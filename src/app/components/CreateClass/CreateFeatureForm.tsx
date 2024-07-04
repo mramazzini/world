@@ -70,6 +70,7 @@ const CreateFeatureForm = ({ features, setFeatures }: Props) => {
           <TextEditor
             data={feature.desc}
             title="Feature Description"
+            description="If you have multiple levels for this class feature, make sure to describe what changes at each level."
             setData={(data) => {
               const newFeatures = [...features];
               newFeatures[index].desc = data;

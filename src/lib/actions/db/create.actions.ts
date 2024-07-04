@@ -13,10 +13,34 @@ import {
   Skill,
   ArmorTypes,
   Prisma,
+  Feature,
 } from "@prisma/client";
 import { deleteClasses } from "./destroy.actions";
 
 const db = new PrismaClient();
+
+export const createClassWithFeaturesAndSubClasses = async (
+  data: Prisma.ClassCreateManyInput,
+  features: Prisma.FeatureCreateManyInput[],
+  subClasses: Prisma.SubClassCreateManyInput[]
+) => {
+  const result = await db.class.create({
+    data: {
+      ...data,
+      Features: {
+        createMany: {
+          data: features,
+        },
+      },
+      SubClasses: {
+        createMany: {
+          data: subClasses,
+        },
+      },
+    },
+  });
+  return result;
+};
 
 export const createClass = async (data: Prisma.ClassCreateInput) => {
   const result = await db.class.create({
@@ -57,6 +81,10 @@ export const createTestClass = async () => {
       "A dungeoneer's pack or an explorer's pack",
     ],
     ASILevels: [4, 6, 8, 12, 14, 16, 19],
+    subClassName: "Martial Archetype",
+    subClassDesc:
+      "you choose an archetype that you strive to emulate in your combat styles and techniques. ",
+    subfeatLevels: [3, 7, 10, 15, 18],
   };
 
   const features = [
@@ -107,6 +135,29 @@ export const createTestClass = async () => {
     },
   ];
 
+  const createFeature = (
+    classID: number,
+    feature: Prisma.FeatureCreateManyInput
+  ) => {
+    return db.feature.create({
+      data: {
+        ...feature,
+        classId: classID,
+      },
+    });
+  };
+
+  const createSubClass = (
+    classID: number,
+    subClass: Prisma.SubClassCreateManyInput
+  ) => {
+    return db.subClass.create({
+      data: {
+        ...subClass,
+        classId: classID,
+      },
+    });
+  };
   //create class
   const classData = await createClass(data);
   //add classId to features arr

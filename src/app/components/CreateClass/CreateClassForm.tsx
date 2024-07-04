@@ -10,9 +10,6 @@ import {
 import List from "../UI/List";
 import Input from "../UI/Input";
 import { useState } from "react";
-import { resourceLimits } from "worker_threads";
-import TextEditor from "../UI/TextEditor";
-import FeatureEditor from "./CreateFeatureForm";
 
 const CreateClassForm = ({
   data,

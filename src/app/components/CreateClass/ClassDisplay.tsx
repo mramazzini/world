@@ -114,7 +114,7 @@ function ClassDisplay({ classObj, features, subClasses }: Props) {
             classObj.subfeatLevels[0] != num &&
             classObj.ASILevels[0] != num
           )
-            return null;
+            return;
 
           //need to render each feature, but when the level hits ASILevels[0], print the ASI feature
           // when the level hits subfeatLevels[0], print the subclass feature
@@ -138,10 +138,9 @@ function ClassDisplay({ classObj, features, subClasses }: Props) {
                         if (index == classObj.subfeatLevels.length - 2)
                           // 2 because we removed the first element
                           // last element needs to be "and"
-                          return `and ${numPlace(lvl)}`;
-                        return numPlace(lvl);
-                      })
-                      .join(", ")}{" "}
+                          return <span key={index}>and {numPlace(lvl)} </span>;
+                        return <span key={index}>{numPlace(lvl)} </span>;
+                      })}
                     level.
                   </p>
                 </div>
@@ -153,15 +152,14 @@ function ClassDisplay({ classObj, features, subClasses }: Props) {
                     When you reach {numPlace(classObj.ASILevels[0])} level, and
                     again at{" "}
                     {[...classObj.ASILevels] // make copy since we dont want to mutate the original
-                      .slice(1) //remove the first element since its referenced above
                       .map((lvl, index) => {
+                        if (index == 0) return; //remove the first element since its referenced above
                         if (index == classObj.ASILevels.length - 2)
                           // 2 because we removed the first element
                           // last element needs to be "and"
-                          return `and ${numPlace(lvl)}`;
-                        return numPlace(lvl);
-                      })
-                      .join(", ")}{" "}
+                          return <span key={index}>and {numPlace(lvl)} </span>;
+                        return <span key={index}>{numPlace(lvl)} </span>;
+                      })}
                     level, you can increase one ability score of your choice by
                     2, or you can increase two ability scores of your choice by
                     1.
@@ -173,12 +171,21 @@ function ClassDisplay({ classObj, features, subClasses }: Props) {
               )}
 
               <ul>
-                {feat.map((feature) => (
-                  <li key={feature.id}>
-                    <h4>{feature.name}</h4>
-                    <p>{feature.desc}</p>
-                  </li>
-                ))}
+                {feat.map((feature) => {
+                  const lvlIndex = feature.levels.findIndex(
+                    (lvl) => lvl === num
+                  );
+                  return (
+                    <li key={`${num}-${feature.id}`}>
+                      <h4>
+                        {feature.name}{" "}
+                        {lvlIndex > 0 ? ` (x${lvlIndex + 1})` : null}
+                      </h4>
+
+                      {lvlIndex == 0 && feature.desc}
+                    </li>
+                  );
+                })}
               </ul>
             </li>
           );
