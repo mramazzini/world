@@ -9,11 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^5.16.1",
+    "@uiw/react-md-editor": "^4.0.4",
+    "dompurify": "^3.1.5",
+    "marked": "^13.0.1",
     "next": "14.2.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "simplemde": "^1.11.2"
   },
   "devDependencies": {
+    "@types/dompurify": "^3.0.5",
     "@types/node": "^20.14.9",
     "@types/react": "^18",
     "@types/react-dom": "^18",

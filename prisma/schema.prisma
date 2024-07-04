@@ -3,12 +3,201 @@
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+// DND 5e data
+
+enum Ability {
+  STR
+  CON
+  DEX
+  INT
+  WIS
+  CHA
+}
+
+enum Size {
+  TINY
+  SMALL
+  MEDIUM
+  LARGE
+  HUGE
+  GARGANTUAN
+}
+
+enum SpellSchool {
+  ABJURATION
+  CONJURATION
+  DIVINATION
+  ENCHANTMENT
+  EVOCATION
+  ILLUSION
+  NECROMANCY
+  TRANSMUTATION
+}
+
+enum Skill {
+  ACROBATICS
+  ANIMAL_HANDLING
+  ARCANA
+  ATHLETICS
+  DECEPTION
+  HISTORY
+  INSIGHT
+  INTIMIDATION
+  INVESTIGATION
+  MEDICINE
+  NATURE
+  PERCEPTION
+  PERFORMANCE
+  PERSUASION
+  RELIGION
+  SLEIGHT_OF_HAND
+  STEALTH
+  SURVIVAL
+}
+
+enum Language {
+  COMMON
+  DWARVISH
+  ELVISH
+  GIANT
+  GNOMISH
+  GOBLIN
+  HALFLING
+  ORC
+  ABYSSAL
+  CELESTIAL
+  DRACONIC
+  DEEP_SPEECH
+  INFERNAL
+  PRIMORDIAL
+  SYLVAN
+  UNDERCOMMON
+}
+
+enum ArmorTypes {
+  LIGHT
+  MEDIUM
+  HEAVY
+  SHIELDS
+}
+
+model Class {
+  id               Int          @id @default(autoincrement())
+  name             String
+  hitDie           Int
+  savingThrows     Ability[]
+  skills           Skill[]
+  skillChoiceCount Int
+  SubClasses       SubClass[]
+  subClassName     String
+  subClassDesc     String
+  subfeatLevels    Int[]
+  Features         Feature[]
+  tools            String[]
+  ASILevels        Int[]
+  equipment        String[]
+  armor            ArmorTypes[]
+  weapons          String[]
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+}
+
+model Feature {
+  id        Int      @id @default(autoincrement())
+  name      String
+  desc      String
+  levels    Int[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Class     Class?   @relation(fields: [classId], references: [id])
+  classId   Int?
+}
+
+model SubClass {
+  id   Int    @id @default(autoincrement())
+  name String
+  desc String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Class     Class?   @relation(fields: [classId], references: [id])
+  classId   Int?
+}
+
+model Race {
+  id            Int       @id @default(autoincrement())
+  name          String
+  size          Size
+  speed         Int
+  abilityScores Ability[]
+
+  originLanguages Language[]
+  customLanguages String[]
+  SubRaces        SubRace[]
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+}
+
+model SubRace {
+  id              Int        @id @default(autoincrement())
+  name            String
+  languages       Language[]
+  customLanguages String[]
+  desc            String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Race      Race?    @relation(fields: [raceId], references: [id])
+  raceId    Int?
+}
+
+model Background {
+  id        Int        @id @default(autoincrement())
+  name      String
+  desc      String
+  skillProf Skill[]
+  toolProf  String[]
+  languages Language[]
+  equipment String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Feat {
+  id        Int      @id @default(autoincrement())
+  name      String
+  desc      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Spell {
+  id        Int         @id @default(autoincrement())
+  name      String
+  desc      String
+  school    SpellSchool
+  lvl       Int
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model Item {
+  id        Int      @id @default(autoincrement())
+  name      String
+  desc      String
+  cost      String
+  weight    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
