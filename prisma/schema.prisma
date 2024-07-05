@@ -92,41 +92,47 @@ enum ArmorTypes {
 }
 
 model Class {
-  id               Int          @id @default(autoincrement())
-  name             String
-  hitDie           Int
-  savingThrows     Ability[]
-  skills           Skill[]
-  skillChoiceCount Int
-  SubClasses       SubClass[]
-  subClassName     String
-  subClassDesc     String
-  subfeatLevels    Int[]
-  Features         Feature[]
-  tools            String[]
-  ASILevels        Int[]
-  equipment        String[]
-  armor            ArmorTypes[]
-  weapons          String[]
-  createdAt        DateTime     @default(now())
-  updatedAt        DateTime     @updatedAt
+  id                  Int          @id @default(autoincrement())
+  name                String
+  description         String
+  hitDie              Int
+  savingThrows        Ability[]
+  skills              Skill[]
+  skillChoiceCount    Int
+  SubClasses          SubClass[]
+  subClassName        String
+  subClassDesc        String
+  subfeatLevels       Int[]
+  multiclassing       String
+  Features            Feature[]
+  tools               String[]
+  ASILevels           Int[]
+  equipment           String[]
+  armor               ArmorTypes[]
+  weapons             String[]
+  spellcaster         Boolean
+  spellCastingAbility Ability
+  spellsKnown         Int[] // number of spells known at each level
+  spellLevels         Json //type SpellLevel[] imported from types.ts
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
 }
 
 model Feature {
-  id        Int      @id @default(autoincrement())
-  name      String
-  desc      String
-  levels    Int[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Class     Class?   @relation(fields: [classId], references: [id])
-  classId   Int?
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  levels      Int[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Class       Class?   @relation(fields: [classId], references: [id])
+  classId     Int?
 }
 
 model SubClass {
-  id   Int    @id @default(autoincrement())
-  name String
-  desc String
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -153,7 +159,7 @@ model SubRace {
   name            String
   languages       Language[]
   customLanguages String[]
-  desc            String
+  description     String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -162,42 +168,42 @@ model SubRace {
 }
 
 model Background {
-  id        Int        @id @default(autoincrement())
-  name      String
-  desc      String
-  skillProf Skill[]
-  toolProf  String[]
-  languages Language[]
-  equipment String[]
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  skillProf   Skill[]
+  toolProf    String[]
+  languages   Language[]
+  equipment   String[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Feat {
-  id        Int      @id @default(autoincrement())
-  name      String
-  desc      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Spell {
-  id        Int         @id @default(autoincrement())
-  name      String
-  desc      String
-  school    SpellSchool
-  lvl       Int
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  id          Int         @id @default(autoincrement())
+  name        String
+  description String
+  school      SpellSchool
+  lvl         Int
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 }
 
 model Item {
-  id        Int      @id @default(autoincrement())
-  name      String
-  desc      String
-  cost      String
-  weight    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  cost        String
+  weight      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

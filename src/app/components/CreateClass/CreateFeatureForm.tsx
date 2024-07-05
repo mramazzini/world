@@ -15,7 +15,7 @@ interface Props {
 const CreateFeatureForm = ({ features, setFeatures }: Props) => {
   const add = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault;
-    setFeatures([...features, { name: "", levels: [1], desc: "" }]);
+    setFeatures([...features, { name: "", levels: [1], description: "" }]);
   };
   const remove = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -68,12 +68,12 @@ const CreateFeatureForm = ({ features, setFeatures }: Props) => {
             ]}
           />
           <TextEditor
-            data={feature.desc}
+            data={feature.description}
             title="Feature Description"
             description="If you have multiple levels for this class feature, make sure to describe what changes at each level."
             setData={(data) => {
               const newFeatures = [...features];
-              newFeatures[index].desc = data;
+              newFeatures[index].description = data;
               setFeatures(newFeatures);
             }}
           />

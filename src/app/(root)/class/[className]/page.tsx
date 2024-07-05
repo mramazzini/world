@@ -19,14 +19,17 @@ const ClassPage = () => {
     });
   }, [className]);
 
-  return data ? (
-    <ClassDisplay
-      classObj={data as Class}
-      features={data.Features}
-      subClasses={data.SubClasses}
-    />
-  ) : (
-    <p>Loading...</p>
+  return (
+    <div className="p-4">
+      {!data && <span className="loading" />}
+      {data && (
+        <ClassDisplay
+          classObj={data as Class}
+          features={data.Features}
+          subClasses={data.SubClasses}
+        />
+      )}
+    </div>
   );
 };
 

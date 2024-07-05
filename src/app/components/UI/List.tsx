@@ -5,6 +5,7 @@
 // User can also change the values in the array
 
 import React, { useState } from "react";
+import "@/lib/string.extensions";
 type ListType = string | number;
 interface Props<T extends ListType> {
   data: T[];
@@ -31,10 +32,7 @@ const List = <T extends ListType>({
     newData.push(val);
     if (isNumeric) {
       newData.sort((a, b) => (a as number) - (b as number));
-    } else {
-      newData.sort();
     }
-
     setData(newData);
   };
 
@@ -72,7 +70,7 @@ const List = <T extends ListType>({
               >
                 {options.map((option, i) => (
                   <option key={i} value={option}>
-                    {option}
+                    {option.toString().toCapitalCase().replace(/_/g, " ")}
                   </option>
                 ))}
               </select>

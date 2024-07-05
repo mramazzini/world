@@ -20,3 +20,15 @@ export interface ClassInfo extends Class {
   Features: Feature[];
   SubClasses: SubClass[];
 }
+export interface SpellLevel {
+  0?: number; //Cantrips
+  1?: number;
+  2?: number;
+  3?: number;
+  4?: number;
+  5?: number;
+  6?: number;
+  7?: number;
+  8?: number;
+  9?: number;
+}

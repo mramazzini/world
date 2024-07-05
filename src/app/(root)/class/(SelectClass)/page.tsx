@@ -15,9 +15,12 @@ const page = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Class</h1>
-      {loading && <p>Loading...</p>}
+    <div className="p-4">
+      <h1>Classes</h1>
+      <Link className="btn btn-primary" href={"/class/create"}>
+        Create Class
+      </Link>
+      {loading && <div className="loading" />}
       {data.map((item) => (
         <div key={item.id}>
           <Link href={`/class/${item.name}`}>{item.name}</Link>

@@ -10,6 +10,7 @@ import {
 import List from "../UI/List";
 import Input from "../UI/Input";
 import { useState } from "react";
+import TextEditor from "../UI/TextEditor";
 
 const CreateClassForm = ({
   data,
@@ -25,7 +26,22 @@ const CreateClassForm = ({
         data={data.name as string}
         name="Name"
         description="The name of the class."
+        placeholder="Insert class name"
         setData={(name) => setData({ ...data, name })}
+      />
+      <TextEditor
+        data={data.description as string}
+        setData={(description) => setData({ ...data, description })}
+        title="Description"
+        description="A brief description of the class."
+        placeholder="Example: The fighter is a master of combat, skilled with a variety of weapons and armor."
+      />
+      <TextEditor
+        data={data.multiclassing}
+        setData={(multiclassing) => setData({ ...data, multiclassing })}
+        title="Multiclassing"
+        description="The requirements for multiclassing in or out of this class."
+        placeholder="Example: You must have a Dexterity or Strength score of 13 or higher in order to multiclass in or out of this class."
       />
       <div className="divider"></div>
       <Input<number>

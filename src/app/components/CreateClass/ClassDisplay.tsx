@@ -4,7 +4,8 @@ import numPlace from "@/lib/utils/numPlace";
 //takes a class object and returns a formatted display of the class
 import numberArray from "@/lib/utils/numberArray";
 import { Class, Feature, SubClass } from "@prisma/client";
-
+import "@/lib/string.extensions";
+import AbilityToText from "@/lib/utils/AbilityToText";
 interface Props {
   classObj: Class;
   features: Feature[];
@@ -14,49 +15,71 @@ interface Props {
 function ClassDisplay({ classObj, features, subClasses }: Props) {
   return (
     <div className="p-4">
-      <h1>{classObj.name}</h1>
+      <h1>{classObj.name || "Class Name"}</h1>
+
+      <p className="italic">
+        {classObj.description || "Your Class Description will go here."}
+      </p>
+      <div className="divider"></div>
+      <p>
+        {classObj.multiclassing ||
+          "Your Multiclassing information will go here"}
+      </p>
       <h2>Hitpoints</h2>
-      <p>Hit Die: {classObj.hitDie}</p>
-      <p>
-        Hitpoints at 1st Level: {classObj.hitDie} + your Constitution modifier
-      </p>
-      <p>
-        Hitpoints at Higher Levels: 1d{classObj.hitDie} (or{" "}
-        {Math.floor(classObj.hitDie / 2) + 1}) + your Constitution modifier per{" "}
-        {classObj.name} level after 1st
-      </p>
+      <div className="p-4">
+        <p>Hit Die: {classObj.hitDie}</p>
+        <p>
+          Hitpoints at 1st Level: {classObj.hitDie} + your Constitution modifier
+        </p>
+        <p>
+          Hitpoints at Higher Levels: 1d{classObj.hitDie} (or{" "}
+          {Math.floor(classObj.hitDie / 2) + 1}) + your Constitution modifier
+          per {classObj.name} level after 1st
+        </p>
+      </div>
       <h2>Proficiencies</h2>
-      <p>
-        <span className="font-bold">Armor: </span>
-        {classObj.armor.join(", ")}
-      </p>
-      <p>
-        <span className="font-bold">Weapons: </span>
-        {classObj.weapons.join(", ")}
-      </p>
-      <p>
-        <span className="font-bold">Tools: </span>
-        {classObj.tools.join(", ")}
-      </p>
-      <p>
-        <span className="font-bold">Saving Throws: </span>
-        {classObj.savingThrows.join(", ")}
-      </p>
+      <div className="p-4">
+        <p>
+          <span className="font-bold">Armor: </span>
+          {classObj.armor.map((s) => s.toCapitalCase()).join(", ") || "None"}
+        </p>
+        <p>
+          <span className="font-bold">Weapons: </span>
+          {classObj.weapons.map((s) => s.toCapitalCase()).join(", ") || "None"}
+        </p>
+        <p>
+          <span className="font-bold">Tools: </span>
+          {classObj.tools.map((s) => s.toCapitalCase()).join(", ") || "None"}
+        </p>
+        <p>
+          <span className="font-bold">Saving Throws: </span>
+          {classObj.savingThrows.map((s) => AbilityToText(s)).join(", ") ||
+            "None"}
+        </p>
+      </div>
       <h2>Equipment</h2>
-      <ul className="list-disc p-4">
-        {classObj.equipment.map((item, i) => (
-          <li key={i}>{item}</li>
-        ))}
-      </ul>
+      <div className="p-4">
+        <p>
+          You start with the following equipment, in addition to the equipment
+          granted by your background:
+        </p>
+        <ul className="list-disc p-4">
+          {classObj.equipment.map((item, i) => (
+            <li key={i}>{item}</li>
+          ))}
+        </ul>
+      </div>
       <h2>Skills</h2>
-      <p>
-        Choose {classObj.skillChoiceCount} from the following list of skills:
-      </p>
-      <ul className="list-disc p-4">
-        {classObj.skills.map((skill, i) => (
-          <li key={i}>{skill}</li>
-        ))}
-      </ul>
+      <div className="p-4">
+        <p>
+          Choose {classObj.skillChoiceCount} from the following list of skills:
+        </p>
+        <ul className="list-disc p-4">
+          {classObj.skills.map((skill, i) => (
+            <li key={i}>{skill.toCapitalCase().replace("_", " ")}</li>
+          ))}
+        </ul>
+      </div>
       <table className="table">
         <thead>
           <tr>
@@ -89,7 +112,7 @@ function ClassDisplay({ classObj, features, subClasses }: Props) {
                   })}
                 {classObj.subfeatLevels.includes(num) ? (
                   <div>
-                    <div>Subclass Feature</div>
+                    <div>{classObj.subClassName} Feature</div>
                   </div>
                 ) : null}
                 {classObj.ASILevels.includes(num) ? (
@@ -102,7 +125,9 @@ function ClassDisplay({ classObj, features, subClasses }: Props) {
           ))}
         </tbody>
       </table>
+      <div className="divider"></div>
       <h2>Class Features</h2>
+      <div className="divider"></div>
       <ul>
         {numberArray(1, 20).map((num) => {
           //grab features for the current level
@@ -123,7 +148,7 @@ function ClassDisplay({ classObj, features, subClasses }: Props) {
             <li key={num}>
               <h3>Level {num}</h3>
               {classObj.subfeatLevels[0] === num && (
-                <div>
+                <div className="p-4">
                   <h4>{classObj.subClassName}</h4>
                   <p>
                     When you reach {numPlace(classObj.subfeatLevels[0])} level,{" "}
@@ -146,7 +171,7 @@ function ClassDisplay({ classObj, features, subClasses }: Props) {
                 </div>
               )}
               {classObj.ASILevels[0] === num && (
-                <div>
+                <div className="p-4">
                   <h4>Ability Score Improvement</h4>
                   <p>
                     When you reach {numPlace(classObj.ASILevels[0])} level, and
@@ -176,17 +201,18 @@ function ClassDisplay({ classObj, features, subClasses }: Props) {
                     (lvl) => lvl === num
                   );
                   return (
-                    <li key={`${num}-${feature.id}`}>
+                    <li className="p-4" key={`${num}-${feature.id}`}>
                       <h4>
                         {feature.name}{" "}
                         {lvlIndex > 0 ? ` (x${lvlIndex + 1})` : null}
                       </h4>
 
-                      {lvlIndex == 0 && feature.desc}
+                      {lvlIndex == 0 && feature.description}
                     </li>
                   );
                 })}
               </ul>
+              <div className="divider"></div>
             </li>
           );
         })}

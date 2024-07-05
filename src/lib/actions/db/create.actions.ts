@@ -54,6 +54,10 @@ export const createTestClass = async () => {
   const data: Prisma.ClassCreateInput = {
     name: "Fighter",
     hitDie: 10,
+    description:
+      "Fighters share an unparalleled mastery with weapons and armor, and a thorough knowledge of the skills of combat. They are well acquainted with death, both meting it out and staring it defiantly in the face.",
+    multiclassing:
+      "You must have a Dexterity or Strength score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.STR, Ability.CON],
     skills: [
       Skill.ACROBATICS,
@@ -135,29 +139,6 @@ export const createTestClass = async () => {
     },
   ];
 
-  const createFeature = (
-    classID: number,
-    feature: Prisma.FeatureCreateManyInput
-  ) => {
-    return db.feature.create({
-      data: {
-        ...feature,
-        classId: classID,
-      },
-    });
-  };
-
-  const createSubClass = (
-    classID: number,
-    subClass: Prisma.SubClassCreateManyInput
-  ) => {
-    return db.subClass.create({
-      data: {
-        ...subClass,
-        classId: classID,
-      },
-    });
-  };
   //create class
   const classData = await createClass(data);
   //add classId to features arr
@@ -170,4 +151,28 @@ export const createTestClass = async () => {
   });
 
   return data;
+};
+
+export const createFeature = (
+  classID: number,
+  feature: Prisma.FeatureCreateManyInput
+) => {
+  return db.feature.create({
+    data: {
+      ...feature,
+      classId: classID,
+    },
+  });
+};
+
+export const createSubClass = (
+  classID: number,
+  subClass: Prisma.SubClassCreateManyInput
+) => {
+  return db.subClass.create({
+    data: {
+      ...subClass,
+      classId: classID,
+    },
+  });
 };

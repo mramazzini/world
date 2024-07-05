@@ -9,6 +9,7 @@ interface Props<T extends ListType> {
   description?: string;
   isNumeric?: boolean;
   options?: T[];
+  placeholder?: string;
 }
 
 //Class for a single input field. Do not have add and remove functions
@@ -20,6 +21,7 @@ const Input = <T extends ListType>({
   description,
   isNumeric = false,
   options = undefined,
+  placeholder = "Enter value",
 }: Props<T>) => {
   const change = (val: T) => {
     if (isNumeric) val = parseInt(val as unknown as string) as unknown as T;
@@ -48,7 +50,7 @@ const Input = <T extends ListType>({
       ) : (
         <input
           className="input input-primary my-2"
-          placeholder="Enter value"
+          placeholder={placeholder}
           value={data as unknown as string}
           onChange={(e) => {
             e.preventDefault();

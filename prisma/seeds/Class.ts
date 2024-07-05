@@ -2,8 +2,13 @@ import { Ability, ArmorTypes, Class, Prisma, Skill } from "@prisma/client";
 
 const Classes: Prisma.ClassCreateManyInput[] = [
   {
+    id: 1,
     name: "Fighter",
     hitDie: 10,
+    description:
+      "Fighters share an unparalleled mastery with weapons and armor, and a thorough knowledge of the skills of combat. They are well acquainted with death, both meting it out and staring it defiantly in the face.",
+    multiclassing:
+      "You must have a Dexterity or Strength score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.STR, Ability.CON],
     skills: [
       Skill.ACROBATICS,
@@ -38,7 +43,12 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   },
 
   {
+    id: 2,
     name: "Wizard",
+    description:
+      "Wizards are supreme magic-users, defined and united as a class by the spells they cast. Drawing on the subtle weave of magic that permeates the cosmos, wizards cast spells of explosive fire, arcing lightning, subtle deception, and brute force mind control. Their magic conjures monsters from other planes of existence, glimpses the future, or turns slain foes into zombies. Their mightiest spells change one substance into another, call meteors down from the sky, or open portals to other worlds.",
+    multiclassing:
+      "You must have an Intelligence score of 13 or higher in order to multiclass in or out of this class.",
     hitDie: 6,
     savingThrows: [Ability.INT, Ability.WIS],
     skills: [
@@ -65,8 +75,13 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subfeatLevels: [2, 6, 10, 14],
   },
   {
+    id: 3,
     name: "Cleric",
     hitDie: 8,
+    description:
+      "Clerics are intermediaries between the mortal world and the distant planes of the gods. As varied as the gods they serve, clerics strive to embody the handiwork of their deities. No ordinary priest, a cleric is imbued with divine magic.",
+    multiclassing:
+      "You must have a Wisdom score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.WIS, Ability.CHA],
     skills: [
       Skill.HISTORY,
@@ -92,8 +107,12 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subfeatLevels: [1, 2, 6, 8, 17],
   },
   {
+    id: 4,
     name: "Rogue",
     hitDie: 8,
+    description: "Rogues are cunning and elusive adversaries. ",
+    multiclassing:
+      "You must have a Dexterity score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.DEX, Ability.INT],
     skills: [
       Skill.ACROBATICS,
@@ -130,7 +149,11 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "you choose a roguish archetype that you emulate in your adventuring career. ",
   },
   {
+    id: 5,
     name: "Barbarian",
+    description: "Barbarians are warriors who rely on their strength and rage.",
+    multiclassing:
+      "You must have a Strength score of 13 or higher in order to multiclass in or out of this class.",
     hitDie: 12,
     savingThrows: [Ability.STR, Ability.CON],
     skills: [
@@ -157,8 +180,12 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subfeatLevels: [3, 6, 10, 14],
   },
   {
+    id: 6,
     name: "Bard",
     hitDie: 8,
+    description: "Bards are versatile and talented musicians.",
+    multiclassing:
+      "You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.DEX, Ability.CHA],
     skills: [
       Skill.ACROBATICS,
@@ -202,8 +229,13 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subClassDesc: "you choose a college that you dedicate yourself to. ",
   },
   {
+    id: 7,
     name: "Druid",
     hitDie: 8,
+    description:
+      "Druids are spellcasters who draw magic from the natural world.",
+    multiclassing:
+      "You must have a Wisdom score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.INT, Ability.WIS],
     skills: [
       Skill.ARCANA,
@@ -241,8 +273,13 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subfeatLevels: [2, 6, 10, 14],
   },
   {
+    id: 8,
     name: "Monk",
     hitDie: 8,
+    description:
+      "Monks are martial artists who use ki to perform amazing feats.",
+    multiclassing:
+      "You must have a Dexterity or Strength score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.STR, Ability.DEX],
     skills: [
       Skill.ACROBATICS,
@@ -268,8 +305,12 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subfeatLevels: [3, 6, 11, 17],
   },
   {
+    id: 9,
     name: "Paladin",
     hitDie: 10,
+    description: "Paladins are holy warriors bound to a sacred oath.",
+    multiclassing:
+      "You must have a Strength and Charisma score of 13 or higher in order to multiclass in or out of this class",
     savingThrows: [Ability.WIS, Ability.CHA],
     skills: [
       Skill.ATHLETICS,
@@ -301,8 +342,12 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subfeatLevels: [3, 7, 15, 20],
   },
   {
+    id: 10,
     name: "Ranger",
     hitDie: 10,
+    description: "Rangers are hunters and wilderness warriors.",
+    multiclassing:
+      "You must have a Dexterity and Wisdom score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.STR, Ability.DEX],
     skills: [
       Skill.ANIMAL_HANDLING,
@@ -331,7 +376,11 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subfeatLevels: [3, 7, 11, 15, 18],
   },
   {
+    id: 11,
     name: "Sorcerer",
+    description: "Sorcerers are spellcasters who draw on innate magic.",
+    multiclassing:
+      "You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.",
     hitDie: 6,
     savingThrows: [Ability.CON, Ability.CHA],
     skills: [
@@ -359,8 +408,13 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subfeatLevels: [1, 6, 14, 18],
   },
   {
+    id: 12,
     name: "Warlock",
     hitDie: 8,
+    description:
+      "Warlocks are wielders of magic who have forged a pact with an otherworldly being.",
+    multiclassing:
+      "You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.WIS, Ability.CHA],
     skills: [
       Skill.ARCANA,

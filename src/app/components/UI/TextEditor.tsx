@@ -7,9 +7,16 @@ interface Props {
   setData: (data: string) => void;
   title?: string;
   description?: string;
+  placeholder?: string;
 }
 
-const TextEditor = ({ data, setData, title, description }: Props) => {
+const TextEditor = ({
+  data,
+  setData,
+  title,
+  description,
+  placeholder,
+}: Props) => {
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setData(e.target.value);
   };
@@ -22,6 +29,7 @@ const TextEditor = ({ data, setData, title, description }: Props) => {
         className="textarea textarea-primary my-2 w-full h-48"
         value={data}
         onChange={handleChange}
+        placeholder={placeholder || "Enter text"}
       />
     </div>
   );
