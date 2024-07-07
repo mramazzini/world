@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 
-type ListType = string | number;
-interface Props<T extends ListType> {
+type InputType = string | number;
+interface Props<T extends InputType> {
   data: T;
   setData: (data: T) => void;
   name: string;
@@ -14,7 +14,7 @@ interface Props<T extends ListType> {
 
 //Class for a single input field. Do not have add and remove functions
 
-const Input = <T extends ListType>({
+const Input = <T extends InputType>({
   data,
   setData,
   name,
@@ -31,7 +31,7 @@ const Input = <T extends ListType>({
   return (
     <div className="p-4">
       <h2>{name}</h2>
-      {description && <h3 className="mb-2">{description}</h3>}
+      {description && <p className="mb-2">{description}</p>}
       {options ? (
         <select
           className="select select-primary my-2"
@@ -48,16 +48,18 @@ const Input = <T extends ListType>({
           ))}
         </select>
       ) : (
-        <input
-          className="input input-primary my-2"
-          placeholder={placeholder}
-          value={data as unknown as string}
-          onChange={(e) => {
-            e.preventDefault();
-            change(e.target.value as unknown as T);
-          }}
-          type={isNumeric ? "number" : "text"}
-        />
+        <label className="form-control w-full max-w-xs">
+          <input
+            className="input input-primary"
+            placeholder={placeholder}
+            value={data as unknown as string}
+            onChange={(e) => {
+              e.preventDefault();
+              change(e.target.value as unknown as T);
+            }}
+            type={isNumeric ? "number" : "text"}
+          />
+        </label>
       )}
     </div>
   );

@@ -91,6 +91,24 @@ enum ArmorTypes {
   SHIELDS
 }
 
+enum DamageTypes {
+  ACID
+  BLUDGEONING
+  COLD
+  FIRE
+  FORCE
+  LIGHTNING
+  NECROTIC
+  PIERCING
+  POISON
+  PSYCHIC
+  RADIANT
+  SLASHING
+  THUNDER
+  NONE
+  OTHER
+}
+
 model Class {
   id                  Int          @id @default(autoincrement())
   name                String
@@ -106,27 +124,85 @@ model Class {
   multiclassing       String
   Features            Feature[]
   tools               String[]
-  ASILevels           Int[]
+  abilityScoreLevels  Int[]
   equipment           String[]
   armor               ArmorTypes[]
   weapons             String[]
-  spellcaster         Boolean
-  spellCastingAbility Ability
+  //spellcasting
+  spellCaster         Boolean      @default(false)
+  spellCastingAbility Ability?
   spellsKnown         Int[] // number of spells known at each level
-  spellLevels         Json //type SpellLevel[] imported from types.ts
-  createdAt           DateTime     @default(now())
-  updatedAt           DateTime     @updatedAt
+  casterType          CasterType?  @relation(fields: [casterTypeId], references: [id])
+  cantripsKnown       Int[] // number of cantrips known at each level
+  ritualCaster        Boolean      @default(false) // can you cast spells as rituals
+  ritualSpellPrepared Boolean      @default(true) //do you need to have a spell prepared to cast it as a ritual
+  spellFocus          String       @default("None")
+  casterTypeId        Int          @default(1)
+  spellCastingInfo    String? // How does spell casting work for this class
+
+  prepareSpellInfo String? // How do spells get prepared for this class
+
+  //custom fields for table
+  customFields CustomField[]
+
+  //date fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model Feature {
+model CustomField {
+  id           Int      @id @default(autoincrement())
+  title        String
+  data         String[] // How many of this item per level
+  isNumber     Boolean
+  consumable   Boolean
+  rechargeData String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  Class        Class    @relation(fields: [classId], references: [id])
+  classId      Int
+}
+
+model CasterType {
   id          Int      @id @default(autoincrement())
   name        String
   description String
-  levels      Int[]
+  level1      Int[]
+  level2      Int[]
+  level3      Int[]
+  level4      Int[]
+  level5      Int[]
+  level6      Int[]
+  level7      Int[]
+  level8      Int[]
+  level9      Int[]
+  level10     Int[]
+  level11     Int[]
+  level12     Int[]
+  level13     Int[]
+  level14     Int[]
+  level15     Int[]
+  level16     Int[]
+  level17     Int[]
+  level18     Int[]
+  level19     Int[]
+  level20     Int[]
+  Class       Class[]
+  examples    String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  Class       Class?   @relation(fields: [classId], references: [id])
-  classId     Int?
+}
+
+model Feature {
+  id                  Int      @id @default(autoincrement())
+  name                String
+  description         String
+  levels              Int[]
+  spellCastingFeature Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  Class               Class?   @relation(fields: [classId], references: [id])
+  classId             Int?
 }
 
 model SubClass {
@@ -198,12 +274,38 @@ model Spell {
   updatedAt   DateTime    @updatedAt
 }
 
-model Item {
+model Weapon {
+  id           Int         @id @default(autoincrement())
+  name         String
+  cost         String
+  damage       String
+  damageType   DamageTypes
+  weight       String
+  versatileDmg String?
+  range        String?
+  isSimple     Boolean
+  isRanged     Boolean
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  WeaponToProperties WeaponToProperty[]
+}
+
+model WeaponProperty {
   id          Int      @id @default(autoincrement())
   name        String
   description String
-  cost        String
-  weight      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  WeaponToProperty WeaponToProperty[]
+}
+
+model WeaponToProperty {
+  weaponId         Int
+  weapon           Weapon         @relation(fields: [weaponId], references: [id])
+  weaponPropertyId Int
+  weaponProperty   WeaponProperty @relation(fields: [weaponPropertyId], references: [id])
+
+  @@id([weaponId, weaponPropertyId]) // Composite primary key
 }

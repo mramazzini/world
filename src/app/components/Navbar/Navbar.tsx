@@ -21,6 +21,9 @@ const Navbar = () => {
       <Link href="/subclass" className="p-4">
         Subclasses
       </Link>
+      <Link href="/item-generator" className="p-4">
+        Item Generator
+      </Link>
     </nav>
   );
 };

@@ -8,8 +8,10 @@ import {
   Background,
   Feat,
   Spell,
-  Item,
   Race,
+  CasterType,
+  Weapon,
+  WeaponProperty,
 } from "@prisma/client";
 
 const db = new PrismaClient();
@@ -41,6 +43,7 @@ export async function getClass(
       include: {
         Features: true,
         SubClasses: true,
+        casterType: true,
       },
     });
   } else {
@@ -51,10 +54,22 @@ export async function getClass(
       include: {
         Features: true,
         SubClasses: true,
+        casterType: true,
       },
     });
   }
 }
+
+export const getDefaultCasterTypes = async (): Promise<CasterType[]> => {
+  const arr: CasterType[] = await db.casterType.findMany({
+    where: {
+      id: {
+        in: [1, 2, 3, 4],
+      },
+    },
+  });
+  return arr;
+};
 
 export async function getSubClass(): Promise<SubClass[]> {
   return await db.subClass.findMany();
@@ -80,6 +95,10 @@ export async function getSpell(): Promise<Spell[]> {
   return await db.spell.findMany();
 }
 
-export async function getItem(): Promise<Item[]> {
-  return await db.item.findMany();
+export async function getWeapon(): Promise<Weapon[]> {
+  return await db.weapon.findMany({
+    include: {
+      WeaponToProperties: true,
+    },
+  });
 }

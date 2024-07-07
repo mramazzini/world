@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { DBInfo, Pages } from "@/lib/types";
 import { getClasses } from "@/lib/actions/db/read.actions";
 import { Class } from "@prisma/client";
+import "@/lib/string.extensions";
 import Link from "next/link";
 const page = () => {
   const [data, setData] = useState<DBInfo[]>([]);
@@ -23,7 +24,7 @@ const page = () => {
       {loading && <div className="loading" />}
       {data.map((item) => (
         <div key={item.id}>
-          <Link href={`/class/${item.name}`}>{item.name}</Link>
+          <Link href={`/class/${item.name}`}>{item.name.toCapitalCase()}</Link>
         </div>
       ))}
     </div>

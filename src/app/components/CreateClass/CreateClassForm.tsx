@@ -109,9 +109,23 @@ const CreateClassForm = ({
         options={Object.values(Skill)}
       />
       <div className="divider"></div>
+      {/* SpellCasting */}
+      <input
+        checked={data.spellCaster}
+        onChange={(e) => {
+          setData({ ...data, spellCaster: e.target.checked });
+        }}
+        type="checkbox"
+        className="checkbox"
+      />
+
+      <div className="divider"></div>
+
       <List<number>
-        data={data.ASILevels as number[]}
-        setData={(ASILevels) => setData({ ...data, ASILevels })}
+        data={data.abilityScoreLevels as number[]}
+        setData={(abilityScoreLevels) =>
+          setData({ ...data, abilityScoreLevels })
+        }
         name="Ability score improvement levels"
         description="List the levels at which this class gains an ability score improvement. (Most classes give them at lvl 4, 8, 12, 16, and 19)"
         options={[

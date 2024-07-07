@@ -3,19 +3,23 @@
 import numPlace from "@/lib/utils/numPlace";
 //takes a class object and returns a formatted display of the class
 import numberArray from "@/lib/utils/numberArray";
-import { Class, Feature, SubClass } from "@prisma/client";
+import { CasterType, Class, Feature, SubClass } from "@prisma/client";
 import "@/lib/string.extensions";
 import AbilityToText from "@/lib/utils/AbilityToText";
+import SpellCastingInfo from "./SpellCastingInfo";
+import { SpellLevels } from "@/lib/types";
+
 interface Props {
   classObj: Class;
   features: Feature[];
   subClasses: SubClass[];
+  casterType: CasterType | null;
 }
 
-function ClassDisplay({ classObj, features, subClasses }: Props) {
+function ClassDisplay({ classObj, features, subClasses, casterType }: Props) {
   return (
     <div className="p-4">
-      <h1>{classObj.name || "Class Name"}</h1>
+      <h1>{classObj.name.toCapitalCase() || "Class Name"}</h1>
 
       <p className="italic">
         {classObj.description || "Your Class Description will go here."}
@@ -25,6 +29,85 @@ function ClassDisplay({ classObj, features, subClasses }: Props) {
         {classObj.multiclassing ||
           "Your Multiclassing information will go here"}
       </p>
+      <div className="overflow-x-auto">
+        <table className="table table-zebra sm:table-xs md:table-sm lg:table-md  my-4 table-pin-rows ">
+          <thead>
+            <tr>
+              <th>Level</th>
+              <th>Proficiency Bonus</th>
+              <th>Features</th>
+              {classObj.cantripsKnown.find((c) => c > 0) && (
+                <th>Cantrips Known</th>
+              )}
+              {classObj.spellsKnown.find((c) => c > 0) && <th>Spells Known</th>}
+              {casterType &&
+                classObj.spellCaster &&
+                numberArray(1, 9).map((num) => <th key={num}>Lvl {num}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {numberArray(1, 20).map((num) => (
+              <tr key={num}>
+                {/* level */}
+                <th>{num}</th>
+                {/* proficiency bonus */}
+                <td>+{Math.ceil(num / 4) + 1}</td>
+                {/* features */}
+                <td>
+                  {features
+                    .filter(
+                      (feature) => feature.levels.includes(num) && feature
+                    )
+                    .map((feature) => {
+                      //if the feature is the second level of the same feature type, just do feature (x2)
+
+                      const lvlIndex = feature.levels.findIndex(
+                        (lvl) => lvl === num
+                      );
+
+                      return (
+                        <div key={`feature-${feature.id}-${num}`}>
+                          {feature.name}
+                          {lvlIndex > 0 ? ` (x${lvlIndex + 1})` : null}
+                        </div>
+                      );
+                    })}
+                  {classObj.subfeatLevels.includes(num) ? (
+                    <div>
+                      <div>{classObj.subClassName} Feature</div>
+                    </div>
+                  ) : null}
+                  {classObj.abilityScoreLevels.includes(num) ? (
+                    <div>
+                      <div>Ability Score Improvement</div>
+                    </div>
+                  ) : null}
+                </td>
+                {classObj.cantripsKnown.find((c) => c > 0) && (
+                  <td>{classObj.cantripsKnown[num - 1] || 0}</td>
+                )}
+                {classObj.spellsKnown.find((c) => c > 0) && (
+                  <td>{classObj.spellsKnown[num - 1] || 0}</td>
+                )}
+                {casterType &&
+                  classObj.spellCaster &&
+                  numberArray(0, 8).map((spellSlotLevel) => {
+                    //get the key "level1" "level2" etc
+                    const key = `level${num}` as SpellLevels;
+                    console.log(casterType[key][spellSlotLevel]);
+                    return (
+                      <td key={spellSlotLevel}>
+                        {casterType[key][spellSlotLevel] > 0
+                          ? casterType[key][spellSlotLevel]
+                          : "-"}
+                      </td>
+                    );
+                  })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <h2>Hitpoints</h2>
       <div className="p-4">
         <p>Hit Die: {classObj.hitDie}</p>
@@ -76,55 +159,14 @@ function ClassDisplay({ classObj, features, subClasses }: Props) {
         </p>
         <ul className="list-disc p-4">
           {classObj.skills.map((skill, i) => (
-            <li key={i}>{skill.toCapitalCase().replace("_", " ")}</li>
+            <li key={i}>{skill.toCapitalCase().replaceAll("_", " ")}</li>
           ))}
         </ul>
       </div>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Level</th>
-            <th>Proficiency Bonus</th>
-            <th>Features</th>
-          </tr>
-        </thead>
-        <tbody>
-          {numberArray(1, 20).map((num) => (
-            <tr key={num}>
-              <td>{num}</td>
-              <td>+{Math.ceil(num / 4) + 1}</td>
-              <td>
-                {features
-                  .filter((feature) => feature.levels.includes(num) && feature)
-                  .map((feature) => {
-                    //if the feature is the second level of the same feature type, just do feature (x2)
+      {classObj.spellCaster && casterType && (
+        <SpellCastingInfo classObj={classObj} casterType={casterType} />
+      )}
 
-                    const lvlIndex = feature.levels.findIndex(
-                      (lvl) => lvl === num
-                    );
-
-                    return (
-                      <div key={`feature-${feature.id}-${num}`}>
-                        {feature.name}
-                        {lvlIndex > 0 ? ` (x${lvlIndex + 1})` : null}
-                      </div>
-                    );
-                  })}
-                {classObj.subfeatLevels.includes(num) ? (
-                  <div>
-                    <div>{classObj.subClassName} Feature</div>
-                  </div>
-                ) : null}
-                {classObj.ASILevels.includes(num) ? (
-                  <div>
-                    <div>Ability Score Improvement</div>
-                  </div>
-                ) : null}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
       <div className="divider"></div>
       <h2>Class Features</h2>
       <div className="divider"></div>
@@ -137,11 +179,11 @@ function ClassDisplay({ classObj, features, subClasses }: Props) {
           if (
             feat.length == 0 &&
             classObj.subfeatLevels[0] != num &&
-            classObj.ASILevels[0] != num
+            classObj.abilityScoreLevels[0] != num
           )
             return;
 
-          //need to render each feature, but when the level hits ASILevels[0], print the ASI feature
+          //need to render each feature, but when the level hits abilityScoreLevels[0], print the ASI feature
           // when the level hits subfeatLevels[0], print the subclass feature
 
           return (
@@ -170,16 +212,16 @@ function ClassDisplay({ classObj, features, subClasses }: Props) {
                   </p>
                 </div>
               )}
-              {classObj.ASILevels[0] === num && (
+              {classObj.abilityScoreLevels[0] === num && (
                 <div className="p-4">
                   <h4>Ability Score Improvement</h4>
                   <p>
-                    When you reach {numPlace(classObj.ASILevels[0])} level, and
-                    again at{" "}
-                    {[...classObj.ASILevels] // make copy since we dont want to mutate the original
+                    When you reach {numPlace(classObj.abilityScoreLevels[0])}{" "}
+                    level, and again at{" "}
+                    {[...classObj.abilityScoreLevels] // make copy since we dont want to mutate the original
                       .map((lvl, index) => {
                         if (index == 0) return; //remove the first element since its referenced above
-                        if (index == classObj.ASILevels.length - 2)
+                        if (index == classObj.abilityScoreLevels.length - 2)
                           // 2 because we removed the first element
                           // last element needs to be "and"
                           return <span key={index}>and {numPlace(lvl)} </span>;

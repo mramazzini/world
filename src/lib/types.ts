@@ -1,4 +1,4 @@
-import { Class, Feature, Prisma, SubClass } from "@prisma/client";
+import { CasterType, Class, Feature, Prisma, SubClass } from "@prisma/client";
 
 export enum Pages {
   Class = "Class",
@@ -19,16 +19,17 @@ export interface DBInfo {
 export interface ClassInfo extends Class {
   Features: Feature[];
   SubClasses: SubClass[];
+  casterType: CasterType | null;
 }
-export interface SpellLevel {
-  0?: number; //Cantrips
-  1?: number;
-  2?: number;
-  3?: number;
-  4?: number;
-  5?: number;
-  6?: number;
-  7?: number;
-  8?: number;
-  9?: number;
-}
+
+// type where options are "level1" , "level2" all the way to level20
+export type SpellLevels =
+  | "level1"
+  | "level2"
+  | "level3"
+  | "level4"
+  | "level5"
+  | "level6"
+  | "level7"
+  | "level8"
+  | "level9";

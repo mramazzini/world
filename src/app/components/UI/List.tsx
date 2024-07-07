@@ -58,7 +58,7 @@ const List = <T extends ListType>({
   return (
     <div className="p-4">
       <h2>{name}</h2>
-      {description && <h3 className="mb-2">{description}</h3>}
+      {description && <p className="mb-2">{description}</p>}
       <ul>
         {data.map((val, index) => (
           <li key={index}>

@@ -18,6 +18,7 @@ import {
 import CreateClassForm from "@/app/components/CreateClass/CreateClassForm";
 import ClassDisplay from "@/app/components/CreateClass/ClassDisplay";
 import CreateFeatureForm from "@/app/components/CreateClass/CreateFeatureForm";
+import { fullCasterSpellLevels } from "@/lib/utils/spellCasterDefaultLevels";
 const Page = () => {
   const [toggle, setToggle] = useState<boolean>(true);
   const [data, setData] = useState<Prisma.ClassCreateManyInput>({
@@ -39,7 +40,13 @@ const Page = () => {
     ],
     subClassName: "",
     subClassDesc: "",
-    ASILevels: [4, 8, 12, 16, 19],
+    abilityScoreLevels: [4, 8, 12, 16, 19],
+    spellCaster: false,
+    spellCastingAbility: Ability.WIS,
+    spellLevels:
+      fullCasterSpellLevels as unknown as Prisma.ClassCreatespellLevelsInput,
+    spellsKnown: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 20 levels
+    cantripsKnown: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 20 levels
   });
   const [features, setFeatures] = useState<Prisma.FeatureCreateManyInput[]>([
     {

@@ -24,7 +24,7 @@ const TextEditor = ({
   return (
     <div className="p-4">
       {title && <h2>{title}</h2>}
-      {description && <h3 className="mb-2">{description}</h3>}
+      {description && <p className="mb-2">{description}</p>}
       <textarea
         className="textarea textarea-primary my-2 w-full h-48"
         value={data}

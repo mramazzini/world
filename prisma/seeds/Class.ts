@@ -1,9 +1,16 @@
-import { Ability, ArmorTypes, Class, Prisma, Skill } from "@prisma/client";
+import {
+  Ability,
+  ArmorTypes,
+  CasterType,
+  Class,
+  Prisma,
+  Skill,
+} from "@prisma/client";
 
 const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 1,
-    name: "Fighter",
+    name: "fighter",
     hitDie: 10,
     description:
       "Fighters share an unparalleled mastery with weapons and armor, and a thorough knowledge of the skills of combat. They are well acquainted with death, both meting it out and staring it defiantly in the face.",
@@ -35,16 +42,17 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "A light crossbow and 20 bolts or two handaxes",
       "A dungeoneer's pack or an explorer's pack",
     ],
-    ASILevels: [4, 6, 8, 12, 14, 16, 19],
+    abilityScoreLevels: [4, 6, 8, 12, 14, 16, 19],
     subClassName: "Martial Archetype",
     subClassDesc:
       "you choose an archetype that you strive to emulate in your combat styles and techniques. ",
     subfeatLevels: [3, 7, 10, 15, 18],
+    spellCaster: false,
   },
 
   {
     id: 2,
-    name: "Wizard",
+    name: "wizard",
     description:
       "Wizards are supreme magic-users, defined and united as a class by the spells they cast. Drawing on the subtle weave of magic that permeates the cosmos, wizards cast spells of explosive fire, arcing lightning, subtle deception, and brute force mind control. Their magic conjures monsters from other planes of existence, glimpses the future, or turns slain foes into zombies. Their mightiest spells change one substance into another, call meteors down from the sky, or open portals to other worlds.",
     multiclassing:
@@ -69,14 +77,25 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "A scholar's pack or an explorer's pack",
       "A spellbook",
     ],
-    ASILevels: [4, 8, 12, 16, 19],
+    abilityScoreLevels: [4, 8, 12, 16, 19],
     subClassName: "Arcane Tradition",
     subClassDesc: "you choose an arcane tradition that you specialize in. ",
     subfeatLevels: [2, 6, 10, 14],
+    spellCaster: true,
+    spellCastingAbility: Ability.INT,
+    spellCastingInfo:
+      "The Wizard table shows how many spell slots you have to cast your wizard spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
+    prepareSpellInfo:
+      "You prepare the list of wizard spells that are available for you to cast. To do so, choose a number of wizard spells from your spellbook equal to your Intelligence modifier + your wizard level (minimum of one spell). The spells must be of a level for which you have spell slots. You can change your list of prepared spells when you finish a long rest. Preparing a new list of wizard spells requires time spent studying your spellbook and memorizing the incantations and gestures you must make to cast the spell: at least 1 minute per spell level for each spell on your list.",
+    ritualCaster: true,
+    ritualSpellPrepared: false,
+    spellFocus: "arcane focus",
+    cantripsKnown: [3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5], // lvl 1-20
+    casterTypeId: 1,
   },
   {
     id: 3,
-    name: "Cleric",
+    name: "cleric",
     hitDie: 8,
     description:
       "Clerics are intermediaries between the mortal world and the distant planes of the gods. As varied as the gods they serve, clerics strive to embody the handiwork of their deities. No ordinary priest, a cleric is imbued with divine magic.",
@@ -101,14 +120,24 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "A priest's pack or an explorer's pack",
       "A shield and a holy symbol",
     ],
-    ASILevels: [4, 8, 12, 16, 19],
+    abilityScoreLevels: [4, 8, 12, 16, 19],
     subClassName: "Divine Domain",
     subClassDesc: "you choose a divine domain that you dedicate yourself to. ",
     subfeatLevels: [1, 2, 6, 8, 17],
+    spellCaster: true,
+    spellCastingAbility: Ability.WIS,
+    spellFocus: "holy symbol",
+    ritualCaster: true,
+    prepareSpellInfo:
+      "You prepare the list of cleric spells that are available for you to cast. To do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots. You can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.",
+    spellCastingInfo:
+      "The Cleric table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
+    cantripsKnown: [3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+    casterTypeId: 1,
   },
   {
     id: 4,
-    name: "Rogue",
+    name: "rogue",
     hitDie: 8,
     description: "Rogues are cunning and elusive adversaries. ",
     multiclassing:
@@ -143,14 +172,16 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "A burglar's pack, a dungeoneer's pack, or an explorer's pack",
       "Leather armor, two daggers, and thieves' tools",
     ],
-    ASILevels: [4, 8, 10, 12, 16, 19],
+    abilityScoreLevels: [4, 8, 10, 12, 16, 19],
     subClassName: "Roguish Archetype",
     subClassDesc:
       "you choose a roguish archetype that you emulate in your adventuring career. ",
+    subfeatLevels: [3, 9, 13, 17],
+    spellCaster: false,
   },
   {
     id: 5,
-    name: "Barbarian",
+    name: "barbarian",
     description: "Barbarians are warriors who rely on their strength and rage.",
     multiclassing:
       "You must have a Strength score of 13 or higher in order to multiclass in or out of this class.",
@@ -174,14 +205,15 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "An explorer's pack or a dungeoneer's pack",
       "Four javelins",
     ],
-    ASILevels: [4, 6, 8, 12, 14, 16, 19],
+    abilityScoreLevels: [4, 6, 8, 12, 14, 16, 19],
     subClassName: "Primal Path",
     subClassDesc: "you choose a path that shapes the nature of your rage. ",
     subfeatLevels: [3, 6, 10, 14],
+    spellCaster: false,
   },
   {
     id: 6,
-    name: "Bard",
+    name: "bard",
     hitDie: 8,
     description: "Bards are versatile and talented musicians.",
     multiclassing:
@@ -223,14 +255,28 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "A lute or any other musical instrument",
       "Leather armor and a dagger",
     ],
-    ASILevels: [4, 8, 12, 16, 19],
+    abilityScoreLevels: [4, 8, 12, 16, 19],
     subfeatLevels: [3, 6, 14],
     subClassName: "Bardic College",
     subClassDesc: "you choose a college that you dedicate yourself to. ",
+    spellCaster: true,
+    spellCastingAbility: Ability.CHA,
+    spellFocus: "musical instrument",
+    prepareSpellInfo: `You know four 1st-level spells of your choice from the bard spell list.
+The Spells Known column of the Bard table shows when you learn more bard spells of your choice. Each of these spells must be of a level for which you have spell slots, as shown on the table. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level.
+Additionally, when you gain a level in this class, you can choose one of the bard spells you know and replace it with another spell from the bard spell list, which also must be of a level for which you have spell slots.`,
+    spellCastingInfo:
+      "The Bard table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
+    ritualCaster: true,
+    cantripsKnown: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], // lvl 1-20
+    spellsKnown: [
+      4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 15, 16, 18, 19, 19, 20, 22, 22, 22,
+    ], // lvl 1-20
+    casterTypeId: 1,
   },
   {
     id: 7,
-    name: "Druid",
+    name: "druid",
     hitDie: 8,
     description:
       "Druids are spellcasters who draw magic from the natural world.",
@@ -267,14 +313,24 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "A scimitar or any simple melee weapon",
       "Leather armor, an explorer's pack, and a druidic focus",
     ],
-    ASILevels: [4, 8, 12, 16, 19],
+    abilityScoreLevels: [4, 8, 12, 16, 19],
     subClassName: "Druidic Circle",
     subClassDesc: "you choose a circle that you dedicate yourself to. ",
     subfeatLevels: [2, 6, 10, 14],
+    spellCaster: true,
+    spellCastingAbility: Ability.WIS,
+    spellFocus: "druidic focus",
+    prepareSpellInfo:
+      "You prepare the list of druid spells that are available for you to cast. To do so, choose a number of druid spells from your spellbook equal to your Wisdom modifier + your druid level (minimum of one spell). The spells must be of a level for which you have spell slots. You can change your list of prepared spells when you finish a long rest. Preparing a new list of druid spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.",
+    spellCastingInfo:
+      "The Druid table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these druid spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
+    ritualCaster: true,
+    cantripsKnown: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], // lvl 1-20\
+    casterTypeId: 1,
   },
   {
     id: 8,
-    name: "Monk",
+    name: "monk",
     hitDie: 8,
     description:
       "Monks are martial artists who use ki to perform amazing feats.",
@@ -298,15 +354,16 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "A dungeoneer's pack or an explorer's pack",
       "10 darts",
     ],
-    ASILevels: [4, 6, 8, 10, 12, 14, 16, 19],
+    abilityScoreLevels: [4, 6, 8, 10, 12, 14, 16, 19],
     subClassName: "Monastic Tradition",
     subClassDesc:
       "you choose a monastic tradition that you dedicate yourself to. ",
     subfeatLevels: [3, 6, 11, 17],
+    spellCaster: false,
   },
   {
     id: 9,
-    name: "Paladin",
+    name: "paladin",
     hitDie: 10,
     description: "Paladins are holy warriors bound to a sacred oath.",
     multiclassing:
@@ -336,14 +393,22 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "A priest's pack or an explorer's pack",
       "A holy symbol",
     ],
-    ASILevels: [4, 8, 12, 16, 19],
+    abilityScoreLevels: [4, 8, 12, 16, 19],
     subClassName: "Sacred Oath",
     subClassDesc: "you choose a sacred oath that you dedicate yourself to. ",
     subfeatLevels: [3, 7, 15, 20],
+    spellCaster: true,
+    spellCastingInfo:
+      "The Paladin table shows how many spell slots you have to cast your spells. To cast one of your paladin spells of 1st level or higher, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
+    prepareSpellInfo:
+      "You prepare the list of paladin spells that are available for you to cast, choosing from the paladin spell list. When you do so, choose a number of paladin spells equal to your Charisma modifier + half your paladin level, rounded down (minimum of one spell). The spells must be of a level for which you have spell slots. You can change your list of prepared spells when you finish a long rest. Preparing a new list of paladin spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.",
+    spellCastingAbility: Ability.CHA,
+    spellFocus: "holy symbol",
+    casterTypeId: 2,
   },
   {
     id: 10,
-    name: "Ranger",
+    name: "ranger",
     hitDie: 10,
     description: "Rangers are hunters and wilderness warriors.",
     multiclassing:
@@ -369,15 +434,25 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "A dungeoneer's pack or an explorer's pack",
       "A longbow and a quiver of 20 arrows",
     ],
-    ASILevels: [4, 8, 12, 16, 19],
+    abilityScoreLevels: [4, 8, 12, 16, 19],
     subClassName: "Ranger Conclave",
     subClassDesc:
       "you choose to emulate the ideals and training of a ranger conclave.",
     subfeatLevels: [3, 7, 11, 15, 18],
+    spellCaster: true,
+    spellCastingAbility: Ability.WIS,
+    spellFocus: "druidic focus",
+    spellCastingInfo: `The Ranger table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.`,
+    prepareSpellInfo: `You know a number of spells from the ranger spell list equal to your Wisdom modifier + half your ranger level, rounded down (minimum of one spell). These spells must be of a level for which you have spell slots. Additionally, when you gain a level in this class, you can choose one of the ranger spells you know and replace it with another spell from the ranger spell list, which also must be of a level for which you have spell slots.`,
+
+    spellsKnown: [
+      0, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11,
+    ], // lvl 1-20
+    casterTypeId: 2,
   },
   {
     id: 11,
-    name: "Sorcerer",
+    name: "sorcerer",
     description: "Sorcerers are spellcasters who draw on innate magic.",
     multiclassing:
       "You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.",
@@ -401,15 +476,27 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "A dungeoneer's pack or an explorer's pack",
       "Two daggers",
     ],
-    ASILevels: [4, 8, 12, 16, 19],
+    abilityScoreLevels: [4, 8, 12, 16, 19],
     subClassName: "Sorcerous Origin",
     subClassDesc:
       "you choose a sorcerous origin that you dedicate yourself to. ",
     subfeatLevels: [1, 6, 14, 18],
+    spellCaster: true,
+    spellCastingAbility: Ability.CHA,
+    spellCastingInfo: `The Sorcerer table shows how many spell slots you have to cast your sorcerer spells of 1st level and higher. To cast one of these sorcerer spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.`,
+    prepareSpellInfo:
+      "You can cast any sorcerer spell you know without preparing it ahead of time. When you cast a spell, you expend a slot of that spell's level or higher, unless you are casting a cantrip. You regain all expended spell slots when you finish a long rest. Additionally, when you gain a level in this class, you can choose one of the sorcerer spells you know and replace it with another spell from the sorcerer spell list, which also must be of a level for which you have spell slots.",
+    spellFocus: "arcane focus",
+
+    spellsKnown: [
+      2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 15,
+    ], // lvl 1-20
+    cantripsKnown: [4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], // lvl 1-20
+    casterTypeId: 1,
   },
   {
     id: 12,
-    name: "Warlock",
+    name: "warlock",
     hitDie: 8,
     description:
       "Warlocks are wielders of magic who have forged a pact with an otherworldly being.",
@@ -435,11 +522,24 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "Leather armor, any simple weapon, and two daggers",
       "A scholar's pack or a dungeoneer's pack",
     ],
-    ASILevels: [4, 8, 12, 16, 19],
+    abilityScoreLevels: [4, 8, 12, 16, 19],
     subClassName: "Otherworldly Patron",
     subClassDesc:
       "you struck a bargain with an otherworldly being of your choice. ",
     subfeatLevels: [1, 6, 10, 14],
+    spellCaster: true,
+    spellCastingAbility: Ability.CHA,
+    spellCastingInfo:
+      "The Warlock table shows how many spell slots you have to cast your warlock spells of 1st through 5th level. The table also shows what the level of those slots is; all of your spell slots are the same level. To cast one of your warlock spells of 1st level or higher, you must expend a spell slot. You regain all expended spell slots when you finish a short or long rest.",
+    prepareSpellInfo:
+      "The Spells Known column of the Warlock table shows when you learn more warlock spells of your choice of 1st level or higher. A spell you choose must be of a level no higher than what's shown in the table's Slot Level column for your level. When you reach 6th level, for example, you learn a new warlock spell, which can be 1st, 2nd, or 3rd level. Additionally, when you gain a level in this class, you can choose one of the warlock spells you know and replace it with another spell from the warlock spell list, which also must be of a level for which you have spell slots.",
+
+    spellFocus: "arcane focus",
+    cantripsKnown: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], // lvl 1-20
+    spellsKnown: [
+      2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15,
+    ], // lvl 1-20
+    casterTypeId: 1,
   },
 ];
 export default Classes;
