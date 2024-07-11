@@ -48,7 +48,7 @@ const Tooltip = ({
 
     // Cleanup event listener on component unmount
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [layer]);
 
   //Idk why it wont work with template strings so this is scuffed for now
   if (position === "left") {

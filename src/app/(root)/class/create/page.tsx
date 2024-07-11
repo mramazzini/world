@@ -9,6 +9,7 @@ import {
 import {
   Ability,
   ArmorTypes,
+  CasterType,
   Class,
   Feature,
   Prisma,
@@ -18,7 +19,7 @@ import {
 import CreateClassForm from "@/app/components/CreateClass/CreateClassForm";
 import ClassDisplay from "@/app/components/CreateClass/ClassDisplay";
 import CreateFeatureForm from "@/app/components/CreateClass/CreateFeatureForm";
-import { fullCasterSpellLevels } from "@/lib/utils/spellCasterDefaultLevels";
+
 const Page = () => {
   const [toggle, setToggle] = useState<boolean>(true);
   const [data, setData] = useState<Prisma.ClassCreateManyInput>({
@@ -64,6 +65,12 @@ const Page = () => {
   const [subClasses, setSubClasses] = useState<
     Prisma.SubClassCreateManyInput[]
   >([]);
+
+  const [casterType, setCasterType] =
+    useState<Prisma.CasterTypeCreateManyInput>({
+      name: "",
+      description: "",
+    });
 
   //alert the user if they try to leave the page with unsaved data
   useEffect(() => {
@@ -117,6 +124,7 @@ const Page = () => {
           classObj={data as Class}
           features={features as Feature[]}
           subClasses={subClasses as SubClass[]}
+          casterType={casterType as CasterType}
         />
       </div>
     </main>

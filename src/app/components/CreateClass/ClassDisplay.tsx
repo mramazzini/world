@@ -314,8 +314,8 @@ function ClassDisplay({ classObj, features, subClasses, casterType }: Props) {
                       <br />
                       <br />
                       <P>
-                        As normal, you can't increase an ability score above 20
-                        using this feature.
+                        As normal, you can&apos;t increase an ability score
+                        above 20 using this feature.
                       </P>
                     </p>
                   </div>

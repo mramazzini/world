@@ -19,12 +19,11 @@ const Info: React.FC<Props> = ({ tooltip }) => {
             <rect x="11" y="7" width="2" height="2" fill="#ffffff" />
           </svg>
         }
-        children={
-          termDictionary.find(
-            (term) => term.term.toLowerCase() === tooltip.toLowerCase()
-          )?.definition || ""
-        }
-      />
+      >
+        {termDictionary.find(
+          (term) => term.term.toLowerCase() === tooltip.toLowerCase()
+        )?.definition || ""}
+      </Tooltip>
     </div>
   );
 };

@@ -5,11 +5,8 @@ import { getClasses } from "@/lib/actions/db/read.actions";
 import { Class } from "@prisma/client";
 import "@/lib/string.extensions";
 import Link from "next/link";
-import termDictionary from "@/app/components/Utility/TermDictionary";
 
-import P from "@/app/components/Utility/FormatAndSanitize";
-
-const page = () => {
+const Page = () => {
   const [data, setData] = useState<DBInfo[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -36,4 +33,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

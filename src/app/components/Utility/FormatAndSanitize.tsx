@@ -165,9 +165,10 @@ const P = ({
           <Tooltip
             key={`${term.term}-${termIndex}`}
             element={str.slice(termIndex, termIndex + term.term.length)}
-            children={term.definition}
             layer={layer}
-          />
+          >
+            {term.definition}
+          </Tooltip>
         );
 
         newElements.push(newElement);
@@ -211,7 +212,7 @@ const P = ({
     setProcessedContent(newElements);
     setLoading(false);
     console.log("processed", newElements);
-  }, [children]);
+  }, [children, layer]);
 
   return loading ? <span>{children}</span> : <>{processedContent}</>;
 };
