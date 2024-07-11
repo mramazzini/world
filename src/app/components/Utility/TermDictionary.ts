@@ -87,7 +87,7 @@ const termDictionary: {
   {
     term: "skill",
     definition:
-      "Represents a character's ability to perform a specific task. They are based on ability scores. Proficiency in a skill allows you to add your proficiency bonus to rolls related to that skill. The 18 skills are Acrobatics, Animal Handling, Arcana, Athletics, Deception, History, Insight, Intimidation, Investigation, Medicine, Nature, Perception, Performance, Persuasion, Religion, Sleight of Hand, Stealth, and Survival.",
+      "Represents a character's ability to perform a specific task. They are based on ability scores. Proficiency in a skill allows you to add your proficiency bonus to rolls related to that skill. ",
   },
   {
     term: "class features",
@@ -102,7 +102,7 @@ const termDictionary: {
   {
     term: "skills",
     definition:
-      "Represent a character's ability to perform specific tasks. They are based on ability scores. Proficiency in a skill allows you to add your proficiency bonus to rolls related to that skill. The 18 skills are Acrobatics, Animal Handling, Arcana, Athletics, Deception, History, Insight, Intimidation, Investigation, Medicine, Nature, Perception, Performance, Persuasion, Religion, Sleight of Hand, Stealth, and Survival.",
+      "Represent a character's ability to perform specific tasks. They are based on ability scores. Proficiency in a skill allows you to add your proficiency bonus to rolls related to that skill. ",
   },
   // {
   //   term: "spell",
