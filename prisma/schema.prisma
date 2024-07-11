@@ -142,25 +142,9 @@ model Class {
 
   prepareSpellInfo String? // How do spells get prepared for this class
 
-  //custom fields for table
-  customFields CustomField[]
-
   //date fields
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-model CustomField {
-  id           Int      @id @default(autoincrement())
-  title        String
-  data         String[] // How many of this item per level
-  isNumber     Boolean
-  consumable   Boolean
-  rechargeData String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  Class        Class    @relation(fields: [classId], references: [id])
-  classId      Int
 }
 
 model CasterType {
@@ -198,6 +182,8 @@ model Feature {
   name                String
   description         String
   levels              Int[]
+  options             String[] // If the feature has options to choose from, list here
+  table               String[] // optionally dedicate a column in the table
   spellCastingFeature Boolean  @default(false)
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt

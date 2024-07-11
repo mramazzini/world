@@ -7,7 +7,6 @@ import {
   Background,
   Feat,
   Spell,
-  Item,
   Race,
   Ability,
   Skill,

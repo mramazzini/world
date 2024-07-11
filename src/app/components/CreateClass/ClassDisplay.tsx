@@ -8,6 +8,9 @@ import "@/lib/string.extensions";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import SpellCastingInfo from "./SpellCastingInfo";
 import { SpellLevels } from "@/lib/types";
+import P from "../Utility/FormatAndSanitize";
+import Info from "../UI/Info";
+import termDictionary from "../Utility/TermDictionary";
 
 interface Props {
   classObj: Class;
@@ -26,8 +29,10 @@ function ClassDisplay({ classObj, features, subClasses, casterType }: Props) {
       </p>
       <div className="divider"></div>
       <p>
-        {classObj.multiclassing ||
-          "Your Multiclassing information will go here"}
+        <P>
+          {classObj.multiclassing ||
+            "Your Multiclassing information will go here"}
+        </P>
       </p>
       <div className="overflow-x-auto">
         <table className="table table-zebra sm:table-xs md:table-sm lg:table-md  my-4 table-pin-rows ">
@@ -42,7 +47,9 @@ function ClassDisplay({ classObj, features, subClasses, casterType }: Props) {
               {classObj.spellsKnown.find((c) => c > 0) && <th>Spells Known</th>}
               {casterType &&
                 classObj.spellCaster &&
-                numberArray(1, 9).map((num) => <th key={num}>Lvl {num}</th>)}
+                numberArray(1, 9).map((num) => (
+                  <th key={num}>Lvl {num.toString()}</th>
+                ))}
             </tr>
           </thead>
           <tbody>
@@ -68,13 +75,18 @@ function ClassDisplay({ classObj, features, subClasses, casterType }: Props) {
                       return (
                         <div key={`feature-${feature.id}-${num}`}>
                           {feature.name}
-                          {lvlIndex > 0 ? ` (x${lvlIndex + 1})` : null}
+                          {lvlIndex > 0 ? ` (x${lvlIndex + 1})` : ""}
                         </div>
                       );
                     })}
                   {classObj.subfeatLevels.includes(num) ? (
                     <div>
-                      <div>{classObj.subClassName} Feature</div>
+                      <div>
+                        {classObj.subClassName}{" "}
+                        {classObj.subfeatLevels.findIndex(
+                          (value) => value === num
+                        ) > 0 && "Feature"}
+                      </div>
                     </div>
                   ) : null}
                   {classObj.abilityScoreLevels.includes(num) ? (
@@ -94,7 +106,7 @@ function ClassDisplay({ classObj, features, subClasses, casterType }: Props) {
                   numberArray(0, 8).map((spellSlotLevel) => {
                     //get the key "level1" "level2" etc
                     const key = `level${num}` as SpellLevels;
-                    console.log(casterType[key][spellSlotLevel]);
+
                     return (
                       <td key={spellSlotLevel}>
                         {casterType[key][spellSlotLevel] > 0
@@ -108,58 +120,102 @@ function ClassDisplay({ classObj, features, subClasses, casterType }: Props) {
           </tbody>
         </table>
       </div>
-      <h2>Hitpoints</h2>
+      <h2>
+        Hitpoints <Info tooltip="Hitpoints" />
+      </h2>
       <div className="p-4">
-        <p>Hit Die: {classObj.hitDie}</p>
         <p>
-          Hitpoints at 1st Level: {classObj.hitDie} + your Constitution modifier
+          <span className="font-bold">
+            <P>Hit Die: </P>
+          </span>
+          <P>
+            1d{classObj.hitDie.toString()} per {classObj.name} level
+          </P>
+        </p>
+
+        <p>
+          <span className="font-bold">
+            <P>Hitpoints at first level: </P>
+          </span>
+          <P>{classObj.hitDie.toString()} + your Constitution modifier</P>
         </p>
         <p>
-          Hitpoints at Higher Levels: 1d{classObj.hitDie} (or{" "}
-          {Math.floor(classObj.hitDie / 2) + 1}) + your Constitution modifier
-          per {classObj.name} level after 1st
+          <span className="font-bold">
+            <P>Hitpoints at Higher Levels: </P>
+          </span>
+          <P>
+            1d{classObj.hitDie.toString()} (or{" "}
+            {(Math.floor(classObj.hitDie / 2) + 1).toString()}) + your
+            Constitution modifier per {classObj.name} level after 1st
+          </P>
         </p>
       </div>
-      <h2>Proficiencies</h2>
+      <h2>
+        Proficiencies <Info tooltip="Proficient" />
+      </h2>
       <div className="p-4">
         <p>
-          <span className="font-bold">Armor: </span>
+          <span className="font-bold">
+            <P>Armor:</P>{" "}
+          </span>
           {classObj.armor.map((s) => s.toCapitalCase()).join(", ") || "None"}
         </p>
         <p>
-          <span className="font-bold">Weapons: </span>
+          <span className="font-bold">
+            <P>Weapons: </P>
+          </span>
           {classObj.weapons.map((s) => s.toCapitalCase()).join(", ") || "None"}
         </p>
         <p>
-          <span className="font-bold">Tools: </span>
+          <span className="font-bold">
+            <P>Tools: </P>
+          </span>
           {classObj.tools.map((s) => s.toCapitalCase()).join(", ") || "None"}
         </p>
         <p>
-          <span className="font-bold">Saving Throws: </span>
-          {classObj.savingThrows.map((s) => AbilityToText(s)).join(", ") ||
-            "None"}
+          <span className="font-bold">
+            <P>Saving Throws: </P>
+          </span>
+          <P>
+            {classObj.savingThrows.map((s) => AbilityToText(s)).join(", ") ||
+              "None"}
+          </P>
         </p>
       </div>
-      <h2>Equipment</h2>
+      <h2>
+        Equipment <Info tooltip="Equipment" />
+      </h2>
       <div className="p-4">
         <p>
-          You start with the following equipment, in addition to the equipment
-          granted by your background:
+          <P>
+            You start with the following equipment, in addition to the equipment
+            granted by your background:
+          </P>
         </p>
         <ul className="list-disc p-4">
           {classObj.equipment.map((item, i) => (
-            <li key={i}>{item}</li>
+            <li key={i}>
+              {" "}
+              <P>{item} </P>
+            </li>
           ))}
         </ul>
       </div>
-      <h2>Skills</h2>
+      <h2>
+        Skills <Info tooltip="skills" />
+      </h2>
       <div className="p-4">
         <p>
-          Choose {classObj.skillChoiceCount} from the following list of skills:
+          <P>
+            Choose {classObj.skillChoiceCount.toString()} from the following
+            list of skills:
+          </P>
         </p>
         <ul className="list-disc p-4">
           {classObj.skills.map((skill, i) => (
-            <li key={i}>{skill.toCapitalCase().replaceAll("_", " ")}</li>
+            <li key={i}>
+              <P>{skill.toCapitalCase().replaceAll("_", " ")} </P>
+            </li>
           ))}
         </ul>
       </div>
@@ -168,7 +224,9 @@ function ClassDisplay({ classObj, features, subClasses, casterType }: Props) {
       )}
 
       <div className="divider"></div>
-      <h2>Class Features</h2>
+      <h2>
+        Class Features <Info tooltip="class features" />
+      </h2>
       <div className="divider"></div>
       <ul>
         {numberArray(1, 20).map((num) => {
@@ -185,78 +243,118 @@ function ClassDisplay({ classObj, features, subClasses, casterType }: Props) {
 
           //need to render each feature, but when the level hits abilityScoreLevels[0], print the ASI feature
           // when the level hits subfeatLevels[0], print the subclass feature
+          if (
+            classObj.subfeatLevels[0] === num ||
+            classObj.abilityScoreLevels[0] === num ||
+            feat.find((f) => f.levels[0] === num)
+          )
+            return (
+              <li key={num}>
+                <h3>Level {num}</h3>
+                {classObj.subfeatLevels[0] === num && (
+                  <div className="p-4">
+                    <h3>{classObj.subClassName}</h3>
+                    <p>
+                      <P>
+                        When you reach {numPlace(classObj.subfeatLevels[0])}{" "}
+                        level, {classObj.subClassDesc}
+                      </P>
+                    </p>
+                    <p>
+                      <P>
+                        {" "}
+                        Your choice grants you features at {numPlace(num)} level
+                        and again at{" "}
+                      </P>
+                      {[...classObj.subfeatLevels] // make copy since we dont want to mutate the original
+                        .slice(1) //remove the first element since its referenced above
+                        .map((lvl, index) => {
+                          if (index == classObj.subfeatLevels.length - 2)
+                            // 2 because we removed the first element
+                            // last element needs to be "and"
+                            return (
+                              <span key={index}>
+                                <P>and {numPlace(lvl)} </P>
+                              </span>
+                            );
+                          return (
+                            <span key={index}>
+                              <P>{numPlace(lvl)}, </P>
+                            </span>
+                          );
+                        })}
+                      <P>level.</P>
+                    </p>
+                  </div>
+                )}
+                {classObj.abilityScoreLevels[0] === num && (
+                  <div className="p-4">
+                    <h3>Ability Score Improvement</h3>
+                    <p>
+                      <P>
+                        When you reach{" "}
+                        {numPlace(classObj.abilityScoreLevels[0])} level, and
+                        again at{" "}
+                      </P>
+                      {[...classObj.abilityScoreLevels] // make copy since we dont want to mutate the original
+                        .map((lvl, index) => {
+                          if (index == 0) return; //remove the first element since its referenced above
+                          if (index == classObj.abilityScoreLevels.length - 1)
+                            // last element needs to be "and"
+                            return (
+                              <span key={index}>and {numPlace(lvl)} </span>
+                            );
+                          return <span key={index}>{numPlace(lvl)}, </span>;
+                        })}
+                      <P>
+                        level, you can increase one ability score of your choice
+                        by 2, or you can increase two ability scores of your
+                        choice by 1.
+                      </P>
+                      <br />
+                      <br />
+                      <P>
+                        As normal, you can't increase an ability score above 20
+                        using this feature.
+                      </P>
+                    </p>
+                  </div>
+                )}
 
-          return (
-            <li key={num}>
-              <h3>Level {num}</h3>
-              {classObj.subfeatLevels[0] === num && (
-                <div className="p-4">
-                  <h4>{classObj.subClassName}</h4>
-                  <p>
-                    When you reach {numPlace(classObj.subfeatLevels[0])} level,{" "}
-                    {classObj.subClassDesc}
-                  </p>
-                  <p>
-                    Your choice grants you features at {numPlace(num)} level and
-                    again at{" "}
-                    {[...classObj.subfeatLevels] // make copy since we dont want to mutate the original
-                      .slice(1) //remove the first element since its referenced above
-                      .map((lvl, index) => {
-                        if (index == classObj.subfeatLevels.length - 2)
-                          // 2 because we removed the first element
-                          // last element needs to be "and"
-                          return <span key={index}>and {numPlace(lvl)} </span>;
-                        return <span key={index}>{numPlace(lvl)} </span>;
-                      })}
-                    level.
-                  </p>
-                </div>
-              )}
-              {classObj.abilityScoreLevels[0] === num && (
-                <div className="p-4">
-                  <h4>Ability Score Improvement</h4>
-                  <p>
-                    When you reach {numPlace(classObj.abilityScoreLevels[0])}{" "}
-                    level, and again at{" "}
-                    {[...classObj.abilityScoreLevels] // make copy since we dont want to mutate the original
-                      .map((lvl, index) => {
-                        if (index == 0) return; //remove the first element since its referenced above
-                        if (index == classObj.abilityScoreLevels.length - 2)
-                          // 2 because we removed the first element
-                          // last element needs to be "and"
-                          return <span key={index}>and {numPlace(lvl)} </span>;
-                        return <span key={index}>{numPlace(lvl)} </span>;
-                      })}
-                    level, you can increase one ability score of your choice by
-                    2, or you can increase two ability scores of your choice by
-                    1.
-                    <br />
-                    As normal, you can't increase an ability score above 20
-                    using this feature.
-                  </p>
-                </div>
-              )}
+                <ul>
+                  {feat.map((feature) => {
+                    const lvlIndex = feature.levels.findIndex(
+                      (lvl) => lvl === num
+                    );
+                    if (lvlIndex === -1 || lvlIndex > 0) return;
+                    return (
+                      <li className="p-4" key={`${num}-${feature.id}`}>
+                        <h3>{lvlIndex === 0 && feature.name}</h3>
 
-              <ul>
-                {feat.map((feature) => {
-                  const lvlIndex = feature.levels.findIndex(
-                    (lvl) => lvl === num
-                  );
-                  return (
-                    <li className="p-4" key={`${num}-${feature.id}`}>
-                      <h4>
-                        {feature.name}{" "}
-                        {lvlIndex > 0 ? ` (x${lvlIndex + 1})` : null}
-                      </h4>
-
-                      {lvlIndex == 0 && feature.description}
-                    </li>
-                  );
-                })}
-              </ul>
-              <div className="divider"></div>
-            </li>
-          );
+                        {lvlIndex === 0 && (
+                          <>
+                            <P>{feature.description}</P>
+                            {feature.options && feature.options.length > 0 && (
+                              <ul className="list-disc p-4">
+                                {feature.options.map((option, index) => (
+                                  <div key={index}>
+                                    <li>
+                                      <P>{option}</P>
+                                    </li>
+                                    <br />
+                                  </div>
+                                ))}
+                              </ul>
+                            )}
+                          </>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+                <div className="divider"></div>
+              </li>
+            );
         })}
       </ul>
     </div>

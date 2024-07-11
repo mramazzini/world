@@ -18,8 +18,7 @@ const getSearchFunction = async (search: Pages): Promise<any> => {
       return functions.getFeat;
     case Pages.Spell:
       return functions.getSpell;
-    case Pages.Item:
-      return functions.getItem;
+
     default:
       console.warn("No search function found for", search);
       return functions.getClass;

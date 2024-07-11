@@ -43,8 +43,7 @@ const Page = () => {
     abilityScoreLevels: [4, 8, 12, 16, 19],
     spellCaster: false,
     spellCastingAbility: Ability.WIS,
-    spellLevels:
-      fullCasterSpellLevels as unknown as Prisma.ClassCreatespellLevelsInput,
+
     spellsKnown: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 20 levels
     cantripsKnown: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 20 levels
   });

@@ -5,6 +5,10 @@ import { getClasses } from "@/lib/actions/db/read.actions";
 import { Class } from "@prisma/client";
 import "@/lib/string.extensions";
 import Link from "next/link";
+import termDictionary from "@/app/components/Utility/TermDictionary";
+
+import P from "@/app/components/Utility/FormatAndSanitize";
+
 const page = () => {
   const [data, setData] = useState<DBInfo[]>([]);
   const [loading, setLoading] = useState(true);
@@ -27,6 +31,7 @@ const page = () => {
           <Link href={`/class/${item.name}`}>{item.name.toCapitalCase()}</Link>
         </div>
       ))}
+      <br />
     </div>
   );
 };

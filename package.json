@@ -16,11 +16,13 @@
     "@prisma/client": "^5.16.1",
     "@uiw/react-md-editor": "^4.0.4",
     "dompurify": "^3.1.5",
+    "interweave": "^13.1.0",
     "marked": "^13.0.1",
     "next": "14.2.4",
-    "react": "^18",
+    "react": "^18.3.1",
     "react-dom": "^18",
-    "simplemde": "^1.11.2"
+    "simplemde": "^1.11.2",
+    "tailwindcss-scoped-groups": "^2.0.0"
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.5",
