@@ -110,7 +110,7 @@ enum DamageTypes {
 }
 
 model Class {
-  id                  Int          @id @default(autoincrement())
+  id                  Int           @id @default(autoincrement())
   name                String
   description         String
   hitDie              Int
@@ -128,23 +128,54 @@ model Class {
   equipment           String[]
   armor               ArmorTypes[]
   weapons             String[]
+  customFields        CustomField[]
   //spellcasting
-  spellCaster         Boolean      @default(false)
+  spellCaster         Boolean       @default(false)
   spellCastingAbility Ability?
   spellsKnown         Int[] // number of spells known at each level
-  casterType          CasterType?  @relation(fields: [casterTypeId], references: [id])
+  casterType          CasterType?   @relation(fields: [casterTypeId], references: [id])
   cantripsKnown       Int[] // number of cantrips known at each level
-  ritualCaster        Boolean      @default(false) // can you cast spells as rituals
-  ritualSpellPrepared Boolean      @default(true) //do you need to have a spell prepared to cast it as a ritual
-  spellFocus          String       @default("None")
-  casterTypeId        Int          @default(1)
+  ritualCaster        Boolean       @default(false) // can you cast spells as rituals
+  ritualSpellPrepared Boolean       @default(true) //do you need to have a spell prepared to cast it as a ritual
+  spellFocus          String        @default("None")
+  casterTypeId        Int           @default(1)
   spellCastingInfo    String? // How does spell casting work for this class
-
-  prepareSpellInfo String? // How do spells get prepared for this class
+  displaySpellList    Boolean       @default(true) // This is for displaying the spell list on the class table. Some classes (like warlock), have a weird spell casting system and opt to use the custom table fields instead.
+  prepareSpellInfo    String? // How do spells get prepared for this class
 
   //date fields
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model CustomField {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  level1      String
+  level2      String
+  level3      String
+  level4      String
+  level5      String
+  level6      String
+  level7      String
+  level8      String
+  level9      String
+  level10     String
+  level11     String
+  level12     String
+  level13     String
+  level14     String
+  level15     String
+  level16     String
+  level17     String
+  level18     String
+  level19     String
+  level20     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Class       Class?   @relation(fields: [classId], references: [id])
+  classId     Int?
 }
 
 model CasterType {

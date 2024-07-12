@@ -30,7 +30,7 @@ const P = ({
       setProcessedContent("");
     }
     let sanitizedDescription = str as string;
-    // console.log("sanitized", sanitizedDescription);
+
     // Split the string into an array of strings and elements
     const elements: React.ReactNode[] = [];
     let lastIndex = 0;
@@ -99,6 +99,7 @@ const P = ({
     pushElement(sanitizedDescription.slice(lastIndex));
 
     if (layer === 3) {
+      console.log(elements);
       setProcessedContent(elements);
     }
 
@@ -121,9 +122,6 @@ const P = ({
 
     //takes an array of indexes of where the term is found in the string and creates a tooltip for each
     function createTooltip(str: string, indexes: number[][]) {
-      if (layer > 0) {
-        // console.log("asd", indexes);
-      }
       // add the gap between the start of the string and the first term
       {
         const firstTermIndex = indexes[0][0];
@@ -156,10 +154,6 @@ const P = ({
           );
           return;
         }
-        const beforeTerm = str.slice(0, termIndex);
-        const afterTerm = str.slice(termIndex + term.term.length, str.length);
-        // console.log("before", beforeTerm);
-        // console.log("after", afterTerm);
 
         const newElement = (
           <Tooltip
@@ -186,7 +180,6 @@ const P = ({
         if (terms && terms.length > 0) {
           createTooltip(element, terms);
         } else {
-          // console.log("No term found in string: ", element.toLowerCase());
           newElements.push(element);
         }
       } else {
@@ -211,7 +204,6 @@ const P = ({
     // Return the elements array
     setProcessedContent(newElements);
     setLoading(false);
-    console.log("processed", newElements);
   }, [children, layer]);
 
   return loading ? <span>{children}</span> : <>{processedContent}</>;

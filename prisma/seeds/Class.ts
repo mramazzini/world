@@ -536,10 +536,9 @@ Additionally, when you gain a level in this class, you can choose one of the bar
 
     spellFocus: "arcane focus",
     cantripsKnown: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], // lvl 1-20
-    spellsKnown: [
-      2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15,
-    ], // lvl 1-20
-    casterTypeId: 1,
+    displaySpellList: false,
+
+    casterTypeId: 5,
   },
 ];
 export default Classes;

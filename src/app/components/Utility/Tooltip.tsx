@@ -1,6 +1,12 @@
 "use client";
 
-import { ReactNode, useEffect, useRef, useState } from "react";
+import {
+  MouseEventHandler,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import P from "./FormatAndSanitize";
 
 const Tooltip = ({
@@ -17,38 +23,17 @@ const Tooltip = ({
     groupHover: "",
   };
   const [position, setPosition] = useState<"left" | "right">("right");
-  const tooltipRef = useRef<HTMLSpanElement>(null);
 
-  useEffect(() => {
-    if (!tooltipRef.current) return;
+  // set left or right based on mouse position
+  const handleMouseEnter = (e: any) => {
+    if (e.clientX > window.innerWidth / 2) {
+      setPosition("left");
+    } else {
+      setPosition("right");
+    }
+  };
 
-    const handleResize = () => {
-      if (tooltipRef.current) {
-        let element = tooltipRef.current;
-        let index = 0;
-        while (index != layer) {
-          element = element.parentElement as HTMLElement;
-          index++;
-        }
-        const { left, right } = element.getBoundingClientRect();
-        const screenWidth = window.innerWidth;
-        if (layer > 0) console.log(left, right, screenWidth / 2);
-        if (right > screenWidth / 2) {
-          setPosition("left");
-        } else {
-          setPosition("right");
-        }
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    // Initial check
-    handleResize();
-
-    // Cleanup event listener on component unmount
-    return () => window.removeEventListener("resize", handleResize);
-  }, [layer]);
+  const handleMouseLeave = () => {};
 
   //Idk why it wont work with template strings so this is scuffed for now
   if (position === "left") {
@@ -103,7 +88,11 @@ const Tooltip = ({
   }
 
   return (
-    <span className={style.group} ref={tooltipRef}>
+    <span
+      className={style.group}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       {element}
       <span className={style.groupHover}>
         <P layer={layer + 1}>{children || ""}</P>

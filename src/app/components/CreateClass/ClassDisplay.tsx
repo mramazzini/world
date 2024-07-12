@@ -3,23 +3,35 @@
 import numPlace from "@/lib/utils/numPlace";
 //takes a class object and returns a formatted display of the class
 import numberArray from "@/lib/utils/numberArray";
-import { CasterType, Class, Feature, SubClass } from "@prisma/client";
+import {
+  CasterType,
+  Class,
+  CustomField,
+  Feature,
+  SubClass,
+} from "@prisma/client";
 import "@/lib/string.extensions";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import SpellCastingInfo from "./SpellCastingInfo";
-import { SpellLevels } from "@/lib/types";
+import ClassTable from "./ClassTable";
 import P from "../Utility/FormatAndSanitize";
 import Info from "../UI/Info";
-import termDictionary from "../Utility/TermDictionary";
 
 interface Props {
   classObj: Class;
   features: Feature[];
   subClasses: SubClass[];
   casterType: CasterType | null;
+  customFields: CustomField[];
 }
 
-function ClassDisplay({ classObj, features, subClasses, casterType }: Props) {
+function ClassDisplay({
+  classObj,
+  features,
+  subClasses,
+  casterType,
+  customFields,
+}: Props) {
   return (
     <div className="p-4">
       <h1>{classObj.name.toCapitalCase() || "Class Name"}</h1>
@@ -35,90 +47,12 @@ function ClassDisplay({ classObj, features, subClasses, casterType }: Props) {
         </P>
       </p>
       <div className="overflow-x-auto">
-        <table className="table table-zebra sm:table-xs md:table-sm lg:table-md  my-4 table-pin-rows ">
-          <thead>
-            <tr>
-              <th>Level</th>
-              <th>Proficiency Bonus</th>
-              <th>Features</th>
-              {classObj.cantripsKnown.find((c) => c > 0) && (
-                <th>Cantrips Known</th>
-              )}
-              {classObj.spellsKnown.find((c) => c > 0) && <th>Spells Known</th>}
-              {casterType &&
-                classObj.spellCaster &&
-                numberArray(1, 9).map((num) => (
-                  <th key={num}>Lvl {num.toString()}</th>
-                ))}
-            </tr>
-          </thead>
-          <tbody>
-            {numberArray(1, 20).map((num) => (
-              <tr key={num}>
-                {/* level */}
-                <th>{num}</th>
-                {/* proficiency bonus */}
-                <td>+{Math.ceil(num / 4) + 1}</td>
-                {/* features */}
-                <td>
-                  {features
-                    .filter(
-                      (feature) => feature.levels.includes(num) && feature
-                    )
-                    .map((feature) => {
-                      //if the feature is the second level of the same feature type, just do feature (x2)
-
-                      const lvlIndex = feature.levels.findIndex(
-                        (lvl) => lvl === num
-                      );
-
-                      return (
-                        <div key={`feature-${feature.id}-${num}`}>
-                          {feature.name}
-                          {lvlIndex > 0 ? ` (x${lvlIndex + 1})` : ""}
-                        </div>
-                      );
-                    })}
-                  {classObj.subfeatLevels.includes(num) ? (
-                    <div>
-                      <div>
-                        {classObj.subClassName}{" "}
-                        {classObj.subfeatLevels.findIndex(
-                          (value) => value === num
-                        ) > 0 && "Feature"}
-                      </div>
-                    </div>
-                  ) : null}
-                  {classObj.abilityScoreLevels.includes(num) ? (
-                    <div>
-                      <div>Ability Score Improvement</div>
-                    </div>
-                  ) : null}
-                </td>
-                {classObj.cantripsKnown.find((c) => c > 0) && (
-                  <td>{classObj.cantripsKnown[num - 1] || 0}</td>
-                )}
-                {classObj.spellsKnown.find((c) => c > 0) && (
-                  <td>{classObj.spellsKnown[num - 1] || 0}</td>
-                )}
-                {casterType &&
-                  classObj.spellCaster &&
-                  numberArray(0, 8).map((spellSlotLevel) => {
-                    //get the key "level1" "level2" etc
-                    const key = `level${num}` as SpellLevels;
-
-                    return (
-                      <td key={spellSlotLevel}>
-                        {casterType[key][spellSlotLevel] > 0
-                          ? casterType[key][spellSlotLevel]
-                          : "-"}
-                      </td>
-                    );
-                  })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <ClassTable
+          classObj={classObj}
+          features={features}
+          casterType={casterType}
+          customFields={customFields}
+        />
       </div>
       <h2>
         Hitpoints <Info tooltip="Hitpoints" />

@@ -5,6 +5,7 @@ import CasterTypes from "./seeds/CasterType";
 import Weapons from "./seeds/Weapons";
 import Properties from "./seeds/Properties";
 import WeaponToPropertyArr from "./seeds/WeaponToProperty";
+import CustomFields from "./seeds/CustomFields";
 import {
   PrismaClient,
   Weapon,
@@ -71,6 +72,22 @@ const seed = async () => {
     }
   }
   console.log("Features created");
+
+  //Create custom fields
+  console.log("Creating custom fields");
+  for (const CustomField of CustomFields) {
+    try {
+      console.log("Creating custom field", CustomField.name);
+      await db.customField.create({
+        data: CustomField,
+      });
+      console.log("Custom field created");
+    } catch (error) {
+      console.error("Error creating custom field", CustomField.name, error);
+      return;
+    }
+  }
+  console.log("Custom fields created");
 
   // Create sub classes
 

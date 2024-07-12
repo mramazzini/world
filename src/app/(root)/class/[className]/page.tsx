@@ -28,6 +28,7 @@ const ClassPage = () => {
           features={data.Features}
           subClasses={data.SubClasses}
           casterType={data.casterType || null}
+          customFields={data.customFields}
         />
       )}
     </div>

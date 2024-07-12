@@ -44,6 +44,7 @@ export async function getClass(
         Features: true,
         SubClasses: true,
         casterType: true,
+        customFields: true,
       },
     });
   } else {
@@ -55,6 +56,7 @@ export async function getClass(
         Features: true,
         SubClasses: true,
         casterType: true,
+        customFields: true,
       },
     });
   }

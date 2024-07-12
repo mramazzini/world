@@ -109,6 +109,33 @@ const CasterTypes: Prisma.CasterTypeCreateManyInput[] = [
     level19: [4, 3, 3, 3, 2, 0, 0, 0, 0],
     level20: [4, 3, 3, 3, 2, 0, 0, 0, 0],
   },
+  {
+    id: 5,
+    name: "Warlock",
+    description:
+      "Warlocks are a unique caster type. They have a limited number of spell slots, but they are always cast at the highest level.",
+    examples: ["Warlock"],
+    level1: [1, 0, 0, 0, 0, 0, 0, 0, 0],
+    level2: [2, 0, 0, 0, 0, 0, 0, 0, 0],
+    level3: [0, 2, 0, 0, 0, 0, 0, 0, 0],
+    level4: [0, 2, 0, 0, 0, 0, 0, 0, 0],
+    level5: [0, 0, 2, 0, 0, 0, 0, 0, 0],
+    level6: [0, 0, 2, 0, 0, 0, 0, 0, 0],
+    level7: [0, 0, 0, 2, 0, 0, 0, 0, 0],
+    level8: [0, 0, 0, 2, 0, 0, 0, 0, 0],
+    level9: [0, 0, 0, 0, 2, 0, 0, 0, 0],
+    level10: [0, 0, 0, 0, 2, 0, 0, 0, 0],
+    level11: [0, 0, 0, 0, 3, 0, 0, 0, 0],
+    level12: [0, 0, 0, 0, 3, 0, 0, 0, 0],
+    level13: [0, 0, 0, 0, 3, 0, 0, 0, 0],
+    level14: [0, 0, 0, 0, 3, 0, 0, 0, 0],
+    level15: [0, 0, 0, 0, 3, 0, 0, 0, 0],
+    level16: [0, 0, 0, 0, 3, 0, 0, 0, 0],
+    level17: [0, 0, 0, 0, 4, 0, 0, 0, 0],
+    level18: [0, 0, 0, 0, 4, 0, 0, 0, 0],
+    level19: [0, 0, 0, 0, 4, 0, 0, 0, 0],
+    level20: [0, 0, 0, 0, 4, 0, 0, 0, 0],
+  },
 ];
 
 export default CasterTypes;
