@@ -9,25 +9,30 @@
     "lint": "next lint",
     "postinstall": "prisma generate",
     "prisma:migrate": "npx prisma migrate dev --name init",
-    "seed": "npx prisma db seed"
+    "seed": "npx prisma db seed && npm run pdfs",
+    "pdfs": "npx tsx scripts/generatepdfs.ts"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.16.1",
+    "@react-pdf/renderer": "^3.4.4",
+    "@types/react-pdf": "^7.0.0",
     "@uiw/react-md-editor": "^4.0.4",
     "dompurify": "^3.1.5",
     "interweave": "^13.1.0",
     "marked": "^13.0.1",
     "next": "14.2.4",
+    "prisma": "^5.16.1",
     "react": "^18.3.1",
     "react-dom": "^18",
+    "react-pdf": "^9.1.0",
+    "react-pdf-tailwind": "^2.3.0",
     "simplemde": "^1.11.2",
     "tailwindcss-scoped-groups": "^2.0.0",
-    "prisma": "^5.16.1",
-    "typescript": "^5.5.3",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.5",

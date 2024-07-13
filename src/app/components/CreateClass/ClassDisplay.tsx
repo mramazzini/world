@@ -16,6 +16,7 @@ import SpellCastingInfo from "./SpellCastingInfo";
 import ClassTable from "./ClassTable";
 import P from "../Utility/FormatAndSanitize";
 import Info from "../UI/Info";
+import Link from "next/link";
 
 interface Props {
   classObj: Class;
@@ -35,10 +36,16 @@ function ClassDisplay({
   return (
     <div className="p-4">
       <h1>{classObj.name.toCapitalCase() || "Class Name"}</h1>
-
       <p className="italic">
         {classObj.description || "Your Class Description will go here."}
       </p>
+      <Link
+        target="_blank"
+        className="text-blue-500 hover:text-blue-700 inline text-sm font-bold"
+        href={`/class/${classObj.name}/pdf`}
+      >
+        View this class as a PDF here -&gt;
+      </Link>{" "}
       <div className="divider"></div>
       <p>
         <P>
@@ -156,7 +163,6 @@ function ClassDisplay({
       {classObj.spellCaster && casterType && (
         <SpellCastingInfo classObj={classObj} casterType={casterType} />
       )}
-
       <div className="divider"></div>
       <h2>
         Class Features <Info tooltip="class features" />
@@ -186,40 +192,91 @@ function ClassDisplay({
               <li key={num}>
                 <h3>Level {num}</h3>
                 {classObj.subfeatLevels[0] === num && (
-                  <div className="p-4">
-                    <h3>{classObj.subClassName}</h3>
-                    <p>
-                      <P>
-                        When you reach {numPlace(classObj.subfeatLevels[0])}{" "}
-                        level, {classObj.subClassDesc}
-                      </P>
-                    </p>
-                    <p>
-                      <P>
-                        {" "}
-                        Your choice grants you features at {numPlace(num)} level
-                        and again at{" "}
-                      </P>
-                      {[...classObj.subfeatLevels] // make copy since we dont want to mutate the original
-                        .slice(1) //remove the first element since its referenced above
-                        .map((lvl, index) => {
-                          if (index == classObj.subfeatLevels.length - 2)
-                            // 2 because we removed the first element
-                            // last element needs to be "and"
+                  <>
+                    <div className="p-4">
+                      <h3>
+                        {classObj.subClassName} - Subclass{" "}
+                        <Info tooltip="Subclass" />
+                      </h3>
+                      <p>
+                        <P>
+                          When you reach {numPlace(classObj.subfeatLevels[0])}{" "}
+                          level, {classObj.subClassDesc}
+                        </P>
+                      </p>
+                      <p>
+                        <P>
+                          {" "}
+                          Your choice grants you features at {numPlace(
+                            num
+                          )}{" "}
+                          level and again at{" "}
+                        </P>
+                        {[...classObj.subfeatLevels] // make copy since we dont want to mutate the original
+                          .slice(1) //remove the first element since its referenced above
+                          .map((lvl, index) => {
+                            if (index == classObj.subfeatLevels.length - 2)
+                              // 2 because we removed the first element
+                              // last element needs to be "and"
+                              return (
+                                <span key={index}>
+                                  <P>and {numPlace(lvl)} </P>
+                                </span>
+                              );
                             return (
                               <span key={index}>
-                                <P>and {numPlace(lvl)} </P>
+                                <P>{numPlace(lvl)}, </P>
                               </span>
                             );
-                          return (
-                            <span key={index}>
-                              <P>{numPlace(lvl)}, </P>
-                            </span>
-                          );
-                        })}
-                      <P>level.</P>
-                    </p>
-                  </div>
+                          })}
+                        <P>level.</P>
+                      </p>
+                    </div>
+                    {/* list subclasses */}
+                    <h3 className="px-4">Official Subclasses:</h3>
+                    <div className="p-4">
+                      <table className="table-zebra">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {subClasses.map((sub) => (
+                            <tr key={sub.id}>
+                              <td
+                                style={{
+                                  minWidth: "200px",
+                                }}
+                              >
+                                <Link
+                                  className="text-blue-500 hover:text-blue-700 "
+                                  href={`/class/${classObj.name}/subclass/${sub.name}`}
+                                >
+                                  {sub.name}
+                                </Link>
+                              </td>
+                              <td
+                                style={{
+                                  overflowWrap: "break-word",
+                                  wordWrap: "break-word",
+                                  hyphens: "auto",
+                                  maxHeight: "50px",
+                                  overflow: "hidden",
+                                  whiteSpace: "nowrap",
+                                  textOverflow: "ellipsis",
+                                  maxWidth: "50vw",
+                                }}
+                              >
+                                {sub.description}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </>
                 )}
                 {classObj.abilityScoreLevels[0] === num && (
                   <div className="p-4">

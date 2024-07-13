@@ -148,6 +148,18 @@ model Class {
   updatedAt DateTime @updatedAt
 }
 
+model SubClass {
+  id              Int               @id @default(autoincrement())
+  name            String
+  description     String
+  spells          String[] // string format: "level:spell,level:spell" where level is an int and spell is a string
+  SubClassFeature SubClassFeature[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Class           Class?            @relation(fields: [classId], references: [id])
+  classId         Int?
+}
+
 model CustomField {
   id          Int      @id @default(autoincrement())
   name        String
@@ -222,15 +234,16 @@ model Feature {
   classId             Int?
 }
 
-model SubClass {
-  id          Int    @id @default(autoincrement())
+model SubClassFeature {
+  id          Int      @id @default(autoincrement())
   name        String
   description String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Class     Class?   @relation(fields: [classId], references: [id])
-  classId   Int?
+  levels      Int[]
+  options     String[] // If the feature has options to choose from, list here
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  SubClass    SubClass @relation(fields: [subClassId], references: [id])
+  subClassId  Int
 }
 
 model Race {

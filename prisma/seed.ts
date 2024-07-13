@@ -1,6 +1,6 @@
 import Features from "./seeds/Features";
 import Classes from "./seeds/Class";
-import SubClasses from "./seeds/SubClasses";
+import SubClasses from "./seeds/Subclasses";
 import CasterTypes from "./seeds/CasterType";
 import Weapons from "./seeds/Weapons";
 import Properties from "./seeds/Properties";
@@ -90,6 +90,20 @@ const seed = async () => {
   console.log("Custom fields created");
 
   // Create sub classes
+  console.log("Creating sub classes");
+  for (const SubClass of SubClasses) {
+    try {
+      console.log("Creating sub class", SubClass.name);
+      await db.subClass.create({
+        data: SubClass,
+      });
+      console.log("Sub class created");
+    } catch (error) {
+      console.error("Error creating sub class", SubClass.name, error);
+      return;
+    }
+  }
+  console.log("Sub classes created");
 
   // Create weapons
   console.log("Creating weapons");

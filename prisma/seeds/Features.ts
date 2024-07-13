@@ -220,7 +220,7 @@ Beginning at 6th level, you can use your Channel Divinity twice between rests, a
     classId: ids.cleric,
   },
   {
-    name: "Channel Divinity: Turn Undead",
+    name: "Turn Undead",
     description: `As an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage.
 
 A turned creature must spend its turns trying to move as far away from you as it can, and it can't willingly move to a space within 30 feet of you. It also can't take reactions. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there's nowhere to move, the creature can use the Dodge action.`,
@@ -229,7 +229,7 @@ A turned creature must spend its turns trying to move as far away from you as it
     classId: ids.cleric,
   },
   {
-    name: "Harness Divine Power (Optional)",
+    name: "Harness Divine Power ",
     description:
       "At 2nd level, you can expend a use of your Channel Divinity to fuel your spells. As a bonus action, you touch your holy symbol, utter a prayer, and regain one expended spell slot, the level of which can be no higher than half your proficiency bonus (rounded up). The number of times you can use this feature is based on the level you've reached in this class: 2nd level, once; 6th level, twice; and 18th level, thrice. You regain all expended uses when you finish a long rest.",
     levels: [2, 6, 18],
@@ -250,7 +250,7 @@ A turned creature must spend its turns trying to move as far away from you as it
     classId: ids.cleric,
   },
   {
-    name: "Blessed Strikes (Optional)",
+    name: "Blessed Strikes ",
     description: `*Replaces the Divine Strike or Potent Spellcasting feature that you may recieve from your Divine Domain.*
 
       When you reach 8th level, you are blessed with divine might in battle. When a creature takes damage from one of your cantrips or weapon attacks, you can also deal 1d8 radiant damage to that creature. Once you deal this damage, you can't use this feature again until the start of your next turn.`,
@@ -676,7 +676,7 @@ A turned creature must spend its turns trying to move as far away from you as it
     classId: ids.paladin,
   },
   {
-    name: "Harness Divine Power (Optional)",
+    name: "Harness Divine Power",
     description:
       "Also at 3rd level, you can expend a use of your Channel Divinity to fuel your spells. As a bonus action, you touch your holy symbol, utter a prayer, and regain one expended spell slot, the level of which can be no higher than half your proficiency bonus (rounded up). The number of times you can use this feature is based on the level you've reached in this class: 3rd level, once; 7th level, twice; and 15th level, thrice. You regain all expended uses when you finish a long rest.",
     levels: [3, 7, 15],

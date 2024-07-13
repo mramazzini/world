@@ -99,8 +99,9 @@ const P = ({
     pushElement(sanitizedDescription.slice(lastIndex));
 
     if (layer === 3) {
-      console.log(elements);
       setProcessedContent(elements);
+      setLoading(false);
+      return;
     }
 
     const newElements: React.ReactNode[] = [];
@@ -206,7 +207,7 @@ const P = ({
     setLoading(false);
   }, [children, layer]);
 
-  return loading ? <span>{children}</span> : <>{processedContent}</>;
+  return loading ? <>{children}</> : <>{processedContent}</>;
 };
 
 export default P;
