@@ -382,11 +382,8 @@ const ClassPDF = () => {
                     )}
                     {feat.map((feature) => {
                       return (
-                        <View>
-                          <Text
-                            key={`feature-${feature.id}-${level}`}
-                            style={{ fontSize: 12, marginBottom: 2 }}
-                          >
+                        <View key={`feature-${feature.id}-${level}`}>
+                          <Text style={{ fontSize: 12, marginBottom: 2 }}>
                             {feature.name}:
                           </Text>
                           <Text style={{ fontSize: 10, marginBottom: 10 }}>

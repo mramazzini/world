@@ -11,6 +11,7 @@ import {
   ArmorTypes,
   CasterType,
   Class,
+  CustomField,
   Feature,
   Prisma,
   Skill,
@@ -72,6 +73,10 @@ const Page = () => {
       description: "",
     });
 
+  const [customFields, setCustomFields] = useState<
+    Prisma.CustomFieldCreateManyInput[]
+  >([]);
+
   //alert the user if they try to leave the page with unsaved data
   useEffect(() => {
     function alertUser(e: BeforeUnloadEvent) {
@@ -125,6 +130,7 @@ const Page = () => {
           features={features as Feature[]}
           subClasses={subClasses as SubClass[]}
           casterType={casterType as CasterType}
+          customFields={customFields as CustomField[]}
         />
       </div>
     </main>

@@ -9,8 +9,7 @@
     "lint": "next lint",
     "postinstall": "prisma generate",
     "prisma:migrate": "npx prisma migrate dev --name init",
-    "seed": "npx prisma db seed && npm run pdfs",
-    "pdfs": "npx tsx scripts/generatepdfs.ts"
+    "seed": "npx prisma db seed "
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"
