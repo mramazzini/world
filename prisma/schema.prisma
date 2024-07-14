@@ -110,38 +110,39 @@ enum DamageTypes {
 }
 
 model Class {
-  id                  Int           @id @default(autoincrement())
-  name                String
-  description         String
-  hitDie              Int
-  savingThrows        Ability[]
-  skills              Skill[]
-  skillChoiceCount    Int
-  SubClasses          SubClass[]
-  subClassName        String
-  subClassDesc        String
-  subfeatLevels       Int[]
-  multiclassing       String
-  Features            Feature[]
-  tools               String[]
-  abilityScoreLevels  Int[]
-  equipment           String[]
-  armor               ArmorTypes[]
-  weapons             String[]
-  customFields        CustomField[]
+  id                       Int           @id @default(autoincrement())
+  name                     String
+  description              String
+  hitDie                   Int
+  savingThrows             Ability[]
+  skills                   Skill[]
+  skillChoiceCount         Int
+  SubClasses               SubClass[]
+  subClassName             String
+  subClassDesc             String
+  subfeatLevels            Int[]
+  multiclassing            String
+  Features                 Feature[]
+  tools                    String[]
+  abilityScoreLevels       Int[]
+  equipment                String[]
+  armor                    ArmorTypes[]
+  weapons                  String[]
+  customFields             CustomField[]
+  subClassSpellDescription String? //If the class has spells given by subclass, describe here
   //spellcasting
-  spellCaster         Boolean       @default(false)
-  spellCastingAbility Ability?
-  spellsKnown         Int[] // number of spells known at each level
-  casterType          CasterType?   @relation(fields: [casterTypeId], references: [id])
-  cantripsKnown       Int[] // number of cantrips known at each level
-  ritualCaster        Boolean       @default(false) // can you cast spells as rituals
-  ritualSpellPrepared Boolean       @default(true) //do you need to have a spell prepared to cast it as a ritual
-  spellFocus          String        @default("None")
-  casterTypeId        Int           @default(1)
-  spellCastingInfo    String? // How does spell casting work for this class
-  displaySpellList    Boolean       @default(true) // This is for displaying the spell list on the class table. Some classes (like warlock), have a weird spell casting system and opt to use the custom table fields instead.
-  prepareSpellInfo    String? // How do spells get prepared for this class
+  spellCaster              Boolean       @default(false)
+  spellCastingAbility      Ability?
+  spellsKnown              Int[] // number of spells known at each level
+  casterType               CasterType?   @relation(fields: [casterTypeId], references: [id])
+  cantripsKnown            Int[] // number of cantrips known at each level
+  ritualCaster             Boolean       @default(false) // can you cast spells as rituals
+  ritualSpellPrepared      Boolean       @default(true) //do you need to have a spell prepared to cast it as a ritual
+  spellFocus               String        @default("None")
+  casterTypeId             Int           @default(1)
+  spellCastingInfo         String? // How does spell casting work for this class
+  displaySpellList         Boolean       @default(true) // This is for displaying the spell list on the class table. Some classes (like warlock), have a weird spell casting system and opt to use the custom table fields instead.
+  prepareSpellInfo         String? // How do spells get prepared for this class
 
   //date fields
   createdAt DateTime @default(now())
@@ -149,15 +150,15 @@ model Class {
 }
 
 model SubClass {
-  id              Int               @id @default(autoincrement())
-  name            String
-  description     String
-  spells          String[] // string format: "level:spell,level:spell" where level is an int and spell is a string
-  SubClassFeature SubClassFeature[]
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  Class           Class?            @relation(fields: [classId], references: [id])
-  classId         Int?
+  id               Int               @id @default(autoincrement())
+  name             String
+  description      String
+  spells           String[] // string format: "level:spell,spell,spell" where level is an int and spell is a string
+  SubClassFeatures SubClassFeature[]
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  Class            Class?            @relation(fields: [classId], references: [id])
+  classId          Int?
 }
 
 model CustomField {

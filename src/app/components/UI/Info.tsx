@@ -22,7 +22,7 @@ const Info: React.FC<Props> = ({ tooltip }) => {
       >
         {termDictionary.find(
           (term) => term.term.toLowerCase() === tooltip.toLowerCase()
-        )?.definition || ""}
+        )?.definition || tooltip}
       </Tooltip>
     </div>
   );

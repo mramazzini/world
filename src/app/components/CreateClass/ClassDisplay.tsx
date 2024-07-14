@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import numPlace from "@/lib/utils/numPlace";
 //takes a class object and returns a formatted display of the class
 import numberArray from "@/lib/utils/numberArray";
@@ -17,6 +17,7 @@ import ClassTable from "./ClassTable";
 import P from "../Utility/FormatAndSanitize";
 import Info from "../UI/Info";
 import Link from "next/link";
+import Levels from "../UI/Levels";
 
 interface Props {
   classObj: Class;
@@ -33,6 +34,7 @@ function ClassDisplay({
   casterType,
   customFields,
 }: Props) {
+  const [toggle, setToggle] = useState(false);
   return (
     <div className="p-4">
       <h1>{classObj.name.toCapitalCase() || "Class Name"}</h1>
@@ -53,14 +55,18 @@ function ClassDisplay({
             "Your Multiclassing information will go here"}
         </P>
       </p>
-      <div className="overflow-x-auto">
-        <ClassTable
-          classObj={classObj}
-          features={features}
-          casterType={casterType}
-          customFields={customFields}
-        />
-      </div>
+      <div className="divider" />
+      <h2>Class Table </h2>
+      {toggle && (
+        <div className="overflow-x-auto">
+          <ClassTable
+            classObj={classObj}
+            features={features}
+            casterType={casterType}
+            customFields={customFields}
+          />
+        </div>
+      )}
       <h2>
         Hitpoints <Info tooltip="Hitpoints" />
       </h2>
@@ -190,13 +196,15 @@ function ClassDisplay({
           )
             return (
               <li key={num}>
-                <h3>Level {num}</h3>
                 {classObj.subfeatLevels[0] === num && (
                   <>
                     <div className="p-4">
-                      <h3>
-                        {classObj.subClassName} - Subclass{" "}
-                        <Info tooltip="Subclass" />
+                      <h3 className="flex flex-row justify-between">
+                        <div>
+                          {classObj.subClassName} - Subclass{" "}
+                          <Info tooltip="Subclass" />
+                        </div>
+                        <Levels levels={classObj.subfeatLevels} />
                       </h3>
                       <p>
                         <P>
@@ -204,13 +212,12 @@ function ClassDisplay({
                           level, {classObj.subClassDesc}
                         </P>
                       </p>
+                      <br />
                       <p>
                         <P>
                           {" "}
-                          Your choice grants you features at {numPlace(
-                            num
-                          )}{" "}
-                          level and again at{" "}
+                          Your subclass choice grants you features at{" "}
+                          {numPlace(num)} level and again at{" "}
                         </P>
                         {[...classObj.subfeatLevels] // make copy since we dont want to mutate the original
                           .slice(1) //remove the first element since its referenced above
@@ -233,7 +240,14 @@ function ClassDisplay({
                       </p>
                     </div>
                     {/* list subclasses */}
+                    <Link
+                      className="m-4 btn btn-primary"
+                      href={`/class/${classObj.name}/subclass`}
+                    >
+                      View all {classObj.name} subclasses -&gt;
+                    </Link>
                     <h3 className="px-4">Official Subclasses:</h3>
+
                     <div className="p-4">
                       <table className="table-zebra">
                         <thead>
@@ -252,7 +266,9 @@ function ClassDisplay({
                               >
                                 <Link
                                   className="text-blue-500 hover:text-blue-700 "
-                                  href={`/class/${classObj.name}/subclass/${sub.name}`}
+                                  href={`/class/${
+                                    classObj.name
+                                  }/subclass/${sub.name.replaceAll(" ", "-")}`}
                                 >
                                   {sub.name}
                                 </Link>
@@ -275,41 +291,53 @@ function ClassDisplay({
                           ))}
                         </tbody>
                       </table>
+                      {classObj.subClassSpellDescription && (
+                        <div className="py-4">
+                          <P>{classObj.subClassSpellDescription}</P>
+                        </div>
+                      )}
                     </div>
+                    <div className="divider"></div>
                   </>
                 )}
                 {classObj.abilityScoreLevels[0] === num && (
-                  <div className="p-4">
-                    <h3>Ability Score Improvement</h3>
-                    <p>
-                      <P>
-                        When you reach{" "}
-                        {numPlace(classObj.abilityScoreLevels[0])} level, and
-                        again at{" "}
-                      </P>
-                      {[...classObj.abilityScoreLevels] // make copy since we dont want to mutate the original
-                        .map((lvl, index) => {
-                          if (index == 0) return; //remove the first element since its referenced above
-                          if (index == classObj.abilityScoreLevels.length - 1)
-                            // last element needs to be "and"
-                            return (
-                              <span key={index}>and {numPlace(lvl)} </span>
-                            );
-                          return <span key={index}>{numPlace(lvl)}, </span>;
-                        })}
-                      <P>
-                        level, you can increase one ability score of your choice
-                        by 2, or you can increase two ability scores of your
-                        choice by 1.
-                      </P>
-                      <br />
-                      <br />
-                      <P>
-                        As normal, you can&apos;t increase an ability score
-                        above 20 using this feature.
-                      </P>
-                    </p>
-                  </div>
+                  <>
+                    <div className="p-4">
+                      <h3 className="flex flex-row justify-between">
+                        Ability Score Improvement{" "}
+                        <Levels levels={classObj.abilityScoreLevels} />
+                      </h3>
+                      <p>
+                        <P>
+                          When you reach{" "}
+                          {numPlace(classObj.abilityScoreLevels[0])} level, and
+                          again at{" "}
+                        </P>
+                        {[...classObj.abilityScoreLevels] // make copy since we dont want to mutate the original
+                          .map((lvl, index) => {
+                            if (index == 0) return; //remove the first element since its referenced above
+                            if (index == classObj.abilityScoreLevels.length - 1)
+                              // last element needs to be "and"
+                              return (
+                                <span key={index}>and {numPlace(lvl)} </span>
+                              );
+                            return <span key={index}>{numPlace(lvl)}, </span>;
+                          })}
+                        <P>
+                          level, you can increase one ability score of your
+                          choice by 2, or you can increase two ability scores of
+                          your choice by 1.
+                        </P>
+                        <br />
+                        <br />
+                        <P>
+                          As normal, you can&apos;t increase an ability score
+                          above 20 using this feature.
+                        </P>
+                      </p>
+                    </div>
+                    <div className="divider"></div>
+                  </>
                 )}
 
                 <ul>
@@ -319,31 +347,38 @@ function ClassDisplay({
                     );
                     if (lvlIndex === -1 || lvlIndex > 0) return;
                     return (
-                      <li className="p-4" key={`${num}-${feature.id}`}>
-                        <h3>{lvlIndex === 0 && feature.name}</h3>
+                      <>
+                        <li className="px-4" key={`${num}-${feature.id}`}>
+                          <h3 className="flex flex-row justify-between">
+                            {lvlIndex === 0 && feature.name}{" "}
+                            <Levels levels={feature.levels} />
+                          </h3>
 
-                        {lvlIndex === 0 && (
-                          <>
-                            <P>{feature.description}</P>
-                            {feature.options && feature.options.length > 0 && (
-                              <ul className="list-disc p-4">
-                                {feature.options.map((option, index) => (
-                                  <div key={index}>
-                                    <li>
-                                      <P>{option}</P>
-                                    </li>
+                          {lvlIndex === 0 && (
+                            <>
+                              <P>{feature.description}</P>
+                              {feature.options &&
+                                feature.options.length > 0 && (
+                                  <ul className="list-disc px-4">
                                     <br />
-                                  </div>
-                                ))}
-                              </ul>
-                            )}
-                          </>
-                        )}
-                      </li>
+                                    {feature.options.map((option, index) => (
+                                      <div key={index}>
+                                        <li>
+                                          <P>{option}</P>
+                                        </li>
+                                        <br />
+                                      </div>
+                                    ))}
+                                  </ul>
+                                )}
+                            </>
+                          )}
+                        </li>
+                        <div className="divider"></div>
+                      </>
                     );
                   })}
                 </ul>
-                <div className="divider"></div>
               </li>
             );
         })}

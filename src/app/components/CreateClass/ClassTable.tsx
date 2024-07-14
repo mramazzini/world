@@ -5,6 +5,7 @@ import numberArray from "@/lib/utils/numberArray";
 import numPlace from "@/lib/utils/numPlace";
 import { Levels, SpellLevels } from "@/lib/types";
 import Link from "next/link";
+import Info from "../UI/Info";
 interface Props {
   classObj: Class;
   features: Feature[];
@@ -20,9 +21,6 @@ const ClassTable = ({
 }: Props) => {
   return (
     <>
-      <div className="divider" />
-      <h2>Class Table </h2>
-
       <table className="table table-zebra sm:table-xs md:table-sm lg:table-md my-4 table-pin-rows max-w-[1800px]">
         <thead>
           <tr>

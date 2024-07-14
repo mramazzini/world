@@ -1,5 +1,5 @@
 "use server";
-import { ClassInfo } from "@/lib/types";
+import { ClassInfo, SubClassInfo } from "@/lib/types";
 import {
   Class,
   PrismaClient,
@@ -62,6 +62,52 @@ export async function getClass(
   }
 }
 
+export async function getSubclass(
+  query: string | number
+): Promise<SubClassInfo | null> {
+  try {
+    if (typeof query === "string") {
+      return await db.subClass.findFirst({
+        where: {
+          name: query,
+        },
+        include: {
+          SubClassFeatures: true,
+        },
+      });
+    } else {
+      return await db.subClass.findFirst({
+        where: {
+          id: query,
+        },
+        include: {
+          SubClassFeatures: true,
+        },
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+}
+
+export const getSubclassFromClassName = async (
+  className: string
+): Promise<SubClass[]> => {
+  //find the class
+  const classObj = await db.class.findFirst({
+    where: {
+      name: className,
+    },
+  });
+  //find the subclasses
+  return await db.subClass.findMany({
+    where: {
+      classId: classObj?.id,
+    },
+  });
+};
+
 export const getDefaultCasterTypes = async (): Promise<CasterType[]> => {
   const arr: CasterType[] = await db.casterType.findMany({
     where: {
@@ -72,10 +118,6 @@ export const getDefaultCasterTypes = async (): Promise<CasterType[]> => {
   });
   return arr;
 };
-
-export async function getSubClass(): Promise<SubClass[]> {
-  return await db.subClass.findMany();
-}
 
 export async function getRace(): Promise<Race[]> {
   return await db.race.findMany();

@@ -122,14 +122,16 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     ],
     abilityScoreLevels: [4, 8, 12, 16, 19],
     subClassName: "Divine Domain",
-    subClassDesc: "you choose a divine domain that you dedicate yourself to. ",
+    subClassDesc: "you choose a divine domain that you dedicate yourself to.",
     subfeatLevels: [1, 2, 6, 8, 17],
     spellCaster: true,
     spellCastingAbility: Ability.WIS,
     spellFocus: "holy symbol",
     ritualCaster: true,
+    subClassSpellDescription:
+      "**Domain Spells:** Each domain has a list of spells-its domain spells that you gain at the cleric levels noted in the domain description. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day. If you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you.",
     prepareSpellInfo:
-      "You prepare the list of cleric spells that are available for you to cast. To do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots. You can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.",
+      "You prepare the list of cleric spells that are available for you to cast. To do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots. \n\nYou can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.",
     spellCastingInfo:
       "The Cleric table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
     cantripsKnown: [3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
@@ -262,9 +264,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     spellCaster: true,
     spellCastingAbility: Ability.CHA,
     spellFocus: "musical instrument",
-    prepareSpellInfo: `You know four 1st-level spells of your choice from the bard spell list.
-The Spells Known column of the Bard table shows when you learn more bard spells of your choice. Each of these spells must be of a level for which you have spell slots, as shown on the table. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level.
-Additionally, when you gain a level in this class, you can choose one of the bard spells you know and replace it with another spell from the bard spell list, which also must be of a level for which you have spell slots.`,
+    prepareSpellInfo: `You know four 1st-level spells of your choice from the bard spell list.\n\nThe Spells Known column of the Bard table shows when you learn more bard spells of your choice. Each of these spells must be of a level for which you have spell slots, as shown on the table. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the bard spells you know and replace it with another spell from the bard spell list, which also must be of a level for which you have spell slots.`,
     spellCastingInfo:
       "The Bard table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
     ritualCaster: true,
@@ -321,7 +321,7 @@ Additionally, when you gain a level in this class, you can choose one of the bar
     spellCastingAbility: Ability.WIS,
     spellFocus: "druidic focus",
     prepareSpellInfo:
-      "You prepare the list of druid spells that are available for you to cast. To do so, choose a number of druid spells from your spellbook equal to your Wisdom modifier + your druid level (minimum of one spell). The spells must be of a level for which you have spell slots. You can change your list of prepared spells when you finish a long rest. Preparing a new list of druid spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.",
+      "You prepare the list of druid spells that are available for you to cast. To do so, choose a number of druid spells from your spellbook equal to your Wisdom modifier + your druid level (minimum of one spell). The spells must be of a level for which you have spell slots.\n\n You can change your list of prepared spells when you finish a long rest. Preparing a new list of druid spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.",
     spellCastingInfo:
       "The Druid table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these druid spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
     ritualCaster: true,

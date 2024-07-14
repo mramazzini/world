@@ -24,7 +24,7 @@ const SpellCastingInfo = ({ classObj, casterType }: Props) => {
       </h2>
       <div className="divider" />
       <h3 className="font-bold">
-        <P>Spellcasting Ability: </P>
+        Spellcasting Ability:{" "}
         {AbilityToText(classObj.spellCastingAbility || "None")}
       </h3>
       <div className="p-4">

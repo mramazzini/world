@@ -20,14 +20,14 @@ const Features: Prisma.FeatureCreateManyInput[] = [
   {
     name: "Action Surge",
     description:
-      "Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action.",
+      "Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action.\n\nOnce you use this feature, you must finish a short or long rest before you can use it again. Starting at 17th level, you can use it twice before a rest, but only once on the same turn.",
     levels: [2],
     classId: ids.fighter,
   },
   {
     name: "Extra Attack",
     description:
-      "Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn. The number of attacks increases to three when you reach 11th level in this class and to four when you reach 20th level in this class.",
+      "Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn.\n\n The number of attacks increases to three when you reach 11th level in this class and to four when you reach 20th level in this class.",
     levels: [5, 11, 20],
     classId: ids.fighter,
   },
@@ -57,7 +57,7 @@ const Features: Prisma.FeatureCreateManyInput[] = [
   {
     name: "Second Wind",
     description:
-      "You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level. Once you use this feature, you must finish a short or long rest before you can use it again.",
+      "You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.\n\n Once you use this feature, you must finish a short or long rest before you can use it again.",
     levels: [1],
     classId: ids.fighter,
   },
@@ -75,7 +75,7 @@ const Features: Prisma.FeatureCreateManyInput[] = [
   {
     name: "Indomitable",
     description:
-      "Beginning at 9th level, you can reroll a saving throw that you fail. If you do so, you must use the new roll, and you can't use this feature again until you finish a long rest. You can use this feature twice between long rests starting at 13th level and three times between long rests starting at 17th level.",
+      "Beginning at 9th level, you can reroll a saving throw that you fail. If you do so, you must use the new roll, and you can't use this feature again until you finish a long rest. \n\nYou can use this feature twice between long rests starting at 13th level and three times between long rests starting at 17th level.",
     levels: [9, 13, 17],
     classId: ids.fighter,
   },
@@ -126,13 +126,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   // Bard
   {
     name: "Bardic Inspiration",
-    description: `You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6.
-      
-      Once within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the DM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time. 
-      
-      You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain any expended uses when you finish a long rest. 
-      
-      Your Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.`,
+    description: `You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6.\n\nOnce within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the DM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time. \n\nYou can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain any expended uses when you finish a long rest.\n\nYour Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.`,
     levels: [1, 5, 10, 15],
     classId: ids.bard,
   },
@@ -145,9 +139,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   },
   {
     name: "Song of Rest",
-    description: `Beginning at 2nd level, you can use soothing music or oration to help revitalize your wounded allies during a short rest. If you or any friendly creatures who can hear your performance regain hit points at the end of the short rest by spending one or more Hit Dice, each of those creatures regains an extra 1d6 hit points.
-    
-    The extra hit points increase when you reach certain levels in this class: to 1d8 at 9th level, to 1d10 at 13th level, and to 1d12 at 17th level.`,
+    description: `Beginning at 2nd level, you can use soothing music or oration to help revitalize your wounded allies during a short rest. If you or any friendly creatures who can hear your performance regain hit points at the end of the short rest by spending one or more Hit Dice, each of those creatures regains an extra 1d6 hit points.\n\nThe extra hit points increase when you reach certain levels in this class: to 1d8 at 9th level, to 1d10 at 13th level, and to 1d12 at 17th level.`,
     levels: [2, 9, 13, 17],
     classId: ids.bard,
   },
@@ -160,9 +152,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   },
   {
     name: "Expertise",
-    description: `At 3rd level, choose two of your skill proficiencies. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.
-    
-    At 10th level, you can choose another two skill proficiencies to gain this benefit.`,
+    description: `At 3rd level, choose two of your skill proficiencies. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.\n\nAt 10th level, you can choose another two skill proficiencies to gain this benefit.`,
     levels: [3, 10],
     classId: ids.bard,
   },
@@ -195,7 +185,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   {
     name: "Magical Secrets",
     description:
-      "By 10th level, you have plundered magical knowledge from a wide spectrum of disciplines. Choose two spells from any classes, including this one. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip. The chosen spells count as bard spells for you and are included in the number in the Spells Known column of the Bard table. You learn two additional spells from any classes at 14th level and again at 18th level. ",
+      "By 10th level, you have plundered magical knowledge from a wide spectrum of disciplines. Choose two spells from any classes, including this one. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip.\n\n The chosen spells count as bard spells for you and are included in the number in the Spells Known column of the Bard table.\n\n You learn two additional spells from any classes at 14th level and again at 18th level. ",
     levels: [10, 14, 18],
     classId: ids.bard,
   },
@@ -209,22 +199,13 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   // Cleric
   {
     name: "Channel Divinity",
-    description: `At 2nd level, you gain the ability to channel divine energy directly from your deity, using that energy to fuel magical effects. You start with two such effects: Turn Undead and an effect determined by your domain. Some domains grant you additional effects as you advance in levels, as noted in the domain description.
-
-When you use your Channel Divinity, you choose which effect to create. You must then finish a short or long rest to use your Channel Divinity again.
-
-Some Channel Divinity effects require saving throws. When you use such an effect from this class, the DC equals your cleric spell save DC.
-
-Beginning at 6th level, you can use your Channel Divinity twice between rests, and beginning at 18th level, you can use it three times between rests. When you finish a short or long rest, you regain your expended uses.`,
+    description: `At 2nd level, you gain the ability to channel divine energy directly from your deity, using that energy to fuel magical effects. You start with two such effects: Turn Undead and an effect determined by your domain. Some domains grant you additional effects as you advance in levels, as noted in the domain description.\n\nWhen you use your Channel Divinity, you choose which effect to create. You must then finish a short or long rest to use your Channel Divinity again.\n\nSome Channel Divinity effects require saving throws. When you use such an effect from this class, the DC equals your cleric spell save DC.\n\nBeginning at 6th level, you can use your Channel Divinity twice between rests, and beginning at 18th level, you can use it three times between rests. When you finish a short or long rest, you regain your expended uses.`,
     levels: [2, 6, 18],
     classId: ids.cleric,
   },
   {
     name: "Turn Undead",
-    description: `As an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage.
-
-A turned creature must spend its turns trying to move as far away from you as it can, and it can't willingly move to a space within 30 feet of you. It also can't take reactions. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there's nowhere to move, the creature can use the Dodge action.`,
-
+    description: `As an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage.\n\nA turned creature must spend its turns trying to move as far away from you as it can, and it can't willingly move to a space within 30 feet of you. It also can't take reactions. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there's nowhere to move, the creature can use the Dodge action.`,
     levels: [2],
     classId: ids.cleric,
   },
@@ -251,19 +232,13 @@ A turned creature must spend its turns trying to move as far away from you as it
   },
   {
     name: "Blessed Strikes ",
-    description: `*Replaces the Divine Strike or Potent Spellcasting feature that you may recieve from your Divine Domain.*
-
-      When you reach 8th level, you are blessed with divine might in battle. When a creature takes damage from one of your cantrips or weapon attacks, you can also deal 1d8 radiant damage to that creature. Once you deal this damage, you can't use this feature again until the start of your next turn.`,
+    description: `*Replaces the Divine Strike or Potent Spellcasting feature that you may recieve from your Divine Domain.*\n\nWhen you reach 8th level, you are blessed with divine might in battle. When a creature takes damage from one of your cantrips or weapon attacks, you can also deal 1d8 radiant damage to that creature. Once you deal this damage, you can't use this feature again until the start of your next turn.`,
     levels: [8],
     classId: ids.cleric,
   },
   {
     name: "Divine Intervention",
-    description: `Beginning at 10th level, you can call on your deity to intervene on your behalf when your need is great.
-    
-    Imploring your deity's aid requires you to use your action. Describe the assistance you seek, and roll percentile dice. If you roll a number equal to or lower than your cleric level, your deity intervenes. The DM chooses the nature of the intervention; the effect of any cleric spell or cleric domain spell would be appropriate. If your deity intervenes, you can't use this feature again for 7 days. Otherwise, you can use it again after you finish a long rest. 
-    
-    At 20th level, your call for intervention succeeds automatically, no roll required.`,
+    description: `Beginning at 10th level, you can call on your deity to intervene on your behalf when your need is great.\n\nImploring your deity's aid requires you to use your action. Describe the assistance you seek, and roll percentile dice. If you roll a number equal to or lower than your cleric level, your deity intervenes. The DM chooses the nature of the intervention; the effect of any cleric spell or cleric domain spell would be appropriate. If your deity intervenes, you can't use this feature again for 7 days. Otherwise, you can use it again after you finish a long rest. \n\nAt 20th level, your call for intervention succeeds automatically, no roll required.`,
     levels: [10, 20],
     classId: ids.cleric,
   },
@@ -355,9 +330,14 @@ A turned creature must spend its turns trying to move as far away from you as it
   {
     name: "Rage",
     description:
-      "In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. While raging, you gain the following benefits if you aren't wearing heavy armor: You have advantage on Strength checks and Strength saving throws. When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table. You have resistance to bludgeoning, piercing, and slashing damage. If you are able to cast spells, you can't cast them or concentrate on them while raging. Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven't attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action. Once you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again.",
+      "In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. \n\nIf you are able to cast spells, you can't cast them or concentrate on them while raging.\n\n Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven't attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.\n\nOnce you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again.\n\n While raging, you have the following benefits if you aren't wearing heavy armor: ",
     levels: [1],
     classId: ids.barbarian,
+    options: [
+      "You have advantage on Strength checks and Strength saving throws.",
+      "When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.",
+      "You have resistance to bludgeoning, piercing, and slashing damage.",
+    ],
   },
   {
     name: "Unarmored Defense",
@@ -397,7 +377,7 @@ A turned creature must spend its turns trying to move as far away from you as it
   {
     name: "Feral Instinct",
     description:
-      "By 7th level, your instincts are so honed that you have advantage on initiative rolls. Additionally, if you are surprised at the beginning of combat and aren't incapacitated, you can act normally on your first turn, but only if you enter your rage before doing anything else on that turn.",
+      "By 7th level, your instincts are so honed that you have advantage on initiative rolls.\n\nAdditionally, if you are surprised at the beginning of combat and aren't incapacitated, you can act normally on your first turn, but only if you enter your rage before doing anything else on that turn.",
     levels: [7],
     classId: ids.barbarian,
   },
@@ -411,14 +391,14 @@ A turned creature must spend its turns trying to move as far away from you as it
   {
     name: "Brutal Critical",
     description:
-      "Beginning at 9th level, you can roll one additional weapon damage die when determining the extra damage for a critical hit with a melee attack. This increases to two additional dice at 13th level and three additional dice at 17th level. ",
+      "Beginning at 9th level, you can roll one additional weapon damage die when determining the extra damage for a critical hit with a melee attack.\n\n This increases to two additional dice at 13th level and three additional dice at 17th level. ",
     levels: [9, 13, 17],
     classId: ids.barbarian,
   },
   {
     name: "Relentless Rage",
     description:
-      "Starting at 11th level, your rage can keep you fighting despite grievous wounds. If you drop to 0 hit points while you're raging and don't die outright, you can make a DC 10 Constitution saving throw. If you succeed, you drop to 1 hit point instead. Each time you use this feature after the first, the DC increases by 5. When you finish a short or long rest, the DC resets to 10.",
+      "Starting at 11th level, your rage can keep you fighting despite grievous wounds. If you drop to 0 hit points while you're raging and don't die outright, you can make a DC 10 Constitution saving throw. If you succeed, you drop to 1 hit point instead.\n\n Each time you use this feature after the first, the DC increases by 5. When you finish a short or long rest, the DC resets to 10.",
     levels: [11],
     classId: ids.barbarian,
   },
@@ -454,14 +434,21 @@ A turned creature must spend its turns trying to move as far away from you as it
   {
     name: "Wild Shape",
     description:
-      "Starting at 2nd level, you can use your action to magically assume the shape of a beast that you have seen before. You can use this feature twice. You regain expended uses when you finish a short or long rest. At 2nd level, you can transform into any beast that has a challenge rating of 1/4 or lower that doesn't have a flying or swimming speed. At 4th level, you can transform into a beast with a challenge rating as high as 1/2, and it can have a swimming speed. At 8th level, you can transform into a beast with a challenge rating as high as 8th level, and it can have a flying speed.",
+      "Starting at 2nd level, you can use your action to magically assume the shape of a beast that you have seen before. You can use this feature twice. You regain expended uses when you finish a short or long rest.\n\nYour druid level determines the beasts you can transform into.\n\n- At 2nd level, you can transform into any beast with a challenge rating of 1/4 or lower that doesn't have a flying or swimming speed.\n- At 4th level, you can transform into a beast with a challenge rating of 1/2 or lower, and it cannot have a flying speed.\n- At 8th level, you can transform into a beast with a challenge rating of 1 or lower.\n\n You can stay in a beast shape for a number of hours equal to half your druid level (rounded down). You then revert to your normal form unless you expend another use of this feature. You can revert to your normal form earlier by using a bonus action on your turn. You automatically revert if you fall unconscious, drop to 0 hit points, or die. \n\nWhile you are transformed, the following rules apply:",
+    options: [
+      "Your game statistics are replaced by the statistics of the beast, but you retain your alignment, personality, and Intelligence, Wisdom, and Charisma scores. You also retain all of your skill and saving throw proficiencies, in addition to gaining those of the creature. If the creature has the same proficiency as you and the bonus in its stat block is higher than yours, use the creature's bonus instead of yours. If the creature has any legendary or lair actions, you can't use them.",
+      "When you transform, you assume the beast's hit points and Hit Dice. When you revert to your normal form, you return to the number of hit points you had before you transformed. However, if you revert as a result of dropping to 0 hit points, any excess damage carries over to your normal form, For example, if you take 10 damage in animal form and have only 1 hit point left, you revert and take 9 damage. As long as the excess damage doesn't reduce your normal form to 0 hit points, you aren't knocked unconscious.",
+      "You can't cast spells, and your ability to speak or take any action that requires hands is limited to the capabilities of your beast form. Transforming doesn't break your concentration on a spell you've already cast, however, or prevent you from taking actions that are part of a spell, such as Call Lightning, that you've already cast.",
+      "You retain the benefit of any features from your class, race, or other source and can use them if the new form is physically capable of doing so. However, you can't use any of your special senses, such as darkvision, unless your new form also has that sense.",
+      "You choose whether your equipment falls to the ground in your space, merges into your new form, or is worn by it. Worn equipment functions as normal, but the DM decides whether it is practical for the new form to wear a piece of equipment, based on the creature's shape and size. Your equipment doesn't change size or shape to match the new form, and any equipment that the new form can't wear must either fall to the ground or merge with it. Equipment that merges with the form has no effect until you leave the form.",
+    ],
     levels: [2, 4, 8],
     classId: ids.druid,
   },
   {
     name: "Wild Companion",
     description:
-      "At 2nd level, you gain the ability to summon a spirit that assumes an animal form: as an action, you can expend a use of your Wild Shape feature to cast the Find Familiar spell, without material components. When you cast the spell in this way, the familiar is a fey instead of a beast, and the familiar disappears after a number of hours equal to half your druid level.",
+      "At 2nd level, you gain the ability to summon a spirit that assumes an animal form: as an action, you can expend a use of your Wild Shape feature to cast the Find Familiar spell, without material components.\n\n When you cast the spell in this way, the familiar is a fey instead of a beast, and the familiar disappears after a number of hours equal to half your druid level.",
     levels: [2],
     classId: ids.druid,
   },
@@ -485,11 +472,14 @@ A turned creature must spend its turns trying to move as far away from you as it
     description:
       "Beginning at 18th level, you can cast many of your druid spells in any shape you assume using Wild Shape. You can perform the somatic and verbal components of a druid spell while in a beast shape, but you aren't able to provide material components.",
     levels: [18],
+    classId: ids.druid,
   },
   {
     name: "Archdruid",
     description:
-      "At 20th level, you can use your Wild Shape an unlimited number of times. Additionally, you can ignore the verbal and somatic components of your druid spells, as well as any material components that lack a cost and aren't consumed by a spell. You gain this benefit in both your normal shape and your beast shape from Wild Shape.",
+      "At 20th level, you can use your Wild Shape an unlimited number of times.\n\n Additionally, you can ignore the verbal and somatic components of your druid spells, as well as any material components that lack a cost and aren't consumed by a spell. You gain this benefit in both your normal shape and your beast shape from Wild Shape.",
+    levels: [20],
+    classId: ids.druid,
   },
   // Monk
   {

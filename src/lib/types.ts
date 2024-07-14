@@ -5,6 +5,7 @@ import {
   Feature,
   Prisma,
   SubClass,
+  SubClassFeature,
 } from "@prisma/client";
 
 export enum Pages {
@@ -28,6 +29,10 @@ export interface ClassInfo extends Class {
   SubClasses: SubClass[];
   casterType: CasterType | null;
   customFields: CustomField[];
+}
+
+export interface SubClassInfo extends SubClass {
+  SubClassFeatures: SubClassFeature[];
 }
 
 // type where options are "level1" , "level2" all the way to level20
