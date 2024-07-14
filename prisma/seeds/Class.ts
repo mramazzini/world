@@ -184,7 +184,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 5,
     name: "barbarian",
-    description: "Barbarians are warriors who rely on their strength and rage.",
+    description:
+      "For some, their rage springs from a communion with fierce animal spirits. Others draw from a roiling reservoir of anger at a world full of pain. For every barbarian, rage is a power that fuels not just a battle frenzy but also uncanny reflexes, resilience, and feats of strength.",
     multiclassing:
       "You must have a Strength score of 13 or higher in order to multiclass in or out of this class.",
     hitDie: 12,
@@ -217,7 +218,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     id: 6,
     name: "bard",
     hitDie: 8,
-    description: "Bards are versatile and talented musicians.",
+    description:
+      "Whether scholar, skald, or scoundrel, a bard weaves magic through words and music to inspire allies, demoralize foes, manipulate minds, create illusions, and even heal wounds. The bard is a master of song, speech, and the magic they contain.",
     multiclassing:
       "You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.DEX, Ability.CHA],
@@ -279,7 +281,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     name: "druid",
     hitDie: 8,
     description:
-      "Druids are spellcasters who draw magic from the natural world.",
+      "Whether calling on the elemental forces of nature or emulating the creatures of the animal world, druids are an embodiment of nature's resilience, cunning, and fury. They claim no mastery over nature, but see themselves as extensions of nature's indomitable will.",
     multiclassing:
       "You must have a Wisdom score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.INT, Ability.WIS],
