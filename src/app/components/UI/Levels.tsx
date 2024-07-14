@@ -41,8 +41,8 @@ const Levels = ({ levels }: Props) => {
 
   return (
     <div className="flex flex-wrap gap-2">
-      {levels.map((level) => (
-        <div className="tooltip" data-tip={`Level ${level}`}>
+      {levels.map((level, index) => (
+        <div key={index} className="tooltip" data-tip={`Level ${level}`}>
           <div
             key={level}
             className={`flex items-center justify-center w-8 h-8 rounded-full cursor-pointer ${getTextColorClass(

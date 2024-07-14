@@ -6,8 +6,7 @@ const getSearchFunction = async (search: Pages): Promise<any> => {
   switch (search) {
     case Pages.Class:
       return functions.getClass;
-    case Pages.SubClass:
-      return functions.getSubClass;
+
     case Pages.Race:
       return functions.getRace;
     case Pages.SubRace:
