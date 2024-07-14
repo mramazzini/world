@@ -6,6 +6,7 @@ import Weapons from "./seeds/Weapons";
 import Properties from "./seeds/Properties";
 import WeaponToPropertyArr from "./seeds/WeaponToProperty";
 import CustomFields from "./seeds/CustomFields";
+import SubclassFeatures from "./seeds/SubclassFeatures";
 import {
   PrismaClient,
   Weapon,
@@ -104,6 +105,25 @@ const seed = async () => {
     }
   }
   console.log("Sub classes created");
+
+  console.log("Creating Subclass features");
+  for (const SubclassFeature of SubclassFeatures) {
+    try {
+      console.log("Creating subclass feature", SubclassFeature.name);
+      await db.subClassFeature.create({
+        data: SubclassFeature,
+      });
+      console.log("Subclass feature created");
+    } catch (error) {
+      console.error(
+        "Error creating subclass feature",
+        SubclassFeature.name,
+        error
+      );
+      return;
+    }
+  }
+  console.log("Subclass features created");
 
   // Create weapons
   console.log("Creating weapons");

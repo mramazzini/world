@@ -16,6 +16,13 @@ const ids = {
 const FighterSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
   // arcane archer
   {
+    subClassId: ids.arcaneArcher,
+    name: "Arcane Archer Lore",
+    description:
+      "At 3rd level, you learn magical theory or some of the secrets of nature – typical for practitioners of the arcane archery. You gain proficiency in Arcana or Nature (your choice), and you choose to learn either the Prestidigitation or Druidcraft cantrip.",
+    levels: [3],
+  },
+  {
     name: "Arcane Shot",
     description:
       "At 3rd level, you learn to unleash special magical effects with some of your shots. When you gain this feature, you learn two Arcane Shot options of your choice. Once per turn when you fire an arrow from a shortbow or longbow as part of the Attack action, you can apply one of your Arcane Shot options to that arrow. You decide to use the option when the arrow hits a creature, unless the option doesn't involve an attack roll. You have two uses of this ability, and you regain all expended uses of it when you finish a short or long rest.",
@@ -31,3 +38,5 @@ const FighterSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     levels: [3, 7, 10, 15, 18],
   },
 ];
+
+export default FighterSubclassFeatures;
