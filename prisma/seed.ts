@@ -7,6 +7,7 @@ import Properties from "./seeds/Properties";
 import WeaponToPropertyArr from "./seeds/WeaponToProperty";
 import CustomFields from "./seeds/CustomFields";
 import SubclassFeatures from "./seeds/SubclassFeatures";
+import { cwarn, cinfo, cerr, csuccess } from "@/lib/utils/chalkLog";
 import {
   PrismaClient,
   Weapon,
@@ -16,8 +17,9 @@ import {
 const db = new PrismaClient();
 const seed = async () => {
   // clear the database
-  console.log("Clearing database");
+  cinfo("Clearing database");
   await db.feature.deleteMany({});
+  await db.subClassFeature.deleteMany({});
   await db.subClass.deleteMany({});
   await db.class.deleteMany({});
   await db.casterType.deleteMany({});
@@ -25,148 +27,175 @@ const seed = async () => {
   await db.weapon.deleteMany({});
   await db.weaponProperty.deleteMany({});
 
-  console.log("Database cleared");
+  cinfo("Database cleared");
 
   // Create caster types
-  console.log("Creating caster types");
+  cinfo("Creating caster types");
   for (const CasterType of CasterTypes) {
     try {
-      console.log("Creating caster type", CasterType.name);
+      cinfo("Creating caster type:", CasterType.name);
       await db.casterType.create({
         data: CasterType,
       });
-      console.log("Caster type created");
+      cinfo("Caster type created");
     } catch (error) {
-      console.error("Error creating caster type", CasterType.name, error);
+      cerr("Error creating caster type:", CasterType.name, error);
       return;
     }
   }
 
   // Create classes
-  console.log("Creating classes");
+  cinfo("Creating classes");
   for (const Class of Classes) {
     try {
-      console.log("Creating class", Class.name);
+      cinfo("Creating class:", Class.name);
       await db.class.create({
         data: Class,
       });
-      console.log("Class created");
+      cinfo("Class created");
     } catch (error) {
-      console.error("Error creating class", Class.name, error);
+      cerr("Error creating class:", Class.name, error);
       return;
     }
   }
-  console.log("Classes created");
+  cinfo("Classes created");
 
   // Create features
-  console.log("Creating features");
+  cinfo("Creating features");
   for (const Feature of Features) {
     try {
-      console.log("Creating feature", Feature.name);
+      cinfo("Creating feature:", Feature.name);
+      //make sure feature has a classId and levels
+      if (!Feature.classId) {
+        cerr("Feature missing classId field:", Feature.name);
+        return;
+      }
+      if (!Feature.levels) {
+        cerr("Feature missing levels field:", Feature.name);
+        return;
+      }
       await db.feature.create({
         data: Feature,
       });
-      console.log("Feature created");
+      cinfo("Feature created");
     } catch (error) {
-      console.error("Error creating feature", Feature.name, error);
+      cerr("Error creating feature:", Feature.name, error);
       return;
     }
   }
-  console.log("Features created");
+  cinfo("Features created");
 
   //Create custom fields
-  console.log("Creating custom fields");
+  cinfo("Creating custom fields");
   for (const CustomField of CustomFields) {
     try {
-      console.log("Creating custom field", CustomField.name);
+      cinfo("Creating custom field:", CustomField.name);
+      //make sure custom field has a classId
+      if (!CustomField.classId) {
+        cerr("Custom field missing classId:", CustomField.name);
+        return;
+      }
       await db.customField.create({
         data: CustomField,
       });
-      console.log("Custom field created");
+      cinfo("Custom field created");
     } catch (error) {
-      console.error("Error creating custom field", CustomField.name, error);
+      cerr("Error creating custom field:", CustomField.name, error);
       return;
     }
   }
-  console.log("Custom fields created");
+  cinfo("Custom fields created");
 
   // Create sub classes
-  console.log("Creating sub classes");
+  cinfo("Creating sub classes");
   for (const SubClass of SubClasses) {
     try {
-      console.log("Creating sub class", SubClass.name);
+      //make sure subclass has a classId and levels
+      if (!SubClass.classId) {
+        console.error("Subclass missing classId field:", SubClass.name);
+        return;
+      }
+      cinfo("Creating sub class:", SubClass.name);
       await db.subClass.create({
         data: SubClass,
       });
-      console.log("Sub class created");
+      cinfo("Sub class created");
     } catch (error) {
-      console.error("Error creating sub class", SubClass.name, error);
+      console.error("Error creating sub class:", SubClass.name, error);
       return;
     }
   }
-  console.log("Sub classes created");
+  cinfo("Sub classes created");
 
-  console.log("Creating Subclass features");
+  cinfo("Creating Subclass features");
   for (const SubclassFeature of SubclassFeatures) {
     try {
-      console.log("Creating subclass feature", SubclassFeature.name);
+      cinfo("Creating subclass feature:", SubclassFeature.name);
+      //make sure subclass feature has a subClassId and levels
+      if (!SubclassFeature.subClassId) {
+        cerr(
+          "Subclass feature missing subClassId field:",
+          SubclassFeature.name
+        );
+        return;
+      }
+      if (!SubclassFeature.levels) {
+        cerr("Subclass feature missing levels field:", SubclassFeature.name);
+        return;
+      }
       await db.subClassFeature.create({
         data: SubclassFeature,
       });
-      console.log("Subclass feature created");
+      cinfo("Subclass feature created");
     } catch (error) {
-      console.error(
-        "Error creating subclass feature",
-        SubclassFeature.name,
-        error
-      );
+      cerr("Error creating subclass feature", SubclassFeature.name, error);
       return;
     }
   }
-  console.log("Subclass features created");
+  cinfo("Subclass features created");
 
   // Create weapons
-  console.log("Creating weapons");
+  cinfo("Creating weapons");
   let weapons: Weapon[] = [];
   for (const Weapon of Weapons) {
     try {
-      console.log("Creating weapon", Weapon.name);
+      cinfo("Creating weapon:", Weapon.name);
       const createdWeapon = await db.weapon.create({
         data: Weapon,
       });
       weapons.push(createdWeapon);
-      console.log("Weapon created");
+      cinfo("Weapon created");
     } catch (error) {
-      console.error("Error creating weapon", Weapon.name, error);
+      cerr("Error creating weapon:", Weapon.name, error);
       return;
     }
   }
   // Create properties
-  console.log("Creating Weapon properties");
+  cinfo("Creating Weapon properties");
   let properties: WeaponProperty[] = [];
   for (const Property of Properties) {
     try {
-      console.log("Creating property", Property.name);
+      cinfo("Creating property:", Property.name);
       const createdProperty = await db.weaponProperty.create({
         data: Property,
       });
       properties.push(createdProperty);
-      console.log("Property created");
+      cinfo("Property created");
     } catch (error) {
-      console.error("Error creating property", Property.name, error);
+      cerr("Error creating property:", Property.name, error);
       return;
     }
   }
-  console.log("Properties created");
+  cinfo("Properties created");
 
   //Link weapons and properties
-  console.log("Linking weapons and properties");
+  cinfo("Linking weapons and properties");
   for (const WeaponToProperty of WeaponToPropertyArr) {
     try {
-      console.log(
-        "Linking weapon",
+      cinfo(
+        "Linking weapon -",
         WeaponToProperty.weaponName,
-        "with properties",
+        "- with properties:",
         WeaponToProperty.properties.join(", ")
       );
       // Find the weapon in the weapons array
@@ -174,7 +203,7 @@ const seed = async () => {
         (w) => w.name === WeaponToProperty.weaponName
       );
       if (!weapon) {
-        console.error("Weapon not found", WeaponToProperty.weaponName);
+        cerr("Weapon not found:", WeaponToProperty.weaponName);
         return;
       }
       // Find the properties in the properties array
@@ -182,8 +211,8 @@ const seed = async () => {
         WeaponToProperty.properties.includes(p.name)
       );
       if (propertiesToLink.length !== WeaponToProperty.properties.length) {
-        console.error(
-          "Not all properties found for weapon",
+        cerr(
+          "Not all properties found for weapon:",
           WeaponToProperty.weaponName
         );
         return;
@@ -198,26 +227,26 @@ const seed = async () => {
             },
           });
         } catch (error) {
-          console.error("Error linking weapon and properties", error);
+          cerr("Error linking weapon and properties\n", error);
           return;
         }
       }
-      console.log("Weapon linked with properties");
+      cinfo("Weapon linked with properties");
     } catch (error) {
-      console.error("Error linking weapon and properties", error);
+      cerr("Error linking weapon and properties\n", error);
       return;
     }
   }
 
-  console.log("✅ Successfully seeded database ✅");
+  csuccess("✅ Successfully seeded database ✅");
 };
 
 seed()
   .catch((e) => {
-    console.error(e);
+    cerr(e);
     process.exit(1);
   })
   .finally(async () => {
-    console.log("Exiting...");
+    cinfo("Exiting...");
     await db.$disconnect();
   });

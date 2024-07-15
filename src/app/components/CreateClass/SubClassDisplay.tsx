@@ -6,6 +6,7 @@ import "@/lib/string.extensions";
 import numberArray from "@/lib/utils/numberArray";
 import Levels from "../UI/Levels";
 import P from "../Utility/FormatAndSanitize";
+import numPlace from "@/lib/utils/numPlace";
 interface Props {
   subClass: SubClassInfo;
 }
@@ -34,33 +35,35 @@ const SubClassDisplay = ({ subClass }: Props) => {
       </h1>
       <p className="italic">{subClass.description}</p>
       {subClass.spells.length > 0 && (
-        <div className="overflow-x-auto p-4">
-          <table className="table-zebra table-md">
-            <thead>
-              <tr>
-                <th>{subClass.name.toCapitalCase()} Spells</th>
-              </tr>
-              <tr>
-                <th>Levels</th>
-                <th>Spells</th>
-              </tr>
-            </thead>
-            <tbody>
-              {subClass.spells.map((spell, index) => {
-                const res = processSpellsString(spell);
-                return (
-                  <tr key={index}>
-                    <td>{res.lvl}</td>
-                    <td>{res.spells.join(", ")}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        <>
+          <br />
+          <h3 className="px-4">
+            You gain the following spells from this subclass:
+          </h3>
+          <div className="overflow-x-auto p-4">
+            <table className="table-zebra table-md w-full">
+              <thead>
+                <tr>
+                  <th className="text-left bg-black/20">Levels</th>
+                  <th className="text-left bg-black/20">Spells</th>
+                </tr>
+              </thead>
+              <tbody>
+                {subClass.spells.map((spell, index) => {
+                  const res = processSpellsString(spell);
+                  return (
+                    <tr key={index}>
+                      <td>{numPlace(res.lvl)}</td>
+                      <td>{res.spells.join(", ")}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
       <div className="divider"></div>
-      <h2>Features</h2>
 
       {numberArray(1, 20).map((num) => {
         //grab features for the current level
@@ -70,13 +73,13 @@ const SubClassDisplay = ({ subClass }: Props) => {
         if (feat.length == 0) return;
         if (feat.find((f) => f.levels[0] === num))
           return (
-            <ul>
+            <ul key={num}>
               {feat.map((feature) => {
                 const lvlIndex = feature.levels.findIndex((lvl) => lvl === num);
                 if (lvlIndex === -1 || lvlIndex > 0) return;
                 return (
-                  <>
-                    <li className="px-4" key={`${num}-${feature.id}`}>
+                  <div key={`${num}-${feature.id}`}>
+                    <li className="px-4">
                       <h3 className="flex flex-row justify-between">
                         {lvlIndex === 0 && feature.name}{" "}
                         <Levels levels={feature.levels} />
@@ -102,7 +105,7 @@ const SubClassDisplay = ({ subClass }: Props) => {
                       )}
                     </li>
                     <div className="divider"></div>
-                  </>
+                  </div>
                 );
               })}
             </ul>

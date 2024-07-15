@@ -33,7 +33,6 @@ const P = ({
 
     // Split the string into an array of strings and elements
     const elements: React.ReactNode[] = [];
-    let lastIndex = 0;
 
     // Function to push a string or a React element to the elements array
     let elIndex = 0;
@@ -42,64 +41,71 @@ const P = ({
       isBold = false,
       isItalic = false
     ) => {
-      elIndex++;
       if (text) {
-        let element = text;
+        // Split the text by newlines
+        const lines = text.toString().split("\n");
 
-        // Wrap text with <span> if it's bold or italic
-        if (isBold) {
-          element = (
-            <span key={`bold-${elIndex}`} className="font-bold">
-              {element}
-            </span>
-          );
-        }
-        if (isItalic) {
-          element = (
-            <span key={`bold-${elIndex}`} className="italic">
-              {element}
-            </span>
-          );
-        }
+        lines.forEach((line, index) => {
+          elIndex++;
+          let element = line as React.ReactNode;
 
-        elements.push(element);
+          // Wrap text with <span> if it's bold or italic
+          if (isBold) {
+            element = (
+              <span key={`bold-${elIndex}`} className="font-bold">
+                {element}
+              </span>
+            );
+          }
+          if (isItalic) {
+            element = (
+              <span key={`italic-${elIndex}`} className="italic">
+                {element}
+              </span>
+            );
+          }
+
+          // Add a line break after each line except the last one
+          elements.push(element);
+          if (index < lines.length - 1) {
+            elements.push(<br key={`br-${elIndex}`} />);
+          }
+        });
       }
     };
 
     // Regex to match characters
-    const boldRegex = /\*\*(.*?)\*\*/g;
-    const italicRegex = /\*(.*?)\*/g;
-    const newLineRegex = /\n/g;
+    const combinedRegex = /\*\*(.*?)\*\*|\*(.*?)\*/g;
 
-    // push elements to the elements array with the string surrounded by <span className = "font-bold"> tags
-    sanitizedDescription.replace(boldRegex, (match, p1, offset) => {
-      // pushElement(sanitizedDescription.slice(lastIndex, offset));
-      pushElement(p1, true);
-      lastIndex = offset + match.length;
-      return match.replace(p1, "");
-    });
+    let lastIndex = 0;
 
-    // push elements to the elements array with the string surrounded by <span className = "italic"> tags
-    sanitizedDescription.replace(italicRegex, (match, p1, offset) => {
-      // pushElement(sanitizedDescription.slice(lastIndex, offset));
-      pushElement(p1, false, true);
-      lastIndex = offset + match.length;
-      return match;
-    });
+    sanitizedDescription.replace(
+      combinedRegex,
+      (match, boldText, italicText, offset) => {
+        // Push text before the current match
+        pushElement(sanitizedDescription.slice(lastIndex, offset));
 
-    // push elements to the elements array with the string surrounded by <span> tags
-    sanitizedDescription.replace(newLineRegex, (match, offset) => {
-      pushElement(sanitizedDescription.slice(lastIndex, offset));
-      pushElement(<br />);
-      lastIndex = offset + match.length;
-      return match;
-    });
+        if (boldText) {
+          // Push bold text
+          pushElement(boldText, true);
+        } else if (italicText) {
+          // Push italic text
+          pushElement(italicText, false, true);
+        }
 
-    // push the last element
+        // Update lastIndex to the end of the current match
+        lastIndex = offset + match.length;
+        return match;
+      }
+    );
+
+    // Push remaining text after the last match
     pushElement(sanitizedDescription.slice(lastIndex));
 
     if (layer === 3) {
-      setProcessedContent(elements);
+      setProcessedContent(
+        elements.map((el, index) => <span key={index}>{el}</span>)
+      );
       setLoading(false);
       return;
     }
@@ -176,8 +182,10 @@ const P = ({
     }
 
     function processElement(element: ReactNode) {
+      console.log(element);
       if (typeof element === "string") {
         const terms = findTerms(element);
+
         if (terms && terms.length > 0) {
           createTooltip(element, terms);
         } else {
@@ -188,9 +196,6 @@ const P = ({
       }
     }
     // Replace terms with TermDescription components
-    // elements.forEach((element, index) => {
-    //   processElement(element, index);
-    // });
 
     while (elements.length > 0) {
       const element = elements.shift();

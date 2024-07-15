@@ -283,6 +283,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
     description:
       "Starting at 5th level, when an attacker that you can see hits you with an attack, you can use your reaction to halve the attack's damage against you.",
     levels: [5],
+    classId: ids.rogue,
   },
   {
     name: "Evasion",

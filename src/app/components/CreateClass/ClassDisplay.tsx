@@ -257,8 +257,8 @@ function ClassDisplay({
                           </tr>
                         </thead>
                         <tbody>
-                          {subClasses.map((sub) => (
-                            <tr key={sub.id}>
+                          {subClasses.map((sub, index) => (
+                            <tr key={index}>
                               <td
                                 style={{
                                   minWidth: "200px",
@@ -347,35 +347,32 @@ function ClassDisplay({
                     );
                     if (lvlIndex === -1 || lvlIndex > 0) return;
                     return (
-                      <>
-                        <li className="px-4" key={`${num}-${feature.id}`}>
-                          <h3 className="flex flex-row justify-between">
-                            {lvlIndex === 0 && feature.name}{" "}
-                            <Levels levels={feature.levels} />
-                          </h3>
+                      <li className="px-4" key={`${num}-${feature.id}`}>
+                        <h3 className="flex flex-row justify-between">
+                          {lvlIndex === 0 && feature.name}{" "}
+                          <Levels levels={feature.levels} />
+                        </h3>
 
-                          {lvlIndex === 0 && (
-                            <>
-                              <P>{feature.description}</P>
-                              {feature.options &&
-                                feature.options.length > 0 && (
-                                  <ul className="list-disc px-4">
+                        {lvlIndex === 0 && (
+                          <>
+                            <P>{feature.description}</P>
+                            {feature.options && feature.options.length > 0 && (
+                              <ul className="list-disc px-4">
+                                <br />
+                                {feature.options.map((option, index) => (
+                                  <div key={index}>
+                                    <li>
+                                      <P>{option}</P>
+                                    </li>
                                     <br />
-                                    {feature.options.map((option, index) => (
-                                      <div key={index}>
-                                        <li>
-                                          <P>{option}</P>
-                                        </li>
-                                        <br />
-                                      </div>
-                                    ))}
-                                  </ul>
-                                )}
-                            </>
-                          )}
-                        </li>
+                                  </div>
+                                ))}
+                              </ul>
+                            )}
+                          </>
+                        )}
                         <div className="divider"></div>
-                      </>
+                      </li>
                     );
                   })}
                 </ul>
