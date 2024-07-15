@@ -22,6 +22,8 @@ export enum Pages {
 export interface DBInfo {
   id: number;
   name: string;
+  description: string;
+  updatedAt: Date;
 }
 
 export interface ClassInfo extends Class {

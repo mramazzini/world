@@ -1,5 +1,5 @@
 "use server";
-import { ClassInfo, SubClassInfo } from "@/lib/types";
+import { ClassInfo, DBInfo, SubClassInfo } from "@/lib/types";
 import {
   Class,
   PrismaClient,
@@ -16,9 +16,7 @@ import {
 
 const db = new PrismaClient();
 
-export async function getClasses(): Promise<
-  Array<{ id: number; name: string }>
-> {
+export async function getClasses(): Promise<DBInfo[]> {
   return await db.class.findMany({
     orderBy: {
       name: "asc",
@@ -27,6 +25,8 @@ export async function getClasses(): Promise<
     select: {
       name: true,
       id: true,
+      description: true,
+      updatedAt: true,
     },
   });
 }
