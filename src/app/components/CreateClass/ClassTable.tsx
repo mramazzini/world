@@ -24,22 +24,27 @@ const ClassTable = ({
       <table className="table table-zebra sm:table-xs md:table-sm lg:table-md my-4 table-pin-rows max-w-[1800px]">
         <thead>
           <tr>
-            <th className="w-[5%]">Level</th>
-            <th>Proficiency Bonus</th>
-            <th className="">Features</th>
+            <th className="text-left bg-black/20 w-[5%]">Level</th>
+            <th className="text-left bg-black/20 ">Proficiency Bonus</th>
+            <th className="text-left bg-black/20 ">Features</th>
             {customFields.map((field) => (
-              <th key={field.id}>{field.name}</th>
+              <th className="text-left bg-black/20 " key={field.id}>
+                {field.name}
+              </th>
             ))}
             {classObj.cantripsKnown.find((c) => c > 0) && (
-              <th>Cantrips Known</th>
+              <th className="text-left bg-black/20 ">Cantrips Known</th>
             )}
-            {classObj.spellsKnown.find((c) => c > 0) && <th>Spells Known</th>}
+            {classObj.spellsKnown.find((c) => c > 0) && (
+              <th className="text-left bg-black/20 ">Spells Known</th>
+            )}
 
             {casterType &&
               classObj.spellCaster &&
               classObj.displaySpellList &&
               numberArray(1, 9).map((num) => (
                 <th
+                  className="text-left bg-black/20 "
                   style={{
                     padding: "0.5rem",
                     width: "2rem",

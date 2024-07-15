@@ -50,8 +50,8 @@ const Page = () => {
       <table className="table-zebra table-sm w-full">
         <thead>
           <tr>
-            <th className="text-left bg-black/20 w-[8%] ">Name</th>
-            <th className="text-left bg-black/20 ">Description</th>
+            <th className="text-left bg-black/20 w-[8%]">Name</th>
+            <th className="text-left bg-black/20">Description</th>
             <th className="text-left bg-black/20 w-[8%]">Source</th>
             <th className="text-left bg-black/20 w-[8%]">Last Updated</th>
           </tr>
