@@ -24,9 +24,9 @@ const ClassTable = ({
       <table className="table table-zebra sm:table-xs md:table-sm lg:table-md my-4 table-pin-rows max-w-[1800px]">
         <thead>
           <tr>
-            <th>Level</th>
+            <th className="w-[5%]">Level</th>
             <th>Proficiency Bonus</th>
-            <th>Features</th>
+            <th className="">Features</th>
             {customFields.map((field) => (
               <th key={field.id}>{field.name}</th>
             ))}

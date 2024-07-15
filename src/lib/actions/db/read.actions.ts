@@ -91,6 +91,27 @@ export async function getSubclass(
   return null;
 }
 
+export const getSubClassMeta = async (
+  className: string
+): Promise<DBInfo[] | null> => {
+  const classObj = await db.class.findFirst({
+    where: {
+      name: className,
+    },
+  });
+  return await db.subClass.findMany({
+    where: {
+      classId: classObj?.id,
+    },
+    select: {
+      name: true,
+      id: true,
+      description: true,
+      updatedAt: true,
+    },
+  });
+};
+
 export const getSubclassFromClassName = async (
   className: string
 ): Promise<SubClass[]> => {

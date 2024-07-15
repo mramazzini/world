@@ -34,7 +34,7 @@ function ClassDisplay({
   casterType,
   customFields,
 }: Props) {
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(true);
   return (
     <div className="p-4">
       <h1>{classObj.name.toCapitalCase() || "Class Name"}</h1>

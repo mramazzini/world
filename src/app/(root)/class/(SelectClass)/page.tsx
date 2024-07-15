@@ -30,7 +30,10 @@ const Page = () => {
           </p>
         </div>
         <div className="flex items-center">
-          <Link className={"btn btn-primary"} href={"#homebrew"}>
+          <Link
+            className={"btn btn-ghost border border-gray-500"}
+            href={"#homebrew"}
+          >
             View Homebrew Classes -&gt;
           </Link>
         </div>
@@ -43,26 +46,32 @@ const Page = () => {
       <table className="table-zebra table-sm w-full">
         <thead>
           <tr>
-            <th className="text-left bg-black/20">Name</th>
-            <th className="text-left bg-black/20">Description</th>
-            <th className="text-left bg-black/20">Source</th>
-            <th className="text-left bg-black/20">Last Updated</th>
+            <th className="text-left bg-black/20 w-[8%] ">Name</th>
+            <th className="text-left bg-black/20 ">Description</th>
+            <th className="text-left bg-black/20 w-[8%]">Source</th>
+            <th className="text-left bg-black/20 w-[8%]">Last Updated</th>
           </tr>
         </thead>
 
         <tbody>
           {data.map((item, index) => {
             return (
-              <tr key={index}>
+              <tr
+                key={index}
+                className="cursor-pointer hover"
+                onClick={() => {
+                  window.location.href = `/class/${item.name}`;
+                }}
+              >
                 <td>
                   <Link
                     href={`/class/${item.name}`}
-                    className="text-blue-500 hover:text-blue-700"
+                    className="text-blue-500 hover:text-blue-700 font-bold"
                   >
-                    {item.name.toCapitalCase()} -&gt;
+                    {item.name.toCapitalCase()}
                   </Link>
                 </td>
-                <td className="italic w-2/3">{item.description}</td>
+                <td className="italic">{item.description}</td>
                 <td>Player&apos;s Handbook</td>
                 <td>
                   {item.updatedAt.getDate()}/{item.updatedAt.getMonth()}/
@@ -79,16 +88,16 @@ const Page = () => {
       <h2 id="homebrew">Homebrew</h2>
       <p className="italic">
         Classes created by the community. These are unnofficial and may be
-        unbalanced. Ask your DM before using them in your campaign.
+        unbalanced. Ask your Dungeon Master before using them in your game.
       </p>
       <div className="divider" />
       <table className="table-zebra table-sm w-full">
         <thead>
           <tr>
-            <th className="text-left bg-black/20">Name</th>
-            <th className="text-left bg-black/20">Description</th>
-            <th className="text-left bg-black/20">Source</th>
-            <th className="text-left bg-black/20">Last Updated</th>
+            <th className="text-left bg-black/20 w-[8%] ">Name</th>
+            <th className="text-left bg-black/20 ">Description</th>
+            <th className="text-left bg-black/20 w-[8%]">Source</th>
+            <th className="text-left bg-black/20 w-[8%]">Last Updated</th>
           </tr>
         </thead>
         <tbody></tbody>
