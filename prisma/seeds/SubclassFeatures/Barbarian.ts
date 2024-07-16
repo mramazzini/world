@@ -13,6 +13,7 @@ const ids = {
   zealot: 19,
 };
 
+
 const BarbarianSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
   // ancestral guardian
   {

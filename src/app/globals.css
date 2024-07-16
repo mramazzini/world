@@ -8,6 +8,8 @@
   }
 }
 
+/* custom scrollbar */
+
 h1 {
   font-size: 2rem;
 }
@@ -41,3 +43,12 @@ h4 {
 html {
   scroll-behavior: smooth;
 }
+
+body {
+  overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
+}
+
+/* * {
+  font-family: "Poppins", sans-serif;
+} */

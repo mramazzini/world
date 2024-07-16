@@ -1,5 +1,5 @@
 "use server";
-import { ClassInfo, DBInfo, SubClassInfo } from "@/lib/types";
+import { ClassInfo, DBmetaData, SubClassInfo } from "@/lib/types";
 import {
   Class,
   PrismaClient,
@@ -16,7 +16,7 @@ import {
 
 const db = new PrismaClient();
 
-export async function getClasses(): Promise<DBInfo[]> {
+export async function getClassMeta(): Promise<DBmetaData[]> {
   return await db.class.findMany({
     orderBy: {
       name: "asc",
@@ -27,6 +27,8 @@ export async function getClasses(): Promise<DBInfo[]> {
       id: true,
       description: true,
       updatedAt: true,
+      subClassName: true,
+      source: true,
     },
   });
 }
@@ -93,7 +95,7 @@ export async function getSubclass(
 
 export const getSubClassMeta = async (
   className: string
-): Promise<DBInfo[] | null> => {
+): Promise<DBmetaData[] | null> => {
   const classObj = await db.class.findFirst({
     where: {
       name: className,
@@ -108,6 +110,7 @@ export const getSubClassMeta = async (
       id: true,
       description: true,
       updatedAt: true,
+      source: true,
     },
   });
 };
@@ -167,3 +170,5 @@ export async function getWeapon(): Promise<Weapon[]> {
     },
   });
 }
+
+db.$disconnect();

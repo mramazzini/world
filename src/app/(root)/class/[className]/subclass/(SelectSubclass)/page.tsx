@@ -6,12 +6,12 @@ import { useState, useEffect } from "react";
 
 import { SubClass } from "@prisma/client";
 import Link from "next/link";
-import { DBInfo } from "@/lib/types";
+import { DBmetaData } from "@/lib/types";
 import { getSubClassMeta } from "@/lib/actions/db/read.actions";
 const Page = () => {
   const router = usePathname();
   const className = router.split("/")[2];
-  const [data, setData] = useState<DBInfo[] | null>(null);
+  const [data, setData] = useState<DBmetaData[] | null>(null);
   useEffect(() => {
     getSubClassMeta(className).then((res) => {
       setData(res);
@@ -50,10 +50,14 @@ const Page = () => {
       <table className="table-zebra table-sm w-full">
         <thead>
           <tr>
-            <th className="text-left bg-black/20 w-[8%]">Name</th>
-            <th className="text-left bg-black/20">Description</th>
-            <th className="text-left bg-black/20 w-[8%]">Source</th>
-            <th className="text-left bg-black/20 w-[8%]">Last Updated</th>
+            <th className="text-left bg-black/20 w-[5%] ">Name</th>
+            <th className="text-left bg-black/20 w-[50%] hidden md:table-cell">
+              Description
+            </th>
+            <th className="text-left bg-black/20 w-[20%]">Source</th>
+            <th className="text-left bg-black/20 w-[10%] hidden sm:table-cell">
+              Last Updated
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -81,9 +85,13 @@ const Page = () => {
                       {item.name}
                     </Link>
                   </td>
-                  <td className="italic">{item.description}</td>
-                  <td>Player&apos;s Handbook</td>
+                  <td className="hidden md:table-cell">
+                    <p className="italic line-clamp-2"> {item.description}</p>
+                  </td>
                   <td>
+                    <p className="line-clamp-2"> {item.source}</p>
+                  </td>
+                  <td className="hidden sm:table-cell">
                     {item.updatedAt.getDate()}/{item.updatedAt.getMonth()}/
                     {item.updatedAt.getFullYear()}
                   </td>
@@ -104,10 +112,10 @@ const Page = () => {
       <table className="table-zebra table-sm w-full">
         <thead>
           <tr>
-            <th className="text-left bg-black/20 w-[8%] ">Name</th>
-            <th className="text-left bg-black/20 ">Description</th>
-            <th className="text-left bg-black/20 w-[8%]">Source</th>
-            <th className="text-left bg-black/20 w-[8%]">Last Updated</th>
+            <th className="text-left bg-black/20 w-[5%] ">Name</th>
+            <th className="text-left bg-black/20 w-[50%]">Description</th>
+            <th className="text-left bg-black/20 w-[10%]">Source</th>
+            <th className="text-left bg-black/20 w-[10%]">Last Updated</th>
           </tr>
         </thead>
         <tbody></tbody>

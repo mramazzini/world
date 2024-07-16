@@ -19,11 +19,13 @@ export enum Pages {
   Item = "Item",
 }
 
-export interface DBInfo {
+export interface DBmetaData {
   id: number;
   name: string;
   description: string;
   updatedAt: Date;
+  subClassName?: string;
+  source: string;
 }
 
 export interface ClassInfo extends Class {
@@ -31,6 +33,22 @@ export interface ClassInfo extends Class {
   SubClasses: SubClass[];
   casterType: CasterType | null;
   customFields: CustomField[];
+}
+
+export enum src {
+  tasha = "Tasha's Cauldron of Everything",
+  xanathar = "Xanathar's Guide to Everything",
+  volo = "Volo's Guide to Monsters",
+  sword = "Sword Coast Adventurer's Guide",
+  Bigby = "Bigby Presents: The Glory of the Giants",
+  mordenkainen = "Mordenkainen's Tome of Foes",
+  eberron = "Eberron: Rising from the Last War",
+  theros = "Theros",
+  ravnica = "Guildmaster's Guide to Ravnica",
+  wildemount = "Explorer's Guide to Wildemount",
+  phb = "Player's Handbook",
+  vanRichten = "Van Richten's Guide to Ravenloft",
+  dmg = "Dungeon Master's Guide",
 }
 
 export interface SubClassInfo extends SubClass {

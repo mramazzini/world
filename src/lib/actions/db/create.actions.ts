@@ -72,3 +72,7 @@ export const createSubClass = (
     },
   });
 };
+
+//deactivate prisma
+
+db.$disconnect();

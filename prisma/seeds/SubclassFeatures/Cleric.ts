@@ -17,6 +17,8 @@ const ids = {
   war: 54,
 };
 
-const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [];
+const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
+  // Arcana
+];
 
 export default ClericSubclassFeatures;
