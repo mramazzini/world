@@ -14,6 +14,7 @@ import {
   WeaponProperty,
   WeaponToProperty,
 } from "@prisma/client";
+import createUser from "./seeds/User";
 const db = new PrismaClient();
 const seed = async () => {
   // clear the database
@@ -26,7 +27,7 @@ const seed = async () => {
   await db.weaponToProperty.deleteMany({});
   await db.weapon.deleteMany({});
   await db.weaponProperty.deleteMany({});
-
+  await db.user.deleteMany({});
   cinfo("Database cleared");
 
   // Create caster types
@@ -237,6 +238,7 @@ const seed = async () => {
       return;
     }
   }
+  await createUser(db);
 
   csuccess("✅ Successfully seeded database ✅");
 };

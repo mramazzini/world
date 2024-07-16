@@ -7,6 +7,7 @@ import numberArray from "@/lib/utils/numberArray";
 import Levels from "../UI/Levels";
 import P from "../Utility/FormatAndSanitize";
 import numPlace from "@/lib/utils/numPlace";
+import Link from "next/link";
 interface Props {
   subClass: SubClassInfo;
 }
@@ -30,10 +31,30 @@ const SubClassDisplay = ({ subClass }: Props) => {
 
   return (
     <div className="p-4">
-      <h1>
-        {className.toCapitalCase()}: {subClass.name}
-      </h1>
-      <p className="italic">{subClass.description}</p>
+      <div className="flex flex-row justify-between">
+        <div className="flex flex-col w-4/5">
+          <h1 className="px-4">
+            {className.toCapitalCase()}: {subClass.name}
+          </h1>
+          <p className="px-4 italic">{subClass.description}</p>
+        </div>
+        <div className="flex justify-center flex-col ">
+          <Link
+            className="btn  mb-2 btn-ghost border border-gray-400"
+            href={`/class/${className}/subclass`}
+          >
+            View All {className.toCapitalCase()} Subclasses -&gt;
+          </Link>
+          {/* go back */}
+          <Link
+            className="btn btn-ghost border border-gray-400"
+            href={`/class/${className.replaceAll(" ", "-").toLowerCase()}`}
+          >
+            View {className.toCapitalCase()} Class -&gt;
+          </Link>
+        </div>
+      </div>
+      <div className="divider"></div>
       {subClass.spells.length > 0 && (
         <>
           <br />

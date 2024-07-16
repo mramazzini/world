@@ -18,23 +18,9 @@ const Page = () => {
     });
   }, [subClassName]);
   return (
-    <div className="p-4">
+    <div className="pt-4">
       {!data && <span className="loading" />}
-      <div className="p-4">
-        <Link
-          className="btn mr-2 btn-ghost border border-gray-400"
-          href={`/class/${className}/subclass`}
-        >
-          View All {className.toCapitalCase()} Subclasses
-        </Link>
-        {/* go back */}
-        <Link
-          className="btn btn-ghost border border-gray-400"
-          href={`/class/${className.replaceAll(" ", "-").toLowerCase()}`}
-        >
-          View {className.toCapitalCase()} Class
-        </Link>
-      </div>
+
       {data && <SubClassDisplay subClass={data} />}
     </div>
   );
