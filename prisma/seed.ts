@@ -18,6 +18,7 @@ const seed = async () => {
   // clear the database
   console.log("Clearing database");
   await db.feature.deleteMany({});
+  await db.subClassFeature.deleteMany({});
   await db.subClass.deleteMany({});
   await db.class.deleteMany({});
   await db.casterType.deleteMany({});
