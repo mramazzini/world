@@ -4,6 +4,7 @@ import { DamageTypes, Weapon } from "@prisma/client";
 import Input from "../UI/Input";
 import List from "../UI/List";
 import { getWeapon } from "@/lib/actions/db/read.actions";
+import P from "../Utility/FormatAndSanitize";
 
 //item rarity type
 type Rarity = "Common" | "Uncommon" | "Rare" | "Very Rare" | "Legendary";

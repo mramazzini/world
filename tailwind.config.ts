@@ -13,6 +13,12 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      lineClamp: {
+        2: "2",
+        3: "3",
+        4: "4",
+        5: "5",
+      },
     },
   },
   plugins: [require("daisyui")],
