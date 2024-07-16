@@ -3,9 +3,12 @@ import SubClassDisplay from "@/app/components/CreateClass/SubClassDisplay";
 import { getSubclass } from "@/lib/actions/db/read.actions";
 import { SubClassInfo } from "@/lib/types";
 import { SubClass } from "@prisma/client";
+import { Metadata } from "next";
+import Head from "next/head";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+
 const Page = () => {
   const router = usePathname();
   const className = router.split("/")[2];
