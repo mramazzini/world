@@ -1,5 +1,5 @@
 import { getSubclass } from "@/lib/actions/db/read.actions";
-import SubClassPage from "@/pages/SubclassPage";
+import SubClassPage from "@/app/components/pages/SubclassPage";
 import { Metadata } from "next";
 
 type Props = {

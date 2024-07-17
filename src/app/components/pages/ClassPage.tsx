@@ -8,8 +8,7 @@ import ClassDisplay from "@/app/components/CreateClass/ClassDisplay";
 
 const ClassPage = () => {
   const router = usePathname();
-  const className = router.split("/")[2];
-
+  const className = router?.split("/")[2];
   const [data, setData] = useState<ClassInfo | null>(null);
 
   useEffect(() => {
@@ -18,7 +17,7 @@ const ClassPage = () => {
       console.log(res);
     });
   }, [className]);
-
+  if (!className) return <span className="p-4">Class does not exist</span>;
   return (
     <div className="p-4">
       {!data && <span className="loading" />}

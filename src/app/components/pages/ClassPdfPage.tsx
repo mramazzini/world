@@ -33,7 +33,8 @@ function findFourthAsteriskIndex(str: string) {
 
 const ClassPdfPage = () => {
   const router = usePathname();
-  const className = router.split("/")[2];
+  const className = router?.split("/")[2];
+
   const [classData, setClassData] = useState<ClassInfo | null>(null);
   const [styles, setStyles] = useState(
     StyleSheet.create({
@@ -147,7 +148,7 @@ const ClassPdfPage = () => {
       console.log(`${80 / count}%`);
     });
   }, [className]);
-
+  if (!className) return <span className="p-4">Class does not exist</span>;
   return classData ? (
     <>
       <Link className=" btn  m-4 text-blue-500" href={`/class/${className}`}>

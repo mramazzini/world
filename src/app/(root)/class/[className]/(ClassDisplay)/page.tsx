@@ -1,4 +1,4 @@
-import ClassPage from "@/pages/ClassPage";
+import ClassPage from "@/app/components/pages/ClassPage";
 import { Metadata } from "next";
 import { getClass } from "@/lib/actions/db/read.actions";
 

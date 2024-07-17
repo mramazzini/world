@@ -9,13 +9,14 @@ import Head from "next/head";
 
 const SelectSubclass = () => {
   const router = usePathname();
-  const className = router.split("/")[2];
+  const className = router?.split("/")[2];
   const [data, setData] = useState<DBmetaData[] | null>(null);
   useEffect(() => {
     getSubClassMeta(className).then((res) => {
       setData(res);
     });
   }, [className]);
+  if (!className) return <span className="p-4">Class does not exist</span>;
   return (
     <>
       <Head>

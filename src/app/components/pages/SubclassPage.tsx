@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 const SubClassPage = () => {
   const router = usePathname();
 
-  const subClassName = router.split("/")[4].replaceAll("-", " ");
+  const subClassName = router?.split("/")[4].replaceAll("-", " ");
 
   const [data, setData] = useState<SubClassInfo | null>(null);
   useEffect(() => {
@@ -17,6 +17,9 @@ const SubClassPage = () => {
       setData(res);
     });
   }, [subClassName]);
+
+  if (!subClassName)
+    return <span className="p-4">Subclass does not exist</span>;
   return (
     <div className="pt-4">
       {!data && <span className="loading" />}

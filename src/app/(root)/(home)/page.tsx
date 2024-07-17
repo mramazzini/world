@@ -1,4 +1,4 @@
-import HomePage from "@/pages/Home";
+import HomePage from "@/app/components/pages/Home";
 
 export const metadata = {
   title: "Max's DND Wiki",
