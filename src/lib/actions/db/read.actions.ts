@@ -17,7 +17,8 @@ import {
 const db = new PrismaClient();
 
 export async function getClassMeta(): Promise<DBmetaData[]> {
-  return await db.class.findMany({
+  let res: DBmetaData[] = [];
+  const data = await db.class.findMany({
     orderBy: {
       name: "asc",
     },
@@ -29,8 +30,29 @@ export async function getClassMeta(): Promise<DBmetaData[]> {
       updatedAt: true,
       subClassName: true,
       source: true,
+      userId: true,
     },
   });
+
+  const ids = data.map((item) => item.userId).filter((id) => id !== null);
+
+  const users = await db.user.findMany({
+    where: {
+      id: {
+        in: ids,
+      },
+    },
+  });
+
+  res = data.map((item) => {
+    const user = users.find((user) => user.id === item.userId);
+    return {
+      ...item,
+      userName: user?.username || null,
+    };
+  });
+
+  return res;
 }
 
 export async function getClass(
@@ -101,7 +123,7 @@ export const getSubClassMeta = async (
       name: className,
     },
   });
-  return await db.subClass.findMany({
+  const data = await db.subClass.findMany({
     where: {
       classId: classObj?.id,
     },
@@ -111,8 +133,29 @@ export const getSubClassMeta = async (
       description: true,
       updatedAt: true,
       source: true,
+      userId: true,
     },
   });
+  let res: DBmetaData[] = [];
+  const ids = data.map((item) => item.userId).filter((id) => id !== null);
+
+  const users = await db.user.findMany({
+    where: {
+      id: {
+        in: ids,
+      },
+    },
+  });
+
+  res = data.map((item) => {
+    const user = users.find((user) => user.id === item.userId);
+    return {
+      ...item,
+      userName: user?.username || null,
+    };
+  });
+
+  return res;
 };
 
 export const getSubclassFromClassName = async (

@@ -5,7 +5,6 @@ import {
   PrismaClient,
   Skill,
 } from "@prisma/client";
-import CasterTypes from "./CasterType";
 
 // Create Maxy User
 const createUser = async (prisma: PrismaClient) => {

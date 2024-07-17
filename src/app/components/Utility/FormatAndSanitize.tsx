@@ -182,7 +182,6 @@ const P = ({
     }
 
     function processElement(element: ReactNode) {
-      console.log(element);
       if (typeof element === "string") {
         const terms = findTerms(element);
 

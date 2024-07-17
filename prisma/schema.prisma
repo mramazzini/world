@@ -178,7 +178,8 @@ model SubClass {
   updatedAt        DateTime          @updatedAt
   Class            Class?            @relation(fields: [classId], references: [id])
   classId          Int?
-  User             User[]
+  User             User?             @relation(fields: [userId], references: [id])
+  userId           Int?
 }
 
 model CustomField {
@@ -279,7 +280,8 @@ model Race {
   SubRaces        SubRace[]
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
-  User            User[]
+  User            User       @relation(fields: [userId], references: [id])
+  userId          Int
 }
 
 model SubRace {
@@ -293,7 +295,8 @@ model SubRace {
   updatedAt       DateTime   @updatedAt
   Race            Race?      @relation(fields: [raceId], references: [id])
   raceId          Int?
-  User            User[]
+  User            User       @relation(fields: [userId], references: [id])
+  userId          Int
 }
 
 model Background {

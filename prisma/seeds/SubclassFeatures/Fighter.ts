@@ -40,22 +40,12 @@ const FighterSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     levels: [3, 7, 10, 15, 18],
   },
   {
-  subClassId: ids.banneret,
-  name: "Banneret Lore",
-  description:
-    "At 3rd level, you learn magical theory or some of the secrets of nature – typical for practitioners of the arcane archery. You gain proficiency in Arcana or Nature (your choice), and you choose to learn either the Prestidigitation or Druidcraft cantrip.",
-  levels: [3],
-},
-{
-  name: "",
-  description:
-    "",
-  subClassId: ids.arcaneArcher,
-  options: [
-    "",
-  ],
-  levels: [3, 7, 10, 15, 18],
-}
+    subClassId: ids.banneret,
+    name: "Banneret Lore",
+    description:
+      "At 3rd level, you learn magical theory or some of the secrets of nature – typical for practitioners of the arcane archery. You gain proficiency in Arcana or Nature (your choice), and you choose to learn either the Prestidigitation or Druidcraft cantrip.",
+    levels: [3],
+  },
 ];
 
 export default FighterSubclassFeatures;

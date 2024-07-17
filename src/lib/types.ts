@@ -26,6 +26,8 @@ export interface DBmetaData {
   updatedAt: Date;
   subClassName?: string;
   source: string;
+  userName: string | null;
+  userId: number | null;
 }
 
 export interface ClassInfo extends Class {
@@ -50,6 +52,22 @@ export enum src {
   vanRichten = "Van Richten's Guide to Ravenloft",
   dmg = "Dungeon Master's Guide",
 }
+
+export const officialSources: string[] = [
+  src.tasha,
+  src.xanathar,
+  src.volo,
+  src.sword,
+  src.Bigby,
+  src.mordenkainen,
+  src.eberron,
+  src.theros,
+  src.ravnica,
+  src.wildemount,
+  src.phb,
+  src.vanRichten,
+  src.dmg,
+];
 
 export interface SubClassInfo extends SubClass {
   SubClassFeatures: SubClassFeature[];

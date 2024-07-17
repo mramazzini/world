@@ -18,7 +18,7 @@ import P from "../Utility/FormatAndSanitize";
 import Info from "../UI/Info";
 import Link from "next/link";
 import Levels from "../UI/Levels";
-
+import { useRouter } from "next/navigation";
 interface Props {
   classObj: Class;
   features: Feature[];
@@ -34,6 +34,7 @@ function ClassDisplay({
   casterType,
   customFields,
 }: Props) {
+  const router = useRouter();
   const [toggle, setToggle] = useState(true);
   return (
     <div className="p-4">
@@ -246,10 +247,11 @@ function ClassDisplay({
                     >
                       View all {classObj.name} subclasses -&gt;
                     </Link>
+
                     <h3 className="px-4">Official Subclasses:</h3>
 
                     <div className="p-4">
-                      <table className="table-zebra">
+                      <table className="table-zebra w-full table-md">
                         <thead>
                           <tr>
                             <th>Name</th>
@@ -258,7 +260,18 @@ function ClassDisplay({
                         </thead>
                         <tbody>
                           {subClasses.map((sub, index) => (
-                            <tr key={index}>
+                            <tr
+                              key={index}
+                              role="button"
+                              className="hover cursor-pointer"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                const formattedName = `/class/${
+                                  classObj.name
+                                }/subclass/${sub.name.replaceAll(" ", "-")}`;
+                                router.push(formattedName);
+                              }}
+                            >
                               <td
                                 style={{
                                   minWidth: "200px",
