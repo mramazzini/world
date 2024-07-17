@@ -6,7 +6,7 @@ import { Class } from "@prisma/client";
 import "@/lib/string.extensions";
 import Link from "next/link";
 
-const SelectClass = () => {
+const SelectClassPage = () => {
   const [data, setData] = useState<DBmetaData[]>([]);
 
   const [loading, setLoading] = useState(true);
@@ -134,4 +134,4 @@ const SelectClass = () => {
   );
 };
 
-export default SelectClass;
+export default SelectClassPage;

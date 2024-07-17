@@ -1,7 +1,7 @@
 import { getSubclass } from "@/lib/actions/db/read.actions";
 import SubClassPage from "@/app/components/pages/SubclassPage";
 import { Metadata } from "next";
-
+import "@/lib/string.extensions";
 type Props = {
   params: { subclassName: string; className: string };
 };

@@ -1,4 +1,4 @@
-import SelectSubclass from "@/app/components/pages/SelectSubclass";
+import SelectSubclass from "@/app/components/pages/SelectSubclassPage";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

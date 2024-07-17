@@ -7,7 +7,7 @@ import { DBmetaData } from "@/lib/types";
 import { getSubClassMeta } from "@/lib/actions/db/read.actions";
 import Head from "next/head";
 
-const SelectSubclass = () => {
+const SelectSubclassPage = () => {
   const router = usePathname();
   const className = router?.split("/")[2];
   const [data, setData] = useState<DBmetaData[] | null>(null);
@@ -133,4 +133,4 @@ const SelectSubclass = () => {
   );
 };
 
-export default SelectSubclass;
+export default SelectSubclassPage;
