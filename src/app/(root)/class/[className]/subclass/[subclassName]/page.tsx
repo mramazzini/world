@@ -16,8 +16,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   return {
     title: `${data.name} - Max's DND Wiki`,
-    description: `${params.className.toCapitalCase()} - ${params.subclassName}
-    -
+    description: `${params.className.toCapitalCase()} - ${params.subclassName.replaceAll(
+      "-",
+      " "
+    )}
+    
     ${data.description}`,
   };
 }
