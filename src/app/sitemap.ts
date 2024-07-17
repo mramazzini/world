@@ -1,12 +1,12 @@
-import { getClassMeta } from "@/lib/actions/db/read.actions";
+import { getClassMeta, getSubClassMeta } from "@/lib/actions/db/read.actions";
 import { MetadataRoute } from "next";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteMap: MetadataRoute.Sitemap = [];
   const routes = [
     "/", // the root
     "/class", // select class
-    // "/class/[className]",//class page
+    "/class/[className]", // class page
     "/class/[className]/subclass", // select subclass
     "/class/[className]/subclass/[subclassName]", // subclass page
     "/class/[className]/pdf", // pdf page for class
@@ -18,10 +18,58 @@ export default function sitemap(): MetadataRoute.Sitemap {
     throw new Error("DOMAIN_NAME is not defined in env");
   }
 
-  for (const route of routes) {
+  const classes = await getClassMeta();
+  siteMap.push({
+    url: process.env.DOMAIN_NAME,
+    lastModified: new Date(),
+    changeFrequency: "yearly",
+    priority: 1,
+  });
+  siteMap.push({
+    url: `${process.env.DOMAIN_NAME}/class`,
+    lastModified: new Date(),
+    changeFrequency: "yearly",
+    priority: 0.9,
+  });
+  for (const c of classes) {
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}${route}`,
+      url: `${process.env.DOMAIN_NAME}/class/${c.name}`,
+      lastModified: c.updatedAt,
+      changeFrequency: "yearly",
+      priority: 0.8,
     });
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/class/${c.name}/pdf`,
+      lastModified: c.updatedAt,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    });
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/class/${c.name}/subclass`,
+      lastModified: c.updatedAt,
+      changeFrequency: "yearly",
+      priority: 0.9,
+    });
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/class/${c.name}/create`,
+      lastModified: c.updatedAt,
+      changeFrequency: "yearly",
+      priority: 0.7,
+    });
+    const subClasses = await getSubClassMeta(c.name);
+    if (!subClasses) {
+      continue;
+    }
+    for (const sc of subClasses) {
+      siteMap.push({
+        url: `${process.env.DOMAIN_NAME}/class/${
+          c.name
+        }/subclass/${sc.name.replaceAll(" ", "-")}`,
+        lastModified: sc.updatedAt,
+        changeFrequency: "yearly",
+        priority: 0.8,
+      });
+    }
   }
 
   return siteMap;

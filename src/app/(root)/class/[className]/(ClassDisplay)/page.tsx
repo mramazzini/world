@@ -1,38 +1,25 @@
-"use client";
-import { useSearchParams, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import ClassPage from "@/pages/ClassPage";
+import { Metadata } from "next";
 import { getClass } from "@/lib/actions/db/read.actions";
-import { Class, Prisma, Feature, SubClass } from "@prisma/client";
-import { ClassInfo } from "@/lib/types";
-import ClassDisplay from "@/app/components/CreateClass/ClassDisplay";
 
-const ClassPage = () => {
-  const router = usePathname();
-  const className = router.split("/")[2];
-
-  const [data, setData] = useState<ClassInfo | null>(null);
-
-  useEffect(() => {
-    getClass(className).then((res) => {
-      setData(res);
-      console.log(res);
-    });
-  }, [className]);
-
-  return (
-    <div className="p-4">
-      {!data && <span className="loading" />}
-      {data && (
-        <ClassDisplay
-          classObj={data as Class}
-          features={data.Features}
-          subClasses={data.SubClasses}
-          casterType={data.casterType || null}
-          customFields={data.customFields}
-        />
-      )}
-    </div>
-  );
+type Props = {
+  params: { className: string };
+};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const data = await getClass(params.className);
+  if (!data) {
+    return {
+      title: "Class Not Found",
+      description: "Class Not Found",
+    };
+  }
+  return {
+    title: `${data.name.toCapitalCase()} - Max's DND Wiki`,
+    description: data.description,
+  };
+}
+const Page = () => {
+  return <ClassPage />;
 };
 
-export default ClassPage;
+export default Page;

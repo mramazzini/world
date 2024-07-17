@@ -1,32 +1,29 @@
-"use client";
-import SubClassDisplay from "@/app/components/CreateClass/SubClassDisplay";
 import { getSubclass } from "@/lib/actions/db/read.actions";
-import { SubClassInfo } from "@/lib/types";
-import { SubClass } from "@prisma/client";
+import SubClassPage from "@/pages/SubclassPage";
 import { Metadata } from "next";
-import Head from "next/head";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+
+type Props = {
+  params: { subclassName: string; className: string };
+};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const data = await getSubclass(params.subclassName.replaceAll("-", " "));
+
+  if (!data) {
+    return {
+      title: "Subclass Not Found - Max's DND Wiki",
+      description: "Subclass Not Found - Max's DND Wiki",
+    };
+  }
+  return {
+    title: `${data.name} - Max's DND Wiki`,
+    description: `${params.className.toCapitalCase()} - ${params.subclassName}
+    -
+    ${data.description}`,
+  };
+}
 
 const Page = () => {
-  const router = usePathname();
-  const className = router.split("/")[2];
-  const subClassName = router.split("/")[4].replaceAll("-", " ");
-
-  const [data, setData] = useState<SubClassInfo | null>(null);
-  useEffect(() => {
-    getSubclass(subClassName).then((res) => {
-      setData(res);
-    });
-  }, [subClassName]);
-  return (
-    <div className="pt-4">
-      {!data && <span className="loading" />}
-
-      {data && <SubClassDisplay subClass={data} />}
-    </div>
-  );
+  return <SubClassPage />;
 };
 
 export default Page;
