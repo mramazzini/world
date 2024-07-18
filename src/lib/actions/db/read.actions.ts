@@ -202,25 +202,40 @@ export const getDefaultCasterTypes = async (): Promise<CasterType[]> => {
   return arr;
 };
 
-// export async function getRace(): Promise<Race[]> {
-//   return await db.race.findMany();
-// }
+export async function getRace(): Promise<Race[]> {
+  const db = new PrismaClient();
+  const res = await db.race.findMany();
+  await db.$disconnect();
+  return res;
+}
 
-// export async function getSubRace(): Promise<SubRace[]> {
-//   return await db.subRace.findMany();
-// }
+export async function getSubRace(): Promise<SubRace[]> {
+  const db = new PrismaClient();
+  const res = await db.subRace.findMany();
+  await db.$disconnect();
+  return res;
+}
 
-// export async function getBackground(): Promise<Background[]> {
-//   return await db.background.findMany();
-// }
+export async function getBackground(): Promise<Background[]> {
+  const db = new PrismaClient();
+  const res = await db.background.findMany();
+  await db.$disconnect();
+  return res;
+}
 
-// export async function getFeat(): Promise<Feat[]> {
-//   return await db.feat.findMany();
-// }
+export async function getFeat(): Promise<Feat[]> {
+  const db = new PrismaClient();
+  const res = await db.feat.findMany();
+  await db.$disconnect();
+  return res;
+}
 
-// export async function getSpell(): Promise<Spell[]> {
-//   return await db.spell.findMany();
-// }
+export async function getSpell(): Promise<Spell[]> {
+  const db = new PrismaClient();
+  const res = await db.spell.findMany();
+  await db.$disconnect();
+  return res;
+}
 
 export async function getWeapon(): Promise<Weapon[]> {
   const db = new PrismaClient();
