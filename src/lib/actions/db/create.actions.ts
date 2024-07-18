@@ -17,13 +17,12 @@ import {
 } from "@prisma/client";
 import { deleteClasses } from "./destroy.actions";
 
-const db = new PrismaClient();
-
 export const createClassWithFeaturesAndSubClasses = async (
   data: Prisma.ClassCreateManyInput,
   features: Prisma.FeatureCreateManyInput[],
   subClasses: Prisma.SubClassCreateManyInput[]
 ) => {
+  const db = new PrismaClient();
   const result = await db.class.create({
     data: {
       ...data,
@@ -39,40 +38,45 @@ export const createClassWithFeaturesAndSubClasses = async (
       },
     },
   });
+  await db.$disconnect();
   return result;
 };
 
 export const createClass = async (data: Prisma.ClassCreateInput) => {
+  const db = new PrismaClient();
   const result = await db.class.create({
     data,
   });
+  await db.$disconnect();
   return result;
 };
 
-export const createFeature = (
+export const createFeature = async (
   classID: number,
   feature: Prisma.FeatureCreateManyInput
 ) => {
-  return db.feature.create({
+  const db = new PrismaClient();
+  const res = await db.feature.create({
     data: {
       ...feature,
       classId: classID,
     },
   });
+  await db.$disconnect();
+  return res;
 };
 
-export const createSubClass = (
+export const createSubClass = async (
   classID: number,
   subClass: Prisma.SubClassCreateManyInput
 ) => {
-  return db.subClass.create({
+  const db = new PrismaClient();
+  const res = await db.subClass.create({
     data: {
       ...subClass,
       classId: classID,
     },
   });
+  await db.$disconnect();
+  return res;
 };
-
-//deactivate prisma
-
-db.$disconnect();

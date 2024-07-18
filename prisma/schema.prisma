@@ -249,6 +249,7 @@ model Feature {
   levels              Int[]
   options             String[] // If the feature has options to choose from, list here
   table               String[] // optionally dedicate a column in the table
+  extendedTable       Json[] // This table will be rendered with the feature
   spellCastingFeature Boolean  @default(false)
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
@@ -257,15 +258,16 @@ model Feature {
 }
 
 model SubClassFeature {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String
-  levels      Int[]
-  options     String[] // If the feature has options to choose from, list here
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  SubClass    SubClass @relation(fields: [subClassId], references: [id])
-  subClassId  Int
+  id            Int      @id @default(autoincrement())
+  name          String
+  description   String
+  levels        Int[]
+  options       String[] // If the feature has options to choose from, list here
+  extendedTable Json[] // This table will be rendered with the feature
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  SubClass      SubClass @relation(fields: [subClassId], references: [id])
+  subClassId    Int
 }
 
 model Race {

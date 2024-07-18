@@ -8,6 +8,7 @@ import Levels from "../UI/Levels";
 import P from "../Utility/FormatAndSanitize";
 import numPlace from "@/lib/utils/numPlace";
 import Link from "next/link";
+import JsonTable from "../Utility/JsonTable";
 interface Props {
   subClass: SubClassInfo;
 }
@@ -125,6 +126,11 @@ const SubClassDisplay = ({ subClass }: Props) => {
                         </>
                       )}
                     </li>
+                    {feature.extendedTable && (
+                      <div className="px-4">
+                        <JsonTable json={feature.extendedTable} />
+                      </div>
+                    )}
                     <div className="divider"></div>
                   </div>
                 );

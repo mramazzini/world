@@ -13,7 +13,6 @@ const ids = {
   zealot: 19,
 };
 
-
 const BarbarianSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
   // ancestral guardian
   {
@@ -78,10 +77,27 @@ const BarbarianSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     name: "Form of the Beast",
     description:
       "Starting when you choose this path at 3rd level, when you enter your rage, you can transform, revealing the bestial power within you. Until the rage ends, you manifest a natural weapon. It counts as a simple melee weapon for you, and you add your Strength modifier to the attack and damage rolls when you attack with it, as normal.\n\nYou choose the weapon’s form each time you rage:",
-    options: [
-      "**Bite.** Your mouth transforms into a bestial muzzle or great mandibles (your choice). It deals 1d8 piercing damage on a hit. Once on each of your turns when you damage a creature with this bite, you regain a number of hit points equal to your proficiency bonus, provided you have less than half your hit points when you hit.",
-      "**Claws.**  Each of your hands transforms into a claw, which you can use as a weapon if it’s empty. It deals 1d6 slashing damage on a hit. Once on each of your turns when you attack with a claw using the Attack action, you can make one additional claw attack as part of the same action.",
-      "**Tail.**  You grow a lashing, spiny tail, which deals 1d8 piercing damage on a hit and has the reach property. If a creature you can see within 10 feet of you hits you with an attack roll, you can use your reaction to swipe your tail and roll a d8, applying a bonus to your AC equal to the number rolled, potentially causing the attack to miss you.",
+
+    extendedTable: [
+      {
+        "": [
+          {
+            Form: "Bite",
+            Description:
+              "Your mouth transforms into a bestial muzzle or great mandibles (your choice). It deals 1d8 piercing damage on a hit. Once on each of your turns when you damage a creature with this bite, you regain a number of hit points equal to your proficiency bonus, provided you have less than half your hit points when you hit.",
+          },
+          {
+            Form: "Claws",
+            Description:
+              "Each of your hands transforms into a claw, which you can use as a weapon if it’s empty. It deals 1d6 slashing damage on a hit. Once on each of your turns when you attack with a claw using the Attack action, you can make one additional claw attack as part of the same action.",
+          },
+          {
+            Form: "Tail",
+            Description:
+              "You grow a lashing, spiny tail, which deals 1d8 piercing damage on a hit and has the reach property. If a creature you can see within 10 feet of you hits you with an attack roll, you can use your reaction to swipe your tail and roll a d8, applying a bonus to your AC equal to the number rolled, potentially causing the attack to miss you.",
+          },
+        ],
+      },
     ],
     subClassId: ids.beast,
     levels: [3],
@@ -159,8 +175,8 @@ const BarbarianSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     description:
       "Your rages pull strength from the primal might of giants, transforming you into a hulking force of destruction. While raging, you gain the following benefits:",
     options: [
-      "**Crushing Throw.**When you make a successful ranged attack with a thrown weapon using Strength, you can add your Rage Damage bonus to the attack’s damage roll.",
-      "**Giant Stature.**Your reach increases by 5 feet, and if you are smaller than Large, you become Large, along with anything you are wearing. If there isn’t enough room for you to increase your size, your size doesn’t change.",
+      "**Crushing Throw.** When you make a successful ranged attack with a thrown weapon using Strength, you can add your Rage Damage bonus to the attack’s damage roll.",
+      "**Giant Stature.** Your reach increases by 5 feet, and if you are smaller than Large, you become Large, along with anything you are wearing. If there isn’t enough room for you to increase your size, your size doesn’t change.",
     ],
     subClassId: ids.giant,
     levels: [3],
@@ -191,10 +207,26 @@ const BarbarianSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     name: "Storm Aura",
     description:
       "When you select this path at 3rd level, you emanate a stormy, magical aura while you rage. The aura extends 10 feet from you in every direction, but not through total cover.\n\nYour aura has an effect that activates when you enter your rage, and you can activate the effect again on each of your turns as a bonus action. Choose desert, sea, or tundra. Your aura's effect depends on that chosen environment, as detailed below. You can change your environment choice whenever you gain a level in this class.\n\nIf your aura's effects require a saving throw, the DC equals 8 + your proficiency bonus + your Constitution modifier.",
-    options: [
-      "**Desert.** At the start of each of your turns, each creature of your choice in your aura takes fire damage equal to half your barbarian level, and you gain a bonus to the damage roll equal to your Constitution modifier.",
-      "**Sea.** At the start of each of your turns, you can choose one creature in your aura (including you, if you so desire). That creature gains temporary hit points equal to your Constitution modifier (minimum of 1).",
-      "**Tundra.** When you enter your rage, you can choose one creature you can see in your aura. That creature gains temporary hit points equal to your level in this class.",
+    extendedTable: [
+      {
+        "": [
+          {
+            Environment: "Desert",
+            Effect:
+              "At the start of each of your turns, each creature of your choice in your aura takes fire damage equal to half your Barbarian level, and you gain a bonus to the damage roll equal to your Constitution modifier.",
+          },
+          {
+            Environment: "Sea",
+            Effect:
+              "At the start of each of your turns, you can choose one creature in your aura (including you, if you so desire). That creature gains temporary hit points equal to your Constitution modifier (minimum of 1).",
+          },
+          {
+            Environment: "Tundra",
+            Effect:
+              "When you enter your rage, you can choose one creature you can see in your aura. That creature gains temporary hit points equal to your level in this class.",
+          },
+        ],
+      },
     ],
     subClassId: ids.stormHerald,
     levels: [3],

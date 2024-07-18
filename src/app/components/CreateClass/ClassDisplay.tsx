@@ -19,6 +19,7 @@ import Info from "../UI/Info";
 import Link from "next/link";
 import Levels from "../UI/Levels";
 import { useRouter } from "next/navigation";
+import JsonTable from "../Utility/JsonTable";
 interface Props {
   classObj: Class;
   features: Feature[];
@@ -383,6 +384,9 @@ function ClassDisplay({
                               </ul>
                             )}
                           </>
+                        )}
+                        {feature.extendedTable && (
+                          <JsonTable json={feature.extendedTable} />
                         )}
                         <div className="divider"></div>
                       </li>

@@ -34,24 +34,85 @@ const Features: Prisma.FeatureCreateManyInput[] = [
   {
     name: "Fighting Style",
     description:
-      "You adopt a particular style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again.",
+      "You adopt a particular style of fighting as your specialty. Choose an option from the Fighting style table. You can't take a Fighting Style option more than once, even if you later get to choose again.",
     levels: [1],
     classId: ids.fighter,
-    options: [
-      "**Archery.** You gain a +2 bonus to attack rolls you make with ranged weapons.",
-      "**Blind Fighting.** You have blindsight with a range of 10 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.",
-      "**Defense.** While you are wearing armor, you gain a +1 bonus to AC.",
-      "**Dueling.** When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.",
-      "**Great Weapon Fighting.** When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.",
-      "**Protection.** When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.",
-      "**Interception.** When a creature you can see hits a target, other than you, within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your proficiency bonus (to a minimum of 0 damage). You must be wielding a shield or a simple or martial weapon to use this reaction.",
-      "**Superior Technique.** You learn one maneuver of your choice from among those available to the Battle Master archetype. If a maneuver you use requires your target to make a saving throw to resist the maneuver's effects, the saving throw DC equals 8 + your proficiency bonus + your Strength or Dexterity modifier (your choice).\n\n You gain one superiority die, which is a d6 (this die is added to any superiority dice you have from another source). This die is used to fuel your maneuvers. A superiority die is expended when you use it. You regain your expended superiority dice when you finish a short or long rest.",
-      "**Thrown Weapon Fighting.** You can draw a weapon that has the thrown property as part of the attack you make with the weapon. In addition, when you hit with a ranged attack using a thrown weapon, you gain a +2 bonus to the damage roll.",
-      "**Two-Weapon Fighting.** When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.",
-      "**Unarmed Fighting.** Your unarmed strikes can deal bludgeoning damage equal to 1d6 + your Strength modifier. If you strike with two free hands, the d6 becomes a d8.",
-      "**Close Quarters Shooter.** When making a ranged attack while you are within 5 feet of a hostile creature, you do not have disadvantage on the attack roll. Your ranged attacks ignore half cover and three-quarters cover against targets within 30 feet of you. Finally, you have a +1 bonus to attack rolls on ranged attacks.",
-      "**Mariner.** As long as you are not wearing heavy armor or using a shield, you have a swimming speed and a climbing speed equal to your normal speed, and you gain a +1 bonus to AC.",
-      "**Tunnel Fighter.** As a bonus action, you can enter a defensive stance that lasts until the start of your next turn. While in your defensive stance, you can make opportunity attacks without using your reaction, and you can use your reaction to make a melee attack against a creature that moves more than 5 feet while within your reach.",
+
+    extendedTable: [
+      {
+        "Fighting Style Table": [
+          {
+            Style: "Archery",
+            Description:
+              "You gain a +2 bonus to attack rolls you make with ranged weapons.",
+          },
+          {
+            Style: "Blind Fighting",
+            Description:
+              "You have blindsight with a range of 10 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.",
+          },
+          {
+            Style: "Defense",
+            Description:
+              "While you are wearing armor, you gain a +1 bonus to AC.",
+          },
+          {
+            Style: "Dueling",
+            Description:
+              "When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.",
+          },
+          {
+            Style: "Great Weapon Fighting",
+            Description:
+              "When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.",
+          },
+          {
+            Style: "Protection",
+            Description:
+              "When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.",
+          },
+          {
+            Style: "Interception",
+            Description:
+              "When a creature you can see hits a target, other than you, within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your proficiency bonus (to a minimum of 0 damage). You must be wielding a shield or a simple or martial weapon to use this reaction.",
+          },
+          {
+            Style: "Superior Technique",
+            Description:
+              "You learn one maneuver of your choice from among those available to the Battle Master archetype. If a maneuver you use requires your target to make a saving throw to resist the maneuver's effects, the saving throw DC equals 8 + your proficiency bonus + your Strength or Dexterity modifier (your choice).\n\n You gain one superiority die, which is a d6 (this die is added to any superiority dice you have from another source). This die is used to fuel your maneuvers. A superiority die is expended when you use it. You regain your expended superiority dice when you finish a short or long rest.",
+          },
+          {
+            Style: "Thrown-Weapon Fighting",
+            Description:
+              "You can draw a weapon that has the thrown property as part of the attack you make with the weapon. In addition, when you hit with a ranged attack using a thrown weapon, you gain a +2 bonus to the damage roll.",
+          },
+          {
+            Style: "Two-Weapon Fighting",
+            Description:
+              "When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.",
+          },
+          {
+            Style: "Unarmed Fighting",
+            Description:
+              "Your unarmed strikes can deal bludgeoning damage equal to 1d6 + your Strength modifier. If you strike with two free hands, the d6 becomes a d8.",
+          },
+          {
+            Style: "Close Quarters Shooter",
+            Description:
+              "When making a ranged attack while you are within 5 feet of a hostile creature, you do not have disadvantage on the attack roll. Your ranged attacks ignore half cover and three-quarters cover against targets within 30 feet of you. Finally, you have a +1 bonus to attack rolls on ranged attacks.",
+          },
+          {
+            Style: "Mariner",
+            Description:
+              "As long as you are not wearing heavy armor or using a shield, you have a swimming speed and a climbing speed equal to your normal speed, and you gain a +1 bonus to AC.",
+          },
+          {
+            Style: "Tunnel Fighter",
+            Description:
+              "As a bonus action, you can enter a defensive stance that lasts until the start of your next turn. While in your defensive stance, you can make opportunity attacks without using your reaction, and you can use your reaction to make a melee attack against a creature that moves more than 5 feet while within your reach.",
+          },
+        ],
+      },
     ],
   },
   {
@@ -435,7 +496,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   {
     name: "Wild Shape",
     description:
-      "Starting at 2nd level, you can use your action to magically assume the shape of a beast that you have seen before. You can use this feature twice. You regain expended uses when you finish a short or long rest.\n\nYour druid level determines the beasts you can transform into.\n\n- At 2nd level, you can transform into any beast with a challenge rating of 1/4 or lower that doesn't have a flying or swimming speed.\n- At 4th level, you can transform into a beast with a challenge rating of 1/2 or lower, and it cannot have a flying speed.\n- At 8th level, you can transform into a beast with a challenge rating of 1 or lower.\n\n You can stay in a beast shape for a number of hours equal to half your druid level (rounded down). You then revert to your normal form unless you expend another use of this feature. You can revert to your normal form earlier by using a bonus action on your turn. You automatically revert if you fall unconscious, drop to 0 hit points, or die. \n\nWhile you are transformed, the following rules apply:",
+      "Starting at 2nd level, you can use your action to magically assume the shape of a beast that you have seen before. You can use this feature twice. You regain expended uses when you finish a short or long rest.\n\nYour druid level determines the beasts you can transform into according to the Beast Shapes Table.\n\n You can stay in a beast shape for a number of hours equal to half your druid level (rounded down). You then revert to your normal form unless you expend another use of this feature. You can revert to your normal form earlier by using a bonus action on your turn. You automatically revert if you fall unconscious, drop to 0 hit points, or die. \n\nWhile you are transformed, the following rules apply:",
     options: [
       "Your game statistics are replaced by the statistics of the beast, but you retain your alignment, personality, and Intelligence, Wisdom, and Charisma scores. You also retain all of your skill and saving throw proficiencies, in addition to gaining those of the creature. If the creature has the same proficiency as you and the bonus in its stat block is higher than yours, use the creature's bonus instead of yours. If the creature has any legendary or lair actions, you can't use them.",
       "When you transform, you assume the beast's hit points and Hit Dice. When you revert to your normal form, you return to the number of hit points you had before you transformed. However, if you revert as a result of dropping to 0 hit points, any excess damage carries over to your normal form, For example, if you take 10 damage in animal form and have only 1 hit point left, you revert and take 9 damage. As long as the excess damage doesn't reduce your normal form to 0 hit points, you aren't knocked unconscious.",
@@ -445,6 +506,30 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
     ],
     levels: [2, 4, 8],
     classId: ids.druid,
+    extendedTable: [
+      {
+        "Beast Shapes": [
+          {
+            Level: "2nd",
+            "Max CR": "1/4",
+            Limitations: "No flying or swimming speed",
+            Example: "Wolf",
+          },
+          {
+            Level: "4th",
+            "Max CR": "1/2",
+            Limitations: "No flying speed",
+            Example: "Crocodile",
+          },
+          {
+            Level: "8th",
+            "Max CR": "1",
+            Limitations: "",
+            Example: "Giant Eagle",
+          },
+        ],
+      },
+    ],
   },
   {
     name: "Wild Companion",

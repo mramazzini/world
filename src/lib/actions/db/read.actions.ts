@@ -14,9 +14,8 @@ import {
   WeaponProperty,
 } from "@prisma/client";
 
-const db = new PrismaClient();
-
 export async function getClassMeta(): Promise<DBmetaData[]> {
+  const db = new PrismaClient();
   let res: DBmetaData[] = [];
   const data = await db.class.findMany({
     orderBy: {
@@ -51,15 +50,16 @@ export async function getClassMeta(): Promise<DBmetaData[]> {
       userName: user?.username || null,
     };
   });
-
+  await db.$disconnect();
   return res;
 }
 
 export async function getClass(
   query: string | number
 ): Promise<ClassInfo | null> {
+  const db = new PrismaClient();
   if (typeof query === "string") {
-    return await db.class.findFirst({
+    const res = await db.class.findFirst({
       where: {
         name: query,
       },
@@ -71,8 +71,10 @@ export async function getClass(
         customFields: true,
       },
     });
+    await db.$disconnect();
+    return res;
   } else {
-    return await db.class.findFirst({
+    const res = await db.class.findFirst({
       where: {
         id: query,
       },
@@ -83,15 +85,18 @@ export async function getClass(
         customFields: true,
       },
     });
+    await db.$disconnect();
+    return res;
   }
 }
 
 export async function getSubclass(
   query: string | number
 ): Promise<SubClassInfo | null> {
+  const db = new PrismaClient();
   try {
     if (typeof query === "string") {
-      return await db.subClass.findFirst({
+      const res = await db.subClass.findFirst({
         where: {
           name: query,
         },
@@ -99,8 +104,10 @@ export async function getSubclass(
           SubClassFeatures: true,
         },
       });
+      await db.$disconnect();
+      return res;
     } else {
-      return await db.subClass.findFirst({
+      const res = await db.subClass.findFirst({
         where: {
           id: query,
         },
@@ -108,16 +115,20 @@ export async function getSubclass(
           SubClassFeatures: true,
         },
       });
+      await db.$disconnect();
+      return res;
     }
   } catch (error) {
     console.error(error);
   }
+  await db.$disconnect();
   return null;
 }
 
 export const getSubClassMeta = async (
   className: string
 ): Promise<DBmetaData[] | null> => {
+  const db = new PrismaClient();
   const classObj = await db.class.findFirst({
     where: {
       name: className,
@@ -154,13 +165,14 @@ export const getSubClassMeta = async (
       userName: user?.username || null,
     };
   });
-
+  await db.$disconnect();
   return res;
 };
 
 export const getSubclassFromClassName = async (
   className: string
 ): Promise<SubClass[]> => {
+  const db = new PrismaClient();
   //find the class
   const classObj = await db.class.findFirst({
     where: {
@@ -168,14 +180,17 @@ export const getSubclassFromClassName = async (
     },
   });
   //find the subclasses
-  return await db.subClass.findMany({
+  const res = await db.subClass.findMany({
     where: {
       classId: classObj?.id,
     },
   });
+  await db.$disconnect();
+  return res;
 };
 
 export const getDefaultCasterTypes = async (): Promise<CasterType[]> => {
+  const db = new PrismaClient();
   const arr: CasterType[] = await db.casterType.findMany({
     where: {
       id: {
@@ -183,35 +198,34 @@ export const getDefaultCasterTypes = async (): Promise<CasterType[]> => {
       },
     },
   });
+  await db.$disconnect();
   return arr;
 };
 
-export async function getRace(): Promise<Race[]> {
-  return await db.race.findMany();
-}
+// export async function getRace(): Promise<Race[]> {
+//   return await db.race.findMany();
+// }
 
-export async function getSubRace(): Promise<SubRace[]> {
-  return await db.subRace.findMany();
-}
+// export async function getSubRace(): Promise<SubRace[]> {
+//   return await db.subRace.findMany();
+// }
 
-export async function getBackground(): Promise<Background[]> {
-  return await db.background.findMany();
-}
+// export async function getBackground(): Promise<Background[]> {
+//   return await db.background.findMany();
+// }
 
-export async function getFeat(): Promise<Feat[]> {
-  return await db.feat.findMany();
-}
+// export async function getFeat(): Promise<Feat[]> {
+//   return await db.feat.findMany();
+// }
 
-export async function getSpell(): Promise<Spell[]> {
-  return await db.spell.findMany();
-}
+// export async function getSpell(): Promise<Spell[]> {
+//   return await db.spell.findMany();
+// }
 
-export async function getWeapon(): Promise<Weapon[]> {
-  return await db.weapon.findMany({
-    include: {
-      WeaponToProperties: true,
-    },
-  });
-}
-
-db.$disconnect();
+// export async function getWeapon(): Promise<Weapon[]> {
+//   return await db.weapon.findMany({
+//     include: {
+//       WeaponToProperties: true,
+//     },
+//   });
+// }

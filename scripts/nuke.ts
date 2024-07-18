@@ -3,9 +3,8 @@
 import { cinfo } from "@/lib/utils/chalkLog";
 import { PrismaClient } from "@prisma/client";
 
-const db = new PrismaClient();
-
 async function nuke() {
+  const db = new PrismaClient();
   cinfo("Clearing database");
   await db.feature.deleteMany({});
   await db.subClassFeature.deleteMany({});
@@ -17,6 +16,7 @@ async function nuke() {
   await db.weaponProperty.deleteMany({});
   await db.user.deleteMany({});
   cinfo("Database cleared");
+  await db.$disconnect();
 }
 
 nuke();
