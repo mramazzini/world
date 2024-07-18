@@ -222,10 +222,13 @@ export const getDefaultCasterTypes = async (): Promise<CasterType[]> => {
 //   return await db.spell.findMany();
 // }
 
-// export async function getWeapon(): Promise<Weapon[]> {
-//   return await db.weapon.findMany({
-//     include: {
-//       WeaponToProperties: true,
-//     },
-//   });
-// }
+export async function getWeapon(): Promise<Weapon[]> {
+  const db = new PrismaClient();
+  const res = await db.weapon.findMany({
+    include: {
+      WeaponToProperties: true,
+    },
+  });
+  await db.$disconnect();
+  return res;
+}
