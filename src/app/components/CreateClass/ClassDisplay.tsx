@@ -268,7 +268,15 @@ function ClassDisplay({
                     <h3 className="px-4">Official Subclasses:</h3>
 
                     <div className="p-4">
-                      <JsonTable json={subClassTableJson} colSizes={[30, 70]} />
+                      <JsonTable
+                        json={subClassTableJson}
+                        colSizes={[30, 70]}
+                        links={subClasses.map((s) => {
+                          return `/class/${
+                            classObj.name
+                          }/subclass/${s.name.replaceAll(" ", "-")}`;
+                        })}
+                      />
 
                       {classObj.subClassSpellDescription && (
                         <div className="py-4">

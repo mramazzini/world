@@ -79,15 +79,7 @@ const SelectSubclassPage = () => {
                     }}
                   >
                     <td>
-                      <Link
-                        href={`/class/${className}/subclass/${item.name.replaceAll(
-                          " ",
-                          "-"
-                        )}`}
-                        className="text-blue-500 hover:text-blue-700 font-bold"
-                      >
-                        {item.name}
-                      </Link>
+                      <p className="text-blue-500  font-bold">{item.name}</p>
                     </td>
                     <td className="hidden md:table-cell">
                       <p className="italic line-clamp-2"> {item.flavorText}</p>

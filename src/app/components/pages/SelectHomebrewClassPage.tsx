@@ -68,14 +68,9 @@ const SelectHomebrewClassPage = () => {
                 }}
               >
                 <td>
-                  <Link
-                    href={`/class/${item.name
-                      .toCapitalCase()
-                      .replaceAll(" ", "-")}`}
-                    className="text-blue-500 hover:text-blue-700 font-bold"
-                  >
+                  <p className="text-blue-500 font-bold">
                     {item.name.toCapitalCase()}
-                  </Link>
+                  </p>
                 </td>
                 <td className="hidden md:table-cell">
                   <p className="italic line-clamp-2"> {item.flavorText}</p>
@@ -91,14 +86,9 @@ const SelectHomebrewClassPage = () => {
                   }}
                 >
                   <p className="line-clamp-2">
-                    <Link
-                      href={`/class/${item.name
-                        .toCapitalCase()
-                        .replaceAll(" ", "-")}/subclass`}
-                      className="text-blue-500 hover:text-blue-700 font-bold"
-                    >
+                    <p className="text-blue-500 font-bold">
                       {item.subClassName}
-                    </Link>
+                    </p>
                   </p>
                 </td>
                 <td>{item.userName}</td>
