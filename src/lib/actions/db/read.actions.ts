@@ -25,7 +25,7 @@ export async function getClassMeta(): Promise<DBmetaData[]> {
     select: {
       name: true,
       id: true,
-      description: true,
+      flavorText: true,
       updatedAt: true,
       subClassName: true,
       source: true,
@@ -145,6 +145,7 @@ export const getSubClassMeta = async (
       updatedAt: true,
       source: true,
       userId: true,
+      flavorText: true,
     },
   });
   let res: DBmetaData[] = [];

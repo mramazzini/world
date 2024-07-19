@@ -40,7 +40,7 @@ const data = [
 
 const HomePage = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div className="p-4">
       <h1 className="text-4xl font-bold text-center">Max&apos;s DND</h1>
       <div className="grid grid-cols-3 gap-4">
         {data.map((item) => (
@@ -59,7 +59,7 @@ const HomePage = () => {
           </a>
         ))}
       </div>
-    </main>
+    </div>
   );
 };
 

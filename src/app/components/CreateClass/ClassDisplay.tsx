@@ -37,11 +37,27 @@ function ClassDisplay({
 }: Props) {
   const router = useRouter();
   const [toggle, setToggle] = useState(true);
+  const subClassTableJson: PrismaJson.Table[] = [];
+  subClassTableJson.push({
+    Subclasses: {
+      headers: ["Name", "Description"],
+      data: subClasses.map((sub) => {
+        return {
+          Name: sub.name,
+          Description: sub.description,
+        };
+      }),
+    },
+  });
   return (
     <div className="p-4">
       <h1>{classObj.name.toCapitalCase() || "Class Name"}</h1>
       <p className="italic">
         {classObj.description || "Your Class Description will go here."}
+      </p>
+      <br />
+      <p>
+        Source:<span className="font-bold italic"> {classObj.source}</span>
       </p>
       <Link
         target="_blank"
@@ -252,59 +268,8 @@ function ClassDisplay({
                     <h3 className="px-4">Official Subclasses:</h3>
 
                     <div className="p-4">
-                      <table className="table-zebra w-full table-md">
-                        <thead>
-                          <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {subClasses.map((sub, index) => (
-                            <tr
-                              key={index}
-                              role="button"
-                              className="hover cursor-pointer"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                const formattedName = `/class/${
-                                  classObj.name
-                                }/subclass/${sub.name.replaceAll(" ", "-")}`;
-                                router.push(formattedName);
-                              }}
-                            >
-                              <td
-                                style={{
-                                  minWidth: "200px",
-                                }}
-                              >
-                                <Link
-                                  className="text-blue-500 hover:text-blue-700 "
-                                  href={`/class/${
-                                    classObj.name
-                                  }/subclass/${sub.name.replaceAll(" ", "-")}`}
-                                >
-                                  {sub.name}
-                                </Link>
-                              </td>
-                              <td
-                                style={{
-                                  overflowWrap: "break-word",
-                                  wordWrap: "break-word",
-                                  hyphens: "auto",
-                                  maxHeight: "50px",
-                                  overflow: "hidden",
-                                  whiteSpace: "nowrap",
-                                  textOverflow: "ellipsis",
-                                  maxWidth: "50vw",
-                                }}
-                              >
-                                {sub.description}
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                      <JsonTable json={subClassTableJson} />
+
                       {classObj.subClassSpellDescription && (
                         <div className="py-4">
                           <P>{classObj.subClassSpellDescription}</P>

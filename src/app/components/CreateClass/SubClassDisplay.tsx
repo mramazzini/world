@@ -38,6 +38,10 @@ const SubClassDisplay = ({ subClass }: Props) => {
             {className.toCapitalCase()}: {subClass.name}
           </h1>
           <p className="px-4 italic">{subClass.description}</p>
+
+          <p className="px-4 pt-4">
+            Source: <span className="font-bold italic">{subClass.source}</span>
+          </p>
         </div>
         <div className="flex justify-center flex-col ">
           <Link

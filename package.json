@@ -14,7 +14,7 @@
     "generate": "npx prisma generate",
     "seed": "env-cmd -f .env.local npx prisma db seed",
     "seed:prod": "env-cmd -f .env npx prisma db seed",
-    "nuke": "npx tsx scripts/nuke.ts",
+    "nuke": "env-cmd -f .env.local npx tsx scripts/nuke.ts",
     "logs": "vercel logs https://world-ashen.vercel.app/"
   },
   "prisma": {

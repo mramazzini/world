@@ -48,6 +48,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "you choose an archetype that you strive to emulate in your combat styles and techniques. ",
     subfeatLevels: [3, 7, 10, 15, 18],
     spellCaster: false,
+    flavorText:
+      "Fighters are the warriors of the realm. They are the masters of weapons and armor, and they are well acquainted with death, both meting it out and staring it defiantly in the face.",
   },
 
   {
@@ -92,6 +94,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     spellFocus: "arcane focus",
     cantripsKnown: [3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5], // lvl 1-20
     casterTypeId: 1,
+    flavorText:
+      "Wizards are the supreme magic-users, defined and united as a class by the spells they cast, using the subtle weave of magic that permeates the cosmos.",
   },
   {
     id: 3,
@@ -136,6 +140,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "The Cleric table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
     cantripsKnown: [3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
     casterTypeId: 1,
+    flavorText:
+      "Clerics are intermediaries between the mortal world and the distant planes of the gods, using their divine magic to heal the wounded, bless the righteous, and smite the wicked.",
   },
   {
     id: 4,
@@ -180,6 +186,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "you choose a roguish archetype that you emulate in your adventuring career. ",
     subfeatLevels: [3, 9, 13, 17],
     spellCaster: false,
+    flavorText:
+      "Rogues are cunning and elusive adversaries. Using their wits and agility, they excel in stealth and deception.",
   },
   {
     id: 5,
@@ -213,6 +221,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subClassDesc: "you choose a path that shapes the nature of your rage. ",
     subfeatLevels: [3, 6, 10, 14],
     spellCaster: false,
+    flavorText:
+      "Barbarians are fierce warriors who draw their power from a primal connection to the spirits of nature and the world around them to fuel an unquenchable rage.",
   },
   {
     id: 6,
@@ -275,6 +285,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 15, 16, 18, 19, 19, 20, 22, 22, 22,
     ], // lvl 1-20
     casterTypeId: 1,
+    flavorText:
+      "Bards are the masters of song, speech, and the magic they contain. They use their talents to inspire allies, demoralize foes, manipulate minds, create illusions, and even heal wounds.",
   },
   {
     id: 7,
@@ -329,6 +341,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     ritualCaster: true,
     cantripsKnown: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], // lvl 1-20\
     casterTypeId: 1,
+    flavorText:
+      "Druids are the embodiment of nature's resilience, cunning, and fury. They claim no mastery over nature, but see themselves as extensions of nature's indomitable will.",
   },
   {
     id: 8,
@@ -362,6 +376,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "you choose a monastic tradition that you dedicate yourself to. ",
     subfeatLevels: [3, 6, 11, 17],
     spellCaster: false,
+    flavorText:
+      "Monks are martial artists who use ki to perform amazing feats. They are masters of unarmed combat, and they are known for their ability to catch arrows, dodge blows, and move with extraordinary speed.",
   },
   {
     id: 9,
@@ -407,6 +423,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     spellCastingAbility: Ability.CHA,
     spellFocus: "holy symbol",
     casterTypeId: 2,
+    flavorText:
+      "Paladins are holy warriors bound to a sacred oath, using their divine magic to heal the wounded, bless the righteous, and smite the wicked.",
   },
   {
     id: 10,
@@ -451,6 +469,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       0, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11,
     ], // lvl 1-20
     casterTypeId: 2,
+    flavorText:
+      "Rangers are hunters and wilderness warriors who use their knowledge of the land and their fighting skills to protect the wild places of the world.",
   },
   {
     id: 11,
@@ -495,6 +515,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     ], // lvl 1-20
     cantripsKnown: [4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], // lvl 1-20
     casterTypeId: 1,
+    flavorText:
+      "Sorcerers are spellcasters who draw on innate magic. They are the masters of the arcane, using their knowledge and power to cast spells that can change the world around them.",
   },
   {
     id: 12,
@@ -541,6 +563,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     displaySpellList: false,
 
     casterTypeId: 5,
+    flavorText:
+      "Warlocks are wielders of magic who have forged a pact with an otherworldly being. Whether it's a demon, a devil, a fey, or some other powerful entity, warlocks draw their power from their patron.",
   },
 ];
 export default Classes;

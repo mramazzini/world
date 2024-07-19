@@ -51,12 +51,12 @@ const SelectSubclassPage = () => {
         <table className="table-zebra table-sm w-full">
           <thead>
             <tr>
-              <th className="text-left bg-black/20 w-[5%] ">Name</th>
-              <th className="text-left bg-black/20 w-[60%] hidden md:table-cell">
+              <th className="text-left bg-black/20 w-[15%] ">Name</th>
+              <th className="text-left bg-black/20 w-[50%] hidden md:table-cell">
                 Description
               </th>
-              <th className="text-left bg-black/20 w-[20%]">Source</th>
-              <th className="text-left bg-black/20 w-[10%] hidden sm:table-cell">
+              <th className="text-left bg-black/20 w-[10%]">Source</th>
+              <th className="text-left bg-black/20 w-[5%] hidden sm:table-cell">
                 Last Updated
               </th>
             </tr>
@@ -90,7 +90,7 @@ const SelectSubclassPage = () => {
                       </Link>
                     </td>
                     <td className="hidden md:table-cell">
-                      <p className="italic line-clamp-2"> {item.description}</p>
+                      <p className="italic line-clamp-2"> {item.flavorText}</p>
                     </td>
                     <td>
                       <p className="line-clamp-2"> {item.source}</p>

@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar/Navbar";
-import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// export const metadata: Metadata = {
-//   title: "Dnd Wiki",
-//   description: "A wiki for all things DnD",
-// };
+export const metadata: Metadata = {
+  title: "Max's Dnd Wiki",
+  description: "A wiki for all things DnD",
+};
 
 export default function RootLayout({
   children,
@@ -18,22 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <meta
-          key={"meta"}
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        />
-        {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-          rel="stylesheet"
-        /> */}
-      </Head>
-      <body className={`${inter.className} w-screen h-screen`}>
-        <Navbar />
-        {children}
+      <body
+        className={`${inter.className} w-screen flex flex-col items-center`}
+      >
+        <div className="max-w-[1800px] w-full">
+          <Navbar />
+          {children}
+        </div>
       </body>
     </html>
   );

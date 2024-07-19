@@ -7,6 +7,7 @@ import {
   SubClass,
   SubClassFeature,
 } from "@prisma/client";
+import { StyledString } from "next/dist/build/swc";
 import { Input } from "postcss";
 
 export enum Pages {
@@ -23,7 +24,7 @@ export enum Pages {
 export interface DBmetaData {
   id: number;
   name: string;
-  description: string;
+  flavorText: string;
   updatedAt: Date;
   subClassName?: string;
   source: string;

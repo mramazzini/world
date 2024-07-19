@@ -62,6 +62,8 @@ const createUser = async (prisma: PrismaClient) => {
       source: "Maxy",
       userId: 1,
       displaySpellList: false,
+      flavorText:
+        "The Alchemist is a master of the alchemical arts, using their knowledge to create powerful solutions that can heal, harm, or transform.",
     },
   });
   //custom fields
