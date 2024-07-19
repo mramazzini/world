@@ -61,166 +61,191 @@ const druidSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
       "Your mystical connection to the land infuses you with the ability to cast certain spells. At 3rd, 5th, 7th, and 9th level you gain access to circle spells connected to the land where you became a druid. Choose that land – arctic, coast, desert, forest, grassland, mountain, swamp, or Underdark – and consult the associated list of spells.\n\nOnce you gain access to a circle spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day. If you gain access to a spell that doesn't appear on the druid spell list, the spell is nonetheless a druid spell for you.",
     subClassId: ids.land,
     levels: [3, 5, 7, 9],
+
     extendedTable: [
       {
-        Arctic: [
-          {
-            "Druid Level": "3rd",
-            "Circle Spells": "Hold Person, Spike Growth",
-          },
-          {
-            "Druid Level": "5th",
-            "Circle Spells": "Sleet Storm, Slow",
-          },
-          {
-            "Druid Level": "7th",
-            "Circle Spells": "Freedom of Movement, Ice Storm",
-          },
-          {
-            "Druid Level": "9th",
-            "Circle Spells": "Commune with Nature, Cone of Cold",
-          },
-        ],
+        Arctic: {
+          headers: ["Druid Level", "Circle Spells"],
+          data: [
+            {
+              "Druid Level": "3rd",
+              "Circle Spells": "Hold Person, Spike Growth",
+            },
+            {
+              "Druid Level": "5th",
+              "Circle Spells": "Sleet Storm, Slow",
+            },
+            {
+              "Druid Level": "7th",
+              "Circle Spells": "Freedom of Movement, Ice Storm",
+            },
+            {
+              "Druid Level": "9th",
+              "Circle Spells": "Commune with Nature, Cone of Cold",
+            },
+          ],
+        },
       },
       {
-        Coast: [
-          {
-            "Druid Level": "3rd",
-            "Circle Spells": "Mirror Image, Misty Step",
-          },
-          {
-            "Druid Level": "5th",
-            "Circle Spells": "Water Breathing, Water Walk",
-          },
-          {
-            "Druid Level": "7th",
-            "Circle Spells": "Control Water, Freedom of Movement",
-          },
-          {
-            "Druid Level": "9th",
-            "Circle Spells": "Conjure Elemental, Scrying",
-          },
-        ],
+        Coast: {
+          headers: ["Druid Level", "Circle Spells"],
+          data: [
+            {
+              "Druid Level": "3rd",
+              "Circle Spells": "Mirror Image, Misty Step",
+            },
+            {
+              "Druid Level": "5th",
+              "Circle Spells": "Water Breathing, Water Walk",
+            },
+            {
+              "Druid Level": "7th",
+              "Circle Spells": "Control Water, Freedom of Movement",
+            },
+            {
+              "Druid Level": "9th",
+              "Circle Spells": "Conjure Elemental, Scrying",
+            },
+          ],
+        },
       },
       {
-        Desert: [
-          {
-            "Druid Level": "3rd",
-            "Circle Spells": "Blur, Silence",
-          },
-          {
-            "Druid Level": "5th",
-            "Circle Spells": "Create Food and Water, Protection from Energy",
-          },
-          {
-            "Druid Level": "7th",
-            "Circle Spells": "Blight, Hallucinatory Terrain",
-          },
-          {
-            "Druid Level": "9th",
-            "Circle Spells": "Insect Plague, Wall of Stone",
-          },
-        ],
+        Desert: {
+          headers: ["Druid Level", "Circle Spells"],
+          data: [
+            {
+              "Druid Level": "3rd",
+              "Circle Spells": "Blur, Silence",
+            },
+            {
+              "Druid Level": "5th",
+              "Circle Spells": "Create Food and Water, Protection from Energy",
+            },
+            {
+              "Druid Level": "7th",
+              "Circle Spells": "Blight, Hallucinatory Terrain",
+            },
+            {
+              "Druid Level": "9th",
+              "Circle Spells": "Insect Plague, Wall of Stone",
+            },
+          ],
+        },
       },
       {
-        Forest: [
-          {
-            "Druid Level": "3rd",
-            "Circle Spells": "Barkskin, Spider Climb",
-          },
-          {
-            "Druid Level": "5th",
-            "Circle Spells": "Call Lightning, Plant Growth",
-          },
-          {
-            "Druid Level": "7th",
-            "Circle Spells": "Divination, Freedom of Movement",
-          },
-          {
-            "Druid Level": "9th",
-            "Circle Spells": "Commune with Nature, Tree Stride",
-          },
-        ],
+        Forest: {
+          headers: ["Druid Level", "Circle Spells"],
+          data: [
+            {
+              "Druid Level": "3rd",
+              "Circle Spells": "Barkskin, Spider Climb",
+            },
+            {
+              "Druid Level": "5th",
+              "Circle Spells": "Call Lightning, Plant Growth",
+            },
+            {
+              "Druid Level": "7th",
+              "Circle Spells": "Divination, Freedom of Movement",
+            },
+            {
+              "Druid Level": "9th",
+              "Circle Spells": "Commune with Nature, Tree Stride",
+            },
+          ],
+        },
       },
       {
-        Grassland: [
-          {
-            "Druid Level": "3rd",
-            "Circle Spells": "Invisibility, Pass without Trace",
-          },
-          {
-            "Druid Level": "5th",
-            "Circle Spells": "Daylight, Haste",
-          },
-          {
-            "Druid Level": "7th",
-            "Circle Spells": "Divination, Freedom of Movement",
-          },
-          {
-            "Druid Level": "9th",
-            "Circle Spells": "Dream, Insect Plague",
-          },
-        ],
+        Grassland: {
+          headers: ["Druid Level", "Circle Spells"],
+          data: [
+            {
+              "Druid Level": "3rd",
+              "Circle Spells": "Invisibility, Pass without Trace",
+            },
+            {
+              "Druid Level": "5th",
+              "Circle Spells": "Daylight, Haste",
+            },
+            {
+              "Druid Level": "7th",
+              "Circle Spells": "Divination, Freedom of Movement",
+            },
+            {
+              "Druid Level": "9th",
+              "Circle Spells": "Dream, Insect Plague",
+            },
+          ],
+        },
       },
       {
-        Mountain: [
-          {
-            "Druid Level": "3rd",
-            "Circle Spells": "Spider Climb, Spike Growth",
-          },
-          {
-            "Druid Level": "5th",
-            "Circle Spells": "Lightning Bolt, Meld into Stone",
-          },
-          {
-            "Druid Level": "7th",
-            "Circle Spells": "Stone Shape, Stoneskin",
-          },
-          {
-            "Druid Level": "9th",
-            "Circle Spells": "Passwall, Wall of Stone",
-          },
-        ],
+        Mountain: {
+          headers: ["Druid Level", "Circle Spells"],
+          data: [
+            {
+              "Druid Level": "3rd",
+              "Circle Spells": "Spider Climb, Spike Growth",
+            },
+            {
+              "Druid Level": "5th",
+              "Circle Spells": "Lightning Bolt, Meld into Stone",
+            },
+            {
+              "Druid Level": "7th",
+              "Circle Spells": "Stone Shape, Stoneskin",
+            },
+            {
+              "Druid Level": "9th",
+              "Circle Spells": "Passwall, Wall of Stone",
+            },
+          ],
+        },
       },
       {
-        Swamp: [
-          {
-            "Druid Level": "3rd",
-            "Circle Spells": "Darkness, Melf's Acid Arrow",
-          },
-          {
-            "Druid Level": "5th",
-            "Circle Spells": "Water Walk, Stinking Cloud",
-          },
-          {
-            "Druid Level": "7th",
-            "Circle Spells": "Freedom of Movement, Locate Creature",
-          },
-          {
-            "Druid Level": "9th",
-            "Circle Spells": "Insect Plague, Scrying",
-          },
-        ],
+        Swamp: {
+          headers: ["Druid Level", "Circle Spells"],
+          data: [
+            {
+              "Druid Level": "3rd",
+              "Circle Spells": "Darkness, Melf's Acid Arrow",
+            },
+            {
+              "Druid Level": "5th",
+              "Circle Spells": "Water Walk, Stinking Cloud",
+            },
+            {
+              "Druid Level": "7th",
+              "Circle Spells": "Freedom of Movement, Locate Creature",
+            },
+            {
+              "Druid Level": "9th",
+              "Circle Spells": "Insect Plague, Scrying",
+            },
+          ],
+        },
       },
       {
-        Underdark: [
-          {
-            "Druid Level": "3rd",
-            "Circle Spells": "Spider Climb, Web",
-          },
-          {
-            "Druid Level": "5th",
-            "Circle Spells": "Gaseous Form, Stinking Cloud",
-          },
-          {
-            "Druid Level": "7th",
-            "Circle Spells": "Greater Invisibility, Stone Shape",
-          },
-          {
-            "Druid Level": "9th",
-            "Circle Spells": "Cloudkill, Insect Plague",
-          },
-        ],
+        Underdark: {
+          headers: ["Druid Level", "Circle Spells"],
+          data: [
+            {
+              "Druid Level": "3rd",
+              "Circle Spells": "Spider Climb, Web",
+            },
+            {
+              "Druid Level": "5th",
+              "Circle Spells": "Gaseous Form, Stinking Cloud",
+            },
+            {
+              "Druid Level": "7th",
+              "Circle Spells": "Greater Invisibility, Stone Shape",
+            },
+            {
+              "Druid Level": "9th",
+              "Circle Spells": "Cloudkill, Insect Plague",
+            },
+          ],
+        },
       },
     ],
   },

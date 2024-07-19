@@ -7,6 +7,14 @@ generator client {
   provider = "prisma-client-js"
 }
 
+/// Always after the prisma-client-js generator
+generator json {
+  provider = "prisma-json-types-generator"
+  // namespace = "PrismaJson"
+  // clientOutput = "<finds it automatically>"
+  // (./ -> relative to schema, or an importable path to require() it)
+}
+
 datasource db {
   provider  = "postgresql"
   url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
@@ -243,13 +251,15 @@ model CasterType {
 }
 
 model Feature {
-  id                  Int      @id @default(autoincrement())
-  name                String
-  description         String
-  levels              Int[]
-  options             String[] // If the feature has options to choose from, list here
-  table               String[] // optionally dedicate a column in the table
-  extendedTable       Json[] // This table will be rendered with the feature
+  id            Int      @id @default(autoincrement())
+  name          String
+  description   String
+  levels        Int[]
+  options       String[] // If the feature has options to choose from, list here
+  table         String[] // optionally dedicate a column in the table
+  /// [Table]
+  extendedTable Json[] // This table will be rendered with the feature
+
   spellCastingFeature Boolean  @default(false)
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
@@ -263,11 +273,13 @@ model SubClassFeature {
   description   String
   levels        Int[]
   options       String[] // If the feature has options to choose from, list here
+  /// [Table]
   extendedTable Json[] // This table will be rendered with the feature
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  SubClass      SubClass @relation(fields: [subClassId], references: [id])
-  subClassId    Int
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  SubClass   SubClass @relation(fields: [subClassId], references: [id])
+  subClassId Int
 }
 
 model Race {

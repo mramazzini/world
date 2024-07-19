@@ -15,6 +15,7 @@ import {
   WeaponToProperty,
 } from "@prisma/client";
 import createUser from "./seeds/User";
+import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
 
 const db = new PrismaClient();
 const seed = async () => {
@@ -75,6 +76,14 @@ const seed = async () => {
         cerr("Feature missing levels field:", Feature.name);
         return;
       }
+      // verify extendedTable integrity
+      if (Feature.extendedTable) {
+        if (
+          !verifyTableIntegrity(Feature.extendedTable as PrismaJson.Table[])
+        ) {
+          return;
+        }
+      }
       await db.feature.create({
         data: Feature,
       });
@@ -96,6 +105,7 @@ const seed = async () => {
         cerr("Custom field missing classId:", CustomField.name);
         return;
       }
+
       await db.customField.create({
         data: CustomField,
       });
@@ -143,6 +153,16 @@ const seed = async () => {
       if (!SubclassFeature.levels) {
         cerr("Subclass feature missing levels field:", SubclassFeature.name);
         return;
+      }
+      //verify extendedTable integrity
+      if (SubclassFeature.extendedTable) {
+        if (
+          !verifyTableIntegrity(
+            SubclassFeature.extendedTable as PrismaJson.Table[]
+          )
+        ) {
+          return;
+        }
       }
       await db.subClassFeature.create({
         data: SubclassFeature,

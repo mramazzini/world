@@ -32,12 +32,34 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
       "Starting at 2nd level, you can use your Channel Divinity to abjure otherworldly creatures.\n\nAs an action, you present your holy symbol, and one celestial, elemental, fey, or fiend of your choice that is within 30 feet of you must make a Wisdom saving throw, provided that the creature can see or hear you. If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage.\n\nA turned creature must spend its turns trying to move as far away from you as it can, and it can't willingly end its move in a space within 30 feet of you. It also can't take reactions. For its action, it can only use the Dash action or try to escape from an effect that prevents it from moving. If there's nowhere to move, the creature can use the Dodge action.\n\nAfter you reach 5th level, when a creature fails its saving throw against your Arcane Abjuration feature, the creature is banished for 1 minute (as in the Banishment spell, no concentration required) if it isn't on its plane of origin and its challenge rating is at or below a certain threshold, as shown on the Arcane Banishment table.",
     subClassId: ids.arcana,
     levels: [2, 5, 8, 11, 14, 17],
-    options: [
-      "**5nd level.** CR 1/2 or lower",
-      "**8th level.** CR 1 or lower",
-      "**11th level.** CR 2 or lower",
-      "**14th level.** CR 3 or lower",
-      "**17th level.** CR 4 or lower",
+    extendedTable: [
+      {
+        "Arcane Banishment": {
+          headers: ["Cleric Level", "Creature CR"],
+          data: [
+            {
+              "Cleric Level": "5th",
+              "Creature CR": "1/2",
+            },
+            {
+              "Cleric Level": "8th",
+              "Creature CR": "1",
+            },
+            {
+              "Cleric Level": "11th",
+              "Creature CR": "2",
+            },
+            {
+              "Cleric Level": "14th",
+              "Creature CR": "3",
+            },
+            {
+              "Cleric Level": "17th",
+              "Creature CR": "4",
+            },
+          ],
+        },
+      },
     ],
   },
   {
@@ -234,7 +256,7 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     subClassId: ids.knowledge,
     levels: [17],
     options: [
-      "**Object Reaing.** Holding an object as you meditate, you can see visions of the object's previous owner. After meditating for 1 minute, you learn how the owner acquired and lost the object, as well as the most recent significant event involving the object and that owner. If the object was owned by another creature in the recent past (within a number of days equal to your Wisdom score), you can spend 1 additional minute for each owner to learn the same information about that creature.",
+      "**Object Reading.** Holding an object as you meditate, you can see visions of the object's previous owner. After meditating for 1 minute, you learn how the owner acquired and lost the object, as well as the most recent significant event involving the object and that owner. If the object was owned by another creature in the recent past (within a number of days equal to your Wisdom score), you can spend 1 additional minute for each owner to learn the same information about that creature.",
       "**Area Reading.** As you meditate, you see visions of recent events in your immediate vicinity (a room, street, tunnel, clearing, or the like, up to a 50-foot cube), going back a number of days equal to your Wisdom score. For each minute you meditate, you learn about one significant event, beginning with the most recent. Significant events typically involve powerful emotions, such as battles and betrayals, marriages and murders, births and funerals. However, they might also include more mundane events that are nevertheless important in your current situation.",
     ],
   },

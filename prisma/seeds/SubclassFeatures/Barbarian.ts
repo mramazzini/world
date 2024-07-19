@@ -77,26 +77,28 @@ const BarbarianSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     name: "Form of the Beast",
     description:
       "Starting when you choose this path at 3rd level, when you enter your rage, you can transform, revealing the bestial power within you. Until the rage ends, you manifest a natural weapon. It counts as a simple melee weapon for you, and you add your Strength modifier to the attack and damage rolls when you attack with it, as normal.\n\nYou choose the weapon’s form each time you rage:",
-
     extendedTable: [
       {
-        "": [
-          {
-            Form: "Bite",
-            Description:
-              "Your mouth transforms into a bestial muzzle or great mandibles (your choice). It deals 1d8 piercing damage on a hit. Once on each of your turns when you damage a creature with this bite, you regain a number of hit points equal to your proficiency bonus, provided you have less than half your hit points when you hit.",
-          },
-          {
-            Form: "Claws",
-            Description:
-              "Each of your hands transforms into a claw, which you can use as a weapon if it’s empty. It deals 1d6 slashing damage on a hit. Once on each of your turns when you attack with a claw using the Attack action, you can make one additional claw attack as part of the same action.",
-          },
-          {
-            Form: "Tail",
-            Description:
-              "You grow a lashing, spiny tail, which deals 1d8 piercing damage on a hit and has the reach property. If a creature you can see within 10 feet of you hits you with an attack roll, you can use your reaction to swipe your tail and roll a d8, applying a bonus to your AC equal to the number rolled, potentially causing the attack to miss you.",
-          },
-        ],
+        "": {
+          headers: ["Form", "Description"],
+          data: [
+            {
+              Form: "Bite",
+              Description:
+                "Your mouth transforms into a bestial muzzle or great mandibles (your choice). It deals 1d8 piercing damage on a hit. Once on each of your turns when you damage a creature with this bite, you regain a number of hit points equal to your proficiency bonus, provided you have less than half your hit points when you hit.",
+            },
+            {
+              Form: "Claws",
+              Description:
+                "Each of your hands transforms into a claw, which you can use as a weapon if it’s empty. It deals 1d6 slashing damage on a hit. Once on each of your turns when you attack with a claw using the Attack action, you can make one additional claw attack as part of the same action.",
+            },
+            {
+              Form: "Tail",
+              Description:
+                "You grow a lashing, spiny tail, which deals 1d8 piercing damage on a hit and has the reach property. If a creature you can see within 10 feet of you hits you with an attack roll, you can use your reaction to swipe your tail and roll a d8, applying a bonus to your AC equal to the number rolled, potentially causing the attack to miss you.",
+            },
+          ],
+        },
       },
     ],
     subClassId: ids.beast,
@@ -209,23 +211,26 @@ const BarbarianSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
       "When you select this path at 3rd level, you emanate a stormy, magical aura while you rage. The aura extends 10 feet from you in every direction, but not through total cover.\n\nYour aura has an effect that activates when you enter your rage, and you can activate the effect again on each of your turns as a bonus action. Choose desert, sea, or tundra. Your aura's effect depends on that chosen environment, as detailed below. You can change your environment choice whenever you gain a level in this class.\n\nIf your aura's effects require a saving throw, the DC equals 8 + your proficiency bonus + your Constitution modifier.",
     extendedTable: [
       {
-        "": [
-          {
-            Environment: "Desert",
-            Effect:
-              "At the start of each of your turns, each creature of your choice in your aura takes fire damage equal to half your Barbarian level, and you gain a bonus to the damage roll equal to your Constitution modifier.",
-          },
-          {
-            Environment: "Sea",
-            Effect:
-              "At the start of each of your turns, you can choose one creature in your aura (including you, if you so desire). That creature gains temporary hit points equal to your Constitution modifier (minimum of 1).",
-          },
-          {
-            Environment: "Tundra",
-            Effect:
-              "When you enter your rage, you can choose one creature you can see in your aura. That creature gains temporary hit points equal to your level in this class.",
-          },
-        ],
+        "": {
+          headers: ["Environment", "Effect"],
+          data: [
+            {
+              Environment: "Desert",
+              Effect:
+                "At the start of each of your turns, each creature of your choice in your aura takes fire damage equal to half your Barbarian level, and you gain a bonus to the damage roll equal to your Constitution modifier.",
+            },
+            {
+              Environment: "Sea",
+              Effect:
+                "At the start of each of your turns, you can choose one creature in your aura (including you, if you so desire). That creature gains temporary hit points equal to your Constitution modifier (minimum of 1).",
+            },
+            {
+              Environment: "Tundra",
+              Effect:
+                "When you enter your rage, you can choose one creature you can see in your aura. That creature gains temporary hit points equal to your level in this class.",
+            },
+          ],
+        },
       },
     ],
     subClassId: ids.stormHerald,
@@ -235,10 +240,30 @@ const BarbarianSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     name: "Storm Soul",
     description:
       "At 6th level, the storm grants you benefits even when your aura isn't active. The benefits are based on the environment you chose for your Storm Aura.",
-    options: [
-      "**Desert.** You gain resistance to fire damage, and you don’t suffer the effects of extreme heat, as described in the Dungeon Master's Guide. Moreover, as an action, you can touch a flammable object that isn't being worn or carried by anyone else and set it on fire.",
-      "**Sea.** You gain resistance to lightning damage, and you can breathe underwater. You also gain a swimming speed of 30 feet.",
-      "**Tundra.** You gain resistance to cold damage, and you don’t suffer the effects of extreme cold, as described in the Dungeon Master's Guide. Moreover, as an action, you can touch water and turn a 5-foot cube of it into ice, which melts after 1 minute. This action fails if a creature is in the cube.",
+
+    extendedTable: [
+      {
+        "": {
+          headers: ["Environment", "Benefits"],
+          data: [
+            {
+              Environment: "Desert",
+              Benefits:
+                "You gain resistance to fire damage, and you don’t suffer the effects of extreme heat, as described in the Dungeon Master's Guide. Moreover, as an action, you can touch a flammable object that isn't being worn or carried by anyone else and set it on fire.",
+            },
+            {
+              Environment: "Sea",
+              Benefits:
+                "You gain resistance to lightning damage, and you can breathe underwater. You also gain a swimming speed of 30 feet.",
+            },
+            {
+              Environment: "Tundra",
+              Benefits:
+                "You gain resistance to cold damage, and you don’t suffer the effects of extreme cold, as described in the Dungeon Master's Guide. Moreover, as an action, you can touch water and turn a 5-foot cube of it into ice, which melts after 1 minute. This action fails if a creature is in the cube.",
+            },
+          ],
+        },
+      },
     ],
     subClassId: ids.stormHerald,
     levels: [6],
@@ -254,10 +279,30 @@ const BarbarianSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     name: "Raging Storm",
     description:
       "At 14th level, the power of the storm you channel grows mightier, lashing out at your foes. The effect is based on the environment you chose for your Storm Aura.",
-    options: [
-      "**Desert.** Immediately after a creature in your aura hits you with an attack, you can use your reaction to force that creature to make a Dexterity saving throw. On a failed save, the creature takes fire damage equal to half your Barbarian level.",
-      "**Sea.** When you hit a creature in your aura with an attack, you can use your reaction to force that creature to make a Strength saving throw. On a failed save, the creature is knocked prone, as if struck by a wave.",
-      "**Tundra.** Whenever the effect of your Storm Aura is activated, you can choose one creature you can see in the aura. That creature must succeed on a Strength saving throw, or its speed is reduced to 0 until the start of your next turn, as magical frost covers it.",
+
+    extendedTable: [
+      {
+        "": {
+          headers: ["Environment", "Effect"],
+          data: [
+            {
+              Environment: "Desert",
+              Effect:
+                "Immediately after a creature in your aura hits you with an attack, you can use your reaction to force that creature to make a Dexterity saving throw. On a failed save, the creature takes fire damage equal to half your Barbarian level.",
+            },
+            {
+              Environment: "Sea",
+              Effect:
+                "When you hit a creature in your aura with an attack, you can use your reaction to force that creature to make a Strength saving throw. On a failed save, the creature is knocked prone, as if struck by a wave.",
+            },
+            {
+              Environment: "Tundra",
+              Effect:
+                "Whenever the effect of your Storm Aura is activated, you can choose one creature you can see in the aura. That creature must succeed on a Strength saving throw, or its speed is reduced to 0 until the start of your next turn, as magical frost covers it.",
+            },
+          ],
+        },
+      },
     ],
     subClassId: ids.stormHerald,
     levels: [14],
@@ -274,12 +319,40 @@ const BarbarianSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     name: "Totem Spirit",
     description:
       "At 3rd level, when you adopt this path, you choose a totem spirit and gain its feature. You must make or acquire a physical totem object – an amulet or similar adornment – that incorporates fur or feathers, claws, teeth, or bones of the totem animal. At your option, you also gain minor physical attributes that are reminiscent of your totem spirit. For example, if you have a bear totem spirit, you might be unusually hairy and thick-skinned, or if your totem is the eagle, your eyes turn bright yellow.\n\nYour totem animal might be an animal related to those listed here but more appropriate to your homeland. For example, you could choose a hawk or vulture in place of an eagle.",
-    options: [
-      "**Bear.** While raging, you have resistance to all damage except psychic damage. The spirit of the bear makes you tough enough to stand up to any punishment.",
-      "**Eagle.**  While you're raging and aren't wearing heavy armor, other creatures have disadvantage on opportunity attack rolls against you, and you can use the Dash action as a bonus action on your turn. The spirit of the eagle makes you into a predator who can weave through the fray with ease.",
-      "**Elk.** While you're raging and aren't wearing heavy armor, your walking speed increases by 15 feet. The spirit of the elk makes you extraordinarily swift.",
-      "**Tiger.** While raging, you can add 10 feet to your long jump distance and 3 feet to your high jump distance. The spirit of the tiger empowers your leaps.",
-      "**Wolf.** While you're raging, your friends have advantage on melee attack rolls against any creature within 5 feet of you that is hostile to you. The spirit of the wolf makes you a leader of hunters.",
+
+    extendedTable: [
+      {
+        "": {
+          headers: ["Totem Spirit", "Feature"],
+          data: [
+            {
+              "Totem Spirit": "Bear",
+              Feature:
+                "While raging, you have resistance to all damage except psychic damage. The spirit of the bear makes you tough enough to stand up to any punishment.",
+            },
+            {
+              "Totem Spirit": "Eagle",
+              Feature:
+                "While you're raging and aren't wearing heavy armor, other creatures have disadvantage on opportunity attack rolls against you, and you can use the Dash action as a bonus action on your turn. The spirit of the eagle makes you into a predator who can weave through the fray with ease.",
+            },
+            {
+              "Totem Spirit": "Elk",
+              Feature:
+                "While you're raging and aren't wearing heavy armor, your walking speed increases by 15 feet. The spirit of the elk makes you extraordinarily swift.",
+            },
+            {
+              "Totem Spirit": "Tiger",
+              Feature:
+                "While raging, you can add 10 feet to your long jump distance and 3 feet to your high jump distance. The spirit of the tiger empowers your leaps.",
+            },
+            {
+              "Totem Spirit": "Wolf",
+              Feature:
+                "While you're raging, your friends have advantage on melee attack rolls against any creature within 5 feet of you that is hostile to you. The spirit of the wolf makes you a leader of hunters.",
+            },
+          ],
+        },
+      },
     ],
     subClassId: ids.totamWarrior,
     levels: [3],
@@ -288,12 +361,39 @@ const BarbarianSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     name: "Aspect of the Beast",
     description:
       "At 6th level, you gain a magical benefit based on the totem animal of your choice. You can choose the same animal you selected at 3rd level or a different one.",
-    options: [
-      "**Bear.** You gain the might of a bear. Your carrying capacity (including maximum load and maximum lift) is doubled, and you have advantage on Strength checks made to push, pull, lift, or break objects.",
-      "**Eagle.** You gain the eyesight of an eagle. You can see up to 1 mile away with no difficulty, able to discern even fine details as though looking at something no more than 100 feet away from you. Additionally, dim light doesn't impose disadvantage on your Wisdom (Perception) checks.",
-      "**Elk.** Whether mounted or on foot, your travel pace is doubled, as is the pace of up to ten companions while they're within 60 feet of you and you're not incapacitated. The elk spirit helps you roam far and fast.",
-      "**Tiger.** You gain proficiency in two skills from the following list: Athletics, Acrobatics, Stealth, and Survival. The cat spirit hones your survival instincts.",
-      "**Wolf.** You gain the hunting sensibilities of a wolf. You can track other creatures while traveling at a fast pace, and you can move stealthily while traveling at a normal pace.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["Totem Spirit", "Feature"],
+          data: [
+            {
+              "Totem Spirit": "Bear",
+              Feature:
+                "You gain the might of a bear. Your carrying capacity (including maximum load and maximum lift) is doubled, and you have advantage on Strength checks made to push, pull, lift, or break objects.",
+            },
+            {
+              "Totem Spirit": "Eagle",
+              Feature:
+                "You gain the eyesight of an eagle. You can see up to 1 mile away with no difficulty, able to discern even fine details as though looking at something no more than 100 feet away from you. Additionally, dim light doesn't impose disadvantage on your Wisdom (Perception) checks.",
+            },
+            {
+              "Totem Spirit": "Elk",
+              Feature:
+                "Whether mounted or on foot, your travel pace is doubled, as is the pace of up to ten companions while they're within 60 feet of you and you're not incapacitated. The elk spirit helps you roam far and fast.",
+            },
+            {
+              "Totem Spirit": "Tiger",
+              Feature:
+                "You gain proficiency in two skills from the following list: Athletics, Acrobatics, Stealth, and Survival. The cat spirit hones your survival instincts.",
+            },
+            {
+              "Totem Spirit": "Wolf",
+              Feature:
+                "You gain the hunting sensibilities of a wolf. You can track other creatures while traveling at a fast pace, and you can move stealthily while traveling at a normal pace.",
+            },
+          ],
+        },
+      },
     ],
     subClassId: ids.totamWarrior,
     levels: [6],
@@ -309,12 +409,40 @@ const BarbarianSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     name: "Totemic Attunement",
     description:
       "At 14th level, you gain a magical benefit based on a totem animal of your choice. You can choose the same animal you selected previously or a different one.",
-    options: [
-      "**Bear.** While you're raging, any creature within 5 feet of you that's hostile to you has disadvantage on attack rolls against targets other than you or another character with this feature. An enemy is immune to this effect if it can't see or hear you or if it can't be frightened.",
-      "**Eagle.** While raging, you have a flying speed equal to your current walking speed. This benefit works only in short bursts; you fall if you end your turn in the air and nothing else is holding you aloft.",
-      "**Elk.**  While raging, you can use a bonus action during your move to pass through the space of a Large or smaller creature. That creature must succeed on a Strength saving throw (DC 8 + your Strength bonus + your proficiency bonus) or be knocked prone and take bludgeoning damage equal to 1d12 + your Strength modifier.",
-      "**Tiger.** While you're raging, if you move at least 20 feet in a straight line toward a Large or smaller target right before making a melee weapon attack against it, you can use a bonus action to make an additional melee weapon attack against it.",
-      "**Wolf.** While you're raging, you can use a bonus action on your turn to knock a Large or smaller creature prone when you hit it with melee weapon attack.",
+
+    extendedTable: [
+      {
+        "": {
+          headers: ["Totem Spirit", "Feature"],
+          data: [
+            {
+              "Totem Spirit": "Bear",
+              Feature:
+                "While you're raging, any creature within 5 feet of you that's hostile to you has disadvantage on attack rolls against targets other than you or another character with this feature. An enemy is immune to this effect if it can't see or hear you or if it can't be frightened.",
+            },
+            {
+              "Totem Spirit": "Eagle",
+              Feature:
+                "While you're raging, you have a flying speed equal to your current walking speed. This benefit works only in short bursts; you fall if you end your turn in the air and nothing else is holding you aloft.",
+            },
+            {
+              "Totem Spirit": "Elk",
+              Feature:
+                "While you're raging, you can use a bonus action during your move to pass through the space of a Large or smaller creature. That creature must succeed on a Strength saving throw (DC 8 + your Strength bonus + your proficiency bonus) or be knocked prone and take bludgeoning damage equal to 1d12 + your Strength modifier.",
+            },
+            {
+              "Totem Spirit": "Tiger",
+              Feature:
+                "While you're raging, if you move at least 20 feet in a straight line toward a Large or smaller target right before making a melee weapon attack against it, you can use a bonus action to make an additional melee weapon attack against it.",
+            },
+            {
+              "Totem Spirit": "Wolf",
+              Feature:
+                "While you're raging, you can use a bonus action on your turn to knock a Large or smaller creature prone when you hit it with melee weapon attack.",
+            },
+          ],
+        },
+      },
     ],
     subClassId: ids.totamWarrior,
     levels: [14],
@@ -331,15 +459,55 @@ const BarbarianSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     name: "Wild Surge",
     description:
       "Also at 3rd level, the magical energy roiling inside you sometimes erupts from you. When you enter your rage, roll 1d8 to determine the magical effect produced based on the options below.\n\nIf the effect requires a saving throw, the DC equals 8 + your proficiency bonus + your Constitution modifier.",
-    options: [
-      "**1** - Each creature of your choice that you can see within 30 feet of you must succeed on a Constitution saving throw or take 1d12 necrotic damage. You also gain 1d12 temporary hit points.",
-      "**2** - You teleport up to 30 feet to an unoccupied space you can see. Until your rage ends, you can use this effect again on each of your turns as a bonus action.",
-      "**3** - An intangible spirit, which looks like a flumph or a pixie (your choice), appears within 5 feet of one creature of your choice that you can see within 30 feet of you. At the end of the current turn, the spirit explodes, and each creature within 5 feet of it must succeed on a Dexterity saving throw or take 1d6 force damage. Until your rage ends, you can use this effect again, summoning another spirit, on each of your turns as a bonus action.",
-      "**4** - Magic infuses one weapon of your choice that you are holding. Until your rage ends, the weapon's damage type changes to force, and it gains the light and thrown properties, with a normal range of 20 feet and a long range of 60 feet. If the weapon leaves your hand, the weapon reappears in your hand at the end of the current turn.",
-      "**5** - Whenever a creature hits you with an attack roll before your rage ends, that creature takes 1d6 force damage, as magic lashes out in retribution.",
-      "**6** - Until your rage ends, you are surrounded by multicolored, protective lights; you gain a +1 bonus to AC, and while within 10 feet of you, your allies gain the same bonus.",
-      "**7** - Flowers and vines temporarily grow around you; until your rage ends, the ground within 15 feet of you is difficult terrain for your enemies.",
-      "**8** - A bolt of light shoots from your chest. Another creature of your choice that you can see within 30 feet of you must succeed on a Constitution saving throw or take 1d6 radiant damage and be blinded until the start of your next turn. Until your rage ends, you can use this effect again on each of your turns as a bonus action.",
+
+    extendedTable: [
+      {
+        "": {
+          headers: ["Roll", "Effect"],
+          data: [
+            {
+              Roll: "1",
+              Effect:
+                "Each creature of your choice that you can see within 30 feet of you must succeed on a Constitution saving throw or take 1d12 necrotic damage. You also gain 1d12 temporary hit points.",
+            },
+            {
+              Roll: "2",
+              Effect:
+                "You teleport up to 30 feet to an unoccupied space you can see. Until your rage ends, you can use this effect again on each of your turns as a bonus action.",
+            },
+            {
+              Roll: "3",
+              Effect:
+                "An intangible spirit, which looks like a flumph or a pixie (your choice), appears within 5 feet of one creature of your choice that you can see within 30 feet of you. At the end of the current turn, the spirit explodes, and each creature within 5 feet of it must succeed on a Dexterity saving throw or take 1d6 force damage. Until your rage ends, you can use this effect again, summoning another spirit, on each of your turns as a bonus action.",
+            },
+            {
+              Roll: "4",
+              Effect:
+                "Magic infuses one weapon of your choice that you are holding. Until your rage ends, the weapon's damage type changes to force, and it gains the light and thrown properties, with a normal range of 20 feet and a long range of 60 feet. If the weapon leaves your hand, the weapon reappears in your hand at the end of the current turn.",
+            },
+            {
+              Roll: "5",
+              Effect:
+                "Whenever a creature hits you with an attack roll before your rage ends, that creature takes 1d6 force damage, as magic lashes out in retribution.",
+            },
+            {
+              Roll: "6",
+              Effect:
+                "Until your rage ends, you are surrounded by multicolored, protective lights; you gain a +1 bonus to AC, and while within 10 feet of you, your allies gain the same bonus.",
+            },
+            {
+              Roll: "7",
+              Effect:
+                "Flowers and vines temporarily grow around you; until your rage ends, the ground within 15 feet of you is difficult terrain for your enemies.",
+            },
+            {
+              Roll: "8",
+              Effect:
+                "A bolt of light shoots from your chest. Another creature of your choice that you can see within 30 feet of you must succeed on a Constitution saving throw or take 1d6 radiant damage and be blinded until the start of your next turn. Until your rage ends, you can use this effect again on each of your turns as a bonus action",
+            },
+          ],
+        },
+      },
     ],
     subClassId: ids.wildMagic,
     levels: [3],

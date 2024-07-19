@@ -83,9 +83,9 @@ const SubClassDisplay = ({ subClass }: Props) => {
               </tbody>
             </table>
           </div>
+          <div className="divider"></div>
         </>
       )}
-      <div className="divider"></div>
 
       {numberArray(1, 20).map((num) => {
         //grab features for the current level

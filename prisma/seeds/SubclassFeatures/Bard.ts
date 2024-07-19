@@ -57,6 +57,62 @@ const BardSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     
     **Actions**
     **Force Empowered Slam:** *Melee Weapon Attack:* your spell attack modifier to hit, reach 5 ft., one target you can see. *Hit:* 1d10 + PB force damage.`,
+    extendedTable: [
+      {
+        "": {
+          headers: ["STR", "DEX", "CON", "INT", "WIS", "CHA"],
+          data: [
+            { STR: "14", DEX: "18", CON: "14", INT: "3", WIS: "14", CHA: "6" },
+          ],
+        },
+      },
+      {
+        "Dancing Item": {
+          headers: ["Stat", "Value"],
+          data: [
+            { Stat: "Armor Class", Value: "16 (natural armor)" },
+            {
+              Stat: "Hit Points",
+              Value: "equal to 10 + 5 times your bard level",
+            },
+            { Stat: "Speed", Value: "30 ft., fly 30 ft. (hover)" },
+            { Stat: "Damage Immunities", Value: "poison, psychic" },
+            {
+              Stat: "Condition Immunities",
+              Value: "charmed, exhaustion, poisoned, frightened",
+            },
+            {
+              Stat: "Senses",
+              Value: "darkvision 60 ft., passive Perception 10",
+            },
+            { Stat: "Languages", Value: "understands the languages you speak" },
+            { Stat: "Proficiency Bonus", Value: "equal to your own" },
+            {
+              Stat: "Immutable Form",
+              Value:
+                "The item is immune to any spell or effect that would alter its form.",
+            },
+            {
+              Stat: "Irrepresable Dance",
+              Value:
+                "When any creature starts its turn within 10 feet of the item, the item can increase or decrease (your choice) the walking speed of that creature by 10 feet until the end of the turn, provided the item isn't incapacitated.",
+            },
+          ],
+        },
+      },
+      {
+        Actions: {
+          headers: ["Name", "Description"],
+          data: [
+            {
+              Name: "Force Empowered Slam",
+              Description:
+                "*Melee Weapon Attack:* your spell attack modifier to hit, reach 5 ft., one target you can see. *Hit:* 1d10 + PB force damage.",
+            },
+          ],
+        },
+      },
+    ],
     subClassId: ids.creation,
     levels: [6],
   },
@@ -189,19 +245,86 @@ const BardSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
       "At 3rd level, you reach out to spirits who tell their tales through you. While you are holding your Spiritual Focus, you can use a bonus action to expend one use of your Bardic Inspiration and roll on the options below using your Bardic Inspiration die to determine the tale the spirits direct you to tell. You retain the tale in mind until you bestow the tale’s effect or you finish a short or long rest.\n\nYou can use an action to choose one creature you can see within 30 feet of you (this can be you) to be the target of the tale’s effect. Once you do so, you can’t bestow the tale’s effect again until you roll it again.\n\nYou can retain only one of these tales in mind at a time, and rolling on one of the options below immediately ends the effect of the previous tale.\n\nIf the tale requires a saving throw, the DC equals your spell save DC.",
     subClassId: ids.spirits,
     levels: [3],
-    options: [
-      "**1: Tale of the Clever Animal.** For the next 10 minutes, whenever the target makes an Intelligence, a Wisdom, or a Charisma check, the target can roll an extra die immediately after rolling the d20 and add the extra die's number to the check. The extra die is the same type as your Bardic Inspiration die.",
-      "**2: Tale of the Renowned Duelist.**You make a melee spell attack against the target. On a hit, the target takes force damage equal to two rolls of your Bardic Inspiration die + your Charisma modifier.",
-      "**3:Tale of the Beloved Friends.** The target and another creature of its choice it can see within 5 feet of it gains temporary hit points equal to a roll of your Bardic Inspiration die + your Charisma modifier",
-      "**4: Tale of the Runaway.** The target can immediately use its reaction to teleport up to 30 feet to an unoccupied space it can see. When the target teleports, it can choose a number of creatures it can see within 30 feet of it up to your Charisma modifier (minimum of 0) to immediately use the same reaction.",
-      "**5: Tale of the Avenger.** For 1 minute, any creature that hits the target with a melee attack takes force damage equal to a roll of your Bardic Inspiration die.",
-      "**6: Tale of the Traveler.** The target gains temporary hit points equal to a roll of your Bardic Inspiration die + your bard level. While it has these temporary hit points, the target’s walking speed increases by 10 feet and it gains a +1 bonus to its AC.",
-      "**7: Tale of the Beguiler.** The target must succeed on a Wisdom saving throw or take psychic damage equal to two rolls of your Bardic Inspiration die, and the target is incapacitated until the end of its next turn.",
-      "**8: Tale of the Phantom** The target becomes invisible until the end of its next turn or until it hits a creature with an attack. If it hits a creature with an attack during this invisibility, the creature it hits takes necrotic damage equal to a roll of your Bardic Inspiration die and is frightened of the target until the end of the frightened creature's next turn.",
-      "**9: Tale of the Brute.** Each creature of the target’s choice it can see within 30 feet of it must make a Strength saving throw. On a failed save, a creature takes thunder damage equal to three rolls of your Bardic Inspiration die and is knocked prone. A creature that succeeds on its saving throw takes half as much damage and isn’t knocked prone.",
-      "**10: Tale of the Dragon.** The target spews fire from the mouth in a 30-foot cone. Each creature in that area must make a Dexterity saving throw, taking fire damage equal to four rolls of your Bardic Inspiration die on a failed save, or half as much damage on a successful one.",
-      "**11: Tale of the Angel.** The target regains hit points equal to two rolls of your Bardic Inspiration die + your Charisma modifier, and you end one condition from the following list affecting the target: blinded, deafened, paralyzed, petrified, or poisoned.",
-      "**12: Tale of the Mind-Bender.** You envoke an incomprehensible fable from an otherworldly being. The target must succeed on an Intelligence saving throw or take psychic damage equal to three rolls of your Bardic Inspiration die and be stunned until the end of its next turn.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["Roll", "Effect", "Description"],
+          data: [
+            {
+              Roll: "1",
+              Effect: "Tale of the Clever Animal",
+              Description:
+                "For the next 10 minutes, whenever the target makes an Intelligence, a Wisdom, or a Charisma check, the target can roll an extra die immediately after rolling the d20 and add the extra die's number to the check. The extra die is the same type as your Bardic Inspiration die.",
+            },
+            {
+              Roll: "2",
+              Effect: "Tale of the Renowned Duelist",
+              Description:
+                "You make a melee spell attack against the target. On a hit, the target takes force damage equal to two rolls of your Bardic Inspiration die + your Charisma modifier.",
+            },
+            {
+              Roll: "3",
+              Effect: "Tale of the Beloved Friends",
+              Description:
+                "The target and another creature of its choice it can see within 5 feet of it gains temporary hit points equal to a roll of your Bardic Inspiration die + your Charisma modifier",
+            },
+            {
+              Roll: "4",
+              Effect: "Tale of the Runaway",
+              Description:
+                "The target can immediately use its reaction to teleport up to 30 feet to an unoccupied space it can see. When the target teleports, it can choose a number of creatures it can see within 30 feet of it up to your Charisma modifier (minimum of 0) to immediately use the same reaction.",
+            },
+            {
+              Roll: "5",
+              Effect: "Tale of the Avenger",
+              Description:
+                "For 1 minute, any creature that hits the target with a melee attack takes force damage equal to a roll of your Bardic Inspiration die.",
+            },
+            {
+              Roll: "6",
+              Effect: "Tale of the Traveler",
+              Description:
+                "The target gains temporary hit points equal to a roll of your Bardic Inspiration die + your bard level. While it has these temporary hit points, the target’s walking speed increases by 10 feet and it gains a +1 bonus to its AC.",
+            },
+            {
+              Roll: "7",
+              Effect: "Tale of the Beguiler",
+              Description:
+                "The target must succeed on a Wisdom saving throw or take psychic damage equal to two rolls of your Bardic Inspiration die, and the target is incapacitated until the end of its next turn.",
+            },
+            {
+              Roll: "8",
+              Effect: "Tale of the Phantom",
+              Description:
+                "The target becomes invisible until the end of its next turn or until it hits a creature with an attack. If it hits a creature with an attack during this invisibility, the creature it hits takes necrotic damage equal to a roll of your Bardic Inspiration die and is frightened of the target until the end of the frightened creature's next turn.",
+            },
+            {
+              Roll: "9",
+              Effect: "Tale of the Brute",
+              Description:
+                "Each creature of the target’s choice it can see within 30 feet of it must make a Strength saving throw. On a failed save, a creature takes thunder damage equal to three rolls of your Bardic Inspiration die and is knocked prone. A creature that succeeds on its saving throw takes half as much damage and isn’t knocked prone.",
+            },
+            {
+              Roll: "10",
+              Effect: "Tale of the Dragon",
+              Description:
+                "The target spews fire from the mouth in a 30-foot cone. Each creature in that area must make a Dexterity saving throw, taking fire damage equal to four rolls of your Bardic Inspiration die on a failed save, or half as much damage on a successful one.",
+            },
+            {
+              Roll: "11",
+              Effect: "Tale of the Angel",
+              Description:
+                "The target regains hit points equal to two rolls of your Bardic Inspiration die + your Charisma modifier, and you end one condition from the following list affecting the target: blinded, deafened, paralyzed, petrified, or poisoned.",
+            },
+            {
+              Roll: "12",
+              Effect: "Tale of the Mind-Bender",
+              Description:
+                "You envoke an incomprehensible fable from an otherworldly being. The target must succeed on an Intelligence saving throw or take psychic damage equal to three rolls of your Bardic Inspiration die and be stunned until the end of its next turn.",
+            },
+          ],
+        },
+      },
     ],
   },
   {
@@ -230,9 +353,25 @@ const BardSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     name: "Fighting Style",
     description:
       "At 3rd level, you adopt a particular style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again.",
-    options: [
-      "**Dueling.** When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.",
-      "**Two-Weapon Fighting.** When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.",
+
+    extendedTable: [
+      {
+        "": {
+          headers: ["Fighting Style", "Description"],
+          data: [
+            {
+              "Fighting Style": "Dueling",
+              Description:
+                "When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.",
+            },
+            {
+              "Fighting Style": "Two-Weapon Fighting",
+              Description:
+                "When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.",
+            },
+          ],
+        },
+      },
     ],
     subClassId: ids.swords,
     levels: [3],
@@ -241,10 +380,29 @@ const BardSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     name: "Blade Flourish",
     description:
       "At 3rd level, you learn to conduct impressive displays of martial prowess and speed.\n\nWhenever you take the Attack action on your turn, your walking speed increases by 10 feet until the end of the turn, and if a weapon attack that you make as part of this action hits a creature, you can use one of the following Blade Flourish options of your choice. You can use only one Blade Flourish option per turn.",
-    options: [
-      "**Defensive Flourish.** You can expend one use of your Bardic Inspiration to cause the weapon to deal extra damage to the target you hit. The damage equals the number you roll on the Bardic Inspiration die. You also add the number rolled to your AC until the start of your next turn.",
-      "**Slashing Flourish.** You can expend one use of your Bardic Inspiration to cause the weapon to deal extra damage to the target you hit and to any other creature of your choice that you can see within 5 feet of you. The damage equals the number you roll on the Bardic Inspiration die.",
-      "**Mobile Flourish.** You can expend one use of your Bardic Inspiration to cause the weapon to deal extra damage to the target you hit. The damage equals the number you roll on the Bardic Inspiration die. You can also push the target up to 5 feet away from you, plus a number of feet equal to the number you roll on that die. You can then immediately use your reaction to move up to your walking speed to an unoccupied space within 5 feet of the target.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["Flourish Name", "Description"],
+          data: [
+            {
+              "Flourish Name": "Defensive Flourish",
+              Description:
+                "You can expend one use of your Bardic Inspiration to cause the weapon to deal extra damage to the target you hit. The damage equals the number you roll on the Bardic Inspiration die. You also add the number rolled to your AC until the start of your next turn.",
+            },
+            {
+              "Flourish Name": "Slashing Flourish",
+              Description:
+                "You can expend one use of your Bardic Inspiration to cause the weapon to deal extra damage to the target you hit and to any other creature of your choice that you can see within 5 feet of you. The damage equals the number you roll on the Bardic Inspiration die.",
+            },
+            {
+              "Flourish Name": "Mobile Flourish",
+              Description:
+                "You can expend one use of your Bardic Inspiration to cause the weapon to deal extra damage to the target you hit. The damage equals the number you roll on the Bardic Inspiration die. You can also push the target up to 5 feet away from you, plus a number of feet equal to the number you roll on that die. You can then immediately use your reaction to move up to your walking speed to an unoccupied space within 5 feet of the target.",
+            },
+          ],
+        },
+      },
     ],
     subClassId: ids.swords,
     levels: [3],

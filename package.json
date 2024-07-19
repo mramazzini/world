@@ -4,13 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run seed && next build",
+    "build": "npm run seed:prod && next build",
+    "build:dev": "npm run seed && next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
-    "prisma:migrate": "npx prisma migrate dev --name init",
-    "seed": "npx prisma db seed ",
-    "nuke": "npx tsx scripts/nuke.ts"
+    "migrate": "env-cmd -f .env.local npx prisma migrate dev",
+    "migrate:prod": "env-cmd -f .env npx prisma migrate deploy",
+    "generate": "npx prisma generate",
+    "seed": "env-cmd -f .env.local npx prisma db seed",
+    "seed:prod": "env-cmd -f .env npx prisma db seed",
+    "nuke": "npx tsx scripts/nuke.ts",
+    "logs": "vercel logs https://world-ashen.vercel.app/"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"
@@ -27,6 +32,7 @@
     "marked": "^13.0.1",
     "next": "14.2.4",
     "prisma": "^5.16.1",
+    "prisma-json-types-generator": "^3.0.4",
     "react": "^18.3.1",
     "react-dom": "^18",
     "react-pdf": "^9.1.0",
@@ -42,6 +48,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "daisyui": "^4.12.10",
+    "env-cmd": "^10.1.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "postcss": "^8",

@@ -7,6 +7,7 @@ import {
   SubClass,
   SubClassFeature,
 } from "@prisma/client";
+import { Input } from "postcss";
 
 export enum Pages {
   Class = "Class",
@@ -35,6 +36,19 @@ export interface ClassInfo extends Class {
   SubClasses: SubClass[];
   casterType: CasterType | null;
   customFields: CustomField[];
+}
+
+declare global {
+  namespace PrismaJson {
+    // you can use classes, interfaces, types, etc.
+    interface Table {
+      [key: string]: TableData;
+    }
+    interface TableData {
+      headers: string[];
+      data: { [key: string | number]: string }[];
+    }
+  }
 }
 
 export enum src {
