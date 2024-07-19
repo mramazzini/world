@@ -32,8 +32,8 @@ const SubClassDisplay = ({ subClass }: Props) => {
 
   return (
     <div className="p-4">
-      <div className="flex flex-row justify-between">
-        <div className="flex flex-col w-4/5">
+      <div className="flex flex-col md:flex-row justify-between">
+        <div className="flex flex-col md:w-4/5">
           <h1 className="px-4">
             {className.toCapitalCase()}: {subClass.name}
           </h1>
@@ -43,16 +43,16 @@ const SubClassDisplay = ({ subClass }: Props) => {
             Source: <span className="font-bold italic">{subClass.source}</span>
           </p>
         </div>
-        <div className="flex justify-center flex-col ">
+        <div className="flex justify-center items-start md:items-end my-2 flex-col ">
           <Link
-            className="btn  mb-2 btn-ghost border border-gray-400"
+            className={"btn btn-ghost border border-gray-500 mb-2 w-full"}
             href={`/class/${className}/subclass`}
           >
             View All {className.toCapitalCase()} Subclasses -&gt;
           </Link>
           {/* go back */}
           <Link
-            className="btn btn-ghost border border-gray-400"
+            className={"btn btn-ghost border border-gray-500 w-full"}
             href={`/class/${className.replaceAll(" ", "-").toLowerCase()}`}
           >
             View {className.toCapitalCase()} Class -&gt;

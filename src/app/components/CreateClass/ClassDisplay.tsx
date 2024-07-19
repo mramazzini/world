@@ -51,21 +51,41 @@ function ClassDisplay({
   });
   return (
     <div className="p-4">
-      <h1>{classObj.name.toCapitalCase() || "Class Name"}</h1>
-      <p className="italic">
-        {classObj.description || "Your Class Description will go here."}
-      </p>
-      <br />
-      <p>
-        Source:<span className="font-bold italic"> {classObj.source}</span>
-      </p>
-      <Link
-        target="_blank"
-        className="text-blue-500 hover:text-blue-700 inline text-sm font-bold"
-        href={`/class/${classObj.name}/pdf`}
-      >
-        View this class as a PDF here -&gt;
-      </Link>{" "}
+      <div className="flex flex-col md:flex-row justify-between">
+        <div className="flex flex-col md:w-4/5">
+          <h1>{classObj.name.toCapitalCase() || "Class Name"}</h1>
+          <p className="italic pr-4">
+            {classObj.description || "Your Class Description will go here."}
+          </p>
+          <p className="pt-4">
+            Source:<span className="font-bold italic"> {classObj.source}</span>
+          </p>
+          <Link
+            target="_blank"
+            className="text-blue-500 hover:text-blue-700 inline text-sm font-bold"
+            href={`/class/${classObj.name}/pdf`}
+          >
+            View this class as a PDF here -&gt;
+          </Link>{" "}
+        </div>
+        <div className="flex justify-center items-start md:items-end my-2 flex-col ">
+          <Link
+            className={"btn btn-ghost border border-gray-500 mb-2 w-full"}
+            href={`/class/${classObj.name
+              .replaceAll(" ", "-")
+              .toLowerCase()}/subclass`}
+          >
+            View All {classObj.name.toCapitalCase()} Subclasses -&gt;
+          </Link>
+          {/* go back */}
+          <Link
+            className={"btn btn-ghost border border-gray-500 w-full"}
+            href={`/class`}
+          >
+            View all Classes -&gt;
+          </Link>
+        </div>
+      </div>
       <div className="divider"></div>
       <p>
         <P>
