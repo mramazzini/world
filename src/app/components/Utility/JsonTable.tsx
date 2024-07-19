@@ -1,22 +1,41 @@
 import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
 import { cerr, cinfo, csuccess, cwarn } from "../../../lib/utils/chalkLog";
 import React from "react";
-const JsonTable = ({ json }: { json: PrismaJson.Table[] }) => {
+const JsonTable = ({
+  json,
+  colSizes,
+}: {
+  json: PrismaJson.Table[];
+  colSizes?: number[] | undefined;
+}) => {
   //generate the tables
   const result: React.ReactNode[] = [];
 
   //function to generate a single table
-  const generateTable = ({ data }: { data: PrismaJson.Table }) => {
+  const generateTable = ({
+    data,
+    colSizes,
+  }: {
+    data: PrismaJson.Table;
+    colSizes?: number[] | undefined;
+  }) => {
     const key = Object.keys(data)[0];
     const tableData = data[key];
     const tableHeader = tableData["headers"];
     const tableBody = tableData["data"];
 
     //style for the first cell of each row
-    const cellStyle = {
-      width: "10%",
-    };
-
+    const firstCellStyle = colSizes
+      ? { width: `${colSizes[0]}%` }
+      : { width: "15%" };
+    const cellStyle: { width: string }[] = colSizes
+      ? colSizes.map((size) => {
+          return { width: `${size}%` };
+        })
+      : //default col size
+        tableHeader.map(() => {
+          return { width: `${100 / tableHeader.length}%` };
+        });
     // return the table
 
     return (
@@ -34,7 +53,10 @@ const JsonTable = ({ json }: { json: PrismaJson.Table[] }) => {
             {tableBody.map((row, index: number) => (
               <tr key={index}>
                 {tableHeader.map((header: any, index: number) => (
-                  <td key={index} style={index === 0 ? cellStyle : {}}>
+                  <td
+                    key={index}
+                    style={index === 0 ? firstCellStyle : cellStyle[index]}
+                  >
                     {row[header]}
                   </td>
                 ))}
@@ -55,7 +77,7 @@ const JsonTable = ({ json }: { json: PrismaJson.Table[] }) => {
 
   //generate tables
   for (const table of json) {
-    result.push(generateTable({ data: table }));
+    result.push(generateTable({ data: table, colSizes }));
   }
   //assign keys
   const tablesWithKeys = result.map((table, index) => {

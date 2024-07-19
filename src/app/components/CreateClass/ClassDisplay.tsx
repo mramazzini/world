@@ -44,7 +44,7 @@ function ClassDisplay({
       data: subClasses.map((sub) => {
         return {
           Name: sub.name,
-          Description: sub.description,
+          Description: sub.flavorText,
         };
       }),
     },
@@ -268,7 +268,7 @@ function ClassDisplay({
                     <h3 className="px-4">Official Subclasses:</h3>
 
                     <div className="p-4">
-                      <JsonTable json={subClassTableJson} />
+                      <JsonTable json={subClassTableJson} colSizes={[30, 70]} />
 
                       {classObj.subClassSpellDescription && (
                         <div className="py-4">
