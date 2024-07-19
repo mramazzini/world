@@ -48,6 +48,7 @@ const Page = () => {
 
     spellsKnown: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 20 levels
     cantripsKnown: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 20 levels
+    flavorText: "",
   });
   const [features, setFeatures] = useState<Prisma.FeatureCreateManyInput[]>([
     {

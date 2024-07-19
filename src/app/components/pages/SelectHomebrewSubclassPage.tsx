@@ -84,7 +84,7 @@ const SelectHomebrewSubclassPage = () => {
                     </Link>
                   </td>
                   <td className="hidden md:table-cell">
-                    <p className="italic line-clamp-2"> {item.description}</p>
+                    <p className="italic line-clamp-2"> {item.flavorText}</p>
                   </td>
                   <td>
                     <p className="line-clamp-2"> {item.userName}</p>

@@ -78,7 +78,7 @@ const SelectHomebrewClassPage = () => {
                   </Link>
                 </td>
                 <td className="hidden md:table-cell">
-                  <p className="italic line-clamp-2"> {item.description}</p>
+                  <p className="italic line-clamp-2"> {item.flavorText}</p>
                 </td>
                 <td
                   className="cursor-pointer hover:bg-black/20 hidden md:table-cell"
