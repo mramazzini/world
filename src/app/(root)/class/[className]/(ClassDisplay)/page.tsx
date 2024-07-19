@@ -1,6 +1,7 @@
 import ClassPage from "@/app/components/pages/ClassPage";
 import { Metadata } from "next";
 import { getClass } from "@/lib/actions/db/read.actions";
+import "@/lib/string.extensions";
 
 type Props = {
   params: { className: string };
