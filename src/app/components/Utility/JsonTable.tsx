@@ -4,11 +4,11 @@ import React from "react";
 import GenerateTable from "../UI/GenerateTable";
 const JsonTable = ({
   json,
-  colSizes,
+
   links,
 }: {
   json: PrismaJson.Table[];
-  colSizes?: number[] | undefined;
+
   links?: string[] | undefined;
 }) => {
   //generate the tables
@@ -23,9 +23,7 @@ const JsonTable = ({
 
   //generate tables
   for (const table of json) {
-    result.push(
-      <GenerateTable data={table} colSizes={colSizes} links={links} />
-    );
+    result.push(<GenerateTable data={table} links={links} />);
   }
   //assign keys
   const tablesWithKeys = result.map((table, index) => {

@@ -423,13 +423,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     id: 41,
     classId: ids.cleric,
     name: "Arcana Domain",
-    spells: [
-      "1:Detect Magic, Magic Missile",
-      "3:Magic Weapon, Nystul's Magic Aura",
-      "5:Dispel Magic, Magic Circle",
-      "7:Arcane Eye, Leomund's Secret Chest",
-      "9:Planar Binding, Teleportation Circle",
-    ],
+
     description:
       "Magic is an energy that suffuses the multiverse and that fuels both destruction and creation. Gods of the Arcana domain know the secrets and potential of magic intimately. For some of these gods, magical knowledge is a great responsibility that comes with a special understanding of the nature of reality. Other gods of Arcana see magic as pure power, to be used as its wielder sees fit. The gods of this domain are often associated with knowledge, as learning and arcane power tend to go hand-in-hand. In the Realms, deities of this domain include Azuth and Mystra, as well as Corellon Larethian of the elven pantheon. In other worlds, this domain includes Hecate, Math Mathonwy, and Isis; the triple moon gods of Solinari, Lunitari, and Nuitari of Krynn; and Boccob, Vecna, and Wee Jas of Greyhawk.",
     source: src.sword,
@@ -440,13 +434,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     id: 42,
     classId: ids.cleric,
     name: "Death Domain",
-    spells: [
-      "1:False Life, Ray of Sickness",
-      "3:Blindness/Deafness, Ray of Enfeeblement",
-      "5:Animate Dead, Vampiric Touch",
-      "7:Blight, Death Ward",
-      "9:Antilife Shell, Cloudkill",
-    ],
+
     source: src.dmg,
     description:
       "The Death domain is concerned with the forces that cause death, as well as the negative energy that gives rise to undead creatures. Deities such as Chemosh, Myrkul, and Wee Jas are patrons of necromancers, death knights, liches, mummy lords, and vampires. Gods of the Death domain also embody murder (Anubis, Bhaal, and Pyremius), pain (Iuz or Loviatar), disease or poison (Incabulos, Talona, or Morgion), and the underworld (Hades and Hel).",
@@ -457,13 +445,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     id: 43,
     classId: ids.cleric,
     name: "Forge Domain",
-    spells: [
-      "1:Identify, Searing Smite",
-      "3:Heat Metal, Magic Weapon",
-      "5:Elemental Weapon, Protection from Energy",
-      "7:Fabricate, Wall of Fire",
-      "9:Animate Objects, Creation",
-    ],
+
     source: src.xanathar,
     description:
       "The gods of the forge are patrons of artisans who work with metal, from a humble blacksmith who keeps a village in horseshoes and plow blades to the mighty elf artisan whose diamond-tipped arrows of mithral have felled demon lords. The gods of the forge teach that, with patience and hard work, even the most intractable metal can be transformed from a lump of ore to a beautifully wrought object. Clerics of these deities search for objects lost to the forces of darkness, liberate mines overrun by orcs, and uncover rare and wondrous materials necessary to create potent magic items. Followers of these gods take great pride in their work, and they are willing to craft and use heavy armor and powerful weapons to protect them. Deities of this domain include Gond, Reorx, Onatar, Moradin, Hephaestus, and Goibhniu.",
@@ -474,13 +456,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     id: 44,
     classId: ids.cleric,
     name: "Grave Domain",
-    spells: [
-      "1:Bane, False Life",
-      "3:Gentle Repose, Ray of Enfeeblement",
-      "5:Revivify, Vampiric Touch",
-      "7:Blight, Death Ward",
-      "9:Antilife Shell, Raise Dead",
-    ],
+
     source: src.xanathar,
     description:
       "Gods of the grave watch over the line between life and death. To these deities, death and the afterlife are a foundational part of the multiverse’s workings. To resist death, or to desecrate the dead’s rest, is an abomination. Deities of the grave include Kelemvor, Wee Jas, the ancestral spirits of the Undying Court, Hades, Anubis, and Osiris. These deities teach their followers to respect the dead and pay them due homage. Followers of these deities seek to put restless spirits to rest, destroy the undead wherever they find them, and ease the suffering of dying creatures. Their magic also allows them to stave off a creature’s death, though they refuse to use such magic to extend a creature’s lifespan beyond its mortal limits.",
@@ -491,13 +467,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     id: 45,
     classId: ids.cleric,
     name: "Knowledge Domain",
-    spells: [
-      "1:Command, Identify",
-      "3:Augury, Suggestion",
-      "5:Nondetection, Speak with Dead",
-      "7:Arcane Eye, Confusion",
-      "9:Legender Lore, Scrying",
-    ],
+
     source: src.phb,
     description:
       "The gods of knowledge – including Oghma, Boccob, Gilean, Aureon, and Thoth – value learning and understanding above all. Some teach that knowledge is to be gathered and shared in libraries and universities, or promote the practical knowledge of craft and invention. Some deities hoard knowledge and keep its secrets to themselves. And some promise their followers that they will gain tremendous power if they unlock the secrets of the multiverse. Followers of these gods study esoteric lore, collect old tomes, delve into the secret places of the earth, and learn all they can. Some gods of knowledge promote the practical knowledge of craft and invention, including smith deities like Gond, Reorx, Onatar, Moradin, Hephaestus, and Goibhniu. In Amonkhet, knowledge is the second virtue of society. Kefnet’s task is to pass on this teaching of the God-Pharaoh and elucidate its meaning. He teaches that the afterlife will be inhabited only by those who have proved by their wits that they are worthy of dwelling in the glorious presence of the God-Pharaoh. He trains acolytes and initiates to push their limits and challenge their mental capacity with spells of ever-greater power.",
@@ -508,13 +478,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     id: 46,
     classId: ids.cleric,
     name: "Life Domain",
-    spells: [
-      "1:Bless, Cure Wounds",
-      "3:Lesser Restoration, Spiritual Weapon",
-      "5:Beacon of Hope, Revivify",
-      "7:Death Ward, Guardian of Faith",
-      "9:Mass Cure Wounds, Raise Dead",
-    ],
+
     source: src.phb,
     description:
       "The Life domain focuses on the vibrant positive energy – one of the fundamental forces of the universe – that sustains all life. The gods of life promote vitality and health through healing the sick and wounded, caring for those in need, and driving away the forces of death and undeath. Almost any non-evil deity can claim influence over this domain, particularly agricultural deities (such as Chauntea, Arawai, and Demeter), sun gods (such as Lathander, Pelor, and Re-Horakhty), gods of healing or endurance (such as Ilmater, Mishakal, Apollo, and Diancecht), and gods of home and community (such as Hestia, Hathor, and Boldrci).",
@@ -525,13 +489,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     id: 47,
     classId: ids.cleric,
     name: "Light Domain",
-    spells: [
-      "1:Burning Hands, Faerie Fire",
-      "3:Flaming Sphere, Scorching Ray",
-      "5:Daylight, Fireball",
-      "7:Guardian of Faith, Wall of Fire",
-      "9:Flame Strike, Scrying",
-    ],
+
     source: src.phb,
     description:
       "Gods of light – including Helm, Lathander, Pholtus, Branchala, the Silver Flame, Belenus, Apollo, and Re-Horakhty – promote the ideals of rebirth and renewal, truth, vigilance, and beauty, often using the symbol of the sun. Some of these gods are portrayed as the sun itself or as a charioteer who guides the sun across the sky. Others are tireless sentinels whose eyes pierce every shadow and see through every deception. Some are deities of beauty and artistry, who teach that art is a vehicle for the soul's improvement. Clerics of a god of light are enlightened souls infused with radiance and the power of their gods' discerning vision, charged with chasing away lies and burning away darkness.",
@@ -542,13 +500,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     id: 48,
     classId: ids.cleric,
     name: "Nature Domain",
-    spells: [
-      "1:Animal Friendship, Speak with Animals",
-      "3:Barkskin, Spike Growth",
-      "5:Plant Growth, Wind Wall",
-      "7:Dominate Beast, Grasping Vine",
-      "9:Insect Plague, Tree Stride",
-    ],
+
     source: src.phb,
     description:
       "Gods of nature are as varied as the natural world itself; from inscrutable gods of the deep forests (such as Silvanus, Obad-Hai, Chislev, Balinor, and Pan) to friendly deities associated with particular springs and groves (such as Eldath). Druids revere nature as a whole and might serve one of these deities, practicing mysterious rites and reciting all-but-forgotten prayers in their own secret tongue. But many of these gods have clerics as well, champions who take a more active role in advancing the interests of a particular nature god. These clerics might hunt the evil monstrosities that despoil the woodlands, bless the harvest of the faithful, or wither the crops of those who anger their gods.",
@@ -559,13 +511,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     id: 49,
     classId: ids.cleric,
     name: "Order Domain",
-    spells: [
-      "1:Command, Heroism",
-      "3:Hold Person, Spiritual Weapon",
-      "5:Mass Healing Word, Slow",
-      "7:Compulsion, Guardian of Faith",
-      "9:Dominate Person, Hold Monster",
-    ],
+
     source: src.tasha,
     description:
       "The Order Domain represents discipline, as well as devotion to the laws that govern a society, an institution, or a philosophy. Clerics of Order meditate on logic and justice as they serve their gods, examples of which appear in the Order Deities table. Clerics of Order believe that well-crafted laws establish legitimate hierarchies, and those selected by law to lead must be obeyed. Those who obey must do so to the best of their ability, and if those who lead fail to protect the law, they must be replaced. In this manner, law weaves a web of obligations that create order and security in a chaotic multiverse.",
@@ -576,13 +522,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     id: 50,
     classId: ids.cleric,
     name: "Peace Domain",
-    spells: [
-      "1:Heroism, Sanctuary",
-      "3:Aid, Warding Bond",
-      "5:Beacon of Hope, Sending",
-      "7:Aura of Purity, Otiluke's Resilient Sphere",
-      "9:Greater Restoration, Rary's Telepathic Bond",
-    ],
+
     source: src.tasha,
     description:
       "The balm of peace thrives at the heart of healthy communities, between friendly nations, and in the souls of the kindhearted. The gods of peace inspire people of all sorts to resolve conflict and to stand up against those forces that try to prevent peace from flourishing. See the Peace Deities table for a list of some of the gods associated with this domain. Clerics of the Peace Domain preside over the signing of treaties, and they are often asked to arbitrate in disputes. These clerics' blessings draw people together and help them shoulder one another's burdens, and the clerics' magic aids those who are driven to fight for the way of peace.",
@@ -593,13 +533,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     id: 51,
     classId: ids.cleric,
     name: "Tempest Domain",
-    spells: [
-      "1:Fog Cloud, Thunderwave",
-      "3:Gust of Wind, Shatter",
-      "5:Call Lightning, Sleet Storm",
-      "7:Control Water, Ice Storm",
-      "9:Destructive Wave, Insect Plague",
-    ],
+
     source: src.phb,
     description:
       "Gods whose portfolios include the Tempest domain – including Talos, Umberlee, Kord, Zeboim, the Devourer, Zeus, and Thor – govern storms, sea, and, sky. They include gods of lightning and thunder, gods of earthquakes, some fire gods, and certain gods of violence, physical strength, and courage. In some pantheons, a god of this domain rules over other deities and is known for swift justice delivered by thunderbolts. In the pantheons of seafaring people, gods of this domain are ocean deities and the patrons of sailors. Tempest gods send their clerics to inspire fear in the common folk, either to keep those folk on the path of righteousness or to encourage them to offer sacrifices of propitiation to ward off divine wrath.",
@@ -610,13 +544,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     id: 52,
     classId: ids.cleric,
     name: "Trickery Domain",
-    spells: [
-      "1:Charm Person, Disguise Self",
-      "3:Mirror Image, Pass without Trace",
-      "5:Blink, Dispel Magic",
-      "7:Dimension Door, Polymorph",
-      "9:Dominate Person, Modify Memory",
-    ],
+
     source: src.phb,
     description:
       "Gods of trickery – such as Tymora, Beshaba, Olidammara, the Traveler, Garl Glittergold, and Loki – are mischief-makers and instigators who stand as a constant challenge to the accepted order among both gods and mortals. They're patrons of thieves, scoundrels, gamblers, rebels, and liberators. Their clerics are a disruptive force in the world, puncturing pride, mocking tyrants, stealing from the rich, freeing captives, and flouting hollow traditions. They prefer subterfuge, pranks, deception, and theft rather than direct confrontation.",
@@ -627,13 +555,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     id: 53,
     classId: ids.cleric,
     name: "Twilight Domain",
-    spells: [
-      "1:Faerie Fire, Sleep",
-      "3:Darkness, Sleep",
-      "5:Aura of Vitality, Leomund's Tiny Hut",
-      "7:Aura of Life, Leomund's Tiny Hut",
-      "9:Circle of Power, Mislead",
-    ],
+
     source: src.tasha,
     description:
       "The twilit transition from light into darkness often brings calm and even joy, as the day's labors end and the hours of rest begin. The darkness can also bring terrors, but the gods of twilight guard against the horrors of the night. Clerics who serve these deities-examples of which appear on the Twilight Deities table-bring comfort to those who seek rest and protect them by venturing into the encroaching darkness to ensure that the dark is a comfort, not a terror.",
@@ -644,13 +566,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     id: 54,
     classId: ids.cleric,
     name: "War Domain",
-    spells: [
-      "1:Divine Favor, Shield of Faith",
-      "3:Magic Weapon, Spiritual Weapon",
-      "5:Crusader's Mantle, Spirit Guardians",
-      "7:Freedom of Movement, Stoneskin",
-      "9:Flame Strike, Hold Monster",
-    ],
+
     source: src.phb,
     description:
       "War has many manifestations. It can make heroes of ordinary people. It can be desperate and horrific, with acts of cruelty and cowardice eclipsing instances of excellence and courage. In either case, the gods of war watch over warriors and reward them for their great deeds. The clerics of such gods excel in battle, inspiring others to fight the good fight or offering acts of violence as prayers. Gods of war include champions of honor and chivalry (such as Torm, Heironeous, and Kiri-Jolith) as well as gods of destruction and pillage (such as Erythnul, the Fury, Gruumsh, and Ares) and gods of conquest and domination (such as Bane, Hextor, and Maglubiyet). Other war gods (such as Tempus, Nike, and Nuada) take a more neutral stance, promoting war in all its manifestations and supporting warriors in any circumstance.",
@@ -727,6 +643,196 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     source: src.tasha,
     flavorText:
       "Druids of the Circle of Wildfire bond with a primal spirit that harbors both destructive and creative power, creating controlled flames that burn away one thing but give life to another.",
+  },
+  //monk
+  {
+    name: "Way of the Astral Self",
+    description:
+      "A monk who follows the Way of the Astral Self believes their body is an illusion. They see their ki as a representation of their true form, an astral self. This astral self has the capacity to be a force of order or disorder, with some monasteries training students to use their power to protect the weak and other instructing aspirants in how to manifest their true selves in service to the mighty.",
+    id: 62,
+    classId: ids.monk,
+    source: src.tasha,
+    flavorText:
+      "Monks who follow the Way of the Astral Self believe their body is an illusion, manifesting their true selves as an astral self.",
+  },
+  {
+    name: "Way of the Ascendant Dragon",
+    description:
+      "The fundamental teaching of this tradition holds that by emulating dragons, a monk becomes a more integrated part of the world and its magic. By altering their spirit to resonate with draconic might, monks who follow this tradition augment their prowess in battle, bolster their allies, and can even soar through the air on draconic wings. But all this power is in service of a greater goal: achieving a spiritual unity with the essence of the Material Plane.",
+    id: 63,
+    classId: ids.monk,
+    source: src.fizban,
+    flavorText:
+      "Monks who follow the Way of the Ascendant Dragon emulate dragons, becoming a more integrated part of the world and its magic.",
+  },
+  {
+    name: "Way of the Drunken Master",
+    description: `The Way of the Drunken Master teaches its students to move with the jerky, unpredictable movements of a drunkard. A drunken master sways, tottering on unsteady feet, to present what seems like an incompetent combatant who proves frustrating to engage. The drunken master’s erratic stumbles conceal a carefully executed dance of blocks, parries, advances, attacks, and retreats.A drunken master often enjoys playing the fool to bring gladness to the despondent or to demonstrate humility to the arrogant, but when battle is joined, the drunken master can be a maddening, masterful foe.`,
+    id: 64,
+    classId: ids.monk,
+    source: src.xanathar,
+    flavorText:
+      "Monks who follow the Way of the Drunken Master move with the jerky, unpredictable movements of a drunkard, swaying to present an incompetent combatant who proves frustrating to engage.",
+  },
+  {
+    name: "Way of the Four Elements",
+    description:
+      "You follow a monastic tradition that teaches you to harness the elements. When you focus your ki, you can align yourself with the forces of creation and bend the four elements to your will, using them as an extension of your body. Some members of this tradition dedicate themselves to a single element, but others weave the elements together.Many monks of this tradition tattoo their bodies with representations of their ki powers, commonly imagined as coiling dragons, but also as phoenixes, fish, plants, mountains, and cresting waves.",
+    id: 65,
+    classId: ids.monk,
+    source: src.phb,
+    flavorText:
+      "Monks who follow the Way of the Four Elements harness the elements, bending them to their will and using them as an extension of their body.",
+  },
+  {
+    name: "Way of the Kensei",
+    description:
+      "Monks of the Way of the Kensei train relentlessly with their weapons, to the point that the weapon becomes like an extension of the body. Founded on a mastery of sword fighting, the tradition has expanded to include many different weapons. A kensei sees a weapon much in the same way a calligrapher or a painter regards a pen or brush. Whatever the weapon, the kensei views it as a tool used to express the beauty and precision of the martial arts. That such mastery makes a kensei a peerless warrior is but a side effect of intense devotion, practice, and study.",
+    id: 66,
+    classId: ids.monk,
+    source: src.xanathar,
+    flavorText:
+      "Monks who follow the Way of the Kensei train relentlessly with their weapons, to the point that the weapon becomes like an extension of the body.",
+  },
+  {
+    name: "Way of the Long Death",
+    description:
+      "Monks of the Way of the Long Death are obsessed with the meaning and mechanics of dying. They capture creatures and prepare elaborate experiments to capture, record, and understand the moments of their demise. They then use this knowledge to guide their understanding of martial arts, yielding a deadly fighting style.",
+    id: 67,
+    classId: ids.monk,
+    source: src.sword,
+    flavorText:
+      "Monks who follow the Way of the Long Death are obsessed with the meaning and mechanics of dying.",
+  },
+  {
+    name: "Way of Mercy",
+    description: `Monks of the Way of Mercy learn to manipulate the life force of others to bring aid to those in need. They are wandering physicians to the poor and hurt. However, to those beyond their help, they bring a swift end as an act of mercy. Those who follow the Way of Mercy might be members of a religious order, administering to the needy and making grim choices rooted in reality rather than idealism. Some might be gentle-voiced healers, beloved by their communities, while others might be masked bringers of macabre mercies. The walkers of this way usually don robes with deep cowls, and they often conceal their faces with masks, presenting themselves as the faceless bringers of life and death.`,
+    id: 68,
+    classId: ids.monk,
+    source: src.tasha,
+    flavorText:
+      "Monks who follow the Way of Mercy learn to manipulate the life force of others to bring aid to those in need.",
+  },
+  {
+    name: "Way of the Open Hand",
+    description:
+      "Monks of the Way of the Open Hand are the ultimate masters of martial arts combat, whether armed or unarmed. They learn techniques to push and trip their opponents, manipulate ki to heal damage to their bodies, and practice advanced meditation that can protect them from harm.",
+    id: 69,
+    classId: ids.monk,
+    source: src.phb,
+    flavorText:
+      "Monks who follow the Way of the Open Hand are the ultimate masters of martial arts combat, whether armed or unarmed.",
+  },
+  {
+    name: "Way of the Shadow",
+    description:
+      "Monks of the Way of Shadow follow a tradition that values stealth and subterfuge. These monks might be called ninjas or shadowdancers, and they serve as spies and assassins. Sometimes the members of a ninja monastery are family members, forming a clan sworn to secrecy about their arts and missions. Other monasteries are more like thieves' guilds, hiring out their services to nobles, rich merchants, or anyone else who can pay their fees. Regardless of their methods, the heads of these monasteries expect the unquestioning obedience of their students.",
+    id: 70,
+    classId: ids.monk,
+    source: src.phb,
+    flavorText:
+      "Monks who follow the Way of Shadow follow a tradition that values stealth and subterfuge, serving as spies and assassins.",
+  },
+  {
+    name: "Way of the Sun Soul",
+    description:
+      "Monks of the Way of the Sun Soul learn to channel their own life energy into searing bolts of light. They teach that meditation can unlock the ability to unleash the indomitable light shed by the soul of every living creature.",
+    id: 71,
+    classId: ids.monk,
+    source: src.xanathar,
+    flavorText:
+      "Monks who follow the Way of the Sun Soul learn to channel their own life energy into searing bolts of light.",
+  },
+  // Paladin
+  {
+    name: "Oath of the Ancients",
+    description:
+      "The Oath of the Ancients is as old as the race of elves and the rituals of the druids. Sometimes called fey knights, green knights, or horned knights, paladins who swear this oath cast their lot with the side of the light in the cosmic struggle against darkness because they love the beautiful and life-giving things of the world, not necessarily because they believe in principles of honor, courage, and justice. They adorn their armor and clothing with images of growing things-leaves, antlers, or flowers-to reflect their commitment to preserving life and light in the world.",
+    id: 72,
+    classId: ids.paladin,
+    source: src.phb,
+    flavorText:
+      "Paladins who swear the Oath of the Ancients cast their lot with the side of the light in the cosmic struggle against darkness.",
+  },
+  {
+    name: "Oath of Conquest",
+    description:
+      "The Oath of Conquest calls to paladins who seek glory in battle and the subjugation of their enemies. It isn’t enough for these paladins to establish order. They must crush the forces of chaos. Sometimes called knight tyrants or iron mongers, those who swear this oath gather into grim orders that serve gods or philosophies of war and well-ordered might. Some of these paladins go so far as to consort with the powers of the Nine Hells, valuing the rule of law over the balm of mercy. The archdevil Bel, warlord of Avernus, counts many of these paladins – called hell knights – as his most ardent supporters. Hell knights cover their armor with trophies taken from fallen enemies, a grim warning to any who dare oppose them and the decrees of their lords. These knights are often most fiercely resisted by other paladins of this oath, who believe that the hell knights have wandered too far into darkness.",
+    id: 73,
+    classId: ids.paladin,
+    source: src.xanathar,
+    flavorText:
+      "Paladins who swear the Oath of Conquest seek glory in battle and the subjugation of their enemies.",
+  },
+  {
+    name: "Oath of the Crown",
+    description:
+      "The Oath of the Crown is sworn to the ideals of civilization, be it the spirit of a nation, fealty to a sovereign, or service to a deity of law and rulership. The paladins who swear this oath dedicate themselves to serving society and, in particular, the just laws that hold society together. These paladins are the watchful guardians on the walls, standing against the chaotic tides of barbarism that threaten to tear down all that civilization has built, and are commonly known as guardians, exemplars, or sentinels. Often, paladins who swear this oath are members of an order of knighthood in service to a nation or a sovereign, and undergo their oath as part of their admission to the order's ranks.",
+    id: 74,
+    classId: ids.paladin,
+    source: src.sword,
+    flavorText:
+      "Paladins who swear the Oath of the Crown dedicate themselves to serving society and the just laws that hold it together.",
+  },
+  {
+    name: "Oath of Devotion",
+    description:
+      "The Oath of Devotion binds a paladin to the loftiest ideals of justice, virtue, and order. Sometimes called cavaliers, white knights, or holy warriors, these paladins meet the ideal of the knight in shining armor, acting with honor in pursuit of justice and the greater good. They hold themselves to the highest standards of conduct, and some, for better or worse, hold the rest of the world to the same standards. Many who swear this oath are devoted to gods of law and good and use their gods' tenets as the measure of their devotion. They hold angels – the perfect servants of good – as their ideals, and incorporate images of angelic wings into their helmets or coats of arms.",
+    id: 75,
+    classId: ids.paladin,
+    source: src.phb,
+    flavorText:
+      "Paladins who swear the Oath of Devotion bind themselves to the loftiest ideals of justice, virtue, and order.",
+  },
+  {
+    name: "Oath of Glory",
+    description:
+      "Paladins who take the Oath of Glory believe they and their companions are destined to achieve glory through deeds of heroism. They train diligently and encourage their companions so they're all ready when destiny calls.",
+    id: 76,
+    classId: ids.paladin,
+    source: src.tasha,
+    flavorText:
+      "Paladins who swear the Oath of Glory believe they and their companions are destined to achieve glory through deeds of heroism.",
+  },
+  {
+    name: "Oath of Redemption",
+    description:
+      "The Oath of Redemption sets a paladin on a difficult path, one that requires a holy warrior to use violence only as a last resort. Paladins who dedicate themselves to this oath believe that any person can be redeemed and that the path of benevolence and justice is one that anyone can walk. These paladins face evil creatures in the hope of turning them to the light, and the paladins slay them only when such a deed will clearly save other lives. Paladins who follow this path are known as redeemers.\n\nWhile redeemers are idealists, they are no fools. Redeemers know that undead, demons, devils, and other supernatural threats can be inherently evil. Against such foes, the paladins bring the full wrath of their weapons and spells to bear. Yet the redeemers still pray that, one day, even creatures of wickedness will invite their own redemption.",
+    id: 77,
+    classId: ids.paladin,
+    source: src.xanathar,
+    flavorText:
+      "Paladins who swear the Oath of Redemption believe that any person can be redeemed and that the path of benevolence and justice is one that anyone can walk.",
+  },
+  {
+    name: "Oath of Vengeance",
+    description:
+      "The Oath of Vengeance is a solemn commitment to punish those who have committed a grievous sin. When evil forces slaughter helpless villagers, when an entire people turns against the will of the gods, when a thieves' guild grows too violent and powerful, when a dragon rampages through the countryside – at times like these, paladins arise and swear an Oath of Vengeance to set right that which has gone wrong. To these paladins – sometimes called avengers or dark knights – their own purity is not as important as delivering justice.",
+    id: 78,
+    classId: ids.paladin,
+    source: src.phb,
+    flavorText:
+      "Paladins who swear the Oath of Vengeance are committed to punishing those who have committed a grievous sin.",
+  },
+  {
+    name: "Oath of the Watchers",
+    description:
+      "The Oath of the Watchers binds paladins to protect mortal realms from the predations of extraplanar creatures, many of which can lay waste to mortal soldiers. Thus, the Watchers hone their minds, spirits, and bodies to be the ultimate weapons against such threats.\n\nPaladins who follow the Watchers' oath are ever vigilant in spotting the influence of extraplanar forces, often establishing a network of spies and informants to gather information on suspected cults. To a Watcher, keeping a healthy suspicion and awareness about one's surroundings is as natural as wearing armor in battle.",
+    id: 79,
+    classId: ids.paladin,
+    source: src.tasha,
+    flavorText:
+      "Paladins who swear the Oath of the Watchers protect mortal realms from the predations of extraplanar creatures.",
+  },
+  {
+    name: "Oathbreaker",
+    description:
+      "An Oathbreaker is a paladin who breaks their sacred oaths to pursue some dark ambition or serve an evil power. Whatever light burned in the paladin's heart is extinguished. Only darkness remains.",
+    id: 80,
+    classId: ids.paladin,
+    source: src.dmg,
+    flavorText:
+      "An Oathbreaker is a paladin who breaks their sacred oaths to pursue some dark ambition or serve an evil power.",
   },
 ];
 

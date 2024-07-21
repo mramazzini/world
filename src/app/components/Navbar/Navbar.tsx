@@ -18,12 +18,12 @@ const Navbar = () => {
       <Link href="/class" className="p-4">
         Classes
       </Link>
-      <Link href="/subclass" className="p-4">
+      {/* <Link href="/subclass" className="p-4">
         Subclasses
-      </Link>
-      <Link href="/item-generator" className="p-4">
+      </Link> */}
+      {/* <Link href="/item-generator" className="p-4">
         Item Generator
-      </Link>
+      </Link> */}
     </nav>
   );
 };

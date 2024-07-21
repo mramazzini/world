@@ -20,6 +20,43 @@ const ids = {
 const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
   // Arcana
   {
+    name: "Arcana Domain Spells",
+    description:
+      "You gain domain spells at the cleric levels listed in the Arcana Domain Spells table.",
+    subClassId: ids.arcana,
+    levels: [1, 3, 5, 7, 9],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Cleric Level", "Spells"],
+          data: [
+            {
+              "Cleric Level": "1st",
+              Spells: "Detect Magic, Magic Missile",
+            },
+            {
+              "Cleric Level": "3rd",
+              Spells: "Magic Weapon, Nystul's Magic Aura",
+            },
+            {
+              "Cleric Level": "5th",
+              Spells: "Magic Circle, Dispel Magic",
+            },
+            {
+              "Cleric Level": "7th",
+              Spells: "Arcane Eye, Leomund's Secret Chest",
+            },
+            {
+              "Cleric Level": "9th",
+              Spells: "Planar Binding, Teleportation Circle",
+            },
+          ],
+        },
+      },
+    ],
+  },
+
+  {
     name: "Arcane Initiate",
     description:
       "When you choose this domain at 1st level, you gain proficiency in the Arcana skill, and you gain two cantrips of your choice from the wizard spell list. For you, these cantrips count as cleric cantrips.",
@@ -34,7 +71,7 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     levels: [2, 5, 8, 11, 14, 17],
     extendedTable: [
       {
-        "Arcane Banishment": {
+        "": {
           headers: ["Cleric Level", "Creature CR"],
           data: [
             {
@@ -85,6 +122,42 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
   },
   // Death
   {
+    name: "Death Domain Spells",
+    description:
+      "You gain domain spells at the cleric levels listed in the Death Domain Spells table.",
+    subClassId: ids.death,
+    levels: [1, 3, 5, 7, 9],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Cleric Level", "Spells"],
+          data: [
+            {
+              "Cleric Level": "1st",
+              Spells: "False Life, Ray of Sickness",
+            },
+            {
+              "Cleric Level": "3rd",
+              Spells: "Blindness/Deafness, Ray of Enfeeblement",
+            },
+            {
+              "Cleric Level": "5th",
+              Spells: "Animate Dead, Vampiric Touch",
+            },
+            {
+              "Cleric Level": "7th",
+              Spells: "Blight, Death Ward",
+            },
+            {
+              "Cleric Level": "9th",
+              Spells: "Antilife Shell, Cloudkill",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
     name: "Bonus Proficiency",
     description:
       "When you choose this domain at 1st level, you gain proficiency with martial weapons.",
@@ -127,6 +200,42 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     levels: [17],
   },
   // Forge
+  {
+    name: "Forge Domain Spells",
+    description:
+      "You gain domain spells at the cleric levels listed in the Forge Domain Spells table.",
+    subClassId: ids.forge,
+    levels: [1, 3, 5, 7, 9],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Cleric Level", "Spells"],
+          data: [
+            {
+              "Cleric Level": "1st",
+              Spells: "Identify, Searing Smite",
+            },
+            {
+              "Cleric Level": "3rd",
+              Spells: "Heat Metal, Magic Weapon",
+            },
+            {
+              "Cleric Level": "5th",
+              Spells: "Elemental Weapon, Protection from Energy",
+            },
+            {
+              "Cleric Level": "7th",
+              Spells: "Fabricate, Wall of Fire",
+            },
+            {
+              "Cleric Level": "9th",
+              Spells: "Animate Objects, Creation",
+            },
+          ],
+        },
+      },
+    ],
+  },
   {
     name: "Bonus Proficiencies",
     description:
@@ -179,6 +288,42 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
   },
   // Grave
   {
+    name: "Grave Domain Spells",
+    description:
+      "You gain domain spells at the cleric levels listed in the Grave Domain Spells table.",
+    subClassId: ids.grave,
+    levels: [1, 3, 5, 7, 9],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Cleric Level", "Spells"],
+          data: [
+            {
+              "Cleric Level": "1st",
+              Spells: "Bane, False Life",
+            },
+            {
+              "Cleric Level": "3rd",
+              Spells: "Gentle Repose, Ray of Enfeeblement",
+            },
+            {
+              "Cleric Level": "5th",
+              Spells: "Revivify, Vampiric Touch",
+            },
+            {
+              "Cleric Level": "7th",
+              Spells: "Blight, Death Ward",
+            },
+            {
+              "Cleric Level": "9th",
+              Spells: "Antilife Shell, Raise Dead",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
     name: "Circle of Mortality",
     description:
       "At 1st level, you gain the ability to manipulate the line between life and death. When you would normally roll one or more dice to restore hit points with a spell to a creature at 0 hit points, you instead use the highest number possible for each die.\n\nIn addition, you learn the Spare the Dying cantrip, which doesn't count against the number of cleric cantrips you know. For you, it has a range of 30 feet, and you can cast it as a bonus action.",
@@ -222,6 +367,42 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
   },
   // knowledge
   {
+    name: "Knowledge Domain Spells",
+    description:
+      "You gain domain spells at the cleric levels listed in the Knowledge Domain Spells table.",
+    subClassId: ids.knowledge,
+    levels: [1, 3, 5, 7, 9],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Cleric Level", "Spells"],
+          data: [
+            {
+              "Cleric Level": "1st",
+              Spells: "Command, Identify",
+            },
+            {
+              "Cleric Level": "3rd",
+              Spells: "Augury, Suggestion",
+            },
+            {
+              "Cleric Level": "5th",
+              Spells: "Nondetection, Speak with Dead",
+            },
+            {
+              "Cleric Level": "7th",
+              Spells: "Arcane Eye, Confusion",
+            },
+            {
+              "Cleric Level": "9th",
+              Spells: "Legend Lore, Scrying",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
     name: "Blessing of Knowledge",
     description:
       "At 1st level, you learn two languages of your choice. You also become proficient in your choice of two of the following skills: Arcana, History, Nature, or Religion. Your proficiency bonus is doubled for any ability check you make that uses either of those skills.",
@@ -261,6 +442,42 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     ],
   },
   //life
+  {
+    name: "Life Domain Spells",
+    description:
+      "You gain domain spells at the cleric levels listed in the Life Domain Spells table.",
+    subClassId: ids.life,
+    levels: [1, 3, 5, 7, 9],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Cleric Level", "Spells"],
+          data: [
+            {
+              "Cleric Level": "1st",
+              Spells: "Bless, Cure Wounds",
+            },
+            {
+              "Cleric Level": "3rd",
+              Spells: "Lesser Restoration, Spiritual Weapon",
+            },
+            {
+              "Cleric Level": "5th",
+              Spells: "Beacon of Hope, Revivify",
+            },
+            {
+              "Cleric Level": "7th",
+              Spells: "Death Ward, Guardian of Faith",
+            },
+            {
+              "Cleric Level": "9th",
+              Spells: "Mass Cure Wounds, Raise Dead",
+            },
+          ],
+        },
+      },
+    ],
+  },
   {
     name: "Bonus Proficiency",
     description:
@@ -305,6 +522,42 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
   },
   //light
   {
+    name: "Light Domain Spells",
+    description:
+      "You gain domain spells at the cleric levels listed in the Light Domain Spells table.",
+    subClassId: ids.light,
+    levels: [1, 3, 5, 7, 9],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Cleric Level", "Spells"],
+          data: [
+            {
+              "Cleric Level": "1st",
+              Spells: "Burning Hands, Faerie Fire",
+            },
+            {
+              "Cleric Level": "3rd",
+              Spells: "Flaming Sphere, Scorching Ray",
+            },
+            {
+              "Cleric Level": "5th",
+              Spells: "Daylight, Fireball",
+            },
+            {
+              "Cleric Level": "7th",
+              Spells: "Guardian of Faith, Wall of Fire",
+            },
+            {
+              "Cleric Level": "9th",
+              Spells: "Flame Strike, Scrying",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
     name: "Bonus Cantrip",
     description:
       "When you choose this domain at 1st level, you gain the Light cantrip if you don't already know it. This cantrip doesn’t count against the number of cleric cantrips you know.",
@@ -347,6 +600,42 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     levels: [17],
   },
   //nature
+  {
+    name: "Nature Domain Spells",
+    description:
+      "You gain domain spells at the cleric levels listed in the Nature Domain Spells table.",
+    subClassId: ids.nature,
+    levels: [1, 3, 5, 7, 9],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Cleric Level", "Spells"],
+          data: [
+            {
+              "Cleric Level": "1st",
+              Spells: "Animal Friendship, Speak with Animals",
+            },
+            {
+              "Cleric Level": "3rd",
+              Spells: "Barkskin, Spike Growth",
+            },
+            {
+              "Cleric Level": "5th",
+              Spells: "Plant Growth, Wind Wall",
+            },
+            {
+              "Cleric Level": "7th",
+              Spells: "Dominate Beast, Grasping Vine",
+            },
+            {
+              "Cleric Level": "9th",
+              Spells: "Insect Plague, Tree Stride",
+            },
+          ],
+        },
+      },
+    ],
+  },
   {
     name: "Acolyte of Nature",
     description:
@@ -391,6 +680,42 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
   },
   //order
   {
+    name: "Order Domain Spells",
+    description:
+      "You gain domain spells at the cleric levels listed in the Order Domain Spells table.",
+    subClassId: ids.order,
+    levels: [1, 3, 5, 7, 9],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Cleric Level", "Spells"],
+          data: [
+            {
+              "Cleric Level": "1st",
+              Spells: "Command, Heroism",
+            },
+            {
+              "Cleric Level": "3rd",
+              Spells: "Hold Person, Zone of Truth",
+            },
+            {
+              "Cleric Level": "5th",
+              Spells: "Mass Healing Word, Slow",
+            },
+            {
+              "Cleric Level": "7th",
+              Spells: "Compulsion, Locate Creature",
+            },
+            {
+              "Cleric Level": "9th",
+              Spells: "Commune, dominate Person",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
     name: "Bonus Proficiencies",
     description:
       "When you choose this domain at 1st level, you gain proficiency with heavy armor. You also gain proficiency in the Intimidation or Persuasion skill (your choice).",
@@ -433,6 +758,42 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     levels: [17],
   },
   //Peace
+  {
+    name: "Peace Domain Spells",
+    description:
+      "You gain domain spells at the cleric levels listed in the Peace Domain Spells table.",
+    subClassId: ids.peace,
+    levels: [1, 3, 5, 7, 9],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Cleric Level", "Spells"],
+          data: [
+            {
+              "Cleric Level": "1st",
+              Spells: "Heroism, Sanctuary",
+            },
+            {
+              "Cleric Level": "3rd",
+              Spells: "Aid, Warding Bond",
+            },
+            {
+              "Cleric Level": "5th",
+              Spells: "Beacon of Hope, Sending",
+            },
+            {
+              "Cleric Level": "7th",
+              Spells: "Aura of Purity, Otiluke's Resilient Sphere",
+            },
+            {
+              "Cleric Level": "9th",
+              Spells: "Greater Restoration, Rary's Telepathic Bond",
+            },
+          ],
+        },
+      },
+    ],
+  },
   {
     name: "Implement of Peace",
     description:
@@ -477,6 +838,42 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
   },
   //Tempest
   {
+    name: "Tempest Domain Spells",
+    description:
+      "You gain domain spells at the cleric levels listed in the Tempest Domain Spells table.",
+    subClassId: ids.tempest,
+    levels: [1, 3, 5, 7, 9],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Cleric Level", "Spells"],
+          data: [
+            {
+              "Cleric Level": "1st",
+              Spells: "Fog Cloud, Thunderwave",
+            },
+            {
+              "Cleric Level": "3rd",
+              Spells: "Gust of Wind, Shatter",
+            },
+            {
+              "Cleric Level": "5th",
+              Spells: "Call Lightning, Sleet Storm",
+            },
+            {
+              "Cleric Level": "7th",
+              Spells: "Control Water, Ice Storm",
+            },
+            {
+              "Cleric Level": "9th",
+              Spells: "Destructive Wave, Insect Plague",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
     name: "Bonus Proficiencies",
     description:
       "At 1st level, you gain proficiency with martial weapons and heavy armor.",
@@ -520,6 +917,42 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
   },
   //trickery
   {
+    name: "Trickery Domain Spells",
+    description:
+      "You gain domain spells at the cleric levels listed in the Trickery Domain Spells table.",
+    subClassId: ids.trickery,
+    levels: [1, 3, 5, 7, 9],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Cleric Level", "Spells"],
+          data: [
+            {
+              "Cleric Level": "1st",
+              Spells: "Charm Person, Disguise Self",
+            },
+            {
+              "Cleric Level": "3rd",
+              Spells: "Mirror Image, Pass without Trace",
+            },
+            {
+              "Cleric Level": "5th",
+              Spells: "Blink, Dispel Magic",
+            },
+            {
+              "Cleric Level": "7th",
+              Spells: "Dimension Door, Polymorph",
+            },
+            {
+              "Cleric Level": "9th",
+              Spells: "Dominate Person, Modify Memory",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
     name: "Blessing of the Trickster",
     description:
       "Starting when you choose this domain at 1st level, you can use your action to touch a willing creature other than yourself to give it advantage on Dexterity (Stealth) checks. This blessing lasts for 1 hour or until you use this feature again.",
@@ -555,6 +988,42 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     levels: [17],
   },
   //twilight
+  {
+    name: "Twilight Domain Spells",
+    description:
+      "You gain domain spells at the cleric levels listed in the Twilight Domain Spells table.",
+    subClassId: ids.twilight,
+    levels: [1, 3, 5, 7, 9],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Cleric Level", "Spells"],
+          data: [
+            {
+              "Cleric Level": "1st",
+              Spells: "Faerie Fire, Sleep",
+            },
+            {
+              "Cleric Level": "3rd",
+              Spells: " 	Moonbeam, See Invisibility",
+            },
+            {
+              "Cleric Level": "5th",
+              Spells: "Aura of Vitality, Leomund's Tiny Hut",
+            },
+            {
+              "Cleric Level": "7th",
+              Spells: " 	Aura of Life, Greater Invisibility",
+            },
+            {
+              "Cleric Level": "9th",
+              Spells: "Circle of Power, Mislead",
+            },
+          ],
+        },
+      },
+    ],
+  },
   {
     name: "Bonus Proficiencies",
     description:
@@ -609,6 +1078,42 @@ const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
     levels: [17],
   },
   //war
+  {
+    name: "War Domain Spells",
+    description:
+      "You gain domain spells at the cleric levels listed in the War Domain Spells table.",
+    subClassId: ids.war,
+    levels: [1, 3, 5, 7, 9],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Cleric Level", "Spells"],
+          data: [
+            {
+              "Cleric Level": "1st",
+              Spells: "Divine Favor, Shield of Faith",
+            },
+            {
+              "Cleric Level": "3rd",
+              Spells: "Magic Weapon, Spiritual Weapon",
+            },
+            {
+              "Cleric Level": "5th",
+              Spells: "Crusader's Mantle, Spirit Guardians",
+            },
+            {
+              "Cleric Level": "7th",
+              Spells: "Freedom of Movement, Stoneskin",
+            },
+            {
+              "Cleric Level": "9th",
+              Spells: "Flame Strike, Hold Monster",
+            },
+          ],
+        },
+      },
+    ],
+  },
   {
     name: "Bonus Proficiencies",
     description:

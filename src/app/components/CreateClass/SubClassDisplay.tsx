@@ -60,36 +60,6 @@ const SubClassDisplay = ({ subClass }: Props) => {
         </div>
       </div>
       <div className="divider"></div>
-      {subClass.spells.length > 0 && (
-        <>
-          <br />
-          <h3 className="px-4">
-            You gain the following spells from this subclass:
-          </h3>
-          <div className="overflow-x-auto p-4">
-            <table className="table-zebra table-md w-full">
-              <thead>
-                <tr>
-                  <th className="text-left bg-black/20">Levels</th>
-                  <th className="text-left bg-black/20">Spells</th>
-                </tr>
-              </thead>
-              <tbody>
-                {subClass.spells.map((spell, index) => {
-                  const res = processSpellsString(spell);
-                  return (
-                    <tr key={index}>
-                      <td>{numPlace(res.lvl)}</td>
-                      <td>{res.spells.join(", ")}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-          <div className="divider"></div>
-        </>
-      )}
 
       {numberArray(1, 20).map((num) => {
         //grab features for the current level

@@ -290,7 +290,6 @@ function ClassDisplay({
                     <div className="p-4">
                       <JsonTable
                         json={subClassTableJson}
-                        colSizes={[30, 70]}
                         links={subClasses.map((s) => {
                           return `/class/${
                             classObj.name

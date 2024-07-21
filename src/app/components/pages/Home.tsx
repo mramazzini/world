@@ -4,38 +4,38 @@ const data = [
     name: "classes",
     url: "/class",
   },
-  {
-    name: "subclasses",
-    url: "/subclass",
-  },
-  {
-    name: "races",
-    url: "/race",
-  },
-  {
-    name: "subraces",
-    url: "/subrace",
-  },
-  {
-    name: "backgrounds",
-    url: "/background",
-  },
-  {
-    name: "feats",
-    url: "/feat",
-  },
-  {
-    name: "spells",
-    url: "/spell",
-  },
-  {
-    name: "items",
-    url: "/item",
-  },
-  {
-    name: "pantheon",
-    url: "/pantheon",
-  },
+  // {
+  //   name: "subclasses",
+  //   url: "/subclass",
+  // },
+  // {
+  //   name: "races",
+  //   url: "/race",
+  // },
+  // {
+  //   name: "subraces",
+  //   url: "/subrace",
+  // },
+  // {
+  //   name: "backgrounds",
+  //   url: "/background",
+  // },
+  // {
+  //   name: "feats",
+  //   url: "/feat",
+  // },
+  // {
+  //   name: "spells",
+  //   url: "/spell",
+  // },
+  // {
+  //   name: "items",
+  //   url: "/item",
+  // },
+  // {
+  //   name: "pantheon",
+  //   url: "/pantheon",
+  // },
 ];
 
 const HomePage = () => {

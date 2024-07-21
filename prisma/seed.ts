@@ -18,19 +18,8 @@ import createUser from "./seeds/User";
 import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
 
 const db = new PrismaClient();
+// db cleared with npm run nuke prior to seeding
 const seed = async () => {
-  // clear the database
-  cinfo("Clearing database");
-  await db.feature.deleteMany({});
-  await db.subClassFeature.deleteMany({});
-  await db.subClass.deleteMany({});
-  await db.class.deleteMany({});
-  await db.casterType.deleteMany({});
-  await db.weaponToProperty.deleteMany({});
-  await db.weapon.deleteMany({});
-  await db.weaponProperty.deleteMany({});
-  await db.user.deleteMany({});
-  cinfo("Database cleared");
   // Create caster types
   cinfo("Creating caster types");
   for (const CasterType of CasterTypes) {

@@ -3,11 +3,9 @@ import { useRouter } from "next/navigation";
 //function to generate a single table
 const GenerateTable = ({
   data,
-  colSizes,
   links,
 }: {
   data: PrismaJson.Table;
-  colSizes?: number[] | undefined;
   links?: string[] | undefined;
 }) => {
   const router = useRouter();
@@ -15,6 +13,7 @@ const GenerateTable = ({
   const tableData = data[key];
   const tableHeader = tableData["headers"];
   const tableBody = tableData["data"];
+  const colSizes = tableData["headersLength"];
 
   //style for the first cell of each row
   let firstCellStyle = colSizes

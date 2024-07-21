@@ -4,8 +4,8 @@ import BarbarianSubclassFeatures from "./Barbarian";
 import BardSubclassFeatures from "./Bard";
 import WizardSubclassFeatures from "./Wizard";
 import DruidSubclassFeatures from "./Druid";
-// import MonkSubclassFeatures from "./Monk";
-// import PaladinSubclassFeatures from "./Paladin";
+import MonkSubclassFeatures from "./Monk";
+import PaladinSubclassFeatures from "./Paladin";
 // import RangerSubclassFeatures from "./Ranger";
 // import RogueSubclassFeatures from "./Rogue";
 // import SorcererSubclassFeatures from "./Sorcerer";
@@ -18,8 +18,8 @@ const SubclassFeatures = [
   ...BardSubclassFeatures,
   ...WizardSubclassFeatures,
   ...DruidSubclassFeatures,
-  // ...MonkSubclassFeatures,
-  // ...PaladinSubclassFeatures,
+  ...MonkSubclassFeatures,
+  ...PaladinSubclassFeatures,
   // ...RangerSubclassFeatures,
   // ...RogueSubclassFeatures,
   // ...SorcererSubclassFeatures,

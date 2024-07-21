@@ -133,7 +133,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     spellFocus: "holy symbol",
     ritualCaster: true,
     subClassSpellDescription:
-      "**Domain Spells:** Each domain has a list of spells-its domain spells that you gain at the cleric levels noted in the domain description. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day. If you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you.",
+      "**Domain Spells:** Each domain has a list of its domain spells that you gain at the cleric levels noted in the domain description. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day. If you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you.",
     prepareSpellInfo:
       "You prepare the list of cleric spells that are available for you to cast. To do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots. \n\nYou can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.",
     spellCastingInfo:

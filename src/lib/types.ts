@@ -47,6 +47,7 @@ declare global {
     }
     interface TableData {
       headers: string[];
+      headersLength?: number[];
       data: { [key: string | number]: string }[];
     }
   }
@@ -66,6 +67,7 @@ export enum src {
   phb = "Player's Handbook",
   vanRichten = "Van Richten's Guide to Ravenloft",
   dmg = "Dungeon Master's Guide",
+  fizban = "Fizban's Treasury of Dragons",
 }
 
 export const officialSources: string[] = [

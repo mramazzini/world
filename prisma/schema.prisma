@@ -180,7 +180,6 @@ model SubClass {
   id               Int               @id @default(autoincrement())
   name             String
   description      String
-  spells           String[] // string format: "level:spell,spell,spell" where level is an int and spell is a string
   SubClassFeatures SubClassFeature[]
   flavorText       String            @db.VarChar(200)
   source           String            @default("Player's Handbook")
@@ -262,11 +261,13 @@ model Feature {
   /// [Table]
   extendedTable Json[] // This table will be rendered with the feature
 
-  spellCastingFeature Boolean  @default(false)
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  Class               Class?   @relation(fields: [classId], references: [id])
+  spellCastingFeature Boolean     @default(false)
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+  Class               Class?      @relation(fields: [classId], references: [id])
   classId             Int?
+  Background          Background? @relation(fields: [backgroundId], references: [id])
+  backgroundId        Int?
 }
 
 model SubClassFeature {
@@ -323,6 +324,7 @@ model Background {
   toolProf    String[]
   languages   Language[]
   equipment   String[]
+  Features    Feature[]
   source      String     @default("Player's Handbook")
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
