@@ -115,7 +115,7 @@ const termDictionary: {
   {
     term: "spell slot",
     definition:
-      "A resource that is used to cast spells. Represents how many spells you can cast before needing to rest.",
+      "A resource that is used to cast spells. Represents how many spells of a certain level you can cast before needing to rest.",
   },
   {
     term: "spell slots",
@@ -224,12 +224,12 @@ const termDictionary: {
   {
     term: "hit dice",
     definition:
-      "A resource that is used to regain hit points during a short rest. Also used to determine how many hit points you gain when you level up.",
+      "A resource that is used to regain hit points during a short rest rolling a die. Also used to determine how many hit points you gain when you level up.",
   },
   {
     term: "hit die",
     definition:
-      "A resource that is used to regain hit points during a short rest. Also used to determine how many hit points you gain when you level up.",
+      "A resource that is used to regain hit points during a short rest by rolling a die. Also used to determine how many hit points you gain when you level up.",
   },
   {
     term: "short rest",
@@ -432,6 +432,21 @@ const termDictionary: {
   {
     term: "Equipment",
     definition: "Items that your character carries and utilizes.",
+  },
+  {
+    term: "Material Components",
+    definition:
+      "Items that are consumed when casting a spell. Some spells require them.",
+  },
+  {
+    term: "Somantic Components",
+    definition:
+      "Gestures that are required to cast a spell. Some spells require them.",
+  },
+  {
+    term: "Verbal Components",
+    definition:
+      "Words that are required to cast a spell. Some spells require them.",
   },
 ];
 

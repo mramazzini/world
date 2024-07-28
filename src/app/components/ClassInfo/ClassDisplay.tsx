@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import numPlace from "@/lib/utils/numPlace";
 //takes a class object and returns a formatted display of the class
 import numberArray from "@/lib/utils/numberArray";
@@ -167,43 +167,68 @@ function ClassDisplay({
           </P>
         </p>
       </div>
-      <h2>
-        Equipment <Info tooltip="Equipment" />
-      </h2>
-      <div className="p-4">
-        <p>
-          <P>
-            You start with the following equipment, in addition to the equipment
-            granted by your background:
-          </P>
-        </p>
-        <ul className="list-disc p-4">
-          {classObj.equipment.map((item, i) => (
-            <li key={i}>
-              {" "}
-              <P>{item} </P>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <h2>
-        Skills <Info tooltip="skills" />
-      </h2>
-      <div className="p-4">
-        <p>
-          <P>
-            Choose {classObj.skillChoiceCount.toString()} from the following
-            list of skills:
-          </P>
-        </p>
-        <ul className="list-disc p-4">
-          {classObj.skills.map((skill, i) => (
-            <li key={i}>
-              <P>{skill.toCapitalCase().replaceAll("_", " ")} </P>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {classObj.equipment.length > 0 && (
+        <>
+          <h2>
+            Equipment <Info tooltip="Equipment" />
+          </h2>
+          <div className="p-4">
+            <p>
+              <P>
+                You start with the following equipment, in addition to the
+                equipment granted by your background:
+              </P>
+            </p>
+            <ul className="list-disc p-4">
+              {classObj.equipment.map((item, i) => (
+                <React.Fragment key={i}>
+                  {item && (
+                    <li>
+                      {" "}
+                      <P>{item} </P>
+                    </li>
+                  )}
+                </React.Fragment>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
+      {classObj.skills.length > 0 || classObj.skillChoiceCount == 0 ? (
+        <>
+          <h2>
+            Skills <Info tooltip="skills" />
+          </h2>
+          <div className="p-4">
+            <p>
+              <P>
+                Choose {classObj.skillChoiceCount.toString()} from the following
+                list of skills:
+              </P>
+            </p>
+
+            <ul className="list-disc p-4">
+              {classObj.skills.map((skill, i) => (
+                <li key={i}>
+                  <P>{skill.toCapitalCase().replaceAll("_", " ")} </P>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      ) : (
+        <>
+          <h2>
+            Skills <Info tooltip="skills" />
+          </h2>
+          <div className="p-4">
+            <p>
+              <P>You are not granted any skill proficiencies by your class.</P>
+            </p>
+          </div>
+        </>
+      )}
+
       {classObj.spellCaster && casterType && (
         <SpellCastingInfo classObj={classObj} casterType={casterType} />
       )}
@@ -347,13 +372,13 @@ function ClassDisplay({
                 )}
 
                 <ul>
-                  {feat.map((feature) => {
+                  {feat.map((feature, index) => {
                     const lvlIndex = feature.levels.findIndex(
                       (lvl) => lvl === num
                     );
                     if (lvlIndex === -1 || lvlIndex > 0) return;
                     return (
-                      <li className="px-4" key={`${num}-${feature.id}`}>
+                      <li className="px-4" key={index}>
                         <h3 className="flex flex-row justify-between">
                           {lvlIndex === 0 && feature.name}{" "}
                           <Levels levels={feature.levels} />

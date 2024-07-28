@@ -147,7 +147,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     id: 4,
     name: "rogue",
     hitDie: 8,
-    description: "Rogues are cunning and elusive adversaries. ",
+    description:
+      "Rogues rely on skill, stealth, and their foes' vulnerabilities to get the upper hand in any situation. They have a knack for finding the solution to just about any problem, demonstrating a resourcefulness and versatility that is the cornerstone of any successful adventuring party.",
     multiclassing:
       "You must have a Dexterity score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.DEX, Ability.INT],
@@ -349,7 +350,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     name: "monk",
     hitDie: 8,
     description:
-      "Monks are martial artists who use ki to perform amazing feats.",
+      "Monks are united in their ability to magically harness the energy that flows in their bodies. Whether channeled as a striking display of combat prowess or a subtler focus of defensive ability and speed, this energy infuses all that a monk does.",
     multiclassing:
       "You must have a Dexterity or Strength score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.STR, Ability.DEX],
@@ -383,7 +384,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     id: 9,
     name: "paladin",
     hitDie: 10,
-    description: "Paladins are holy warriors bound to a sacred oath.",
+    description:
+      "Whether sworn before a god's altar and the witness of a priest, in a sacred glade before nature spirits and fey beings, or in a moment of desperation and grief with the dead as the only witness, a paladin's oath is a powerful bond.",
     multiclassing:
       "You must have a Strength and Charisma score of 13 or higher in order to multiclass in or out of this class",
     savingThrows: [Ability.WIS, Ability.CHA],
@@ -419,7 +421,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     spellCastingInfo:
       "The Paladin table shows how many spell slots you have to cast your spells. To cast one of your paladin spells of 1st level or higher, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
     prepareSpellInfo:
-      "You prepare the list of paladin spells that are available for you to cast, choosing from the paladin spell list. When you do so, choose a number of paladin spells equal to your Charisma modifier + half your paladin level, rounded down (minimum of one spell). The spells must be of a level for which you have spell slots. You can change your list of prepared spells when you finish a long rest. Preparing a new list of paladin spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.",
+      "You prepare the list of paladin spells that are available for you to cast, choosing from the paladin spell list. When you do so, choose a number of paladin spells equal to your Charisma modifier + half your paladin level, rounded down (minimum of one spell). The spells must be of a level for which you have spell slots.\n\n You can change your list of prepared spells when you finish a long rest. Preparing a new list of paladin spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.",
     spellCastingAbility: Ability.CHA,
     spellFocus: "holy symbol",
     casterTypeId: 2,
@@ -430,7 +432,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     id: 10,
     name: "ranger",
     hitDie: 10,
-    description: "Rangers are hunters and wilderness warriors.",
+    description:
+      "Far from the bustle of cities and towns, past the hedges that shelter the most distant farms from the terrors of the wild, amid the dense-packed trees of trackless forests and across wide and empty plains, rangers keep their unending watch.",
     multiclassing:
       "You must have a Dexterity and Wisdom score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.STR, Ability.DEX],
@@ -462,8 +465,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     spellCaster: true,
     spellCastingAbility: Ability.WIS,
     spellFocus: "druidic focus",
-    spellCastingInfo: `The Ranger table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.`,
-    prepareSpellInfo: `You know a number of spells from the ranger spell list equal to your Wisdom modifier + half your ranger level, rounded down (minimum of one spell). These spells must be of a level for which you have spell slots. Additionally, when you gain a level in this class, you can choose one of the ranger spells you know and replace it with another spell from the ranger spell list, which also must be of a level for which you have spell slots.`,
+    spellCastingInfo: `The Ranger table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. \n\nYou regain all expended spell slots when you finish a long rest.`,
+    prepareSpellInfo: `You know a number of spells from the ranger spell list equal to your Wisdom modifier + half your ranger level, rounded down (minimum of one spell). These spells must be of a level for which you have spell slots. \n\nAdditionally, when you gain a level in this class, you can choose one of the ranger spells you know and replace it with another spell from the ranger spell list, which also must be of a level for which you have spell slots.`,
 
     spellsKnown: [
       0, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11,
@@ -475,7 +478,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 11,
     name: "sorcerer",
-    description: "Sorcerers are spellcasters who draw on innate magic.",
+    description:
+      "Sorcerers carry a magical birthright conferred upon them by an exotic bloodline, some otherworldly influence, or exposure to unknown cosmic forces. No one chooses sorcery; the power chooses the sorcerer.",
     multiclassing:
       "You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.",
     hitDie: 6,
@@ -523,7 +527,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     name: "warlock",
     hitDie: 8,
     description:
-      "Warlocks are wielders of magic who have forged a pact with an otherworldly being.",
+      "Warlocks are seekers of the knowledge that lies hidden in the fabric of the multiverse. Through pacts made with mysterious beings of supernatural power, warlocks unlock magical effects both subtle and spectacular.",
     multiclassing:
       "You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: [Ability.WIS, Ability.CHA],

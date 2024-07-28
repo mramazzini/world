@@ -195,7 +195,7 @@ export const getDefaultCasterTypes = async (): Promise<CasterType[]> => {
   const arr: CasterType[] = await db.casterType.findMany({
     where: {
       id: {
-        in: [1, 2, 3, 4],
+        in: [1, 2, 3],
       },
     },
   });

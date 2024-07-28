@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getClass } from "@/lib/actions/db/read.actions";
 import { Class, Prisma, Feature, SubClass } from "@prisma/client";
 import { ClassInfo } from "@/lib/types";
-import ClassDisplay from "@/app/components/CreateClass/ClassDisplay";
+import ClassDisplay from "@/app/components/ClassInfo/ClassDisplay";
 
 const ClassPage = () => {
   const router = usePathname();

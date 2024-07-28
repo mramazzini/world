@@ -740,14 +740,19 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   {
     name: "Divine Sense",
     description:
-      "The presence of strong evil registers on your senses like a noxious odor, and powerful good rings like heavenly music in your ears. As an action, you can open your awareness to detect such forces. Until the end of your next turn, you know the location of any celestial, fiend, or undead within 60 feet of you that is not behind total cover. You know the type (celestial, fiend, or undead) of any being whose presence you sense, but not its identity (the vampire Count Strahd von Zarovich, for instance). Within the same radius, you also detect the presence of any place or object that has been consecrated or desecrated, as with the Hallow spell. You can use this feature a number of times equal to 1 + your Charisma modifier. When you finish a long rest, you regain all expended uses.",
+      "The presence of strong evil registers on your senses like a noxious odor, and powerful good rings like heavenly music in your ears. As an action, you can open your awareness to detect such forces. Until the end of your next turn, within a 60ft radius, you get the benefits listed below. You can use this feature a number of times equal to 1 + your Charisma modifier. When you finish a long rest, you regain all expended uses.",
+    options: [
+      "You know the location of any celestial, fiend, or undead within 60 feet of you that is not behind total cover.",
+      "You know the type (celestial, fiend, or undead) of any being whose presence you sense, but not its identity.",
+      "You also detect the presence of any place or object that has been consecrated or desecrated, as with the Hallow spell.",
+    ],
     levels: [1],
     classId: ids.paladin,
   },
   {
     name: "Lay on Hands",
     description:
-      "Your blessed touch can heal wounds. You have a pool of healing power that replenishes when you take a long rest. With that pool, you can restore a total number of hit points equal to your paladin level x 5. As an action, you can touch a creature and draw power from the pool to restore a number of hit points to that creature, up to the maximum amount remaining in your pool. Alternatively, you can expend 5 hit points from your pool of healing to cure the target of one disease or neutralize one poison affecting it. You can cure multiple diseases and neutralize multiple poisons with a single use of Lay on Hands, expending hit points separately for each one. This feature has no effect on undead and constructs.",
+      "Your blessed touch can heal wounds. You have a pool of healing power that replenishes when you take a long rest. With that pool, you can restore a total number of hit points equal to your paladin level x 5.\n\nAs an action, you can touch a creature and draw power from the pool to restore a number of hit points to that creature, up to the maximum amount remaining in your pool.\n\nAlternatively, you can expend 5 hit points from your pool of healing to cure the target of one disease or neutralize one poison affecting it. You can cure multiple diseases and neutralize multiple poisons with a single use of Lay on Hands, expending hit points separately for each one.\n\nThis feature has no effect on undead and constructs.",
     levels: [1],
     classId: ids.paladin,
   },
@@ -755,6 +760,75 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
     name: "Fighting Style",
     description:
       "At 2nd level, you adopt a style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again.",
+    extendedTable: [
+      {
+        "Fighting Styles": {
+          headers: ["Fighting Style", "Description"],
+          data: [
+            {
+              "Fighting Style": "Blessed Warrior",
+              Description:
+                "You learn two cantrips of your choice from the cleric spell list. They count as paladin spells for you, and Charisma is your spellcasting ability for them. Whenever you gain a level in this class, you can replace one of these cantrips with another cantrip from the cleric spell list.",
+            },
+            {
+              "Fighting Style": "Blind Fighting",
+              Description:
+                "You have blindsight with a range of 10 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.",
+            },
+            {
+              "Fighting Style": "Defense",
+              Description:
+                "While you are wearing armor, you gain a +1 bonus to AC.",
+            },
+            {
+              "Fighting Style": "Dueling",
+              Description:
+                "When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.",
+            },
+            {
+              "Fighting Style": "Great Weapon Fighting",
+              Description:
+                "When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.",
+            },
+            {
+              "Fighting Style": "Interception",
+              Description:
+                "When a creature you can see hits a target, other than you, within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your proficiency bonus (to a minimum of 0 damage). You must be wielding a shield or a simple or martial weapon to use this reaction.",
+            },
+            {
+              "Fighting Style": "Protection",
+              Description:
+                "When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.",
+            },
+            {
+              "Fighting Style": "Close Quarters Shooter (UA)",
+              Description:
+                "When making a ranged attack while you are within 5 feet of a hostile creature, you do not have disadvantage on the attack roll. Your ranged attacks ignore half cover and three-quarters cover against targets within 30 feet of you. You have a +1 bonus to attack rolls on ranged attacks.",
+            },
+            {
+              "Fighting Style": "Mariner (UA)",
+              Description:
+                "As long as you are not wearing heavy armor or using a shield, you have a swimming speed and a climbing speed equal to your normal speed, and you gain a +1 bonus to armor class.",
+            },
+            {
+              "Fighting Style": "Thrown-Weapon Fighting (UA)",
+              Description:
+                "You can draw a weapon that has the thrown property as part of the attack you make with the weapon. In addition, when you hit with a ranged attack using a thrown weapon, you gain a +1 bonus to the damage roll.",
+            },
+            {
+              "Fighting Style": "Tunnel Fighter (UA)",
+              Description:
+                "As a bonus action, you can enter a defensive stance that lasts until the start of your next turn. While in your defensive stance, you can make opportunity attacks without using your reaction, and you can use your reaction to make a melee attack against a creature that moves more than 5 feet while within your reach.",
+            },
+            {
+              "Fighting Style": "Unarmed Fighting",
+              Description:
+                "Your unarmed strikes can deal bludgeoning damage equal to 1d6 + your Strength modifier. If you strike with two free hands, the d6 becomes a d8. When you successfully start a grapple, you can deal 1d4 bludgeoning damage to the grappled creature. Until the grapple ends, you can also deal this damage to the creature whenever you hit it with a melee attack.",
+            },
+          ],
+        },
+      },
+    ],
     levels: [2],
     classId: ids.paladin,
   },
@@ -890,28 +964,65 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   {
     name: "Favored Enemy",
     description:
-      "Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain type of enemy. Choose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead. Alternatively, you can select two  races of humanoid (such as gnolls and orcs) as favored enemies. You have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to recall information about them. When you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if they speak one at all. You choose one additional favored enemy, as well as an associated language, at 6th and 14th level. As you gain levels, your choices should reflect the types of monsters you have encountered on your adventures.",
+      "Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain type of enemy.\n\nChoose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead. Alternatively, you can select two races of humanoid (such as gnolls and orcs) as favored enemies.\n\nYou have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to recall information about them.\n\nWhen you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if they speak one at all.\n\nYou choose one additional favored enemy, as well as an associated language, at 6th and 14th level. As you gain levels, your choices should reflect the types of monsters you have encountered on your adventures.",
+
     levels: [1, 6, 14],
     classId: ids.ranger,
   },
   {
     name: "Favored Foe",
     description:
-      "This 1st-level feature replaces the Favored Enemy feature and works with the Foe Slayer feature. You gain no benefit from the replaced feature and don't qualify for anything in the game that requires it. When you hit a creature with an attack roll, you can call on your mystical bond with nature to mark the target as your favored enemy for 1 minute or until you lose your concentration (as if you were concentrating on a spell). The first time on each of your turns that you hit the favored enemy and deal damage to it, including when you mark it, you increase that damage by 1d4. You can use this feature to mark a favored enemy a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest. This feature's extra damage increases when you reach certain levels in this class: to 1d6 at 6th level and to 1d8 at 14th level.",
+      "This 1st-level feature replaces the Favored Enemy feature and works with the Foe Slayer feature. You gain no benefit from the replaced feature and don't qualify for anything in the game that requires it.\n\n When you hit a creature with an attack roll, you can call on your mystical bond with nature to mark the target as your favored enemy for 1 minute or until you lose your concentration (as if you were concentrating on a spell). \n\nThe first time on each of your turns that you hit the favored enemy and deal damage to it, including when you mark it, you increase that damage by 1d4.\n\n You can use this feature to mark a favored enemy a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.\n\n This feature's extra damage increases when you reach certain levels in this class: to 1d6 at 6th level and to 1d8 at 14th level.",
     levels: [1, 6, 14],
     classId: ids.ranger,
   },
   {
     name: "Natural Explorer",
     description:
-      "You are particularly familiar with one type of natural environment and are adept at traveling and surviving in such regions. Choose one type of favored terrain: arctic, coast, desert, forest, grassland, mountain, swamp, or the Underdark. When you make an Intelligence or Wisdom check related to your favored terrain, your proficiency bonus is doubled if you are using a skill that you're proficient in. While traveling for an hour or more in your favored terrain, you gain the following benefits: Difficult terrain doesn't slow your group's travel. Your group can't become lost except by magical means. Even when you are engaged in another activity while traveling (such as foraging, navigating, or tracking), you remain alert to danger. If you are traveling alone, you can move stealthily at a normal pace. When you forage, you find twice as much food as you normally would. While tracking other creatures, you also learn their exact number, their sizes, and how long ago they passed through the area.You choose additional favored terrain types at 6th and 10th level. ",
+      "You are particularly familiar with one type of natural environment and are adept at traveling and surviving in such regions. Choose one type of favored terrain: arctic, coast, desert, forest, grassland, mountain, swamp, or the Underdark. When you make an Intelligence or Wisdom check related to your favored terrain, your proficiency bonus is doubled if you are using a skill that you're proficient in.\n\n While traveling for an hour or more in your favored terrain, you gain the benefits listed below.\n\nYou choose additional favored terrain types at 6th and 10th level.",
+    options: [
+      "Difficult terrain doesn't slow your group's travel.",
+      "Your group can't become lost except by magical means.",
+      "Even when you are engaged in another activity while traveling (such as foraging, navigating, or tracking), you remain alert to danger.",
+      "If you are traveling alone, you can move stealthily at a normal pace.",
+      "When you forage, you find twice as much food as you normally would.",
+      "While tracking other creatures, you also learn their exact number, their sizes, and how long ago they passed through the area.",
+    ],
+
     levels: [1, 6, 10],
     classId: ids.ranger,
   },
   {
-    name: "Deft Explorer",
+    name: "Deft Explorer (Optional)",
     description:
-      "This 1st-level feature replaces the Natural Explorer feature. You gain no benefit from the replaced feature and don't qualify for anything in the game that requires it.You are an unsurpassed explorer and survivor, both in the wilderness and in dealing with others on your travels. You gain the Canny benefit below, and you gain an additional benefit when you reach 6th level and 10th level in this class. Canny (1st level): Choose one of your skill proficiencies. Your proficiency bonus is doubled for any ability check you make using the chosen skill. You can also speak, read, and write 2 additional languages of your choice. Roving (6th level): Your walking speed increases by 5, and you gain a climbing speed and a swimming speed equal to your walking speed. Tireless (10th level): As an action, you can give yourself a number of temporary hit points equal to 1d8 + your Wisdom modifier (minimum of 1 temporary hit point). You can use this action a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest. In addition, whenever you finish a short rest, your exhaustion level, if any, is decreased by 1.",
+      "This 1st-level feature replaces the Natural Explorer feature. You gain no benefit from the replaced feature and don't qualify for anything in the game that requires it.\n\nIf you take the Deft Explorer Feature, you gain the following benefits at the specified levels:",
+    extendedTable: [
+      {
+        "": {
+          headers: ["Level", "Deft Explorer Feature", "Description"],
+          data: [
+            {
+              Level: "1",
+              "Deft Explorer Feature": "Canny",
+              Description:
+                "Choose one of your skill proficiencies. Your proficiency bonus is doubled for any ability check you make using the chosen skill.\n\nYou can also speak, read, and write 2 additional languages of your choice.",
+            },
+            {
+              Level: "6",
+              "Deft Explorer Feature": "Roving",
+              Description:
+                "Your walking speed increases by 5 feet, and you gain a climbing speed and a swimming speed equal to your walking speed.",
+            },
+            {
+              Level: "10",
+              "Deft Explorer Feature": "Tireless",
+              Description:
+                "As an action, you can give yourself a number of temporary hit points equal to 1d8 + your Wisdom modifier (minimum of 1 temporary hit point). You can use this action a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.\n\nIn addition, whenever you finish a short rest, your exhaustion level, if any, is decreased by 1.",
+            },
+          ],
+        },
+      },
+    ],
     levels: [1, 6, 10],
     classId: ids.ranger,
   },
@@ -921,9 +1032,78 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
       "At 2nd level, you adopt a style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again.",
     levels: [2],
     classId: ids.ranger,
+    extendedTable: [
+      {
+        "Fighting Styles": {
+          headers: ["Fighting Style", "Description"],
+          data: [
+            {
+              "Fighting Style": "Archery",
+              Description:
+                "You gain a +2 bonus to attack rolls you make with ranged weapons.",
+            },
+            {
+              "Fighting Style": "Blind Fighting",
+              Description:
+                "You have blind sight with a range of 10 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.",
+            },
+            {
+              "Fighting Style": "Defense",
+              Description:
+                "While you are wearing armor, you gain a +1 bonus to AC.",
+            },
+            {
+              "Fighting Style": "Druidic Warrior",
+              Description:
+                "You learn two cantrips of your choice from the Druid spell list. They count as ranger spells for you, and Wisdom is your spellcasting ability for them. Whenever you gain a level in this class, you can replace one of these cantrips with another cantrip from the Druid spell list.",
+            },
+            {
+              "Fighting Style": "Dueling",
+              Description:
+                "When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.",
+            },
+            {
+              "Fighting Style": "Thrown Weapon Fighting",
+              Description:
+                "You can draw a weapon that has the thrown property as part of the attack you make with the weapon. In addition, when you hit with a ranged attack using a thrown weapon, you gain a +2 bonus to the damage roll.",
+            },
+            {
+              "Fighting Style": "Two-Weapon Fighting",
+              Description:
+                "When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.",
+            },
+            {
+              "Fighting Style": "Close Quarters Shooter (UA)",
+              Description:
+                "When making a ranged attack while you are within 5 feet of a hostile creature, you do not have disadvantage on the attack roll. Your ranged attacks ignore half cover and three-quarters cover against targets within 30 feet of you. You have a +1 bonus to attack rolls on ranged attacks.",
+            },
+            {
+              "Fighting Style": "Interception (UA)",
+              Description:
+                "When a creature you can see hits a target that is within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your proficiency bonus (to a minimum of 0 damage). You must be wielding a shield or a simple or martial weapon to use this reaction.",
+            },
+            {
+              "Fighting Style": "Mariner (UA)",
+              Description:
+                "As long as you are not wearing heavy armor or using a shield, you have a swimming speed and a climbing speed equal to your normal speed, and you gain a +1 bonus to armor class.",
+            },
+            {
+              "Fighting Style": "Tunnel Fighter (UA)",
+              Description:
+                "As a bonus action, you can enter a defensive stance that lasts until the start of your next turn. While in your defensive stance, you can make opportunity attacks without using your reaction, and you can use your reaction to make a melee attack against a creature that moves more than 5 feet while within your reach.",
+            },
+            {
+              "Fighting Style": "Unarmed Fighting",
+              Description:
+                "Your unarmed strikes can deal bludgeoning damage equal to 1d6 + your Strength modifier. If you strike with two free hands, the d6 becomes a d8. \n\n When you successfully start a grapple, you can deal 1d4 bludgeoning damage to the grappled creature. Until the grapple ends, you can also deal this damage to the creature whenever you hit it with a melee attack.",
+            },
+          ],
+        },
+      },
+    ],
   },
   {
-    name: "Primal Awareness",
+    name: "Primeval Awareness",
     description:
       "Beginning at 3rd level, you can use your action and expend one ranger spell slot to focus your awareness on the region around you. For 1 minute per level of the spell slot you expend, you can sense whether the following types of creatures are present within 1 mile of you (or within up to 6 miles if you are in your favored terrain): aberrations, celestials, dragons, elementals, fey, fiends, and undead. This feature doesn’t reveal the creatures’ location or number.",
     levels: [3],
@@ -932,7 +1112,36 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   {
     name: "Primal Awareness",
     description:
-      "This 3rd-level feature replaces the Primeval Awareness feature. You gain no benefit from the replaced feature and don't qualify for anything in the game that requires it. You can focus your awareness through the interconnections of nature: you learn additional spells when you reach certain levels in this class if you don't already know them, as shown in the Primal Awareness Spells table. These spells don't count against the number of ranger spells you know. You can cast each of these spells once without expending a spell slot. Once you cast a spell in this way, you can't do so again until you finish a long rest.",
+      "This 3rd-level feature replaces the Primeval Awareness feature. You gain no benefit from the replaced feature and don't qualify for anything in the game that requires it.\n\n You can focus your awareness through the interconnections of nature: you learn additional spells when you reach certain levels in this class if you don't already know them, as shown in the Primal Awareness Spells table. These spells don't count against the number of ranger spells you know. \n\nYou can cast each of these spells once without expending a spell slot. Once you cast a spell in this way, you can't do so again until you finish a long rest.",
+    extendedTable: [
+      {
+        "Primal Awareness Spells": {
+          headers: ["Ranger Level", "Spell"],
+          data: [
+            {
+              "Ranger Level": "3rd",
+              Spell: "Speak With Animals",
+            },
+            {
+              "Ranger Level": "5th",
+              Spell: "Beast Sense",
+            },
+            {
+              "Ranger Level": "9th",
+              Spell: "Speak With Plants",
+            },
+            {
+              "Ranger Level": "13th",
+              Spell: "Locate Creature",
+            },
+            {
+              "Ranger Level": "17th",
+              Spell: "Commune With Nature",
+            },
+          ],
+        },
+      },
+    ],
     levels: [3],
     classId: ids.ranger,
   },
@@ -953,21 +1162,21 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   {
     name: "Land's Stride",
     description:
-      "Starting at 8th level, moving through nonmagical difficult terrain costs you no extra movement. You can also pass through nonmagical plants without being slowed by them and without taking damage from them if they have thorns, spines, or a similar hazard. In addition, you have advantage on saving throws against plants that are magically created or manipulated to impede movement, such as those created by the Entangle spell.",
+      "Starting at 8th level, moving through nonmagical difficult terrain costs you no extra movement. You can also pass through nonmagical plants without being slowed by them and without taking damage from them if they have thorns, spines, or a similar hazard.\n\n In addition, you have advantage on saving throws against plants that are magically created or manipulated to impede movement, such as those created by the Entangle spell.",
     levels: [8],
     classId: ids.ranger,
   },
   {
     name: "Hide in Plain Sight",
     description:
-      "Starting at 10th level, you can spend 1 minute creating camouflage for yourself. You must have access to fresh mud, dirt, plants, soot, and other naturally occurring materials with which to create your camouflage. Once you are camouflaged in this way, you can try to hide by pressing yourself up against a solid surface, such as a tree or wall, that is at least as tall and wide as you are. You gain a +10 bonus to Dexterity (Stealth) checks as long as you remain there without moving or taking actions. Once you move or take an action or a reaction, you must camouflage yourself again to gain this benefit.",
+      "Starting at 10th level, you can spend 1 minute creating camouflage for yourself. You must have access to fresh mud, dirt, plants, soot, and other naturally occurring materials with which to create your camouflage.\n\n Once you are camouflaged in this way, you can try to hide by pressing yourself up against a solid surface, such as a tree or wall, that is at least as tall and wide as you are. You gain a +10 bonus to Dexterity (Stealth) checks as long as you remain there without moving or taking actions. Once you move or take an action or a reaction, you must camouflage yourself again to gain this benefit.",
     levels: [10],
     classId: ids.ranger,
   },
   {
     name: "Nature's Veil",
     description:
-      "This 10th-level feature replaces the Hide in Plain Sight feature. You gain no benefit from the replaced feature and don't qualify for anything in the game that requires it. You draw on the powers of nature to hide yourself from view briefly. As a bonus action, you can magically become invisible, along with any equipment you are wearing or carrying, until the start of your next turn. You can use this feature a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
+      "This 10th-level feature replaces the Hide in Plain Sight feature. You gain no benefit from the replaced feature and don't qualify for anything in the game that requires it. \n\nYou draw on the powers of nature to hide yourself from view briefly. As a bonus action, you can magically become invisible, along with any equipment you are wearing or carrying, until the start of your next turn.\n\n You can use this feature a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
     levels: [10],
     classId: ids.ranger,
   },
@@ -981,7 +1190,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   {
     name: "Feral Senses",
     description:
-      "At 18th level, you gain preternatural senses that help you fight creatures you can't see. When you attack a creature you can't see, your inability to see it doesn't impose disadvantage on your attack rolls against it. You are also aware of the location of any invisible creature within 30 feet of you, provided that the creature isn't hidden from you and you aren't blinded or deafened.",
+      "At 18th level, you gain preternatural senses that help you fight creatures you can't see. When you attack a creature you can't see, your inability to see it doesn't impose disadvantage on your attack rolls against it. \n\nYou are also aware of the location of any invisible creature within 30 feet of you, provided that the creature isn't hidden from you and you aren't blinded or deafened.",
     levels: [18],
     classId: ids.ranger,
   },

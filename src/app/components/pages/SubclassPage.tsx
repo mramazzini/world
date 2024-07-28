@@ -1,5 +1,5 @@
 "use client";
-import SubClassDisplay from "@/app/components/CreateClass/SubClassDisplay";
+import SubClassDisplay from "@/app/components/ClassInfo/SubClassDisplay";
 import { getSubclass } from "@/lib/actions/db/read.actions";
 import { SubClassInfo } from "@/lib/types";
 

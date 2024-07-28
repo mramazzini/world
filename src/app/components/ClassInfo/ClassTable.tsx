@@ -27,8 +27,8 @@ const ClassTable = ({
             <th className="text-left bg-black/20 w-[5%]">Level</th>
             <th className="text-left bg-black/20 ">Proficiency Bonus</th>
             <th className="text-left bg-black/20 ">Features</th>
-            {customFields.map((field) => (
-              <th className="text-left bg-black/20 " key={field.id}>
+            {customFields.map((field, index) => (
+              <th className="text-left bg-black/20 " key={index}>
                 {field.name}
               </th>
             ))}
@@ -70,7 +70,7 @@ const ClassTable = ({
                     .filter(
                       (feature) => feature.levels.includes(num) && feature
                     )
-                    .map((feature) => {
+                    .map((feature, index) => {
                       //if the feature is the second level of the same feature type, just do feature (x2)
 
                       const lvlIndex = feature.levels.findIndex(
@@ -78,10 +78,7 @@ const ClassTable = ({
                       );
 
                       return (
-                        <li
-                          className="text-nowrap"
-                          key={`feature-${feature.id}-${num}`}
-                        >
+                        <li className="text-nowrap" key={index}>
                           {feature.name}
                           {lvlIndex > 0 ? ` (x${lvlIndex + 1})` : ""}
                         </li>
@@ -100,10 +97,10 @@ const ClassTable = ({
                   ) : null}
                 </ul>
               </td>
-              {customFields.map((field) => {
+              {customFields.map((field, index) => {
                 const level = `level${num}` as Levels;
                 const value = field[level];
-                return <td key={field.id}>{value || "-"}</td>;
+                return <td key={index}>{value || "-"}</td>;
               })}
               {classObj.cantripsKnown.find((c) => c > 0) && (
                 <td>{classObj.cantripsKnown[num - 1] || 0}</td>
@@ -114,12 +111,12 @@ const ClassTable = ({
               {casterType &&
                 classObj.spellCaster &&
                 classObj.displaySpellList &&
-                numberArray(0, 8).map((spellSlotLevel) => {
+                numberArray(0, 8).map((spellSlotLevel, index) => {
                   //get the key "level1" "level2" etc
                   const key = `level${num}` as SpellLevels;
 
                   return (
-                    <td key={spellSlotLevel}>
+                    <td key={index}>
                       {casterType[key][spellSlotLevel] > 0
                         ? casterType[key][spellSlotLevel]
                         : "-"}

@@ -13,10 +13,12 @@ const Tooltip = ({
   element,
   children,
   layer = 0,
+  format = true,
 }: {
   element: ReactNode;
   children?: string;
   layer?: number;
+  format?: boolean;
 }) => {
   let style: { group: string; groupHover: string } = {
     group: "",
@@ -95,7 +97,7 @@ const Tooltip = ({
     >
       {element}
       <span className={style.groupHover}>
-        <P layer={layer + 1}>{children || ""}</P>
+        {format ? <P layer={layer + 1}>{children || ""}</P> : children}
       </span>
     </span>
   );

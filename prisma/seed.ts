@@ -14,7 +14,7 @@ import {
   WeaponProperty,
   WeaponToProperty,
 } from "@prisma/client";
-import createUser from "./seeds/User";
+import createMaxyUser from "./seeds/User";
 import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
 
 const db = new PrismaClient();
@@ -247,7 +247,7 @@ const seed = async () => {
       return;
     }
   }
-  await createUser(db);
+  await createMaxyUser(db);
 
   csuccess("✅ Successfully seeded database ✅");
 };

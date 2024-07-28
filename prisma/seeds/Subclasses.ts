@@ -834,6 +834,177 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     flavorText:
       "An Oathbreaker is a paladin who breaks their sacred oaths to pursue some dark ambition or serve an evil power.",
   },
+  // ranger
+  {
+    name: "Beast Master Conclave",
+    description:
+      "The Beast Master archetype embodies a friendship between the civilized races and the beasts of the world. United in focus, beast and ranger work as one to fight the monstrous foes that threaten civilization and the wilderness alike. Emulating the Beast Master archetype means committing yourself to this ideal, working in partnership with an animal as its companion and friend.",
+    id: 81,
+    classId: ids.ranger,
+    source: src.phb,
+    flavorText:
+      "The Beast Master archetype embodies a friendship between the civilized races and the beasts of the world.",
+  },
+  {
+    name: "Fey Wanderer Conclave",
+    description:
+      "A fey mystique surrounds you, thanks to the boon of an archfey, the shining fruit you ate from a talking tree, the magic spring you swam in, or some other auspicious event. However you acquired your fey magic, you are now a Fey Wanderer, a ranger who represents both the mortal and the fey realms. As you wander the multiverse, your joyful laughter brightens the hearts of the downtrodden, and your martial prowess strikes terror in your foes, for great is the mirth of the fey and dreadful is their fury.",
+    id: 82,
+    classId: ids.ranger,
+    source: src.tasha,
+    flavorText:
+      "Fey Wanderers are rangers who represent both the mortal and the fey realms, bringing joy to the downtrodden and striking terror in their foes.",
+  },
+  {
+    name: "Gloom Stalker Conclave",
+    description:
+      "Gloom stalkers are at home in the darkest places: deep under the earth, in gloomy alleyways, in primeval forests, and wherever else the light dims. Most folk enter such places with trepidation, but a gloom stalker ventures boldly into the darkness, seeking to ambush threats before they can reach the broader world. Such rangers are often found in the Underdark, but they will go any place where evil lurks in the shadows.",
+    id: 83,
+    classId: ids.ranger,
+    source: src.xanathar,
+    flavorText:
+      "Gloom stalkers are at home in the darkest places, seeking to ambush threats before they can reach the broader world.",
+  },
+  {
+    name: "Horizon Walker Conclave",
+    description:
+      "Horizon walkers guard the world against threats that originate from other planes or that seek to ravage the mortal realm with otherworldly magic. They seek out planar portals and keep watch over them, venturing to the Inner Planes and the Outer Planes as needed to pursue their foes. These rangers are also friends to any forces in the multiverse – especially benevolent dragons, fey, and elementals – that work to preserve life and the order of the planes.",
+    id: 84,
+    classId: ids.ranger,
+    source: src.xanathar,
+    flavorText:
+      "Horizon walkers guard the world against threats that originate from other planes or that seek to ravage the mortal realm with otherworldly magic.",
+  },
+  {
+    name: "Hunter Conclave",
+    description:
+      "Some rangers seek to master weapons to better protect civilization from the terrors of the wilderness. Members of the Hunter Conclave learn specialized fighting techniques for use against the most dire threats, from rampaging ogres and hordes of orcs to towering giants and terrifying dragons.",
+    id: 85,
+    classId: ids.ranger,
+    source: src.phb,
+    flavorText:
+      "Members of the Hunter Conclave learn specialized fighting techniques for use against the most dire threats.",
+  },
+  {
+    name: "Monster Slayer Conclave",
+    description:
+      "You have dedicated yourself to hunting down creatures of the night and wielders of grim magic. A monster slayer seeks out vampires, dragons, evil fey, fiends, and other magical threats. Trained in supernatural techniques to overcome such monsters, slayers are experts at unearthing and defeating mighty, mystical foes.",
+    id: 86,
+    classId: ids.ranger,
+    source: src.xanathar,
+    flavorText:
+      "Monster Slayers dedicate themselves to hunting down creatures of the night and wielders of grim magic.",
+  },
+  {
+    name: "Swarmkeeper",
+    description:
+      "Feeling a deep connection to the environment around them, some rangers reach out through their magical connection to the world and bond with a swarm of nature spirits. The swarm becomes a potent force in battle, as well as helpful company for the ranger. Some Swarmkeepers are outcasts or hermits, keeping to themselves and their attendant swarms rather than dealing with the discomfort of others. Other Swarmkeepers enjoy building vibrant communities that work for the mutual benefit of all those they consider part of their swarm.",
+    id: 87,
+    classId: ids.ranger,
+    source: src.tasha,
+    flavorText:
+      "Swarmkeepers bond with a swarm of nature spirits, using the swarm as a potent force in battle and helpful company for the ranger.",
+  },
+  {
+    name: "Drakewarden",
+    description:
+      "Your connection to the natural world takes the form of a draconic spirit, which can manifest in physical form as a drake. As your powers grow, your drake grows as well, blossoming from a small four-legged companion to a majestic winged creature large and strong enough for you to ride. Along the way, you gain an increasing share of the awe-inspiring power of dragons.",
+    id: 88,
+    classId: ids.ranger,
+    source: src.fizban,
+    flavorText:
+      "Drakewardens bond with a draconic spirit, which can manifest in physical form as a drake.",
+  },
+  //rogue
+  {
+    name: "Arcane Trickster",
+    description:
+      "Some rogues enhance their fine-honed skills of stealth and agility with magic, learning tricks of enchantment and illusion. These rogues include pickpockets and burglars, but also pranksters, mischief-makers, and a significant number of adventurers.",
+    id: 89,
+    classId: ids.rogue,
+    source: src.phb,
+    flavorText:
+      "Arcane Tricksters enhance their fine-honed skills of stealth and agility with magic, learning tricks of enchantment and illusion.",
+  },
+  {
+    name: "Assassin",
+    description:
+      "You focus your training on the grim art of death. Those who adhere to this archetype are diverse: hired killers, spies, bounty hunters, and even specially anointed priests trained to exterminate the enemies of their deity. Stealth, poison, and disguise help you eliminate your foes with deadly efficiency.",
+    id: 90,
+    classId: ids.rogue,
+    source: src.phb,
+    flavorText:
+      "Assassins focus their training on the grim art of death, using stealth, poison, and disguise to eliminate their foes with deadly efficiency.",
+  },
+  {
+    name: "Inquisitive",
+    description:
+      "As an archetypal Inquisitive, you excel at rooting out secrets and unraveling mysteries. You rely on your sharp eye for detail, but also on your finely honed ability to read the words and deeds of other creatures to determine their true intent. You excel at defeating creatures that hide among and prey upon ordinary folk, and your mastery of lore and your sharp eye make you well equipped to expose and end hidden evils.",
+    id: 91,
+    classId: ids.rogue,
+    source: src.xanathar,
+    flavorText:
+      "Inquisitives excel at rooting out secrets and unraveling mysteries, relying on their sharp eye for detail and finely honed ability to read the words and deeds of other creatures.",
+  },
+  {
+    name: "Mastermind",
+    description: `Your focus is on people and on the influence and secrets they have. Many spies, courtiers, and schemers follow this archetype, leading lives of intrigue. Words are your weapons as often as knives or poison, and secrets and favors are some of your favorite treasures. If you're playing a campaign with heavy political intrigue, or one in which the party will be dealing with a lot of NPCs, the Mastermind can be a great choice.`,
+    id: 92,
+    classId: ids.rogue,
+    source: src.xanathar,
+    flavorText:
+      "Masterminds focus on people and the influence and secrets they have, leading lives of intrigue and using words as weapons.",
+  },
+  {
+    name: "Phantom",
+    description:
+      "Many rogues walk a fine line between life and death, risking their own lives and taking the lives of others. While adventuring on that line, some rogues discover a mystical connection to death itself. These rogues take knowledge from the dead and become immersed in negative energy, eventually becoming like ghosts. Thieves' guilds value them as highly effective information gatherers and spies.Many shadar-kai of the Shadowfell are masters of these macabre techniques, and some are willing to teach this path. In places like Thay in the Forgotten Realms and Karrnath in Eberron, where many necromancers practice their craft, a Phantom can become a wizard's confidant and right hand. In temples of gods of death, the Phantom might work as an agent to track down those who try to cheat death and to recover knowledge that might otherwise be lost to the grave.",
+    id: 93,
+    classId: ids.rogue,
+    source: src.tasha,
+    flavorText:
+      "Phantoms take knowledge from the dead and become immersed in negative energy, eventually becoming like ghosts.",
+  },
+  {
+    name: "Scout",
+    description:
+      "You are skilled in stealth and surviving far from the streets of a city, allowing you to scout ahead of your companions during expeditions. Rogues who embrace this archetype are at home in the wilderness and among barbarians and rangers, and many Scouts serve as the eyes and ears of war bands. Ambusher, spy, bounty hunter – these are just a few of the roles that Scouts assume as they range the world.",
+    id: 94,
+    classId: ids.rogue,
+    source: src.xanathar,
+    flavorText:
+      "Scouts are skilled in stealth and surviving far from the streets of a city, allowing them to scout ahead of their companions during expeditions.",
+  },
+  {
+    name: "Soulknife",
+    description:
+      "Most assassins strike with physical weapons, and many burglars and spies use thieves' tools to infiltrate secure locations. In contrast, a Soulknife strikes and infiltrates with the mind, cutting through barriers both physical and psychic. These rogues discover psionic power within themselves and channel it to do their roguish work. They find easy employment as members of thieves' guilds, though they are often mistrusted by rogues who are leery of anyone using strange mind powers to conduct their business. Most governments would also be happy to employ a Soulknife as a spy. Amid the trees of ancient forests on the Material Plane and in the Feywild, some wood elves walk the path of the Soulknife, serving as silent, lethal guardians of their woods. In the endless war among the gith, a githzerai is encouraged to become a Soulknife when stealth is required against the githyanki foe.As a Soulknife, your psionic abilities might have haunted you since you were a child, only revealing their full potential as you experienced the stress of adventure. Or you might have sought out a reclusive order of psychic adepts and spent years learning how to manifest your power.",
+    id: 95,
+    classId: ids.rogue,
+    source: src.tasha,
+    flavorText:
+      "Soulknives channel psionic power to strike and infiltrate with the mind, cutting through barriers both physical and psychic.",
+  },
+  {
+    name: "Swashbuckler",
+    description:
+      "You focus your training on the art of the blade, relying on speed, elegance, and charm in equal parts. While some warriors are brutes clad in heavy armor, your method of fighting looks almost like a performance. Duelists and pirates typically belong to this archetype. A Swashbuckler excels in single combat, and can fight with two weapons while safely darting away from an opponent.",
+    id: 96,
+    classId: ids.rogue,
+    source: src.xanathar,
+    flavorText:
+      "Swashbucklers focus their training on the art of the blade, relying on speed, elegance, and charm in equal parts.",
+  },
+  {
+    name: "Thief",
+    description:
+      "You hone your skills in the larcenous arts. Burglars, bandits, cutpurses, and other criminals typically follow this archetype, but so do rogues who prefer to think of themselves as professional treasure seekers, explorers, delvers, and investigators. In addition to improving your agility and stealth, you learn skills useful for delving into ancient ruins, reading unfamiliar languages, and using magic items you normally couldn't employ.",
+    id: 97,
+    classId: ids.rogue,
+    source: src.phb,
+    flavorText:
+      "Thieves hone their skills in the larcenous arts, improving their agility and stealth and learning skills useful for delving into ancient ruins.",
+  },
 ];
 
 export default SubClasses;

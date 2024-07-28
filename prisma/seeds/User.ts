@@ -7,7 +7,7 @@ import {
 } from "@prisma/client";
 
 // Create Maxy User
-const createUser = async (prisma: PrismaClient) => {
+const createMaxyUser = async (prisma: PrismaClient) => {
   await prisma.user.create({
     data: {
       id: 1,
@@ -151,4 +151,4 @@ const createUser = async (prisma: PrismaClient) => {
   });
 };
 
-export default createUser;
+export default createMaxyUser;

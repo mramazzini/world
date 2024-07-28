@@ -110,17 +110,22 @@ const SpellCastingInfo = ({ classObj, casterType }: Props) => {
           </p>
         </>
       )}
-      {classObj.prepareSpellInfo && (
-        <>
-          <h3 className="font-bold">Casting and Preparing Spells</h3>
-          <p className="p-4">
-            <P>{classObj.spellCastingInfo || ""}</P>
-          </p>
-          <p className="p-4">
-            <P>{classObj.prepareSpellInfo}</P>
-          </p>
-        </>
-      )}
+      {classObj.prepareSpellInfo ||
+        (classObj.spellCastingInfo && (
+          <>
+            <h3 className="font-bold">Casting and Preparing Spells</h3>
+            {classObj.spellCastingInfo && (
+              <p className="p-4">
+                <P>{classObj.spellCastingInfo || ""}</P>
+              </p>
+            )}
+            {classObj.prepareSpellInfo && (
+              <p className="p-4">
+                <P>{classObj.prepareSpellInfo}</P>
+              </p>
+            )}
+          </>
+        ))}
     </>
   );
 };

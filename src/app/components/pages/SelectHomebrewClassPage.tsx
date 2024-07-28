@@ -31,12 +31,18 @@ const SelectHomebrewClassPage = () => {
             unbalanced. Ask your Dungeon Master before using them in your game.
           </p>
         </div>
-        <div className="flex items-center my-2">
+        <div className="flex justify-center items-start md:items-end my-2 flex-col ">
           <Link
             href={`/class`}
-            className={"btn btn-ghost border border-gray-500"}
+            className={"btn btn-ghost border border-gray-500 mb-2 w-full"}
           >
             View Official Classes -&gt;
+          </Link>
+          <Link
+            href={"/class/create"}
+            className={"btn btn-ghost border border-gray-500 w-full"}
+          >
+            Create a Class -&gt;
           </Link>
         </div>
       </div>
@@ -85,10 +91,8 @@ const SelectHomebrewClassPage = () => {
                     router.push(`/class/${formattedName}/subclass`);
                   }}
                 >
-                  <p className="line-clamp-2">
-                    <p className="text-blue-500 font-bold">
-                      {item.subClassName}
-                    </p>
+                  <p className="text-blue-500 font-bold line-clamp-2">
+                    {item.subClassName}
                   </p>
                 </td>
                 <td>{item.userName}</td>
