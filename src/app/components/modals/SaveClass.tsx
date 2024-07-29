@@ -1,11 +1,11 @@
 import { CasterType, Class, CustomField, Feature } from "@prisma/client";
-import Levels from "../../UI/Levels";
-import JsonTable from "../../Utility/JsonTable";
-import P from "../../Utility/FormatAndSanitize";
+import Levels from "../UI/Levels";
+import JsonTable from "../Utility/JsonTable";
+import P from "../Utility/FormatAndSanitize";
 import Link from "next/link";
 import React from "react";
-import UploadJsonFile from "../../Utility/UpdateJsonFile";
-import GenerateJsonFile from "../../Utility/GenerateJsonFile";
+import UploadJsonFile from "../Utility/UpdateJsonFile";
+import GenerateJsonFile from "../Utility/GenerateJsonFile";
 
 const SaveClass = ({
   features,

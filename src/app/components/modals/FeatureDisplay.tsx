@@ -1,7 +1,7 @@
 import { Feature } from "@prisma/client";
-import Levels from "../../UI/Levels";
-import JsonTable from "../../Utility/JsonTable";
-import P from "../../Utility/FormatAndSanitize";
+import Levels from "../UI/Levels";
+import JsonTable from "../Utility/JsonTable";
+import P from "../Utility/FormatAndSanitize";
 
 const FeatureDisplay = ({
   feature,

@@ -2,7 +2,7 @@ import { Class, Feature } from "@prisma/client";
 import Module from "../Module";
 import React from "react";
 import Info from "../../UI/Info";
-import FeatureDisplay from "../modals/FeatureDisplay";
+import FeatureDisplay from "../../modals/FeatureDisplay";
 import FeatureTableEditor from "../FeatureTableEditor";
 import MultiOptions from "../../UI/MultiOptions";
 import MultiInput from "../../UI/MultiInput";

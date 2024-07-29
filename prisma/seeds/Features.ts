@@ -13,6 +13,7 @@ const ids = {
   ranger: 10,
   sorcerer: 11,
   warlock: 12,
+  artificer: 13,
 };
 
 const Features: Prisma.FeatureCreateManyInput[] = [
@@ -1202,6 +1203,223 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
     classId: ids.ranger,
   },
   //Artificer
+  {
+    classId: ids.artificer,
+    name: "Magical Tinkering",
+    levels: [1],
+    description:
+      "At 1st level, you've learned how to invest a spark of magic into mundane objects. To use this ability, you must have thieves' tools or artisan's tools in hand. You then touch a Tiny nonmagical object as an action and give it a property from the *Tinkering Options Table* below.\n\nThe chosen property lasts indefinitely. As an action, you can touch the object and end the property early.\n\nYou can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies.",
+    extendedTable: [
+      {
+        "Tinkering Options": {
+          headers: ["Description"],
+          data: [
+            {
+              Description:
+                "The object sheds bright light in a 5-foot radius and dim light for an additional 5 feet.",
+            },
+            {
+              Description:
+                "Whenever tapped by a creature, the object emits a recorded message that can be heard up to 10 feet away. You utter the message when you bestow this property on the object, and the recording can be no more than 6 seconds long.",
+            },
+            {
+              Description:
+                "A static visual effect appears on one of the object's surfaces. This effect can be a picture, up to 25 words of text, lines and shapes, or a mixture of these elements, as you like.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    classId: ids.artificer,
+    levels: [2],
+    name: "Infuse Item",
+    description:
+      "At 2nd level, you've gained the ability to imbue mundane items with certain magical infusions, turning those objects into magic items.\n\n**Infusions Known**\n\nWhen you gain this feature, pick four artificer infusions to learn, chosen from the table below. You learn additional infusions of your choice when you reach certain levels in this class, as shown in the Infusions Known column of the Artificer table.\n\nWhenever you gain a level in this class, you can replace one of the artificer infusions you learned with a new one.\n\n**Infusing an Item**\n\nWhenever you finish a long rest, you can touch a nonmagical object and imbue it with one of your artificer infusions, turning it into a magic item. An infusion works on only certain kinds of objects, as specified in the infusion's description. If the item requires attunement, you can attune yourself to it the instant you infuse the item. If you decide to attune to the item later, you must do so using the normal process for attunement (see the attunement rules in the Dungeon Master's Guide).\n\nYour infusion remains in an item indefinitely, but when you die, the infusion vanishes after a number of days equal to your Intelligence modifier (minimum of 1 day). The infusion also vanishes if you replace your knowledge of the infusion.\n\nYou can infuse more than one nonmagical object at the end of a long rest; the maximum number of objects appears in the Infused Items column of the Artificer table. You must touch each of the objects, and each of your infusions can be in only one object at a time. Moreover, no object can bear more than one of your infusions at a time. If you try to exceed your maximum number of infusions, the oldest infusion ends, and then the new infusion applies.\n\nIf an infusion ends on an item that contains other things, like a bag of holding, its contents harmlessly appear in and around its space.",
+    extendedTable: [
+      {
+        "Artificer Infusions": {
+          headers: ["Infusion", "Description", "Item", "Prerequisites"],
+          headersLength: [15, 60, 15, 10],
+          data: [
+            {
+              Infusion: "Arcane Propulsion Armor",
+              Description:
+                "The wearer of this armor gets the following benefits. (1) The wearer's waling speed increases by 5 feet. (2) The armor includes gauntlets, each of which is a magic melee weapon that can be wielded only when the hand is holding nothing. The wearer is proficient with the gauntlets, and each one deals 1d8 force damage on a hit and has the thrown property, with a normal range of 20 feet and a long range of 60 feet. When thrown, the gauntlet detaches and flies at the attack's target, then immediately returns to the wearer and reattaches. (3) The armor can't be removed against the wearer's will. (4) If the wearer is missing any limbs, the armor replaces those limbs - hands, arms, feet, legs, or similar appendages. The replacements function identically to the body parts they replace.",
+              Item: "A suit of armor (requires attunement)",
+              Prerequisites: "14th level artificer",
+            },
+            {
+              Infusion: "Armor of Magical Strength",
+              Description:
+                "This armor has 6 charges. The wearer can expend the armor's charges in the following ways: (1) When the wearer makes a Strength check or a Strength saving throw, it can expend 1 charge to add a bonus to the roll equal to its Intelligence modifier or (2) If the creature would be knocked prone, it can use its reaction to expend 1 charge to avoid being knocked prone.\n\nThe armor regains 1d6 expended charges daily at dawn.",
+              Item: "A suit of armor (requires attunement)",
+              Prerequisites: "-",
+            },
+            {
+              Infusion: "Armor of Tools (UA)",
+              Description:
+                "As an action, a creature wearing this infused armor can integrate into it artisan’s tools or thieves’ tools. The tools remain integrated in the armor for 8 hours or until the wearer removes the tools as an action. The armor can have only one tool integrated at a time. The wearer can add its Intelligence modifier to any ability checks it makes with the integrated tool. The wearer must have a hand free to use the tool.",
+              Item: "A suit of armor (requires attunement)",
+              Prerequisites: "-",
+            },
+            {
+              Infusion: "Boots of the Winding Path",
+              Description:
+                "While wearing these boots, a creature can teleport up to 15 feet as a bonus action to an unoccupied space the creature can see. The creature must have occupied that space at some point during the current turn.",
+              Item: "A pair of boots (requires attunement)",
+              Prerequisites: "6th level artificer",
+            },
+            {
+              Infusion: "Enhanced Arcane Focus",
+              Description:
+                "While holding this item, a creature gains +1 bonus to spell attack rolls. In addition, the creature ignores half cover when making a spell attack. The bonus increases to +2 when you reach 10th level in this class.",
+              Item: "A rod, staff, or wand (requires attunement)",
+              Prerequisites: "-",
+            },
+            {
+              Infusion: "Enhanced Defense",
+              Description:
+                "A creature gains a +1 bonus to Armor Class while wearing (armor) or wielding (shield) the infused item.\n\nThe bonus increases to +2 when you reach 10th level in this class.",
+              Item: "A suit of armor or a shield ",
+              Prerequisites: "-",
+            },
+            {
+              Infusion: "Enhanced Weapon",
+              Description:
+                "This magic weapon grants a +1 bonus to attack and damage rolls made with it.\n\nThe bonus increases to +2 when you reach 10th level in this class.",
+              Item: "A simple or martial weapon",
+              Prerequisites: "-",
+            },
+            {
+              Infusion: "Helm of Awareness",
+              Description:
+                "While wearing this helmet, a creature has advantage on initiative rolls. In addition, the wearer can’t be surprised, provided it isn’t incapacitated.",
+              Item: "A helmet (requires attunement)",
+              Prerequisites: "10th level artificer",
+            },
+            {
+              Infusion: "Mind Sharpener",
+              Description:
+                "The infused item can send a jolt to the wearer to refocus their mind. The item has 4 charges. When the wearer fails a Constitution saving throw to maintain concentration on a spell, the wearer can use its reaction to expend 1 of the item's charges to succeed instead. The item regains 1d4 expended charges daily at dawn.",
+              Item: "A suit of armor or robes",
+              Prerequisites: "-",
+            },
+            {
+              Infusion: "Radiant Weapon",
+              Description:
+                "This magic weapon grants a +1 bonus to attack and damage rolls made with it. While holding it, the wielder can take a bonus action to cause it to shed bright light in a 30-foot radius and dim light for an additional 30 feet. The wielder can extinguish the light as a bonus action.\n\nThe weapon has 4 charges. As a reaction immediately after being hit by an attack, the wielder can expend 1 charge and cause the attacker to be blinded until the end of the attacker's next turn, unless the attacker succeeds on a Constitution saving throw against your spell save DC. The weapon regains 1d4 expended charges daily at dawn.",
+              Item: "A simple or martial weapon (requires attunement)",
+              Prerequisites: "6th level artificer",
+            },
+            {
+              Infusion: "Repeating Shot",
+              Description:
+                "This magic weapon grants a +1 bonus to attack and damage rolls made with it when it's used to make a ranged attack, and it ignores the loading property if it has it.\n\nIf the weapon lacks ammunition, it produces its own, automatically creating one piece of magic ammunition when the wielder makes a ranged attack with it. The ammunition created by the weapon vanishes the instant after it hits or misses a target.",
+              Item: "A simple or martial weapon with the ammunition property (requires attunement)",
+              Prerequisites: "-",
+            },
+            {
+              Infusion: "Repulsion Shield",
+              Description:
+                "A creature gains a +1 bonus to Armor Class while wielding this shield.\n\nThe shield has 4 charges. While holding it, the wielder can use a reaction immediately after being hit by a melee attack to expend 1 of the shield's charges and push the attacker up to 15 feet away. The shield regains 1d4 expended charges daily at dawn.",
+              Item: "A shield (requires attunement)",
+              Prerequisites: "6th level artificer",
+            },
+            {
+              Infusion: "Resistant Armor",
+              Description:
+                "While wearing this armor, a creature has resistance to one of the following damage types, which you choose when you infuse the item: acid, cold, fire, force, lightning, necrotic, poison, psychic, radiant, or thunder.",
+              Item: "A suit of armor (requires attunement)",
+              Prerequisites: "6th level artificer",
+            },
+            {
+              Infusion: "Returning Weapon",
+              Description:
+                "This magic weapon grants a +1 bonus to attack and damage rolls made with it, and it returns to the wielder’s hand immediately after it is used to make a ranged attack.",
+              Item: "A simple or martial weapon with the thrown property",
+              Prerequisites: "-",
+            },
+            {
+              Infusion: "Spell-Refueling Ring",
+              Description:
+                "While wearing this ring, the creature can recover one expended spell slot as an action. The recovered slot can be of 3rd level or lower. Once used, the ring can't be used again until the next dawn.",
+              Item: "A ring (requires attunement)",
+              Prerequisites: "6th level artificer",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    name: "The Right Tool for the Job",
+    description:
+      "At 3rd level, you've learned how to produce exactly the tool you need: with thieves' tools or artisan's tools in hand, you can magically create one set of artisan's tools in an unoccupied space within 5 feet of you. This creation requires 1 hour of uninterrupted work, which can coincide with a short or long rest. Though the product of magic, the tools are nonmagical, and they vanish when you use this feature again.",
+    levels: [3],
+    classId: ids.artificer,
+  },
+  {
+    name: "Tool Expertise",
+    description:
+      "At 6th level, your proficiency bonus is now doubled for any ability check you make that uses your proficiency with a tool.",
+    levels: [6],
+    classId: ids.artificer,
+  },
+  {
+    name: "Flash of Genius",
+    description:
+      "At 7th level, you've gained the ability to come up with solutions under pressure. When you or another creature you can see within 30 feet of you makes an ability check or a saving throw, you can use your reaction to add your Intelligence modifier to the roll.\n\nYou can use this feature a number of times equal to your Intelligence modifier (minimum of once). You regain all expended uses when you finish a long rest.",
+    levels: [7],
+    classId: ids.artificer,
+  },
+  {
+    classId: ids.artificer,
+    name: "Magic Item Adept",
+    description:
+      "When you reach 10th level, you achieve a profound understanding of how to use and make magic items:",
+    options: [
+      "You can attune to up to four magic items at once.",
+      "If you craft a magic item with a rarity of common or uncommon, it takes you a quarter of the normal time, and it costs you half as much of the usual gold.",
+    ],
+    levels: [10],
+  },
+  {
+    name: "Spell-Storing Item",
+    description:
+      "At 11th level, you can now store a spell in an object. Whenever you finish a long rest, you can touch one simple or martial weapon or one item that you can use as a spellcasting focus, and you store a spell in it, choosing a 1st- or 2nd-level spell from the artificer spell list that requires 1 action to cast (you needn't have it prepared).",
+    levels: [11],
+    classId: ids.artificer,
+  },
+  {
+    name: "Magic Item Savant",
+    description: "At 14th level, your skill with magic items deepens more:",
+    options: [
+      "You can attune to up to five magic items at once.",
+      "You ignore all class, race, spell and level requirements on attuning to or using a magic item.",
+    ],
+    levels: [14],
+    classId: ids.artificer,
+  },
+  {
+    name: "Magic Item Master",
+    description:
+      "Starting at 18th level, you can attune up to six magic items at once.",
+    levels: [18],
+    classId: ids.artificer,
+  },
+  {
+    classId: ids.artificer,
+    name: "Soul of Artifice",
+    levels: [20],
+    description:
+      "At 20th level, you develop a mystical connection to your magic items, which you can draw on for protection:",
+    options: [
+      "You gain a +1 bonus to all saving throws per magic item you are currently attuned to.",
+      "If you're reduced to 0 hit points but not killed out-right, you can use your reaction to end one of your artificer infusions, causing you to drop to 1 hit point instead of 0.",
+    ],
+  },
 ];
 
 export default Features;

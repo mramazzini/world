@@ -126,7 +126,7 @@ const P = ({
 
       return matchIndexes;
     }
-
+    let index = 0;
     //takes an array of indexes of where the term is found in the string and creates a tooltip for each
     function createTooltip(str: string, indexes: number[][]) {
       // add the gap between the start of the string and the first term
@@ -164,14 +164,14 @@ const P = ({
 
         const newElement = (
           <Tooltip
-            key={`${term.term}-${termIndex}`}
+            key={`${term.term}-${termIndex}-${index}`}
             element={str.slice(termIndex, termIndex + term.term.length)}
             layer={layer}
           >
             {term.definition}
           </Tooltip>
         );
-
+        index++;
         newElements.push(newElement);
       }
       // add the gap between the last term and the end of the string
@@ -204,7 +204,9 @@ const P = ({
     }
 
     //give each element a key
-    newElements.map((el, index) => <div key={index}>{el}</div>);
+    newElements.map((el, index) => (
+      <React.Fragment key={index}>{el}</React.Fragment>
+    ));
 
     // Return the elements array
     setProcessedContent(newElements);

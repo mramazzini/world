@@ -1,5 +1,9 @@
 import RegisterForm from "@/app/components/auth/RegisterForm";
-
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Create an Account",
+  description: "Create an Account to access all features",
+};
 const Page = () => {
   return (
     <main className="p-4 flex w-full justify-center">

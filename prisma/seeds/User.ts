@@ -6,21 +6,26 @@ import {
   Skill,
 } from "@prisma/client";
 
+import bcrypt from "bcrypt";
+
 // Create Maxy User
 const createMaxyUser = async (prisma: PrismaClient) => {
+  const saltRounds = 10;
+  const password = "password";
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
   await prisma.user.create({
     data: {
       id: 1,
       email: "maxyboboy@gmail.com",
       username: "Maxy",
-      password: "password",
+      password: hashedPassword,
     },
   });
 
   // Create Custom Classes
   await prisma.class.create({
     data: {
-      id: 13,
+      id: 14,
       name: "Alchemist",
       description:
         "In battle, the Alchemist is a force of nature, wielding potent elixirs that can heal allies, unleash fiery explosions, or transform enemies into harmless creatures. They carry an array of tinctures and potions, each crafted with precision and care, ready to be unleashed in the heat of the moment. Whether they are healing the wounded, bolstering the strength of their companions, or laying waste to their foes with a well-placed flask, their versatility makes them invaluable.",
@@ -69,7 +74,7 @@ const createMaxyUser = async (prisma: PrismaClient) => {
   //custom fields
   await prisma.customField.create({
     data: {
-      classId: 13,
+      classId: 14,
       name: "Alchemical Solutions",
       description:
         "Alchemical Solutions are the key to the Alchemist's spellcasting. ",
@@ -97,7 +102,7 @@ const createMaxyUser = async (prisma: PrismaClient) => {
   });
   await prisma.customField.create({
     data: {
-      classId: 13,
+      classId: 14,
       name: "Solution Die",
       description:
         "Alchemical Solutions are inherently unstable, and vary with power.",
@@ -131,14 +136,14 @@ const createMaxyUser = async (prisma: PrismaClient) => {
       description:
         "Starting at 1st level, you are an expert in the use of alchemical items. Whenever you make an ability check that uses your proficiency with Alchemist's Supplies, you can add double your proficiency bonus to the check, instead of your normal proficiency bonus.",
       levels: [1],
-      classId: 13,
+      classId: 14,
     },
     {
       name: "Fast Learner",
       description:
         "Starting at 2nd level, whenever you succesfully create an Alchemical Solution, you may add 1 to the Solution Die roll in all future creations of that solution.\n\nAdditionally, this value increases by 1 at 5th, and 15th level, granted that you create another successfull Alchemical Solution.",
       levels: [2, 5, 15],
-      classId: 13,
+      classId: 14,
     },
     {
       name: "Alchemical Mastery",

@@ -21,8 +21,8 @@ import CustomFieldsEditor from "../CreateClass/modules/CustomFieldsEditor";
 import SubclassInfo from "../CreateClass/modules/SubclassInfo";
 import FeatureCreator from "../CreateClass/modules/FeatureCreator";
 import { clientClassCreator } from "@/lib/actions/db/create.actions";
-import SaveClass from "../CreateClass/modals/SaveClass";
-import useErrorModal from "../CreateClass/modals/ErrorModal";
+import SaveClass from "../modals/SaveClass";
+import useErrorModal from "../modals/ErrorModal";
 import { Levels } from "@/lib/types";
 import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
 

@@ -4,7 +4,7 @@ import React from "react";
 import { useState } from "react";
 
 const useErrorModal = (): {
-  ErrorModal: React.ReactNode;
+  ErrorModal: JSX.Element;
   openModal: (message: string) => void;
 } => {
   const [message, setMessage] = useState("");
@@ -13,8 +13,6 @@ const useErrorModal = (): {
     ErrorModal: (
       <dialog id="error-modal" className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Cannot Create Class:</h3>
-          <div className="divider m-0" />
           <p className="text-red-500">{message}</p>
           <div className="modal-action">
             <form method="dialog">
@@ -26,6 +24,10 @@ const useErrorModal = (): {
     ),
     openModal: (message: string) => {
       const modal = document.getElementById("error-modal") as HTMLDialogElement;
+      if (!modal)
+        console.error(
+          "Error modal not found, make sure you add it to the page."
+        );
       setMessage(message);
       modal.showModal();
     },

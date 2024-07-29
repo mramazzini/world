@@ -570,5 +570,59 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     flavorText:
       "Warlocks are wielders of magic who have forged a pact with an otherworldly being. Whether it's a demon, a devil, a fey, or some other powerful entity, warlocks draw their power from their patron.",
   },
+  //artificer
+  {
+    id: 13,
+    name: "artificer",
+    source: "Wayfinder’s Guide to Eberron",
+    flavorText:
+      "Masters of invention, artificers use ingenuity and magic to unlock extraordinary capabilities in objects.",
+    description:
+      "Masters of invention, artificers use ingenuity and magic to unlock extraordinary capabilities in objects. They see magic as a complex system waiting to be decoded and then harnessed in their spells and inventions. You can find everything you need to play one of these inventors in the next few sections.Artificers use a variety of tools to channel their arcane power. To cast a spell, an artificer might use alchemist's supplies to create a potent elixir, calligrapher's supplies to inscribe a sigil of power, or tinker's tools to craft a temporary charm. The magic of artificers is tied to their tools and their talents, and few other characters can produce the right tool for a job as well as an artificer.",
+    multiclassing:
+      "You must have an Intelligence score of 13 or higher in order to multiclass in or out of this class.",
+    hitDie: 8,
+    armor: [ArmorTypes.LIGHT, ArmorTypes.MEDIUM, ArmorTypes.SHIELDS],
+    savingThrows: [Ability.CON, Ability.INT],
+    tools: [
+      "Thieves' Tools",
+      "Tinker's Tools",
+      "One type of artisan's tools of your choice",
+    ],
+    skills: [
+      Skill.ARCANA,
+      Skill.HISTORY,
+      Skill.INVESTIGATION,
+      Skill.MEDICINE,
+      Skill.NATURE,
+      Skill.PERCEPTION,
+      Skill.SLEIGHT_OF_HAND,
+      Skill.INSIGHT,
+    ],
+    skillChoiceCount: 2,
+    weapons: ["Simple weapons, firearms (if allowed in your campaign)"],
+    equipment: [
+      "Any two simple weapons",
+      "A light crossbow and 20 bolts",
+      "(a) Studded leather armor or (b) scale mail",
+      "Thieves’ tools and a dungeoneer’s pack",
+      "Alternatively, you can forgo the above equipment and start with 5d4 x 10 gp to buy your own.",
+    ],
+    abilityScoreLevels: [4, 8, 12, 16, 19],
+    subClassName: "Artficer Specialist",
+    subClassDesc: "you choose the type of specialist you are.",
+    subfeatLevels: [3, 5, 9, 15],
+    spellCaster: true,
+    spellCastingAbility: Ability.INT,
+    spellFocus:
+      "thieves' tools or some kind of artisan's tool that you are proficient in.",
+    spellCastingInfo:
+      "You've studied the workings of magic and how to cast spells, channeling the magic through objects. To observers, you don't appear to be casting spells in a conventional way; you appear to produce wonders from mundane items and outlandish inventions.\n\nThe Artificer table shows how many spell slots you have to cast your artificer spells. To cast one of your artificer spells of 1st level or higher, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
+    prepareSpellInfo:
+      "You can change your list of prepared spells when you finish a long rest. Preparing a new list of artificer spells requires time spent tinkering with your spellcasting focuses: at least 1 minute per spell level for each spell on your list.\n\nYou prepare the list of artificer spells that are available for you to cast, choosing from the artificer spell list. When you do so, choose a number of artificer spells equal to your Intelligence modifier + half your artificer level, rounded down (minimum of one spell). The spells must be of a level for which you have spell slots.\n\n**Tools**\n\nYou produce your artificer spell effects through your tools. You must have a spellcasting focus - specifically thieves' tools or some kind of artisan's tool - in hand when you cast any spell with this Spellcasting feature (meaning the spell has an 'M' component when you cast it). You must be proficient with the tool to use it in this way. See the equipment chapter in the Player's Handbook for descriptions of these tools.\n\nAfter you gain the Infuse Item feature at 2nd level, you can also use any item bearing one of your infusions as a spellcasting focus.\n\n**Cantrips**\n\nAt 1st level, you know two cantrips of your choice from the artificer spell list. At higher levels, you learn additional artificer cantrips of your choice, as shown in the Cantrips Known column of the Artificer table.\n\nWhen you gain a level in this class, you can replace one of the artificer cantrips you know with another cantrip from the artificer spell list.",
+    ritualCaster: true,
+    ritualSpellPrepared: true,
+    casterTypeId: 4,
+  },
 ];
 export default Classes;
