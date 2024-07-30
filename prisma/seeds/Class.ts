@@ -92,7 +92,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     ritualCaster: true,
     ritualSpellPrepared: false,
     spellFocus: "arcane focus",
-    cantripsKnown: [3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5], // lvl 1-20
+
     casterTypeId: 1,
     flavorText:
       "Wizards are the supreme magic-users, defined and united as a class by the spells they cast, using the subtle weave of magic that permeates the cosmos.",
@@ -138,10 +138,11 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "You prepare the list of cleric spells that are available for you to cast. To do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots. \n\nYou can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.",
     spellCastingInfo:
       "The Cleric table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
-    cantripsKnown: [3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+
     casterTypeId: 1,
     flavorText:
       "Clerics are intermediaries between the mortal world and the distant planes of the gods, using their divine magic to heal the wounded, bless the righteous, and smite the wicked.",
+    cantripsKnown: 1,
   },
   {
     id: 4,
@@ -281,13 +282,12 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     spellCastingInfo:
       "The Bard table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
     ritualCaster: true,
-    cantripsKnown: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], // lvl 1-20
-    spellsKnown: [
-      4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 15, 16, 18, 19, 19, 20, 22, 22, 22,
-    ], // lvl 1-20
+
     casterTypeId: 1,
     flavorText:
       "Bards are the masters of song, speech, and the magic they contain. They use their talents to inspire allies, demoralize foes, manipulate minds, create illusions, and even heal wounds.",
+    spellsKnown: 1,
+    cantripsKnown: 2,
   },
   {
     id: 7,
@@ -340,10 +340,11 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     spellCastingInfo:
       "The Druid table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these druid spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
     ritualCaster: true,
-    cantripsKnown: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], // lvl 1-20\
+
     casterTypeId: 1,
     flavorText:
       "Druids are the embodiment of nature's resilience, cunning, and fury. They claim no mastery over nature, but see themselves as extensions of nature's indomitable will.",
+    cantripsKnown: 1,
   },
   {
     id: 8,
@@ -468,12 +469,10 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     spellCastingInfo: `The Ranger table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. \n\nYou regain all expended spell slots when you finish a long rest.`,
     prepareSpellInfo: `You know a number of spells from the ranger spell list equal to your Wisdom modifier + half your ranger level, rounded down (minimum of one spell). These spells must be of a level for which you have spell slots. \n\nAdditionally, when you gain a level in this class, you can choose one of the ranger spells you know and replace it with another spell from the ranger spell list, which also must be of a level for which you have spell slots.`,
 
-    spellsKnown: [
-      0, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11,
-    ], // lvl 1-20
     casterTypeId: 2,
     flavorText:
       "Rangers are hunters and wilderness warriors who use their knowledge of the land and their fighting skills to protect the wild places of the world.",
+    spellsKnown: 2,
   },
   {
     id: 11,
@@ -514,13 +513,11 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "You can cast any sorcerer spell you know without preparing it ahead of time. When you cast a spell, you expend a slot of that spell's level or higher, unless you are casting a cantrip. You regain all expended spell slots when you finish a long rest. Additionally, when you gain a level in this class, you can choose one of the sorcerer spells you know and replace it with another spell from the sorcerer spell list, which also must be of a level for which you have spell slots.",
     spellFocus: "arcane focus",
 
-    spellsKnown: [
-      2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 15,
-    ], // lvl 1-20
-    cantripsKnown: [4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], // lvl 1-20
     casterTypeId: 1,
     flavorText:
       "Sorcerers are spellcasters who draw on innate magic. They are the masters of the arcane, using their knowledge and power to cast spells that can change the world around them.",
+    spellsKnown: 1,
+    cantripsKnown: 1,
   },
   {
     id: 12,
@@ -563,12 +560,13 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "The Spells Known column of the Warlock table shows when you learn more warlock spells of your choice of 1st level or higher. A spell you choose must be of a level no higher than what's shown in the table's Slot Level column for your level. When you reach 6th level, for example, you learn a new warlock spell, which can be 1st, 2nd, or 3rd level. Additionally, when you gain a level in this class, you can choose one of the warlock spells you know and replace it with another spell from the warlock spell list, which also must be of a level for which you have spell slots.",
 
     spellFocus: "arcane focus",
-    cantripsKnown: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], // lvl 1-20
+
     displaySpellList: false,
 
     casterTypeId: 5,
     flavorText:
       "Warlocks are wielders of magic who have forged a pact with an otherworldly being. Whether it's a demon, a devil, a fey, or some other powerful entity, warlocks draw their power from their patron.",
+    cantripsKnown: 1,
   },
   //artificer
   {

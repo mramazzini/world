@@ -55,32 +55,29 @@ const SpellCastingInfo = ({ classObj, casterType }: Props) => {
           <br />
         </p>
       </div>
-      {classObj.cantripsKnown[0] && (
+      {classObj.cantripsKnown && (
         <>
           <h3 className="font-bold">Cantrips</h3>
           <p className="p-4">
             <P>
-              At {numPlace(classObj.cantripsKnown.findIndex((c) => c > 0) || 1)}{" "}
-              level you know{" "}
-              {(classObj.cantripsKnown.find((c) => c > 0) || 0).toString()}{" "}
-              cantrips from the {classObj.name} spell list. This increases each
-              level as shown in the Cantrips Known column of the {classObj.name}{" "}
-              table.
+              At {numPlace(classObj.cantripsKnown)} level you know a certain
+              amount of cantrips from the {classObj.name} spell list as dictated
+              in the Cantrips known Column of the{" "}
+              {classObj.name.toCapitalCase()} table. The number of cantrips
+              increases each level.
             </P>
           </p>
         </>
       )}
-      {classObj.spellsKnown.find((c) => c > 0) && (
+      {classObj.spellsKnown && (
         <>
           <h3 className="font-bold">Spells Known</h3>
           <p className="p-4">
             <P>
-              You know{" "}
-              {(classObj.spellsKnown.find((c) => c > 0) || 0).toString()} spells
-              at{" "}
-              {numPlace(classObj.spellsKnown.findIndex((c) => c > 0) + 1 || 1)}{" "}
-              level. This increases each level as shown in the Spells Known
-              column of the {classObj.name} table.
+              Each level you know a certain amount of spells from the{" "}
+              {classObj.name} spell list as dictated in the Spells Known Column
+              of the {classObj.name.toCapitalCase()} table. The number of spells
+              increases each level.
             </P>
           </p>
         </>

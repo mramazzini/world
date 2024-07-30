@@ -157,9 +157,7 @@ model Class {
   //spellcasting
   spellCaster              Boolean       @default(false)
   spellCastingAbility      Ability?
-  spellsKnown              Int[] // number of spells known at each level
   casterType               CasterType?   @relation(fields: [casterTypeId], references: [id])
-  cantripsKnown            Int[] // number of cantrips known at each level
   ritualCaster             Boolean       @default(false) // can you cast spells as rituals
   ritualSpellPrepared      Boolean       @default(true) //do you need to have a spell prepared to cast it as a ritual
   spellFocus               String        @default("None")
@@ -167,28 +165,42 @@ model Class {
   spellCastingInfo         String? // How does spell casting work for this class
   displaySpellList         Boolean       @default(true) // This is for displaying the spell list on the class table. Some classes (like warlock), have a weird spell casting system and opt to use the custom table fields instead.
   prepareSpellInfo         String? // How do spells get prepared for this class
-  source                   String        @default("Player's Handbook") //source of the class
+
+  //these two fields will presume that a customField is created in the class table
+  // deafults to 0, meaning the class does not have a set number of spells known
+  //otherwise, the number indicates the first level in which they have spells known
+  spellsKnown   Int @default(0) // Does the class have a set number of spells known
+  cantripsKnown Int @default(0) // Does the class have a set number of cantrips known
+
+  source    String   @default("Player's Handbook") //source of the class
   //date fields
-  createdAt                DateTime      @default(now())
-  updatedAt                DateTime      @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   User   User? @relation(fields: [userId], references: [id])
   userId Int?
 }
 
 model SubClass {
-  id               Int               @id @default(autoincrement())
-  name             String
-  description      String
-  SubClassFeatures SubClassFeature[]
-  flavorText       String            @db.VarChar(200)
-  source           String            @default("Player's Handbook")
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
-  Class            Class?            @relation(fields: [classId], references: [id])
-  classId          Int?
-  User             User?             @relation(fields: [userId], references: [id])
-  userId           Int?
+  id                  Int               @id @default(autoincrement())
+  name                String
+  description         String
+  SubClassFeatures    SubClassFeature[]
+  flavorText          String            @db.VarChar(200)
+  source              String            @default("Player's Handbook")
+  //spellcasting
+  spellCaster         Boolean           @default(false)
+  spellCastingAbility Ability?
+  casterType          CasterType?       @relation(fields: [casterTypeId], references: [id])
+  casterTypeId        Int               @default(3)
+  spellCastingInfo    String? // How does spell casting work for this class
+  prepareSpellInfo    String? // How do spells get prepared for this class
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  Class               Class?            @relation(fields: [classId], references: [id])
+  classId             Int?
+  User                User?             @relation(fields: [userId], references: [id])
+  userId              Int?
 }
 
 model CustomField {
@@ -222,7 +234,7 @@ model CustomField {
 }
 
 model CasterType {
-  id          Int      @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   name        String
   description String
   level1      Int[]
@@ -247,8 +259,9 @@ model CasterType {
   level20     Int[]
   Class       Class[]
   examples    String[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  SubClass    SubClass[]
 }
 
 model Feature {

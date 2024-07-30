@@ -1,5 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { src } from "@/lib/types";
+import P from "@/app/components/Utility/FormatAndSanitize";
 
 const ids = {
   fighter: 1, //
@@ -1004,6 +1005,87 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     source: src.phb,
     flavorText:
       "Thieves hone their skills in the larcenous arts, improving their agility and stealth and learning skills useful for delving into ancient ruins.",
+  },
+  // sorcerer
+  {
+    name: "Aberrant Mind",
+    description:
+      "An alien influence has wrapped its tendrils around your mind, giving you psionic power. You can now touch other minds with that power and alter the world around you by using it to control the magical energy of the multiverse. Will this power shine from you as a hopeful beacon to others? Or will you be a source of terror to those who feel the stab of your mind and witness the strange manifestations of your might?",
+    id: 98,
+    classId: ids.sorcerer,
+    source: src.tasha,
+    flavorText:
+      "Aberrant Minds have an alien influence wrapped around their minds, giving them psionic power.",
+  },
+  {
+    name: "Clockwork Soul",
+    description:
+      "The cosmic force of order has suffused you with magic. That power arises from Mechanus or a realm like it-a plane of existence shaped entirely by clockwork efficiency. You, or someone from your lineage, might have become entangled in the machinations of the modrons, the orderly beings who inhabit Mechanus. Perhaps your ancestor even took part in the Great Modron March. Whatever its origin within you, the power of order can seem strange to others, but for you, it is part of a vast and glorious system.",
+    id: 99,
+    classId: ids.sorcerer,
+    source: src.tasha,
+    flavorText:
+      "Clockwork Souls are suffused with the cosmic force of order, arising from Mechanus or a realm like it.",
+  },
+  {
+    name: "Draconic Bloodline",
+    description:
+      "Your innate magic comes from draconic magic that was mingled with your blood or that of your ancestors. Most often, sorcerers with this origin trace their descent back to a mighty sorcerer of ancient times who made a bargain with a dragon or who might even have claimed a dragon parent. Some of these bloodlines are well established in the world, but most are obscure. Any given sorcerer could be the first of a new bloodline, as a result of a pact or some other exceptional circumstance.",
+    id: 100,
+    classId: ids.sorcerer,
+    source: src.phb,
+    flavorText:
+      "Sorcerers with the Draconic Bloodline have innate magic that comes from draconic magic mingled with their blood or that of their ancestors.",
+  },
+  {
+    name: "Divine Soul",
+    description:
+      "Sometimes the spark of magic that fuels a sorcerer comes from a divine source that glimmers within the soul. Having such a blessed soul is a sign that your innate magic might come from a distant but powerful familial connection to a divine being. Perhaps your ancestor was an angel, transformed into a mortal and sent to fight in a god’s name. Or your birth might align with an ancient prophecy, marking you as a servant of the gods or a chosen vessel of divine magic.\n\nA Divine Soul, with natural magnetism, is seen as a threat by some religious hierarchies. As an outsider who commands celestial power, these sorcerers can undermine the existing order by claiming a direct tie to the divine.\n\nIn some cultures, only those who can claim the power of a Divine Soul may command religious power. In these lands, ecclesiastical positions are dominated by a few bloodlines and preserved over generations.",
+    id: 101,
+    classId: ids.sorcerer,
+    source: src.xanathar,
+    flavorText:
+      "Divine Souls have a spark of magic that comes from a divine source that glimmers within their soul.",
+  },
+  {
+    name: "Lunar Sorcery",
+    description:
+      "On many worlds, the moon is a revered celestial body with magical properties. On Krynn, the gods of magic are associated with the world's three moons. On the world of Toril, the god Selûne uses the light of the moon to battle darkness. On Eberron, scholars of the Draconic Prophecy decipher ancient secrets from the waxing and waning of that world's twelve moons.\n\nYou or someone from your lineage has been exposed to the concentrated magic of the moon (or moons) of your world, imbuing you with lunar magic. Perhaps your ancestor was involved in a druidic ritual involving an eclipse, or maybe a mystical fragment of a moon crashed near you. However you came to have your magic, your connection to the moon is obvious when you cast sorcerer spells-perhaps making your pupils glow with the color of a moon from your world, causing spectral manifestations of lunar phases to orbit you, or some other effect.",
+    id: 102,
+    classId: ids.sorcerer,
+    source: src.dragonQueen,
+    flavorText:
+      "Lunar Sorcerers have been exposed to the concentrated magic of the moon, imbuing them with lunar magic.",
+  },
+  {
+    name: "Shadow Magic",
+    description:
+      "You are a creature of shadow, for your innate magic comes from the Shadowfell itself. You might trace your lineage to an entity from that place, or perhaps you were exposed to its fell energy and transformed by it.\n\nThe power of shadow magic casts a strange pall over your physical presence. The spark of life that sustains you is muffled, as if it struggles to remain viable against the dark energy that imbues your soul.",
+    id: 103,
+    classId: ids.sorcerer,
+    source: src.xanathar,
+    flavorText:
+      "Sorcerers with Shadow Magic are creatures of shadow, for their innate magic comes from the Shadowfell itself.",
+  },
+  {
+    name: "Storm Sorcery",
+    description:
+      "Your innate magic comes from the power of elemental air. Many with this power can trace their magic back to a near-death experience caused by the Great Rain, but perhaps you were born during a howling gale so powerful that folk still tell stories of it, or your lineage might include the influence of potent air creatures such as vaati or djinn. Whatever the case, the magic of the storm permeates your being.\n\nStorm sorcerers are invaluable members of a ship's crew. Their magic allows them to exert control over wind and weather in their immediate area. Their abilities also prove useful in repelling attacks by sahuagin, pirates, and other waterborne threats.",
+    id: 104,
+    classId: ids.sorcerer,
+    source: src.xanathar,
+    flavorText:
+      "Sorcerers with Storm Sorcery have innate magic that comes from the power of elemental air.",
+  },
+  {
+    name: "Wild Magic",
+    description:
+      "Your innate magic comes from the wild forces of chaos that underlie the order of creation. You might have endured exposure to some form of raw magic, perhaps through a planar portal leading to Limbo, the Elemental Planes, or the mysterious Far Realm. Perhaps you were blessed by a powerful fey creature or marked by a demon. Or your magic could be a fluke of your birth, with no apparent cause or reason. However it came to be, this chaotic magic churns within you, waiting for any outlet.",
+    id: 105,
+    classId: ids.sorcerer,
+    source: src.phb,
+    flavorText:
+      "Sorcerers with Wild Magic have innate magic that comes from the wild forces of chaos that underlie the order of creation.",
   },
 ];
 

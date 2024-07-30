@@ -68,6 +68,7 @@ export enum src {
   vanRichten = "Van Richten's Guide to Ravenloft",
   dmg = "Dungeon Master's Guide",
   fizban = "Fizban's Treasury of Dragons",
+  dragonQueen = "Dragonlance: Shadow of the Dragon Queen",
 }
 
 export const officialSources: string[] = [

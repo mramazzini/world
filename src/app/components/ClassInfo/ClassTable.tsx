@@ -32,12 +32,6 @@ const ClassTable = ({
                 {field.name}
               </th>
             ))}
-            {classObj.cantripsKnown.find((c) => c > 0) && (
-              <th className="text-left bg-black/20 ">Cantrips Known</th>
-            )}
-            {classObj.spellsKnown.find((c) => c > 0) && (
-              <th className="text-left bg-black/20 ">Spells Known</th>
-            )}
 
             {casterType &&
               classObj.spellCaster &&
@@ -102,12 +96,7 @@ const ClassTable = ({
                 const value = field[level];
                 return <td key={index}>{value || "-"}</td>;
               })}
-              {classObj.cantripsKnown.find((c) => c > 0) && (
-                <td>{classObj.cantripsKnown[num - 1] || 0}</td>
-              )}
-              {classObj.spellsKnown.find((c) => c > 0) && (
-                <td>{classObj.spellsKnown[num - 1] || 0}</td>
-              )}
+
               {casterType &&
                 classObj.spellCaster &&
                 classObj.displaySpellList &&

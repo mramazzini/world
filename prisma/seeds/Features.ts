@@ -148,7 +148,7 @@ const Features: Prisma.FeatureCreateManyInput[] = [
   {
     name: "Arcane Recovery",
     description:
-      "You have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher. For example, if you're a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots.",
+      "You have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.\n\nFor example, if you're a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots.",
     levels: [1],
     classId: ids.wizard,
   },
@@ -189,6 +189,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
     classId: ids.wizard,
   },
   // Bard
+
   {
     name: "Bardic Inspiration",
     description: `You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6.\n\nOnce within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the DM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time. \n\nYou can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain any expended uses when you finish a long rest.\n\nYour Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.`,
@@ -311,21 +312,21 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   {
     name: "Expertise",
     description:
-      "At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with thieves' tools. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies. At 6th level, you can choose two more of your proficiencies (in skills or with thieves' tools) to gain this benefit.",
+      "At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with thieves' tools. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.\n\n At 6th level, you can choose two more of your proficiencies (in skills or with thieves' tools) to gain this benefit.",
     levels: [1, 6],
     classId: ids.rogue,
   },
   {
     name: "Sneak Attack",
     description:
-      "Beginning at 1st level, you know how to strike subtly and exploit a foe's distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon. You don't need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn't incapacitated, and you don't have disadvantage on the attack roll. The amount of the extra damage increases as you gain levels in this class, as shown in the Sneak Attack column of the Rogue table.",
+      "Beginning at 1st level, you know how to strike subtly and exploit a foe's distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.\n\n You don't need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn't incapacitated, and you don't have disadvantage on the attack roll. \n\nThe amount of the extra damage increases as you gain levels in this class, as shown in the Sneak Attack column of the Rogue table.",
     levels: [1],
     classId: ids.rogue,
   },
   {
     name: "Thieves' Cant",
     description:
-      "During your rogue training you learned thieves' cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves' cant understands such messages. It takes four times longer to convey such a message than it does to speak the same idea plainly. In addition, you understand a set of secret signs and symbols used to convey short, simple messages, such as whether an area is dangerous or the territory of a thieves' guild, whether loot is nearby, or whether the people in an area are easy marks or will provide a safe house for thieves on the run.",
+      "During your rogue training you learned thieves' cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves' cant understands such messages. It takes four times longer to convey such a message than it does to speak the same idea plainly.\n\n In addition, you understand a set of secret signs and symbols used to convey short, simple messages, such as whether an area is dangerous or the territory of a thieves' guild, whether loot is nearby, or whether the people in an area are easy marks or will provide a safe house for thieves on the run.",
     levels: [1],
     classId: ids.rogue,
   },
@@ -893,26 +894,129 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   {
     name: "Font of Magic",
     description:
-      "At 2nd level, you tap into a deep wellspring of magic within yourself. This wellspring is represented by sorcery points, which allow you to create a variety of magical effects. The number of sorcery points you have is based on your level in this class, as shown in the Sorcery Points column of the Sorcerer table. You can never have more sorcery points than shown on the table for your level. You regain all spent sorcery points when you finish a long rest.",
+      "At 2nd level, you tap into a deep wellspring of magic within yourself. This wellspring is represented by sorcery points, which allow you to create a variety of magical effects.",
+    options: [
+      "**Sorcery Points.** You have 2 sorcery points, and you gain more as you reach higher levels, as shown in the Sorcery Points column of the Sorcerer table. You can never have more sorcery points than shown on the table for your level. You regain all spent sorcery points when you finish a long rest.",
+      "**Create Spell Slots.** You can transform unexpended sorcery points into one spell slot as a bonus action on your turn. The Creating Spell Slots table shows the cost of creating a spell slot of a given level. You can create spell slots no higher in level than 5th. Any spell slot you create with this feature vanishes when you finish a long rest.",
+      "**Converting Spell Slots to Sorcery points.** As a bonus action on your turn, you can expend one spell slot and gain a number of sorcery points equal to the slot's level.",
+    ],
     levels: [2],
     classId: ids.sorcerer,
+    extendedTable: [
+      {
+        "Creating Spell Slots": {
+          headersLength: [50, 50],
+          headers: ["Spell Slot Level", "Sorcery Point Cost"],
+          data: [
+            {
+              "Spell Slot Level": "1st",
+              "Sorcery Point Cost": "2",
+            },
+            {
+              "Spell Slot Level": "2nd",
+              "Sorcery Point Cost": "3",
+            },
+            {
+              "Spell Slot Level": "3rd",
+              "Sorcery Point Cost": "5",
+            },
+            {
+              "Spell Slot Level": "4th",
+              "Sorcery Point Cost": "6",
+            },
+            {
+              "Spell Slot Level": "5th",
+              "Sorcery Point Cost": "7",
+            },
+          ],
+        },
+      },
+    ],
   },
   {
     name: "Metamagic",
     description:
       "At 3rd level, you gain the ability to twist your spells to suit your needs. You gain two of the following Metamagic options of your choice. You gain another one at 10th and 17th level.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["Metamagic", "Description"],
+          data: [
+            {
+              Metamagic: "Careful Spell",
+              Description:
+                "When you cast a spell that forces other creatures to make a saving throw, you can protect some of those creatures from the spell's full force. To do so, you spend 1 sorcery point and choose a number of those creatures up to your Charisma modifier (minimum of one creature). A chosen creature automatically succeeds on its saving throw against the spell.",
+            },
+            {
+              Metamagic: "Distant Spell",
+              Description:
+                "When you cast a spell that has a range of 5 feet or greater, you can spend 1 sorcery point to double the range of the spell. When you cast a spell that has a range of touch, you can spend 1 sorcery point to make the range of the spell 30 feet.",
+            },
+            {
+              Metamagic: "Empowered Spell",
+              Description:
+                "When you roll damage for a spell, you can spend 1 sorcery point to reroll a number of the damage dice up to your Charisma modifier (minimum of one). You must use the new rolls. You can use Empowered Spell even if you have already used a different Metamagic option during the casting of the spell.",
+            },
+            {
+              Metamagic: "Extended Spell",
+              Description:
+                "When you cast a spell that has a duration of 1 minute or longer, you can spend 1 sorcery point to double its duration, to a maximum duration of 24 hours.",
+            },
+            {
+              Metamagic: "Heightened Spell",
+              Description:
+                "When you cast a spell that forces a creature to make a saving throw to resist its effects, you can spend 3 sorcery points to give one target of the spell disadvantage on its first saving throw made against the spell.",
+            },
+            {
+              Metamagic: "Quickened Spell",
+              Description:
+                "When you cast a spell that has a casting time of 1 action, you can spend 2 sorcery points to change the casting time to 1 bonus action for this casting.",
+            },
+            {
+              Metamagic: "Seeking Spell",
+              Description:
+                "If you make an attack roll for a spell and miss, you can spend 2 sorcerer points to reroll the d20, and you must use the new roll. You can use Seeking Spell even if you have already used a different Metamagic option during the casting of the spell.",
+            },
+            {
+              Metamagic: "Seeking Spell (UA)",
+              Description:
+                "When you cast a spell that requires you to make a spell attack roll or that forces a target to make a Dexterity saving throw, you can spend 1 sorcery point to ignore the effects of half- and three-quarters cover against targets of the spell.",
+            },
+            {
+              Metamagic: "Subtle Spell",
+              Description:
+                "When you cast a spell, you can spend 1 sorcery point to cast it without any somatic or verbal components.",
+            },
+            {
+              Metamagic: "Transmuted Spell",
+              Description:
+                "When you cast a spell that deals a type of damage from the following list, you can spend 1 sorcery point to change that damage type to one of the other listed types: acid, cold, fire, lightning, poison, thunder.",
+            },
+            {
+              Metamagic: "Twinned Spell",
+              Description:
+                "When you cast a spell that targets only one creature and doesn't have a range of self, you can spend a number of sorcery points equal to the spell's level to target a second creature in range with the same spell (1 sorcery point if the spell is a cantrip). To be eligible, a spell must be incapable of targeting more than one creature at the spell's current level. ",
+            },
+          ],
+        },
+      },
+    ],
     levels: [3, 10, 17],
     classId: ids.sorcerer,
   },
   {
-    name: "Sorcerous Versatility",
+    name: "Sorcerous Versatility (Optional)",
     description:
-      "When you reach a level in this class that grants the Ability Score Improvement feature, you can do one of the following, representing the magic within you flowing in new ways: Replace one of the Metamagic options you chose when you leveled up with a different Metamagic option available to you OR Replace one cantrip you learned from this class's Spellcasting feature with another cantrip from the sorcerer spell list.",
+      "When you reach a level in this class that grants the Ability Score Improvement feature, you can do one of the following, representing the magic within you flowing in new ways:",
+    options: [
+      "Replace one of the options you chose for the Metamagic feature with a different Metamagic option available to you.",
+      "Replace one cantrip you learned from this class' spellcasting feature with another cantrip from the sorcerer spell list.",
+    ],
     levels: [4, 8, 12, 16, 19],
     classId: ids.sorcerer,
   },
   {
-    name: "Magical Guidance",
+    name: "Magical Guidance (Optional)",
     description:
       "When you reach 5th level, you can tap into your inner wellspring of magic to try and conjure success from failure. When you make an ability check that fails, you can spend 1 sorcery point to reroll the d20, and you must use the new roll, potentially turning the failure into a success.",
     levels: [5],
