@@ -1,12 +1,12 @@
 "use client";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import numPlace from "@/lib/utils/numPlace";
-import { CasterType, Class } from "@prisma/client";
+import { CasterType, Class, SubClass } from "@prisma/client";
 import Link from "next/link";
 import P from "../Utility/FormatAndSanitize";
 
 interface Props {
-  classObj: Class;
+  classObj: Class | SubClass;
   casterType: CasterType;
 }
 const SpellCastingInfo = ({ classObj, casterType }: Props) => {
@@ -16,7 +16,7 @@ const SpellCastingInfo = ({ classObj, casterType }: Props) => {
       <h2>
         Spellcasting
         <Link
-          className="text-blue-500 underline text-sm ml-2 hover:text-blue-700"
+          className="text-accent underline text-sm ml-2 hover:text-acce"
           href="/rules/spellcasting"
         >
           Spellcasting Rules -&gt;

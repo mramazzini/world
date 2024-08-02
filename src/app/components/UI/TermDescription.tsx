@@ -14,7 +14,7 @@ const TermDescription = ({
   return (
     <>
       <span
-        className="font-bold text-blue-500 cursor-pointer hover:underline "
+        className="font-bold text-accent cursor-pointer hover:underline "
         onMouseEnter={() => setShow(true)}
         onMouseLeave={() => setShow(false)}
       >

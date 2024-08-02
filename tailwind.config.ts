@@ -23,27 +23,38 @@ const config: Config = {
   },
   daisyui: {
     themes: [
-      {
-        mytheme: {
-          primary: "#3b82f6",
-
-          secondary: "#ff6000",
-
-          accent: "#c13500",
-
-          neutral: "#1c1e2d",
-
-          "base-100": "#1b2835",
-
-          info: "#00b1ff",
-
-          success: "#00c05b",
-
-          warning: "#ffcf00",
-
-          error: "#ff576f",
-        },
-      },
+      "light",
+      "dark",
+      "cupcake",
+      "bumblebee",
+      "emerald",
+      "corporate",
+      "synthwave",
+      "retro",
+      "cyberpunk",
+      "valentine",
+      "halloween",
+      "garden",
+      "forest",
+      "aqua",
+      "lofi",
+      "pastel",
+      "fantasy",
+      "wireframe",
+      "black",
+      "luxury",
+      "dracula",
+      "cmyk",
+      "autumn",
+      "business",
+      "acid",
+      "lemonade",
+      "night",
+      "coffee",
+      "winter",
+      "dim",
+      "nord",
+      "sunset",
     ],
   },
   plugins: [require("daisyui")],

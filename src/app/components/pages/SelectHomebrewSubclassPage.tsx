@@ -74,7 +74,7 @@ const SelectHomebrewSubclassPage = () => {
                   }}
                 >
                   <td>
-                    <p className="text-blue-500  font-bold">
+                    <p className="text-accent  font-bold">
                       {item.name.toCapitalCase()}
                     </p>
                   </td>

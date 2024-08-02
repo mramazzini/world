@@ -56,8 +56,6 @@ const CreateClassPage = () => {
     ritualSpellPrepared: false,
     spellCaster: false,
     spellCastingAbility: Ability.WIS,
-    cantripsKnown: [],
-    spellsKnown: [],
   });
   const [features, setFeatures] = useState<Prisma.FeatureCreateManyInput[]>([]);
   const [subClasses, setSubClasses] = useState<
@@ -175,8 +173,6 @@ const CreateClassPage = () => {
         <SpellCasting
           spellCaster={data.spellCaster as boolean}
           spellCastingAbility={data.spellCastingAbility as Ability}
-          cantripsKnown={data.cantripsKnown as number[]}
-          spellsKnown={data.spellsKnown as number[]}
           casterType={casterType as CasterType}
           ritualCaster={data.ritualCaster as boolean}
           ritualSpellPrepared={data.ritualSpellPrepared as boolean}

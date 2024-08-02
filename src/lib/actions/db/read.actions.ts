@@ -102,6 +102,8 @@ export async function getSubclass(
         },
         include: {
           SubClassFeatures: true,
+          casterType: true,
+          customFields: true,
         },
       });
       await db.$disconnect();
@@ -113,6 +115,8 @@ export async function getSubclass(
         },
         include: {
           SubClassFeatures: true,
+          casterType: true,
+          customFields: true,
         },
       });
       await db.$disconnect();

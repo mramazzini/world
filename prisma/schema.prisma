@@ -189,22 +189,33 @@ model SubClass {
   flavorText          String            @db.VarChar(200)
   source              String            @default("Player's Handbook")
   //spellcasting
+  ritualCaster        Boolean           @default(false) // can you cast spells as rituals
   spellCaster         Boolean           @default(false)
+  ritualSpellPrepared Boolean           @default(true) //do you need to have a spell prepared to cast it as a ritual
+  spellFocus          String?
   spellCastingAbility Ability?
   casterType          CasterType?       @relation(fields: [casterTypeId], references: [id])
   casterTypeId        Int               @default(3)
   spellCastingInfo    String? // How does spell casting work for this class
   prepareSpellInfo    String? // How do spells get prepared for this class
-  createdAt           DateTime          @default(now())
-  updatedAt           DateTime          @updatedAt
-  Class               Class?            @relation(fields: [classId], references: [id])
-  classId             Int?
-  User                User?             @relation(fields: [userId], references: [id])
-  userId              Int?
+  customFields        CustomField[] // Custom fields for the subclass spellcasting
+
+  //these two fields will presume that a customField is created in the class table
+  // deafults to 0, meaning the class does not have a set number of spells known
+  //otherwise, the number indicates the first level in which they have spells known
+  spellsKnown   Int @default(0) // Does the class have a set number of spells known
+  cantripsKnown Int @default(0) // Does the class have a set number of cantrips known
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Class     Class?   @relation(fields: [classId], references: [id])
+  classId   Int?
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
 }
 
 model CustomField {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   description String
   level1      String
@@ -227,10 +238,12 @@ model CustomField {
   level18     String
   level19     String
   level20     String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  Class       Class?   @relation(fields: [classId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Class       Class?    @relation(fields: [classId], references: [id])
   classId     Int?
+  SubClass    SubClass? @relation(fields: [subClassId], references: [id])
+  subClassId  Int?
 }
 
 model CasterType {

@@ -81,7 +81,7 @@ const SelectClassPage = () => {
                 }}
               >
                 <td>
-                  <p className="text-blue-500 font-bold">
+                  <p className="text-accent font-bold">
                     {item.name.toCapitalCase()}
                   </p>
                 </td>
@@ -95,7 +95,7 @@ const SelectClassPage = () => {
                     router.push(`/class/${item.name}/subclass`);
                   }}
                 >
-                  <p className="line-clamp-2 text-blue-500  font-bold">
+                  <p className="line-clamp-2 text-accent  font-bold">
                     {item.subClassName}
                   </p>
                 </td>

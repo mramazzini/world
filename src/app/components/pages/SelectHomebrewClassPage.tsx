@@ -74,7 +74,7 @@ const SelectHomebrewClassPage = () => {
                 }}
               >
                 <td>
-                  <p className="text-blue-500 font-bold">
+                  <p className="text-accent font-bold">
                     {item.name.toCapitalCase()}
                   </p>
                 </td>
@@ -91,7 +91,7 @@ const SelectHomebrewClassPage = () => {
                     router.push(`/class/${formattedName}/subclass`);
                   }}
                 >
-                  <p className="text-blue-500 font-bold line-clamp-2">
+                  <p className="text-accent font-bold line-clamp-2">
                     {item.subClassName}
                   </p>
                 </td>

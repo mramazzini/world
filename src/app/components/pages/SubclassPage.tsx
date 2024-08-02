@@ -2,6 +2,7 @@
 import SubClassDisplay from "@/app/components/ClassInfo/SubClassDisplay";
 import { getSubclass } from "@/lib/actions/db/read.actions";
 import { SubClassInfo } from "@/lib/types";
+import { CasterType } from "@prisma/client";
 
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -24,7 +25,13 @@ const SubClassPage = () => {
     <div className="pt-4">
       {!data && <span className="loading" />}
 
-      {data && <SubClassDisplay subClass={data} />}
+      {data && (
+        <SubClassDisplay
+          subClass={data}
+          casterType={data.casterType as CasterType}
+          customFields={data.customFields}
+        />
+      )}
     </div>
   );
 };

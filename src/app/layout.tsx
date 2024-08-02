@@ -18,10 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} w-screen flex flex-col items-center text-gray-200`}
+        className={`${inter.className} w-screen flex flex-col items-center  min-h-screen`}
       >
         <Navbar />
-        <div className="max-w-[1800px] w-full">{children}</div>
+
+        <div className="max-w-[1800px] w-full  ">{children}</div>
       </body>
     </html>
   );

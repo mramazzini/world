@@ -79,7 +79,7 @@ const SelectSubclassPage = () => {
                     }}
                   >
                     <td>
-                      <p className="text-blue-500  font-bold">{item.name}</p>
+                      <p className="text-accent  font-bold">{item.name}</p>
                     </td>
                     <td className="hidden md:table-cell">
                       <p className="italic line-clamp-2"> {item.flavorText}</p>

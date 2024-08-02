@@ -9,24 +9,17 @@ import P from "../Utility/FormatAndSanitize";
 import numPlace from "@/lib/utils/numPlace";
 import Link from "next/link";
 import JsonTable from "../Utility/JsonTable";
+import SpellCastingInfo from "./SpellCastingInfo";
+import { CasterType, CustomField } from "@prisma/client";
+import SubClassTable from "./SubClassTable";
+import Info from "../UI/Info";
 interface Props {
   subClass: SubClassInfo;
+  casterType: CasterType;
+  customFields: CustomField[];
 }
 
-interface SpellLevel {
-  lvl: number;
-  spells: string[];
-}
-// lvl:spell, spell, spell
-const processSpellsString = (spells: string): SpellLevel => {
-  const spellList = spells.split(", ");
-  const level = spellList[0].split(":")[0];
-
-  spellList[0] = spellList[0].split(":")[1];
-  return { lvl: parseInt(level), spells: spellList };
-};
-
-const SubClassDisplay = ({ subClass }: Props) => {
+const SubClassDisplay = ({ subClass, casterType, customFields }: Props) => {
   const router = usePathname();
   const className = router.split("/")[2];
 
@@ -60,59 +53,84 @@ const SubClassDisplay = ({ subClass }: Props) => {
         </div>
       </div>
       <div className="divider"></div>
+      <div className="px-4">
+        {/* Subclass table only required if they are a spellcaster */}
 
-      {numberArray(1, 20).map((num) => {
-        //grab features for the current level
-        const feat = subClass.SubClassFeatures.filter((feature) =>
-          feature.levels.find((lvl) => lvl === num)
-        );
-        if (feat.length == 0) return;
-        if (feat.find((f) => f.levels[0] === num))
-          return (
-            <ul key={num}>
-              {feat.map((feature) => {
-                const lvlIndex = feature.levels.findIndex((lvl) => lvl === num);
-                if (lvlIndex === -1 || lvlIndex > 0) return;
-                return (
-                  <div key={`${num}-${feature.id}`}>
-                    <li className="px-4">
-                      <h3 className="flex flex-row justify-between">
-                        {lvlIndex === 0 && feature.name}{" "}
-                        <Levels levels={feature.levels} />
-                      </h3>
+        {/* spellcasting */}
+        {subClass.spellCaster && casterType && (
+          <>
+            <h2>Subclass Table</h2>
+            <SubClassTable
+              subClass={subClass}
+              casterType={casterType}
+              customFields={customFields}
+              subClassLevel={subClass.SubClassFeatures[0].levels[0]}
+            />
+            <SpellCastingInfo classObj={subClass} casterType={casterType} />
+            <div className="divider"></div>
+            {/* features */}
+          </>
+        )}
+        <h2 className="px-4">
+          Subclass Features{" "}
+          <Info tooltip="Subclasses provide additional features that make your character more powerful as they level up." />
+        </h2>
+        <div className="divider"></div>
 
-                      {lvlIndex === 0 && (
-                        <>
-                          <P>{feature.description}</P>
-                          {feature.options && feature.options.length > 0 && (
-                            <ul className="list-disc px-4">
-                              <br />
-                              {feature.options.map((option, index) => (
-                                <div key={index}>
-                                  <li>
-                                    <P>{option}</P>
-                                  </li>
-                                  <br />
-                                </div>
-                              ))}
-                            </ul>
-                          )}
-                        </>
-                      )}
-                    </li>
-                    {feature.extendedTable && (
-                      <div className="px-4">
-                        <JsonTable json={feature.extendedTable} />
-                      </div>
-                    )}
-                    <div className="divider"></div>
-                  </div>
-                );
-              })}
-            </ul>
+        {numberArray(1, 20).map((num) => {
+          //grab features for the current level
+          const feat = subClass.SubClassFeatures.filter((feature) =>
+            feature.levels.find((lvl) => lvl === num)
           );
-      })}
-      <ul></ul>
+          if (feat.length == 0) return;
+          if (feat.find((f) => f.levels[0] === num))
+            return (
+              <ul key={num}>
+                {feat.map((feature) => {
+                  const lvlIndex = feature.levels.findIndex(
+                    (lvl) => lvl === num
+                  );
+                  if (lvlIndex === -1 || lvlIndex > 0) return;
+                  return (
+                    <div key={`${num}-${feature.id}`}>
+                      <li className="px-4">
+                        <h3 className="flex flex-row justify-between">
+                          {lvlIndex === 0 && feature.name}{" "}
+                          <Levels levels={feature.levels} />
+                        </h3>
+
+                        {lvlIndex === 0 && (
+                          <>
+                            <P>{feature.description}</P>
+                            {feature.options && feature.options.length > 0 && (
+                              <ul className="list-disc px-4">
+                                <br />
+                                {feature.options.map((option, index) => (
+                                  <div key={index}>
+                                    <li>
+                                      <P>{option}</P>
+                                    </li>
+                                    <br />
+                                  </div>
+                                ))}
+                              </ul>
+                            )}
+                          </>
+                        )}
+                      </li>
+                      {feature.extendedTable && (
+                        <div className="px-4">
+                          <JsonTable json={feature.extendedTable} />
+                        </div>
+                      )}
+                      <div className="divider"></div>
+                    </div>
+                  );
+                })}
+              </ul>
+            );
+        })}
+      </div>
     </div>
   );
 };

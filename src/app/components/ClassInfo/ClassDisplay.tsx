@@ -62,7 +62,7 @@ function ClassDisplay({
           </p>
           <Link
             target="_blank"
-            className="text-blue-500 hover:text-blue-700 inline text-sm font-bold"
+            className="text-accent inline text-sm font-bold"
             href={`/class/${classObj.name}/pdf`}
           >
             View this class as a PDF here -&gt;

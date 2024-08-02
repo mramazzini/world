@@ -63,7 +63,7 @@ const GenerateTable = ({
                 <td
                   key={index}
                   style={index === 0 ? firstCellStyle : cellStyle[index]}
-                  className={`${links && index === 0 ? "text-blue-500" : ""}`}
+                  className={`${links && index === 0 ? "text-accent" : ""}`}
                 >
                   {row[header]}
                 </td>

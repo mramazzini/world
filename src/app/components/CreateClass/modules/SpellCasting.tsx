@@ -8,8 +8,7 @@ import SpellTableEditor from "../SpellTableEditor";
 interface Props {
   spellCaster: boolean;
   spellCastingAbility: Ability;
-  cantripsKnown: number[];
-  spellsKnown: number[];
+
   casterType: CasterType;
   active: boolean;
   ritualCaster: boolean;

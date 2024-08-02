@@ -84,28 +84,6 @@ const seed = async () => {
   }
   cinfo("Features created");
 
-  //Create custom fields
-  cinfo("Creating custom fields");
-  for (const CustomField of CustomFields) {
-    try {
-      cinfo("Creating custom field:", CustomField.name);
-      //make sure custom field has a classId
-      if (!CustomField.classId) {
-        cerr("Custom field missing classId:", CustomField.name);
-        return;
-      }
-
-      await db.customField.create({
-        data: CustomField,
-      });
-      cinfo("Custom field created");
-    } catch (error) {
-      cerr("Error creating custom field:", CustomField.name, error);
-      return;
-    }
-  }
-  cinfo("Custom fields created");
-
   // Create sub classes
   cinfo("Creating sub classes");
   for (const SubClass of SubClasses) {
@@ -163,6 +141,28 @@ const seed = async () => {
     }
   }
   cinfo("Subclass features created");
+
+  //Create custom fields
+  cinfo("Creating custom fields");
+  for (const CustomField of CustomFields) {
+    try {
+      cinfo("Creating custom field:", CustomField.name);
+      //make sure custom field has a classId
+      if (!CustomField.classId && !CustomField.subClassId) {
+        cerr("Custom field missing classId or subClassID:", CustomField.name);
+        return;
+      }
+
+      await db.customField.create({
+        data: CustomField,
+      });
+      cinfo("Custom field created");
+    } catch (error) {
+      cerr("Error creating custom field:", CustomField.name, error);
+      return;
+    }
+  }
+  cinfo("Custom fields created");
 
   // Create weapons
   cinfo("Creating weapons");

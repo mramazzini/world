@@ -39,6 +39,12 @@ export interface ClassInfo extends Class {
   customFields: CustomField[];
 }
 
+export interface SubClassInfo extends SubClass {
+  SubClassFeatures: SubClassFeature[];
+  casterType: CasterType | null;
+  customFields: CustomField[];
+}
+
 declare global {
   namespace PrismaJson {
     // you can use classes, interfaces, types, etc.
@@ -86,10 +92,6 @@ export const officialSources: string[] = [
   src.vanRichten,
   src.dmg,
 ];
-
-export interface SubClassInfo extends SubClass {
-  SubClassFeatures: SubClassFeature[];
-}
 
 // type where options are "level1" , "level2" all the way to level20
 export type SpellLevels =

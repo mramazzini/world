@@ -151,7 +151,7 @@ const ClassPdfPage = () => {
   if (!className) return <span className="p-4">Class does not exist</span>;
   return classData ? (
     <>
-      <Link className=" btn  m-4 text-blue-500" href={`/class/${className}`}>
+      <Link className=" btn  m-4 text-accent" href={`/class/${className}`}>
         &lt;- Back to Class
       </Link>
       {/* Download pdf */}

@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Ability, Prisma } from "@prisma/client";
 import { src } from "@/lib/types";
 import P from "@/app/components/Utility/FormatAndSanitize";
 
@@ -926,6 +926,15 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     source: src.phb,
     flavorText:
       "Arcane Tricksters enhance their fine-honed skills of stealth and agility with magic, learning tricks of enchantment and illusion.",
+    spellCaster: true,
+    spellCastingAbility: Ability.INT,
+    spellCastingInfo:
+      "You know three 1st-level wizard spells of your choice, two of which you must choose from the enchantment and illusion spells on the wizard spell list.\n\nThe Spells Known column of the Arcane Trickster Spellcasting table shows when you learn more wizard spells of 1st level or higher. Each of these spells must be an enchantment or illusion spell of your choice, and must be of a level for which you have spell slots. For instance, when you reach 7th level in this class, you can learn one new spell of 1st or 2nd level.\n\nThe spells you learn at 8th, 14th, and 20th level can come from any school of magic.\n\nWhenever you gain a level in this class, you can replace one of the wizard spells you know with another spell of your choice from the wizard spell list. The new spell must be of a level for which you have spell slots, and it must be an enchantment or illusion spell, unless you're replacing the spell you gained at 3rd, 8th, 14th, or 20th level from any school of magic.",
+    prepareSpellInfo:
+      "The Arcane Trickster Spellcasting table shows how many spell slots you have to cast your wizard spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
+    casterTypeId: 3, //3rd caster
+    spellsKnown: 3,
+    cantripsKnown: 3,
   },
   {
     name: "Assassin",
