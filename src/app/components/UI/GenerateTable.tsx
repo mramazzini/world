@@ -1,4 +1,5 @@
 import { useRouter } from "next/navigation";
+import P from "../Utility/FormatAndSanitize";
 
 //function to generate a single table
 const GenerateTable = ({
@@ -33,9 +34,9 @@ const GenerateTable = ({
   // return the table
 
   return (
-    <div key={key} className={`overflow-x-auto py-2`}>
+    <div key={key} className={`py-2 overflow-y-visible`}>
       <h3>{key}</h3>
-      <table className="table table-sm table-zebra">
+      <table className="table table-sm table-zebra overflow-y-visible">
         <thead>
           <tr className="bg-black/30">
             {tableHeader.map((header: any) => (
@@ -65,7 +66,7 @@ const GenerateTable = ({
                   style={index === 0 ? firstCellStyle : cellStyle[index]}
                   className={`${links && index === 0 ? "text-accent" : ""}`}
                 >
-                  {row[header]}
+                  <P>{row[header]}</P>
                 </td>
               ))}
             </tr>

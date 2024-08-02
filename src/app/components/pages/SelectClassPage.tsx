@@ -75,7 +75,7 @@ const SelectClassPage = () => {
             return (
               <tr
                 key={index}
-                className="cursor-pointer hover"
+                className="cursor-pointer hover "
                 onClick={() => {
                   router.push(`/class/${item.name}`);
                 }}
