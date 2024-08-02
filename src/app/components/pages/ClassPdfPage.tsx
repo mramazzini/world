@@ -94,8 +94,8 @@ const ClassPdfPage = () => {
       console.log(spells);
       //levels proficieny and features will have their own css
       count += res?.customFields.length || 0;
-      count += res?.cantripsKnown.find((c) => c > 0) ? 1 : 0;
-      count += res?.spellsKnown.find((c) => c > 0) ? 1 : 0;
+      count += res?.cantripsKnown ? 1 : 0;
+      count += res?.spellsKnown ? 1 : 0;
       setStyles(
         StyleSheet.create({
           table: {
@@ -183,10 +183,10 @@ const ClassPdfPage = () => {
                     {field.name}
                   </Text>
                 ))}
-                {classData.cantripsKnown.find((c) => c > 0) && (
+                {classData.cantripsKnown && (
                   <Text style={styles.col}>Cantrips Known</Text>
                 )}
-                {classData.spellsKnown.find((c) => c > 0) && (
+                {classData.spellsKnown && (
                   <Text style={styles.col}>Spells Known</Text>
                 )}
                 {classData.spellCaster &&
@@ -230,17 +230,7 @@ const ClassPdfPage = () => {
                     );
                   })}
                   {/* Cantrips Known */}
-                  {classData.cantripsKnown.find((c) => c > 0) && (
-                    <Text style={styles.col}>
-                      {classData.cantripsKnown[level - 1] || "-"}
-                    </Text>
-                  )}
-                  {/* Spells Known */}
-                  {classData.spellsKnown.find((c) => c > 0) && (
-                    <Text style={styles.col}>
-                      {classData.spellsKnown[level - 1] || "-"}
-                    </Text>
-                  )}
+
                   {/* Spell Slots */}
                   {classData.casterType &&
                     classData.spellCaster &&

@@ -79,10 +79,10 @@ const ClassTableEditor = ({
                   {field.name}
                 </th>
               ))}
-              {classObj.cantripsKnown.find((c) => c > 0) && (
+              {classObj.cantripsKnown && (
                 <th className="text-left bg-black/20 ">Cantrips Known</th>
               )}
-              {classObj.spellsKnown.find((c) => c > 0) && (
+              {classObj.spellsKnown && (
                 <th className="text-left bg-black/20 ">Spells Known</th>
               )}
 
@@ -163,12 +163,6 @@ const ClassTableEditor = ({
                     </td>
                   );
                 })}
-                {classObj.cantripsKnown.find((c) => c > 0) && (
-                  <td>{classObj.cantripsKnown[num - 1] || 0}</td>
-                )}
-                {classObj.spellsKnown.find((c) => c > 0) && (
-                  <td>{classObj.spellsKnown[num - 1] || 0}</td>
-                )}
                 {casterType &&
                   classObj.spellCaster &&
                   classObj.displaySpellList &&
