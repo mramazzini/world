@@ -1350,7 +1350,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
             {
               Infusion: "Arcane Propulsion Armor",
               Description:
-                "The wearer of this armor gets the following benefits. (1) The wearer's waling speed increases by 5 feet. (2) The armor includes gauntlets, each of which is a magic melee weapon that can be wielded only when the hand is holding nothing. The wearer is proficient with the gauntlets, and each one deals 1d8 force damage on a hit and has the thrown property, with a normal range of 20 feet and a long range of 60 feet. When thrown, the gauntlet detaches and flies at the attack's target, then immediately returns to the wearer and reattaches. (3) The armor can't be removed against the wearer's will. (4) If the wearer is missing any limbs, the armor replaces those limbs - hands, arms, feet, legs, or similar appendages. The replacements function identically to the body parts they replace.",
+                "The wearer of this armor gets the following benefits.\n\n (1) The wearer's waling speed increases by 5 feet.\n\n (2) The armor includes gauntlets, each of which is a magic melee weapon that can be wielded only when the hand is holding nothing. The wearer is proficient with the gauntlets, and each one deals 1d8 force damage on a hit and has the thrown property, with a normal range of 20 feet and a long range of 60 feet. When thrown, the gauntlet detaches and flies at the attack's target, then immediately returns to the wearer and reattaches.\n\n (3) The armor can't be removed against the wearer's will. \n\n(4) If the wearer is missing any limbs, the armor replaces those limbs - hands, arms, feet, legs, or similar appendages. The replacements function identically to the body parts they replace.",
               Item: "A suit of armor (requires attunement)",
               Prerequisites: "14th level artificer",
             },
@@ -1452,6 +1452,20 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
               Item: "A ring (requires attunement)",
               Prerequisites: "6th level artificer",
             },
+            {
+              Infusion: "Homunculus Servant",
+              Description:
+                "You learn intricate methods for magically creating a special homunculus that serves you. The item you infuse serves as the creature's heart, around which the creature's body instantly forms.\n\nYou determine the homunculus's appearance. Some artificers prefer mechanical-looking birds, whereas some like winged vials or miniature, animate cauldrons.\n\nThe homunculus is friendly to you and your companions, and it obeys your commands. See this creature's game statistics in the Homunculus Servant stat block (located at the bottom of this page, under Additonal Infusions), which uses your proficiency bonus (PB) in several places.\n\nIn combat, the homunculus shares your initiative count, but it takes its turn immediately after yours. It can move and use its reaction on its own, but the only action it takes on its turn is the Dodge action, unless you take a bonus action on your turn to command it to take another action. That action can be one in its stat block or some other action. If you are incapacitated, the homunculus can take any action of its choice, not just Dodge.\n\nThe homunculus regains 2d6 hit points if the mending spell is cast on it. If you or the homunculus dies, it vanishes, leaving its heart in its space.",
+              Item: "A gem or crystal worth at least 100 gp",
+              Prerequisites: "10th level artificer",
+            },
+            {
+              Infusion: "Replicate Magic Item",
+              Description:
+                "Using this infusion, you replicate a particular magic item. You can learn this infusion multiple times; each time you do so, choose a magic item that you can make with it, picking from the Replicable Items tables  (located at the bottom of this page, under Additonal Infusions). A table's title tells you the level you must be in the class to choose an item from the table. Alternatively, you can choose the magic item from among the common magic items in the game, not including potions or scrolls.\n\nIn the tables, an item's entry tells you whether the item requires attunement. See the item's description in the Dungeon Master's Guide for more information about it, including the type of object required for its making.\n\nIf you have Xanathar's Guide to Everything, you can choose from among the common magic items in that book when you pick a magic item you can replicate with this infusion.",
+              Item: "A nonmagical version of the item",
+              Prerequisites: "-",
+            },
           ],
         },
       },
@@ -1522,6 +1536,360 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
     options: [
       "You gain a +1 bonus to all saving throws per magic item you are currently attuned to.",
       "If you're reduced to 0 hit points but not killed out-right, you can use your reaction to end one of your artificer infusions, causing you to drop to 1 hit point instead of 0.",
+    ],
+  },
+  {
+    classId: ids.artificer,
+    levels: [],
+    name: "Additional Infusions",
+    description:
+      "Below is some extra information on some of the infusions listed above.",
+  },
+  {
+    name: "Homunculus Servant Infusion",
+    description:
+      "Below is the stat block for the Homunculus Servant that you can create with the Homunculus Servant infusion.",
+    levels: [],
+    classId: ids.artificer,
+    extendedTable: [
+      {
+        "Homunculus Servant": {
+          headers: ["STR", "DEX", "CON", "INT", "WIS", "CHA"],
+          data: [
+            {
+              STR: "4 (-3)",
+              DEX: "15 (+2)",
+              CON: "12 (+1)",
+              INT: "10 (+0)",
+              WIS: "10 (+0)",
+              CHA: "7 (-2)",
+            },
+          ],
+        },
+      },
+      {
+        "": {
+          headers: ["Stat", "Value"],
+          data: [
+            {
+              Stat: "Creature Type",
+              Value: "Tiny Construct",
+            },
+            {
+              Stat: "Armor Class",
+              Value: "13 (natural armor)",
+            },
+            {
+              Stat: "Hit Points",
+              Value:
+                "1 + your Intelligence modifier + your artificer level (the homunculus has a number of Hit Dice [d4s] equal to your artificer level)",
+            },
+            {
+              Stat: "Speed",
+              Value: "20 ft., fly 30 ft.",
+            },
+            {
+              Stat: "Saving Throws",
+              Value: "Dex +2 plus PB",
+            },
+            {
+              Stat: "Skills",
+              Value: "Perception +0 plus PB x 2, Stealth +2 plus PB",
+            },
+            {
+              Stat: "Damage Immunities",
+              Value: "Poison",
+            },
+            {
+              Stat: "Condition Immunities",
+              Value: "Exhaustion, Poisoned",
+            },
+            {
+              Stat: "Senses",
+              Value: "darkvision 60 ft., passive Perception 10 + (PB x 2)",
+            },
+            {
+              Stat: "Languages",
+              Value: "understands the languages you speak",
+            },
+            {
+              Stat: "Proficiency Bonus (PB)",
+              Value: "equals your bonus",
+            },
+            {
+              Stat: "Evasion",
+              Value:
+                "If the homunculus is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, it instead takes no damage if it succeeds on the saving throw, and only half damage if it fails. It can't use this trait if it's incapacitated.",
+            },
+          ],
+        },
+      },
+      {
+        "": {
+          headers: ["Action", "Description"],
+          data: [
+            {
+              Action: "Force Strike",
+              Description:
+                "Ranged Weapon Attack: your spell attack modifier to hit, range 30 ft., one target you can see. Hit: 1d4 + PB force damage.",
+            },
+          ],
+        },
+      },
+      {
+        "": {
+          headers: ["Reaction", "Description"],
+          data: [
+            {
+              Reaction: "Channel Magic",
+              Description:
+                "The homunculus delivers a spell you cast that has a range of touch. The homunculus must be within 120 feet of you.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+
+  {
+    name: "Replicable Items Infusion",
+    description:
+      "Below is a list of items that you can replicate with the Replicate Magic Item infusion.",
+    levels: [],
+    classId: ids.artificer,
+    extendedTable: [
+      {
+        "Replicable Magic Items (2nd-Level Artificer)": {
+          headers: ["Magic Item", "Attunement"],
+          data: [
+            {
+              "Magic Item": "Alchemy Jug",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Bag of Holding",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Cap of Water Breathing",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Goggles of Night",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Rope of Climbing",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Sending Stones",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Wand of Magic Detection",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Wand of Secrets",
+              Attunement: "No",
+            },
+          ],
+        },
+      },
+      {
+        "Replicable Magic Items (6th-Level Artificer)": {
+          headers: ["Magic Item", "Attunement"],
+          data: [
+            {
+              "Magic Item": "Boots of Elvenkind",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Cloak of Elvenkind",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Cloak of the Manta Ray",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Eyes of Charming",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Gloves of Thievery",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Lantern of Revealing",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Pipes of Haunting",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Ring of Water Walking",
+              Attunement: "No",
+            },
+          ],
+        },
+      },
+      {
+        "Replicable Magic Items (10th-level artificer)": {
+          headers: ["Magic Item", "Attunement"],
+          data: [
+            {
+              "Magic Item": "Boots of Striding and Springing",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Boots of the Winterlands",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Bracers of Archery",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Brooch of Shielding",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Cloak of Protection",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Eyes of the Eagle",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Gauntlets of Ogre Power",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Gloves of Missile Snaring",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Gloves of Swimming and Climbing",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Hat of Disguise",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Headband of Intellect",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Helm of Telepathy",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Medallion of Thoughts",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Necklace of Adaptation",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Periapt of Wound Closure",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Pipes of the Sewers",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Quiver of Ehlonna",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Ring of Jumping",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Ring of Mind Shielding",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Slippers of Spider Climbing",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Ventilating Lungs",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Winged Boots",
+              Attunement: "Yes",
+            },
+          ],
+        },
+      },
+      {
+        "Replicable Magic Items (14th-level artificer)": {
+          headers: ["Magic Item", "Attunement"],
+          data: [
+            {
+              "Magic Item": "Amulet of Health",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Arcane Propulsion Arm",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Belt of Hill Giant Strength",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Boots of Levitation",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Boots of Speed",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Bracers of Defense",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Cloak of the Bat",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Dimensional Shackles",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Gem of Seeing",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Horn of Blasting",
+              Attunement: "No",
+            },
+            {
+              "Magic Item": "Ring of Free Action",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Ring of Protection",
+              Attunement: "Yes",
+            },
+            {
+              "Magic Item": "Ring of the Ram",
+              Attunement: "Yes",
+            },
+          ],
+        },
+      },
     ],
   },
 ];

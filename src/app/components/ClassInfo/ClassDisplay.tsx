@@ -413,6 +413,35 @@ function ClassDisplay({
               </li>
             );
         })}
+        {/* Features with no specific levels */}
+        {features.map((feature, index) => {
+          if (feature.levels.length > 0) return;
+          return (
+            <li className="px-4" key={index}>
+              <h3 className="flex flex-row justify-between">
+                {feature.name} <Levels levels={feature.levels} />
+              </h3>
+              <P>{feature.description}</P>
+              {feature.options && feature.options.length > 0 && (
+                <ul className="list-disc px-4">
+                  <br />
+                  {feature.options.map((option, index) => (
+                    <div key={index}>
+                      <li>
+                        <P>{option}</P>
+                      </li>
+                      <br />
+                    </div>
+                  ))}
+                </ul>
+              )}
+              {feature.extendedTable && (
+                <JsonTable json={feature.extendedTable} />
+              )}
+              <div className="divider"></div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
