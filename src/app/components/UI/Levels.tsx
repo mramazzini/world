@@ -26,11 +26,8 @@ const Levels = ({ levels }: Props) => {
       "rgb(108, 108, 198)",
       "rgb(113, 113, 208)",
     ];
-    return { backgroundColor: colors[level - 1] };
-  };
 
-  const getTextColorClass = (level: number) => {
-    return level < 13 ? "text-black" : "text-white";
+    return { backgroundColor: colors[level - 1] };
   };
 
   for (const level of levels) {
@@ -45,12 +42,10 @@ const Levels = ({ levels }: Props) => {
         <div key={index} className="tooltip" data-tip={`Level ${level}`}>
           <div
             key={level}
-            className={`flex items-center justify-center w-8 h-8 rounded-full cursor-pointer ${getTextColorClass(
-              20 - level
-            )} font-bold`}
+            className={`flex items-center justify-center w-8 h-8 rounded-full cursor-pointer  font-bold  bg-accent`}
             style={getColorStyle(level)}
           >
-            {level}
+            <span className="text-white">{level}</span>
           </div>
         </div>
       ))}
