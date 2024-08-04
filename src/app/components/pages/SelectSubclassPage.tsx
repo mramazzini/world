@@ -48,6 +48,7 @@ const SelectSubclassPage = () => {
         </div>
         <div className="divider" />
         <SearchBar
+          placeholder="Search Subclass..."
           handleSearch={async (index: number, query: string) => {
             setData(null);
             const res = await getSubclassChunkByClass(index, query, className);

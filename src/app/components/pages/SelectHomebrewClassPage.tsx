@@ -50,7 +50,11 @@ const SelectHomebrewClassPage = () => {
         </div>
       </div>
       <div className="divider" />
-      <SearchBar handleSearch={handleSearch} setLoading={setLoading} />
+      <SearchBar
+        handleSearch={handleSearch}
+        setLoading={setLoading}
+        placeholder="Search Class..."
+      />
       <table className="table-zebra table-sm w-full">
         <thead>
           <tr>

@@ -44,7 +44,7 @@ const SubclassSearchPage = () => {
       </div>
       <div className="divider" />
       {/* search bar */}
-      <SearchBar handleSearch={handleSearch} />
+      <SearchBar placeholder="Search Subclass..." handleSearch={handleSearch} />
       <table className="table-zebra table-sm w-full">
         <thead>
           <tr>

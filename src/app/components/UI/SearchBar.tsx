@@ -1,6 +1,6 @@
 "use client";
 import { QUERY_LIMIT } from "@/lib/globalVars";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface Props {
   //returns number of results
@@ -8,15 +8,21 @@ interface Props {
   handleSearch: (index: number, query: string) => Promise<number>;
   //Optional function to set loading state
   setLoading?: (loading: boolean) => void;
+  placeholder?: string;
 }
 
-const SearchBar = ({ handleSearch, setLoading }: Props) => {
+const SearchBar = ({ handleSearch, setLoading, placeholder }: Props) => {
   const [query, setQuery] = useState("");
   const [index, setIndex] = useState(0);
+  const queryRef = useRef(query);
   const [length, setLength] = useState<number | "loading">(0);
 
   useEffect(() => {
-    componentSearch(index, query);
+    queryRef.current = query;
+  }, [query]);
+
+  useEffect(() => {
+    componentSearch(index, queryRef.current);
   }, [index]);
 
   const componentSearch = async (index: number, query: string) => {
@@ -44,7 +50,7 @@ const SearchBar = ({ handleSearch, setLoading }: Props) => {
       >
         <input
           type="text"
-          placeholder="Search for a subclass..."
+          placeholder={placeholder || "Search"}
           className="input input-primary w-1/2"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
