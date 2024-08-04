@@ -94,8 +94,6 @@ const ClassPdfPage = () => {
       console.log(spells);
       //levels proficieny and features will have their own css
       count += res?.customFields.length || 0;
-      count += res?.cantripsKnown ? 1 : 0;
-      count += res?.spellsKnown ? 1 : 0;
       setStyles(
         StyleSheet.create({
           table: {
@@ -183,12 +181,6 @@ const ClassPdfPage = () => {
                     {field.name}
                   </Text>
                 ))}
-                {classData.cantripsKnown && (
-                  <Text style={styles.col}>Cantrips Known</Text>
-                )}
-                {classData.spellsKnown && (
-                  <Text style={styles.col}>Spells Known</Text>
-                )}
                 {classData.spellCaster &&
                   classData.displaySpellList &&
                   numberArray(1, 9).map((num) => (
