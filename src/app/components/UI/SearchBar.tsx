@@ -13,7 +13,7 @@ interface Props {
 const SearchBar = ({ handleSearch, setLoading }: Props) => {
   const [query, setQuery] = useState("");
   const [index, setIndex] = useState(0);
-  const [length, setLength] = useState(0);
+  const [length, setLength] = useState<number | "loading">(0);
 
   useEffect(() => {
     componentSearch(index, query);
@@ -29,6 +29,7 @@ const SearchBar = ({ handleSearch, setLoading }: Props) => {
   const handlePageChange = (index: number) => {
     if (index < 0) return;
     setIndex(index);
+    setLength("loading");
   };
 
   return (
@@ -54,7 +55,7 @@ const SearchBar = ({ handleSearch, setLoading }: Props) => {
       </form>
 
       <div className="flex flex-row justify-between">
-        <span className="text-sm"></span>
+        <span className=" w-[100px]"></span>
         <div className="flex justify-center items-center pb-4">
           <button
             onClick={() => handlePageChange(index - 1)}
@@ -73,9 +74,13 @@ const SearchBar = ({ handleSearch, setLoading }: Props) => {
             -&gt;
           </button>
         </div>
-        <span className="text-xl font-bold flex justify-center items-center">
+        <span className="text-xl font-bold flex justify-center items-center w-[100px]">
           {length == 0 ? 0 : index * QUERY_LIMIT + 1} -{" "}
-          {index * QUERY_LIMIT + length}
+          {length == "loading" ? (
+            <span className="loading"></span>
+          ) : (
+            index * QUERY_LIMIT + length
+          )}{" "}
         </span>
       </div>
     </>

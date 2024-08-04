@@ -13,6 +13,7 @@ const SubclassSearchPage = () => {
   const router = useRouter();
 
   const handleSearch = async (index: number, query: string) => {
+    setData(null);
     const res = await getSubclassChunk(index, query);
     setData(res);
     console.log(res);

@@ -47,6 +47,7 @@ const SelectHomebrewSubclassPage = () => {
       <div className="divider" />
       <SearchBar
         handleSearch={async (index: number, query: string) => {
+          setData(null);
           const res = await getSubclassChunkByClass(index, query, className);
           //filter out subclasses without a user
           const filtered =
