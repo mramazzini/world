@@ -1,5 +1,6 @@
 "use server";
-import { ClassInfo, DBmetaData, SubClassInfo } from "@/lib/types";
+import Fuse from "fuse.js";
+import { ClassInfo, SubClassInfo, SubclassSearchResults } from "@/lib/types";
 import {
   Class,
   PrismaClient,
@@ -13,45 +14,187 @@ import {
   Weapon,
   WeaponProperty,
 } from "@prisma/client";
+import { QUERY_LIMIT } from "@/lib/globalVars";
 
-export async function getClassMeta(): Promise<DBmetaData[]> {
+// get top 10 subclasses based on query
+export async function getSubclassChunk(
+  index: number,
+  query: string
+): Promise<SubclassSearchResults[] | null> {
   const db = new PrismaClient();
-  let res: DBmetaData[] = [];
-  const data = await db.class.findMany({
-    orderBy: {
-      name: "asc",
-    },
-    //only name and id
-    select: {
-      name: true,
-      id: true,
-      flavorText: true,
-      updatedAt: true,
-      subClassName: true,
-      source: true,
-      userId: true,
-    },
-  });
 
-  const ids = data.map((item) => item.userId).filter((id) => id !== null);
+  if (query === "") {
+    const res = await db.subClass.findMany({
+      take: QUERY_LIMIT,
+      skip: index * QUERY_LIMIT,
+      include: {
+        Class: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+    await db.$disconnect();
+    return res;
+  }
 
-  const users = await db.user.findMany({
-    where: {
-      id: {
-        in: ids,
+  const res = await db.subClass.findMany({
+    include: {
+      SubClassFeatures: {
+        select: {
+          name: true,
+          description: true,
+        },
+      },
+      Class: {
+        select: {
+          name: true,
+        },
       },
     },
   });
-
-  res = data.map((item) => {
-    const user = users.find((user) => user.id === item.userId);
-    return {
-      ...item,
-      userName: user?.username || null,
-    };
+  const fuse = new Fuse(res, {
+    keys: [
+      { name: "name", weight: 3 },
+      { name: "description", weight: 1 },
+      { name: "flavorText", weight: 2 },
+      { name: "SubClassFeatures.name", weight: 2 },
+      { name: "SubClassFeatures.description", weight: 1 },
+    ],
   });
+  const results = fuse.search(query);
   await db.$disconnect();
-  return res;
+  //remove SubClassFeatures from results
+  const resultsCopy: SubclassSearchResults[] = results.map((item) => {
+    const { SubClassFeatures, ...rest } = item.item;
+    return rest;
+  });
+
+  return resultsCopy.slice(
+    index * QUERY_LIMIT,
+    index * QUERY_LIMIT + QUERY_LIMIT
+  );
+}
+
+export async function getSubclassChunkByClass(
+  index: number,
+  query: string,
+  className: string
+): Promise<SubClassInfo[] | null> {
+  const db = new PrismaClient();
+  if (query === "") {
+    const res = await db.subClass.findMany({
+      take: QUERY_LIMIT,
+      skip: index * QUERY_LIMIT,
+      where: {
+        Class: {
+          name: className,
+        },
+      },
+      include: {
+        SubClassFeatures: true,
+        casterType: true,
+        customFields: true,
+        User: {
+          select: {
+            username: true,
+          },
+        },
+      },
+    });
+    await db.$disconnect();
+    return res;
+  }
+  const res = await db.subClass.findMany({
+    where: {
+      Class: {
+        name: className,
+      },
+    },
+    include: {
+      SubClassFeatures: true,
+      casterType: true,
+      customFields: true,
+      User: {
+        select: {
+          username: true,
+        },
+      },
+    },
+  });
+  const fuse = new Fuse(res, {
+    keys: [
+      { name: "name", weight: 3 },
+      { name: "description", weight: 1 },
+      { name: "flavorText", weight: 2 },
+      { name: "SubClassFeatures.name", weight: 2 },
+      { name: "SubClassFeatures.description", weight: 1 },
+    ],
+  });
+  const results = fuse.search(query);
+  const resultsCopy = results.map((item) => item.item);
+  await db.$disconnect();
+  return resultsCopy.slice(
+    index * QUERY_LIMIT,
+    index * QUERY_LIMIT + QUERY_LIMIT
+  );
+}
+
+export async function getClassChunk(
+  index: number,
+  query: string
+): Promise<ClassInfo[]> {
+  const db = new PrismaClient();
+  if (query === "") {
+    const res = await db.class.findMany({
+      take: QUERY_LIMIT,
+      skip: index * QUERY_LIMIT,
+      include: {
+        Features: true,
+        SubClasses: true,
+        casterType: true,
+        customFields: true,
+        User: {
+          select: {
+            username: true,
+          },
+        },
+      },
+    });
+    await db.$disconnect();
+    return res;
+  }
+  const res: ClassInfo[] = await db.class.findMany({
+    include: {
+      Features: true,
+      SubClasses: true,
+      casterType: true,
+      customFields: true,
+      User: {
+        select: {
+          username: true,
+        },
+      },
+    },
+  });
+  const fuse = new Fuse(res, {
+    keys: [
+      { name: "name", weight: 3 },
+      { name: "description", weight: 1 },
+      { name: "flavorText", weight: 2 },
+      { name: "Features.name", weight: 2 },
+      { name: "Features.description", weight: 1 },
+    ],
+  });
+  const results = fuse.search(query);
+  const resultsCopy = results.map((item) => item.item);
+  await db.$disconnect();
+
+  return resultsCopy.slice(
+    index * QUERY_LIMIT,
+    index * QUERY_LIMIT + QUERY_LIMIT
+  );
 }
 
 export async function getClass(
@@ -69,6 +212,11 @@ export async function getClass(
         SubClasses: true,
         casterType: true,
         customFields: true,
+        User: {
+          select: {
+            username: true,
+          },
+        },
       },
     });
     await db.$disconnect();
@@ -83,6 +231,11 @@ export async function getClass(
         SubClasses: true,
         casterType: true,
         customFields: true,
+        User: {
+          select: {
+            username: true,
+          },
+        },
       },
     });
     await db.$disconnect();
@@ -104,6 +257,11 @@ export async function getSubclass(
           SubClassFeatures: true,
           casterType: true,
           customFields: true,
+          User: {
+            select: {
+              username: true,
+            },
+          },
         },
       });
       await db.$disconnect();
@@ -117,6 +275,11 @@ export async function getSubclass(
           SubClassFeatures: true,
           casterType: true,
           customFields: true,
+          User: {
+            select: {
+              username: true,
+            },
+          },
         },
       });
       await db.$disconnect();
@@ -128,51 +291,6 @@ export async function getSubclass(
   await db.$disconnect();
   return null;
 }
-
-export const getSubClassMeta = async (
-  className: string
-): Promise<DBmetaData[] | null> => {
-  const db = new PrismaClient();
-  const classObj = await db.class.findFirst({
-    where: {
-      name: className,
-    },
-  });
-  const data = await db.subClass.findMany({
-    where: {
-      classId: classObj?.id,
-    },
-    select: {
-      name: true,
-      id: true,
-      description: true,
-      updatedAt: true,
-      source: true,
-      userId: true,
-      flavorText: true,
-    },
-  });
-  let res: DBmetaData[] = [];
-  const ids = data.map((item) => item.userId).filter((id) => id !== null);
-
-  const users = await db.user.findMany({
-    where: {
-      id: {
-        in: ids,
-      },
-    },
-  });
-
-  res = data.map((item) => {
-    const user = users.find((user) => user.id === item.userId);
-    return {
-      ...item,
-      userName: user?.username || null,
-    };
-  });
-  await db.$disconnect();
-  return res;
-};
 
 export const getSubclassFromClassName = async (
   className: string
@@ -206,7 +324,18 @@ export const getDefaultCasterTypes = async (): Promise<CasterType[]> => {
   await db.$disconnect();
   return arr;
 };
-
+export async function getClasses(): Promise<Class[]> {
+  const db = new PrismaClient();
+  const res = await db.class.findMany();
+  await db.$disconnect();
+  return res;
+}
+export async function getSubclasses(): Promise<SubClass[]> {
+  const db = new PrismaClient();
+  const res = await db.subClass.findMany();
+  await db.$disconnect();
+  return res;
+}
 export async function getRace(): Promise<Race[]> {
   const db = new PrismaClient();
   const res = await db.race.findMany();

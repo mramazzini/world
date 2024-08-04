@@ -14,6 +14,7 @@ import numPlace from "@/lib/utils/numPlace";
 import { italic } from "@uiw/react-md-editor";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import Link from "next/link";
+import Loading from "../UI/Loading";
 // The 'theme' object is your Tailwind theme config
 
 function findFourthAsteriskIndex(str: string) {
@@ -434,7 +435,7 @@ const ClassPdfPage = () => {
       </PDFViewer>
     </>
   ) : (
-    <span className="loading p-4" />
+    <Loading />
   );
 };
 

@@ -21,28 +21,29 @@ export enum Pages {
   Item = "Item",
 }
 
-export interface DBmetaData {
-  id: number;
-  name: string;
-  flavorText: string;
-  updatedAt: Date;
-  subClassName?: string;
-  source: string;
-  userName: string | null;
-  userId: number | null;
-}
-
 export interface ClassInfo extends Class {
   Features: Feature[];
   SubClasses: SubClass[];
   casterType: CasterType | null;
   customFields: CustomField[];
+  User: {
+    username: string | null;
+  } | null;
 }
 
 export interface SubClassInfo extends SubClass {
   SubClassFeatures: SubClassFeature[];
   casterType: CasterType | null;
   customFields: CustomField[];
+  User: {
+    username: string | null;
+  } | null;
+}
+
+export interface SubclassSearchResults extends SubClass {
+  Class: {
+    name: string | null;
+  } | null;
 }
 
 declare global {

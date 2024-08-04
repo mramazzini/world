@@ -3,20 +3,20 @@ import { usePathname, useRouter } from "next/navigation";
 import "@/lib/string.extensions";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { DBmetaData, src } from "@/lib/types";
-import { getSubClassMeta } from "@/lib/actions/db/read.actions";
+
+import { SubClassInfo } from "@/lib/types";
+import { getSubclassChunkByClass } from "@/lib/actions/db/read.actions";
+import { get } from "http";
+import SearchBar from "../UI/SearchBar";
+import Loading from "../UI/Loading";
 
 const SelectSubclassPage = () => {
   const router = useRouter();
   const path = usePathname();
   const className = path?.split("/")[2];
 
-  const [data, setData] = useState<DBmetaData[] | null>(null);
-  useEffect(() => {
-    getSubClassMeta(className).then((res) => {
-      setData(res);
-    });
-  }, [className]);
+  const [data, setData] = useState<SubClassInfo[] | null>(null);
+
   if (!className) return <span className="p-4">Class does not exist</span>;
   return (
     <>
@@ -47,6 +47,16 @@ const SelectSubclassPage = () => {
           </div>
         </div>
         <div className="divider" />
+        <SearchBar
+          handleSearch={async (index: number, query: string) => {
+            const res = await getSubclassChunkByClass(index, query, className);
+            //filter out subclasses with a user
+            const filtered =
+              res && res.filter((item) => (item.userId ? true : false));
+            setData(filtered);
+            return filtered ? filtered.length : 0;
+          }}
+        />
 
         <table className="table-zebra table-sm w-full">
           <thead>
@@ -64,7 +74,7 @@ const SelectSubclassPage = () => {
           <tbody>
             {data &&
               data.map((item, index) => {
-                if (item.userName) return null;
+                if (item.User?.username) return null;
                 return (
                   <tr
                     key={index}
@@ -96,7 +106,7 @@ const SelectSubclassPage = () => {
               })}
           </tbody>
         </table>
-        {!data && <span className="loading m-4" />}
+        {!data && <Loading />}
       </main>
     </>
   );

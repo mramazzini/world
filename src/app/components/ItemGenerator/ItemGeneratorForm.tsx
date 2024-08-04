@@ -5,6 +5,7 @@ import Input from "../UI/Input";
 import List from "../UI/List";
 import { getWeapon } from "@/lib/actions/db/read.actions";
 import P from "../Utility/FormatAndSanitize";
+import Loading from "../UI/Loading";
 
 //item rarity type
 type Rarity = "Common" | "Uncommon" | "Rare" | "Very Rare" | "Legendary";
@@ -26,7 +27,7 @@ const ItemGeneratorForm = () => {
     console.log(item);
   };
 
-  if (!weapons) return <span className="loading">Loading...</span>;
+  if (!weapons) return <Loading />;
   console.log(item);
 
   return (

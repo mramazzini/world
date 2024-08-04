@@ -1,20 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
-import { DBmetaData, Pages } from "@/lib/types";
-import { getClassMeta } from "@/lib/actions/db/read.actions";
-import { Class } from "@prisma/client";
+import { ClassInfo, Pages } from "@/lib/types";
+import { getClassChunk } from "@/lib/actions/db/read.actions";
+
 import "@/lib/string.extensions";
 import Link from "next/link";
-import useSessionState from "../Utility/useSessionState";
+
 import { useRouter } from "next/navigation";
+import Loading from "../UI/Loading";
 
 const SelectClassPage = () => {
   const router = useRouter();
-  const [data, setData] = useState<DBmetaData[]>([]);
+  const [data, setData] = useState<ClassInfo[]>([]);
 
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    getClassMeta().then((res) => {
+    getClassChunk(0, "").then((res) => {
       setLoading(false);
       setData(res);
     });
@@ -109,7 +110,7 @@ const SelectClassPage = () => {
           })}
         </tbody>
       </table>
-      {loading && <div className="loading loading-lg m-4" />}
+      {loading && <Loading />}
     </main>
   );
 };

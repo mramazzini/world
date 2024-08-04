@@ -3,27 +3,26 @@ import { usePathname, useRouter } from "next/navigation";
 import "@/lib/string.extensions";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { DBmetaData, src } from "@/lib/types";
-import { getSubClassMeta } from "@/lib/actions/db/read.actions";
+
+import Loading from "../UI/Loading";
+import { SubClassInfo } from "@/lib/types";
+import SearchBar from "../UI/SearchBar";
+import { getSubclassChunkByClass } from "@/lib/actions/db/read.actions";
 
 const SelectHomebrewSubclassPage = () => {
   const router = useRouter();
   const path = usePathname();
   const className = path?.split("/")[2];
 
-  const [data, setData] = useState<DBmetaData[] | null>(null);
-  useEffect(() => {
-    getSubClassMeta(className).then((res) => {
-      setData(res);
-    });
-  }, [className]);
+  const [data, setData] = useState<SubClassInfo[] | null>(null);
+
   if (!className) return <span className="p-4">Class does not exist</span>;
   return (
     <main className="p-8">
       {/* Homebrew */}
       <div className="flex flex-col md:flex-row justify-between">
         <div className="flex flex-col md:w-4/5">
-          <h1>Homebrew</h1>
+          <h1>{className.toCapitalCase()} Subclass Homebrew</h1>
           <p className="italic">
             Homebrew subclasses are created by the community. They are not
             official content and should be reviewed by your Dungeon Master
@@ -46,6 +45,16 @@ const SelectHomebrewSubclassPage = () => {
         </div>
       </div>
       <div className="divider" />
+      <SearchBar
+        handleSearch={async (index: number, query: string) => {
+          const res = await getSubclassChunkByClass(index, query, className);
+          //filter out subclasses without a user
+          const filtered =
+            res && res.filter((item) => (item.userId ? true : false));
+          setData(filtered);
+          return filtered ? filtered.length : 0;
+        }}
+      />
 
       <table className="table-zebra table-sm w-full">
         <thead>
@@ -59,7 +68,7 @@ const SelectHomebrewSubclassPage = () => {
         <tbody>
           {data &&
             data.map((item, index) => {
-              if (!item.userName) return null;
+              if (!item.User?.username) return null;
               return (
                 <tr
                   key={index}
@@ -82,7 +91,7 @@ const SelectHomebrewSubclassPage = () => {
                     <p className="italic line-clamp-2"> {item.flavorText}</p>
                   </td>
                   <td>
-                    <p className="line-clamp-2"> {item.userName}</p>
+                    <p className="line-clamp-2"> {item.User.username}</p>
                   </td>
                   <td className="hidden sm:table-cell">
                     {item.updatedAt.getDate()}/{item.updatedAt.getMonth()}/
@@ -93,7 +102,7 @@ const SelectHomebrewSubclassPage = () => {
             })}
         </tbody>
       </table>
-      {!data && <span className="loading p-4" />}
+      {!data && <Loading />}
     </main>
   );
 };

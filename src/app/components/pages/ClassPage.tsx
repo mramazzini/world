@@ -5,6 +5,7 @@ import { getClass } from "@/lib/actions/db/read.actions";
 import { Class, Prisma, Feature, SubClass } from "@prisma/client";
 import { ClassInfo } from "@/lib/types";
 import ClassDisplay from "@/app/components/ClassInfo/ClassDisplay";
+import Loading from "../UI/Loading";
 
 const ClassPage = () => {
   const router = usePathname();
@@ -20,7 +21,7 @@ const ClassPage = () => {
   if (!className) return <span className="p-4">Class does not exist</span>;
   return (
     <div className="p-4">
-      {!data && <span className="loading" />}
+      {!data && <Loading />}
       {data && (
         <ClassDisplay
           classObj={data as Class}

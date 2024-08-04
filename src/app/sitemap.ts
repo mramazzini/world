@@ -1,4 +1,10 @@
-import { getClassMeta, getSubClassMeta } from "@/lib/actions/db/read.actions";
+import {
+  getClasses,
+  getSubclass,
+  getSubclassFromClassName,
+} from "@/lib/actions/db/read.actions";
+import { ClassInfo } from "@/lib/types";
+import { Class } from "@prisma/client";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -18,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     throw new Error("DOMAIN_NAME is not defined in env");
   }
 
-  const classes = await getClassMeta();
+  const classes = await getClasses();
   siteMap.push({
     url: process.env.DOMAIN_NAME,
     lastModified: new Date(),
@@ -56,7 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly",
       priority: 0.7,
     });
-    const subClasses = await getSubClassMeta(c.name);
+    const subClasses = await getSubclassFromClassName(c.name);
     if (!subClasses) {
       continue;
     }

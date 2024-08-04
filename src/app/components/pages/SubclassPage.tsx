@@ -6,6 +6,7 @@ import { CasterType } from "@prisma/client";
 
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import Loading from "../UI/Loading";
 
 const SubClassPage = () => {
   const router = usePathname();
@@ -23,7 +24,7 @@ const SubClassPage = () => {
     return <span className="p-4">Subclass does not exist</span>;
   return (
     <div className="pt-4">
-      {!data && <span className="loading" />}
+      {!data && <Loading />}
 
       {data && (
         <SubClassDisplay

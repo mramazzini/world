@@ -1,24 +1,27 @@
 "use client";
 import { useState, useEffect } from "react";
-import { DBmetaData, Pages } from "@/lib/types";
-import { getClassMeta } from "@/lib/actions/db/read.actions";
+import { ClassInfo, Pages } from "@/lib/types";
+import { getClassChunk } from "@/lib/actions/db/read.actions";
 
 import "@/lib/string.extensions";
 import Link from "next/link";
 
 import { useRouter } from "next/navigation";
+import SearchBar from "../UI/SearchBar";
+import Loading from "../UI/Loading";
 
 const SelectHomebrewClassPage = () => {
   const router = useRouter();
-  const [data, setData] = useState<DBmetaData[]>([]);
+  const [data, setData] = useState<ClassInfo[]>([]);
 
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    getClassMeta().then((res) => {
-      setLoading(false);
-      setData(res);
-    });
-  }, []);
+
+  const handleSearch = async (index: number, query: string) => {
+    const res = await getClassChunk(index, query);
+    const filtered = res.filter((item) => (item.userId ? true : false));
+    setData(filtered);
+    return filtered.length;
+  };
 
   return (
     <main className="p-8">
@@ -47,6 +50,7 @@ const SelectHomebrewClassPage = () => {
         </div>
       </div>
       <div className="divider" />
+      <SearchBar handleSearch={handleSearch} setLoading={setLoading} />
       <table className="table-zebra table-sm w-full">
         <thead>
           <tr>
@@ -61,7 +65,7 @@ const SelectHomebrewClassPage = () => {
         </thead>
         <tbody>
           {data.map((item, index) => {
-            if (!item.userName) return null;
+            if (!item.userId) return null;
             return (
               <tr
                 key={index}
@@ -95,7 +99,7 @@ const SelectHomebrewClassPage = () => {
                     {item.subClassName}
                   </p>
                 </td>
-                <td>{item.userName}</td>
+                <td>{item.User?.username}</td>
                 <td className="hidden sm:table-cell">
                   {item.updatedAt.getDate()}/{item.updatedAt.getMonth()}/
                   {item.updatedAt.getFullYear()}
@@ -105,7 +109,7 @@ const SelectHomebrewClassPage = () => {
           })}
         </tbody>
       </table>
-      {loading && <div className="loading loading-lg m-4" />}
+      {loading && <Loading />}
     </main>
   );
 };
