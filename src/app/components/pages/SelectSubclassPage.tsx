@@ -17,6 +17,12 @@ const SelectSubclassPage = () => {
 
   const [data, setData] = useState<SubClassInfo[] | null>(null);
 
+  useEffect(() => {
+    getSubclassChunkByClass(0, "", className).then((res) => {
+      setData(res);
+    });
+  }, [className]);
+
   if (!className) return <span className="p-4">Class does not exist</span>;
   return (
     <>
