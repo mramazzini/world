@@ -82,8 +82,9 @@ const SubclassSearchPage = () => {
                 <td className="hidden md:table-cell">{subClass.flavorText}</td>
                 <td>{subClass.userId ? subClass.userId : subClass.source}</td>
                 <td className="hidden sm:table-cell">
-                  {subClass.updatedAt.getMonth()}/{subClass.updatedAt.getDate()}
-                  /{subClass.updatedAt.getFullYear()}
+                  {subClass.updatedAt.getDate()}/{" "}
+                  {subClass.updatedAt.getMonth()}/
+                  {subClass.updatedAt.getFullYear()}
                 </td>
               </tr>
             ))}
