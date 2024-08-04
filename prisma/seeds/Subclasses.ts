@@ -15,6 +15,7 @@ const ids = {
   ranger: 10,
   sorcerer: 11,
   warlock: 12,
+  artificer: 13,
 };
 
 const SubClasses: Prisma.SubClassCreateManyInput[] = [
@@ -1103,6 +1104,46 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     source: src.phb,
     flavorText:
       "Sorcerers with Wild Magic have innate magic that comes from the wild forces of chaos that underlie the order of creation.",
+  },
+  // artificer
+  {
+    name: "Alchemist",
+    description:
+      "An Alchemist is an expert at combining reagents to produce mystical effects. Alchemists use their creations to give life and to leech it away. Alchemy is the oldest of artificer traditions, and its versatility has long been valued during times of war and peace.",
+    id: 106,
+    classId: ids.artificer,
+    source: src.eberron,
+    flavorText:
+      "Alchemists are experts at combining reagents to produce mystical effects, using their creations to give life and to leech it away.",
+  },
+  {
+    name: "Armorer",
+    description:
+      "An artificer who specializes as an Armorer modifies armor to function almost like a second skin. The armor is enhanced to hone the artificer's magic, unleash potent attacks, and generate a formidable defense. The artificer bonds with this armor, becoming one with it even as they experiment with it and refine its magical capabilities.",
+    id: 107,
+    classId: ids.artificer,
+    source: src.tasha,
+    flavorText:
+      "Armorers modify armor to function almost like a second skin, enhancing it to hone their magic, unleash potent attacks, and generate a formidable defense.",
+  },
+  {
+    name: "Artillerist",
+    description: `An Artillerist specializes in using magic to hurl energy, projectiles, and explosions on a battlefield. This destructive power is valued by armies in the wars on many different worlds. And when war passes, some members of this specialization seek to build a more peaceful world by using their powers to fight the resurgence of strife. The world-hopping gnome artificer Vi has been especially vocal about making things right: "It's about time we fixed things instead of blowing them all to hell."`,
+    id: 108,
+    classId: ids.artificer,
+    source: src.eberron,
+    flavorText:
+      "Artillerists specialize in using magic to hurl energy, projectiles, and explosions on a battlefield.",
+  },
+  {
+    name: "Battle Smith",
+    description:
+      "Armies require protection, and someone has to put things back together if defenses fail. A combination of protector and medic, a Battle Smith is an expert at defending others and repairing both materiel and personnel. To aid in their work, Battle Smiths are accompanied by a steel defender, a protective companion of their own creation. Many soldiers tell stories of nearly dying before being saved by a Battle Smith and a steel defender.\n\nIn the world of Eberron, Battle Smiths played a key role in House Cannith's work on battle constructs and the original warforged, and after the Last War, these artificers led efforts to aid those who were injured in the war's horrific battles.",
+    id: 109,
+    classId: ids.artificer,
+    source: src.eberron,
+    flavorText:
+      "A combination of protector and medic, a Battle Smith is an expert at defending others and repairing both materiel and personnel.",
   },
 ];
 

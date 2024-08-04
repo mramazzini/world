@@ -10,7 +10,7 @@ import RangerSubclassFeatures from "./Ranger";
 import RogueSubclassFeatures from "./Rogue";
 import SorcererSubclassFeatures from "./Sorcerer";
 // import WarlockSubclassFeatures from "./Warlock";
-// import ArtificerSubclassFeatures from "./Artificer";
+import ArtificerSubclassFeatures from "./Artificer";
 
 const SubclassFeatures = [
   ...FighterSubclassFeatures,
@@ -25,7 +25,7 @@ const SubclassFeatures = [
   ...RogueSubclassFeatures,
   ...SorcererSubclassFeatures,
   // ...WarlockSubclassFeatures,
-  // ...ArtificerSubclassFeatures,
+  ...ArtificerSubclassFeatures,
 ];
 
 export default SubclassFeatures;
