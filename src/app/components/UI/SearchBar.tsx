@@ -22,6 +22,7 @@ const SearchBar = ({ handleSearch, setLoading, placeholder }: Props) => {
   }, [query]);
 
   useEffect(() => {
+    console.log("searching");
     componentSearch(index, queryRef.current);
   }, [index]);
 
@@ -29,6 +30,7 @@ const SearchBar = ({ handleSearch, setLoading, placeholder }: Props) => {
     setLoading && setLoading(true);
     const res = await handleSearch(index, query);
     setLength(res);
+    console.log(res);
     setLoading && setLoading(false);
   };
 

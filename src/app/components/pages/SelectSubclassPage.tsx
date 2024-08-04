@@ -17,12 +17,6 @@ const SelectSubclassPage = () => {
 
   const [data, setData] = useState<SubClassInfo[] | null>(null);
 
-  useEffect(() => {
-    getSubclassChunkByClass(0, "", className).then((res) => {
-      setData(res);
-    });
-  }, [className]);
-
   if (!className) return <span className="p-4">Class does not exist</span>;
   return (
     <>
@@ -59,8 +53,10 @@ const SelectSubclassPage = () => {
             setData(null);
             const res = await getSubclassChunkByClass(index, query, className);
             //filter out subclasses with a user
+            console.log(res);
             const filtered =
-              res && res.filter((item) => (item.userId ? true : false));
+              res && res.filter((item) => (item.userId ? false : true));
+            console.log(filtered);
             setData(filtered);
             return filtered ? filtered.length : 0;
           }}
