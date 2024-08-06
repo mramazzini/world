@@ -287,7 +287,7 @@ const cantrips: Prisma.SpellCreateManyInput[] = [
       "The spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).",
   },
   {
-    name: "Green-Flame Blade",
+    name: "Green Flame Blade",
     description:
       "You brandish the weapon used in the spell’s casting and make a melee attack with it against one creature within 5 feet of you. On a hit, the target suffers the weapon attack’s normal effects, and you can cause green fire to leap from the target to a different creature of your choice that you can see within 5 feet of it. The second creature takes fire damage equal to your spellcasting ability modifier.",
     level: 0,

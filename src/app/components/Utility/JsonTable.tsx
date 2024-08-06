@@ -17,7 +17,7 @@ const JsonTable = ({
   //verify table integrity
 
   if (!verifyTableIntegrity(json)) {
-    cwarn("Table integrity check failed");
+    cerr("Table integrity check failed");
     return <></>;
   }
 
@@ -27,7 +27,11 @@ const JsonTable = ({
   }
   //assign keys
   const tablesWithKeys = result.map((table, index) => {
-    return <React.Fragment key={index}>{table}</React.Fragment>;
+    return (
+      <div key={index} className="mb-2">
+        {table}
+      </div>
+    );
   });
 
   return <>{tablesWithKeys}</>;

@@ -68,13 +68,6 @@ export async function getFeat(): Promise<Feat[]> {
   return res;
 }
 
-export async function getSpell(): Promise<Spell[]> {
-  const db = new PrismaClient();
-  const res = await db.spell.findMany();
-  await db.$disconnect();
-  return res;
-}
-
 export async function getWeapon(): Promise<Weapon[]> {
   const db = new PrismaClient();
   const res = await db.weapon.findMany({

@@ -55,7 +55,7 @@ const SpellCastingInfo = ({ classObj, casterType }: Props) => {
           <br />
         </p>
       </div>
-      {classObj.cantripsKnown && (
+      {classObj.cantripsKnown > 0 && (
         <>
           <h3 className="font-bold">Cantrips</h3>
           <p className="p-4">
@@ -69,7 +69,7 @@ const SpellCastingInfo = ({ classObj, casterType }: Props) => {
           </p>
         </>
       )}
-      {classObj.spellsKnown && (
+      {classObj.spellsKnown > 0 && (
         <>
           <h3 className="font-bold">Spells Known</h3>
           <p className="p-4">

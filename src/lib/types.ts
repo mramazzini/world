@@ -5,6 +5,7 @@ import {
   Feature,
   Prisma,
   Spell,
+  SpellListToSpell,
   SubClass,
   SubClassFeature,
 } from "@prisma/client";
@@ -41,10 +42,17 @@ export interface SubClassInfo extends SubClass {
   } | null;
 }
 
+export interface SpellListToSpellInfo extends SpellListToSpell {
+  spellList: {
+    name: string | null;
+  } | null;
+}
+
 export interface SpellInfo extends Spell {
   User: {
     username: string | null;
   } | null;
+  SpellListToSpell: SpellListToSpellInfo[];
 }
 
 export interface SubclassSearchResults extends SubClass {

@@ -43,7 +43,7 @@ const Tooltip = ({
     switch (layer) {
       case 0:
         style = {
-          group: `text-accent cursor-pointer hover:text-blue-700 group/zero`,
+          group: `text-accent cursor-pointer hover:text-accent/70 group/zero`,
           groupHover: `transform translate-x-[-100%] bg-white group-hover/zero:inline text-sm text-black  rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-10 hidden shadow-md h-auto group-focus/zero:inline`,
         };
         break;
@@ -66,7 +66,7 @@ const Tooltip = ({
     switch (layer) {
       case 0:
         style = {
-          group: `text-accent cursor-pointer hover:text-blue-700 group/zero`,
+          group: `text-accent cursor-pointer hover:text-accent/70 group/zero`,
           groupHover: `group-hover/zero:inline text-sm text-black bg-white rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-10 hidden  shadow-md transform h-auto group-focus/zero:inline
          
       `,
