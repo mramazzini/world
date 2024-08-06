@@ -165,20 +165,71 @@ model Class {
   spellCastingInfo         String? // How does spell casting work for this class
   displaySpellList         Boolean       @default(true) // This is for displaying the spell list on the class table. Some classes (like warlock), have a weird spell casting system and opt to use the custom table fields instead.
   prepareSpellInfo         String? // How do spells get prepared for this class
-
+  SpellList                SpellList?    @relation(fields: [spellListId], references: [id]) // If the class has a spell list, link it here
   //these two fields will presume that a customField is created in the class table
   // deafults to 0, meaning the class does not have a set number of spells known
   //otherwise, the number indicates the first level in which they have spells known
-  spellsKnown   Int @default(0) // Does the class have a set number of spells known
-  cantripsKnown Int @default(0) // Does the class have a set number of cantrips known
+  spellsKnown              Int           @default(0) // Does the class have a set number of spells known
+  cantripsKnown            Int           @default(0) // Does the class have a set number of cantrips known
 
   source    String   @default("Player's Handbook") //source of the class
   //date fields
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  User        User? @relation(fields: [userId], references: [id])
+  userId      Int?
+  spellListId Int?
+}
+
+model Spell {
+  id            Int          @id @default(autoincrement())
+  name          String
+  description   String
+  duration      String
+  range         String
+  castingTime   String
+  verbal        Boolean      @default(false)
+  somatic       Boolean      @default(false)
+  material      Boolean      @default(false)
+  materialCost  String?
+  concentration Boolean      @default(false)
+  ritual        Boolean      @default(false)
+  upcastInfo    String?
+  //search fields
+  tags          String[]
+  saveRequired  Boolean      @default(false)
+  damageType    DamageTypes?
+  aoe           Boolean      @default(false)
+  conditions    String[]
+
+  /// [Table]
+  extendedTable    Json[] // This table will be rendered with the spell
+  school           SpellSchool
+  level            Int //0 is cantrip, 1-9 are spell levels
+  source           String
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  SpellListToSpell SpellListToSpell[]
+}
+
+model SpellListToSpell {
+  spellListId Int       @map("spellListId")
+  spellId     Int       @map("spellId")
+  spellList   SpellList @relation(fields: [spellListId], references: [id])
+  spell       Spell     @relation(fields: [spellId], references: [id])
+
+  @@id([spellListId, spellId]) // Composite primary key
+}
+
+model SpellList {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  SpellListToSpell SpellListToSpell[]
+  Class            Class[]
 }
 
 model SubClass {
@@ -323,8 +374,9 @@ model Race {
   SubRaces        SubRace[]
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
-  User            User       @relation(fields: [userId], references: [id])
-  userId          Int
+
+  User   User @relation(fields: [userId], references: [id])
+  userId Int
 }
 
 model SubRace {
@@ -365,17 +417,6 @@ model Feat {
   source      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-}
-
-model Spell {
-  id          Int         @id @default(autoincrement())
-  name        String
-  description String
-  school      SpellSchool
-  lvl         Int
-  source      String
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
 }
 
 model Weapon {

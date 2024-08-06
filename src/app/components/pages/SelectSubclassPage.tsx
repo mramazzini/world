@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 import { SubClassInfo } from "@/lib/types";
-import { getSubclassChunkByClass } from "@/lib/actions/db/read.actions";
+import { getSubclassChunkByClass } from "@/lib/actions/db/subclass/read.actions";
 import { get } from "http";
 import SearchBar from "../UI/SearchBar";
 import Loading from "../UI/Loading";
@@ -85,7 +85,7 @@ const SelectSubclassPage = () => {
                     className="cursor-pointer hover"
                     onClick={(e) => {
                       e.stopPropagation();
-                      const formattedName = `/class/${className}/subclass/${item.name.replaceAll(
+                      const formattedName = `/subclass/${item.name.replaceAll(
                         " ",
                         "-"
                       )}`;

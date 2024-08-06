@@ -1,9 +1,11 @@
 import HomePage from "@/app/components/pages/Home";
 import { Metadata } from "next";
+import { URL } from "url";
 
 export const metadata: Metadata = {
   title: "Max's DND Wiki",
   description: "A collection of DND resources",
+  metadataBase: new URL("https://world-ashen.vercel.app"),
   openGraph: {
     type: "website",
     title: "Max's DND Wiki",

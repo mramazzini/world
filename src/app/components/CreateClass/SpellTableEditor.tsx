@@ -1,5 +1,5 @@
 "use client";
-import { getDefaultCasterTypes } from "@/lib/actions/db/read.actions";
+import { getDefaultCasterTypes } from "@/lib/actions/db/general/read.actions";
 import { Levels } from "@/lib/types";
 import numberArray from "@/lib/utils/numberArray";
 import { CasterType } from "@prisma/client";

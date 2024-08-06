@@ -1,6 +1,6 @@
 "use client";
 import SubClassDisplay from "@/app/components/ClassInfo/SubClassDisplay";
-import { getSubclass } from "@/lib/actions/db/read.actions";
+import { getSubclass } from "@/lib/actions/db/subclass/read.actions";
 import { SubClassInfo } from "@/lib/types";
 import { CasterType } from "@prisma/client";
 
@@ -11,7 +11,7 @@ import Loading from "../UI/Loading";
 const SubClassPage = () => {
   const router = usePathname();
 
-  const subClassName = router?.split("/")[4].replaceAll("-", " ");
+  const subClassName = router?.split("/")[2].replaceAll("-", " ");
 
   const [data, setData] = useState<SubClassInfo | null>(null);
   useEffect(() => {

@@ -13,6 +13,9 @@ import SpellCastingInfo from "./SpellCastingInfo";
 import { CasterType, CustomField } from "@prisma/client";
 import SubClassTable from "./SubClassTable";
 import Info from "../UI/Info";
+import { getClass } from "@/lib/actions/db/class/read.actions";
+import { useEffect, useState } from "react";
+import Loading from "../UI/Loading";
 interface Props {
   subClass: SubClassInfo;
   casterType: CasterType;
@@ -20,15 +23,22 @@ interface Props {
 }
 
 const SubClassDisplay = ({ subClass, casterType, customFields }: Props) => {
-  const router = usePathname();
-  const className = router.split("/")[2];
+  const [className, setClassName] = useState<string>("");
+  useEffect(() => {
+    if (!subClass.classId) return;
+    getClass(subClass.classId).then((res) => {
+      if (!res) return;
+      setClassName(res.name);
+    });
+  }, [subClass.classId]);
 
+  if (!className) return <Loading />;
   return (
     <div className="p-4">
       <div className="flex flex-col md:flex-row justify-between">
         <div className="flex flex-col md:w-4/5">
           <h1 className="px-4">
-            {className.toCapitalCase()}: {subClass.name}
+            {className.toCapitalCase()} - {subClass.name}
           </h1>
           <p className="px-4 italic">{subClass.description}</p>
 
@@ -46,7 +56,7 @@ const SubClassDisplay = ({ subClass, casterType, customFields }: Props) => {
           {/* go back */}
           <Link
             className={"btn btn-ghost border border-gray-500 w-full"}
-            href={`/class/${className.replaceAll(" ", "-").toLowerCase()}`}
+            href={`/class/${className.replaceAll(" ", "-")}`}
           >
             View {className.toCapitalCase()} Class -&gt;
           </Link>

@@ -1,36 +1,18 @@
 "use client";
 import React, { useState } from "react";
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
-
 import { PDFViewer } from "@react-pdf/renderer";
-
 import { ClassInfo, Levels, SpellLevels } from "@/lib/types";
-import { getClass } from "@/lib/actions/db/read.actions";
+import { getClass } from "@/lib/actions/db/class/read.actions";
 import { useEffect } from "react";
-import { useSearchParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import "@/lib/string.extensions";
 import numberArray from "@/lib/utils/numberArray";
 import numPlace from "@/lib/utils/numPlace";
-import { italic } from "@uiw/react-md-editor";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import Link from "next/link";
 import Loading from "../UI/Loading";
 // The 'theme' object is your Tailwind theme config
-
-function findFourthAsteriskIndex(str: string) {
-  let count = 0;
-
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] === "*") {
-      count++;
-      if (count === 4) {
-        return i;
-      }
-    }
-  }
-
-  return -1; // Return -1 if there are less than 4 asterisks
-}
 
 const ClassPdfPage = () => {
   const router = usePathname();

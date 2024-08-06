@@ -1,16 +1,16 @@
-import FighterSubclassFeatures from "./Fighter";
-import ClericSubclassFeatures from "./Cleric";
-import BarbarianSubclassFeatures from "./Barbarian";
-import BardSubclassFeatures from "./Bard";
-import WizardSubclassFeatures from "./Wizard";
-import DruidSubclassFeatures from "./Druid";
-import MonkSubclassFeatures from "./Monk";
-import PaladinSubclassFeatures from "./Paladin";
-import RangerSubclassFeatures from "./Ranger";
-import RogueSubclassFeatures from "./Rogue";
-import SorcererSubclassFeatures from "./Sorcerer";
-// import WarlockSubclassFeatures from "./Warlock";
-import ArtificerSubclassFeatures from "./Artificer";
+import FighterSubclassFeatures from "./Fighter.seed";
+import ClericSubclassFeatures from "./Cleric.seed";
+import BarbarianSubclassFeatures from "./Barbarian.seed";
+import BardSubclassFeatures from "./Bard.seed";
+import WizardSubclassFeatures from "./Wizard.seed";
+import DruidSubclassFeatures from "./Druid.seed";
+import MonkSubclassFeatures from "./Monk.seed";
+import PaladinSubclassFeatures from "./Paladin.seed";
+import RangerSubclassFeatures from "./Ranger.seed";
+import RogueSubclassFeatures from "./Rogue.seed";
+import SorcererSubclassFeatures from "./Sorcerer.seed";
+import WarlockSubclassFeatures from "./Warlock.seed";
+import ArtificerSubclassFeatures from "./Artificer.seed";
 
 const SubclassFeatures = [
   ...FighterSubclassFeatures,
@@ -24,7 +24,7 @@ const SubclassFeatures = [
   ...RangerSubclassFeatures,
   ...RogueSubclassFeatures,
   ...SorcererSubclassFeatures,
-  // ...WarlockSubclassFeatures,
+  ...WarlockSubclassFeatures,
   ...ArtificerSubclassFeatures,
 ];
 

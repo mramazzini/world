@@ -7,7 +7,7 @@ import Link from "next/link";
 import Loading from "../UI/Loading";
 import { SubClassInfo } from "@/lib/types";
 import SearchBar from "../UI/SearchBar";
-import { getSubclassChunkByClass } from "@/lib/actions/db/read.actions";
+import { getSubclassChunkByClass } from "@/lib/actions/db/subclass/read.actions";
 
 const SelectHomebrewSubclassPage = () => {
   const router = useRouter();

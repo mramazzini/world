@@ -1,8 +1,5 @@
-import {
-  getClasses,
-  getSubclass,
-  getSubclassFromClassName,
-} from "@/lib/actions/db/read.actions";
+import { getClasses } from "@/lib/actions/db/class/read.actions";
+import { getSubclassFromClassName } from "@/lib/actions/db/subclass/read.actions";
 import { ClassInfo } from "@/lib/types";
 import { Class } from "@prisma/client";
 import { MetadataRoute } from "next";
@@ -57,7 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     });
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/class/${c.name}/create`,
+      url: `${process.env.DOMAIN_NAME}/homebrew/class/create`,
       lastModified: c.updatedAt,
       changeFrequency: "yearly",
       priority: 0.7,
@@ -67,10 +64,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       continue;
     }
     for (const sc of subClasses) {
+      if (sc.userId) {
+        continue;
+      }
       siteMap.push({
-        url: `${process.env.DOMAIN_NAME}/class/${
-          c.name
-        }/subclass/${sc.name.replaceAll(" ", "-")}`,
+        url: `${process.env.DOMAIN_NAME}/subclass/${sc.name.replaceAll(
+          " ",
+          "-"
+        )}`,
         lastModified: sc.updatedAt,
         changeFrequency: "yearly",
         priority: 0.8,

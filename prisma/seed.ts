@@ -1,25 +1,41 @@
-import Features from "./seeds/Features";
-import Classes from "./seeds/Class";
-import SubClasses from "./seeds/Subclasses";
-import CasterTypes from "./seeds/CasterType";
-import Weapons from "./seeds/Weapons";
-import Properties from "./seeds/Properties";
-import WeaponToPropertyArr from "./seeds/WeaponToProperty";
-import CustomFields from "./seeds/CustomFields";
+import Features from "./seeds/Features.seed";
+import Classes from "./seeds/Class.seed";
+import SubClasses from "./seeds/Subclasses.seed";
+import CasterTypes from "./seeds/CasterType.seed";
+import Weapons from "./seeds/Weapons.seed";
+import Properties from "./seeds/Properties.seed";
+import WeaponToPropertyArr from "./seeds/WeaponToProperty.seed";
+import CustomFields from "./seeds/CustomFields.seed";
 import SubclassFeatures from "./seeds/SubclassFeatures";
 import { cwarn, cinfo, cerr, csuccess } from "@/lib/utils/chalkLog";
+import SpellLists from "./seeds/SpellLists.seed";
 import {
   PrismaClient,
   Weapon,
   WeaponProperty,
   WeaponToProperty,
 } from "@prisma/client";
-import createMaxyUser from "./seeds/User";
+import createMaxyUser from "./seeds/User.seed";
 import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
 
 const db = new PrismaClient();
 // db cleared with npm run nuke prior to seeding
 const seed = async () => {
+  //create spell lists
+  cinfo("Creating spell lists");
+  for (const SpellList of SpellLists) {
+    try {
+      cinfo("Creating spell list:", SpellList.name);
+      await db.spellList.create({
+        data: SpellList,
+      });
+      cinfo("Spell list created");
+    } catch (error) {
+      cerr("Error creating spell list:", SpellList.name, error);
+      return;
+    }
+  }
+
   // Create caster types
   cinfo("Creating caster types");
   for (const CasterType of CasterTypes) {

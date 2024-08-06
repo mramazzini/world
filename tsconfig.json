@@ -26,7 +26,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/(root)/class/create"
+    "src/app/(root)/homebrew/class/create"
   ],
   "exclude": ["node_modules"]
 }

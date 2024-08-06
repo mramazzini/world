@@ -20,11 +20,11 @@ import SpellCasting from "../CreateClass/modules/SpellCasting";
 import CustomFieldsEditor from "../CreateClass/modules/CustomFieldsEditor";
 import SubclassInfo from "../CreateClass/modules/SubclassInfo";
 import FeatureCreator from "../CreateClass/modules/FeatureCreator";
-import { clientClassCreator } from "@/lib/actions/db/create.actions";
 import SaveClass from "../modals/SaveClass";
 import useErrorModal from "../modals/ErrorModal";
 import { Levels } from "@/lib/types";
 import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
+import { clientClassCreator } from "@/lib/actions/db/class/create.actions";
 
 const CreateClassPage = () => {
   const [activeModule, setActiveModule] = useState<number>(0);

@@ -7,7 +7,7 @@ import {
   validateEmail,
   validateSecureString,
 } from "@/lib/utils/auth";
-import { createUser } from "../db/create.actions";
+import { createUser } from "../db/general/create.actions";
 
 const db = new PrismaClient();
 
