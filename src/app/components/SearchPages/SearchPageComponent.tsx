@@ -1,13 +1,29 @@
 "use client";
 import Link from "next/link";
-import SearchBar from "./UI/SearchBar";
+import SearchBar from "../UI/SearchBar";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import Loading from "./UI/Loading";
+import Loading from "../UI/Loading";
 import { ClassInfo, SubClassInfo, SubclassSearchResults } from "@/lib/types";
 import { Spell } from "@prisma/client";
 import "@/lib/string.extensions";
+import numPlace from "@/lib/utils/numPlace";
+import { toSpellLevel } from "@/lib/utils/toSpellLevel";
 type DataType = SubClassInfo | ClassInfo | Spell | SubclassSearchResults | null;
+
+type Modifier =
+  | "Date"
+  | "Bold"
+  | "Link"
+  | "CapitalCase"
+  | "NumPlace"
+  | "SpellLevel";
+interface TableInfo {
+  headerWidth: number;
+  dbHeader: string | number;
+  header: string;
+  modifiers?: Modifier[];
+}
 
 interface Props<T extends DataType> {
   title: string;
@@ -18,22 +34,19 @@ interface Props<T extends DataType> {
   routeName: string;
   data: T[] | null;
   handleSearch: (index: number, query: string) => Promise<number>;
-  tableHeaders: string[];
-  dataHeaders: string[];
-  headerSizes: number[];
+  table: TableInfo[];
   homebrew: boolean;
 }
 
 const SearchPageComponent = <T extends DataType>({
   data,
-  tableHeaders,
-  headerSizes,
+
   handleSearch,
   title,
   description,
   createText,
   homebrewOfficialText,
-  dataHeaders,
+  table,
   searchPlaceholder,
   routeName,
   homebrew,
@@ -48,6 +61,32 @@ const SearchPageComponent = <T extends DataType>({
 
   const tableRoute = (name: string) =>
     `/${routeName}/${name.replaceAll(" ", "-")}`;
+
+  const applyModifiers = (data: string, modifier: Modifier[], index = 0) => {
+    switch (modifier[index]) {
+      case "Date":
+        return applyModifiers(
+          new Date(data).toLocaleDateString(),
+          modifier,
+          index + 1
+        );
+      case "Bold":
+        return <b>{applyModifiers(data, modifier, index + 1)}</b>;
+      case "Link":
+        return (
+          <Link href={data} className="text-accent">
+            {applyModifiers(data, modifier, index + 1)}
+          </Link>
+        );
+      case "CapitalCase":
+        return applyModifiers(data.toCapitalCase(), modifier, index + 1);
+      case "NumPlace":
+        return applyModifiers(numPlace(parseInt(data)), modifier, index + 1);
+      case "SpellLevel":
+        return applyModifiers(toSpellLevel(data), modifier, index + 1);
+    }
+    return data;
+  };
 
   return (
     <main className="p-8">
@@ -78,12 +117,12 @@ const SearchPageComponent = <T extends DataType>({
       <table className="table-zebra table-sm w-full">
         <thead>
           <tr>
-            {tableHeaders.map((header, index) => (
+            {table.map((col, index) => (
               <th
-                key={header}
-                className={`text-left bg-black/20 w-[${headerSizes[index]}%]`}
+                key={index}
+                className={`text-left bg-black/20 w-[${col.headerWidth}%]`}
               >
-                {header}
+                {col.header}
               </th>
             ))}
           </tr>
@@ -94,37 +133,24 @@ const SearchPageComponent = <T extends DataType>({
               <React.Fragment key={index}>
                 {item && (
                   <tr
-                    className="cursor-pointer hover"
+                    className="cursor-pointer hover transition ease-in-out duration-50"
                     onClick={(e) => {
                       e.stopPropagation();
                       router.push(tableRoute(item.name));
                     }}
                   >
-                    {dataHeaders.map((header, index) => {
-                      const hasHeader = item.hasOwnProperty(header);
+                    {table.map((col, index) => {
+                      const hasHeader = item.hasOwnProperty(col.dbHeader);
+
                       if (hasHeader) {
                         // @ts-ignore
-                        if (header === "updatedAt") {
+                        const data = applyModifiers(
                           // @ts-ignore
-                          return (
-                            <td key={header}>
-                              {/* @ts-ignore */}
-                              {new Date(item[header]).toLocaleDateString()}
-                            </td>
-                          );
-                        }
-                        if (index === 0) {
-                          return (
-                            <td key={header}>
-                              <p className="text-accent font-bold">
-                                {/* @ts-ignore */}
-                                {item[header]}
-                              </p>
-                            </td>
-                          );
-                        }
+                          item[col.dbHeader],
+                          col.modifiers || []
+                        );
                         // @ts-ignore
-                        return <td key={header}>{item[header]}</td>;
+                        return <td key={index}>{data}</td>;
                       }
                       return null;
                     })}

@@ -7,8 +7,11 @@ import Properties from "./seeds/Properties.seed";
 import WeaponToPropertyArr from "./seeds/WeaponToProperty.seed";
 import CustomFields from "./seeds/CustomFields.seed";
 import SubclassFeatures from "./seeds/SubclassFeatures";
+import Spells from "./seeds/Spells";
 import { cwarn, cinfo, cerr, csuccess } from "@/lib/utils/chalkLog";
-import SpellLists from "./seeds/SpellLists.seed";
+import SpellLists from "./seeds/Spells/SpellLists/SpellLists.seed";
+import { SpellListToSpell } from "@prisma/client";
+import SpellListToSpellArr from "./seeds/Spells/SpellLists/SpellListToSpell";
 import {
   PrismaClient,
   Weapon,
@@ -17,10 +20,27 @@ import {
 } from "@prisma/client";
 import createMaxyUser from "./seeds/User.seed";
 import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
+import { src } from "@/lib/types";
 
 const db = new PrismaClient();
 // db cleared with npm run nuke prior to seeding
 const seed = async () => {
+  // Create spells
+  cinfo("Creating spells");
+  for (const Spell of Spells) {
+    try {
+      cinfo("Creating spell:", Spell.name);
+      await db.spell.create({
+        data: Spell,
+      });
+      cinfo("Spell created");
+    } catch (error) {
+      cerr("Error creating spell:", Spell.name, error);
+      return;
+    }
+  }
+  cinfo("Spells created");
+
   //create spell lists
   cinfo("Creating spell lists");
   for (const SpellList of SpellLists) {
@@ -32,6 +52,51 @@ const seed = async () => {
       cinfo("Spell list created");
     } catch (error) {
       cerr("Error creating spell list:", SpellList.name, error);
+      return;
+    }
+  }
+  cinfo("Spell lists created");
+
+  //linking spellLists to spells
+  cinfo("Linking spell lists to spells");
+  for (const s of SpellListToSpellArr) {
+    try {
+      cinfo(
+        "Linking spell -",
+        s.spellName,
+        "- with spell lists:",
+        s.spellListIds.join(", ")
+      );
+      // Find the spell in the spells array
+      const spell = await db.spell.findFirst({
+        where: {
+          name: s.spellName,
+          source: {
+            not: src.homebrew,
+          },
+        },
+      });
+      if (!spell) {
+        cerr("Spell not found:", s.spellName);
+        return;
+      }
+      // Link the spell to the spell lists
+      for (const spellListId of s.spellListIds) {
+        try {
+          await db.spellListToSpell.create({
+            data: {
+              spellId: spell.id,
+              spellListId: spellListId,
+            },
+          });
+        } catch (error) {
+          cerr("Error linking spell and spell lists\n", error);
+          return;
+        }
+      }
+      cinfo("Spell linked with spell lists");
+    } catch (error) {
+      cerr("Error linking spell and spell lists\n", error);
       return;
     }
   }
@@ -50,6 +115,7 @@ const seed = async () => {
       return;
     }
   }
+  cinfo("Caster types created");
 
   // Create classes
   cinfo("Creating classes");
@@ -196,6 +262,7 @@ const seed = async () => {
       return;
     }
   }
+  cinfo("Weapons created");
   // Create properties
   cinfo("Creating Weapon properties");
   let properties: WeaponProperty[] = [];

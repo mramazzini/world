@@ -76,7 +76,7 @@ const SelectClassPage = () => {
             return (
               <tr
                 key={index}
-                className="cursor-pointer hover "
+                className="cursor-pointer hover transition ease-in-out duration-50"
                 onClick={() => {
                   router.push(`/class/${item.name}`);
                 }}

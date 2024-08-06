@@ -33,6 +33,10 @@ const SpellLists: Prisma.SpellListCreateManyInput[] = [
     id: 8,
     name: "Wizard",
   },
+  {
+    id: 9,
+    name: "Artificer",
+  },
 ];
 
 export default SpellLists;

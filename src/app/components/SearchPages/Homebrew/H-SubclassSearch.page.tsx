@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { SubClassInfo } from "@/lib/types";
-import SearchPageComponent from "../../SearchPageComponent";
+import SearchPageComponent from "../SearchPageComponent";
 import { getHomebrewSubclassChunk } from "@/lib/actions/db/subclass/read.actions";
 
 const HomebrewSubclassSearchPage = () => {
@@ -23,9 +23,30 @@ const HomebrewSubclassSearchPage = () => {
       searchPlaceholder="Search Subclass..."
       handleSearch={handleSearch}
       data={data}
-      tableHeaders={["Name", "Description", "Source", "Last Updated"]}
-      headerSizes={[15, 50, 10, 5]}
-      dataHeaders={["name", "flavorText", "userId", "updatedAt"]}
+      table={[
+        {
+          headerWidth: 15,
+          header: "Name",
+          dbHeader: "name",
+          modifiers: ["Link", "Bold"],
+        },
+        {
+          headerWidth: 50,
+          header: "Description",
+          dbHeader: "flavorText",
+        },
+        {
+          headerWidth: 10,
+          header: "Source",
+          dbHeader: "userId",
+        },
+        {
+          headerWidth: 5,
+          header: "Last Updated",
+          dbHeader: "updatedAt",
+          modifiers: ["Date"],
+        },
+      ]}
       routeName="subclass"
       createText="Create a Subclass ->"
       homebrewOfficialText="View Official Subclasses ->"

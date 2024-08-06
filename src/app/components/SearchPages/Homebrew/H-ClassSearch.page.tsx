@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ClassInfo } from "@/lib/types";
-import SearchPageComponent from "../../SearchPageComponent";
+import SearchPageComponent from "../SearchPageComponent";
 import { getHomebrewClassChunk } from "@/lib/actions/db/class/read.actions";
 
 const HomebrewClassSearchPage = () => {
@@ -23,9 +23,30 @@ const HomebrewClassSearchPage = () => {
       searchPlaceholder="Search Class..."
       handleSearch={handleSearch}
       data={data}
-      tableHeaders={["Name", "Description", "Source", "Last Updated"]}
-      headerSizes={[15, 50, 10, 5]}
-      dataHeaders={["name", "flavorText", "source", "updatedAt"]}
+      table={[
+        {
+          headerWidth: 15,
+          header: "Name",
+          dbHeader: "name",
+          modifiers: ["Link", "Bold"],
+        },
+        {
+          headerWidth: 50,
+          header: "Description",
+          dbHeader: "flavorText",
+        },
+        {
+          headerWidth: 10,
+          header: "Source",
+          dbHeader: "userId",
+        },
+        {
+          headerWidth: 5,
+          header: "Last Updated",
+          dbHeader: "updatedAt",
+          modifiers: ["Date"],
+        },
+      ]}
       routeName="class"
       createText="Create a Class ->"
       homebrewOfficialText="View Official Classes ->"

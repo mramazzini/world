@@ -4,6 +4,7 @@ import {
   CustomField,
   Feature,
   Prisma,
+  Spell,
   SubClass,
   SubClassFeature,
 } from "@prisma/client";
@@ -40,6 +41,12 @@ export interface SubClassInfo extends SubClass {
   } | null;
 }
 
+export interface SpellInfo extends Spell {
+  User: {
+    username: string | null;
+  } | null;
+}
+
 export interface SubclassSearchResults extends SubClass {
   Class: {
     name: string | null;
@@ -61,6 +68,7 @@ declare global {
 }
 
 export enum src {
+  homebrew = "Homebrew",
   tasha = "Tasha's Cauldron of Everything",
   xanathar = "Xanathar's Guide to Everything",
   volo = "Volo's Guide to Monsters",

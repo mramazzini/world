@@ -130,6 +130,7 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Spell     Spell[]
 }
 
 model Class {
@@ -205,12 +206,15 @@ model Spell {
 
   /// [Table]
   extendedTable    Json[] // This table will be rendered with the spell
+  postTableContent String? // This is for any additional content that should be displayed after the table
   school           SpellSchool
   level            Int //0 is cantrip, 1-9 are spell levels
   source           String
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   SpellListToSpell SpellListToSpell[]
+  User             User?              @relation(fields: [userId], references: [id])
+  userId           Int?
 }
 
 model SpellListToSpell {
