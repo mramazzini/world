@@ -58,45 +58,16 @@ const seed = async () => {
   cinfo("Spell lists created");
 
   //linking spellLists to spells
-  cinfo("Linking spell lists to spells");
+  cinfo("Creating spell list to spell links");
   for (const s of SpellListToSpellArr) {
     try {
-      cinfo(
-        "Linking spell -",
-        s.spellName,
-        "- with spell lists:",
-        s.spellListIds.join(", ")
-      );
-      // Find the spell in the spells array
-      const spell = await db.spell.findFirst({
-        where: {
-          name: s.spellName,
-          source: {
-            not: src.homebrew,
-          },
-        },
+      cinfo("Creating spell list to spell link:", s.spellId);
+      await db.spellListToSpell.create({
+        data: s,
       });
-      if (!spell) {
-        cerr("Spell not found:", s.spellName);
-        return;
-      }
-      // Link the spell to the spell lists
-      for (const spellListId of s.spellListIds) {
-        try {
-          await db.spellListToSpell.create({
-            data: {
-              spellId: spell.id,
-              spellListId: spellListId,
-            },
-          });
-        } catch (error) {
-          cerr("Error linking spell and spell lists\n", error);
-          return;
-        }
-      }
-      cinfo("Spell linked with spell lists");
+      cinfo("Spell list to spell link created");
     } catch (error) {
-      cerr("Error linking spell and spell lists\n", error);
+      cerr("Error creating spell list to spell link:", s.spellId, error);
       return;
     }
   }

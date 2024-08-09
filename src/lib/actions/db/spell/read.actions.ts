@@ -85,8 +85,6 @@ export const getSpellChunk = async (
   }
 
   const res: SpellInfo[] = await db.spell.findMany({
-    skip: index,
-    take: QUERY_LIMIT,
     include: {
       User: {
         select: {
@@ -103,9 +101,9 @@ export const getSpellChunk = async (
 
   const fuse = new Fuse(res, {
     keys: [
-      { name: "name", weight: 0.7 },
+      { name: "name", weight: 3 },
       { name: "description", weight: 0.3 },
-      { name: "tags", weight: 0.5 },
+      { name: "tags", weight: 1 },
       { name: "User.username", weight: 0.5 },
     ],
   });

@@ -184,29 +184,29 @@ model Class {
 }
 
 model Spell {
-  id            Int          @id @default(autoincrement())
-  name          String
-  description   String
-  duration      String
-  range         String
-  castingTime   String
-  verbal        Boolean      @default(false)
-  somatic       Boolean      @default(false)
-  material      Boolean      @default(false)
-  materialCost  String?
-  concentration Boolean      @default(false)
-  ritual        Boolean      @default(false)
-  upcastInfo    String?
+  id               Int                @id @default(autoincrement())
+  name             String
+  description      String
+  duration         String
+  range            String
+  castingTime      String
+  verbal           Boolean            @default(false)
+  somatic          Boolean            @default(false)
+  material         Boolean            @default(false)
+  materialCost     String?
+  concentration    Boolean            @default(false)
+  ritual           Boolean            @default(false)
+  upcastInfo       String?
   //search fields
-  tags          String[]
-  saveRequired  Boolean      @default(false)
-  damageType    DamageTypes?
-  aoe           Boolean      @default(false)
-  conditions    String[]
-
+  tags             String[]
+  saveRequired     Boolean            @default(false)
+  damageType       DamageTypes?
+  aoe              Boolean            @default(false)
+  conditions       String[]
+  options          String[] // If the spell has options to choose from, list here  
   /// [Table]
   extendedTable    Json[] // This table will be rendered with the spell
-  postTableContent String? // This is for any additional content that should be displayed after the table
+  postTableData    String? // This is for any additional content that should be displayed after the table
   school           SpellSchool
   level            Int //0 is cantrip, 1-9 are spell levels
   source           String
@@ -221,7 +221,7 @@ model SpellListToSpell {
   spellListId Int       @map("spellListId")
   spellId     Int       @map("spellId")
   spellList   SpellList @relation(fields: [spellListId], references: [id])
-  spell       Spell     @relation(fields: [spellId], references: [id])
+  Spell       Spell     @relation(fields: [spellId], references: [id])
 
   @@id([spellListId, spellId]) // Composite primary key
 }

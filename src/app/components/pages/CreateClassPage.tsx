@@ -55,7 +55,7 @@ const CreateClassPage = () => {
     ritualCaster: false,
     ritualSpellPrepared: false,
     spellCaster: false,
-    spellCastingAbility: Ability.WIS,
+    spellCastingAbility: Ability.STR,
   });
   const [features, setFeatures] = useState<Prisma.FeatureCreateManyInput[]>([]);
   const [subClasses, setSubClasses] = useState<

@@ -10,6 +10,7 @@ interface Props {
 }
 
 const SpellDisplay = ({ spell }: Props) => {
+  console.log(spell);
   const generateComponentsString = () => {
     let components = "";
     if (spell.verbal) components += "V";
@@ -24,7 +25,7 @@ const SpellDisplay = ({ spell }: Props) => {
     return components;
   };
   return (
-    <div>
+    <div className="text-xl">
       <h1>{spell.name}</h1>
       <div className="divider m-0"></div>
       {spell.level === 0 ? (
@@ -84,10 +85,23 @@ const SpellDisplay = ({ spell }: Props) => {
         Duration: <span className="font-normal">{spell.duration}</span>
       </h3>
       <div className="divider"></div>
-      <P>{spell.description}</P>
+      <P>{spell.description.trim()}</P>
+      {spell.options.length > 0 && (
+        <>
+          <br /> <br />
+          <ul className="list-disc p-2">
+            {spell.options.map((option, index) => (
+              <li key={index} className="m-4">
+                <P>{option}</P>
+              </li>
+            ))}
+          </ul>
+          <br />
+        </>
+      )}
       <JsonTable json={spell.extendedTable} />
 
-      {spell.postTableContent && <P>{spell.postTableContent}</P>}
+      {spell.postTableData && <P>{spell.postTableData.trim()}</P>}
       {spell.upcastInfo && (
         <>
           <div className="divider"></div>
