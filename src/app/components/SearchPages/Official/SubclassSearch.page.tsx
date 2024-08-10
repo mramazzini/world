@@ -30,30 +30,37 @@ const SubclassSearchPage = () => {
           header: "Name",
           dbHeader: "name",
           modifiers: ["Link", "Bold"],
+          index: 0,
         },
         {
           headerWidth: 50,
           header: "Description",
           dbHeader: "flavorText",
+          index: 1,
         },
         {
           headerWidth: 10,
           header: "Source",
           dbHeader: "source",
           searchFields: officialSources,
+          index: 3,
         },
         {
           headerWidth: 5,
           header: "Last Updated",
           dbHeader: "updatedAt",
           modifiers: ["Date"],
+          index: 4,
         },
       ]}
       relationalFields={[
         {
+          index: 2,
           model: "Class",
-          alias: "Class Name",
+          alias: "Class",
           key: "name",
+          modifiers: ["Link", "CapitalCase", "Bold"],
+          headerWidth: 5,
         },
       ]}
       routeName="subclass"

@@ -104,14 +104,17 @@ const SpellDisplay = ({ spell }: Props) => {
         Duration: <span className="font-normal">{spell.duration}</span>
       </h3>
       <div className="divider"></div>
-      <P>{spell.description.trim()}</P>
+
+      <p>
+        <P>{spell.description.trim()} </P>
+      </p>
+
       {spell.options.length > 0 && (
         <>
-          <br /> <br />
           <ul className="list-disc p-2">
             {spell.options.map((option, index) => (
               <li key={index} className="m-4">
-                <P>{option}</P>
+                <P>{option.trim()}</P>
               </li>
             ))}
           </ul>

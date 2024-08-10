@@ -16,6 +16,7 @@ import { Spell } from "@prisma/client";
 import "@/lib/string.extensions";
 import numPlace from "@/lib/utils/numPlace";
 import { toSpellLevel } from "@/lib/utils/toSpellLevel";
+import numberArray from "@/lib/utils/numberArray";
 type DataType = SubClassInfo | ClassInfo | Spell | SubclassSearchResults | null;
 
 type Modifier =
@@ -33,6 +34,7 @@ interface TableInfo {
   searchFields?: string[] | number[];
   includeOther?: boolean;
   enum?: boolean;
+  index: number;
 }
 
 interface Props<T extends DataType> {
@@ -49,9 +51,12 @@ interface Props<T extends DataType> {
   // when you want to search through a different sql model
   //key is model name, data is the field to search
   relationalFields?: {
+    index: number;
     model: string;
     key: string;
     alias?: string;
+    modifiers?: Modifier[];
+    headerWidth: number;
   }[];
 }
 
@@ -69,7 +74,10 @@ const SearchPageComponent = <T extends DataType>({
   relationalFields,
 }: Props<T>) => {
   const router = useRouter();
-
+  let count = -1;
+  count += table.length;
+  count += relationalFields?.length || 0;
+  console.log(count);
   const homebrewOfficialRoute = homebrew
     ? `/${routeName}`
     : `/homebrew/${routeName}`;
@@ -160,47 +168,82 @@ const SearchPageComponent = <T extends DataType>({
       <table className="table-zebra table-sm w-full">
         <thead>
           <tr>
-            {table.map((col, index) => (
-              <th
-                key={index}
-                className={`text-left bg-black/20 w-[${col.headerWidth}%]`}
-              >
-                {col.header}
-              </th>
-            ))}
+            {numberArray(0, count).map((num) => {
+              const col = table.find((col) => col.index === num);
+              const relCol = relationalFields?.find((col) => col.index === num);
+              if (col) {
+                return (
+                  <th
+                    key={num}
+                    className={`text-left bg-black/20 w-[${col.headerWidth}%]`}
+                  >
+                    {col.header}
+                  </th>
+                );
+              } else if (relCol) {
+                return (
+                  <th
+                    key={num}
+                    className={`text-left bg-black/20 w-[${relCol.headerWidth}%]`}
+                  >
+                    {relCol.alias || relCol.key}
+                  </th>
+                );
+              }
+            })}
           </tr>
         </thead>
         <tbody>
           {data &&
-            data.map((item, index) => (
-              <React.Fragment key={index}>
-                {item && (
-                  <tr
-                    className="cursor-pointer hover transition ease-in-out duration-50"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      router.push(tableRoute(item.name));
-                    }}
-                  >
-                    {table.map((col, index) => {
-                      const hasHeader = item.hasOwnProperty(col.dbHeader);
+            data.map((item, index) => {
+              if (count === -1) return null;
 
-                      if (hasHeader) {
-                        // @ts-ignore
-                        const data = applyModifiers(
-                          // @ts-ignore
-                          item[col.dbHeader],
-                          col.modifiers || []
+              return (
+                <React.Fragment key={index}>
+                  {item && (
+                    <tr
+                      className="cursor-pointer hover transition ease-in-out duration-50"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push(tableRoute(item.name));
+                      }}
+                    >
+                      {numberArray(0, count).map((num) => {
+                        const col = table.find((col) => col.index === num);
+                        const relCol = relationalFields?.find(
+                          (col) => col.index === num
                         );
-                        // @ts-ignore
-                        return <td key={index}>{data}</td>;
-                      }
-                      return null;
-                    })}
-                  </tr>
-                )}
-              </React.Fragment>
-            ))}
+                        if (col) {
+                          const hasHeader = item.hasOwnProperty(col.dbHeader);
+                          if (hasHeader) {
+                            // @ts-ignore
+                            const data = applyModifiers(
+                              // @ts-ignore
+                              item[col.dbHeader],
+                              col.modifiers || []
+                            );
+                            // @ts-ignore
+                            return <td key={num}>{data}</td>;
+                          }
+                        } else if (relCol) {
+                          const hasHeader = item.hasOwnProperty(relCol.model);
+                          if (hasHeader) {
+                            // @ts-ignore
+                            const data = applyModifiers(
+                              // @ts-ignore
+                              item[relCol.model][relCol.key],
+                              relCol.modifiers || []
+                            );
+                            return <td key={num}>{data}</td>;
+                          }
+                          return null;
+                        }
+                      })}
+                    </tr>
+                  )}
+                </React.Fragment>
+              );
+            })}
         </tbody>
       </table>{" "}
       {!data && <Loading />}
