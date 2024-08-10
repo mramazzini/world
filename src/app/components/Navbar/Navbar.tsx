@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { destroySession, verifyToken } from "@/lib/utils/auth";
 import { useState, useEffect } from "react";
-import { NAVBAR_HEIGHT_REM } from "@/lib/globalVars";
+import { DISCORD_INVITE, NAVBAR_HEIGHT_REM } from "@/lib/globalVars";
 import Image from "next/image";
 
 const Navbar = () => {
@@ -14,11 +14,7 @@ const Navbar = () => {
   //add pages to this array to hide the navbar
   const noNavbar = [""];
   const showNavbar = !noNavbar.includes(pathname);
-  const [href, setHref] = useState("/");
 
-  useEffect(() => {
-    setHref(process.env.DISCORD_INVITE || "/");
-  }, []);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const checkToken = async () => {
     const isAuthenticated = await verifyToken();
@@ -176,14 +172,14 @@ const Navbar = () => {
         ) : (
           <div className="ml-auto">
             <Link
-              href={href}
+              href={DISCORD_INVITE}
               target="_blank"
               className="flex items-center justify-center btn btn-ghost mx-2 border border-primary"
             >
               <img
                 src="/images/discord.svg"
                 alt="Discord"
-                className="h-10 flex items-center justify-center "
+                className="h-10 flex items-center justify-center"
               />
             </Link>
             <Link href="/login" className="p-4 btn btn-ghost mx-2">

@@ -18,3 +18,5 @@ export const officialSources: string[] = [
   src.vanRichten,
   src.dmg,
 ];
+
+export const DISCORD_INVITE = "https://discord.gg/gNmJU7ZZqs";

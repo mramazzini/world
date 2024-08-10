@@ -1,3 +1,4 @@
+import { DISCORD_INVITE } from "@/lib/globalVars";
 import Link from "next/link";
 
 const UpcomingChangesPage = () => {
@@ -25,7 +26,7 @@ const UpcomingChangesPage = () => {
       <div className="divider"></div>
       <Link
         className={"btn btn-primary border border-gray-500 mb-2"}
-        href={process.env.DISCORD_INVITE || "/"}
+        href={DISCORD_INVITE}
         target="_blank"
       >
         Join the Official Discord -&gt;
