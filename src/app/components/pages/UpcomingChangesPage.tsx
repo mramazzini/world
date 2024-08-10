@@ -7,9 +7,9 @@ const UpcomingChangesPage = () => {
         <div className="flex flex-col md:w-4/5">
           <h1>Upcoming Features</h1>
           <p className="text-lg">
-            Hi! I'm Max, the creator of this site. I'm always working on new
-            features and improvements for the site. Join the Official Discord to
-            stay up to date with what's coming next!
+            Hi! I&apos;m Max, the creator of this site. I&apos;m always working
+            on new features and improvements for the site. Join the Official
+            Discord to stay up to date with what&apos;s coming next!
           </p>
         </div>
 

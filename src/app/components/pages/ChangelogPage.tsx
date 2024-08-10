@@ -158,7 +158,7 @@ const ChangelogPage = () => {
         <div className="flex flex-col md:w-4/5">
           <h1>Changelog</h1>
           <p className="text-lg">
-            View previous and upcoming updates for Max's DnD Wiki
+            View previous and upcoming updates for Max&apos;s DnD Wiki
           </p>
         </div>
 
