@@ -1,5 +1,7 @@
+"use client";
+import { useState } from "react";
 import Link from "next/link";
-
+import useContactModal from "../modals/ContactModal";
 const pageLinks = [
   {
     name: "Home",
@@ -42,33 +44,43 @@ const legalLinks = [
 ];
 
 const Footer = () => {
+  const { ContactModal, openModal } = useContactModal();
   return (
-    <footer className="footer bg-neutral text-neutral-content p-10 mt-auto">
-      <nav>
-        <h6 className="footer-title">Links</h6>
-        {pageLinks.map((link) => (
-          <Link key={link.url} href={link.url} className="link link-hover">
-            {link.name}
-          </Link>
-        ))}
-      </nav>
-      <nav>
-        <h6 className="footer-title">Create</h6>
-        {createLinks.map((link) => (
-          <Link key={link.url} href={link.url} className="link link-hover">
-            {link.name}
-          </Link>
-        ))}
-      </nav>
-      <nav>
-        <h6 className="footer-title">Legal</h6>
-        {legalLinks.map((link) => (
-          <Link key={link.url} href={link.url} className="link link-hover">
-            {link.name}
-          </Link>
-        ))}
-      </nav>
-    </footer>
+    <>
+      <ContactModal />
+      <footer className="footer bg-neutral text-neutral-content p-10 mt-auto">
+        <nav>
+          <h6 className="footer-title">Links</h6>
+          {pageLinks.map((link) => (
+            <Link key={link.url} href={link.url} className="link link-hover">
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+        <nav>
+          <h6 className="footer-title">Create</h6>
+          {createLinks.map((link) => (
+            <Link key={link.url} href={link.url} className="link link-hover">
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+        <nav>
+          <h6 className="footer-title">Legal</h6>
+          {legalLinks.map((link) => (
+            <Link key={link.url} href={link.url} className="link link-hover">
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+        <div>
+          <h6 className="footer-title">Contact</h6>
+          <button onClick={openModal} className="btn btn-primary">
+            Contact us -&gt;
+          </button>
+        </div>
+      </footer>
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ import {
   Class,
   CustomField,
   Feature,
+  Message,
   Prisma,
   Spell,
   SpellListToSpell,
@@ -171,4 +172,12 @@ export interface RelationFieldOptions {
   model: string;
   key: string;
   data: string;
+}
+
+export interface MessageInfo extends Message {
+  User: {
+    id: number;
+    email: string | null;
+    username: string | null;
+  } | null;
 }

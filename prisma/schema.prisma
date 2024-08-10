@@ -136,9 +136,10 @@ model User {
   SubRaces   SubRace[]
   Background Background[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   Spell     Spell[]
+  Messages  Message[]
 }
 
 model Class {
@@ -465,4 +466,14 @@ model WeaponToProperty {
   weaponProperty   WeaponProperty @relation(fields: [weaponPropertyId], references: [id])
 
   @@id([weaponId, weaponPropertyId]) // Composite primary key
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
+  email     String?
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

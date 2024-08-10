@@ -23,6 +23,29 @@ const Navbar = () => {
     checkToken();
   }, [pathname, router]);
 
+  const links = [
+    {
+      name: "Home",
+      href: "/",
+    },
+    {
+      name: "Classes",
+      href: "/class",
+    },
+    {
+      name: "Subclasses",
+      href: "/subclass",
+    },
+    {
+      name: "Spells",
+      href: "/spells",
+    },
+    // {
+    //   name: "Monsters",
+    //   href: "/monster",
+    // },
+  ];
+
   if (!showNavbar) return null;
   return (
     <>
@@ -30,46 +53,25 @@ const Navbar = () => {
         className={`navbar z-[1] bg-base-200 border-b border-primary hidden md:flex`}
         style={{ height: `${NAVBAR_HEIGHT_REM}rem` }}
       >
-        <Link
-          href="/"
-          className={`p-4 btn btn-${
-            pathname === "/" ? "primary" : "ghost"
-          } mx-1`}
-        >
-          Home
-        </Link>
-        <Link
-          href="/class"
-          className={`p-4 btn btn-${
-            pathname === "/class" ? "primary" : "ghost"
-          } mx-1`}
-        >
-          Classes
-        </Link>
-        <Link
-          href="/subclass"
-          className={`p-4 btn btn-${
-            pathname === "/subclass" ? "primary" : "ghost"
-          } mx-1`}
-        >
-          Subclasses
-        </Link>
-        <Link
-          href="/spells"
-          className={`p-4 btn btn-${
-            pathname === "/spells" ? "primary" : "ghost"
-          } mx-1`}
-        >
-          Spells
-        </Link>
-        <Link
+        {links.map((link) => (
+          <Link
+            key={link.name}
+            href={link.href}
+            className={`p-4 btn btn-${
+              pathname === link.href ? "primary" : "ghost"
+            } mx-1`}
+          >
+            {link.name}
+          </Link>
+        ))}
+        {/* <Link
           href="/monster"
           className={`p-4 btn btn-${
             pathname === "/monster" ? "primary" : "ghost"
           } mx-1`}
         >
           Monsters
-        </Link>
+        </Link> */}
         <div className="dropdown ">
           <div tabIndex={0} role="button" className="btn m-1 btn-ghost">
             Theme
@@ -207,23 +209,11 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              <li>
-                <Link href="/">Home</Link>
-              </li>{" "}
-              <li>
-                <Link href="/class">Classes</Link>
-              </li>{" "}
-              <li>
-                <Link href="/subclass" className={``}>
-                  Subclasses
-                </Link>
-              </li>{" "}
-              <li>
-                <Link href="/spells">Spells</Link>
-              </li>{" "}
-              <li>
-                <Link href="/monster">Monsters</Link>
-              </li>
+              {links.map((link) => (
+                <li key={link.name}>
+                  <Link href={link.href}>{link.name}</Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

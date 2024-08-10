@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import Footer from "./components/Footer/Footer";
 import { NAVBAR_HEIGHT_REM } from "@/lib/globalVars";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
