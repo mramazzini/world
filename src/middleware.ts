@@ -9,7 +9,7 @@ export async function middleware(req: NextRequest) {
   const isAuthenticated = await verifyToken();
 
   // administator routes can only be accessed by me
-  if (isAuthenticated && adminRoutes.includes(req.nextUrl.pathname)) {
+  if (!isAuthenticated && adminRoutes.includes(req.nextUrl.pathname)) {
     const isAdmin = await isAdministrator();
     console.log(isAdmin);
     if (!isAdmin) {
