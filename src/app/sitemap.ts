@@ -1,7 +1,6 @@
 import { getClasses } from "@/lib/actions/db/class/read.actions";
 import { getSubclassFromClassName } from "@/lib/actions/db/subclass/read.actions";
-import { ClassInfo } from "@/lib/types";
-import { Class } from "@prisma/client";
+import { getSpells } from "@/lib/actions/db/spell/read.actions";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -11,9 +10,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/class", // select class
     "/class/[className]", // class page
     "/class/[className]/subclass", // select subclass
-    "/class/[className]/subclass/[subclassName]", // subclass page
+    "/class/[className]/subclass", // subclass select
     "/class/[className]/pdf", // pdf page for class
     "/class/create", // create class
+    "/subclass/[subclass]", // subclass page
+    "/spells", // spell select
+    "/spells/[spell]", // spell page
+    "/homebrew", // homebrew
+    "/homebrew/class/create", // create homebrew class
+    "/homebrew/subclass",
+    "/homebrew/spells",
     "/item-generator", // item generator
   ];
 
@@ -77,6 +83,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       });
     }
+  }
+  const spells = await getSpells();
+  siteMap.push({
+    url: `${process.env.DOMAIN_NAME}/spells`,
+    lastModified: new Date(),
+    changeFrequency: "yearly",
+    priority: 0.9,
+  });
+  for (const s of spells) {
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/spells/${s.name.replaceAll(" ", "-")}`,
+      lastModified: s.updatedAt,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    });
   }
 
   return siteMap;
