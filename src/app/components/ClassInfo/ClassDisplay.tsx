@@ -316,9 +316,7 @@ function ClassDisplay({
                       <JsonTable
                         json={subClassTableJson}
                         links={subClasses.map((s) => {
-                          return `/class/${
-                            classObj.name
-                          }/subclass/${s.name.replaceAll(" ", "-")}`;
+                          return `/subclass/${s.name.replaceAll(" ", "-")}`;
                         })}
                       />
 
