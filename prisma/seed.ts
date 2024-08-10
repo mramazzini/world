@@ -7,11 +7,11 @@ import Properties from "./seeds/Properties.seed";
 import WeaponToPropertyArr from "./seeds/WeaponToProperty.seed";
 import CustomFields from "./seeds/CustomFields.seed";
 import SubclassFeatures from "./seeds/SubclassFeatures";
-import Spells from "./seeds/Spells";
+import Spells from "./seeds/Spells/spells.seed";
 import { cwarn, cinfo, cerr, csuccess } from "@/lib/utils/chalkLog";
 import SpellLists from "./seeds/Spells/SpellLists/SpellLists.seed";
 import { SpellListToSpell } from "@prisma/client";
-import SpellListToSpellArr from "./seeds/Spells/SpellLists/SpellListToSpell";
+import SpellListToSpellArr from "./seeds/Spells/SpellLists/SpellListToSpell.seed";
 import {
   PrismaClient,
   Weapon,

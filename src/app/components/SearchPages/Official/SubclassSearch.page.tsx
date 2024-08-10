@@ -2,15 +2,16 @@
 
 import { getSubclassChunk } from "@/lib/actions/db/subclass/read.actions";
 import { useState } from "react";
-import { SubclassSearchResults } from "@/lib/types";
+import { QueryParams, SubclassSearchResults } from "@/lib/types";
 import SearchPageComponent from "../SearchPageComponent";
+import { officialSources } from "@/lib/globalVars";
 
 const SubclassSearchPage = () => {
   const [data, setData] = useState<SubclassSearchResults[] | null>(null);
 
-  const handleSearch = async (index: number, query: string) => {
+  const handleSearch = async (query: QueryParams) => {
     setData(null);
-    const res = await getSubclassChunk(index, query);
+    const res = await getSubclassChunk(query);
     setData(res);
 
     return res ? res.length : 0;
@@ -39,12 +40,20 @@ const SubclassSearchPage = () => {
           headerWidth: 10,
           header: "Source",
           dbHeader: "source",
+          searchFields: officialSources,
         },
         {
           headerWidth: 5,
           header: "Last Updated",
           dbHeader: "updatedAt",
           modifiers: ["Date"],
+        },
+      ]}
+      relationalFields={[
+        {
+          model: "Class",
+          alias: "Class Name",
+          key: "name",
         },
       ]}
       routeName="subclass"

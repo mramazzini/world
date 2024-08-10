@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 import Loading from "../UI/Loading";
-import { SubClassInfo } from "@/lib/types";
+import { QueryParams, SubClassInfo } from "@/lib/types";
 import SearchBar from "../UI/SearchBar";
 import { getSubclassChunkByClass } from "@/lib/actions/db/subclass/read.actions";
 
@@ -47,9 +47,9 @@ const SelectHomebrewSubclassPage = () => {
       <div className="divider" />
       <SearchBar
         placeholder="Search Subclass..."
-        handleSearch={async (index: number, query: string) => {
+        handleSearch={async (query: QueryParams) => {
           setData(null);
-          const res = await getSubclassChunkByClass(index, query, className);
+          const res = await getSubclassChunkByClass(query, className);
           //filter out subclasses without a user
           const filtered =
             res && res.filter((item) => (item.userId ? true : false));

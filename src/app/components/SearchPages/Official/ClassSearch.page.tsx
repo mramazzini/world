@@ -60,10 +60,10 @@ const SelectClassPage = () => {
             <th className="text-left bg-black/20 w-[50%] hidden md:table-cell">
               Description
             </th>
-            <th className="text-left bg-black/20 w-[10%] hidden md:table-cell">
+            <th className="text-left bg-black/20 w-[20%] hidden md:table-cell">
               Subclass
             </th>
-            <th className="text-left bg-black/20 w-[20%] ">Source</th>
+            <th className="text-left bg-black/20 w-[10%] ">Source</th>
             <th className="text-left bg-black/20 w-[10%] hidden sm:table-cell">
               Last Updated
             </th>
@@ -82,7 +82,7 @@ const SelectClassPage = () => {
                 }}
               >
                 <td>
-                  <p className="text-accent font-bold">
+                  <p className="btn btn-xs btn-primary h-auto font-bold">
                     {item.name.toCapitalCase()}
                   </p>
                 </td>
@@ -90,13 +90,13 @@ const SelectClassPage = () => {
                   <p className="italic line-clamp-2 "> {item.flavorText}</p>
                 </td>
                 <td
-                  className="cursor-pointer hover:bg-black/20 hidden md:table-cell"
+                  className="cursor-pointer hidden md:table-cell"
                   onClick={(e) => {
                     e.stopPropagation();
                     router.push(`/class/${item.name}/subclass`);
                   }}
                 >
-                  <p className="line-clamp-2 text-accent  font-bold">
+                  <p className=" btn  btn-accent btn-xs h-auto  font-bold ">
                     {item.subClassName}
                   </p>
                 </td>

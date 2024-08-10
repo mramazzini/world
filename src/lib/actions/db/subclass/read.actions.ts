@@ -1,18 +1,22 @@
 "use server";
 import { QUERY_LIMIT } from "@/lib/globalVars";
-import { SubClassInfo, SubclassSearchResults } from "@/lib/types";
+import { QueryParams, SubClassInfo, SubclassSearchResults } from "@/lib/types";
+import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { Prisma, PrismaClient, SubClass } from "@prisma/client";
 import Fuse from "fuse.js";
 
 // get top 10 subclasses based on query
 export async function getSubclassChunk(
-  index: number,
-  query: string
+  queryInfo: QueryParams
 ): Promise<SubclassSearchResults[] | null> {
   const db = new PrismaClient();
-
+  const { query, index } = queryInfo;
   if (query === "") {
     const res = await db.subClass.findMany({
+      where: generateQueryFields({
+        fields: queryInfo.searchFields,
+        relationalFields: queryInfo.relationalFields,
+      }),
       take: QUERY_LIMIT,
       skip: index * QUERY_LIMIT,
       include: {
@@ -28,6 +32,10 @@ export async function getSubclassChunk(
   }
 
   const res = await db.subClass.findMany({
+    where: generateQueryFields({
+      fields: queryInfo.searchFields,
+      relationalFields: queryInfo.relationalFields,
+    }),
     include: {
       SubClassFeatures: {
         select: {
@@ -66,20 +74,24 @@ export async function getSubclassChunk(
 }
 
 export async function getSubclassChunkByClass(
-  index: number,
-  query: string,
+  queryInfo: QueryParams,
   className: string
 ): Promise<SubClassInfo[] | null> {
   const db = new PrismaClient();
+  const { query, index } = queryInfo;
   if (query === "") {
     const res = await db.subClass.findMany({
       take: QUERY_LIMIT,
       skip: index * QUERY_LIMIT,
-      where: {
-        Class: {
-          name: className,
+      where: generateQueryFields({
+        fields: queryInfo.searchFields,
+        relationalFields: queryInfo.relationalFields,
+        additionalWhere: {
+          Class: {
+            name: className,
+          },
         },
-      },
+      }),
       include: {
         SubClassFeatures: true,
         casterType: true,
@@ -95,11 +107,15 @@ export async function getSubclassChunkByClass(
     return res;
   }
   const res = await db.subClass.findMany({
-    where: {
-      Class: {
-        name: className,
+    where: generateQueryFields({
+      fields: queryInfo.searchFields,
+      relationalFields: queryInfo.relationalFields,
+      additionalWhere: {
+        Class: {
+          name: className,
+        },
       },
-    },
+    }),
     include: {
       SubClassFeatures: true,
       casterType: true,
@@ -122,6 +138,7 @@ export async function getSubclassChunkByClass(
   });
   const results = fuse.search(query);
   const resultsCopy = results.map((item) => item.item);
+
   await db.$disconnect();
   return resultsCopy.slice(
     index * QUERY_LIMIT,
@@ -130,19 +147,23 @@ export async function getSubclassChunkByClass(
 }
 
 export async function getHomebrewSubclassChunk(
-  index: number,
-  query: string
+  queryInfo: QueryParams
 ): Promise<SubClassInfo[]> {
   const db = new PrismaClient();
+  const { query, index } = queryInfo;
   if (query === "") {
     const res = await db.subClass.findMany({
       take: QUERY_LIMIT,
       skip: index * QUERY_LIMIT,
-      where: {
-        userId: {
-          not: null,
-        },
-      },
+      where: generateQueryFields({
+        fields: queryInfo.searchFields,
+        relationalFields: queryInfo.relationalFields,
+        additionalWhere: {
+          userId: {
+            not: null,
+          },
+        } as Prisma.SubClassWhereInput,
+      }),
       include: {
         SubClassFeatures: true,
         casterType: true,
@@ -158,11 +179,15 @@ export async function getHomebrewSubclassChunk(
     return res;
   }
   const res = await db.subClass.findMany({
-    where: {
-      userId: {
-        not: null,
-      },
-    },
+    where: generateQueryFields({
+      fields: queryInfo.searchFields,
+      relationalFields: queryInfo.relationalFields,
+      additionalWhere: {
+        userId: {
+          not: null,
+        },
+      } as Prisma.SubClassWhereInput,
+    }),
     include: {
       SubClassFeatures: true,
       casterType: true,

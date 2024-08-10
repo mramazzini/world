@@ -23,6 +23,7 @@ datasource db {
 
 // DND 5e data
 
+// ALL ENUMS NEED A NULL VALUE FOR THE FRONT END TO WORK PROPERLY
 enum Ability {
   STR
   CON
@@ -30,6 +31,7 @@ enum Ability {
   INT
   WIS
   CHA
+  NULL
 }
 
 enum Size {
@@ -39,6 +41,7 @@ enum Size {
   LARGE
   HUGE
   GARGANTUAN
+  NULL
 }
 
 enum SpellSchool {
@@ -50,6 +53,7 @@ enum SpellSchool {
   ILLUSION
   NECROMANCY
   TRANSMUTATION
+  NULL
 }
 
 enum Skill {
@@ -71,6 +75,7 @@ enum Skill {
   SLEIGHT_OF_HAND
   STEALTH
   SURVIVAL
+  NULL
 }
 
 enum Language {
@@ -90,6 +95,7 @@ enum Language {
   PRIMORDIAL
   SYLVAN
   UNDERCOMMON
+  NULL
 }
 
 enum ArmorTypes {
@@ -97,6 +103,7 @@ enum ArmorTypes {
   MEDIUM
   HEAVY
   SHIELDS
+  NULL
 }
 
 enum DamageTypes {
@@ -114,6 +121,7 @@ enum DamageTypes {
   SLASHING
   THUNDER
   NONE
+  NULL
   OTHER
 }
 

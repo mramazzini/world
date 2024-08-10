@@ -4,7 +4,7 @@ import "@/lib/string.extensions";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-import { SubClassInfo } from "@/lib/types";
+import { QueryParams, SubClassInfo } from "@/lib/types";
 import { getSubclassChunkByClass } from "@/lib/actions/db/subclass/read.actions";
 import { get } from "http";
 import SearchBar from "../UI/SearchBar";
@@ -49,9 +49,9 @@ const SelectSubclassPage = () => {
         <div className="divider" />
         <SearchBar
           placeholder="Search Subclass..."
-          handleSearch={async (index: number, query: string) => {
+          handleSearch={async (query: QueryParams) => {
             setData(null);
-            const res = await getSubclassChunkByClass(index, query, className);
+            const res = await getSubclassChunkByClass(query, className);
             //filter out subclasses with a user
             console.log(res);
             const filtered =

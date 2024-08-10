@@ -1,6 +1,7 @@
 "use server";
 import { QUERY_LIMIT } from "@/lib/globalVars";
-import { ClassInfo } from "@/lib/types";
+import { ClassInfo, QueryParams } from "@/lib/types";
+import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { Class, PrismaClient } from "@prisma/client";
 import Fuse from "fuse.js";
 
@@ -114,19 +115,23 @@ export async function getClassChunk(
 }
 
 export const getHomebrewClassChunk = async (
-  index: number,
-  query: string
+  queryInfo: QueryParams
 ): Promise<ClassInfo[]> => {
   const db = new PrismaClient();
+  const { query, index } = queryInfo;
   if (query === "") {
     const res = await db.class.findMany({
       take: QUERY_LIMIT,
       skip: index * QUERY_LIMIT,
-      where: {
-        userId: {
-          not: null,
+      where: generateQueryFields({
+        fields: queryInfo.searchFields,
+        relationalFields: queryInfo.relationalFields,
+        additionalWhere: {
+          userId: {
+            not: null,
+          },
         },
-      },
+      }),
       include: {
         Features: true,
         SubClasses: true,

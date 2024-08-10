@@ -4,7 +4,14 @@ import SearchBar from "../UI/SearchBar";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Loading from "../UI/Loading";
-import { ClassInfo, SubClassInfo, SubclassSearchResults } from "@/lib/types";
+import {
+  ClassInfo,
+  QueryParams,
+  SearchFieldOption,
+  SearchFieldOptions,
+  SubClassInfo,
+  SubclassSearchResults,
+} from "@/lib/types";
 import { Spell } from "@prisma/client";
 import "@/lib/string.extensions";
 import numPlace from "@/lib/utils/numPlace";
@@ -23,6 +30,9 @@ interface TableInfo {
   dbHeader: string | number;
   header: string;
   modifiers?: Modifier[];
+  searchFields?: string[] | number[];
+  includeOther?: boolean;
+  enum?: boolean;
 }
 
 interface Props<T extends DataType> {
@@ -33,14 +43,20 @@ interface Props<T extends DataType> {
   searchPlaceholder: string;
   routeName: string;
   data: T[] | null;
-  handleSearch: (index: number, query: string) => Promise<number>;
+  handleSearch: (query: QueryParams) => Promise<number>;
   table: TableInfo[];
   homebrew: boolean;
+  // when you want to search through a different sql model
+  //key is model name, data is the field to search
+  relationalFields?: {
+    model: string;
+    key: string;
+    alias?: string;
+  }[];
 }
 
 const SearchPageComponent = <T extends DataType>({
   data,
-
   handleSearch,
   title,
   description,
@@ -50,6 +66,7 @@ const SearchPageComponent = <T extends DataType>({
   searchPlaceholder,
   routeName,
   homebrew,
+  relationalFields,
 }: Props<T>) => {
   const router = useRouter();
 
@@ -62,6 +79,22 @@ const SearchPageComponent = <T extends DataType>({
   const tableRoute = (name: string) =>
     `/${routeName}/${name.replaceAll(" ", "-")}`;
 
+  const generateSearchOptions = (): SearchFieldOptions[] => {
+    const searchOptions: SearchFieldOptions[] = [];
+    table.forEach((col) => {
+      if (!col.searchFields) return;
+      searchOptions.push({
+        key: col.dbHeader,
+        data: col.searchFields,
+        enum: col.enum || false,
+        numeric: typeof col.searchFields[0] === "number",
+      });
+    });
+    return searchOptions;
+  };
+
+  const searchOptions = generateSearchOptions();
+
   const applyModifiers = (data: string, modifier: Modifier[], index = 0) => {
     switch (modifier[index]) {
       case "Date":
@@ -71,10 +104,14 @@ const SearchPageComponent = <T extends DataType>({
           index + 1
         );
       case "Bold":
-        return <b>{applyModifiers(data, modifier, index + 1)}</b>;
+        return (
+          <b className="btn btn-primary  btn-xs h-auto ">
+            {applyModifiers(data, modifier, index + 1)}
+          </b>
+        );
       case "Link":
         return (
-          <Link href={data} className="text-accent">
+          <Link href={data} className="">
             {applyModifiers(data, modifier, index + 1)}
           </Link>
         );
@@ -96,6 +133,7 @@ const SearchPageComponent = <T extends DataType>({
           <h1>{title}</h1>
           <p className="italic">{description}</p>
         </div>
+
         <div className="flex justify-center items-start md:items-end my-2 flex-col ">
           <Link
             href={homebrewOfficialRoute}
@@ -113,7 +151,12 @@ const SearchPageComponent = <T extends DataType>({
       </div>
       <div className="divider" />
       {/* search bar */}
-      <SearchBar placeholder={searchPlaceholder} handleSearch={handleSearch} />
+      <SearchBar
+        placeholder={searchPlaceholder}
+        handleSearch={handleSearch}
+        searchFields={searchOptions}
+        relationalFields={relationalFields}
+      />
       <table className="table-zebra table-sm w-full">
         <thead>
           <tr>

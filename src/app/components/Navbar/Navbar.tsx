@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { destroySession, verifyToken } from "@/lib/utils/auth";
 import { useState, useEffect } from "react";
+import { NAVBAR_HEIGHT_REM } from "@/lib/globalVars";
 
 const Navbar = () => {
   //Block navbar on certain pages
@@ -26,7 +27,8 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`navbar z-[1 bg-base-200 border-b border-primary hidden md:flex`}
+        className={`navbar z-[1] bg-base-200 border-b border-primary hidden md:flex`}
+        style={{ height: `${NAVBAR_HEIGHT_REM}rem` }}
       >
         <Link
           href="/"
@@ -121,15 +123,7 @@ const Navbar = () => {
                 value="cupcake"
               />
             </li>
-            <li>
-              <input
-                type="radio"
-                name="theme-dropdown"
-                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                aria-label="Bumblebee"
-                value="bumblebee"
-              />
-            </li>
+
             <li>
               <input
                 type="radio"

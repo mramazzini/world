@@ -50,7 +50,7 @@ function ClassDisplay({
     },
   });
   return (
-    <div className="p-4">
+    <div className="p-4 bg-">
       <div className="flex flex-col md:flex-row justify-between">
         <div className="flex flex-col md:w-4/5">
           <h1>{classObj.name.toCapitalCase() || "Class Name"}</h1>
@@ -62,7 +62,7 @@ function ClassDisplay({
           </p>
           <Link
             target="_blank"
-            className="text-accent inline text-sm font-bold"
+            className="text-primary inline text-sm font-bold"
             href={`/class/${classObj.name}/pdf`}
           >
             View this class as a PDF here -&gt;

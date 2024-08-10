@@ -94,22 +94,6 @@ export enum src {
   dragonQueen = "Dragonlance: Shadow of the Dragon Queen",
 }
 
-export const officialSources: string[] = [
-  src.tasha,
-  src.xanathar,
-  src.volo,
-  src.sword,
-  src.Bigby,
-  src.mordenkainen,
-  src.eberron,
-  src.theros,
-  src.ravnica,
-  src.wildemount,
-  src.phb,
-  src.vanRichten,
-  src.dmg,
-];
-
 // type where options are "level1" , "level2" all the way to level20
 export type SpellLevels =
   | "level1"
@@ -155,4 +139,36 @@ export enum AuthResult {
   TokenExpired = "Token Expired",
   Success = "Success",
   FailedToCreateUser = "Failed To Create User",
+}
+
+export interface QueryOptions {
+  index: number;
+  query: string;
+  searchFields: SearchFieldOption[];
+}
+
+export interface SearchFieldOptions {
+  key: string | number;
+  data: string[] | number[];
+  enum: boolean;
+  numeric: boolean;
+}
+
+export interface QueryParams {
+  index: number;
+  query: string;
+  searchFields: SearchFieldOption[];
+  relationalFields: RelationFieldOptions[];
+}
+
+export interface SearchFieldOption {
+  key: string | number;
+  data: string | number;
+  enum: boolean;
+}
+
+export interface RelationFieldOptions {
+  model: string;
+  key: string;
+  data: string;
 }

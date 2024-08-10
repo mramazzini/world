@@ -1,6 +1,8 @@
 "use server";
 import { QUERY_LIMIT } from "@/lib/globalVars";
-import { SpellInfo } from "@/lib/types";
+import { QueryParams, SpellInfo } from "@/lib/types";
+import { cerr } from "@/lib/utils/chalkLog";
+import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { PrismaClient, Spell } from "@prisma/client";
 import Fuse from "fuse.js";
 
@@ -59,14 +61,18 @@ export const getSpell = async (
 };
 
 export const getSpellChunk = async (
-  index: number,
-  query: string
+  queryInfo: QueryParams
 ): Promise<SpellInfo[]> => {
   const db = new PrismaClient();
+  const { query, index } = queryInfo;
   if (query === "") {
     const res = await db.spell.findMany({
       skip: index * QUERY_LIMIT,
       take: QUERY_LIMIT,
+      where: generateQueryFields({
+        fields: queryInfo.searchFields,
+        relationalFields: queryInfo.relationalFields,
+      }),
       include: {
         User: {
           select: {
@@ -85,6 +91,11 @@ export const getSpellChunk = async (
   }
 
   const res: SpellInfo[] = await db.spell.findMany({
+    where: generateQueryFields({
+      fields: queryInfo.searchFields,
+      relationalFields: queryInfo.relationalFields,
+    }),
+
     include: {
       User: {
         select: {
@@ -101,16 +112,20 @@ export const getSpellChunk = async (
 
   const fuse = new Fuse(res, {
     keys: [
-      { name: "name", weight: 3 },
-      { name: "description", weight: 0.3 },
-      { name: "tags", weight: 1 },
-      { name: "User.username", weight: 0.5 },
+      { name: "name", weight: 1 },
+      { name: "description", weight: 1 },
+      { name: "postTableData", weight: 1 },
+      { name: "upcastInfo", weight: 1 },
+      { name: "duration", weight: 0.2 },
+      { name: "range", weight: 0.2 },
+      { name: "damageType", weight: 0.2 },
+      { name: "castingTime", weight: 0.2 },
     ],
   });
 
   const results = fuse.search(query);
+  const filtered = results.map((result) => result.item);
+
   await db.$disconnect();
-  return results
-    .map((result) => result.item)
-    .slice(index * QUERY_LIMIT, index * QUERY_LIMIT + QUERY_LIMIT);
+  return filtered.slice(index * QUERY_LIMIT, index * QUERY_LIMIT + QUERY_LIMIT);
 };

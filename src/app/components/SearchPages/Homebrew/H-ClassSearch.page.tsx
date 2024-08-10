@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { ClassInfo } from "@/lib/types";
+import { ClassInfo, QueryParams } from "@/lib/types";
 import SearchPageComponent from "../SearchPageComponent";
 import { getHomebrewClassChunk } from "@/lib/actions/db/class/read.actions";
 
 const HomebrewClassSearchPage = () => {
   const [data, setData] = useState<ClassInfo[] | null>(null);
 
-  const handleSearch = async (index: number, query: string) => {
+  const handleSearch = async (query: QueryParams) => {
     setData(null);
-    const res = await getHomebrewClassChunk(index, query);
+    const res = await getHomebrewClassChunk(query);
     setData(res);
     console.log(res);
     return res ? res.length : 0;
@@ -45,6 +45,13 @@ const HomebrewClassSearchPage = () => {
           header: "Last Updated",
           dbHeader: "updatedAt",
           modifiers: ["Date"],
+        },
+      ]}
+      relationalFields={[
+        {
+          model: "User",
+          alias: "Author",
+          key: "username",
         },
       ]}
       routeName="class"

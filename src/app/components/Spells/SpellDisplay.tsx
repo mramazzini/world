@@ -5,6 +5,7 @@ import JsonTable from "../Utility/JsonTable";
 import P from "../Utility/FormatAndSanitize";
 import Link from "next/link";
 import React from "react";
+import Tooltip from "../Utility/Tooltip";
 interface Props {
   spell: SpellInfo;
 }
@@ -43,28 +44,46 @@ const SpellDisplay = ({ spell }: Props) => {
         </span>
       </p>
       <p>
+        Spell Lists:{" "}
         {spell.SpellListToSpell.map((item, index) => {
           if (index === spell.SpellListToSpell.length - 1) {
             return (
               <Link
-                className="text-accent hover:opacity-70"
+                className="text-accent "
                 href={`/class/${item.spellList?.name?.toLowerCase()}`}
                 key={index}
               >
-                {item.spellList?.name}
+                {item.spellList?.name && (
+                  <Tooltip
+                    element={item.spellList?.name}
+                    layer={0}
+                    format={false}
+                  >
+                    {`Go to ${item.spellList?.name} class ->`}
+                  </Tooltip>
+                )}
               </Link>
             );
           }
           return (
-            <React.Fragment key={index}>
+            <>
               <Link
-                className="text-accent hover:opacity-70"
+                className="text-accent "
                 href={`/class/${item.spellList?.name?.toLowerCase()}`}
+                key={index}
               >
-                {item.spellList?.name}
+                {item.spellList?.name && (
+                  <Tooltip
+                    element={item.spellList?.name}
+                    layer={0}
+                    format={false}
+                  >
+                    {`Go to ${item.spellList?.name} class ->`}
+                  </Tooltip>
+                )}
               </Link>
               ,{" "}
-            </React.Fragment>
+            </>
           );
         })}
       </p>
