@@ -43,7 +43,7 @@ const SelectSpellPage = () => {
           headerWidth: 15,
           header: "Name",
           dbHeader: "name",
-          modifiers: ["Bold", "Link"],
+          modifiers: ["Bold", "Button"],
           index: 0,
           priority: "all",
         },

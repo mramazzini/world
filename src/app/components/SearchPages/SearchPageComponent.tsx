@@ -22,7 +22,7 @@ type Priority = "all" | "sm" | "md" | "lg" | "xl";
 type Modifier =
   | "Date"
   | "Bold"
-  | "Link"
+  | "Button"
   | "CapitalCase"
   | "NumPlace"
   | "SpellLevel";
@@ -124,12 +124,13 @@ const SearchPageComponent = <T extends DataType>({
           index + 1
         );
       case "Bold":
+        return <b>{applyModifiers(data, modifier, index + 1)}</b>;
+      case "Button":
         return (
-          <b className="btn btn-primary btn-xs h-auto p-1">
+          <div className="btn btn-primary btn-xs h-auto p-1 ">
             {applyModifiers(data, modifier, index + 1)}
-          </b>
+          </div>
         );
-
       case "CapitalCase":
         return applyModifiers(data.toCapitalCase(), modifier, index + 1);
       case "NumPlace":
