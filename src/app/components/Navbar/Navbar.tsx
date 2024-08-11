@@ -5,7 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { destroySession, verifyToken } from "@/lib/utils/auth";
 import { useState, useEffect } from "react";
 import { DISCORD_INVITE, NAVBAR_HEIGHT_REM } from "@/lib/globalVars";
-import Image from "next/image";
 
 const Navbar = () => {
   //Block navbar on certain pages
@@ -90,15 +89,6 @@ const Navbar = () => {
             tabIndex={0}
             className="dropdown-content bg-base-300 z-[1] w-52 p-2  rounded-box"
           >
-            <li>
-              <input
-                type="radio"
-                name="theme-dropdown"
-                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                aria-label="Default"
-                value="default"
-              />
-            </li>
             <li>
               <input
                 type="radio"

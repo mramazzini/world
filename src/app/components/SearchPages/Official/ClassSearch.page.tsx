@@ -21,8 +21,17 @@ const SelectClassPage = () => {
     });
   }, []);
 
+  const [linkLoading, setLinkLoading] = useState(false);
+
+  const handleLinkClick = () => {
+    setLinkLoading(true);
+    setTimeout(() => {
+      setLinkLoading(false);
+    }, 5000);
+  };
+
   return (
-    <main className="p-4 md:p-8">
+    <main className={`p-4 md:p-8 ${linkLoading && "cursor-wait"}`}>
       <div className="flex flex-col md:flex-row justify-between ">
         <div className="flex flex-col md:w-4/5 ">
           <h1>Official Classes</h1>
@@ -76,8 +85,11 @@ const SelectClassPage = () => {
             return (
               <tr
                 key={index}
-                className="cursor-pointer hover transition ease-in-out duration-50"
+                className={`hover transition ease-in-out duration-50 ${
+                  linkLoading && "cursor-wait"
+                }`}
                 onClick={() => {
+                  handleLinkClick();
                   router.push(`/class/${item.name}`);
                 }}
               >

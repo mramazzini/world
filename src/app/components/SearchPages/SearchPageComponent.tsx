@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import SearchBar from "../UI/SearchBar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Loading from "../UI/Loading";
 import {
@@ -85,6 +85,7 @@ const SearchPageComponent = <T extends DataType>({
       setLoading(false);
     }, 5000);
   };
+
   let count = -1;
   count += table.length;
   count += relationalFields?.length || 0;
@@ -140,7 +141,7 @@ const SearchPageComponent = <T extends DataType>({
   };
 
   return (
-    <main className="p-4 md:p-8">
+    <main className={`p-4 md:p-8 ${loading && "cursor-wait"}`}>
       {/* Homebrew */}
       <div className="flex flex-col md:flex-row justify-between ">
         <div className="flex flex-col md:w-4/5 ">
@@ -172,7 +173,9 @@ const SearchPageComponent = <T extends DataType>({
         relationalFields={relationalFields}
       />
       <div className="overflow-x-auto">
-        <table className="table-zebra table-sm w-full table-pin-rows table-pin-cols">
+        <table
+          className={`table-zebra table-sm w-full table-pin-rows table-pin-cols`}
+        >
           <thead>
             <tr>
               {numberArray(0, count).map((num) => {
@@ -235,11 +238,13 @@ const SearchPageComponent = <T extends DataType>({
                   <React.Fragment key={index}>
                     {item && (
                       <tr
-                        className="cursor-pointer hover transition ease-in-out duration-50"
+                        className={`hover transition ease-in-out duration-50 ${
+                          loading ? "cursor-wait" : "cursor-pointer"
+                        }`}
                         onClick={(e) => {
                           e.stopPropagation();
                           //make mouse pointer turn to a loading icon
-
+                          handleLoad();
                           router.push(tableRoute(item.name));
                         }}
                       >
