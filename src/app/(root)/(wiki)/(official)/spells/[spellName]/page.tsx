@@ -4,6 +4,7 @@ import "@/lib/string.extensions";
 
 import { getSpell } from "@/lib/actions/db/spell/read.actions";
 import SpellPage from "@/app/components/pages/Spellpage";
+import { SpellInfo } from "@/lib/types";
 
 type Props = {
   params: { spellName: string };
@@ -23,8 +24,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: data.description,
   };
 }
-const Page = () => {
-  return <SpellPage />;
+
+const Page = async ({ params }: Props) => {
+  const spell = await getSpell(params.spellName.replaceAll("-", " "));
+  return <SpellPage spell={spell} />;
 };
 
 export default Page;
