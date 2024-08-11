@@ -76,6 +76,15 @@ const SearchPageComponent = <T extends DataType>({
   relationalFields,
 }: Props<T>) => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  const handleLoad = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+  };
   let count = -1;
   count += table.length;
   count += relationalFields?.length || 0;
@@ -119,12 +128,7 @@ const SearchPageComponent = <T extends DataType>({
             {applyModifiers(data, modifier, index + 1)}
           </b>
         );
-      case "Link":
-        return (
-          <Link href={data} className="">
-            {applyModifiers(data, modifier, index + 1)}
-          </Link>
-        );
+
       case "CapitalCase":
         return applyModifiers(data.toCapitalCase(), modifier, index + 1);
       case "NumPlace":
@@ -234,6 +238,8 @@ const SearchPageComponent = <T extends DataType>({
                         className="cursor-pointer hover transition ease-in-out duration-50"
                         onClick={(e) => {
                           e.stopPropagation();
+                          //make mouse pointer turn to a loading icon
+
                           router.push(tableRoute(item.name));
                         }}
                       >
@@ -267,7 +273,9 @@ const SearchPageComponent = <T extends DataType>({
                                       : "hidden xl:table-cell"
                                   }`}
                                 >
-                                  {data}
+                                  <Link href={tableRoute(item.name)}>
+                                    {data}
+                                  </Link>
                                 </td>
                               );
                             }
