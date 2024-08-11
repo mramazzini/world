@@ -28,7 +28,7 @@ const HomebrewClassSearchPage = () => {
           headerWidth: 15,
           header: "Name",
           dbHeader: "name",
-          modifiers: ["Link", "Bold"],
+          modifiers: ["Button", "Bold"],
           index: 0,
           priority: "all",
         },
