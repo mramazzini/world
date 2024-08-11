@@ -86,7 +86,7 @@ const SelectClassPage = () => {
               <tr
                 key={index}
                 className={`hover transition ease-in-out duration-50 ${
-                  linkLoading && "cursor-wait"
+                  linkLoading ? "cursor-wait" : "cursor-pointer"
                 }`}
                 onClick={() => {
                   handleLinkClick();
@@ -102,9 +102,12 @@ const SelectClassPage = () => {
                   <p className="italic line-clamp-2 "> {item.flavorText}</p>
                 </td>
                 <td
-                  className="cursor-pointer hidden md:table-cell"
+                  className={` hidden md:table-cell ${
+                    linkLoading ? "cursor-wait" : "cursor-pointer"
+                  }`}
                   onClick={(e) => {
                     e.stopPropagation();
+                    handleLinkClick();
                     router.push(`/class/${item.name}/subclass`);
                   }}
                 >
