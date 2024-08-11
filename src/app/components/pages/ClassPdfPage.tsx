@@ -137,7 +137,7 @@ const ClassPdfPage = () => {
       </Link>
       {/* Download pdf */}
 
-      <PDFViewer className="w-screen h-screen">
+      <PDFViewer className="w-full h-screen">
         <Document>
           <Page size="A4" style={{ padding: 40 }}>
             <View>
