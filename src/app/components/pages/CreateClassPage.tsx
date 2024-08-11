@@ -361,7 +361,7 @@ const CreateClassPage = () => {
   return (
     <>
       {ErrorModal}
-      <main className="flex flex-col w-full h-full justify-between p-4">
+      <main className="flex flex-col w-full h-full justify-between p-4 md:p-8">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="flex flex-col md:w-4/5">
             <h1>Create a Class</h1>

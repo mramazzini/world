@@ -20,7 +20,7 @@ const SelectSubclassPage = () => {
   if (!className) return <span className="p-4">Class does not exist</span>;
   return (
     <>
-      <main className="p-8">
+      <main className="p-4 md:p-8">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="flex flex-col md:w-4/5">
             <h1>{className.toCapitalCase()} Subclasses</h1>

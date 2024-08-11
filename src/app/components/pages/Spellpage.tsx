@@ -16,7 +16,7 @@ const SpellPage = () => {
   }, []);
   if (!spellName) return <span className="p-4">Spell does not exist!</span>;
   return (
-    <main className="p-8">
+    <main className="p-4 md:p-8">
       {!data && <Loading />}
       {data && <SpellDisplay spell={data} />}
     </main>

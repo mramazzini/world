@@ -16,7 +16,8 @@
     "seed:prod": "npx prisma db seed",
     "nuke": "env-cmd -f .env.local npx tsx scripts/nuke.ts",
     "nuke:prod": "npx tsx scripts/nuke.ts",
-    "logs": "vercel logs https://world-ashen.vercel.app/"
+    "logs": "vercel logs https://world-ashen.vercel.app/",
+    "generate:background": "cd scripts/generateSeeds/Backgrounds && npx tsx backgrounds.ts"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"
@@ -59,6 +60,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "postcss": "^8",
+    "puppeteer": "^23.0.2",
     "tailwindcss": "^3.4.1"
   }
 }

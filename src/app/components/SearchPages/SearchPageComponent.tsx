@@ -134,7 +134,7 @@ const SearchPageComponent = <T extends DataType>({
   };
 
   return (
-    <main className="p-8">
+    <main className="p-4 md:p-8">
       {/* Homebrew */}
       <div className="flex flex-col md:flex-row justify-between ">
         <div className="flex flex-col md:w-4/5 ">
@@ -165,87 +165,91 @@ const SearchPageComponent = <T extends DataType>({
         searchFields={searchOptions}
         relationalFields={relationalFields}
       />
-      <table className="table-zebra table-sm w-full">
-        <thead>
-          <tr>
-            {numberArray(0, count).map((num) => {
-              const col = table.find((col) => col.index === num);
-              const relCol = relationalFields?.find((col) => col.index === num);
-              if (col) {
-                return (
-                  <th
-                    key={num}
-                    className={`text-left bg-black/20 w-[${col.headerWidth}%]`}
-                  >
-                    {col.header}
-                  </th>
+      <div className="overflow-x-auto">
+        <table className="table-zebra table-sm w-full table-pin-rows table-pin-cols">
+          <thead>
+            <tr>
+              {numberArray(0, count).map((num) => {
+                const col = table.find((col) => col.index === num);
+                const relCol = relationalFields?.find(
+                  (col) => col.index === num
                 );
-              } else if (relCol) {
-                return (
-                  <th
-                    key={num}
-                    className={`text-left bg-black/20 w-[${relCol.headerWidth}%]`}
-                  >
-                    {relCol.alias || relCol.key}
-                  </th>
-                );
-              }
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {data &&
-            data.map((item, index) => {
-              if (count === -1) return null;
-
-              return (
-                <React.Fragment key={index}>
-                  {item && (
-                    <tr
-                      className="cursor-pointer hover transition ease-in-out duration-50"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        router.push(tableRoute(item.name));
-                      }}
+                if (col) {
+                  return (
+                    <th
+                      key={num}
+                      className={`text-left bg-black/20 w-[${col.headerWidth}%]`}
                     >
-                      {numberArray(0, count).map((num) => {
-                        const col = table.find((col) => col.index === num);
-                        const relCol = relationalFields?.find(
-                          (col) => col.index === num
-                        );
-                        if (col) {
-                          const hasHeader = item.hasOwnProperty(col.dbHeader);
-                          if (hasHeader) {
-                            // @ts-ignore
-                            const data = applyModifiers(
+                      {col.header}
+                    </th>
+                  );
+                } else if (relCol) {
+                  return (
+                    <th
+                      key={num}
+                      className={`text-left bg-black/20 w-[${relCol.headerWidth}%]`}
+                    >
+                      {relCol.alias || relCol.key}
+                    </th>
+                  );
+                }
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {data &&
+              data.map((item, index) => {
+                if (count === -1) return null;
+
+                return (
+                  <React.Fragment key={index}>
+                    {item && (
+                      <tr
+                        className="cursor-pointer hover transition ease-in-out duration-50"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          router.push(tableRoute(item.name));
+                        }}
+                      >
+                        {numberArray(0, count).map((num) => {
+                          const col = table.find((col) => col.index === num);
+                          const relCol = relationalFields?.find(
+                            (col) => col.index === num
+                          );
+                          if (col) {
+                            const hasHeader = item.hasOwnProperty(col.dbHeader);
+                            if (hasHeader) {
                               // @ts-ignore
-                              item[col.dbHeader],
-                              col.modifiers || []
-                            );
-                            // @ts-ignore
-                            return <td key={num}>{data}</td>;
-                          }
-                        } else if (relCol) {
-                          const hasHeader = item.hasOwnProperty(relCol.model);
-                          if (hasHeader) {
-                            // @ts-ignore
-                            const data = applyModifiers(
+                              const data = applyModifiers(
+                                // @ts-ignore
+                                item[col.dbHeader],
+                                col.modifiers || []
+                              );
                               // @ts-ignore
-                              item[relCol.model][relCol.key],
-                              relCol.modifiers || []
-                            );
-                            return <td key={num}>{data}</td>;
+                              return <td key={num}>{data}</td>;
+                            }
+                          } else if (relCol) {
+                            const hasHeader = item.hasOwnProperty(relCol.model);
+                            if (hasHeader) {
+                              // @ts-ignore
+                              const data = applyModifiers(
+                                // @ts-ignore
+                                item[relCol.model][relCol.key],
+                                relCol.modifiers || []
+                              );
+                              return <td key={num}>{data}</td>;
+                            }
+                            return null;
                           }
-                          return null;
-                        }
-                      })}
-                    </tr>
-                  )}
-                </React.Fragment>
-              );
-            })}
-        </tbody>
-      </table>{" "}
+                        })}
+                      </tr>
+                    )}
+                  </React.Fragment>
+                );
+              })}
+          </tbody>
+        </table>
+      </div>
       {!data && <Loading />}
     </main>
   );

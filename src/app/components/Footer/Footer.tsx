@@ -7,14 +7,7 @@ const pageLinks = [
     name: "Home",
     url: "/",
   },
-  {
-    name: "About",
-    url: "/about",
-  },
-  {
-    name: "Contact",
-    url: "/contact",
-  },
+
   {
     name: "Change Log",
     url: "/changelog",
@@ -37,14 +30,14 @@ const createLinks = [
 ];
 
 const legalLinks = [
-  {
-    name: "Terms of use",
-    url: "/terms",
-  },
-  {
-    name: "Privacy policy",
-    url: "/privacy",
-  },
+  // {
+  //   name: "Terms of use",
+  //   url: "/terms",
+  // },
+  // {
+  //   name: "Privacy policy",
+  //   url: "/privacy",
+  // },
 ];
 
 const Footer = () => {
@@ -69,14 +62,14 @@ const Footer = () => {
             </Link>
           ))}
         </nav>
-        <nav>
+        {/* <nav>
           <h6 className="footer-title">Legal</h6>
           {legalLinks.map((link) => (
             <Link key={link.url} href={link.url} className="link link-hover">
               {link.name}
             </Link>
           ))}
-        </nav>
+        </nav> */}
         <div>
           <h6 className="footer-title">Contact</h6>
           <button onClick={openModal} className="btn btn-primary">

@@ -23,7 +23,7 @@ const SubClassPage = () => {
   if (!subClassName)
     return <span className="p-4">Subclass does not exist</span>;
   return (
-    <div className="pt-4">
+    <div className="p-4 md:p-8">
       {!data && <Loading />}
 
       {data && (

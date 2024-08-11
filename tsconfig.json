@@ -26,7 +26,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/(root)/(wiki)/homebrew/class/create"
+    "src/app/(root)/(wiki)/homebrew/class/create",
+    "scripts/generateSeeds/Spells/Spells.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -34,7 +34,7 @@ const SubClassDisplay = ({ subClass, casterType, customFields }: Props) => {
 
   if (!className) return <Loading />;
   return (
-    <div className="p-4">
+    <>
       <div className="flex flex-col md:flex-row justify-between">
         <div className="flex flex-col md:w-4/5">
           <h1 className="px-4">
@@ -141,7 +141,7 @@ const SubClassDisplay = ({ subClass, casterType, customFields }: Props) => {
             );
         })}
       </div>
-    </div>
+    </>
   );
 };
 

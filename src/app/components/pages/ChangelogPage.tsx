@@ -149,11 +149,16 @@ const changelog = [
       "Added Discord Link",
     ],
   },
+  {
+    version: "0.4.8",
+    date: "2021-08-11",
+    changes: ["Fixed Searchbar not rendering correctly on mobile devices"],
+  },
 ];
 
 const ChangelogPage = () => {
   return (
-    <main className="p-8">
+    <main className="p-4 md:p-8">
       <div className="flex flex-col md:flex-row justify-between">
         <div className="flex flex-col md:w-4/5">
           <h1>Changelog</h1>

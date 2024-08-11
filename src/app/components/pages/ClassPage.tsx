@@ -20,7 +20,7 @@ const ClassPage = () => {
   }, [className]);
   if (!className) return <span className="p-4">Class does not exist</span>;
   return (
-    <div className="p-4">
+    <main className="p-4 md:p-8">
       {!data && <Loading />}
       {data && (
         <ClassDisplay
@@ -31,7 +31,7 @@ const ClassPage = () => {
           customFields={data.customFields}
         />
       )}
-    </div>
+    </main>
   );
 };
 

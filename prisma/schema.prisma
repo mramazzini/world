@@ -408,19 +408,24 @@ model SubRace {
 }
 
 model Background {
-  id          Int        @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   name        String
   description String
-  skillProf   Skill[]
-  toolProf    String[]
-  languages   Language[]
-  equipment   String[]
-  Features    Feature[]
-  source      String     @default("Player's Handbook")
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  User        User?      @relation(fields: [userId], references: [id])
-  userId      Int?
+  source      String @default("Player's Handbook")
+
+  skillProficiencies  Skill[]
+  skillChoiceCount    Int
+  toolProficiencies   String[]
+  languages           Language[]
+  languageChoiceCount Int
+  equipment           String[]
+
+  Features Feature[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
 }
 
 model Feat {

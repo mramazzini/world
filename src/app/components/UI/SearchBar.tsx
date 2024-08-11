@@ -67,10 +67,10 @@ const SearchBar = ({
           componentSearch(queryInfo);
         }}
       >
-        <div className="flex justify-center items-center pb-4">
+        <div className="flex justify-center items-center pb-4 join">
           <input
             placeholder={placeholder || "Search"}
-            className="input input-primary w-1/2"
+            className="input input-primary w-1/2 join-item"
             value={queryInfo.query}
             onChange={(e) =>
               setQuery({
@@ -79,17 +79,17 @@ const SearchBar = ({
               })
             }
           />
-          <button type="submit" className="ml-2 btn btn-accent">
+          <button type="submit" className="ml-2 btn btn-accent join-item">
             Search
           </button>
         </div>
-        <div className="flex flex-row justify-center bg-neutral rounded-xl p-4 mb-4">
+        <div className="flex flex-col  md:flex-row justify-center items-center bg-neutral rounded-xl p-4 mb-4">
           {/* advanced search */}
           {searchFields &&
             searchFields.map((field, index) => (
               <div
                 key={index}
-                className="flex flex-col mx-4 text-neutral-content text-center"
+                className="flex flex-col mx-4 text-neutral-content text-center p-2"
               >
                 <label>
                   {typeof field.key == "number"
