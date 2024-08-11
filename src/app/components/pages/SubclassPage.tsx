@@ -8,29 +8,17 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import Loading from "../UI/Loading";
 
-const SubClassPage = () => {
-  const router = usePathname();
-
-  const subClassName = router?.split("/")[2].replaceAll("-", " ");
-
-  const [data, setData] = useState<SubClassInfo | null>(null);
-  useEffect(() => {
-    getSubclass(subClassName).then((res) => {
-      setData(res);
-    });
-  }, [subClassName]);
-
-  if (!subClassName)
-    return <span className="p-4">Subclass does not exist</span>;
+const SubClassPage = ({ subclass }: { subclass: SubClassInfo | null }) => {
+  if (!subclass) return <span className="p-4">Subclass does not exist</span>;
   return (
     <div className="p-4 md:p-8">
-      {!data && <Loading />}
+      {!subclass && <Loading />}
 
-      {data && (
+      {subclass && (
         <SubClassDisplay
-          subClass={data}
-          casterType={data.casterType as CasterType}
-          customFields={data.customFields}
+          subClass={subclass}
+          casterType={subclass.casterType as CasterType}
+          customFields={subclass.customFields}
         />
       )}
     </div>

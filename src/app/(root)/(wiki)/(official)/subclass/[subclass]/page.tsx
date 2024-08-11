@@ -22,8 +22,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: data.description,
   };
 }
-const Page = () => {
-  return <SubClassPage />;
+const Page = async ({ params }: Props) => {
+  const subclass = await getSubclass(params.subclass.replaceAll("-", " "));
+  return <SubClassPage subclass={subclass} />;
 };
 
 export default Page;

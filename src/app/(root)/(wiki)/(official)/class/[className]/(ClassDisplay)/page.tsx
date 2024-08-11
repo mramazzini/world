@@ -20,8 +20,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: data.description,
   };
 }
-const Page = () => {
-  return <ClassPage />;
+const Page = async ({ params }: Props) => {
+  const classObj = await getClass(params.className);
+  return <ClassPage classObj={classObj} />;
 };
 
 export default Page;

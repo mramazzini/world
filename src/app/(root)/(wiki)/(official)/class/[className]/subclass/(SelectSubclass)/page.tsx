@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: `A list of subclasses for the ${data.name.toCapitalCase()} class in Dungeons and Dragons 5th Edition.`,
   };
 }
-const Page = () => {
+const Page = async () => {
   return <SelectSubclass />;
 };
 
