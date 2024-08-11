@@ -5,7 +5,7 @@ import { URL } from "url";
 export const metadata: Metadata = {
   title: "Max's DND Wiki",
   description: "A collection of DND resources",
-  metadataBase: new URL("https://world-ashen.vercel.app"),
+  metadataBase: new URL("https://maxdnd.com"),
   openGraph: {
     type: "website",
     title: "Max's DND Wiki",
