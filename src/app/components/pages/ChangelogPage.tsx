@@ -152,7 +152,10 @@ const changelog = [
   {
     version: "0.4.8",
     date: "2021-08-11",
-    changes: ["Fixed Searchbar not rendering correctly on mobile devices"],
+    changes: [
+      "Fixed Searchbar not rendering correctly on mobile devices",
+      "Fixed Search tables not rendering correctly on mobile devices",
+    ],
   },
 ];
 
