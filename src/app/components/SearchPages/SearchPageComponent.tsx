@@ -18,7 +18,7 @@ import numPlace from "@/lib/utils/numPlace";
 import { toSpellLevel } from "@/lib/utils/toSpellLevel";
 import numberArray from "@/lib/utils/numberArray";
 type DataType = SubClassInfo | ClassInfo | Spell | SubclassSearchResults | null;
-
+type Priority = "all" | "sm" | "md" | "lg" | "xl";
 type Modifier =
   | "Date"
   | "Bold"
@@ -35,6 +35,7 @@ interface TableInfo {
   includeOther?: boolean;
   enum?: boolean;
   index: number;
+  priority: Priority;
 }
 
 interface Props<T extends DataType> {
@@ -57,6 +58,7 @@ interface Props<T extends DataType> {
     alias?: string;
     modifiers?: Modifier[];
     headerWidth: number;
+    priority: Priority;
   }[];
 }
 
@@ -113,7 +115,7 @@ const SearchPageComponent = <T extends DataType>({
         );
       case "Bold":
         return (
-          <b className="btn btn-primary  btn-xs h-auto ">
+          <b className="btn btn-primary btn-xs h-auto p-1">
             {applyModifiers(data, modifier, index + 1)}
           </b>
         );
@@ -178,7 +180,19 @@ const SearchPageComponent = <T extends DataType>({
                   return (
                     <th
                       key={num}
-                      className={`text-left bg-black/20 w-[${col.headerWidth}%]`}
+                      className={`text-left bg-black/20 w-[${
+                        col.headerWidth
+                      }%] ${
+                        col.priority == "all"
+                          ? ""
+                          : col.priority == "sm"
+                          ? "hidden sm:table-cell"
+                          : col.priority == "md"
+                          ? "hidden md:table-cell"
+                          : col.priority == "lg"
+                          ? "hidden lg:table-cell"
+                          : "hidden xl:table-cell"
+                      }`}
                     >
                       {col.header}
                     </th>
@@ -187,7 +201,19 @@ const SearchPageComponent = <T extends DataType>({
                   return (
                     <th
                       key={num}
-                      className={`text-left bg-black/20 w-[${relCol.headerWidth}%]`}
+                      className={`text-left bg-black/20 w-[${
+                        relCol.headerWidth
+                      }%]  ${
+                        relCol.priority == "all"
+                          ? ""
+                          : relCol.priority == "sm"
+                          ? "hidden sm:table-cell"
+                          : relCol.priority == "md"
+                          ? "hidden md:table-cell"
+                          : relCol.priority == "lg"
+                          ? "hidden lg:table-cell"
+                          : "hidden xl:table-cell"
+                      }`}
                     >
                       {relCol.alias || relCol.key}
                     </th>
@@ -226,7 +252,24 @@ const SearchPageComponent = <T extends DataType>({
                                 col.modifiers || []
                               );
                               // @ts-ignore
-                              return <td key={num}>{data}</td>;
+                              return (
+                                <td
+                                  key={num}
+                                  className={`${
+                                    col.priority == "all"
+                                      ? ""
+                                      : col.priority == "sm"
+                                      ? "hidden sm:table-cell"
+                                      : col.priority == "md"
+                                      ? "hidden md:table-cell"
+                                      : col.priority == "lg"
+                                      ? "hidden lg:table-cell"
+                                      : "hidden xl:table-cell"
+                                  }`}
+                                >
+                                  {data}
+                                </td>
+                              );
                             }
                           } else if (relCol) {
                             const hasHeader = item.hasOwnProperty(relCol.model);
@@ -237,7 +280,24 @@ const SearchPageComponent = <T extends DataType>({
                                 item[relCol.model][relCol.key],
                                 relCol.modifiers || []
                               );
-                              return <td key={num}>{data}</td>;
+                              return (
+                                <td
+                                  key={num}
+                                  className={`${
+                                    relCol.priority == "all"
+                                      ? ""
+                                      : relCol.priority == "sm"
+                                      ? "hidden sm:table-cell"
+                                      : relCol.priority == "md"
+                                      ? "hidden md:table-cell"
+                                      : relCol.priority == "lg"
+                                      ? "hidden lg:table-cell"
+                                      : "hidden xl:table-cell"
+                                  }`}
+                                >
+                                  {data}
+                                </td>
+                              );
                             }
                             return null;
                           }

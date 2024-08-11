@@ -30,12 +30,14 @@ const HomebrewClassSearchPage = () => {
           dbHeader: "name",
           modifiers: ["Link", "Bold"],
           index: 0,
+          priority: "all",
         },
         {
           headerWidth: 50,
           header: "Description",
           dbHeader: "flavorText",
           index: 1,
+          priority: "md",
         },
 
         {
@@ -44,6 +46,7 @@ const HomebrewClassSearchPage = () => {
           dbHeader: "updatedAt",
           modifiers: ["Date"],
           index: 3,
+          priority: "all",
         },
       ]}
       relationalFields={[
@@ -53,6 +56,7 @@ const HomebrewClassSearchPage = () => {
           key: "username",
           index: 2,
           headerWidth: 10,
+          priority: "all",
         },
       ]}
       routeName="class"

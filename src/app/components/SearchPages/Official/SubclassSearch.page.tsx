@@ -31,12 +31,14 @@ const SubclassSearchPage = () => {
           dbHeader: "name",
           modifiers: ["Link", "Bold"],
           index: 0,
+          priority: "all",
         },
         {
           headerWidth: 50,
           header: "Description",
           dbHeader: "flavorText",
           index: 1,
+          priority: "md",
         },
         {
           headerWidth: 10,
@@ -44,6 +46,7 @@ const SubclassSearchPage = () => {
           dbHeader: "source",
           searchFields: officialSources,
           index: 3,
+          priority: "all",
         },
         {
           headerWidth: 5,
@@ -51,6 +54,7 @@ const SubclassSearchPage = () => {
           dbHeader: "updatedAt",
           modifiers: ["Date"],
           index: 4,
+          priority: "sm",
         },
       ]}
       relationalFields={[
@@ -61,6 +65,7 @@ const SubclassSearchPage = () => {
           key: "name",
           modifiers: ["Link", "CapitalCase", "Bold"],
           headerWidth: 5,
+          priority: "all",
         },
       ]}
       routeName="subclass"

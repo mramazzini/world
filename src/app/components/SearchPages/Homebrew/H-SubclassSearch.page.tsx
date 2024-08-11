@@ -30,25 +30,23 @@ const HomebrewSubclassSearchPage = () => {
           dbHeader: "name",
           modifiers: ["Link", "Bold"],
           index: 0,
+          priority: "all",
         },
         {
           headerWidth: 50,
           header: "Description",
           dbHeader: "flavorText",
           index: 1,
+          priority: "md",
         },
-        {
-          headerWidth: 10,
-          header: "Author",
-          dbHeader: "userId",
-          index: 2,
-        },
+
         {
           headerWidth: 5,
           header: "Last Updated",
           dbHeader: "updatedAt",
           modifiers: ["Date"],
-          index: 5,
+          index: 4,
+          priority: "sm",
         },
       ]}
       relationalFields={[
@@ -56,15 +54,17 @@ const HomebrewSubclassSearchPage = () => {
           model: "Class",
           alias: "Class Name",
           key: "name",
-          index: 3,
+          index: 2,
           headerWidth: 15,
+          priority: "all",
         },
         {
           model: "User",
           alias: "Author",
           key: "username",
-          index: 4,
+          index: 3,
           headerWidth: 5,
+          priority: "all",
         },
       ]}
       routeName="subclass"

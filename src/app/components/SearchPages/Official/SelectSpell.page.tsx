@@ -45,6 +45,7 @@ const SelectSpellPage = () => {
           dbHeader: "name",
           modifiers: ["Bold", "Link"],
           index: 0,
+          priority: "all",
         },
         {
           headerWidth: 10,
@@ -53,12 +54,14 @@ const SelectSpellPage = () => {
           modifiers: ["SpellLevel"],
           searchFields: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
           index: 1,
+          priority: "all",
         },
         {
           headerWidth: 10,
           header: "Range",
           dbHeader: "range",
           index: 2,
+          priority: "lg",
         },
         {
           headerWidth: 10,
@@ -73,6 +76,7 @@ const SelectSpellPage = () => {
           ],
           includeOther: true,
           index: 3,
+          priority: "lg",
         },
         {
           headerWidth: 10,
@@ -82,6 +86,7 @@ const SelectSpellPage = () => {
           searchFields: spellSchoolOptions,
           enum: true,
           index: 4,
+          priority: "all",
         },
         {
           headerWidth: 5,
@@ -89,6 +94,7 @@ const SelectSpellPage = () => {
           dbHeader: "updatedAt",
           modifiers: ["Date"],
           index: 5,
+          priority: "md",
         },
       ]}
       homebrew={false}
