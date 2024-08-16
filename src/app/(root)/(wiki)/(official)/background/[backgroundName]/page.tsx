@@ -2,14 +2,14 @@ import { Metadata } from "next";
 
 import "@/lib/string.extensions";
 
-import { getSpell } from "@/lib/actions/db/spell/read.actions";
-import SpellPage from "@/app/components/pages/Spellpage";
+import { getBackground } from "@/lib/actions/db/background/read.actions";
+import BackgroundPage from "@/app/components/pages/Background.page";
 
 type Props = {
-  params: { spellName: string };
+  params: { backgroundName: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getSpell(params.spellName.replaceAll("-", " "));
+  const data = await getBackground(params.backgroundName.replaceAll("-", " "));
 
   if (!data) {
     return {
@@ -25,8 +25,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Page = async ({ params }: Props) => {
-  const spell = await getSpell(params.spellName.replaceAll("-", " "));
-  return <SpellPage spell={spell} />;
+  const background = await getBackground(
+    params.backgroundName.replaceAll("-", " ")
+  );
+  return <BackgroundPage background={background} />;
 };
 
 export default Page;

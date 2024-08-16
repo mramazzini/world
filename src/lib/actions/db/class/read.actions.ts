@@ -4,7 +4,7 @@ import { ClassInfo, QueryParams } from "@/lib/types";
 import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { Class, PrismaClient } from "@prisma/client";
 import Fuse from "fuse.js";
-
+import { isAdministrator } from "@/lib/utils/auth";
 export async function getClasses(): Promise<Class[]> {
   const db = new PrismaClient();
   const res = await db.class.findMany();
@@ -16,6 +16,8 @@ export async function getClass(
   query: string | number
 ): Promise<ClassInfo | null> {
   const db = new PrismaClient();
+  const isAdmin = await isAdministrator();
+
   if (typeof query === "string") {
     const res = await db.class.findFirst({
       where: {
@@ -35,6 +37,8 @@ export async function getClass(
       },
     });
     await db.$disconnect();
+    console.log(!isAdmin, res?.srd === false, !res?.userId);
+    if (res?.srd === false && !res?.userId && !isAdmin) return null;
     return res;
   } else {
     const res = await db.class.findFirst({

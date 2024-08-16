@@ -292,7 +292,8 @@ const getSpell = async (page, link) => {
 
 (async () => {
   // Launch Puppeteer browser
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: false });
+
   const page = await browser.newPage();
 
   // Navigate to the target webpage
@@ -306,7 +307,7 @@ const getSpell = async (page, link) => {
   // go to each link and get the spell
 
   const errors = [];
-  for (let i = 530; i < links.length; i++) {
+  for (let i = 0; i < links.length; i++) {
     console.log("Getting spell", `${i + 1}/${links.length}`);
     try {
       await getSpell(page, links[i]);

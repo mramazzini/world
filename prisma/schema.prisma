@@ -144,6 +144,7 @@ model User {
 
 model Class {
   id                       Int           @id @default(autoincrement())
+  srd                      Boolean       @default(false)
   name                     String
   description              String
   hitDie                   Int
@@ -194,6 +195,7 @@ model Class {
 
 model Spell {
   id               Int                @id @default(autoincrement())
+  srd              Boolean            @default(false)
   name             String
   description      String
   duration         String
@@ -247,6 +249,7 @@ model SpellList {
 
 model SubClass {
   id                  Int               @id @default(autoincrement())
+  srd                 Boolean           @default(false)
   name                String
   description         String
   SubClassFeatures    SubClassFeature[]
@@ -351,13 +354,11 @@ model Feature {
   /// [Table]
   extendedTable Json[] // This table will be rendered with the feature
 
-  spellCastingFeature Boolean     @default(false)
-  createdAt           DateTime    @default(now())
-  updatedAt           DateTime    @updatedAt
-  Class               Class?      @relation(fields: [classId], references: [id])
+  spellCastingFeature Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  Class               Class?   @relation(fields: [classId], references: [id])
   classId             Int?
-  Background          Background? @relation(fields: [backgroundId], references: [id])
-  backgroundId        Int?
 }
 
 model SubClassFeature {
@@ -377,6 +378,7 @@ model SubClassFeature {
 
 model Race {
   id              Int        @id @default(autoincrement())
+  srd             Boolean    @default(false)
   name            String
   size            Size
   speed           Int
@@ -394,6 +396,7 @@ model Race {
 
 model SubRace {
   id              Int        @id @default(autoincrement())
+  srd             Boolean    @default(false)
   name            String
   languages       Language[]
   customLanguages String[]
@@ -408,24 +411,37 @@ model SubRace {
 }
 
 model Background {
-  id          Int    @id @default(autoincrement())
-  name        String
-  description String
-  source      String @default("Player's Handbook")
-
+  id                  Int                 @id @default(autoincrement())
+  srd                 Boolean             @default(false)
+  name                String
+  description         String
+  source              String              @default("Player's Handbook")
+  flavorText          String              @db.VarChar(200)
   skillProficiencies  Skill[]
   skillChoiceCount    Int
   toolProficiencies   String[]
   languages           Language[]
   languageChoiceCount Int
   equipment           String[]
+  Features            BackgroundFeature[]
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+  User                User?               @relation(fields: [userId], references: [id])
+  userId              Int?
+}
 
-  Features Feature[]
+model BackgroundFeature {
+  id            Int      @id @default(autoincrement())
+  name          String
+  description   String
+  /// [Table]
+  extendedTable Json[]
+  options       String[] // If the feature has options to choose from, list here
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    Int?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  Background   Background? @relation(fields: [backgroundId], references: [id])
+  backgroundId Int?
 }
 
 model Feat {

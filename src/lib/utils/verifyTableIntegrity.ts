@@ -12,7 +12,7 @@ const verifyTableIntegrity = (table: PrismaJson.Table[]): Boolean => {
       return false;
     }
     if (Object.keys(obj).length !== 1) {
-      cerr("Each object in the table must have only one key");
+      cerr("Each object in the table must have only one key", Object.keys(obj));
       return false;
     }
     tables.push(obj as Object);

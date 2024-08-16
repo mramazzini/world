@@ -1,4 +1,6 @@
 import {
+  Background,
+  BackgroundFeature,
   CasterType,
   Class,
   CustomField,
@@ -29,6 +31,13 @@ export interface ClassInfo extends Class {
   SubClasses: SubClass[];
   casterType: CasterType | null;
   customFields: CustomField[];
+  User: {
+    username: string | null;
+  } | null;
+}
+
+export interface BackgroundInfo extends Background {
+  Features: BackgroundFeature[];
   User: {
     username: string | null;
   } | null;
@@ -93,6 +102,9 @@ export enum src {
   dmg = "Dungeon Master's Guide",
   fizban = "Fizban's Treasury of Dragons",
   dragonQueen = "Dragonlance: Shadow of the Dragon Queen",
+  tomb = "Tomb of Annihilation",
+  descent = "Descent into Avernus",
+  witchlight = "The Wild Beyond the Witchlight",
 }
 
 // type where options are "level1" , "level2" all the way to level20

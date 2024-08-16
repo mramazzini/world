@@ -1,4 +1,4 @@
-import { Skill } from "@prisma/client";
+import { Language, Skill } from "@prisma/client";
 import { src } from "./types";
 
 export const QUERY_LIMIT = 20;
@@ -41,4 +41,24 @@ export const skills: Skill[] = [
   Skill.SLEIGHT_OF_HAND,
   Skill.STEALTH,
   Skill.SURVIVAL,
+];
+
+export const languages = [
+  Language.ABYSSAL,
+  Language.CELESTIAL,
+  Language.DEEP_SPEECH,
+
+  Language.DRACONIC,
+  Language.INFERNAL,
+  Language.PRIMORDIAL,
+  Language.SYLVAN,
+  Language.UNDERCOMMON,
+  Language.COMMON,
+  Language.DWARVISH,
+  Language.ELVISH,
+  Language.GIANT,
+  Language.GNOMISH,
+  Language.GOBLIN,
+  Language.HALFLING,
+  Language.ORC,
 ];

@@ -10,7 +10,8 @@ import SubclassFeatures from "./seeds/SubclassFeatures";
 import Spells from "./seeds/Spells/spells.seed";
 import { cwarn, cinfo, cerr, csuccess } from "@/lib/utils/chalkLog";
 import SpellLists from "./seeds/Spells/SpellLists/SpellLists.seed";
-import { SpellListToSpell } from "@prisma/client";
+import Backgrounds from "./seeds/Backgrounds";
+import BackgroundFeatures from "./seeds/BackgroundFeatures";
 import SpellListToSpellArr from "./seeds/Spells/SpellLists/SpellListToSpell.seed";
 import {
   PrismaClient,
@@ -25,6 +26,52 @@ import { src } from "@/lib/types";
 const db = new PrismaClient();
 // db cleared with npm run nuke prior to seeding
 const seed = async () => {
+  // Create Backgrounds
+  cinfo("Creating backgrounds");
+  for (const Background of Backgrounds) {
+    try {
+      cinfo("Creating background:", Background.name);
+      await db.background.create({
+        data: Background,
+      });
+      cinfo("Background created");
+    } catch (error) {
+      cerr("Error creating background:", Background.name, error);
+      return;
+    }
+  }
+  cinfo("Backgrounds created");
+
+  // Create Background Features
+  cinfo("Creating background features");
+  for (const Feature of BackgroundFeatures) {
+    try {
+      cinfo("Creating feature:", Feature.name);
+      //make sure feature has a classId and levels
+      if (!Feature.backgroundId) {
+        cerr("Feature missing backgroundId field:", Feature.name);
+        return;
+      }
+
+      // verify extendedTable integrity
+      if (Feature.extendedTable) {
+        if (
+          !verifyTableIntegrity(Feature.extendedTable as PrismaJson.Table[])
+        ) {
+          return;
+        }
+      }
+      await db.backgroundFeature.create({
+        data: Feature,
+      });
+      cinfo("Feature created");
+    } catch (error) {
+      cerr("Error creating background feature:", Feature.name, error);
+      return;
+    }
+  }
+  cinfo("Background features created");
+
   // Create spells
   cinfo("Creating spells");
   for (const Spell of Spells) {
@@ -301,7 +348,7 @@ const seed = async () => {
       return;
     }
   }
-  await createMaxyUser(db);
+  // await createMaxyUser(db);
 
   csuccess("✅ Successfully seeded database ✅");
 };

@@ -6,14 +6,16 @@
     "features": [],
     "skillProficiencies": ["INSIGHT", "RELIGION"],
     "toolProficiencies": ["None"],
+    "skillChoiceCount": 0,
+    "languageChoiceCount": 0,
     "languages": ["Two of your choice"],
     "equipment": [
       "A holy symbol (a gift to you when you entered the priesthood)",
-      "a prayer book or prayer wheel",
+      "A prayer book or prayer wheel",
       "5 sticks of incense",
-      "vestmentsValue:0 Weight:0",
-      "a set of common clothesValue:5sp Weight:3lbs",
-      "and a pouchValue:5sp Weight:1lb containing 15gp"
+      "Vestments",
+      "A set of common clothes",
+      "And a pouch containing 15gp"
     ]
   }
 ]

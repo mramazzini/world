@@ -10,6 +10,7 @@ import {
 const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 1,
+    srd: true,
     name: "fighter",
     hitDie: 10,
     description:
@@ -55,6 +56,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 2,
     name: "wizard",
+    srd: true,
     description:
       "Wizards are supreme magic-users, defined and united as a class by the spells they cast. Drawing on the subtle weave of magic that permeates the cosmos, wizards cast spells of explosive fire, arcing lightning, subtle deception, and brute force mind control. Their magic conjures monsters from other planes of existence, glimpses the future, or turns slain foes into zombies. Their mightiest spells change one substance into another, call meteors down from the sky, or open portals to other worlds.",
     multiclassing:
@@ -100,6 +102,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 3,
     name: "cleric",
+    srd: true,
     hitDie: 8,
     description:
       "Clerics are intermediaries between the mortal world and the distant planes of the gods. As varied as the gods they serve, clerics strive to embody the handiwork of their deities. No ordinary priest, a cleric is imbued with divine magic.",
@@ -148,6 +151,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     id: 4,
     name: "rogue",
     hitDie: 8,
+    srd: true,
     description:
       "Rogues rely on skill, stealth, and their foes' vulnerabilities to get the upper hand in any situation. They have a knack for finding the solution to just about any problem, demonstrating a resourcefulness and versatility that is the cornerstone of any successful adventuring party.",
     multiclassing:
@@ -194,6 +198,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 5,
     name: "barbarian",
+    srd: true,
     description:
       "For some, their rage springs from a communion with fierce animal spirits. Others draw from a roiling reservoir of anger at a world full of pain. For every barbarian, rage is a power that fuels not just a battle frenzy but also uncanny reflexes, resilience, and feats of strength.",
     multiclassing:
@@ -229,6 +234,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 6,
     name: "bard",
+    srd: true,
     hitDie: 8,
     description:
       "Whether scholar, skald, or scoundrel, a bard weaves magic through words and music to inspire allies, demoralize foes, manipulate minds, create illusions, and even heal wounds. The bard is a master of song, speech, and the magic they contain.",
@@ -292,6 +298,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 7,
     name: "druid",
+    srd: true,
     hitDie: 8,
     description:
       "Whether calling on the elemental forces of nature or emulating the creatures of the animal world, druids are an embodiment of nature's resilience, cunning, and fury. They claim no mastery over nature, but see themselves as extensions of nature's indomitable will.",
@@ -349,6 +356,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 8,
     name: "monk",
+    srd: true,
     hitDie: 8,
     description:
       "Monks are united in their ability to magically harness the energy that flows in their bodies. Whether channeled as a striking display of combat prowess or a subtler focus of defensive ability and speed, this energy infuses all that a monk does.",
@@ -384,6 +392,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 9,
     name: "paladin",
+    srd: true,
     hitDie: 10,
     description:
       "Whether sworn before a god's altar and the witness of a priest, in a sacred glade before nature spirits and fey beings, or in a moment of desperation and grief with the dead as the only witness, a paladin's oath is a powerful bond.",
@@ -432,6 +441,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 10,
     name: "ranger",
+    srd: true,
     hitDie: 10,
     description:
       "Far from the bustle of cities and towns, past the hedges that shelter the most distant farms from the terrors of the wild, amid the dense-packed trees of trackless forests and across wide and empty plains, rangers keep their unending watch.",
@@ -477,6 +487,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 11,
     name: "sorcerer",
+    srd: true,
     description:
       "Sorcerers carry a magical birthright conferred upon them by an exotic bloodline, some otherworldly influence, or exposure to unknown cosmic forces. No one chooses sorcery; the power chooses the sorcerer.",
     multiclassing:
@@ -522,6 +533,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 12,
     name: "warlock",
+    srd: true,
     hitDie: 8,
     description:
       "Warlocks are seekers of the knowledge that lies hidden in the fabric of the multiverse. Through pacts made with mysterious beings of supernatural power, warlocks unlock magical effects both subtle and spectacular.",

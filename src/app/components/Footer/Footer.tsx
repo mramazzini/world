@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import useContactModal from "../modals/ContactModal";
+import CreativeCommons from "../legal/CreativeCommon";
 const pageLinks = [
   {
     name: "Home",
@@ -45,24 +46,25 @@ const Footer = () => {
   return (
     <>
       <ContactModal />
-      <footer className="footer bg-neutral text-neutral-content p-10 mt-auto grid-rows-2">
-        <nav>
-          <h6 className="footer-title">Links</h6>
-          {pageLinks.map((link) => (
-            <Link key={link.url} href={link.url} className="link link-hover">
-              {link.name}
-            </Link>
-          ))}
-        </nav>
-        <nav>
-          <h6 className="footer-title">Create</h6>
-          {createLinks.map((link) => (
-            <Link key={link.url} href={link.url} className="link link-hover">
-              {link.name}
-            </Link>
-          ))}
-        </nav>
-        {/* <nav>
+      <footer className=" bg-neutral text-neutral-content p-10 mt-auto ">
+        <div className="footer grid-rows-2">
+          <nav>
+            <h6 className="footer-title">Links</h6>
+            {pageLinks.map((link) => (
+              <Link key={link.url} href={link.url} className="link link-hover">
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+          <nav>
+            <h6 className="footer-title">Create</h6>
+            {createLinks.map((link) => (
+              <Link key={link.url} href={link.url} className="link link-hover">
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+          {/* <nav>
           <h6 className="footer-title">Legal</h6>
           {legalLinks.map((link) => (
             <Link key={link.url} href={link.url} className="link link-hover">
@@ -70,12 +72,16 @@ const Footer = () => {
             </Link>
           ))}
         </nav> */}
-        <div>
-          <h6 className="footer-title">Contact</h6>
-          <button onClick={openModal} className="btn btn-primary">
-            Contact us -&gt;
-          </button>
+
+          <div>
+            <h6 className="footer-title">Contact</h6>
+            <button onClick={openModal} className="btn btn-primary">
+              Contact us -&gt;
+            </button>
+          </div>
         </div>
+        <div className="divider"></div>
+        <CreativeCommons />
       </footer>
     </>
   );

@@ -40,6 +40,10 @@ const Navbar = () => {
       name: "Spells",
       href: "/spells",
     },
+    {
+      name: "Backgrounds",
+      href: "/background",
+    },
     // {
     //   name: "Monsters",
     //   href: "/monster",
@@ -149,15 +153,29 @@ const Navbar = () => {
           </ul>
         </div>
         {isAuthenticated ? (
-          <div
-            className="ml-auto p-4 cursor-pointer"
-            onClick={async () => {
-              await destroySession();
-              await checkToken();
-              router.push(pathname);
-            }}
-          >
-            Logout
+          <div className="ml-auto">
+            <Link
+              href={DISCORD_INVITE}
+              target="_blank"
+              className="flex items-center justify-center btn btn-ghost mx-2 border border-primary"
+            >
+              <img
+                src="/images/discord.svg"
+                alt="Discord"
+                className="h-10 flex items-center justify-center"
+              />
+            </Link>
+
+            <div
+              className="ml-auto p-4 cursor-pointer"
+              onClick={async () => {
+                await destroySession();
+                await checkToken();
+                router.push(pathname);
+              }}
+            >
+              Logout
+            </div>
           </div>
         ) : (
           <div className="ml-auto">

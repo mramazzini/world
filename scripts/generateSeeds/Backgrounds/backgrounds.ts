@@ -2,7 +2,7 @@ import puppeteer, { Page } from "puppeteer";
 import fs, { link } from "fs";
 import { Background, Prisma, Skill } from "@prisma/client";
 import { officialSources, skills } from "@/lib/globalVars";
-
+import "@/lib/string.extensions";
 const backgrounds: Prisma.BackgroundCreateManyInput[] = [];
 const errors: { link: string; error: Error }[] = [];
 const getBackground = async (page: Page, link: string) => {
@@ -61,20 +61,31 @@ const getBackground = async (page: Page, link: string) => {
 
   const toolProficiencies = extraData[1].split(": ")[1].split(", ");
   const languages = extraData[2].split(": ")[1].split(", ");
-  const equipment = extraData[3].split(": ")[1].split(", ");
 
-  // const obj = {
-  //   name: name[0],
-  //   description: description.join("\n\n"),
-  //   source,
-  //   features: [],
-  //   skillProficiencies: finalSkills,
-  //   toolProficiencies,
-  //   languages,
-  //   equipment,
-  // } as Prisma.BackgroundCreateManyInput;
+  const valWeightRegex = /value:(\d+)(?!\b0\b)\w*\sweight:(\d+)(?!\b0\b)\w*/;
+  const equipment = extraData[3]
+    .split(": ")[1]
+    .split(", ")
+    .map((item) => item.toCapitalCase().replace(valWeightRegex, "").trim());
+  const skillChoiceCount = 0;
+  const languageChoiceCount = 0;
 
-  // backgrounds.push(obj);
+  console.log(extraData);
+
+  const obj = {
+    name: name[0],
+    description: description.join("\n\n"),
+    source,
+    features: [],
+    skillProficiencies: finalSkills,
+    toolProficiencies,
+    skillChoiceCount,
+    languageChoiceCount,
+    languages,
+    equipment,
+  } as Prisma.BackgroundCreateManyInput;
+
+  backgrounds.push(obj);
 };
 
 (async () => {

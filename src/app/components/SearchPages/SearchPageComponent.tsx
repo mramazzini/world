@@ -12,12 +12,18 @@ import {
   SubClassInfo,
   SubclassSearchResults,
 } from "@/lib/types";
-import { Spell } from "@prisma/client";
+import { Background, Spell } from "@prisma/client";
 import "@/lib/string.extensions";
 import numPlace from "@/lib/utils/numPlace";
 import { toSpellLevel } from "@/lib/utils/toSpellLevel";
 import numberArray from "@/lib/utils/numberArray";
-type DataType = SubClassInfo | ClassInfo | Spell | SubclassSearchResults | null;
+type DataType =
+  | SubClassInfo
+  | ClassInfo
+  | Spell
+  | Background
+  | SubclassSearchResults
+  | null;
 type Priority = "all" | "sm" | "md" | "lg" | "xl";
 type Modifier =
   | "Date"
@@ -25,7 +31,8 @@ type Modifier =
   | "Button"
   | "CapitalCase"
   | "NumPlace"
-  | "SpellLevel";
+  | "SpellLevel"
+  | "Italic";
 interface TableInfo {
   headerWidth: number;
   dbHeader: string | number;
@@ -137,6 +144,8 @@ const SearchPageComponent = <T extends DataType>({
         return applyModifiers(numPlace(parseInt(data)), modifier, index + 1);
       case "SpellLevel":
         return applyModifiers(toSpellLevel(data), modifier, index + 1);
+      case "Italic":
+        return <i>{applyModifiers(data, modifier, index + 1)}</i>;
     }
     return data;
   };
