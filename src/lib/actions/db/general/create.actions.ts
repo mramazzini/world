@@ -1,21 +1,5 @@
 "use server";
-import {
-  Class,
-  PrismaClient,
-  SubClass,
-  SubRace,
-  Background,
-  Feat,
-  Spell,
-  Race,
-  Ability,
-  Skill,
-  ArmorTypes,
-  Prisma,
-  Feature,
-  CasterType,
-  User,
-} from "@prisma/client";
+import { PrismaClient, Prisma, User } from "@prisma/client";
 
 export const createUser = async (
   data: Prisma.UserCreateInput
