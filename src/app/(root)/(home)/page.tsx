@@ -7,18 +7,20 @@ if (process.env.DOMAIN_NAME === undefined) {
 }
 export const metadata: Metadata = {
   title: "Max's DND Wiki",
-  description: "A collection of DND resources",
+  description:
+    "Max's DND Wiki is a collection of Classes, Subclasses, Races, Spells, Backgrounds and more for Dungeons and Dragons 5th Edition.",
   metadataBase: new URL(process.env.DOMAIN_NAME),
   openGraph: {
     type: "website",
     title: "Max's DND Wiki",
-    description: "A collection of DND resources",
+    description:
+      "Max's DND Wiki is a collection of Classes, Subclasses, Races, Spells, Backgrounds and more for Dungeons and Dragons 5th Edition.",
     images: [
       {
         url: "/images/hero.jpg",
         width: 1440,
         height: 1920,
-        alt: "Description of the image",
+        alt: "Dungeons and Dragons Fire Dragon Attack",
       },
     ],
   },

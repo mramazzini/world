@@ -3,7 +3,8 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Subclasses - Max's DND Wiki",
-  description: "Search for subclasses for your DND campaign.",
+  description:
+    "A vast collection of subclasses for your DND campaign. Choose from offical content or user submitted homebrew subclasses.",
 };
 
 const Page = () => {

@@ -12,8 +12,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!data) {
     return {
-      title: "Subclass Not Found",
-      description: "Subclass Not Found",
+      title: "Subclass Not Found - Max's DND Wiki",
+      description: "Subclass Not Found - Max's DND Wiki",
     };
   }
 

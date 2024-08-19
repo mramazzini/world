@@ -125,15 +125,33 @@ enum DamageTypes {
   OTHER
 }
 
+enum CreatureType {
+  ABERRATION
+  BEAST
+  CELESTIAL
+  CONSTRUCT
+  DRAGON
+  ELEMENTAL
+  FEY
+  FIEND
+  GIANT
+  HUMANOID
+  MONSTROSITY
+  OOZE
+  PLANT
+  UNDEAD
+  NULL
+}
+
 model User {
-  id         Int          @id @default(autoincrement())
-  username   String       @unique
-  email      String       @unique
+  id         Int        @id @default(autoincrement())
+  username   String     @unique
+  email      String     @unique
   password   String
   Classes    Class[]
   SubClasses SubClass[]
   Races      Race[]
-  SubRaces   SubRace[]
+
   Background Background[]
 
   createdAt DateTime  @default(now())
@@ -377,37 +395,59 @@ model SubClassFeature {
 }
 
 model Race {
-  id              Int        @id @default(autoincrement())
-  srd             Boolean    @default(false)
-  name            String
-  size            Size
-  speed           Int
-  abilityScores   Ability[]
-  source          String     @default("Player's Handbook")
-  originLanguages Language[]
-  customLanguages String[]
-  SubRaces        SubRace[]
-  createdAt       DateTime   @default(now())
-  updatedAt       DateTime   @updatedAt
+  id          Int     @id @default(autoincrement())
+  srd         Boolean @default(false)
+  name        String
+  description String
+  flavortext  String  @db.VarChar(200)
+  source      String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   User   User @relation(fields: [userId], references: [id])
   userId Int
 }
 
-model SubRace {
-  id              Int        @id @default(autoincrement())
-  srd             Boolean    @default(false)
-  name            String
-  languages       Language[]
-  customLanguages String[]
-  description     String
-  source          String     @default("Player's Handbook")
-  createdAt       DateTime   @default(now())
-  updatedAt       DateTime   @updatedAt
-  Race            Race?      @relation(fields: [raceId], references: [id])
-  raceId          Int?
-  User            User       @relation(fields: [userId], references: [id])
-  userId          Int
+model RaceVariant {
+  id            Int       @id @default(autoincrement())
+  srd           Boolean   @default(false)
+  name          String
+  description   String
+  flavortext    String    @db.VarChar(200)
+  source        String
+  //FIXME: MAKE CUSTOM JSON TYPE
+  abilityScores Ability[]
+
+  creatureType CreatureType
+  size         Size
+  speed        Int
+
+  flightSpeed Int?
+  swimSpeed   Int?
+  climbSpeed  Int?
+
+  flightDescription String?
+  swimDescription   String?
+  climbDescription  String?
+
+  originLanguages     Language[]
+  languageDescription String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RacialTraits {
+  id            Int      @id @default(autoincrement())
+  name          String
+  description   String
+  /// [Table]
+  extendedTable Json[]
+  options       String[] // If the feature has options to choose from, list here
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Background {

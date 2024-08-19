@@ -3,7 +3,8 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Spells - Max's DND Wiki",
-  description: "Search for Spells in DND.",
+  description:
+    "A vast collection of spells for your DND campaign. Choose from offical content or user submitted homebrew spells.",
 };
 
 const Spells = () => {

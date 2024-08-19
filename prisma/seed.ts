@@ -1,17 +1,17 @@
-import Features from "./seeds/Features.seed";
-import Classes from "./seeds/Class.seed";
-import SubClasses from "./seeds/Subclasses.seed";
-import CasterTypes from "./seeds/CasterType.seed";
-import Weapons from "./seeds/Weapons.seed";
-import Properties from "./seeds/Properties.seed";
-import WeaponToPropertyArr from "./seeds/WeaponToProperty.seed";
-import CustomFields from "./seeds/CustomFields.seed";
+import Features from "./seeds/Classes/Features.seed";
+import Classes from "./seeds/Classes/Class.seed";
+import SubClasses from "./seeds/Subclasses/Subclasses.seed";
+import CasterTypes from "./seeds/Classes/CasterType.seed";
+import Weapons from "./seeds/Weapons/Weapons.seed";
+import Properties from "./seeds/Weapons/Properties.seed";
+import WeaponToPropertyArr from "./seeds/Weapons/WeaponToProperty.seed";
+import CustomFields from "./seeds/Classes/CustomFields.seed";
 import SubclassFeatures from "./seeds/SubclassFeatures";
 import Spells from "./seeds/Spells/spells.seed";
 import { cwarn, cinfo, cerr, csuccess } from "@/lib/utils/chalkLog";
 import SpellLists from "./seeds/Spells/SpellLists/SpellLists.seed";
-import Backgrounds from "./seeds/Backgrounds";
-import BackgroundFeatures from "./seeds/BackgroundFeatures";
+import Backgrounds from "./seeds/Backgrounds/Backgrounds.seed";
+import BackgroundFeatures from "./seeds/Backgrounds/BackgroundFeatures.seed";
 import SpellListToSpellArr from "./seeds/Spells/SpellLists/SpellListToSpell.seed";
 import {
   PrismaClient,

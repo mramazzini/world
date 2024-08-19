@@ -11,8 +11,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getClass(params.className);
   if (!data) {
     return {
-      title: "Class Not Found",
-      description: "Class Not Found",
+      title: "Class Not Found - Max's DND Wiki",
+      description: "Class Not Found - Max's DND Wiki",
     };
   }
   return {

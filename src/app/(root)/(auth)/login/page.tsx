@@ -4,8 +4,8 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Login",
-  description: "Login to your account",
+  title: "Login - Max's DND Wiki",
+  description: "Login to your account to create and access your saved content.",
 };
 
 export default function Page() {
