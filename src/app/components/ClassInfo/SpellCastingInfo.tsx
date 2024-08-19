@@ -15,12 +15,12 @@ const SpellCastingInfo = ({ classObj, casterType }: Props) => {
       <div className="divider" />
       <h2>
         Spellcasting
-        <Link
+        {/* <Link
           className="text-accent underline text-sm ml-2 hover:text-acce"
           href="/rules/spellcasting"
         >
           Spellcasting Rules -&gt;
-        </Link>
+        </Link> */}
       </h2>
       <div className="divider" />
       <h3 className="font-bold">

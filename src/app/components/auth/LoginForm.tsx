@@ -76,12 +76,12 @@ const LoginForm = () => {
         </label>
         <div className="flex items-center justify-between">
           <div className="text-sm">
-            <Link
+            {/* <Link
               className="font-medium text-primary hover:text-blue-600"
               href="/auth/forgot-password"
             >
               Forgot your password?
-            </Link>
+            </Link> */}
           </div>
           <div>
             <button type="submit" className="btn btn-primary text-white">
