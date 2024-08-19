@@ -110,7 +110,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // });
   for (const b of backgrounds) {
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/backgrounds/${b.name}`,
+      url: `${process.env.DOMAIN_NAME}/background/${b.name}`,
       lastModified: b.updatedAt,
       changeFrequency: "yearly",
       priority: 0.7,
