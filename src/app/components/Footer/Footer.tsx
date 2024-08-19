@@ -8,10 +8,36 @@ const pageLinks = [
     name: "Home",
     url: "/",
   },
-
+  {
+    name: "Login",
+    url: "/login",
+  },
+  {
+    name: "Register",
+    url: "/register",
+  },
   {
     name: "Change Log",
     url: "/changelog",
+  },
+];
+
+const wikiLinks = [
+  {
+    name: "Classes",
+    url: "/class",
+  },
+  {
+    name: "Spells",
+    url: "/spell",
+  },
+  {
+    name: "Subclasses",
+    url: "/subclass",
+  },
+  {
+    name: "Backgrounds",
+    url: "/background",
   },
 ];
 
@@ -51,6 +77,14 @@ const Footer = () => {
           <nav>
             <h6 className="footer-title">Links</h6>
             {pageLinks.map((link) => (
+              <Link key={link.url} href={link.url} className="link link-hover">
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+          <nav>
+            <h6 className="footer-title">Wiki</h6>
+            {wikiLinks.map((link) => (
               <Link key={link.url} href={link.url} className="link link-hover">
                 {link.name}
               </Link>
