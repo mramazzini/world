@@ -2805,7 +2805,7 @@ const Spells: Prisma.SpellCreateManyInput[] = [
   },
   {
     id: 133,
-    name: "Blindness/Deafness",
+    name: "Blindness Deafness",
     description:
       "You can blind or deafen a foe. Choose one creature that you can see within range to make a Constitution saving throw. If it fails, the target is either blinded or deafened (your choice) for the duration. At the end of each of its turns, the target can make a Constitution saving throw. On a success, the spell ends.\n\n",
     level: 2,
@@ -3139,7 +3139,7 @@ const Spells: Prisma.SpellCreateManyInput[] = [
   },
   {
     id: 149,
-    name: "Enlarge - Reduce",
+    name: "Enlarge Reduce",
     description:
       "You cause a creature or an object you can see within range to grow larger or smaller for the duration. Choose either a creature or an object that is neither worn nor carried. If the target is unwilling, it can make a Constitution saving throw. On a success, the spell has no effect.\n\nIf the target is a creature, everything it is wearing and carrying changes size with it. Any item dropped by an affected creature returns to normal size at once.\n\n",
     level: 2,
@@ -9774,7 +9774,7 @@ const Spells: Prisma.SpellCreateManyInput[] = [
   },
   {
     id: 452,
-    name: "Antipathy - Sympathy",
+    name: "Antipathy Sympathy",
     description:
       "This spell attracts or repels creatures of your choice. You target something within range, either a Huge or smaller object or creature or an area that is no larger than a 200-foot cube. Then specify a kind of intelligent creature, such as red dragons, goblins, or vampires. You invest the target with an aura that either attracts or repels the specified creatures for the duration. Choose antipathy or sympathy as the aura’s effect.\n\n",
     level: 8,
