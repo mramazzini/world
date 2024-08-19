@@ -160,7 +160,7 @@ const SearchPageComponent = <T extends DataType>({
         </div>
 
         <div className="flex justify-center items-start md:items-end my-2 flex-col ">
-          <Link
+          {/* <Link
             href={homebrewOfficialRoute}
             className={"btn btn-ghost border border-gray-500 mb-2 w-full"}
           >
@@ -171,7 +171,7 @@ const SearchPageComponent = <T extends DataType>({
             className={"btn btn-ghost border border-gray-500 w-full"}
           >
             {createText}
-          </Link>
+          </Link> */}
         </div>
       </div>
       <div className="divider" />
