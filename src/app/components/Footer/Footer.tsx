@@ -75,7 +75,7 @@ const Footer = () => {
       <footer className=" bg-neutral text-neutral-content p-10 mt-auto w-full">
         <div className="footer grid-rows-2">
           <nav>
-            <h6 className="footer-title">Links</h6>
+            <div className="footer-title">Links</div>
             {pageLinks.map((link) => (
               <Link key={link.url} href={link.url} className="link link-hover">
                 {link.name}
@@ -83,7 +83,7 @@ const Footer = () => {
             ))}
           </nav>
           <nav>
-            <h6 className="footer-title">Wiki</h6>
+            <div className="footer-title">Wiki</div>
             {wikiLinks.map((link) => (
               <Link key={link.url} href={link.url} className="link link-hover">
                 {link.name}
@@ -91,7 +91,7 @@ const Footer = () => {
             ))}
           </nav>
           {/* <nav>
-            <h6 className="footer-title">Create</h6>
+            <div className="footer-title">Create</div>
             {createLinks.map((link) => (
               <Link key={link.url} href={link.url} className="link link-hover">
                 {link.name}
@@ -99,7 +99,7 @@ const Footer = () => {
             ))}
           </nav> */}
           {/* <nav>
-          <h6 className="footer-title">Legal</h6>
+          <div className="footer-title">Legal</div>
           {legalLinks.map((link) => (
             <Link key={link.url} href={link.url} className="link link-hover">
               {link.name}
@@ -108,7 +108,7 @@ const Footer = () => {
         </nav> */}
 
           <div>
-            <h6 className="footer-title">Contact</h6>
+            <div className="footer-title">Contact</div>
             <button onClick={openModal} className="btn btn-primary">
               Contact us -&gt;
             </button>
