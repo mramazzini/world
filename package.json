@@ -17,7 +17,8 @@
     "nuke": "env-cmd -f .env.local npx tsx scripts/nuke.ts",
     "nuke:prod": "env-cmd -f .env npx tsx scripts/nuke.ts",
     "logs": "vercel logs https://world-ashen.vercel.app/",
-    "generate:background": "cd scripts/generateSeeds/Backgrounds && npx tsx backgrounds.ts"
+    "generate:background": "cd scripts/generateSeeds/Backgrounds && npx tsx backgrounds.ts",
+    "reseed-push": "npm run nuke:prod && git push origin main"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"

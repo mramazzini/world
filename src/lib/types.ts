@@ -98,7 +98,7 @@ export enum src {
   Bigby = "Bigby Presents: The Glory of the Giants",
   mordenkainen = "Mordenkainen's Tome of Foes",
   eberron = "Eberron: Rising from the Last War",
-  theros = "Theros",
+  theros = "Mythic Odysseys of Theros",
   ravnica = "Guildmaster's Guide to Ravnica",
   wildemount = "Explorer's Guide to Wildemount",
   phb = "Player's Handbook",
