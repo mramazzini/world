@@ -19,7 +19,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${data.name} - Max's DND Wiki`,
-    description: data.description,
+    description:
+      data.description.length > 157
+        ? data.description.substring(0, 157) + "..."
+        : data.description,
   };
 }
 const Page = async ({ params }: Props) => {

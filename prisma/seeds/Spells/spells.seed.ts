@@ -282,7 +282,7 @@ const Spells: Prisma.SpellCreateManyInput[] = [
   },
   {
     id: 13,
-    name: "Green-Flame Blade",
+    name: "Green Flame Blade",
     description:
       "You brandish the weapon used in the spell’s casting and make a melee attack with it against one creature within 5 feet of you. On a hit, the target suffers the weapon attack’s normal effects, and you can cause green fire to leap from the target to a different creature of your choice that you can see within 5 feet of it. The second creature takes fire damage equal to your spellcasting ability modifier.\n\n",
     level: 0,
@@ -9307,7 +9307,7 @@ const Spells: Prisma.SpellCreateManyInput[] = [
   },
   {
     id: 436,
-    name: "Power Word: Pain",
+    name: "Power Word Pain",
     description:
       "You speak a word of power that causes waves of intense pain to assail one creature you can see within range. If the target has 100 hit points or fewer, it is subject to crippling pain. Otherwise, the spell has no effect on it. A target is also unaffected if it is immune to being charmed.\n\nWhile the target is affected by crippling pain, any speed it has can be no higher than 10 feet. The target also has disadvantage on attack rolls, ability checks, and saving throws, other than Constitution saving throws. Finally, if the target tries to cast a spell, it must first succeed on a Constitution saving throw, or the casting fails and the spell is wasted.\n\nA target suffering this pain can make a Constitution saving throw at the end of each of its turns. On a successful save, the pain ends.\n\n",
     level: 7,
@@ -9706,7 +9706,7 @@ const Spells: Prisma.SpellCreateManyInput[] = [
   },
   {
     id: 449,
-    name: "Abi-Dalzim's Horrid Wilting",
+    name: "Abi Dalzim's Horrid Wilting",
     description:
       "You draw the moisture from every creature in a 30-foot cube centered on a point you choose within range. Each creature in that area must make a Constitution saving throw. Constructs and undead aren’t affected, and plants and water elementals make this saving throw with disadvantage. A creature takes 10d8 necrotic damage on a failed save, or half as much damage on a successful one.\n\n",
     level: 8,
@@ -10120,7 +10120,7 @@ const Spells: Prisma.SpellCreateManyInput[] = [
   },
   {
     id: 467,
-    name: "Power Word: Stun",
+    name: "Power Word Stun",
     description:
       "You speak a word of power that can overwhelm the mind of one creature you can see within range, leaving it dumbfounded. If the target has 150 hit points or fewer, it is stunned. Otherwise, the spell has no effect. The stunned target must make a Constitution saving throw at the end of each of its turns. On a successful save, this stunning effect ends.\n\n",
     level: 8,
@@ -10361,7 +10361,7 @@ const Spells: Prisma.SpellCreateManyInput[] = [
   },
   {
     id: 479,
-    name: "Power Word: Heal",
+    name: "Power Word Heal",
     description:
       "A wave of healing energy washes over a creature you touch. The target regains all its hit points. If the creature is charmed, frightened, paralyzed, or stunned, the condition ends. If the creature is prone, it can use its reaction to stand up. This spell has no effect on undead or constructs.\n\n",
     level: 9,
@@ -10381,7 +10381,7 @@ const Spells: Prisma.SpellCreateManyInput[] = [
   },
   {
     id: 480,
-    name: "Power Word: Kill",
+    name: "Power Word Kill",
     description:
       "You utter a word of power that can compel one creature you can see within range to die instantly. If the creature you chose has 100 hit points or fewer, it dies. Otherwise, the spell has no effect.\n\n",
     level: 9,
