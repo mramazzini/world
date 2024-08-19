@@ -56,14 +56,14 @@ const Footer = () => {
               </Link>
             ))}
           </nav>
-          <nav>
+          {/* <nav>
             <h6 className="footer-title">Create</h6>
             {createLinks.map((link) => (
               <Link key={link.url} href={link.url} className="link link-hover">
                 {link.name}
               </Link>
             ))}
-          </nav>
+          </nav> */}
           {/* <nav>
           <h6 className="footer-title">Legal</h6>
           {legalLinks.map((link) => (
