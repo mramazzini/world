@@ -5,9 +5,21 @@ import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { Class, PrismaClient } from "@prisma/client";
 import Fuse from "fuse.js";
 import { isAdministrator } from "@/lib/utils/auth";
-export async function getClasses(): Promise<Class[]> {
+export async function getClasses(): Promise<ClassInfo[]> {
   const db = new PrismaClient();
-  const res = await db.class.findMany();
+  const res = await db.class.findMany({
+    include: {
+      Features: true,
+      SubClasses: true,
+      casterType: true,
+      customFields: true,
+      User: {
+        select: {
+          username: true,
+        },
+      },
+    },
+  });
   await db.$disconnect();
   return res;
 }
