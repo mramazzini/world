@@ -10,7 +10,6 @@ import {
   Class,
   PrismaClient,
   SubClass,
-  SubRace,
   Background,
   Feat,
   Spell,
@@ -43,13 +42,6 @@ export async function getSubclasses(): Promise<SubClass[]> {
 export async function getRace(): Promise<Race[]> {
   const db = new PrismaClient();
   const res = await db.race.findMany();
-  await db.$disconnect();
-  return res;
-}
-
-export async function getSubRace(): Promise<SubRace[]> {
-  const db = new PrismaClient();
-  const res = await db.subRace.findMany();
   await db.$disconnect();
   return res;
 }
