@@ -1,5 +1,3 @@
-"use client";
-import React, { useState } from "react";
 import numPlace from "@/lib/utils/numPlace";
 //takes a class object and returns a formatted display of the class
 import numberArray from "@/lib/utils/numberArray";
@@ -18,9 +16,10 @@ import P from "../Utility/FormatAndSanitize";
 import Info from "../UI/Info";
 import Link from "next/link";
 import Levels from "../UI/Levels";
-import { useRouter } from "next/navigation";
+
 import JsonTable from "../Utility/JsonTable";
 import NewLineParse from "../Utility/NewLineParse";
+import { Fragment } from "react";
 interface Props {
   classObj: Class;
   features: Feature[];
@@ -36,8 +35,6 @@ function ClassDisplay({
   casterType,
   customFields,
 }: Props) {
-  const router = useRouter();
-  const [toggle, setToggle] = useState(true);
   const subClassTableJson: PrismaJson.Table[] = [];
   subClassTableJson.push({
     Subclasses: {
@@ -98,16 +95,16 @@ function ClassDisplay({
       </p>
       <div className="divider" />
       <h2>Class Table </h2>
-      {toggle && (
-        <div className="overflow-x-auto">
-          <ClassTable
-            classObj={classObj}
-            features={features}
-            casterType={casterType}
-            customFields={customFields}
-          />
-        </div>
-      )}
+
+      <div className="overflow-x-auto">
+        <ClassTable
+          classObj={classObj}
+          features={features}
+          casterType={casterType}
+          customFields={customFields}
+        />
+      </div>
+
       <h2>
         Hitpoints <Info tooltip="Hitpoints" />
       </h2>
@@ -184,14 +181,14 @@ function ClassDisplay({
             </p>
             <ul className="list-disc p-4">
               {classObj.equipment.map((item, i) => (
-                <React.Fragment key={i}>
+                <Fragment key={i}>
                   {item && (
                     <li>
                       {" "}
                       <P>{item} </P>
                     </li>
                   )}
-                </React.Fragment>
+                </Fragment>
               ))}
             </ul>
           </div>

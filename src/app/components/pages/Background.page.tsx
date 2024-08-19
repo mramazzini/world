@@ -1,4 +1,3 @@
-"use client";
 import { BackgroundInfo } from "@/lib/types";
 import Loading from "../UI/Loading";
 import Link from "next/link";
@@ -6,7 +5,7 @@ import P from "../Utility/FormatAndSanitize";
 import "@/lib/string.extensions";
 import { languages, skills } from "@/lib/globalVars";
 import { arraysEqual } from "@/lib/utils/arraysEqual";
-import Tooltip from "../Utility/Tooltip";
+
 import Info from "../UI/Info";
 import JsonTable from "../Utility/JsonTable";
 import NewLineParse from "../Utility/NewLineParse";

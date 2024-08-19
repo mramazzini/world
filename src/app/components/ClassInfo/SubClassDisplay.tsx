@@ -1,20 +1,17 @@
-"use client";
-
 import { SubClassInfo } from "@/lib/types";
-import { usePathname } from "next/navigation";
+
 import "@/lib/string.extensions";
 import numberArray from "@/lib/utils/numberArray";
 import Levels from "../UI/Levels";
 import P from "../Utility/FormatAndSanitize";
-import numPlace from "@/lib/utils/numPlace";
+
 import Link from "next/link";
 import JsonTable from "../Utility/JsonTable";
 import SpellCastingInfo from "./SpellCastingInfo";
 import { CasterType, CustomField } from "@prisma/client";
 import SubClassTable from "./SubClassTable";
 import Info from "../UI/Info";
-import { getClass } from "@/lib/actions/db/class/read.actions";
-import { useEffect, useState } from "react";
+
 import Loading from "../UI/Loading";
 import NewLineParse from "../Utility/NewLineParse";
 interface Props {
@@ -24,15 +21,7 @@ interface Props {
 }
 
 const SubClassDisplay = ({ subClass, casterType, customFields }: Props) => {
-  const [className, setClassName] = useState<string>("");
-  useEffect(() => {
-    if (!subClass.classId) return;
-    getClass(subClass.classId).then((res) => {
-      if (!res) return;
-      setClassName(res.name);
-    });
-  }, [subClass.classId]);
-
+  const className = subClass.Class?.name;
   if (!className) return <Loading />;
   return (
     <>

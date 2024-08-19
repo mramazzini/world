@@ -47,6 +47,10 @@ export interface SubClassInfo extends SubClass {
   SubClassFeatures: SubClassFeature[];
   casterType: CasterType | null;
   customFields: CustomField[];
+  Class: {
+    name: string | null;
+  } | null;
+
   User: {
     username: string | null;
   } | null;

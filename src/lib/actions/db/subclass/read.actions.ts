@@ -95,6 +95,11 @@ export async function getSubclassChunkByClass(
       include: {
         SubClassFeatures: true,
         casterType: true,
+        Class: {
+          select: {
+            name: true,
+          },
+        },
         customFields: true,
         User: {
           select: {
@@ -120,6 +125,11 @@ export async function getSubclassChunkByClass(
       SubClassFeatures: true,
       casterType: true,
       customFields: true,
+      Class: {
+        select: {
+          name: true,
+        },
+      },
       User: {
         select: {
           username: true,
@@ -168,6 +178,11 @@ export async function getHomebrewSubclassChunk(
         SubClassFeatures: true,
         casterType: true,
         customFields: true,
+        Class: {
+          select: {
+            name: true,
+          },
+        },
         User: {
           select: {
             username: true,
@@ -192,6 +207,11 @@ export async function getHomebrewSubclassChunk(
       SubClassFeatures: true,
       casterType: true,
       customFields: true,
+      Class: {
+        select: {
+          name: true,
+        },
+      },
       User: {
         select: {
           username: true,
@@ -231,6 +251,11 @@ export async function getSubclass(
           SubClassFeatures: true,
           casterType: true,
           customFields: true,
+          Class: {
+            select: {
+              name: true,
+            },
+          },
           User: {
             select: {
               username: true,
@@ -249,6 +274,11 @@ export async function getSubclass(
           SubClassFeatures: true,
           casterType: true,
           customFields: true,
+          Class: {
+            select: {
+              name: true,
+            },
+          },
           User: {
             select: {
               username: true,

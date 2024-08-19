@@ -1,4 +1,3 @@
-"use client";
 import { useSearchParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getClass } from "@/lib/actions/db/class/read.actions";

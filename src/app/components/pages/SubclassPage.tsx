@@ -1,11 +1,8 @@
-"use client";
 import SubClassDisplay from "@/app/components/ClassInfo/SubClassDisplay";
-import { getSubclass } from "@/lib/actions/db/subclass/read.actions";
+
 import { SubClassInfo } from "@/lib/types";
 import { CasterType } from "@prisma/client";
 
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
 import Loading from "../UI/Loading";
 
 const SubClassPage = ({ subclass }: { subclass: SubClassInfo | null }) => {
