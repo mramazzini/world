@@ -2,6 +2,7 @@ import { getClasses } from "@/lib/actions/db/class/read.actions";
 import { getSubclassFromClassName } from "@/lib/actions/db/subclass/read.actions";
 import { getSpells } from "@/lib/actions/db/spell/read.actions";
 import { MetadataRoute } from "next";
+import { getBackgrounds } from "@/lib/actions/db/background/read.actions";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteMap: MetadataRoute.Sitemap = [];
@@ -97,6 +98,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: s.updatedAt,
       changeFrequency: "yearly",
       priority: 0.8,
+    });
+  }
+
+  const backgrounds = await getBackgrounds();
+  // siteMap.push({
+  //   url: `${process.env.DOMAIN_NAME}/homebrew/backgrounds`,
+  //   lastModified: new Date(),
+  //   changeFrequency: "yearly",
+  //   priority: 0.7,
+  // });
+  for (const b of backgrounds) {
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/homebrew/backgrounds/${b.name}`,
+      lastModified: b.updatedAt,
+      changeFrequency: "yearly",
+      priority: 0.7,
     });
   }
 

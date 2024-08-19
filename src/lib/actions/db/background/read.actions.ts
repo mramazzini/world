@@ -5,6 +5,22 @@ import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { PrismaClient } from "@prisma/client";
 import Fuse from "fuse.js";
 
+export const getBackgrounds = async (): Promise<BackgroundInfo[]> => {
+  const db = new PrismaClient();
+  const res = await db.background.findMany({
+    include: {
+      Features: true,
+      User: {
+        select: {
+          username: true,
+        },
+      },
+    },
+  });
+  await db.$disconnect();
+  return res;
+};
+
 export const getBackground = async (
   query: string | number
 ): Promise<BackgroundInfo | null> => {
