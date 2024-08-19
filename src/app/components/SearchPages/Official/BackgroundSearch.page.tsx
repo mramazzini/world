@@ -6,6 +6,7 @@ import { useState } from "react";
 import { BackgroundInfo, QueryParams } from "@/lib/types";
 import { Background } from "@prisma/client";
 import { getBackgroundChunk } from "@/lib/actions/db/background/read.actions";
+import { officialSources } from "@/lib/globalVars";
 
 const BackgroundSearchPage = () => {
   const [data, setData] = useState<BackgroundInfo[] | null>(null);
@@ -48,6 +49,7 @@ const BackgroundSearchPage = () => {
           headerWidth: 10,
           dbHeader: "source",
           header: "Source",
+          searchFields: officialSources,
           modifiers: [],
           index: 2,
           priority: "md",

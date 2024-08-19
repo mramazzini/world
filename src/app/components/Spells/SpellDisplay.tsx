@@ -128,7 +128,9 @@ const SpellDisplay = ({ spell }: Props) => {
         <>
           <div className="divider"></div>
           <h3>At Higher Levels</h3>
-          <p>{spell.upcastInfo}</p>
+          <p>
+            <P>{spell.upcastInfo}</P>
+          </p>
         </>
       )}
     </div>

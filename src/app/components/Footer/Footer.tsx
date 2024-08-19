@@ -46,7 +46,7 @@ const Footer = () => {
   return (
     <>
       <ContactModal />
-      <footer className=" bg-neutral text-neutral-content p-10 mt-auto ">
+      <footer className=" bg-neutral text-neutral-content p-10 mt-auto w-full">
         <div className="footer grid-rows-2">
           <nav>
             <h6 className="footer-title">Links</h6>
@@ -81,7 +81,6 @@ const Footer = () => {
           </div>
         </div>
         <div className="divider"></div>
-        <CreativeCommons />
       </footer>
     </>
   );

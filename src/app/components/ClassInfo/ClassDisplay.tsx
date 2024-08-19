@@ -20,6 +20,7 @@ import Link from "next/link";
 import Levels from "../UI/Levels";
 import { useRouter } from "next/navigation";
 import JsonTable from "../Utility/JsonTable";
+import NewLineParse from "../Utility/NewLineParse";
 interface Props {
   classObj: Class;
   features: Feature[];
@@ -55,7 +56,9 @@ function ClassDisplay({
         <div className="flex flex-col md:w-4/5">
           <h1>{classObj.name.toCapitalCase() || "Class Name"}</h1>
           <p className="italic pr-4">
-            {classObj.description || "Your Class Description will go here."}
+            <NewLineParse>
+              {classObj.description || "Your Class Description will go here."}
+            </NewLineParse>
           </p>
           <p className="pt-4">
             Source:<span className="font-bold italic"> {classObj.source}</span>

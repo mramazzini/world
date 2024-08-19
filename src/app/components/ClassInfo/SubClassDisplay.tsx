@@ -16,6 +16,7 @@ import Info from "../UI/Info";
 import { getClass } from "@/lib/actions/db/class/read.actions";
 import { useEffect, useState } from "react";
 import Loading from "../UI/Loading";
+import NewLineParse from "../Utility/NewLineParse";
 interface Props {
   subClass: SubClassInfo;
   casterType: CasterType;
@@ -40,7 +41,9 @@ const SubClassDisplay = ({ subClass, casterType, customFields }: Props) => {
           <h1 className="px-4">
             {className.toCapitalCase()} - {subClass.name}
           </h1>
-          <p className="px-4 italic">{subClass.description}</p>
+          <p className="px-4 italic">
+            <NewLineParse>{subClass.description}</NewLineParse>
+          </p>
 
           <p className="px-4 pt-4">
             Source: <span className="font-bold italic">{subClass.source}</span>

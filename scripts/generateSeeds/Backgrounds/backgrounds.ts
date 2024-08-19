@@ -72,20 +72,20 @@ const getBackground = async (page: Page, link: string) => {
 
   console.log(extraData);
 
-  const obj = {
-    name: name[0],
-    description: description.join("\n\n"),
-    source,
-    features: [],
-    skillProficiencies: finalSkills,
-    toolProficiencies,
-    skillChoiceCount,
-    languageChoiceCount,
-    languages,
-    equipment,
-  } as Prisma.BackgroundCreateManyInput;
+  // // const obj = {
+  // //   name: name[0],
+  // //   description: description.join("\n\n"),
+  // //   source,
+  // //   features: [],
+  // //   skillProficiencies: finalSkills,
+  // //   toolProficiencies,
+  // //   skillChoiceCount,
+  // //   languageChoiceCount,
+  // //   languages,
+  // //   equipment,
+  // // } as Prisma.BackgroundCreateManyInput;
 
-  backgrounds.push(obj);
+  // backgrounds.push(obj);
 };
 
 (async () => {

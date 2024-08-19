@@ -448,6 +448,11 @@ const termDictionary: {
     definition:
       "Words that are required to cast a spell. Some spells require them.",
   },
+  {
+    term: "Background",
+    definition:
+      "A character's history and upbringing. Determines some of your character's starting equipment and abilities.",
+  },
 ];
 
 export default termDictionary;
