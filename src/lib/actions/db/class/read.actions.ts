@@ -37,8 +37,8 @@ export async function getClass(
       },
     });
     await db.$disconnect();
-    console.log(!isAdmin, res?.srd === false, !res?.userId);
-    if (res?.srd === false && !res?.userId && !isAdmin) return null;
+    // console.log(!isAdmin, res?.srd === false, !res?.userId);
+    // if (res?.srd === false && !res?.userId && !isAdmin) return null;
     return res;
   } else {
     const res = await db.class.findFirst({
