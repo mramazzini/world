@@ -172,7 +172,7 @@ export interface SearchFieldOptions {
 }
 
 export interface QueryParams {
-  index: number;
+  page: number;
   query: string;
   searchFields: SearchFieldOption[];
   relationalFields: RelationFieldOptions[];

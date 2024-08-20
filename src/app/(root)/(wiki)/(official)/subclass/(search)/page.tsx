@@ -1,6 +1,8 @@
 import SubclassSearchPage from "@/app/components/SearchPages/Official/SubclassSearch.page";
+import Loading from "@/app/components/UI/Loading";
 import { getSubclasses } from "@/lib/actions/db/subclass/read.actions";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Subclasses - Max's DND Wiki",
@@ -17,7 +19,11 @@ const Page = async () => {
       </div>
     );
   }
-  return <SubclassSearchPage subclasses={subclasses} />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <SubclassSearchPage subclasses={subclasses} />
+    </Suspense>
+  );
 };
 
 export default Page;

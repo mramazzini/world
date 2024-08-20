@@ -1,6 +1,8 @@
 import SelectSpellPage from "@/app/components/SearchPages/Official/SelectSpell.page";
+import Loading from "@/app/components/UI/Loading";
 import { getSpells } from "@/lib/actions/db/spell/read.actions";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Spells - Max's DND Wiki",
@@ -17,7 +19,11 @@ const Spells = async () => {
       </div>
     );
   }
-  return <SelectSpellPage spells={spells} />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <SelectSpellPage spells={spells} />
+    </Suspense>
+  );
 };
 
 export default Spells;

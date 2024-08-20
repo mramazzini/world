@@ -48,6 +48,7 @@ const SelectSubclassPage = () => {
         </div>
         <div className="divider" />
         <SearchBar
+          usingStaticData={false}
           placeholder="Search Subclass..."
           handleSearch={async (query: QueryParams) => {
             setData(null);
