@@ -6,6 +6,7 @@ import {
 import { getSpells } from "@/lib/actions/db/spell/read.actions";
 import { MetadataRoute } from "next";
 import { getBackgrounds } from "@/lib/actions/db/background/read.actions";
+import { QUERY_LIMIT } from "@/lib/globalVars";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteMap: MetadataRoute.Sitemap = [];
@@ -79,6 +80,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     });
   }
+  const subclassPagesCount = Math.ceil(subclasses.length / QUERY_LIMIT);
+  for (let i = 0; i < subclassPagesCount; i++) {
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/subclass?page=${i}`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    });
+  }
+
   const spells = await getSpells();
   siteMap.push({
     url: `${process.env.DOMAIN_NAME}/spells`,
@@ -92,6 +103,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: s.updatedAt,
       changeFrequency: "yearly",
       priority: 0.8,
+    });
+  }
+  const spellPagesCount = Math.ceil(spells.length / QUERY_LIMIT);
+  for (let i = 0; i < spellPagesCount; i++) {
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/spells?page=${i}`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.7,
     });
   }
 
@@ -109,6 +129,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         "-"
       )}`,
       lastModified: b.updatedAt,
+      changeFrequency: "yearly",
+      priority: 0.7,
+    });
+  }
+  const backgroundPagesCount = Math.ceil(backgrounds.length / QUERY_LIMIT);
+  for (let i = 0; i < backgroundPagesCount; i++) {
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/background?page=${i}`,
+      lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.7,
     });
