@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "A vast collection of classes for your DND campaign. Choose from offical content or user submitted homebrew classes.",
 };
-
+export const dynamic = "force-dynamic";
 const Page = async () => {
   const classes = await getClasses(false);
   if (!classes) {

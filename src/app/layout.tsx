@@ -21,6 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* charset */}
+        <meta charSet="UTF-8" />
+      </head>
       <body
         className={`${inter.className} w-screen flex flex-col items-center  `}
       >

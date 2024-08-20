@@ -2,14 +2,13 @@ import SubclassSearchPage from "@/app/components/SearchPages/Official/SubclassSe
 import Loading from "@/app/components/UI/Loading";
 import { getSubclasses } from "@/lib/actions/db/subclass/read.actions";
 import { Metadata } from "next";
-import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Subclasses - Max's DND Wiki",
   description:
     "A vast collection of subclasses for your DND campaign. Choose from offical content or user submitted homebrew subclasses.",
 };
-
+export const dynamic = "force-dynamic";
 const Page = async () => {
   const subclasses = await getSubclasses({ homebrew: false });
   if (!subclasses) {
@@ -19,11 +18,7 @@ const Page = async () => {
       </div>
     );
   }
-  return (
-    <Suspense fallback={<Loading />}>
-      <SubclassSearchPage subclasses={subclasses} />
-    </Suspense>
-  );
+  return <SubclassSearchPage subclasses={subclasses} />;
 };
 
 export default Page;

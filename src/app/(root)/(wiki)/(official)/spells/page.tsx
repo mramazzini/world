@@ -2,14 +2,13 @@ import SelectSpellPage from "@/app/components/SearchPages/Official/SelectSpell.p
 import Loading from "@/app/components/UI/Loading";
 import { getSpells } from "@/lib/actions/db/spell/read.actions";
 import { Metadata } from "next";
-import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Spells - Max's DND Wiki",
   description:
     "A vast collection of spells for your DND campaign. Choose from offical content or user submitted homebrew spells.",
 };
-
+export const dynamic = "force-dynamic";
 const Spells = async () => {
   const spells = await getSpells();
   if (!spells) {
@@ -19,11 +18,7 @@ const Spells = async () => {
       </div>
     );
   }
-  return (
-    <Suspense fallback={<Loading />}>
-      <SelectSpellPage spells={spells} />
-    </Suspense>
-  );
+  return <SelectSpellPage spells={spells} />;
 };
 
 export default Spells;
