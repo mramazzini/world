@@ -6,9 +6,22 @@ import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { PrismaClient, Spell } from "@prisma/client";
 import Fuse from "fuse.js";
 
-export const getSpells = async () => {
+export const getSpells = async (): Promise<SpellInfo[]> => {
   const db = await new PrismaClient();
-  const spells = await db.spell.findMany({});
+  const spells = await db.spell.findMany({
+    include: {
+      User: {
+        select: {
+          username: true,
+        },
+      },
+      SpellListToSpell: {
+        include: {
+          spellList: true,
+        },
+      },
+    },
+  });
   db.$disconnect();
   return spells;
 };
@@ -64,10 +77,10 @@ export const getSpellChunk = async (
   queryInfo: QueryParams
 ): Promise<SpellInfo[]> => {
   const db = new PrismaClient();
-  const { query, index } = queryInfo;
+  const { query, page } = queryInfo;
   if (query === "") {
     const res = await db.spell.findMany({
-      skip: index * QUERY_LIMIT,
+      skip: page * QUERY_LIMIT,
       take: QUERY_LIMIT,
       where: generateQueryFields({
         fields: queryInfo.searchFields,
@@ -127,5 +140,5 @@ export const getSpellChunk = async (
   const filtered = results.map((result) => result.item);
 
   await db.$disconnect();
-  return filtered.slice(index * QUERY_LIMIT, index * QUERY_LIMIT + QUERY_LIMIT);
+  return filtered.slice(page * QUERY_LIMIT, page * QUERY_LIMIT + QUERY_LIMIT);
 };

@@ -9,7 +9,14 @@ export const metadata: Metadata = {
 };
 
 const Page = async () => {
-  const classes = await getClasses();
+  const classes = await getClasses(false);
+  if (!classes) {
+    return (
+      <div className="p-8">
+        Classes not found, try refreshing the page or come back later.
+      </div>
+    );
+  }
   return <ClassSearchPage classes={classes} />;
 };
 

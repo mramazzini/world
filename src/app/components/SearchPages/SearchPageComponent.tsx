@@ -1,9 +1,12 @@
 "use client";
 import Link from "next/link";
 import SearchBar from "../UI/SearchBar";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Loading from "../UI/Loading";
+import { usePathname } from "next/navigation";
+import { QUERY_LIMIT } from "@/lib/globalVars";
+import { useSearchParams } from "next/navigation";
 import {
   ClassInfo,
   QueryParams,
@@ -17,13 +20,9 @@ import "@/lib/string.extensions";
 import numPlace from "@/lib/utils/numPlace";
 import { toSpellLevel } from "@/lib/utils/toSpellLevel";
 import numberArray from "@/lib/utils/numberArray";
-type DataType =
-  | SubClassInfo
-  | ClassInfo
-  | Spell
-  | Background
-  | SubclassSearchResults
-  | null;
+import { serialize } from "../Utility/urlSerializers";
+
+type DataType = SubClassInfo | ClassInfo | Spell | Background | null;
 type Priority = "all" | "sm" | "md" | "lg" | "xl";
 type Modifier =
   | "Date"
@@ -52,8 +51,8 @@ interface Props<T extends DataType> {
   homebrewOfficialText: string;
   searchPlaceholder: string;
   routeName: string;
-  data: T[] | null;
-  handleSearch: (query: QueryParams) => Promise<number>;
+  staticInput: T[];
+  handleSearch: (query: QueryParams) => Promise<T[] | null>;
   table: TableInfo[];
   homebrew: boolean;
   // when you want to search through a different sql model
@@ -70,7 +69,7 @@ interface Props<T extends DataType> {
 }
 
 const SearchPageComponent = <T extends DataType>({
-  data,
+  staticInput,
   handleSearch,
   title,
   description,
@@ -82,6 +81,18 @@ const SearchPageComponent = <T extends DataType>({
   homebrew,
   relationalFields,
 }: Props<T>) => {
+  const params = useSearchParams();
+  const [usingStaticData, setUsingStaticData] = useState(true);
+
+  const [data, setData] = useState<T[]>(staticInput);
+  const page =
+    parseInt(params.get("page") || "0") >= 0
+      ? parseInt(params.get("page") || "0")
+      : 0;
+
+  const [length, setLength] = useState(data.length);
+  const pathname = usePathname();
+
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -96,7 +107,7 @@ const SearchPageComponent = <T extends DataType>({
   let count = -1;
   count += table.length;
   count += relationalFields?.length || 0;
-  console.log(count);
+
   const homebrewOfficialRoute = homebrew
     ? `/${routeName}`
     : `/homebrew/${routeName}`;
@@ -121,6 +132,17 @@ const SearchPageComponent = <T extends DataType>({
   };
 
   const searchOptions = generateSearchOptions();
+
+  const handleQuerySearch = async (query: QueryParams) => {
+    const res = await handleSearch(query);
+    console.log(query);
+    setLength(res ? res.length : 0);
+    setData(res || []);
+    setUsingStaticData(false);
+
+    console.log(res);
+    return res ? res.length : 0;
+  };
 
   const applyModifiers = (data: string, modifier: Modifier[], index = 0) => {
     switch (modifier[index]) {
@@ -178,10 +200,42 @@ const SearchPageComponent = <T extends DataType>({
       {/* search bar */}
       <SearchBar
         placeholder={searchPlaceholder}
-        handleSearch={handleSearch}
+        handleSearch={handleQuerySearch}
         searchFields={searchOptions}
         relationalFields={relationalFields}
+        usingStaticData={usingStaticData}
       />
+      {usingStaticData && (
+        <div className="flex flex-row justify-between">
+          <span className=" w-[100px]"></span>
+          <div className="flex justify-center items-center pb-4">
+            {page > 0 ? (
+              <Link href={`${pathname}${page == 1 ? "" : `?page=${page - 1}`}`}>
+                <button className="btn btn-primary mr-2">&lt;-</button>
+              </Link>
+            ) : (
+              <button className="btn btn-primary mr-2" disabled>
+                &lt;-
+              </button>
+            )}
+            {page != Math.floor(length / QUERY_LIMIT) ? (
+              <Link href={`${pathname}${`?page=${page + 1}`}`}>
+                <button className="btn btn-primary">-&gt;</button>
+              </Link>
+            ) : (
+              <button className="btn btn-primary" disabled>
+                -&gt;
+              </button>
+            )}
+          </div>
+          <span className="text-xl font-bold flex justify-center items-center w-[100px]">
+            {length == 0 ? 0 : page * QUERY_LIMIT + 1} -{" "}
+            {page * QUERY_LIMIT + QUERY_LIMIT > length
+              ? length
+              : page * QUERY_LIMIT + QUERY_LIMIT}{" "}
+          </span>
+        </div>
+      )}
       <div className="overflow-x-auto">
         <table
           className={`table-zebra table-sm w-full table-pin-rows table-pin-cols`}
@@ -250,6 +304,8 @@ const SearchPageComponent = <T extends DataType>({
                       <tr
                         className={`hover transition ease-in-out duration-50 ${
                           loading ? "cursor-wait" : "cursor-pointer"
+                        } ${
+                          Math.floor(index / QUERY_LIMIT) !== page && "hidden"
                         }`}
                         onClick={(e) => {
                           e.stopPropagation();

@@ -5,24 +5,31 @@ import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { Prisma, PrismaClient, SubClass } from "@prisma/client";
 import Fuse from "fuse.js";
 
-// get top 10 subclasses based on query
-export async function getSubclassChunk(
-  queryInfo: QueryParams
-): Promise<SubclassSearchResults[] | null> {
+export async function getSubclasses({
+  homebrew,
+}: {
+  homebrew: boolean;
+}): Promise<SubClassInfo[]> {
   const db = new PrismaClient();
-  const { query, index } = queryInfo;
-  if (query === "") {
+  if (homebrew) {
     const res = await db.subClass.findMany({
-      where: generateQueryFields({
-        fields: queryInfo.searchFields,
-        relationalFields: queryInfo.relationalFields,
-      }),
-      take: QUERY_LIMIT,
-      skip: index * QUERY_LIMIT,
+      where: {
+        userId: {
+          not: null,
+        },
+      },
       include: {
+        SubClassFeatures: true,
+        casterType: true,
         Class: {
           select: {
             name: true,
+          },
+        },
+        customFields: true,
+        User: {
+          select: {
+            username: true,
           },
         },
       },
@@ -30,47 +37,25 @@ export async function getSubclassChunk(
     await db.$disconnect();
     return res;
   }
-
   const res = await db.subClass.findMany({
-    where: generateQueryFields({
-      fields: queryInfo.searchFields,
-      relationalFields: queryInfo.relationalFields,
-    }),
     include: {
-      SubClassFeatures: {
-        select: {
-          name: true,
-          description: true,
-        },
-      },
+      SubClassFeatures: true,
+      casterType: true,
       Class: {
         select: {
           name: true,
         },
       },
+      customFields: true,
+      User: {
+        select: {
+          username: true,
+        },
+      },
     },
   });
-  const fuse = new Fuse(res, {
-    keys: [
-      { name: "name", weight: 1 },
-      { name: "description", weight: 0.33 },
-      { name: "flavorText", weight: 0.5 },
-      { name: "SubClassFeatures.name", weight: 0.5 },
-      { name: "SubClassFeatures.description", weight: 0.33 },
-    ],
-  });
-  const results = fuse.search(query);
   await db.$disconnect();
-  //remove SubClassFeatures from results
-  const resultsCopy: SubclassSearchResults[] = results.map((item) => {
-    const { SubClassFeatures, ...rest } = item.item;
-    return rest;
-  });
-
-  return resultsCopy.slice(
-    index * QUERY_LIMIT,
-    index * QUERY_LIMIT + QUERY_LIMIT
-  );
+  return res;
 }
 
 export async function getSubclassChunkByClass(
@@ -78,11 +63,11 @@ export async function getSubclassChunkByClass(
   className: string
 ): Promise<SubClassInfo[] | null> {
   const db = new PrismaClient();
-  const { query, index } = queryInfo;
+  const { query, page } = queryInfo;
   if (query === "") {
     const res = await db.subClass.findMany({
       take: QUERY_LIMIT,
-      skip: index * QUERY_LIMIT,
+      skip: page * QUERY_LIMIT,
       where: generateQueryFields({
         fields: queryInfo.searchFields,
         relationalFields: queryInfo.relationalFields,
@@ -151,8 +136,8 @@ export async function getSubclassChunkByClass(
 
   await db.$disconnect();
   return resultsCopy.slice(
-    index * QUERY_LIMIT,
-    index * QUERY_LIMIT + QUERY_LIMIT
+    page * QUERY_LIMIT,
+    page * QUERY_LIMIT + QUERY_LIMIT
   );
 }
 
@@ -160,11 +145,11 @@ export async function getHomebrewSubclassChunk(
   queryInfo: QueryParams
 ): Promise<SubClassInfo[]> {
   const db = new PrismaClient();
-  const { query, index } = queryInfo;
+  const { query, page } = queryInfo;
   if (query === "") {
     const res = await db.subClass.findMany({
       take: QUERY_LIMIT,
-      skip: index * QUERY_LIMIT,
+      skip: page * QUERY_LIMIT,
       where: generateQueryFields({
         fields: queryInfo.searchFields,
         relationalFields: queryInfo.relationalFields,
@@ -232,8 +217,8 @@ export async function getHomebrewSubclassChunk(
   const resultsCopy = results.map((item) => item.item);
   await db.$disconnect();
   return resultsCopy.slice(
-    index * QUERY_LIMIT,
-    index * QUERY_LIMIT + QUERY_LIMIT
+    page * QUERY_LIMIT,
+    page * QUERY_LIMIT + QUERY_LIMIT
   );
 }
 

@@ -1,5 +1,3 @@
-"use client";
-
 import SearchPageComponent from "../SearchPageComponent";
 
 import { useState } from "react";
@@ -7,27 +5,20 @@ import { BackgroundInfo, QueryParams } from "@/lib/types";
 import { Background } from "@prisma/client";
 import { getBackgroundChunk } from "@/lib/actions/db/background/read.actions";
 import { officialSources } from "@/lib/globalVars";
-
-const BackgroundSearchPage = () => {
-  const [data, setData] = useState<BackgroundInfo[] | null>(null);
-
-  const handleSearch = async (query: QueryParams) => {
-    setData(null);
-    const res = await getBackgroundChunk(query);
-    setData(res);
-    console.log(res);
-    return res ? res.length : 0;
-  };
+interface Props {
+  backgrounds: BackgroundInfo[];
+}
+const BackgroundSearchPage = ({ backgrounds }: Props) => {
   return (
-    <SearchPageComponent<Background>
+    <SearchPageComponent<BackgroundInfo>
       title="Backgrounds"
       description="Backgrounds provide additional flavor and roleplaying opportunities for characters. They can provide additional skills, languages, and equipment. Select a background to view more information."
       createText="Create a Background ->"
       homebrewOfficialText="View Homebrew Backgrounds ->"
       searchPlaceholder="Search Background..."
       routeName="background"
-      data={data}
-      handleSearch={handleSearch}
+      handleSearch={getBackgroundChunk}
+      staticInput={backgrounds}
       table={[
         {
           headerWidth: 15,

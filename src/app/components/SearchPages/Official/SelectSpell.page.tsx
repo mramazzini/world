@@ -1,33 +1,15 @@
-"use client";
-
 import { Spell, SpellSchool } from "@prisma/client";
 import SearchPageComponent from "../SearchPageComponent";
+import { SpellInfo } from "@/lib/types";
 import { getSpellChunk } from "@/lib/actions/db/spell/read.actions";
-import { useState } from "react";
-import { QueryParams, SpellInfo } from "@/lib/types";
 
-const spellSchoolOptions = [
-  SpellSchool.ABJURATION,
-  SpellSchool.CONJURATION,
-  SpellSchool.DIVINATION,
-  SpellSchool.ENCHANTMENT,
-  SpellSchool.EVOCATION,
-  SpellSchool.ILLUSION,
-  SpellSchool.NECROMANCY,
-  SpellSchool.TRANSMUTATION,
-];
+const spellSchoolOptions = Object.values(SpellSchool);
 
-const SelectSpellPage = () => {
-  const [data, setData] = useState<SpellInfo[] | null>(null);
+interface Props {
+  spells: SpellInfo[];
+}
 
-  const handleSearch = async (query: QueryParams) => {
-    console.log(query);
-    setData(null);
-    const res = await getSpellChunk(query);
-    setData(res);
-
-    return res ? res.length : 0;
-  };
+const SelectSpellPage = ({ spells }: Props) => {
   return (
     <SearchPageComponent<Spell>
       title="Spells"
@@ -36,8 +18,8 @@ const SelectSpellPage = () => {
       homebrewOfficialText="View Homebrew Spells ->"
       searchPlaceholder="Search Spell..."
       routeName="spells"
-      data={data}
-      handleSearch={handleSearch}
+      handleSearch={getSpellChunk}
+      staticInput={spells}
       table={[
         {
           headerWidth: 15,

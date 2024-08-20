@@ -1,29 +1,24 @@
-"use client";
-
-import { getSubclassChunk } from "@/lib/actions/db/subclass/read.actions";
-import { useState } from "react";
-import { QueryParams, SubclassSearchResults } from "@/lib/types";
+import { QueryParams, SubClassInfo, SubclassSearchResults } from "@/lib/types";
 import SearchPageComponent from "../SearchPageComponent";
 import { officialSources } from "@/lib/globalVars";
+import { getSubclassChunk } from "@/lib/actions/db/subclass/query.actions";
 
-const SubclassSearchPage = () => {
-  const [data, setData] = useState<SubclassSearchResults[] | null>(null);
-
+interface Props {
+  subclasses: SubClassInfo[];
+}
+const SubclassSearchPage = ({ subclasses }: Props) => {
   const handleSearch = async (query: QueryParams) => {
-    setData(null);
-    const res = await getSubclassChunk(query);
-    setData(res);
-
-    return res ? res.length : 0;
+    "use server";
+    return 0;
   };
 
   return (
-    <SearchPageComponent<SubclassSearchResults>
+    <SearchPageComponent<SubClassInfo>
       title="Subclasses"
       description="Select a subclass to view more information. Subclasses are additional class options that provide more customization to your character. They provide additional abilities and features that differentiate your character from others of the same class."
       searchPlaceholder="Search Subclass..."
-      handleSearch={handleSearch}
-      data={data}
+      staticInput={subclasses}
+      handleSearch={getSubclassChunk}
       table={[
         {
           headerWidth: 15,

@@ -4,7 +4,6 @@ import { ClassInfo } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Loading from "../UI/Loading";
-import Link from "next/link";
 import "@/lib/string.extensions";
 interface Props {
   classes: ClassInfo[];
@@ -25,7 +24,7 @@ const ClassSearch = ({ classes }: Props) => {
   };
 
   return (
-    <main className={`p-4 md:p-8 ${linkLoading && "cursor-wait"}`}>
+    <main className={` ${linkLoading && "cursor-wait"}`}>
       <div className="flex flex-col md:flex-row justify-between ">
         <div className="flex flex-col md:w-4/5 ">
           <h1>Official Classes</h1>
@@ -36,7 +35,7 @@ const ClassSearch = ({ classes }: Props) => {
             class.
           </p>
         </div>
-        <div className="flex justify-center items-start md:items-end my-2 flex-col ">
+        {/* <div className="flex justify-center items-start md:items-end my-2 flex-col ">
           <Link
             href={`/homebrew/class`}
             className={"btn btn-ghost border border-gray-500 mb-2 w-full"}
@@ -49,7 +48,7 @@ const ClassSearch = ({ classes }: Props) => {
           >
             Create a Class -&gt;
           </Link>
-        </div>
+        </div> */}
       </div>
       <div className="divider" />
       {/* <Link className="btn btn-primary" href={"/class/create"}>

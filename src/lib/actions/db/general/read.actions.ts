@@ -33,12 +33,6 @@ export const getDefaultCasterTypes = async (): Promise<CasterType[]> => {
   return arr;
 };
 
-export async function getSubclasses(): Promise<SubClass[]> {
-  const db = new PrismaClient();
-  const res = await db.subClass.findMany();
-  await db.$disconnect();
-  return res;
-}
 export async function getRace(): Promise<Race[]> {
   const db = new PrismaClient();
   const res = await db.race.findMany();

@@ -5,24 +5,18 @@ import { QueryParams, SubClassInfo } from "@/lib/types";
 import SearchPageComponent from "../SearchPageComponent";
 import { getHomebrewSubclassChunk } from "@/lib/actions/db/subclass/read.actions";
 
-const HomebrewSubclassSearchPage = () => {
-  const [data, setData] = useState<SubClassInfo[] | null>(null);
+interface Props {
+  subclasses: SubClassInfo[];
+}
 
-  const handleSearch = async (query: QueryParams) => {
-    setData(null);
-    const res = await getHomebrewSubclassChunk(query);
-    setData(res);
-    console.log(res);
-    return res ? res.length : 0;
-  };
-
+const HomebrewSubclassSearchPage = ({ subclasses }: Props) => {
   return (
     <SearchPageComponent<SubClassInfo>
       title="Homebrew Subclasses"
       description="Subclasses created by the community. These are unnofficial and may be unbalanced. Ask your Dungeon Master before using them in your game."
       searchPlaceholder="Search Subclass..."
-      handleSearch={handleSearch}
-      data={data}
+      handleSearch={getHomebrewSubclassChunk}
+      staticInput={subclasses}
       table={[
         {
           headerWidth: 15,

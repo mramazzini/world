@@ -1,13 +1,9 @@
 "use client";
 import { QUERY_LIMIT } from "@/lib/globalVars";
-import {
-  QueryParams,
-  RelationFieldOptions,
-  SearchFieldOption,
-  SearchFieldOptions,
-} from "@/lib/types";
+import { QueryParams, SearchFieldOptions } from "@/lib/types";
 import { useState, useEffect, useRef } from "react";
 import "@/lib/string.extensions";
+
 interface Props {
   //returns number of results
   // this is to disable the next button when there are no more results
@@ -21,6 +17,7 @@ interface Props {
     key: string;
     alias?: string;
   }[];
+  usingStaticData: boolean;
 }
 
 const SearchBar = ({
@@ -29,33 +26,33 @@ const SearchBar = ({
   placeholder,
   searchFields,
   relationalFields,
+  usingStaticData,
 }: Props) => {
   const [queryInfo, setQuery] = useState<QueryParams>({
     query: "",
-    index: 0,
+    page: 0,
     searchFields: [],
     relationalFields: [],
   });
-
-  useEffect(() => {
-    componentSearch(queryInfo);
-  }, []);
-
-  const [length, setLength] = useState<number | "loading">(0);
+  const [length, setLength] = useState(0);
 
   const componentSearch = async (query: QueryParams) => {
     setLoading && setLoading(true);
     const res = await handleSearch(query);
     setLength(res);
     console.log(res);
+
     setLoading && setLoading(false);
   };
 
-  const handlePageChange = (index: number) => {
-    if (queryInfo.index < 0) return;
-    setQuery({ ...queryInfo, index });
-    setLength("loading");
-    componentSearch({ ...queryInfo, index });
+  const handlePageChange = (newPage: number) => {
+    console.log(newPage);
+    if (newPage < 0 || (length < QUERY_LIMIT && newPage > queryInfo.page))
+      return;
+    console.log(newPage);
+    setQuery({ ...queryInfo, page: newPage });
+    componentSearch({ ...queryInfo, page: newPage });
+    console.log({ ...queryInfo, page: newPage });
   };
 
   return (
@@ -63,7 +60,7 @@ const SearchBar = ({
       <form
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
-          setQuery({ ...queryInfo, index: 0 });
+          setQuery({ ...queryInfo, page: 0 });
           componentSearch(queryInfo);
         }}
       >
@@ -86,9 +83,9 @@ const SearchBar = ({
         <div className="flex flex-col  md:flex-row justify-center items-center bg-neutral rounded-xl p-4 mb-4">
           {/* advanced search */}
           {searchFields &&
-            searchFields.map((field, index) => (
+            searchFields.map((field, page) => (
               <div
-                key={index}
+                key={page}
                 className="flex flex-col mx-4 text-neutral-content text-center p-2"
               >
                 <label>
@@ -109,7 +106,7 @@ const SearchBar = ({
                         {
                           key: field.key,
                           data: e.target.value,
-                          enum: searchFields[index].enum,
+                          enum: searchFields[page].enum,
                         },
                       ],
                     });
@@ -119,8 +116,8 @@ const SearchBar = ({
                     Any
                   </option>
                   {field.data &&
-                    field.data.map((value, index) => (
-                      <option key={index} value={value}>
+                    field.data.map((value, page) => (
+                      <option key={page} value={value}>
                         {value.toString().toCapitalCase()}
                       </option>
                     ))}
@@ -128,9 +125,9 @@ const SearchBar = ({
               </div>
             ))}
           {relationalFields &&
-            relationalFields.map((field, index) => (
+            relationalFields.map((field, page) => (
               <div
-                key={index}
+                key={page}
                 className="flex flex-col mx-4 text-neutral-content text-center"
               >
                 <label>
@@ -159,36 +156,32 @@ const SearchBar = ({
             ))}
         </div>
       </form>
-      <div className="flex flex-row justify-between">
-        <span className=" w-[100px]"></span>
-        <div className="flex justify-center items-center pb-4">
-          <button
-            onClick={() => handlePageChange(queryInfo.index - 1)}
-            className="btn btn-primary mr-2"
-            disabled={queryInfo.index == 0}
-          >
-            &lt;-
-          </button>
-          <button
-            onClick={() => {
-              handlePageChange(queryInfo.index + 1);
-            }}
-            className="btn btn-primary"
-            disabled={length != QUERY_LIMIT}
-          >
-            -&gt;
-          </button>
-        </div>
+      {!usingStaticData && (
+        <div className="flex flex-row justify-between">
+          <span className=" w-[100px]"></span>
+          <div className="flex justify-center items-center pb-4">
+            <button
+              disabled={queryInfo.page == 0}
+              className="btn btn-primary mr-2"
+              onClick={() => handlePageChange(queryInfo.page - 1)}
+            >
+              &lt;-
+            </button>
 
-        <span className="text-xl font-bold flex justify-center items-center w-[100px]">
-          {length == 0 ? 0 : queryInfo.index * QUERY_LIMIT + 1} -{" "}
-          {length == "loading" ? (
-            <span className="loading"></span>
-          ) : (
-            queryInfo.index * QUERY_LIMIT + length
-          )}{" "}
-        </span>
-      </div>
+            <button
+              disabled={length < QUERY_LIMIT}
+              className="btn btn-primary"
+              onClick={() => handlePageChange(queryInfo.page + 1)}
+            >
+              -&gt;
+            </button>
+          </div>
+          <span className="text-xl font-bold flex justify-center items-center w-[100px]">
+            {length == 0 ? 0 : queryInfo.page * QUERY_LIMIT + 1} -{" "}
+            {length + QUERY_LIMIT * queryInfo.page}
+          </span>
+        </div>
+      )}
     </>
   );
 };

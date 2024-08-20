@@ -1,5 +1,8 @@
 import { getClasses } from "@/lib/actions/db/class/read.actions";
-import { getSubclassFromClassName } from "@/lib/actions/db/subclass/read.actions";
+import {
+  getSubclasses,
+  getSubclassFromClassName,
+} from "@/lib/actions/db/subclass/read.actions";
 import { getSpells } from "@/lib/actions/db/spell/read.actions";
 import { MetadataRoute } from "next";
 import { getBackgrounds } from "@/lib/actions/db/background/read.actions";
@@ -28,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     throw new Error("DOMAIN_NAME is not defined in env");
   }
 
-  const classes = await getClasses();
+  const classes = await getClasses(false);
   siteMap.push({
     url: process.env.DOMAIN_NAME,
     lastModified: new Date(),
@@ -60,30 +63,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly",
       priority: 0.9,
     });
+    // siteMap.push({
+    //   url: `${process.env.DOMAIN_NAME}/homebrew/class/create`,
+    //   lastModified: c.updatedAt,
+    //   changeFrequency: "yearly",
+    //   priority: 0.7,
+    // });
+  }
+  const subclasses = await getSubclasses({ homebrew: false });
+  for (const s of subclasses) {
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/homebrew/class/create`,
-      lastModified: c.updatedAt,
+      url: `${process.env.DOMAIN_NAME}/subclass/${s.name.replaceAll(" ", "-")}`,
+      lastModified: s.updatedAt,
       changeFrequency: "yearly",
-      priority: 0.7,
+      priority: 0.8,
     });
-    const subClasses = await getSubclassFromClassName(c.name);
-    if (!subClasses) {
-      continue;
-    }
-    for (const sc of subClasses) {
-      if (sc.userId) {
-        continue;
-      }
-      siteMap.push({
-        url: `${process.env.DOMAIN_NAME}/subclass/${sc.name.replaceAll(
-          " ",
-          "-"
-        )}`,
-        lastModified: sc.updatedAt,
-        changeFrequency: "yearly",
-        priority: 0.8,
-      });
-    }
   }
   const spells = await getSpells();
   siteMap.push({

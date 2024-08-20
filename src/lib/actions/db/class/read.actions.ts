@@ -5,8 +5,30 @@ import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { Class, PrismaClient } from "@prisma/client";
 import Fuse from "fuse.js";
 import { isAdministrator } from "@/lib/utils/auth";
-export async function getClasses(): Promise<ClassInfo[]> {
+export async function getClasses(homebrew: boolean): Promise<ClassInfo[]> {
   const db = new PrismaClient();
+  if (homebrew) {
+    const res = await db.class.findMany({
+      where: {
+        userId: {
+          not: null,
+        },
+      },
+      include: {
+        Features: true,
+        SubClasses: true,
+        casterType: true,
+        customFields: true,
+        User: {
+          select: {
+            username: true,
+          },
+        },
+      },
+    });
+    await db.$disconnect();
+    return res;
+  }
   const res = await db.class.findMany({
     include: {
       Features: true,
@@ -75,14 +97,14 @@ export async function getClass(
 }
 
 export async function getClassChunk(
-  index: number,
+  page: number,
   query: string
 ): Promise<ClassInfo[]> {
   const db = new PrismaClient();
   if (query === "") {
     const res = await db.class.findMany({
       take: QUERY_LIMIT,
-      skip: index * QUERY_LIMIT,
+      skip: page * QUERY_LIMIT,
       include: {
         Features: true,
         SubClasses: true,
@@ -125,8 +147,8 @@ export async function getClassChunk(
   await db.$disconnect();
 
   return resultsCopy.slice(
-    index * QUERY_LIMIT,
-    index * QUERY_LIMIT + QUERY_LIMIT
+    page * QUERY_LIMIT,
+    page * QUERY_LIMIT + QUERY_LIMIT
   );
 }
 
@@ -134,11 +156,11 @@ export const getHomebrewClassChunk = async (
   queryInfo: QueryParams
 ): Promise<ClassInfo[]> => {
   const db = new PrismaClient();
-  const { query, index } = queryInfo;
+  const { query, page } = queryInfo;
   if (query === "") {
     const res = await db.class.findMany({
       take: QUERY_LIMIT,
-      skip: index * QUERY_LIMIT,
+      skip: page * QUERY_LIMIT,
       where: generateQueryFields({
         fields: queryInfo.searchFields,
         relationalFields: queryInfo.relationalFields,
@@ -195,7 +217,7 @@ export const getHomebrewClassChunk = async (
   await db.$disconnect();
 
   return resultsCopy.slice(
-    index * QUERY_LIMIT,
-    index * QUERY_LIMIT + QUERY_LIMIT
+    page * QUERY_LIMIT,
+    page * QUERY_LIMIT + QUERY_LIMIT
   );
 };

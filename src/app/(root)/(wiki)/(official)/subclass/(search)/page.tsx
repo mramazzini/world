@@ -1,4 +1,5 @@
 import SubclassSearchPage from "@/app/components/SearchPages/Official/SubclassSearch.page";
+import { getSubclasses } from "@/lib/actions/db/subclass/read.actions";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,8 +8,16 @@ export const metadata: Metadata = {
     "A vast collection of subclasses for your DND campaign. Choose from offical content or user submitted homebrew subclasses.",
 };
 
-const Page = () => {
-  return <SubclassSearchPage />;
+const Page = async () => {
+  const subclasses = await getSubclasses({ homebrew: false });
+  if (!subclasses) {
+    return (
+      <div className="p-8">
+        Subclasses not found, try refreshing the page or come back later.
+      </div>
+    );
+  }
+  return <SubclassSearchPage subclasses={subclasses} />;
 };
 
 export default Page;

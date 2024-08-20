@@ -64,11 +64,9 @@ export const getBackgroundChunk = async (
   queryInfo: QueryParams
 ): Promise<BackgroundInfo[] | null> => {
   const db = new PrismaClient();
-  const { query, index } = queryInfo;
+  const { query, page } = queryInfo;
   if (query === "") {
     const res = await db.background.findMany({
-      skip: index * QUERY_LIMIT,
-      take: QUERY_LIMIT,
       where: generateQueryFields({
         fields: queryInfo.searchFields,
         relationalFields: queryInfo.relationalFields,
@@ -115,5 +113,5 @@ export const getBackgroundChunk = async (
   const filtered = results.map((result) => result.item);
 
   await db.$disconnect();
-  return filtered.slice(index * QUERY_LIMIT, index * QUERY_LIMIT + QUERY_LIMIT);
+  return filtered;
 };
