@@ -3,6 +3,7 @@ import { QUERY_LIMIT } from "@/lib/globalVars";
 import { QueryParams, SearchFieldOptions } from "@/lib/types";
 import { useState, useEffect, useRef } from "react";
 import "@/lib/string.extensions";
+import { usePathname, useRouter } from "next/navigation";
 
 interface Props {
   //returns number of results
@@ -34,13 +35,15 @@ const SearchBar = ({
     searchFields: [],
     relationalFields: [],
   });
+  const [currentQueryString, setCurrentQueryString] = useState("");
   const [length, setLength] = useState(0);
-
+  const router = useRouter();
+  const pathname = usePathname();
   const componentSearch = async (query: QueryParams) => {
     setLoading && setLoading(true);
+    router.push(pathname);
     const res = await handleSearch(query);
     setLength(res);
-    console.log(res);
 
     setLoading && setLoading(false);
   };
@@ -49,7 +52,7 @@ const SearchBar = ({
     console.log(newPage);
     if (newPage < 0 || (length < QUERY_LIMIT && newPage > queryInfo.page))
       return;
-    console.log(newPage);
+
     setQuery({ ...queryInfo, page: newPage });
     componentSearch({ ...queryInfo, page: newPage });
     console.log({ ...queryInfo, page: newPage });
@@ -60,21 +63,17 @@ const SearchBar = ({
       <form
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
-          setQuery({ ...queryInfo, page: 0 });
-          componentSearch(queryInfo);
+          setQuery({ ...queryInfo, page: 0, query: currentQueryString });
+
+          componentSearch({ ...queryInfo, page: 0, query: currentQueryString });
         }}
       >
         <div className="flex justify-center items-center pb-4 join">
           <input
             placeholder={placeholder || "Search"}
             className="input input-primary w-1/2 join-item"
-            value={queryInfo.query}
-            onChange={(e) =>
-              setQuery({
-                ...queryInfo,
-                query: e.target.value,
-              })
-            }
+            value={currentQueryString}
+            onChange={(e) => setCurrentQueryString(e.target.value)}
           />
           <button type="submit" className="ml-2 btn btn-accent join-item">
             Search

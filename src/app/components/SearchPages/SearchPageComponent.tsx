@@ -20,7 +20,6 @@ import "@/lib/string.extensions";
 import numPlace from "@/lib/utils/numPlace";
 import { toSpellLevel } from "@/lib/utils/toSpellLevel";
 import numberArray from "@/lib/utils/numberArray";
-import { serialize } from "../Utility/urlSerializers";
 
 type DataType = SubClassInfo | ClassInfo | Spell | Background | null;
 type Priority = "all" | "sm" | "md" | "lg" | "xl";
@@ -95,7 +94,7 @@ const SearchPageComponent = <T extends DataType>({
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-
+  const [loadingQuery, setLoadingQuery] = useState(false);
   const handleLoad = () => {
     setLoading(true);
 
@@ -134,13 +133,16 @@ const SearchPageComponent = <T extends DataType>({
   const searchOptions = generateSearchOptions();
 
   const handleQuerySearch = async (query: QueryParams) => {
+    setLoadingQuery(true);
+
     const res = await handleSearch(query);
-    console.log(query);
+
     setLength(res ? res.length : 0);
     setData(res || []);
     setUsingStaticData(false);
 
-    console.log(res);
+    setLoadingQuery(false);
+
     return res ? res.length : 0;
   };
 
@@ -294,7 +296,7 @@ const SearchPageComponent = <T extends DataType>({
             </tr>
           </thead>
           <tbody>
-            {data &&
+            {data && !loadingQuery ? (
               data.map((item, index) => {
                 if (count === -1) return null;
 
@@ -385,7 +387,10 @@ const SearchPageComponent = <T extends DataType>({
                     )}
                   </React.Fragment>
                 );
-              })}
+              })
+            ) : (
+              <Loading />
+            )}
           </tbody>
         </table>
       </div>

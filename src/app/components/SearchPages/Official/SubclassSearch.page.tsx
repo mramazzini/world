@@ -7,11 +7,6 @@ interface Props {
   subclasses: SubClassInfo[];
 }
 const SubclassSearchPage = ({ subclasses }: Props) => {
-  const handleSearch = async (query: QueryParams) => {
-    "use server";
-    return 0;
-  };
-
   return (
     <SearchPageComponent<SubClassInfo>
       title="Subclasses"
