@@ -10,23 +10,6 @@ import { QUERY_LIMIT } from "@/lib/globalVars";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteMap: MetadataRoute.Sitemap = [];
-  const routes = [
-    "/", // the root
-    "/class", // select class
-    "/class/[className]", // class page
-    "/class/[className]/subclass", // select subclass
-    "/class/[className]/subclass", // subclass select
-    "/class/[className]/pdf", // pdf page for class
-    "/class/create", // create class
-    "/subclass/[subclass]", // subclass page
-    "/spells", // spell select
-    "/spells/[spell]", // spell page
-    "/homebrew", // homebrew
-    "/homebrew/class/create", // create homebrew class
-    "/homebrew/subclass",
-    "/homebrew/spells",
-    "/item-generator", // item generator
-  ];
 
   if (process.env.DOMAIN_NAME === undefined) {
     throw new Error("DOMAIN_NAME is not defined in env");

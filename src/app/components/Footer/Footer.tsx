@@ -29,7 +29,7 @@ const wikiLinks = [
   },
   {
     name: "Spells",
-    url: "/spell",
+    url: "/spells",
   },
   {
     name: "Subclasses",
