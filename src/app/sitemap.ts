@@ -32,6 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     siteMap.push({
       url: `${process.env.DOMAIN_NAME}/class/${c.name}`,
       lastModified: c.updatedAt,
+      
       changeFrequency: "yearly",
       priority: 0.8,
     });
@@ -64,7 +65,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   }
   const subclassPagesCount = Math.ceil(subclasses.length / QUERY_LIMIT);
-  for (let i = 0; i < subclassPagesCount; i++) {
+  for (let i = 1; i < subclassPagesCount; i++) {
     siteMap.push({
       url: `${process.env.DOMAIN_NAME}/subclass?page=${i}`,
       lastModified: new Date(),
@@ -72,6 +73,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     });
   }
+  siteMap.push({
+    url: `${process.env.DOMAIN_NAME}/subclass`,
+    lastModified: new Date(),
+    changeFrequency: "yearly",
+    priority: 0.9,
+  });
 
   const spells = await getSpells();
   siteMap.push({
@@ -89,7 +96,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   }
   const spellPagesCount = Math.ceil(spells.length / QUERY_LIMIT);
-  for (let i = 0; i < spellPagesCount; i++) {
+  siteMap.push({
+    url: `${process.env.DOMAIN_NAME}/spells?page=0`,
+    lastModified: new Date(),
+    changeFrequency: "yearly",
+    priority: 0.7,
+  });
+  for (let i = 1; i < spellPagesCount; i++) {
     siteMap.push({
       url: `${process.env.DOMAIN_NAME}/spells?page=${i}`,
       lastModified: new Date(),
@@ -116,8 +129,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     });
   }
+  siteMap.push({
+    url: `${process.env.DOMAIN_NAME}/background`,
+    lastModified: new Date(),
+    changeFrequency: "yearly",
+    priority: 0.9,
+  });
   const backgroundPagesCount = Math.ceil(backgrounds.length / QUERY_LIMIT);
-  for (let i = 0; i < backgroundPagesCount; i++) {
+  for (let i = 1; i < backgroundPagesCount; i++) {
     siteMap.push({
       url: `${process.env.DOMAIN_NAME}/background?page=${i}`,
       lastModified: new Date(),

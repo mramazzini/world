@@ -95,6 +95,7 @@ const SearchPageComponent = <T extends DataType>({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [loadingQuery, setLoadingQuery] = useState(false);
+  const [loadingPage, setLoadingPage] = useState(false);
   const handleLoad = () => {
     setLoading(true);
 
@@ -102,6 +103,10 @@ const SearchPageComponent = <T extends DataType>({
       setLoading(false);
     }, 5000);
   };
+
+  useEffect(() => {
+    setLoadingPage(false);
+  }, [params]);
 
   let count = -1;
   count += table.length;
@@ -212,7 +217,10 @@ const SearchPageComponent = <T extends DataType>({
           <span className=" w-[100px]"></span>
           <div className="flex justify-center items-center pb-4">
             {page > 0 ? (
-              <Link href={`${pathname}${page == 1 ? "" : `?page=${page - 1}`}`}>
+              <Link
+                href={`${pathname}${page == 1 ? "" : `?page=${page - 1}`}`}
+                onClick={() => setLoadingPage(true)}
+              >
                 <button className="btn btn-primary mr-2">&lt;-</button>
               </Link>
             ) : (
@@ -221,7 +229,10 @@ const SearchPageComponent = <T extends DataType>({
               </button>
             )}
             {page != Math.floor(length / QUERY_LIMIT) ? (
-              <Link href={`${pathname}${`?page=${page + 1}`}`}>
+              <Link
+                href={`${pathname}${`?page=${page + 1}`}`}
+                onClick={() => setLoadingPage(true)}
+              >
                 <button className="btn btn-primary">-&gt;</button>
               </Link>
             ) : (
@@ -296,103 +307,106 @@ const SearchPageComponent = <T extends DataType>({
             </tr>
           </thead>
           <tbody>
-            {data && !loadingQuery ? (
-              data.map((item, index) => {
-                if (count === -1) return null;
+            {data && !loadingQuery && !loading && !loadingPage
+              ? data.map((item, index) => {
+                  if (count === -1) return null;
 
-                return (
-                  <React.Fragment key={index}>
-                    {item && (
-                      <tr
-                        className={`hover transition ease-in-out duration-50 ${
-                          loading ? "cursor-wait" : "cursor-pointer"
-                        } ${
-                          Math.floor(index / QUERY_LIMIT) !== page && "hidden"
-                        }`}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          //make mouse pointer turn to a loading icon
-                          handleLoad();
-                          router.push(tableRoute(item.name));
-                        }}
-                      >
-                        {numberArray(0, count).map((num) => {
-                          const col = table.find((col) => col.index === num);
-                          const relCol = relationalFields?.find(
-                            (col) => col.index === num
-                          );
-                          if (col) {
-                            const hasHeader = item.hasOwnProperty(col.dbHeader);
-                            if (hasHeader) {
-                              // @ts-ignore
-                              const data = applyModifiers(
-                                // @ts-ignore
-                                item[col.dbHeader],
-                                col.modifiers || []
+                  return (
+                    <React.Fragment key={index}>
+                      {item && (
+                        <tr
+                          className={`hover transition ease-in-out duration-50 ${
+                            loading ? "cursor-wait" : "cursor-pointer"
+                          } ${
+                            Math.floor(index / QUERY_LIMIT) !== page && "hidden"
+                          }`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            //make mouse pointer turn to a loading icon
+                            handleLoad();
+                            router.push(tableRoute(item.name));
+                          }}
+                        >
+                          {numberArray(0, count).map((num) => {
+                            const col = table.find((col) => col.index === num);
+                            const relCol = relationalFields?.find(
+                              (col) => col.index === num
+                            );
+                            if (col) {
+                              const hasHeader = item.hasOwnProperty(
+                                col.dbHeader
                               );
-                              // @ts-ignore
-                              return (
-                                <td
-                                  key={num}
-                                  className={`${
-                                    col.priority == "all"
-                                      ? ""
-                                      : col.priority == "sm"
-                                      ? "hidden sm:table-cell"
-                                      : col.priority == "md"
-                                      ? "hidden md:table-cell"
-                                      : col.priority == "lg"
-                                      ? "hidden lg:table-cell"
-                                      : "hidden xl:table-cell"
-                                  }`}
-                                >
-                                  <Link href={tableRoute(item.name)}>
+                              if (hasHeader) {
+                                // @ts-ignore
+                                const data = applyModifiers(
+                                  // @ts-ignore
+                                  item[col.dbHeader],
+                                  col.modifiers || []
+                                );
+                                // @ts-ignore
+                                return (
+                                  <td
+                                    key={num}
+                                    className={`${
+                                      col.priority == "all"
+                                        ? ""
+                                        : col.priority == "sm"
+                                        ? "hidden sm:table-cell"
+                                        : col.priority == "md"
+                                        ? "hidden md:table-cell"
+                                        : col.priority == "lg"
+                                        ? "hidden lg:table-cell"
+                                        : "hidden xl:table-cell"
+                                    }`}
+                                  >
+                                    <Link href={tableRoute(item.name)}>
+                                      {data}
+                                    </Link>
+                                  </td>
+                                );
+                              }
+                            } else if (relCol) {
+                              const hasHeader = item.hasOwnProperty(
+                                relCol.model
+                              );
+                              if (hasHeader) {
+                                // @ts-ignore
+                                const data = applyModifiers(
+                                  // @ts-ignore
+                                  item[relCol.model][relCol.key],
+                                  relCol.modifiers || []
+                                );
+                                return (
+                                  <td
+                                    key={num}
+                                    className={`${
+                                      relCol.priority == "all"
+                                        ? ""
+                                        : relCol.priority == "sm"
+                                        ? "hidden sm:table-cell"
+                                        : relCol.priority == "md"
+                                        ? "hidden md:table-cell"
+                                        : relCol.priority == "lg"
+                                        ? "hidden lg:table-cell"
+                                        : "hidden xl:table-cell"
+                                    }`}
+                                  >
                                     {data}
-                                  </Link>
-                                </td>
-                              );
+                                  </td>
+                                );
+                              }
+                              return null;
                             }
-                          } else if (relCol) {
-                            const hasHeader = item.hasOwnProperty(relCol.model);
-                            if (hasHeader) {
-                              // @ts-ignore
-                              const data = applyModifiers(
-                                // @ts-ignore
-                                item[relCol.model][relCol.key],
-                                relCol.modifiers || []
-                              );
-                              return (
-                                <td
-                                  key={num}
-                                  className={`${
-                                    relCol.priority == "all"
-                                      ? ""
-                                      : relCol.priority == "sm"
-                                      ? "hidden sm:table-cell"
-                                      : relCol.priority == "md"
-                                      ? "hidden md:table-cell"
-                                      : relCol.priority == "lg"
-                                      ? "hidden lg:table-cell"
-                                      : "hidden xl:table-cell"
-                                  }`}
-                                >
-                                  {data}
-                                </td>
-                              );
-                            }
-                            return null;
-                          }
-                        })}
-                      </tr>
-                    )}
-                  </React.Fragment>
-                );
-              })
-            ) : (
-              <Loading />
-            )}
+                          })}
+                        </tr>
+                      )}
+                    </React.Fragment>
+                  );
+                })
+              : null}
           </tbody>
         </table>
+        {(loadingQuery || loadingPage || loading) && <Loading />}
       </div>
       {!data && <Loading />}
     </main>
