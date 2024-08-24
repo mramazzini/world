@@ -156,7 +156,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
   for (const r of races) {
     siteMap.push({
-      url: `${process.env.DOMAIN}/race/${r.name.replaceAll(" ", "-")}`,
+      url: `${process.env.DOMAIN_NAME}/race/${r.name.replaceAll(" ", "-")}`,
       lastModified: r.updatedAt,
       changeFrequency: "yearly",
       priority: 0.8,
