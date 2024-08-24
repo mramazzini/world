@@ -1,5 +1,5 @@
 import { Spell, SpellSchool } from "@prisma/client";
-import SearchPageComponent from "../SearchPageComponent";
+import SearchPageComponent from "../SearchPage";
 import { SpellInfo } from "@/lib/types";
 import { getSpellChunk } from "@/lib/actions/db/spell/read.actions";
 

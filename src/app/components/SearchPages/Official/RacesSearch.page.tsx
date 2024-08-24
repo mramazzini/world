@@ -1,4 +1,4 @@
-import SearchPageComponent from "../SearchPageComponent";
+import SearchPageComponent from "../SearchPage";
 
 import { RaceInfo, QueryParams } from "@/lib/types";
 

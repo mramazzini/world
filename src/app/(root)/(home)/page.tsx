@@ -1,4 +1,4 @@
-import HomePage from "@/app/components/pages/Home";
+import HomePage from "@/app/components/pages/home/Home";
 import { Metadata } from "next";
 import { URL } from "url";
 

@@ -1,5 +1,5 @@
 import { QueryParams, SubClassInfo, SubclassSearchResults } from "@/lib/types";
-import SearchPageComponent from "../SearchPageComponent";
+import SearchPageComponent from "../SearchPage";
 import { officialSources } from "@/lib/globalVars";
 import { getSubclassChunk } from "@/lib/actions/db/subclass/query.actions";
 

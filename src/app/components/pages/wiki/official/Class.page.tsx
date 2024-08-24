@@ -4,7 +4,7 @@ import { getClass } from "@/lib/actions/db/class/read.actions";
 import { Class, Prisma, Feature, SubClass } from "@prisma/client";
 import { ClassInfo } from "@/lib/types";
 import ClassDisplay from "@/app/components/ClassInfo/ClassDisplay";
-import Loading from "../UI/Loading";
+import Loading from "../../../UI/Loading";
 
 const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
   if (!classObj) return <span className="p-4">Class does not exist</span>;

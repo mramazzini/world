@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import "@/lib/string.extensions";
 
 import { getBackground } from "@/lib/actions/db/background/read.actions";
-import BackgroundPage from "@/app/components/pages/Background.page";
+import BackgroundPage from "@/app/components/pages/wiki/official/Background.page";
 
 type Props = {
   params: { backgroundName: string };

@@ -1,14 +1,14 @@
 import { Metadata } from "next";
 
 import "@/lib/string.extensions";
-import SubClassPage from "@/app/components/pages/SubclassPage";
+import SubClassPage from "@/app/components/pages/wiki/official/Subclass.page";
 import { getSubclass } from "@/lib/actions/db/subclass/read.actions";
 
 type Props = {
-  params: { subclass: string };
+  params: { subclassName: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getSubclass(params.subclass.replaceAll("-", " "));
+  const data = await getSubclass(params.subclassName.replaceAll("-", " "));
 
   if (!data) {
     return {
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 const Page = async ({ params }: Props) => {
-  const subclass = await getSubclass(params.subclass.replaceAll("-", " "));
+  const subclass = await getSubclass(params.subclassName.replaceAll("-", " "));
   return <SubClassPage subclass={subclass} />;
 };
 

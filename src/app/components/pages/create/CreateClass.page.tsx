@@ -13,18 +13,18 @@ import {
 } from "@prisma/client";
 import React, { useEffect, useState } from "react";
 
-import ClassDisplay from "../ClassInfo/ClassDisplay";
-import ClassInfo from "../CreateClass/modules/ClassInfo";
-import Proficiencies from "../CreateClass/modules/Proficiencies";
-import SpellCasting from "../CreateClass/modules/SpellCasting";
-import CustomFieldsEditor from "../CreateClass/modules/CustomFieldsEditor";
-import SubclassInfo from "../CreateClass/modules/SubclassInfo";
-import FeatureCreator from "../CreateClass/modules/FeatureCreator";
-import SaveClass from "../modals/SaveClass";
-import useErrorModal from "../modals/ErrorModal";
 import { Levels } from "@/lib/types";
 import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
 import { clientClassCreator } from "@/lib/actions/db/class/create.actions";
+import useErrorModal from "../../modals/ErrorModal";
+import SaveClass from "../../modals/SaveClass";
+import ClassInfo from "../../CreateClass/modules/ClassInfo";
+import Proficiencies from "../../CreateClass/modules/Proficiencies";
+import CustomFieldsEditor from "../../CreateClass/modules/CustomFieldsEditor";
+import SpellCasting from "../../CreateClass/modules/SpellCasting";
+import SubclassInfo from "../../CreateClass/modules/SubclassInfo";
+import FeatureCreator from "../../CreateClass/modules/FeatureCreator";
+import ClassDisplay from "../../ClassInfo/ClassDisplay";
 
 const CreateClassPage = () => {
   const [activeModule, setActiveModule] = useState<number>(0);

@@ -1,5 +1,5 @@
 import HomebrewSubclassSearchPage from "@/app/components/SearchPages/Homebrew/H-SubclassSearch.page";
-import Loading from "@/app/components/UI/Loading";
+
 import { getSubclasses } from "@/lib/actions/db/subclass/read.actions";
 import { Metadata } from "next";
 

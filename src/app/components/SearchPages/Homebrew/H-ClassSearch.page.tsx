@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ClassInfo, QueryParams } from "@/lib/types";
-import SearchPageComponent from "../SearchPageComponent";
+import SearchPageComponent from "../SearchPage";
 import { getHomebrewClassChunk } from "@/lib/actions/db/class/read.actions";
 
 const HomebrewClassSearchPage = ({ classes }: { classes: ClassInfo[] }) => {

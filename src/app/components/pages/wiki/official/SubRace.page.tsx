@@ -1,9 +1,9 @@
 import { SubRaceInfo } from "@/lib/types";
-import NewLineParse from "../Utility/NewLineParse";
+import NewLineParse from "@/app/components/Utility/NewLineParse";
 import Link from "next/link";
-import Info from "../UI/Info";
-import P from "../Utility/FormatAndSanitize";
-import GenerateTable from "../UI/GenerateTable";
+import Info from "@/app/components/UI/Info";
+import P from "@/app/components/Utility/FormatAndSanitize";
+import GenerateTable from "@/app/components/UI/GenerateTable";
 
 interface Props {
   subRace: SubRaceInfo | null;
@@ -13,7 +13,7 @@ import "@/lib/string.extensions";
 import { arraysEqual } from "@/lib/utils/arraysEqual";
 import { deepEqual } from "assert";
 import { objEqual } from "@/lib/utils/deepEqual";
-import JsonTable from "../Utility/JsonTable";
+import JsonTable from "@/app/components/Utility/JsonTable";
 const SubRacePage = ({ subRace, weaponNames }: Props) => {
   if (!subRace) return null;
   const race = subRace.BaseRace;

@@ -1,4 +1,4 @@
-import SearchPageComponent from "../SearchPageComponent";
+import SearchPageComponent from "../SearchPage";
 
 import { SubRaceInfo } from "@/lib/types";
 

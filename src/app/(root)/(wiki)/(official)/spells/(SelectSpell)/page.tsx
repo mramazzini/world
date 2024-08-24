@@ -1,5 +1,4 @@
-import SelectSpellPage from "@/app/components/SearchPages/Official/SelectSpell.page";
-import Loading from "@/app/components/UI/Loading";
+import SelectSpellPage from "@/app/components/SearchPages/Official/SpellSearch.page";
 import { getSpells } from "@/lib/actions/db/spell/read.actions";
 import { Metadata } from "next";
 

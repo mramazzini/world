@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { QueryParams, SubClassInfo } from "@/lib/types";
-import SearchPageComponent from "../SearchPageComponent";
+import SearchPageComponent from "../SearchPage";
 import { getHomebrewSubclassChunk } from "@/lib/actions/db/subclass/read.actions";
 
 interface Props {

@@ -1,4 +1,4 @@
-import CreateClassPage from "@/app/components/pages/CreateClassPage";
+import CreateClassPage from "@/app/components/pages/create/CreateClass.page";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -1,14 +1,14 @@
 import { BackgroundInfo } from "@/lib/types";
-import Loading from "../UI/Loading";
+import Loading from "../../../UI/Loading";
 import Link from "next/link";
-import P from "../Utility/FormatAndSanitize";
+import P from "../../../Utility/FormatAndSanitize";
 import "@/lib/string.extensions";
 import { languages, skills } from "@/lib/globalVars";
 import { arraysEqual } from "@/lib/utils/arraysEqual";
 
-import Info from "../UI/Info";
-import JsonTable from "../Utility/JsonTable";
-import NewLineParse from "../Utility/NewLineParse";
+import Info from "../../../UI/Info";
+import JsonTable from "../../../Utility/JsonTable";
+import NewLineParse from "../../../Utility/NewLineParse";
 interface Props {
   background: BackgroundInfo | null;
 }

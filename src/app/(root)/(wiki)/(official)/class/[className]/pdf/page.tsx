@@ -1,4 +1,4 @@
-import ClassPdfPage from "@/app/components/pages/ClassPdfPage";
+import ClassPdfPage from "@/app/components/pages/pdfs/ClassPdf.page";
 import { Metadata } from "next";
 import "@/lib/string.extensions";
 type Props = {

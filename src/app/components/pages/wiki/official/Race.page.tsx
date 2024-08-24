@@ -1,15 +1,10 @@
 import { RaceInfo } from "@/lib/types";
 import Link from "next/link";
-import NewLineParse from "../Utility/NewLineParse";
-import Loading from "../UI/Loading";
-import ASIParser from "../UI/ChoiceParsers/ASIParser";
-import GenerateTable from "../UI/GenerateTable";
-import { headers } from "next/headers";
-import LanguageParser from "../UI/ChoiceParsers/LanguageParser";
-import Tooltip from "../Utility/Tooltip";
-import Info from "../UI/Info";
-import P from "../Utility/FormatAndSanitize";
-import JsonTable from "../Utility/JsonTable";
+import NewLineParse from "@/app/components/Utility/NewLineParse";
+import GenerateTable from "@/app/components/UI/GenerateTable";
+import Info from "@/app/components/UI/Info";
+import P from "@/app/components/Utility/FormatAndSanitize";
+import JsonTable from "@/app/components/Utility/JsonTable";
 
 interface Props {
   race: RaceInfo | null;

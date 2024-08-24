@@ -1,4 +1,4 @@
-import SearchPageComponent from "../SearchPageComponent";
+import SearchPageComponent from "../SearchPage";
 
 import { useState } from "react";
 import { BackgroundInfo, QueryParams } from "@/lib/types";
