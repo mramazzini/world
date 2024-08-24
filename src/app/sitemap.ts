@@ -7,6 +7,8 @@ import { getSpells } from "@/lib/actions/db/spell/read.actions";
 import { MetadataRoute } from "next";
 import { getBackgrounds } from "@/lib/actions/db/background/read.actions";
 import { QUERY_LIMIT } from "@/lib/globalVars";
+import { getRaces } from "@/lib/actions/db/race/get.actions";
+import { getSubRaces } from "@/lib/actions/db/subrace/get.actions";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteMap: MetadataRoute.Sitemap = [];
@@ -32,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     siteMap.push({
       url: `${process.env.DOMAIN_NAME}/class/${c.name}`,
       lastModified: c.updatedAt,
-      
+
       changeFrequency: "yearly",
       priority: 0.8,
     });
@@ -142,6 +144,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.7,
+    });
+  }
+
+  const races = await getRaces();
+  siteMap.push({
+    url: `${process.env.DOMAIN_NAME}/race`,
+    lastModified: new Date(),
+    changeFrequency: "yearly",
+    priority: 0.9,
+  });
+  for (const r of races) {
+    siteMap.push({
+      url: `${process.env.DOMAIN}/race/${r.name.replaceAll(" ", "-")}`,
+      lastModified: r.updatedAt,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    });
+  }
+
+  const variants = await getSubRaces();
+  siteMap.push({
+    url: `${process.env.DOMAIN_NAME}/subrace`,
+    lastModified: new Date(),
+    changeFrequency: "yearly",
+    priority: 0.9,
+  });
+  for (const v of variants) {
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/subrace/${v.name.replaceAll(" ", "-")}`,
+      lastModified: v.updatedAt,
+      changeFrequency: "yearly",
+      priority: 0.8,
     });
   }
 
