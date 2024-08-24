@@ -39,6 +39,14 @@ const wikiLinks = [
     name: "Backgrounds",
     url: "/background",
   },
+  {
+    name: "Races",
+    url: "/race",
+  },
+  {
+    name: "Subraces",
+    url: "/subrace",
+  },
 ];
 
 const createLinks = [
