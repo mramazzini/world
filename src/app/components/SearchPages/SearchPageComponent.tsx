@@ -10,10 +10,12 @@ import { useSearchParams } from "next/navigation";
 import {
   ClassInfo,
   QueryParams,
+  RaceInfo,
   SearchFieldOption,
   SearchFieldOptions,
   SubClassInfo,
   SubclassSearchResults,
+  SubRaceInfo,
 } from "@/lib/types";
 import { Background, Spell } from "@prisma/client";
 import "@/lib/string.extensions";
@@ -21,7 +23,14 @@ import numPlace from "@/lib/utils/numPlace";
 import { toSpellLevel } from "@/lib/utils/toSpellLevel";
 import numberArray from "@/lib/utils/numberArray";
 
-type DataType = SubClassInfo | ClassInfo | Spell | Background | null;
+type DataType =
+  | SubClassInfo
+  | ClassInfo
+  | Spell
+  | Background
+  | RaceInfo
+  | SubRaceInfo
+  | null;
 type Priority = "all" | "sm" | "md" | "lg" | "xl";
 type Modifier =
   | "Date"

@@ -401,7 +401,9 @@ function ClassDisplay({
                           </>
                         )}
                         {feature.extendedTable && (
-                          <JsonTable json={feature.extendedTable} />
+                          <div className="mt-4">
+                            <JsonTable json={feature.extendedTable} />
+                          </div>
                         )}
                         <div className="divider"></div>
                       </li>
@@ -434,7 +436,9 @@ function ClassDisplay({
                 </ul>
               )}
               {feature.extendedTable && (
-                <JsonTable json={feature.extendedTable} />
+                <div className="bg-base-300 mt-4">
+                  <JsonTable json={feature.extendedTable} />
+                </div>
               )}
               <div className="divider"></div>
             </li>

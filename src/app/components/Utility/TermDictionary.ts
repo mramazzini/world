@@ -453,6 +453,52 @@ const termDictionary: {
     definition:
       "A character's history and upbringing. Determines some of your character's starting equipment and abilities.",
   },
+  {
+    term: "Subrace",
+    definition:
+      "A more specific heritage based on your race. Grants additional racial traits.",
+  },
+  {
+    term: "Racial trait",
+    definition: "An ability that your character gains from their race/subrace.",
+  },
+  {
+    term: "Racial traits",
+    definition: "Abilities that your character gains from their race/subrace.",
+  },
+  {
+    term: "Race",
+    definition:
+      "A character's species. Determines many aspects of your character, including size, age, languages, Ability scores, and racial traits.",
+  },
+  {
+    term: "Size",
+    definition:
+      "A character's physical size. Determines many aspects of your character, including speed and carrying capacity.",
+  },
+  {
+    term: "Carrying Capacity",
+    definition: "The maximum amount of weight that your character can carry.",
+  },
+
+  {
+    term: "Languages",
+    definition: "The languages that your character can speak, read, and write.",
+  },
+  {
+    term: "Age",
+    definition: "How old your character is.",
+  },
+  {
+    term: "Ability Scores",
+    definition:
+      "Numerical values that represent a character's physical and mental attributes.",
+  },
+  {
+    term: "Darkvision",
+    definition:
+      "The ability to see in the dark. Allows you to see in dim light as if it were bright light and in darkness as if it were dim light.",
+  },
 ];
 
 export default termDictionary;

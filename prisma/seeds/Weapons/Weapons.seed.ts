@@ -2,6 +2,7 @@ import { DamageTypes, Prisma } from "@prisma/client";
 
 const Weapons: Prisma.WeaponCreateManyInput[] = [
   {
+    id: 1,
     name: "Club",
     cost: "1 sp",
     weight: "2 lb.",
@@ -11,6 +12,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: true,
   },
   {
+    id: 2,
     name: "Dagger",
     cost: "2 gp",
     weight: "1 lb.",
@@ -20,6 +22,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: true,
   },
   {
+    id: 3,
     name: "Greatclub",
     cost: "2 sp",
     weight: "10 lb.",
@@ -29,6 +32,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: true,
   },
   {
+    id: 4,
     name: "Handaxe",
     cost: "5 gp",
     weight: "2 lb.",
@@ -38,6 +42,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: true,
   },
   {
+    id: 5,
     name: "Javelin",
     cost: "5 sp",
     weight: "2 lb.",
@@ -47,6 +52,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: true,
   },
   {
+    id: 6,
     name: "Light Hammer",
     cost: "2 gp",
     weight: "2 lb.",
@@ -56,6 +62,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: true,
   },
   {
+    id: 7,
     name: "Mace",
     cost: "5 gp",
     weight: "4 lb.",
@@ -65,6 +72,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: true,
   },
   {
+    id: 8,
     name: "Quarterstaff",
     cost: "2 sp",
     weight: "4 lb.",
@@ -74,6 +82,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: true,
   },
   {
+    id: 9,
     name: "Sickle",
     cost: "1 gp",
     weight: "2 lb.",
@@ -83,6 +92,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: true,
   },
   {
+    id: 10,
     name: "Spear",
     cost: "1 gp",
     weight: "3 lb.",
@@ -92,6 +102,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: true,
   },
   {
+    id: 11,
     name: "Crossbow, Light",
     cost: "25 gp",
     weight: "5 lb.",
@@ -101,6 +112,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 12,
     name: "Dart",
     cost: "5 cp",
     weight: "1/4 lb.",
@@ -110,6 +122,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 13,
     name: "Shortbow",
     cost: "25 gp",
     weight: "2 lb.",
@@ -119,6 +132,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 14,
     name: "Sling",
     cost: "1 sp",
     weight: "-",
@@ -128,6 +142,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 15,
     name: "Battleaxe",
     cost: "10 gp",
     weight: "4 lb.",
@@ -137,6 +152,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 16,
     name: "Flail",
     cost: "10 gp",
     weight: "2 lb.",
@@ -146,6 +162,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 17,
     name: "Glaive",
     cost: "20 gp",
     weight: "6 lb.",
@@ -155,6 +172,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 18,
     name: "Greataxe",
     cost: "30 gp",
     weight: "7 lb.",
@@ -164,6 +182,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 19,
     name: "Greatsword",
     cost: "50 gp",
     weight: "6 lb.",
@@ -173,6 +192,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 20,
     name: "Halberd",
     cost: "20 gp",
     weight: "6 lb.",
@@ -182,6 +202,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 21,
     name: "Lance",
     cost: "10 gp",
     weight: "6 lb.",
@@ -191,6 +212,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 22,
     name: "Longsword",
     cost: "15 gp",
     weight: "3 lb.",
@@ -200,6 +222,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 23,
     name: "Maul",
     cost: "10 gp",
     weight: "10 lb.",
@@ -209,6 +232,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 24,
     name: "Morningstar",
     cost: "15 gp",
     weight: "4 lb.",
@@ -218,6 +242,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 25,
     name: "Pike",
     cost: "5 gp",
     weight: "18 lb.",
@@ -227,6 +252,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 26,
     name: "Rapier",
     cost: "25 gp",
     weight: "2 lb.",
@@ -236,6 +262,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 27,
     name: "Scimitar",
     cost: "25 gp",
     weight: "3 lb.",
@@ -245,6 +272,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 28,
     name: "Shortsword",
     cost: "10 gp",
     weight: "2 lb.",
@@ -254,6 +282,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 29,
     name: "Trident",
     cost: "5 gp",
     weight: "4 lb.",
@@ -263,6 +292,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 30,
     name: "War Pick",
     cost: "5 gp",
     weight: "2 lb.",
@@ -272,6 +302,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 31,
     name: "Warhammer",
     cost: "15 gp",
     weight: "2 lb.",
@@ -281,6 +312,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 32,
     name: "Whip",
     cost: "2 gp",
     weight: "3 lb.",
@@ -290,6 +322,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 33,
     name: "Blowgun",
     cost: "10 gp",
     weight: "1 lb.",
@@ -299,6 +332,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 34,
     name: "Crossbow, Hand",
     cost: "75 gp",
     weight: "3 lb.",
@@ -308,6 +342,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 35,
     name: "Crossbow, Heavy",
     cost: "50 gp",
     weight: "18 lb.",
@@ -317,6 +352,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 36,
     name: "Longbow",
     cost: "50 gp",
     weight: "2 lb.",
@@ -326,6 +362,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
   {
+    id: 37,
     name: "Net",
     cost: "1 gp",
     weight: "3 lb.",
@@ -335,5 +372,47 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
   },
 ];
+
+const weaponIds = {
+  club: 1,
+  dagger: 2,
+  greatclub: 3,
+  handaxe: 4,
+  javelin: 5,
+  lightHammer: 6,
+  mace: 7,
+  quarterstaff: 8,
+  sickle: 9,
+  spear: 10,
+  crossbowLight: 11,
+  dart: 12,
+  shortbow: 13,
+  sling: 14,
+  battleaxe: 15,
+  flail: 16,
+  glaive: 17,
+  greataxe: 18,
+  greatsword: 19,
+  halberd: 20,
+  lance: 21,
+  longsword: 22,
+  maul: 23,
+  morningstar: 24,
+  pike: 25,
+  rapier: 26,
+  scimitar: 27,
+  shortsword: 28,
+  trident: 29,
+  warPick: 30,
+  warhammer: 31,
+  whip: 32,
+  blowgun: 33,
+  crossbowHand: 34,
+  crossbowHeavy: 35,
+  longbow: 36,
+  net: 37,
+};
+
+export { weaponIds };
 
 export default Weapons;

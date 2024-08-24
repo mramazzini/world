@@ -1,12 +1,17 @@
 import {
+  Ability,
   Background,
   BackgroundFeature,
   CasterType,
   Class,
   CustomField,
   Feature,
+  Language,
   Message,
   Prisma,
+  Race,
+  RaceVariant,
+  RacialTraits,
   Spell,
   SpellListToSpell,
   SubClass,
@@ -86,10 +91,39 @@ declare global {
       headersLength?: number[];
       data: { [key: string | number]: string }[];
     }
+
+    interface ASI {
+      fixedIncreases?: { ability: Ability; value: number }[]; // Fixed increases like Strength +2, Charisma +1
+      choices?: {
+        abilities: Ability[]; // Array of abilities that can be chosen
+        options: {
+          numberOfAbilities: number; // Number of different abilities to increase (e.g., 1, 2, or 3)
+          increases: number[]; // Array of values for each increase, e.g., [2, 1] or [1, 1, 1]
+        }[];
+      }[];
+      universalIncrease?: number; // If all abilities increase by a single value, e.g., +5 to all
+    }
+
+    interface LanguageChoice {
+      defaultLanguages: Language[];
+      choices?: {
+        languages: Language[];
+        numberOfLanguages: number;
+      };
+    }
+
+    interface ToolChoice {
+      defaultTools: string[];
+      choices?: {
+        tools: string[];
+        numberOfTools: number;
+      };
+    }
   }
 }
 
 export enum src {
+  kaladesh = "Plane Shift: Kaladesh",
   homebrew = "Homebrew",
   tasha = "Tasha's Cauldron of Everything",
   xanathar = "Xanathar's Guide to Everything",
@@ -196,4 +230,24 @@ export interface MessageInfo extends Message {
     email: string | null;
     username: string | null;
   } | null;
+}
+
+export interface RaceInfo extends Race {
+  User: {
+    username: string | null;
+  } | null;
+  RacialTraits: RacialTraits[];
+  Variants: RaceVariant[];
+}
+
+export interface SubRaceInfo extends RaceVariant {
+  User: {
+    username: string | null;
+  } | null;
+  RacialTraits: RacialTraits[];
+  BaseRace: SubRaceInfoBaseRaceExtension;
+}
+
+interface SubRaceInfoBaseRaceExtension extends Race {
+  RacialTraits: RacialTraits[];
 }

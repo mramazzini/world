@@ -33,13 +33,6 @@ export const getDefaultCasterTypes = async (): Promise<CasterType[]> => {
   return arr;
 };
 
-export async function getRace(): Promise<Race[]> {
-  const db = new PrismaClient();
-  const res = await db.race.findMany();
-  await db.$disconnect();
-  return res;
-}
-
 export async function getBackground(): Promise<Background[]> {
   const db = new PrismaClient();
   const res = await db.background.findMany();

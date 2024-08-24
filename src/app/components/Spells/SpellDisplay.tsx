@@ -121,7 +121,9 @@ const SpellDisplay = ({ spell }: Props) => {
           <br />
         </>
       )}
-      <JsonTable json={spell.extendedTable} />
+      <div className="mt-2">
+        <JsonTable json={spell.extendedTable} />
+      </div>
 
       {spell.postTableData && <P>{spell.postTableData.trim()}</P>}
       {spell.upcastInfo && (

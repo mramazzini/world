@@ -44,10 +44,14 @@ const Navbar = () => {
       name: "Backgrounds",
       href: "/background",
     },
-    // {
-    //   name: "Monsters",
-    //   href: "/monster",
-    // },
+    {
+      name: "Races",
+      href: "/race",
+    },
+    {
+      name: "Subraces",
+      href: "/subrace",
+    },
   ];
 
   if (!showNavbar) return null;

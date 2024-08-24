@@ -35,8 +35,8 @@ const GenerateTable = ({
   // return the table
 
   return (
-    <div key={key} className={`py-2 overflow-y-visible`}>
-      <h3>{key}</h3>
+    <div key={key} className={`overflow-y-visible`}>
+      {key && <h3 className="py-2">{key}</h3>}
       <table className="table table-sm table-zebra overflow-y-visible">
         <thead>
           <tr className="bg-black/30">

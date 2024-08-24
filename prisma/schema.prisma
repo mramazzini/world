@@ -154,10 +154,11 @@ model User {
 
   Background Background[]
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  Spell     Spell[]
-  Messages  Message[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  Spell       Spell[]
+  Messages    Message[]
+  RaceVariant RaceVariant[]
 }
 
 model Class {
@@ -399,55 +400,131 @@ model Race {
   srd         Boolean @default(false)
   name        String
   description String
-  flavortext  String  @db.VarChar(200)
+  flavorText  String  @db.VarChar(200)
   source      String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  RacialTraits RacialTraits[]
 
-  User   User @relation(fields: [userId], references: [id])
-  userId Int
-}
+  /// [ASI]
+  abilityScores           Json
+  abilityScoreDescription String
 
-model RaceVariant {
-  id            Int       @id @default(autoincrement())
-  srd           Boolean   @default(false)
-  name          String
-  description   String
-  flavortext    String    @db.VarChar(200)
-  source        String
-  //FIXME: MAKE CUSTOM JSON TYPE
-  abilityScores Ability[]
+  creatureType    CreatureType
+  size            Size
+  sizeDescription String?
 
-  creatureType CreatureType
-  size         Size
-  speed        Int
+  age       String
+  alignment String
 
+  skillProficiencies Skill[]
+
+  /// [ToolChoice]
+  toolProficiencies   Json?
+  weaponProficiencies Int[] // Weapon IDs
+
+  speed       Int
   flightSpeed Int?
   swimSpeed   Int?
   climbSpeed  Int?
 
+  speedDescription  String
   flightDescription String?
   swimDescription   String?
   climbDescription  String?
 
-  originLanguages     Language[]
+  darkvision            Int?
+  darkvisionDescription String?
+
+  resistanceTo DamageTypes[]
+  immuneTo     DamageTypes[]
+  vulnerableTo DamageTypes[]
+
+  /// [LanguageChoice]
+  originLanguages     Json
   languageDescription String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  Variants RaceVariant[]
+
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
+}
+
+// This model has optional fields, whose purpose is to override the origin race its attached to
+model RaceVariant {
+  id                      Int     @id @default(autoincrement())
+  srd                     Boolean @default(false)
+  name                    String
+  description             String
+  flavorText              String  @db.VarChar(200)
+  source                  String
+  /// [ASI]
+  abilityScores           Json?
+  abilityScoreDescription String?
+
+  RacialTraits  RacialTraits[]
+  removedTraits String[] // A list of traits that are removed from the base race. Case sensitive
+
+  creatureType    CreatureType?
+  size            Size?
+  sizeDescription String?
+
+  age       String?
+  alignment String?
+
+  skillProficiencies Skill[]
+
+  /// [ToolChoice]
+  toolProficiencies   Json?
+  weaponProficiencies Int[] // Weapon IDs
+
+  speed       Int?
+  flightSpeed Int?
+  swimSpeed   Int?
+  climbSpeed  Int?
+
+  speedDescription  String?
+  flightDescription String?
+  swimDescription   String?
+  climbDescription  String?
+
+  darkvision            Int?
+  darkvisionDescription String?
+
+  resistanceTo DamageTypes[]
+  immuneTo     DamageTypes[]
+  vulnerableTo DamageTypes[]
+
+  /// [LanguageChoice]
+  originLanguages     Json?
+  languageDescription String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
+
+  BaseRace   Race @relation(fields: [baseRaceId], references: [id])
+  baseRaceId Int
 }
 
 model RacialTraits {
-  id            Int      @id @default(autoincrement())
+  id            Int          @id @default(autoincrement())
   name          String
   description   String
   /// [Table]
   extendedTable Json[]
   options       String[] // If the feature has options to choose from, list here
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  postTableData String? // This is for any additional content that should be displayed after the table
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  Race          Race?        @relation(fields: [raceId], references: [id])
+  raceId        Int?
+  RaceVariant   RaceVariant? @relation(fields: [raceVariantId], references: [id])
+  raceVariantId Int?
 }
 
 model Background {

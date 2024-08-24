@@ -28,7 +28,7 @@ const JsonTable = ({
   //assign keys
   const tablesWithKeys = result.map((table, index) => {
     return (
-      <div key={index} className="mb-2">
+      <div key={index} className="">
         {table}
       </div>
     );

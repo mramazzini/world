@@ -36,7 +36,7 @@ const BackgroundPage = ({ background }: Props) => {
               {/* go back */}
               <Link
                 className={"btn btn-ghost border border-gray-500 w-full"}
-                href={`/class`}
+                href={`/background`}
               >
                 View all Backgrounds -&gt;
               </Link>
@@ -123,7 +123,9 @@ const BackgroundPage = ({ background }: Props) => {
                   </>
                 )}
                 {feature.extendedTable && (
-                  <JsonTable json={feature.extendedTable} />
+                  <div className="mt-2">
+                    <JsonTable json={feature.extendedTable} />
+                  </div>
                 )}
                 <div className="divider"></div>
               </li>

@@ -121,7 +121,7 @@ const SubClassDisplay = ({ subClass, casterType, customFields }: Props) => {
                         )}
                       </li>
                       {feature.extendedTable && (
-                        <div className="px-4">
+                        <div className="px-4 mt-2 ">
                           <JsonTable json={feature.extendedTable} />
                         </div>
                       )}

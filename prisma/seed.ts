@@ -13,6 +13,10 @@ import SpellLists from "./seeds/Spells/SpellLists/SpellLists.seed";
 import Backgrounds from "./seeds/Backgrounds/Backgrounds.seed";
 import BackgroundFeatures from "./seeds/Backgrounds/BackgroundFeatures.seed";
 import SpellListToSpellArr from "./seeds/Spells/SpellLists/SpellListToSpell.seed";
+import Species from "./seeds/Races/Races.seed";
+import Traits from "./seeds/Races/Traits.seed";
+import { ClassicVariants } from "./seeds/Races/Variants/ClassicVariants";
+import ClassicTraits from "./seeds/Races/Variants/ClassicTraits";
 import {
   PrismaClient,
   Weapon,
@@ -345,6 +349,88 @@ const seed = async () => {
       cinfo("Weapon linked with properties");
     } catch (error) {
       cerr("Error linking weapon and properties\n", error);
+      return;
+    }
+  }
+  //create species and traits
+  cinfo("Creating Species");
+  for (const r of Species) {
+    try {
+      cinfo("Creating species:", r.name);
+      await db.race.create({
+        data: r,
+      });
+      cinfo("Species created");
+    } catch (error) {
+      cerr("Error creating species:", r.name, error);
+      return;
+    }
+  }
+  cinfo("Species created");
+  //create classic variants
+  cinfo("Creating Classic Variants");
+  for (const v of ClassicVariants) {
+    try {
+      cinfo("Creating classic variant:", v.name);
+      if (!v.baseRaceId) {
+        cerr("Classic variant missing raceId field:", v.name);
+        return;
+      }
+      await db.raceVariant.create({
+        data: v,
+      });
+      cinfo("Classic variant created");
+    } catch (error) {
+      cerr("Error creating classic variant:", v.name, error);
+      return;
+    }
+  }
+  cinfo("Creating Traits");
+  for (const t of Traits) {
+    try {
+      cinfo("Creating trait:", t.name);
+      if (!t.raceId && !t.raceVariantId) {
+        cerr("Trait missing raceId field:", t.name);
+        return;
+      }
+      if (
+        t.extendedTable &&
+        !verifyTableIntegrity(t.extendedTable as PrismaJson.Table[])
+      ) {
+        cerr("Error verifying extended table integrity:", t.name);
+        return;
+      }
+      await db.racialTraits.create({
+        data: t,
+      });
+      cinfo("Trait created");
+    } catch (error) {
+      cerr("Error creating trait:", t.name, error);
+      return;
+    }
+  }
+  cinfo("Traits created");
+  cinfo("Creating Classic Traits");
+  for (const t of ClassicTraits) {
+    try {
+      cinfo("Creating classic trait:", t.name);
+      if (!t.raceId && !t.raceVariantId) {
+        cerr("Classic trait missing raceId field:", t.name);
+        return;
+      }
+      if (
+        t.extendedTable &&
+        !verifyTableIntegrity(t.extendedTable as PrismaJson.Table[])
+      ) {
+        cerr("Error verifying extended table integrity:", t.name);
+        return;
+      }
+      await db.racialTraits.create({
+        data: t,
+      });
+      cinfo("Classic trait created");
+    } catch (error) {
+      cerr("Error creating classic trait:", t.name, error);
       return;
     }
   }
