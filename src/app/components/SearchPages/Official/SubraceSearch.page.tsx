@@ -11,11 +11,11 @@ interface Props {
 const SubRaceSearchPage = ({ subRaces }: Props) => {
   return (
     <SearchPageComponent<SubRaceInfo>
-      title="Racial Origin"
-      description="Races provide a unique set of abilities and traits to your character based on their heritage. They can provide additional skills, languages, and abilities. Select a Race to view more information."
-      createText="Create a Race ->"
-      homebrewOfficialText="View Homebrew Races ->"
-      searchPlaceholder="Search Race..."
+      title="Subraces"
+      description="Subraces are a slight variation of its base race, such as a Hill Dwarf or a Wood Elf. They provide additional abilities and features that differentiate your character from others."
+      createText="Create a Subrace ->"
+      homebrewOfficialText="View Homebrew Subraces ->"
+      searchPlaceholder="Search Subrace..."
       routeName="subrace"
       handleSearch={getSubRaceChunk}
       staticInput={subRaces}

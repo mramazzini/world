@@ -264,7 +264,7 @@ const SubRacePage = ({ subRace, weaponNames }: Props) => {
                 {subRace.abilityScoreDescription !== null ? (
                   <div className="badge badge-accent">{subRace.name}</div>
                 ) : (
-                  <div className="badge badge-primary">{race.name}</div>
+                  <div className="badge badge-neutral">{race.name}</div>
                 )}
               </h2>
               <div className="divider m-0"></div>
@@ -289,11 +289,18 @@ const SubRacePage = ({ subRace, weaponNames }: Props) => {
             </div>
             {weaponNames.length > 0 && (
               <div className="bg-base-200 rounded-xl p-4  max-w-1/3 ">
-                <h2 className="pb-0">
-                  Weapons{" "}
-                  <Info
-                    tooltip={`A character who is a ${subRace.name} has proficiency with the following weapons.`}
-                  />
+                <h2 className="pb-0 flex justify-between flex-row items-center">
+                  <div>
+                    Weapons{" "}
+                    <Info
+                      tooltip={`A character who is a ${subRace.name} has proficiency with the following weapons.`}
+                    />
+                  </div>
+                  {subRace.weaponProficiencies.length > 0 ? (
+                    <div className="badge badge-accent">{subRace.name}</div>
+                  ) : (
+                    <div className="badge badge-neutral">{race.name}</div>
+                  )}
                 </h2>
                 <div className="divider m-0"></div>
                 <ul className="list-disc pl-4">
