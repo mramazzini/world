@@ -11,7 +11,7 @@ import numberArray from "@/lib/utils/numberArray";
 import numPlace from "@/lib/utils/numPlace";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import Link from "next/link";
-import Loading from "../UI/Loading";
+import Loading from "../../UI/Loading";
 // The 'theme' object is your Tailwind theme config
 
 const ClassPdfPage = () => {
