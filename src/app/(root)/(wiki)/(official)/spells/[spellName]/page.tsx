@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import "@/lib/string.extensions";
 
 import { getSpell } from "@/lib/actions/db/spell/read.actions";
-import SpellPage from "@/app/components/pages/wiki/official/Spellpage";
+import SpellPage from "@/app/components/pages/wiki/official/Spell.page";
 
 type Props = {
   params: { spellName: string };
