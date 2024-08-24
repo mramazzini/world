@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { getUser } from "@/lib/actions/db/user/read.actions";
 import { User } from "@prisma/client";
 import { createMessage } from "@/lib/actions/db/message/create.actions";
+import Loading from "../UI/Loading";
 
 const useContactModal = (): {
   ContactModal: () => React.JSX.Element;
@@ -18,6 +19,9 @@ const useContactModal = (): {
       const [user, setUser] = useState<User | null>(null);
       const [message, setMessage] = useState("");
       const [email, setEmail] = useState("");
+      const [state, setState] = useState<"sending" | "sent" | "error" | "open">(
+        "open"
+      );
       useEffect(() => {
         verifyToken().then((res) => {
           setLoggedIn(res);
@@ -34,13 +38,15 @@ const useContactModal = (): {
 
       const handleMessageSend = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
         if ((!email && !user?.id) || !message) return;
+        setState("sending");
         createMessage({
           email: email,
           message: message,
           userId: user?.id || null,
         }).then(() => {
-          alert("Message sent!");
+          setState("sent");
         });
       };
 
@@ -96,9 +102,17 @@ const useContactModal = (): {
                 placeholder="Message"
               ></textarea>
               <div className="divider"></div>
-              <button type="submit" className="btn btn-primary w-auto  my-2">
-                Submit
-              </button>
+              {state === "sent" ? (
+                <p className="text-green-500">Message Sent!</p>
+              ) : state === "error" ? (
+                <p className="text-red-500">Error sending message</p>
+              ) : state === "sending" ? (
+                <Loading />
+              ) : (
+                <button type="submit" className="btn btn-primary w-auto  my-2">
+                  Submit
+                </button>
+              )}
             </form>
             <div className="modal-action">
               <form method="dialog">
