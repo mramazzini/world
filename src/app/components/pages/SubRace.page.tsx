@@ -1,11 +1,10 @@
-"use client";
 import { SubRaceInfo } from "@/lib/types";
 import NewLineParse from "../Utility/NewLineParse";
 import Link from "next/link";
 import Info from "../UI/Info";
 import P from "../Utility/FormatAndSanitize";
 import GenerateTable from "../UI/GenerateTable";
-import { useState } from "react";
+
 interface Props {
   subRace: SubRaceInfo | null;
   weaponNames: string[];
@@ -18,7 +17,6 @@ import JsonTable from "../Utility/JsonTable";
 const SubRacePage = ({ subRace, weaponNames }: Props) => {
   if (!subRace) return null;
   const race = subRace.BaseRace;
-  const [fullView, setFullView] = useState(false);
 
   interface Difference {
     age: TraitStatus;
