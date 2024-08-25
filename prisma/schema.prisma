@@ -144,21 +144,33 @@ enum CreatureType {
 }
 
 model User {
-  id         Int        @id @default(autoincrement())
-  username   String     @unique
-  email      String     @unique
-  password   String
-  Classes    Class[]
-  SubClasses SubClass[]
-  Races      Race[]
-
-  Background Background[]
-
+  id          Int           @id @default(autoincrement())
+  username    String        @unique
+  email       String        @unique
+  password    String
+  Classes     Class[]
+  SubClasses  SubClass[]
+  Races       Race[]
+  Background  Background[]
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
   Spell       Spell[]
   Messages    Message[]
   RaceVariant RaceVariant[]
+
+  Campaigns      Campaign[] @relation("PlayerCampaigns")
+  GMForCampaigns Campaign[] @relation("GMCampaigns")
+}
+
+model Campaign {
+  id           Int      @id @default(autoincrement())
+  name         String
+  description  String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  GameMaster   User     @relation("GMCampaigns", fields: [gameMasterId], references: [id])
+  gameMasterId Int
+  Players      User[]   @relation("PlayerCampaigns")
 }
 
 model Class {
