@@ -42,75 +42,88 @@ const ToolPage = ({ tool }: Props) => {
               </Link>
             </div>
           </div>{" "}
-          <div className="divider"></div>
-          <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
-            <h2>
-              Components{" "}
-              <Info
-                tooltip={`Included within this tool, you gain the following items. These represent the tool in question.`}
-              />
-            </h2>
-            <div className="divider m-0"></div>
-            <ul className="list-disc pl-4">
-              {tool.components.map((component, index) => (
-                <li key={index}>{component} </li>
-              ))}
-            </ul>
-          </div>
-          <div className="divider"></div>
-          <h2>
-            Skill Checks{" "}
-            <Info
-              tooltip={`When a character is proficient in ${tool.name}, certain situations will grant advantage on skill checks.`}
-            />
-          </h2>
-          <div className="divider"></div>
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {/* <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
-              <h2 className="pb-0">
-                Ability scores{" "}
-                <Info tooltip="Ability score improvements, or ASI, are numerical increases to your characters ability scores." />
+          {tool.components.length > 0 && (
+            <>
+              <div className="divider"></div>
+              <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                <h2>
+                  Components{" "}
+                  <Info
+                    tooltip={`Included within this tool, you gain the following items. These represent the tool in question.`}
+                  />
+                </h2>
+                <div className="divider m-0"></div>
+                <ul className="list-disc pl-4">
+                  {tool.components.map((component, index) => (
+                    <li key={index}>{component} </li>
+                  ))}
+                </ul>
+              </div>
+            </>
+          )}
+          {tool.skills.length > 0 && (
+            <>
+              {" "}
+              <div className="divider"></div>
+              <h2>
+                Skill Checks{" "}
+                <Info
+                  tooltip={`When a character is proficient in ${tool.name}, certain situations will grant advantage on skill checks.`}
+                />
               </h2>
-              <div className="divider m-0"></div>
-              {race.abilityScoreDescription}
-            </div> */}
-            {tool.skills.map((skill, index) => (
-              <div key={index} className="bg-base-200 rounded-xl p-4 max-w-1/3">
-                <h2 className="pb-0">
-                  {skill.skill.toCapitalCase()}{" "}
-                  <Info
-                    tooltip={`You situationally gain advantage on ${skill.skill.toCapitalCase()} checks when you are proficient with ${
-                      tool.name
-                    }. The description below describes when you would gain advantage.`}
-                  />
-                </h2>
-                <div className="divider m-0"></div>
-                <p>{skill.description}</p>
+              <div className="divider"></div>
+              <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                {tool.skills.map((skill, index) => (
+                  <div
+                    key={index}
+                    className="bg-base-200 rounded-xl p-4 max-w-1/3"
+                  >
+                    <h2 className="pb-0">
+                      {skill.skill.toCapitalCase()}{" "}
+                      <Info
+                        tooltip={`You situationally gain advantage on ${skill.skill.toCapitalCase()} checks when you are proficient with ${
+                          tool.name
+                        }. The description below describes when you would gain advantage.`}
+                      />
+                    </h2>
+                    <div className="divider m-0"></div>
+                    <p>
+                      <P>{skill.description}</P>
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div className="divider"></div>
-          <h2>
-            Additional Abilities{" "}
-            <Info tooltip="When you are proficient in some tools, they grant you additional abilities that your able to do." />
-          </h2>
-          <div className="divider"></div>
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {tool.features.map((ability, index) => (
-              <div key={index} className="bg-base-200 rounded-xl p-4 max-w-1/3">
-                <h2 className="pb-0">
-                  {ability.name.toCapitalCase()}{" "}
-                  <Info
-                    tooltip={`When you are proficient with ${tool.name}, you gain the following ability.`}
-                  />
-                </h2>
-                <div className="divider m-0"></div>
-                <p>
-                  <P>{ability.description}</P>
-                </p>
+            </>
+          )}
+          {tool.features.length > 0 && (
+            <>
+              <div className="divider"></div>
+              <h2>
+                Additional Abilities{" "}
+                <Info tooltip="When you are proficient in some tools, they grant you additional abilities that your able to do." />
+              </h2>
+              <div className="divider"></div>
+              <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                {tool.features.map((ability, index) => (
+                  <div
+                    key={index}
+                    className="bg-base-200 rounded-xl p-4 max-w-1/3"
+                  >
+                    <h2 className="pb-0">
+                      {ability.name.toCapitalCase()}{" "}
+                      <Info
+                        tooltip={`When you are proficient with ${tool.name}, you gain the following ability.`}
+                      />
+                    </h2>
+                    <div className="divider m-0"></div>
+                    <p>
+                      <P>{ability.description}</P>
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
+          )}
         </>
       )}
     </main>
