@@ -17,8 +17,8 @@ const HomeSearchPage = () => {
         </div>
       </div>
       <div className="divider" />
-      <HomeSearchBar />
       <Suspense>
+        <HomeSearchBar />
         <SearchTable />
       </Suspense>
     </main>

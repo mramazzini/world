@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import Footer from "./components/Footer/Footer";
 import { NAVBAR_HEIGHT_REM } from "@/lib/globalVars";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,7 +43,9 @@ export default function RootLayout({
       <body
         className={`${inter.className} w-screen flex flex-col items-center  `}
       >
-        <Navbar />
+        <Suspense>
+          <Navbar />
+        </Suspense>
 
         <div
           className="max-w-[1800px] w-full  h-full "

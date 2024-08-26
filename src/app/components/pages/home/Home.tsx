@@ -43,7 +43,7 @@ const HomePage = () => {
   return (
     <main className="p-4 md:p-8 flex flex-col bg-base-100 items-center relative min-h-screen">
       <div className="bg-base-300 p-4 w-full rounded-xl h-full">
-        <h1 className="text-center">Max's DnD Wiki</h1>
+        <h1 className="text-center">Max&apos;s DnD Wiki</h1>
         <p className="text-center">
           Welcome to the DnD Wiki! Here you can find information on any and all
           things Dungeons and Dragons 5th Edition.

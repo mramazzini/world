@@ -209,7 +209,7 @@ const Navbar = () => {
                 target="_blank"
                 className="flex items-center justify-center btn btn-ghost mx-2 border border-primary"
               >
-                <img
+                <Image
                   src="/images/discord.svg"
                   alt="Discord"
                   className="h-10 flex items-center justify-center"
@@ -234,7 +234,7 @@ const Navbar = () => {
                 target="_blank"
                 className="flex items-center justify-center btn btn-ghost mx-2 border border-primary"
               >
-                <img
+                <Image
                   src="/images/discord.svg"
                   alt="Discord"
                   className="h-10 flex items-center justify-center"
