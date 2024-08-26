@@ -49,7 +49,7 @@ const ToolPage = ({ tool }: Props) => {
                 <h2>
                   Components{" "}
                   <Info
-                    tooltip={`Included within this tool, you gain the following items. These represent the tool in question.`}
+                    tooltip={`Included within this tool, you gain the following items. These items represent the different components of the tool. You gain these components once you aquire the tool, and you do not need to be proficient in the tool.`}
                   />
                 </h2>
                 <div className="divider m-0"></div>
