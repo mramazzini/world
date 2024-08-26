@@ -281,6 +281,36 @@ export async function getSubclass(
   return null;
 }
 
+export const getSubclassesByClass = async (
+  className: string
+): Promise<SubClassInfo[]> => {
+  const db = new PrismaClient();
+  const res = await db.subClass.findMany({
+    where: {
+      Class: {
+        name: className,
+      },
+    },
+    include: {
+      SubClassFeatures: true,
+      casterType: true,
+      customFields: true,
+      User: {
+        select: {
+          username: true,
+        },
+      },
+      Class: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+  await db.$disconnect();
+  return res;
+};
+
 export const getSubclassFromClassName = async (
   className: string
 ): Promise<SubClass[]> => {

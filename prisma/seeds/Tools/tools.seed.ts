@@ -215,11 +215,6 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
     features: [
       {
-        name: "Survival",
-        description:
-          "Your understanding of geography makes it easier to find paths to civilization, to predict areas where villages or towns might be found, and to avoid becoming lost. You have studied so many maps that common patterns, such as how trade routes evolve and where settlements a rise in relation to geographic locations, are familiar to you.",
-      },
-      {
         name: "Craft a Map",
         description:
           "While traveling, you can draw a map as you go in addition to engaging in other activity.",

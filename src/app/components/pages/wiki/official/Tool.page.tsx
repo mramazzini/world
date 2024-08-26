@@ -79,7 +79,7 @@ const ToolPage = ({ tool }: Props) => {
                     className="bg-base-200 rounded-xl p-4 max-w-1/3"
                   >
                     <h2 className="pb-0">
-                      {skill.skill.toCapitalCase()}{" "}
+                      {skill.skill.toCapitalCase().replace("_", " ")}{" "}
                       <Info
                         tooltip={`You situationally gain advantage on ${skill.skill.toCapitalCase()} checks when you are proficient with ${
                           tool.name
