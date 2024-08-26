@@ -52,6 +52,10 @@ const Navbar = () => {
       name: "Subraces",
       href: "/subrace",
     },
+    {
+      name: "Tools",
+      href: "/tool",
+    },
   ];
 
   if (!showNavbar) return null;

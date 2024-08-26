@@ -47,6 +47,10 @@ const wikiLinks = [
     name: "Subraces",
     url: "/subrace",
   },
+  {
+    name: "Tools",
+    url: "/tool",
+  },
 ];
 
 const createLinks = [
