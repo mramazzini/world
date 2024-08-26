@@ -17,6 +17,7 @@ import Species from "./seeds/Races/Races.seed";
 import Traits from "./seeds/Races/Traits.seed";
 import { ClassicVariants } from "./seeds/Races/Variants/ClassicVariants";
 import ClassicTraits from "./seeds/Races/Variants/ClassicTraits";
+import ToolSeed from "./seeds/Tools/tools.seed";
 import {
   PrismaClient,
   Weapon,
@@ -30,6 +31,21 @@ import { src } from "@/lib/types";
 const db = new PrismaClient();
 // db cleared with npm run nuke prior to seeding
 const seed = async () => {
+  //Create Tools
+  cinfo("Creating tools");
+  for (const Tool of ToolSeed) {
+    try {
+      cinfo("Creating tool:", Tool.name);
+      await db.tool.create({
+        data: Tool,
+      });
+      cinfo("Tool created");
+    } catch (error) {
+      cerr("Error creating tool:", Tool.name, error);
+      return;
+    }
+  }
+  cinfo("Tools created");
   // Create Backgrounds
   cinfo("Creating backgrounds");
   for (const Background of Backgrounds) {

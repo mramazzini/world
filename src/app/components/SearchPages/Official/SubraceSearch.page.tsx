@@ -3,8 +3,8 @@ import SearchPageComponent from "../SearchPage";
 import { SubRaceInfo } from "@/lib/types";
 
 import { officialSources } from "@/lib/globalVars";
-import { getSubRaceChunk } from "@/lib/actions/db/subrace/get.actions";
-import { Size } from "@prisma/client";
+import { getSubRaceChunk } from "@/lib/actions/db/subrace/read.actions";
+
 interface Props {
   subRaces: SubRaceInfo[];
 }

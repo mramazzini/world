@@ -12,10 +12,12 @@ import {
   Race,
   RaceVariant,
   RacialTraits,
+  Skill,
   Spell,
   SpellListToSpell,
   SubClass,
   SubClassFeature,
+  Tool,
 } from "@prisma/client";
 import { StyledString } from "next/dist/build/swc";
 import { Input } from "postcss";
@@ -118,6 +120,23 @@ declare global {
         tools: string[];
         numberOfTools: number;
       };
+    }
+
+    interface QuantityUnit {
+      quantity: number;
+      unit: string;
+    }
+
+    interface ToolSkill {
+      skill: Skill;
+      description: string;
+    }
+    interface ToolFeature {
+      name: string;
+      description: string;
+      extendedTable?: Table;
+      options?: string[];
+      postTableData?: string;
     }
   }
 }
@@ -250,4 +269,10 @@ export interface SubRaceInfo extends RaceVariant {
 
 interface SubRaceInfoBaseRaceExtension extends Race {
   RacialTraits: RacialTraits[];
+}
+
+export interface ToolInfo extends Tool {
+  User: {
+    username: string | null;
+  } | null;
 }

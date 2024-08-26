@@ -16,6 +16,7 @@ import {
   SubClassInfo,
   SubclassSearchResults,
   SubRaceInfo,
+  ToolInfo,
 } from "@/lib/types";
 import { Background, Spell } from "@prisma/client";
 import "@/lib/string.extensions";
@@ -30,6 +31,7 @@ type DataType =
   | Background
   | RaceInfo
   | SubRaceInfo
+  | ToolInfo
   | null;
 type Priority = "all" | "sm" | "md" | "lg" | "xl";
 type Modifier =

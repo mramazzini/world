@@ -22,6 +22,7 @@ async function nuke() {
   await db.racialTraits.deleteMany({});
   await db.raceVariant.deleteMany({});
   await db.race.deleteMany({});
+  await db.tool.deleteMany({});
 
   cinfo("Database cleared");
   await db.$disconnect();

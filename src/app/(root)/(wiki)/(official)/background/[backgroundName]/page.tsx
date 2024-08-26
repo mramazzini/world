@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!data) {
     return {
-      title: "Spell Not Found - Max's DND Wiki",
-      description: "Spell Not Found - Max's DND Wiki",
+      title: "Background Not Found - Max's DND Wiki",
+      description: "Background Not Found - Max's DND Wiki",
     };
   }
 

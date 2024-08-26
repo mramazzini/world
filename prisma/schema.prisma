@@ -160,6 +160,7 @@ model User {
 
   Campaigns      Campaign[] @relation("PlayerCampaigns")
   GMForCampaigns Campaign[] @relation("GMCampaigns")
+  Tool           Tool[]
 }
 
 model Campaign {
@@ -624,6 +625,32 @@ model Message {
   userId    Int?
   email     String?
   message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tool {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  flavorText  String @db.VarChar(200)
+  /// [QuantityUnit]
+  cost        Json
+  /// [QuantityUnit]
+  weight      Json
+
+  /// [ToolSkill]
+  skills Json[]
+
+  components            String[] // Some tools have components that the character gets. These will be automatically added into the characters sheet
+  componentsDescription String? // Description of the components
+
+  /// [ToolFeature]
+  features Json[]
+
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

@@ -1,5 +1,5 @@
 import SubRaceSearchPage from "@/app/components/SearchPages/Official/SubraceSearch.page";
-import { getSubRaces } from "@/lib/actions/db/subrace/get.actions";
+import { getSubRaces } from "@/lib/actions/db/subrace/read.actions";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
