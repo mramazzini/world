@@ -60,16 +60,21 @@ const HomePage = () => {
           <Image
             src={"/images/hero.jpg"}
             alt={"Dragon fighter adventurers"}
-            className=" w-96 h-96 rounded-full object-cover mx-auto m-12"
+            className="w-48 h-48 md:w-96 md:h-96 rounded-full object-cover mx-auto m-12"
             width={1440}
             height={1920}
           />
           {/* searchabar */}
           <Suspense>
-            <HomeSearchBar />
+            <div className="hidden md:flex justify-center items-center">
+              <HomeSearchBar />
+            </div>
+            <div className="flex md:hidden justify-center items-center">
+              <HomeSearchBar small />
+            </div>
           </Suspense>
         </div>
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-between items-center mt-12">
           {/* <Link href={""} className="link link-primary">
             Want to contribute? Click Here!
           </Link> */}

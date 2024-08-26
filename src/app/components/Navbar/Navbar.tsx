@@ -13,7 +13,7 @@ const Navbar = () => {
   const pathname = usePathname();
   const router = useRouter();
   //add pages to this array to hide the navbar
-  const noNavbar = ["/"];
+  const noNavbar: string[] = [];
   const showNavbar = !noNavbar.includes(pathname);
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -212,7 +212,9 @@ const Navbar = () => {
                 <Image
                   src="/images/discord.svg"
                   alt="Discord"
-                  className="h-10 flex items-center justify-center"
+                  className="h-10 w-10 flex items-center justify-center"
+                  width={100}
+                  height={100}
                 />
               </Link>
 
@@ -237,7 +239,9 @@ const Navbar = () => {
                 <Image
                   src="/images/discord.svg"
                   alt="Discord"
-                  className="h-10 flex items-center justify-center"
+                  className="h-10 w-10 flex items-center justify-center"
+                  width={100}
+                  height={100}
                 />
               </Link>
               <Link href="/login" className="p-4 btn btn-ghost mx-2">
