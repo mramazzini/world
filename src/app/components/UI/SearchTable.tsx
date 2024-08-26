@@ -43,9 +43,13 @@ const SearchTable = () => {
           <thead>
             <tr>
               <th className="w-[15%] text-left bg-black/20">Name</th>
-              <th className="text-left bg-black/20">Description</th>
-              <th className="w-[10%] text-left bg-black/20">Type</th>
-              <th className="w-[10%] text-left bg-black/20">Last Updated</th>
+              <th className="text-left bg-black/20 ">Description</th>
+              <th className="w-[10%] text-left bg-black/20 md:table-cell hidden">
+                Type
+              </th>
+              <th className="w-[10%] text-left bg-black/20 md:table-cell hidden">
+                Last Updated
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -75,17 +79,22 @@ const SearchTable = () => {
                         : item.name}
                     </div>
                   </td>
-                  <td>
+                  <td className="hidden lg:table-cell">
                     {item.flavorText.length < 200
                       ? item.flavorText
                       : item.flavorText.slice(0, 200) + "..."}
                   </td>
-                  <td>
+                  <td className="lg:hidden  ">
+                    {item.flavorText.length < 100
+                      ? item.flavorText
+                      : item.flavorText.slice(0, 100) + "..."}
+                  </td>
+                  <td className="md:table-cell hidden">
                     <div className="btn btn-accent btn-xs h-auto p-1 ">
                       {item.type}
                     </div>
                   </td>
-                  <td>
+                  <td className="md:table-cell hidden">
                     {item.lastUpdated && item.lastUpdated.toLocaleDateString()}
                   </td>
                 </tr>
