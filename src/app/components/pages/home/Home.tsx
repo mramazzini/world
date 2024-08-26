@@ -4,7 +4,7 @@ import { DISCORD_INVITE, NAVBAR_HEIGHT_REM } from "@/lib/globalVars";
 import { QueryParams } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import HomeSearchBar from "../../UI/HomeSearchBar";
 const links = [
   {
@@ -65,7 +65,9 @@ const HomePage = () => {
             height={1920}
           />
           {/* searchabar */}
-          <HomeSearchBar />
+          <Suspense>
+            <HomeSearchBar />
+          </Suspense>
         </div>
         <div className="w-full flex justify-between items-center">
           {/* <Link href={""} className="link link-primary">
