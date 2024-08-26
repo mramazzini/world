@@ -1,41 +1,82 @@
+"use client";
+
+import { DISCORD_INVITE, NAVBAR_HEIGHT_REM } from "@/lib/globalVars";
+import { QueryParams } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import HomeSearchBar from "../../UI/HomeSearchBar";
+const links = [
+  {
+    name: "Classes",
+    href: "/class",
+  },
+  {
+    name: "Subclasses",
+    href: "/subclass",
+  },
+  {
+    name: "Spells",
+    href: "/spells",
+  },
+  {
+    name: "Backgrounds",
+    href: "/background",
+  },
+  {
+    name: "Races",
+    href: "/race",
+  },
+  {
+    name: "Subraces",
+    href: "/subrace",
+  },
+  {
+    name: "Tools",
+    href: "/tool",
+  },
+];
 
 const HomePage = () => {
+  const [currentQueryString, setCurrentQueryString] = useState("");
+
   return (
-    <div className="p-4 md:p-8 flex flex-col bg-base-100 ">
-      <div className="flex flex-row justify-center">
-        <div className=" md:w-1/2 flex flex-col items-start justify-center  p-4 md:p-24 bg-base-200 rounded-l-xl">
-          <h1 className="text-4xl md:text-7xl font-bold text-center w-full md:text-left">
-            Max&apos;s DnD Wiki
-          </h1>
-          <p className="text-center text-2xl">
-            A wiki for all things Dungeons and Dragons
-          </p>
-          <div className="divider"></div>
-          <p className="text-left text-xl">
-            View all the classes, subclasses, spells, and more from Dungeons and
-            Dragons 5th Edition, or login to add your own homebrew content!
-          </p>
-          <div className="divider"></div>
-          <div className="btns flex flex-row  justify-center w-full">
-            <Link href={"/class"} className="btn btn-primary mx-2 my-2">
-              Classes -&gt;
+    <main className="p-4 md:p-8 flex flex-col bg-base-100 items-center relative min-h-screen">
+      <div className="bg-base-300 p-4 w-full rounded-xl h-full">
+        <h1 className="text-center">Max's DnD Wiki</h1>
+        <p className="text-center">
+          Welcome to the DnD Wiki! Here you can find information on any and all
+          things Dungeons and Dragons 5th Edition.
+        </p>
+        <div className="divider"></div>
+        <div className="flex flex-wrap justify-center">
+          {links.map((link, index) => (
+            <Link key={index} href={link.href}>
+              <div className="btn m-2">{link.name}</div>
             </Link>
-            <Link href={"/login"} className="btn btn-primary mx-2 my-2">
-              Login -&gt;
-            </Link>
-          </div>
+          ))}
         </div>
-        <Image
-          src="/images/hero.jpg"
-          alt={"Dragon fighter adventurers"}
-          className="rounded-r-lg max-h-[90vh] w-1/2 object-cover hidden md:flex"
-          width={900}
-          height={100}
-        />
+        <div className="relative flex flex-col justify-center items-center">
+          <Image
+            src={"/images/hero.jpg"}
+            alt={"Dragon fighter adventurers"}
+            className=" w-96 h-96 rounded-full object-cover mx-auto m-12"
+            width={1440}
+            height={1920}
+          />
+          {/* searchabar */}
+          <HomeSearchBar />
+        </div>
+        <div className="w-full flex justify-between items-center">
+          {/* <Link href={""} className="link link-primary">
+            Want to contribute? Click Here!
+          </Link> */}
+          <Link href={DISCORD_INVITE} className="btn btn-primary">
+            Join our Discord -&gt;
+          </Link>
+        </div>
       </div>
-    </div>
+    </main>
   );
 };
 

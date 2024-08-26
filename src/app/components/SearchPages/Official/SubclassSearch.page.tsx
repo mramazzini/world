@@ -53,7 +53,7 @@ const SubclassSearchPage = ({ subclasses }: Props) => {
           model: "Class",
           alias: "Class",
           key: "name",
-          modifiers: ["Button", "CapitalCase"],
+          modifiers: ["Button-Accent", "CapitalCase"],
           headerWidth: 5,
           priority: "all",
         },

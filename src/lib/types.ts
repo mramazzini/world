@@ -276,3 +276,11 @@ export interface ToolInfo extends Tool {
     username: string | null;
   } | null;
 }
+export interface CombinedData {
+  name: string;
+  description: string;
+  flavorText: string;
+  type: string;
+  other: string | null;
+  lastUpdated: Date;
+}

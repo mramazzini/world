@@ -42,7 +42,7 @@ const SubRaceSearchPage = ({ subRaces }: Props) => {
           header: "Source",
           searchFields: officialSources,
           modifiers: [],
-          index: 2,
+          index: 3,
           priority: "md",
         },
         {
@@ -50,8 +50,19 @@ const SubRaceSearchPage = ({ subRaces }: Props) => {
           header: "Last Updated",
           dbHeader: "updatedAt",
           modifiers: ["Date"],
-          index: 3,
+          index: 4,
           priority: "md",
+        },
+      ]}
+      relationalFields={[
+        {
+          index: 2,
+          model: "BaseRace",
+          alias: "Race",
+          key: "name",
+          modifiers: ["Button-Accent", "CapitalCase"],
+          headerWidth: 5,
+          priority: "all",
         },
       ]}
       homebrew={false}

@@ -55,7 +55,7 @@ const ToolPage = ({ tool }: Props) => {
                 <div className="divider m-0"></div>
                 <ul className="list-disc pl-4">
                   {tool.components.map((component, index) => (
-                    <li key={index}>{component} </li>
+                    <li key={index}>{component}</li>
                   ))}
                 </ul>
               </div>

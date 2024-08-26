@@ -1,0 +1,101 @@
+"use client";
+import { searchEverything } from "@/lib/actions/db/general/read.actions";
+import { CombinedData, QueryParams } from "@/lib/types";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import Loading from "./Loading";
+import "@/lib/string.extensions";
+const SearchTable = () => {
+  const params = useSearchParams();
+  const query = params.get("query") || "";
+  const page = params.get("page") || "0";
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const [data, setData] = useState<null | CombinedData[]>(null);
+
+  const tableRoute = (routeName: string, name: string) =>
+    `/${routeName}/${name.replaceAll(" ", "-")}`;
+  useEffect(() => {
+    const req: QueryParams = {
+      query,
+      page: parseInt(page),
+      searchFields: [],
+      relationalFields: [],
+    };
+    searchEverything(req).then((res) => {
+      setData(res);
+      console.log(res);
+    });
+  }, [query, page]);
+  const handleLoad = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+  };
+  return (
+    <>
+      <div className="overflow-x-auto">
+        <table
+          className={`table-zebra table-sm w-full table-pin-rows table-pin-cols`}
+        >
+          <thead>
+            <tr>
+              <th className="w-[15%] text-left bg-black/20">Name</th>
+              <th className="text-left bg-black/20">Description</th>
+              <th className="w-[10%] text-left bg-black/20">Type</th>
+              <th className="w-[10%] text-left bg-black/20">Last Updated</th>
+            </tr>
+          </thead>
+          <tbody>
+            {!loading &&
+              data?.map((item, index) => (
+                <tr
+                  key={index}
+                  className={`hover transition ease-in-out duration-50 ${
+                    loading ? "cursor-wait" : "cursor-pointer"
+                  } `}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    //make mouse pointer turn to a loading icon
+                    handleLoad();
+                    router.push(
+                      tableRoute(
+                        item.type.toLowerCase(),
+                        item.name.replaceAll(" ", "-")
+                      )
+                    );
+                  }}
+                >
+                  <td>
+                    <div className="btn btn-primary btn-xs h-auto p-1 ">
+                      {item.type === "Class"
+                        ? item.name.toCapitalCase()
+                        : item.name}
+                    </div>
+                  </td>
+                  <td>
+                    {item.flavorText.length < 200
+                      ? item.flavorText
+                      : item.flavorText.slice(0, 200) + "..."}
+                  </td>
+                  <td>
+                    <div className="btn btn-accent btn-xs h-auto p-1 ">
+                      {item.type}
+                    </div>
+                  </td>
+                  <td>
+                    {item.lastUpdated && item.lastUpdated.toLocaleDateString()}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+        {(!data || loading) && <Loading />}
+      </div>
+    </>
+  );
+};
+
+export default SearchTable;

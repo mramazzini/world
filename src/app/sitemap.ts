@@ -90,10 +90,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "yearly",
     priority: 0.9,
   });
-  for (const s of spells) {
+  for (let i = 0; i < spells.length; i++) {
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/spells/${s.name.replaceAll(" ", "-")}`,
-      lastModified: s.updatedAt,
+      url: `${process.env.DOMAIN_NAME}/spells/${spells[i].name.replaceAll(
+        " ",
+        "-"
+      )}`,
+      lastModified: spells[i].updatedAt,
       changeFrequency: "yearly",
       priority: 0.8,
     });

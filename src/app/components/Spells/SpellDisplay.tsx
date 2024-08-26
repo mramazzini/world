@@ -27,7 +27,13 @@ const SpellDisplay = ({ spell }: Props) => {
   };
   return (
     <div className="text-xl">
-      <h1>{spell.name}</h1>
+      <div className="flex flex-row justify-between items-center">
+        <h1>{spell.name}</h1>
+        <Link className="btn btn-ghost border border-gray-500" href={`/spells`}>
+          View all Spells -&gt;
+        </Link>
+      </div>
+
       <div className="divider m-0"></div>
       {spell.level === 0 ? (
         <h2>{spell.school.toCapitalCase()} cantrip</h2>

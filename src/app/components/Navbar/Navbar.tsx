@@ -5,13 +5,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { destroySession, verifyToken } from "@/lib/utils/auth";
 import { useState, useEffect } from "react";
 import { DISCORD_INVITE, NAVBAR_HEIGHT_REM } from "@/lib/globalVars";
+import HomeSearchBar from "../UI/HomeSearchBar";
 
 const Navbar = () => {
   //Block navbar on certain pages
   const pathname = usePathname();
   const router = useRouter();
   //add pages to this array to hide the navbar
-  const noNavbar = [""];
+  const noNavbar = ["/"];
   const showNavbar = !noNavbar.includes(pathname);
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -65,7 +66,7 @@ const Navbar = () => {
         className={`navbar z-[1] bg-base-200 border-b border-primary hidden md:flex`}
         style={{ height: `${NAVBAR_HEIGHT_REM}rem` }}
       >
-        {links.map((link) => (
+        {/* {links.map((link) => (
           <Link
             key={link.name}
             href={link.href}
@@ -75,7 +76,7 @@ const Navbar = () => {
           >
             {link.name}
           </Link>
-        ))}
+        ))} */}
         {/* <Link
           href="/monster"
           className={`p-4 btn btn-${
@@ -83,7 +84,36 @@ const Navbar = () => {
           } mx-1`}
         >
           Monsters
-        </Link> */}
+        </Link> */}{" "}
+        <div className="dropdown">
+          <div tabIndex={0} role="button" className="btn btn-ghost">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </div>
+
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+          >
+            {links.map((link) => (
+              <li key={link.name}>
+                <Link href={link.href}>{link.name}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className="dropdown ">
           <div tabIndex={0} role="button" className="btn m-1 btn-ghost">
             Theme
@@ -160,6 +190,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+        <HomeSearchBar small />
         {isAuthenticated ? (
           <div className="ml-auto">
             <Link
@@ -206,7 +237,6 @@ const Navbar = () => {
             </Link>
           </div>
         )}
-
         {/* <Link href="/item-generator" className="p-4">
         Item Generator
       </Link> */}

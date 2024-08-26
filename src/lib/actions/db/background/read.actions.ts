@@ -64,7 +64,7 @@ export const getBackgroundChunk = async (
   queryInfo: QueryParams
 ): Promise<BackgroundInfo[] | null> => {
   const db = new PrismaClient();
-  const { query, page } = queryInfo;
+  const { query } = queryInfo;
   if (query === "") {
     const res = await db.background.findMany({
       where: generateQueryFields({

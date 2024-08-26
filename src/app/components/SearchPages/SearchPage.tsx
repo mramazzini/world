@@ -38,6 +38,7 @@ type Modifier =
   | "Date"
   | "Bold"
   | "Button"
+  | "Button-Accent"
   | "CapitalCase"
   | "NumPlace"
   | "SpellLevel"
@@ -186,6 +187,12 @@ const SearchPageComponent = <T extends DataType>({
         return applyModifiers(toSpellLevel(data), modifier, index + 1);
       case "Italic":
         return <i>{applyModifiers(data, modifier, index + 1)}</i>;
+      case "Button-Accent":
+        return (
+          <div className="btn btn-accent btn-xs h-auto p-1 ">
+            {applyModifiers(data, modifier, index + 1)}
+          </div>
+        );
     }
     return data;
   };
