@@ -1,10 +1,10 @@
 "use client";
 
 import { DISCORD_INVITE, NAVBAR_HEIGHT_REM } from "@/lib/globalVars";
-import { QueryParams } from "@/lib/types";
+
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import HomeSearchBar from "../../UI/HomeSearchBar";
 const links = [
   {
@@ -38,8 +38,11 @@ const links = [
 ];
 
 const HomePage = () => {
-  const [currentQueryString, setCurrentQueryString] = useState("");
-
+  const [randomImage, setRandomImage] = useState(false);
+  useEffect(() => {
+    const randomImageChance = 1000; //1/1000 chance of showing a random image
+    setRandomImage(Math.floor(Math.random() * randomImageChance) === 0);
+  }, []);
   return (
     <main className="p-4 md:p-8 flex flex-col bg-base-100 items-center relative min-h-screen">
       <div className="bg-base-300 p-4 w-full rounded-xl h-full">
@@ -58,12 +61,29 @@ const HomePage = () => {
         </div>
         <div className="relative flex flex-col justify-center items-center">
           <Image
-            src={"/images/hero.jpg"}
+            src={"/images/alternateHero.png"}
             alt={"Dragon fighter adventurers"}
             className="w-48 h-48 md:w-96 md:h-96 rounded-full object-cover mx-auto m-12"
+            style={{
+              display: randomImage ? "block" : "none",
+            }}
+            priority
             width={1440}
             height={1920}
           />
+
+          <Image
+            src={"/images/hero.jpg"}
+            alt={"Dragon fighter adventurers"}
+            className="w-48 h-48 md:w-96 md:h-96 rounded-full object-cover mx-auto m-12"
+            style={{
+              display: randomImage ? "none" : "block",
+            }}
+            priority
+            width={1440}
+            height={1920}
+          />
+
           {/* searchabar */}
           <Suspense>
             <div className="hidden md:flex justify-center items-center">
