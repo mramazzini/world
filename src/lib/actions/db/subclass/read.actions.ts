@@ -19,14 +19,11 @@ export async function getSubclasses({
         },
       },
       include: {
-        SubClassFeatures: true,
-        casterType: true,
         Class: {
           select: {
             name: true,
           },
         },
-        customFields: true,
         User: {
           select: {
             username: true,
@@ -39,14 +36,11 @@ export async function getSubclasses({
   }
   const res = await db.subClass.findMany({
     include: {
-      SubClassFeatures: true,
-      casterType: true,
       Class: {
         select: {
           name: true,
         },
       },
-      customFields: true,
       User: {
         select: {
           username: true,
@@ -78,14 +72,11 @@ export async function getSubclassChunkByClass(
         },
       }),
       include: {
-        SubClassFeatures: true,
-        casterType: true,
         Class: {
           select: {
             name: true,
           },
         },
-        customFields: true,
         User: {
           select: {
             username: true,
@@ -107,9 +98,6 @@ export async function getSubclassChunkByClass(
       },
     }),
     include: {
-      SubClassFeatures: true,
-      casterType: true,
-      customFields: true,
       Class: {
         select: {
           name: true,
@@ -160,9 +148,6 @@ export async function getHomebrewSubclassChunk(
         } as Prisma.SubClassWhereInput,
       }),
       include: {
-        SubClassFeatures: true,
-        casterType: true,
-        customFields: true,
         Class: {
           select: {
             name: true,
@@ -189,9 +174,6 @@ export async function getHomebrewSubclassChunk(
       } as Prisma.SubClassWhereInput,
     }),
     include: {
-      SubClassFeatures: true,
-      casterType: true,
-      customFields: true,
       Class: {
         select: {
           name: true,
@@ -233,9 +215,6 @@ export async function getSubclass(
           name: query,
         },
         include: {
-          SubClassFeatures: true,
-          casterType: true,
-          customFields: true,
           Class: {
             select: {
               name: true,
@@ -256,9 +235,6 @@ export async function getSubclass(
           id: query,
         },
         include: {
-          SubClassFeatures: true,
-          casterType: true,
-          customFields: true,
           Class: {
             select: {
               name: true,
@@ -292,9 +268,6 @@ export const getSubclassesByClass = async (
       },
     },
     include: {
-      SubClassFeatures: true,
-      casterType: true,
-      customFields: true,
       User: {
         select: {
           username: true,

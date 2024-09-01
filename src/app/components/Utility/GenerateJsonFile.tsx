@@ -1,24 +1,13 @@
-import { CasterType, Class, CustomField, Feature } from "@prisma/client";
+import { Class } from "@prisma/client";
 import Link from "next/link";
 
 interface Props {
   classObj: Class;
-  features: Feature[];
-  customFields: CustomField[];
-  casterType: CasterType | null;
 }
 
-const GenerateJsonFile = ({
-  classObj,
-  features,
-  customFields,
-  casterType,
-}: Props) => {
+const GenerateJsonFile = ({ classObj }: Props) => {
   const json = {
     class: classObj,
-    features,
-    customFields,
-    casterType,
   };
 
   const dataStr = JSON.stringify(json);

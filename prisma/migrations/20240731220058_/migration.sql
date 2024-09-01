@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "SubClass" ADD COLUMN     "cantripsKnown" INTEGER NOT NULL DEFAULT 0,
-ADD COLUMN     "spellsKnown" INTEGER NOT NULL DEFAULT 0;

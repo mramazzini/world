@@ -1,4 +1,14 @@
-import { Ability, ArmorTypes, Class, Prisma, Skill } from "@prisma/client";
+import numberArray from "@/lib/utils/numberArray";
+import { itemIds } from "../Items/ItemIds";
+import {
+  cantripIds,
+  generateSpellLink,
+  getSpellIdsEqualToOrLessThanLevel,
+  getSpellIdsOfLevel,
+  ritualIds,
+  spellIds,
+} from "../Spells/spells.seed";
+import { Time } from "@/lib/types";
 
 const ids = {
   fighter: 1,
@@ -15,14 +25,17 @@ const ids = {
   warlock: 12,
   artificer: 13,
 };
-
-const Features: Prisma.FeatureCreateManyInput[] = [
+interface ClassFeature extends PrismaJson.Feature {
+  classId: number;
+  spellCasting?: boolean;
+}
+const Features: ClassFeature[] = [
   // Fighter
   {
     name: "Action Surge",
     description:
       "Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action.\n\nOnce you use this feature, you must finish a short or long rest before you can use it again. Starting at 17th level, you can use it twice before a rest, but only once on the same turn.",
-    levels: [2],
+    levels: [2, 17],
     classId: ids.fighter,
   },
   {
@@ -33,12 +46,14 @@ const Features: Prisma.FeatureCreateManyInput[] = [
     classId: ids.fighter,
   },
   {
-    name: "Fighting Style",
-    description:
-      "You adopt a particular style of fighting as your specialty. Choose an option from the Fighting style table. You can't take a Fighting Style option more than once, even if you later get to choose again.",
-    levels: [1],
     classId: ids.fighter,
-
+    name: "Fighting Style",
+    levels: [1],
+    description: `You adopt a particular style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again.`,
+    choices: {
+      numberOfChoices: 1,
+      options: [],
+    },
     extendedTable: [
       {
         "": {
@@ -71,13 +86,11 @@ const Features: Prisma.FeatureCreateManyInput[] = [
             },
             {
               Style: "Protection",
-              Description:
-                "When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.",
+              Description: `When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a ^${itemIds.shield}{shield}^.`,
             },
             {
               Style: "Interception",
-              Description:
-                "When a creature you can see hits a target, other than you, within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your proficiency bonus (to a minimum of 0 damage). You must be wielding a shield or a simple or martial weapon to use this reaction.",
+              Description: `When a creature you can see hits a target, other than you, within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your proficiency bonus (to a minimum of 0 damage). You must be wielding a ^${itemIds.shield}{shield}^ or a simple or martial weapon to use this reaction.`,
             },
             {
               Style: "Superior Technique",
@@ -99,21 +112,6 @@ const Features: Prisma.FeatureCreateManyInput[] = [
               Description:
                 "Your unarmed strikes can deal bludgeoning damage equal to 1d6 + your Strength modifier. If you strike with two free hands, the d6 becomes a d8.",
             },
-            {
-              Style: "Close Quarters Shooter",
-              Description:
-                "When making a ranged attack while you are within 5 feet of a hostile creature, you do not have disadvantage on the attack roll. Your ranged attacks ignore half cover and three-quarters cover against targets within 30 feet of you. Finally, you have a +1 bonus to attack rolls on ranged attacks.",
-            },
-            {
-              Style: "Mariner",
-              Description:
-                "As long as you are not wearing heavy armor or using a shield, you have a swimming speed and a climbing speed equal to your normal speed, and you gain a +1 bonus to AC.",
-            },
-            {
-              Style: "Tunnel Fighter",
-              Description:
-                "As a bonus action, you can enter a defensive stance that lasts until the start of your next turn. While in your defensive stance, you can make opportunity attacks without using your reaction, and you can use your reaction to make a melee attack against a creature that moves more than 5 feet while within your reach.",
-            },
           ],
         },
       },
@@ -121,9 +119,9 @@ const Features: Prisma.FeatureCreateManyInput[] = [
   },
   {
     name: "Second Wind",
+    levels: [1],
     description:
       "You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.\n\n Once you use this feature, you must finish a short or long rest before you can use it again.",
-    levels: [1],
     classId: ids.fighter,
   },
   {
@@ -146,50 +144,587 @@ const Features: Prisma.FeatureCreateManyInput[] = [
   },
   // Wizard
   {
-    name: "Arcane Recovery",
+    classId: ids.wizard,
+    spellCasting: true,
+    name: "Cantrips",
+    levels: [1, 4, 10],
     description:
-      "You have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.\n\nFor example, if you're a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots.",
-    levels: [1],
-    classId: ids.wizard,
-  },
-  {
-    name: "Spellbook",
-    description: `At 1st level, you have a spellbook containing six 1st-level wizard spells of your choice. Your spellbook is the repository of the wizard spells you know, except your cantrips, which are fixed in your mind.
+      "At 1st level, you know three cantrips of your choice from the wizard spell list. You learn additional wizard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Wizard table.",
 
-The spells that you add to your spellbook as you gain levels reflect the arcane research you conduct on your own, as well as intellectual breakthroughs you have had about the nature of the multiverse. You might find other spells during your adventures. You could discover a spell recorded on a scroll in an evil wizard's chest, for example, or in a dusty tome in an ancient library.`,
-    levels: [1],
-    classId: ids.wizard,
-    spellCastingFeature: true,
-    options: [
-      "**Copying a Spell into the Book.** When you find a wizard spell of 1st level or higher, you can add it to your spellbook if it is of a spell level you can prepare and if you can spare the time to decipher and copy it. Copying a spell into your spellbook involves reproducing the basic form of the spell, then deciphering the unique system of notation used by the wizard who wrote it. You must practice the spell until you understand the sounds or gestures required, then transcribe it into your spellbook using your own notation. For each level of the spell, the process takes 2 hours and costs 50 gp. The cost represents material components you expend as you experiment with the spell to master it, as well as the fine inks you need to record it. Once you have spent this time and money, you can prepare the spell just like your other spells.",
-      "**Replacing the Book.** You can copy a spell from your own spellbook into another book-for example, if you want to make a backup copy of your spellbook. This is just like copying a new spell into your spellbook, but faster and easier, since you understand your own notation and already know how to cast the spell. You need spend only 1 hour and 10 gp for each level of the copied spell.",
-      "**The Book's Appearance.** Your spellbook is a unique compilation of spells, with its own decorative flourishes and margin notes. It might be a plain, functional leather volume that you received as a gift from your master, a finely bound gilt-edged tome you found in an ancient library or even a loose collection of notes scrounged together after you lost your previous spellbook in a mishap. If you lose your spellbook, you can use the same procedure to transcribe the spells that you have prepared into a new spellbook. Filling out the remainder of your spellbook requires you to find new spells to do so, as normal. For this reason, many wizards keep backup spellbooks in a safe place.",
-    ],
+    leveledFeatures: {
+      1: {
+        preparedSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 3,
+                spellIds: Object.values(cantripIds),
+              },
+            ],
+          },
+        },
+      },
+      4: {
+        preparedSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 1,
+                spellIds: Object.values(cantripIds),
+              },
+            ],
+          },
+        },
+      },
+      10: {
+        preparedSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 1,
+                spellIds: Object.values(cantripIds),
+              },
+            ],
+          },
+        },
+      },
+    },
   },
-
+  ...numberArray(1, 6).map((level) => {
+    const spellSlot = {} as { [key: number]: number };
+    spellSlot[level] = 1;
+    return {
+      classId: ids.wizard,
+      name: `Recover ${level} Level Spell`,
+      description: `Use Arcane Recovery to recover a ${level} level spell.`,
+      hideInSheet: true,
+      effect: {
+        spellSlotRegained: spellSlot,
+        active: {
+          cost: {
+            customResource: {
+              resource: "Arcane Recovery",
+              quantity: level,
+            },
+            time: { quantity: 1, unit: Time.shortRest },
+          },
+        },
+      },
+    };
+  }),
   {
-    name: "Cantrip Formulas",
-    description:
-      "At 3rd level, you have scribed a set of arcane formulas in your spellbook that you can use to formulate a cantrip in your mind. Whenever you finish a long rest and consult those formulas in your spellbook, you can replace one wizard cantrip you know with another cantrip from the wizard spell list.",
-    levels: [3],
     classId: ids.wizard,
+    levels: [20],
+    name: "Signature Spells",
+    description: `When you reach 20th level, you gain mastery over two powerful spells and can cast them with little effort. Choose two 3rd-level wizard spells in your ^${itemIds.spellBook}{spellbook}^ as your signature spells. You always have these spells prepared, they don't count against the number of spells you have prepared, and you can cast each of them once at 3rd level without expending a spell slot. When you do so, you can't do so again until you finish a short or long rest.\n\nIf you want to cast either spell at a higher level, you must expend a spell slot as normal.`,
+    leveledFeatures: {
+      20: {
+        customSpells: [
+          {
+            spells: {
+              defaultSpells: getSpellIdsOfLevel(3),
+            },
+            noSpellSlot: true,
+          },
+          {
+            spells: {
+              defaultSpells: getSpellIdsOfLevel(3),
+            },
+            noSpellSlot: true,
+          },
+        ],
+        active: {
+          cost: {
+            time: {
+              quantity: 1,
+              unit: Time.rest,
+            },
+          },
+        },
+      },
+    },
   },
   {
     name: "Spell Mastery",
-    description:
-      "At 18th level, you have achieved such mastery over certain spells that you can cast them at will. Choose a 1st-level wizard spell and a 2nd-level wizard spell that are in your spellbook. You can cast those spells at their lowest level without expending a spell slot when you have them prepared. If you want to cast either spell at a higher level, you must expend a spell slot as normal.\n\nBy spending 8 hours in study, you can exchange one or both of the spells you chose for different spells of the same levels.",
+    description: `At 18th level, you have achieved such mastery over certain spells that you can cast them at will. Choose a 1st-level wizard spell and a 2nd-level wizard spell that are in your ^${itemIds.spellBook}{spellbook}^. You can cast those spells at their lowest level without expending a spell slot when you have them prepared. If you want to cast either spell at a higher level, you must expend a spell slot as normal.\n\nBy spending 8 hours in study, you can exchange one or both of the spells you chose for different spells of the same levels.`,
     levels: [18],
     classId: ids.wizard,
+    leveledFeatures: {
+      18: {
+        active: {
+          cost: {
+            time: {
+              quantity: 8,
+              unit: Time.hour,
+            },
+          },
+        },
+        customSpells: [
+          {
+            spells: {
+              defaultSpells: getSpellIdsOfLevel(1),
+            },
+            noSpellSlot: true,
+          },
+          {
+            spells: {
+              defaultSpells: getSpellIdsOfLevel(2),
+            },
+            noSpellSlot: true,
+          },
+        ],
+      },
+    },
   },
   {
-    name: "Signature Spells",
-    description:
-      "When you reach 20th level, you gain mastery over two powerful spells and can cast them with little effort. Choose two 3rd-level wizard spells in your spellbook as your signature spells. You always have these spells prepared, they don't count against the number of spells you have prepared, and you can cast each of them once at 3rd level without expending a spell slot. When you do so, you can't do so again until you finish a short or long rest.\n\n If you want to cast either spell at a higher level, you must expend a spell slot as normal.",
-    levels: [20],
+    levels: [3],
     classId: ids.wizard,
+    name: "Cantrip Formulas",
+    description: `At 3rd level, you have scribed a set of arcane formulas in your ^${itemIds.spellBook}{spellbook}^ that you can use to formulate a cantrip in your mind. Whenever you finish a long rest and consult those formulas in your ^${itemIds.spellBook}{spellbook}^, you can replace one wizard cantrip you know with another cantrip from the wizard spell list.`,
+    leveledFeatures: {
+      3: {
+        preparedSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 1,
+                spellIds: Object.values(cantripIds),
+              },
+            ],
+          },
+          lose: {
+            choices: [
+              {
+                numberOfSpells: 1,
+                spellIds: Object.values(cantripIds),
+              },
+            ],
+          },
+        },
+        active: {
+          cost: {
+            time: {
+              quantity: 1,
+              unit: Time.longRest,
+            },
+          },
+        },
+      },
+    },
   },
-  // Bard
+  {
+    classId: ids.wizard,
+    levels: [1],
+    name: "Arcane Recovery",
+    description: `You have learned to regain some of your magical energy by studying your ^${itemIds.spellBook}{spellbook}^. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.\n\nFor example, if you're a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots.`,
+    leveledFeatures: {
+      ...numberArray(1, 20).reduce((acc, level) => {
+        const res: PrismaJson.FeatureEffect = {
+          resourceAmountIncrease: [
+            {
+              resourceName: "Arcane Recovery",
+              amount: Math.ceil(level / 2),
+            },
+          ],
+          active: {
+            cost: {
+              time: {
+                quantity: 1,
+                unit: Time.day,
+              },
+            },
+          },
+        };
+        acc[level] = res; // Assign the result to the corresponding level key
+        return acc;
+      }, {} as { [key: number]: PrismaJson.FeatureEffect }), // Type the accumulator as an object with numeric keys
+    },
+  },
+  {
+    classId: ids.wizard,
+    spellCasting: true,
+    name: "Spellbook",
 
+    description: `As a wizard, you have a ^${itemIds.spellBook}{spellbook}^ containing six 1st-level wizard spells of your choice. Your ^${itemIds.spellBook}{spellbook}^ is the repository of the wizard spells you know, except your cantrips, which are fixed in your mind.\n\nThe spells that you add to your ^${itemIds.spellBook}{spellbook}^ as you gain levels reflect the arcane research you conduct on your own, as well as intellectual breakthroughs you have had about the nature of the multiverse. You might find other spells during your adventures. You could discover a spell recorded on a scroll in an evil wizard's chest, for example, or in a dusty tome in an ancient library.\n\nYour ^${itemIds.spellBook}{spellbook}^ is a unique compilation of spells, with its own decorative flourishes and margin notes. It might be a plain, functional leather volume that you received as a gift from your master, a finely bound gilt-edged tome you found in an ancient library or even a loose collection of notes scrounged together after you lost your previous ^${itemIds.spellBook}{spellbook}^ in a mishap.`,
+  },
+  {
+    classId: ids.wizard,
+    spellCasting: true,
+    name: "Copying a Spell into the Spellbook",
+    description: `When you find a wizard spell of 1st level or higher, you can add it to your ^${itemIds.spellBook}{spellbook}^ if it is of a spell level you can prepare and if you can spare the time to decipher and copy it.\n\nCopying a spell into your ^${itemIds.spellBook}{spellbook}^ involves reproducing the basic form of the spell, then deciphering the unique system of notation used by the wizard who wrote it. You must practice the spell until you understand the sounds or gestures required, then transcribe it into your ^${itemIds.spellBook}{spellbook}^ using your own notation.\n\nFor each level of the spell, the process takes 2 hours and costs 50 ^${itemIds.goldPiece}{gp}^. The cost represents material components you expend as you experiment with the spell to master it, as well as the fine ^${itemIds.ink}{inks}^ you need to record it. Once you have spent this time and money, you can prepare the spell just like your other spells.`,
+  },
+  ...numberArray(1, 9).map((level) => {
+    return {
+      classId: ids.wizard,
+      spellCasting: true,
+      name: `Copy Level ${level} Spell`,
+      description: `Copy a level ${level} spell into a spellbook.`,
+      hideInSheet: true,
+      effect: {
+        active: {
+          cost: {
+            items: {
+              defaultItems: [{ item: itemIds.goldPiece, quantity: 50 * level }],
+            },
+            time: {
+              quantity: 2 * level,
+              unit: Time.hour,
+            },
+          },
+        },
+      },
+    };
+  }),
+  {
+    spellCasting: true,
+    classId: ids.wizard,
+    name: "Replacing the Spellbook",
+    description: `You can copy a spell from your own ^${itemIds.spellBook}{spellbook}^ into another book-for example, if you want to make a backup copy of your ^${itemIds.spellBook}{spellbook}^. This is just like copying a new spell into your ^${itemIds.spellBook}{spellbook}^, but faster and easier, since you understand your own notation and already know how to cast the spell. You need spend only 1 hour and 10 ^${itemIds.goldPiece}{gp}^ for each level of the copied spell.\n\nIf you lose your ^${itemIds.spellBook}{spellbook}^, you can use the same procedure to transcribe the spells that you have prepared into a new ^${itemIds.spellBook}{spellbook}^. Filling out the remainder of your ^${itemIds.spellBook}{spellbook}^ requires you to find new spells to do so, as normal. For this reason, many wizards keep backup ^${itemIds.spellBook}{spellbooks}^ in a safe place.`,
+  },
+  {
+    classId: ids.wizard,
+    spellCasting: true,
+    name: "Ritual Casting",
+    description: `You can cast a wizard spell as a ritual if that spell has the ritual tag and you have the spell in your ^${itemIds.spellBook}{spellbook}^. You don't need to have the spell prepared.`,
+    effect: {
+      ritualCasting: {
+        spellPrepared: true,
+        fromSpellList: true,
+      },
+    },
+  },
+  {
+    classId: ids.wizard,
+    spellCasting: true,
+    name: "Learning Spells of 1st Level and Higher",
+    description: `Each time you gain a wizard level, you can add two wizard spells of your choice to your ^${itemIds.spellBook}{spellbook}^ for free. Each of these spells must be of a level for which you have spell slots, as shown on the Wizard table. On your adventures, you might find other spells that you can add to your ^${itemIds.spellBook}{spellbook}^.`,
+    leveledFeatures: {
+      1: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(1),
+              },
+            ],
+          },
+        },
+      },
+      2: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(1),
+              },
+            ],
+          },
+        },
+      },
+      3: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(1),
+              },
+            ],
+          },
+        },
+      },
+      4: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(2),
+              },
+            ],
+          },
+        },
+      },
+      5: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(3),
+              },
+            ],
+          },
+        },
+      },
+      6: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(3),
+              },
+            ],
+          },
+        },
+      },
+      7: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(4),
+              },
+            ],
+          },
+        },
+      },
+      8: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(4),
+              },
+            ],
+          },
+        },
+      },
+      9: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(5),
+              },
+            ],
+          },
+        },
+      },
+      10: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(5),
+              },
+            ],
+          },
+        },
+      },
+      11: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(6),
+              },
+            ],
+          },
+        },
+      },
+      12: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(6),
+              },
+            ],
+          },
+        },
+      },
+      13: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(7),
+              },
+            ],
+          },
+        },
+      },
+      14: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(7),
+              },
+            ],
+          },
+        },
+      },
+      15: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(8),
+              },
+            ],
+          },
+        },
+      },
+      16: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(8),
+              },
+            ],
+          },
+        },
+      },
+      17: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(9),
+              },
+            ],
+          },
+        },
+      },
+
+      18: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(9),
+              },
+            ],
+          },
+        },
+      },
+      19: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(9),
+              },
+            ],
+          },
+        },
+      },
+      20: {
+        availableSpellChoices: {
+          gain: {
+            choices: [
+              {
+                numberOfSpells: 2,
+                spellIds: getSpellIdsEqualToOrLessThanLevel(9),
+              },
+            ],
+          },
+        },
+      },
+    },
+  },
+
+  // Bard
+  {
+    name: "Cantrips",
+    description:
+      "You know two cantrips of your choice from the bard spell list. You learn additional bard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Bard table.",
+    spellCasting: true,
+
+    classId: ids.bard,
+    tableColumns: [
+      {
+        title: "Cantrips Known",
+        col: {
+          1: 2,
+          2: 2,
+          3: 2,
+          4: 3,
+          5: 3,
+          6: 3,
+          7: 3,
+          8: 3,
+          9: 3,
+          10: 4,
+          11: 4,
+          12: 4,
+          13: 4,
+          14: 4,
+          15: 4,
+          16: 4,
+          17: 4,
+          18: 4,
+          19: 4,
+          20: 4,
+        },
+      },
+    ],
+  },
+  {
+    name: "Spells Known",
+    description:
+      "You know four 1st-level spells of your choice from the bard spell list.\n\nThe Spells Known column of the Bard table shows when you learn more bard spells of your choice. Each of these spells must be of a level for which you have spell slots, as shown on the table. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the bard spells you know and replace it with another spell from the bard spell list, which also must be of a level for which you have spell slots.",
+    spellCasting: true,
+    classId: ids.bard,
+    tableColumns: [
+      {
+        title: "Spells Known",
+        col: {
+          1: 4,
+          2: 5,
+          3: 6,
+          4: 7,
+          5: 8,
+          6: 9,
+          7: 10,
+          8: 11,
+          9: 12,
+          10: 14,
+          11: 15,
+          12: 15,
+          13: 16,
+          14: 18,
+          15: 19,
+          16: 19,
+          17: 20,
+          18: 22,
+          19: 22,
+          20: 22,
+        },
+      },
+    ],
+  },
+  {
+    name: "Ritual Casting",
+    description: `You can cast any bard spell you know as a ritual if that spell has the ritual tag.`,
+    spellCasting: true,
+    classId: ids.bard,
+    effect: {
+      ritualCasting: {
+        spellPrepared: true,
+        fromSpellList: true,
+      },
+    },
+  },
   {
     name: "Bardic Inspiration",
     description: `You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6.\n\nOnce within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the DM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time. \n\nYou can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain any expended uses when you finish a long rest.\n\nYour Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.`,
@@ -308,11 +843,30 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
     levels: [10, 20],
     classId: ids.cleric,
   },
+  {
+    name: "Cantrips",
+    description:
+      "At 1st level, you know three cantrips of your choice from the cleric spell list. You learn additional cleric cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Cleric table.",
+    levels: [1, 4, 10],
+    classId: ids.cleric,
+    spellCasting: true,
+  },
+  {
+    name: "Ritual Casting",
+    description: `You can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared.`,
+    classId: ids.cleric,
+    spellCasting: true,
+    effect: {
+      ritualCasting: {
+        spellPrepared: true,
+        fromSpellList: true,
+      },
+    },
+  },
   // Rogue
   {
     name: "Expertise",
-    description:
-      "At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with thieves' tools. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.\n\n At 6th level, you can choose two more of your proficiencies (in skills or with thieves' tools) to gain this benefit.",
+    description: `At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with ^${itemIds.thievesTools}{thieves' tools}^. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.\n\n At 6th level, you can choose two more of your proficiencies (in skills or with ^${itemIds.thievesTools}{thieves' tools}^) to gain this benefit.`,
     levels: [1, 6],
     classId: ids.rogue,
   },
@@ -320,8 +874,35 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
     name: "Sneak Attack",
     description:
       "Beginning at 1st level, you know how to strike subtly and exploit a foe's distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.\n\n You don't need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn't incapacitated, and you don't have disadvantage on the attack roll. \n\nThe amount of the extra damage increases as you gain levels in this class, as shown in the Sneak Attack column of the Rogue table.",
-    levels: [1],
     classId: ids.rogue,
+    levels: [1],
+    tableColumns: [
+      {
+        title: "Sneak Attack",
+        col: {
+          1: "1d6",
+          2: "1d6",
+          3: "2d6",
+          4: "2d6",
+          5: "3d6",
+          6: "3d6",
+          7: "4d6",
+          8: "4d6",
+          9: "5d6",
+          10: "5d6",
+          11: "6d6",
+          12: "6d6",
+          13: "7d6",
+          14: "7d6",
+          15: "8d6",
+          16: "8d6",
+          17: "9d6",
+          18: "9d6",
+          19: "10d6",
+          20: "10d6",
+        },
+      },
+    ],
   },
   {
     name: "Thieves' Cant",
@@ -353,8 +934,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   },
   {
     name: "Evasion",
-    description:
-      "Beginning at 7th level, you can nimbly dodge out of the way of certain area effects, such as a red dragon's fiery breath or an ice storm spell. When you are subjected to an effect that allows you to make a Dexterity saving throw to take only half damage, you instead take no damage if you succeed on the saving throw, and only half damage if you fail.",
+    description: `Beginning at 7th level, you can nimbly dodge out of the way of certain area effects, such as a red dragon's fiery breath or an %${spellIds.iceStorm}{ice storm}% spell. When you are subjected to an effect that allows you to make a Dexterity saving throw to take only half damage, you instead take no damage if you succeed on the saving throw, and only half damage if you fail.`,
     levels: [7],
     classId: ids.rogue,
   },
@@ -405,11 +985,62 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
       "When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.",
       "You have resistance to bludgeoning, piercing, and slashing damage.",
     ],
+    tableColumns: [
+      {
+        title: "Rages",
+        col: {
+          1: 2,
+          2: 2,
+          3: 3,
+          4: 3,
+          5: 3,
+          6: 4,
+          7: 4,
+          8: 4,
+          9: 4,
+          10: 4,
+          11: 4,
+          12: 5,
+          13: 5,
+          14: 5,
+          15: 5,
+          16: 5,
+          17: 6,
+          18: 6,
+          19: 6,
+          20: "Unlimited",
+        },
+      },
+      {
+        title: "Rage Damage",
+        col: {
+          1: "+2",
+          2: "+2",
+          3: "+2",
+          4: "+2",
+          5: "+2",
+          6: "+2",
+          7: "+2",
+          8: "+2",
+          9: "+3",
+          10: "+3",
+          11: "+3",
+          12: "+3",
+          13: "+3",
+          14: "+3",
+          15: "+3",
+          16: "+4",
+          17: "+4",
+          18: "+4",
+          19: "+4",
+          20: "+4",
+        },
+      },
+    ],
   },
   {
     name: "Unarmored Defense",
-    description:
-      "While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.",
+    description: `While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a ^${itemIds.shield}{shield}^ and still gain this benefit.`,
     levels: [1],
     classId: ids.barbarian,
   },
@@ -492,11 +1123,57 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   },
   // Druid
   {
+    name: "Cantrips",
+    description:
+      "At 1st level, you know two cantrips of your choice from the druid spell list. You learn additional druid cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Druid table.",
+    spellCasting: true,
+    classId: ids.druid,
+    tableColumns: [
+      {
+        title: "Cantrips Known",
+        col: {
+          1: 2,
+          2: 2,
+          3: 2,
+          4: 3,
+          5: 3,
+          6: 3,
+          7: 3,
+          8: 3,
+          9: 3,
+          10: 4,
+          11: 4,
+          12: 4,
+          13: 4,
+          14: 4,
+          15: 4,
+          16: 4,
+          17: 4,
+          18: 4,
+          19: 4,
+          20: 4,
+        },
+      },
+    ],
+  },
+  {
     name: "Druidic",
     description:
       "You know Druidic, the secret language of druids. You can speak the language and use it to leave hidden messages. You and others who know this language automatically spot such a message. Others spot the message's presence with a successful DC 15 Wisdom (Perception) check but can't decipher it without magic.",
     levels: [1],
     classId: ids.druid,
+  },
+  {
+    name: "Ritual Casting",
+    description: `You can cast a druid spell as a ritual if that spell has the ritual tag and you have the spell prepared.`,
+    spellCasting: true,
+    classId: ids.druid,
+    effect: {
+      ritualCasting: {
+        spellPrepared: true,
+        fromSpellList: true,
+      },
+    },
   },
   {
     name: "Wild Shape",
@@ -578,15 +1255,13 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   // Monk
   {
     name: "Unarmored Defense",
-    description:
-      "Beginning at 1st level, while you are wearing no armor and not wielding a shield, your AC equals 10 + your Dexterity modifier + your Wisdom modifier.",
+    description: `Beginning at 1st level, while you are wearing no armor and not wielding a ^${itemIds.shield}{shield}^, your AC equals 10 + your Dexterity modifier + your Wisdom modifier.`,
     levels: [1],
     classId: ids.monk,
   },
   {
     name: "Martial Arts",
-    description:
-      "At 1st level, your practice of martial arts gives you mastery of combat styles that use unarmed strikes and monk weapons, which are shortswords and any simple melee weapons that don't have the two-handed or heavy property.\n\nCertain monasteries use specialized forms of the monk weapons. For example, you might use a club that is two lengths of wood connected by a short chain (called a nunchaku) or a sickle with a shorter, straighter blade (called a kama). Whatever name you use for a monk weapon, you can use the game statistics provided for the weapon on the Weapons page.\n\nYou gain the following benefits while you are unarmed or wielding only monk weapons and you aren't wearing armor or wielding a shield:",
+    description: `At 1st level, your practice of martial arts gives you mastery of combat styles that use unarmed strikes and monk weapons, which are ^${itemIds.shortsword}{shortswords}^ and any simple melee weapons that don't have the two-handed or heavy property.\n\nCertain monasteries use specialized forms of the monk weapons. For example, you might use a ^${itemIds.club}{club}^ that is two lengths of wood connected by a short chain (called a nunchaku) or a ^${itemIds.sickle}{sickle}^ with a shorter, straighter blade (called a kama). Whatever name you use for a monk weapon, you can use the game statistics provided for the weapon on the Weapons page.\n\nYou gain the following benefits while you are unarmed or wielding only monk weapons and you aren't wearing armor or wielding a ^${itemIds.shield}{shield}^:`,
     options: [
       "You can use Dexterity instead of Strength for the attack and damage rolls of your unarmed strikes and monk weapons.",
       "You can roll a d4 in place of the normal damage of your unarmed strike or monk weapon. This die changes as you gain monk levels, as shown in the Martial Arts column of the Monk table.",
@@ -594,6 +1269,33 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
     ],
     levels: [1],
     classId: ids.monk,
+    tableColumns: [
+      {
+        title: "Martial Arts",
+        col: {
+          1: "1d4",
+          2: "1d4",
+          3: "1d4",
+          4: "1d4",
+          5: "1d6",
+          6: "1d6",
+          7: "1d6",
+          8: "1d6",
+          9: "1d8",
+          10: "1d8",
+          11: "1d8",
+          12: "1d8",
+          13: "1d8",
+          14: "1d8",
+          15: "1d8",
+          16: "1d8",
+          17: "1d10",
+          18: "1d10",
+          19: "1d10",
+          20: "1d10",
+        },
+      },
+    ],
   },
   {
     name: "Ki",
@@ -606,13 +1308,66 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
     ],
     levels: [2],
     classId: ids.monk,
+    tableColumns: [
+      {
+        title: "Ki Points",
+        col: {
+          1: "-",
+          2: 2,
+          3: 3,
+          4: 4,
+          5: 5,
+          6: 6,
+          7: 7,
+          8: 8,
+          9: 9,
+          10: 10,
+          11: 11,
+          12: 12,
+          13: 13,
+          14: 14,
+          15: 15,
+          16: 16,
+          17: 17,
+          18: 18,
+          19: 19,
+          20: 20,
+        },
+      },
+    ],
   },
   {
     name: "Unarmored Movement",
-    description:
-      "Starting at 2nd level, your speed increases by 10 feet while you are not wearing armor or wielding a shield. This bonus increases when you reach certain monk levels, as shown in the Monk table.\n\n At 9th level, you gain the ability to move along vertical surfaces and across liquids on your turn without falling during the move.",
+    description: `Starting at 2nd level, your speed increases by 10 feet while you are not wearing armor or wielding a ^${itemIds.shield}{shield}^. This bonus increases when you reach certain monk levels, as shown in the Monk table.\n\n At 9th level, you gain the ability to move along vertical surfaces and across liquids on your turn without falling during the move.`,
     levels: [2, 9],
     classId: ids.monk,
+    tableColumns: [
+      {
+        title: "Unarmored Movement",
+        col: {
+          1: "-",
+          2: "+10 ft.",
+          3: "+10 ft.",
+          4: "+10 ft.",
+          5: "+10 ft.",
+          6: "+15 ft.",
+          7: "+15 ft.",
+          8: "+15 ft.",
+          9: "+15 ft.",
+          10: "+20 ft.",
+          11: "+20 ft.",
+          12: "+20 ft.",
+          13: "+20 ft.",
+          14: "+25 ft.",
+          15: "+25 ft.",
+          16: "+25 ft.",
+          17: "+25 ft.",
+          18: "+30 ft.",
+          19: "+30 ft.",
+          20: "+30 ft.",
+        },
+      },
+    ],
   },
   {
     name: "Dedicated Weapon",
@@ -684,8 +1439,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   },
   {
     name: "Evasion",
-    description:
-      "At 7th level, your instinctive agility lets you dodge out of the way of certain area effects, such as a blue dragon's lightning breath or a fireball spell. When you are subjected to an effect that allows you to make a Dexterity saving throw to take only half damage, you instead take no damage if you succeed on the saving throw, and only half damage if you fail.",
+    description: `At 7th level, your instinctive agility lets you dodge out of the way of certain area effects, such as a blue dragon's lightning breath or a %${spellIds.fireball}{fireball}% spell. When you are subjected to an effect that allows you to make a Dexterity saving throw to take only half damage, you instead take no damage if you succeed on the saving throw, and only half damage if you fail.`,
     levels: [7],
     classId: ids.monk,
   },
@@ -892,6 +1646,80 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   },
   // Sorcerer
   {
+    name: "Cantrips",
+    description:
+      "At 1st level, you know four cantrips of your choice from the sorcerer spell list. You learn additional sorcerer cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Sorcerer table.",
+    spellCasting: true,
+    classId: ids.sorcerer,
+    effect: {
+      ritualCasting: {
+        spellPrepared: true,
+        fromSpellList: true,
+      },
+    },
+    tableColumns: [
+      {
+        title: "Cantrips Known",
+        col: {
+          1: 4,
+          2: 4,
+          3: 4,
+          4: 5,
+          5: 5,
+          6: 5,
+          7: 5,
+          8: 5,
+          9: 5,
+          10: 6,
+          11: 6,
+          12: 6,
+          13: 6,
+          14: 6,
+          15: 6,
+          16: 6,
+          17: 6,
+          18: 6,
+          19: 6,
+          20: 6,
+        },
+      },
+    ],
+  },
+  {
+    name: "Spells Known",
+    description:
+      "You know two 1st-level spells of your choice from the sorcerer spell list.\n\nThe Spells Known column of the Sorcerer table shows when you learn more sorcerer spells of your choice. Each of these spells must be of a level for which you have spell slots. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the sorcerer spells you know and replace it with another spell from the sorcerer spell list, which also must be of a level for which you have spell slots.",
+    spellCasting: true,
+    classId: ids.sorcerer,
+    tableColumns: [
+      {
+        title: "Spells Known",
+        col: {
+          1: 2,
+          2: 3,
+          3: 4,
+          4: 5,
+          5: 6,
+          6: 7,
+          7: 8,
+          8: 9,
+          9: 10,
+          10: 11,
+          11: 12,
+          12: 12,
+          13: 13,
+          14: 13,
+          15: 14,
+          16: 14,
+          17: 15,
+          18: 15,
+          19: 15,
+          20: 15,
+        },
+      },
+    ],
+  },
+  {
     name: "Font of Magic",
     description:
       "At 2nd level, you tap into a deep wellspring of magic within yourself. This wellspring is represented by sorcery points, which allow you to create a variety of magical effects.",
@@ -929,6 +1757,33 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
               "Sorcery Point Cost": "7",
             },
           ],
+        },
+      },
+    ],
+    tableColumns: [
+      {
+        title: "Sorcery Points",
+        col: {
+          1: "-",
+          2: 2,
+          3: 3,
+          4: 4,
+          5: 5,
+          6: 6,
+          7: 7,
+          8: 8,
+          9: 9,
+          10: 10,
+          11: 11,
+          12: 12,
+          13: 13,
+          14: 14,
+          15: 15,
+          16: 16,
+          17: 17,
+          18: 18,
+          19: 19,
+          20: 20,
         },
       },
     ],
@@ -1031,11 +1886,131 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   },
   // Warlock
   {
+    name: "Cantrips",
+    description:
+      "You know two cantrips of your choice from the warlock spell list. You learn additional warlock cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Warlock table.",
+    spellCasting: true,
+    classId: ids.warlock,
+    tableColumns: [
+      {
+        title: "Cantrips Known",
+        col: {
+          1: 2,
+          2: 2,
+          3: 2,
+          4: 3,
+          5: 3,
+          6: 3,
+          7: 3,
+          8: 3,
+          9: 3,
+          10: 4,
+          11: 4,
+          12: 4,
+          13: 4,
+          14: 4,
+          15: 4,
+          16: 4,
+          17: 4,
+          18: 4,
+          19: 4,
+          20: 4,
+        },
+      },
+    ],
+  },
+  {
+    name: "Spells Known",
+    description:
+      "At 1st level, you know two 1st-level spells of your choice from the warlock spell list.\n\nThe Spells Known column of the Warlock table shows when you learn more warlock spells of your choice of 1st level or higher. A spell you choose must be of a level no higher than what's shown in the table's Slot Level column for your level. When you reach 6th level, for example, you learn a new warlock spell, which can be 1st, 2nd, or 3rd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the warlock spells you know and replace it with another spell from the warlock spell list, which also must be of a level for which you have spell slots.",
+    spellCasting: true,
+    classId: ids.warlock,
+    tableColumns: [
+      {
+        title: "Spells Known",
+        col: {
+          1: 2,
+          2: 3,
+          3: 4,
+          4: 5,
+          5: 6,
+          6: 7,
+          7: 8,
+          8: 9,
+          9: 10,
+          10: 10,
+          11: 11,
+          12: 11,
+          13: 12,
+          14: 12,
+          15: 13,
+          16: 13,
+          17: 14,
+          18: 14,
+          19: 15,
+          20: 15,
+        },
+      },
+      {
+        title: "Slot Level",
+        col: {
+          1: "1st",
+          2: "1st",
+          3: "2nd",
+          4: "2nd",
+          5: "3rd",
+          6: "3rd",
+          7: "4th",
+          8: "4th",
+          9: "5th",
+          10: "5th",
+          11: "5th",
+          12: "5th",
+          13: "5th",
+          14: "5th",
+          15: "5th",
+          16: "5th",
+          17: "5th",
+          18: "5th",
+          19: "5th",
+          20: "5th",
+        },
+      },
+    ],
+  },
+  {
     name: "Eldritch Invocations",
     description:
       "In your study of occult lore, you have unearthed eldritch invocations, fragments of forbidden knowledge that imbue you with an abiding magical ability. At 2nd level, you gain two eldritch invocations of your choice. When you gain certain warlock levels, you gain additional invocations of your choice, as shown in the Invocations Known column of the Warlock table. A level prerequisite refers to your level in this class. Additionally, when you gain a level in this class, you can choose one of the invocations you know and replace it with another invocation that you could learn at that level.",
     levels: [2],
     classId: ids.warlock,
+    tableColumns: [
+      {
+        title: "Invocations Known",
+        col: {
+          1: "-",
+          2: 2,
+          3: 2,
+          4: 2,
+          5: 3,
+          6: 3,
+          7: 4,
+          8: 4,
+          9: 5,
+          10: 5,
+          11: 5,
+          12: 6,
+          13: 6,
+          14: 6,
+          15: 7,
+          16: 7,
+          17: 7,
+          18: 8,
+          19: 8,
+          20: 8,
+        },
+      },
+    ],
   },
   {
     name: "Pact Boon",
@@ -1067,10 +2042,43 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   },
   //Ranger
   {
+    name: "Spells Known",
+    description:
+      "You know two 1st-level spells of your choice from the ranger spell list.\n\nThe Spells Known column of the Ranger table shows when you learn more ranger spells of your choice. Each of these spells must be of a level for which you have spell slots. For instance, when you reach 5th level in this class, you can learn one new spell of 1st or 2nd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the ranger spells you know and replace it with another spell from the ranger spell list, which also must be of a level for which you have spell slots.",
+    classId: ids.ranger,
+    spellCasting: true,
+    tableColumns: [
+      {
+        title: "Spells Known",
+        col: {
+          1: "-",
+          2: 2,
+          3: 3,
+          4: 4,
+          5: 4,
+          6: 4,
+          7: 5,
+          8: 5,
+          9: 6,
+          10: 6,
+          11: 7,
+          12: 7,
+          13: 8,
+          14: 8,
+          15: 9,
+          16: 9,
+          17: 10,
+          18: 10,
+          19: 11,
+          20: 11,
+        },
+      },
+    ],
+  },
+  {
     name: "Favored Enemy",
     description:
       "Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain type of enemy.\n\nChoose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead. Alternatively, you can select two races of humanoid (such as gnolls and orcs) as favored enemies.\n\nYou have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to recall information about them.\n\nWhen you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if they speak one at all.\n\nYou choose one additional favored enemy, as well as an associated language, at 6th and 14th level. As you gain levels, your choices should reflect the types of monsters you have encountered on your adventures.",
-
     levels: [1, 6, 14],
     classId: ids.ranger,
   },
@@ -1105,6 +2113,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
       {
         "": {
           headers: ["Level", "Deft Explorer Feature", "Description"],
+          headersLength: [10, 10, 80],
           data: [
             {
               Level: "1",
@@ -1184,13 +2193,11 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
             },
             {
               "Fighting Style": "Interception (UA)",
-              Description:
-                "When a creature you can see hits a target that is within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your proficiency bonus (to a minimum of 0 damage). You must be wielding a shield or a simple or martial weapon to use this reaction.",
+              Description: `When a creature you can see hits a target that is within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your proficiency bonus (to a minimum of 0 damage). You must be wielding a ^${itemIds.shield}{shield}^ or a simple or martial weapon to use this reaction.`,
             },
             {
               "Fighting Style": "Mariner (UA)",
-              Description:
-                "As long as you are not wearing heavy armor or using a shield, you have a swimming speed and a climbing speed equal to your normal speed, and you gain a +1 bonus to armor class.",
+              Description: `As long as you are not wearing heavy armor or using a ^${itemIds.shield}{shield}^, you have a swimming speed and a climbing speed equal to your normal speed, and you gain a +1 bonus to armor class.`,
             },
             {
               "Fighting Style": "Tunnel Fighter (UA)",
@@ -1222,26 +2229,33 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
       {
         "Primal Awareness Spells": {
           headers: ["Ranger Level", "Spell"],
+          links: [
+            spellIds.speakWithAnimals,
+            spellIds.beastSense,
+            spellIds.speakWithPlants,
+            spellIds.locateCreature,
+            spellIds.communeWithNature,
+          ].map((id) => generateSpellLink(id)),
           data: [
             {
               "Ranger Level": "3rd",
-              Spell: "Speak With Animals",
+              Spell: `%${spellIds.speakWithAnimals}{Speak With Animals}%`,
             },
             {
               "Ranger Level": "5th",
-              Spell: "Beast Sense",
+              Spell: `%${spellIds.beastSense}{Beast Sense}%`,
             },
             {
               "Ranger Level": "9th",
-              Spell: "Speak With Plants",
+              Spell: `%${spellIds.speakWithPlants}{Speak With Plants}%`,
             },
             {
               "Ranger Level": "13th",
-              Spell: "Locate Creature",
+              Spell: `%${spellIds.locateCreature}{Locate Creature}%`,
             },
             {
               "Ranger Level": "17th",
-              Spell: "Commune With Nature",
+              Spell: `%${spellIds.communeWithNature}{Commune With Nature}%`,
             },
           ],
         },
@@ -1266,8 +2280,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   },
   {
     name: "Land's Stride",
-    description:
-      "Starting at 8th level, moving through nonmagical difficult terrain costs you no extra movement. You can also pass through nonmagical plants without being slowed by them and without taking damage from them if they have thorns, spines, or a similar hazard.\n\n In addition, you have advantage on saving throws against plants that are magically created or manipulated to impede movement, such as those created by the Entangle spell.",
+    description: `Starting at 8th level, moving through nonmagical difficult terrain costs you no extra movement. You can also pass through nonmagical plants without being slowed by them and without taking damage from them if they have thorns, spines, or a similar hazard.\n\n In addition, you have advantage on saving throws against plants that are magically created or manipulated to impede movement, such as those created by the %${spellIds.entangle}{Entangle}% spell.`,
     levels: [8],
     classId: ids.ranger,
   },
@@ -1309,10 +2322,57 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   //Artificer
   {
     classId: ids.artificer,
+    name: "Cantrips",
+    description:
+      "At 1st level, you know two cantrips of your choice from the artificer spell list. At higher levels, you learn additional artificer cantrips of your choice, as shown in the Cantrips Known column of the Artificer table.\n\nWhen you gain a level in this class, you can replace one of the artificer cantrips you know with another cantrip from the artificer spell list.",
+    spellCasting: true,
+    tableColumns: [
+      {
+        title: "Cantrips Known",
+        col: {
+          1: 2,
+          2: 2,
+          3: 2,
+          4: 2,
+          5: 2,
+          6: 2,
+          7: 2,
+          8: 2,
+          9: 2,
+          10: 3,
+          11: 3,
+          12: 3,
+          13: 3,
+          14: 4,
+          15: 4,
+          16: 4,
+          17: 4,
+          18: 4,
+          19: 4,
+          20: 4,
+        },
+      },
+    ],
+  },
+  {
+    classId: ids.artificer,
+    name: "Ritual Casting",
+    description:
+      "You can cast an artificer spell as a ritual if that spell has the ritual tag and you have the spell prepared.",
+    levels: [1],
+    spellCasting: true,
+    effect: {
+      ritualCasting: {
+        spellPrepared: true,
+        fromSpellList: true,
+      },
+    },
+  },
+  {
+    classId: ids.artificer,
     name: "Magical Tinkering",
     levels: [1],
-    description:
-      "At 1st level, you've learned how to invest a spark of magic into mundane objects. To use this ability, you must have thieves' tools or artisan's tools in hand. You then touch a Tiny nonmagical object as an action and give it a property from the *Tinkering Options Table* below.\n\nThe chosen property lasts indefinitely. As an action, you can touch the object and end the property early.\n\nYou can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies.",
+    description: `At 1st level, you've learned how to invest a spark of magic into mundane objects. To use this ability, you must have ^${itemIds.thievesTools}{thieves' tools}^ or artisan's tools in hand. You then touch a Tiny nonmagical object as an action and give it a property from the *Tinkering Options Table* below.\n\nThe chosen property lasts indefinitely. As an action, you can touch the object and end the property early.\n\nYou can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies.`,
     extendedTable: [
       {
         "Tinkering Options": {
@@ -1341,6 +2401,58 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
     name: "Infuse Item",
     description:
       "At 2nd level, you've gained the ability to imbue mundane items with certain magical infusions, turning those objects into magic items.\n\n**Infusions Known**\n\nWhen you gain this feature, pick four artificer infusions to learn, chosen from the table below. You learn additional infusions of your choice when you reach certain levels in this class, as shown in the Infusions Known column of the Artificer table.\n\nWhenever you gain a level in this class, you can replace one of the artificer infusions you learned with a new one.\n\n**Infusing an Item**\n\nWhenever you finish a long rest, you can touch a nonmagical object and imbue it with one of your artificer infusions, turning it into a magic item. An infusion works on only certain kinds of objects, as specified in the infusion's description. If the item requires attunement, you can attune yourself to it the instant you infuse the item. If you decide to attune to the item later, you must do so using the normal process for attunement (see the attunement rules in the Dungeon Master's Guide).\n\nYour infusion remains in an item indefinitely, but when you die, the infusion vanishes after a number of days equal to your Intelligence modifier (minimum of 1 day). The infusion also vanishes if you replace your knowledge of the infusion.\n\nYou can infuse more than one nonmagical object at the end of a long rest; the maximum number of objects appears in the Infused Items column of the Artificer table. You must touch each of the objects, and each of your infusions can be in only one object at a time. Moreover, no object can bear more than one of your infusions at a time. If you try to exceed your maximum number of infusions, the oldest infusion ends, and then the new infusion applies.\n\nIf an infusion ends on an item that contains other things, like a bag of holding, its contents harmlessly appear in and around its space.",
+    tableColumns: [
+      {
+        title: "Infusions Known",
+        col: {
+          1: "-",
+          2: 4,
+          3: 4,
+          4: 4,
+          5: 4,
+          6: 6,
+          7: 6,
+          8: 6,
+          9: 6,
+          10: 8,
+          11: 8,
+          12: 8,
+          13: 8,
+          14: 10,
+          15: 10,
+          16: 10,
+          17: 10,
+          18: 12,
+          19: 12,
+          20: 12,
+        },
+      },
+      {
+        title: "Infused Items",
+        col: {
+          1: "-",
+          2: 2,
+          3: 2,
+          4: 2,
+          5: 2,
+          6: 3,
+          7: 3,
+          8: 3,
+          9: 3,
+          10: 4,
+          11: 4,
+          12: 4,
+          13: 4,
+          14: 5,
+          15: 5,
+          16: 5,
+          17: 5,
+          18: 6,
+          19: 6,
+          20: 6,
+        },
+      },
+    ],
     extendedTable: [
       {
         "Artificer Infusions": {
@@ -1350,7 +2462,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
             {
               Infusion: "Arcane Propulsion Armor",
               Description:
-                "The wearer of this armor gets the following benefits.\n\n (1) The wearer's waling speed increases by 5 feet.\n\n (2) The armor includes gauntlets, each of which is a magic melee weapon that can be wielded only when the hand is holding nothing. The wearer is proficient with the gauntlets, and each one deals 1d8 force damage on a hit and has the thrown property, with a normal range of 20 feet and a long range of 60 feet. When thrown, the gauntlet detaches and flies at the attack's target, then immediately returns to the wearer and reattaches.\n\n (3) The armor can't be removed against the wearer's will. \n\n(4) If the wearer is missing any limbs, the armor replaces those limbs - hands, arms, feet, legs, or similar appendages. The replacements function identically to the body parts they replace.",
+                "The wearer of this armor gets the following benefits.\n\n (1) The wearer's walking speed increases by 5 feet.\n\n (2) The armor includes gauntlets, each of which is a magic melee weapon that can be wielded only when the hand is holding nothing. The wearer is proficient with the gauntlets, and each one deals 1d8 force damage on a hit and has the thrown property, with a normal range of 20 feet and a long range of 60 feet. When thrown, the gauntlet detaches and flies at the attack's target, then immediately returns to the wearer and reattaches.\n\n (3) The armor can't be removed against the wearer's will. \n\n(4) If the wearer is missing any limbs, the armor replaces those limbs - hands, arms, feet, legs, or similar appendages. The replacements function identically to the body parts they replace.",
               Item: "A suit of armor (requires attunement)",
               Prerequisites: "14th level artificer",
             },
@@ -1361,13 +2473,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
               Item: "A suit of armor (requires attunement)",
               Prerequisites: "-",
             },
-            {
-              Infusion: "Armor of Tools (UA)",
-              Description:
-                "As an action, a creature wearing this infused armor can integrate into it artisan’s tools or thieves’ tools. The tools remain integrated in the armor for 8 hours or until the wearer removes the tools as an action. The armor can have only one tool integrated at a time. The wearer can add its Intelligence modifier to any ability checks it makes with the integrated tool. The wearer must have a hand free to use the tool.",
-              Item: "A suit of armor (requires attunement)",
-              Prerequisites: "-",
-            },
+
             {
               Infusion: "Boots of the Winding Path",
               Description:
@@ -1473,8 +2579,7 @@ The spells that you add to your spellbook as you gain levels reflect the arcane 
   },
   {
     name: "The Right Tool for the Job",
-    description:
-      "At 3rd level, you've learned how to produce exactly the tool you need: with thieves' tools or artisan's tools in hand, you can magically create one set of artisan's tools in an unoccupied space within 5 feet of you. This creation requires 1 hour of uninterrupted work, which can coincide with a short or long rest. Though the product of magic, the tools are nonmagical, and they vanish when you use this feature again.",
+    description: `At 3rd level, you've learned how to produce exactly the tool you need: with ^${itemIds.thievesTools}{thieves' tools}^ or artisan's tools in hand, you can magically create one set of artisan's tools in an unoccupied space within 5 feet of you. This creation requires 1 hour of uninterrupted work, which can coincide with a short or long rest. Though the product of magic, the tools are nonmagical, and they vanish when you use this feature again.`,
     levels: [3],
     classId: ids.artificer,
   },

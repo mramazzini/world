@@ -1,6 +1,4 @@
-import { Prisma } from "@prisma/client";
-
-const SpellListToSpellArr: Prisma.SpellListToSpellCreateManyInput[] = [
+const SpellListToSpellArr = [
   { spellId: 0, spellListId: 9 },
   { spellId: 0, spellListId: 6 },
   { spellId: 0, spellListId: 8 },

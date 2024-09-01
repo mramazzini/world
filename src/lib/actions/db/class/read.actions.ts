@@ -15,10 +15,11 @@ export async function getClasses(homebrew: boolean): Promise<ClassInfo[]> {
         },
       },
       include: {
-        Features: true,
         SubClasses: true,
-        casterType: true,
-        customFields: true,
+        potentialEquipment: true,
+        potentialTools: true,
+        potentialWeapons: true,
+        SpellList: true,
         User: {
           select: {
             username: true,
@@ -31,10 +32,11 @@ export async function getClasses(homebrew: boolean): Promise<ClassInfo[]> {
   }
   const res = await db.class.findMany({
     include: {
-      Features: true,
       SubClasses: true,
-      casterType: true,
-      customFields: true,
+      potentialEquipment: true,
+      potentialTools: true,
+      potentialWeapons: true,
+      SpellList: true,
       User: {
         select: {
           username: true,
@@ -59,10 +61,11 @@ export async function getClass(
       },
 
       include: {
-        Features: true,
+        potentialEquipment: true,
+        potentialTools: true,
+        potentialWeapons: true,
         SubClasses: true,
-        casterType: true,
-        customFields: true,
+        SpellList: true,
         User: {
           select: {
             username: true,
@@ -80,10 +83,11 @@ export async function getClass(
         id: query,
       },
       include: {
-        Features: true,
+        potentialEquipment: true,
+        potentialTools: true,
+        potentialWeapons: true,
         SubClasses: true,
-        casterType: true,
-        customFields: true,
+        SpellList: true,
         User: {
           select: {
             username: true,
@@ -106,10 +110,11 @@ export async function getClassChunk(
       take: QUERY_LIMIT,
       skip: page * QUERY_LIMIT,
       include: {
-        Features: true,
         SubClasses: true,
-        casterType: true,
-        customFields: true,
+        potentialEquipment: true,
+        potentialTools: true,
+        potentialWeapons: true,
+        SpellList: true,
         User: {
           select: {
             username: true,
@@ -122,10 +127,11 @@ export async function getClassChunk(
   }
   const res: ClassInfo[] = await db.class.findMany({
     include: {
-      Features: true,
       SubClasses: true,
-      casterType: true,
-      customFields: true,
+      potentialEquipment: true,
+      potentialTools: true,
+      potentialWeapons: true,
+      SpellList: true,
       User: {
         select: {
           username: true,
@@ -171,10 +177,11 @@ export const getHomebrewClassChunk = async (
         },
       }),
       include: {
-        Features: true,
+        potentialEquipment: true,
+        potentialTools: true,
+        potentialWeapons: true,
         SubClasses: true,
-        casterType: true,
-        customFields: true,
+        SpellList: true,
         User: {
           select: {
             username: true,
@@ -192,10 +199,11 @@ export const getHomebrewClassChunk = async (
       },
     },
     include: {
-      Features: true,
       SubClasses: true,
-      casterType: true,
-      customFields: true,
+      potentialEquipment: true,
+      potentialTools: true,
+      potentialWeapons: true,
+      SpellList: true,
       User: {
         select: {
           username: true,

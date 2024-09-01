@@ -1,6 +1,7 @@
+import { SpellLevel } from "@/lib/types";
 import { Prisma } from "@prisma/client";
 
-const Spells: Prisma.SpellCreateManyInput[] = [
+const SpellSeed: Prisma.SpellCreateManyInput[] = [
   {
     id: 0,
     name: "Acid Splash",
@@ -10633,5 +10634,122 @@ const Spells: Prisma.SpellCreateManyInput[] = [
     upcastInfo: "",
   },
 ];
+export const generateSpellLink = (spellId: number): string => {
+  return `/spells/${SpellSeed.find(
+    (spell) => spell.id === spellId
+  )?.name.replaceAll(" ", "-")}`;
+};
+const spellIds = {
+  magicMissile: 102,
+  fireball: 230,
+  cureWounds: 66,
+  iceStorm: 303,
+  speakWithAnimals: 115,
+  beastSense: 132,
+  speakWithPlants: 262,
+  locateCreature: 305,
+  communeWithNature: 330,
+  entangle: 76,
+};
+const ritualIds = {
+  alarm: 47,
+  ceremony: 57,
+  comprehendLanguages: 64,
+  detectMagic: 68,
+  detectPoisonAndDisease: 69,
+  findFamiliar: 81,
+  identify: 95,
+  illusoryScript: 96,
+  purifyFoodAndDrink: 105,
+  speakWithAnimals: 115,
+  tensersFloatingDisk: 117,
+  unseenServant: 120,
+  augury: 130,
+  beastSense: 132,
+  gentleRepose: 157,
+  locateAnimalsOrPlants: 170,
+  magicMouth: 172,
+  silence: 192,
+  skywrite: 193,
+  wristPocket: 205,
+  feignDeath: 229,
+  leomundsTinyHut: 241,
+  meldIntoStone: 248,
+  phantomSteed: 252,
+  waterBreathing: 272,
+  waterWalk: 273,
+  divination: 288,
+  commune: 329,
+  communeWithNature: 330,
+  contactOtherPlane: 334,
+  rarysTelepathicBond: 365,
+  drawmijsInstantSummons: 389,
+  forbiddance: 393,
+};
+const cantripIds = {
+  acidSplash: 0,
+  bladeWard: 1,
+  boomingBlade: 2,
+  chillTouch: 3,
+  controlFlames: 4,
+  createBonfire: 5,
+  dancingLights: 6,
+  druidCraft: 7,
+  eldritchBlast: 8,
+  encodeThoughts: 9,
+  fireBolt: 10,
+  friends: 11,
+  frostbite: 12,
+  greenFlameBlade: 13,
+  guidance: 14,
+  gust: 15,
+  infestation: 16,
+  light: 17,
+  lightningLure: 18,
+  mageHand: 19,
+  magicStone: 20,
+  mending: 21,
+  message: 22,
+  mindSliver: 23,
+  minorIllusion: 24,
+  moldEarth: 25,
+  poisonSpray: 26,
+  prestidigitation: 27,
+  primalSavagery: 28,
+  produceFlame: 29,
+  rayOfFrost: 30,
+  resistance: 31,
+  sacredFlame: 32,
+  sappingString: 33,
+  shapeWater: 34,
+  shillelagh: 35,
+  shockingGrasp: 36,
+  spareTheDying: 37,
+  swordBurst: 38,
+  thaumaturgy: 39,
+  thornWhip: 40,
+  thunderClap: 41,
+  tollTheDead: 42,
+  trueStrike: 43,
+  viciousMockery: 44,
+  wordOfRadiance: 45,
+};
+const getSpellIdsOfLevel = (level: SpellLevel): number[] => {
+  return SpellSeed.filter((spell) => spell.level === level)
+    .map((spell) => spell.id)
+    .filter((spellId) => spellId !== undefined);
+};
+const getSpellIdsEqualToOrLessThanLevel = (level: SpellLevel): number[] => {
+  return SpellSeed.filter((spell) => spell.level <= level)
+    .map((spell) => spell.id)
+    .filter((spellId) => spellId !== undefined);
+};
 
-export default Spells;
+export {
+  SpellSeed,
+  spellIds,
+  cantripIds,
+  ritualIds,
+  getSpellIdsOfLevel,
+  getSpellIdsEqualToOrLessThanLevel,
+};

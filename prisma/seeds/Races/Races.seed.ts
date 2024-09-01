@@ -1,15 +1,15 @@
 import { languages } from "@/lib/globalVars";
 import { src } from "@/lib/types";
+import { Ability } from "@/lib/types";
 import {
   Prisma,
-  Ability,
   Size,
   CreatureType,
   Language,
   Skill,
   DamageTypes,
 } from "@prisma/client";
-import { weaponIds } from "../Weapons/Weapons.seed";
+import { weaponIds } from "../Items/Weapons/Weapons.seed";
 
 const Species: Prisma.RaceCreateManyInput[] = [
   {

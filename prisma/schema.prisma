@@ -31,7 +31,13 @@ enum Ability {
   INT
   WIS
   CHA
-  NULL
+}
+
+enum ArmorType {
+  LIGHT
+  MEDIUM
+  HEAVY
+  SHIELDS
 }
 
 enum Size {
@@ -54,6 +60,14 @@ enum SpellSchool {
   NECROMANCY
   TRANSMUTATION
   NULL
+}
+
+enum Currency {
+  cp
+  sp
+  ep
+  gp
+  pp
 }
 
 enum Skill {
@@ -95,14 +109,6 @@ enum Language {
   PRIMORDIAL
   SYLVAN
   UNDERCOMMON
-  NULL
-}
-
-enum ArmorTypes {
-  LIGHT
-  MEDIUM
-  HEAVY
-  SHIELDS
   NULL
 }
 
@@ -161,6 +167,7 @@ model User {
   Campaigns      Campaign[] @relation("PlayerCampaigns")
   GMForCampaigns Campaign[] @relation("GMCampaigns")
   Tool           Tool[]
+  Item           Item[]
 }
 
 model Campaign {
@@ -175,237 +182,143 @@ model Campaign {
 }
 
 model Class {
-  id                       Int           @id @default(autoincrement())
-  srd                      Boolean       @default(false)
+  id  Int     @id @default(autoincrement())
+  srd Boolean @default(false)
+
   name                     String
   description              String
-  hitDie                   Int
-  savingThrows             Ability[]
-  skills                   Skill[]
-  skillChoiceCount         Int
-  SubClasses               SubClass[]
-  subClassName             String
-  subClassDesc             String
-  subfeatLevels            Int[]
-  multiclassing            String
-  Features                 Feature[]
-  tools                    String[]
-  abilityScoreLevels       Int[]
-  equipment                String[]
-  armor                    ArmorTypes[]
-  weapons                  String[]
-  customFields             CustomField[]
-  subClassSpellDescription String? //If the class has spells given by subclass, describe here
-  flavorText               String        @db.VarChar(200)
-  //spellcasting
-  spellCaster              Boolean       @default(false)
-  spellCastingAbility      Ability?
-  casterType               CasterType?   @relation(fields: [casterTypeId], references: [id])
-  ritualCaster             Boolean       @default(false) // can you cast spells as rituals
-  ritualSpellPrepared      Boolean       @default(true) //do you need to have a spell prepared to cast it as a ritual
-  spellFocus               String        @default("None")
-  casterTypeId             Int           @default(1)
-  spellCastingInfo         String? // How does spell casting work for this class
-  displaySpellList         Boolean       @default(true) // This is for displaying the spell list on the class table. Some classes (like warlock), have a weird spell casting system and opt to use the custom table fields instead.
-  prepareSpellInfo         String? // How do spells get prepared for this class
-  SpellList                SpellList?    @relation(fields: [spellListId], references: [id]) // If the class has a spell list, link it here
-  //these two fields will presume that a customField is created in the class table
-  // deafults to 0, meaning the class does not have a set number of spells known
-  //otherwise, the number indicates the first level in which they have spells known
-  spellsKnown              Int           @default(0) // Does the class have a set number of spells known
-  cantripsKnown            Int           @default(0) // Does the class have a set number of cantrips known
+  flavorText               String @db.VarChar(200)
+  /// [AbilityScoreTrigger]
+  multiclassing            Json
+  multiclassingDescription String
+  source                   String @default("Player's Handbook") //source of the class
 
-  source    String   @default("Player's Handbook") //source of the class
+  hitDie Int
+
+  /// [AbilityChoice]
+  savingThrows Json
+
+  /// [SkillChoice]
+  skills                 Json
+  skillChoiceDescription String
+
+  SubClasses            SubClass[]
+  subClassName          String
+  subClassDescription   String
+  subClassFeatureLevels Int[]
+
+  /// [Feature]
+  features Json[]
+
+  /// [ToolChoice]
+  tools            Json
+  toolsDescription String
+  potentialTools   Tool[] @relation("ToolClass")
+
+  /// [ArmorChoice]
+  armor            Json
+  armorDescription String
+
+  /// [WeaponChoice]
+  weapons           Json
+  weaponDescription String
+  potentialWeapons  Weapon[] @relation("WeaponClass")
+
+  abilityScoreLevels Int[]
+
+  /// [ItemChoice]
+  equipment            Json //this is the starting items for the class
+  equipmentDescription String[]
+  potentialEquipment   Item[]   @relation("ItemClass")
+
+  isSpellCaster    Boolean @default(false)
+  /// [SpellCastingInfo]
+  spellCastingInfo Json? //only exists if isSpellCaster is true
+
+  SpellList            SpellList? @relation(fields: [spellListId], references: [id]) // If the class has a spell list, link it here
+  spellListId          Int?
+  spellListDescription String?
+
   //date fields
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  User        User? @relation(fields: [userId], references: [id])
-  userId      Int?
-  spellListId Int?
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
 }
 
 model Spell {
-  id               Int                @id @default(autoincrement())
-  srd              Boolean            @default(false)
-  name             String
-  description      String
-  duration         String
-  range            String
-  castingTime      String
-  verbal           Boolean            @default(false)
-  somatic          Boolean            @default(false)
-  material         Boolean            @default(false)
-  materialCost     String?
-  concentration    Boolean            @default(false)
-  ritual           Boolean            @default(false)
-  upcastInfo       String?
+  id            Int          @id @default(autoincrement())
+  srd           Boolean      @default(false)
+  name          String
+  description   String
+  duration      String
+  range         String
+  castingTime   String
+  verbal        Boolean      @default(false)
+  somatic       Boolean      @default(false)
+  material      Boolean      @default(false)
+  materialCost  String?
+  concentration Boolean      @default(false)
+  ritual        Boolean      @default(false)
+  upcastInfo    String?
   //search fields
-  tags             String[]
-  saveRequired     Boolean            @default(false)
-  damageType       DamageTypes?
-  aoe              Boolean            @default(false)
-  conditions       String[]
-  options          String[] // If the spell has options to choose from, list here  
+  tags          String[]
+  saveRequired  Boolean      @default(false)
+  damageType    DamageTypes?
+  aoe           Boolean      @default(false)
+  conditions    String[]
+  options       String[] // If the spell has options to choose from, list here  
   /// [Table]
-  extendedTable    Json[] // This table will be rendered with the spell
-  postTableData    String? // This is for any additional content that should be displayed after the table
-  school           SpellSchool
-  level            Int //0 is cantrip, 1-9 are spell levels
-  source           String
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  SpellListToSpell SpellListToSpell[]
-  User             User?              @relation(fields: [userId], references: [id])
-  userId           Int?
-}
+  extendedTable Json[] // This table will be rendered with the spell
+  postTableData String? // This is for any additional content that should be displayed after the table
+  school        SpellSchool
+  level         Int //0 is cantrip, 1-9 are spell levels
+  source        String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 
-model SpellListToSpell {
-  spellListId Int       @map("spellListId")
-  spellId     Int       @map("spellId")
-  spellList   SpellList @relation(fields: [spellListId], references: [id])
-  Spell       Spell     @relation(fields: [spellId], references: [id])
-
-  @@id([spellListId, spellId]) // Composite primary key
+  User       User?       @relation(fields: [userId], references: [id])
+  userId     Int?
+  SpellLists SpellList[]
+  Item       Item[]      @relation("SpellScroll")
 }
 
 model SpellList {
-  id   Int    @id @default(autoincrement())
-  name String
-
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  SpellListToSpell SpellListToSpell[]
-  Class            Class[]
-}
-
-model SubClass {
-  id                  Int               @id @default(autoincrement())
-  srd                 Boolean           @default(false)
-  name                String
-  description         String
-  SubClassFeatures    SubClassFeature[]
-  flavorText          String            @db.VarChar(200)
-  source              String            @default("Player's Handbook")
-  //spellcasting
-  ritualCaster        Boolean           @default(false) // can you cast spells as rituals
-  spellCaster         Boolean           @default(false)
-  ritualSpellPrepared Boolean           @default(true) //do you need to have a spell prepared to cast it as a ritual
-  spellFocus          String?
-  spellCastingAbility Ability?
-  casterType          CasterType?       @relation(fields: [casterTypeId], references: [id])
-  casterTypeId        Int               @default(3)
-  spellCastingInfo    String? // How does spell casting work for this class
-  prepareSpellInfo    String? // How do spells get prepared for this class
-  customFields        CustomField[] // Custom fields for the subclass spellcasting
-
-  //these two fields will presume that a customField is created in the class table
-  // deafults to 0, meaning the class does not have a set number of spells known
-  //otherwise, the number indicates the first level in which they have spells known
-  spellsKnown   Int @default(0) // Does the class have a set number of spells known
-  cantripsKnown Int @default(0) // Does the class have a set number of cantrips known
+  id          Int    @id @default(autoincrement())
+  name        String
+  flavorText  String @db.VarChar(200)
+  description String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Class     Class?   @relation(fields: [classId], references: [id])
-  classId   Int?
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    Int?
+  Spells    Spell[]
+  Classes   Class[]
 }
 
-model CustomField {
-  id          Int       @id @default(autoincrement())
+model SubClass {
+  id  Int     @id @default(autoincrement())
+  srd Boolean @default(false)
+
   name        String
   description String
-  level1      String
-  level2      String
-  level3      String
-  level4      String
-  level5      String
-  level6      String
-  level7      String
-  level8      String
-  level9      String
-  level10     String
-  level11     String
-  level12     String
-  level13     String
-  level14     String
-  level15     String
-  level16     String
-  level17     String
-  level18     String
-  level19     String
-  level20     String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  Class       Class?    @relation(fields: [classId], references: [id])
-  classId     Int?
-  SubClass    SubClass? @relation(fields: [subClassId], references: [id])
-  subClassId  Int?
-}
+  flavorText  String @db.VarChar(200)
+  source      String @default("Player's Handbook")
 
-model CasterType {
-  id          Int        @id @default(autoincrement())
-  name        String
-  description String
-  level1      Int[]
-  level2      Int[]
-  level3      Int[]
-  level4      Int[]
-  level5      Int[]
-  level6      Int[]
-  level7      Int[]
-  level8      Int[]
-  level9      Int[]
-  level10     Int[]
-  level11     Int[]
-  level12     Int[]
-  level13     Int[]
-  level14     Int[]
-  level15     Int[]
-  level16     Int[]
-  level17     Int[]
-  level18     Int[]
-  level19     Int[]
-  level20     Int[]
-  Class       Class[]
-  examples    String[]
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  SubClass    SubClass[]
-}
+  /// [Feature]
+  features Json[]
 
-model Feature {
-  id            Int      @id @default(autoincrement())
-  name          String
-  description   String
-  levels        Int[]
-  options       String[] // If the feature has options to choose from, list here
-  table         String[] // optionally dedicate a column in the table
-  /// [Table]
-  extendedTable Json[] // This table will be rendered with the feature
+  isSpellCaster    Boolean @default(false)
+  /// [SpellCastingInfo]
+  spellCastingInfo Json? //only exists if isSpellCaster is true
 
-  spellCastingFeature Boolean  @default(false)
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  Class               Class?   @relation(fields: [classId], references: [id])
-  classId             Int?
-}
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-model SubClassFeature {
-  id            Int      @id @default(autoincrement())
-  name          String
-  description   String
-  levels        Int[]
-  options       String[] // If the feature has options to choose from, list here
-  /// [Table]
-  extendedTable Json[] // This table will be rendered with the feature
-
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  SubClass   SubClass @relation(fields: [subClassId], references: [id])
-  subClassId Int
+  Class   Class? @relation(fields: [classId], references: [id])
+  classId Int?
+  User    User?  @relation(fields: [userId], references: [id])
+  userId  Int?
 }
 
 model Race {
@@ -418,7 +331,7 @@ model Race {
 
   RacialTraits RacialTraits[]
 
-  /// [ASI]
+  /// [AbilityScoreNumber]
   abilityScores           Json
   abilityScoreDescription String
 
@@ -473,7 +386,7 @@ model RaceVariant {
   description             String
   flavorText              String  @db.VarChar(200)
   source                  String
-  /// [ASI]
+  /// [AbilityScoreNumber]
   abilityScores           Json?
   abilityScoreDescription String?
 
@@ -583,42 +496,6 @@ model Feat {
   updatedAt   DateTime @updatedAt
 }
 
-model Weapon {
-  id           Int         @id @default(autoincrement())
-  name         String
-  cost         String
-  damage       String
-  damageType   DamageTypes
-  weight       String
-  versatileDmg String?
-  range        String?
-  isSimple     Boolean
-  isRanged     Boolean
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-
-  WeaponToProperties WeaponToProperty[]
-}
-
-model WeaponProperty {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  WeaponToProperty WeaponToProperty[]
-}
-
-model WeaponToProperty {
-  weaponId         Int
-  weapon           Weapon         @relation(fields: [weaponId], references: [id])
-  weaponPropertyId Int
-  weaponProperty   WeaponProperty @relation(fields: [weaponPropertyId], references: [id])
-
-  @@id([weaponId, weaponPropertyId]) // Composite primary key
-}
-
 model Message {
   id        Int      @id @default(autoincrement())
   User      User?    @relation(fields: [userId], references: [id])
@@ -630,14 +507,8 @@ model Message {
 }
 
 model Tool {
-  id          Int    @id @default(autoincrement())
-  name        String
-  description String
-  flavorText  String @db.VarChar(200)
-  /// [QuantityUnit]
-  cost        Json
-  /// [QuantityUnit]
-  weight      Json
+  id   Int    @id @default(autoincrement())
+  name String
 
   /// [ToolSkill]
   skills Json[]
@@ -648,9 +519,147 @@ model Tool {
   /// [ToolFeature]
   features Json[]
 
+  Items Item[]
+
   User   User? @relation(fields: [userId], references: [id])
   userId Int?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Class     Class[]  @relation("ToolClass")
+}
+
+enum ItemTypes {
+  COMMON
+  MAGIC
+  CLOTHES
+  ARCANE_FOCUS
+  DRUIDIC_FOCUS
+  HOLY_SYMBOL
+  CONTAINER
+  WEAPON
+  ARMOR
+  AMMUNITION
+  COMPONENT_POUCH
+  SPELL_BOOK
+  EXPLOSIVE
+  EQUIPMENT_PACK
+  MISC
+  TOOL
+  CURRENCY
+  SPELL_SCROLL
+}
+
+enum Unit {
+  lb
+  oz
+  pint
+  quart
+  gal
+}
+
+model EquipmentPack {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  /// [QuantityItem]
+  itemsQuantity Json[] //describes how many of each item is in the pack
+  itemList      Item[] @relation("EquipmentPackParent")
+
+  items Item[] @relation("EquipmentPackChild")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Item {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  flavorText  String @db.VarChar(200)
+
+  /// [CurrencyAmount]
+  cost Json?
+
+  /// [QuantityUnit]
+  weight Json?
+
+  /// [QuantityUnit]
+  capacity Json?
+
+  // unique item storage
+
+  /// [QuantityItem]
+  customItemCapacity Json?
+
+  /// [Feature]
+  features Json[]
+
+  types ItemTypes[]
+
+  // the item can be part of an equipment pack
+  EquipmentPackList EquipmentPack[] @relation("EquipmentPackParent")
+  //the item can be an equipment pack
+  EquipmentPack     EquipmentPack?  @relation("EquipmentPackChild", fields: [equipmentPackId], references: [id])
+  equipmentPackId   Int?
+
+  // if the item is a tool we can link it to the tool model
+  Tool   Tool? @relation(fields: [toolId], references: [id])
+  toolId Int?
+
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
+
+  Spell   Spell? @relation("SpellScroll", fields: [spellId], references: [id])
+  spellId Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Classes Class[] @relation("ItemClass")
+
+  Weapon        Weapon?  @relation("ItemWeapon", fields: [weaponId], references: [id])
+  weaponId      Int?
+  AmmunitionFor Weapon[] @relation("WeaponAmmunition")
+  Armor         Armor?   @relation("ItemArmor", fields: [armorId], references: [id])
+  armorId       Int?
+}
+
+enum Rarity {
+  COMMON
+  UNCOMMON
+  RARE
+  VERY_RARE
+  LEGENDARY
+  ARTIFACT
+}
+
+model Weapon {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  // if the weapon is simple or martial
+  isSimple Boolean
+
+  /// [Damage]
+  damage     Json[] // AND array (ex 1d6 piercing and 2d6 fire)
+  /// [WeaponProperty]
+  properties Json[] // AND array (ex finesse, light, thrown(20/60))
+  Item       Item[] @relation("ItemWeapon")
+
+  ammunition   Item?   @relation("WeaponAmmunition", fields: [ammunitionId], references: [id])
+  ammunitionId Int?
+  Class        Class[] @relation("WeaponClass")
+}
+
+model Armor {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  armorClass Int
+  armorType  ArmorType
+
+  /// [Feature]
+  features Json[] // AND array (ex disadvantage on stealth checks)
+  Item     Item[] @relation("ItemArmor")
 }

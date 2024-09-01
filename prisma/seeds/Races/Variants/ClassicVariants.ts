@@ -1,14 +1,14 @@
 import { languages } from "@/lib/globalVars";
 import { src } from "@/lib/types";
 import {
-  Ability,
   CreatureType,
   DamageTypes,
   Language,
   Prisma,
   Size,
 } from "@prisma/client";
-import { weaponIds } from "../../Weapons/Weapons.seed";
+import { Ability } from "@/lib/types";
+import { weaponIds } from "../../Items/Weapons/Weapons.seed";
 const ids = {
   dragonborn: 1,
   dwarf: 2,

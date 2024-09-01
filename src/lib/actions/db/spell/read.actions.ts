@@ -10,14 +10,11 @@ export const getSpells = async (): Promise<SpellInfo[]> => {
   const db = await new PrismaClient();
   const spells = await db.spell.findMany({
     include: {
+      SpellLists: true,
+
       User: {
         select: {
           username: true,
-        },
-      },
-      SpellListToSpell: {
-        include: {
-          spellList: true,
         },
       },
     },
@@ -36,14 +33,10 @@ export const getSpell = async (
         name: query,
       },
       include: {
+        SpellLists: true,
         User: {
           select: {
             username: true,
-          },
-        },
-        SpellListToSpell: {
-          include: {
-            spellList: true,
           },
         },
       },
@@ -56,14 +49,11 @@ export const getSpell = async (
         id: query,
       },
       include: {
+        SpellLists: true,
+
         User: {
           select: {
             username: true,
-          },
-        },
-        SpellListToSpell: {
-          include: {
-            spellList: true,
           },
         },
       },
@@ -87,14 +77,10 @@ export const getSpellChunk = async (
         relationalFields: queryInfo.relationalFields,
       }),
       include: {
+        SpellLists: true,
         User: {
           select: {
             username: true,
-          },
-        },
-        SpellListToSpell: {
-          include: {
-            spellList: true,
           },
         },
       },
@@ -110,14 +96,11 @@ export const getSpellChunk = async (
     }),
 
     include: {
+      SpellLists: true,
+
       User: {
         select: {
           username: true,
-        },
-      },
-      SpellListToSpell: {
-        include: {
-          spellList: true,
         },
       },
     },

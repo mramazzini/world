@@ -1,11 +1,9 @@
 import {
-  Ability,
   Background,
   BackgroundFeature,
-  CasterType,
   Class,
-  CustomField,
-  Feature,
+  DamageTypes,
+  Item,
   Language,
   Message,
   Prisma,
@@ -14,13 +12,11 @@ import {
   RacialTraits,
   Skill,
   Spell,
-  SpellListToSpell,
+  SpellList,
   SubClass,
-  SubClassFeature,
   Tool,
+  Weapon,
 } from "@prisma/client";
-import { StyledString } from "next/dist/build/swc";
-import { Input } from "postcss";
 
 export enum Pages {
   Class = "Class",
@@ -32,12 +28,16 @@ export enum Pages {
   Spell = "Spell",
   Item = "Item",
 }
-
+export interface Badge {
+  text: string;
+  color: "badge-primary" | "badge-secondary" | "badge-accent" | "badge-neutral";
+}
 export interface ClassInfo extends Class {
-  Features: Feature[];
   SubClasses: SubClass[];
-  casterType: CasterType | null;
-  customFields: CustomField[];
+  potentialTools: Tool[];
+  potentialEquipment: Item[];
+  SpellList: SpellList | null;
+  potentialWeapons: Weapon[];
   User: {
     username: string | null;
   } | null;
@@ -49,11 +49,13 @@ export interface BackgroundInfo extends Background {
     username: string | null;
   } | null;
 }
+export interface ItemInfo extends Item {
+  User: {
+    username: string | null;
+  } | null;
+}
 
 export interface SubClassInfo extends SubClass {
-  SubClassFeatures: SubClassFeature[];
-  casterType: CasterType | null;
-  customFields: CustomField[];
   Class: {
     name: string | null;
   } | null;
@@ -63,25 +65,106 @@ export interface SubClassInfo extends SubClass {
   } | null;
 }
 
-export interface SpellListToSpellInfo extends SpellListToSpell {
-  spellList: {
-    name: string | null;
-  } | null;
-}
-
 export interface SpellInfo extends Spell {
+  SpellLists: SpellList[];
   User: {
     username: string | null;
   } | null;
-  SpellListToSpell: SpellListToSpellInfo[];
 }
-
+export enum Unit {
+  lb = "lb",
+  oz = "oz",
+  pint = "pint",
+  quart = "quart",
+  gal = "gal",
+  hour = "hour",
+  day = "day",
+  week = "week",
+  month = "month",
+  year = "year",
+  minute = "minute",
+  second = "second",
+  cp = "cp",
+  sp = "sp",
+  ep = "ep",
+  gp = "gp",
+  pp = "pp",
+}
+export enum Distance {
+  ft = "ft",
+  mi = "mi",
+  m = "m",
+  km = "km",
+  inch = "inch",
+  mile = "mile",
+}
+export enum Time {
+  hour = "hour",
+  day = "day",
+  week = "week",
+  month = "month",
+  year = "year",
+  minute = "minute",
+  second = "second",
+  longRest = "long rest",
+  shortRest = "short rest",
+  rest = "short or long rest",
+}
 export interface SubclassSearchResults extends SubClass {
   Class: {
     name: string | null;
   } | null;
 }
-
+export enum Currency {
+  cp,
+  sp,
+  ep,
+  gp,
+  pp,
+}
+export type Level =
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12
+  | 13
+  | 14
+  | 15
+  | 16
+  | 17
+  | 18
+  | 19
+  | 20;
+export type SpellLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+export enum WeaponPropertyNames {
+  Ammunition = "Ammunition",
+  Finesse = "Finesse",
+  Heavy = "Heavy",
+  Light = "Light",
+  Loading = "Loading",
+  Range = "Range",
+  Reach = "Reach",
+  Special = "Special",
+  Thrown = "Thrown",
+  TwoHanded = "Two-Handed",
+  Versatile = "Versatile",
+}
+export enum SpellFocus {
+  ARCANE_FOCUS = "arcane focus",
+  HOLY_SYMBOL = "holy symbol",
+  DRUIDIC_FOCUS = "druidic focus",
+  MUSICAL_INSTRUMENT = "musical instrument",
+  ARTISAN_TOOLS = "artisan tools",
+  NONE = "none",
+}
 declare global {
   namespace PrismaJson {
     // you can use classes, interfaces, types, etc.
@@ -91,10 +174,11 @@ declare global {
     interface TableData {
       headers: string[];
       headersLength?: number[];
+      links?: string[];
       data: { [key: string | number]: string }[];
     }
 
-    interface ASI {
+    interface AbilityScoreNumber {
       fixedIncreases?: { ability: Ability; value: number }[]; // Fixed increases like Strength +2, Charisma +1
       choices?: {
         abilities: Ability[]; // Array of abilities that can be chosen
@@ -103,7 +187,6 @@ declare global {
           increases: number[]; // Array of values for each increase, e.g., [2, 1] or [1, 1, 1]
         }[];
       }[];
-      universalIncrease?: number; // If all abilities increase by a single value, e.g., +5 to all
     }
 
     interface LanguageChoice {
@@ -114,17 +197,382 @@ declare global {
       };
     }
 
-    interface ToolChoice {
-      defaultTools: string[];
-      choices?: {
-        tools: string[];
-        numberOfTools: number;
+    type TableColumn = {
+      [K in Level]: string | number;
+    };
+    interface TableColumnData {
+      title: string;
+      col: TableColumn;
+    }
+    type SpellLevels = {
+      [K in Level]?: {
+        [K in SpellLevel]?: number;
+      };
+    };
+
+    interface Feature {
+      name: string;
+      description: string;
+      options?: string[];
+      extendedTable?: Table[];
+      postTableData?: string;
+      tableColumns?: TableColumnData[];
+      levels?: number[]; //levels that the feature is gained
+      itemsRequired?: ItemChoice[]; //required to have in inventory to use this feature. This is different from item cost. This is more like a key to unlock the feature, while cost gets spent. No need to put items here if they are in cost.
+      abilityScoreTriggers?: AbilityScoreTrigger;
+      effect?: FeatureEffect;
+      leveledFeatures?: {
+        [K in Level]?: FeatureEffect;
+      };
+      hideInSheet?: boolean; //if true, this feature will not be displayed in the character sheet. Active features will still be useable.
+      // You choose a number of options from the options array equal to numberOfChoices. Each option is a FeatureEffect.
+      choices?: FeatureEffectChoice;
+    }
+    interface Trigger {
+      onDamage?: {
+        all?: boolean;
+        rolledA: number[]; // damage rolled a specific num
+      };
+      onRoll: {
+        allowChaining?: boolean; // if true, the trigger can be used multiple times in a single roll (e.g., rerolling 1s and 2s, over and over)
+        attack?: {
+          all?: boolean;
+          rolledA: number[]; // attack roll rolled a specific num
+        };
+
+        damage?: {
+          all?: boolean;
+          rolledA: number[]; // damage roll rolled a specific num
+        };
+        savingThrow?: {
+          all?: boolean;
+          rolledA: number[]; // saving throw rolled a specific num
+        };
+
+        abilityCheck?: {
+          all?: boolean;
+          rolledA: number[]; // ability check rolled a specific num
+        };
+        skillCheck?: {
+          all?: boolean;
+          rolledA: number[]; // skill check rolled a specific num
+        };
+        initiative?: {
+          all?: boolean;
+          rolledA: number[]; // initiative rolled a specific num
+        };
+        d4?: {
+          all?: boolean;
+          rolledA: number[]; // d4 rolled a specific num
+        };
+        d6?: {
+          all?: boolean;
+          rolledA: number[]; // d6 rolled a specific num
+        };
+        d8?: {
+          all?: boolean;
+          rolledA: number[]; // d8 rolled a specific num
+        };
+        d10?: {
+          all?: boolean;
+          rolledA: number[]; // d10 rolled a specific num
+        };
+        d12?: {
+          all?: boolean;
+          rolledA: number[]; // d12 rolled a specific num
+        };
+        d20?: {
+          all?: boolean;
+          rolledA: number[]; // d20 rolled a specific num
+        };
       };
     }
+    interface FeatureEffect {
+      reroll?: {
+        damageDie?: Trigger;
+      };
 
+      ASI?: AbilityScoreNumber;
+      //Adds languages to the player's language proficiencies
+      languageChoices?: LanguageChoice;
+      //adds armor to the player's armor proficiencies
+      armorChoices?: ArmorChoice;
+      //adds weapons to the player's weapon proficiencies
+      weaponChoices?: WeaponChoice;
+      //adds tools to the player's tool proficiencies
+      toolChoices?: ToolChoice;
+      //adds skills to the player's skill proficiencies
+      skillChoices?: SkillChoice;
+      //i DONT REMEMBER TBH
+      abilityChoices?: AbilityChoice;
+      //Sets the metadata for the feature specific resource.
+      setResourceData?: CustomResource[];
+      ACBonus?: number; //Increases the player's AC
+      //Increases the player's resource amount
+      resourceAmountIncrease?: { resourceName: string; amount: number }[]; //cant go past max or below 0
+      //Adds certain spells to the player's prepared spells (like a cleric's domain spells)
+      preparedSpellChoices?: {
+        gain?: SpellChoice;
+        lose?: SpellChoice;
+      };
+      //adds certain spells to the player's available spells (like a wizard's spellbook)
+      availableSpellChoices?: {
+        gain?: SpellChoice;
+        lose?: SpellChoice;
+      };
+      customSpells?: CustomizedSpell[]; //custom spells need to be set, and are unique to the feature. They cannot be added or removed.
+      //regains spell slots
+      spellSlotRegained?: SpellSlots;
+      //grants advantage on certain skill checks
+      skillRollAdvantages?: SkillRollAdvantage[];
+      //grants advantage on certain ability checks
+      abilityRollAdvantages?: AbilityRollAdvantage[];
+      //grants bonuses to certain skill checks
+      skillRollBonuses?: SkillRollBonus[];
+      //grants bonuses to certain ability checks
+      abilityRollBonuses?: AbilityRollBonus[];
+      //grants bonuses to attack rolls
+      attackRollAdvantages?: AttackRollAdvantage[];
+      //grants bonuses to damage rolls
+      attackRollBonuses?: AttackRollBonus[];
+      //grants bonuses to saving throws
+      damageRollBonuses?: DamageRollBonus[];
+      //grants advantage to saving throws
+      savingThrowAdvantages?: AbilityRollAdvantage[];
+      //grants bonuses to saving throws
+      savingThrowBonuses?: AbilityRollBonus[];
+      //grants bonuses to speed
+      speedBonus?: number;
+      //grants the character the ability to ritual cast certain spells
+      ritualCasting?: {
+        spellPrepared: boolean;
+        spells?: SpellChoice;
+        fromSpellList?: true; //defaults to current spellList
+      };
+
+      blindSight?: QuantityDistance;
+      //grants the player items
+      itemsGranted?: ItemChoice;
+      //if the feature is active, you only gain the benefits when the feature is activated. Otherwise, the benefits are always active.
+      active?: {
+        levelRequired?: number;
+        cost?: Cost;
+        uses?: QuantityTime; //3 per day, 1 per short rest, etc. If not present, it is assumed to be at-will
+      };
+      //if you need to be equipped with certain items to use the feature
+      mustEquip?: EquipmentSetup[]; //or array
+    }
+
+    interface WeaponPropertyChoice {
+      defaultProperties?: WeaponPropertyNames[];
+      choices?: {
+        properties: WeaponPropertyNames[];
+        numberOfProperties: number;
+      }[];
+    }
+
+    interface EquipmentSetup {
+      armorTypes?: ArmorTypes[];
+      armor?: number[]; // armor id
+      weapons?: {
+        martialOnly?: boolean;
+        simpleOnly?: boolean;
+        rangedOnly?: boolean;
+        meleeOnly?: boolean;
+        weaponIds?: number[]; // weapon id
+        properties?: WeaponPropertyNames[];
+      };
+
+      shield?: boolean;
+      items?: number[]; // If a specific item needs to be equipped.
+      emptyHands?: { amount: 1 | 2 }; // If the player needs to have empty hands to use the feature. If shield is true, the player can have a shield equipped.
+      armorless?: boolean; // If the player needs to be unarmored to use the feature.
+      weaponless?: boolean; // If the player needs to be unarmed to use the feature.
+      shieldless?: boolean; // If the player needs to be unshielded to use the feature.
+    }
+
+    interface FeatureEffectChoice {
+      numberOfChoices: number;
+      options: {
+        name: string;
+        description: string;
+        effect: FeatureEffect;
+      }[];
+    }
+    interface CustomizedSpell {
+      spells: SpellChoice;
+      noSpellSlot?: boolean;
+      customLevel?: number;
+      alwaysPrepared?: boolean;
+      //add more as needed
+    }
+    interface CustomResource {
+      name: string;
+      description: string;
+      max: number; //amount of resource
+
+      resetType: QuantityTime;
+    }
+    interface Cost {
+      items?: ItemChoice;
+      spellSlots?: SpellSlots;
+      combatTime?: CombatTime;
+      time?: QuantityTime;
+      customResources?: QuantityCustomResource;
+    }
+    interface QuantityCustomResource {
+      quantity: number;
+      resource: string; //resource name
+    }
+
+    type CombatTime =
+      | "Action"
+      | "Bonus Action"
+      | "Reaction"
+      | "Free Action"
+      | "Movement"
+      | "Other";
+
+    type SpellSlots = {
+      [K in SpellLevel]?: number;
+    };
+
+    interface SpellChoice {
+      //Spell Ids
+      defaultSpells?: number[];
+      choices?: {
+        spellIds: number[];
+        numberOfSpells: number;
+      }[];
+    }
+
+    interface AbilityScoreTrigger {
+      abilities: Ability[];
+      lessThan?: number;
+      greaterThan?: number;
+    }
+
+    interface ArmorChoice {
+      defaultArmors?: ArmorTypes[];
+      choices?: {
+        armors: ArmorTypes[];
+        numberOfArmors: number;
+      }[];
+    }
+
+    interface WeaponChoice {
+      defaultWeapons?: number[]; // weapon id
+      choices?: {
+        weapons: number[]; // weapon id
+        numberOfWeapons: number;
+      }[];
+    }
+
+    interface ToolChoice {
+      defaultTools?: number[]; // tool id
+      choices?: {
+        tools: number[]; // tool id
+        numberOfTools: number;
+      }[];
+    }
+
+    interface SkillChoice {
+      defaultSkills?: Skill[];
+      choices?: {
+        skills: Skill[];
+        numberOfSkills: number;
+      }[];
+    }
+    interface ItemChoice {
+      defaultItems?: {
+        item: number; // item id
+        quantity: number;
+      }[];
+      choices?: {
+        items: QuantityItem[][]; // 2d arr to allow variations in quantity
+        numberOfChoices: number;
+      }[];
+    }
+
+    interface QuantityTime {
+      quantity: number;
+      unit: Time;
+    }
+    interface AttackRollBonus extends RollBonus {
+      rangedOnly?: boolean;
+      meleeOnly?: boolean;
+    }
+
+    interface AbilityChoice {
+      defaultAbilities?: Ability[];
+      choices?: {
+        abilities: Ability[];
+        numberOfAbilities: number;
+      }[];
+    }
+    interface Choice {
+      defaultChoices?: string[];
+      choices?: {
+        numberOfChoices: number;
+        options: string[];
+      }[];
+    }
+
+    interface RollBonus {
+      bonus: number;
+      situation: string;
+    }
+
+    interface Advantage {
+      always?: boolean;
+      situation: string;
+      disadvantage?: boolean;
+    }
+
+    interface AttackRollAdvantage extends Advantage {
+      rangedOnly?: boolean;
+      meleeOnly?: boolean;
+    }
+
+    interface DamageRollBonus {
+      bonus: Damage[] | number; // number will be damage type of weapon.
+      situation: string;
+      rangedOnly?: boolean;
+      meleeOnly?: boolean;
+    }
+
+    interface SkillRollAdvantage extends Advantage {
+      skill: SkillChoice;
+    }
+
+    interface SkillRollBonus extends RollBonus {
+      skill: SkillChoice;
+    }
+
+    interface AbilityRollBonus extends RollBonus {
+      ability: AbilityChoice;
+    }
+
+    interface AbilityRollAdvantage extends Advantage {
+      ability: AbilityChoice;
+    }
+
+    interface Equipment {
+      name: string;
+      description?: string;
+      type: "Tool" | "Weapon" | "Armor" | "Misc";
+    }
+    interface CurrencyAmount {
+      quantity: number;
+      unit: Currency;
+    }
     interface QuantityUnit {
       quantity: number;
-      unit: string;
+      unit: Unit;
+    }
+    interface QuantityItem {
+      quantity: number;
+      item: number; // item id
     }
 
     interface ToolSkill {
@@ -138,9 +586,55 @@ declare global {
       options?: string[];
       postTableData?: string;
     }
+
+    interface SpellCastingInfo {
+      levelAquired: number;
+      description: string;
+      preparingSpellsDescription?: string;
+      castingSpellsDescription?: string;
+      spellCastingAbilityDescription: string;
+      ability: Ability;
+      spellFocus: SpellFocus;
+      spellFocusDescription?: string;
+      features: Feature[];
+      displaySpellLevels: boolean; // If true, display the spell levels in the class description
+      spellLevels: SpellLevels;
+    }
+
+    interface Damage {
+      // ex. 1d6 fire damage
+      type: DamageTypes; // type of damage ex. slashing, fire, etc.
+      dice: number; // type of dice ex. 6 for d6 or 8 for d8
+      numberOfDice: number; // number of dice rolled
+    }
+    interface WeaponProperty {
+      property: Property;
+      versatileDamage?: Damage; // versatile damage
+      range?: number; // range in feet
+      maxRange?: number; // max range in feet
+      special?: Feature[]; // special properties
+    }
   }
 }
+export interface Property {
+  name: string;
+  description: string;
+}
+export enum Ability {
+  STR,
+  CON,
+  DEX,
+  INT,
+  WIS,
+  CHA,
+}
 
+export enum ArmorTypes {
+  LIGHT,
+  MEDIUM,
+  HEAVY,
+  SHIELDS,
+}
 export enum src {
   kaladesh = "Plane Shift: Kaladesh",
   homebrew = "Homebrew",
@@ -163,40 +657,6 @@ export enum src {
   descent = "Descent into Avernus",
   witchlight = "The Wild Beyond the Witchlight",
 }
-
-// type where options are "level1" , "level2" all the way to level20
-export type SpellLevels =
-  | "level1"
-  | "level2"
-  | "level3"
-  | "level4"
-  | "level5"
-  | "level6"
-  | "level7"
-  | "level8"
-  | "level9";
-
-export type Levels =
-  | "level1"
-  | "level2"
-  | "level3"
-  | "level4"
-  | "level5"
-  | "level6"
-  | "level7"
-  | "level8"
-  | "level9"
-  | "level10"
-  | "level11"
-  | "level12"
-  | "level13"
-  | "level14"
-  | "level15"
-  | "level16"
-  | "level17"
-  | "level18"
-  | "level19"
-  | "level20";
 
 export enum AuthResult {
   InvalidCredentials = "Invalid Credentials",
@@ -283,4 +743,9 @@ export interface CombinedData {
   type: string;
   other: string | null;
   lastUpdated: Date;
+}
+
+export interface QuantityDistance {
+  quantity: number;
+  unit: Distance;
 }

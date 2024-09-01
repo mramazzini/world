@@ -1,7 +1,6 @@
 import SubClassDisplay from "@/app/components/ClassInfo/SubClassDisplay";
 
 import { SubClassInfo } from "@/lib/types";
-import { CasterType } from "@prisma/client";
 
 import Loading from "../../../UI/Loading";
 
@@ -11,13 +10,7 @@ const SubClassPage = ({ subclass }: { subclass: SubClassInfo | null }) => {
     <div className="p-4 md:p-8">
       {!subclass && <Loading />}
 
-      {subclass && (
-        <SubClassDisplay
-          subClass={subclass}
-          casterType={subclass.casterType as CasterType}
-          customFields={subclass.customFields}
-        />
-      )}
+      {subclass && <SubClassDisplay subClass={subclass} />}
     </div>
   );
 };
