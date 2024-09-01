@@ -204,7 +204,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 17,
-    name: "Ladder (10-foot)",
+    name: "Ladder (10 foot)",
     description: "A ladder is used to climb up or down walls.",
     cost: { quantity: 1, unit: sp },
     weight: { quantity: 25, unit: lb },
@@ -333,7 +333,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 27,
-    name: "Pole (10-foot)",
+    name: "Pole (10 foot)",
     description: "A pole is a long, slender piece of wood or metal.",
     cost: { quantity: 5, unit: cp },
     weight: { quantity: 7, unit: lb },
@@ -486,7 +486,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 41,
-    name: "Tent, Two-Person",
+    name: "Tent, (Two Person)",
     description: "A small tent that can accommodate two people.",
     cost: { quantity: 2, unit: gp },
     weight: { quantity: 20, unit: lb },
@@ -2327,7 +2327,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 192,
-    name: "Three-Dragon Ante Set",
+    name: "Three Dragon Ante Set",
     description:
       "Three-Dragon Ante is a game of chance and skill that pits two or more players against each other in a battle of wits.",
     flavorText:
