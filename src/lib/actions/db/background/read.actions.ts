@@ -9,7 +9,6 @@ export const getBackgrounds = async (): Promise<BackgroundInfo[]> => {
   const db = new PrismaClient();
   const res = await db.background.findMany({
     include: {
-      Features: true,
       User: {
         select: {
           username: true,
@@ -31,7 +30,6 @@ export const getBackground = async (
         name: query,
       },
       include: {
-        Features: true,
         User: {
           select: {
             username: true,
@@ -47,7 +45,6 @@ export const getBackground = async (
         id: query,
       },
       include: {
-        Features: true,
         User: {
           select: {
             username: true,
@@ -72,7 +69,6 @@ export const getBackgroundChunk = async (
         relationalFields: queryInfo.relationalFields,
       }),
       include: {
-        Features: true,
         User: {
           select: {
             username: true,
@@ -91,7 +87,6 @@ export const getBackgroundChunk = async (
     }),
 
     include: {
-      Features: true,
       User: {
         select: {
           username: true,

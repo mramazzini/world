@@ -13,7 +13,6 @@ async function nuke() {
   await db.subClass.deleteMany({});
   await db.class.deleteMany({});
 
-  await db.backgroundFeature.deleteMany({});
   await db.background.deleteMany({});
   await db.racialTraits.deleteMany({});
   await db.raceVariant.deleteMany({});

@@ -48,8 +48,8 @@ const wikiLinks = [
     url: "/subrace",
   },
   {
-    name: "Tools",
-    url: "/tool",
+    name: "Items",
+    url: "/item",
   },
 ];
 

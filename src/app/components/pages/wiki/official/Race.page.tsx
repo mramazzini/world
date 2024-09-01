@@ -147,14 +147,13 @@ const RacePage = ({ race, weaponNames }: Props) => {
           </h2>
           <div className="divider mb-0"></div>
           <GenerateTable
-            links={race.Variants.map((variant) => {
-              return `/subrace/${variant.name.replaceAll(" ", "-")}`;
-            })}
             data={{
               "": {
                 headers: ["Name", "Description", "Source"],
                 headersLength: [15, 70, 15],
-
+                links: race.Variants.map((variant) => {
+                  return `/subrace/${variant.name.replaceAll(" ", "-")}`;
+                }),
                 data: race.Variants.map((variant) => {
                   return {
                     Name: variant.name,

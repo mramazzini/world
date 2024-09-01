@@ -14,6 +14,8 @@ import {
   numberColor,
   numberColorBefore,
 } from "@/app/components/Utility/colorBefore";
+import FeatureList from "@/app/components/UI/FeatureList";
+import Feature from "@/app/components/UI/Feature";
 
 const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
   if (!classObj) return <span className="p-4">Class does not exist</span>;
@@ -352,68 +354,10 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
                     <div className="divider m-0"></div>
                   </div>
                 )}
-                {spellCastingFeatures?.map((feature, index) => {
-                  return (
-                    !feature.hideInSheet && (
-                      <div
-                        key={`spellcastingFeature-${index}-${feature.name}`}
-                        className="bg-base-200 rounded-xl p-4 max-w-1/3"
-                      >
-                        <div className="flex justify-between">
-                          <h2 className="pb-0">{feature.name}</h2>
-                          <div className="flex flex-wrap items-center">
-                            {feature.levels && feature.levels.length == 20 ? (
-                              <span className="badge badge-accent font-bold rounded-full hidden md:flex">
-                                All Levels
-                              </span>
-                            ) : (
-                              feature.levels &&
-                              feature.levels.map((level, index) => {
-                                return (
-                                  <div
-                                    className={`bg-neutral rounded-full w-8 h-8 flex justify-center items-center text-neutral-content font-bold ${numberColor(
-                                      level
-                                    )} border border-4 mx-1 before:absolute  before:rounded-full before:border-4 z-[1] before:w-8 before:h-8 ${
-                                      numberColorBefore[level].bg
-                                    } ${numberColorBefore[level].opacity}`}
-                                    key={index}
-                                  >
-                                    {level}
-                                  </div>
-                                );
-                              })
-                            )}
-                          </div>
-                        </div>
-                        <div className="divider m-0"></div>
-                        <p>
-                          <P>{feature.description && feature.description}</P>
-                        </p>
-                        <div className="divider m-0"></div>
-                        {feature.options && (
-                          <>
-                            <ul className="list-disc pl-4">
-                              {feature.options.map((option, index) => (
-                                <li key={index} className="">
-                                  <P>{option}</P>
-                                </li>
-                              ))}
-                            </ul>
-                            <div className="divider m-0"></div>
-                          </>
-                        )}
-                        {feature.extendedTable && (
-                          <>
-                            <div className="bg-base-100">
-                              <JsonTable json={feature.extendedTable} />
-                            </div>
-                            <div className="divider m-0"></div>
-                          </>
-                        )}
-                      </div>
-                    )
-                  );
-                })}
+                {spellCastingFeatures &&
+                  spellCastingFeatures.map((feature, index) => (
+                    <Feature key={index} feature={feature} />
+                  ))}
               </div>
             </>
           )}
@@ -422,113 +366,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
             Class Features <Info tooltip="Features" />
           </h2>
           <div className="divider"></div>
-          <div className="grid grid-cols-1 gap-4">
-            {regularFeatures.map((feature, index) => {
-              if (feature.hideInSheet) return null;
-              return (
-                <div key={index} className="bg-base-200 p-4 rounded-xl">
-                  <div className="flex justify-between">
-                    <h2 className="pb-0">{feature.name}</h2>
-                    <div className="flex flex-wrap items-center">
-                      {feature.levels && feature.levels.length == 20 ? (
-                        <span className="badge badge-accent font-bold rounded-full">
-                          All Levels
-                        </span>
-                      ) : (
-                        feature.levels?.map((level, index) => {
-                          const color =
-                            level >= 1 && level <= 4
-                              ? "border-success"
-                              : level >= 5 && level <= 8
-                              ? "border-primary"
-                              : level >= 9 && level <= 12
-                              ? "border-accent"
-                              : level >= 13 && level <= 16
-                              ? "border-secondary"
-                              : level >= 17 && level <= 20
-                              ? "border-error"
-                              : "border-info";
-                          return (
-                            <div
-                              className={`bg-neutral rounded-full w-8 h-8 flex justify-center items-center text-neutral-content font-bold ${numberColor(
-                                level
-                              )} border border-4 mx-1 before:absolute  before:rounded-full before:border-4 z-[1] before:w-8 before:h-8 ${
-                                numberColorBefore[level].bg
-                              } ${numberColorBefore[level].opacity}`}
-                              key={index}
-                            >
-                              {level}
-                            </div>
-                          );
-                        })
-                      )}
-                      {/* Uncoment when leveldfeatures are utilized. */}
-                      {/* {feature.leveledFeatures && 
-                        (Object.keys(feature.leveledFeatures).length === 20 ? (
-                          <span className="badge badge-accent font-bold rounded-full">
-                            All Levels
-                          </span>
-                        ) : (
-                          Object.keys(feature.leveledFeatures).map(
-                            (featureLevel, index) => {
-                              const lvl = parseInt(featureLevel);
-                              const color =
-                                lvl >= 1 && lvl <= 4
-                                  ? "border-success"
-                                  : lvl >= 5 && lvl <= 8
-                                  ? "border-primary"
-                                  : lvl >= 9 && lvl <= 12
-                                  ? "border-accent"
-                                  : lvl >= 13 && lvl <= 16
-                                  ? "border-secondary"
-                                  : lvl >= 17 && lvl <= 20
-                                  ? "border-error"
-                                  : "border-info";
-                              return (
-                                <div
-                                  className={`bg-neutral rounded-full w-8 h-8 flex justify-center items-center text-neutral-content font-bold ${color} border border-4 mx-1 before:absolute  before:rounded-full before:border-4 z-[1] before:w-8 before:h-8 ${before[lvl].bg} ${before[lvl].opacity}`}
-                                  key={index}
-                                >
-                                  {lvl}
-                                </div>
-                              );
-                            }
-                          )
-                        ))} */}
-                    </div>
-                  </div>
-
-                  <div className="divider m-0"></div>
-                  <p>
-                    <P>{feature.description}</P>
-                  </p>
-                  <div className="divider m-0"></div>
-                  {feature.options && (
-                    <>
-                      <ul className="list-disc ">
-                        {feature.options.map((option, index) => (
-                          <>
-                            <li key={index} className="ml-4">
-                              <P>{option}</P>
-                            </li>
-                            <div className="divider m-0"></div>
-                          </>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                  {feature.extendedTable && (
-                    <>
-                      <div className="bg-base-100">
-                        <JsonTable json={feature.extendedTable} />
-                      </div>
-                      <div className="divider m-0"></div>
-                    </>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          <FeatureList features={regularFeatures} />
         </>
       )}
     </main>

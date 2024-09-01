@@ -267,7 +267,7 @@ const termDictionary: {
   {
     term: "features",
     definition:
-      "Abilities that your character gains from their class or subclass once they reach a certain level.",
+      "Abilities that your character gains from things like their class, subclass, background, etc.",
   },
   {
     term: "DC",

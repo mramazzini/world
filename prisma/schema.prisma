@@ -505,7 +505,7 @@ model Tool {
   components            String[] // Some tools have components that the character gets. These will be automatically added into the characters sheet
   componentsDescription String? // Description of the components
 
-  /// [ToolFeature]
+  /// [Feature]
   features Json[]
 
   Items Item[]

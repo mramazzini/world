@@ -20,7 +20,6 @@ const HomeSearchBar = ({ small }: Props) => {
   const [currentQueryString, setCurrentQueryString] = useState(
     pathname === "/search" ? params.get("query") || "" : ""
   );
-  console.log(small);
   if (small)
     return (
       <form

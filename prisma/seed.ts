@@ -244,34 +244,41 @@ const seed = async () => {
   cinfo("Backgrounds created");
 
   // Create Background Features
-  // cinfo("Creating background features");
-  // for (const Feature of BackgroundFeatures) {
-  //   try {
-  //     cinfo("Creating feature:", Feature.name);
-  //     //make sure feature has a classId and levels
-  //     if (!Feature.backgroundId) {
-  //       cerr("Feature missing backgroundId field:", Feature.name);
-  //       return;
-  //     }
+  cinfo("Creating background features");
+  for (const Feature of BackgroundFeatures) {
+    try {
+      cinfo("Creating feature:", Feature.name);
+      //make sure feature has a classId and levels
+      if (!Feature.backgroundId) {
+        cerr("Feature missing backgroundId field:", Feature.name);
+        return;
+      }
 
-  //     // verify extendedTable integrity
-  //     if (Feature.extendedTable) {
-  //       if (
-  //         !verifyTableIntegrity(Feature.extendedTable as PrismaJson.Table[])
-  //       ) {
-  //         return;
-  //       }
-  //     }
-  //     await db.backgroundFeature.create({
-  //       data: Feature,
-  //     });
-  //     cinfo("Feature created");
-  //   } catch (error) {
-  //     cerr("Error creating background feature:", Feature.name, error);
-  //     return;
-  //   }
-  // }
-  // cinfo("Background features created");
+      // verify extendedTable integrity
+      if (Feature.extendedTable) {
+        if (
+          !verifyTableIntegrity(Feature.extendedTable as PrismaJson.Table[])
+        ) {
+          return;
+        }
+      }
+      await db.background.update({
+        where: {
+          id: Feature.backgroundId,
+        },
+        data: {
+          features: {
+            push: Feature,
+          },
+        },
+      });
+      cinfo("Feature created");
+    } catch (error) {
+      cerr("Error creating background feature:", Feature.name, error);
+      return;
+    }
+  }
+  cinfo("Background features created");
 
   // Create classes
   cinfo("Creating classes");

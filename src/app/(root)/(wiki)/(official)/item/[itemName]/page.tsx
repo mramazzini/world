@@ -1,20 +1,19 @@
 import { Metadata } from "next";
 
 import "@/lib/string.extensions";
-
-import { getTool } from "@/lib/actions/db/tool/read.actions";
-import ToolPage from "@/app/components/pages/wiki/official/Tool.page";
+import { getItem } from "@/lib/actions/db/item/read.actions";
+import ItemPage from "@/app/components/pages/wiki/official/Item.page";
 
 type Props = {
-  params: { toolName: string };
+  params: { itemName: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getTool(params.toolName.replaceAll("-", " "));
+  const data = await getItem(params.itemName.replaceAll("-", " "));
 
   if (!data) {
     return {
-      title: "Tool Not Found - Max's DND Wiki",
-      description: "Tool Not Found - Max's DND Wiki",
+      title: "Item Not Found - Max's DND Wiki",
+      description: "Item Not Found - Max's DND Wiki",
     };
   }
 
@@ -28,8 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Page = async ({ params }: Props) => {
-  const tool = await getTool(params.toolName.replaceAll("-", " "));
-  return <ToolPage tool={tool} />;
+  const item = await getItem(params.itemName.replaceAll("-", " "));
+  return <ItemPage item={item} />;
 };
 
 export default Page;

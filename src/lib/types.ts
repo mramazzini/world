@@ -1,8 +1,9 @@
 import {
+  Armor,
   Background,
-  BackgroundFeature,
   Class,
   DamageTypes,
+  EquipmentPack,
   Item,
   Language,
   Message,
@@ -44,12 +45,6 @@ export interface ClassInfo extends Class {
 }
 
 export interface BackgroundInfo extends Background {
-  Features: BackgroundFeature[];
-  User: {
-    username: string | null;
-  } | null;
-}
-export interface ItemInfo extends Item {
   User: {
     username: string | null;
   } | null;
@@ -116,11 +111,11 @@ export interface SubclassSearchResults extends SubClass {
   } | null;
 }
 export enum Currency {
-  cp,
-  sp,
-  ep,
-  gp,
-  pp,
+  cp = "cp",
+  sp = "sp",
+  ep = "ep",
+  gp = "gp",
+  pp = "pp",
 }
 export type Level =
   | 1
@@ -579,13 +574,6 @@ declare global {
       skill: Skill;
       description: string;
     }
-    interface ToolFeature {
-      name: string;
-      description: string;
-      extendedTable?: Table;
-      options?: string[];
-      postTableData?: string;
-    }
 
     interface SpellCastingInfo {
       levelAquired: number;
@@ -726,16 +714,25 @@ export interface SubRaceInfo extends RaceVariant {
   RacialTraits: RacialTraits[];
   BaseRace: SubRaceInfoBaseRaceExtension;
 }
+export interface ItemInfo extends Item {
+  User: {
+    username: string | null;
+  } | null;
+  Weapon: WeaponInfo | null;
+  Armor: Armor | null;
+  Tool: Tool | null;
+  AmmunitionFor: Weapon[] | null;
+  EquipmentPack: EquipmentPack | null;
+  Spell: Spell | null;
+}
+export interface WeaponInfo extends Weapon {
+  ammunition: Item | null;
+}
 
 interface SubRaceInfoBaseRaceExtension extends Race {
   RacialTraits: RacialTraits[];
 }
 
-export interface ToolInfo extends Tool {
-  User: {
-    username: string | null;
-  } | null;
-}
 export interface CombinedData {
   name: string;
   description: string;
