@@ -10650,6 +10650,7 @@ const spellIds = {
   locateCreature: 305,
   communeWithNature: 330,
   entangle: 76,
+  shield: 109,
 };
 const ritualIds = {
   alarm: 47,

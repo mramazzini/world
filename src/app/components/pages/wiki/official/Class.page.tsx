@@ -10,6 +10,10 @@ import Info from "@/app/components/UI/Info";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import JsonTable from "@/app/components/Utility/JsonTable";
 import numPlace from "@/lib/utils/numPlace";
+import {
+  numberColor,
+  numberColorBefore,
+} from "@/app/components/Utility/colorBefore";
 
 const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
   if (!classObj) return <span className="p-4">Class does not exist</span>;
@@ -75,92 +79,6 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
       return minA - minB;
     });
 
-  const before = [
-    {
-      bg: "before:border-primary",
-      opacity: "before:opacity-0",
-    },
-    {
-      bg: "before:border-primary",
-      opacity: "before:opacity-[25%]",
-    },
-    {
-      bg: "before:border-primary",
-      opacity: "before:opacity-[50%]",
-    },
-    {
-      bg: "before:border-primary",
-      opacity: "before:opacity-[75%]",
-    },
-    {
-      bg: "before:border-primary",
-      opacity: "before:opacity-[100%]",
-    },
-    {
-      bg: "before:border-accent",
-      opacity: "before:opacity-[25%]",
-    },
-    {
-      bg: "before:border-accent",
-      opacity: "before:opacity-[50%]",
-    },
-    {
-      bg: "before:border-accent",
-      opacity: "before:opacity-[75%]",
-    },
-    {
-      bg: "before:border-accent",
-      opacity: "before:opacity-[100%]",
-    },
-    {
-      bg: "before:border-secondary",
-      opacity: "before:opacity-[25%]",
-    },
-    {
-      bg: "before:border-secondary",
-      opacity: "before:opacity-[50%]",
-    },
-    {
-      bg: "before:border-secondary",
-      opacity: "before:opacity-[75%]",
-    },
-    {
-      bg: "before:border-secondary",
-      opacity: "before:opacity-[100%]",
-    },
-    {
-      bg: "before:border-error",
-      opacity: "before:opacity-25",
-    },
-    {
-      bg: "before:border-error",
-      opacity: "before:opacity-50",
-    },
-    {
-      bg: "before:border-error",
-      opacity: "before:opacity-75",
-    },
-    {
-      bg: "before:border-error",
-      opacity: "before:opacity-100",
-    },
-    {
-      bg: "before:border-info",
-      opacity: "before:opacity-[25%]",
-    },
-    {
-      bg: "before:border-info",
-      opacity: "before:opacity-[50%]",
-    },
-    {
-      bg: "before:border-info",
-      opacity: "before:opacity-[75%]",
-    },
-    {
-      bg: "before:border-info",
-      opacity: "before:opacity-[100%]",
-    },
-  ];
   return (
     <main className="p-4 md:p-8">
       {!classObj && <Loading />}
@@ -451,22 +369,14 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
                             ) : (
                               feature.levels &&
                               feature.levels.map((level, index) => {
-                                const color =
-                                  level >= 1 && level <= 4
-                                    ? "border-success"
-                                    : level >= 5 && level <= 8
-                                    ? "border-primary"
-                                    : level >= 9 && level <= 12
-                                    ? "border-accent"
-                                    : level >= 13 && level <= 16
-                                    ? "border-secondary"
-                                    : level >= 17 && level <= 20
-                                    ? "border-error"
-                                    : "border-info";
                                 return (
                                   <div
-                                    className={`bg-neutral rounded-full w-8 h-8 flex justify-center items-center text-neutral-content font-bold ${color} border border-4 mx-1 before:absolute  before:rounded-full before:border-4 z-[1] before:w-8 before:h-8 ${before[level].bg} ${before[level].opacity}`}
-                                    key={`spellcasting-${index}-${level}`}
+                                    className={`bg-neutral rounded-full w-8 h-8 flex justify-center items-center text-neutral-content font-bold ${numberColor(
+                                      level
+                                    )} border border-4 mx-1 before:absolute  before:rounded-full before:border-4 z-[1] before:w-8 before:h-8 ${
+                                      numberColorBefore[level].bg
+                                    } ${numberColorBefore[level].opacity}`}
+                                    key={index}
                                   >
                                     {level}
                                   </div>
@@ -540,7 +450,11 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
                               : "border-info";
                           return (
                             <div
-                              className={`bg-neutral rounded-full w-8 h-8 flex justify-center items-center text-neutral-content font-bold ${color} border border-4 mx-1 before:absolute  before:rounded-full before:border-4 z-[1] before:w-8 before:h-8 ${before[level].bg} ${before[level].opacity}`}
+                              className={`bg-neutral rounded-full w-8 h-8 flex justify-center items-center text-neutral-content font-bold ${numberColor(
+                                level
+                              )} border border-4 mx-1 before:absolute  before:rounded-full before:border-4 z-[1] before:w-8 before:h-8 ${
+                                numberColorBefore[level].bg
+                              } ${numberColorBefore[level].opacity}`}
                               key={index}
                             >
                               {level}

@@ -81,15 +81,6 @@ function ClassDisplay({ classObj }: Props) {
       <div className="divider" />
       <h2>Class Table </h2>
 
-      <div className="overflow-x-auto">
-        {/* <ClassTable
-          classObj={classObj}
-          features={features}
-          casterType={casterType}
-          customFields={customFields}
-        /> */}
-      </div>
-
       <h2>
         Hitpoints <Info tooltip="Hitpoints" />
       </h2>

@@ -290,10 +290,11 @@ model SpellList {
   flavorText  String @db.VarChar(200)
   description String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   Spells    Spell[]
   Classes   Class[]
+  SubClass  SubClass[]
 }
 
 model SubClass {
@@ -308,9 +309,10 @@ model SubClass {
   /// [Feature]
   features Json[]
 
-  isSpellCaster    Boolean @default(false)
   /// [SpellCastingInfo]
   spellCastingInfo Json? //only exists if isSpellCaster is true
+  spellList        SpellList? @relation(fields: [spellListId], references: [id]) // If the class has a spell list, link it here
+  spellListId      Int?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -454,37 +456,24 @@ model RacialTraits {
 }
 
 model Background {
-  id                  Int                 @id @default(autoincrement())
-  srd                 Boolean             @default(false)
+  id                  Int        @id @default(autoincrement())
+  srd                 Boolean    @default(false)
   name                String
   description         String
-  source              String              @default("Player's Handbook")
-  flavorText          String              @db.VarChar(200)
+  source              String     @default("Player's Handbook")
+  flavorText          String     @db.VarChar(200)
   skillProficiencies  Skill[]
   skillChoiceCount    Int
   toolProficiencies   String[]
   languages           Language[]
   languageChoiceCount Int
   equipment           String[]
-  Features            BackgroundFeature[]
-  createdAt           DateTime            @default(now())
-  updatedAt           DateTime            @updatedAt
-  User                User?               @relation(fields: [userId], references: [id])
+  /// [Feature]
+  features            Json[]
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+  User                User?      @relation(fields: [userId], references: [id])
   userId              Int?
-}
-
-model BackgroundFeature {
-  id            Int      @id @default(autoincrement())
-  name          String
-  description   String
-  /// [Table]
-  extendedTable Json[]
-  options       String[] // If the feature has options to choose from, list here
-
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-  Background   Background? @relation(fields: [backgroundId], references: [id])
-  backgroundId Int?
 }
 
 model Feat {

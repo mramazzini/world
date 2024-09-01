@@ -333,42 +333,49 @@ const seed = async () => {
   }
   cinfo("Sub classes created");
 
-  // cinfo("Creating Subclass features");
-  // for (const SubclassFeature of SubclassFeatures) {
-  //   try {
-  //     cinfo("Creating subclass feature:", SubclassFeature.name);
-  //     //make sure subclass feature has a subClassId and levels
-  //     if (!SubclassFeature.subClassId) {
-  //       cerr(
-  //         "Subclass feature missing subClassId field:",
-  //         SubclassFeature.name
-  //       );
-  //       return;
-  //     }
-  //     if (!SubclassFeature.levels) {
-  //       cerr("Subclass feature missing levels field:", SubclassFeature.name);
-  //       return;
-  //     }
-  //     //verify extendedTable integrity
-  //     if (SubclassFeature.extendedTable) {
-  //       if (
-  //         !verifyTableIntegrity(
-  //           SubclassFeature.extendedTable as PrismaJson.Table[]
-  //         )
-  //       ) {
-  //         return;
-  //       }
-  //     }
-  //     await db.subClassFeature.create({
-  //       data: SubclassFeature,
-  //     });
-  //     cinfo("Subclass feature created");
-  //   } catch (error) {
-  //     cerr("Error creating subclass feature", SubclassFeature.name, error);
-  //     return;
-  //   }
-  // }
-  // cinfo("Subclass features created");
+  cinfo("Creating Subclass features");
+  for (const SubclassFeature of SubclassFeatures) {
+    try {
+      cinfo("Creating subclass feature:", SubclassFeature.name);
+      //make sure subclass feature has a subClassId and levels
+      if (!SubclassFeature.subClassId) {
+        cerr(
+          "Subclass feature missing subClassId field:",
+          SubclassFeature.name
+        );
+        return;
+      }
+      if (!SubclassFeature.levels) {
+        cerr("Subclass feature missing levels field:", SubclassFeature.name);
+        return;
+      }
+      //verify extendedTable integrity
+      if (SubclassFeature.extendedTable) {
+        if (
+          !verifyTableIntegrity(
+            SubclassFeature.extendedTable as PrismaJson.Table[]
+          )
+        ) {
+          return;
+        }
+      }
+      await db.subClass.update({
+        where: {
+          id: SubclassFeature.subClassId,
+        },
+        data: {
+          features: {
+            push: SubclassFeature,
+          },
+        },
+      });
+      cinfo("Subclass feature created");
+    } catch (error) {
+      cerr("Error creating subclass feature", SubclassFeature.name, error);
+      return;
+    }
+  }
+  cinfo("Subclass features created");
 
   //create species and traits
   cinfo("Creating Species");
