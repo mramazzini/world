@@ -33,15 +33,7 @@ const UploadJsonFile = ({ setClass }: Props): React.ReactNode => {
       if (parsed.class) {
         setClass(parsed.class);
       }
-      if (parsed.features) {
-        setFeatures(parsed.features);
-      }
-      if (parsed.customFields) {
-        setCustomFields(parsed.customFields);
-      }
-      if (parsed.casterType) {
-        setCasterType(parsed.casterType);
-      }
+
       setSuccess("Successfully Generated Class.");
       console.log(success);
     } catch (e) {

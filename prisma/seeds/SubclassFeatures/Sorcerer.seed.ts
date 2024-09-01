@@ -10,8 +10,11 @@ const ids = {
   storm: 104,
   wild: 105,
 };
+interface SubclassFeature extends PrismaJson.Feature {
+  subClassId: number;
+}
 
-const sorcererSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
+const sorcererSubclassFeatures: SubclassFeature[] = [
   //aberant
   {
     name: "Aberrant Origin",

@@ -15,8 +15,11 @@ const ids = {
   transmutation: 39,
   warMagic: 40,
 };
+interface SubclassFeature extends PrismaJson.Feature {
+  subClassId: number;
+}
 
-const WizardSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
+const WizardSubclassFeatures: SubclassFeature[] = [
   //abjuration
   {
     name: "Abjuration Savant",

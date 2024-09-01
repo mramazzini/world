@@ -273,8 +273,11 @@ const ItemPage = ({ item }: Props) => {
                     <div className="divider "></div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      {item.Tool.skills.map((skill) => (
-                        <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                      {item.Tool.skills.map((skill, index) => (
+                        <div
+                          key={index}
+                          className="bg-base-200 rounded-xl p-4 max-w-1/3"
+                        >
                           <h2 className="pb-0">
                             Advantage:{" "}
                             <P>

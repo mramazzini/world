@@ -17,8 +17,11 @@ const ids = {
   farTraveler: 14,
   feyLost: 15,
 };
+interface BackgroundFeature extends PrismaJson.Feature {
+  backgroundId: number;
+}
 
-const BackgroundFeatures: Prisma.BackgroundFeatureCreateManyInput[] = [
+const BackgroundFeatures: BackgroundFeature[] = [
   //acolyte
   {
     backgroundId: ids.acolyte,

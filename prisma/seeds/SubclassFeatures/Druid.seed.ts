@@ -9,8 +9,11 @@ const ids = {
   stars: 60,
   wildfire: 61,
 };
+interface SubclassFeature extends PrismaJson.Feature {
+  subClassId: number;
+}
 
-const druidSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
+const druidSubclassFeatures: SubclassFeature[] = [
   //dreams
   {
     name: "Balm of the Summer Court",

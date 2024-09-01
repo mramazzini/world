@@ -13,6 +13,12 @@ interface Props<T extends model> {
 }
 
 const ModelLink = ({ potential, children, linkBase }: Props<model>) => {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    // Simulate some data preparation time before rendering the tooltip
+    setReady(true);
+  }, []);
   if (typeof children !== "string") children = children.join("");
   const strRegex = /\d+\{[^}]+\}/g;
 
@@ -35,13 +41,6 @@ const ModelLink = ({ potential, children, linkBase }: Props<model>) => {
         const modelObj = potential.find(
           (item) => item.id === parseInt(id[0])
         ) as model;
-
-        const [ready, setReady] = useState(false);
-
-        useEffect(() => {
-          // Simulate some data preparation time before rendering the tooltip
-          setReady(true);
-        }, []);
 
         return (
           <span key={index}>

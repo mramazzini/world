@@ -11,8 +11,11 @@ const ids = {
   undead: 117,
   undying: 118,
 };
+interface SubclassFeature extends PrismaJson.Feature {
+  subClassId: number;
+}
 
-const warlockSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
+const warlockSubclassFeatures: SubclassFeature[] = [
   //archfey
   {
     name: "Expanded Spell List",

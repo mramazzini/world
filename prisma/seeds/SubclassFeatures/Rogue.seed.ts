@@ -11,8 +11,11 @@ const ids = {
   swashbuckler: 96,
   thief: 97,
 };
+interface SubclassFeature extends PrismaJson.Feature {
+  subClassId: number;
+}
 
-const RogueSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
+const RogueSubclassFeatures: SubclassFeature[] = [
   // Arcane Trickster
   {
     name: "Mage Hand Legerdemain",

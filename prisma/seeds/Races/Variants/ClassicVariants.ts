@@ -9,6 +9,7 @@ import {
 } from "@prisma/client";
 import { Ability } from "@/lib/types";
 import { weaponIds } from "../../Items/Weapons/Weapons.seed";
+import { artisanIds, toolIds } from "../../Items/Tools/tools.seed";
 const ids = {
   dragonborn: 1,
   dwarf: 2,
@@ -539,7 +540,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     description:
       "The Mark of Scribing is a dragonmark that bestows a number of powers related to the written word and communication, often over great distances.",
     toolProficiencies: {
-      defaultTools: ["Tinker's tools"],
+      defaultTools: [toolIds.tinkersTools],
     },
     flavorText:
       "The Mark of Scribing is a dragonmark that bestows a number of powers related to the written word and communication.",
@@ -895,7 +896,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       ],
     },
     toolProficiencies: {
-      defaultTools: ["Artisan's tools"],
+      defaultTools: Object.values(artisanIds),
     },
     abilityScoreDescription:
       "Your Intelligence score increases by 2, and one other Ability Score of your choice increases by 1.",

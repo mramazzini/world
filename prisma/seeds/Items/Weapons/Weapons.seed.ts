@@ -9,13 +9,19 @@ const { BLUDGEONING, PIERCING, SLASHING } = DamageTypes;
 const d = (damage: number, type: DamageTypes): PrismaJson.Damage[] => [
   { dice: damage, numberOfDice: 1, type },
 ];
-const p = (property: WeaponPropertyNames[]): PrismaJson.WeaponProperty[] => {
-  const res = property.map((prop) => ({
-    property: WeaponProperties[prop],
-  }));
+const p = (property: string[]): PrismaJson.WeaponProperty[] => {
+  const res = property.map((prop) => {
+    if (
+      !Object.values(WeaponPropertyNames).includes(prop as WeaponPropertyNames)
+    ) {
+      throw new Error(`Property ${prop} is not a valid weapon property`);
+    }
+    return {
+      property: WeaponProperties[prop as WeaponPropertyNames],
+    };
+  });
   return res;
 };
-
 const Weapons: Prisma.WeaponCreateManyInput[] = [
   {
     id: 1,

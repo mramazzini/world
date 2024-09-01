@@ -1,7 +1,6 @@
 import Features from "./seeds/Classes/Features.seed";
 import Classes from "./seeds/Classes/Class.seed";
 import SubClasses from "./seeds/Subclasses/Subclasses.seed";
-import CasterTypes from "./seeds/Classes/CasterType.seed";
 
 import SubclassFeatures from "./seeds/SubclassFeatures";
 import { SpellSeed } from "./seeds/Spells/spells.seed";

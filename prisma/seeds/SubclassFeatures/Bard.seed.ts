@@ -10,8 +10,11 @@ const ids = {
   valor: 26,
   whispers: 27,
 };
+interface SubclassFeature extends PrismaJson.Feature {
+  subClassId: number;
+}
 
-const BardSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
+const BardSubclassFeatures: SubclassFeature[] = [
   //creation
   {
     name: "Mote of Potential",

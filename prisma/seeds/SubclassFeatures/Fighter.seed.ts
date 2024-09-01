@@ -12,8 +12,11 @@ const ids = {
   runeKnight: 9,
   samurai: 10,
 };
+interface SubclassFeature extends PrismaJson.Feature {
+  subClassId: number;
+}
 
-const FighterSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
+const FighterSubclassFeatures: SubclassFeature[] = [
   // arcane archer
   {
     subClassId: ids.arcaneArcher,
