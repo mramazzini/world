@@ -1,6 +1,10 @@
-import { Ability, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
+import { Ability, SpellFocus } from "@/lib/types";
 import { src } from "@/lib/types";
 import P from "@/app/components/Utility/FormatAndSanitize";
+import { spellListIds } from "../Spells/SpellLists/SpellLists.seed";
+import { spellIds } from "../Spells/spells.seed";
+import { thirdCaster } from "../Classes/SpellSlotsUtil";
 
 const ids = {
   fighter: 1, //
@@ -89,14 +93,94 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     source: src.phb,
     flavorText:
       "The Eldritch Knight combines the martial mastery common to all fighters with a careful study of magic.",
-    spellCaster: true,
-    cantripsKnown: 3,
-    spellsKnown: 3,
-    spellCastingAbility: Ability.INT,
-    spellCastingInfo:
-      "Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.",
-    prepareSpellInfo:
-      "You know three 1st-level wizard spells of your choice, two of which you must choose from the abjuration and evocation spells on the wizard spell list.\n\nThe Spells Known column of the Eldritch Knight Spellcasting table shows when you learn more wizard spells of 1st level or higher. Each of these spells must be an abjuration or evocation spell of your choice, and must be of a level for which you have spell slots. For instance, when you reach 7th level in this class, you can learn one new spell of 1st or 2nd level.\n\nThe spells you learn at 8th, 14th, and 20th level can come from any school of magic.\n\nWhenever you gain a level in this class, you can replace one of the wizard spells you know with another spell of your choice from the wizard spell list. The new spell must be of a level for which you have spell slots, and it must be an abjuration or evocation spell, unless you're replacing the spell you gained at 3rd, 8th, 14th, or 20th level from any school of magic.",
+    spellCastingInfo: {
+      levelAquired: 3,
+      displaySpellLevels: true,
+      ability: Ability.INT,
+      description:
+        "When you reach 3rd level, you augment your martial prowess with the ability to cast spells.",
+      spellFocus: SpellFocus.NONE,
+      spellFocusDescription:
+        "Eldritch Knights do not use a spell focus. If they acquire a component pouch, they can use it to cast spells.",
+      spellCastingAbilityDescription:
+        "Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.",
+      castingSpellsDescription: `The Eldritch Knight Spellcasting table shows how many spell slots you have to cast your wizard spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.\n\nFor example, if you know the 1st-level spell %${spellIds.shield}{Shield}% and have a 1st-level and a 2nd-level spell slot available, you can cast %${spellIds.shield}{Shield}% using either slot.`,
+      spellLevels: thirdCaster,
+      features: [
+        {
+          name: "Cantrips",
+          description:
+            "You learn two cantrips of your choice from the wizard spell list. You learn an additional wizard cantrip of your choice at 10th level.",
+          tableColumns: [
+            {
+              title: "Cantrips Known",
+              col: {
+                1: "-",
+                2: "-",
+                3: 2,
+                4: 2,
+                5: 2,
+                6: 2,
+                7: 2,
+                8: 2,
+                9: 2,
+                10: 3,
+                11: 3,
+                12: 3,
+                13: 3,
+                14: 3,
+                15: 3,
+                16: 3,
+                17: 3,
+                18: 3,
+                19: 3,
+                20: 3,
+              },
+            },
+          ],
+        },
+        {
+          name: "Spells Known",
+          description:
+            "You know three 1st-level wizard spells of your choice, two of which you must choose from the abjuration and evocation spells on the wizard spell list.\n\nThe Spells Known column of the Eldritch Knight Spellcasting table shows when you learn more wizard spells of 1st level or higher. Each of these spells must be an abjuration or evocation spell of your choice, and must be of a level for which you have spell slots. For instance, when you reach 7th level in this class, you can learn one new spell of 1st or 2nd level.\n\nThe spells you learn at 8th, 14th, and 20th level can come from any school of magic.\n\nWhenever you gain a level in this class, you can replace one of the wizard spells you know with another spell of your choice from the wizard spell list. The new spell must be of a level for which you have spell slots, and it must be an abjuration or evocation spell, unless you're replacing the spell you gained at 3rd, 8th, 14th, or 20th level from any school of magic.",
+          tableColumns: [
+            {
+              title: "Spells Known",
+              col: {
+                1: "-",
+                2: "-",
+                3: 3,
+                4: 4,
+                5: 4,
+                6: 4,
+                7: 5,
+                8: 6,
+                9: 6,
+                10: 7,
+                11: 8,
+                12: 8,
+                13: 9,
+                14: 10,
+                15: 10,
+                16: 11,
+                17: 11,
+                18: 11,
+                19: 12,
+                20: 13,
+              },
+            },
+          ],
+        },
+      ],
+    },
+    // spellCaster: true,
+    // cantripsKnown: 3,
+    // spellsKnown: 3,
+    // spellCastingAbility: Ability.INT,
+    // spellCastingInfo:
+    //   "Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.",
+    // prepareSpellInfo:
+    //   "You know three 1st-level wizard spells of your choice, two of which you must choose from the abjuration and evocation spells on the wizard spell list.\n\nThe Spells Known column of the Eldritch Knight Spellcasting table shows when you learn more wizard spells of 1st level or higher. Each of these spells must be an abjuration or evocation spell of your choice, and must be of a level for which you have spell slots. For instance, when you reach 7th level in this class, you can learn one new spell of 1st or 2nd level.\n\nThe spells you learn at 8th, 14th, and 20th level can come from any school of magic.\n\nWhenever you gain a level in this class, you can replace one of the wizard spells you know with another spell of your choice from the wizard spell list. The new spell must be of a level for which you have spell slots, and it must be an abjuration or evocation spell, unless you're replacing the spell you gained at 3rd, 8th, 14th, or 20th level from any school of magic.",
   },
   {
     id: 8,
@@ -935,15 +1019,88 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     source: src.phb,
     flavorText:
       "Arcane Tricksters enhance their fine-honed skills of stealth and agility with magic, learning tricks of enchantment and illusion.",
-    spellCaster: true,
-    spellCastingAbility: Ability.INT,
-    spellCastingInfo:
-      "You know three 1st-level wizard spells of your choice, two of which you must choose from the enchantment and illusion spells on the wizard spell list.\n\nThe Spells Known column of the Arcane Trickster Spellcasting table shows when you learn more wizard spells of 1st level or higher. Each of these spells must be an enchantment or illusion spell of your choice, and must be of a level for which you have spell slots. For instance, when you reach 7th level in this class, you can learn one new spell of 1st or 2nd level.\n\nThe spells you learn at 8th, 14th, and 20th level can come from any school of magic.\n\nWhenever you gain a level in this class, you can replace one of the wizard spells you know with another spell of your choice from the wizard spell list. The new spell must be of a level for which you have spell slots, and it must be an enchantment or illusion spell, unless you're replacing the spell you gained at 3rd, 8th, 14th, or 20th level from any school of magic.",
-    prepareSpellInfo:
-      "The Arcane Trickster Spellcasting table shows how many spell slots you have to cast your wizard spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
-    casterTypeId: 3, //3rd caster
-    spellsKnown: 3,
-    cantripsKnown: 3,
+    spellListId: spellListIds.wizard,
+    spellCastingInfo: {
+      ability: Ability.INT,
+      levelAquired: 3,
+      description:
+        "When you reach 3rd level, you augment your martial prowess with the ability to cast spells.",
+      displaySpellLevels: true,
+      spellLevels: thirdCaster,
+      spellCastingAbilityDescription:
+        "Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through dedicated study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.",
+      spellFocus: SpellFocus.NONE,
+      spellFocusDescription:
+        "Arcane tricksters do not use a spell focus. If they acquire a component pouch, they can use it to cast spells.",
+      castingSpellsDescription:
+        "The Arcane Trickster Spellcasting table shows how many spell slots you have to cast your wizard spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.\n\nFor example, if you know the 1st-level spell Charm Person and have a 1st-level and a 2nd-level spell slot available, you can cast Charm Person using either slot.",
+      features: [
+        {
+          name: "Cantrips",
+          description:
+            "You learn three cantrips: Mage Hand and two other cantrips of your choice from the wizard spell list. You learn another wizard cantrip of your choice at 10th level.",
+          tableColumns: [
+            {
+              title: "Cantrips Known",
+              col: {
+                1: "-",
+                2: "-",
+                3: "Mage Hand + 2",
+                4: "Mage Hand + 2",
+                5: "Mage Hand + 2",
+                6: "Mage Hand + 2",
+                7: "Mage Hand + 2",
+                8: "Mage Hand + 2",
+                9: "Mage Hand + 2",
+                10: "Mage Hand + 3",
+                11: "Mage Hand + 3",
+                12: "Mage Hand + 3",
+                13: "Mage Hand + 3",
+                14: "Mage Hand + 3",
+                15: "Mage Hand + 3",
+                16: "Mage Hand + 3",
+                17: "Mage Hand + 3",
+                18: "Mage Hand + 3",
+                19: "Mage Hand + 3",
+                20: "Mage Hand + 3",
+              },
+            },
+          ],
+        },
+        {
+          name: "Spells Known",
+          description:
+            "You know three 1st-level wizard spells of your choice, two of which you must choose from the enchantment and illusion spells on the wizard spell list.\n\nThe Spells Known column of the Arcane Trickster Spellcasting table shows when you learn more wizard spells of 1st level or higher. Each of these spells must be an enchantment or illusion spell of your choice, and must be of a level for which you have spell slots. For instance, when you reach 7th level in this class, you can learn one new spell of 1st or 2nd level.\n\nThe spells you learn at 8th, 14th, and 20th level can come from any school of magic.\n\nWhenever you gain a level in this class, you can replace one of the wizard spells you know with another spell of your choice from the wizard spell list. The new spell must be of a level for which you have spell slots, and it must be an enchantment or illusion spell, unless you're replacing the spell you gained at 3rd, 8th, 14th, or 20th level from any school of magic.",
+          tableColumns: [
+            {
+              title: "Spells Known",
+              col: {
+                1: "-",
+                2: "-",
+                3: "3",
+                4: "4",
+                5: "4",
+                6: "4",
+                7: "5",
+                8: "6",
+                9: "6",
+                10: "7",
+                11: "8",
+                12: "8",
+                13: "9",
+                14: "10",
+                15: "10",
+                16: "11",
+                17: "11",
+                18: "11",
+                19: "12",
+                20: "13",
+              },
+            },
+          ],
+        },
+      ],
+    },
   },
   {
     name: "Assassin",

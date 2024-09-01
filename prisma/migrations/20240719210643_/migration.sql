@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "SubClass" ALTER COLUMN "flavorText" SET DATA TYPE VARCHAR(300);

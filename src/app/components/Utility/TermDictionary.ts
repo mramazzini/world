@@ -267,7 +267,7 @@ const termDictionary: {
   {
     term: "features",
     definition:
-      "Abilities that your character gains from their class or subclass once they reach a certain level.",
+      "Abilities that your character gains from things like their class, subclass, background, etc.",
   },
   {
     term: "DC",
@@ -427,8 +427,19 @@ const termDictionary: {
   {
     term: "arcane focus",
     definition:
-      "A tool used to cast spells. It can be used in place of material components.",
+      "A tool used by some spellcasters to cast spells. It removes the need for material components that do not specify a cost.",
   },
+  {
+    term: "druidic focus",
+    definition:
+      "A tool used by some spellcasters to cast spells. It removes the need for material components that do not specify a cost.",
+  },
+  {
+    term: "holy symbol",
+    definition:
+      "A tool used by some spellcasters to cast spells. It removes the need for material components that do not specify a cost.",
+  },
+
   {
     term: "Equipment",
     definition: "Items that your character carries and utilizes.",
@@ -439,7 +450,7 @@ const termDictionary: {
       "Items that are consumed when casting a spell. Some spells require them.",
   },
   {
-    term: "Somantic Components",
+    term: "Somatic Components",
     definition:
       "Gestures that are required to cast a spell. Some spells require them.",
   },
@@ -448,6 +459,22 @@ const termDictionary: {
     definition:
       "Words that are required to cast a spell. Some spells require them.",
   },
+  {
+    term: "Verbal",
+    definition:
+      "In the context of spellcasting, Verbal components are words that are required to cast a spell. Some spells require them.",
+  },
+  {
+    term: "Somatic",
+    definition:
+      "In the context of spellcasting, Somatic components are gestures that are required to cast a spell. Some spells require them.",
+  },
+  {
+    term: "Material",
+    definition:
+      "In the context of spellcasting, Material components are items that are consumed when casting a spell. Some spells require them.",
+  },
+
   {
     term: "Background",
     definition:

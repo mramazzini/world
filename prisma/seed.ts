@@ -1,15 +1,11 @@
 import Features from "./seeds/Classes/Features.seed";
 import Classes from "./seeds/Classes/Class.seed";
 import SubClasses from "./seeds/Subclasses/Subclasses.seed";
-import CasterTypes from "./seeds/Classes/CasterType.seed";
-import Weapons from "./seeds/Weapons/Weapons.seed";
-import Properties from "./seeds/Weapons/Properties.seed";
-import WeaponToPropertyArr from "./seeds/Weapons/WeaponToProperty.seed";
-import CustomFields from "./seeds/Classes/CustomFields.seed";
+
 import SubclassFeatures from "./seeds/SubclassFeatures";
-import Spells from "./seeds/Spells/spells.seed";
+import { SpellSeed } from "./seeds/Spells/spells.seed";
 import { cwarn, cinfo, cerr, csuccess } from "@/lib/utils/chalkLog";
-import SpellLists from "./seeds/Spells/SpellLists/SpellLists.seed";
+import { SpellLists } from "./seeds/Spells/SpellLists/SpellLists.seed";
 import Backgrounds from "./seeds/Backgrounds/Backgrounds.seed";
 import BackgroundFeatures from "./seeds/Backgrounds/BackgroundFeatures.seed";
 import SpellListToSpellArr from "./seeds/Spells/SpellLists/SpellListToSpell.seed";
@@ -17,20 +13,97 @@ import Species from "./seeds/Races/Races.seed";
 import Traits from "./seeds/Races/Traits.seed";
 import { ClassicVariants } from "./seeds/Races/Variants/ClassicVariants";
 import ClassicTraits from "./seeds/Races/Variants/ClassicTraits";
-import ToolSeed from "./seeds/Tools/tools.seed";
-import {
-  PrismaClient,
-  Weapon,
-  WeaponProperty,
-  WeaponToProperty,
-} from "@prisma/client";
+import { ItemsSeed } from "./seeds/Items/Items.seed";
+import { ItemTypes, PrismaClient, Weapon } from "@prisma/client";
 import createMaxyUser from "./seeds/User.seed";
 import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
-import { src } from "@/lib/types";
+import { ToolSeed } from "./seeds/Items/Tools/tools.seed";
+import { Weapons } from "./seeds/Items/Weapons/Weapons.seed";
+import { ArmorSeed } from "./seeds/Items/Armor/Armor.seed";
+import { EquipmentPackSeed } from "./seeds/Items/EquipmentPack/EquipmentPack.seed";
+import { getPotentialItemsFromClass } from "@/app/components/Utility/idExtraction";
 
 const db = new PrismaClient();
 // db cleared with npm run nuke prior to seeding
 const seed = async () => {
+  // Create spells
+  cinfo("Creating spells");
+  for (const Spell of SpellSeed) {
+    try {
+      cinfo("Creating spell:", Spell.name);
+      await db.spell.create({
+        data: Spell,
+      });
+      cinfo("Spell created");
+    } catch (error) {
+      cerr("Error creating spell:", Spell.name, error);
+      return;
+    }
+  }
+  cinfo("Spells created");
+
+  //create spell lists
+  cinfo("Creating spell lists");
+  for (const SpellList of SpellLists) {
+    try {
+      cinfo("Creating spell list:", SpellList.name);
+      await db.spellList.create({
+        data: SpellList,
+      });
+      cinfo("Spell list created");
+    } catch (error) {
+      cerr("Error creating spell list:", SpellList.name, error);
+      return;
+    }
+  }
+  cinfo("Spell lists created");
+
+  //link spells to spell lists
+  cinfo("Linking spells to spell lists");
+  for (const SpellListToSpell of SpellListToSpellArr) {
+    try {
+      cinfo("Linking spell to spell list:", SpellListToSpell.spellId);
+      await db.spellList.update({
+        where: {
+          id: SpellListToSpell.spellListId,
+        },
+        data: {
+          Spells: {
+            connect: {
+              id: SpellListToSpell.spellId,
+            },
+          },
+        },
+      });
+      cinfo("Spell linked to spell list");
+    } catch (error) {
+      cerr(
+        "Error linking spell to spell list:",
+        SpellListToSpell.spellId,
+        error
+      );
+      return;
+    }
+  }
+  // Create weapons
+  cinfo("Creating weapons");
+
+  for (const Weapon of Weapons) {
+    try {
+      cinfo("Creating weapon:", Weapon.name);
+      const createdWeapon = await db.weapon.create({
+        data: {
+          ...Weapon,
+          ammunitionId: null,
+        },
+      });
+      cinfo("Weapon created");
+    } catch (error) {
+      cerr("Error creating weapon:", Weapon.name, error);
+      return;
+    }
+  }
+  cinfo("Weapons created");
   //Create Tools
   cinfo("Creating tools");
   for (const Tool of ToolSeed) {
@@ -46,6 +119,113 @@ const seed = async () => {
     }
   }
   cinfo("Tools created");
+  //Create Armor
+  cinfo("Creating armor");
+  for (const Armor of ArmorSeed) {
+    try {
+      cinfo("Creating armor:", Armor.name);
+      await db.armor.create({
+        data: Armor,
+      });
+      cinfo("Armor created");
+    } catch (error) {
+      cerr("Error creating armor:", Armor.name, error);
+      return;
+    }
+  }
+  cinfo("Armor created");
+
+  // create equipment packs
+  cinfo("Creating equipment packs");
+  let createdEquipmentPacks = [];
+  for (const Pack of EquipmentPackSeed) {
+    try {
+      cinfo("Creating equipment pack:", Pack.name);
+      const e = await db.equipmentPack.create({
+        data: {
+          ...Pack,
+          itemList: undefined,
+        },
+      });
+      createdEquipmentPacks.push(e);
+      cinfo("Equipment pack created");
+    } catch (error) {
+      cerr("Error creating equipment pack:", Pack.name, error);
+      return;
+    }
+  }
+  cinfo("Equipment packs created");
+
+  //Create Items
+  cinfo("Creating items");
+  for (const Item of ItemsSeed) {
+    try {
+      cinfo("Creating item:", Item.name);
+
+      await db.item.create({
+        data: {
+          ...Item,
+          equipmentPackId:
+            createdEquipmentPacks.find((p) => p.name === Item.name)?.id || null,
+        },
+      });
+      cinfo("Item created");
+    } catch (error) {
+      cerr("Error creating item:", Item.name, error);
+      console.error(error);
+      return;
+    }
+  }
+  cinfo("Items created");
+
+  //After items are created, link ammunition to weapons
+  cinfo("Linking ammunition to weapons");
+  for (const Weapon of Weapons) {
+    if (Weapon.ammunitionId) {
+      try {
+        cinfo("Linking ammunition to weapon:", Weapon.name);
+        await db.weapon.update({
+          where: {
+            id: Weapon.id,
+          },
+          data: {
+            ammunition: {
+              connect: {
+                id: Weapon.ammunitionId,
+              },
+            },
+          },
+        });
+        cinfo("Ammunition linked to weapon");
+      } catch (error) {
+        cerr("Error linking ammunition to weapon:", Weapon.name, error);
+        return;
+      }
+    }
+  }
+  cinfo("Ammunition linked to weapons");
+
+  // populate equipment pack items
+  cinfo("Populating equipment pack items");
+  for (const Pack of createdEquipmentPacks) {
+    try {
+      cinfo("Populating equipment pack:", Pack.name);
+      await db.equipmentPack.update({
+        where: {
+          id: Pack.id,
+        },
+        data: {
+          itemList: EquipmentPackSeed.find((p) => p.name === Pack.name)
+            ?.itemList,
+        },
+      });
+      cinfo("Equipment pack populated");
+    } catch (error) {
+      cerr("Error populating equipment pack:", Pack.name, error);
+      return;
+    }
+  }
+
   // Create Backgrounds
   cinfo("Creating backgrounds");
   for (const Background of Backgrounds) {
@@ -81,8 +261,15 @@ const seed = async () => {
           return;
         }
       }
-      await db.backgroundFeature.create({
-        data: Feature,
+      await db.background.update({
+        where: {
+          id: Feature.backgroundId,
+        },
+        data: {
+          features: {
+            push: Feature,
+          },
+        },
       });
       cinfo("Feature created");
     } catch (error) {
@@ -91,69 +278,6 @@ const seed = async () => {
     }
   }
   cinfo("Background features created");
-
-  // Create spells
-  cinfo("Creating spells");
-  for (const Spell of Spells) {
-    try {
-      cinfo("Creating spell:", Spell.name);
-      await db.spell.create({
-        data: Spell,
-      });
-      cinfo("Spell created");
-    } catch (error) {
-      cerr("Error creating spell:", Spell.name, error);
-      return;
-    }
-  }
-  cinfo("Spells created");
-
-  //create spell lists
-  cinfo("Creating spell lists");
-  for (const SpellList of SpellLists) {
-    try {
-      cinfo("Creating spell list:", SpellList.name);
-      await db.spellList.create({
-        data: SpellList,
-      });
-      cinfo("Spell list created");
-    } catch (error) {
-      cerr("Error creating spell list:", SpellList.name, error);
-      return;
-    }
-  }
-  cinfo("Spell lists created");
-
-  //linking spellLists to spells
-  cinfo("Creating spell list to spell links");
-  for (const s of SpellListToSpellArr) {
-    try {
-      cinfo("Creating spell list to spell link:", s.spellId);
-      await db.spellListToSpell.create({
-        data: s,
-      });
-      cinfo("Spell list to spell link created");
-    } catch (error) {
-      cerr("Error creating spell list to spell link:", s.spellId, error);
-      return;
-    }
-  }
-
-  // Create caster types
-  cinfo("Creating caster types");
-  for (const CasterType of CasterTypes) {
-    try {
-      cinfo("Creating caster type:", CasterType.name);
-      await db.casterType.create({
-        data: CasterType,
-      });
-      cinfo("Caster type created");
-    } catch (error) {
-      cerr("Error creating caster type:", CasterType.name, error);
-      return;
-    }
-  }
-  cinfo("Caster types created");
 
   // Create classes
   cinfo("Creating classes");
@@ -171,38 +295,28 @@ const seed = async () => {
   }
   cinfo("Classes created");
 
-  // Create features
-  cinfo("Creating features");
-  for (const Feature of Features) {
+  // link potential items to classes
+  cinfo("Linking potential items to classes");
+  for (const Class of Classes) {
     try {
-      cinfo("Creating feature:", Feature.name);
-      //make sure feature has a classId and levels
-      if (!Feature.classId) {
-        cerr("Feature missing classId field:", Feature.name);
-        return;
-      }
-      if (!Feature.levels) {
-        cerr("Feature missing levels field:", Feature.name);
-        return;
-      }
-      // verify extendedTable integrity
-      if (Feature.extendedTable) {
-        if (
-          !verifyTableIntegrity(Feature.extendedTable as PrismaJson.Table[])
-        ) {
-          return;
-        }
-      }
-      await db.feature.create({
-        data: Feature,
+      cinfo("Linking potential items to class:", Class.name);
+      const items = getPotentialItemsFromClass(Class);
+      await db.class.update({
+        where: {
+          id: Class.id,
+        },
+        data: {
+          potentialEquipment: {
+            connect: items.map((i) => ({ id: i })),
+          },
+        },
       });
-      cinfo("Feature created");
+      cinfo("Potential items linked to class");
     } catch (error) {
-      cerr("Error creating feature:", Feature.name, error);
+      cerr("Error linking potential items to class:", Class.name, error);
       return;
     }
   }
-  cinfo("Features created");
 
   // Create sub classes
   cinfo("Creating sub classes");
@@ -251,8 +365,15 @@ const seed = async () => {
           return;
         }
       }
-      await db.subClassFeature.create({
-        data: SubclassFeature,
+      await db.subClass.update({
+        where: {
+          id: SubclassFeature.subClassId,
+        },
+        data: {
+          features: {
+            push: SubclassFeature,
+          },
+        },
       });
       cinfo("Subclass feature created");
     } catch (error) {
@@ -262,112 +383,6 @@ const seed = async () => {
   }
   cinfo("Subclass features created");
 
-  //Create custom fields
-  cinfo("Creating custom fields");
-  for (const CustomField of CustomFields) {
-    try {
-      cinfo("Creating custom field:", CustomField.name);
-      //make sure custom field has a classId
-      if (!CustomField.classId && !CustomField.subClassId) {
-        cerr("Custom field missing classId or subClassID:", CustomField.name);
-        return;
-      }
-
-      await db.customField.create({
-        data: CustomField,
-      });
-      cinfo("Custom field created");
-    } catch (error) {
-      cerr("Error creating custom field:", CustomField.name, error);
-      return;
-    }
-  }
-  cinfo("Custom fields created");
-
-  // Create weapons
-  cinfo("Creating weapons");
-  let weapons: Weapon[] = [];
-  for (const Weapon of Weapons) {
-    try {
-      cinfo("Creating weapon:", Weapon.name);
-      const createdWeapon = await db.weapon.create({
-        data: Weapon,
-      });
-      weapons.push(createdWeapon);
-      cinfo("Weapon created");
-    } catch (error) {
-      cerr("Error creating weapon:", Weapon.name, error);
-      return;
-    }
-  }
-  cinfo("Weapons created");
-  // Create properties
-  cinfo("Creating Weapon properties");
-  let properties: WeaponProperty[] = [];
-  for (const Property of Properties) {
-    try {
-      cinfo("Creating property:", Property.name);
-      const createdProperty = await db.weaponProperty.create({
-        data: Property,
-      });
-      properties.push(createdProperty);
-      cinfo("Property created");
-    } catch (error) {
-      cerr("Error creating property:", Property.name, error);
-      return;
-    }
-  }
-  cinfo("Properties created");
-
-  //Link weapons and properties
-  cinfo("Linking weapons and properties");
-  for (const WeaponToProperty of WeaponToPropertyArr) {
-    try {
-      cinfo(
-        "Linking weapon -",
-        WeaponToProperty.weaponName,
-        "- with properties:",
-        WeaponToProperty.properties.join(", ")
-      );
-      // Find the weapon in the weapons array
-      const weapon = weapons.find(
-        (w) => w.name === WeaponToProperty.weaponName
-      );
-      if (!weapon) {
-        cerr("Weapon not found:", WeaponToProperty.weaponName);
-        return;
-      }
-      // Find the properties in the properties array
-      const propertiesToLink = properties.filter((p) =>
-        WeaponToProperty.properties.includes(p.name)
-      );
-      if (propertiesToLink.length !== WeaponToProperty.properties.length) {
-        cerr(
-          "Not all properties found for weapon:",
-          WeaponToProperty.weaponName
-        );
-        return;
-      }
-      // Link the properties to the weapon
-      for (const property of propertiesToLink) {
-        try {
-          await db.weaponToProperty.create({
-            data: {
-              weaponId: weapon.id,
-              weaponPropertyId: property.id,
-            },
-          });
-        } catch (error) {
-          cerr("Error linking weapon and properties\n", error);
-          return;
-        }
-      }
-      cinfo("Weapon linked with properties");
-    } catch (error) {
-      cerr("Error linking weapon and properties\n", error);
-      return;
-    }
-  }
   //create species and traits
   cinfo("Creating Species");
   for (const r of Species) {

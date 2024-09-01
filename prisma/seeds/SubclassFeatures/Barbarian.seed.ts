@@ -11,8 +11,11 @@ const ids = {
   wildMagic: 18,
   zealot: 19,
 };
+interface SubclassFeature extends PrismaJson.Feature {
+  subClassId: number;
+}
 
-const BarbarianSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
+const BarbarianSubclassFeatures: SubclassFeature[] = [
   // ancestral guardian
   {
     name: "Ancestral Protectors",

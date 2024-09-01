@@ -1,26 +1,23 @@
 import { SubClassInfo } from "@/lib/types";
 
 import "@/lib/string.extensions";
-import numberArray from "@/lib/utils/numberArray";
-import Levels from "../UI/Levels";
+
 import P from "../Utility/FormatAndSanitize";
 
 import Link from "next/link";
 import JsonTable from "../Utility/JsonTable";
-import SpellCastingInfo from "./SpellCastingInfo";
-import { CasterType, CustomField } from "@prisma/client";
 import SubClassTable from "./SubClassTable";
 import Info from "../UI/Info";
 
 import Loading from "../UI/Loading";
 import NewLineParse from "../Utility/NewLineParse";
+import { numberColor, numberColorBefore } from "../Utility/colorBefore";
+import Feature from "../UI/Feature";
 interface Props {
   subClass: SubClassInfo;
-  casterType: CasterType;
-  customFields: CustomField[];
 }
 
-const SubClassDisplay = ({ subClass, casterType, customFields }: Props) => {
+const SubClassDisplay = ({ subClass }: Props) => {
   const className = subClass.Class?.name;
   if (!className) return <Loading />;
   return (
@@ -57,81 +54,28 @@ const SubClassDisplay = ({ subClass, casterType, customFields }: Props) => {
       <div className="divider"></div>
       <div className="px-4">
         {/* Subclass table only required if they are a spellcaster */}
-
-        {/* spellcasting */}
-        {subClass.spellCaster && casterType && (
+        {subClass.spellCastingInfo && (
           <>
-            <h2>Subclass Table</h2>
-            <SubClassTable
-              subClass={subClass}
-              casterType={casterType}
-              customFields={customFields}
-              subClassLevel={subClass.SubClassFeatures[0].levels[0]}
-            />
-            <SpellCastingInfo classObj={subClass} casterType={casterType} />
+            <div className="bg-base-300 p-4 rounded-xl ">
+              <h2>{subClass.name} Spellcasting </h2>
+              <div className="divider m-0"></div>
+              <SubClassTable subClass={subClass} />
+            </div>
+
             <div className="divider"></div>
-            {/* features */}
           </>
         )}
+
         <h2 className="px-4">
           Subclass Features{" "}
           <Info tooltip="Subclasses provide additional features that make your character more powerful as they level up." />
         </h2>
         <div className="divider"></div>
-
-        {numberArray(1, 20).map((num) => {
-          //grab features for the current level
-          const feat = subClass.SubClassFeatures.filter((feature) =>
-            feature.levels.find((lvl) => lvl === num)
-          );
-          if (feat.length == 0) return;
-          if (feat.find((f) => f.levels[0] === num))
-            return (
-              <ul key={num}>
-                {feat.map((feature) => {
-                  const lvlIndex = feature.levels.findIndex(
-                    (lvl) => lvl === num
-                  );
-                  if (lvlIndex === -1 || lvlIndex > 0) return;
-                  return (
-                    <div key={`${num}-${feature.id}`}>
-                      <li className="px-4">
-                        <h3 className="flex flex-row justify-between">
-                          {lvlIndex === 0 && feature.name}{" "}
-                          <Levels levels={feature.levels} />
-                        </h3>
-
-                        {lvlIndex === 0 && (
-                          <>
-                            <P>{feature.description}</P>
-                            {feature.options && feature.options.length > 0 && (
-                              <ul className="list-disc px-4">
-                                <br />
-                                {feature.options.map((option, index) => (
-                                  <div key={index}>
-                                    <li>
-                                      <P>{option}</P>
-                                    </li>
-                                    <br />
-                                  </div>
-                                ))}
-                              </ul>
-                            )}
-                          </>
-                        )}
-                      </li>
-                      {feature.extendedTable && (
-                        <div className="px-4 mt-2 ">
-                          <JsonTable json={feature.extendedTable} />
-                        </div>
-                      )}
-                      <div className="divider"></div>
-                    </div>
-                  );
-                })}
-              </ul>
-            );
-        })}
+        <div className="grid grid-cols-1 gap-4">
+          {subClass.features.map((feature, index) => (
+            <Feature key={index} feature={feature} />
+          ))}
+        </div>
       </div>
     </>
   );

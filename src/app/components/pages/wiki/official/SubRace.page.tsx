@@ -154,139 +154,146 @@ const SubRacePage = ({ subRace, weaponNames }: Props) => {
           </div>
 
           <div className="divider"></div>
-
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
-              <h2 className="pb-0">
-                What&apos;s new{" "}
-                <Info tooltip="By selecting this subrace, you gain the following racial traits." />
-              </h2>
-              <div className="divider m-0"></div>
-              <ul className="list-disc pl-4">
-                {Object.entries(difference).map(([key, value], index) => {
-                  if (value == TraitStatus.NEW) {
-                    return <li key={index}>{key.camelToCapitalCase()}</li>;
-                  }
-                })}
-                {subRace.RacialTraits.map((trait, index) => (
-                  <li key={index}>{trait.name}</li>
-                ))}
-                {subRace.RacialTraits.length == 0 &&
-                  Object.values(difference).every(
+          <div className="bg-base-300 p-4 rounded-xl">
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                <h2 className="pb-0">
+                  What&apos;s new{" "}
+                  <Info tooltip="By selecting this subrace, you gain the following racial traits." />
+                </h2>
+                <div className="divider m-0"></div>
+                <ul className="list-disc pl-4">
+                  {Object.entries(difference).map(([key, value], index) => {
+                    if (value == TraitStatus.NEW) {
+                      return <li key={index}>{key.camelToCapitalCase()}</li>;
+                    }
+                  })}
+                  {subRace.RacialTraits.map((trait, index) => (
+                    <li key={index}>{trait.name}</li>
+                  ))}
+                  {subRace.RacialTraits.length == 0 &&
+                    Object.values(difference).every(
+                      (val) => val == TraitStatus.NONE
+                    ) && <li>None</li>}
+                </ul>
+              </div>
+              <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                <h2 className="pb-0">
+                  What&apos;s replaced{" "}
+                  <Info
+                    tooltip={`By selecting this subrace, the following traits from your race are replaced.`}
+                  />
+                </h2>
+                <div className="divider m-0"></div>
+                <ul className="list-disc pl-4">
+                  {Object.entries(difference).map(([key, value], index) => {
+                    if (value == TraitStatus.REPLACED) {
+                      return <li key={index}>{key.camelToCapitalCase()}</li>;
+                    }
+                  })}
+                  {Object.values(difference).every(
                     (val) => val == TraitStatus.NONE
                   ) && <li>None</li>}
-              </ul>
-            </div>
-            <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
-              <h2 className="pb-0">
-                What&apos;s replaced{" "}
-                <Info
-                  tooltip={`By selecting this subrace, the following traits from your race are replaced.`}
-                />
-              </h2>
-              <div className="divider m-0"></div>
-              <ul className="list-disc pl-4">
-                {Object.entries(difference).map(([key, value], index) => {
-                  if (value == TraitStatus.REPLACED) {
-                    return <li key={index}>{key.camelToCapitalCase()}</li>;
-                  }
-                })}
-                {Object.values(difference).every(
-                  (val) => val == TraitStatus.NONE
-                ) && <li>None</li>}
-              </ul>
-            </div>
-            <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
-              <h2 className="pb-0">
-                What&apos;s lost{" "}
-                <Info
-                  tooltip={`By selecting this subrace, the following traits from your race are lost`}
-                />
-              </h2>
-              <div className="divider m-0"></div>
+                </ul>
+              </div>
+              <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                <h2 className="pb-0">
+                  What&apos;s lost{" "}
+                  <Info
+                    tooltip={`By selecting this subrace, the following traits from your race are lost`}
+                  />
+                </h2>
+                <div className="divider m-0"></div>
 
-              <ul className="list-disc pl-4">
-                {subRace.removedTraits.map((trait, index) => (
-                  <li key={index}>{trait}</li>
-                ))}
-                {subRace.removedTraits.length == 0 && <li>None</li>}
-              </ul>
-              <ul className="list-disc pl-4"></ul>
+                <ul className="list-disc pl-4">
+                  {subRace.removedTraits.map((trait, index) => (
+                    <li key={index}>{trait}</li>
+                  ))}
+                  {subRace.removedTraits.length == 0 && <li>None</li>}
+                </ul>
+                <ul className="list-disc pl-4"></ul>
+              </div>
             </div>
           </div>
+          <div className="divider"></div>
+          <div className="bg-base-300 p-4 rounded-xl">
+            <h2 className="pb-0">Basic Traits</h2>
+            <div className="divider"></div>
+            <GenerateTable
+              data={{
+                "": {
+                  headers: ["Name", "Description"],
+                  headersLength: [15, 70],
+                  data: [
+                    {
+                      Name: "Age",
+                      Description: subRace.age || race.age,
+                    },
+                    {
+                      Name: "Alignment",
+                      Description: subRace.alignment || race.alignment,
+                    },
+                    {
+                      Name: "Size",
+                      Description:
+                        subRace.sizeDescription ||
+                        race.sizeDescription ||
+                        "N/A",
+                    },
+                    {
+                      Name: "Speed",
+                      Description: `Your base walking speed is ${
+                        subRace.speed || race.speed
+                      } ft.`,
+                    },
+                    {
+                      Name: "Darkvision",
+                      Description:
+                        subRace.darkvisionDescription ||
+                        race.darkvisionDescription ||
+                        "None",
+                    },
+                  ],
+                },
+              }}
+            />
+            <div className="divider"></div>
+            <div className="grid gap-4 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+              <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                <h2 className="pb-0 flex justify-between flex-row items-center">
+                  <div>
+                    Ability scores{" "}
+                    <Info tooltip="Ability score improvements, or ASI, are numerical increases to your characters ability scores." />
+                  </div>
+                  {subRace.abilityScoreDescription !== null ? (
+                    <div className="badge badge-accent">{subRace.name}</div>
+                  ) : (
+                    <div className="badge badge-neutral">{race.name}</div>
+                  )}
+                </h2>
+                <div className="divider m-0"></div>
+                {subRace.abilityScoreDescription ||
+                  race.abilityScoreDescription}
+              </div>
+              <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                <h2 className="pb-0 flex justify-between flex-row items-center">
+                  <div>
+                    Languages{" "}
+                    <Info
+                      tooltip={`A character who is a ${subRace.name} is proficient in the following languages.`}
+                    />{" "}
+                  </div>
+                  {subRace.languageDescription !== null ? (
+                    <div className="badge badge-accent">{subRace.name}</div>
+                  ) : (
+                    <div className="badge badge-neutral">{race.name}</div>
+                  )}
+                </h2>
+                <div className="divider m-0"></div>
+                <p>{subRace.languageDescription || race.languageDescription}</p>
+              </div>
+            </div>
 
-          <div className="divider"></div>
-          <h2 className="">Basic Traits</h2>
-          <GenerateTable
-            data={{
-              "": {
-                headers: ["Name", "Description"],
-                headersLength: [15, 70],
-                data: [
-                  {
-                    Name: "Age",
-                    Description: subRace.age || race.age,
-                  },
-                  {
-                    Name: "Alignment",
-                    Description: subRace.alignment || race.alignment,
-                  },
-                  {
-                    Name: "Size",
-                    Description:
-                      subRace.sizeDescription || race.sizeDescription || "N/A",
-                  },
-                  {
-                    Name: "Speed",
-                    Description: `Your base walking speed is ${
-                      subRace.speed || race.speed
-                    } ft.`,
-                  },
-                  {
-                    Name: "Darkvision",
-                    Description:
-                      subRace.darkvisionDescription ||
-                      race.darkvisionDescription ||
-                      "None",
-                  },
-                ],
-              },
-            }}
-          />
-          <div className="divider"></div>
-          <div className="grid gap-4 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
-            <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
-              <h2 className="pb-0 flex justify-between flex-row items-center">
-                <div>
-                  Ability scores{" "}
-                  <Info tooltip="Ability score improvements, or ASI, are numerical increases to your characters ability scores." />
-                </div>
-                {subRace.abilityScoreDescription !== null ? (
-                  <div className="badge badge-accent">{subRace.name}</div>
-                ) : (
-                  <div className="badge badge-neutral">{race.name}</div>
-                )}
-              </h2>
-              <div className="divider m-0"></div>
-              {subRace.abilityScoreDescription || race.abilityScoreDescription}
-            </div>
-            <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
-              <h2 className="pb-0 flex justify-between flex-row items-center">
-                <div>
-                  Languages{" "}
-                  <Info
-                    tooltip={`A character who is a ${subRace.name} is proficient in the following languages.`}
-                  />{" "}
-                </div>
-                {subRace.languageDescription !== null ? (
-                  <div className="badge badge-accent">{subRace.name}</div>
-                ) : (
-                  <div className="badge badge-neutral">{race.name}</div>
-                )}
-              </h2>
-              <div className="divider m-0"></div>
-              <p>{subRace.languageDescription || race.languageDescription}</p>
-            </div>
             {weaponNames.length > 0 && (
               <div className="bg-base-200 rounded-xl p-4  max-w-1/3 ">
                 <h2 className="pb-0 flex justify-between flex-row items-center">
@@ -310,56 +317,53 @@ const SubRacePage = ({ subRace, weaponNames }: Props) => {
                 </ul>
               </div>
             )}
-            {/* {race.toolProficiencies && (
-              <div className="bg-base-200 rounded-xl p-4  max-w-1/3">
-                <h2 className="pb-0">Tool Proficiencies</h2>
-                <div className="divider m-0"></div>
-              </div>
-            )} */}
+            <div className="divider mb-0"></div>
           </div>
           {/* traits */}
           <div className="divider"></div>
-          <h2>
-            Racial Traits{" "}
-            <Info tooltip="Unique Abilities granted to your character due to its subrace." />
-          </h2>
-          <div className="divider"></div>
-          {subRace.RacialTraits.length > 0 && (
-            <>
-              {subRace.RacialTraits.map((trait, index) => (
-                <div key={index} className="bg-base-200 rounded-xl p-4 my-2">
-                  <h3>
-                    {trait.name}{" "}
-                    <div className="badge badge-accent">{subRace.name}</div>
-                  </h3>
-                  <p>
-                    <P>{trait.description}</P>
-                  </p>
-                  {trait.extendedTable.length > 0 && (
-                    <div className="bg-base-300 mt-4">
-                      <JsonTable json={trait.extendedTable} />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </>
-          )}
-          {race.RacialTraits.map((trait, index) => (
-            <div key={index} className="bg-base-200 rounded-xl p-4 my-2">
-              <h3>
-                {trait.name}{" "}
-                <div className="badge badge-neutral">{race.name}</div>
-              </h3>
-              <p>
-                <P>{trait.description}</P>
-              </p>
-              {trait.extendedTable.length > 0 && (
-                <div className="bg-base-300 mt-4">
-                  <JsonTable json={trait.extendedTable} />
-                </div>
-              )}
-            </div>
-          ))}
+          <div className="bg-base-300 p-4 rounded-xl">
+            <h2 className="pb-0">
+              Racial Traits{" "}
+              <Info tooltip="Unique Abilities granted to your character due to its subrace." />
+            </h2>
+            <div className="divider"></div>
+            {subRace.RacialTraits.length > 0 && (
+              <>
+                {subRace.RacialTraits.map((trait, index) => (
+                  <div key={index} className="bg-base-200 rounded-xl p-4 my-2">
+                    <h3>
+                      {trait.name}{" "}
+                      <div className="badge badge-accent">{subRace.name}</div>
+                    </h3>
+                    <p>
+                      <P>{trait.description}</P>
+                    </p>
+                    {trait.extendedTable.length > 0 && (
+                      <div className="bg-base-300 mt-4">
+                        <JsonTable json={trait.extendedTable} />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </>
+            )}
+            {race.RacialTraits.map((trait, index) => (
+              <div key={index} className="bg-base-200 rounded-xl p-4 my-2">
+                <h3>
+                  {trait.name}{" "}
+                  <div className="badge badge-neutral">{race.name}</div>
+                </h3>
+                <p>
+                  <P>{trait.description}</P>
+                </p>
+                {trait.extendedTable.length > 0 && (
+                  <div className="bg-base-300 mt-4">
+                    <JsonTable json={trait.extendedTable} />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </>
       )}
     </main>

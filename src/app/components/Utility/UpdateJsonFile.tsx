@@ -1,21 +1,13 @@
 "use client";
 
-import { CasterType, Class, CustomField, Feature } from "@prisma/client";
+import { Class } from "@prisma/client";
 import React from "react";
 
 interface Props {
   setClass: (value: Class) => void;
-  setFeatures: (value: Feature[]) => void;
-  setCustomFields: (value: CustomField[]) => void;
-  setCasterType: (value: CasterType) => void;
 }
 //parse an uploaded json file
-const UploadJsonFile = ({
-  setClass,
-  setFeatures,
-  setCustomFields,
-  setCasterType,
-}: Props): React.ReactNode => {
+const UploadJsonFile = ({ setClass }: Props): React.ReactNode => {
   const [json, setJson] = React.useState<string>("");
   const [error, setError] = React.useState<string>("");
   const [success, setSuccess] = React.useState<string>("");
@@ -41,15 +33,7 @@ const UploadJsonFile = ({
       if (parsed.class) {
         setClass(parsed.class);
       }
-      if (parsed.features) {
-        setFeatures(parsed.features);
-      }
-      if (parsed.customFields) {
-        setCustomFields(parsed.customFields);
-      }
-      if (parsed.casterType) {
-        setCasterType(parsed.casterType);
-      }
+
       setSuccess("Successfully Generated Class.");
       console.log(success);
     } catch (e) {

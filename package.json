@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "npm run seed:prod && next build",
     "build:dev": "npm run seed && next build",
+    "buildtest": "next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",

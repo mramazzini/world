@@ -12,8 +12,11 @@ const ids = {
   shadow: 70,
   sunSoul: 71,
 };
+interface SubclassFeature extends PrismaJson.Feature {
+  subClassId: number;
+}
 
-const MonkSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
+const MonkSubclassFeatures: SubclassFeature[] = [
   //astral self
   {
     name: "Arms of the Astral Self",

@@ -1,8 +1,16 @@
 "use client";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useCallback, useEffect, useState } from "react";
 import DOMPurify from "dompurify";
 import termDictionary from "./TermDictionary";
 import Tooltip from "./Tooltip";
+import { getSpell } from "@/lib/actions/db/spell/read.actions";
+import { ItemInfo, SpellInfo } from "@/lib/types";
+import { cerr } from "@/lib/utils/chalkLog";
+import ModelLink from "./ModelLink";
+import { Item, Spell } from "@prisma/client";
+import { getItem } from "@/lib/actions/db/item/read.actions";
+import { memoize } from "@/lib/utils/memoize";
+import { memoizeGetItem, memoizeGetSpell } from "./globalCache";
 
 const P = ({
   children,
@@ -109,44 +117,176 @@ const P = ({
       setLoading(false);
       return;
     }
+    interface Term {
+      matchIndexes: number[];
+      isSpell: boolean;
+      isItem: boolean;
+    }
 
-    const newElements: React.ReactNode[] = [];
+    async function findItems(str: string): Promise<{
+      matchIndexes: Term[];
+      items: ItemInfo[];
+    } | null> {
+      const itemRegex = /\^[0-9]+{[^}]+}\^/g;
+      let match: RegExpExecArray | null;
+      let matchIndexes: Term[] = [];
 
-    function findTerms(str: string): number[][] {
+      const items: ItemInfo[] = [];
+      // indexes and length of term
+      while ((match = itemRegex.exec(str)) !== null) {
+        matchIndexes.push({
+          matchIndexes: [match.index, match[0].length],
+          isItem: true,
+          isSpell: false,
+        });
+        const string = match[0].slice(1, match[0].length - 1);
+        const idRegex = /[0-9]+/;
+        const idMatch = idRegex.exec(string);
+        const id = idMatch ? idMatch[0] : null;
+
+        if (!id) {
+          console.error("Item id not found in string: ", string);
+          return null;
+        }
+        const item = (await memoizeGetItem(parseInt(id))) as ItemInfo;
+
+        if (match[0].length && item) {
+          items.push(item);
+        }
+      }
+
+      return { matchIndexes, items };
+    }
+
+    async function findSpells(str: string): Promise<{
+      matchIndexes: Term[];
+      spells: SpellInfo[];
+    } | null> {
+      const spellRegex = /%[0-9]+{[^}]+}%/g;
+      let match: RegExpExecArray | null;
+      let matchIndexes: Term[] = [];
+
+      const spells: SpellInfo[] = [];
+      // indexes and length of term
+      while ((match = spellRegex.exec(str)) !== null) {
+        matchIndexes.push({
+          matchIndexes: [match.index, match[0].length],
+          isSpell: true,
+          isItem: false,
+        });
+        const string = match[0].slice(1, match[0].length - 1);
+        const idRegex = /[0-9]+/;
+        const idMatch = idRegex.exec(string);
+        const id = idMatch ? idMatch[0] : null;
+
+        if (!id) {
+          console.error("Spell id not found in string: ", string);
+          return null;
+        }
+        const spell = await memoizeGetSpell(parseInt(id));
+        if (match[0].length && spell) {
+          spells.push(spell);
+        }
+      }
+
+      return { matchIndexes, spells };
+    }
+
+    function findTerms(str: string): Term[] {
       let pattern = termDictionary.map((term) => term.term).join("|");
 
       let regex = new RegExp(`\\b(${pattern})\\b`, "gi");
-
+      let curlyRegex = /{[^}]+}/g;
       let match;
       let matchIndexes = [];
       // indexes and length of term
-      while ((match = regex.exec(str)) !== null) {
+      //need to get curlybrace match length so that we can fill it with empty space,
+      let curlyMatches = [];
+      while ((match = curlyRegex.exec(str)) !== null) {
+        curlyMatches.push([match.index, match[0].length]);
+      }
+      let noCurlyString = str;
+      curlyMatches.forEach((match) => {
+        let emptyString = " ".repeat(match[1]);
+        noCurlyString =
+          noCurlyString.slice(0, match[0]) +
+          emptyString +
+          noCurlyString.slice(match[0] + match[1]);
+      });
+      while ((match = regex.exec(noCurlyString)) !== null) {
         matchIndexes.push([match.index, match[0].length]);
       }
 
-      return matchIndexes;
+      if (matchIndexes.length > 0) {
+        return matchIndexes.map((match) => {
+          return {
+            matchIndexes: match,
+            isSpell: false,
+            isItem: false,
+          };
+        });
+      }
+      return [];
     }
     let index = 0;
+
+    let newElements: React.ReactNode[] = [];
+
     //takes an array of indexes of where the term is found in the string and creates a tooltip for each
-    function createTooltip(str: string, indexes: number[][]) {
+    function createTooltips(
+      str: string,
+      indexes: Term[],
+      spells: SpellInfo[],
+      items: ItemInfo[]
+    ) {
       // add the gap between the start of the string and the first term
+      const newArr = [];
+
       {
-        const firstTermIndex = indexes[0][0];
-        const firstTermLength = indexes[0][1];
+        const firstTermIndex = indexes[0].matchIndexes[0];
+        const firstTermLength = indexes[0].matchIndexes[1];
         const gap = str.slice(0, firstTermIndex);
-        newElements.push(gap);
+        newArr.push(gap);
       }
       for (let i = 0; i < indexes.length; i++) {
-        const termIndex = indexes[i][0];
-        const termLength = indexes[i][1];
+        const termIndex = indexes[i].matchIndexes[0];
+        const termLength = indexes[i].matchIndexes[1];
 
         // add the gap between the last term and this term
         if (i > 0) {
-          const lastTermIndex = indexes[i - 1][0];
-          const lastTermLength = indexes[i - 1][1];
+          const lastTermIndex = indexes[i - 1].matchIndexes[0];
+          const lastTermLength = indexes[i - 1].matchIndexes[1];
           const gap = str.slice(lastTermIndex + lastTermLength, termIndex);
 
-          newElements.push(gap);
+          newArr.push(gap);
+        }
+        if (indexes[i].isItem) {
+          const newElement = (
+            <ModelLink
+              key={`item-${termIndex}-${index}`}
+              potential={items}
+              linkBase="item"
+            >
+              {str.slice(termIndex + 1, termIndex + termLength - 1)}
+            </ModelLink>
+          );
+          index++;
+          newArr.push(newElement);
+          continue;
+        }
+        if (indexes[i].isSpell) {
+          const newElement = (
+            <ModelLink
+              key={`spell-${termIndex}-${index}`}
+              potential={spells}
+              linkBase="spell"
+            >
+              {str.slice(termIndex + 1, termIndex + termLength - 1)}
+            </ModelLink>
+          );
+          index++;
+          newArr.push(newElement);
+          continue;
         }
 
         const term = termDictionary.find(
@@ -159,7 +299,8 @@ const P = ({
             "Term not found in dictionary: ",
             str.slice(termIndex, termIndex + termLength)
           );
-          return;
+          index++;
+          continue;
         }
 
         const newElement = (
@@ -172,21 +313,39 @@ const P = ({
           </Tooltip>
         );
         index++;
-        newElements.push(newElement);
+        newArr.push(newElement);
       }
       // add the gap between the last term and the end of the string
-      const lastTermIndex = indexes[indexes.length - 1][0];
-      const lastTermLength = indexes[indexes.length - 1][1];
+      const lastTermIndex = indexes[indexes.length - 1].matchIndexes[0];
+      const lastTermLength = indexes[indexes.length - 1].matchIndexes[1];
       const gap = str.slice(lastTermIndex + lastTermLength, str.length);
-      newElements.push(gap);
+      newArr.push(gap);
+      return newArr;
     }
 
-    function processElement(element: ReactNode) {
+    async function processElement(element: ReactNode) {
       if (typeof element === "string") {
         const terms = findTerms(element);
-
-        if (terms && terms.length > 0) {
-          createTooltip(element, terms);
+        const spells = await findSpells(element);
+        const items = await findItems(element);
+        let combined: Term[] = [
+          ...terms,
+          ...((spells && spells.matchIndexes && spells.matchIndexes) || []),
+          ...((items && items.matchIndexes && items.matchIndexes) || []),
+        ];
+        const sorted = combined.sort(
+          (a, b) => a.matchIndexes[0] - b.matchIndexes[0]
+        );
+        if (sorted.length > 0) {
+          const toolEl = createTooltips(
+            element,
+            sorted,
+            spells?.spells || [],
+            items?.items || []
+          );
+          if (toolEl) {
+            newElements.push(...toolEl);
+          }
         } else {
           newElements.push(element);
         }
@@ -196,24 +355,53 @@ const P = ({
     }
     // Replace terms with TermDescription components
 
-    while (elements.length > 0) {
-      const element = elements.shift();
-      if (element) {
-        processElement(element);
+    async function processElements() {
+      while (elements.length > 0) {
+        const element = elements.shift();
+        if (element) {
+          await processElement(element);
+        }
       }
     }
+    processElements().then(() => {
+      //give each element a key
+      newElements.map((el, index) => (
+        <React.Fragment key={index}>{el}</React.Fragment>
+      ));
 
-    //give each element a key
-    newElements.map((el, index) => (
-      <React.Fragment key={index}>{el}</React.Fragment>
-    ));
-
-    // Return the elements array
-    setProcessedContent(newElements);
-    setLoading(false);
+      // Return the elements array
+      setProcessedContent(newElements);
+      setLoading(false);
+    });
   }, [children, layer]);
 
-  return loading ? <>{children}</> : <>{processedContent}</>;
+  const preFilter = (content: string) => {
+    const digitRegex = /\d*{/g;
+    const caretRegex = /\^/g;
+    const bracketRegex = /}/g;
+    const percentageRegex = /%/g;
+
+    //remove the digits,brackets and carets, while keeping original text
+    const res = content
+      .replaceAll(digitRegex, "")
+      .replaceAll(caretRegex, "")
+      .replaceAll(bracketRegex, "")
+      .replaceAll(percentageRegex, "");
+
+    return res;
+  };
+
+  return loading ? (
+    <>
+      {typeof children === "string"
+        ? preFilter(children)
+        : typeof children === "number"
+        ? children
+        : preFilter(children.join(""))}
+    </>
+  ) : (
+    <>{processedContent}</>
+  );
 };
 
 export default P;

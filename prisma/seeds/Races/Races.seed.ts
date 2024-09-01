@@ -1,15 +1,16 @@
 import { languages } from "@/lib/globalVars";
 import { src } from "@/lib/types";
+import { Ability } from "@/lib/types";
 import {
   Prisma,
-  Ability,
   Size,
   CreatureType,
   Language,
   Skill,
   DamageTypes,
 } from "@prisma/client";
-import { weaponIds } from "../Weapons/Weapons.seed";
+import { weaponIds } from "../Items/Weapons/Weapons.seed";
+import { toolIds } from "../Items/Tools/tools.seed";
 
 const Species: Prisma.RaceCreateManyInput[] = [
   {
@@ -71,10 +72,16 @@ const Species: Prisma.RaceCreateManyInput[] = [
     ],
     toolProficiencies: {
       defaultTools: [],
-      choices: {
-        tools: ["Smith's tools", "Brewer's supplies", "Mason's tools"],
-        numberOfTools: 1,
-      },
+      choices: [
+        {
+          tools: [
+            toolIds.smithTools,
+            toolIds.brewerSupplies,
+            toolIds.masonTools,
+          ],
+          numberOfTools: 1,
+        },
+      ],
     },
     darkvision: 60,
     darkvisionDescription:
@@ -296,7 +303,32 @@ const Species: Prisma.RaceCreateManyInput[] = [
     description:
       "In the reckonings of most worlds, humans are the youngest of the common races, late to arrive on the world scene and short-lived in comparison to dwarves, elves, and dragons. Perhaps it is because of their shorter lives that they strive to achieve as much as they can in the years they are given. Or maybe they feel they have something to prove to the elder races, and that's why they build their mighty empires on the foundation of conquest and trade. Whatever drives them, humans are the innovators, the achievers, and the pioneers of the worlds.",
     abilityScores: {
-      universalIncrease: 1,
+      fixedIncreases: [
+        {
+          ability: Ability.STR,
+          value: 1,
+        },
+        {
+          ability: Ability.DEX,
+          value: 1,
+        },
+        {
+          ability: Ability.CON,
+          value: 1,
+        },
+        {
+          ability: Ability.INT,
+          value: 1,
+        },
+        {
+          ability: Ability.WIS,
+          value: 1,
+        },
+        {
+          ability: Ability.CHA,
+          value: 1,
+        },
+      ],
     },
     abilityScoreDescription: "Your ability scores each increase by 1.",
     age: "Humans reach adulthood in their late teens and live less than a century.",

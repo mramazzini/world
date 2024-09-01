@@ -9,6 +9,8 @@ import { arraysEqual } from "@/lib/utils/arraysEqual";
 import Info from "../../../UI/Info";
 import JsonTable from "../../../Utility/JsonTable";
 import NewLineParse from "../../../Utility/NewLineParse";
+import Feature from "@/app/components/UI/Feature";
+import FeatureList from "@/app/components/UI/FeatureList";
 interface Props {
   background: BackgroundInfo | null;
 }
@@ -104,33 +106,7 @@ const BackgroundPage = ({ background }: Props) => {
             <Info tooltip="Abilities that your background grants your character." />
           </h2>
           <div className="divider"> </div>
-          <ul>
-            {background.Features.map((feature, index) => (
-              <li key={index}>
-                <h3>{feature.name.toCapitalCase()}</h3>
-                <p>
-                  <P>{feature.description}</P>
-                </p>
-                {feature.options.length > 0 && (
-                  <>
-                    <ul className="list-disc p-2">
-                      {feature.options.map((option, index) => (
-                        <li key={index} className="m-4">
-                          {option}
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                )}
-                {feature.extendedTable && (
-                  <div className="mt-2">
-                    <JsonTable json={feature.extendedTable} />
-                  </div>
-                )}
-                <div className="divider"></div>
-              </li>
-            ))}
-          </ul>
+          <FeatureList features={background.features} />
         </>
       )}
     </main>

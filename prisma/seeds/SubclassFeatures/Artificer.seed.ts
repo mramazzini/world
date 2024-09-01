@@ -7,7 +7,11 @@ const ids = {
   battleSmith: 109,
 };
 
-const ArtificerSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
+interface SubclassFeature extends PrismaJson.Feature {
+  subClassId: number;
+}
+
+const ArtificerSubclassFeatures: SubclassFeature[] = [
   // Alchemist
   {
     name: "Tool Proficiency",

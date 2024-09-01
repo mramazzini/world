@@ -2,15 +2,7 @@ import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
 import { cerr, cinfo, csuccess, cwarn } from "../../../lib/utils/chalkLog";
 import React from "react";
 import GenerateTable from "../UI/GenerateTable";
-const JsonTable = ({
-  json,
-
-  links,
-}: {
-  json: PrismaJson.Table[];
-
-  links?: string[] | undefined;
-}) => {
+const JsonTable = ({ json }: { json: PrismaJson.Table[] }) => {
   //generate the tables
   const result: React.ReactNode[] = [];
 
@@ -22,8 +14,9 @@ const JsonTable = ({
   }
 
   //generate tables
+
   for (const table of json) {
-    result.push(<GenerateTable data={table} links={links} />);
+    result.push(<GenerateTable data={table} />);
   }
   //assign keys
   const tablesWithKeys = result.map((table, index) => {

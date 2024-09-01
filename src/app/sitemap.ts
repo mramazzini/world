@@ -6,7 +6,7 @@ import { getBackgrounds } from "@/lib/actions/db/background/read.actions";
 import { QUERY_LIMIT } from "@/lib/globalVars";
 import { getRaces } from "@/lib/actions/db/race/get.actions";
 import { getSubRaces } from "@/lib/actions/db/subrace/read.actions";
-import { getTools } from "@/lib/actions/db/tool/read.actions";
+import { getItems } from "@/lib/actions/db/item/read.actions";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteMap: MetadataRoute.Sitemap = [];
@@ -36,12 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly",
       priority: 0.8,
     });
-    siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/class/${c.name}/pdf`,
-      lastModified: c.updatedAt,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    });
+
     siteMap.push({
       url: `${process.env.DOMAIN_NAME}/class/${c.name}/subclass`,
       lastModified: c.updatedAt,
@@ -189,25 +184,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   }
 
-  const tools = await getTools();
-  const toolPagesCount = Math.ceil(tools.length / QUERY_LIMIT);
-  for (let i = 1; i < toolPagesCount; i++) {
+  const items = await getItems();
+  const itemPagesCount = Math.ceil(items.length / QUERY_LIMIT);
+  for (let i = 1; i < itemPagesCount; i++) {
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/tool?page=${i}`,
+      url: `${process.env.DOMAIN_NAME}/item?page=${i}`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.7,
     });
   }
   siteMap.push({
-    url: `${process.env.DOMAIN_NAME}/tool`,
+    url: `${process.env.DOMAIN_NAME}/item`,
     lastModified: new Date(),
     changeFrequency: "yearly",
     priority: 0.9,
   });
-  for (const t of tools) {
+  for (const t of items) {
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/tool/${t.name.replaceAll(" ", "-")}`,
+      url: `${process.env.DOMAIN_NAME}/item/${t.name.replaceAll(" ", "-")}`,
       lastModified: t.updatedAt,
       changeFrequency: "yearly",
       priority: 0.8,

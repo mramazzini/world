@@ -11,8 +11,11 @@ const ids = {
   swarmkeeper: 87,
   drakewarden: 88,
 };
+interface SubclassFeature extends PrismaJson.Feature {
+  subClassId: number;
+}
 
-const RangerSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
+const RangerSubclassFeatures: SubclassFeature[] = [
   // Beast Master
   {
     name: "Ranger's Companion",

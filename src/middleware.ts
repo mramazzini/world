@@ -11,7 +11,6 @@ export async function middleware(req: NextRequest) {
   // administator routes can only be accessed by me
   if (!isAuthenticated && adminRoutes.includes(req.nextUrl.pathname)) {
     const isAdmin = await isAdministrator();
-    console.log(isAdmin);
     if (!isAdmin) {
       const absoluteURL = new URL("/not-found", req.nextUrl.origin);
       return NextResponse.redirect(absoluteURL.toString());

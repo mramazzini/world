@@ -12,8 +12,11 @@ const ids = {
   watchers: 79,
   oathbreaker: 80,
 };
+interface SubclassFeature extends PrismaJson.Feature {
+  subClassId: number;
+}
 
-const PaladinSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
+const PaladinSubclassFeatures: SubclassFeature[] = [
   //ancients
   {
     name: "Tenets of the Ancients",

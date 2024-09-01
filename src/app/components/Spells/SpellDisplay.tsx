@@ -51,21 +51,17 @@ const SpellDisplay = ({ spell }: Props) => {
       </p>
       <p>
         Spell Lists:{" "}
-        {spell.SpellListToSpell.map((item, index) => {
-          if (index === spell.SpellListToSpell.length - 1) {
+        {spell.SpellLists.map((spellList, index) => {
+          if (index === spell.SpellLists.length - 1) {
             return (
               <Link
                 className="text-accent "
-                href={`/class/${item.spellList?.name?.toLowerCase()}`}
+                href={`/class/${spellList.name?.toLowerCase()}`}
                 key={index}
               >
-                {item.spellList?.name && (
-                  <Tooltip
-                    element={item.spellList?.name}
-                    layer={0}
-                    format={false}
-                  >
-                    {`Go to ${item.spellList?.name} class ->`}
+                {spellList.name && (
+                  <Tooltip element={spellList.name} layer={0} format={false}>
+                    {`Go to ${spellList.name} class ->`}
                   </Tooltip>
                 )}
               </Link>
@@ -75,16 +71,12 @@ const SpellDisplay = ({ spell }: Props) => {
             <>
               <Link
                 className="text-accent "
-                href={`/class/${item.spellList?.name?.toLowerCase()}`}
+                href={`/class/${spellList.name?.toLowerCase()}`}
                 key={index}
               >
-                {item.spellList?.name && (
-                  <Tooltip
-                    element={item.spellList?.name}
-                    layer={0}
-                    format={false}
-                  >
-                    {`Go to ${item.spellList?.name} class ->`}
+                {spellList.name && (
+                  <Tooltip element={spellList.name} layer={0} format={false}>
+                    {`Go to ${spellList.name} class ->`}
                   </Tooltip>
                 )}
               </Link>

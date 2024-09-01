@@ -16,9 +16,7 @@ import {
   Feat,
   Spell,
   Race,
-  CasterType,
   Weapon,
-  WeaponProperty,
 } from "@prisma/client";
 import { QUERY_LIMIT } from "@/lib/globalVars";
 
@@ -44,7 +42,7 @@ export const searchEverything = async (
     },
   });
 
-  const tools = await db.tool.findMany({});
+  const items = await db.item.findMany({});
 
   const backgrounds = await db.background.findMany({});
 
@@ -62,7 +60,7 @@ export const searchEverything = async (
       description: class_.description,
       flavorText: class_.description,
       type: "Class",
-      other: class_.subClassDesc,
+      other: class_.subClassDescription,
       lastUpdated: class_.updatedAt,
     })),
     ...subclasses.map((subclass) => ({
@@ -76,6 +74,14 @@ export const searchEverything = async (
       type: "Subclass",
       other: subclass.Class?.name || "",
       lastUpdated: subclass.updatedAt,
+    })),
+    ...items.map((item) => ({
+      name: item.name,
+      description: item.description,
+      flavorText: item.flavorText,
+      type: "Item",
+      other: item.types.join(", "),
+      lastUpdated: item.updatedAt,
     })),
     ...races.map((r) => ({
       name: r.name,
@@ -93,14 +99,7 @@ export const searchEverything = async (
       other: r.BaseRace.name,
       lastUpdated: r.updatedAt,
     })),
-    ...tools.map((tool) => ({
-      name: tool.name,
-      description: tool.description,
-      flavorText: tool.description,
-      type: "Tool",
-      other: tool.componentsDescription,
-      lastUpdated: tool.updatedAt,
-    })),
+
     ...backgrounds.map((background) => ({
       name: background.name,
       description: background.description,
@@ -131,19 +130,6 @@ export const searchEverything = async (
   return filtered.slice(page * 50, page * QUERY_LIMIT + 50);
 };
 
-export const getDefaultCasterTypes = async (): Promise<CasterType[]> => {
-  const db = new PrismaClient();
-  const arr: CasterType[] = await db.casterType.findMany({
-    where: {
-      id: {
-        in: [1, 2, 3],
-      },
-    },
-  });
-  await db.$disconnect();
-  return arr;
-};
-
 export async function getBackground(): Promise<Background[]> {
   const db = new PrismaClient();
   const res = await db.background.findMany();
@@ -160,11 +146,7 @@ export async function getFeat(): Promise<Feat[]> {
 
 export async function getWeapon(): Promise<Weapon[]> {
   const db = new PrismaClient();
-  const res = await db.weapon.findMany({
-    include: {
-      WeaponToProperties: true,
-    },
-  });
+  const res = await db.weapon.findMany();
   await db.$disconnect();
   return res;
 }

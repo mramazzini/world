@@ -16,8 +16,11 @@ const ids = {
   twilight: 53,
   war: 54,
 };
+interface SubclassFeature extends PrismaJson.Feature {
+  subClassId: number;
+}
 
-const ClericSubclassFeatures: Prisma.SubClassFeatureCreateManyInput[] = [
+const ClericSubclassFeatures: SubclassFeature[] = [
   // Arcana
   {
     name: "Arcana Domain Spells",

@@ -19,14 +19,11 @@ export async function getSubclasses({
         },
       },
       include: {
-        SubClassFeatures: true,
-        casterType: true,
         Class: {
           select: {
             name: true,
           },
         },
-        customFields: true,
         User: {
           select: {
             username: true,
@@ -39,14 +36,11 @@ export async function getSubclasses({
   }
   const res = await db.subClass.findMany({
     include: {
-      SubClassFeatures: true,
-      casterType: true,
       Class: {
         select: {
           name: true,
         },
       },
-      customFields: true,
       User: {
         select: {
           username: true,
@@ -78,14 +72,11 @@ export async function getSubclassChunkByClass(
         },
       }),
       include: {
-        SubClassFeatures: true,
-        casterType: true,
         Class: {
           select: {
             name: true,
           },
         },
-        customFields: true,
         User: {
           select: {
             username: true,
@@ -107,9 +98,6 @@ export async function getSubclassChunkByClass(
       },
     }),
     include: {
-      SubClassFeatures: true,
-      casterType: true,
-      customFields: true,
       Class: {
         select: {
           name: true,
@@ -160,9 +148,6 @@ export async function getHomebrewSubclassChunk(
         } as Prisma.SubClassWhereInput,
       }),
       include: {
-        SubClassFeatures: true,
-        casterType: true,
-        customFields: true,
         Class: {
           select: {
             name: true,
@@ -189,9 +174,6 @@ export async function getHomebrewSubclassChunk(
       } as Prisma.SubClassWhereInput,
     }),
     include: {
-      SubClassFeatures: true,
-      casterType: true,
-      customFields: true,
       Class: {
         select: {
           name: true,
@@ -233,9 +215,6 @@ export async function getSubclass(
           name: query,
         },
         include: {
-          SubClassFeatures: true,
-          casterType: true,
-          customFields: true,
           Class: {
             select: {
               name: true,
@@ -256,9 +235,6 @@ export async function getSubclass(
           id: query,
         },
         include: {
-          SubClassFeatures: true,
-          casterType: true,
-          customFields: true,
           Class: {
             select: {
               name: true,
@@ -292,9 +268,6 @@ export const getSubclassesByClass = async (
       },
     },
     include: {
-      SubClassFeatures: true,
-      casterType: true,
-      customFields: true,
       User: {
         select: {
           username: true,
@@ -310,3 +283,72 @@ export const getSubclassesByClass = async (
   await db.$disconnect();
   return res;
 };
+
+// get top 10 subclasses based on query
+export async function getSubclassChunk(
+  queryInfo: QueryParams
+): Promise<SubClassInfo[] | null> {
+  const db = new PrismaClient();
+  const { query, page } = queryInfo;
+  if (query === "") {
+    const res = await db.subClass.findMany({
+      where: generateQueryFields({
+        fields: queryInfo.searchFields,
+        relationalFields: queryInfo.relationalFields,
+      }),
+      take: QUERY_LIMIT,
+      skip: page * QUERY_LIMIT,
+      include: {
+        User: {
+          select: {
+            username: true,
+          },
+        },
+        Class: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+    await db.$disconnect();
+    return res;
+  }
+
+  const res = await db.subClass.findMany({
+    where: generateQueryFields({
+      fields: queryInfo.searchFields,
+      relationalFields: queryInfo.relationalFields,
+    }),
+    include: {
+      User: {
+        select: {
+          username: true,
+        },
+      },
+      Class: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+  const fuse = new Fuse(res, {
+    keys: [
+      { name: "name", weight: 1 },
+      { name: "description", weight: 0.33 },
+      { name: "flavorText", weight: 0.5 },
+      { name: "SubClassFeatures.name", weight: 0.5 },
+      { name: "SubClassFeatures.description", weight: 0.33 },
+    ],
+  });
+  const results = fuse.search(query);
+  await db.$disconnect();
+
+  const resultsCopy: SubClassInfo[] = results.map((item) => item.item);
+
+  return resultsCopy.slice(
+    page * QUERY_LIMIT,
+    page * QUERY_LIMIT + QUERY_LIMIT
+  );
+}
