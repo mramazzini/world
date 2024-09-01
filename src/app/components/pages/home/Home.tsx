@@ -32,8 +32,8 @@ const links = [
     href: "/subrace",
   },
   {
-    name: "Tools",
-    href: "/tool",
+    name: "Items",
+    href: "/item",
   },
 ];
 
