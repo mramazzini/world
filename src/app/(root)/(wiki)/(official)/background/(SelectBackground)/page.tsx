@@ -7,6 +7,20 @@ export const metadata: Metadata = {
   title: "Backgrounds - Max's DnD Wiki",
   description:
     "A list of Background origins for your Dungeons and Dragons Fifth Edition character.",
+  openGraph: {
+    type: "website",
+    title: "Backgrounds - Max's DnD Wiki",
+    description:
+      "A list of Background origins for your Dungeons and Dragons Fifth Edition character.",
+    images: [
+      {
+        url: "https://www.maxdnd.com/images/hero.jpg",
+        width: 1440,
+        height: 1920,
+        alt: "Dungeons and Dragons Fire Dragon Attack",
+      },
+    ],
+  },
 };
 export const dynamic = "force-dynamic";
 const Page = async () => {

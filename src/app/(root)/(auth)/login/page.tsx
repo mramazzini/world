@@ -6,6 +6,21 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Login - Max's DND Wiki",
   description: "Login to your account to create and access your saved content.",
+  openGraph: {
+    type: "website",
+
+    title: "Login - Max's DND Wiki",
+    description:
+      "Login to your account to create and access your saved content.",
+    images: [
+      {
+        url: "https://www.maxdnd.com/images/hero.jpg",
+        width: 1440,
+        height: 1920,
+        alt: "Dungeons and Dragons Fire Dragon Attack",
+      },
+    ],
+  },
 };
 
 export default function Page() {

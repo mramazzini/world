@@ -5,6 +5,19 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Subraces - Max's DND Wiki",
   description: "A vast collection of Subraces for your DND 5e campaign.",
+  openGraph: {
+    type: "website",
+    title: "Subraces - Max's DND Wiki",
+    description: "A vast collection of Subraces for your DND 5e campaign.",
+    images: [
+      {
+        url: "https://www.maxdnd.com/images/hero.jpg",
+        width: 1440,
+        height: 1920,
+        alt: "Dungeons and Dragons Fire Dragon Attack",
+      },
+    ],
+  },
 };
 export const dynamic = "force-dynamic";
 const Page = async () => {

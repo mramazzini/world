@@ -22,7 +22,7 @@ export const metadata: Metadata = {
       "Max's DND Wiki is a collection of Classes, Subclasses, Races, Spells, Backgrounds and more for Dungeons and Dragons 5th Edition.",
     images: [
       {
-        url: "/images/hero.jpg",
+        url: "https://www.maxdnd.com/images/hero.jpg",
         width: 1440,
         height: 1920,
         alt: "Dungeons and Dragons Fire Dragon Attack",

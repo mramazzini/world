@@ -6,6 +6,20 @@ export const metadata: Metadata = {
   title: "Official Classes - Max's DND Wiki",
   description:
     "A vast collection of classes for your DND campaign. Choose from offical content or user submitted homebrew classes.",
+  openGraph: {
+    type: "website",
+    title: "Official Classes - Max's DND Wiki",
+    description:
+      "A vast collection of classes for your DND campaign. Choose from offical content or user submitted homebrew classes.",
+    images: [
+      {
+        url: "https://www.maxdnd.com/images/hero.jpg",
+        width: 1440,
+        height: 1920,
+        alt: "Dungeons and Dragons Fire Dragon Attack",
+      },
+    ],
+  },
 };
 export const dynamic = "force-dynamic";
 const Page = async () => {

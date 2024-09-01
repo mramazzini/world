@@ -17,15 +17,45 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: "Subrace Not Found - Max's DND Wiki",
       description: "Subrace Not Found - Max's DND Wiki",
+      openGraph: {
+        type: "website",
+        title: "Subrace Not Found - Max's DND Wiki",
+        description: "Subrace Not Found - Max's DND Wiki",
+        images: [
+          {
+            url: "https://www.maxdnd.com/images/hero.jpg",
+            width: 1440,
+            height: 1920,
+            alt: "Dungeons and Dragons Fire Dragon Attack",
+          },
+        ],
+      },
     };
   }
 
   return {
     title: `${data.name} - Max's DND Wiki`,
+
     description:
       data.description.length > 157
         ? data.description.substring(0, 157) + "..."
         : data.description,
+    openGraph: {
+      type: "website",
+      title: `${data.name} - Max's DND Wiki`,
+      description:
+        data.description.length > 157
+          ? data.description.substring(0, 157) + "..."
+          : data.description,
+      images: [
+        {
+          url: "https://www.maxdnd.com/images/hero.jpg",
+          width: 1440,
+          height: 1920,
+          alt: "Dungeons and Dragons Fire Dragon Attack",
+        },
+      ],
+    },
   };
 }
 
@@ -36,7 +66,6 @@ const Page = async ({ params }: Props) => {
   const weaponNames = weapons
     .filter((weapon) => race?.weaponProficiencies.includes(weapon.id))
     .map((weapon) => weapon.name);
-  console.log(race);
   return <SubRacePage subRace={race} weaponNames={weaponNames} />;
 };
 

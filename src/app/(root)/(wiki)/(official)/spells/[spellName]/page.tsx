@@ -15,6 +15,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: "Spell Not Found - Max's DND Wiki",
       description: "Spell Not Found - Max's DND Wiki",
+      openGraph: {
+        type: "website",
+        title: "Spell Not Found - Max's DND Wiki",
+        description: "Spell Not Found - Max's DND Wiki",
+        images: [
+          {
+            url: "https://www.maxdnd.com/images/hero.jpg",
+            width: 1440,
+            height: 1920,
+            alt: "Dungeons and Dragons Fire Dragon Attack",
+          },
+        ],
+      },
     };
   }
 
@@ -24,6 +37,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       data.description.length > 157
         ? data.description.substring(0, 157) + "..."
         : data.description,
+    openGraph: {
+      type: "website",
+      title: `${data.name} - Max's DND Wiki`,
+      description:
+        data.description.length > 157
+          ? data.description.substring(0, 157) + "..."
+          : data.description,
+      images: [
+        {
+          url: "https://www.maxdnd.com/images/hero.jpg",
+          width: 1440,
+          height: 1920,
+          alt: "Dungeons and Dragons Fire Dragon Attack",
+        },
+      ],
+    },
   };
 }
 
