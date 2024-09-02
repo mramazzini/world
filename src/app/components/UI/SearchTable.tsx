@@ -36,10 +36,8 @@ const SearchTable = () => {
   };
   return (
     <>
-      <div className="overflow-x-auto">
-        <table
-          className={`table-zebra table-sm w-full table-pin-rows table-pin-cols`}
-        >
+      <div className="overflow-x-auto h-[60vh] overflow-y-scroll">
+        <table className={`table-zebra table-sm w-full table table-pin-rows`}>
           <thead>
             <tr>
               <th className="w-[15%] text-left bg-black/20">Name</th>

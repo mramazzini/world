@@ -5,7 +5,7 @@ import React, { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Loading from "../UI/Loading";
 import { usePathname } from "next/navigation";
-import { QUERY_LIMIT } from "@/lib/globalVars";
+import { NAVBAR_HEIGHT_REM, QUERY_LIMIT } from "@/lib/globalVars";
 import { useSearchParams } from "next/navigation";
 import {
   ClassInfo,
@@ -267,10 +267,8 @@ const SearchPageComponent = <T extends DataType>({
           </span>
         </div>
       )}
-      <div className="overflow-x-auto">
-        <table
-          className={`table-zebra table-sm w-full table-pin-rows table-pin-cols`}
-        >
+      <div className="overflow-x-auto h-[60vh] overflow-y-scroll">
+        <table className={`table-zebra table-sm w-full table table-pin-rows`}>
           <thead>
             <tr>
               {numberArray(0, count).map((num) => {

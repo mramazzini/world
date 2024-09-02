@@ -86,9 +86,9 @@ const ItemPage = ({ item }: Props) => {
                 <div className="divider m-0"></div>
               </div>
             </div>
-            <div className="divider "></div>
             {item.features.length > 0 && (
               <>
+                <div className="divider"></div>
                 <h2>
                   Features{" "}
                   <Info
@@ -97,9 +97,9 @@ const ItemPage = ({ item }: Props) => {
                 </h2>
                 <div className="divider "></div>
                 <FeatureList features={item.features} />
-                <div className="divider "></div>
               </>
             )}
+            <div className="divider mb-0"></div>
           </div>
           <div className="divider "></div>
           {item.Armor && (
@@ -177,6 +177,61 @@ const ItemPage = ({ item }: Props) => {
                 <div className="divider "></div>
                 <div className="grid grid-cols-1 gap-4">
                   <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                    <h2 className="pb-0">Spell Scroll</h2>
+                    <div className="divider m-0"></div>
+                    <p>
+                      <P>
+                        A spell scroll bears the words of a single spell,
+                        written in a mystical cipher. If the spell is on your
+                        class’s spell list, you can read the scroll and cast its
+                        spell without providing any material components.
+                        Otherwise, the scroll is unintelligible. Casting the
+                        spell by reading the scroll requires the spell’s normal
+                        casting time. Once the spell is cast, the words on the
+                        scroll fade, and it crumbles to dust. If the casting is
+                        interrupted, the scroll is not lost.\n\nIf the spell is
+                        on your class's spell list but of a higher level than
+                        you can normally cast, you must make an ability check
+                        using your spellcasting ability to determine whether you
+                        cast it successfully. The DC equals 10 + the spell's
+                        level. On a failed check, the spell disappears from the
+                        scroll with no other effect.
+                      </P>
+                    </p>
+                    <br />
+                    <p>
+                      <P>
+                        If the spell is on your class's spell list but of a
+                        higher level than you can normally cast, you must make
+                        an ability check using your spellcasting ability to
+                        determine whether you cast it successfully. The DC
+                        equals 10 + the spell's level. On a failed check, the
+                        spell disappears from the scroll with no other effect.
+                      </P>
+                    </p>
+                    <br />
+                    <p>
+                      <P>
+                        Once the spell is cast, the words on the scroll fade,
+                        and the scroll itself crumbles to dust.
+                      </P>
+                    </p>
+                    <br />
+                    <p>
+                      <P>
+                        A wizard spell on a spell scroll can be copied just as
+                        spells in spellbooks can be copied. When a spell is
+                        copied from a spell scroll, the copier must succeed on
+                        an Intelligence (Arcana) check with a DC equal to 10 +
+                        the spell's level. If the check succeeds, the spell is
+                        successfully copied. Whether the check succeeds or
+                        fails, the spell scroll is destroyed.
+                      </P>
+                    </p>
+                  </div>
+
+                  <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                    <h2 className="pb-0">Cast Spell: {item.Spell.name}</h2>
                     <div className="divider m-0"></div>
                     <P>
                       This item can be used to cast the spell: %
@@ -186,7 +241,7 @@ const ItemPage = ({ item }: Props) => {
                     <div className="divider m-0"></div>
                   </div>
                 </div>
-                <div className="divider "></div>
+                <div className="divider mb-0"></div>
               </div>
               <div className="divider "></div>
             </>
@@ -245,16 +300,17 @@ const ItemPage = ({ item }: Props) => {
                   </div>{" "}
                   {item.Weapon.properties.some((w) => w.special) && (
                     <>
-                      <div className="divider "></div>
+                      <div className="divider m-0"></div>
                       {item.Weapon.properties.map((prop, index) => {
                         return prop.special?.map((special, index) => (
                           <Feature key={index} feature={special} />
                         ));
                       })}
-                      <div className="divider "></div>
+                      <div className="divider m-0"></div>
                     </>
                   )}
                 </div>
+                <div className="divider mb-0" />
               </div>
               <div className="divider "></div>
             </>

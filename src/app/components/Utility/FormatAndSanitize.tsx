@@ -279,7 +279,7 @@ const P = ({
             <ModelLink
               key={`spell-${termIndex}-${index}`}
               potential={spells}
-              linkBase="spell"
+              linkBase="spells"
             >
               {str.slice(termIndex + 1, termIndex + termLength - 1)}
             </ModelLink>

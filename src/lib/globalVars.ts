@@ -1,7 +1,7 @@
 import { Language, Skill } from "@prisma/client";
 import { Property, src, WeaponPropertyNames } from "./types";
 
-export const QUERY_LIMIT = 20;
+export const QUERY_LIMIT = 30;
 export const NAVBAR_HEIGHT_REM = 4;
 export const VERSION = "0.7.3";
 export const officialSources: string[] = Object.values(src).filter(
