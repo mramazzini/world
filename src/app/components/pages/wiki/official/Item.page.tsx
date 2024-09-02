@@ -8,7 +8,8 @@ import { WeaponProperties } from "@/lib/globalVars";
 import Tooltip from "@/app/components/Utility/Tooltip";
 import Feature from "@/app/components/UI/Feature";
 import FeatureList from "@/app/components/UI/FeatureList";
-import { ArmorType } from "@prisma/client";
+import { ArmorType, Rarity } from "@prisma/client";
+import { itemIds } from "../../../../../../prisma/seeds/Items/ItemIds";
 interface Props {
   item: ItemInfo | null;
 }
@@ -42,10 +43,36 @@ const ItemPage = ({ item }: Props) => {
               <h1>{item.name || "Class Name"}</h1>
               <p className="mb-4">
                 {item.types.map((type, index) => (
-                  <span key={index} className="badge badge-accent font-bold">
+                  <span
+                    key={index}
+                    className="badge badge-accent font-bold mr-1"
+                  >
                     {type.toCapitalCase().replaceAll("_", " ")}
                   </span>
                 ))}
+                {item.rarity == Rarity.COMMON ? (
+                  <span className="badge badge-primary font-bold mr-1">
+                    Common
+                  </span>
+                ) : item.rarity == Rarity.UNCOMMON ? (
+                  <span className="badge badge-success font-bold mr-1">
+                    Uncommon
+                  </span>
+                ) : item.rarity == Rarity.RARE ? (
+                  <span className="badge badge-warning font-bold mr-1">
+                    Rare
+                  </span>
+                ) : item.rarity == Rarity.VERY_RARE ? (
+                  <span className="badge badge-danger font-bold mr-1">
+                    Very Rare
+                  </span>
+                ) : item.rarity == Rarity.LEGENDARY ? (
+                  <span className="badge badge-error font-bold mr-1">
+                    Legendary
+                  </span>
+                ) : (
+                  ""
+                )}
               </p>
               <p className="italic pr-4">
                 <NewLineParse>{item.description}</NewLineParse>
@@ -72,15 +99,31 @@ const ItemPage = ({ item }: Props) => {
                 <ul className="list-disc ">
                   <li className="ml-4">
                     <span className="font-bold">Value:</span>{" "}
-                    {item.cost
-                      ? `${item.cost.quantity} ${item.cost.unit}`
-                      : "N/A"}{" "}
+                    <P>
+                      {item.cost
+                        ? `${item.cost.quantity} ${item.cost.unit}`
+                        : item.rarity == Rarity.COMMON
+                        ? `50-100 ^${itemIds.goldPiece}{gp}^`
+                        : item.rarity == Rarity.UNCOMMON
+                        ? `101-500 ^${itemIds.goldPiece}{gp}^`
+                        : item.rarity == Rarity.RARE
+                        ? `501-5000 ^${itemIds.goldPiece}{gp}^`
+                        : item.rarity == Rarity.VERY_RARE
+                        ? `5,001-50,000 ^${itemIds.goldPiece}{gp}^`
+                        : item.rarity == Rarity.LEGENDARY
+                        ? `50,001+ ^${itemIds.goldPiece}{gp}^`
+                        : ""}{" "}
+                    </P>
                   </li>
                   <li className="ml-4">
                     <span className="font-bold">Weight:</span>{" "}
                     {item.weight
                       ? `${item.weight.quantity} ${item.weight.unit}`
                       : "N/A"}
+                  </li>
+                  <li className="ml-4">
+                    <span className="font-bold">Rarity:</span>{" "}
+                    {item.rarity.toCapitalCase()}
                   </li>
                 </ul>
                 <div className="divider m-0"></div>

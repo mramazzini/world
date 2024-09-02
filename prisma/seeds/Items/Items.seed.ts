@@ -1,5 +1,5 @@
 import { Ability, Currency } from "@/lib/types";
-import { ItemTypes, Prisma } from "@prisma/client";
+import { ItemTypes, Prisma, Rarity } from "@prisma/client";
 import { Unit } from "@/lib/types";
 import { itemIds } from "../Items/ItemIds";
 
@@ -22,7 +22,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "An abacus is a counting tool that consists of beads strung on wires set in a frame. It is used to perform arithmetic.",
     description:
       "An abacus is a counting tool that consists of beads strung on wires set in a frame. It is used to perform arithmetic.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A bedroll consists of a cloth sack stuffed with cloth padding that serves as a simple sleeping surface.",
     description:
       "A bedroll consists of a cloth sack stuffed with cloth padding that serves as a simple sleeping surface.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 3,
@@ -44,7 +44,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A bell is a hollow metal object that makes a ringing sound when struck.",
     description:
       "A bell is a hollow metal object that makes a ringing sound when struck.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 4,
@@ -55,7 +55,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A blanket is a large piece of cloth that is used to keep warm.",
     description:
       "A blanket is a large piece of cloth that is used to keep warm.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 5,
@@ -74,7 +74,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       },
     ],
 
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 6,
@@ -85,7 +85,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A book is a collection of written or printed pages bound together.",
     description:
       "A book might contain poetry, historical accounts, information pertaining to a particular field of lore, diagrams and notes on gnomish contraptions, or just about anything else that can be represented sing text or pictures. A book of spells is a spellbook.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 7,
@@ -95,7 +95,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "For 1 hour, a candle sheds bright light in a 5-foot radius and dim light for another 5 feet.",
     flavorText:
       "For 1 hour, a candle sheds bright light in a 5-foot radius and dim light for another 5 feet.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Light Candle",
@@ -113,7 +114,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A chain has 10 hit points. It can be burst with a successful DC 20 Strength check.",
     description:
       "A chain has 10 hit points. It can be burst with a successful DC 20 Strength check.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 9,
@@ -122,7 +123,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description:
       "A piece of chalk can be used to write on most surfaces, including stone, metal, and wood.",
     flavorText: "A piece of chalk can be used to write on most surfaces.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 10,
@@ -133,7 +134,9 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A component pouch is a small, watertight leather belt pouch that has compartments to hold all the material components and other special items you need to cast your spells.",
     description:
       "A component pouch is a small, watertight leather belt pouch that has compartments to hold all the material components and other special items you need to cast your spells.",
-    types: [ItemTypes.COMMON, ItemTypes.COMPONENT_POUCH],
+    types: [ItemTypes.COMPONENT_POUCH],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Component Storage",
@@ -151,7 +154,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 4, unit: lb },
     flavorText:
       "This kit includes a wooden rod, silken line, corkwood bobbers, steel hooks, lead sinkers, velvet lures, and narrow netting.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 12,
@@ -160,7 +163,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 2, unit: gp },
     weight: { quantity: 4, unit: lb },
     flavorText: "Useful for climbing up or down walls.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 13,
@@ -171,7 +174,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 3, unit: lb },
     flavorText:
       "A hammer is a tool used to drive nails into wood or other materials.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 14,
@@ -180,7 +183,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 25, unit: gp },
     weight: { quantity: 1, unit: lb },
     flavorText: "An hourglass is a device used to measure time.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 15,
@@ -190,7 +193,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 10, unit: gp },
     flavorText:
       "Ink is used to write on paper or parchment with a quill or pen.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 16,
@@ -200,7 +203,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 2, unit: cp },
     flavorText:
       "An ink pen is a writing instrument used to write on paper or parchment.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 17,
@@ -209,7 +212,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 1, unit: sp },
     weight: { quantity: 25, unit: lb },
     flavorText: "A ladder is used to climb up or down walls.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 18,
@@ -227,7 +230,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           "Without the key, a creature proficient with thieves' tools can pick your lock with a successful DC 15 Dexterity check. Your DM may decide that better locks are available for higher prices.",
       },
     ],
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 19,
@@ -237,7 +240,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 100, unit: gp },
     flavorText:
       "This lens allows a closer look at small objects. It is also useful as a substitute or flint and steel when starting fires.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Light Fire",
@@ -265,7 +269,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 2, unit: gp },
     weight: { quantity: 6, unit: lb },
     flavorText: "Iron Manacles that can bind a Small or Medium creature.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Bind",
@@ -283,7 +288,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 1, unit: lb },
     flavorText:
       "This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 22,
@@ -294,7 +299,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 10, unit: lb },
     flavorText:
       "A miner's pick is a tool used to break up rock or other hard materials.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 23,
@@ -302,7 +307,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description: "Paper is a thin material that is used to write on.",
     cost: { quantity: 2, unit: sp },
     flavorText: "Paper is a thin material  that is used to write on.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 24,
@@ -310,7 +315,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description: "Parchment is a thin material that is used to write on.",
     cost: { quantity: 1, unit: gp },
     flavorText: "Parchment is a thin material that is used to write on.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 25,
@@ -320,7 +325,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 5, unit: gp },
     flavorText:
       "Perfume is a fragrant liquid made from essential oils and alcohol.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 26,
@@ -329,7 +334,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 5, unit: cp },
     weight: { quantity: 0.25, unit: lb },
     flavorText: "A piton is a metal spike used to secure ropes.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 27,
@@ -338,7 +343,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 5, unit: cp },
     weight: { quantity: 7, unit: lb },
     flavorText: "A pole is a long, slender piece of wood or metal.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 28,
@@ -347,6 +352,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 4, unit: gp },
     weight: { quantity: 35, unit: lb },
     flavorText: "You can use a portable ram to break down doors.",
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Ram",
@@ -384,7 +391,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 2, unit: lb },
     flavorText:
       "Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 30,
@@ -395,6 +402,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 10, unit: lb },
     flavorText:
       "Rope has 2 hit points and can be burst with a DC 17 Strength check.",
+    rarity: Rarity.COMMON,
   },
   {
     id: 31,
@@ -405,6 +413,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 5, unit: lb },
     flavorText:
       "Rope has 2 hit points and can be burst with a DC 17 Strength check.",
+    rarity: Rarity.COMMON,
   },
 
   {
@@ -416,7 +425,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 5, unit: lb },
     flavorText:
       "A shovel is a tool used to dig holes or move dirt or other materials.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 34,
@@ -424,7 +433,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description: "A signal whistle is a small metal whistle.",
     cost: { quantity: 5, unit: cp },
     flavorText: "A signal whistle is a small metal whistle.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 35,
@@ -432,7 +441,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description: "Sealing wax is used to seal letters and other documents.",
     cost: { quantity: 5, unit: sp },
     flavorText: "Sealing wax is used to seal letters and other documents.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 36,
@@ -442,6 +451,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 5, unit: gp },
     flavorText:
       "A signet ring is a ring bearing a family crest or other symbol.",
+    rarity: Rarity.COMMON,
   },
   {
     id: 37,
@@ -450,6 +460,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 2, unit: gp },
     weight: { quantity: 10, unit: lb },
     flavorText: "A sledgehammer is a large, heavy hammer.",
+    rarity: Rarity.COMMON,
   },
   {
     id: 38,
@@ -460,7 +471,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 3, unit: lb },
     flavorText:
       "Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 39,
@@ -471,7 +482,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 5, unit: lb },
     flavorText:
       "Iron spikes are driven into wood or other materials with a hammer.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 40,
@@ -482,7 +493,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 1, unit: lb },
     flavorText:
       "A spyglass is a small, handheld telescope. Objects viewed through a spyglass are magnified to twice their size.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 41,
@@ -491,7 +502,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 2, unit: gp },
     weight: { quantity: 20, unit: lb },
     flavorText: "A small tent that can accommodate two people.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 42,
@@ -500,7 +511,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 1, unit: cp },
     weight: { quantity: 1, unit: lb },
     flavorText: "A whetstone is a stone used to sharpen blades.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 43,
@@ -511,7 +522,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 1, unit: lb },
     flavorText:
       "Acid is a corrosive substance that can dissolve materials and used offensively.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Use Acid",
@@ -529,7 +541,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 1, unit: lb },
     flavorText:
       "Alchemist's fire is a sticky, adhesive substance that ignites when exposed to air.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Use Alchemist's Fire",
@@ -546,7 +559,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 50, unit: gp },
     flavorText:
       "Antitoxin is a substance that can counteract a poison's effects.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Use Antitoxin",
@@ -571,6 +585,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           "As an action, you can spill these tiny balls from their pouch to cover a level area 10 feet square. A creature moving across the covered area must succeed on a DC 10 Dexterity saving throw or fall prone. A creature moving through the area at half speed doesn't need to make the saving throw.",
       },
     ],
+    rarity: Rarity.COMMON,
   },
   {
     id: 47,
@@ -588,6 +603,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           "As an action, you can spread a single bag of caltrops to cover a 5-foot-square area. Any creature that enters the area must succeed on a DC 15 Dexterity saving throw or stop moving and take 1 piercing damage. Until the creature regains at least 1 hit point, its walking speed is reduced by 10 feet. A creature moving through the area at half speed doesn't need to make the saving throw.",
       },
     ],
+    rarity: Rarity.COMMON,
   },
   {
     id: 48,
@@ -598,7 +614,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 12, unit: lb },
     flavorText:
       "A climbing kit includes special pitons, boot tips, gloves, and a harness.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Climbing Kit",
@@ -614,7 +631,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 2, unit: gp },
     weight: { quantity: 5, unit: lb },
     flavorText: "A crowbar is a metal bar used to pry things open.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Pry Open",
@@ -650,7 +668,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           "As an action, you can expend one use of the kit to stabilize a creature that has 0 hit points, without needing to make a Wisdom (Medicine) check. Once you use the kit 10 times, it is exhausted and can't be used again.",
       },
     ],
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 51,
@@ -661,7 +679,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 1, unit: lb },
     flavorText:
       "Holy water is water that has been blessed in some way. It is used to purify or ward off evil.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Use Holy Water",
@@ -682,7 +701,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 5, unit: gp },
     weight: { quantity: 25, unit: lb },
     flavorText: "A hunting trap is a mechanical device used to catch prey.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Set Trap",
@@ -700,7 +720,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 1, unit: lb },
     flavorText:
       "A lamp casts bright light in a 15-foot radius and dim light for an additional 30 feet.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Light Lamp",
@@ -718,7 +739,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 2, unit: lb },
     flavorText:
       "A bullseye lantern casts bright light in a 60-foot cone and dim light for an additional 60 feet.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Light Lantern",
@@ -736,7 +758,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 2, unit: lb },
     flavorText:
       "A hooded lantern casts bright light in a 30-foot radius and dim light for an additional 30 feet.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Light Lantern",
@@ -753,7 +776,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 1, unit: sp },
     weight: { quantity: 1, unit: lb },
     flavorText: "Oil can be poured on the ground to create a slick surface.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Use Oil",
@@ -775,7 +799,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 100, unit: gp },
     flavorText:
       "Basic poison is a toxic substance that can be applied to weapons.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Apply Poison",
@@ -793,7 +818,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 0.5, unit: lb },
     flavorText:
       "A potion of healing is a vial of liquid that restores hit points.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Drink Potion",
@@ -811,7 +837,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 1, unit: lb },
     flavorText:
       "This small container holds flint, fire steel, an tinder (usually dry cloth soaked in light oil) used to kindle a fire. ",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Start Fire",
@@ -827,7 +854,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 1, unit: cp },
     weight: { quantity: 1, unit: lb },
     flavorText: "A torch can be used to provide light.",
-    types: [ItemTypes.COMMON],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Light Torch",
@@ -850,7 +878,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 3, unit: lb },
     flavorText:
       "Common clothes include a shirt, pants, shoes, and possibly a cloak or hat.",
-    types: [ItemTypes.COMMON, ItemTypes.CLOTHES],
+    types: [ItemTypes.CLOTHES],
+    rarity: Rarity.COMMON,
   },
   {
     id: 62,
@@ -861,7 +890,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 4, unit: lb },
     flavorText:
       "Costume clothes include fancy, ornate clothes suitable for a masquerade or other fancy event.",
-    types: [ItemTypes.COMMON, ItemTypes.CLOTHES],
+    types: [ItemTypes.CLOTHES],
+    rarity: Rarity.COMMON,
   },
   {
     id: 63,
@@ -872,7 +902,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 6, unit: lb },
     flavorText:
       "Fine clothes include a set of fine clothes, a tabard, or a vest.",
-    types: [ItemTypes.COMMON, ItemTypes.CLOTHES],
+    types: [ItemTypes.CLOTHES],
+    rarity: Rarity.COMMON,
   },
   {
     id: 64,
@@ -881,7 +912,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 1, unit: gp },
     weight: { quantity: 4, unit: lb },
     flavorText: "Robes are long, flowing garments.",
-    types: [ItemTypes.COMMON, ItemTypes.CLOTHES],
+    types: [ItemTypes.CLOTHES],
+    rarity: Rarity.COMMON,
   },
   {
     id: 65,
@@ -893,6 +925,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "Traveler's clothes include a shirt, pants, boots, and a cloak.",
     types: [ItemTypes.CLOTHES],
+    rarity: Rarity.COMMON,
   },
   {
     id: 66,
@@ -904,6 +937,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A crystal is a small, polished stone that can be used as a Arcane Focus.",
     types: [ItemTypes.ARCANE_FOCUS],
+    rarity: Rarity.COMMON,
   },
   {
     id: 67,
@@ -914,6 +948,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 3, unit: lb },
     flavorText: "An orb is a crystal ball that can be used as an Arcane Focus.",
     types: [ItemTypes.ARCANE_FOCUS],
+    rarity: Rarity.COMMON,
   },
   {
     id: 68,
@@ -925,6 +960,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A rod is a straight, slender stick that can be used as an Arcane Focus.",
     types: [ItemTypes.ARCANE_FOCUS],
+    rarity: Rarity.COMMON,
   },
   {
     id: 69,
@@ -936,6 +972,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A staff is a long, slender pole that can be used as an Arcane Focus.",
     types: [ItemTypes.ARCANE_FOCUS],
+    rarity: Rarity.COMMON,
   },
   {
     id: 70,
@@ -947,6 +984,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A wand is a thin, straight stick that can be used as an Arcane Focus.",
     types: [ItemTypes.ARCANE_FOCUS],
+    rarity: Rarity.COMMON,
   },
   {
     id: 71,
@@ -957,6 +995,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A sprig of mistletoe is a sacred plant used as a Druidic Focus.",
     types: [ItemTypes.DRUIDIC_FOCUS],
+    rarity: Rarity.COMMON,
   },
   {
     id: 72,
@@ -967,6 +1006,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A totem is a small, wooden or metal object that can be used as a Druidic Focus.",
     types: [ItemTypes.DRUIDIC_FOCUS],
+    rarity: Rarity.COMMON,
   },
   {
     id: 73,
@@ -978,6 +1018,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A wooden staff is a long, slender pole that can be used as a Druidic Focus.",
     types: [ItemTypes.DRUIDIC_FOCUS],
+    rarity: Rarity.COMMON,
   },
   {
     id: 74,
@@ -989,6 +1030,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A yew wand is a thin, straight stick that can be used as a Druidic Focus.",
     types: [ItemTypes.DRUIDIC_FOCUS],
+    rarity: Rarity.COMMON,
   },
   {
     id: 75,
@@ -1000,6 +1042,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "An amulet is a magical pendant that can be used as a Holy Symbol.",
     types: [ItemTypes.HOLY_SYMBOL],
+    rarity: Rarity.COMMON,
   },
   {
     id: 76,
@@ -1010,6 +1053,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "An emblem is a magical badge that can be used as a Holy Symbol.",
     types: [ItemTypes.HOLY_SYMBOL],
+    rarity: Rarity.COMMON,
   },
   {
     id: 77,
@@ -1021,6 +1065,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A reliquary is a container for holy relics that can be used as a Holy Symbol.",
     types: [ItemTypes.HOLY_SYMBOL],
+    rarity: Rarity.COMMON,
   },
   {
     id: 78,
@@ -1033,6 +1078,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 5, unit: lb },
     capacity: { quantity: 30, unit: lb },
     types: [ItemTypes.CONTAINER],
+    rarity: Rarity.COMMON,
   },
   {
     id: 79,
@@ -1045,6 +1091,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A barrel is a large, cylindrical container made of wood staves bound by metal hoops.",
     types: [ItemTypes.CONTAINER],
+    rarity: Rarity.COMMON,
   },
   {
     id: 80,
@@ -1057,6 +1104,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A basket is a woven container made of reeds, wicker, or other materials.",
     types: [ItemTypes.CONTAINER],
+    rarity: Rarity.COMMON,
   },
   {
     id: 81,
@@ -1067,6 +1115,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     customItemCapacity: { quantity: 20, item: itemIds.crossbowBolt },
     flavorText: "A crossbow bolt case can hold up to 20 crossbow bolts.",
     types: [ItemTypes.CONTAINER],
+    rarity: Rarity.COMMON,
   },
   {
     id: 82,
@@ -1078,6 +1127,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     customItemCapacity: { quantity: 10, item: itemIds.paper },
     flavorText:
       "A map or scroll case is a cylindrical tube with a cap on each end.",
+    rarity: Rarity.COMMON,
   },
   {
     id: 83,
@@ -1091,6 +1141,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A chest is a large, wooden container with a hinged lid and a lock.",
     types: [ItemTypes.CONTAINER],
+    rarity: Rarity.COMMON,
   },
   {
     id: 84,
@@ -1101,6 +1152,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     capacity: { quantity: 1, unit: pint },
     flavorText: "A flask is a small, metal container for holding liquids.",
     types: [ItemTypes.CONTAINER],
+    rarity: Rarity.COMMON,
   },
   {
     id: 85,
@@ -1113,6 +1165,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A glass bottle is a small, glass container for holding liquids.",
     types: [ItemTypes.CONTAINER],
+    rarity: Rarity.COMMON,
   },
   {
     id: 86,
@@ -1123,6 +1176,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     capacity: { quantity: 1, unit: gal },
     flavorText: "A jug is a large, ceramic container for holding liquids.",
     types: [ItemTypes.CONTAINER],
+    rarity: Rarity.COMMON,
   },
   {
     id: 87,
@@ -1133,6 +1187,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     capacity: { quantity: 1, unit: gal },
     flavorText: "An iron pot is a large, metal container for cooking.",
     types: [ItemTypes.CONTAINER],
+    rarity: Rarity.COMMON,
   },
   {
     id: 88,
@@ -1145,6 +1200,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A pouch is a small, leather container for holding various items.",
     types: [ItemTypes.CONTAINER],
+    rarity: Rarity.COMMON,
   },
   {
     id: 89,
@@ -1157,6 +1213,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     customItemCapacity: { quantity: 1, item: itemIds.commonClothes },
     flavorText: "A sack is a large, cloth container for holding various items.",
     types: [ItemTypes.CONTAINER],
+    rarity: Rarity.COMMON,
   },
   {
     id: 90,
@@ -1167,6 +1224,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     customItemCapacity: { quantity: 20, item: itemIds.arrow },
     flavorText: "A quiver is a container for holding arrows.",
     types: [ItemTypes.CONTAINER],
+    rarity: Rarity.COMMON,
   },
   {
     id: 91,
@@ -1176,6 +1234,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     capacity: { quantity: 4, unit: oz },
     flavorText: "A vial is a small, glass container for holding liquids.",
     types: [ItemTypes.CONTAINER],
+    rarity: Rarity.COMMON,
   },
   {
     id: 92,
@@ -1188,6 +1247,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A waterskin is a container for holding water or other liquids.",
     types: [ItemTypes.CONTAINER],
+    rarity: Rarity.COMMON,
   },
   {
     id: 93,
@@ -1198,6 +1258,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "These backpack-sized devices are created in pairs, with matching numbers engraved on them, and allow communication over a long distance using radio frequencies.",
 
     types: [ItemTypes.MAGIC],
+    rarity: Rarity.COMMON,
+
     features: [
       {
         name: "Use Fargab",
@@ -1219,6 +1281,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           "If you fall while wearing this device, you can use your reaction to deploy the parachute. Once deployed, the parachute rapidly inflates, and you descend 60 feet per round and take no damage from falling. When you are 10 feet away from the ground, roll a d20. If you roll a 5 or less, the parachute gives out, and you begin to fall normally.",
       },
     ],
+    rarity: Rarity.COMMON,
   },
   {
     id: 95,
@@ -1232,6 +1295,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A club is a simple weapon that is essentially a short, stout stick.",
     weaponId: weaponIds.club,
     types: [ItemTypes.WEAPON],
+    rarity: Rarity.COMMON,
   },
   {
     id: 96,
@@ -1244,6 +1308,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A dagger is a small, easily concealed weapon that can be used for stabbing or slashing.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.dagger,
+    rarity: Rarity.COMMON,
   },
   {
     id: 97,
@@ -1256,6 +1321,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A greatclub is a large, heavy stick that can be used as a weapon.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.greatclub,
+    rarity: Rarity.COMMON,
   },
   {
     id: 98,
@@ -1268,6 +1334,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A handaxe is a small, light axe that can be used for chopping or throwing.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.handaxe,
+    rarity: Rarity.COMMON,
   },
   {
     id: 99,
@@ -1278,6 +1345,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText: "A javelin is a light, spear-like weapon that can be thrown.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.javelin,
+    rarity: Rarity.COMMON,
   },
   {
     id: 100,
@@ -1290,6 +1358,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A light hammer is a small, light hammer that can be used for bludgeoning or throwing.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.lightHammer,
+    rarity: Rarity.COMMON,
   },
   {
     id: 101,
@@ -1302,6 +1371,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A mace is a simple weapon that is essentially a heavy, metal club.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.mace,
+    rarity: Rarity.COMMON,
   },
   {
     id: 102,
@@ -1314,6 +1384,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A quarterstaff is a simple weapon that is essentially a long, wooden stick.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.quarterstaff,
+    rarity: Rarity.COMMON,
   },
   {
     id: 103,
@@ -1326,6 +1397,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A sickle is a simple weapon that is essentially a curved, metal blade attached to a short handle.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.sickle,
+    rarity: Rarity.COMMON,
   },
   {
     id: 104,
@@ -1338,6 +1410,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A spear is a simple weapon that is essentially a long, pointed stick.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.spear,
+    rarity: Rarity.COMMON,
   },
   {
     id: 105,
@@ -1350,6 +1423,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A light crossbow is a simple weapon that is essentially a small, hand-held crossbow.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.crossbowLight,
+    rarity: Rarity.COMMON,
   },
   {
     id: 106,
@@ -1362,6 +1436,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A dart is a simple weapon that is essentially a small, pointed projectile.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.dart,
+    rarity: Rarity.COMMON,
   },
   {
     id: 107,
@@ -1374,6 +1449,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A shortbow is a simple weapon that is essentially a small, hand-held bow.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.shortbow,
+    rarity: Rarity.COMMON,
   },
   {
     id: 108,
@@ -1385,6 +1461,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A sling is a simple weapon that is essentially a small, leather strap used to hurl stones.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.sling,
+    rarity: Rarity.COMMON,
   },
   {
     id: 109,
@@ -1397,6 +1474,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A battleaxe is a martial weapon that is essentially a large, double-headed axe.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.battleaxe,
+    rarity: Rarity.COMMON,
   },
   {
     id: 110,
@@ -1409,6 +1487,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A flail is a martial weapon that is essentially a spiked ball attached to a handle by a chain.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.flail,
+    rarity: Rarity.COMMON,
   },
   {
     id: 111,
@@ -1421,6 +1500,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A glaive is a martial weapon that is essentially a large, bladed polearm.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.glaive,
+    rarity: Rarity.COMMON,
   },
   {
     id: 112,
@@ -1433,6 +1513,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A greataxe is a martial weapon that is essentially a large, single-headed axe.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.greataxe,
+    rarity: Rarity.COMMON,
   },
   {
     id: 113,
@@ -1445,6 +1526,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A greatsword is a martial weapon that is essentially a large, two-handed sword.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.greatsword,
+    rarity: Rarity.COMMON,
   },
   {
     id: 114,
@@ -1457,6 +1539,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A halberd is a martial weapon that is essentially a large, bladed polearm.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.halberd,
+    rarity: Rarity.COMMON,
   },
   {
     id: 115,
@@ -1469,6 +1552,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A lance is a martial weapon that is essentially a long, wooden pole with a metal tip.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.lance,
+    rarity: Rarity.COMMON,
   },
   {
     id: 116,
@@ -1481,6 +1565,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A longsword is a martial weapon that is essentially a long, one-handed sword.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.longsword,
+    rarity: Rarity.COMMON,
   },
   {
     id: 117,
@@ -1492,6 +1577,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A maul is a martial weapon that is essentially a large, heavy hammer.",
     weaponId: weaponIds.maul,
+    rarity: Rarity.COMMON,
   },
   {
     id: 118,
@@ -1504,6 +1590,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A morningstar is a martial weapon that is essentially a spiked ball attached to a handle.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.morningstar,
+    rarity: Rarity.COMMON,
   },
   {
     id: 119,
@@ -1516,6 +1603,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A pike is a martial weapon that is essentially a long, pointed polearm.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.pike,
+    rarity: Rarity.COMMON,
   },
   {
     id: 120,
@@ -1528,6 +1616,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A rapier is a martial weapon that is essentially a thin, pointed sword.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.rapier,
+    rarity: Rarity.COMMON,
   },
   {
     id: 121,
@@ -1540,6 +1629,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A scimitar is a martial weapon that is essentially a curved, slashing sword.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.scimitar,
+    rarity: Rarity.COMMON,
   },
   {
     id: 122,
@@ -1552,6 +1642,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A shortsword is a martial weapon that is essentially a short, one-handed sword.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.shortsword,
+    rarity: Rarity.COMMON,
   },
   {
     id: 123,
@@ -1564,6 +1655,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A trident is a martial weapon that is essentially a three-pronged spear.",
     weaponId: weaponIds.trident,
+    rarity: Rarity.COMMON,
   },
   {
     id: 124,
@@ -1576,6 +1668,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A war pick is a martial weapon that is essentially a heavy, metal pick.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.warPick,
+    rarity: Rarity.COMMON,
   },
   {
     id: 125,
@@ -1588,6 +1681,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A warhammer is a martial weapon that is essentially a heavy, metal hammer.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.warhammer,
+    rarity: Rarity.COMMON,
   },
   {
     id: 126,
@@ -1600,6 +1694,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A whip is a martial weapon that is essentially a long, flexible cord with a handle.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.whip,
+    rarity: Rarity.COMMON,
   },
   {
     id: 127,
@@ -1612,6 +1707,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A blowgun is a ranged weapon that is essentially a long, hollow tube used to fire darts.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.blowgun,
+    rarity: Rarity.COMMON,
   },
   {
     id: 128,
@@ -1624,6 +1720,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A hand crossbow is a ranged weapon that is essentially a small, hand-held crossbow.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.crossbowHand,
+    rarity: Rarity.COMMON,
   },
   {
     id: 129,
@@ -1636,6 +1733,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A heavy crossbow is a ranged weapon that is essentially a large, hand-held crossbow.",
     types: [ItemTypes.WEAPON],
     weaponId: weaponIds.crossbowHeavy,
+    rarity: Rarity.COMMON,
   },
   {
     id: 130,
@@ -1648,6 +1746,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A longbow is a ranged weapon that is essentially a large, hand-held bow.",
     weaponId: weaponIds.longbow,
+    rarity: Rarity.COMMON,
   },
   {
     id: 131,
@@ -1660,6 +1759,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A net is a ranged weapon that is essentially a large, weighted mesh used to entangle creatures.",
     weaponId: weaponIds.net,
+    rarity: Rarity.COMMON,
   },
   {
     id: 132,
@@ -1671,6 +1771,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "An arrow is a small, pointed projectile that is fired from a bow.",
     types: [ItemTypes.AMMUNITION],
+    rarity: Rarity.COMMON,
   },
   {
     id: 133,
@@ -1682,6 +1783,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.AMMUNITION],
     flavorText:
       "A blowgun needle is a small, pointed projectile that is fired from a blowgun.",
+    rarity: Rarity.COMMON,
   },
   {
     id: 134,
@@ -1693,6 +1795,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.AMMUNITION],
     flavorText:
       "A crossbow bolt is a small, pointed projectile that is fired from a crossbow.",
+    rarity: Rarity.COMMON,
   },
   {
     id: 135,
@@ -1704,6 +1807,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.AMMUNITION],
     flavorText:
       "A sling bullet is a small, rounded projectile that is fired from a sling.",
+    rarity: Rarity.COMMON,
   },
   {
     id: 136,
@@ -1714,6 +1818,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.ARMOR],
     flavorText: "Padded armor is made of quilted layers of cloth.",
     armorId: armorIds.paddedArmor,
+    rarity: Rarity.COMMON,
   },
   {
     id: 137,
@@ -1724,6 +1829,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.ARMOR],
     flavorText: "Leather armor is made of stiffened leather.",
     armorId: armorIds.leatherArmor,
+    rarity: Rarity.COMMON,
   },
   {
     id: 138,
@@ -1736,6 +1842,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "Studded leather armor is made of leather with metal studs sewn into it.",
     armorId: armorIds.studdedLeatherArmor,
+    rarity: Rarity.COMMON,
   },
   {
     id: 139,
@@ -1745,6 +1852,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 12, unit: lb },
     types: [ItemTypes.ARMOR],
     flavorText: "Hide armor is made of thick animal hides.",
+    rarity: Rarity.COMMON,
     armorId: armorIds.hideArmor,
   },
   {
@@ -1757,6 +1865,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.ARMOR],
     flavorText: "A chain shirt is made of interlocking metal rings.",
     armorId: armorIds.chainShirt,
+    rarity: Rarity.COMMON,
   },
   {
     id: 141,
@@ -1770,6 +1879,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "Scale mail is made of overlapping metal scales sewn onto a leather backing.",
     armorId: armorIds.scaleMail,
+    rarity: Rarity.COMMON,
   },
   {
     id: 142,
@@ -1782,6 +1892,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "Spiked armor is made of leather with metal spikes sewn into it.",
     armorId: armorIds.spikedArmor,
+    rarity: Rarity.COMMON,
   },
   {
     id: 143,
@@ -1792,6 +1903,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.ARMOR],
     flavorText: "A breastplate is made of a single piece of metal.",
     armorId: armorIds.breastplate,
+    rarity: Rarity.COMMON,
   },
   {
     id: 144,
@@ -1804,6 +1916,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "Half plate is made of metal plates that cover most of the body.",
     armorId: armorIds.halfPlate,
+    rarity: Rarity.COMMON,
   },
   {
     id: 145,
@@ -1814,6 +1927,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.ARMOR],
     flavorText: "Ring mail is made of interlocking metal rings.",
     armorId: armorIds.ringMail,
+    rarity: Rarity.COMMON,
   },
   {
     id: 146,
@@ -1825,6 +1939,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.ARMOR],
     flavorText: "Chain mail is made of interlocking metal rings.",
     armorId: armorIds.chainMail,
+    rarity: Rarity.COMMON,
   },
   {
     id: 147,
@@ -1835,6 +1950,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.ARMOR],
     flavorText: "Splint armor is made of narrow vertical strips of metal.",
     armorId: armorIds.splintArmor,
+    rarity: Rarity.COMMON,
   },
   {
     id: 148,
@@ -1845,6 +1961,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.ARMOR],
     flavorText: "Plate armor is made of interlocking metal plates.",
     armorId: armorIds.plateArmor,
+    rarity: Rarity.COMMON,
   },
   {
     id: 149,
@@ -1857,6 +1974,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A shield is a piece of wood or metal that is carried in one hand.",
     armorId: armorIds.shield,
+    rarity: Rarity.COMMON,
   },
   {
     id: 150,
@@ -1873,6 +1991,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           "As an action, a character can light this bomb and throw it at a point up to 60 feet away. Each creature within 5 feet of that point must succeed on a DC 12 Dexterity saving throw or take 3d6 fire damage.",
       },
     ],
+    rarity: Rarity.COMMON,
   },
   {
     id: 151,
@@ -1889,6 +2008,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           "Setting fire to a container full of gunpowder can cause it to explode, dealing 7d6 fire damage to creatures within 10 feet of it. A successful DC 12 Dexterity saving throw halves the damage. Setting fire to an ounce of gunpowder causes it to flare for 1 round, shedding bright light in a 30-foot radius and dim light for an additional 30 feet.",
       },
     ],
+    rarity: Rarity.COMMON,
   },
   {
     id: 152,
@@ -1905,6 +2025,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           "Setting fire to a container full of gunpowder can cause it to explode, dealing 3d6 fire damage to creatures within 10 feet of it. A successful DC 12 Dexterity saving throw halves the damage. Setting fire to an ounce of gunpowder causes it to flare for 1 round, shedding bright light in a 30-foot radius and dim light for an additional 30 feet.",
       },
     ],
+    rarity: Rarity.COMMON,
   },
   {
     id: 153,
@@ -1920,6 +2041,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           "As an action, a creature can light a stick of dynamite and throw it at a point up to 60 feet away. Each creature within 5 feet of that point must make a DC 12 Dexterity saving throw, taking 3d6 bludgeoning damage on a failed save, or half as much damage on a successful one.\n\nA character can bind sticks of dynamite together so they explode at the same time. Each additional stick increases the damage by 1d6 (to a maximum of 10d6) and the burst radius by 5 feet (to a maximum of 20 feet).\n\nDynamite can be rigged with a longer fuse to explode after a set amount of time, usually 1 to 6 rounds. Roll initiative for the dynamite. After the set number of rounds goes by, the dynamite explodes on that initiative.",
       },
     ],
+    rarity: Rarity.COMMON,
   },
   {
     id: 154,
@@ -1937,6 +2059,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           "As an action, a character can throw a grenade at a point up to 60 feet away.\n\nEach creature within 20 feet of an exploding fragmentation grenade must make a DC 15 Dexterity saving throw, taking 5d6 piercing damage on a failed save, or half as much damage on a successful one.",
       },
     ],
+    rarity: Rarity.COMMON,
   },
   {
     id: 155,
@@ -1954,6 +2077,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           "As an action, a character can throw a grenade at a point up to 60 feet away.\n\nOne round after a smoke grenade lands, it emits a cloud of smoke that creates a heavily obscured area in a 20-foot radius. A moderate wind (at least 10 miles per hour) disperses the smoke in 4 rounds; a strong wind (20 or more miles per hour) disperses it in 1 round.",
       },
     ],
+    rarity: Rarity.COMMON,
   },
   {
     id: 156,
@@ -1963,6 +2087,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 0.01, unit: lb },
     types: [ItemTypes.MISC],
     flavorText: "A piece of string is a thin, flexible cord.",
+    rarity: Rarity.COMMON,
   },
   {
     id: 157,
@@ -1971,6 +2096,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 2, unit: cp },
     flavorText: "Soap is a cleaning agent used for washing.",
     types: [ItemTypes.MISC],
+    rarity: Rarity.COMMON,
   },
   {
     id: 158,
@@ -1978,30 +2104,35 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description: "A small bag of sand, typically found in a scholar's pack.",
     flavorText: "A small bag of sand, typically found in a scholar's pack.",
     types: [ItemTypes.MISC],
+    rarity: Rarity.COMMON,
   },
   {
     id: 159,
     name: "Alms Box",
     description: "A small box for alms, typically found in a priest's pack.",
     flavorText: "A small box for alms, typically found in a priest's pack.",
+    rarity: Rarity.COMMON,
   },
   {
     id: 160,
     name: "Block of Incense",
     description: "A block of incense, typically found in a priest's pack.",
     flavorText: "A block of incense, typically found in a priest's pack.",
+    rarity: Rarity.COMMON,
   },
   {
     id: 161,
     name: "Small Knife",
     description: "A small knife, typically found in a priest's pack.",
     flavorText: "A small knife, typically found in a priest's pack.",
+    rarity: Rarity.COMMON,
   },
   {
     id: 162,
     name: "Vestments",
     description: "A set of vestments, typically found in a priest's pack.",
     flavorText: "A set of vestments, typically found in a priest's pack.",
+    rarity: Rarity.COMMON,
   },
   {
     id: 163,
@@ -2014,6 +2145,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 50, unit: gp },
     types: [ItemTypes.TOOL],
     toolId: toolIds.alchemistSupplies,
+    rarity: Rarity.COMMON,
   },
   {
     id: 164,
@@ -2026,6 +2158,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 20, unit: gp },
     types: [ItemTypes.TOOL],
     toolId: toolIds.brewerSupplies,
+    rarity: Rarity.COMMON,
   },
   {
     id: 165,
@@ -2037,6 +2170,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "Calligrapher's supplies allow you to create beautiful, ornate writing.",
     cost: { quantity: 10, unit: gp },
     types: [ItemTypes.TOOL],
+    rarity: Rarity.COMMON,
   },
   {
     id: 166,
@@ -2049,6 +2183,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 8, unit: gp },
     types: [ItemTypes.TOOL],
     toolId: toolIds.carpenterTools,
+    rarity: Rarity.COMMON,
   },
   {
     id: 167,
@@ -2061,6 +2196,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 15, unit: gp },
     types: [ItemTypes.TOOL],
     toolId: toolIds.cartographerTools,
+    rarity: Rarity.COMMON,
   },
   {
     id: 168,
@@ -2072,6 +2208,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.TOOL],
     flavorText: "Cobbler's tools allow you to repair and create footwear.",
     toolId: toolIds.cobblerTools,
+    rarity: Rarity.COMMON,
   },
   {
     id: 169,
@@ -2083,6 +2220,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 1, unit: gp },
     types: [ItemTypes.TOOL],
     toolId: toolIds.cookUtensils,
+    rarity: Rarity.COMMON,
   },
   {
     id: 170,
@@ -2094,6 +2232,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 25, unit: gp },
     types: [ItemTypes.TOOL],
     toolId: toolIds.disguiseKit,
+    rarity: Rarity.COMMON,
   },
   {
     id: 171,
@@ -2105,6 +2244,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 15, unit: gp },
     types: [ItemTypes.TOOL],
     toolId: toolIds.forgeryKit,
+    rarity: Rarity.COMMON,
   },
   {
     id: 172,
@@ -2116,6 +2256,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 5, unit: gp },
     types: [ItemTypes.TOOL],
     toolId: toolIds.gamingKit,
+    rarity: Rarity.COMMON,
   },
   {
     id: 173,
@@ -2127,6 +2268,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.TOOL],
     flavorText: "Glassblower's tools allow you to shape glass.",
     toolId: toolIds.glassblowerTools,
+    rarity: Rarity.COMMON,
   },
   {
     id: 174,
@@ -2138,6 +2280,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.TOOL],
     flavorText: "An herbalism kit allows you to create potions and salves.",
     toolId: toolIds.herbalismKit,
+    rarity: Rarity.COMMON,
   },
   {
     id: 175,
@@ -2149,6 +2292,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 25, unit: gp },
     types: [ItemTypes.TOOL],
     toolId: toolIds.jewelerTools,
+    rarity: Rarity.COMMON,
   },
   {
     id: 176,
@@ -2159,6 +2303,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText: "Land and water vehicles allow you to travel.",
     types: [ItemTypes.TOOL],
     toolId: toolIds.landWaterVehicles,
+    rarity: Rarity.COMMON,
   },
   {
     id: 177,
@@ -2171,6 +2316,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "Leatherworker's tools allow you to create and repair leather goods.",
     toolId: toolIds.leatherworkerTools,
+    rarity: Rarity.COMMON,
   },
   {
     id: 178,
@@ -2182,6 +2328,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText: "Mason's tools allow you to craft stone structures.",
     types: [ItemTypes.TOOL],
     toolId: toolIds.masonTools,
+    rarity: Rarity.COMMON,
   },
   {
     id: 179,
@@ -2191,6 +2338,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.TOOL],
     flavorText: "A musical instrument allows you to create music.",
     toolId: toolIds.musicalInstrument,
+    rarity: Rarity.COMMON,
   },
   {
     id: 180,
@@ -2202,6 +2350,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText: "Navigator's tools allow you to determine your location.",
     types: [ItemTypes.TOOL],
     toolId: toolIds.navigatorsTools,
+    rarity: Rarity.COMMON,
   },
   {
     id: 181,
@@ -2213,6 +2362,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText: "Painter's supplies allow you to create art.",
     types: [ItemTypes.TOOL],
     toolId: toolIds.paintersSupplies,
+    rarity: Rarity.COMMON,
   },
   {
     id: 182,
@@ -2224,6 +2374,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText: "A poisoner's kit allows you to create and apply poisons.",
     types: [ItemTypes.TOOL],
     toolId: toolIds.poisonersKit,
+    rarity: Rarity.COMMON,
   },
   {
     id: 183,
@@ -2235,6 +2386,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 10, unit: gp },
     types: [ItemTypes.TOOL],
     toolId: toolIds.pottersTools,
+    rarity: Rarity.COMMON,
   },
   {
     id: 184,
@@ -2245,6 +2397,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 20, unit: gp },
     flavorText: "Smith's tools allow you to work metal.",
     types: [ItemTypes.TOOL],
+    rarity: Rarity.COMMON,
     toolId: toolIds.smithTools,
   },
   {
@@ -2256,6 +2409,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 25, unit: gp },
     flavorText: "Thieves' tools allow you to pick locks and disarm traps.",
     types: [ItemTypes.TOOL],
+    rarity: Rarity.COMMON,
     toolId: toolIds.thievesTools,
   },
   {
@@ -2267,6 +2421,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 50, unit: gp },
     types: [ItemTypes.TOOL],
     flavorText: "Tinker's tools allow you to repair objects.",
+    rarity: Rarity.COMMON,
     toolId: toolIds.tinkersTools,
   },
   {
@@ -2278,6 +2433,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 1, unit: gp },
     flavorText: "Weaver's tools allow you to create and repair clothing.",
     types: [ItemTypes.TOOL],
+    rarity: Rarity.COMMON,
     toolId: toolIds.weaversTools,
   },
   {
@@ -2288,6 +2444,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 5, unit: lb },
     cost: { quantity: 1, unit: gp },
     flavorText: "Woodcarver's tools allow you to create wooden objects.",
+    rarity: Rarity.COMMON,
     types: [ItemTypes.TOOL],
     toolId: toolIds.woodcarversTools,
   },
@@ -2299,6 +2456,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 0, unit: lb },
     flavorText: "A dice set allows you to play games that require dice.",
     cost: { quantity: 1, unit: sp },
+    rarity: Rarity.COMMON,
     types: [ItemTypes.TOOL],
     toolId: toolIds.diceSet,
   },
@@ -2311,6 +2469,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "Dragonchess is a game of strategy and cunning that pits two players against each other in a battle of wits.",
     cost: { quantity: 1, unit: gp },
+    rarity: Rarity.COMMON,
     types: [ItemTypes.TOOL],
     toolId: toolIds.dragonchessSet,
   },
@@ -2320,6 +2479,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description:
       "A playing card set is a collection of cards used to play a variety of games.",
     cost: { quantity: 5, unit: sp },
+    rarity: Rarity.COMMON,
     flavorText:
       "A playing card set allows you to play games that require cards.",
     types: [ItemTypes.TOOL],
@@ -2330,6 +2490,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     name: "Three Dragon Ante Set",
     description:
       "Three-Dragon Ante is a game of chance and skill that pits two or more players against each other in a battle of wits.",
+    rarity: Rarity.COMMON,
     flavorText:
       "Three-Dragon Ante is a game of chance and skill that pits two or more players against each other in a battle of wits.",
     cost: { quantity: 1, unit: gp },
@@ -2341,6 +2502,8 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     name: "Bagpipes",
     description:
       "Bagpipes are a musical instrument that consists of a bag, a chanter, and one or more drones.",
+    rarity: Rarity.COMMON,
+
     weight: { quantity: 6, unit: lb },
     flavorText:
       "Bagpipes are a musical instrument that consists of a bag, a chanter, and one or more drones.",
@@ -2356,6 +2519,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     weight: { quantity: 3, unit: lb },
     flavorText:
       "A drum is a musical instrument that produces sound by being struck with a stick or the hand.",
+    rarity: Rarity.COMMON,
     cost: { quantity: 6, unit: gp },
     types: [ItemTypes.TOOL],
     toolId: toolIds.drum,
@@ -2370,6 +2534,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A dulcimer is a musical instrument that produces sound by being struck with hammers.",
     types: [ItemTypes.TOOL],
+    rarity: Rarity.COMMON,
     toolId: toolIds.dulcimer,
   },
   {
@@ -2381,6 +2546,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     cost: { quantity: 2, unit: gp },
     flavorText: "A flute allows you to create music.",
     types: [ItemTypes.TOOL],
+    rarity: Rarity.COMMON,
     toolId: toolIds.flute,
   },
   {
@@ -2393,6 +2559,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     flavorText:
       "A lute is a musical instrument that produces sound by plucking strings.",
     types: [ItemTypes.TOOL],
+    rarity: Rarity.COMMON,
     toolId: toolIds.lute,
   },
   {
@@ -2402,6 +2569,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A lyre is a musical instrument that produces sound by plucking strings.",
     weight: { quantity: 2, unit: lb },
     cost: { quantity: 30, unit: gp },
+    rarity: Rarity.COMMON,
 
     flavorText:
       "A lyre is a musical instrument that produces sound by plucking strings.",
@@ -2414,6 +2582,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description:
       "A horn is a musical instrument that produces sound by being blown into.",
     weight: { quantity: 2, unit: lb },
+    rarity: Rarity.COMMON,
     cost: { quantity: 3, unit: gp },
     flavorText:
       "A horn is a musical instrument that produces sound by being blown into.",
@@ -2427,6 +2596,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A pan flute is a musical instrument that produces sound by blowing air across an opening.",
     weight: { quantity: 2, unit: lb },
     cost: { quantity: 12, unit: gp },
+    rarity: Rarity.COMMON,
     flavorText:
       "A pan flute is a musical instrument that produces sound by blowing air across an opening.",
     types: [ItemTypes.TOOL],
@@ -2439,6 +2609,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A shawm is a musical instrument that produces sound by being blown into.",
     weight: { quantity: 1, unit: lb },
     cost: { quantity: 2, unit: gp },
+    rarity: Rarity.COMMON,
     flavorText:
       "A shawm is a musical instrument that produces sound by being blown into.",
     types: [ItemTypes.TOOL],
@@ -2451,6 +2622,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       "A viol is a musical instrument that produces sound by being bowed or plucked.",
     weight: { quantity: 1, unit: lb },
     cost: { quantity: 30, unit: gp },
+    rarity: Rarity.COMMON,
     flavorText:
       "A viol is a musical instrument that produces sound by being bowed or plucked.",
     types: [ItemTypes.TOOL],
@@ -2463,6 +2635,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description:
       "A burglar's pack is a collection of items that are useful for breaking and entering.",
     cost: { quantity: 16, unit: gp },
+    rarity: Rarity.COMMON,
     types: [ItemTypes.EQUIPMENT_PACK],
     flavorText:
       "A burglar's pack is a collection of items that are useful for breaking and entering.",
@@ -2473,6 +2646,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description:
       "A diplomat's pack is a collection of items that are useful for negotiating with others.",
     cost: { quantity: 39, unit: gp },
+    rarity: Rarity.COMMON,
     types: [ItemTypes.EQUIPMENT_PACK],
     flavorText:
       "A diplomat's pack is a collection of items that are useful for negotiating with others.",
@@ -2483,6 +2657,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description:
       "A dungeoneer's pack is a collection of items that are useful for exploring dungeons.",
     cost: { quantity: 12, unit: gp },
+    rarity: Rarity.COMMON,
     types: [ItemTypes.EQUIPMENT_PACK],
     flavorText:
       "A dungeoneer's pack is a collection of items that are useful for exploring dungeons.",
@@ -2493,6 +2668,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description:
       "An entertainer's pack is a collection of items that are useful for performing.",
     cost: { quantity: 40, unit: gp },
+    rarity: Rarity.COMMON,
     types: [ItemTypes.EQUIPMENT_PACK],
     flavorText:
       "An entertainer's pack is a collection of items that are useful for performing.",
@@ -2503,6 +2679,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description:
       "An explorer's pack is a collection of items that are useful for traveling.",
     cost: { quantity: 10, unit: gp },
+    rarity: Rarity.COMMON,
     types: [ItemTypes.EQUIPMENT_PACK],
     flavorText:
       "An explorer's pack is a collection of items that are useful for traveling.",
@@ -2513,6 +2690,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description:
       "A priest's pack is a collection of items that are useful for performing religious rites.",
     cost: { quantity: 19, unit: gp },
+    rarity: Rarity.COMMON,
     types: [ItemTypes.EQUIPMENT_PACK],
     flavorText:
       "A priest's pack is a collection of items that are useful for performing religious rites.",
@@ -2523,6 +2701,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     name: "Scholar's Pack",
     description:
       "A scholar's pack is a collection of items that are useful for studying.",
+    rarity: Rarity.COMMON,
     cost: { quantity: 40, unit: gp },
     types: [ItemTypes.EQUIPMENT_PACK],
     flavorText:
@@ -2534,6 +2713,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description: "A gold piece is a coin made of gold.",
     cost: { quantity: 1, unit: gp },
     weight: { quantity: 1 / 50, unit: lb },
+    rarity: Rarity.COMMON,
     types: [ItemTypes.CURRENCY],
     flavorText: "A gold piece is a coin made of gold.",
   },
@@ -2543,6 +2723,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description: "A platinum piece is a coin made of platinum.",
     cost: { quantity: 1, unit: pp },
     weight: { quantity: 1 / 50, unit: lb },
+    rarity: Rarity.COMMON,
     types: [ItemTypes.CURRENCY],
     flavorText: "A platinum piece is a coin made of platinum.",
   },
@@ -2552,6 +2733,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description: "A silver piece is a coin made of silver.",
     cost: { quantity: 1, unit: sp },
     weight: { quantity: 1 / 50, unit: lb },
+    rarity: Rarity.COMMON,
     types: [ItemTypes.CURRENCY],
     flavorText: "A silver piece is a coin made of silver.",
   },
@@ -2561,6 +2743,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description: "A copper piece is a coin made of copper.",
     cost: { quantity: 1, unit: cp },
     weight: { quantity: 1 / 50, unit: lb },
+    rarity: Rarity.COMMON,
     types: [ItemTypes.CURRENCY],
     flavorText: "A copper piece is a coin made of copper.",
   },
@@ -2570,6 +2753,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     description: "An electrum piece is a coin made of electrum.",
     cost: { quantity: 1, unit: ep },
     weight: { quantity: 1 / 50, unit: lb },
+    rarity: Rarity.COMMON,
     types: [ItemTypes.CURRENCY],
     flavorText: "An electrum piece is a coin made of electrum.",
   },
@@ -2578,6 +2762,16 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     name: `Scroll of ${spell.name}`,
     description: `This is a spell scroll for the spell ${spell.name}.`,
     types: [ItemTypes.SPELL_SCROLL],
+    rarity:
+      spell.level == 9
+        ? Rarity.LEGENDARY
+        : spell.level >= 6 && spell.level <= 8
+        ? Rarity.VERY_RARE
+        : spell.level >= 4 && spell.level <= 5
+        ? Rarity.RARE
+        : spell.level >= 2 && spell.level <= 3
+        ? Rarity.UNCOMMON
+        : Rarity.COMMON,
     flavorText: `This is a spell scroll for the spell ${spell.name}.`,
     spellId: spell.id,
   })),

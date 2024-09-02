@@ -14,7 +14,7 @@ import Traits from "./seeds/Races/Traits.seed";
 import { ClassicVariants } from "./seeds/Races/Variants/ClassicVariants";
 import ClassicTraits from "./seeds/Races/Variants/ClassicTraits";
 import { ItemsSeed } from "./seeds/Items/Items.seed";
-import { ItemTypes, PrismaClient, Weapon } from "@prisma/client";
+import { ItemTypes, Prisma, PrismaClient, Weapon } from "@prisma/client";
 import createMaxyUser from "./seeds/User.seed";
 import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
 import { ToolSeed } from "./seeds/Items/Tools/tools.seed";
@@ -31,6 +31,10 @@ const seed = async () => {
   for (const Spell of SpellSeed) {
     try {
       cinfo("Creating spell:", Spell.name);
+      if (!verifySpell(Spell)) {
+        cerr("Error verifying spell:", Spell.name);
+        return;
+      }
       await db.spell.create({
         data: Spell,
       });
@@ -57,6 +61,12 @@ const seed = async () => {
     }
   }
   cinfo("Spell lists created");
+  const ids = SpellSeed.map((s) => s.id).filter((id) => id !== undefined);
+
+  if (!verifySpellList(ids, SpellListToSpellArr)) {
+    cerr("Error verifying spell list");
+    return;
+  }
 
   //link spells to spell lists
   cinfo("Linking spells to spell lists");
@@ -468,6 +478,53 @@ const seed = async () => {
   // await createMaxyUser(db);
 
   csuccess("✅ Successfully seeded database ✅");
+};
+
+const verifySpell = (spell: Prisma.SpellCreateManyInput) => {
+  //since the spells were scraped we need to verify the data is good
+  if (!spell.name) {
+    cwarn("Spell missing name field:", spell);
+    return false;
+  }
+
+  if (!spell.school) {
+    cwarn("Spell missing school field:", spell);
+    return false;
+  }
+  if (!spell.castingTime) {
+    cwarn("Spell missing castingTime field:", spell);
+    return false;
+  }
+  if (!spell.range) {
+    cwarn("Spell missing range field:", spell);
+    return false;
+  }
+  if (!spell.duration) {
+    cwarn("Spell missing duration field:", spell);
+    return false;
+  }
+  if (!spell.description) {
+    cwarn("Spell missing description field:", spell);
+    return false;
+  }
+  if (!spell.source) {
+    cwarn("Spell missing source field:", spell);
+    return false;
+  }
+  return true;
+};
+const verifySpellList = (
+  spellIds: number[],
+  spellListsToSpell: { spellId: number; spellListId: number }[]
+) => {
+  //verify that all spellIds are in spellListsToSpell
+  for (const id of spellIds) {
+    if (!spellListsToSpell.find((s) => s.spellId === id)) {
+      cwarn("Spell id not found in spellListsToSpell:", id);
+      return false;
+    }
+  }
+  return true;
 };
 
 seed()

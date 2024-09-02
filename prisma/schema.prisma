@@ -519,7 +519,6 @@ model Tool {
 }
 
 enum ItemTypes {
-  COMMON
   MAGIC
   CLOTHES
   ARCANE_FOCUS
@@ -566,9 +565,9 @@ model Item {
   name        String
   description String
   flavorText  String @db.VarChar(200)
-
+  rarity      Rarity
   /// [CurrencyAmount]
-  cost Json?
+  cost        Json?
 
   /// [QuantityUnit]
   weight Json?

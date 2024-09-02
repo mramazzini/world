@@ -8034,7 +8034,8 @@ const SpellSeed: Prisma.SpellCreateManyInput[] = [
   {
     id: 376,
     name: "Wall of Force",
-    description: "",
+    description:
+      "An invisible wall of force springs into existence at a point you choose within range.The wall appears in any orientation you choose, as a horizontal or vertical barrier or at an angle. It can be free floating or resting on a solid surface. You can form it into a hemispherical dome or a sphere with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-by-10-foot panels. Each panel must be contiguous with another panel. In any form, the wall is 1/4 inch thick. It lasts for the duration. If the wall cuts through a creature's space when it appears, the creature is pushed to one side of the wall (your choice which side).\n\nNothing can physically pass through the wall. It is immune to all damage and can't be dispelled by dispel magic. A disintegrate spell destroys the wall instantly, however. The wall also extends into the Ethereal Plane, blocking ethereal travel through the wall.",
     level: 5,
     school: "EVOCATION",
     castingTime: "1 action",
@@ -8219,7 +8220,8 @@ const SpellSeed: Prisma.SpellCreateManyInput[] = [
   {
     id: 385,
     name: "Contingency",
-    description: "",
+    description:
+      "Choose a spell of 5th level or lower that you can cast, that has a casting time of 1 action, and that can target you. You cast that spell—called the contingent spell—as part of casting contingency, expending spell slots for both, but the contingent spell doesn’t come into effect. Instead, it takes effect when a certain circumstance occurs. You describe that circumstance when you cast the two spells. For example, a contingency cast with water breathing might stipulate that water breathing comes into effect when you are engulfed in water or a similar liquid.\n\nThe contingent spell takes effect immediately after the circumstance is met for the first time, whether or not you want it to, and then contingency ends.\n\nThe contingent spell takes effect only on you, even if it can normally target others. You can use only one contingency spell at a time. If you cast this spell again, the effect of another contingency spell on you ends. Also, contingency ends on you if its material component is ever not on your person.",
     level: 6,
     school: "EVOCATION",
     castingTime: "10 minutes",
@@ -10103,7 +10105,8 @@ const SpellSeed: Prisma.SpellCreateManyInput[] = [
   {
     id: 466,
     name: "Mind Blank",
-    description: "",
+    description:
+      "Until the spell ends, one willing creature you touch is immune to psychic damage, any effect that would sense its emotions or read its thoughts, divination spells, and the charmed condition. The spell even foils wish spells and spells or effects of similar power used to affect the target's mind or to gain information about the target.",
     level: 8,
     school: "ABJURATION",
     castingTime: "1 action",
