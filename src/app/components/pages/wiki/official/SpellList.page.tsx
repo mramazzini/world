@@ -45,7 +45,7 @@ const SpellListPage = ({ spellList }: Props) => {
               {/* go back */}
               <Link
                 className={"btn btn-ghost border border-gray-500 w-full"}
-                href={`/spellList`}
+                href={`/spell-list`}
               >
                 View all SpellLists -&gt;
               </Link>

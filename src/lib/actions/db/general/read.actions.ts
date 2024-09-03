@@ -45,6 +45,7 @@ export const searchEverything = async (
   const items = await db.item.findMany({});
 
   const backgrounds = await db.background.findMany({});
+  const spellLists = await db.spellList.findMany({});
 
   const combined: CombinedData[] = [
     ...spells.map((spell) => ({
@@ -107,6 +108,14 @@ export const searchEverything = async (
       type: "Background",
       other: "",
       lastUpdated: background.updatedAt,
+    })),
+    ...spellLists.map((spellList) => ({
+      name: spellList.name,
+      description: spellList.description,
+      flavorText: spellList.description,
+      type: "SpellList",
+      other: "",
+      lastUpdated: spellList.updatedAt,
     })),
   ];
   const fuse = new Fuse(combined, {

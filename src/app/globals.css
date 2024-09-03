@@ -34,9 +34,6 @@ h4 {
   padding: 0.5rem 0;
 }
 
-.hover-parent {
-}
-
 .hover-parent:hover * {
   display: inline;
 }
