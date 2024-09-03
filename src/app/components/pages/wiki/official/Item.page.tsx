@@ -8,8 +8,9 @@ import { WeaponProperties } from "@/lib/globalVars";
 import Tooltip from "@/app/components/Utility/Tooltip";
 import Feature from "@/app/components/UI/Feature";
 import FeatureList from "@/app/components/UI/FeatureList";
-import { ArmorType, Rarity } from "@prisma/client";
+import { ArmorType, ItemTypes, Rarity } from "@prisma/client";
 import { itemIds } from "../../../../../../prisma/seeds/Items/ItemIds";
+import JsonTable from "@/app/components/Utility/JsonTable";
 interface Props {
   item: ItemInfo | null;
 }
@@ -125,6 +126,42 @@ const ItemPage = ({ item }: Props) => {
                     <span className="font-bold">Rarity:</span>{" "}
                     {item.rarity.toCapitalCase()}
                   </li>
+                  {item.AmmunitionFor && item.AmmunitionFor.length > 0 && (
+                    <li className="ml-4">
+                      <span className="font-bold">Ammunition For:</span>{" "}
+                      {item.AmmunitionFor.map((ammo, index) =>
+                        item.AmmunitionFor &&
+                        item.AmmunitionFor.length - 1 == index ? (
+                          <span key={index}>
+                            <P>{`^${ammo.id.toString()}{${ammo.name}}^`}</P>{" "}
+                          </span>
+                        ) : (
+                          <span key={index}>
+                            <P>{`^${ammo.id.toString()}{${ammo.name}}^`}</P>
+                            {", "}
+                          </span>
+                        )
+                      )}
+                    </li>
+                  )}
+                  {item.types.includes(ItemTypes.CONTAINER) && (
+                    <li className="ml-4">
+                      <span className="font-bold">Capacity:</span>{" "}
+                      <P>
+                        {item.capacity
+                          ? `${item.capacity.quantity} ${item.capacity.unit}${
+                              item.capacity.quantity > 1 ? "s" : ""
+                            }`
+                          : item.customItemCapacity
+                          ? `${item.customItemCapacity.quantity} ^${
+                              item.customItemCapacity.item
+                            }{}^${
+                              item.customItemCapacity.quantity > 1 ? "s" : ""
+                            }`
+                          : ""}
+                      </P>
+                    </li>
+                  )}
                 </ul>
                 <div className="divider m-0"></div>
               </div>
@@ -145,6 +182,160 @@ const ItemPage = ({ item }: Props) => {
             <div className="divider mb-0"></div>
           </div>
           <div className="divider "></div>
+          {item.types.includes(ItemTypes.ARCANE_FOCUS) ? (
+            <>
+              <div className="bg-base-300 rounded-xl p-4">
+                <h2 className="pb-0">
+                  Arcane Focus{" "}
+                  <Info tooltip="This item can be used as an arcane focus for spellcasting." />
+                </h2>
+                <div className="divider "></div>
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                    <div className="divider m-0"></div>
+                    <p>
+                      <P>
+                        An arcane focus is a special item designed to channel
+                        the power of arcane spells.
+                      </P>
+                    </p>
+                    <br />
+                    <p>
+                      <P>
+                        A character can use the arcane focus in place of the
+                        components specified for a spell. But if a cost is
+                        indicated for a component, a character must have that
+                        specific component before he or she can cast the spell.
+                      </P>
+                    </p>
+                    <div className="divider m-0"></div>
+                  </div>
+                </div>
+                <div className="divider"></div>
+              </div>
+              <div className="divider"></div>
+            </>
+          ) : item.types.includes(ItemTypes.HOLY_SYMBOL) ? (
+            <>
+              <div className="bg-base-300 rounded-xl p-4">
+                <h2 className="pb-0">
+                  Holy Symbol{" "}
+                  <Info tooltip="This item can be used as a holy symbol for spellcasting." />
+                </h2>
+                <div className="divider "></div>
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                    <div className="divider m-0"></div>
+                    <p>
+                      <P>
+                        A holy symbol is a representation of a god or pantheon.
+                        It might be an amulet depicting a symbol representing a
+                        deity, the same symbol carefully engraved or inlaid as
+                        an emblem on a shield, or a tiny box holding a fragment
+                        of a sacred relic.
+                      </P>
+                    </p>
+                    <br />
+                    <p>
+                      <P>
+                        A character can use the holy symbol in place of the
+                        components specified for a spell. But if a cost is
+                        indicated for a component, a character must have that
+                        specific component before he or she can cast the spell.
+                      </P>
+                    </p>
+                    <div className="divider m-0"></div>
+                  </div>
+                </div>
+                <div className="divider"></div>
+              </div>
+              <div className="divider"></div>
+            </>
+          ) : item.types.includes(ItemTypes.DRUIDIC_FOCUS) ? (
+            <>
+              <div className="bg-base-300 rounded-xl p-4">
+                <h2 className="pb-0">
+                  Druidic Focus{" "}
+                  <Info tooltip="This item can be used as a druidic focus for spellcasting." />
+                </h2>
+                <div className="divider "></div>
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                    <div className="divider m-0"></div>
+                    <p>
+                      <P>
+                        A druidic focus might be a sprig of mistletoe or holly,
+                        a wand or scepter made of yew or another special wood, a
+                        staff drawn whole out of a living tree, or a totem
+                        object incorporating feathers, fur, bones, and teeth
+                        from sacred animals.
+                      </P>
+                    </p>
+                    <br />
+                    <p>
+                      <P>
+                        A character can use the holy symbol in place of the
+                        components specified for a spell. But if a cost is
+                        indicated for a component, a character must have that
+                        specific component before he or she can cast the spell.
+                      </P>
+                    </p>
+                  </div>
+                </div>
+                <div className="divider"></div>
+              </div>
+              <div className="divider"></div>
+            </>
+          ) : (
+            item.types.includes(ItemTypes.COMPONENT_POUCH) && ""
+          )}
+          {item.EquipmentPack && (
+            <>
+              <div className="bg-base-300 rounded-xl p-4">
+                <h2 className="pb-0">
+                  Equipment Pack{" "}
+                  <Info tooltip="Equipment packs are a collection of items, bundled up in a convenient way." />
+                </h2>
+                <div className="divider "></div>
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                    <div className="divider m-0"></div>
+                    <p className="p-4 bg-base-300 rounded-t-xl">
+                      <P>
+                        When you acquire this Equipment Pack, you gain the
+                        following items.
+                      </P>
+                    </p>
+                    <div className="bg-base-300">
+                      <JsonTable
+                        json={[
+                          {
+                            "": {
+                              headers: ["Item", "Quantity"],
+                              headersLength: [15, 85],
+                              data: [
+                                ...item.EquipmentPack.itemsQuantity.map(
+                                  (item, i) => {
+                                    return {
+                                      Item: `^${item.item}{}^`,
+                                      Quantity: item.quantity.toString(),
+                                    };
+                                  }
+                                ),
+                              ],
+                            },
+                          },
+                        ]}
+                      />
+                    </div>
+                    <div className="divider m-0"></div>
+                  </div>
+                </div>
+                <div className="divider"></div>
+              </div>
+              <div className="divider"></div>
+            </>
+          )}
           {item.Armor && (
             <>
               <div className="bg-base-300 rounded-xl p-4">
@@ -340,6 +531,12 @@ const ItemPage = ({ item }: Props) => {
                           );
                         })}
                       </li>
+                      {item.Weapon.ammunition && (
+                        <li className="ml-4">
+                          <span className="font-bold">Ammunition:</span>{" "}
+                          <P>{`^${item.Weapon.ammunition.id}{${item.Weapon.ammunition.name}}^`}</P>
+                        </li>
+                      )}
                     </ul>
                     <div className="divider m-0"></div>
                   </div>{" "}
@@ -360,6 +557,103 @@ const ItemPage = ({ item }: Props) => {
               <div className="divider "></div>
             </>
           )}
+          {item.types.includes(ItemTypes.CURRENCY) && (
+            <>
+              <div className="bg-base-300 rounded-xl p-4">
+                <h2 className="pb-0">
+                  Currency{" "}
+                  <Info tooltip="This item is classified as currency." />
+                </h2>
+                <div className="divider "></div>
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                    <div className="divider m-0"></div>
+                    <ul className="list-disc ">
+                      <li className="ml-4">
+                        <span className="font-bold">Value:</span>{" "}
+                        <P>
+                          The most basic type of treasure is money, including
+                          copper pieces (cp), silver pieces (sp), electrum
+                          pieces (ep), gold pieces (gp), and platinum pieces
+                          (pp). Fifty coins of any type weigh 1 pound.
+                        </P>
+                      </li>
+                      <div className="divider m-0"></div>
+                      <li className="ml-4">
+                        <span className="font-bold">Exchange Rate:</span>
+                        <div className="divider m-0"></div>
+                        <div className="bg-base-300">
+                          <JsonTable
+                            json={[
+                              {
+                                "": {
+                                  headers: [
+                                    "Coin",
+                                    "Cp",
+                                    "Sp",
+                                    "Ep",
+                                    "Gp",
+                                    "Pp",
+                                  ],
+                                  headersLength: [15, 15, 15, 15, 15, 15],
+                                  data: [
+                                    {
+                                      Coin: "Copper (cp)",
+                                      Cp: "1",
+                                      Sp: "1/10",
+                                      Ep: "1/5",
+                                      Gp: "1/100",
+                                      Pp: "1/1000",
+                                    },
+                                    {
+                                      Coin: "Silver (sp)",
+                                      Cp: "10",
+                                      Sp: "1",
+                                      Ep: "1/5",
+                                      Gp: "1/10",
+                                      Pp: "1/100",
+                                    },
+                                    {
+                                      Coin: "Electrum (ep)",
+                                      Cp: "50",
+                                      Sp: "5",
+                                      Ep: "1",
+                                      Gp: "1/2",
+                                      Pp: "1/20",
+                                    },
+                                    {
+                                      Coin: "Gold (gp)",
+                                      Cp: "100",
+                                      Sp: "10",
+                                      Ep: "2",
+                                      Gp: "1",
+                                      Pp: "1/10",
+                                    },
+                                    {
+                                      Coin: "Platinum (pp)",
+                                      Cp: "1000",
+                                      Sp: "100",
+                                      Ep: "50",
+                                      Gp: "10",
+                                      Pp: "1",
+                                    },
+                                  ],
+                                },
+                              },
+                            ]}
+                          />
+                        </div>
+                      </li>
+                    </ul>
+                    <div className="divider m-0"></div>
+                  </div>
+                </div>
+                <div className="divider mb-0"></div>
+              </div>
+              <div className="divider "></div>
+            </>
+          )}
+
           {item.Tool && (
             <>
               <div className="bg-base-300 rounded-xl p-4">

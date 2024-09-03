@@ -127,7 +127,7 @@ const P = ({
       matchIndexes: Term[];
       items: ItemInfo[];
     } | null> {
-      const itemRegex = /\^[0-9]+{[^}]+}\^/g;
+      const itemRegex = /\^[0-9]+{[^}]*}\^/g;
       let match: RegExpExecArray | null;
       let matchIndexes: Term[] = [];
 
@@ -162,7 +162,7 @@ const P = ({
       matchIndexes: Term[];
       spells: SpellInfo[];
     } | null> {
-      const spellRegex = /%[0-9]+{[^}]+}%/g;
+      const spellRegex = /%[0-9]+{[^}]*}%/g;
       let match: RegExpExecArray | null;
       let matchIndexes: Term[] = [];
 

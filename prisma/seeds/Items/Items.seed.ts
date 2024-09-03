@@ -1108,7 +1108,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 81,
-    name: "Case, Crossbow Bolt",
+    name: "Case (Crossbow Bolt)",
     description: "A crossbow bolt case can hold up to 20 crossbow bolts.",
     cost: { quantity: 1, unit: gp },
     weight: { quantity: 1, unit: lb },
@@ -1119,7 +1119,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 82,
-    name: "Case, Map or Scroll",
+    name: "Case (Map or Scroll)",
     description:
       "A map or scroll case is a cylindrical tube with a cap on each end.",
     cost: { quantity: 1, unit: gp },
@@ -1180,7 +1180,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 87,
-    name: "Pot, Iron",
+    name: "Pot (Iron)",
     description: "An iron pot is a large, metal container for cooking.",
     cost: { quantity: 2, unit: gp },
     weight: { quantity: 10, unit: lb },
@@ -1414,7 +1414,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 105,
-    name: "Crossbow, Light",
+    name: "Crossbow (Light)",
     description:
       "A light crossbow is a simple weapon that is essentially a small, hand-held crossbow.",
     cost: { quantity: 25, unit: gp },
@@ -1711,7 +1711,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 128,
-    name: "Crossbow, Hand",
+    name: "Crossbow (Hand)",
     description:
       "A hand crossbow is a ranged weapon that is essentially a small, hand-held crossbow.",
     cost: { quantity: 75, unit: gp },
@@ -1724,7 +1724,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 129,
-    name: "Crossbow, Heavy",
+    name: "Crossbow (Heavy)",
     description:
       "A heavy crossbow is a ranged weapon that is essentially a large, hand-held crossbow.",
     cost: { quantity: 50, unit: gp },
