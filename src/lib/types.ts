@@ -160,6 +160,9 @@ export enum SpellFocus {
   ARTISAN_TOOLS = "artisan tools",
   NONE = "none",
 }
+export interface SpellListInfo extends SpellList {
+  Spells: Spell[];
+}
 declare global {
   namespace PrismaJson {
     // you can use classes, interfaces, types, etc.
