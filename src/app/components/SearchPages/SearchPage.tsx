@@ -45,6 +45,7 @@ type Modifier =
   | "NumPlace"
   | "SpellLevel"
   | "Italic";
+
 interface TableInfo {
   headerWidth: number;
   dbHeader: string | number;
@@ -78,6 +79,7 @@ interface Props<T extends DataType> {
     modifiers?: Modifier[];
     headerWidth: number;
     priority: Priority;
+    options?: string[];
   }[];
 }
 
@@ -182,7 +184,11 @@ const SearchPageComponent = <T extends DataType>({
           </div>
         );
       case "CapitalCase":
-        return applyModifiers(data.toCapitalCase(), modifier, index + 1);
+        return applyModifiers(
+          data.toCapitalCase().replaceAll("_", " "),
+          modifier,
+          index + 1
+        );
       case "NumPlace":
         return applyModifiers(numPlace(parseInt(data)), modifier, index + 1);
       case "SpellLevel":

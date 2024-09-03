@@ -17,6 +17,7 @@ interface Props {
     model: string;
     key: string;
     alias?: string;
+    options?: string[];
   }[];
   usingStaticData: boolean;
 }
@@ -117,7 +118,7 @@ const SearchBar = ({
                   {field.data &&
                     field.data.map((value, page) => (
                       <option key={page} value={value}>
-                        {value.toString().toCapitalCase()}
+                        {value.toString().toCapitalCase().replaceAll("_", " ")}
                       </option>
                     ))}
                 </select>
@@ -132,25 +133,56 @@ const SearchBar = ({
                 <label>
                   {field.alias ? field.alias : field.key.camelToCapitalCase()}
                 </label>
-                <input
-                  className="input input-primary w-40 bg-neutral"
-                  onChange={(e) => {
-                    const newQuery = queryInfo.relationalFields.filter(
-                      (relationalField) => relationalField.key !== field.key
-                    );
-                    setQuery({
-                      ...queryInfo,
-                      relationalFields: [
-                        ...newQuery,
-                        {
-                          model: field.model,
-                          key: field.key,
-                          data: e.target.value,
-                        },
-                      ],
-                    });
-                  }}
-                />
+                {field.options ? (
+                  <select
+                    className="input input-primary w-40 bg-neutral"
+                    onChange={(e) => {
+                      const newQuery = queryInfo.relationalFields.filter(
+                        (relationalField) => relationalField.key !== field.key
+                      );
+                      setQuery({
+                        ...queryInfo,
+                        relationalFields: [
+                          ...newQuery,
+                          {
+                            model: field.model,
+                            key: field.key,
+                            data: e.target.value,
+                          },
+                        ],
+                      });
+                    }}
+                  >
+                    <option value="">Any</option>
+                    {field.options.map((value, page) => (
+                      <option key={page} value={value}>
+                        {value.toString().toCapitalCase()}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <>
+                    <input
+                      className="input input-primary w-40 bg-neutral"
+                      onChange={(e) => {
+                        const newQuery = queryInfo.relationalFields.filter(
+                          (relationalField) => relationalField.key !== field.key
+                        );
+                        setQuery({
+                          ...queryInfo,
+                          relationalFields: [
+                            ...newQuery,
+                            {
+                              model: field.model,
+                              key: field.key,
+                              data: e.target.value,
+                            },
+                          ],
+                        });
+                      }}
+                    />{" "}
+                  </>
+                )}
               </div>
             ))}
         </div>

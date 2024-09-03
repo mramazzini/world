@@ -35,7 +35,7 @@ export const generateQueryFields = ({
         res[key] = { equals: d };
       } else if (typeof data === "string") {
         // @ts-ignore
-        res[key] = { contains: data };
+        res[key] = { contains: data, mode: "insensitive" };
       }
     }
   }
@@ -47,6 +47,7 @@ export const generateQueryFields = ({
     res[model] = {
       [key]: {
         contains: data,
+        mode: "insensitive",
       },
     };
   }

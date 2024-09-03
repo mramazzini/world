@@ -2,7 +2,7 @@ import SearchPageComponent from "../SearchPage";
 
 import { SubRaceInfo } from "@/lib/types";
 
-import { officialSources } from "@/lib/globalVars";
+import { officialSources, races } from "@/lib/globalVars";
 import { getSubRaceChunk } from "@/lib/actions/db/subrace/read.actions";
 
 interface Props {
@@ -63,6 +63,7 @@ const SubRaceSearchPage = ({ subRaces }: Props) => {
           modifiers: ["Button-Accent", "CapitalCase"],
           headerWidth: 5,
           priority: "all",
+          options: races,
         },
       ]}
       homebrew={false}

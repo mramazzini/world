@@ -2,7 +2,7 @@ import SearchPageComponent from "../SearchPage";
 
 import { useState } from "react";
 import { ItemInfo, QueryParams } from "@/lib/types";
-import { Item } from "@prisma/client";
+import { Item, Rarity } from "@prisma/client";
 import { getItemChunk } from "@/lib/actions/db/item/read.actions";
 import { officialSources } from "@/lib/globalVars";
 interface Props {
@@ -35,6 +35,16 @@ const ItemSearchPage = ({ items }: Props) => {
           modifiers: ["Italic"],
           index: 1,
           priority: "all",
+        },
+        {
+          headerWidth: 10,
+          dbHeader: "rarity",
+          header: "Rarity",
+          enum: true,
+          searchFields: Object.values(Rarity),
+          modifiers: ["CapitalCase", "Button-Accent"],
+          index: 2,
+          priority: "md",
         },
 
         {

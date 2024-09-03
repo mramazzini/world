@@ -1,4 +1,4 @@
-import { Language, Skill } from "@prisma/client";
+import { Language, Race, Skill } from "@prisma/client";
 import { Property, src, WeaponPropertyNames } from "./types";
 
 export const QUERY_LIMIT = 30;
@@ -13,6 +13,33 @@ export const DISCORD_INVITE = "https://discord.gg/gNmJU7ZZqs";
 export const skills: Skill[] = Object.values(Skill);
 
 export const languages = Object.values(Language);
+
+export const races: string[] = [
+  "Human",
+  "Elf",
+  "Dwarf",
+  "Halfling",
+  "Gnome",
+  "Half Elf",
+  "Half Orc",
+  "Tiefling",
+  "Dragonborn",
+];
+
+export const classes: string[] = [
+  "Barbarian",
+  "Bard",
+  "Cleric",
+  "Druid",
+  "Fighter",
+  "Monk",
+  "Paladin",
+  "Ranger",
+  "Rogue",
+  "Sorcerer",
+  "Warlock",
+  "Wizard",
+];
 
 export const WeaponProperties: Record<WeaponPropertyNames, Property> = {
   Ammunition: {

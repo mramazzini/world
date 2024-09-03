@@ -110,7 +110,7 @@ const ClassSearch = ({ classes }: Props) => {
                 </td>
                 <td>{item.source}</td>
                 <td className="hidden sm:table-cell">
-                  {item.updatedAt.getDate()}/{item.updatedAt.getMonth()}/
+                  {item.updatedAt.getMonth()}/{item.updatedAt.getDate()}/
                   {item.updatedAt.getFullYear()}
                 </td>
               </tr>

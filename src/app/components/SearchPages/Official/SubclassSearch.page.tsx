@@ -1,6 +1,6 @@
 import { QueryParams, SubClassInfo, SubclassSearchResults } from "@/lib/types";
 import SearchPageComponent from "../SearchPage";
-import { officialSources } from "@/lib/globalVars";
+import { classes, officialSources } from "@/lib/globalVars";
 import { getSubclassChunk } from "@/lib/actions/db/subclass/read.actions";
 
 interface Props {
@@ -56,6 +56,7 @@ const SubclassSearchPage = ({ subclasses }: Props) => {
           modifiers: ["Button-Accent", "CapitalCase"],
           headerWidth: 5,
           priority: "all",
+          options: classes,
         },
       ]}
       routeName="subclass"

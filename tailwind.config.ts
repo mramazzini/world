@@ -22,7 +22,15 @@ const config: Config = {
     },
   },
   daisyui: {
-    themes: ["cupcake", "dracula"],
+    themes: [
+      {
+        cupcake: {
+          ...require("daisyui/src/theming/themes")["cupcake"],
+          primary: "#38bdf8",
+        },
+      },
+      "dracula",
+    ],
   },
   plugins: [require("daisyui")],
 };
