@@ -149,6 +149,19 @@ enum CreatureType {
   NULL
 }
 
+enum Alignment {
+  LAWFUL_GOOD
+  NEUTRAL_GOOD
+  CHAOTIC_GOOD
+  LAWFUL_NEUTRAL
+  TRUE_NEUTRAL
+  CHAOTIC_NEUTRAL
+  LAWFUL_EVIL
+  NEUTRAL_EVIL
+  CHAOTIC_EVIL
+  NULL
+}
+
 model User {
   id          Int           @id @default(autoincrement())
   username    String        @unique
@@ -164,10 +177,55 @@ model User {
   Messages    Message[]
   RaceVariant RaceVariant[]
 
-  Campaigns      Campaign[] @relation("PlayerCampaigns")
-  GMForCampaigns Campaign[] @relation("GMCampaigns")
+  Campaigns      Campaign[]  @relation("PlayerCampaigns")
+  GMForCampaigns Campaign[]  @relation("GMCampaigns")
   Tool           Tool[]
   Item           Item[]
+  Character      Character[]
+}
+
+model Character {
+  id         Int    @id @default(autoincrement())
+  name       String
+  experience Int
+
+  background   Background @relation(fields: [backgroundId], references: [id])
+  backgroundId Int
+
+  classes Class[] @relation("Character classes")
+
+  subClasses SubClass[] @relation("Character subClasses")
+
+  race   Race @relation(fields: [raceId], references: [id])
+  raceId Int
+
+  alignment Alignment
+  skills    Skill[]
+  languages Language[]
+  /// [QuantityItem]
+  currency  Json[]
+  /// [QuantityItem]
+  inventory Json[]
+
+  armorClass Int
+
+  equippedArmor   Int[] // Item IDs
+  equippedWeapons Int[] // Item IDs
+
+  currentHitPoints Int
+  maxHitPoints     Int
+  hitDice          Int
+
+  abilityScores Json
+
+  /// [Feature]
+  features Json[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?
 }
 
 model Campaign {
@@ -243,8 +301,9 @@ model Class {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  User       User?       @relation(fields: [userId], references: [id])
+  userId     Int?
+  Characters Character[] @relation("Character classes")
 }
 
 model Spell {
@@ -321,6 +380,8 @@ model SubClass {
   classId Int?
   User    User?  @relation(fields: [userId], references: [id])
   userId  Int?
+
+  Character Character[] @relation("Character subClasses")
 }
 
 model Race {
@@ -376,8 +437,9 @@ model Race {
 
   Variants RaceVariant[]
 
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  User      User?       @relation(fields: [userId], references: [id])
+  userId    Int?
+  Character Character[]
 }
 
 // This model has optional fields, whose purpose is to override the origin race its attached to
@@ -456,12 +518,12 @@ model RacialTraits {
 }
 
 model Background {
-  id                  Int        @id @default(autoincrement())
-  srd                 Boolean    @default(false)
+  id                  Int         @id @default(autoincrement())
+  srd                 Boolean     @default(false)
   name                String
   description         String
-  source              String     @default("Player's Handbook")
-  flavorText          String     @db.VarChar(200)
+  source              String      @default("Player's Handbook")
+  flavorText          String      @db.VarChar(200)
   skillProficiencies  Skill[]
   skillChoiceCount    Int
   toolProficiencies   String[]
@@ -470,10 +532,11 @@ model Background {
   equipment           String[]
   /// [Feature]
   features            Json[]
-  createdAt           DateTime   @default(now())
-  updatedAt           DateTime   @updatedAt
-  User                User?      @relation(fields: [userId], references: [id])
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+  User                User?       @relation(fields: [userId], references: [id])
   userId              Int?
+  Character           Character[]
 }
 
 model Feat {
