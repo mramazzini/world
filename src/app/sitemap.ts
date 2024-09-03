@@ -7,6 +7,7 @@ import { QUERY_LIMIT } from "@/lib/globalVars";
 import { getRaces } from "@/lib/actions/db/race/get.actions";
 import { getSubRaces } from "@/lib/actions/db/subrace/read.actions";
 import { getItems } from "@/lib/actions/db/item/read.actions";
+import { getSpellLists } from "@/lib/actions/db/spellList/read.actions";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteMap: MetadataRoute.Sitemap = [];
@@ -204,6 +205,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     siteMap.push({
       url: `${process.env.DOMAIN_NAME}/item/${t.name.replaceAll(" ", "-")}`,
       lastModified: t.updatedAt,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    });
+  }
+
+  const spellLists = await getSpellLists();
+  const spellListPagesCount = Math.ceil(spellLists.length / QUERY_LIMIT);
+  for (let i = 1; i < spellListPagesCount; i++) {
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/spell-list?page=${i}`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    });
+  }
+  siteMap.push({
+    url: `${process.env.DOMAIN_NAME}/spell-list`,
+    lastModified: new Date(),
+    changeFrequency: "yearly",
+    priority: 0.9,
+  });
+  for (const s of spellLists) {
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/spell-list/${s.name.replaceAll(
+        " ",
+        "-"
+      )}`,
+      lastModified: s.updatedAt,
       changeFrequency: "yearly",
       priority: 0.8,
     });

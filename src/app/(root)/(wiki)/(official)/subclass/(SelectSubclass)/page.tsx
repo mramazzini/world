@@ -21,6 +21,9 @@ export const metadata: Metadata = {
       },
     ],
   },
+  alternates: {
+    canonical: `${process.env.DOMAIN_NAME}/subclass`,
+  },
 };
 export const dynamic = "force-dynamic";
 const Page = async () => {
