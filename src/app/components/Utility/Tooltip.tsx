@@ -106,7 +106,7 @@ const Tooltip = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {element}
+      {link ? <Link href={link}>{element}</Link> : element}
       <span className={style.groupHover}>
         {title && (
           <span className="divider m-0 mb-1 divider-primary font-bold">

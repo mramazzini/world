@@ -89,7 +89,7 @@ const Footer = () => {
     <>
       <ContactModal />
       <footer className=" bg-neutral text-neutral-content p-10 mt-auto w-full">
-        <div className="footer grid-rows-2">
+        <div className="footer">
           <nav>
             <div className="footer-title">Links</div>
             {pageLinks.map((link) => (

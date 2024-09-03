@@ -48,8 +48,8 @@ const HomePage = () => {
       <div className="bg-base-300 p-4 w-full rounded-xl h-full">
         <h1 className="text-center">Max&apos;s DnD Wiki</h1>
         <p className="text-center">
-          Welcome to the DnD Wiki! Here you can find information on any and all
-          things Dungeons and Dragons 5th Edition.
+          Welcome to the Max&apos;s DnD Wiki! Here you can find information on
+          any and all things Dungeons and Dragons 5th Edition.
         </p>
         <div className="divider"></div>
         <div className="flex flex-wrap justify-center">

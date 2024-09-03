@@ -40,7 +40,11 @@ const GenerateTable = ({ data }: { data: PrismaJson.Table }) => {
       key={key}
       className={`overflow-y-visible ${loadingLink && "cursor-wait"}`}
     >
-      {key && <h3 className="py-2">{key}</h3>}
+      {key && (
+        <h3 className="w-full bg-black/30 px-2 rounded-t-md border-accent  border-b-2 ">
+          {key}
+        </h3>
+      )}
       <table className="table table-sm table-zebra overflow-y-visible">
         <thead>
           <tr className="bg-black/30">

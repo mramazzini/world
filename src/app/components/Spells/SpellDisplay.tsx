@@ -55,7 +55,7 @@ const SpellDisplay = ({ spell }: Props) => {
             return (
               <Link
                 className="text-accent "
-                href={`/class/${spellList.name?.toLowerCase()}`}
+                href={`/spell-list/${spellList.name?.replaceAll(" ", "-")}`}
                 key={index}
               >
                 {spellList.name && (
@@ -70,7 +70,8 @@ const SpellDisplay = ({ spell }: Props) => {
             <Fragment key={index}>
               <Link
                 className="text-accent "
-                href={`/class/${spellList.name?.toLowerCase()}`}
+                href={`/spell-list/${spellList.name?.replaceAll(" ", "-")}`}
+                key={index}
               >
                 {spellList.name && (
                   <Tooltip element={spellList.name} layer={0} format={false}>

@@ -424,13 +424,18 @@ const ItemPage = ({ item }: Props) => {
                         spell&apos;s normal casting time. Once the spell is
                         cast, the words on the scroll fade, and it crumbles to
                         dust. If the casting is interrupted, the scroll is not
-                        lost.\n\nIf the spell is on your class&apos;s spell list
-                        but of a higher level than you can normally cast, you
-                        must make an ability check using your spellcasting
-                        ability to determine whether you cast it successfully.
-                        The DC equals 10 + the spell&apos;s level. On a failed
-                        check, the spell disappears from the scroll with no
-                        other effect.
+                        lost.
+                      </P>
+                    </p>
+                    <p>
+                      <P>
+                        If the spell is on your class&apos;s spell list but of a
+                        higher level than you can normally cast, you must make
+                        an ability check using your spellcasting ability to
+                        determine whether you cast it successfully. The DC
+                        equals 10 + the spell&apos;s level. On a failed check,
+                        the spell disappears from the scroll with no other
+                        effect.
                       </P>
                     </p>
                     <br />
