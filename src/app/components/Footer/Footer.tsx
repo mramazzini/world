@@ -51,6 +51,10 @@ const wikiLinks = [
     name: "Items",
     url: "/item",
   },
+  {
+    name: "Spell Lists",
+    url: "/spell-list",
+  },
 ];
 
 const createLinks = [

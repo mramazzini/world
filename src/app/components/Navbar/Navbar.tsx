@@ -25,7 +25,7 @@ const Navbar = () => {
     checkToken();
   }, [pathname, router]);
 
-  const links = [
+  const links: { name: string; href: string }[] = [
     {
       name: "Classes",
       href: "/class",
@@ -53,6 +53,10 @@ const Navbar = () => {
     {
       name: "Items",
       href: "/item",
+    },
+    {
+      name: "Spell Lists",
+      href: "/spell-list",
     },
   ];
 

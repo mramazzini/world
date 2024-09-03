@@ -4,14 +4,13 @@ import numPlace from "@/lib/utils/numPlace";
 import JsonTable from "../Utility/JsonTable";
 import P from "../Utility/FormatAndSanitize";
 import Link from "next/link";
-import React from "react";
+import React, { Fragment } from "react";
 import Tooltip from "../Utility/Tooltip";
 interface Props {
   spell: SpellInfo;
 }
 
 const SpellDisplay = ({ spell }: Props) => {
-  console.log(spell);
   const generateComponentsString = () => {
     let components = "";
     if (spell.verbal) components += "V";
@@ -68,11 +67,10 @@ const SpellDisplay = ({ spell }: Props) => {
             );
           }
           return (
-            <>
+            <Fragment key={index}>
               <Link
                 className="text-accent "
                 href={`/class/${spellList.name?.toLowerCase()}`}
-                key={index}
               >
                 {spellList.name && (
                   <Tooltip element={spellList.name} layer={0} format={false}>
@@ -81,7 +79,7 @@ const SpellDisplay = ({ spell }: Props) => {
                 )}
               </Link>
               ,{" "}
-            </>
+            </Fragment>
           );
         })}
       </p>
