@@ -189,28 +189,30 @@ model Character {
   name       String
   experience Int
 
-  background   Background @relation(fields: [backgroundId], references: [id])
+  Background   Background @relation(fields: [backgroundId], references: [id])
   backgroundId Int
 
-  classes Class[] @relation("Character classes")
+  Classes Class[] @relation("Character classes")
 
-  subClasses SubClass[] @relation("Character subClasses")
+  SubClasses SubClass[] @relation("Character subClasses")
 
-  race   Race @relation(fields: [raceId], references: [id])
+  Race   Race @relation(fields: [raceId], references: [id])
   raceId Int
 
-  alignment Alignment
-  skills    Skill[]
-  languages Language[]
-  /// [QuantityItem]
-  currency  Json[]
-  /// [QuantityItem]
-  inventory Json[]
+  SubRace   RaceVariant? @relation(fields: [subRaceId], references: [id])
+  subRaceId Int?
+
+  alignment          Alignment
+  skillProficiencies Skill[]
+  skillExpertise     Skill[]
+  languages          Language[]
+  //TODO:add a way to track items within their inventory (like inventory id)
+  Inventory          Json[]
 
   armorClass Int
 
-  equippedArmor   Int[] // Item IDs
-  equippedWeapons Int[] // Item IDs
+  equippedArmor   Int[] // InventoryIds
+  equippedWeapons Int[] // InventoryIds
 
   currentHitPoints Int
   maxHitPoints     Int
@@ -224,7 +226,7 @@ model Character {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user   User? @relation(fields: [userId], references: [id])
+  User   User? @relation(fields: [userId], references: [id])
   userId Int?
 }
 
@@ -497,8 +499,9 @@ model RaceVariant {
   User   User? @relation(fields: [userId], references: [id])
   userId Int?
 
-  BaseRace   Race @relation(fields: [baseRaceId], references: [id])
+  BaseRace   Race        @relation(fields: [baseRaceId], references: [id])
   baseRaceId Int
+  Character  Character[]
 }
 
 model RacialTraits {

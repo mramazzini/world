@@ -1,6 +1,7 @@
 import {
   Armor,
   Background,
+  Character,
   Class,
   DamageTypes,
   EquipmentPack,
@@ -42,6 +43,16 @@ export interface ClassInfo extends Class {
   User: {
     username: string | null;
   } | null;
+}
+export interface CharacterInfo extends Character {
+  User: {
+    username: string | null;
+  } | null;
+  Background: Background | null;
+  Classes: Class[];
+  Race: Race | null;
+  SubRace: RaceVariant | null;
+  Inventory: any;
 }
 
 export interface BackgroundInfo extends Background {

@@ -22,7 +22,7 @@ import { Weapons } from "./seeds/Items/Weapons/Weapons.seed";
 import { ArmorSeed } from "./seeds/Items/Armor/Armor.seed";
 import { EquipmentPackSeed } from "./seeds/Items/EquipmentPack/EquipmentPack.seed";
 import { getPotentialItemsFromClass } from "@/app/components/Utility/idExtraction";
-
+import CharacterSeed from "./seeds/Character/Character.seed";
 const db = new PrismaClient();
 // db cleared with npm run nuke prior to seeding
 const seed = async () => {
@@ -472,6 +472,20 @@ const seed = async () => {
       cinfo("Classic trait created");
     } catch (error) {
       cerr("Error creating classic trait:", t.name, error);
+      return;
+    }
+  }
+  //create test character
+  cinfo("Creating test character");
+  for (const Character of CharacterSeed) {
+    try {
+      cinfo("Creating character:", Character.name);
+      await db.character.create({
+        data: Character,
+      });
+      cinfo("Character created");
+    } catch (error) {
+      cerr("Error creating character:", Character.name, error);
       return;
     }
   }
