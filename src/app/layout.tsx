@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
+      <head data-theme="dracula">
         {/* charset */}
         <meta charSet="UTF-8" />
       </head>

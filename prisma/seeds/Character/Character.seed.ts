@@ -2,8 +2,7 @@ import { Alignment, Prisma } from "@prisma/client";
 
 const CharacterSeed: Prisma.CharacterCreateInput[] = [
   {
-    name: "Test Character",
-    experience: 1000,
+    name: "Larry",
     Background: {
       connect: {
         id: 1,
@@ -30,12 +29,7 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
       },
     },
 
-    armorClass: 10,
     alignment: Alignment.TRUE_NEUTRAL,
-    currentHitPoints: 100,
-    maxHitPoints: 100,
-    hitDice: 4,
-    abilityScores: {},
   },
 ];
 

@@ -1,5 +1,5 @@
 import { Language, Race, Skill } from "@prisma/client";
-import { Property, src, WeaponPropertyNames } from "./types";
+import { Ability, Property, src, WeaponPropertyNames } from "./types";
 
 export const QUERY_LIMIT = 30;
 export const NAVBAR_HEIGHT_REM = 4;
@@ -11,6 +11,27 @@ export const officialSources: string[] = Object.values(src).filter(
 export const DISCORD_INVITE = "https://discord.gg/gNmJU7ZZqs";
 
 export const skills: Skill[] = Object.values(Skill);
+
+export const skillAtritbuteMap: Record<Skill, Ability> = {
+  ACROBATICS: Ability.DEX,
+  ANIMAL_HANDLING: Ability.WIS,
+  ARCANA: Ability.INT,
+  ATHLETICS: Ability.STR,
+  DECEPTION: Ability.CHA,
+  HISTORY: Ability.INT,
+  INSIGHT: Ability.WIS,
+  INTIMIDATION: Ability.CHA,
+  INVESTIGATION: Ability.INT,
+  MEDICINE: Ability.WIS,
+  NATURE: Ability.INT,
+  PERCEPTION: Ability.WIS,
+  PERFORMANCE: Ability.CHA,
+  PERSUASION: Ability.CHA,
+  RELIGION: Ability.INT,
+  SLEIGHT_OF_HAND: Ability.DEX,
+  STEALTH: Ability.DEX,
+  SURVIVAL: Ability.WIS,
+};
 
 export const languages = Object.values(Language);
 

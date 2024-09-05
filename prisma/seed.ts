@@ -426,11 +426,11 @@ const seed = async () => {
       return;
     }
   }
-  cinfo("Creating Traits");
+  cinfo("Creating race features");
   for (const t of Traits) {
     try {
-      cinfo("Creating trait:", t.name);
-      if (!t.raceId && !t.raceVariantId) {
+      cinfo("Creating race features:", t.name);
+      if (!t.raceId) {
         cerr("Trait missing raceId field:", t.name);
         return;
       }
@@ -441,21 +441,28 @@ const seed = async () => {
         cerr("Error verifying extended table integrity:", t.name);
         return;
       }
-      await db.racialTraits.create({
-        data: t,
+      await db.race.update({
+        where: {
+          id: t.raceId,
+        },
+        data: {
+          features: {
+            push: t,
+          },
+        },
       });
-      cinfo("Trait created");
+      cinfo("Race Feature created");
     } catch (error) {
-      cerr("Error creating trait:", t.name, error);
+      cerr("Error creating race feature:", t.name, error);
       return;
     }
   }
-  cinfo("Traits created");
-  cinfo("Creating Classic Traits");
+  cinfo("Race Features created");
+  cinfo("Creating Classic Race Features");
   for (const t of ClassicTraits) {
     try {
       cinfo("Creating classic trait:", t.name);
-      if (!t.raceId && !t.raceVariantId) {
+      if (!t.raceVariantId) {
         cerr("Classic trait missing raceId field:", t.name);
         return;
       }
@@ -466,8 +473,15 @@ const seed = async () => {
         cerr("Error verifying extended table integrity:", t.name);
         return;
       }
-      await db.racialTraits.create({
-        data: t,
+      await db.raceVariant.update({
+        where: {
+          id: t.raceVariantId,
+        },
+        data: {
+          features: {
+            push: t,
+          },
+        },
       });
       cinfo("Classic trait created");
     } catch (error) {

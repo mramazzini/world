@@ -11,7 +11,6 @@ import {
   Prisma,
   Race,
   RaceVariant,
-  RacialTraits,
   Skill,
   Spell,
   SpellList,
@@ -419,7 +418,7 @@ declare global {
       name: string;
       description: string;
       max: number; //amount of resource
-
+      current: number; //current amount of resource
       resetType: QuantityTime;
     }
     interface Cost {
@@ -511,19 +510,19 @@ declare global {
       rangedOnly?: boolean;
       meleeOnly?: boolean;
     }
+    type Choice =
+      | SkillChoice
+      | AbilityChoice
+      | WeaponChoice
+      | ArmorChoice
+      | LanguageChoice
+      | ItemChoice;
 
     interface AbilityChoice {
       defaultAbilities?: Ability[];
       choices?: {
         abilities: Ability[];
         numberOfAbilities: number;
-      }[];
-    }
-    interface Choice {
-      defaultChoices?: string[];
-      choices?: {
-        numberOfChoices: number;
-        options: string[];
       }[];
     }
 
@@ -616,6 +615,92 @@ declare global {
       maxRange?: number; // max range in feet
       special?: Feature[]; // special properties
     }
+    interface Reason {
+      reason: string;
+      effect: string | number;
+    }
+    interface CharacterState {
+      classLevels: { classId: number; level: number }[];
+      inspirationRolls: number;
+
+      armorClass: number;
+      armorClassReasons: Reason[];
+
+      experience: number;
+      experienceLog: { date: Date; amount: number; event: string }[];
+      hp: {
+        max: number;
+        maxReasons: Reason[];
+        current: number;
+        damageLog: { date: Date; reason: number; effect: string }[];
+        temporary: number;
+        temporaryReason?: Reason; //Can only have one source of temphp
+        hitDieAvailable: {
+          4?: number;
+          6?: number;
+          8?: number;
+          10?: number;
+          12?: number;
+          20?: number;
+        };
+      };
+      inventory: QuantityItem[];
+      speed: {
+        base: number;
+        bonuses: Reason[];
+        running: number;
+        swimming: number;
+        climbing: number;
+        flying: number;
+        runningReasons: Reason[];
+        swimmingReasons: Reason[];
+        climbingReasons: Reason[];
+        flyingReasons: Reason[];
+      };
+      initiative: number;
+      initiativeReasons: Reason[];
+      darkvision?: QuantityUnit;
+      darkvisionReasons?: Reason[];
+      blindsight?: QuantityUnit;
+      blindsightReasons?: Reason[];
+      abilityScores: AbilityScores;
+      abilityScoreReasons: {
+        [K in Ability]?: Reason[];
+      };
+      passivePerception: number;
+      passivePerceptionReasons?: Reason[];
+      equipped: {
+        armor?: number;
+        hands: {
+          numberOfHands: number;
+          items?: number[]; // item id
+        };
+      };
+      customResources?: CustomResource[];
+      deathSaves: {
+        successes: number;
+        failures: number;
+      };
+      exhaustion: number;
+      exhaustionReasons: string[];
+      conditions: string[];
+      conditionsReasons: string[];
+
+      spellSlots?: {
+        [K in SpellLevel]?: number;
+      };
+      proficiencies: {
+        languages: Language[];
+        skills: Skill[];
+        skillExpertise: Skill[];
+        tools: Tool[];
+        weapons: Weapon[];
+        armor: Armor[];
+        savingThrows: Ability[];
+      };
+      features: { feature: Feature; source: string }[];
+      pendingChoices: Choice[];
+    }
   }
 }
 export interface Property {
@@ -623,12 +708,12 @@ export interface Property {
   description: string;
 }
 export enum Ability {
-  STR,
-  CON,
-  DEX,
-  INT,
-  WIS,
-  CHA,
+  STR = "STR",
+  CON = "CON",
+  DEX = "DEX",
+  INT = "INT",
+  WIS = "WIS",
+  CHA = "CHA",
 }
 
 export enum ArmorTypes {
@@ -636,6 +721,14 @@ export enum ArmorTypes {
   MEDIUM,
   HEAVY,
   SHIELDS,
+}
+export interface AbilityScores {
+  STR: number;
+  DEX: number;
+  CON: number;
+  INT: number;
+  WIS: number;
+  CHA: number;
 }
 export enum src {
   kaladesh = "Plane Shift: Kaladesh",
@@ -717,16 +810,14 @@ export interface RaceInfo extends Race {
   User: {
     username: string | null;
   } | null;
-  RacialTraits: RacialTraits[];
   Variants: RaceVariant[];
 }
 
 export interface SubRaceInfo extends RaceVariant {
+  BaseRace: Race;
   User: {
     username: string | null;
   } | null;
-  RacialTraits: RacialTraits[];
-  BaseRace: SubRaceInfoBaseRaceExtension;
 }
 export interface ItemInfo extends Item {
   User: {
@@ -741,10 +832,6 @@ export interface ItemInfo extends Item {
 }
 export interface WeaponInfo extends Weapon {
   ammunition: Item | null;
-}
-
-interface SubRaceInfoBaseRaceExtension extends Race {
-  RacialTraits: RacialTraits[];
 }
 
 export interface CombinedData {

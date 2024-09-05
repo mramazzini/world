@@ -9,12 +9,7 @@ export const getSubRaces = async (): Promise<SubRaceInfo[]> => {
   const db = new PrismaClient();
   const res = await db.raceVariant.findMany({
     include: {
-      RacialTraits: true,
-      BaseRace: {
-        include: {
-          RacialTraits: true,
-        },
-      },
+      BaseRace: true,
       User: {
         select: {
           username: true,
@@ -36,12 +31,7 @@ export const getSubRace = async (
         name: query,
       },
       include: {
-        RacialTraits: true,
-        BaseRace: {
-          include: {
-            RacialTraits: true,
-          },
-        },
+        BaseRace: true,
         User: {
           select: {
             username: true,
@@ -57,12 +47,7 @@ export const getSubRace = async (
         id: query,
       },
       include: {
-        RacialTraits: true,
-        BaseRace: {
-          include: {
-            RacialTraits: true,
-          },
-        },
+        BaseRace: true,
         User: {
           select: {
             username: true,
@@ -87,12 +72,7 @@ export const getSubRaceChunk = async (
         relationalFields: queryInfo.relationalFields,
       }),
       include: {
-        RacialTraits: true,
-        BaseRace: {
-          include: {
-            RacialTraits: true,
-          },
-        },
+        BaseRace: true,
         User: {
           select: {
             username: true,
@@ -111,12 +91,7 @@ export const getSubRaceChunk = async (
     }),
 
     include: {
-      RacialTraits: true,
-      BaseRace: {
-        include: {
-          RacialTraits: true,
-        },
-      },
+      BaseRace: true,
       User: {
         select: {
           username: true,

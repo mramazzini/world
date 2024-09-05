@@ -56,19 +56,19 @@ const Tooltip = ({
       case 0:
         style = {
           group: `text-primary font-bold cursor-pointer hover:text-primary/70 group/zero`,
-          groupHover: `transform translate-x-[-100%] bg-neutral group-hover/zero:inline text-sm text-neutral-content  rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-10 hidden shadow-md h-auto group-focus/zero:inline`,
+          groupHover: `transform translate-x-[-100%] bg-neutral group-hover/zero:inline text-sm text-neutral-content  rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-[100] hidden shadow-md h-auto group-focus/zero:inline`,
         };
         break;
       case 1:
         style = {
           group: `text-secondary cursor-pointer hover:text-secondary/80 group/one`,
-          groupHover: `transform translate-x-[-100%] group-hover/one:inline text-sm text-neutral-content bg-neutral rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-10 hidden shadow-md transform`,
+          groupHover: `transform translate-x-[-100%] group-hover/one:inline text-sm text-neutral-content bg-neutral rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-[100] hidden shadow-md transform`,
         };
         break;
       case 2:
         style = {
           group: `text-accent cursor-pointer hover:text-accent/80 group/two`,
-          groupHover: `transform translate-x-[-100%] group-hover/two:inline text-sm text-neutral-content bg-neutral rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-10 hidden shadow-md transform`,
+          groupHover: `transform translate-x-[-100%] group-hover/two:inline text-sm text-neutral-content bg-neutral rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-[100] hidden shadow-md transform`,
         };
         break;
       default:
@@ -79,20 +79,20 @@ const Tooltip = ({
       case 0:
         style = {
           group: `text-primary font-bold cursor-pointer hover:text-primary/70 group/zero`,
-          groupHover: `group-hover/zero:inline text-sm text-neutral-content bg-neutral rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-10 hidden  shadow-md transform h-auto group-focus/zero:inline
+          groupHover: `group-hover/zero:inline text-sm text-neutral-content bg-neutral rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-[100] hidden  shadow-md transform h-auto group-focus/zero:inline
       `,
         };
         break;
       case 1:
         style = {
           group: `text-secondary cursor-pointer hover:text-secondary/80 group/one`,
-          groupHover: `group-hover/one:inline text-sm text-neutral-content bg-neutral rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-10 hidden shadow-md transform`,
+          groupHover: `group-hover/one:inline text-sm text-neutral-content bg-neutral rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-[100] hidden shadow-md transform`,
         };
         break;
       case 2:
         style = {
           group: `text-accent cursor-pointer hover:text-accent/80 group/two`,
-          groupHover: `group-hover/two:inline text-sm text-neutral-content bg-neutral rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-10 hidden shadow-md transform`,
+          groupHover: `group-hover/two:inline text-sm text-neutral-content bg-neutral rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-[100] hidden shadow-md transform`,
         };
         break;
       default:

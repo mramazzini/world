@@ -11,8 +11,11 @@ const ids = {
   human: 8,
   tiefling: 9,
 };
+interface RacialTraits extends PrismaJson.Feature {
+  raceId: number;
+}
 
-const Traits: Prisma.RacialTraitsCreateManyInput[] = [
+const Traits: RacialTraits[] = [
   //Dragonborn
   {
     name: "Draconic Ancestry",

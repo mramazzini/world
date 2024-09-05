@@ -5,6 +5,7 @@ import GenerateTable from "@/app/components/UI/GenerateTable";
 import Info from "@/app/components/UI/Info";
 import P from "@/app/components/Utility/FormatAndSanitize";
 import JsonTable from "@/app/components/Utility/JsonTable";
+import FeatureList from "@/app/components/UI/FeatureList";
 
 interface Props {
   race: RaceInfo | null;
@@ -113,34 +114,8 @@ const RacePage = ({ race, weaponNames }: Props) => {
             <div className="divider mb-0"></div>
           </div>
           <div className="divider"></div>
-          {/* traits */}
-
-          {race.RacialTraits.length > 0 && (
-            <>
-              <div className="bg-base-300 p-4 rounded-xl">
-                <h2 className="pb-0">
-                  Racial Traits{" "}
-                  <Info tooltip="Unique Abilities granted to your character due to its race." />
-                </h2>
-                <div className="divider"></div>
-                {race.RacialTraits.map((trait, index) => (
-                  <div key={index} className="bg-base-200 rounded-xl p-4 my-2">
-                    <h3>{trait.name}</h3>
-                    <p>
-                      <P>{trait.description}</P>
-                    </p>{" "}
-                    {trait.extendedTable.length > 0 && (
-                      <div className="bg-base-300 mt-4">
-                        <JsonTable json={trait.extendedTable} />
-                      </div>
-                    )}
-                  </div>
-                ))}
-                <div className="divider mb-0"></div>
-              </div>
-              <div className="divider"></div>
-            </>
-          )}
+          <FeatureList features={race.features} />
+          <div className="divider"></div>
           <div className="bg-base-300 p-4 rounded-xl">
             <h2 className="pb-0">
               Subraces{" "}

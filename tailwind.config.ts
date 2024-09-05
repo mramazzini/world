@@ -27,9 +27,14 @@ const config: Config = {
         cupcake: {
           ...require("daisyui/src/theming/themes")["cupcake"],
           primary: "#38bdf8",
+          secondary: "#c084fc",
         },
       },
-      "dracula",
+      {
+        dracula: {
+          ...require("daisyui/src/theming/themes")["dracula"],
+        },
+      },
     ],
   },
   plugins: [require("daisyui")],

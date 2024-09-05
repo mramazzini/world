@@ -9,7 +9,6 @@ export const getRaces = async (): Promise<RaceInfo[]> => {
   const db = new PrismaClient();
   const res = await db.race.findMany({
     include: {
-      RacialTraits: true,
       Variants: true,
       User: {
         select: {
@@ -32,7 +31,6 @@ export const getRace = async (
         name: query,
       },
       include: {
-        RacialTraits: true,
         Variants: true,
         User: {
           select: {
@@ -49,7 +47,6 @@ export const getRace = async (
         id: query,
       },
       include: {
-        RacialTraits: true,
         Variants: true,
         User: {
           select: {
@@ -75,7 +72,6 @@ export const getRaceChunk = async (
         relationalFields: queryInfo.relationalFields,
       }),
       include: {
-        RacialTraits: true,
         Variants: true,
         User: {
           select: {
@@ -95,7 +91,6 @@ export const getRaceChunk = async (
     }),
 
     include: {
-      RacialTraits: true,
       Variants: true,
       User: {
         select: {

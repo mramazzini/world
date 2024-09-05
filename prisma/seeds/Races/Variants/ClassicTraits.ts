@@ -2,7 +2,11 @@ import { Prisma } from "@prisma/client";
 
 import { ClassicVariantsIds } from "./ClassicVariants";
 
-const ClassicTraits: Prisma.RacialTraitsCreateManyInput[] = [
+interface RaceFeature extends PrismaJson.Feature {
+  raceVariantId: number;
+}
+
+const ClassicTraits: RaceFeature[] = [
   //black dragonborn
   {
     name: "Acid Breath",

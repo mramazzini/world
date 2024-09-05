@@ -168,10 +168,10 @@ const SubRacePage = ({ subRace, weaponNames }: Props) => {
                       return <li key={index}>{key.camelToCapitalCase()}</li>;
                     }
                   })}
-                  {subRace.RacialTraits.map((trait, index) => (
+                  {subRace.features.map((trait, index) => (
                     <li key={index}>{trait.name}</li>
                   ))}
-                  {subRace.RacialTraits.length == 0 &&
+                  {subRace.features.length == 0 &&
                     Object.values(difference).every(
                       (val) => val == TraitStatus.NONE
                     ) && <li>None</li>}
@@ -327,18 +327,19 @@ const SubRacePage = ({ subRace, weaponNames }: Props) => {
               <Info tooltip="Unique Abilities granted to your character due to its subrace." />
             </h2>
             <div className="divider"></div>
-            {subRace.RacialTraits.length > 0 && (
+            {subRace.features.length > 0 && (
               <>
-                {subRace.RacialTraits.map((trait, index) => (
+                {subRace.features.map((trait, index) => (
                   <div key={index} className="bg-base-200 rounded-xl p-4 my-2">
                     <h3>
                       {trait.name}{" "}
                       <div className="badge badge-accent">{subRace.name}</div>
                     </h3>
+                    <div className="divider m-0"></div>
                     <p>
                       <P>{trait.description}</P>
                     </p>
-                    {trait.extendedTable.length > 0 && (
+                    {trait.extendedTable && trait.extendedTable.length > 0 && (
                       <div className="bg-base-300 mt-4">
                         <JsonTable json={trait.extendedTable} />
                       </div>
@@ -347,16 +348,17 @@ const SubRacePage = ({ subRace, weaponNames }: Props) => {
                 ))}
               </>
             )}
-            {race.RacialTraits.map((trait, index) => (
+            {race.features.map((trait, index) => (
               <div key={index} className="bg-base-200 rounded-xl p-4 my-2">
                 <h3>
                   {trait.name}{" "}
                   <div className="badge badge-neutral">{race.name}</div>
                 </h3>
+                <div className="divider m-0"></div>
                 <p>
                   <P>{trait.description}</P>
                 </p>
-                {trait.extendedTable.length > 0 && (
+                {trait.extendedTable && trait.extendedTable.length > 0 && (
                   <div className="bg-base-300 mt-4">
                     <JsonTable json={trait.extendedTable} />
                   </div>
