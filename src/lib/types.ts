@@ -51,7 +51,7 @@ export interface CharacterInfo extends Character {
   Classes: Class[];
   Race: Race | null;
   SubRace: RaceVariant | null;
-  Inventory: any;
+  // Inventory: any;
 }
 
 export interface BackgroundInfo extends Background {
