@@ -168,7 +168,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
   //     defaultLanguages: [Language.COMMON],
   //     choices: {
   //       languages: languages.filter((lang) => lang !== Language.COMMON),
-  //       numberOfLanguages: 1,
+  //       numberOfChoices: 1,
   //     },
   //   },
   //   languageDescription:
@@ -215,7 +215,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
   //     defaultLanguages: [Language.COMMON],
   //     choices: {
   //       languages: languages.filter((lang) => lang !== Language.COMMON),
-  //       numberOfLanguages: 1,
+  //       numberOfChoices: 1,
   //     },
   //   },
   // },
@@ -260,7 +260,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
   //     defaultLanguages: [Language.COMMON],
   //     choices: {
   //       languages: languages.filter((lang) => lang !== Language.COMMON),
-  //       numberOfLanguages: 1,
+  //       numberOfChoices: 1,
   //     },
   //   },
   // },
@@ -369,13 +369,15 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       weaponIds.shortbow,
     ],
     originLanguages: {
-      defaultLanguages: [Language.COMMON, Language.ELVISH],
-      choices: {
-        languages: languages.filter(
-          (lang) => lang !== Language.COMMON && lang !== Language.ELVISH
-        ),
-        numberOfLanguages: 1,
-      },
+      default: [Language.COMMON, Language.ELVISH],
+      choices: [
+        {
+          options: languages.filter(
+            (lang) => lang !== Language.COMMON && lang !== Language.ELVISH
+          ),
+          numberOfChoices: 1,
+        },
+      ],
     },
     languageDescription:
       "On top of being able to speak, read, and write Common and Elvish, you can learn one extra language of your choice.",
@@ -480,13 +482,15 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     abilityScoreDescription:
       "On top of your Dexterity increase from being an elf, your Wisdom score increases by 1.",
     originLanguages: {
-      defaultLanguages: [Language.COMMON, Language.ELVISH],
-      choices: {
-        languages: languages.filter(
-          (lang) => lang !== Language.COMMON && lang !== Language.ELVISH
-        ),
-        numberOfLanguages: 1,
-      },
+      default: [Language.COMMON, Language.ELVISH],
+      choices: [
+        {
+          options: languages.filter(
+            (lang) => lang !== Language.COMMON && lang !== Language.ELVISH
+          ),
+          numberOfChoices: 1,
+        },
+      ],
     },
     languageDescription:
       "On top of being able to speak, read, and write Common and Elvish, you can learn one extra language of your choice.",
@@ -540,7 +544,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     description:
       "The Mark of Scribing is a dragonmark that bestows a number of powers related to the written word and communication, often over great distances.",
     toolProficiencies: {
-      defaultTools: [toolIds.tinkersTools],
+      default: [toolIds.tinkersTools],
     },
     flavorText:
       "The Mark of Scribing is a dragonmark that bestows a number of powers related to the written word and communication.",
@@ -634,8 +638,8 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
           ], // All available abilities
           options: [
             {
-              numberOfAbilities: 1,
-              increases: [1],
+              numberOfChoices: 1,
+              options: [1],
             },
           ],
         },
@@ -682,7 +686,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     abilityScoreDescription:
       "Your Wisdom score increases by 2, and your Constitution score increases by 1.",
     originLanguages: {
-      defaultLanguages: [Language.COMMON, Language.GOBLIN],
+      default: [Language.COMMON, Language.GOBLIN],
     },
   },
   //halfling
@@ -819,8 +823,8 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
           ], // All available abilities
           options: [
             {
-              numberOfAbilities: 1,
-              increases: [1],
+              numberOfChoices: 1,
+              options: [1],
             },
           ],
         },
@@ -831,7 +835,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     abilityScoreDescription:
       "Your Wisdom score increases by 2, and your Constitution score increases by 1.",
     originLanguages: {
-      defaultLanguages: [Language.COMMON, Language.GOBLIN],
+      default: [Language.COMMON, Language.GOBLIN],
     },
   },
   {
@@ -856,8 +860,8 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
           ], // All available abilities
           options: [
             {
-              numberOfAbilities: 1,
-              increases: [1],
+              numberOfChoices: 1,
+              options: [1],
             },
           ],
         },
@@ -888,15 +892,15 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
           ], // All available abilities
           options: [
             {
-              numberOfAbilities: 1,
-              increases: [1],
+              numberOfChoices: 1,
+              options: [1],
             },
           ],
         },
       ],
     },
     toolProficiencies: {
-      defaultTools: Object.values(artisanIds),
+      default: Object.values(artisanIds),
     },
     abilityScoreDescription:
       "Your Intelligence score increases by 2, and one other Ability Score of your choice increases by 1.",
@@ -923,8 +927,8 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
           ], // All available abilities
           options: [
             {
-              numberOfAbilities: 1,
-              increases: [1],
+              numberOfChoices: 1,
+              options: [1],
             },
           ],
         },

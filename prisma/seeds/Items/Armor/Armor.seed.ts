@@ -15,7 +15,7 @@ const ArmorSeed: Prisma.ArmorCreateManyInput[] = [
           skillRollAdvantages: [
             {
               skill: {
-                defaultSkills: [Skill.STEALTH],
+                default: [Skill.STEALTH],
               },
               always: true,
               situation: "Padded Armor imposes disadvantage on Stealth checks.",
@@ -62,7 +62,7 @@ const ArmorSeed: Prisma.ArmorCreateManyInput[] = [
           skillRollAdvantages: [
             {
               skill: {
-                defaultSkills: [Skill.STEALTH],
+                default: [Skill.STEALTH],
               },
               always: true,
               situation:
@@ -86,7 +86,7 @@ const ArmorSeed: Prisma.ArmorCreateManyInput[] = [
           skillRollAdvantages: [
             {
               skill: {
-                defaultSkills: [Skill.STEALTH],
+                default: [Skill.STEALTH],
               },
               always: true,
               situation: "Spiked Armor imposes disadvantage on Stealth checks.",
@@ -117,7 +117,7 @@ const ArmorSeed: Prisma.ArmorCreateManyInput[] = [
           skillRollAdvantages: [
             {
               skill: {
-                defaultSkills: [Skill.STEALTH],
+                default: [Skill.STEALTH],
               },
               always: true,
               situation:
@@ -141,7 +141,7 @@ const ArmorSeed: Prisma.ArmorCreateManyInput[] = [
           skillRollAdvantages: [
             {
               skill: {
-                defaultSkills: [Skill.STEALTH],
+                default: [Skill.STEALTH],
               },
               always: true,
               situation:
@@ -165,7 +165,7 @@ const ArmorSeed: Prisma.ArmorCreateManyInput[] = [
           skillRollAdvantages: [
             {
               skill: {
-                defaultSkills: [Skill.STEALTH],
+                default: [Skill.STEALTH],
               },
               always: true,
               situation:
@@ -201,7 +201,7 @@ const ArmorSeed: Prisma.ArmorCreateManyInput[] = [
           skillRollAdvantages: [
             {
               skill: {
-                defaultSkills: [Skill.STEALTH],
+                default: [Skill.STEALTH],
               },
               always: true,
               situation: "Splint Armor imposes disadvantage on Stealth checks.",
@@ -236,7 +236,7 @@ const ArmorSeed: Prisma.ArmorCreateManyInput[] = [
           skillRollAdvantages: [
             {
               skill: {
-                defaultSkills: [Skill.STEALTH],
+                default: [Skill.STEALTH],
               },
               always: true,
               situation: "Splint Armor imposes disadvantage on Stealth checks.",

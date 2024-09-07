@@ -251,7 +251,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           abilityRollAdvantages: [
             {
               ability: {
-                defaultAbilities: Object.values(Ability) as Ability[],
+                default: Object.values(Ability) as Ability[],
               },
               situation:
                 "Appraise or inspect an item that is small or highly detailed.",
@@ -363,7 +363,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           abilityRollAdvantages: [
             {
               ability: {
-                defaultAbilities: [Ability.STR],
+                default: [Ability.STR],
               },
               situation:
                 "Using Portable Ram to break down doors and another character is helping you.",
@@ -372,7 +372,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           abilityRollBonuses: [
             {
               ability: {
-                defaultAbilities: [Ability.STR],
+                default: [Ability.STR],
               },
               bonus: 4,
               situation: "Using Portable Ram to break down doors.",
@@ -642,7 +642,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
           abilityRollAdvantages: [
             {
               ability: {
-                defaultAbilities: [Ability.STR],
+                default: [Ability.STR],
               },
               situation:
                 "Strength checks where the crowbar's leverage can be applied.",

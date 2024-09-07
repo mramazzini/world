@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import "@/lib/string.extensions";
 import { getRace } from "@/lib/actions/db/race/get.actions";
 import RacePage from "@/app/components/pages/wiki/official/Race.page";
-import { getWeapons } from "@/lib/actions/db/weapons/weapons.actions";
+import { getWeapons } from "@/lib/actions/db/weapons/read.actions";
 
 type Props = {
   params: { raceName: string };

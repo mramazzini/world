@@ -50,10 +50,7 @@ const Features: ClassFeature[] = [
     name: "Fighting Style",
     levels: [1],
     description: `You adopt a particular style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again.`,
-    choices: {
-      numberOfChoices: 1,
-      options: [],
-    },
+
     extendedTable: [
       {
         "": {
@@ -150,45 +147,6 @@ const Features: ClassFeature[] = [
     levels: [1, 4, 10],
     description:
       "At 1st level, you know three cantrips of your choice from the wizard spell list. You learn additional wizard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Wizard table.",
-
-    leveledFeatures: {
-      1: {
-        preparedSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 3,
-                spellIds: Object.values(cantripIds),
-              },
-            ],
-          },
-        },
-      },
-      4: {
-        preparedSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 1,
-                spellIds: Object.values(cantripIds),
-              },
-            ],
-          },
-        },
-      },
-      10: {
-        preparedSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 1,
-                spellIds: Object.values(cantripIds),
-              },
-            ],
-          },
-        },
-      },
-    },
   },
   ...numberArray(1, 6).map((level) => {
     const spellSlot = {} as { [key: number]: number };
@@ -210,135 +168,31 @@ const Features: ClassFeature[] = [
           },
         },
       },
-    };
+    } as ClassFeature;
   }),
   {
     classId: ids.wizard,
     levels: [20],
     name: "Signature Spells",
     description: `When you reach 20th level, you gain mastery over two powerful spells and can cast them with little effort. Choose two 3rd-level wizard spells in your ^${itemIds.spellBook}{spellbook}^ as your signature spells. You always have these spells prepared, they don't count against the number of spells you have prepared, and you can cast each of them once at 3rd level without expending a spell slot. When you do so, you can't do so again until you finish a short or long rest.\n\nIf you want to cast either spell at a higher level, you must expend a spell slot as normal.`,
-    leveledFeatures: {
-      20: {
-        customSpells: [
-          {
-            spells: {
-              defaultSpells: getSpellIdsOfLevel(3),
-            },
-            noSpellSlot: true,
-          },
-          {
-            spells: {
-              defaultSpells: getSpellIdsOfLevel(3),
-            },
-            noSpellSlot: true,
-          },
-        ],
-        active: {
-          cost: {
-            time: {
-              quantity: 1,
-              unit: Time.rest,
-            },
-          },
-        },
-      },
-    },
   },
   {
     name: "Spell Mastery",
     description: `At 18th level, you have achieved such mastery over certain spells that you can cast them at will. Choose a 1st-level wizard spell and a 2nd-level wizard spell that are in your ^${itemIds.spellBook}{spellbook}^. You can cast those spells at their lowest level without expending a spell slot when you have them prepared. If you want to cast either spell at a higher level, you must expend a spell slot as normal.\n\nBy spending 8 hours in study, you can exchange one or both of the spells you chose for different spells of the same levels.`,
     levels: [18],
     classId: ids.wizard,
-    leveledFeatures: {
-      18: {
-        active: {
-          cost: {
-            time: {
-              quantity: 8,
-              unit: Time.hour,
-            },
-          },
-        },
-        customSpells: [
-          {
-            spells: {
-              defaultSpells: getSpellIdsOfLevel(1),
-            },
-            noSpellSlot: true,
-          },
-          {
-            spells: {
-              defaultSpells: getSpellIdsOfLevel(2),
-            },
-            noSpellSlot: true,
-          },
-        ],
-      },
-    },
   },
   {
     levels: [3],
     classId: ids.wizard,
     name: "Cantrip Formulas",
     description: `At 3rd level, you have scribed a set of arcane formulas in your ^${itemIds.spellBook}{spellbook}^ that you can use to formulate a cantrip in your mind. Whenever you finish a long rest and consult those formulas in your ^${itemIds.spellBook}{spellbook}^, you can replace one wizard cantrip you know with another cantrip from the wizard spell list.`,
-    leveledFeatures: {
-      3: {
-        preparedSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 1,
-                spellIds: Object.values(cantripIds),
-              },
-            ],
-          },
-          lose: {
-            choices: [
-              {
-                numberOfSpells: 1,
-                spellIds: Object.values(cantripIds),
-              },
-            ],
-          },
-        },
-        active: {
-          cost: {
-            time: {
-              quantity: 1,
-              unit: Time.longRest,
-            },
-          },
-        },
-      },
-    },
   },
   {
     classId: ids.wizard,
     levels: [1],
     name: "Arcane Recovery",
     description: `You have learned to regain some of your magical energy by studying your ^${itemIds.spellBook}{spellbook}^. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.\n\nFor example, if you're a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots.`,
-    leveledFeatures: {
-      ...numberArray(1, 20).reduce((acc, level) => {
-        const res: PrismaJson.FeatureEffect = {
-          resourceAmountIncrease: [
-            {
-              resourceName: "Arcane Recovery",
-              amount: Math.ceil(level / 2),
-            },
-          ],
-          active: {
-            cost: {
-              time: {
-                quantity: 1,
-                unit: Time.day,
-              },
-            },
-          },
-        };
-        acc[level] = res; // Assign the result to the corresponding level key
-        return acc;
-      }, {} as { [key: number]: PrismaJson.FeatureEffect }), // Type the accumulator as an object with numeric keys
-    },
   },
   {
     classId: ids.wizard,
@@ -364,7 +218,7 @@ const Features: ClassFeature[] = [
         active: {
           cost: {
             items: {
-              defaultItems: [{ item: itemIds.goldPiece, quantity: 50 * level }],
+              default: [{ item: itemIds.goldPiece, quantity: 50 * level }],
             },
             time: {
               quantity: 2 * level,
@@ -398,249 +252,6 @@ const Features: ClassFeature[] = [
     spellCasting: true,
     name: "Learning Spells of 1st Level and Higher",
     description: `Each time you gain a wizard level, you can add two wizard spells of your choice to your ^${itemIds.spellBook}{spellbook}^ for free. Each of these spells must be of a level for which you have spell slots, as shown on the Wizard table. On your adventures, you might find other spells that you can add to your ^${itemIds.spellBook}{spellbook}^.`,
-    leveledFeatures: {
-      1: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(1),
-              },
-            ],
-          },
-        },
-      },
-      2: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(1),
-              },
-            ],
-          },
-        },
-      },
-      3: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(1),
-              },
-            ],
-          },
-        },
-      },
-      4: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(2),
-              },
-            ],
-          },
-        },
-      },
-      5: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(3),
-              },
-            ],
-          },
-        },
-      },
-      6: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(3),
-              },
-            ],
-          },
-        },
-      },
-      7: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(4),
-              },
-            ],
-          },
-        },
-      },
-      8: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(4),
-              },
-            ],
-          },
-        },
-      },
-      9: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(5),
-              },
-            ],
-          },
-        },
-      },
-      10: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(5),
-              },
-            ],
-          },
-        },
-      },
-      11: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(6),
-              },
-            ],
-          },
-        },
-      },
-      12: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(6),
-              },
-            ],
-          },
-        },
-      },
-      13: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(7),
-              },
-            ],
-          },
-        },
-      },
-      14: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(7),
-              },
-            ],
-          },
-        },
-      },
-      15: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(8),
-              },
-            ],
-          },
-        },
-      },
-      16: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(8),
-              },
-            ],
-          },
-        },
-      },
-      17: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(9),
-              },
-            ],
-          },
-        },
-      },
-
-      18: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(9),
-              },
-            ],
-          },
-        },
-      },
-      19: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(9),
-              },
-            ],
-          },
-        },
-      },
-      20: {
-        availableSpellChoices: {
-          gain: {
-            choices: [
-              {
-                numberOfSpells: 2,
-                spellIds: getSpellIdsEqualToOrLessThanLevel(9),
-              },
-            ],
-          },
-        },
-      },
-    },
   },
 
   // Bard

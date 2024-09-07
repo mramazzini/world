@@ -2,10 +2,9 @@ import { Metadata } from "next";
 
 import "@/lib/string.extensions";
 
-import { getWeapons } from "@/lib/actions/db/weapons/weapons.actions";
-
 import SubRacePage from "@/app/components/pages/wiki/official/SubRace.page";
 import { getSubRace } from "@/lib/actions/db/subrace/read.actions";
+import { getWeapons } from "@/lib/actions/db/weapons/read.actions";
 
 type Props = {
   params: { subraceName: string };

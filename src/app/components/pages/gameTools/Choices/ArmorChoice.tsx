@@ -18,7 +18,6 @@ const ArmorChoice = ({ choice, updateSelections }: Props) => {
     updateSelections(selections);
   }, [selections]);
 
-  useEffect(() => {}, []);
   return (
     <div className="flex bg-base-300 rounded-xl p-4 flex-col mb-4">
       <p>Choose {choice.numberOfChoices} from:</p>

@@ -1,6 +1,9 @@
 import { getSpell } from "@/lib/actions/db/spell/read.actions";
 import { getFromDb, putInDb } from "./indexedDB";
 import { getItem } from "@/lib/actions/db/item/read.actions";
+import { getArmor } from "@/lib/actions/db/armor/read.actions";
+import { getTool } from "@/lib/actions/db/tool/read.actions";
+import { getWeapon } from "@/lib/actions/db/weapons/read.actions";
 
 const pendingQueries = new Map<string, Promise<any>>();
 
@@ -55,4 +58,19 @@ export const memoizeGetSpell = cacheFunction(
 export const memoizeGetItem = cacheFunction(
   (itemId: string) => `item-${itemId}`,
   getItem
+);
+
+export const memoizeGetWeapon = cacheFunction(
+  (weaponId: string) => `weapon-${weaponId}`,
+  getWeapon
+);
+
+export const memoizeGetArmor = cacheFunction(
+  (armorId: string) => `armor-${armorId}`,
+  getArmor
+);
+
+export const memoizeGetTool = cacheFunction(
+  (toolId: string) => `tool-${toolId}`,
+  getTool
 );

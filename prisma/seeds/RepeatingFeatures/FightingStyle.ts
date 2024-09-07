@@ -1,4 +1,5 @@
-import { ArmorTypes, Distance, WeaponPropertyNames } from "@/lib/types";
+import { Distance, WeaponPropertyNames } from "@/lib/types";
+import { ArmorType } from "@prisma/client";
 
 const fightingStyles: PrismaJson.Feature[] = [
   {
@@ -33,9 +34,9 @@ const fightingStyles: PrismaJson.Feature[] = [
     effect: {
       ACBonus: 1,
       mustEquip: [
-        { armorTypes: [ArmorTypes.LIGHT] },
-        { armorTypes: [ArmorTypes.MEDIUM] },
-        { armorTypes: [ArmorTypes.HEAVY] },
+        { armorTypes: [ArmorType.LIGHT] },
+        { armorTypes: [ArmorType.MEDIUM] },
+        { armorTypes: [ArmorType.HEAVY] },
       ],
     },
   },

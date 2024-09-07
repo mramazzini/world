@@ -195,7 +195,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
                   <P>Saving Throws: </P>
                 </span>
                 <P>
-                  {classObj.savingThrows?.defaultAbilities
+                  {classObj.savingThrows?.default
                     ?.map((s) => AbilityToText(Ability[s]))
                     .join(", ") || "None"}
                 </P>

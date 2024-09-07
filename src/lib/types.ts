@@ -1,5 +1,6 @@
 import {
   Armor,
+  ArmorType,
   Background,
   Character,
   Class,
@@ -59,6 +60,8 @@ export interface BackgroundInfo extends Background {
     username: string | null;
   } | null;
 }
+export interface ArmorInfo extends Armor {}
+export interface ToolInfo extends Tool {}
 
 export interface SubClassInfo extends SubClass {
   Class: {
@@ -69,7 +72,16 @@ export interface SubClassInfo extends SubClass {
     username: string | null;
   } | null;
 }
-
+export type CallbackOptions =
+  | Skill[]
+  | Ability[]
+  | Language[]
+  | ArmorType[]
+  | WeaponID[]
+  | ToolID[]
+  | ItemID[]
+  | ArmorID[]
+  | PrismaJson.QuantityItem[][];
 export interface SpellInfo extends Spell {
   SpellLists: SpellList[];
   User: {
@@ -173,6 +185,12 @@ export enum SpellFocus {
 export interface SpellListInfo extends SpellList {
   Spells: Spell[];
 }
+export type ArmorID = number;
+export type WeaponID = number;
+export type ItemID = number;
+export type ToolID = number;
+export type SpellID = number;
+
 declare global {
   namespace PrismaJson {
     // you can use classes, interfaces, types, etc.
@@ -191,18 +209,18 @@ declare global {
       choices?: {
         abilities: Ability[]; // Array of abilities that can be chosen
         options: {
-          numberOfAbilities: number; // Number of different abilities to increase (e.g., 1, 2, or 3)
-          increases: number[]; // Array of values for each increase, e.g., [2, 1] or [1, 1, 1]
+          numberOfChoices: number; // Number of different abilities to increase (e.g., 1, 2, or 3)
+          options: number[]; // Array of values for each increase, e.g., [2, 1] or [1, 1, 1]
         }[];
       }[];
     }
 
     interface LanguageChoice {
-      defaultLanguages: Language[];
+      default: Language[];
       choices?: {
-        languages: Language[];
-        numberOfLanguages: number;
-      };
+        options: Language[];
+        numberOfChoices: number;
+      }[];
     }
 
     type TableColumn = {
@@ -372,27 +390,27 @@ declare global {
     }
 
     interface WeaponPropertyChoice {
-      defaultProperties?: WeaponPropertyNames[];
+      default?: WeaponPropertyNames[];
       choices?: {
-        properties: WeaponPropertyNames[];
-        numberOfProperties: number;
+        options: WeaponPropertyNames[];
+        numberOfChoices: number;
       }[];
     }
 
     interface EquipmentSetup {
-      armorTypes?: ArmorTypes[];
-      armor?: number[]; // armor id
+      armorTypes?: ArmorType[];
+      armor?: ArmorID[]; // armor id
       weapons?: {
         martialOnly?: boolean;
         simpleOnly?: boolean;
         rangedOnly?: boolean;
         meleeOnly?: boolean;
-        weaponIds?: number[]; // weapon id
+        weaponIds?: WeaponID[]; // weapon id
         properties?: WeaponPropertyNames[];
       };
 
       shield?: boolean;
-      items?: number[]; // If a specific item needs to be equipped.
+      items?: ItemID[]; // If a specific item needs to be equipped.
       emptyHands?: { amount: 1 | 2 }; // If the player needs to have empty hands to use the feature. If shield is true, the player can have a shield equipped.
       armorless?: boolean; // If the player needs to be unarmored to use the feature.
       weaponless?: boolean; // If the player needs to be unarmed to use the feature.
@@ -447,10 +465,10 @@ declare global {
 
     interface SpellChoice {
       //Spell Ids
-      defaultSpells?: number[];
+      default?: SpellID[];
       choices?: {
-        spellIds: number[];
-        numberOfSpells: number;
+        options: SpellID[];
+        numberOfChoices: number;
       }[];
     }
 
@@ -461,43 +479,43 @@ declare global {
     }
 
     interface ArmorChoice {
-      defaultArmors?: ArmorTypes[];
+      default?: ArmorType[];
       choices?: {
-        armors: ArmorTypes[];
-        numberOfArmors: number;
+        options: ArmorType[];
+        numberOfChoices: number;
       }[];
     }
 
     interface WeaponChoice {
-      defaultWeapons?: number[]; // weapon id
+      default?: WeaponID[]; // weapon id
       choices?: {
-        weapons: number[]; // weapon id
-        numberOfWeapons: number;
+        options: WeaponID[]; // weapon id
+        numberOfChoices: number;
       }[];
     }
 
     interface ToolChoice {
-      defaultTools?: number[]; // tool id
+      default?: ToolID[]; // tool id
       choices?: {
-        tools: number[]; // tool id
-        numberOfTools: number;
+        options: ToolID[]; // tool id
+        numberOfChoices: number;
       }[];
     }
 
     interface SkillChoice {
-      defaultSkills?: Skill[];
+      default?: Skill[];
       choices?: {
-        skills: Skill[];
-        numberOfSkills: number;
+        options: Skill[];
+        numberOfChoices: number;
       }[];
     }
     interface ItemChoice {
-      defaultItems?: {
+      default?: {
         item: number; // item id
         quantity: number;
       }[];
       choices?: {
-        items: QuantityItem[][]; // 2d arr to allow variations in quantity
+        options: QuantityItem[][]; // 2d arr to allow variations in quantity
         numberOfChoices: number;
       }[];
     }
@@ -510,19 +528,39 @@ declare global {
       rangedOnly?: boolean;
       meleeOnly?: boolean;
     }
-    type Choice =
+    type ChoiceModel =
+      | "Item"
+      | "Language"
+      | "Skill"
+      | "Ability"
+      | "Weapon"
+      | "Armor"
+      | "Tool";
+    type ChoiceType =
+      | ItemChoice
+      | LanguageChoice
       | SkillChoice
       | AbilityChoice
       | WeaponChoice
       | ArmorChoice
-      | LanguageChoice
-      | ItemChoice;
+      | ToolChoice;
+    interface Choice {
+      model: ChoiceModel;
+      choice: ChoiceType;
+
+      from: string;
+      description?: string;
+      callback: (
+        state: CharacterState,
+        selections: CallbackOptions
+      ) => CharacterState;
+    }
 
     interface AbilityChoice {
-      defaultAbilities?: Ability[];
+      default?: Ability[];
       choices?: {
-        abilities: Ability[];
-        numberOfAbilities: number;
+        options: Ability[];
+        numberOfChoices: number;
       }[];
     }
 
@@ -673,7 +711,8 @@ declare global {
         armor?: number;
         hands: {
           numberOfHands: number;
-          items?: number[]; // item id
+          numberOfHandsReasons: Reason[];
+          items?: ItemID[]; // item id
         };
       };
       customResources?: CustomResource[];
@@ -686,17 +725,27 @@ declare global {
       conditions: string[];
       conditionsReasons: string[];
 
+      carryingCapacity: number;
+      carryingCapacityReasons: Reason[];
+
       spellSlots?: {
         [K in SpellLevel]?: number;
       };
       proficiencies: {
         languages: Language[];
+        languageReasons: Reason[];
         skills: Skill[];
+        skillReasons: Reason[];
         skillExpertise: Skill[];
-        tools: Tool[];
-        weapons: Weapon[];
-        armor: Armor[];
+        skillExpertiseReasons: Reason[];
+        tools: ToolID[]; // tool id
+        toolReasons: Reason[];
+        weapons: WeaponID[]; // weapon id
+        weaponReasons: Reason[];
+        armor: ArmorType[];
+        armorReasons: Reason[];
         savingThrows: Ability[];
+        savingThrowsReasons: Reason[];
       };
       features: { feature: Feature; source: string }[];
       pendingChoices: Choice[];
@@ -716,12 +765,6 @@ export enum Ability {
   CHA = "CHA",
 }
 
-export enum ArmorTypes {
-  LIGHT,
-  MEDIUM,
-  HEAVY,
-  SHIELDS,
-}
 export interface AbilityScores {
   STR: number;
   DEX: number;

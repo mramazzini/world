@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { DamageTypes, Weapon } from "@prisma/client";
 import Input from "../UI/Input";
 import List from "../UI/List";
-import { getWeapon } from "@/lib/actions/db/general/read.actions";
 import P from "../Utility/FormatAndSanitize";
 import Loading from "../UI/Loading";
+import { getWeapons } from "@/lib/actions/db/weapons/read.actions";
 
 //item rarity type
 type Rarity = "Common" | "Uncommon" | "Rare" | "Very Rare" | "Legendary";
@@ -19,7 +19,7 @@ const ItemGeneratorForm = () => {
   const [weapons, setWeapons] = useState<Weapon[]>([]);
 
   useEffect(() => {
-    getWeapon().then((weapons) => setWeapons(weapons));
+    getWeapons().then((weapons) => setWeapons(weapons));
   }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

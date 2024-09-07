@@ -16,7 +16,7 @@ const P = ({
   children,
   layer = 0,
 }: {
-  children: string | number | string[];
+  children: string | string[];
   layer?: number;
 }): ReactNode => {
   const [loading, setLoading] = useState(true);

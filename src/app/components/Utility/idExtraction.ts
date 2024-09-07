@@ -5,15 +5,16 @@ export const getPotentialItemsFromClass = (
 ): number[] => {
   const items: number[] = [];
   const equipment = classObj.equipment;
-  const { defaultItems, choices } = equipment;
-  defaultItems &&
-    defaultItems.forEach((item) => {
+  const def = equipment.default;
+  const choices = equipment.choices;
+  def &&
+    def.forEach((item) => {
       items.push(item.item);
     });
 
   choices &&
     choices.forEach((choice) => {
-      choice.items.forEach((selection) => {
+      choice.options.forEach((selection) => {
         selection.forEach((item) => {
           items.push(item.item);
         });

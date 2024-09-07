@@ -122,12 +122,12 @@ const Navbar = () => {
               <input
                 type="checkbox"
                 className="theme-controller"
-                value="dracula"
+                value="cupcake"
               />
 
               {/* sun icon */}
               <svg
-                className="swap-off h-10 w-10 fill-current"
+                className="swap-on h-10 w-10 fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
@@ -136,7 +136,7 @@ const Navbar = () => {
 
               {/* moon icon */}
               <svg
-                className="swap-on h-10 w-10 fill-current"
+                className="swap-off h-10 w-10 fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
@@ -253,12 +253,12 @@ const Navbar = () => {
               <input
                 type="checkbox"
                 className="theme-controller"
-                value="dracula"
+                value="cupcake"
               />
 
               {/* sun icon */}
               <svg
-                className="swap-off h-10 w-10 fill-current"
+                className="swap-on h-10 w-10 fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
@@ -267,7 +267,7 @@ const Navbar = () => {
 
               {/* moon icon */}
               <svg
-                className="swap-on h-10 w-10 fill-current"
+                className="swap-off h-10 w-10 fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >

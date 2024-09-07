@@ -24,15 +24,22 @@ const config: Config = {
   daisyui: {
     themes: [
       {
+        //first element is default theme
+        dracula: {
+          ...require("daisyui/src/theming/themes")["dracula"],
+          ".tab-base-300": {
+            "--tab-bg": "#1e1f29",
+          },
+        },
+      },
+      {
         cupcake: {
           ...require("daisyui/src/theming/themes")["cupcake"],
           primary: "#38bdf8",
           secondary: "#c084fc",
-        },
-      },
-      {
-        dracula: {
-          ...require("daisyui/src/theming/themes")["dracula"],
+          ".tab-base-300": {
+            "--tab-bg": "oklch(91.5861% 0.006811 53.440502)",
+          },
         },
       },
     ],

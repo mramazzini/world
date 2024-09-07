@@ -1,4 +1,4 @@
-import CharacterCreate from "@/app/components/pages/gameTools/CharacterCreate.page";
+import CharacterCreate from "@/app/components/pages/gameTools/Character.page";
 import { Metadata } from "next";
 import { URL } from "url";
 

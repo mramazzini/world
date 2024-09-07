@@ -45,7 +45,7 @@ const Species: Prisma.RaceCreateManyInput[] = [
       "Dragonborn look very much like dragons standing erect in humanoid form, though they lack wings or a tail.",
     source: src.phb,
     originLanguages: {
-      defaultLanguages: [Language.DRACONIC, Language.COMMON],
+      default: [Language.DRACONIC, Language.COMMON],
     },
     languageDescription: "You can read, speak, and write Common and Draconic.",
   },
@@ -71,15 +71,15 @@ const Species: Prisma.RaceCreateManyInput[] = [
       weaponIds.warhammer,
     ],
     toolProficiencies: {
-      defaultTools: [],
+      default: [],
       choices: [
         {
-          tools: [
+          options: [
             toolIds.smithTools,
             toolIds.brewerSupplies,
             toolIds.masonTools,
           ],
-          numberOfTools: 1,
+          numberOfChoices: 1,
         },
       ],
     },
@@ -95,7 +95,7 @@ const Species: Prisma.RaceCreateManyInput[] = [
     speed: 25,
     speedDescription: "Your base walking speed is 25 feet.",
     originLanguages: {
-      defaultLanguages: [Language.DWARVISH, Language.COMMON],
+      default: [Language.DWARVISH, Language.COMMON],
     },
     languageDescription:
       "You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.",
@@ -130,7 +130,7 @@ const Species: Prisma.RaceCreateManyInput[] = [
     speed: 30,
     speedDescription: "Your base walking speed is 30 feet.",
     originLanguages: {
-      defaultLanguages: [Language.ELVISH, Language.COMMON],
+      default: [Language.ELVISH, Language.COMMON],
     },
     languageDescription: "You can speak, read, and write Common and Elven.",
     skillProficiencies: [Skill.PERCEPTION],
@@ -165,7 +165,7 @@ const Species: Prisma.RaceCreateManyInput[] = [
     speed: 25,
     speedDescription: "Your base walking speed is 25 feet.",
     originLanguages: {
-      defaultLanguages: [Language.GNOMISH, Language.COMMON],
+      default: [Language.GNOMISH, Language.COMMON],
     },
     languageDescription: "You can read, speak, and write Common and Gnomish.",
     creatureType: CreatureType.HUMANOID,
@@ -196,8 +196,8 @@ const Species: Prisma.RaceCreateManyInput[] = [
           ],
           options: [
             {
-              numberOfAbilities: 2,
-              increases: [1, 1],
+              numberOfChoices: 2,
+              options: [1, 1],
             },
           ],
         },
@@ -217,7 +217,7 @@ const Species: Prisma.RaceCreateManyInput[] = [
     speed: 30,
     speedDescription: "Your base walking speed is 30 feet.",
     originLanguages: {
-      defaultLanguages: [Language.ELVISH, Language.COMMON],
+      default: [Language.ELVISH, Language.COMMON],
     },
     languageDescription:
       "You can read, speak, and write Common, Elven, and one language of your choice.",
@@ -261,7 +261,7 @@ const Species: Prisma.RaceCreateManyInput[] = [
       "Half-orcs are not evil by nature, but evil does lurk within them, whether they embrace it or rebel against it.",
     source: src.phb,
     originLanguages: {
-      defaultLanguages: [Language.ORC, Language.COMMON],
+      default: [Language.ORC, Language.COMMON],
     },
     languageDescription:
       "You can speak, read, and write Common and Orc. Orc is a harsh, grating language with hard consonants. It has no script of its own but is written in the Dwarvish script.",
@@ -293,7 +293,7 @@ const Species: Prisma.RaceCreateManyInput[] = [
       "Halflings are an unobtrusive but lively bunch. Curious and adventurous, they see opportunity in everything.",
     source: src.phb,
     originLanguages: {
-      defaultLanguages: [Language.HALFLING, Language.COMMON],
+      default: [Language.HALFLING, Language.COMMON],
     },
     languageDescription: "You can speak, read, and write Common and Halfling.",
   },
@@ -344,11 +344,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       "Humans are the most adaptable and ambitious people among the common races of the worlds.",
     source: src.phb,
     originLanguages: {
-      defaultLanguages: [Language.COMMON],
-      choices: {
-        languages: languages.filter((l) => l !== Language.COMMON),
-        numberOfLanguages: 1,
-      },
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: languages.filter((l) => l !== Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
     },
     languageDescription:
       "You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.",
@@ -384,7 +386,7 @@ const Species: Prisma.RaceCreateManyInput[] = [
       "Tieflings are derived from human bloodlines, and in the broadest possible sense, they still look human. However, their infernal heritage has left a clear imprint on their appearance.",
     source: src.phb,
     originLanguages: {
-      defaultLanguages: [Language.INFERNAL, Language.COMMON],
+      default: [Language.INFERNAL, Language.COMMON],
     },
     languageDescription: "You can speak, read, and write Common and Infernal.",
   },

@@ -1,7 +1,6 @@
-import { Class, Prisma, Skill } from "@prisma/client";
+import { ArmorType, Class, Prisma, Skill } from "@prisma/client";
 import {
   Ability,
-  ArmorTypes,
   Distance,
   SpellFocus,
   Time,
@@ -57,13 +56,13 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     multiclassingDescription:
       "You must have a Dexterity or Strength score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: {
-      defaultAbilities: [Ability.STR, Ability.CON],
+      default: [Ability.STR, Ability.CON],
     },
 
     skills: {
       choices: [
         {
-          skills: [
+          options: [
             Skill.ACROBATICS,
             Skill.ANIMAL_HANDLING,
             Skill.ATHLETICS,
@@ -73,23 +72,23 @@ const Classes: Prisma.ClassCreateManyInput[] = [
             Skill.PERCEPTION,
             Skill.SURVIVAL,
           ],
-          numberOfSkills: 2,
+          numberOfChoices: 2,
         },
       ],
     },
     skillChoiceDescription:
       "Choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival.",
     weapons: {
-      defaultWeapons: Object.values(weaponIds),
+      default: Object.values(weaponIds),
     },
     weaponDescription:
       "Fighters are proficient in all simple and martial weapons",
     armor: {
-      defaultArmors: [
-        ArmorTypes.LIGHT,
-        ArmorTypes.MEDIUM,
-        ArmorTypes.HEAVY,
-        ArmorTypes.SHIELDS,
+      default: [
+        ArmorType.LIGHT,
+        ArmorType.MEDIUM,
+        ArmorType.HEAVY,
+        ArmorType.SHIELDS,
       ],
     },
     armorDescription: "Fighters are proficient with all armor and shields",
@@ -100,7 +99,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       choices: [
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.chainMail, quantity: 1 }],
             [
               { item: itemIds.leatherArmor, quantity: 1 },
@@ -111,7 +110,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             ...martialMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
             ...martialRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
             [{ item: itemIds.shield, quantity: 1 }],
@@ -119,14 +118,14 @@ const Classes: Prisma.ClassCreateManyInput[] = [
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             ...martialMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
             ...martialRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [
               { item: itemIds.crossbowLight, quantity: 1 },
               { item: itemIds.crossbowBolt, quantity: 20 },
@@ -136,7 +135,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.dungeoneersPack, quantity: 1 }],
             [{ item: itemIds.explorersPack, quantity: 1 }],
           ],
@@ -173,12 +172,12 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "You must have an Intelligence score of 13 or higher in order to multiclass in or out of this class.",
     hitDie: 6,
     savingThrows: {
-      defaultAbilities: [Ability.INT, Ability.WIS],
+      default: [Ability.INT, Ability.WIS],
     },
     skills: {
       choices: [
         {
-          skills: [
+          options: [
             Skill.ARCANA,
             Skill.HISTORY,
             Skill.INSIGHT,
@@ -186,7 +185,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
             Skill.MEDICINE,
             Skill.RELIGION,
           ],
-          numberOfSkills: 2,
+          numberOfChoices: 2,
         },
       ],
     },
@@ -195,7 +194,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     armor: {},
     armorDescription: "Wizards are not proficient with any armor.",
     weapons: {
-      defaultWeapons: [
+      default: [
         weaponIds.dagger,
         weaponIds.quarterstaff,
         weaponIds.crossbowLight,
@@ -210,18 +209,18 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     tools: {},
     toolsDescription: "Wizards are not proficient with any tools.",
     equipment: {
-      defaultItems: [{ item: itemIds.spellBook, quantity: 1 }],
+      default: [{ item: itemIds.spellBook, quantity: 1 }],
       choices: [
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.quarterstaff, quantity: 1 }],
             [{ item: itemIds.dagger, quantity: 1 }],
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.componentPouch, quantity: 1 }],
             [{ item: itemIds.crystal, quantity: 1 }],
             [{ item: itemIds.orb, quantity: 1 }],
@@ -232,7 +231,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.scholarsPack, quantity: 1 }],
             [{ item: itemIds.explorersPack, quantity: 1 }],
           ],
@@ -286,19 +285,19 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       greaterThan: 12,
     },
     savingThrows: {
-      defaultAbilities: [Ability.WIS, Ability.CHA],
+      default: [Ability.WIS, Ability.CHA],
     },
     skills: {
       choices: [
         {
-          skills: [
+          options: [
             Skill.HISTORY,
             Skill.INSIGHT,
             Skill.MEDICINE,
             Skill.PERSUASION,
             Skill.RELIGION,
           ],
-          numberOfSkills: 2,
+          numberOfChoices: 2,
         },
       ],
     },
@@ -306,22 +305,22 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "Choose two skills from History, Insight, Medicine, Persuasion, and Religion.",
 
     weapons: {
-      defaultWeapons: simpleIds,
+      default: simpleIds,
     },
     weaponDescription: "Clerics are proficient with all simple weapons.",
     armor: {
-      defaultArmors: [ArmorTypes.LIGHT, ArmorTypes.MEDIUM, ArmorTypes.SHIELDS],
+      default: [ArmorType.LIGHT, ArmorType.MEDIUM, ArmorType.SHIELDS],
     },
     armorDescription:
       "Clerics are proficient with Light Armor, Medium Armor, and shields.",
     tools: {},
     toolsDescription: "Clerics are not proficient with any tools.",
     equipment: {
-      defaultItems: [{ item: itemIds.shield, quantity: 1 }],
+      default: [{ item: itemIds.shield, quantity: 1 }],
       choices: [
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.amulet, quantity: 1 }],
             [{ item: itemIds.reliquary, quantity: 1 }],
             [{ item: itemIds.emblem, quantity: 1 }],
@@ -329,14 +328,14 @@ const Classes: Prisma.ClassCreateManyInput[] = [
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.warhammer, quantity: 1 }],
             [{ item: itemIds.mace, quantity: 1 }],
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.scaleMail, quantity: 1 }],
             [{ item: itemIds.leatherArmor, quantity: 1 }],
             [{ item: itemIds.chainMail, quantity: 1 }],
@@ -344,7 +343,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [
               { item: itemIds.crossbowLight, quantity: 1 },
               { item: itemIds.crossbowBolt, quantity: 20 },
@@ -356,7 +355,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
 
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.priestsPack, quantity: 1 }],
             [{ item: itemIds.explorersPack, quantity: 1 }],
           ],
@@ -414,12 +413,12 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     multiclassingDescription:
       "You must have a Dexterity score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: {
-      defaultAbilities: [Ability.DEX, Ability.INT],
+      default: [Ability.DEX, Ability.INT],
     },
     skills: {
       choices: [
         {
-          skills: [
+          options: [
             Skill.ACROBATICS,
             Skill.ATHLETICS,
             Skill.DECEPTION,
@@ -432,7 +431,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
             Skill.SLEIGHT_OF_HAND,
             Skill.STEALTH,
           ],
-          numberOfSkills: 4,
+          numberOfChoices: 4,
         },
       ],
     },
@@ -440,7 +439,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "Choose four skills from Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, Sleight of Hand, and Stealth.",
 
     weapons: {
-      defaultWeapons: simpleIds.concat([
+      default: simpleIds.concat([
         weaponIds.rapier,
         weaponIds.shortsword,
         weaponIds.longsword,
@@ -449,15 +448,15 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
     weaponDescription: `Rogues are proficient with all simple weapons, ^${itemIds.rapier}{rapiers}^, ^${itemIds.shortsword}{shortswords}^, ^${itemIds.longsword}{longswords}^, and ^${itemIds.crossbowHand}{hand crossbows}^`,
     armor: {
-      defaultArmors: [ArmorTypes.LIGHT],
+      default: [ArmorType.LIGHT],
     },
     armorDescription: "Rogues are proficient with light armor.",
     tools: {
-      defaultTools: [toolIds.thievesTools],
+      default: [toolIds.thievesTools],
     },
     toolsDescription: `Rogues are proficient with ^${itemIds.thievesTools}{thieves' tools}^.`,
     equipment: {
-      defaultItems: [
+      default: [
         { item: itemIds.dagger, quantity: 2 },
         { item: itemIds.thievesTools, quantity: 1 },
         { item: itemIds.leatherArmor, quantity: 1 },
@@ -465,14 +464,14 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       choices: [
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.rapier, quantity: 1 }],
             [{ item: itemIds.shortsword, quantity: 1 }],
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.burglarsPack, quantity: 1 }],
             [{ item: itemIds.dungeoneersPack, quantity: 1 }],
             [{ item: itemIds.explorersPack, quantity: 1 }],
@@ -480,7 +479,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [
               { item: itemIds.shortbow, quantity: 1 },
               { item: itemIds.arrow, quantity: 20 },
@@ -520,12 +519,12 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "You must have a Strength score of 13 or higher in order to multiclass in or out of this class.",
     hitDie: 12,
     savingThrows: {
-      defaultAbilities: [Ability.STR, Ability.CON],
+      default: [Ability.STR, Ability.CON],
     },
     skills: {
       choices: [
         {
-          skills: [
+          options: [
             Skill.ANIMAL_HANDLING,
             Skill.ATHLETICS,
             Skill.INTIMIDATION,
@@ -533,39 +532,39 @@ const Classes: Prisma.ClassCreateManyInput[] = [
             Skill.PERCEPTION,
             Skill.SURVIVAL,
           ],
-          numberOfSkills: 2,
+          numberOfChoices: 2,
         },
       ],
     },
     skillChoiceDescription: `Choose two skills from Animal Handling, Athletics, Intimidation, Nature, Perception, and Survival.`,
     weapons: {
-      defaultWeapons: Object.values(weaponIds),
+      default: Object.values(weaponIds),
     },
     weaponDescription:
       "Barbarians are proficient with all simple and martial weapons.",
     armor: {
-      defaultArmors: [ArmorTypes.LIGHT, ArmorTypes.MEDIUM, ArmorTypes.SHIELDS],
+      default: [ArmorType.LIGHT, ArmorType.MEDIUM, ArmorType.SHIELDS],
     },
     armorDescription:
       "Barbarians are proficient with Light Armor, Medium Armor, Shields",
     tools: {},
     toolsDescription: "Barbarians are not proficient with any tools.",
     equipment: {
-      defaultItems: [
+      default: [
         { item: itemIds.explorersPack, quantity: 1 },
         { item: itemIds.javelin, quantity: 4 },
       ],
       choices: [
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.greataxe, quantity: 1 }],
             ...martialMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.handaxe, quantity: 2 }],
             ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
             ...simpleRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
@@ -602,20 +601,20 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     multiclassingDescription:
       "You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: {
-      defaultAbilities: [Ability.DEX, Ability.CHA],
+      default: [Ability.DEX, Ability.CHA],
     },
     skills: {
       choices: [
         {
-          skills: Object.values(Skill),
-          numberOfSkills: 3,
+          options: Object.values(Skill),
+          numberOfChoices: 3,
         },
       ],
     },
     skillChoiceDescription:
       "Rogues are proficient in any three skills of their choice.",
     weapons: {
-      defaultWeapons: simpleIds.concat([
+      default: simpleIds.concat([
         weaponIds.longsword,
         weaponIds.rapier,
         weaponIds.shortsword,
@@ -624,29 +623,29 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
     weaponDescription: `Bards are proficient with all simple weapons, plus the ^${itemIds.longsword}{longsword}^, ^${itemIds.rapier}{rapier}^, ^${itemIds.shortsword}{shortsword}^, and ^${itemIds.crossbowHand}{hand crossbow}^`,
     armor: {
-      defaultArmors: [ArmorTypes.LIGHT],
+      default: [ArmorType.LIGHT],
     },
     armorDescription: "Bards are proficient with light armor.",
 
     tools: {
       choices: [
         {
-          numberOfTools: 3,
-          tools: instrumentIds,
+          numberOfChoices: 3,
+          options: instrumentIds,
         },
       ],
     },
     toolsDescription:
       "Bards are proficient with three musical instruments of their choice.",
     equipment: {
-      defaultItems: [
+      default: [
         { item: itemIds.leatherArmor, quantity: 1 },
         { item: itemIds.dagger, quantity: 1 },
       ],
       choices: [
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.rapier, quantity: 1 }],
             [{ item: itemIds.longsword, quantity: 1 }],
             ...simpleIds.map((id) => [{ item: id, quantity: 1 }]),
@@ -654,14 +653,14 @@ const Classes: Prisma.ClassCreateManyInput[] = [
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.diplomatsPack, quantity: 1 }],
             [{ item: itemIds.entertainersPack, quantity: 1 }],
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             ...instrumentItemIds.map((id) => [{ item: id, quantity: 1 }]),
           ],
         },
@@ -714,12 +713,12 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     multiclassingDescription:
       "You must have a Wisdom score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: {
-      defaultAbilities: [Ability.INT, Ability.WIS],
+      default: [Ability.INT, Ability.WIS],
     },
     skills: {
       choices: [
         {
-          skills: [
+          options: [
             Skill.ARCANA,
             Skill.ANIMAL_HANDLING,
             Skill.INSIGHT,
@@ -729,13 +728,13 @@ const Classes: Prisma.ClassCreateManyInput[] = [
             Skill.RELIGION,
             Skill.SURVIVAL,
           ],
-          numberOfSkills: 2,
+          numberOfChoices: 2,
         },
       ],
     },
     skillChoiceDescription: `Choose two skills from Arcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival.`,
     weapons: {
-      defaultWeapons: [
+      default: [
         itemIds.club,
         itemIds.dagger,
         itemIds.dart,
@@ -750,30 +749,30 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
     weaponDescription: `Druids are proficient with  ^${itemIds.club}{club}^ , ^${itemIds.dagger}{dagger}^, ^${itemIds.dart}{dart}^, ^${itemIds.javelin}{javelin}^, ^${itemIds.mace}{mace}^, ^${itemIds.quarterstaff}{quarterstaff}^, ^${itemIds.scimitar}{scimitar}^, ^${itemIds.sickle}{sickle}^, ^${itemIds.sling}{sling}^, and ^${itemIds.spear}{spear}^`,
     armor: {
-      defaultArmors: [ArmorTypes.LIGHT, ArmorTypes.MEDIUM, ArmorTypes.SHIELDS],
+      default: [ArmorType.LIGHT, ArmorType.MEDIUM, ArmorType.SHIELDS],
     },
     armorDescription:
       "Druids are proficient with Light Armor, Medium Armor, and Shields. However, a druid will not wear armor or use shields made of metal.",
     tools: {
-      defaultTools: [toolIds.herbalismKit],
+      default: [toolIds.herbalismKit],
     },
     toolsDescription: `Druids are proficient with ^${itemIds.herbalismKit}{herbalism kits}^.`,
     equipment: {
-      defaultItems: [
+      default: [
         { item: itemIds.leatherArmor, quantity: 1 },
         { item: itemIds.explorersPack, quantity: 1 },
       ],
       choices: [
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.scimitar, quantity: 1 }],
             ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.sprigOfMistletoe, quantity: 1 }],
             [{ item: itemIds.totem, quantity: 1 }],
             [{ item: itemIds.woodenStaff, quantity: 1 }],
@@ -782,7 +781,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.shield, quantity: 1 }],
             ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
             ...simpleRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
@@ -840,12 +839,12 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     multiclassingDescription:
       "You must have a Dexterity score and a Wisdom score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: {
-      defaultAbilities: [Ability.STR, Ability.DEX],
+      default: [Ability.STR, Ability.DEX],
     },
     skills: {
       choices: [
         {
-          skills: [
+          options: [
             Skill.ACROBATICS,
             Skill.ATHLETICS,
             Skill.HISTORY,
@@ -853,13 +852,13 @@ const Classes: Prisma.ClassCreateManyInput[] = [
             Skill.RELIGION,
             Skill.STEALTH,
           ],
-          numberOfSkills: 2,
+          numberOfChoices: 2,
         },
       ],
     },
     skillChoiceDescription: `Choose two skills from Acrobatics, Athletics, History, Insight, Religion, and Stealth.`,
     weapons: {
-      defaultWeapons: simpleIds.concat([weaponIds.shortsword]),
+      default: simpleIds.concat([weaponIds.shortsword]),
     },
     weaponDescription: `Monks are proficient with all simple melee weapons and ^${itemIds.shortsword}{shortswords}^`,
     armor: {},
@@ -867,19 +866,19 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     tools: {
       choices: [
         {
-          numberOfTools: 1,
-          tools: [...instrumentIds, ...artisanIds],
+          numberOfChoices: 1,
+          options: [...instrumentIds, ...artisanIds],
         },
       ],
     },
     toolsDescription:
       "Choose one type of artisan's tools or one musical instrument.",
     equipment: {
-      defaultItems: [{ item: itemIds.dart, quantity: 10 }],
+      default: [{ item: itemIds.dart, quantity: 10 }],
       choices: [
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.shortsword, quantity: 1 }],
             ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
             ...simpleRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
@@ -887,7 +886,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.dungeoneersPack, quantity: 1 }],
             [{ item: itemIds.explorersPack, quantity: 1 }],
           ],
@@ -924,12 +923,12 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     multiclassingDescription:
       "You must have a Strength and Charisma score of 13 or higher in order to multiclass in or out of this class",
     savingThrows: {
-      defaultAbilities: [Ability.WIS, Ability.CHA],
+      default: [Ability.WIS, Ability.CHA],
     },
     skills: {
       choices: [
         {
-          skills: [
+          options: [
             Skill.ATHLETICS,
             Skill.INSIGHT,
             Skill.INTIMIDATION,
@@ -937,36 +936,36 @@ const Classes: Prisma.ClassCreateManyInput[] = [
             Skill.PERSUASION,
             Skill.RELIGION,
           ],
-          numberOfSkills: 2,
+          numberOfChoices: 2,
         },
       ],
     },
     skillChoiceDescription:
       "Choose two skills from Athletics, Insight, Intimidation, Medicine, Persuasion, and Religion.",
     weapons: {
-      defaultWeapons: Object.values(weaponIds),
+      default: Object.values(weaponIds),
     },
     weaponDescription:
       "Paladins are proficient with all simple and martial weapons.",
     armor: {
-      defaultArmors: [ArmorTypes.LIGHT, ArmorTypes.MEDIUM, ArmorTypes.HEAVY],
+      default: [ArmorType.LIGHT, ArmorType.MEDIUM, ArmorType.HEAVY],
     },
     armorDescription: `Paladins are proficient with all armor and ^${itemIds.shield}{shields}^.`,
     tools: {},
     toolsDescription: "Paladins are not proficient with any tools.",
     equipment: {
-      defaultItems: [{ item: itemIds.chainMail, quantity: 1 }],
+      default: [{ item: itemIds.chainMail, quantity: 1 }],
       choices: [
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             ...martialMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
             ...martialRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             ...martialMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
             ...martialRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
             [{ item: itemIds.shield, quantity: 1 }],
@@ -974,21 +973,21 @@ const Classes: Prisma.ClassCreateManyInput[] = [
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.javelin, quantity: 5 }],
             ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.priestsPack, quantity: 1 }],
             [{ item: itemIds.explorersPack, quantity: 1 }],
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.amulet, quantity: 1 }],
             [{ item: itemIds.reliquary, quantity: 1 }],
             [{ item: itemIds.emblem, quantity: 1 }],
@@ -1046,12 +1045,12 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       greaterThan: 12,
     },
     savingThrows: {
-      defaultAbilities: [Ability.STR, Ability.DEX],
+      default: [Ability.STR, Ability.DEX],
     },
     skills: {
       choices: [
         {
-          skills: [
+          options: [
             Skill.ANIMAL_HANDLING,
             Skill.ATHLETICS,
             Skill.INSIGHT,
@@ -1061,18 +1060,18 @@ const Classes: Prisma.ClassCreateManyInput[] = [
             Skill.STEALTH,
             Skill.SURVIVAL,
           ],
-          numberOfSkills: 3,
+          numberOfChoices: 3,
         },
       ],
     },
     skillChoiceDescription: `Choose three from Animal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, and Survival`,
     weapons: {
-      defaultWeapons: Object.values(weaponIds),
+      default: Object.values(weaponIds),
     },
     weaponDescription:
       "Rangers are proficient with all simple and martial weapons.",
     armor: {
-      defaultArmors: [ArmorTypes.LIGHT, ArmorTypes.MEDIUM, ArmorTypes.SHIELDS],
+      default: [ArmorType.LIGHT, ArmorType.MEDIUM, ArmorType.SHIELDS],
     },
     armorDescription:
       "Rangers are proficient with Light Armor and Medium Armor.",
@@ -1080,7 +1079,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     toolsDescription: "Rangers are not proficient with any tools.",
 
     equipment: {
-      defaultItems: [
+      default: [
         { item: itemIds.arrow, quantity: 20 },
         {
           item: itemIds.quiver,
@@ -1094,28 +1093,28 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       choices: [
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.scaleMail, quantity: 1 }],
             [{ item: itemIds.leatherArmor, quantity: 1 }],
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.shortsword, quantity: 1 }],
             ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.shortsword, quantity: 1 }],
             ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.dungeoneersPack, quantity: 1 }],
             [{ item: itemIds.explorersPack, quantity: 1 }],
           ],
@@ -1172,14 +1171,14 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.",
     hitDie: 6,
     savingThrows: {
-      defaultAbilities: [Ability.CON, Ability.CHA],
+      default: [Ability.CON, Ability.CHA],
     },
     skillChoiceDescription:
       "Choose two from Arcana, Deception, Insight, Intimidation, Persuasion, and Religion",
     skills: {
       choices: [
         {
-          skills: [
+          options: [
             Skill.ARCANA,
             Skill.DECEPTION,
             Skill.INSIGHT,
@@ -1187,13 +1186,13 @@ const Classes: Prisma.ClassCreateManyInput[] = [
             Skill.PERSUASION,
             Skill.RELIGION,
           ],
-          numberOfSkills: 2,
+          numberOfChoices: 2,
         },
       ],
     },
 
     weapons: {
-      defaultWeapons: [
+      default: [
         weaponIds.dagger,
         weaponIds.dart,
         weaponIds.sling,
@@ -1207,11 +1206,11 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     tools: {},
     toolsDescription: "Sorcerers are not proficient with any tools.",
     equipment: {
-      defaultItems: [{ item: itemIds.dagger, quantity: 2 }],
+      default: [{ item: itemIds.dagger, quantity: 2 }],
       choices: [
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [
               { item: itemIds.crossbowLight, quantity: 1 },
               { item: itemIds.crossbowBolt, quantity: 20 },
@@ -1222,14 +1221,14 @@ const Classes: Prisma.ClassCreateManyInput[] = [
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.dungeoneersPack, quantity: 1 }],
             [{ item: itemIds.explorersPack, quantity: 1 }],
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.componentPouch, quantity: 1 }],
             [{ item: itemIds.staff, quantity: 1 }],
             [{ item: itemIds.wand, quantity: 1 }],
@@ -1289,12 +1288,12 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     multiclassingDescription:
       "You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.",
     savingThrows: {
-      defaultAbilities: [Ability.WIS, Ability.CHA],
+      default: [Ability.WIS, Ability.CHA],
     },
     skills: {
       choices: [
         {
-          skills: [
+          options: [
             Skill.ARCANA,
             Skill.DECEPTION,
             Skill.HISTORY,
@@ -1303,32 +1302,32 @@ const Classes: Prisma.ClassCreateManyInput[] = [
             Skill.NATURE,
             Skill.RELIGION,
           ],
-          numberOfSkills: 2,
+          numberOfChoices: 2,
         },
       ],
     },
     skillChoiceDescription:
       "Choose two from Arcana, Deception, History, Intimidation, Investigation, Nature, and Religion",
     weapons: {
-      defaultWeapons: simpleIds,
+      default: simpleIds,
     },
     weaponDescription: "Warlocks are proficient with all simple weapons.",
     armor: {
-      defaultArmors: [ArmorTypes.LIGHT],
+      default: [ArmorType.LIGHT],
     },
     armorDescription: "Warlocks are proficient with Light Armor.",
     tools: {},
     toolsDescription: "Warlocks are not proficient with any tools.",
 
     equipment: {
-      defaultItems: [
+      default: [
         { item: itemIds.dagger, quantity: 2 },
         { item: itemIds.leatherArmor, quantity: 1 },
       ],
       choices: [
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [
               { item: itemIds.crossbowLight, quantity: 1 },
               { item: itemIds.crossbowBolt, quantity: 20 },
@@ -1339,7 +1338,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.componentPouch, quantity: 1 }],
             [{ item: itemIds.staff, quantity: 1 }],
             [{ item: itemIds.wand, quantity: 1 }],
@@ -1350,14 +1349,14 @@ const Classes: Prisma.ClassCreateManyInput[] = [
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.dungeoneersPack, quantity: 1 }],
             [{ item: itemIds.scholarsPack, quantity: 1 }],
           ],
         },
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
             ...simpleRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
           ],
@@ -1417,27 +1416,27 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "You must have an Intelligence score of 13 or higher in order to multiclass in or out of this class.",
     hitDie: 8,
     armor: {
-      defaultArmors: [ArmorTypes.LIGHT, ArmorTypes.MEDIUM, ArmorTypes.SHIELDS],
+      default: [ArmorType.LIGHT, ArmorType.MEDIUM, ArmorType.SHIELDS],
     },
     armorDescription:
       "Artificers are proficient with Light Armor, Medium Armor, and Shields.",
     savingThrows: {
-      defaultAbilities: [Ability.CON, Ability.INT],
+      default: [Ability.CON, Ability.INT],
     },
     toolsDescription: `Artificers are proficient with a variety of tools. All artificers are proficient with ^${itemIds.thievesTools}{Thieves' Tools}^ and ^${itemIds.thievesTools}{Tinker's Tools}^. Additionally, you can choose one additional artisan's tool of your choice.`,
     tools: {
-      defaultTools: [toolIds.thievesTools, toolIds.tinkersTools],
+      default: [toolIds.thievesTools, toolIds.tinkersTools],
       choices: [
         {
-          numberOfTools: 1,
-          tools: artisanIds,
+          numberOfChoices: 1,
+          options: artisanIds,
         },
       ],
     },
     skills: {
       choices: [
         {
-          skills: [
+          options: [
             Skill.ARCANA,
             Skill.HISTORY,
             Skill.INVESTIGATION,
@@ -1447,7 +1446,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
             Skill.SLEIGHT_OF_HAND,
             Skill.INSIGHT,
           ],
-          numberOfSkills: 2,
+          numberOfChoices: 2,
         },
       ],
     },
@@ -1455,11 +1454,11 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       "Choose two from Arcana, History, Investigation, Medicine, Nature, Perception, Sleight of Hand, and Insight.",
     weaponDescription: "Artificers are proficient with simple weapons.",
     weapons: {
-      defaultWeapons: simpleIds,
+      default: simpleIds,
     },
 
     equipment: {
-      defaultItems: [
+      default: [
         { item: itemIds.dagger, quantity: 1 },
         { item: itemIds.crossbowLight, quantity: 1 },
         { item: itemIds.crossbowBolt, quantity: 20 },
@@ -1470,14 +1469,14 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       choices: [
         {
           numberOfChoices: 1,
-          items: [
+          options: [
             [{ item: itemIds.scaleMail, quantity: 1 }],
             [{ item: itemIds.studdedLeatherArmor, quantity: 1 }],
           ],
         },
         {
           numberOfChoices: 2,
-          items: [
+          options: [
             ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
             ...simpleRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
           ],
