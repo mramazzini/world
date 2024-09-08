@@ -6,6 +6,7 @@ import { PrismaClient } from "@prisma/client";
 async function nuke() {
   const db = new PrismaClient();
   cinfo("Clearing database");
+  await db.character.deleteMany({});
 
   await db.spellList.deleteMany({});
   await db.spell.deleteMany({});

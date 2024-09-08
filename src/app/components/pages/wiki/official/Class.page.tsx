@@ -312,7 +312,10 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
                           `The ${classObj.name} class can cast spells from the ${classObj.SpellList.name} Spell-list.`}
                       </P>
                       <Link
-                        href={`/spell-list/${classObj.SpellList?.name}`}
+                        href={`/spell-list/${classObj.SpellList?.name.replaceAll(
+                          " ",
+                          "-"
+                        )}`}
                         className="btn btn-primary btn-sm mx-4"
                       >
                         View Spell List -&gt;

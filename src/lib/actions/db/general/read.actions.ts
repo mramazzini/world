@@ -113,7 +113,7 @@ export const searchEverything = async (
       name: spellList.name,
       description: spellList.description,
       flavorText: spellList.description,
-      type: "SpellList",
+      type: "Spell-List",
       other: "",
       lastUpdated: spellList.updatedAt,
     })),
