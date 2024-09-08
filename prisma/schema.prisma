@@ -105,6 +105,8 @@ enum Language {
   PRIMORDIAL
   SYLVAN
   UNDERCOMMON
+  AURAN
+  AARAKOCRA
 }
 
 enum DamageTypes {

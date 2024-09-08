@@ -348,23 +348,26 @@ const SubRacePage = ({ subRace, weaponNames }: Props) => {
                 ))}
               </>
             )}
-            {race.features.map((trait, index) => (
-              <div key={index} className="bg-base-200 rounded-xl p-4 my-2">
-                <h3>
-                  {trait.name}{" "}
-                  <div className="badge badge-neutral">{race.name}</div>
-                </h3>
-                <div className="divider m-0"></div>
-                <p>
-                  <P>{trait.description}</P>
-                </p>
-                {trait.extendedTable && trait.extendedTable.length > 0 && (
-                  <div className="bg-base-300 mt-4">
-                    <JsonTable json={trait.extendedTable} />
+            {race.features.map(
+              (trait, index) =>
+                !subRace.removedTraits.includes(trait.name) && (
+                  <div key={index} className="bg-base-200 rounded-xl p-4 my-2">
+                    <h3>
+                      {trait.name}{" "}
+                      <div className="badge badge-neutral">{race.name}</div>
+                    </h3>
+                    <div className="divider m-0"></div>
+                    <p>
+                      <P>{trait.description}</P>
+                    </p>
+                    {trait.extendedTable && trait.extendedTable.length > 0 && (
+                      <div className="bg-base-300 mt-4">
+                        <JsonTable json={trait.extendedTable} />
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            ))}
+                )
+            )}
           </div>
         </>
       )}

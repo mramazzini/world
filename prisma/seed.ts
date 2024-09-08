@@ -15,6 +15,7 @@ import { ClassicVariants } from "./seeds/Races/Variants/ClassicVariants";
 import ClassicTraits from "./seeds/Races/Variants/ClassicTraits";
 import { ItemsSeed } from "./seeds/Items/Items.seed";
 import { ItemTypes, Prisma, PrismaClient, Weapon } from "@prisma/client";
+import ExoticVariants from "./seeds/Races/Variants/ExoticVariants";
 import createMaxyUser from "./seeds/User.seed";
 import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
 import { ToolSeed } from "./seeds/Items/Tools/tools.seed";
@@ -489,6 +490,22 @@ const seed = async () => {
       return;
     }
   }
+  //exotic species
+  cinfo("Creating  Exotic Variants");
+  //create exotic species
+  for (const r of ExoticVariants) {
+    try {
+      cinfo("Creating exotic variant:", r.name);
+      await db.raceVariant.create({
+        data: r,
+      });
+      cinfo("Exotic variant created");
+    } catch (error) {
+      cerr("Error creating exotic variant:", r.name, error);
+      return;
+    }
+  }
+
   //create test character
   cinfo("Creating test character");
   for (const Character of CharacterSeed) {

@@ -1235,7 +1235,45 @@ const SpellSeed: Prisma.SpellCreateManyInput[] = [
     duration: "Instantaneous (see below)",
     source: "Xanathar's Guide to Everything",
     postTableData: "",
-    extendedTable: [],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Ceremony", "Effect"],
+          data: [
+            {
+              Ceremony: "Atonement",
+              Effect:
+                "You touch one willing creature whose alignment has changed, and you make a DC 20 Wisdom (Insight) check. On a successful check, you restore the target to its original alignment.",
+            },
+            {
+              Ceremony: "Bless Water",
+              Effect:
+                "You touch one vial of water and cause it to become holy water.",
+            },
+            {
+              Ceremony: "Coming of Age",
+              Effect:
+                "You touch one humanoid who is a young adult. For the next 24 hours, whenever the target makes an ability check, it can roll a d4 and add the number rolled to the ability check. A creature can benefit from this rite only once.",
+            },
+            {
+              Ceremony: "Dedication",
+              Effect:
+                "You touch one humanoid who wishes to be dedicated to your god’s service. For the next 24 hours, whenever the target makes a saving throw, it can roll a d4 and add the number rolled to the save. A creature can benefit from this rite only once.",
+            },
+            {
+              Ceremony: "Funeral Rite",
+              Effect:
+                "You touch one corpse, and for the next 7 days, the target can’t become undead by any means short of a Wish spell.",
+            },
+            {
+              Ceremony: "Wedding",
+              Effect:
+                "You touch adult humanoids willing to be bonded together in marriage. For the next 7 days, each target gains a +2 bonus to AC while they are within 30 feet of each other. A creature can benefit from this rite again only if widowed.",
+            },
+          ],
+        },
+      },
+    ],
     options: [],
     upcastInfo: "",
   },
@@ -1356,7 +1394,39 @@ const SpellSeed: Prisma.SpellCreateManyInput[] = [
     duration: "1 round",
     source: "Player's Handbook",
     postTableData: "",
-    extendedTable: [],
+    extendedTable: [
+      {
+        "": {
+          headers: ["Command", "Effect"],
+          data: [
+            {
+              Command: "Approach",
+              Effect:
+                "The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.",
+            },
+            {
+              Command: "Drop",
+              Effect:
+                "The target drops whatever it is holding and then ends its turn.",
+            },
+            {
+              Command: "Flee",
+              Effect:
+                "The target spends its turn moving away from you by the fastest available means.",
+            },
+            {
+              Command: "Grovel",
+              Effect: "The target falls prone and then ends its turn.",
+            },
+            {
+              Command: "Halt",
+              Effect:
+                "The target doesn’t move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.",
+            },
+          ],
+        },
+      },
+    ],
     options: [],
     upcastInfo:
       "When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.",

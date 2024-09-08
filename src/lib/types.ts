@@ -794,6 +794,7 @@ export enum src {
   tomb = "Tomb of Annihilation",
   descent = "Descent into Avernus",
   witchlight = "The Wild Beyond the Witchlight",
+  eepc = "Elemental Evil Player's Companion",
 }
 
 export enum AuthResult {

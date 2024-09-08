@@ -390,6 +390,224 @@ const Species: Prisma.RaceCreateManyInput[] = [
     },
     languageDescription: "You can speak, read, and write Common and Infernal.",
   },
+  //exotic
+  //aarakocra
+  {
+    id: 10,
+    name: "Aarakocra",
+    flavorText:
+      "A winged people who originated on the Elemental Plane of Air, aarakocra soar through the sky wherever they wander.",
+    age: "N/A",
+    alignment: "N/A",
+    description:
+      "A winged people who originated on the Elemental Plane of Air, aarakocra soar through the sky wherever they wander. The first aarakocra served the Wind Dukes of Aaqa — mighty beings of air — and were imbued with a measure of their masters’ power over winds. Their descendants still command echoes of that power.\n\nFrom below, aarakocra look like large birds and thus are sometimes called birdfolk. Only when they roost on a branch or walk across the ground is their Humanoid nature clear. Standing upright, aarakocra are typically about 5 feet tall, and they have long, narrow legs that taper to sharp talons. Feathers cover their bodies — usually red, orange, yellow, brown, or gray. Their heads are also avian, often resembling those of parrots or eagles.",
+    source: src.mordenkainen,
+    abilityScores: {
+      choices: [
+        {
+          abilities: Object.values(Ability),
+          options: [
+            {
+              numberOfChoices: 2,
+              options: [1, 2],
+            },
+          ],
+        },
+        {
+          abilities: [Ability.WIS],
+          options: [
+            {
+              numberOfChoices: 3,
+              options: [1, 1, 1],
+            },
+          ],
+        },
+      ],
+    },
+    abilityScoreDescription:
+      "When determining your character’s ability scores, increase one score by 2 and increase a different score by 1, or increase three different scores by 1. You can't raise any of your scores above 20.",
+    creatureType: CreatureType.HUMANOID,
+    size: Size.MEDIUM,
+    speed: 30,
+    speedDescription: "Your walking speed is 30 feet.",
+    flightSpeed: 30,
+    flightDescription:
+      "Because of your wings, you have a flying speed equal to your walking speed. You can’t use this flying speed if you’re wearing medium or heavy armor.",
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    languageDescription:
+      "Your character can speak, read, and write Common and one other language that you and your DM agree is appropriate for the character. The Player’s Handbook offers a list of languages to choose from. The DM is free to modify that list for a campaign.",
+    features: [
+      {
+        name: "Talons",
+        description:
+          "You have talons that you can use to make unarmed strikes. When you hit with them, the strike deals 1d6 + your Strength modifier slashing damage, instead of the bludgeoning damage normal for an unarmed strike.",
+      },
+      {
+        name: "Wind Caller",
+        description:
+          "Starting at 3rd level, you can cast the Gust of Wind spell with this trait, without requiring a material component. Once you cast the spell with this trait, you can’t do so again until you finish a long rest. You can also cast the spell using any spell slots you have of 2nd level or higher. \n\nIntelligence, Wisdom, or Charisma is your spellcasting ability for it when you cast Gust of Wind with this trait (choose when you select this race).",
+      },
+    ],
+  },
+  {
+    id: 11,
+    name: "Aasimar",
+    description:
+      "Whether descended from a celestial being or infused with heavenly power, aasimar are mortals who carry a spark of the Upper Planes within their souls. They can fan that spark to bring light, ease wounds, and unleash the fury of the heavens.\n\nAasimar can arise among any population of mortals. They resemble their parents, but they live for up to 160 years and often have features that hint at their celestial heritage. These often begin subtle and become more obvious when the aasimar gains the ability to reveal their full celestial nature. The Aasimar Celestial Features table has examples you can choose or use as inspiration to create your own.",
+    flavorText:
+      "Whether descended from a celestial being or infused with heavenly power, aasimar are mortals who carry a spark of the Upper Planes within their souls.",
+    source: src.mordenkainen,
+    abilityScores: {
+      choices: [
+        {
+          abilities: Object.values(Ability),
+          options: [
+            {
+              numberOfChoices: 2,
+              options: [2, 1],
+            },
+          ],
+        },
+        {
+          abilities: Object.values(Ability),
+          options: [
+            {
+              numberOfChoices: 3,
+              options: [1, 1, 1],
+            },
+          ],
+        },
+      ],
+    },
+    age: "N/A",
+    alignment: "N/A",
+    abilityScoreDescription:
+      "When determining your character’s ability scores, increase one score by 2 and increase a different score by 1, or increase three different scores by 1. You can't raise any of your scores above 20.",
+    creatureType: CreatureType.HUMANOID,
+    size: Size.MEDIUM,
+    sizeDescription:
+      "You are Medium or Small. You choose the size when you select this race.",
+    speed: 30,
+    speedDescription: "Your walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light and in darkness as if it were dim light. You discern colors in that darkness only as shades of gray.",
+    resistanceTo: [DamageTypes.RADIANT, DamageTypes.NECROTIC],
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    languageDescription:
+      "Your character can speak, read, and write Common and one other language that you and your DM agree is appropriate for the character. The Player’s Handbook offers a list of languages to choose from. The DM is free to modify that list for a campaign.",
+    features: [
+      {
+        name: "Celestial Resistance",
+        description: "You have resistance to necrotic and radiant damage.",
+      },
+      {
+        name: "Healing Hands",
+        description:
+          "As an action, you can touch a creature and roll a number of d4s equal to your proficiency bonus. The creature regains a number of hit points equal to the total rolled. Once you use this trait, you can’t use it again until you finish a long rest.",
+      },
+      {
+        name: "Light Bearer",
+        description:
+          "You know the Light cantrip. Charisma is your spellcasting ability for it.",
+      },
+      {
+        name: "Celestial Revelation",
+        description:
+          "When you reach 3rd level, choose one of the revelation options below. Thereafter, you can use a bonus action to unleash the celestial energy within yourself, gaining the benefits of that revelation. Your transformation lasts for 1 minute or until you end it as a bonus action. Once you transform using your revelation below, you can’t use it again until you finish a long rest: ",
+        extendedTable: [
+          {
+            "": {
+              headers: ["Revelation", "Description"],
+              data: [
+                {
+                  Revelation: "Necrotic Shroud",
+                  Description:
+                    "Your eyes briefly become pools of darkness, and ghostly, flightless wings sprout from your back temporarily. Creatures other than your allies within 10 feet of you that can see you must succeed on a Charisma saving throw (DC 8 + your proficiency bonus + your Charisma modifier) or become frightened of you until the end of your next turn. Until the transformation ends, once on each of your turns, you can deal extra necrotic damage to one target when you deal damage to it with an attack or a spell. The extra damage equals your proficiency bonus.",
+                },
+                {
+                  Revelation: "Radiant Consumption",
+                  Description:
+                    "Searing light temporarily radiates from your eyes and mouth. For the duration, you shed bright light in a 10-foot radius and dim light for an additional 10 feet, and at the end of each of your turns, each creature within 10 feet of you takes radiant damage equal to your proficiency bonus. Until the transformation ends, once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra damage equals your proficiency bonus.",
+                },
+                {
+                  Revelation: "Radiant Soul",
+                  Description:
+                    "Two luminous, spectral wings sprout from your back temporarily. Until the transformation ends, you have a flying speed equal to your walking speed, and once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra damage equals your proficiency bonus.",
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 12,
+    name: "Aasimar (VGM)",
+    description:
+      "Aasimar bear within their souls the light of the heavens. They are descended from humans with a touch of the power of Mount Celestia, the divine realm of many lawful good deities. Aasimar are born to serve as champions of the gods, their births hailed as blessed events. They are a people of otherworldly visages, with luminous features that reveal their celestial heritage.\n\nAn aasimar, except for one who has turned to evil, has a link to an angelic being. That being – usually a deva – provides guidance to the aasimar, though this connection functions only in dreams. As such, the guidance is not a direct command or a simple spoken word. Instead, the aasimar receives visions, prophecies, and feelings.",
+    flavorText: "Aasimar bear within their souls the light of the heavens.",
+    source: src.volo,
+    abilityScoreDescription: "Your Charisma score increases by 2.",
+    abilityScores: {
+      fixedIncreases: [
+        {
+          ability: Ability.CHA,
+          value: 2,
+        },
+      ],
+    },
+    age: "Aasimar mature at the same rate as humans, but they can live up to 160 years.",
+    alignment:
+      "Imbued with celestial power, most aasimar are good. Outcast aasimar are most often neutral or even evil.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Aasimar have the same range of height and weight as humans. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "Blessed with a radiant soul, your vision can easily cut through darkness. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+    languageDescription: "You can speak, read, and write Common and Celestial.",
+    originLanguages: {
+      default: [Language.CELESTIAL, Language.COMMON],
+    },
+    resistanceTo: [DamageTypes.RADIANT, DamageTypes.NECROTIC],
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Celestial Resistance",
+        description: "You have resistance to necrotic and radiant damage.",
+      },
+      {
+        name: "Healing Hands",
+        description:
+          "As an action, you can touch a creature and cause it to regain a number of hit points equal to your level. Once you use this trait, you can't use it again until you finish a long rest.",
+      },
+      {
+        name: "Light Bearer",
+        description:
+          "You know the Light cantrip. Charisma is your spellcasting ability for it.",
+      },
+    ],
+  },
 ];
 
 export default Species;
