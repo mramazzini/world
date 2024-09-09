@@ -984,7 +984,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     baseRaceId: ids.tiefling,
     flavorText:
       "Tieflings tied to Baalzebul can corrupt others both physically and psychically.",
-    source: src.mordenkainen,
+    source: src.mordenkainenFoes,
     abilityScores: {
       fixedIncreases: [
         { ability: Ability.INT, value: 1 },
@@ -1002,7 +1002,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     baseRaceId: ids.tiefling,
     flavorText:
       "Tieflings tied to Dispater are excellent spies and infiltrators.",
-    source: src.mordenkainen,
+    source: src.mordenkainenFoes,
     abilityScores: {
       fixedIncreases: [
         { ability: Ability.DEX, value: 1 },
@@ -1020,7 +1020,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     baseRaceId: ids.tiefling,
     flavorText:
       "Tieflings tied to Fierna are known for their loyalty and their ability to manipulate others.",
-    source: src.mordenkainen,
+    source: src.mordenkainenFoes,
     abilityScores: {
       fixedIncreases: [
         { ability: Ability.WIS, value: 1 },
@@ -1038,7 +1038,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     baseRaceId: ids.tiefling,
     flavorText:
       "Glasya, Hell's criminal mastermind, grants her tiefiings magic that is useful for committing heists.",
-    source: src.mordenkainen,
+    source: src.mordenkainenFoes,
     abilityScores: {
       fixedIncreases: [
         { ability: Ability.DEX, value: 1 },
@@ -1056,7 +1056,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     baseRaceId: ids.tiefling,
     flavorText:
       "Frozen Stygia is ruled by Levistus, an archdevil known for offering bargains to those who face an inescapable doom.",
-    source: src.mordenkainen,
+    source: src.mordenkainenFoes,
     abilityScores: {
       fixedIncreases: [
         { ability: Ability.CON, value: 1 },
@@ -1074,7 +1074,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     baseRaceId: ids.tiefling,
     flavorText:
       "Tieflings tied to Mammon excel at gathering and safeguarding wealth.",
-    source: src.mordenkainen,
+    source: src.mordenkainenFoes,
     abilityScores: {
       fixedIncreases: [
         { ability: Ability.INT, value: 1 },
@@ -1091,7 +1091,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "In the frozen realm of Cania, Mephistopheles offers arcane power to those who entreat with him. Tieflings linked to him master some arcane magic.",
     baseRaceId: ids.tiefling,
     flavorText: "Tieflings tied to Mephistopheles master some arcane magic.",
-    source: src.mordenkainen,
+    source: src.mordenkainenFoes,
     abilityScores: {
       fixedIncreases: [
         { ability: Ability.INT, value: 1 },
@@ -1109,7 +1109,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     baseRaceId: ids.tiefling,
     flavorText:
       "Tieflings with a blood tie to Zariel are stronger than the typical tiefling and receive magical abilities that aid them in battle.",
-    source: src.mordenkainen,
+    source: src.mordenkainenFoes,
     abilityScores: {
       fixedIncreases: [
         { ability: Ability.STR, value: 1 },

@@ -385,7 +385,9 @@ model Race {
   age       String
   alignment String
 
-  skillProficiencies Skill[]
+  /// [SkillChoice]
+  skillProficiencies          Json?
+  skillProficiencyDescription String?
 
   /// [ToolChoice]
   toolProficiencies   Json?
@@ -445,7 +447,9 @@ model RaceVariant {
   age       String?
   alignment String?
 
-  skillProficiencies Skill[]
+  /// [SkillChoice]
+  skillProficiencies          Json?
+  skillProficiencyDescription String?
 
   /// [ToolChoice]
   toolProficiencies   Json?

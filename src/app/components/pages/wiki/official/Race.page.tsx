@@ -116,35 +116,40 @@ const RacePage = ({ race, weaponNames }: Props) => {
           <div className="divider"></div>
           <FeatureList features={race.features} />
           <div className="divider"></div>
-          <div className="bg-base-300 p-4 rounded-xl">
-            <h2 className="pb-0">
-              Subraces{" "}
-              <Info tooltip="Subraces allow your character to more closely identify with a specific heritage. Your subrace grants you a few extra racial traits that further empower your character." />
-            </h2>
-            <div className="divider"></div>
-            <div className="bg-base-100">
-              <JsonTable
-                json={[
-                  {
-                    "": {
-                      headers: ["Name", "Description", "Source"],
-                      headersLength: [15, 70, 15],
-                      links: race.Variants.map((variant) => {
-                        return `/subrace/${variant.name.replaceAll(" ", "-")}`;
-                      }),
-                      data: race.Variants.map((variant) => {
-                        return {
-                          Name: variant.name,
-                          Description: variant.flavorText,
-                          Source: variant.source,
-                        };
-                      }),
+          {race.Variants.length > 0 && (
+            <div className="bg-base-300 p-4 rounded-xl">
+              <h2 className="pb-0">
+                Subraces{" "}
+                <Info tooltip="Subraces allow your character to more closely identify with a specific heritage. Your subrace grants you a few extra racial traits that further empower your character." />
+              </h2>
+              <div className="divider"></div>
+              <div className="bg-base-100">
+                <JsonTable
+                  json={[
+                    {
+                      "": {
+                        headers: ["Name", "Description", "Source"],
+                        headersLength: [15, 70, 15],
+                        links: race.Variants.map((variant) => {
+                          return `/subrace/${variant.name.replaceAll(
+                            " ",
+                            "-"
+                          )}`;
+                        }),
+                        data: race.Variants.map((variant) => {
+                          return {
+                            Name: variant.name,
+                            Description: variant.flavorText,
+                            Source: variant.source,
+                          };
+                        }),
+                      },
                     },
-                  },
-                ]}
-              />
+                  ]}
+                />
+              </div>
             </div>
-          </div>
+          )}
         </>
       )}
     </main>

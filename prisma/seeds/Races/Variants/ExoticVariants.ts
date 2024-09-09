@@ -14,6 +14,7 @@ const ids = {
   aaracokkra: 10,
   aasimar: 11,
   aasimarVGM: 12,
+  changeling: 13,
 };
 
 const ExoticVariants: Prisma.RaceVariantCreateManyInput[] = [
