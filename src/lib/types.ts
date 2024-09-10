@@ -796,6 +796,10 @@ export enum src {
   descent = "Descent into Avernus",
   witchlight = "The Wild Beyond the Witchlight",
   eepc = "Elemental Evil Player's Companion",
+  locathah = "Locathah Rising",
+  strixhaven = "Strixhaven: A Curriculum of Chaos",
+  tortle = "The Tortle Package",
+  aquisitions = "Acquisitions Incorporated",
 }
 
 export enum AuthResult {

@@ -60,7 +60,7 @@ const SpellDisplay = ({ spell }: Props) => {
               >
                 {spellList.name && (
                   <Tooltip element={spellList.name} layer={0} format={false}>
-                    {`Go to ${spellList.name} class ->`}
+                    {`Go to ${spellList.name} ->`}
                   </Tooltip>
                 )}
               </Link>
