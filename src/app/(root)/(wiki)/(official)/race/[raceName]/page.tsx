@@ -58,13 +58,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const Page = async ({ params }: Props) => {
   const race = await getRace(params.raceName.replaceAll("-", " "));
-  const weapons = await getWeapons();
 
-  const weaponNames = weapons
-    .filter((weapon) => race?.weaponProficiencies.includes(weapon.id))
-    .map((weapon) => weapon.name);
-
-  return <RacePage race={race} weaponNames={weaponNames} />;
+  return <RacePage race={race} />;
 };
 
 export default Page;
