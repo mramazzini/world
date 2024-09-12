@@ -9,10 +9,9 @@ import FeatureList from "@/app/components/UI/FeatureList";
 
 interface Props {
   race: RaceInfo | null;
-  weaponNames: string[];
 }
 
-const RacePage = ({ race, weaponNames }: Props) => {
+const RacePage = ({ race }: Props) => {
   return (
     <main className="p-4 md:p-8">
       {race && (
@@ -94,20 +93,23 @@ const RacePage = ({ race, weaponNames }: Props) => {
                 <div className="divider m-0"></div>
                 <p>{race.languageDescription}</p>
               </div>
-              {weaponNames.length > 0 && (
+              {race.weaponProficiencyDescription !== null && (
                 <div className="bg-base-200 rounded-xl p-4  max-w-1/3 ">
-                  <h2 className="pb-0">
-                    Weapons{" "}
-                    <Info
-                      tooltip={`A character who is a ${race.name} has proficiency with the following weapons.`}
-                    />
+                  <h2 className="pb-0 flex justify-between flex-row items-center">
+                    <div>
+                      Weapons{" "}
+                      <Info
+                        tooltip={`A character who is a ${race.name} has proficiency with the following weapons.`}
+                      />
+                    </div>
+                    {race.weaponProficiencyDescription !== null ? (
+                      <div className="badge badge-accent">{race.name}</div>
+                    ) : (
+                      <div className="badge badge-neutral">{race.name}</div>
+                    )}
                   </h2>
                   <div className="divider m-0"></div>
-                  <ul className="list-disc pl-4">
-                    {weaponNames.map((weapon, index) => (
-                      <li key={index}>{weapon}</li>
-                    ))}
-                  </ul>
+                  <p>{race.weaponProficiencyDescription || "None"}</p>
                 </div>
               )}
             </div>
