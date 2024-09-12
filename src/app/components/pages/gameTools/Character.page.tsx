@@ -18,11 +18,16 @@ import MainSheet from "./main/MainSheet";
 import InventoryTab from "./Inventory/InventoryTab";
 import ChooseChoices from "./Choices/Choices";
 type Tab = "sheet" | "inventory" | "spells" | "notes" | "choices";
-const CharacterCreate = () => {
+
+interface Props {
+  charName: string;
+}
+
+const CharacterSheet = ({ charName }: Props) => {
   const [character, setCharacter] = useState<CharacterInfo | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("sheet");
   useEffect(() => {
-    getCharacter("Larry").then((res) => {
+    getCharacter(charName).then((res) => {
       if (!res) return;
       const char: CharacterInfo = {
         ...res,
@@ -148,4 +153,4 @@ const CharacterCreate = () => {
   );
 };
 
-export default CharacterCreate;
+export default CharacterSheet;

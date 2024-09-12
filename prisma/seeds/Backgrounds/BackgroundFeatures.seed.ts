@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import { headers } from "next/headers";
 
 const ids = {
   acolyte: 1,
@@ -16,6 +17,39 @@ const ids = {
   factionAgent: 13,
   farTraveler: 14,
   feyLost: 15,
+  fisher: 16,
+  folkHero: 17,
+  giantFoundling: 18,
+  gladiator: 19,
+  guildArtisan: 20,
+  guildMerchant: 21,
+  hauntedOne: 22,
+  hermit: 23,
+  houseAgent: 24,
+  inheritor: 25,
+  investigatorSCAG: 26,
+  investigatorVRGR: 27,
+  knight: 28,
+  knightOfTheOrder: 29,
+  marine: 30,
+  mercenaryVeteran: 31,
+  noble: 32,
+  outlander: 33,
+  pirate: 34,
+  rewarded: 35,
+  ruined: 36,
+  runeCarver: 37,
+  sage: 38,
+  sailor: 39,
+  shipwright: 40,
+  smuggler: 41,
+  soldier: 42,
+  spy: 43,
+  urbanBountyHunter: 44,
+  urchin: 45,
+  uthgardtTribeMember: 46,
+  waterdhavianNoble: 47,
+  witchlightHand: 48,
 };
 interface BackgroundFeature extends PrismaJson.Feature {
   backgroundId: number;
@@ -29,159 +63,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
     description:
       "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.\n\nYou might also have ties to a specific temple dedicated to your chosen deity or pantheon, and you have a residence there. This could be the temple where you used to serve, if you remain on good terms with it, or a temple where you have found a new home. While near your temple, you can call upon the priests for assistance, provided the assistance you ask for is not hazardous and you remain in good standing with your temple.",
   },
-  {
-    backgroundId: ids.acolyte,
-    name: "Suggested Characteristics",
-    description:
-      "Acolytes are shaped by their experience in temples or other religious communities. Their study of the history and tenets of their faith and their relationships to temples, shrines, or hierarchies affect their mannerisms and ideals. Their flaws might be some hidden hypocrisy or heretical idea, or an ideal or bond taken to an extreme.",
-    extendedTable: [
-      {
-        "Personality Traits": {
-          headers: ["d8", "Personality Trait"],
-          data: [
-            {
-              d8: "1",
-              "Personality Trait":
-                "I idolize a particular hero of my faith, and constantly refer to that person's deeds and example.",
-            },
-            {
-              d8: "2",
-              "Personality Trait":
-                "I can find common ground between the fiercest enemies, empathizing with them and always working toward peace.",
-            },
-            {
-              d8: "3",
-              "Personality Trait":
-                "I see omens in every event and action. The gods try to speak to us, we just need to listen.",
-            },
-            {
-              d8: "4",
-              "Personality Trait": "Nothing can shake my optimistic attitude.",
-            },
-            {
-              d8: "5",
-              "Personality Trait":
-                "I quote (or misquote) sacred texts and proverbs in almost every situation.",
-            },
-            {
-              d8: "6",
-              "Personality Trait":
-                "I am tolerant (or intolerant) of other faiths and respect (or condemn) the worship of other gods.",
-            },
-            {
-              d8: "7",
-              "Personality Trait":
-                "I've enjoyed fine food, drink, and high society among my temple's elite. Rough living grates on me.",
-            },
-            {
-              d8: "8",
-              "Personality Trait":
-                "I've spent so long in the temple that I have little practical experience dealing with people in the outside world.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d6", "Ideal"],
-          data: [
-            {
-              d6: "1",
-              Ideal:
-                "**Tradition.** The ancient traditions of worship and sacrifice must be preserved and upheld. (Lawful)",
-            },
-            {
-              d6: "2",
-              Ideal:
-                "**Charity.** I always try to help those in need, no matter what the personal cost. (Good)",
-            },
-            {
-              d6: "3",
-              Ideal:
-                "**Change.** We must help bring about the changes the gods are constantly working in the world. (Chaotic)",
-            },
-            {
-              d6: "4",
-              Ideal:
-                "**Power.** I hope to one day rise to the top of my faith's religious hierarchy. (Lawful)",
-            },
-            {
-              d6: "5",
-              Ideal:
-                "**Faith.** I trust that my deity will guide my actions. I have faith that if I work hard, things will go well. (Lawful)",
-            },
-            {
-              d6: "6",
-              Ideal:
-                "**Aspiration.** I seek to prove myself worthy of my god's favor by matching my actions against his or her teachings. (Any)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d6", "Bond"],
-          data: [
-            {
-              d6: "1",
-              Bond: "I would die to recover an ancient relic of my faith that was lost long ago.",
-            },
-            {
-              d6: "2",
-              Bond: "I will someday get revenge on the corrupt temple hierarchy who branded me a heretic.",
-            },
-            {
-              d6: "3",
-              Bond: "I owe my life to the priest who took me in when my parents died.",
-            },
-            {
-              d6: "4",
-              Bond: "Everything I do is for the common people.",
-            },
-            {
-              d6: "5",
-              Bond: "I will do anything to protect the temple where I served.",
-            },
-            {
-              d6: "6",
-              Bond: "I seek to preserve a sacred text that my enemies consider heretical and seek to destroy.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d6", "Flaw"],
-          data: [
-            {
-              d6: "1",
-              Flaw: "I judge others harshly, and myself even more severely.",
-            },
-            {
-              d6: "2",
-              Flaw: "I put too much trust in those who wield power within my temple's hierarchy.",
-            },
-            {
-              d6: "3",
-              Flaw: "My piety sometimes leads me to blindly trust those that profess faith in my god.",
-            },
-            {
-              d6: "4",
-              Flaw: "I am inflexible in my thinking.",
-            },
-            {
-              d6: "5",
-              Flaw: "I am suspicious of strangers and expect the worst of them.",
-            },
-            {
-              d6: "6",
-              Flaw: "Once I pick a goal, I become obsessed with it to the detriment of everything else in my life.",
-            },
-          ],
-        },
-      },
-    ],
-  },
+
   //anthropologist
   {
     backgroundId: ids.anthropologist,
@@ -195,149 +77,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
     description:
       "You can communicate with humanoids who don't speak any language you know. You must observe the humanoids interacting with one another for at least 1 day, after which you learn a handful of important words, expressions, and gestures – enough to communicate on a rudimentary level.",
   },
-  {
-    backgroundId: ids.anthropologist,
-    name: "Suggested Characteristics",
-    description:
-      "Anthropologists leave behind the societies into which they were born to discover what life ls like in other parts of the world. They seek to see how other races and civilizations survive – or why they did not. Some anthropologists are driven by intellectual curiosity, while others want the fame and recognition that comes with being the first to discover a new people, a lost tribe, or the truth about an ancient empire's downfall.",
-    extendedTable: [
-      {
-        "Personality Traits": {
-          headers: ["d6", "Personality Trait"],
-          data: [
-            {
-              d6: "1",
-              "Personality Trait":
-                "I prefer the company of those who aren't like me, including people of other races",
-            },
-            {
-              d6: "2",
-              "Personality Trait":
-                "I'm a stickler when it comes to observing proper etiquette and local customs.",
-            },
-            {
-              d6: "3",
-              "Personality Trait": "I would rather observe than meddle.",
-            },
-            {
-              d6: "4",
-              "Personality Trait":
-                "By living among violent people, I have become desensitized to violence.",
-            },
-            {
-              d6: "5",
-              "Personality Trait":
-                "I would risk life and limb to discover a new culture or unravel the secrets of a dead one.",
-            },
-            {
-              d6: "6",
-              "Personality Trait":
-                "When I arrive at a new settlement for the first time, I must learn all its customs.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d6", "Ideal"],
-          data: [
-            {
-              d6: "1",
-              Ideal:
-                "**Discovery.** I want to be the first person to discover a lost culture. (Any)",
-            },
-            {
-              d6: "2",
-              Ideal:
-                "**Distance.** One must not interfere with the affairs of another culture – even one in need of aid. (Lawful)",
-            },
-            {
-              d6: "3",
-              Ideal:
-                "**Knowledge.** By understanding other races and cultures, we learn to understand ourselves. (Any)",
-            },
-            {
-              d6: "4",
-              Ideal:
-                "**Power.** Common people crave strong leadership, and I do my utmost to provide it. (Lawful)",
-            },
-            {
-              d6: "5",
-              Ideal:
-                "**Protection.** I must do everything possible to save a society facing extinction. (Good)",
-            },
-            {
-              d6: "6",
-              Ideal:
-                "**Indifferent.** Life is cruel. What's the point in saving people if they're going to die anyway? (Chaotic)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d6", "Bond"],
-          data: [
-            {
-              d6: "1",
-              Bond: "My mentor gave me a journal filled with lore and wisdom. Losing it would devastate me.",
-            },
-            {
-              d6: "2",
-              Bond: "Having lived among the people of a primeval tribe or clan, I long to return and see how they are faring.",
-            },
-            {
-              d6: "3",
-              Bond: "Years ago, tragedy struck the members of an isolated society I befriended, and I will honor them.",
-            },
-            {
-              d6: "4",
-              Bond: "I want to learn more about a particular humanoid culture that fascinates me.",
-            },
-            {
-              d6: "5",
-              Bond: "I seek to avenge a clan, tribe, kingdom, or empire that was wiped out.",
-            },
-            {
-              d6: "6",
-              Bond: "I have a trinket that I believe is the key to finding a long-lost society.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d6", "Flaw"],
-          data: [
-            {
-              d6: "1",
-              Flaw: "Boats make me seasick.",
-            },
-            {
-              d6: "2",
-              Flaw: "I talk to myself, and I don't make friends easily.",
-            },
-            {
-              d6: "3",
-              Flaw: "I believe that I'm intellectually superior to people from other cultures and have much to teach them.",
-            },
-            {
-              d6: "4",
-              Flaw: "I've picked up some unpleasant habits living among races such as goblins, lizardfolk, or orcs.",
-            },
-            {
-              d6: "5",
-              Flaw: "I complain about everything.",
-            },
-            {
-              d6: "6",
-              Flaw: "I wear a tribal mask and never take it off.",
-            },
-          ],
-        },
-      },
-    ],
-  },
+
   //  archaeologist
   {
     name: "Dust Digger",
@@ -392,157 +132,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
     description:
       "When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether those were dwarves, elves, humans, yuan-ti, or some other known race. In addition, you can determine the monetary value of art objects more than a century old.",
   },
-  {
-    name: "Suggested Characteristics",
-    backgroundId: ids.archaeologist,
-    description:
-      "Few archaeologists can resist the lure of an unexplored ruin or dungeon, particularly if such a site is the source of legends or is rumored to contain the treasures and relics of wizards, warlords, or royalty. Some archaeologists plunder for wealth or fame, while others consider it their calling to illuminate the past or keep the world's greatest treasures from falling into the wrong hands. Whatever their motivations, archaeologists combine the qualities of a scrappy historian with the self-made heroism of a treasure-hunting scoundrel.",
-    extendedTable: [
-      {
-        "Personality Traits": {
-          headers: ["d8", "Personality Trait"],
-          data: [
-            {
-              d8: "1",
-              "Personality Trait": "I love a good puzzle or mystery.",
-            },
-            {
-              d8: "2",
-              "Personality Trait":
-                "I'm a pack rat who never throws anything away.",
-            },
-            {
-              d8: "3",
-              "Personality Trait": "Fame is more important to me than money.",
-            },
-            {
-              d8: "4",
-              "Personality Trait":
-                "I have no qualms about stealing from the dead.",
-            },
-            {
-              d8: "5",
-              "Personality Trait":
-                "I'm happier in a dusty old tomb than I am in the centers of civilization.",
-            },
-            {
-              d8: "6",
-              "Personality Trait":
-                "Traps don't make me nervous. Idiots who trigger traps make me nervous.",
-            },
-            {
-              d8: "7",
-              "Personality Trait": "I might fail, but I will never give up.",
-            },
-            {
-              d8: "8",
-              "Personality Trait":
-                "You might think I'm a scholar, but I love a good brawl. These fists were made for punching.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d6", "Ideal"],
-          data: [
-            {
-              d6: "1",
-              Ideal:
-                "**Preservation.** That artifact belongs in a museum. (Good)",
-            },
-            {
-              d6: "2",
-              Ideal:
-                "**Greed.** I won't risk my life for nothing. I expect some kind of payment. (Any)",
-            },
-            {
-              d6: "3",
-              Ideal:
-                "**Death Wish.** Nothing is more exhilarating than a narrow escape from the jaws of death. (Chaotic)",
-            },
-            {
-              d6: "4",
-              Ideal:
-                "**Dignity.** The dead and their belongings deserve to be treated with respect. (Lawful)",
-            },
-            {
-              d6: "5",
-              Ideal:
-                "**Immortality.** All my exploring is part of a plan to find the secret of everlasting life. (Any)",
-            },
-            {
-              d6: "6",
-              Ideal:
-                "**Danger.** With every great discovery comes grave danger. The two walk hand in hand. (Any)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d6", "Bond"],
-          data: [
-            {
-              d6: "1",
-              Bond: "Ever since I was a child, I've heard stories about a lost city. I aim to find it, learn its secrets, and earn my place in the history books.",
-            },
-            {
-              d6: "2",
-              Bond: "I want to find my mentor, who disappeared on an expedition some time ago.",
-            },
-            {
-              d6: "3",
-              Bond: "I have a friendly rival. Only one of us can be the best, and I aim to prove it's me.",
-            },
-            {
-              d6: "4",
-              Bond: "I won't sell an art object or other treasure that has historical significance or is one of a kind.",
-            },
-            {
-              d6: "5",
-              Bond: "I'm secretly in love with the wealthy patron who sponsors my archaeological exploits.",
-            },
-            {
-              d6: "6",
-              Bond: "I hope to bring prestige to a library, a museum, or a university.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d6", "Flaw"],
-          data: [
-            {
-              d6: "1",
-              Flaw: "I have a secret fear of some common wild animal – and in my work, I see them everywhere.",
-            },
-            {
-              d6: "2",
-              Flaw: "I can't leave a room without searching it for secret doors.",
-            },
-            {
-              d6: "3",
-              Flaw: "When I'm not exploring dungeons or ruins, I get jittery and impatient.",
-            },
-            {
-              d6: "4",
-              Flaw: "I have no time for friends or family. I spend every waking moment thinking about and preparing for my next expedition.",
-            },
-            {
-              d6: "5",
-              Flaw: "When given the choice of going left or right, I always go left.",
-            },
-            {
-              d6: "6",
-              Flaw: "I can't sleep except in total darkness.",
-            },
-          ],
-        },
-      },
-    ],
-  },
+
   // athlete
   {
     name: "Favored Event",
@@ -597,154 +187,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
     description: `You have attracted admiration among spectators, fellow athletes, and trainers in the region that hosted your past athletic victories. When visiting any settlement within 100 miles of where you grew up, there is a 50 percent chance you can find someone there who admires you and is willing to provide information and temporary shelter.\n\nBetween adventures, you might compete in athletic events sufficient enough to maintain a comfortable lifestyle, as per the "Practicing a Profession" downtime activity in chapter 8 of the Players Handbook.`,
     backgroundId: ids.athlete,
   },
-  {
-    name: "Suggested Characteristics",
-    description:
-      "Competition can forge strong bonds between teammates and rivals or ignite bitter feuds that burn outside the arena. Athletes often apply lessons from their training to their lives in general.",
-    backgroundId: ids.athlete,
-    extendedTable: [
-      {
-        "Personality Traits": {
-          headers: ["d8", "Personality Trait"],
-          data: [
-            {
-              d8: "1",
-              "Personality Trait":
-                "I feel most at peace during physical exertion, whether exercise or battle.",
-            },
-            {
-              d8: "2",
-              "Personality Trait": "I don't like to sit idle.",
-            },
-            {
-              d8: "3",
-              "Personality Trait":
-                "I have a daily exercise routine I refuse to break.",
-            },
-            {
-              d8: "4",
-              "Personality Trait": "Obstacles exist to be overcome.",
-            },
-            {
-              d8: "5",
-              "Personality Trait":
-                "When I see others struggling, I offer to help.",
-            },
-            {
-              d8: "6",
-              "Personality Trait": "I love to trade banter and gibes.",
-            },
-            {
-              d8: "7",
-              "Personality Trait": "Anything worth doing is worth doing best.",
-            },
-            {
-              d8: "8",
-              "Personality Trait":
-                "I get irritated if people praise someone else and not me.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d6", "Ideal"],
-          data: [
-            {
-              d6: "1",
-              Ideal:
-                "**Competition.** I strive to test myself in all things. (Chaotic)",
-            },
-            {
-              d6: "2",
-              Ideal:
-                "**Triumph.** The best part of winning is seeing my rivals brought low. (Evil)",
-            },
-            {
-              d6: "3",
-              Ideal:
-                "**Camaraderie.** The strongest bonds are forged through struggle. (Good)",
-            },
-            {
-              d6: "4",
-              Ideal: "**People.** I strive to inspire my spectators. (Neutral)",
-            },
-            {
-              d6: "5",
-              Ideal:
-                "**Tradition.** Every game has rules, and the playing field must be level. (Lawful)",
-            },
-            {
-              d6: "6",
-              Ideal: "**Growth.** Lessons hide in victory and defeat. (Any)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d6", "Bond"],
-          data: [
-            {
-              d6: "1",
-              Bond: "My teammates are my family.",
-            },
-            {
-              d6: "2",
-              Bond: "I will overcome a rival and prove myself their better.",
-            },
-            {
-              d6: "3",
-              Bond: "My mistake got someone hurt. Ill never make that mistake again.",
-            },
-            {
-              d6: "4",
-              Bond: "I will be the best for the honor and glory of my home.",
-            },
-            {
-              d6: "5",
-              Bond: "The person who trained me is the most important person in my world.",
-            },
-            {
-              d6: "6",
-              Bond: "I strive to live up to a specific hero's example.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d6", "Flaw"],
-          data: [
-            {
-              d6: "1",
-              Flaw: "I indulge in a habit that threatens my reputation or health.",
-            },
-            {
-              d6: "2",
-              Flaw: "I'll do absolutely anything to win.",
-            },
-            {
-              d6: "3",
-              Flaw: "I ignore anyone who doesn't compete and anyone who loses to me.",
-            },
-            {
-              d6: "4",
-              Flaw: "I have lingering pain of old injuries.",
-            },
-            {
-              d6: "5",
-              Flaw: "Any defeat or failure on my part is because my opponents cheated.",
-            },
-            {
-              d6: "6",
-              Flaw: "I must be the captain of any group I join.",
-            },
-          ],
-        },
-      },
-    ],
-  },
+
   //charlatan
   {
     name: "Favorite Schemes",
@@ -793,325 +236,15 @@ const BackgroundFeatures: BackgroundFeature[] = [
       "You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona. Additionally, you can forge documents including official papers and personal letters, as long as you have seen an example of the kind of document or the handwriting you are trying to copy.",
     backgroundId: ids.charlatan,
   },
-  {
-    name: "Suggested Characteristics",
-    backgroundId: ids.charlatan,
-    description:
-      "Charlatans are colorful characters who conceal their true selves behind the masks they construct. They reflect what people want to see, what they want to believe, and how they see the world. But their true selves are sometimes plagued by an uneasy conscience, an old enemy, or deep-seated trust issues.",
-    extendedTable: [
-      {
-        "Personality Traits": {
-          headers: ["d8", "Personality Trait"],
-          data: [
-            {
-              d8: "1",
-              "Personality Trait":
-                "I fall in and out of love easily, and am always pursuing someone.",
-            },
-            {
-              d8: "2",
-              "Personality Trait":
-                "I have a joke for every occasion, especially occasions where humor is inappropriate.",
-            },
-            {
-              d8: "3",
-              "Personality Trait":
-                "Flattery is my preferred trick for getting what I want.",
-            },
-            {
-              d8: "4",
-              "Personality Trait":
-                "I'm a born gambler who can't resist taking a risk for a potential payoff.",
-            },
-            {
-              d8: "5",
-              "Personality Trait":
-                "I lie about almost everything, even when there's no good reason to.",
-            },
-            {
-              d8: "6",
-              "Personality Trait":
-                "Sarcasm and insults are my weapons of choice.",
-            },
-            {
-              d8: "7",
-              "Personality Trait":
-                "I keep multiple holy symbols on me and invoke whatever deity might come in useful at any given moment.",
-            },
-            {
-              d8: "8",
-              "Personality Trait":
-                "I pocket anything I see that might have some value.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d6", "Ideal"],
-          data: [
-            {
-              d6: "1",
-              Ideal:
-                "**Independence.** I am a free spirit – no one tells me what to do. (Chaotic)",
-            },
-            {
-              d6: "2",
-              Ideal:
-                "**Fairness.** I never target people who can't afford to lose a few coins. (Lawful)",
-            },
-            {
-              d6: "3",
-              Ideal:
-                "**Charity.** I distribute the money I acquire to the people who really need it. (Good)",
-            },
-            {
-              d6: "4",
-              Ideal:
-                "**Creativity.** I never run the same con twice. (Chaotic)",
-            },
-            {
-              d6: "5",
-              Ideal:
-                "**Friendship.** Material goods come and go. Bonds of friendship last forever. (Good)",
-            },
-            {
-              d6: "6",
-              Ideal:
-                "**Aspiration.** I'm determined to make something of myself. (Any)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d6", "Bond"],
-          data: [
-            {
-              d6: "1",
-              Bond: "I fleeced the wrong person and must work to ensure that this individual never crosses paths with me or those I care about.",
-            },
-            {
-              d6: "2",
-              Bond: "I owe everything to my mentor – a horrible person who's probably rotting in jail somewhere.",
-            },
-            {
-              d6: "3",
-              Bond: "Somewhere out there, I have a child who doesn't know me. I'm making the world better for him or her.",
-            },
-            {
-              d6: "4",
-              Bond: "I come from a noble family, and one day I'll reclaim my lands and title from those who stole them from me.",
-            },
-            {
-              d6: "5",
-              Bond: "A powerful person killed someone I love. Some day soon, I'll have my revenge.",
-            },
-            {
-              d6: "6",
-              Bond: "I swindled and ruined a person who didn't deserve it. I seek to atone for my misdeeds but might never be able to forgive myself.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d6", "Flaw"],
-          data: [
-            {
-              d6: "1",
-              Flaw: "I can't resist a pretty face.",
-            },
-            {
-              d6: "2",
-              Flaw: "I'm always in debt. I spend my ill-gotten gains on decadent luxuries faster than I bring them in.",
-            },
-            {
-              d6: "3",
-              Flaw: "I'm convinced that no one could ever fool me the way I fool others.",
-            },
-            {
-              d6: "4",
-              Flaw: "I'm too greedy for my own good. I can't resist taking a risk if there's money involved.",
-            },
-            {
-              d6: "5",
-              Flaw: "I can't resist swindling people who are more powerful than me.",
-            },
-            {
-              d6: "6",
-              Flaw: "I hate to admit it and will hate myself for it, but I'll run and preserve my own hide if the going gets tough.",
-            },
-          ],
-        },
-      },
-    ],
-  },
+
   //cityWatch
-  {
-    name: "Investigator",
-    description:
-      "Rarer than watch or patrol members are a community's investigators, who are responsible for solving crimes after the fact. Though such folk are seldom found in rural areas, nearly every settlement of decent size has at least one or two watch members who have the skill to investigate crime scenes and track down criminals. If your prior experience is as an investigator, you have proficiency in Investigation rather than Athletics.",
-    backgroundId: ids.cityWatch,
-  },
   {
     name: "Watcher's Eye",
     description:
       "Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former locations rather than the latter.",
     backgroundId: ids.cityWatch,
   },
-  {
-    name: "Suggested Characteristics",
-    backgroundId: ids.cityWatch,
-    description:
-      "Use the tables for the soldier background as the basis for your traits and motivations, modifying the entries when appropriate to suit your identity.\n\nYour bond is likely associated with your fellow watch members or the watch organization itself and almost certainly concerns your community. Your ideal probably involves the fostering of peace and safety. An investigator is likely to have an ideal connected to achieving justice by successfully solving crimes.\n\n*Editor's Note: I added the tables for the soldier background here for your convenience.*",
-    extendedTable: [
-      {
-        "Personality Traits": {
-          headers: ["d8", "Personality Trait"],
-          data: [
-            {
-              d8: "1",
-              "Personality Trait": "I'm always polite and respectful.",
-            },
-            {
-              d8: "2",
-              "Personality Trait":
-                "I'm haunted by memories of war. I can't get the images of violence out of my mind.",
-            },
-            {
-              d8: "3",
-              "Personality Trait":
-                "I've lost too many friends, and I'm slow to make new ones.",
-            },
-            {
-              d8: "4",
-              "Personality Trait":
-                "I'm full of inspiring and cautionary tales from my military experience relevant to almost every combat situation.",
-            },
-            {
-              d8: "5",
-              "Personality Trait":
-                "I can stare down a hellhound without flinching.",
-            },
-            {
-              d8: "6",
-              "Personality Trait":
-                "I enjoy being strong and like breaking things.",
-            },
-            {
-              d8: "7",
-              "Personality Trait": "I have a crude sense of humor.",
-            },
-            {
-              d8: "8",
-              "Personality Trait":
-                "I face problems head-on. A simple, direct solution is the best path to success.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d6", "Ideal"],
-          data: [
-            {
-              d6: "1",
-              Ideal:
-                "**Greater Good.** Our lot is to lay down our lives in defense of others. (Good)",
-            },
-            {
-              d6: "2",
-              Ideal:
-                "**Responsibility.** I do what I must and obey just authority. (Lawful)",
-            },
-            {
-              d6: "3",
-              Ideal:
-                "**Independence.** When people follow orders blindly, they embrace a kind of tyranny. (Chaotic)",
-            },
-            {
-              d6: "4",
-              Ideal:
-                "**Might.** In life as in war, the stronger force wins. (Evil)",
-            },
-            {
-              d6: "5",
-              Ideal:
-                "**Live and Let Live.** Ideals aren't worth killing over or going to war for. (Neutral)",
-            },
-            {
-              d6: "6",
-              Ideal:
-                "**Nation.** My city, nation, or people are all that matter. (Any)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d6", "Bond"],
-          data: [
-            {
-              d6: "1",
-              Bond: "I would still lay down my life for the people I served with.",
-            },
-            {
-              d6: "2",
-              Bond: "Someone saved my life on the battlefield. To this day, I will never leave a friend behind.",
-            },
-            {
-              d6: "3",
-              Bond: "My honor is my life.",
-            },
-            {
-              d6: "4",
-              Bond: "I'll never forget the crushing defeat my company suffered or the enemies who dealt it.",
-            },
-            {
-              d6: "5",
-              Bond: "Those who fight beside me are those worth dying for.",
-            },
-            {
-              d6: "6",
-              Bond: "I fight for those who cannot fight for themselves.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d6", "Flaw"],
-          data: [
-            {
-              d6: "1",
-              Flaw: "The monstrous enemy we faced in battle still leaves me quivering with fear.",
-            },
-            {
-              d6: "2",
-              Flaw: "I have little respect for anyone who is not a proven warrior.",
-            },
-            {
-              d6: "3",
-              Flaw: "I made a terrible mistake in battle that cost many lives – and I would do anything to keep that mistake secret.",
-            },
-            {
-              d6: "4",
-              Flaw: "My hatred of my enemies is blind and unreasoning.",
-            },
-            {
-              d6: "5",
-              Flaw: "I obey the law, even if the law causes misery.",
-            },
-            {
-              d6: "6",
-              Flaw: "I'd rather eat my armor than admit when I'm wrong.",
-            },
-          ],
-        },
-      },
-    ],
-  },
+
   // clanCrafter
   {
     name: "Respect of the Stout Folk",
@@ -1119,158 +252,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
       "As well respected as clan crafters are among outsiders, no one esteems them quite so highly as dwarves do. You always have free room and board in any place where shield dwarves or gold dwarves dwell, and the individuals in such a settlement might vie among themselves to determine who can offer you (and possibly your compatriots) the finest accommodations and assistance.",
     backgroundId: ids.clanCrafter,
   },
-  {
-    name: "Suggested Characteristics",
-    description: `Use the tables for the guild artisan background as the basis for your traits and motivations, modifying the entries when appropriate to suit your identity. (For instance, consider the words "guild" and "clan" to be interchangeable.)\n\nYour bond is almost certainly related to the master or the clan that taught you, or else to the work that you produce. Your ideal might have to do with maintaining the high quality of your work or preserving the dwarven traditions of craftsmanship.\n\nEditor's Note: I added the tables for the guild artisan background here for your convenience.`,
-    backgroundId: ids.clanCrafter,
-    extendedTable: [
-      {
-        "Personality Traits": {
-          headers: ["d8", "Personality Trait"],
-          data: [
-            {
-              d8: "1",
-              "Personality Trait":
-                "I believe that anything worth doing is worth doing right. I can't help it – I'm a perfectionist.",
-            },
-            {
-              d8: "2",
-              "Personality Trait":
-                "I'm a snob who looks down on those who can't appreciate fine art.",
-            },
-            {
-              d8: "3",
-              "Personality Trait":
-                "I always want to know how things work and what makes people tick.",
-            },
-            {
-              d8: "4",
-              "Personality Trait":
-                "I'm full of witty aphorisms and have a proverb for every occasion.",
-            },
-            {
-              d8: "5",
-              "Personality Trait":
-                "I'm rude to people who lack my commitment to hard work and fair play.",
-            },
-            {
-              d8: "6",
-              "Personality Trait":
-                "I like to talk at length about my profession.",
-            },
-            {
-              d8: "7",
-              "Personality Trait":
-                "I don't part with my money easily and will haggle tirelessly to get the best deal possible.",
-            },
-            {
-              d8: "8",
-              "Personality Trait":
-                "I'm well known for my work, and I want to make sure everyone appreciates it. I'm always taken aback when people haven't heard of me.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d6", "Ideal"],
-          data: [
-            {
-              d6: "1",
-              Ideal:
-                "**Community.** It is the duty of all civilized people to strengthen the bonds of community and the security of civilization. (Lawful)",
-            },
-            {
-              d6: "2",
-              Ideal:
-                "**Generosity.** My talents were given to me so that I could use them to benefit the world. (Good)",
-            },
-            {
-              d6: "3",
-              Ideal:
-                "**Freedom.** Everyone should be free to pursue his or her livelihood. (Chaotic)",
-            },
-            {
-              d6: "4",
-              Ideal: "**Greed.** I'm only in it for the money. (Evil)",
-            },
-            {
-              d6: "5",
-              Ideal:
-                "**People.** I'm committed to the people I care about, not to ideals. (Neutral)",
-            },
-            {
-              d6: "6",
-              Ideal:
-                "**Aspiration.** I work hard to be the best there is at my craft. (Any)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d6", "Bond"],
-          data: [
-            {
-              d6: "1",
-              Bond: "The workshop where I learned my trade is the most important place in the world to me.",
-            },
-            {
-              d6: "2",
-              Bond: "I created a great work for someone, and then found them unworthy to receive it. I'm still looking for someone worthy.",
-            },
-            {
-              d6: "3",
-              Bond: "I owe my guild a great debt for forging me into the person I am today.",
-            },
-            {
-              d6: "4",
-              Bond: "I pursue wealth to secure someone's love.",
-            },
-            {
-              d6: "5",
-              Bond: "One day I will return to my guild and prove that I am the greatest artisan of them all.",
-            },
-            {
-              d6: "6",
-              Bond: "I will get revenge on the evil forces that destroyed my place of business and ruined my livelihood.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d6", "Flaw"],
-          data: [
-            {
-              d6: "1",
-              Flaw: "I'll do anything to get my hands on something rare or priceless.",
-            },
-            {
-              d6: "2",
-              Flaw: "2 	I'm quick to assume that someone is trying to cheat me.",
-            },
-            {
-              d6: "3",
-              Flaw: "No one must ever learn that I once stole money from guild coffers.",
-            },
-            {
-              d6: "4",
-              Flaw: "I'm never satisfied with what I have – I always want more.",
-            },
-            {
-              d6: "5",
-              Flaw: "I would kill to acquire a noble title.",
-            },
-            {
-              d6: "6",
-              Flaw: "I'm horribly jealous of anyone who can outshine my handiwork. Everywhere I go, I'm surrounded by rivals.",
-            },
-          ],
-        },
-      },
-    ],
-  },
+
   // cloisteredScholar
   {
     name: "Library Access",
@@ -1278,160 +260,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
       "Though others must often endure extensive interviews and significant fees to gain access to even the most common archives in your library, you have free and easy access to the majority of the library, though it might also have repositories of lore that are too valuable, magical, or secret to permit anyone immediate access.\n\nYou have a working knowledge of your cloister's personnel and bureaucracy, and you know how to navigate those connections with some ease.\n\nAdditionally, you are likely to gain preferential treatment at other libraries across the Realms, as professional courtesy shown to a fellow scholar.",
     backgroundId: ids.cloisteredScholar,
   },
-  {
-    name: "Suggested Characteristics",
-    description:
-      "Use the tables for the sage background as the basis for your traits and motivations, modifying the entries when appropriate to suit your identity.\n\nYour bond is almost certainly associated either with the place where you grew up or with the knowledge you hope to acquire through adventuring. Your ideal is no doubt related to how you view the quest for knowledge and truth – perhaps as a worthy goal in itself, or maybe as a means to a desirable end.\n\n*Editor's Note: I added the tables for the sage background here for your convenience.*",
-    backgroundId: ids.cloisteredScholar,
-    extendedTable: [
-      {
-        "Personality Traits": {
-          headers: ["d8", "Personality Trait"],
-          data: [
-            {
-              d8: "1",
-              "Personality Trait":
-                "I use polysyllabic words that convey the impression of great erudition.",
-            },
-            {
-              d8: "2",
-              "Personality Trait":
-                "I've read every book in the world's greatest libraries – or I like to boast that I have.",
-            },
-            {
-              d8: "3",
-              "Personality Trait":
-                "I'm used to helping out those who aren't as smart as I am, and I patiently explain anything and everything to others.",
-            },
-            {
-              d8: "4",
-              "Personality Trait":
-                "There's nothing I like more than a good mystery.",
-            },
-            {
-              d8: "5",
-              "Personality Trait":
-                "I'm willing to listen to every side of an argument before I make my own judgment.",
-            },
-            {
-              d8: "6",
-              "Personality Trait":
-                "I... speak... slowly... when talking... to idiots, which... almost... everyone... is... compared... to me.",
-            },
-            {
-              d8: "7",
-              "Personality Trait":
-                "I am horribly, horribly awkward in social situations.",
-            },
-            {
-              d8: "8",
-              "Personality Trait":
-                "I'm convinced that people are always trying to steal my secrets.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d6", "Ideal"],
-          data: [
-            {
-              d6: "1",
-              Ideal:
-                "**Knowledge.** The path to power and self-improvement is through knowledge. (Neutral)",
-            },
-            {
-              d6: "2",
-              Ideal:
-                "**Beauty.** What is beautiful points us beyond itself toward what is true. (Good)",
-            },
-            {
-              d6: "3",
-              Ideal:
-                "**Logic.** Emotions must not cloud our logical thinking. (Lawful)",
-            },
-            {
-              d6: "4",
-              Ideal:
-                "**No Limits.** Nothing should fetter the infinite possibility inherent in all existence. (Chaotic)",
-            },
-            {
-              d6: "5",
-              Ideal:
-                "**Power.** Knowledge is the path to power and domination. (Evil)",
-            },
-            {
-              d6: "6",
-              Ideal:
-                "**Self-Improvement.** The goal of a life of study is the betterment of oneself. (Any)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d6", "Bond"],
-          data: [
-            {
-              d6: "1",
-              Bond: "It is my duty to protect my students.",
-            },
-            {
-              d6: "2",
-              Bond: "I have an ancient text that holds terrible secrets that must not fall into the wrong hands.",
-            },
-            {
-              d6: "3",
-              Bond: "I work to preserve a library, university, scriptorium, or monastery.",
-            },
-            {
-              d6: "4",
-              Bond: "My life's work is a series of tomes related to a specific field of lore.",
-            },
-            {
-              d6: "5",
-              Bond: "I've been searching my whole life for the answer to a certain question.",
-            },
-            {
-              d6: "6",
-              Bond: "I sold my soul for knowledge. I hope to do great deeds and win it back.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d6", "Flaw"],
-          data: [
-            {
-              d6: "1",
-              Flaw: "I am easily distracted by the promise of information.",
-            },
-            {
-              d6: "2",
-              Flaw: "Most people scream and run when they see a demon. I stop and take notes on its anatomy.",
-            },
-            {
-              d6: "3",
-              Flaw: "Unlocking an ancient mystery is worth the price of a civilization.",
-            },
-            {
-              d6: "4",
-              Flaw: "I overlook obvious solutions in favor of complicated ones.",
-            },
-            {
-              d6: "5",
-              Flaw: "I speak without really thinking through my words, invariably insulting others.",
-            },
-            {
-              d6: "6",
-              Flaw: "I can't keep a secret to save my life, or anyone else's.",
-            },
-          ],
-        },
-      },
-    ],
-  },
+
   // courtier
   {
     name: "Court Functionary",
@@ -1439,159 +268,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
       "Your knowledge of how bureaucracies function lets you gain access to the records and inner workings of any noble court or government you encounter. You know who the movers and shakers are, whom to go to for the favors you seek, and what the current intrigues of interest in the group are.",
     backgroundId: ids.courtier,
   },
-  {
-    name: "Suggested Characteristics",
-    description:
-      "Use the tables for the guild artisan background as the basis for your traits and motivations, modifying the entries when appropriate to suit your identity.\n\nThe noble court or bureaucratic organization where you got your start is directly or indirectly associated with your bond (which could pertain to certain individuals in the group, such as your sponsor or mentor). Your ideal might be concerned with the prevailing philosophy of your court or organization.\n\n*Editor's Note: I added the tables for the guild artisan background here for your convenience.*",
-    backgroundId: ids.courtier,
-    extendedTable: [
-      {
-        "Personality Traits": {
-          headers: ["d8", "Personality Trait"],
-          data: [
-            {
-              d8: "1",
-              "Personality Trait":
-                "I believe that anything worth doing is worth doing right. I can't help it – I'm a perfectionist.",
-            },
-            {
-              d8: "2",
-              "Personality Trait":
-                "I'm a snob who looks down on those who can't appreciate fine art.",
-            },
-            {
-              d8: "3",
-              "Personality Trait":
-                "I always want to know how things work and what makes people tick.",
-            },
-            {
-              d8: "4",
-              "Personality Trait":
-                "I'm full of witty aphorisms and have a proverb for every occasion.",
-            },
-            {
-              d8: "5",
-              "Personality Trait":
-                "I'm rude to people who lack my commitment to hard work and fair play.",
-            },
-            {
-              d8: "6",
-              "Personality Trait":
-                "I like to talk at length about my profession.",
-            },
-            {
-              d8: "7",
-              "Personality Trait":
-                "I don't part with my money easily and will haggle tirelessly to get the best deal possible.",
-            },
-            {
-              d8: "8",
-              "Personality Trait":
-                "I'm well known for my work, and I want to make sure everyone appreciates it. I'm always taken aback when people haven't heard of me.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d6", "Ideal"],
-          data: [
-            {
-              d6: "1",
-              Ideal:
-                "**Community.** It is the duty of all civilized people to strengthen the bonds of community and the security of civilization. (Lawful)",
-            },
-            {
-              d6: "2",
-              Ideal:
-                "**Generosity.** My talents were given to me so that I could use them to benefit the world. (Good)",
-            },
-            {
-              d6: "3",
-              Ideal:
-                "**Freedom.** Everyone should be free to pursue his or her livelihood. (Chaotic)",
-            },
-            {
-              d6: "4",
-              Ideal: "**Greed.** I'm only in it for the money. (Evil)",
-            },
-            {
-              d6: "5",
-              Ideal:
-                "**People.** I'm committed to the people I care about, not to ideals. (Neutral)",
-            },
-            {
-              d6: "6",
-              Ideal:
-                "**Aspiration.** I work hard to be the best there is at my craft. (Any)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d6", "Bond"],
-          data: [
-            {
-              d6: "1",
-              Bond: "The workshop where I learned my trade is the most important place in the world to me.",
-            },
-            {
-              d6: "2",
-              Bond: "I created a great work for someone, and then found them unworthy to receive it. I'm still looking for someone worthy.",
-            },
-            {
-              d6: "3",
-              Bond: "I owe my guild a great debt for forging me into the person I am today.",
-            },
-            {
-              d6: "4",
-              Bond: "I pursue wealth to secure someone's love.",
-            },
-            {
-              d6: "5",
-              Bond: "One day I will return to my guild and prove that I am the greatest artisan of them all.",
-            },
-            {
-              d6: "6",
-              Bond: "I will get revenge on the evil forces that destroyed my place of business and ruined my livelihood.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d6", "Flaw"],
-          data: [
-            {
-              d6: "1",
-              Flaw: "I'll do anything to get my hands on something rare or priceless.",
-            },
-            {
-              d6: "2",
-              Flaw: "2 	I'm quick to assume that someone is trying to cheat me.",
-            },
-            {
-              d6: "3",
-              Flaw: "No one must ever learn that I once stole money from guild coffers.",
-            },
-            {
-              d6: "4",
-              Flaw: "I'm never satisfied with what I have – I always want more.",
-            },
-            {
-              d6: "5",
-              Flaw: "I would kill to acquire a noble title.",
-            },
-            {
-              d6: "6",
-              Flaw: "I'm horribly jealous of anyone who can outshine my handiwork. Everywhere I go, I'm surrounded by rivals.",
-            },
-          ],
-        },
-      },
-    ],
-  },
+
   // criminal
   {
     name: "Criminal Specialty",
@@ -1646,166 +323,8 @@ const BackgroundFeatures: BackgroundFeature[] = [
       "You have a reliable and trustworthy contact who acts as your liaison to a network of other criminals. You know how to get messages to and from your contact, even over great distances; specifically, you know the local messengers, corrupt caravan masters, and seedy sailors who can deliver messages for you.",
     backgroundId: ids.criminal,
   },
-  {
-    name: "Suggested Characteristics",
-    description:
-      "Criminals might seem like villains on the surface, and many of them are villainous to the core. But some have an abundance of endearing, if not redeeming, characteristics. There might be honor among thieves, but criminals rarely show any respect for law or authority.",
-    backgroundId: ids.criminal,
-    extendedTable: [
-      {
-        "Personality Traits": {
-          headers: ["d8", "Personality Trait"],
-          data: [
-            {
-              d8: "1",
-              "Personality Trait":
-                "I always have a plan for what to do when things go wrong.",
-            },
-            {
-              d8: "2",
-              "Personality Trait":
-                "I am always calm, no matter what the situation. I never raise my voice or let my emotions control me.",
-            },
-            {
-              d8: "3",
-              "Personality Trait":
-                "The first thing I do in a new place is note the locations of everything valuable – or where such things could be hidden.",
-            },
-            {
-              d8: "4",
-              "Personality Trait":
-                "I would rather make a new friend than a new enemy.",
-            },
-            {
-              d8: "5",
-              "Personality Trait":
-                "I am incredibly slow to trust. Those who seem the fairest often have the most to hide.",
-            },
-            {
-              d8: "6",
-              "Personality Trait":
-                "I don't pay attention to the risks in a situation. Never tell me the odds.",
-            },
-            {
-              d8: "7",
-              "Personality Trait":
-                "The best way to get me to do something is to tell me I can't do it.",
-            },
-            {
-              d8: "8",
-              "Personality Trait": "I blow up at the slightest insult.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d6", "Ideal"],
-          data: [
-            {
-              d6: "1",
-              Ideal:
-                "**Honor.** I don't steal from others in the trade. (Lawful)",
-            },
-            {
-              d6: "2",
-              Ideal:
-                "**Freedom.** Chains are meant to be broken, as are those who would forge them. (Chaotic)",
-            },
-            {
-              d6: "3",
-              Ideal:
-                "**Charity.** I steal from the wealthy so that I can help people in need. (Good)",
-            },
-            {
-              d6: "4",
-              Ideal:
-                "**Greed.** I will do whatever it takes to become wealthy. (Evil)",
-            },
-            {
-              d6: "5",
-              Ideal:
-                "**People.** I'm loyal to my friends, not to any ideals, and everyone else can take a trip down the Styx for all I care. (Neutral)",
-            },
-            {
-              d6: "6",
-              Ideal:
-                "**Redemption.** There's a spark of good in everyone. (Good)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d6", "Bond"],
-          data: [
-            {
-              d6: "1",
-              Bond: "I'm trying to pay off an old debt I owe to a generous benefactor.",
-            },
-            {
-              d6: "2",
-              Bond: "My ill-gotten gains go to support my family.",
-            },
-            {
-              d6: "3",
-              Bond: "Something important was taken from me, and I aim to steal it back.",
-            },
-            {
-              d6: "4",
-              Bond: "I will become the greatest thief that ever lived.",
-            },
-            {
-              d6: "5",
-              Bond: "I'm guilty of a terrible crime. I hope I can redeem myself for it.",
-            },
-            {
-              d6: "6",
-              Bond: "Someone I loved died because of a mistake I made. That will never happen again.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d6", "Flaw"],
-          data: [
-            {
-              d6: "1",
-              Flaw: "When I see something valuable, I can think of nothing but how to steal it.",
-            },
-            {
-              d6: "2",
-              Flaw: "When faced with a choice between money and my friends, I usually choose the money.",
-            },
-            {
-              d6: "3",
-              Flaw: "If there's a plan, I'll forget it. If I don't forget it, I'll ignore it.",
-            },
-            {
-              d6: "4",
-              Flaw: "I have a 'tell' that reveals when I'm lying.",
-            },
-            {
-              d6: "5",
-              Flaw: "I turn tail and run when things look bad.",
-            },
-            {
-              d6: "6",
-              Flaw: "An innocent person is in prison for a crime that I committed. I'm okay with that.",
-            },
-          ],
-        },
-      },
-    ],
-  },
+
   // entertainer
-  {
-    name: "Gladiator",
-    description:
-      "A gladiator is as much an entertainer as any minstrel or circus performer trained to make the arts of combat into a spectacle the crowd can enjoy. This kind of flashy combat is your entertainer routine, though you might also have some skills as a tumbler or actor. Using your By Popular Demand feature, you can find a place to perform in any place that features combat for entertainment-perhaps a gladiatorial arena or secret pit fighting club. You can replace the musical instrument in your equipment package with an inexpensive but unusual weapon, such as a trident or net.",
-    backgroundId: ids.entertainer,
-  },
   {
     name: "Entertainer Routines",
     backgroundId: ids.entertainer,
@@ -1867,159 +386,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
       "You can always find a place to perform, usually in an inn or tavern but possibly with a circus, at a theater, or even in a noble's court. At such a place, you receive free lodging and food of a modest or comfortable standard (depending on the quality of the establishment), as long as you perform each night. In addition, your performance makes you something of a local figure. When strangers recognize you in a town where you have performed, they typically take a liking to you.",
     backgroundId: ids.entertainer,
   },
-  {
-    name: "Suggested Characteristics",
-    description:
-      "Successful entertainers have to be able to capture and hold an audience's attention, so they tend to have flamboyant or forceful personalities. They're inclined toward the romantic and often cling to high-minded ideals about the practice of art and the appreciation of beauty.",
-    backgroundId: ids.entertainer,
-    extendedTable: [
-      {
-        "Personality Traits": {
-          headers: ["d8", "Personality Trait"],
-          data: [
-            {
-              d8: "1",
-              "Personality Trait":
-                "I know a story relevant to almost every situation.",
-            },
-            {
-              d8: "2",
-              "Personality Trait":
-                "Whenever I come to a new place, I collect local rumors and spread gossip.",
-            },
-            {
-              d8: "3",
-              "Personality Trait":
-                "I'm a hopeless romantic, always searching for that 'special someone.'",
-            },
-            {
-              d8: "4",
-              "Personality Trait":
-                "Nobody stays angry at me or around me for long, since I can defuse any amount of tension.",
-            },
-            {
-              d8: "5",
-              "Personality Trait":
-                "I love a good insult, even one directed at me.",
-            },
-            {
-              d8: "6",
-              "Personality Trait":
-                "I get bitter if I'm not the center of attention.",
-            },
-            {
-              d8: "7",
-              "Personality Trait":
-                "I'll settle for nothing less than perfection.",
-            },
-            {
-              d8: "8",
-              "Personality Trait":
-                "I change my mood or my mind as quickly as I change key in a song.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d6", "Ideal"],
-          data: [
-            {
-              d6: "1",
-              Ideal:
-                "**Beauty.** When I perform, I make the world better than it was. (Good)",
-            },
-            {
-              d6: "2",
-              Ideal:
-                "**Tradition.** The stories, legends, and songs of the past must never be forgotten, for they teach us who we are. (Lawful)",
-            },
-            {
-              d6: "3",
-              Ideal:
-                "**Creativity.** The world is in need of new ideas and bold action. (Chaotic)",
-            },
-            {
-              d6: "4",
-              Ideal: "**Greed.** I'm only in it for the money and fame. (Evil)",
-            },
-            {
-              d6: "5",
-              Ideal:
-                "**People.** I like seeing the smiles on people's faces when I perform. That's all that matters. (Neutral)",
-            },
-            {
-              d6: "6",
-              Ideal:
-                "**Honesty.** Art should reflect the soul; it should come from within and reveal who we really are. (Any)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d6", "Bond"],
-          data: [
-            {
-              d6: "1",
-              Bond: "My instrument is my most treasured possession, and it reminds me of someone I love.",
-            },
-            {
-              d6: "2",
-              Bond: "Someone stole my precious instrument, and someday I'll get it back.",
-            },
-            {
-              d6: "3",
-              Bond: "I want to be famous, whatever it takes.",
-            },
-            {
-              d6: "4",
-              Bond: "I idolize a hero of the old tales and measure my deeds against that person's.",
-            },
-            {
-              d6: "5",
-              Bond: "I will do anything to prove myself superior to my hated rival.",
-            },
-            {
-              d6: "6",
-              Bond: "I would do anything for the other members of my old troupe.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d6", "Flaw"],
-          data: [
-            {
-              d6: "1",
-              Flaw: "I'll do anything to win fame and renown.",
-            },
-            {
-              d6: "2",
-              Flaw: "I'm a sucker for a pretty face.",
-            },
-            {
-              d6: "3",
-              Flaw: "A scandal prevents me from ever going home again. That kind of trouble seems to follow me around.",
-            },
-            {
-              d6: "4",
-              Flaw: "I once satirized a noble who still wants my head. It was a mistake that I will likely repeat.",
-            },
-            {
-              d6: "5",
-              Flaw: "I have trouble keeping my true feelings hidden. My sharp tongue lands me in trouble.",
-            },
-            {
-              d6: "6",
-              Flaw: "Despite my best efforts, I am unreliable to my friends.",
-            },
-          ],
-        },
-      },
-    ],
-  },
+
   // facelss
   {
     name: "Faceless Persona",
@@ -2083,159 +450,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
       "Most of your fellow adventurers and the world know you as your persona. Those who seek to learn more about you—your weakness, your origins, your purpose—find themselves stymied by your disguise. Upon donning a disguise and behaving as your persona, you are unidentifiable as your true self. By removing your disguise and revealing your true face, you are no longer identifiable as your persona. This allows you to change appearances between your two personalities as often as you wish, using one to hide the other or serve as convenient camouflage. However, should someone realize the connection between your persona and your true self, your deception might lose its effectiveness.",
     backgroundId: ids.faceless,
   },
-  {
-    name: "Suggested Characteristics",
-    description:
-      "A faceless character usually plays their persona—the hero or extraordinary person they are every day. That's all a facade, though, or a part of them expressed to an extreme. To define a persona, feel free to choose characteristics from other backgrounds, particularly folk hero, hermit, or noble. For the person behind the persona, the one who truly strives to be faceless, consider a distinct set of faceless characteristics. As a result, those with this background have two sets of characteristics, one for their persona, and one for their faceless selves.",
-    backgroundId: ids.faceless,
-    extendedTable: [
-      {
-        "Personality Traits": {
-          headers: ["d8", "Personality Trait"],
-          data: [
-            {
-              d8: "1",
-              "Personality Trait": "I'm earnest and uncommonly direct.",
-            },
-            {
-              d8: "2",
-              "Personality Trait":
-                "I strive to have no personality—it's easier to forget what's hardly there.",
-            },
-            {
-              d8: "3",
-              "Personality Trait":
-                "I treasure a memento of a person or instance that set me upon my path.",
-            },
-            {
-              d8: "4",
-              "Personality Trait":
-                "I sleep just as much as I need to and on an unusual schedule.",
-            },
-            {
-              d8: "5",
-              "Personality Trait":
-                " 	I think far ahead, a detachedness often mistaken for daydreaming.",
-            },
-            {
-              d8: "6",
-              "Personality Trait":
-                "I cultivate a single obscure hobby or study and eagerly discuss it at length.",
-            },
-            {
-              d8: "7",
-              "Personality Trait":
-                "I am ever learning how to be among others—when to stay quiet, when to laugh.",
-            },
-            {
-              d8: "8",
-              "Personality Trait":
-                "I behave like an extreme opposite of my persona.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d6", "Ideal"],
-          data: [
-            {
-              d6: "1",
-              Ideal:
-                "**Justice.** Place in society shouldn't determine one's access to what is right. (Good)",
-            },
-            {
-              d6: "2",
-              Ideal:
-                "**Security.** Doing what must be done can't bring the innocent to harm. (Lawful)",
-            },
-            {
-              d6: "3",
-              Ideal:
-                "**Confusion.** Deception is a weapon. Strike from where your foes won't expect. (Chaotic)",
-            },
-            {
-              d6: "4",
-              Ideal:
-                "**Infamy.** My name will be a malediction, a curse that fulfills my will. (Evil)",
-            },
-            {
-              d6: "5",
-              Ideal:
-                "**Incorruptability.** Be a symbol, and leave your flawed being behind. (Any)",
-            },
-            {
-              d6: "6",
-              Ideal:
-                "**Anonymity**  It's my deeds that should be remembered, not their instrument. (Any)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d6", "Bond"],
-          data: [
-            {
-              d6: "1",
-              Bond: "I do everything for my family. My first thought is keeping them safe.",
-            },
-            {
-              d6: "2",
-              Bond: "What I do, I do for the world. The people don't realize how much they need me.",
-            },
-            {
-              d6: "3",
-              Bond: "I've seen too many in need. I must not fail them as everyone else has.",
-            },
-            {
-              d6: "4",
-              Bond: "I stand in opposition, lest the wicked go unopposed.",
-            },
-            {
-              d6: "5",
-              Bond: "I am exceptional. I do this because no one else can, and no one can stop me.",
-            },
-            {
-              d6: "6",
-              Bond: "I do everything for those who were taken from me.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d6", "Flaw"],
-          data: [
-            {
-              d6: "1",
-              Flaw: "I an callous about death. It comes to us all eventually.",
-            },
-            {
-              d6: "2",
-              Flaw: "I never make eye contact or hold it unflinchingly.",
-            },
-            {
-              d6: "3",
-              Flaw: "I have no sense of humor. Laughing is uncomfortable and embarrassing.",
-            },
-            {
-              d6: "4",
-              Flaw: "I overexert myself, sometimes needing to recuperate for a day or more.",
-            },
-            {
-              d6: "5",
-              Flaw: "I think far ahead, a detachedness often mistaken for daydreaming.",
-            },
-            {
-              d6: "6",
-              Flaw: "I see morality entirely in black and white.",
-            },
-          ],
-        },
-      },
-    ],
-  },
+
   // factionAgent
   {
     name: "Factions of the Sword Coast",
@@ -2283,158 +498,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
       "As a faction agent, you have access to a secret network of supporters and operatives who can provide assistance on your adventures. You know a set of secret signs and passwords you can use to identify such operatives, who can provide you with access to a hidden safe house, free room and board, or assistance in finding information. These agents never risk their lives for you or risk revealing their true identities.",
     backgroundId: ids.factionAgent,
   },
-  {
-    name: "Suggested Characteristics",
-    description: `Use the tables for the Acolyte background as the basis for your traits and motivations, modifying the entries when appropriate to suit your identity. (For instance, consider the words "faith" and "faction" to be interchangeable.)\n\n*Editor's Note: I added the tables for the acolyte background here for your convenience.*\n\nYour bond might be associated with other members of your faction, or a location or an object that is important to your faction. The ideal you strive for is probably in keeping with the tenets and principles of your faction, but might be more personal in nature.`,
-    backgroundId: ids.factionAgent,
-    extendedTable: [
-      {
-        "Personality Traits": {
-          headers: ["d8", "Personality Trait"],
-          data: [
-            {
-              d8: "1",
-              "Personality Trait":
-                "I idolize a particular hero of my faith, and constantly refer to that person's deeds and example.",
-            },
-            {
-              d8: "2",
-              "Personality Trait":
-                "I can find common ground between the fiercest enemies, empathizing with them and always working toward peace.",
-            },
-            {
-              d8: "3",
-              "Personality Trait":
-                "I see omens in every event and action. The gods try to speak to us, we just need to listen.",
-            },
-            {
-              d8: "4",
-              "Personality Trait": "Nothing can shake my optimistic attitude.",
-            },
-            {
-              d8: "5",
-              "Personality Trait":
-                "I quote (or misquote) sacred texts and proverbs in almost every situation.",
-            },
-            {
-              d8: "6",
-              "Personality Trait":
-                "I am tolerant (or intolerant) of other faiths and respect (or condemn) the worship of other gods.",
-            },
-            {
-              d8: "7",
-              "Personality Trait":
-                "I've enjoyed fine food, drink, and high society among my temple's elite. Rough living grates on me.",
-            },
-            {
-              d8: "8",
-              "Personality Trait":
-                "I've spent so long in the temple that I have little practical experience dealing with people in the outside world.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d6", "Ideal"],
-          data: [
-            {
-              d6: "1",
-              Ideal:
-                "**Tradition.** The ancient traditions of worship and sacrifice must be preserved and upheld. (Lawful)",
-            },
-            {
-              d6: "2",
-              Ideal:
-                "**Charity.** I always try to help those in need, no matter what the personal cost. (Good)",
-            },
-            {
-              d6: "3",
-              Ideal:
-                "**Change.** We must help bring about the changes the gods are constantly working in the world. (Chaotic)",
-            },
-            {
-              d6: "4",
-              Ideal:
-                "**Power.** I hope to one day rise to the top of my faith's religious hierarchy. (Lawful)",
-            },
-            {
-              d6: "5",
-              Ideal:
-                "**Faith.** I trust that my deity will guide my actions. I have faith that if I work hard, things will go well. (Lawful)",
-            },
-            {
-              d6: "6",
-              Ideal:
-                "**Aspiration.** I seek to prove myself worthy of my god's favor by matching my actions against his or her teachings. (Any)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d6", "Bond"],
-          data: [
-            {
-              d6: "1",
-              Bond: "I would die to recover an ancient relic of my faith that was lost long ago.",
-            },
-            {
-              d6: "2",
-              Bond: "I will someday get revenge on the corrupt temple hierarchy who branded me a heretic.",
-            },
-            {
-              d6: "3",
-              Bond: "I owe my life to the priest who took me in when my parents died.",
-            },
-            {
-              d6: "4",
-              Bond: "Everything I do is for the common people.",
-            },
-            {
-              d6: "5",
-              Bond: "I will do anything to protect the temple where I served.",
-            },
-            {
-              d6: "6",
-              Bond: "I seek to preserve a sacred text that my enemies consider heretical and seek to destroy.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d6", "Flaw"],
-          data: [
-            {
-              d6: "1",
-              Flaw: "I judge others harshly, and myself even more severely.",
-            },
-            {
-              d6: "2",
-              Flaw: "I put too much trust in those who wield power within my temple's hierarchy.",
-            },
-            {
-              d6: "3",
-              Flaw: "My piety sometimes leads me to blindly trust those that profess faith in my god.",
-            },
-            {
-              d6: "4",
-              Flaw: "I am inflexible in my thinking.",
-            },
-            {
-              d6: "5",
-              Flaw: "I am suspicious of strangers and expect the worst of them.",
-            },
-            {
-              d6: "6",
-              Flaw: "Once I pick a goal, I become obsessed with it to the detriment of everything else in my life.",
-            },
-          ],
-        },
-      },
-    ],
-  },
+
   //far traveler
   {
     name: "Why Are You Here?",
@@ -2530,149 +594,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
       "Your accent, mannerisms, figures of speech, and perhaps even your appearance all mark you as foreign. Curious glances are directed your way wherever you go, which can be a nuisance, but you also gain the friendly interest of scholars and others intrigued by far-off lands, to say nothing of everyday folk who are eager to hear stories of your homeland.\n\nYou can parley this attention into access to people and places you might not otherwise have, for you and your traveling companions. Noble lords, scholars, and merchant princes, to name a few, might be interested in hearing about your distant homeland and people.",
     backgroundId: ids.farTraveler,
   },
-  {
-    name: "Suggested Characteristics",
-    description: "Here are some suggested characteristics for far travelers.",
-    backgroundId: ids.farTraveler,
-    extendedTable: [
-      {
-        "Personality Traits": {
-          headers: ["d6", "Personality Trait"],
-          data: [
-            {
-              d6: "1",
-              "Personality Trait":
-                "I have different assumptions from those around me concerning personal space, blithely invading others' space in innocence, or reacting to ignorant invasion of my own.",
-            },
-            {
-              d6: "2",
-              "Personality Trait":
-                "I have my own ideas about what is and is not food, and I find the eating habits of those around me fascinating, confusing, or revolting.",
-            },
-            {
-              d6: "3",
-              "Personality Trait":
-                "I have a strong code of honor or sense of propriety that others don't comprehend.",
-            },
-            {
-              d6: "4",
-              "Personality Trait":
-                "I express affection or contempt in ways that are unfamiliar to others.",
-            },
-            {
-              d6: "5",
-              "Personality Trait":
-                "I honor my deities through practices that are foreign to this land.",
-            },
-            {
-              d6: "6",
-              "Personality Trait":
-                "I begin or end my day with small traditional rituals that are unfamiliar to those around me.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d6", "Ideal"],
-          data: [
-            {
-              d6: "1",
-              Ideal:
-                "**Change.** I have much to learn from the kindly folk I meet along my way. (Good)",
-            },
-            {
-              d6: "2",
-              Ideal:
-                "**Greater Good.** As someone new to these strange lands, I am cautious and respectful in my dealings. (Lawful)",
-            },
-            {
-              d6: "3",
-              Ideal:
-                "**Honor.** I'm far from home, and everything is strange and wonderful! (Chaotic)",
-            },
-            {
-              d6: "4",
-              Ideal:
-                "**Might.** Though I may not know their ways, neither do they know mine, which can be to my advantage. (Evil)",
-            },
-            {
-              d6: "5",
-              Ideal:
-                "**Nature.** Everything is new, but I have a thirst to learn. (Neutral)",
-            },
-            {
-              d6: "6",
-              Ideal:
-                "**Knowledge.** I must be careful, for I have no way of telling friend from foe here. (Any)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d6", "Bond"],
-          data: [
-            {
-              d6: "1",
-              Bond: "So long as I have this token from my homeland, I can face any adversity in this strange land.",
-            },
-            {
-              d6: "2",
-              Bond: "The gods of my people are a comfort to me so far from home.",
-            },
-            {
-              d6: "3",
-              Bond: "I hold no greater cause than my service to my people.",
-            },
-            {
-              d6: "4",
-              Bond: "My freedom is my most precious possession. I'll never let anyone take it from me again.",
-            },
-            {
-              d6: "5",
-              Bond: "I'm fascinated by the beauty and wonder of this new land.",
-            },
-            {
-              d6: "6",
-              Bond: "Though I had no choice, I lament having to leave my loved one(s) behind. I hope to see them again one day.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d6", "Flaw"],
-          data: [
-            {
-              d6: "1",
-              Flaw: "I am secretly (or not so secretly) convinced of the superiority of my own culture over that of this foreign land.",
-            },
-            {
-              d6: "2",
-              Flaw: "I pretend not to understand the local language in order to avoid interactions I would rather not have.",
-            },
-            {
-              d6: "3",
-              Flaw: "I have a weakness for the exotic beauty of the people of these lands.",
-            },
-            {
-              d6: "4",
-              Flaw: "I don't take kindly to some of the actions and motivations of the people of this land, because these folk are different from me.",
-            },
-            {
-              d6: "5",
-              Flaw: "I consider the adherents of other gods to be deluded innocents at best, or ignorant fools at worst.",
-            },
-            {
-              d6: "6",
-              Flaw: "I have a weakness for the new intoxicants and other pleasures of this land.",
-            },
-          ],
-        },
-      },
-    ],
-  },
+
   // feylost
   {
     name: "Fey Mark",
@@ -2779,180 +701,1052 @@ const BackgroundFeatures: BackgroundFeature[] = [
       "Your mannerisms and knowledge of fey customs are recognized by natives of the Feywild, who see you as one of their own. Because of this, friendly Fey creatures are inclined to come to your aid if you are lost or need help in the Feywild.",
     backgroundId: ids.feyLost,
   },
+
   {
-    name: "Suggested Characteristics",
+    backgroundId: ids.fisher,
+    name: "Harvest the Water",
     description:
-      "These tables, while optional, are well suited to Feywild-themed adventurers and are ideal for any character who has the Feylost background.",
-    backgroundId: ids.feyLost,
+      "You gain advantage on ability checks made using fishing tackle. If you have access to a body of water that sustains marine life, you can maintain a moderate lifestyle while working as a fisher, and you can catch enough food to feed yourself and up to ten other people each day.",
+  },
+  {
+    backgroundId: ids.fisher,
+    name: "Fishing Tales",
+    description:
+      "You can tell a compelling tale, whether tall or true, to impress and entertain others. Once a day, you can tell your story to willing listeners. At the DM's discretion, a number of those listeners become friendly toward you; this is not a magical effect, and continued amicability on their part depends on your actions. You can roll on the following table to help determine the theme of your tale or choose one that best fits your character. Alternatively, work with your DM to create your own fishing tale.",
     extendedTable: [
       {
-        "Personality Traits": {
-          headers: ["d8", "Personality Trait"],
+        "": {
+          headers: ["d8", "Fishing Tale"],
           data: [
             {
               d8: "1",
-              "Personality Trait":
-                "I'm haunted by fey laughter that only I can hear, though I know it's just my mind playing tricks on me.",
+              "Fishing Tale":
+                "**Lobster Wrestling.** You fought in hand-to-hand combat with an immense lobster.",
             },
             {
               d8: "2",
-              "Personality Trait":
-                "Like a nomad, I can't settle down in one place for very long.",
+              "Fishing Tale":
+                "**It Dragged the Boat.** You nearly caught a fish of monstrous size that pulled your boat for miles.",
             },
             {
               d8: "3",
-              "Personality Trait": "Good music makes me weep like a baby.",
+              "Fishing Tale":
+                "**Fins of Pure Gold.** You caught a sea animal whose fins were made of pure gold, but another fisher stole it.",
             },
             {
               d8: "4",
-              "Personality Trait":
-                "Wherever I go, I try to bring a little of the warmth and tranquility of home with me.",
+              "Fishing Tale":
+                "**Ghost Fish.** You are haunted by a ghostly fish that only you can see.",
             },
             {
               d8: "5",
-              "Personality Trait":
-                "I have never lost my childlike sense of wonder.",
+              "Fishing Tale":
+                "**Nemesis Clam.** A large clam containing a pearl the size of your head claimed one of your fingers before jetting away; one day, you'll find that clam.",
             },
             {
               d8: "6",
-              "Personality Trait":
-                "When I have a new idea, I get wildly excited about it until I come up with another, better idea.",
+              "Fishing Tale":
+                "**The Fish That Swallowed the Sun.** You once saw a fish leap from the water and turn day into night.",
             },
             {
               d8: "7",
-              "Personality Trait":
-                "I live by my own set of weird and wonderful rules.",
+              "Fishing Tale":
+                "**Dive into the Abyss.** You found yourself in an underwater cave leading to the Abyss, and your luck has been sour ever since.",
             },
             {
               d8: "8",
-              "Personality Trait": "I can't bring myself to trust most adults.",
-            },
-          ],
-        },
-      },
-      {
-        Ideals: {
-          headers: ["d8", "Ideal"],
-          data: [
-            {
-              d8: "1",
-              Ideal: "**Friendship.** I never leave a friend behind. (Good)",
-            },
-            {
-              d8: "2",
-              Ideal:
-                "**Empathy.** No creature should be made to suffer. (Good)",
-            },
-            {
-              d8: "3",
-              Ideal:
-                "**Wanderlust.** I prefer to take the less traveled path. (Chaotic)",
-            },
-            {
-              d8: "4",
-              Ideal:
-                "**Changeability.** Change is good, which is why I live by an ever-changing set of rules. (Chaotic)",
-            },
-            {
-              d8: "5",
-              Ideal:
-                "**Honor.** A deal is a deal, and I would never break one. (Lawful)",
-            },
-            {
-              d8: "6",
-              Ideal: `**Rule of Three.** Everything in the multiverse happens in threes. I see the "rule of three" everywhere. (Lawful)`,
-            },
-            {
-              d8: "7",
-              Ideal: "**Obsession.** I won't let go of a grudge. (Evil)",
-            },
-            {
-              d8: "8",
-              Ideal:
-                "**Greed.** I will do whatever it takes to get what I want, regardless of the harm it might cause. (Evil)",
-            },
-          ],
-        },
-      },
-      {
-        Bonds: {
-          headers: ["d8", "Bond"],
-          data: [
-            {
-              d8: "1",
-              Bond: "I would never break my word.",
-            },
-            {
-              d8: "2",
-              Bond: "I find magic in all its forms to be compelling. The more magical a place, the more I am drawn to it.",
-            },
-            {
-              d8: "3",
-              Bond: "A trusted friend is the most important thing in the multiverse to me.",
-            },
-            {
-              d8: "4",
-              Bond: "I have a deep connection to a particular plant, and I visit it often.",
-            },
-            {
-              d8: "5",
-              Bond: "I can't bring myself to harm a Fey creature, either because I consider myself one or because I fear the repercussions.",
-            },
-            {
-              d8: "6",
-              Bond: "The Witchlight Carnival feels like home to me.",
-            },
-            {
-              d8: "7",
-              Bond: "I'm drawn to the Feywild and long to return there, if only for a short while.",
-            },
-            {
-              d8: "8",
-              Bond: "I feel indebted to Mister Witch and Mister Light for giving me a home and a purpose.",
-            },
-          ],
-        },
-      },
-      {
-        Flaws: {
-          headers: ["d8", "Flaw"],
-          data: [
-            {
-              d8: "1",
-              Flaw: "I easily lose track of time. My poor sense of time means I'm always late.",
-            },
-            {
-              d8: "2",
-              Flaw: "I think the whole multiverse is out to get me.",
-            },
-            {
-              d8: "3",
-              Flaw: "I'm always operating under a tight timeline, and I'm obsessed with keeping everything on schedule.",
-            },
-            {
-              d8: "4",
-              Flaw: "I'm a kleptomaniac who covets shiny, sparkling treasure.",
-            },
-            {
-              d8: "5",
-              Flaw: "I'm forgetful. Sometimes I can't remember even the simplest things.",
-            },
-            {
-              d8: "6",
-              Flaw: "I never give away anything for free and always expect something in return.",
-            },
-            {
-              d8: "7",
-              Flaw: "I have many vices and tend to indulge them.",
-            },
-            {
-              d8: "8",
-              Flaw: "I'm always changing my mind-well, almost always.",
+              "Fishing Tale":
+                "**Love Story.** You fell in love with a creature of pure water, but your brief romance ended tragically.",
             },
           ],
         },
       },
     ],
+  },
+  //folkHero
+  {
+    backgroundId: ids.folkHero,
+    name: "Defining Event",
+    description:
+      "You previously pursued a simple profession among the peasantry, perhaps as a farmer, miner, servant, shepherd, woodcutter, or gravedigger. But something happened that set you on a different path and marked you for greater things. Choose or randomly determine a defining event that marked you as a hero of the people.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["d10", "Event"],
+          data: [
+            {
+              d10: "1",
+              Event: "You stood up to a tyrant's agents.",
+            },
+            {
+              d10: "2",
+              Event: "You saved people during a natural disaster.",
+            },
+            {
+              d10: "3",
+              Event: "You stood alone against a terrible monster.",
+            },
+            {
+              d10: "4",
+              Event: "You stole from a corrupt merchant to help the poor.",
+            },
+            {
+              d10: "5",
+              Event: "You led a militia to fight off an invading army.",
+            },
+            {
+              d10: "6",
+              Event:
+                "You broke into a tyrant's castle and stole weapons to arm the people.",
+            },
+            {
+              d10: "7",
+              Event:
+                "You trained the peasantry to use farm implements as weapons against a tyrant's soldiers.",
+            },
+            {
+              d10: "8",
+              Event:
+                "A lord rescinded an unpopular decree after you led a symbolic act of protect against it.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.folkHero,
+    name: "Rustic Hospitality",
+    description:
+      "Since you come from the ranks of the common folk, you fit in among them with ease. You can find a place to hide, rest, or recuperate among other commoners, unless you have shown yourself to be a danger to them. They will shield you from the law or anyone else searching for you, though they will not risk their lives for you.",
+  },
+  // giantFoundling
+  {
+    backgroundId: ids.giantFoundling,
+    name: "Strike of the Giants",
+    description: "You gain the strike of the Giants feat.",
+  },
+  {
+    name: "Origin Stories",
+    description:
+      "How you came to live among colossal creatures is up to you to determine, but the Foundling Origin table suggests a variety of possibilities.",
+    backgroundId: ids.giantFoundling,
+    extendedTable: [
+      {
+        "": {
+          headers: ["d6", "Origin"],
+          data: [
+            {
+              d6: "1",
+              Origin:
+                "You were found as a baby by a family of nomadic giants who raised you as one of their own.",
+            },
+            {
+              d6: "2",
+              Origin:
+                "A family of stone giants rescued you when you fell into a mountain chasm, and you have lived with them underground ever since.",
+            },
+            {
+              d6: "3",
+              Origin:
+                "You were lost or abandoned as a child in a jungle that teemed with ravenous dinosaurs. There, you found an equally lost frost giant; together, you survived.",
+            },
+            {
+              d6: "4",
+              Origin:
+                "Your farm was crushed and your family killed in a battle between warring groups of giants. Racked with guilt over the destruction, a sympathetic giant soldier promised to care for you.",
+            },
+            {
+              d6: "5",
+              Origin:
+                "After you had a series of strange dreams as a child, your superstitious parents sent you to study with a powerful but aloof storm giant oracle.",
+            },
+            {
+              d6: "6",
+              Origin:
+                "While playing hide-and-seek with your friends, you stumbled into the castle of a cloud giant, who immediately adopted you.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  // Gladiator
+  {
+    backgroundId: ids.gladiator,
+    name: "By Popular Demand",
+    description:
+      "You can always find a place to perform in any place that features combat for entertainment-perhaps a gladiatorial arena or secret pit fighting club. At such a place, you receive free lodging and food of a modest or comfortable standard (depending on the quality of the establishment), as long as you perform each night. In addition, your performance makes you something of a local figure. When strangers recognize you in a town where you have performed, they typically take a liking to you. ",
+  },
+  {
+    backgroundId: ids.gladiator,
+    name: "Entertainer Routines",
+    description:
+      "A gladiator is as much an entertainer as any minstrel or circus performer trained to make the arts of combat into a spectacle the crowd can enjoy. This kind of flashy combat is your entertainer routine, though you might also have some skills as a tumbler or actor. Choose one to three routines to define your expertise as an entertainer.",
+  },
+  // guildArtisan
+  {
+    name: "Guild Business",
+    description:
+      "Guilds are generally found in cities large enough to support several artisans practicing the same trade. However, your guild might instead be a loose network of artisans who each work in a different village within a larger realm. Work with your DM to determine the nature of your guild. You can select your guild business from the Guild Business table or roll randomly.",
+    backgroundId: ids.guildArtisan,
+    extendedTable: [
+      {
+        "": {
+          headers: ["d20", "Guild Business"],
+          data: [
+            { d20: "1", "Guild Business": "Alchemists and apothecaries" },
+            {
+              d20: "2",
+              "Guild Business": "Armorers, locksmiths, and finesmiths",
+            },
+            { d20: "3", "Guild Business": "Brewers, distillers, and vintners" },
+            {
+              d20: "4",
+              "Guild Business": "Calligraphers, scribes, and scriveners",
+            },
+            {
+              d20: "5",
+              "Guild Business": "Carpenters, roofers, and plasterers",
+            },
+            {
+              d20: "6",
+              "Guild Business": "Cartographers, surveyors, and chart-makers",
+            },
+            { d20: "7", "Guild Business": "Cobblers and shoemakers" },
+            { d20: "8", "Guild Business": "Cooks and bakers" },
+            { d20: "9", "Guild Business": "Glassblowers and glaziers" },
+            { d20: "10", "Guild Business": "Jewelers and gemcutters" },
+            {
+              d20: "11",
+              "Guild Business": "Leatherworkers, skinners, and tanners",
+            },
+            { d20: "12", "Guild Business": "Masons and stonecutters" },
+            {
+              d20: "13",
+              "Guild Business": "Painters, limners, and sign-makers",
+            },
+            { d20: "14", "Guild Business": "Potters and tile-makers" },
+            { d20: "15", "Guild Business": "Shipwrights and sailmakers" },
+            { d20: "16", "Guild Business": "Smiths and metal-forgers" },
+            { d20: "17", "Guild Business": "Tinkers, pewterers, and casters" },
+            { d20: "18", "Guild Business": "Wagon-makers and wheelwrights" },
+            { d20: "19", "Guild Business": "Weavers and dyers" },
+            {
+              d20: "20",
+              "Guild Business": "Woodcarvers, coopers, and bowyers",
+            },
+          ],
+        },
+      },
+    ],
+    postTableData:
+      "As a member of your guild, you know the skills needed to create finished items from raw materials (reflected in your proficiency with a certain kind of artisan's tools), as well as the principles of trade and good business practices. The question now is whether you abandon your trade for adventure, or take on the extra effort to weave adventuring and trade together.",
+  },
+  {
+    name: "Guild Membership",
+    description:
+      "As an established and respected member of a guild, you can rely on certain benefits that membership provides. Your fellow guild members will provide you with lodging and food if necessary, and pay for your funeral if needed. In some cities and towns, a guildhall offers a central place to meet other members of your profession, which can be a good place to meet potential patrons, allies, or hirelings.\n\nGuilds often wield tremendous political power. If you are accused of a crime, your guild will support you if a good case can be made for your innocence or the crime is justifiable. You can also gain access to powerful political figures through the guild, if you are a member in good standing. Such connections might require the donation of money or magic items to the guild's coffers.\n\nYou must pay dues of 5 gp per month to the guild. If you miss payments, you must make up back dues to remain in the guild's good graces.",
+    backgroundId: ids.guildArtisan,
+  },
+  {
+    name: "Guild Business",
+    description:
+      "Guilds are generally found in cities large enough to support several artisans practicing the same trade. However, your guild might instead be a loose network of artisans who each work in a different village within a larger realm. Work with your DM to determine the nature of your guild. You can select your guild business from the Guild Business table or roll randomly.",
+    backgroundId: ids.guildMerchant,
+    extendedTable: [
+      {
+        "": {
+          headers: ["d20", "Guild Business"],
+          data: [
+            { d20: "1", "Guild Business": "Alchemists and apothecaries" },
+            {
+              d20: "2",
+              "Guild Business": "Armorers, locksmiths, and finesmiths",
+            },
+            { d20: "3", "Guild Business": "Brewers, distillers, and vintners" },
+            {
+              d20: "4",
+              "Guild Business": "Calligraphers, scribes, and scriveners",
+            },
+            {
+              d20: "5",
+              "Guild Business": "Carpenters, roofers, and plasterers",
+            },
+            {
+              d20: "6",
+              "Guild Business": "Cartographers, surveyors, and chart-makers",
+            },
+            { d20: "7", "Guild Business": "Cobblers and shoemakers" },
+            { d20: "8", "Guild Business": "Cooks and bakers" },
+            { d20: "9", "Guild Business": "Glassblowers and glaziers" },
+            { d20: "10", "Guild Business": "Jewelers and gemcutters" },
+            {
+              d20: "11",
+              "Guild Business": "Leatherworkers, skinners, and tanners",
+            },
+            { d20: "12", "Guild Business": "Masons and stonecutters" },
+            {
+              d20: "13",
+              "Guild Business": "Painters, limners, and sign-makers",
+            },
+            { d20: "14", "Guild Business": "Potters and tile-makers" },
+            { d20: "15", "Guild Business": "Shipwrights and sailmakers" },
+            { d20: "16", "Guild Business": "Smiths and metal-forgers" },
+            { d20: "17", "Guild Business": "Tinkers, pewterers, and casters" },
+            { d20: "18", "Guild Business": "Wagon-makers and wheelwrights" },
+            { d20: "19", "Guild Business": "Weavers and dyers" },
+            {
+              d20: "20",
+              "Guild Business": "Woodcarvers, coopers, and bowyers",
+            },
+          ],
+        },
+      },
+    ],
+    postTableData:
+      "As a member of your guild, you know the skills needed to create finished items from raw materials (reflected in your proficiency with a certain kind of artisan's tools), as well as the principles of trade and good business practices. The question now is whether you abandon your trade for adventure, or take on the extra effort to weave adventuring and trade together.",
+  },
+  {
+    name: "Guild Membership",
+    description:
+      "As an established and respected member of a guild, you can rely on certain benefits that membership provides. Your fellow guild members will provide you with lodging and food if necessary, and pay for your funeral if needed. In some cities and towns, a guildhall offers a central place to meet other members of your profession, which can be a good place to meet potential patrons, allies, or hirelings.\n\nGuilds often wield tremendous political power. If you are accused of a crime, your guild will support you if a good case can be made for your innocence or the crime is justifiable. You can also gain access to powerful political figures through the guild, if you are a member in good standing. Such connections might require the donation of money or magic items to the guild's coffers.\n\nYou must pay dues of 5 gp per month to the guild. If you miss payments, you must make up back dues to remain in the guild's good graces.",
+    backgroundId: ids.guildMerchant,
+  },
+  {
+    backgroundId: ids.hauntedOne,
+    name: "Harrowing Event",
+    description:
+      "Prior to becoming an adventurer, your path in life was defined by one dark moment, one fateful decision, or one tragedy. Now you feel a darkness threatening to consume you, and you fear there may be no hope of escape. Choose a harrowing event that haunts you, or roll one on the Harrowing Events table.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["d10", "Harrowing Event"],
+          data: [
+            {
+              d10: "1",
+              "Harrowing Event":
+                "A monster that slaughtered dozens of innocent people spared your life, and you don’t know why.",
+            },
+            {
+              d10: "2",
+              "Harrowing Event":
+                "You were born under a dark star. You can feel it watching you, coldly and distantly. Sometimes it beckons you in the dead of night.",
+            },
+            {
+              d10: "3",
+              "Harrowing Event":
+                "An apparition that has haunted your family for generations now haunts you. You don’t know what it wants, and it won’t leave you alone.",
+            },
+            {
+              d10: "4",
+              "Harrowing Event":
+                "Your family has a history of practicing the dark arts. You dabbled once and felt something horrible clutch at your soul, whereupon you fled in terror.",
+            },
+            {
+              d10: "5",
+              "Harrowing Event":
+                "An oni took your sibling one cold, dark night, and you were unable to stop it.",
+            },
+            {
+              d10: "6",
+              "Harrowing Event":
+                "You were cursed with lycanthropy and later cured. You are now haunted by the innocents you slaughtered.",
+            },
+            {
+              d10: "7",
+              "Harrowing Event":
+                "A hag kidnapped and raised you. You escaped, but the hag still has a magical hold over you and fills your mind with evil thoughts.",
+            },
+            {
+              d10: "8",
+              "Harrowing Event":
+                "You opened an eldritch tome and saw things unfit for a sane mind. You burned the book, but its words and images are burned into your psyche.",
+            },
+            {
+              d10: "9",
+              "Harrowing Event":
+                "A fiend possessed you as a child. You were locked away but escaped. The fiend is still inside you, but now you try to keep it locked away.",
+            },
+            {
+              d10: "10",
+              "Harrowing Event":
+                "You did terrible things to avenge the murder of someone you loved. You became a monster, and it haunts your waking dreams.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.hauntedOne,
+    name: "Heart of Darkness",
+    description:
+      "Those who look into your eyes can see that you have faced unimaginable horror and that you are no stranger to darkness. Though they might fear you, commoners will extend you every courtesy and do their utmost to help you. Unless you have shown yourself to be a danger to them, they will even take up arms to fight alongside you, should you find yourself facing an enemy alone.",
+  },
+  {
+    backgroundId: ids.hermit,
+    name: "Life of Seclusion",
+    description:
+      "What was the reason for your isolation, and what changed to allow you to end your solitude? You can work with your DM to determine the exact nature of your seclusion, or you can choose to roll on the table below to determine the reason behind your seclusion.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["d8", "Reason"],
+          data: [
+            {
+              d8: "1",
+              Reason: "I was searching for spiritual enlightenment.",
+            },
+            {
+              d8: "2",
+              Reason:
+                "I was partaking of communal living in accordance with the dictates of a religious order.",
+            },
+            {
+              d8: "3",
+              Reason: "I was exiled for a crime I didn't commit.",
+            },
+            {
+              d8: "4",
+              Reason: "I retreated from society after a life-altering event.",
+            },
+            {
+              d8: "5",
+              Reason:
+                "I needed a quiet place to work on my art, literature, music, or manifesto.",
+            },
+            {
+              d8: "6",
+              Reason: "I needed to commune with nature, far from civilization.",
+            },
+            {
+              d8: "7",
+              Reason: "I was the caretaker of an ancient ruin or relic.",
+            },
+            {
+              d8: "8",
+              Reason:
+                "I was a pilgrim in search of a person, place, or relic of spiritual significance.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.hermit,
+    name: "Discovery",
+    description:
+      "The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery. The exact nature of this revelation depends on the nature of your seclusion. It might be a great truth about the cosmos, the deities, the powerful beings of the outer planes, or the forces of nature. It could be a site that no one else has ever seen. You might have uncovered a fact that has long been forgotten, or unearthed some relic of the past that could rewrite history. It might be information that would be damaging to the people who or consigned you to exile, and hence the reason for your return to society.\n\nWork with your DM to determine the details of your discovery and its impact on the campaign.",
+  },
+  {
+    backgroundId: ids.inheritor,
+    name: "Inheritance",
+    description:
+      "Choose or randomly determine your inheritance from among the possibilities in the table below. Work with your DM to come up with details: Why is your inheritance so important, and what is its full story? You might prefer for the DM to invent these details as part of the game, allowing you to learn more about your inheritance as your character does.\n\nThe DM is free to use your inheritance as a story hook, sending you on quests to learn more about its history or true nature, or confronting you with foes who want to claim it for themselves or prevent you from learning what you seek. The DM also determines the properties of your inheritance and how they figure into the item's history and importance. For instance, the object might be a minor magic item, or one that begins with a modest ability and increases in potency with the passage of time. Or, the true nature of your inheritance might not be apparent at first and is revealed only when certain conditions are met.\n\nWhen you begin your adventuring career, you can decide whether to tell your companions about your inheritance right away. Rather than attracting attention to yourself, you might want to keep your inheritance a secret until you learn more about what it means to you and what it can do for you.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["d8", "Inheritance"],
+          data: [
+            {
+              d8: "1",
+              Inheritance: "A document such as a map, a letter, or a journal",
+            },
+            { d8: "2", Inheritance: "A trinket" },
+            { d8: "3", Inheritance: "A trinket" },
+            { d8: "4", Inheritance: "An article of clothing" },
+            { d8: "5", Inheritance: "A piece of jewelry" },
+            { d8: "6", Inheritance: "An arcane book or formulary" },
+            { d8: "7", Inheritance: "A written story, song, poem, or secret" },
+            { d8: "8", Inheritance: "A tattoo or other body marking" },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.investigatorSCAG,
+    name: "Watcher's Eye",
+    description:
+      "Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former locations rather than the latter.",
+  },
+  {
+    backgroundId: ids.investigatorVRGR,
+    name: "Path to Mystery",
+    description:
+      "Your first case influenced the types of mysteries you're interested in. Why was this case so impactful, personal, or traumatic? Whom did it affect besides you? Why and how did you get involved? Was it solved? How did it set you on the path to investigating other mysteries? Roll on or choose details from the First Case table below to develop the mystery that started your career as an investigator.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["d8", "First Case"],
+          data: [
+            {
+              d8: "1",
+              "First Case":
+                "A friend was wrongfully accused of murder. You tracked down the actual killer, proving your friend's innocence and starting your career as a detective.",
+            },
+            {
+              d8: "2",
+              "First Case":
+                "You're told you went missing for weeks. When you were found, you had no memory of being gone. Now you search to discover what happened to you.",
+            },
+            {
+              d8: "3",
+              "First Case":
+                "You helped a spirit find peace by finding its missing corpse. Ever since, other spectral clients have sought you out to help them find rest.",
+            },
+            {
+              d8: "4",
+              "First Case":
+                "You revealed that the monsters terrorizing your home were illusions created by a cruel mage. The magic-user escaped, but you've continued to uncover magical hoaxes.",
+            },
+            {
+              d8: "5",
+              "First Case":
+                "You were wrongfully accused and convicted of a crime. You managed to escape and seek to help others avoid the experience you suffered, even while still being pursued by the law.",
+            },
+            {
+              d8: "6",
+              "First Case":
+                "You survived the destructive use of a magic device that wiped out your home. Members of a secret organization found you. You now work with them, tracking down dangerous supernatural phenomena and preventing them from doing harm.",
+            },
+            {
+              d8: "7",
+              "First Case":
+                "You found evidence of a conspiracy underpinning society. You tried to expose this mysterious cabal, but no one believed you. You're still trying to prove what you know is true.",
+            },
+            {
+              d8: "8",
+              "First Case":
+                "You got a job with an agency that investigates crimes that local law enforcement can't solve. You often wonder which you value more, the truth or your pay.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.investigatorVRGR,
+    name: "Official Inquiry",
+    description:
+      "You're experienced at gaining access to people and places to get the information you need. Through a combination of fast-talking, determination, and official-looking documentation, you can gain access to a place or an individual related to a crime you're investigating. Those who aren't involved in your investigation avoid impeding you or pass along your requests. Additionally, local law enforcement has firm opinions about you, viewing you as either a nuisance or one of their own.",
+  },
+  {
+    backgroundId: ids.knight,
+    name: "Retainers",
+    description:
+      "You have the service of three retainers loyal to your family. These retainers can be attendants or messengers. One of your commoner retainers is replaced by a noble who serves as your squire, aiding you in exchange for training on his or her own path to knighthood. Your two remaining retainers might include a groom to care for your horse and a servant who polishes your armor (and even helps you put it on). \n\nYour retainers are commoners who can perform mundane tasks for you, but they do not fight for you, will not follow you into obviously dangerous areas (such as dungeons), and will leave if they are frequently endangered or abused.",
+  },
+  {
+    backgroundId: ids.noble,
+    name: "Position of Privilege or Retainers",
+    description:
+      "Thanks to your noble birth, people are inclined to think the best of you. You are welcome in high society, and people assume you have the right to be wherever you are. The common folk make every effort to accommodate you and avoid your displeasure, and other people of high birth treat you as a member of the same social sphere. You can secure an audience with a local noble if you need to.\n\nalternativly, you can choose to have retainers instead of the position of privilege as described below.\n\nYou have the service of three retainers loyal to your family. These retainers can be attendants or messengers, and one might be a majordomo. Your retainers are commoners who can perform mundane tasks for you, but they do not fight for you, will not follow you into obviously dangerous areas (such as dungeons), and will leave if they are frequently endangered or abused.",
+  },
+  {
+    backgroundId: ids.knightOfTheOrder,
+    name: "Knightly Orders of Faerûn",
+    description: `Many who rightfully call themselves "knight" earn that title as part of an order in service to a deity, such as Kelemvor's Eternal Order or Mystra's Knights of the Mystic Fire. Other knightly orders serve a government, royal family, or are the elite military of a feudal state, such as the brutal Warlock Knights of Vaasa. Other knighthoods are secular and non-governmental organizations of warriors who follow a particular philosophy, or consider themselves a kind of extended family, similar to an order of monks. Although there are organizations, such as the Knights of the Shield, that use the trappings of knighthood without necessarily being warriors, most folk of Faerûn who hear the word "knight" think of a mounted warrior in armor beholden to a code. Below are a few knightly organizations.`,
+    extendedTable: [
+      {
+        "": {
+          headers: ["Knightly Order", "Description"],
+          data: [
+            {
+              "Knightly Order": "The Knights of the Unicorn",
+              Description:
+                "The Knights of the Unicorn began as a fad of romantically minded sons and daughters of patriar families in Baldur's Gate. On a lark, they took the unicorn goddess Lurue as their mascot and went on various adventures for fun. The reality of the dangers they faced eventually sank in, as did Lurue's tenets. Over time the small group grew and spread, gaining a following in places as far as Cormyr. The Knights of the Unicorn are chivalric adventurers who follow romantic ideals: life is to be relished and lived with laughter, quests should be taken on a dare, impossible dreams should be pursued for the sheer wonder of their completion, and everyone should be praised for their strengths and comforted in their weaknesses.",
+            },
+            {
+              "Knightly Order": "Knights of Myth Drannor",
+              Description:
+                "Long ago, the Knights of Myth Drannor were a famous adventuring band, and Dove Falconhand, one of the famous Seven Sisters, was one of them. The band took its name to honor the great but fallen city, just as the new Knights of Myth Drannor do today. With the city once again in ruins, Dove Falconhand decided to reform the group with the primary goal of building alliances and friendship between the civilized races of the world and goodly people in order to combat evil. The Knights of Myth Drannor once again ride the roads of the Dalelands, and they've begun to spread to the lands beyond. Their members, each accepted by Dove herself, are above all valiant and honest.",
+            },
+            {
+              "Knightly Order": "Knights of the Silver Chalice",
+              Description:
+                "The Knights of the Silver Chalice was formed by edict of the demigod Siamorphe in Waterdeep a century ago. Siamorphe's ethos is the nobility's right and responsibility to rule, and the demigod is incarnated as a different noble mortal in each generation. By the decree of the Siamorphe at that time, the Knights of the Silver Chalice took it upon themselves to put a proper heir on the throne of Tethyr and reestablish order in that kingdom. Since then they have grown to be the most popular knighthood in Tethyr, a nation that has hosted many knighthoods in fealty to the crown.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.knightOfTheOrder,
+    name: "Knightly Regard",
+    description:
+      "You receive shelter and succor from members of your knightly order and those who are sympathetic to its aims. If your order is a religious one, you can gain aid from temples and other religious communities of your deity. Knights of civic orders can get help from the community – whether a lone settlement or a great nation that they serve, and knights of philosophical orders can find help from those they have aided in pursuit of their ideals, and those who share those ideals.\n\nThis help comes in the form of shelter and meals, and healing when appropriate, as well as occasionally risky assistance, such as a band of local citizens rallying to aid a sorely pressed knight in a fight, or those who support the order helping to smuggle a knight out of town when he or she is being hunted unjustly.",
+  },
+  {
+    backgroundId: ids.marine,
+    name: "Hardship Endured",
+    description:
+      "Hardship in your past has forged you into an unstoppable living weapon. This hardship is essential to you and is at the heart of a personal philosophy or ethos that often guides your actions. You can roll on the following table to determine this hardship or choose one that best fits your character.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["d6", "Hardship Endured"],
+          data: [
+            {
+              d6: "1",
+              "Hardship Endured":
+                "You hid underwater to avoid detection by enemies and held your breath for an extremely long time. Just before you would have died, you had a revelation about your existence.",
+            },
+            {
+              d6: "2",
+              "Hardship Endured":
+                "You spent months enduring thirst, starvation, and torture at the hands of your enemy, but you never broke.",
+            },
+            {
+              d6: "3",
+              "Hardship Endured":
+                "You enabled the escape of your fellow soldiers, but at great cost to yourself. Some of your past comrades may think you're dead.",
+            },
+            {
+              d6: "4",
+              "Hardship Endured":
+                "No reasonable explanation can explain how you survived a particular battle. Every arrow and bolt missed you. You slew scores of enemies single-handedly and led your comrades to victory.",
+            },
+            {
+              d6: "5",
+              "Hardship Endured":
+                "For days, you hid in the bilge of an enemy ship, surviving on brackish water and foolhardy rats. At the right moment, you crept up to the deck and took over the ship on your own.",
+            },
+            {
+              d6: "6",
+              "Hardship Endured":
+                "You carried an injured marine for miles to avoid capture and death.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.marine,
+    name: "Steady",
+    description: `You can move twice the normal amount of time (up to 16 hours) each day before being subject to the effect of a forced march (see "Travel Pace" in chapter 8 of the Player's Handbook). Additionally, you can automatically find a safe route to land a boat on shore, provided such a route exists.`,
+  },
+  {
+    backgroundId: ids.mercenaryVeteran,
+    name: "Mercernaries of the North",
+    description:
+      "Countless mercenary companies operate up and down the Sword Coast and throughout the North. Most are small-scale operations that employ a dozen to a hundred folk who offer security services, hunt monsters and brigands, or go to war in exchange for gold. Some organizations, such as the Zhentarim, Flaming Fist, and the nation of Mintarn have hundreds or thousands of members and can provide private armies to those with enough funds. A few organizations operating in the North are described below.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["Mercenary Company", "Description"],
+          data: [
+            {
+              "Mercenary Company": "The Chill",
+              Description:
+                "The cold and mysterious Lurkwood serves as the home of numerous groups of goblinoids that have banded together into one tribe called the Chill. Unlike most of their kind, the Chill refrains from raiding the people of the North and maintains relatively good relations so that they can hire them selves out as warriors. Few city-states in the North are willing to field an army alongside the Chill, but several are happy to quietly pay the Chill to battle the Uthgardt, ores, trolls of the Evermoors, and other threats to civilization.",
+            },
+            {
+              "Mercenary Company": "Silent Rain",
+              Description:
+                "Consisting solely of elves, Silent Rain is a legendary mercenary company operating out of Evereska. Caring little for gold or fame, Silent Rain agrees only to jobs that either promote elven causes or involve destroying ores, gnolls, and the like. Prospective employers must leave written word (in Elvish) near Evereska, and the Silent Rain sends a representative if interested.",
+            },
+            {
+              "Mercenary Company": "The Bloodaxes",
+              Description:
+                "Founded in Sundabar nearly two centuries ago, the Bloodaxes were originally a group of dwarves outcast from their clans for crimes against the teachings of Moradin Soulforger. They began hiring out as mercenaries to whoever in the North would pay them. Since then the mercenary company has broadened its membership to other races , but every member is an exile, criminal, or misfit of some sort looking for a fresh start and a new family among the bold Bloodaxes.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.mercenaryVeteran,
+    name: "Mercenary Life",
+    description:
+      "You know the mercenary life as only someone who has experienced it can. You are able to identify mercenary companies by their emblems, and you know a little about any such company, including the names and reputations of its commanders and leaders, and who has hired them recently. You can find the taverns and festhalls where mercenaries abide in any area, as long as you speak the language. You can find mercenary work between adventures sufficient to maintain a comfortable lifestyle.",
+  },
+  {
+    backgroundId: ids.outlander,
+    name: "Origin",
+    description:
+      "You've been to strange places and seen things that others cannot begin to fathom. Consider some of the distant lands you have visited, and how they impacted you. You can roll on the following table to determine your occupation during your time in the wild, or choose one that best fits your character.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["d10", "Occupation"],
+          data: [
+            { d10: "1", Occupation: "Forester" },
+            { d10: "2", Occupation: "Trapper" },
+            { d10: "3", Occupation: "Homesteader" },
+            { d10: "4", Occupation: "Guide" },
+            { d10: "5", Occupation: "Exile or outcast" },
+            { d10: "6", Occupation: "Bounty hunter" },
+            { d10: "7", Occupation: "Pilgrim" },
+            { d10: "8", Occupation: "Tribal nomad" },
+            { d10: "9", Occupation: "Hunter-gatherer" },
+            { d10: "10", Occupation: "Tribal marauder" },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.outlander,
+    name: "Wanderer",
+    description:
+      "You have an excellent memory for maps and geography, and you can always recall the general layout of terrain, settlements, and other features around you. In addition, you can find food and fresh water for yourself and up to five other people each day, provided that the land offers berries, small game, water, and so forth.",
+  },
+  {
+    backgroundId: ids.pirate,
+    name: "Bad Reputation",
+    description:
+      "No matter where you go, people are afraid of you due to your reputation. When you are in a civilized settlement, you can get away with minor criminal offenses, such as refusing to pay for food at a tavern or breaking down doors at a local shop, since most people will not report your activity to the authorities.",
+  },
+  {
+    backgroundId: ids.rewarded,
+    name: "Rewarded Trinket",
+    description:
+      "When you make your character, you may roll once on the Rewarded Trinkets table, instead of on the Trinkets table in the Player's Handbook, for your starting trinket.",
+    extendedTable: [
+      {
+        "Rewarded Trinkets Table": {
+          headers: ["d6", "Trinket"],
+          data: [
+            { d6: "1", Trinket: "A perfumed silk scarf from an admirer" },
+            {
+              d6: "2",
+              Trinket: "A crystal bead that glows like a candle in the dark",
+            },
+            {
+              d6: "3",
+              Trinket:
+                "A letter of introduction and invitation from an influential person in a far-off city",
+            },
+            {
+              d6: "4",
+              Trinket:
+                "A motto or symbol whose meaning eludes you, etched on a piece of your equipment",
+            },
+            {
+              d6: "5",
+              Trinket:
+                "A crisp playing card that never seems to tear or soil, depicting the card that affected you",
+            },
+            {
+              d6: "6",
+              Trinket:
+                "Half a medallion designed to be rejoined to its other half",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.ruined,
+    name: "Still Standing",
+    description:
+      "You have weathered ruinous misfortune, and you possess hidden reserves others don’t expect. You gain the Alert, Skilled, or Tough feat (your choice). Your choice of feat reflects how you’ve dealt with the terrible loss that changed your life forever. If you’ve kept your senses sharp for every opportunity and climbed your way out of misery by seizing the tiniest scrap of hope, choose Alert. If you’ve redoubled your efforts to reclaim what was once yours, choose Skilled. If you’ve stoically persevered through your misfortune, select Tough.",
+  },
+  {
+    backgroundId: ids.ruined,
+    name: "Ruined Trinket",
+    description:
+      "When you make your character, you may roll once on the Ruined Trinkets table, instead of on the Trinkets table in the Player's Handbook, for your starting trinket.",
+    extendedTable: [
+      {
+        "Ruined Trinkets Table": {
+          headers: ["d6", "Trinket"],
+          data: [
+            {
+              d6: "1",
+              Trinket: "A rusted scrap of a once-beloved family heirloom",
+            },
+            {
+              d6: "2",
+              Trinket:
+                "A land deed, but all the names and markings that once tied it to you have faded into obscurity",
+            },
+            { d6: "3", Trinket: "A bauble once imbued with powerful magic" },
+            {
+              d6: "4",
+              Trinket:
+                "A battered playing card with a hole pierced in it, its face depicting the card that affected you",
+            },
+            {
+              d6: "5",
+              Trinket:
+                "A yellowed Humanoid tooth that whispers eerily when placed under a pillow",
+            },
+            {
+              d6: "6",
+              Trinket:
+                "A keepsake from someone you were once close to but who is now your enemy",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.runeCarver,
+    name: "Rune Styles",
+    description:
+      "Each rune carver has a unique style and preferred medium. To determine how you make your runes, you can roll on the Rune Style table.",
+    extendedTable: [
+      {
+        "Rune Style Table": {
+          headers: ["d6", "Rune Style"],
+          data: [
+            {
+              d6: "1",
+              "Rune Style":
+                "You inscribe runes in wax or clay with a fine metal needle.",
+            },
+            {
+              d6: "2",
+              "Rune Style":
+                "You whittle pieces of wood into small figurines you mark with runes.",
+            },
+            {
+              d6: "3",
+              "Rune Style":
+                "You engrave runes onto glass beads and thread them onto necklaces and bracelets.",
+            },
+            {
+              d6: "4",
+              "Rune Style": "You stitch your runes into the hems of clothing.",
+            },
+            {
+              d6: "5",
+              "Rune Style":
+                "You carve runes on a set of animal bones you can throw in different formations.",
+            },
+            {
+              d6: "6",
+              "Rune Style":
+                "You draw your runes into candles, melting the wax to smooth over the engravings.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.runeCarver,
+    name: "Rune Shaper",
+    description: "You gain the Rune Shaper feat.",
+  },
+  {
+    backgroundId: ids.sage,
+    name: "Specialty",
+    description:
+      "To determine the nature of your scholarly training, roll a d8 or choose from the options in the table below.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["d8", "Specialty"],
+          data: [
+            { d8: "1", Specialty: "Alchemist" },
+            { d8: "2", Specialty: "Astronomer" },
+            { d8: "3", Specialty: "Discredited academic" },
+            { d8: "4", Specialty: "Librarian" },
+            { d8: "5", Specialty: "Professor" },
+            { d8: "6", Specialty: "Researcher" },
+            { d8: "7", Specialty: "Wizard's apprentice" },
+            { d8: "8", Specialty: "Scribe" },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    name: "Researcher",
+    description:
+      "When you attempt to learn or recall a piece of lore, if you do not know that information, you often know where and from whom you can obtain it. Usually, this information comes from a library, scriptorium, university, or a sage or other learned person or creature. Your DM might rule that the knowledge you seek is secreted away in an almost inaccessible place, or that it simply cannot be found. Unearthing the deepest secrets of the multiverse can require an adventure or even a whole campaign.",
+    backgroundId: ids.sage,
+  },
+  {
+    name: "Ship's Passage",
+    description:
+      "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate). Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need. Your DM will determine how long it takes to get where you need to go. In return for your free passage, you and your companions are expected to assist the crew during the voyage.",
+    backgroundId: ids.sailor,
+  },
+  {
+    name: "I'll patch it!",
+    description:
+      "Provided you have carpenter's tools and wood, you can perform repairs on a water vehicle. When you use this ability, you restore a number of hit points to the hull of a water vehicle equal to 5 × your proficiency modifier. A vehicle cannot be patched by you in this way again until after it has been pulled ashore and fully repaired.",
+    backgroundId: ids.sailor,
+  },
+  {
+    backgroundId: ids.sailor,
+    name: "Life at Sea",
+    description:
+      "Your life at sea and in port has shaped you; you can roll on the following table to determine its impact or choose an element that best fits your character.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["d6", "Seas Influence"],
+          data: [
+            {
+              d6: "1",
+              "Seas Influence":
+                "Grand Designs. You are working on plans and schematics for a new, very fast ship. You must examine as many different kinds of vessels as possible to help ensure the success of your design.",
+            },
+            {
+              d6: "2",
+              "Seas Influence":
+                "Solid and Sound. You patched up a war galley and prevented it from sinking. The local navy regards you as a friend.",
+            },
+            {
+              d6: "3",
+              "Seas Influence":
+                "Favored. You insisted on thicker planking for a merchant vessel's hull, which saved it from sinking when it smashed against a reef. You have a standing invitation to visit the merchant's distant mansion.",
+            },
+            {
+              d6: "4",
+              "Seas Influence":
+                "Master of Armaments. You specialized in designing and mounting defenses for the navy. You easily recognize and determine the quality of such items.",
+            },
+            {
+              d6: "5",
+              "Seas Influence":
+                "Low Places. You have contacts in the smuggling outfits along the coast; you occasionally repair the criminals' ships in exchange for coin and favors.",
+            },
+            {
+              d6: "6",
+              "Seas Influence":
+                "Mysteries of the Deep. You experienced an encounter with a possibly divine being while sailing alone. Work with your DM to determine the secret about the deep waters of the sea that this entity revealed to you.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.smuggler,
+    name: "Down Low",
+    description:
+      "You are acquainted with a network of smugglers who are willing to help you out of tight situations. While in a particular town, city, or other similarly sized community (DM's discretion), you and your companions can stay for free in safe houses. Safe houses provide a poor lifestyle. While staying at a safe house, you can choose to keep your presence (and that of your companions) a secret.",
+  },
+  {
+    backgroundId: ids.smuggler,
+    name: "Claim to Fame",
+    description:
+      "Every smuggler has that one tale that sets them apart from common criminals. By wits, sailing skill, or a silver tongue, you lived to tell the story—and you tell it often. You can roll on the following table to determine your claim or choose one that best fits your character.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["d6", "Accomplishment"],
+          data: [
+            {
+              d6: "1",
+              Accomplishment:
+                "**Spirit of the Whale.** You smuggled stolen dwarven spirits in the body of a dead whale being pulled behind a fishing boat. When you delivered the goods, the corpse suddenly exploded, sending whale meat and whiskey bottles for half a mile.",
+            },
+            {
+              d6: "2",
+              Accomplishment:
+                "**Cart and Sword.** You drove a cart filled with stolen art through the middle of a battlefield while singing sea shanties to confuse the combatants.",
+            },
+            {
+              d6: "3",
+              Accomplishment:
+                "**The Recruit.** You enlisted in another nation's navy for the purpose of smuggling stolen jewels to a distant port. You attained a minor rank before disappearing from the navy and making your way here.",
+            },
+            {
+              d6: "4",
+              Accomplishment:
+                "**River of Shadows.** Your riverboat accidentally slipped through the veil into the Shadowfell for several hours. While you were there, you sold some stolen dragonborn artifacts before returning to this plane and paddling home.",
+            },
+            {
+              d6: "5",
+              Accomplishment:
+                "**Gold-Hearted.** You agreed to transport a family escaping a war. The baby began to cry at a checkpoint, and you gave the guards all your gold to let you pass. The family never found out about this gesture.",
+            },
+            {
+              d6: "6",
+              Accomplishment:
+                "**Playing Both Sides.** You once smuggled crates of crossbow bolts and bundles of arrows, each destined for an opposing side in a regional war, at the same time. The buyers arrived within moments of each other but did not discover your trickery.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.soldier,
+    name: "Specialty",
+    description:
+      "During your time as a soldier, you had a specific role to play in your unit or army. Roll a d8 or choose from the options in the table below to determine your role:",
+    extendedTable: [
+      {
+        "": {
+          headers: ["d8", "Specialty"],
+          data: [
+            { d8: "1", Specialty: "Officer" },
+            { d8: "2", Specialty: "Scout" },
+            { d8: "3", Specialty: "Infantry" },
+            { d8: "4", Specialty: "Cavalry" },
+            { d8: "5", Specialty: "Healer" },
+            { d8: "6", Specialty: "Quartermaster" },
+            { d8: "7", Specialty: "Standard bearer" },
+            {
+              d8: "8",
+              Specialty: "Support staff (cook, blacksmith, or the like)",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.soldier,
+    name: "Military Rank",
+    description:
+      "You have a military rank from your career as a soldier. Soldiers loyal to your former military organization still recognize your authority and influence, and they defer to you if they are of a lower rank. You can invoke your rank to exert influence over other soldiers and requisition simple equipment or horses for temporary use. You can also usually gain access to friendly military encampments and fortresses where your rank is recognized.",
+  },
+  {
+    backgroundId: ids.spy,
+    name: "Criminal Specialty (Spy)",
+    description:
+      "*This feature is from the Criminal Background, adjust it for the Spy background accordingly.*\n\nThere are many kinds of criminals, and within a thieves' guild or similar criminal organization, individual members have particular specialties. Even criminals who operate outside of such organizations have strong preferences for certain kinds of crimes over others. Choose the role you played in your criminal life, or roll on the table below.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["d8", "Specialty"],
+          data: [
+            { d8: "1", Specialty: "Blackmailer" },
+            { d8: "2", Specialty: "Burglar" },
+            { d8: "3", Specialty: "Enforcer" },
+            { d8: "4", Specialty: "Fence" },
+            { d8: "5", Specialty: "Highway robber" },
+            { d8: "6", Specialty: "Hired killer" },
+            { d8: "7", Specialty: "Pickpocket" },
+            { d8: "8", Specialty: "Smuggler" },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.spy,
+    name: "Criminal Contact (Spy)",
+    description:
+      "*This feature is from the Criminal Background, adjust it for the Spy background accordingly.*\n\nYou have a reliable and trustworthy contact who acts as your liaison to a network of other criminals. You know how to get messages to and from your contact, even over great distances; specifically, you know the local messengers, corrupt caravan masters, and seedy sailors who can deliver messages for you.",
+  },
+  {
+    backgroundId: ids.urbanBountyHunter,
+    name: "Ear to the Ground",
+    description:
+      "You are in frequent contact with people in the segment of society that your chosen quarries move through. These people might be associated with the criminal underworld, the rough-and-tumble folk of the streets, or members of high society. This connection comes in the form of a contact in any city you visit, a person who provides information about the people and places of the local area.",
+  },
+  {
+    backgroundId: ids.urchin,
+    name: "City Secrets",
+    description:
+      "You know the secret patterns and flow to cities and can find passages through the urban sprawl that others would miss. When you are not in combat, you (and companions you lead) can travel between any two locations in the city twice as fast as your speed would normally allow.",
   },
 ];
 

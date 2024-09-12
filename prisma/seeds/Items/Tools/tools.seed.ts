@@ -514,7 +514,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   },
   {
     id: 14,
-    name: "Land and Water Vehicles",
+    name: "Land Vehicles",
 
     skills: [
       {
@@ -1255,6 +1255,40 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
       },
     ],
   },
+  {
+    id: 41,
+    name: "Water Vehicles",
+
+    skills: [
+      {
+        skill: Skill.ARCANA,
+        description:
+          "When you study a magic vehicle, this tool proficiency aids you in uncovering lore or determining how the vehicle operates.",
+      },
+      {
+        skill: Skill.INVESTIGATION,
+        description:
+          "When you inspect a vehicle for clues or hidden information, your proficiency aids you in noticing things that others might miss.",
+      },
+      {
+        skill: Skill.PERCEPTION,
+        description:
+          "When you inspect a vehicle for clues or hidden information, your proficiency aids you in noticing things that others might miss.",
+      },
+      {
+        skill: Skill.SURVIVAL,
+        description:
+          "Your knowledge of vehicles aids you in identifying the origin and use of vehicles you encounter.",
+      },
+    ],
+    features: [
+      {
+        name: "Vehicle Handling",
+        description:
+          "When piloting a vehicle, you can apply your proficiency bonus to the vehicle's AC and saving throws.",
+      },
+    ],
+  },
 ];
 
 const toolIds = {
@@ -1271,7 +1305,7 @@ const toolIds = {
   glassblowerTools: 11,
   herbalismKit: 12,
   jewelerTools: 13,
-  landWaterVehicles: 14,
+  landVehicles: 14,
   leatherworkerTools: 15,
   masonTools: 16,
   musicalInstrument: 17,
@@ -1298,11 +1332,13 @@ const toolIds = {
   panFlute: 38,
   shawm: 39,
   viol: 40,
+  waterVehicle: 41,
 };
 
 const instrumentIds = [31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
 const artisanIds = [
   1, 2, 3, 4, 5, 6, 7, 11, 13, 15, 16, 19, 21, 22, 24, 25, 26,
 ];
+const gamingKitIds = [27, 28, 29, 30];
 
-export { ToolSeed, toolIds, instrumentIds, artisanIds };
+export { ToolSeed, toolIds, instrumentIds, artisanIds, gamingKitIds };

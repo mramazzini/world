@@ -58,7 +58,7 @@ const MainSheet = ({ character }: Props) => {
       <div className="xl:grid md:gap-4 md:grid-flow-row grid-cols-1 md:grid-cols-12  ">
         <section className="flex flex-row bg-base-200 rounded-xl p-4  md:col-span-4 items-center ">
           <Image
-            src={"/fighter.jpg"}
+            src={character.imageURL || "/images/hero.jpg"}
             width={200}
             height={200}
             className="rounded-lg w-[100px] h-[100px] object-cover object-top mr-4"

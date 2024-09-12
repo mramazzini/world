@@ -7,14 +7,13 @@ import GenerateTable from "@/app/components/UI/GenerateTable";
 
 interface Props {
   subRace: SubRaceInfo | null;
-  weaponNames: string[];
 }
 import "@/lib/string.extensions";
 import { arraysEqual } from "@/lib/utils/arraysEqual";
 import { deepEqual } from "assert";
 import { objEqual } from "@/lib/utils/deepEqual";
 import JsonTable from "@/app/components/Utility/JsonTable";
-const SubRacePage = ({ subRace, weaponNames }: Props) => {
+const SubRacePage = ({ subRace }: Props) => {
   if (!subRace) return null;
   const race = subRace.BaseRace;
 
@@ -93,13 +92,12 @@ const SubRacePage = ({ subRace, weaponNames }: Props) => {
           : TraitStatus.NONE,
 
       weaponProficiencies:
-        base.weaponProficiencies.length == 0 &&
-        sub.weaponProficiencies.length > 0
+        base.weaponProficiencyDescription === null &&
+        sub.weaponProficiencyDescription !== null
           ? TraitStatus.NEW
-          : base.weaponProficiencies.length > 0 &&
-            sub.weaponProficiencies.length == 0
-          ? TraitStatus.NONE
-          : !arraysEqual(sub.weaponProficiencies, base.weaponProficiencies)
+          : base.weaponProficiencyDescription !==
+              sub.weaponProficiencyDescription &&
+            sub.weaponProficiencyDescription !== null
           ? TraitStatus.REPLACED
           : TraitStatus.NONE,
 
@@ -292,31 +290,27 @@ const SubRacePage = ({ subRace, weaponNames }: Props) => {
                 <div className="divider m-0"></div>
                 <p>{subRace.languageDescription || race.languageDescription}</p>
               </div>
+              {subRace.weaponProficiencyDescription !== null && (
+                <div className="bg-base-200 rounded-xl p-4  max-w-1/3 ">
+                  <h2 className="pb-0 flex justify-between flex-row items-center">
+                    <div>
+                      Weapons{" "}
+                      <Info
+                        tooltip={`A character who is a ${subRace.name} has proficiency with the following weapons.`}
+                      />
+                    </div>
+                    {subRace.weaponProficiencyDescription !== null ? (
+                      <div className="badge badge-accent">{subRace.name}</div>
+                    ) : (
+                      <div className="badge badge-neutral">{race.name}</div>
+                    )}
+                  </h2>
+                  <div className="divider m-0"></div>
+                  <p>{subRace.weaponProficiencyDescription || "None"}</p>
+                </div>
+              )}
             </div>
 
-            {weaponNames.length > 0 && (
-              <div className="bg-base-200 rounded-xl p-4  max-w-1/3 ">
-                <h2 className="pb-0 flex justify-between flex-row items-center">
-                  <div>
-                    Weapons{" "}
-                    <Info
-                      tooltip={`A character who is a ${subRace.name} has proficiency with the following weapons.`}
-                    />
-                  </div>
-                  {subRace.weaponProficiencies.length > 0 ? (
-                    <div className="badge badge-accent">{subRace.name}</div>
-                  ) : (
-                    <div className="badge badge-neutral">{race.name}</div>
-                  )}
-                </h2>
-                <div className="divider m-0"></div>
-                <ul className="list-disc pl-4">
-                  {weaponNames.map((weapon, index) => (
-                    <li key={index}>{weapon}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
             <div className="divider mb-0"></div>
           </div>
           {/* traits */}

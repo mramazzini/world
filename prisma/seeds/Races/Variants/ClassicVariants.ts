@@ -341,11 +341,11 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     darkvision: 120,
     darkvisionDescription:
       "On top of your Dexterity increase from being an elf, your Charisma score increases by 1.",
-    weaponProficiencies: [
-      weaponIds.rapier,
-      weaponIds.shortsword,
-      weaponIds.crossbowHand,
-    ],
+    weaponProficiencies: {
+      default: [weaponIds.rapier, weaponIds.shortsword, weaponIds.crossbowHand],
+    },
+    weaponProficiencyDescription:
+      "You have proficiency with rapiers, shortswords, and hand crossbows.",
   },
   {
     id: 18,
@@ -362,12 +362,16 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
         { ability: Ability.INT, value: 1 },
       ],
     },
-    weaponProficiencies: [
-      weaponIds.longsword,
-      weaponIds.shortsword,
-      weaponIds.longbow,
-      weaponIds.shortbow,
-    ],
+    weaponProficiencies: {
+      default: [
+        weaponIds.longsword,
+        weaponIds.shortsword,
+        weaponIds.longbow,
+        weaponIds.shortbow,
+      ],
+    },
+    weaponProficiencyDescription:
+      "You have proficiency with longswords, shortswords, longbows, and shortbows.",
     originLanguages: {
       default: [Language.COMMON, Language.ELVISH],
       choices: [
@@ -399,12 +403,16 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       ],
     },
     source: src.phb,
-    weaponProficiencies: [
-      weaponIds.longsword,
-      weaponIds.shortsword,
-      weaponIds.shortbow,
-      weaponIds.longbow,
-    ],
+    weaponProficiencies: {
+      default: [
+        weaponIds.longsword,
+        weaponIds.shortsword,
+        weaponIds.shortbow,
+        weaponIds.longbow,
+      ],
+    },
+    weaponProficiencyDescription:
+      "You have proficiency in longswords, shortswords, shortbows, and longbows.",
     speed: 35,
     speedDescription: "Your base walking speed increases to 35 feet.",
   },
@@ -494,12 +502,16 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     },
     languageDescription:
       "On top of being able to speak, read, and write Common and Elvish, you can learn one extra language of your choice.",
-    weaponProficiencies: [
-      weaponIds.longsword,
-      weaponIds.shortsword,
-      weaponIds.longbow,
-      weaponIds.shortbow,
-    ],
+    weaponProficiencies: {
+      default: [
+        weaponIds.longsword,
+        weaponIds.shortsword,
+        weaponIds.longbow,
+        weaponIds.shortbow,
+      ],
+    },
+    weaponProficiencyDescription:
+      "You have proficiency with longswords, shortswords, longbows, and shortbows.",
   },
   //gnome
   {
@@ -1135,12 +1147,16 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "On top of your Dexterity increase from being an elf, your Wisdom score increases by 1.",
     speed: 35,
     speedDescription: "Your base walking speed increases to 35 feet.",
-    weaponProficiencies: [
-      weaponIds.longsword,
-      weaponIds.shortsword,
-      weaponIds.longbow,
-      weaponIds.shortbow,
-    ],
+    weaponProficiencies: {
+      default: [
+        weaponIds.longsword,
+        weaponIds.shortsword,
+        weaponIds.longbow,
+        weaponIds.shortbow,
+      ],
+    },
+    weaponProficiencyDescription:
+      "You have proficiency with longswords, shortswords, longbows, and shortbows.",
   },
 ];
 

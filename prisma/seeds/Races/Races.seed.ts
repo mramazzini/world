@@ -64,12 +64,16 @@ const Species: Prisma.RaceCreateManyInput[] = [
       ],
     },
     resistanceTo: [DamageTypes.POISON],
-    weaponProficiencies: [
-      weaponIds.battleaxe,
-      weaponIds.handaxe,
-      weaponIds.lightHammer,
-      weaponIds.warhammer,
-    ],
+    weaponProficiencies: {
+      default: [
+        weaponIds.battleaxe,
+        weaponIds.handaxe,
+        weaponIds.lightHammer,
+        weaponIds.warhammer,
+      ],
+    },
+    weaponProficiencyDescription:
+      "You have proficiency with the battleaxe, handaxe, light hammer, and warhammer.",
     toolProficiencies: {
       default: [],
       choices: [
@@ -3128,12 +3132,16 @@ const Species: Prisma.RaceCreateManyInput[] = [
       default: [Language.COMMON, Language.ELVISH, Language.AQUAN],
     },
     alignment: "N/A",
-    weaponProficiencies: [
-      weaponIds.spear,
-      weaponIds.trident,
-      weaponIds.crossbowLight,
-      weaponIds.net,
-    ],
+    weaponProficiencies: {
+      default: [
+        weaponIds.spear,
+        weaponIds.trident,
+        weaponIds.crossbowLight,
+        weaponIds.net,
+      ],
+    },
+    weaponProficiencyDescription:
+      "You have proficiency with the spear, trident, light crossbow, and net.",
     creatureType: CreatureType.HUMANOID,
     features: [
       {

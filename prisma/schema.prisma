@@ -185,6 +185,7 @@ model User {
 model Character {
   id           Int        @id @default(autoincrement())
   name         String
+  imageURL     String?
   alignment    Alignment
   Background   Background @relation(fields: [backgroundId], references: [id])
   backgroundId Int
@@ -392,8 +393,10 @@ model Race {
   skillProficiencyDescription String?
 
   /// [ToolChoice]
-  toolProficiencies   Json?
-  weaponProficiencies Int[] // Weapon IDs
+  toolProficiencies            Json?
+  /// [WeaponChoice]
+  weaponProficiencies          Json? // Weapon IDs
+  weaponProficiencyDescription String?
 
   speed       Int
   flightSpeed Int?
@@ -454,8 +457,11 @@ model RaceVariant {
   skillProficiencyDescription String?
 
   /// [ToolChoice]
-  toolProficiencies   Json?
-  weaponProficiencies Int[] // Weapon IDs
+  toolProficiencies            Json?
+  toolProficiencyDescription   String?
+  /// [WeaponChoice]
+  weaponProficiencies          Json?
+  weaponProficiencyDescription String?
 
   speed       Int?
   flightSpeed Int?
@@ -490,25 +496,36 @@ model RaceVariant {
 }
 
 model Background {
-  id                  Int         @id @default(autoincrement())
-  srd                 Boolean     @default(false)
-  name                String
-  description         String
-  source              String      @default("Player's Handbook")
-  flavorText          String      @db.VarChar(200)
-  skillProficiencies  Skill[]
-  skillChoiceCount    Int
-  toolProficiencies   String[]
-  languages           Language[]
-  languageChoiceCount Int
-  equipment           String[]
+  id                             Int         @id @default(autoincrement())
+  srd                            Boolean     @default(false)
+  name                           String
+  description                    String
+  source                         String      @default("Player's Handbook")
+  flavorText                     String      @db.VarChar(200)
+  /// [SkillChoice]
+  skillProficiencies             Json?
+  skillProficiencyDescription    String?
+  /// [ToolChoice]
+  toolProficiencies              Json?
+  toolProficiencyDescription     String?
+  /// [LanguageChoice]
+  languageProficiencies          Json?
+  languageProficiencyDescription String?
+  /// [ItemChoice]
+  equipment                      Json?
+  equipmentDescription           String[]
   /// [Feature]
-  features            Json[]
-  createdAt           DateTime    @default(now())
-  updatedAt           DateTime    @updatedAt
-  User                User?       @relation(fields: [userId], references: [id])
-  userId              Int?
-  Character           Character[]
+  features                       Json[]
+  suggestedCharacteristics       String?
+  traits                         String[]
+  ideals                         String[]
+  bonds                          String[]
+  flaws                          String[]
+  createdAt                      DateTime    @default(now())
+  updatedAt                      DateTime    @updatedAt
+  User                           User?       @relation(fields: [userId], references: [id])
+  userId                         Int?
+  Character                      Character[]
 }
 
 model Feat {
@@ -571,6 +588,7 @@ enum ItemTypes {
   TOOL
   CURRENCY
   SPELL_SCROLL
+  GEMSTONE
 }
 
 enum Unit {
@@ -685,4 +703,22 @@ model Armor {
   /// [Feature]
   features Json[] // AND array (ex disadvantage on stealth checks)
   Item     Item[] @relation("ItemArmor")
+}
+
+//Prisma wont create the types if they are not in a model, so this is a dummy model
+model Enums {
+  id           Int          @id @default(autoincrement())
+  skill        Skill
+  ability      Ability
+  armorType    ArmorType
+  size         Size
+  spellSchool  SpellSchool
+  currency     Currency
+  damageTypes  DamageTypes
+  creatureType CreatureType
+  alignment    Alignment
+  language     Language
+  rarity       Rarity
+  itemTypes    ItemTypes
+  unit         Unit
 }

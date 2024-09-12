@@ -2294,17 +2294,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     toolId: toolIds.jewelerTools,
     rarity: Rarity.COMMON,
   },
-  {
-    id: 176,
-    name: "Land and Water Vehicles",
-    description:
-      "Proficiency with land vehicles covers a wide range of options, from chariots and howdahs to wagons and carts. Proficiency with water vehicles covers anything that navigates waterways. Proficiency with vehicles grants the knowledge needed to handle vehicles of that type, along with knowledge of how to repair and maintain them.",
 
-    flavorText: "Land and water vehicles allow you to travel.",
-    types: [ItemTypes.TOOL],
-    toolId: toolIds.landWaterVehicles,
-    rarity: Rarity.COMMON,
-  },
   {
     id: 177,
     name: "Leatherworker's Tools",
@@ -2757,6 +2747,678 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.CURRENCY],
     flavorText: "An electrum piece is a coin made of electrum.",
   },
+  {
+    id: 215,
+    name: "Prayer Book",
+    description:
+      "A prayer book is presumably a book containing prayers and religious texts.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText:
+      "A prayer book is presumably a book containing prayers and religious texts.",
+  },
+  {
+    id: 216,
+    name: "Prayer Wheel",
+    description:
+      "A prayer wheel is presumably a cylindrical wheel on a spindle made from metal, wood, stone, leather, or coarse cotton.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText:
+      "A prayer wheel is presumably a cylindrical wheel on a spindle made from metal, wood, stone, leather, or coarse cotton.",
+  },
+  {
+    id: 217,
+    name: "Incense Stick",
+    description:
+      "An incense stick is a thin piece of wood or bamboo coated with incense.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText:
+      "An incense stick is a thin piece of wood or bamboo coated with incense.",
+  },
+  {
+    id: 218,
+    name: "Trinket",
+    description:
+      "A trinket is a small item of little value, such as a piece of jewelry or a small toy.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText:
+      "A trinket is a small item of little value, such as a piece of jewelry or a small toy.",
+  },
+  {
+    id: 219,
+    name: "Bronze Discus",
+    description: "A bronze discus is a heavy, circular throwing disc.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText: "A bronze discus is a heavy, circular throwing disc.",
+  },
+  {
+    id: 220,
+    name: "Leather Ball",
+    description: "A leather ball is a round object used in games.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText: "A leather ball is a round object used in games.",
+  },
+  {
+    id: 221,
+    name: "Uniform",
+    description:
+      "A uniform is a set of standard clothing worn by members of an organization.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.CLOTHES],
+    flavorText:
+      "A uniform is a set of standard clothing worn by members of an organization.",
+  },
+  {
+    id: 222,
+    name: "Chisel",
+    description: "A chisel is a tool with a sharp edge used for cutting.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText: "A chisel is a tool with a sharp edge used for cutting.",
+  },
+  //gemstones
+  {
+    id: 223,
+    name: "Azurite",
+    description: "Azurite is an opaque mottled deep blue gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Azurite is an opaque mottled deep blue gemstone.",
+    cost: { quantity: 10, unit: gp },
+  },
+  {
+    id: 224,
+    name: "Banded Agate",
+    description: "Banded agate is a translucent striped gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Banded agate is a translucent striped gemstone.",
+    cost: { quantity: 10, unit: gp },
+  },
+  {
+    id: 225,
+    name: "Blue Quartz",
+    description: "Blue quartz is a transparent pale blue gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Blue quartz is a transparent pale blue gemstone.",
+    cost: { quantity: 10, unit: gp },
+  },
+  {
+    id: 226,
+    name: "Eye Agate",
+    description:
+      "Eye agate is a gemstone made of translucent circles of gray, white, brown, blue, or green",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText:
+      "Eye agate is a gemstone made of translucent circles of gray, white, brown, blue, or green",
+    cost: { quantity: 10, unit: gp },
+  },
+  {
+    id: 227,
+    name: "Hematite",
+    description: "Hematite is an opaque gray-black gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Hematite is an opaque gray-black gemstone.",
+    cost: { quantity: 10, unit: gp },
+  },
+  {
+    id: 228,
+    name: "Lapis Lazuli",
+    description:
+      "Lapis lazuli is an opaque light and dark blue gemstone with yellow flecks.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText:
+      "Lapis lazuli is an opaque light and dark blue gemstone with yellow flecks.",
+    cost: { quantity: 10, unit: gp },
+  },
+  {
+    id: 229,
+    name: "Malachite",
+    description:
+      "Malachite is an opaque striated light and dark green gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText:
+      "Malachite is an opaque striated light and dark green gemstone.",
+    cost: { quantity: 10, unit: gp },
+  },
+  {
+    id: 230,
+    name: "Moss Agate",
+    description:
+      "Moss agate is a translucent pink or yellow-white gemstone with mossy gray or green markings.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText:
+      "Moss agate is a translucent pink or yellow-white gemstone with mossy gray or green markings.",
+    cost: { quantity: 10, unit: gp },
+  },
+  {
+    id: 231,
+    name: "Obsidian",
+    description: "Obsidian is an opaque black gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Obsidian is an opaque black gemstone.",
+    cost: { quantity: 10, unit: gp },
+  },
+  {
+    id: 232,
+    name: "Rhodochrosite",
+    description: "Rhodochrosite is an opaque light pink gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Rhodochrosite is an opaque light pink gemstone.",
+    cost: { quantity: 10, unit: gp },
+  },
+  {
+    id: 233,
+    name: "Tiger Eye",
+    description:
+      "Tiger eye is a translucent brown gemstone with golden center.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Tiger eye is a translucent brown gemstone with golden center.",
+    cost: { quantity: 10, unit: gp },
+  },
+  {
+    id: 234,
+    name: "Turquoise",
+    description: "Turquoise is an opaque light blue-green gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Turquoise is an opaque light blue-green gemstone.",
+    cost: { quantity: 10, unit: gp },
+  },
+  {
+    id: 235,
+    name: "Bloodstone",
+    description: "Bloodstone is an opaque dark gray with red flecks gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Bloodstone is an opaque dark gray with red flecks gemstone.",
+    cost: { quantity: 50, unit: gp },
+  },
+  {
+    id: 236,
+    name: "Carnelian",
+    description: "Carnelian is a translucent orange to red-brown gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Carnelian is a translucent orange to red-brown gemstone.",
+    cost: { quantity: 50, unit: gp },
+  },
+  {
+    id: 237,
+    name: "Chalcedony",
+    description: "Chalcedony is an opaque white gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Chalcedony is an opaque white gemstone.",
+    cost: { quantity: 50, unit: gp },
+  },
+  {
+    id: 238,
+    name: "Chrysoprase",
+    description: "Chrysoprase is a translucent apple green gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    cost: { quantity: 50, unit: gp },
+    flavorText: "Chrysoprase is a translucent apple green gemstone.",
+  },
+  {
+    id: 239,
+    name: "Citrine",
+    description: "Citrine is a translucent pale yellow to brown gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    cost: { quantity: 50, unit: gp },
+    flavorText: "Citrine is a translucent pale yellow to brown gemstone.",
+  },
+  {
+    id: 240,
+    name: "Jasper",
+    description: "Jasper is an opaque blue, black, or brown gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    cost: { quantity: 50, unit: gp },
+    flavorText: "Jasper is an opaque blue, black, or brown gemstone.",
+  },
+  {
+    id: 241,
+    name: "Moonstone",
+    description:
+      "Moonstone is a translucent white with pale blue glow gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    cost: { quantity: 50, unit: gp },
+    flavorText:
+      "Moonstone is a translucent white with pale blue glow gemstone.",
+  },
+  {
+    id: 242,
+    name: "Onyx",
+    description: "Onyx is an opaque black and white banded gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    cost: { quantity: 50, unit: gp },
+    flavorText: "Onyx is an opaque black and white banded gemstone.",
+  },
+  {
+    id: 243,
+    name: "Quartz",
+    description: "Quartz is a transparent white gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    cost: { quantity: 50, unit: gp },
+    flavorText: "Quartz is a transparent white gemstone.",
+  },
+  {
+    id: 244,
+    name: "Sardonyx",
+    description: "Sardonyx is an opaque red and white banded gemstone.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    cost: { quantity: 50, unit: gp },
+    flavorText: "Sardonyx is an opaque red and white banded gemstone.",
+  },
+  {
+    id: 245,
+    name: "Star Rose Quartz",
+    description:
+      "Star rose quartz is a translucent rosy gemstone with white star.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.GEMSTONE],
+    cost: { quantity: 50, unit: gp },
+    flavorText:
+      "Star rose quartz is a translucent rosy gemstone with white star.",
+  },
+  {
+    id: 246,
+    name: "Zircon",
+    description: "Zircon is a transparent pale blue-green gemstone.",
+    rarity: Rarity.COMMON,
+    cost: { quantity: 50, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Zircon is a transparent pale blue-green gemstone.",
+  },
+  {
+    id: 247,
+    name: "Amber",
+    description: "Amber is a transparent watery gold to rich gold",
+    rarity: Rarity.COMMON,
+    cost: { quantity: 100, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Amber is a transparent watery gold to rich gold",
+  },
+  {
+    id: 248,
+    name: "Amethyst",
+    description: "Amethyst is a transparent deep purple gemstone.",
+    rarity: Rarity.COMMON,
+    cost: { quantity: 100, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Amethyst is a transparent deep purple gemstone.",
+  },
+  {
+    id: 249,
+    name: "Chrysoberyl",
+    description: "Chrysoberyl is a transparent yellow-green gemstone.",
+    rarity: Rarity.COMMON,
+    cost: { quantity: 100, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Chrysoberyl is a transparent yellow-green gemstone.",
+  },
+  {
+    id: 250,
+    name: "Coral",
+    description: "Coral is a opaque pink to red gemstone.",
+    rarity: Rarity.COMMON,
+    cost: { quantity: 100, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Coral is a opaque pink to red gemstone.",
+  },
+  {
+    id: 251,
+    name: "Garnet",
+    description: "Garnet is an Opaque Crimson Gemstone.",
+    rarity: Rarity.COMMON,
+
+    cost: { quantity: 100, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Garnet is an Opaque Crimson Gemstone.",
+  },
+  {
+    id: 252,
+    name: "Jade",
+    description:
+      "Jade is a translucent translucent light green, deep green, or white gemstone.",
+    rarity: Rarity.COMMON,
+    cost: { quantity: 100, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText:
+      "Jade is a translucent translucent light green, deep green, or white gemstone.",
+  },
+  {
+    id: 253,
+    name: "Jet",
+    description: "Jet is an opaque deep black gemstone.",
+    rarity: Rarity.COMMON,
+    cost: { quantity: 100, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Jet is an opaque deep black gemstone.",
+  },
+  {
+    id: 254,
+    name: "Pearl",
+    description: "Pearl is an opaque lustrous white gemstone.",
+    rarity: Rarity.COMMON,
+    cost: { quantity: 100, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Pearl is an opaque lustrous white gemstone.",
+  },
+  {
+    id: 255,
+    name: "Spinel",
+    description:
+      "Spinel is a transparent red, red-brown, or deep green gemstone.",
+    rarity: Rarity.COMMON,
+    cost: { quantity: 100, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText:
+      "Spinel is a transparent red, red-brown, or deep green gemstone.",
+  },
+  {
+    id: 256,
+    name: "Tourmaline",
+    description:
+      "Tourmaline is a transparent pale green, blue, brown, or red gemstone.",
+    rarity: Rarity.COMMON,
+    cost: { quantity: 100, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText:
+      "Tourmaline is a transparent pale green, blue, brown, or red gemstone.",
+  },
+  {
+    id: 257,
+    name: "Alexandrite",
+    description: "Alexandrite is a transparent dark green gemstone.",
+    rarity: Rarity.UNCOMMON,
+    cost: { quantity: 500, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Alexandrite is a transparent dark green gemstone.",
+  },
+  {
+    id: 258,
+    name: "Aquamarine",
+    description: "Aquamarine is a transparent pale blue-green gemstone.",
+    rarity: Rarity.UNCOMMON,
+    cost: { quantity: 500, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Aquamarine is a transparent pale blue-green gemstone.",
+  },
+  {
+    id: 259,
+    name: "Black Pearl",
+    description: "Black pearl is an opaque pure black gemstone.",
+    rarity: Rarity.UNCOMMON,
+    cost: { quantity: 500, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Black pearl is an opaque pure black gemstone.",
+  },
+  {
+    id: 260,
+    name: "Blue Spinel",
+    description: "Blue spinel is a transparent deep blue gemstone.",
+    rarity: Rarity.UNCOMMON,
+    cost: { quantity: 500, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Blue spinel is a transparent deep blue gemstone.",
+  },
+  {
+    id: 261,
+    name: "Peridot",
+    description: "Peridot is a transparent rich olive green gemstone.",
+    rarity: Rarity.UNCOMMON,
+    cost: { quantity: 500, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Peridot is a transparent rich olive green gemstone.",
+  },
+  {
+    id: 262,
+    name: "Topaz",
+    description: "Topaz is a transparent golden yellow gemstone.",
+    rarity: Rarity.UNCOMMON,
+    cost: { quantity: 500, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Topaz is a transparent golden yellow gemstone.",
+  },
+  {
+    id: 263,
+    name: "Black Opal",
+    description:
+      "Black opal is a translucent dark green with black mottling gemstone.",
+    rarity: Rarity.RARE,
+    cost: { quantity: 1000, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText:
+      "Black opal is a translucent dark green with black mottling gemstone.",
+  },
+  {
+    id: 264,
+    name: "Blue Sapphire",
+    description:
+      "Blue sapphire is a transparent blue-white to medium blue gemstone.",
+    rarity: Rarity.RARE,
+    cost: { quantity: 1000, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText:
+      "Blue sapphire is a transparent blue-white to medium blue gemstone.",
+  },
+  {
+    id: 265,
+    name: "Emerald",
+    description: "Emerald is a transparent deep bright green gemstone.",
+    rarity: Rarity.RARE,
+    cost: { quantity: 1000, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Emerald is a transparent deep bright green gemstone.",
+  },
+  {
+    id: 266,
+    name: "Fire Opal",
+    description: "Fire opal is a translucent fiery red gemstone.",
+    rarity: Rarity.RARE,
+    cost: { quantity: 1000, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Fire opal is a translucent fiery red gemstone.",
+  },
+  {
+    id: 267,
+    name: "Opal",
+    description:
+      "Opal is a translucent pale blue with green and gold mottling gemstone.",
+
+    rarity: Rarity.RARE,
+    cost: { quantity: 1000, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText:
+      "Opal is a translucent pale blue with green and gold mottling gemstone.",
+  },
+  {
+    id: 268,
+    name: "Star Ruby",
+    description: "Star ruby is a translucent ruby with white star gemstone.",
+    rarity: Rarity.RARE,
+    cost: { quantity: 1000, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Star ruby is a translucent ruby with white star gemstone.",
+  },
+  {
+    id: 269,
+    name: "Star Sapphire",
+    description:
+      "Star sapphire is a translucent sapphire with white star gemstone.",
+    rarity: Rarity.RARE,
+    cost: { quantity: 1000, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText:
+      "Star sapphire is a translucent sapphire with white star gemstone.",
+  },
+  {
+    id: 270,
+    name: "Yellow Sapphire",
+    description: "Yellow sapphire is a transparent fiery yellow gemstone.",
+    rarity: Rarity.RARE,
+    cost: { quantity: 1000, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Yellow sapphire is a transparent fiery yellow gemstone.",
+  },
+  {
+    id: 271,
+    name: "Black Sapphire",
+    description: "Black sapphire is a transparent lustrous black gemstone.",
+    rarity: Rarity.RARE,
+    cost: { quantity: 5000, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Black sapphire is a transparent lustrous black gemstone.",
+  },
+  {
+    id: 272,
+    name: "Diamond",
+    description:
+      "Diamond is a transparent blue-white, canary, pink, brown or blue gemstone.",
+    rarity: Rarity.RARE,
+    cost: { quantity: 5000, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText:
+      "Diamond is a transparent blue-white, canary, pink, brown or blue gemstone.",
+  },
+  {
+    id: 273,
+    name: "Jacinth",
+    description: "Jacinth is a transparent fiery orange gemstone.",
+    rarity: Rarity.RARE,
+    cost: { quantity: 5000, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Jacinth is a transparent fiery orange gemstone.",
+  },
+  {
+    id: 274,
+    name: "Ruby",
+    description: "Ruby is a transparent deep crimson gemstone.",
+    rarity: Rarity.RARE,
+    cost: { quantity: 5000, unit: gp },
+    types: [ItemTypes.GEMSTONE],
+    flavorText: "Ruby is a transparent deep crimson gemstone.",
+  },
+  {
+    id: 275,
+    name: "Quill",
+    description: "A quill is a pen made from a bird's feather.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText: "A quill is a pen made from a bird's feather.",
+    cost: { quantity: 2, unit: cp },
+  },
+  {
+    id: 276,
+    name: "Penknife",
+    description: "A penknife is a small knife used for cutting quills.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText: "A penknife is a small knife used for cutting quills.",
+  },
+  {
+    id: 277,
+    name: "Badge",
+    description:
+      "A badge is a small piece of metal worn on clothing. It typically displays a symbol or logo.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText:
+      "A badge is a small piece of metal worn on clothing. It typically displays a symbol or logo.",
+  },
+  {
+    id: 278,
+    name: "Jewelry",
+    description: "Jewelry is a decorative item worn for personal adornment.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText: "Jewelry is a decorative item worn for personal adornment.",
+    cost: { quantity: 10, unit: gp },
+  },
+  {
+    id: 279,
+    name: "Fishing Lure",
+    description:
+      "A fishing lure is an artificial fishing bait used to attract fish.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText:
+      "A fishing lure is an artificial fishing bait used to attract fish.",
+  },
+  {
+    id: 280,
+    name: "Leather Boots",
+    description: "Leather boots are shoes made from leather.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.CLOTHES],
+    flavorText: "Leather boots are shoes made from leather.",
+  },
+  {
+    id: 281,
+    name: "Stone",
+    description: "A stone is a small rock.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText: "A stone is a small rock.",
+  },
+  {
+    id: 282,
+    name: "Twig",
+    description: "A twig is a small thin branch.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText: "A twig is a small thin branch.",
+  },
+  {
+    id: 283,
+    name: "Monster Hunter Pack",
+    description:
+      "A monster hunter's pack is a collection of items that are useful for hunting monsters.",
+    flavorText:
+      "A monster hunter's pack is a collection of items that are useful for hunting monsters.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.EQUIPMENT_PACK],
+    equipmentPackId: equipmentPackIds.monster,
+  },
+  {
+    id: 284,
+    name: "Wooden Stake",
+    description: "A wooden stake is a pointed stick made of wood.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText: "A wooden stake is a pointed stick made of wood.",
+  },
+  {
+    id: 285,
+    name: "Steel Mirror",
+    description: "A steel mirror is a mirror made of steel.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText: "A steel mirror is a mirror made of steel.",
+  },
+
   ...SpellSeed.map((spell) => ({
     id: spell.id && 10000 + spell.id,
     name: `Scroll of ${spell.name}`,
@@ -2850,3 +3512,107 @@ export const martialRangedItemIds = [
   itemIds.longbow,
   itemIds.net,
 ];
+
+export const gemstoneIds = {
+  azurite: 223,
+  bandedAgate: 224,
+  blueQuartz: 225,
+  eyeAgate: 226,
+  hematite: 227,
+  lapisLazuli: 228,
+  malachite: 229,
+  mossAgate: 230,
+  obsidian: 231,
+  rhodochrosite: 232,
+  tigerEye: 233,
+  turquoise: 234,
+  bloodstone: 235,
+  carnelian: 236,
+  chalcedony: 237,
+  chrysoprase: 238,
+  citrine: 239,
+  jasper: 240,
+  moonstone: 241,
+  onyx: 242,
+  quartz: 243,
+  sardonyx: 244,
+  starRoseQuartz: 245,
+  zircon: 246,
+  amber: 247,
+  amethyst: 248,
+  chrysoberyl: 249,
+  coral: 250,
+  garnet: 251,
+  jade: 252,
+  jet: 253,
+  pearl: 254,
+  spinel: 255,
+  tourmaline: 256,
+  alexandrite: 257,
+  aquamarine: 258,
+  blackPearl: 259,
+  blueSpinel: 260,
+  peridot: 261,
+  topaz: 262,
+  blackOpal: 263,
+  blueSapphire: 264,
+  emerald: 265,
+  fireOpal: 266,
+  opal: 267,
+  starRuby: 268,
+  starSapphire: 269,
+  yellowSapphire: 270,
+  blackSapphire: 271,
+  diamond: 272,
+  jacinth: 273,
+  ruby: 274,
+  leatherVest: 275,
+};
+export const artisanToolItemIds = [
+  itemIds.alchemistsSupplies,
+  itemIds.brewersSupplies,
+  itemIds.calligraphersSupplies,
+  itemIds.carpentersTools,
+  itemIds.cartographersTools,
+  itemIds.cobblersTools,
+  itemIds.cooksUtensils,
+  itemIds.glassblowersTools,
+  itemIds.jewelersTools,
+  itemIds.leatherworkersTools,
+  itemIds.masonsTools,
+  itemIds.paintersSupplies,
+  itemIds.pottersTools,
+  itemIds.smithsTools,
+
+  itemIds.tinkersTools,
+  itemIds.weaversTools,
+  itemIds.woodcarversTools,
+];
+
+export const gamingKitItemIds = [itemIds.diceSet, itemIds.playingCardSet];
+
+export const getGemstoneIdsOfMinValue = (value: number) => {
+  return Object.values(gemstoneIds).filter((id) => {
+    const item = ItemsSeed.find((item) => item.id === id);
+    if (!item || !item.cost) return false;
+    const cost = item.cost as PrismaJson.CurrencyAmount;
+    return cost.quantity >= value;
+  });
+};
+export const getGemstoneIdsOfValue = (value: number) => {
+  return Object.values(gemstoneIds).filter((id) => {
+    const item = ItemsSeed.find((item) => item.id === id);
+    if (!item || !item.cost) return false;
+    const cost = item.cost as PrismaJson.CurrencyAmount;
+    return cost.quantity === value;
+  });
+};
+
+export const getGemstoneIdsOfMaxValue = (value: number) => {
+  return Object.values(gemstoneIds).filter((id) => {
+    const item = ItemsSeed.find((item) => item.id === id);
+    if (!item || !item.cost) return false;
+    const cost = item.cost as PrismaJson.CurrencyAmount;
+    return cost.quantity <= value;
+  });
+};

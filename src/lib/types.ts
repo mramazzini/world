@@ -216,7 +216,7 @@ declare global {
     }
 
     interface LanguageChoice {
-      default: Language[];
+      default?: Language[];
       choices?: {
         options: Language[];
         numberOfChoices: number;
@@ -800,6 +800,10 @@ export enum src {
   strixhaven = "Strixhaven: A Curriculum of Chaos",
   tortle = "The Tortle Package",
   aquisitions = "Acquisitions Incorporated",
+  saltmarsh = "Ghosts of Saltmarsh",
+  strahd = "Curse of Strahd",
+  ravenloft = "Van Richten's Guide to Ravenloft",
+  manyThings = "Book of Many Things",
 }
 
 export enum AuthResult {

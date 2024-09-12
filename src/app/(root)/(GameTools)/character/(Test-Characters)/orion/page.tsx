@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     type: "website",
 
     title: "Max's DND",
-    description: "Create you Dungone's andDragon'sfifth editon character.",
+    description: "Create you Dungone's and Dragon'sfifth editon character.",
     images: [
       {
         url: "https://www.maxdnd.com/images/hero.jpg",
@@ -26,5 +26,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <CharacterCreate />;
+  return <CharacterCreate charName="Orion Lysander" />;
 }

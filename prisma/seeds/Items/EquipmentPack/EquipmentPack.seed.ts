@@ -521,6 +521,55 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateInput[] = [
       ],
     },
   },
+  {
+    name: "Monster Hunter's Pack",
+    itemsQuantity: [
+      {
+        item: itemIds.chest,
+        quantity: 1,
+      },
+      {
+        item: itemIds.crowbar,
+        quantity: 1,
+      },
+      {
+        item: itemIds.hammer,
+        quantity: 1,
+      },
+      {
+        item: itemIds.woodenStake,
+        quantity: 3,
+      },
+      {
+        item: itemIds.emblem,
+        quantity: 1,
+      },
+      {
+        item: itemIds.holyWaterFlask,
+        quantity: 1,
+      },
+      {
+        item: itemIds.manacles,
+        quantity: 1,
+      },
+      {
+        item: itemIds.steelMirror,
+        quantity: 1,
+      },
+      {
+        item: itemIds.oilFlask,
+        quantity: 1,
+      },
+      {
+        item: itemIds.tinderBox,
+        quantity: 1,
+      },
+      {
+        item: itemIds.torch,
+        quantity: 3,
+      },
+    ],
+  },
 ];
 
 const equipmentPackIds = {
@@ -531,6 +580,7 @@ const equipmentPackIds = {
   explorer: 5,
   priest: 6,
   scholar: 7,
+  monster: 8,
 };
 
 export { EquipmentPackSeed, equipmentPackIds };

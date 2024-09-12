@@ -7,10 +7,10 @@ import { languages, skills } from "@/lib/globalVars";
 import { arraysEqual } from "@/lib/utils/arraysEqual";
 
 import Info from "../../../UI/Info";
-import JsonTable from "../../../Utility/JsonTable";
 import NewLineParse from "../../../Utility/NewLineParse";
-import Feature from "@/app/components/UI/Feature";
 import FeatureList from "@/app/components/UI/FeatureList";
+import { Fragment } from "react";
+import DieTable from "@/app/components/UI/DieTable";
 interface Props {
   background: BackgroundInfo | null;
 }
@@ -45,61 +45,53 @@ const BackgroundPage = ({ background }: Props) => {
             </div>
           </div>
           <div className="divider"></div>
-          <h2>Proficiencies</h2>
-          <div className="py-2">
-            <p>
-              <span className="font-bold">
-                <P>Skill Proficiencies: </P>
-              </span>
-              {arraysEqual(background.skillProficiencies, skills) ? (
-                <span>Pick any {background.skillChoiceCount} skills</span>
-              ) : (
-                <span>
-                  <P>
-                    Pick {background.skillChoiceCount.toString()} skills from:{" "}
-                    {background.skillProficiencies
-                      .map((s) => s.toCapitalCase())
-                      .join(", ")
-                      .replaceAll("_", " ") || "None"}
-                  </P>
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
+            <div className="bg-base-200 rounded-xl p-4 max-w-1/2">
+              <h2 className="pb-0">
+                Proficiencies <Info tooltip="Proficient" />
+              </h2>
+              <div className="divider m-0"></div>
+              <p>
+                <span className="font-bold">
+                  <P>Tools: </P>
                 </span>
-              )}
-            </p>
-            <p>
-              <span className="font-bold">
-                <P>Tool Proficiencies: </P>
-              </span>
-              {background.toolProficiencies
-                .map((t) => t.toCapitalCase())
-                .join(", ") || "None"}
-            </p>
-            <p>
-              <span className="font-bold">
-                <P>Languages: </P>
-              </span>
-
-              {background.languageChoiceCount == 0 ? (
-                <span>None</span>
-              ) : arraysEqual(background.languages, languages) ? (
-                <span>Pick any {background.languageChoiceCount} languages</span>
-              ) : (
-                <span>
-                  Pick {background.languageChoiceCount} languages from:{" "}
-                  {background.languages
-                    .map((l) => l.toCapitalCase().replaceAll("_", " "))
-                    .join(", ") || "None"}
+                <P>{background.toolProficiencyDescription || "None"}</P>
+              </p>
+              <div className="divider m-0"></div>
+              <p>
+                <span className="font-bold">
+                  <P>Skills: </P>
                 </span>
-              )}
-            </p>
+                <P>{background.skillProficiencyDescription || "None"}</P>
+              </p>
+              <div className="divider m-0"></div>
+              <p>
+                <span className="font-bold">
+                  <P>Languages: </P>
+                </span>
+                <P>{background.languageProficiencyDescription || "None"}</P>
+              </p>
+              <div className="divider m-0"></div>
+            </div>
+            <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+              <h2 className="pb-0">
+                Equipment{" "}
+                <Info tooltip="In addition to other items you gain from your class, your character can start with the following equipment." />
+              </h2>
+              <div className="divider m-0"></div>
+              <ul>
+                {background.equipmentDescription.map((item, index) => (
+                  <Fragment key={index}>
+                    <li>
+                      - <P>{item}</P>
+                    </li>
+                    <div className="divider m-0"></div>
+                  </Fragment>
+                ))}
+              </ul>
+            </div>
           </div>
-          <h2>Equipment</h2>
-          <ul className="p-4">
-            {background.equipment.map((item, index) => (
-              <li className="list-disc" key={index}>
-                {item.toCapitalCase()}
-              </li>
-            ))}
-          </ul>
+
           <div className="divider"></div>
           <h2>
             Background Features{" "}
@@ -107,6 +99,57 @@ const BackgroundPage = ({ background }: Props) => {
           </h2>
           <div className="divider"> </div>
           <FeatureList features={background.features} />
+          <div className="divider"></div>
+          {background.suggestedCharacteristics && (
+            <>
+              <h2>
+                Suggested Characteristics{" "}
+                <Info tooltip="Ideas for how to roleplay your character." />
+              </h2>
+              <p className="italic">{background.suggestedCharacteristics}</p>
+              <div className="divider"></div>
+              {background.traits && (
+                <>
+                  <DieTable
+                    data={background.traits}
+                    title="Traits"
+                    resultString="Trait"
+                  />
+                  <div className="divider"></div>
+                </>
+              )}
+              {background.ideals && (
+                <>
+                  <DieTable
+                    data={background.ideals}
+                    title="Ideals"
+                    resultString="Ideal"
+                  />
+                  <div className="divider"></div>
+                </>
+              )}
+              {background.bonds && (
+                <>
+                  <DieTable
+                    data={background.bonds}
+                    title="Bonds"
+                    resultString="Bond"
+                  />
+                  <div className="divider"></div>
+                </>
+              )}
+              {background.flaws && (
+                <>
+                  <DieTable
+                    data={background.flaws}
+                    title="Flaws"
+                    resultString="Flaw"
+                  />
+                  <div className="divider"></div>
+                </>
+              )}
+            </>
+          )}
         </>
       )}
     </main>
