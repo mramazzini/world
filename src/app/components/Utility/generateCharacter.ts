@@ -51,6 +51,9 @@ export const generateCharacter = (
         [classObj.hitDie as 4 | 6 | 8 | 10 | 12 | 20]: 1,
       },
     },
+    preparedCantrips: [],
+    alwaysPreparedSpells: [],
+    preparedSpells: [],
     abilityScores: abilityScores,
     abilityScoreReasons: {
       STR: [{ reason: "Base Ability Score", effect: abilityScores.STR }],
@@ -128,6 +131,10 @@ export const generateCharacter = (
         feature: f,
         source: classObj.name.toCapitalCase(),
       })),
+      ...(classObj.spellCastingInfo?.features.map((f) => ({
+        feature: f,
+        source: classObj.name.toCapitalCase(),
+      })) || []),
       ...background.features.map((f) => ({
         feature: f,
         source: background.name,

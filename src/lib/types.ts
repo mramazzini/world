@@ -44,14 +44,18 @@ export interface ClassInfo extends Class {
     username: string | null;
   } | null;
 }
+interface ClassWithSpellList extends Class {
+  SpellList: SpellListInfo | null;
+}
 export interface CharacterInfo extends Character {
   User: {
     username: string | null;
   } | null;
   Background: Background | null;
-  Classes: Class[];
+  Classes: ClassWithSpellList[] | null;
   Race: Race | null;
   SubRace: RaceVariant | null;
+
   // Inventory: any;
 }
 
@@ -728,6 +732,10 @@ declare global {
       carryingCapacity: number;
       carryingCapacityReasons: Reason[];
 
+      preparedSpells: SpellID[];
+      alwaysPreparedSpells: SpellID[];
+      preparedCantrips: SpellID[];
+
       spellSlots?: {
         [K in SpellLevel]?: number;
       };
@@ -763,6 +771,22 @@ export enum Ability {
   INT = "INT",
   WIS = "WIS",
   CHA = "CHA",
+}
+
+export interface Roll {
+  rolls: {
+    diceType: number;
+    rolled: number;
+  }[];
+  plus: number;
+  total: number;
+}
+
+export interface Log {
+  logType: "roll" | "info";
+  roll?: Roll;
+  info?: string;
+  from?: string;
 }
 
 export interface AbilityScores {

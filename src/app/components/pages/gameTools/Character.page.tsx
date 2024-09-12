@@ -1,7 +1,7 @@
 "use client";
 
 import { getCharacter } from "@/lib/actions/db/character/read.actions";
-import { Ability, CharacterInfo } from "@/lib/types";
+import { Ability, CharacterInfo, SpellListInfo } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { generateCharacter } from "../../Utility/generateCharacter";
 import Image from "next/image";
@@ -17,6 +17,7 @@ import { calcProficiency } from "../../Utility/calcProficiency";
 import MainSheet from "./main/MainSheet";
 import InventoryTab from "./Inventory/InventoryTab";
 import ChooseChoices from "./Choices/Choices";
+import SpellSheet from "./Spells/SpellSheet";
 type Tab = "sheet" | "inventory" | "spells" | "notes" | "choices";
 
 interface Props {
@@ -26,6 +27,7 @@ interface Props {
 const CharacterSheet = ({ charName }: Props) => {
   const [character, setCharacter] = useState<CharacterInfo | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("sheet");
+
   useEffect(() => {
     getCharacter(charName).then((res) => {
       if (!res) return;
@@ -108,7 +110,7 @@ const CharacterSheet = ({ charName }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              Spells
+              <SpellSheet character={character} />
             </div>
             <input
               type="radio"

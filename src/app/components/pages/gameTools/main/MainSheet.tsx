@@ -7,13 +7,16 @@ import {
 } from "@/app/components/Utility/colorBefore";
 import P from "@/app/components/Utility/FormatAndSanitize";
 import JsonTable from "@/app/components/Utility/JsonTable";
+import { roll } from "@/app/components/Utility/roll";
 import Tooltip from "@/app/components/Utility/Tooltip";
+import useLog from "@/app/components/Utility/useDicelog";
 import { skillAtritbuteMap, skills } from "@/lib/globalVars";
 import { Ability, CharacterInfo } from "@/lib/types";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import { Skill } from "@prisma/client";
 import Image from "next/image";
 import { Fragment, useEffect } from "react";
+import RenderLog from "./Log";
 
 interface Props {
   character: CharacterInfo;
@@ -31,6 +34,20 @@ const MainSheet = ({ character }: Props) => {
       (acc, cur) => acc + cur.level,
       0
     );
+  };
+  const { log, logPush } = useLog();
+
+  const handleRoll = (modifier: number, from: string, dice: number = 20) => {
+    const result = roll(1, dice, modifier);
+    logPush({
+      logType: "roll",
+      roll: {
+        rolls: [{ diceType: 20, rolled: result - modifier }],
+        total: result,
+        plus: modifier,
+      },
+      from,
+    });
   };
 
   const calcSkillModifier = (skill: Skill) => {
@@ -54,7 +71,8 @@ const MainSheet = ({ character }: Props) => {
 
   return (
     character &&
-    character.state && (
+    character.state &&
+    character.Classes && (
       <div className="xl:grid md:gap-4 md:grid-flow-row grid-cols-1 md:grid-cols-12  ">
         <section className="flex flex-row bg-base-200 rounded-xl p-4  md:col-span-4 items-center ">
           <Image
@@ -72,7 +90,7 @@ const MainSheet = ({ character }: Props) => {
 
             <p className="italic">
               Level {calcLevel()} {character.Race?.name}{" "}
-              {character.Classes.map((c) => (
+              {character.Classes?.map((c) => (
                 <Fragment key={c.name}>{c.name.toCapitalCase()}</Fragment>
               ))}
             </p>
@@ -121,7 +139,15 @@ const MainSheet = ({ character }: Props) => {
                     </div>
                     <div className="divider px-2 m-0 border-x border-primary"></div>
                     <div className="px-2 text-center border-x text-xl font-bold border-primary flex items-center justify-center">
-                      <button className="btn btn-xs btn-accent">
+                      <button
+                        className="btn btn-xs btn-accent"
+                        onClick={() =>
+                          handleRoll(
+                            AbilityToModifier(value),
+                            ` ${AbilityToText(key)} Check`
+                          )
+                        }
+                      >
                         {AbilityToModifier(value) >= 0
                           ? `+ ${AbilityToModifier(value)}`
                           : AbilityToModifier(value)}
@@ -342,11 +368,20 @@ const MainSheet = ({ character }: Props) => {
                         <p className="join-item bg-base-100 badge font-bold badge-lg w-32 text-xs whitespace-nowrap overflow-hidden text-ellipsis">
                           {skill.toCapitalCase().replaceAll("_", " ")}
                         </p>
-                        <p className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold">
+                        <button
+                          className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold"
+                          onClick={() =>
+                            handleRoll(
+                              calcSkillModifier(skill),
+                              skill.toCapitalCase().replaceAll("_", " "),
+                              20
+                            )
+                          }
+                        >
                           {character.state && calcSkillModifier(skill) >= 0
                             ? `+ ${calcSkillModifier(skill)}`
                             : calcSkillModifier(skill)}
-                        </p>
+                        </button>
                       </div>
                     </Fragment>
                   )
@@ -449,7 +484,16 @@ const MainSheet = ({ character }: Props) => {
                         <p className="join-item bg-base-100 badge font-bold badge-lg w-32 text-xs whitespace-nowrap overflow-hidden text-ellipsis">
                           {skill.toCapitalCase().replaceAll("_", " ")}
                         </p>
-                        <p className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold">
+                        <button
+                          className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold"
+                          onClick={() => {
+                            handleRoll(
+                              calcSkillModifier(skill),
+                              skill.toCapitalCase().replaceAll("_", " "),
+                              20
+                            );
+                          }}
+                        >
                           {character.state &&
                           AbilityToModifier(
                             character.state.abilityScores[
@@ -467,7 +511,7 @@ const MainSheet = ({ character }: Props) => {
                                   skillAtritbuteMap[skill] as Ability
                                 ]
                               )}
-                        </p>
+                        </button>
                       </div>
                     </Fragment>
                   )
@@ -532,7 +576,18 @@ const MainSheet = ({ character }: Props) => {
                   <p className="join-item bg-base-100 badge font-bold badge-lg w-32 text-xs">
                     {AbilityToText(ability)}
                   </p>
-                  <p className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold">
+                  <button
+                    className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold"
+                    onClick={() =>
+                      character.state &&
+                      handleRoll(
+                        AbilityToModifier(
+                          character.state.abilityScores[ability]
+                        ),
+                        ` ${AbilityToText(ability)} Saving Throw`
+                      )
+                    }
+                  >
                     {character.state &&
                     AbilityToModifier(character.state.abilityScores[ability]) >=
                       0
@@ -543,7 +598,7 @@ const MainSheet = ({ character }: Props) => {
                         AbilityToModifier(
                           character.state.abilityScores[ability]
                         )}
-                  </p>
+                  </button>
                 </div>
               ))}
             </div>
@@ -598,7 +653,7 @@ const MainSheet = ({ character }: Props) => {
             {/* passive perception */}
             <div className="flex flex-row items-center justify-between">
               <h2 className="pb-0 px-4 text-sm flex flex-row items-center">
-                Passive Perception
+                PP
               </h2>
               <div className="flex flex-row items-center join">
                 <Tooltip
@@ -684,7 +739,7 @@ const MainSheet = ({ character }: Props) => {
             <div className="divider m-0"></div>
             <div className="flex flex-row items-center justify-between">
               <h2 className="pb-0 px-4 text-sm flex flex-row items-center">
-                Running Speed
+                Running
               </h2>
               <div className="flex flex-row items-center join">
                 <Tooltip
@@ -727,7 +782,7 @@ const MainSheet = ({ character }: Props) => {
             <div className="divider m-0" />
             <div className="flex flex-row items-center justify-between">
               <h2 className="pb-0 px-4 text-sm flex flex-row items-center">
-                Swimming Speed
+                Swimming
               </h2>
               <div className="flex flex-row items-center join">
                 <Tooltip
@@ -770,7 +825,7 @@ const MainSheet = ({ character }: Props) => {
             <div className="divider m-0"></div>
             <div className="flex flex-row items-center justify-between">
               <h2 className="pb-0 px-4 text-sm flex flex-row items-center ">
-                <span>Climbing Speed</span>
+                <span>Climbing </span>
               </h2>
               <div className="flex flex-row items-center join">
                 <Tooltip
@@ -813,7 +868,7 @@ const MainSheet = ({ character }: Props) => {
             <div className="divider m-0"></div>
             <div className="flex flex-row items-center justify-between">
               <h2 className="pb-0 px-4 text-sm flex flex-row items-center">
-                Flying Speed
+                Flying
               </h2>
               <div className="flex flex-row items-center join">
                 <Tooltip
@@ -861,11 +916,11 @@ const MainSheet = ({ character }: Props) => {
           TODO: Resources
         </section>
         <section className="bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2 ">
-          <h2 className="pb-0 px-4">Spellcasting</h2>
-          <div className="divider m-0"></div>
-          <div className="flex flex-wrap justify-center  rounded-xl p-2 border-secondary border bg-base-300">
+          <div className="flex flex-col   rounded-xl border-secondary border bg-base-300 h-full">
+            <h2 className="pb-0 px-4 text-sm text-center">Spellcasting</h2>
+            <div className="divider m-0"></div>
             {character.Classes[0].spellCastingInfo ? (
-              <div className=" rounded-xl p-4  mt-2 py-0 flex flex-col items-center w-full">
+              <div className="flex flex-wrap justify-center flex-col px-4 pb-4">
                 {/* spellcasting ability, spell save, spell attack roll */}
                 <div className="flex flex-row items-center justify-between w-full">
                   <h3 className="p-0 text-base">Ability</h3>
@@ -1005,7 +1060,24 @@ const MainSheet = ({ character }: Props) => {
                         </span>
                       }
                     />
-                    <p className="btn btn-accent btn-xs font-bold join-item">
+                    <button
+                      className="btn btn-accent btn-xs font-bold join-item"
+                      onClick={() => {
+                        character.state &&
+                          character.Classes &&
+                          handleRoll(
+                            calcProficiency(calcLevel() || 1) +
+                              AbilityToModifier(
+                                character.state.abilityScores[
+                                  character.Classes[0].spellCastingInfo
+                                    ?.ability as Ability
+                                ]
+                              ),
+                            "Spell Attack Roll",
+                            20
+                          );
+                      }}
+                    >
                       +{" "}
                       {calcProficiency(calcLevel() || 1) +
                         AbilityToModifier(
@@ -1014,7 +1086,7 @@ const MainSheet = ({ character }: Props) => {
                               ?.ability as Ability
                           ]
                         )}
-                    </p>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -1035,6 +1107,10 @@ const MainSheet = ({ character }: Props) => {
             )}
           </div>
         </section>
+        {/* Log */}
+        <section className="bg-base-200 rounded-xl p-4 col-span-6 2xl:col-span-5">
+          <RenderLog log={log} pushLog={logPush} />
+        </section>
         {/* features */}
         <section className=" bg-base-200 rounded-xl p-4 col-span-12">
           <h2 className="pb-0 px-4">Features</h2>
@@ -1053,6 +1129,7 @@ const MainSheet = ({ character }: Props) => {
             .map((featureInfo, index) => (
               <div
                 key={index}
+                tabIndex={0}
                 className="bg-base-300 rounded-xl p-4 collapse collapse-arrow mt-2 collapse-sm py-0"
               >
                 <input type="checkbox" />
@@ -1094,9 +1171,18 @@ const MainSheet = ({ character }: Props) => {
                   {featureInfo.feature.extendedTable && (
                     <JsonTable json={featureInfo.feature.extendedTable} />
                   )}
+                  {featureInfo.feature.postTableData && (
+                    <>
+                      <div className="bg-base-100">
+                        {featureInfo.feature.postTableData}
+                      </div>
+                      <div className="divider m-0"></div>
+                    </>
+                  )}
                 </div>
               </div>
             ))}
+
           {/* locked features */}
           <div className="divider m-1"></div>
           <h2 className="py-0 px-4">Locked Features</h2>
@@ -1109,6 +1195,7 @@ const MainSheet = ({ character }: Props) => {
             .map((featureInfo, index) => (
               <div
                 key={index}
+                tabIndex={0}
                 className="bg-base-300 rounded-xl p-4 collapse collapse-arrow mt-2 collapse-sm py-0"
               >
                 <input type="checkbox" />
@@ -1166,6 +1253,14 @@ const MainSheet = ({ character }: Props) => {
                     <>
                       <div className="bg-base-100">
                         <JsonTable json={featureInfo.feature.extendedTable} />
+                      </div>
+                      <div className="divider m-0"></div>
+                    </>
+                  )}
+                  {featureInfo.feature.postTableData && (
+                    <>
+                      <div className="bg-base-100">
+                        {featureInfo.feature.postTableData}
                       </div>
                       <div className="divider m-0"></div>
                     </>

@@ -12,8 +12,17 @@ export const getCharacters = async (): Promise<CharacterInfo[]> => {
       Race: true,
       Background: true,
       SubClasses: true,
-      Classes: true,
+      Classes: {
+        include: {
+          SpellList: {
+            include: {
+              Spells: true,
+            },
+          },
+        },
+      },
       SubRace: true,
+
       User: {
         select: {
           username: true,
@@ -38,7 +47,15 @@ export const getCharacter = async (
         Race: true,
         Background: true,
         SubClasses: true,
-        Classes: true,
+        Classes: {
+          include: {
+            SpellList: {
+              include: {
+                Spells: true,
+              },
+            },
+          },
+        },
         SubRace: true,
         User: {
           select: {
@@ -58,7 +75,15 @@ export const getCharacter = async (
         Race: true,
         Background: true,
         SubClasses: true,
-        Classes: true,
+        Classes: {
+          include: {
+            SpellList: {
+              include: {
+                Spells: true,
+              },
+            },
+          },
+        },
         SubRace: true,
         User: {
           select: {
@@ -87,7 +112,15 @@ export const getCharacterChunk = async (
         Race: true,
         Background: true,
         SubClasses: true,
-        Classes: true,
+        Classes: {
+          include: {
+            SpellList: {
+              include: {
+                Spells: true,
+              },
+            },
+          },
+        },
         SubRace: true,
         User: {
           select: {
@@ -110,7 +143,15 @@ export const getCharacterChunk = async (
       Race: true,
       Background: true,
       SubClasses: true,
-      Classes: true,
+      Classes: {
+        include: {
+          SpellList: {
+            include: {
+              Spells: true,
+            },
+          },
+        },
+      },
       SubRace: true,
       User: {
         select: {
