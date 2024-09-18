@@ -45,6 +45,7 @@ const WeaponChoice = ({ choice, updateSelections }: Props) => {
       {numberArray(1, choice.numberOfChoices).map((_, index) => {
         return (
           <select
+            key={index}
             defaultValue={"Pick One"}
             className="select select-bordered   w-full max-w-xs mt-2"
             onChange={(e) => {

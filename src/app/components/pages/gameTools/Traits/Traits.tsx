@@ -99,7 +99,7 @@ const ListEditor = ({
       <div className="divider m-0"></div>
       {editing ? (
         data.map((item, index) => (
-          <div className="join">
+          <div className="join" key={index}>
             <input
               className="input input-bordered w-full mb-2 join-item"
               key={index}
@@ -171,7 +171,9 @@ const Traits = ({ state, setState, background }: Props) => {
   return (
     <div className="flex flex-col w-full bg-base-200 p-4">
       <h2 className="font-bold">Personality Traits</h2>
-      <p>Write down your character's traits, ideals, bonds, and flaws here.</p>
+      <p>
+        Write down your character&apos;s traits, ideals, bonds, and flaws here.
+      </p>
       <p>
         Use{" "}
         <a
@@ -238,8 +240,9 @@ const Traits = ({ state, setState, background }: Props) => {
               }
             >
               Personality traits are small quirks or habits that define your
-              character's personality. They can be anything from "I'm always
-              polite and respectful" to "I can't resist a pretty face."
+              character&apos;s personality. They can be anything from
+              &quot;I&apos;m always polite and respectful&quot; to &quot;I
+              can&apos;t resist a pretty face.&quot;
             </Tooltip>
           }
         />
@@ -280,8 +283,9 @@ const Traits = ({ state, setState, background }: Props) => {
                 </>
               }
             >
-              Ideals are beliefs that drive your character's actions. They can
-              be anything from "Respect" to "Independence."
+              Ideals are beliefs that drive your character&apos;s actions. They
+              can be anything from &quot;Respect&quot; to
+              &quot;Independence.&quot;
             </Tooltip>
           }
         />
@@ -323,8 +327,8 @@ const Traits = ({ state, setState, background }: Props) => {
               }
             >
               Bonds are connections to people, places, or things that are
-              important to your character. They can be anything from "My family"
-              to "My homeland."
+              important to your character. They can be anything from &quot;My
+              family&quot; to &quot;My homeland.&quot;
             </Tooltip>
           }
         />
@@ -366,8 +370,8 @@ const Traits = ({ state, setState, background }: Props) => {
               }
             >
               Flaws are weaknesses or imperfections that your character has.
-              They can be anything from "I have a weakness for the vices of the
-              city" to "I'm always in debt."
+              They can be anything from &quot;I have a weakness for the vices of
+              the city&quot; to &quot;I&apos;m always in debt.&quot;
             </Tooltip>
           }
         />

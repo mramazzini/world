@@ -382,3 +382,17 @@ _09-17-2024_
 - Added A few more items
 - Added Variant Human
 - Can now middle click links that were unable to be middle clicked before to open in a new tab
+
+The following are known issues/things that are planned to be added:
+
+- Level up functionality
+- Subclasses
+- Ability Score Improvements
+- Feats (both to wiki and character sheet)
+- Magic Items
+- Item Shop
+- Spells will be able to be added to the spell list by clicking on them
+
+Any other suggestions and bugs can be reported in the discord.
+
+---

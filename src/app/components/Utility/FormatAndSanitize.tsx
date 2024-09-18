@@ -9,7 +9,6 @@ import { cerr } from "@/lib/utils/chalkLog";
 import ModelLink from "./ModelLink";
 import { Item, Spell } from "@prisma/client";
 import { getItem } from "@/lib/actions/db/item/read.actions";
-import { memoize } from "@/lib/utils/memoize";
 import { memoizeGetItem, memoizeGetSpell } from "./globalCache";
 
 const P = ({

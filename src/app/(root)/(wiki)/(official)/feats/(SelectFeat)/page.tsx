@@ -1,5 +1,5 @@
-import FeatSearchPage from "@/app/components/SearchPages/Official/FeatsSearch.page";
-import { getFeats } from "@/lib/actions/db/feat/get.actions";
+import FeatSearchPage from "@/app/components/SearchPages/Official/FeatSearch.page";
+import { getFeats } from "@/lib/actions/db/feat/read.actions";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

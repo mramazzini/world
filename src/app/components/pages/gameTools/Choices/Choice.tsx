@@ -117,7 +117,8 @@ const Choice = ({
 
   return (
     character &&
-    character.state && (
+    character.state &&
+    !hidden && (
       <div className="flex bg-base-200 rounded-xl p-4 flex-col  items-center w-96">
         <p className="">{choiceData.description}</p>
         <div className="divider  m-0"></div>
