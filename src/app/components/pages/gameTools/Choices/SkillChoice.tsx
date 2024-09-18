@@ -1,6 +1,7 @@
 "use client";
 
 import P from "@/app/components/Utility/FormatAndSanitize";
+import numberArray from "@/lib/utils/numberArray";
 import { Skill } from "@prisma/client";
 import { useEffect, useState } from "react";
 interface Props {
@@ -41,26 +42,31 @@ const SkillChoice = ({ choice, updateSelections }: Props) => {
           );
         })}
       </ul>
-      <select
-        defaultValue={"Pick One"}
-        className="select select-bordered   w-full max-w-xs mt-2"
-        onChange={(e) => {
-          const index = parseInt(e.target.value);
-          const newSelections = [...selections];
-          if (newSelections.length >= choice.numberOfChoices) {
-            newSelections.shift();
-          }
-          newSelections.push(index);
-          setSelections(newSelections);
-        }}
-      >
-        <option disabled>Pick One</option>
-        {choice.options.map((skill, index) => (
-          <option key={index} value={index}>
-            {skill.toCapitalCase().replaceAll("_", " ")}
-          </option>
-        ))}
-      </select>
+      {numberArray(1, choice.numberOfChoices).map((_, index) => {
+        return (
+          <select
+            key={index}
+            defaultValue={"Pick One"}
+            className="select select-bordered   w-full max-w-xs mt-2"
+            onChange={(e) => {
+              const index = parseInt(e.target.value);
+              const newSelections = [...selections];
+              if (newSelections.length >= choice.numberOfChoices) {
+                newSelections.shift();
+              }
+              newSelections.push(index);
+              setSelections(newSelections);
+            }}
+          >
+            <option disabled>Pick One</option>
+            {choice.options.map((skill, index) => (
+              <option key={index} value={index}>
+                {skill.toCapitalCase().replaceAll("_", " ")}
+              </option>
+            ))}
+          </select>
+        );
+      })}
     </div>
   );
 };

@@ -1,18 +1,37 @@
+"use client";
 import P from "@/app/components/Utility/FormatAndSanitize";
 import { CharacterInfo } from "@/lib/types";
 import numberArray from "@/lib/utils/numberArray";
+import { useState } from "react";
 
 interface Props {
   character: CharacterInfo;
+  updateState: (state: PrismaJson.CharacterState) => void;
+  setSelectedItem: (item: PrismaJson.QuantityItem | null) => void;
 }
 
-const GridItem = ({ data }: { data?: PrismaJson.QuantityItem }) => {
+const GridItem = ({
+  data,
+  updateState,
+  setSelectedItem,
+}: {
+  data?: PrismaJson.QuantityItem;
+  updateState?: (state: PrismaJson.CharacterState) => void;
+  setSelectedItem?: (item: PrismaJson.QuantityItem | null) => void;
+}) => {
   return data ? (
-    <div className="w-24 h-12 bg-neutral p-2 rounded-box flex flex-col items-center justify-center">
+    <button
+      className="w-24 h-12  p-2 rounded-box flex flex-col items-center justify-center btn btn-neutral"
+      onClick={(e) => {
+        e.preventDefault();
+        if (!setSelectedItem) return;
+        setSelectedItem(data);
+      }}
+    >
       <span className="text-xs text-center">
         {data.quantity} <P>{`^${data.item}{}^`}</P>
       </span>
-    </div>
+    </button>
   ) : (
     <div className="w-24 h-12 bg-neutral p-2 rounded-box flex items-center justify-center">
       <div className="w-6 h-6 bg-base-300 rounded-box flex items-center justify-center">
@@ -22,12 +41,17 @@ const GridItem = ({ data }: { data?: PrismaJson.QuantityItem }) => {
   );
 };
 
-const ItemsUI = ({ character }: Props) => {
+const ItemsUI = ({ character, updateState, setSelectedItem }: Props) => {
   if (!character.state) return null;
   return (
     <div className="flex flex-wrap gap-2 justify-center">
       {character.state.inventory.map((item, index) => (
-        <GridItem key={index} data={item} />
+        <GridItem
+          key={index}
+          data={item}
+          updateState={updateState}
+          setSelectedItem={setSelectedItem}
+        />
       ))}
       {numberArray(1, 56 - character.state.inventory.length).map((index) => (
         <GridItem key={index} />

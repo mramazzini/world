@@ -2,6 +2,7 @@
 import P from "@/app/components/Utility/FormatAndSanitize";
 import { memoizeGetItem } from "@/app/components/Utility/globalCache";
 import { ItemInfo } from "@/lib/types";
+import numberArray from "@/lib/utils/numberArray";
 import { useEffect, useState } from "react";
 interface Props {
   choice: {
@@ -61,33 +62,38 @@ const ItemChoice = ({ choice, updateSelections }: Props) => {
           );
         })}
       </ul>
-      <select
-        defaultValue={"Pick One"}
-        className="select select-bordered   w-full max-w-xs mt-2"
-        onChange={(e) => {
-          const index = parseInt(e.target.value);
-          const newSelections = [...selections];
-          if (newSelections.length >= choice.numberOfChoices) {
-            newSelections.shift();
-          }
-          newSelections.push(index);
-          setSelections(newSelections);
-        }}
-      >
-        <option disabled>Pick One</option>
-        {choice.options.map((itemList, index) => (
-          <option key={index} value={index}>
-            {itemList
-              .map(
-                (itemData) =>
-                  `${itemData.quantity} ${
-                    options.find((i) => i.id === itemData.item)?.name
-                  }`
-              )
-              .join(", ")}
-          </option>
-        ))}
-      </select>
+      {numberArray(1, choice.numberOfChoices).map((_, index) => {
+        return (
+          <select
+            key={index}
+            defaultValue={"Pick One"}
+            className="select select-bordered   w-full max-w-xs mt-2"
+            onChange={(e) => {
+              const index = parseInt(e.target.value);
+              const newSelections = [...selections];
+              if (newSelections.length >= choice.numberOfChoices) {
+                newSelections.shift();
+              }
+              newSelections.push(index);
+              setSelections(newSelections);
+            }}
+          >
+            <option disabled>Pick One</option>
+            {choice.options.map((itemList, index) => (
+              <option key={index} value={index}>
+                {itemList
+                  .map(
+                    (itemData) =>
+                      `${itemData.quantity} ${
+                        options.find((i) => i.id === itemData.item)?.name
+                      }`
+                  )
+                  .join(", ")}
+              </option>
+            ))}
+          </select>
+        );
+      })}
     </div>
   );
 };

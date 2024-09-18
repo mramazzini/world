@@ -1,6 +1,6 @@
 "use client";
-import { AbilityToModifier } from "@/app/components/Utility/AbilityToModifier";
-import { calcProficiency } from "@/app/components/Utility/calcProficiency";
+import { AbilityToModifier } from "@/app/components/Utility/characterStateFunctions/calc/AbilityToModifier";
+import { calcProficiency } from "@/app/components/Utility/characterStateFunctions/calc/calcProficiency";
 import {
   numberColor,
   numberColorBefore,
@@ -11,31 +11,34 @@ import { roll } from "@/app/components/Utility/roll";
 import Tooltip from "@/app/components/Utility/Tooltip";
 import useLog from "@/app/components/Utility/useDicelog";
 import { skillAtritbuteMap, skills } from "@/lib/globalVars";
-import { Ability, CharacterInfo } from "@/lib/types";
+import { Ability, ArmorInfo, CharacterInfo, WeaponID } from "@/lib/types";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import { Skill } from "@prisma/client";
 import Image from "next/image";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import RenderLog from "./Log";
-
+import WeaponRoller from "./WeaponRoller";
+import Resources from "./Resources";
+import Tools from "./Tools";
+import { calculateLevel } from "@/app/components/Utility/characterStateFunctions/calc/calcLevel";
+import { calcSkillModifier } from "@/app/components/Utility/characterStateFunctions/calc/calcSkillModifier";
+import { alignmentToText } from "@/app/components/Utility/alignmentToText";
+import Spells from "./Spells";
 interface Props {
   character: CharacterInfo;
+  setCharacter: (character: CharacterInfo) => void;
 }
 
-const MainSheet = ({ character }: Props) => {
+const MainSheet = ({ character, setCharacter }: Props) => {
   useEffect(() => {
     if (character) {
       console.log(character);
     }
   }, [character]);
 
-  const calcLevel = () => {
-    return character?.state?.classLevels.reduce(
-      (acc, cur) => acc + cur.level,
-      0
-    );
-  };
   const { log, logPush } = useLog();
+
+  const [hpDeltaValue, setHpDeltaValue] = useState<number>(1);
 
   const handleRoll = (modifier: number, from: string, dice: number = 20) => {
     const result = roll(1, dice, modifier);
@@ -50,24 +53,7 @@ const MainSheet = ({ character }: Props) => {
     });
   };
 
-  const calcSkillModifier = (skill: Skill) => {
-    if (!character.state) return 0;
-    const base = AbilityToModifier(
-      character.state.abilityScores[skillAtritbuteMap[skill] as Ability]
-    );
-
-    const proficiency = character.state.proficiencies.skills.includes(skill);
-    const expertise =
-      character.state.proficiencies.skillExpertise.includes(skill);
-    const prof = calcProficiency(calcLevel() || 1);
-    if (expertise) {
-      return base + prof * 2;
-    }
-    if (proficiency) {
-      return base + prof;
-    }
-    return base;
-  };
+  const calcLevel = (character.state && calculateLevel(character.state)) || 1;
 
   return (
     character &&
@@ -79,7 +65,7 @@ const MainSheet = ({ character }: Props) => {
             src={character.imageURL || "/images/hero.jpg"}
             width={200}
             height={200}
-            className="rounded-lg w-[100px] h-[100px] object-cover object-top mr-4"
+            className="rounded-lg w-[100px] h-[100px] object-cover object-center mr-4"
             alt="Fighter"
           />
           <div className="flex flex-col justify-">
@@ -89,10 +75,49 @@ const MainSheet = ({ character }: Props) => {
             </h2>
 
             <p className="italic">
-              Level {calcLevel()} {character.Race?.name}{" "}
+              Level {calcLevel},{" "}
+              {character.SubRace ? (
+                <a
+                  href={`/subrace/${character.SubRace?.name.replaceAll(
+                    " ",
+                    "-"
+                  )}`}
+                  className="hover:link"
+                >
+                  {character.SubRace?.name}
+                </a>
+              ) : (
+                <a
+                  href={`/race/${character.Race?.name.replaceAll(" ", "-")}`}
+                  className="hover:link"
+                >
+                  {character.Race?.name}
+                </a>
+              )}
+              ,{" "}
               {character.Classes?.map((c) => (
-                <Fragment key={c.name}>{c.name.toCapitalCase()}</Fragment>
+                <Fragment key={c.name}>
+                  <a
+                    href={`/class/${c.name.replaceAll(" ", "-")}`}
+                    className="hover:link"
+                  >
+                    {c.name.toCapitalCase()}
+                  </a>
+                </Fragment>
               ))}
+              ,{" "}
+              <a
+                href={`/background/${character.Background?.name.replaceAll(
+                  " ",
+                  "-"
+                )}`}
+                className="hover:link"
+              >
+                {character.Background?.name}
+              </a>{" "}
+            </p>
+            <p className="italic font-bold">
+              {alignmentToText(character.alignment)}
             </p>
           </div>
         </section>
@@ -205,7 +230,6 @@ const MainSheet = ({ character }: Props) => {
                             <tr className="bg-black/30">
                               <th>Reason</th>
                               <th>Effect</th>
-                              <th className="hidden md:table-cell">Date</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -214,9 +238,6 @@ const MainSheet = ({ character }: Props) => {
                                 <tr key={index}>
                                   <td>{reason.reason}</td>
                                   <td>{reason.effect}</td>
-                                  <td className="hidden md:table-cell">
-                                    {reason.date.toISOString().split("T")[0]}
-                                  </td>
                                 </tr>
                               )
                             )}
@@ -271,15 +292,50 @@ const MainSheet = ({ character }: Props) => {
               <div className="divider px-2 m-0 border-x border-primary"></div>
               <div className="rounded-b-xl px-2 pb-2 text-center border-primary text-xs border-b border-x font-bold ">
                 <div className="join w-full flex items-center justify-center">
-                  <button className="btn btn-error btn-xs w-12  join-item">
+                  <button
+                    className="btn btn-error btn-xs w-12  join-item"
+                    onClick={() => {
+                      const newChar = { ...character };
+                      if (!newChar.state) return;
+                      if (newChar.state.hp.current - hpDeltaValue < 0) {
+                        return;
+                      }
+                      newChar.state.hp.damageLog.push({
+                        reason: "Damage",
+                        effect: `- ${Math.abs(hpDeltaValue)}`,
+                      });
+                      newChar.state.hp.current -= hpDeltaValue;
+                      setCharacter(newChar);
+                    }}
+                  >
                     -{" "}
                   </button>
                   <input
                     type="number"
                     className="input input-xs w-12 join-item  border-y-neutral border-2 text-center"
+                    value={hpDeltaValue}
+                    onChange={(e) => setHpDeltaValue(parseInt(e.target.value))}
                   />
 
-                  <button className="btn btn-success btn-xs w-12 join-item">
+                  <button
+                    className="btn btn-success btn-xs w-12 join-item"
+                    onClick={() => {
+                      const newChar = { ...character };
+                      if (!newChar.state) return;
+                      if (
+                        newChar.state.hp.current + hpDeltaValue >
+                        newChar.state.hp.max
+                      ) {
+                        return;
+                      }
+                      newChar.state.hp.damageLog.push({
+                        reason: "Healing",
+                        effect: `+ ${hpDeltaValue}`,
+                      });
+                      newChar.state.hp.current += hpDeltaValue;
+                      setCharacter(newChar);
+                    }}
+                  >
                     +
                   </button>
                 </div>
@@ -320,26 +376,21 @@ const MainSheet = ({ character }: Props) => {
                                     </td>
                                     <td>
                                       {character.state &&
-                                      AbilityToModifier(
-                                        character.state.abilityScores[
-                                          skillAtritbuteMap[skill] as Ability
-                                        ]
+                                      calcSkillModifier(
+                                        character.state,
+                                        skill
                                       ) >= 0
-                                        ? `+ ${AbilityToModifier(
-                                            character.state.abilityScores[
-                                              skillAtritbuteMap[
-                                                skill
-                                              ] as Ability
-                                            ]
+                                        ? `+ ${calcSkillModifier(
+                                            character.state,
+                                            skill
                                           )}`
                                         : character.state &&
-                                          AbilityToModifier(
-                                            character.state.abilityScores[
-                                              skillAtritbuteMap[
-                                                skill
-                                              ] as Ability
-                                            ]
-                                          )}
+                                          `- ${Math.abs(
+                                            calcSkillModifier(
+                                              character.state,
+                                              skill
+                                            )
+                                          )}`}
                                     </td>
                                   </tr>
                                   {character.state &&
@@ -349,7 +400,7 @@ const MainSheet = ({ character }: Props) => {
                                       <tr>
                                         <td>Proficient</td>
                                         <td>
-                                          + {calcProficiency(calcLevel() || 1)}
+                                          + {calcProficiency(calcLevel || 1)}
                                         </td>
                                       </tr>
                                     )}
@@ -369,18 +420,25 @@ const MainSheet = ({ character }: Props) => {
                           {skill.toCapitalCase().replaceAll("_", " ")}
                         </p>
                         <button
-                          className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold"
+                          className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold w-10"
                           onClick={() =>
+                            character.state &&
                             handleRoll(
-                              calcSkillModifier(skill),
+                              calcSkillModifier(character.state, skill),
                               skill.toCapitalCase().replaceAll("_", " "),
                               20
                             )
                           }
                         >
-                          {character.state && calcSkillModifier(skill) >= 0
-                            ? `+ ${calcSkillModifier(skill)}`
-                            : calcSkillModifier(skill)}
+                          {character.state &&
+                          calcSkillModifier(character.state, skill) >= 0
+                            ? `+ ${calcSkillModifier(character.state, skill)}`
+                            : `- ${
+                                character.state &&
+                                Math.abs(
+                                  calcSkillModifier(character.state, skill)
+                                )
+                              }`}
                         </button>
                       </div>
                     </Fragment>
@@ -437,13 +495,15 @@ const MainSheet = ({ character }: Props) => {
                                             ]
                                           )}`
                                         : character.state &&
-                                          AbilityToModifier(
-                                            character.state.abilityScores[
-                                              skillAtritbuteMap[
-                                                skill
-                                              ] as Ability
-                                            ]
-                                          )}
+                                          `- ${Math.abs(
+                                            AbilityToModifier(
+                                              character.state.abilityScores[
+                                                skillAtritbuteMap[
+                                                  skill
+                                                ] as Ability
+                                              ]
+                                            )
+                                          )}`}
                                     </td>
                                   </tr>
                                   {character.state &&
@@ -452,9 +512,7 @@ const MainSheet = ({ character }: Props) => {
                                     ) && (
                                       <tr>
                                         <td>Proficiency</td>
-                                        <td>
-                                          + {calcProficiency(calcLevel() || 1)}
-                                        </td>
+                                        <td>+ {calcProficiency(calcLevel)}</td>
                                       </tr>
                                     )}
 
@@ -464,9 +522,7 @@ const MainSheet = ({ character }: Props) => {
                                     ) && (
                                       <tr>
                                         <td>Expertise</td>
-                                        <td>
-                                          + {calcProficiency(calcLevel() || 1)}
-                                        </td>
+                                        <td>+ {calcProficiency(calcLevel)}</td>
                                       </tr>
                                     )}
                                 </tbody>
@@ -485,32 +541,23 @@ const MainSheet = ({ character }: Props) => {
                           {skill.toCapitalCase().replaceAll("_", " ")}
                         </p>
                         <button
-                          className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold"
+                          className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold w-10"
                           onClick={() => {
+                            if (!character.state) return;
                             handleRoll(
-                              calcSkillModifier(skill),
+                              calcSkillModifier(character.state, skill),
                               skill.toCapitalCase().replaceAll("_", " "),
                               20
                             );
                           }}
                         >
                           {character.state &&
-                          AbilityToModifier(
-                            character.state.abilityScores[
-                              skillAtritbuteMap[skill] as Ability
-                            ]
-                          ) >= 0
-                            ? `+ ${AbilityToModifier(
-                                character.state.abilityScores[
-                                  skillAtritbuteMap[skill] as Ability
-                                ]
-                              )}`
+                          calcSkillModifier(character.state, skill) >= 0
+                            ? `+ ${calcSkillModifier(character.state, skill)}`
                             : character.state &&
-                              AbilityToModifier(
-                                character.state.abilityScores[
-                                  skillAtritbuteMap[skill] as Ability
-                                ]
-                              )}
+                              `- ${Math.abs(
+                                calcSkillModifier(character.state, skill)
+                              )}`}
                         </button>
                       </div>
                     </Fragment>
@@ -558,10 +605,14 @@ const MainSheet = ({ character }: Props) => {
                                   ? `+ ${AbilityToModifier(
                                       character.state.abilityScores[ability]
                                     )}`
-                                  : character.state &&
-                                    AbilityToModifier(
-                                      character.state.abilityScores[ability]
-                                    )}
+                                  : `- ${
+                                      character.state &&
+                                      Math.abs(
+                                        AbilityToModifier(
+                                          character.state.abilityScores[ability]
+                                        )
+                                      )
+                                    }`}
                               </td>
                             </tr>
                           </tbody>
@@ -577,7 +628,7 @@ const MainSheet = ({ character }: Props) => {
                     {AbilityToText(ability)}
                   </p>
                   <button
-                    className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold"
+                    className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold w-10"
                     onClick={() =>
                       character.state &&
                       handleRoll(
@@ -594,10 +645,14 @@ const MainSheet = ({ character }: Props) => {
                       ? `+ ${AbilityToModifier(
                           character.state.abilityScores[ability]
                         )}`
-                      : character.state &&
-                        AbilityToModifier(
-                          character.state.abilityScores[ability]
-                        )}
+                      : `- ${
+                          character.state &&
+                          Math.abs(
+                            AbilityToModifier(
+                              character.state.abilityScores[ability]
+                            )
+                          )
+                        }`}
                   </button>
                 </div>
               ))}
@@ -689,7 +744,7 @@ const MainSheet = ({ character }: Props) => {
                   Your Passive Perception is defined by the following:
                 </Tooltip>
                 <p className="badge badge-secondary font-bold join-item w-14">
-                  {character.state.passivePerception} ft
+                  DC {character.state.passivePerception}
                 </p>
               </div>
             </div>
@@ -913,7 +968,7 @@ const MainSheet = ({ character }: Props) => {
         </section>
         {/* Resources (ki, rages, hitdie) */}
         <section className="bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2">
-          TODO: Resources
+          <Resources character={character} setCharacter={setCharacter} />
         </section>
         <section className="bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2 ">
           <div className="flex flex-col   rounded-xl border-secondary border bg-base-300 h-full">
@@ -948,7 +1003,7 @@ const MainSheet = ({ character }: Props) => {
                             <tbody>
                               <tr>
                                 <td>Proficiency</td>
-                                <td>+ {calcProficiency(calcLevel() || 1)}</td>
+                                <td>+ {calcProficiency(calcLevel)}</td>
                               </tr>
                               <tr>
                                 <td>
@@ -991,7 +1046,7 @@ const MainSheet = ({ character }: Props) => {
                     />
                     <p className="badge badge-secondary  font-bold join-item">
                       {8 +
-                        calcProficiency(calcLevel() || 1) +
+                        calcProficiency(calcLevel) +
                         AbilityToModifier(
                           character.state.abilityScores[
                             character.Classes[0].spellCastingInfo
@@ -1019,7 +1074,7 @@ const MainSheet = ({ character }: Props) => {
                             <tbody>
                               <tr>
                                 <td>Proficiency</td>
-                                <td>+ {calcProficiency(calcLevel() || 1)}</td>
+                                <td>+ {calcProficiency(calcLevel)}</td>
                               </tr>
                               <tr>
                                 <td>
@@ -1066,7 +1121,7 @@ const MainSheet = ({ character }: Props) => {
                         character.state &&
                           character.Classes &&
                           handleRoll(
-                            calcProficiency(calcLevel() || 1) +
+                            calcProficiency(calcLevel) +
                               AbilityToModifier(
                                 character.state.abilityScores[
                                   character.Classes[0].spellCastingInfo
@@ -1079,7 +1134,7 @@ const MainSheet = ({ character }: Props) => {
                       }}
                     >
                       +{" "}
-                      {calcProficiency(calcLevel() || 1) +
+                      {calcProficiency(calcLevel) +
                         AbilityToModifier(
                           character.state.abilityScores[
                             character.Classes[0].spellCastingInfo
@@ -1108,13 +1163,30 @@ const MainSheet = ({ character }: Props) => {
           </div>
         </section>
         {/* Log */}
-        <section className="bg-base-200 rounded-xl p-4 col-span-6 2xl:col-span-5">
+        <section className="bg-base-200 rounded-xl p-4 col-span-6 2xl:col-span-5 row-span-2">
           <RenderLog log={log} pushLog={logPush} />
         </section>
+
+        <section className="bg-base-200 rounded-xl p-4 col-span-6 2xl:col-span-7 row-span-1">
+          <Tools character={character} pushLog={logPush} />
+        </section>
+        <section className="bg-base-200 rounded-xl p-4 col-span-12 2xl:col-span-7 row-span-1 ">
+          <WeaponRoller
+            equipped={character.state.equipped.hands.items || []}
+            abilities={character.state.abilityScores}
+            logPush={logPush}
+            proficiencyBonus={calcProficiency(calcLevel)}
+            weaponProficiencies={character.state.proficiencies.weapons}
+          />
+        </section>
+        <section className="bg-base-200 rounded-xl p-4 col-span-12 2xl:col-span-12 row-span-1">
+          <Spells character={character} logPush={logPush} />
+        </section>
+
         {/* features */}
         <section className=" bg-base-200 rounded-xl p-4 col-span-12">
           <h2 className="pb-0 px-4">Features</h2>
-          <div className="divider m-0"></div>
+          <div className="divider m-0" />
           {character.state.features
             .sort((a, b) => {
               if (a.feature.levels === undefined) return -1; // Put a first if its levels are undefined

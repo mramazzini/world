@@ -18,6 +18,7 @@ import {
   SubRaceInfo,
   ItemInfo,
   SpellListInfo,
+  FeatInfo,
 } from "@/lib/types";
 import { Background, Spell } from "@prisma/client";
 import "@/lib/string.extensions";
@@ -33,6 +34,7 @@ type DataType =
   | RaceInfo
   | SubRaceInfo
   | ItemInfo
+  | FeatInfo
   | SpellListInfo
   | null;
 type Priority = "all" | "sm" | "md" | "lg" | "xl";
@@ -276,7 +278,9 @@ const SearchPageComponent = <T extends DataType>({
         </div>
       )}
       <div className="overflow-x-auto h-[60vh] overflow-y-scroll">
-        <table className={`table-zebra table-sm w-full table table-pin-rows`}>
+        <table
+          className={`table-zebra table-sm w-full table table-pin-rows table-link`}
+        >
           <thead>
             <tr>
               {numberArray(0, count).map((num) => {

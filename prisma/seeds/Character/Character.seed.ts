@@ -6,7 +6,7 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
     imageURL: "/images/constantine.jpeg",
     Background: {
       connect: {
-        id: 37, //runecarver
+        id: 6, //city watch
       },
     },
     Classes: {
@@ -85,7 +85,7 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
     imageURL: "/images/ranis.png",
     Background: {
       connect: {
-        id: 6, //city watch
+        id: 37, //runecarver
       },
     },
     Race: {
@@ -110,6 +110,51 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
     },
 
     alignment: Alignment.TRUE_NEUTRAL,
+  },
+  {
+    name: "Jay Walker",
+    alignment: Alignment.CHAOTIC_NEUTRAL,
+    imageURL: "https://c.tenor.com/LJWHrVzT0-EAAAAd/tenor.gif",
+    Background: {
+      connect: {
+        id: 51, //gambler
+      },
+    },
+    Classes: {
+      connect: {
+        id: 10, //ranger
+      },
+    },
+    Race: {
+      connect: {
+        id: 39, //harengon
+      },
+    },
+  },
+  {
+    name: "Oliver Shorthand",
+    imageURL: "https://c.tenor.com/b5p8rjSmfDsAAAAd/tenor.gif",
+    alignment: Alignment.LAWFUL_GOOD,
+    Background: {
+      connect: {
+        id: 38, //sage
+      },
+    },
+    Classes: {
+      connect: {
+        id: 11, //wizard
+      },
+    },
+    Race: {
+      connect: {
+        id: 8, //human
+      },
+    },
+    SubRace: {
+      connect: {
+        id: 57, //variant
+      },
+    },
   },
 ];
 

@@ -1,24 +1,31 @@
 "use client";
 
 import { getCharacter } from "@/lib/actions/db/character/read.actions";
-import { Ability, CharacterInfo, SpellListInfo } from "@/lib/types";
+import {
+  Ability,
+  AbilityScores,
+  CharacterInfo,
+  SpellListInfo,
+} from "@/lib/types";
 import { useEffect, useState } from "react";
-import { generateCharacter } from "../../Utility/generateCharacter";
+import { generateCharacter } from "../../Utility/characterStateFunctions/update/generateCharacter";
 import Image from "next/image";
 import AbilityToText from "@/lib/utils/AbilityToText";
-import { AbilityToModifier } from "../../Utility/AbilityToModifier";
+import { AbilityToModifier } from "../../Utility/characterStateFunctions/calc/AbilityToModifier";
 import Tooltip from "../../Utility/Tooltip";
 import P from "../../Utility/FormatAndSanitize";
 import JsonTable from "../../Utility/JsonTable";
 import { numberColor, numberColorBefore } from "../../Utility/colorBefore";
 import "@/lib/string.extensions";
 import { skillAtritbuteMap, skills } from "@/lib/globalVars";
-import { calcProficiency } from "../../Utility/calcProficiency";
+import { calcProficiency } from "../../Utility/characterStateFunctions/calc/calcProficiency";
 import MainSheet from "./main/MainSheet";
 import InventoryTab from "./Inventory/InventoryTab";
 import ChooseChoices from "./Choices/Choices";
 import SpellSheet from "./Spells/SpellSheet";
-type Tab = "sheet" | "inventory" | "spells" | "notes" | "choices";
+import Notes from "./Notes/Notes";
+import Traits from "./Traits/Traits";
+type Tab = "sheet" | "inventory" | "spells" | "notes" | "choices" | "traits";
 
 interface Props {
   charName: string;
@@ -31,16 +38,81 @@ const CharacterSheet = ({ charName }: Props) => {
   useEffect(() => {
     getCharacter(charName).then((res) => {
       if (!res) return;
+      const abilityScoresDemo: {
+        orion: AbilityScores;
+        constantine: AbilityScores;
+        boon: AbilityScores;
+        ranis: AbilityScores;
+        jay: AbilityScores;
+        oliver: AbilityScores;
+      } = {
+        orion: {
+          STR: 14,
+          DEX: 10,
+          CON: 14,
+          INT: 8,
+          WIS: 16,
+          CHA: 14,
+        },
+        constantine: {
+          STR: 15,
+          DEX: 10,
+          CON: 15,
+          INT: 8,
+          WIS: 8,
+          CHA: 16,
+        },
+        boon: {
+          STR: 12,
+          DEX: 10,
+          CON: 14,
+          INT: 15,
+          WIS: 16,
+          CHA: 8,
+        },
+        ranis: {
+          STR: 8,
+          DEX: 16,
+          CON: 13,
+          INT: 16,
+          WIS: 12,
+          CHA: 10,
+        },
+        jay: {
+          STR: 14,
+          DEX: 14,
+          CON: 12,
+          INT: 8,
+          WIS: 8,
+          CHA: 15,
+        },
+        oliver: {
+          //just put some wizard stats for now
+          STR: 9,
+          DEX: 16,
+          CON: 14,
+          INT: 18,
+          WIS: 12,
+          CHA: 9,
+        },
+      };
+      console.log(res);
       const char: CharacterInfo = {
         ...res,
-        state: generateCharacter(res, {
-          STR: 13,
-          DEX: 15,
-          CON: 14,
-          INT: 17,
-          WIS: 19,
-          CHA: 15,
-        }),
+        state: generateCharacter(
+          res,
+          res.name === "Constantine Wayfinder"
+            ? abilityScoresDemo.constantine
+            : res.name === "Orion Lysander"
+            ? abilityScoresDemo.orion
+            : res.name === "Boon"
+            ? abilityScoresDemo.boon
+            : res.name === "Jay Walker"
+            ? abilityScoresDemo.jay
+            : res.name === "Oliver Shorthand"
+            ? abilityScoresDemo.oliver
+            : abilityScoresDemo.ranis
+        ),
       };
       setCharacter(char);
       console.log(char);
@@ -77,7 +149,7 @@ const CharacterSheet = ({ charName }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <MainSheet character={character} />
+              <MainSheet character={character} setCharacter={setCharacter} />
             </div>
             {/* dummy tabs for now */}
             <input
@@ -94,7 +166,7 @@ const CharacterSheet = ({ charName }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <InventoryTab character={character} />
+              <InventoryTab character={character} updateState={setState} />
             </div>
             <input
               type="radio"
@@ -110,8 +182,29 @@ const CharacterSheet = ({ charName }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <SpellSheet character={character} />
+              <SpellSheet character={character} setState={setState} />
             </div>
+            <input
+              type="radio"
+              name="charcter_tabs"
+              role="tab"
+              className={`tab tab-base-300 ${
+                activeTab === "traits" ? "tab-active" : ""
+              }`}
+              aria-label="Traits"
+              onClick={() => setActiveTab("traits")}
+            />
+            <div
+              role="tabpanel"
+              className="bg-base-300 p-4 rounded-xl tab-content "
+            >
+              <Traits
+                state={character.state}
+                setState={setState}
+                background={character.Background}
+              />
+            </div>
+
             <input
               type="radio"
               name="charcter_tabs"
@@ -126,7 +219,13 @@ const CharacterSheet = ({ charName }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              Notes
+              <Notes
+                notes={character.state.notes}
+                updateNotes={(notes) => {
+                  if (!character.state) return;
+                  setState({ ...character.state, notes });
+                }}
+              />
             </div>
             <input
               type="radio"

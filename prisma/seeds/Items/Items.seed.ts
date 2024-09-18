@@ -3418,6 +3418,16 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.MISC],
     flavorText: "A steel mirror is a mirror made of steel.",
   },
+  {
+    id: 286,
+    name: "Merchant's Scale",
+    description: "A merchant's scale is a scale used for weighing items.",
+    rarity: Rarity.COMMON,
+    types: [ItemTypes.MISC],
+    flavorText: "A merchant's scale is a scale used for weighing items.",
+    weight: { quantity: 3, unit: lb },
+    cost: { quantity: 5, unit: gp },
+  },
 
   ...SpellSeed.map((spell) => ({
     id: spell.id && 10000 + spell.id,

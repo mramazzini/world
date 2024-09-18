@@ -1,5 +1,7 @@
 import {
   Ability,
+  AbilityScores,
+  AbilityScoreValue,
   CallbackOptions,
   CharacterInfo,
   ToolID,
@@ -99,7 +101,15 @@ const Choice = ({
             callback={runCallback}
           />
         );
-
+      case "AbilityScore":
+        return (
+          <ProficiencyChoiceHandler<AbilityScoreValue>
+            proficiency="abilityScore"
+            choice={choice.choice as PrismaJson.AbilityScoreChoice}
+            character={character}
+            callback={runCallback}
+          />
+        );
       default:
         return <p>Choice not found</p>;
     }

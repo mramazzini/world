@@ -145,10 +145,3 @@ export async function getBackground(): Promise<Background[]> {
   await db.$disconnect();
   return res;
 }
-
-export async function getFeat(): Promise<Feat[]> {
-  const db = new PrismaClient();
-  const res = await db.feat.findMany();
-  await db.$disconnect();
-  return res;
-}

@@ -6,6 +6,7 @@ import {
   Class,
   DamageTypes,
   EquipmentPack,
+  Feat,
   Item,
   Language,
   Message,
@@ -44,6 +45,7 @@ export interface ClassInfo extends Class {
     username: string | null;
   } | null;
 }
+export interface FeatInfo extends Feat {}
 interface ClassWithSpellList extends Class {
   SpellList: SpellListInfo | null;
 }
@@ -85,6 +87,7 @@ export type CallbackOptions =
   | ToolID[]
   | ItemID[]
   | ArmorID[]
+  | AbilityScoreValue[]
   | PrismaJson.QuantityItem[][];
 export interface SpellInfo extends Spell {
   SpellLists: SpellList[];
@@ -208,8 +211,8 @@ declare global {
       data: { [key: string | number]: string }[];
     }
 
-    interface AbilityScoreNumber {
-      fixedIncreases?: { ability: Ability; value: number }[]; // Fixed increases like Strength +2, Charisma +1
+    interface AbilityScoreChoice {
+      default?: { ability: Ability; value: number }[]; // Fixed increases like Strength +2, Charisma +1
       choices?: {
         abilities: Ability[]; // Array of abilities that can be chosen
         options: {
@@ -239,6 +242,25 @@ declare global {
         [K in SpellLevel]?: number;
       };
     };
+
+    interface SheetSpell {
+      name: string;
+      notes: string;
+      linkedSpell?: SpellID;
+      prepared: boolean;
+      alwaysPrepared: boolean;
+      spellRoll?: SpellRoll[];
+      range?: string;
+      castingTime?: string;
+      radius?: string;
+      duration?: string;
+      concentration?: boolean;
+      ritual?: boolean;
+      upcastBonus?: SpellRoll;
+      baseLevel: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+      addSpellcastingModifier?: boolean;
+      components?: string;
+    }
 
     interface Feature {
       name: string;
@@ -322,7 +344,7 @@ declare global {
         damageDie?: Trigger;
       };
 
-      ASI?: AbilityScoreNumber;
+      ASI?: AbilityScoreChoice;
       //Adds languages to the player's language proficiencies
       languageChoices?: LanguageChoice;
       //adds armor to the player's armor proficiencies
@@ -537,6 +559,7 @@ declare global {
       | "Language"
       | "Skill"
       | "Ability"
+      | "AbilityScore"
       | "Weapon"
       | "Armor"
       | "Tool";
@@ -545,9 +568,11 @@ declare global {
       | LanguageChoice
       | SkillChoice
       | AbilityChoice
+      | AbilityScoreChoice
       | WeaponChoice
       | ArmorChoice
       | ToolChoice;
+
     interface Choice {
       model: ChoiceModel;
       choice: ChoiceType;
@@ -644,6 +669,12 @@ declare global {
       spellLevels: SpellLevels;
     }
 
+    interface SpellRoll {
+      type: DamageTypes | "healing";
+      dice: 4 | 6 | 8 | 10 | 12 | 20 | 100;
+      numberOfDice: number;
+    }
+
     interface Damage {
       // ex. 1d6 fire damage
       type: DamageTypes; // type of damage ex. slashing, fire, etc.
@@ -662,6 +693,12 @@ declare global {
       effect: string | number;
     }
     interface CharacterState {
+      notes: MarkdownItem[];
+      ideals: MarkdownItem[];
+      bonds: MarkdownItem[];
+      flaws: MarkdownItem[];
+      biography: MarkdownItem;
+      personalityTraits: MarkdownItem[];
       classLevels: { classId: number; level: number }[];
       inspirationRolls: number;
 
@@ -674,7 +711,7 @@ declare global {
         max: number;
         maxReasons: Reason[];
         current: number;
-        damageLog: { date: Date; reason: number; effect: string }[];
+        damageLog: Reason[];
         temporary: number;
         temporaryReason?: Reason; //Can only have one source of temphp
         hitDieAvailable: {
@@ -735,6 +772,8 @@ declare global {
       preparedSpells: SpellID[];
       alwaysPreparedSpells: SpellID[];
       preparedCantrips: SpellID[];
+      //for now, we only allow user submitted spells to be added to the character sheet
+      userSubmittedSpells: SheetSpell[];
 
       spellSlots?: {
         [K in SpellLevel]?: number;
@@ -760,6 +799,9 @@ declare global {
     }
   }
 }
+
+export type MarkdownItem = string;
+
 export interface Property {
   name: string;
   description: string;
@@ -783,10 +825,15 @@ export interface Roll {
 }
 
 export interface Log {
-  logType: "roll" | "info";
+  logType: "roll" | "info" | "spell";
   roll?: Roll;
   info?: string;
   from?: string;
+  spellLevel?: number;
+}
+export interface AbilityScoreValue {
+  ability: Ability;
+  amount: number;
 }
 
 export interface AbilityScores {

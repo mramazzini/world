@@ -1,5 +1,8 @@
 import { roll } from "@/app/components/Utility/roll";
 import { Log, Roll } from "@/lib/types";
+import { toSpellLevel } from "@/lib/utils/toSpellLevel";
+import Image from "next/image";
+import { Fragment, useEffect, useRef } from "react";
 
 interface Props {
   log: Log[];
@@ -7,6 +10,15 @@ interface Props {
 }
 
 const RenderLog = ({ log, pushLog }: Props) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    //to autoscroll to bottom of log on new log entry
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  }, [log]);
+
   const rollLogString = (l: Log) => {
     const r = l.roll;
     if (!r) return "";
@@ -32,12 +44,20 @@ const RenderLog = ({ log, pushLog }: Props) => {
         :{" "}
         {r.rolls.map((roll, index) => {
           return (
-            <>
-              <span key={index} className="badge">
+            <Fragment key={index}>
+              <span
+                className={`badge ${
+                  roll.rolled === 1 && roll.diceType === 20
+                    ? "badge-error"
+                    : roll.rolled === 20 && roll.diceType === 20
+                    ? "badge-success"
+                    : ""
+                }`}
+              >
                 {roll.rolled}
               </span>
               {index < r.rolls.length - 1 ? " + " : ""}
-            </>
+            </Fragment>
           );
         })}
         {r.plus ? ` + ${r.plus}` : ""}
@@ -49,27 +69,71 @@ const RenderLog = ({ log, pushLog }: Props) => {
   return (
     <>
       <div className=" w-full flex flex-col join-vertical">
-        <div className="bg-base-300 p-4 rounded-xl h-64 overflow-scroll">
-          {log.map((logEntry, index) => {
-            if (logEntry.logType === "roll") {
-              return (
-                <>
-                  <div
-                    key={index}
-                    className="flex flex-row items-center justify-between"
-                  >
-                    <span className="ml-2">{rollLogString(logEntry)}</span>
-                    <span className="badge badge-secondary">
-                      {logEntry.from}
-                    </span>
-                  </div>
-                  <div className="divider m-0" />
-                </>
-              );
-            }
-          })}
+        <div
+          className="bg-base-300 p-4 rounded-xl h-64 overflow-scroll"
+          ref={containerRef}
+        >
+          {log.length > 0 ? (
+            log.map((logEntry, index) => {
+              if (logEntry.logType === "roll") {
+                return (
+                  <Fragment key={index}>
+                    <div
+                      key={index}
+                      className="flex flex-row items-center justify-between "
+                    >
+                      <span className="ml-2">{rollLogString(logEntry)}</span>
+                      <span className="badge badge-secondary h-auto text-center">
+                        {logEntry.from}
+                      </span>
+                    </div>
+                    <div className="divider m-0" />
+                  </Fragment>
+                );
+              }
+              if (logEntry.logType === "spell") {
+                return (
+                  <Fragment key={index}>
+                    <div
+                      key={index}
+                      className="flex flex-row items-center justify-between"
+                    >
+                      <span className="ml-2">
+                        Casted <strong>{logEntry.from}</strong> as
+                        {logEntry.spellLevel
+                          ? logEntry.spellLevel === 0
+                            ? " a Cantrip"
+                            : ` a ${toSpellLevel(
+                                logEntry.spellLevel
+                              )} level spell.`
+                          : " a Cantrip."}{" "}
+                      </span>
+                      <span className="badge badge-secondary h-auto">
+                        {logEntry.from}
+                      </span>
+                    </div>
+                    <div className="divider m-0" />
+                  </Fragment>
+                );
+              }
+            })
+          ) : (
+            <div className="flex items-center justify-center h-full flex-col ">
+              <p className="text-center p-4 font-bold">No rolls yet...</p>
+              <Image
+                src="/images/d20.svg"
+                alt="Dice"
+                width={100}
+                height={100}
+                className="opacity-50"
+              />
+              <p className="text-center p-4">
+                Click a button to roll dice and see the results here.
+              </p>
+            </div>
+          )}
         </div>
-        <div className="flex flex-row  m-2">
+        <div className="flex flex-row  m-2 ">
           <div className=" flex flex-col ">
             <p className="flex items-center justify-center w-full my-2 badge-neutral badge">
               Roll
@@ -100,7 +164,7 @@ const RenderLog = ({ log, pushLog }: Props) => {
           <div className="divider divider-horizontal" />
           {[2, 3, 4, 5].map((numberOfDice, index) => {
             return (
-              <div className=" flex flex-col mx-1 w-full">
+              <div key={index} className=" flex flex-col mx-1 w-full">
                 <p className="flex items-center justify-center w-full my-2 badge-neutral badge">
                   {numberOfDice} Dice
                 </p>

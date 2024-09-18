@@ -6,6 +6,7 @@ import {
   Language,
   Prisma,
   Size,
+  Skill,
 } from "@prisma/client";
 import { Ability } from "@/lib/types";
 import { weaponIds } from "../../Items/Weapons/Weapons.seed";
@@ -1158,6 +1159,54 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     weaponProficiencyDescription:
       "You have proficiency with longswords, shortswords, longbows, and shortbows.",
   },
+  {
+    id: 57,
+    name: "Variant Human",
+    description:
+      "If your campaign uses the optional feat rules from chapter 5 of the Player's Handbook, your Dungeon Master might allow these variant traits, all of which replace the human's Ability Score Increase trait.",
+    baseRaceId: ids.human,
+    source: src.phb,
+    flavorText:
+      "If your campaign uses the optional feat rules from chapter 5 of the Player's Handbook, your Dungeon Master might allow these variant traits.",
+    abilityScoreDescription:
+      "Two different ability scores of your choice increase by 1.",
+    abilityScores: {
+      choices: [
+        {
+          abilities: [
+            Ability.STR,
+            Ability.DEX,
+            Ability.CON,
+            Ability.INT,
+            Ability.WIS,
+            Ability.CHA,
+          ],
+          options: [
+            {
+              numberOfChoices: 2,
+              options: [1, 1],
+            },
+          ],
+        },
+      ],
+    },
+    skillProficiencyDescription:
+      "You gain proficiency in one skill of your choice.",
+    skillProficiencies: {
+      choices: [
+        {
+          options: Object.values(Skill),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    features: [
+      {
+        name: "Feat",
+        description: "You gain one feat of your choice.",
+      },
+    ],
+  },
 ];
 
 const ClassicVariantsIds = {
@@ -1218,6 +1267,7 @@ const ClassicVariantsIds = {
   mephistopheles: 54,
   zariel: 55,
   tirahar: 56,
+  variantHuman: 57,
 };
 
 export { ClassicVariants, ClassicVariantsIds };

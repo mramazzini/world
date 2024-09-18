@@ -5,12 +5,11 @@ import { useState, useEffect } from "react";
 const useLog = () => {
   const [log, updateLog] = useState<Log[]>([]);
 
-  useEffect(() => {
-    console.log(log);
-  }, [log]);
-
   const logPush = (newLog: Log) => {
-    updateLog([...log, newLog]);
+    console.log(newLog);
+    updateLog((prev) => {
+      return [...prev, newLog];
+    });
   };
 
   return { log, logPush };

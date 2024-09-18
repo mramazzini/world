@@ -3266,6 +3266,23 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
         "gp"
       )}`,
     ],
+    equipment: {
+      default: [
+        { item: itemIds.diceSet, quantity: 1 },
+        { item: itemIds.commonClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 10 },
+      ],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [
+            [{ item: itemIds.playingCardSet, quantity: 1 }],
+            [{ item: itemIds.diceSet, quantity: 1 }],
+          ],
+        },
+      ],
+    },
     suggestedCharacteristics:
       "The horrors of war combined with the rigid discipline of military service leave their mark on all soldiers, shaping their ideals, creating strong bonds, and often leaving them scarred and vulnerable to fear, shame, and hatred.",
     traits: [
@@ -3536,6 +3553,755 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
       "I'd rather kill someone in their sleep than fight fair.",
       "It's not stealing if I need it more than someone else.",
       "People who can't take care of themselves get what they deserve.",
+    ],
+  },
+  {
+    id: 46,
+    name: "Uthgardt Tribe Member",
+    description:
+      "Though you might have only recently arrived in civilized lands, you are no stranger to the values of cooperation and group effort when striving for supremacy. You learned these principles, and much more, as a member of an Uthgardt tribe.\n\nYour people have always tried to hold to the old ways. Tradition and taboo have kept the Uthgardt strong while the kingdoms of others have collapsed into chaos and ruin. But for the last few generations, some bands among the tribes were tempted to settle, make peace, trade, and even to build towns. Perhaps this is why Uthgar chose to raise up the totems among the people as living embodiments of his power. Perhaps they needed a reminder of who they were and from whence they came. The Chosen of Uthgar led bands back to the old ways, and most of your people abandoned the soft ways of civilization.\n\nYou might have grown up in one of the tribes that had decided to settle down, and now that they have abandoned that path, you find yourself adrift. Or you might come from a segment of the Uthgardt that adheres to tradition, but you seek to bring glory to your tribe by achieving great things as a formidable adventurer.",
+    flavorText:
+      "You are no stranger to the values of cooperation and group effort when striving for supremacy.",
+    source: src.sword,
+    skillProficiencyDescription:
+      "You are proficient in Athletics and Survival.",
+    skillProficiencies: {
+      default: [Skill.ATHLETICS, Skill.SURVIVAL],
+    },
+    toolProficiencyDescription:
+      "You are proficient with one type of musical instrument or 1 set of artisan's tools.",
+    toolProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...instrumentIds, ...artisanIds],
+        },
+      ],
+    },
+    languageProficiencyDescription:
+      "You are proficient in one language of your choice.",
+    languageProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: Object.values(Language),
+        },
+      ],
+    },
+    equipmentDescription: [
+      "A " + i(itemIds.huntingTrap, "hunting trap"),
+      "A " +
+        i(itemIds.totem, "totemic token") +
+        " or set of tatoos marking your loyalty to Uthgar and your tribal totem",
+      "A set of " + i(itemIds.travelersClothes, "traveler's clothes"),
+      `A ${i(itemIds.pouch, "pouch")} containing 10 ${i(
+        itemIds.goldPiece,
+        "gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.huntingTrap, quantity: 1 },
+        { item: itemIds.travelersClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 10 },
+        { item: itemIds.totem, quantity: 1 },
+      ],
+    },
+    suggestedCharacteristics:
+      "Use the tables for the Outlander background as the basis for your traits and motivations, modifying the entries when appropriate to suit your identity.\n\nEven if you have left your tribe behind (at least for now), you hold to the traditions of your people. You will never cut down a still-living tree, and you may not countenance such an act being done in your presence. The Uthgardt ancestral mounds – great hills where the totem spirits were defeated by Uthgar and where the heroes of the tribes are interred – are sacred to you.\n\nYour bond is undoubtedly associated with your tribe or some aspect of Uthgardt philosophy or culture (perhaps even Uthgar himself). Your ideal is a personal choice that probably hews closely to the ethos of your people and certainly doesn't contradict or compromise what being an Uthgardt stands for.",
+    traits: [
+      "I'm driven by a wanderlust that led me away from home.",
+      "I watch over my friends as if they were a litter of newborn pups.",
+      "I once ran twenty-five miles without stopping to warn my clan of an approaching orc horde. I'd do it again if I had to.",
+      "I have a lesson for every situation, drawn from observing nature.",
+      "I place no stock in wealthy or well-mannered folk. Money and manners won't save you from a hungry owlbear.",
+      "I'm always picking things up, absently fiddling with them, and sometimes accidentally breaking them.",
+      "I feel far more comfortable around animals than people.",
+      "I was, in fact, raised by wolves.",
+    ],
+    ideals: [
+      "**Change.** Life is like the seasons, in constant change, and we must change with it. (Chaotic)",
+      "**Greater Good.** It is each person's responsibility to make the most happiness for the whole tribe. (Good)",
+      "**Honor.** If I dishonor myself, I dishonor my whole clan. (Lawful)",
+      "**Might.** The strongest are meant to rule. (Evil)",
+      "**Nature.** The natural world is more important than all the constructs of civilization. (Neutral)",
+      "**Glory.** I must earn glory in battle, for myself and my clan. (Any)",
+    ],
+    bonds: [
+      "My family, clan, or tribe is the most important thing in my life, even when they are far from me.",
+      "An injury to the unspoiled wilderness of my home is an injury to me.",
+      "I will bring terrible wrath down on the evildoers who destroyed my homeland.",
+      "I am the last of my tribe, and it is up to me to ensure their names enter legend.",
+      "I suffer awful visions of a coming disaster and will do anything to prevent it.",
+      "It is my duty to provide children to sustain my tribe.",
+    ],
+    flaws: [
+      "I am too enamored of ale, wine, and other intoxicants.",
+      "There's no room for caution in a life lived to the fullest.",
+      "I remember every insult I've received and nurse a silent resentment toward anyone who's ever wronged me.",
+      "I am slow to trust members of other races, tribes, and societies.",
+      "Violence is my answer to almost any challenge.",
+      "Don't expect me to save those who can't save themselves. It is nature's way that the strong thrive and the weak perish.",
+    ],
+  },
+  {
+    id: 47,
+    name: "Waterdhavian Noble",
+    description:
+      "You are a scion of one of the great noble families of Waterdeep. Human families who jealously guard their privilege and place in the City of Splendors, Waterdhavian nobles have a reputation across Faerûn for being eccentric, spoiled, venal, and, above all else, rich.\n\nWhether you are a shining example of the reason for this reputation or one who proves the rule by being an exception, people expect things of you when they know your surname and what it means. Your reasons for taking up adventuring likely involve your family in some way: Are you the family rebel, who prefers delving in filthy dungeons to sipping zzar at a ball? Or have you taken up sword or spell on your family's behalf, ensuring that they have someone of renown to see to their legacy?\n\nWork with your DM to come up with the family you are part of – there are around seventy-five lineages in Waterdeep, each with its own financial interests, specialties, and schemes. You might be part of the main line of your family, possibly in line to become its leader one day. Or you might be one of any number of cousins, with less prestige but also less responsibility.",
+    source: src.sword,
+    flavorText:
+      "You are a scion of one of the great noble families of Waterdeep.",
+    skillProficiencyDescription:
+      "You are proficient in History and Persuasion.",
+    skillProficiencies: {
+      default: [Skill.HISTORY, Skill.PERSUASION],
+    },
+    toolProficiencyDescription:
+      "You are proficient with one type of gaming set or musical instrument.",
+    toolProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...gamingKitIds, ...instrumentIds],
+        },
+      ],
+    },
+    languageProficiencyDescription:
+      "You are proficient in one language of your choice.",
+    languageProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: Object.values(Language),
+        },
+      ],
+    },
+    equipmentDescription: [
+      "A set of " + i(itemIds.fineClothes, "fine clothes"),
+      `A ${i(itemIds.signetRing, "signet ring")} or brooch`,
+      `${i(itemIds.paper, "A scroll")} of pedigree`,
+      `A ${(itemIds.waterskin, "skin")} of fine zzar or wine`,
+      `A ${i(itemIds.pouch, "purse")} containing 20 ${i(
+        itemIds.goldPiece,
+        "gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.fineClothes, quantity: 1 },
+        { item: itemIds.signetRing, quantity: 1 },
+        { item: itemIds.paper, quantity: 1 },
+        { item: itemIds.waterskin, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 20 },
+      ],
+    },
+    suggestedCharacteristics:
+      "Use the tables for the Noble background as the basis for your traits and motivations, modifying the entries when appropriate to suit your identity.\n\nLike other nobles, you were born and raised in a different world from the one that most folk know – one that grants you privilege but also calls you to fulfill a duty befitting your station. Your bond might be associated with your family a lone, or it could be concerned with another noble house that sides with or opposes your own. Your ideal depends to some extent on how you view your role in the family, and how you intend to conduct yourself in the world at large as a representative of your house.",
+    traits: [
+      "My eloquent flattery makes everyone I talk to feel like the most wonderful and important person in the world.",
+      "The common folk love me for my kindness and generosity.",
+      "No one could doubt by looking at my regal bearing that I am a cut above the unwashed masses.",
+      "I take great pains to always look my best and follow the latest fashions.",
+      "I don't like to get my hands dirty, and I won't be caught dead in unsuitable accommodations.",
+      "Despite my noble birth, I do not place myself above other folk. We all have the same blood.",
+      "My favor, once lost, is lost forever.",
+      "If you do me an injury, I will crush you, ruin your name, and salt your fields.",
+    ],
+
+    ideals: [
+      "**Respect.** Respect is due to me because of my position, but all people regardless of station deserve to be treated with dignity. (Good)",
+      "**Responsibility.** It is my duty to respect the authority of those above me, just as those below me must respect mine. (Lawful)",
+      "**Independence.** I must prove that I can handle myself without the coddling of my family. (Chaotic)",
+      "**Power.** If I can attain more power, no one will tell me what to do. (Evil)",
+      "**Family.** Blood runs thicker than water. (Any)",
+      "**Noble Obligation.** It is my duty to protect and care for the people beneath me. (Good)",
+    ],
+
+    bonds: [
+      "I will face any challenge to win the approval of my family.",
+      "My house's alliance with another noble family must be sustained at all costs.",
+      "Nothing is more important than the other members of my family.",
+      "I am in love with the heir of a family that my family despises.",
+      "My loyalty to my sovereign is unwavering.",
+      "The common folk must see me as a hero of the people.",
+    ],
+
+    flaws: [
+      "I secretly believe that everyone is beneath me.",
+      "I hide a truly scandalous secret that could ruin my family forever.",
+      "I too often hear veiled insults and threats in every word addressed to me, and I'm quick to anger.",
+      "I have an insatiable desire for carnal pleasures.",
+      "In fact, the world does revolve around me.",
+      "By my words and actions, I often bring shame to my family.",
+    ],
+  },
+  {
+    id: 48,
+    name: "Witchlight Hand",
+    description:
+      "You crept into the Witchlight Carnival as a child or youth and never looked back, earning a place among those who work behind the scenes to keep the carnival in business. As a hand, you work hard and party hard. The carnival has borne you to many fantastic worlds, circling back around to your home world once every eight years, but you know almost nothing about these worlds because you spend all your time in the carnival. You know the other hands well, but the carnival's owners-Mister Witch and Mister Light-remain mysterious to you even after all these years.\n\nMaybe you joined the carnival to escape a dismal life at home, or maybe you were enchanted by the idea of visiting new places or the dream of becoming one of the carnival's star attractions. Now that you're older, carnival life has lost some of its appeal. The daily routine has grown tedious, the cyclical nature of the carnival's journey monotonous. The carnival no longer fills your heart with a sense of wonder. Perhaps greater adventures await you beyond the carnival's gates.",
+    flavorText:
+      "You crept into the Witchlight Carnival as a child or youth and never looked back.",
+    source: src.witchlight,
+    skillProficiencyDescription:
+      "You are proficient in Sleight of Hand and Performance.",
+    skillProficiencies: {
+      default: [Skill.SLEIGHT_OF_HAND, Skill.PERFORMANCE],
+    },
+    toolProficiencyDescription:
+      "You are proficient with disguise kits and one type of musical instrument.",
+    toolProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...instrumentIds],
+        },
+      ],
+    },
+    languageProficiencyDescription:
+      "You are proficient in one language of your choice.",
+    languageProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: Object.values(Language),
+        },
+      ],
+    },
+    equipmentDescription: [
+      `A ${i(itemIds.disguiseKit, "disguise kit")} or one type of ${i(
+        itemIds.musicalInstrument,
+        "musical instrument"
+      )}.`,
+      `A deck of ${i(itemIds.playingCardSet, "playing cards")}`,
+      `A carnival ${i(itemIds.uniform, "uniform")} or ${i(
+        itemIds.costumeClothes,
+        "costume"
+      )}`,
+      `One ${i(
+        itemIds.trinket,
+        "trinket"
+      )} determined by rolled on the Feywild trinkets table.`,
+      `A ${i(itemIds.pouch, "purse")} containing 8 ${i(
+        itemIds.goldPiece,
+        "gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.playingCardSet, quantity: 1 },
+        { item: itemIds.trinket, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 8 },
+      ],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [
+            [{ item: itemIds.disguiseKit, quantity: 1 }],
+            [...instrumentItemIds.map((id) => ({ item: id, quantity: 1 }))],
+          ],
+        },
+        {
+          numberOfChoices: 1,
+          options: [
+            [{ item: itemIds.uniform, quantity: 1 }],
+            [{ item: itemIds.costumeClothes, quantity: 1 }],
+          ],
+        },
+      ],
+    },
+
+    suggestedCharacteristics:
+      "These tables, while optional, are well suited to Feywild-themed adventurers and are ideal for any character who has the Witchlight Hand background.",
+    traits: [
+      "I'm haunted by fey laughter that only I can hear, though I know it's just my mind playing tricks on me.",
+      "Like a nomad, I can't settle down in one place for very long.",
+      "Good music makes me weep like a baby.",
+      "Wherever I go, I try to bring a little of the warmth and tranquility of home with me.",
+      "I have never lost my childlike sense of wonder.",
+      "When I have a new idea, I get wildly excited about it until I come up with another, better idea.",
+      "I live by my own set of weird and wonderful rules.",
+      "I can't bring myself to trust most adults.",
+    ],
+    ideals: [
+      "**Friendship.** I never leave a friend behind. (Good)",
+      "**Empathy.** No creature should be made to suffer. (Good)",
+      "**Wanderlust.** I prefer to take the less traveled path. (Chaotic)",
+      "**Changeability.** Change is good, which is why I live by an ever-changing set of rules. (Chaotic)",
+      "**Honor.** A deal is a deal, and I would never break one. (Lawful)",
+      "**Rule of Three.** Everything in the multiverse happens in threes. I see the 'rule of three' everywhere. (Lawful)",
+      "**Obsession.** I won't let go of a grudge. (Evil)",
+      "**Greed.** I will do whatever it takes to get what I want, regardless of the harm it might cause. (Evil)",
+    ],
+    bonds: [
+      "I would never break my word.",
+      "I find magic in all its forms to be compelling. The more magical a place, the more I am drawn to it.",
+      "I do what I can to protect the natural world.",
+      "A trusted friend is the most important thing in the multiverse to me.",
+      "I can't bring myself to harm a Fey creature, either because I consider myself one or because I fear the repercussions.",
+      "The Witchlight Carnival feels like home to me.",
+      "I'm drawn to the Feywild and long to return there, if only for a short while.",
+      "I feel indebted to Mister Witch and Mister Light for giving me a home and a purpose.",
+    ],
+    flaws: [
+      "I easily lose track of time. My poor sense of time means I'm always late.",
+      "I think the whole multiverse is out to get me.",
+      "I'm always operating under a tight timeline, and I'm obsessed with keeping everything on schedule.",
+      "I'm a kleptomaniac who covets shiny, sparkling treasure.",
+      "I'm forgetful. Sometimes I can't remember even the simplest things.",
+      "I never give away anything for free and always expect something in return.",
+      "I have many vices and tend to indulge them.",
+      "I'm always changing my mind—well, almost always.",
+    ],
+  },
+  {
+    id: 49,
+    name: "Celebrity Adventurer's Scion",
+    description:
+      "Your family name strikes fear and admiration in the hearts of the common folk - but that's got nothing to do with you. Songs and stories celebrating the adventuring exploits of your famous parent are widely known. Kids across the land grew up wishing they were you. But being the child of a famous adventurer wasn't all hugs and kisses.\n\nYou seldom saw your celebrity-adventurer parent, and when they were around, it was all about them and tales of slaying this demon or vanquishing that dragon. All too often, you'd be woken out of a sound sleep by someone standing outside your home screaming about the latest threat to the town, the region, or the world.\n\nIn the end, all you have to show for your lineage is your name. Most of the family's money went for consumables, from potions of healing and spell scrolls to copious amounts of dwarven ale. And everyone expects you to swing a sword or sling spells like your famous forebear, making it doubly hard for you to prove yourself.",
+    flavorText:
+      "Your family name strikes fear and admiration in the hearts of the common folk - but that's got nothing to do with you.",
+    skillProficiencyDescription:
+      "You are proficient in Perception and Performance.",
+    skillProficiencies: {
+      default: [Skill.PERCEPTION, Skill.PERFORMANCE],
+    },
+    toolProficiencyDescription: "You are proficient with Disguise kits.",
+    toolProficiencies: {
+      default: [toolIds.disguiseKit],
+    },
+    source: src.aquisitions,
+    equipmentDescription: [
+      `A ${i(itemIds.disguiseKit, "disguise kit")}`,
+      `A set of ${i(itemIds.fineClothes, "fine clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing 30 ${i(
+        itemIds.goldPiece,
+        "gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.disguiseKit, quantity: 1 },
+        { item: itemIds.fineClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 30 },
+      ],
+    },
+
+    suggestedCharacteristics:
+      "Scions of celebrity adventurers must deal with fame that's not theirs, wealth they didn't earn. and expectations they can never hope to meet. These hardships can have adverse effects, but those who cope with them can arrive at a decent attitude and a grounded worldview. Those who fail become bitter - or worse.",
+    traits: [
+      "I will never get out of my famous parent's shadow, and no one else will ever understand this burden.",
+      "I've seen enough of the adventuring life to have realistic expectations and empathy for my peers.",
+      "Living up to my legacy will be difficult, but I'm going to do it.",
+      "I'm used to the very best in life, and that's a hard habit to break.",
+      "My parent taught me a sense of duty. I strive to uphold it, even when the odds are against me.",
+      "No one can fake a smile, a handshake, or an interested nod like I can.",
+      "I've been part of the adventuring life since I was old enough to walk. Let me explain a few things to you.",
+      "No risk is too great for the rewards of defeating my enemies … and taking their stuff.",
+    ],
+    ideals: [
+      "**Power.** The only way to get ahead in this world is to attain power and hold onto it with all your might. (Evil)",
+      "**Peace.** Those who can find or make peace in the chaotic world around them have everything. (Lawful)",
+      "**Fame.** I've seen what fame can bring. And I'll do anything to get all that for myself. (Neutral)",
+      "**Training.** Hard work, sacrifice, and training lead to success - and eventually to perfection. (Any)",
+      "**Anonymity.** I want to be successful. And alone. With lots of guards and wards between me and everyone else in the world. (Any)",
+      "**Wisdom.** Material wealth is an illusion. Wisdom is the real treasure. (Good)",
+    ],
+    bonds: [
+      "While my parent was out adventuring, a servant raised me, and I care about that person more than anyone.",
+      "I consider every member of my parent's former adventuring party to be family.",
+      "Despite their absences, my famous parent was kind and generous. I love them and want to make them proud.",
+      "My parent once brought a cursed magic item home. It is my obsession.",
+      "My childhood home holds all my best memories, and its upkeep is my primary concern.",
+      "Growing up, I had an imaginary friend I could always count on. That friend is still with me.",
+    ],
+    flaws: [
+      "You don't know what I'm going through. You never can.",
+      "You. Fetch my cloak. And maybe rub my feet for a while.",
+      "My comrades are brave, but I must defeat this threat alone to prove my worth.",
+      "Oh, yeah, that spell? Named after my parent's best friend. Let me tell you about them.",
+      "My best days are behind me. Ahead lies only toil, pain, and death.",
+      "You have to look out for yourself. No one else will.",
+    ],
+  },
+  {
+    id: 50,
+    name: "Failed Merchant",
+    source: src.aquisitions,
+    description:
+      "Maybe you come from a long line of merchants. Perhaps you were an entrepreneur. Regardless. your ventures ended poorly. Whether it was because of outside influences, bad luck, or simply because your business acumen was weak, you lost everything.\n\nWith failure, however. comes experience. You're free of that old life, having made some connections and learned your lessons. Prepared to pursue the life of an adventurer, your insight into the world of commerce brought you into the sphere of Acquisitions Incorporated - and a franchise just might be in your future.",
+    flavorText: "You come from a long line of merchants.",
+    skillProficiencyDescription:
+      "You are proficient in Investigation and Persuasion.",
+    skillProficiencies: {
+      default: [Skill.INVESTIGATION, Skill.PERSUASION],
+    },
+    toolProficiencyDescription:
+      "You are proficient with one type of artisan's tools.",
+    toolProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...artisanIds],
+        },
+      ],
+    },
+    languageProficiencyDescription:
+      "You are proficient in one language of your choice.",
+    languageProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: Object.values(Language),
+        },
+      ],
+    },
+    equipmentDescription: [
+      `A set of ${i(itemIds.fineClothes, "fine clothes")}`,
+      `One set of artisan's tools`,
+      `A ${i(itemIds.merchantScale, "merchant's scale")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing 10 ${i(
+        itemIds.goldPiece,
+        "gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.fineClothes, quantity: 1 },
+        { item: itemIds.merchantScale, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 10 },
+      ],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [
+            ...artisanToolItemIds.map((id) => [{ item: id, quantity: 1 }]),
+          ],
+        },
+      ],
+    },
+    suggestedCharacteristics:
+      "Being a merchant involved having a head for numbers, a strong personality. the ability to make deals with hostile adversaries, a strong sword arm to fight off bandits, and the intuition for knowing what people want and need. The art of business is the art of finding the best path to profit, and that path might be different with each transaction. It takes a strong mind and a stronger stomach to succeed. So why did you fail?",
+    traits: [
+      "I didn't have the cutthroat attitude necessary to succeed. I won't make that mistake again.",
+      "Even my competitors said I was affable and talented. Those traits should serve me well.",
+      "To prosper, you have to be in control.",
+      "The customer is always right.",
+      "I was cutting corners and breaking deals to maximize profit. That's why I failed.",
+      "When I get an idea, I am single-minded in its execution - even if it's a terrible idea.",
+      "If I can be everyone's friend, I'll always have support.",
+      "My heart wasn't in being a merchant, so I failed. I'm not all that keen on adventuring either, but I need the money.",
+    ],
+    ideals: [
+      "**Survival.** Where there's life, there's hope. If I remain alive and flexible, I can succeed. (Any)",
+      "**Generosity.** People helped me when I was down. Now that I'm back on my feet, I'll pay it forward. (Good)",
+      "**Excitement.** Caution got me nowhere in my previous business. I'm not going to let it hold me back now. (Chaotic)",
+      "**Wealth.** With enough coin, I can buy comfort, power, knowledge, and even eternal life. Nothing will stand between me and money. (Evil)",
+      "**Stability.** The mercantile trade was too chaotic for me. I need a nice stable profession, like adventuring. (Lawful)",
+      "**Redemption.** Too many people consider me a failure. So I need to prove them wrong. (Any)",
+    ],
+    bonds: [
+      "My family means everything to me. I failed them before, and I must not do so again.",
+      "My church provides a connection to my god, so I must ensure that it is protected and funded.",
+      "My former business partner fell ill, and then our business failed. Part of my new venture involves earning enough to take care of their family.",
+      "If I take care of my possessions, they'll take care of me. People come and go, but a weapon or a wand is something you can always rely on.",
+      "Although my business failed, the people of my community were kind to me. I'll do everything in my power to protect them.",
+      "I owe a dangerous person a lot of money. As long as they're happy, they let my debt rest unpaid.",
+    ],
+    flaws: [
+      "Why spend gold here when you can buy the same thing for copper in the next town?",
+      "I must have the best of everything. Like, right now.",
+      "You haven't heard of me? I'm sure that's because of your ignorance and low breeding.",
+      "I failed, but I'm awesome. So when anyone else is successful, it must be because of nepotism, dishonesty, or dumb luck.",
+      "I find that most people are trustworthy. Hey, where's my belt pouch?",
+      "Nothing gets between me and danger except my fellow adventurers. So I'll be sure to put them there.",
+    ],
+  },
+  {
+    id: 51,
+    name: "Gambler",
+    description:
+      "All you need to make a lot of gold is a little gold. Except at those times when all you need to have no gold at all is a little gold. Whether you're a good gambler or a bad one rarely matters, because no one can divine the whims of Lady Luck. Sometimes you're up, sometimes you're down. But the thing about gambling is that someone is always willing to take a bet.",
+    source: src.aquisitions,
+    flavorText: "All you need to make a lot of gold is a little gold.",
+    skillProficiencyDescription: "You are proficient in Deception and Insight.",
+    skillProficiencies: {
+      default: [Skill.DECEPTION, Skill.INSIGHT],
+    },
+    toolProficiencyDescription:
+      "You are proficient with one type of gaming set.",
+    toolProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...gamingKitIds],
+        },
+      ],
+    },
+    languageProficiencyDescription:
+      "You are proficient in one language of your choice.",
+    languageProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: Object.values(Language),
+        },
+      ],
+    },
+    equipmentDescription: [
+      `A set of ${i(itemIds.fineClothes, "fine clothes")}`,
+      `A ${i(itemIds.gamingKit, "gaming set")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing 15 ${i(
+        itemIds.goldPiece,
+        "gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.fineClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 15 },
+      ],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [
+            ...gamingKitItemIds.map((id) => [{ item: id, quantity: 1 }]),
+          ],
+        },
+      ],
+    },
+    suggestedCharacteristics:
+      "Some gamble out of necessity. Others do so out of boredom. Still others become addicted to the thrill of winning or losing everything on a turn of fortune. For some, gambling is less a matter of chance and more a matter of seeking every advantage to ensure the outcome. The best gamblers can lose everything, and the worst gamblers sometimes win. Regardless, you can always tell gamblers by the look in their eyes. Lady Luck haunts them.",
+    traits: [
+      "I plan for every contingency. Leave nothing to chance!",
+      "Every copper wants to be a silver. Each bet is an opportunity.",
+      "I'm one of Lady Luck's favored. Anything I try is destined to succeed.",
+      "I've lost so much to gambling that I refuse to spend money on anything anymore.",
+      "Nothing is certain. Planning is a coward's act.",
+      "I can't be sure who I've swindled, cheated, or defeated, so I keep a low profile in public.",
+      "The perfect bet is out there somewhere. I just have to keep my eyes open.",
+      "I have beaten my addiction, but all it takes is one weak moment and I'll be back at the card table.",
+    ],
+    ideals: [
+      "**Knowledge.** Knowledge is power, and knowing which horse to back is the key to success. (Any)",
+      "**Fate.** Whatever happens is fated, regardless of any planning or striving. (Lawful)",
+      "**Bravery.** If you want to succeed, you have to take risks. (Chaotic)",
+      "**Survival.** You can't win if you're dead. Live to fight another day - when the odds might be more in your favor. (Any)",
+      "**Reliability.** When I was in need, I was able to rely on others. Now I want to be the one others rely on. (Good)",
+      "**Victory.** Winning is the real measure of a person. In the end, the only thing that matters is the scoreboard. (Evil)",
+    ],
+    bonds: [
+      "One person in particular owes me a lot of money, and I need to keep them alive if I want to be repaid.",
+      "I'm loyal to the friend or family member who taught me how to gamble.",
+      "The person who saved me from my gambling addiction is the only reason I'm alive today.",
+      "A patron once fronted me money in exchange for a percentage of my winnings. I owe them a debt of gratitude. And a lot of cash.",
+      "A criminal syndicate I once played for isn't happy I left the game, and its enforcers are looking for me.",
+      "Urchins once helped me find marks for my games. Now I'm driven to help them escape the streets.",
+    ],
+    flaws: [
+      "I don't know when to quit. Especially when everyone else is telling me to.",
+      "I save my sympathy for my friends, and I have no friends.",
+      "You think we're in trouble now? Let me tell you how bad things are likely to get!",
+      "You can loan me a little, right? I've got a sure thing. I'll double your money, guaranteed.",
+      "I was once a terribly flawed person, like you. Let me tell you how you can save yourself.",
+      "I'm a great gambler. I'm just bad at math and logic.",
+    ],
+  },
+  {
+    id: 52,
+    name: "Plaintiff",
+    description:
+      "Sure, accidents happen. But they seem to happen an awful lot when Acquisitions Incorporated operatives are on the scene. Naturally, nothing ever happens when there are no witnesses left behind. But sometimes one casualty is left a little less than dead, just waiting to discover what a lucky break that accident actually was.\n\nYou were a victim of a legal incident that was ostensibly the fault of Acquisitions Incorporated. At least that's what the local magistrate said. But before a final ruling could be handed down. Acquisitions Incorporated offered you a job! Don't know how to swing a sword? They promised to teach you! Think you have what it takes to sling spells? They've got masters who'll have you throwing fire in no time!\n\nWith the promise of untold treasures and realms of magic and mystery just a dungeon away, you left your old life behind. Now a world of adventure is yours. Just initial here and sign here and here. Absolve Acq Inc of all former claims, and acknowledge you understand past outcomes don't guarantee future results.",
+    flavorText:
+      "You were a victim of a legal incident that was ostensibly the fault of Acquisitions Incorporated.",
+    source: src.aquisitions,
+    skillProficiencyDescription:
+      "You are proficient in Medicine and Persuasion.",
+    skillProficiencies: {
+      default: [Skill.MEDICINE, Skill.PERSUASION],
+    },
+    toolProficiencyDescription:
+      "You are proficient with one type of artisan's tools.",
+    toolProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...artisanIds],
+        },
+      ],
+    },
+    languageProficiencyDescription:
+      "You are proficient in one language of your choice.",
+    languageProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: Object.values(Language),
+        },
+      ],
+    },
+    equipmentDescription: [
+      `A set of ${i(itemIds.fineClothes, "fine clothes")}`,
+      `One set of artisan's tools`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing 20 ${i(
+        itemIds.goldPiece,
+        "gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.fineClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 20 },
+      ],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [
+            ...artisanToolItemIds.map((id) => [{ item: id, quantity: 1 }]),
+          ],
+        },
+      ],
+    },
+    suggestedCharacteristics:
+      "Plaintiffs come in many varieties. Some are innocent bystanders who want only fair compensation for their injuries. Others are professional courtroom operatives, going to extreme lengths to appear wronged in pursuit of a large payout.",
+    traits: [
+      "I can't believe I have a chance to join Acquisitions Incorporated! The fun I'm going to have!",
+      "I've been wronged my entire life, and the world owes me.",
+      "I have always tried to make the best of a bad situation.",
+      "The law doesn't protect the honest and the hardworking. I'm going to do whatever needs to be done to make things right.",
+      "I'm always in the wrong place at the wrong time.",
+      "My superiors are smarter and wiser than I am. I do what I'm told.",
+      "Never pass up the opportunity to make an easy bit of coin. That's my motto.",
+      "I'm beginning to feel like the gods are not on my side.",
+    ],
+    ideals: [
+      "**Justice.** Those who break the law need to answer for their crimes. (Lawful)",
+      "**Freedom.** People must have the freedom to do what they want and pursue their dreams. (Chaotic)",
+      "**Greed.** Everyone I see is getting theirs, so I'm surely going to get mine. (Evil)",
+      "**Chaos.** You're out of order! And you're out of order! This whole realm is out of order! (Chaotic)",
+      "**Humility.** I'm just a small part of a larger whole. So is everyone else. (Neutral)",
+      "**Responsibility.** We all have our roles to play. I'll hold up my end of the bargain. (Any)",
+    ],
+    bonds: [
+      "Others hurt in the same accident that hurt me are my new family. I'll make sure they're taken care of.",
+      "The rulers of this place were kind to me, and they have my lifelong devotion.",
+      "My parents worry about me, but I'll make them proud.",
+      "The only bond that matters is the one holding my money pouch to my belt.",
+      "The other new hires at Acquisitions Incorporated are my allies. We have each other's backs.",
+      "My legal counsel is my best friend. I owe all my forthcoming opportunities to their hard work.",
+    ],
+    flaws: [
+      "The person who gains the most reward for the least effort wins.",
+      "Three magic beans for just one cow? What a deal!",
+      "I have only one vice, but it controls my life.",
+      "Sleep is for the weak. We need to keep training more if we're going to be ready for the challenges ahead.",
+      "Until my songs are sung in every tavern in this realm, I won't be satisfied.",
+      "If people find me unpleasant, that's their problem.",
+    ],
+  },
+  {
+    id: 53,
+    name: "Rival Intern",
+    description:
+      "You were an intern at a rival of Acquisitions Incorporated, and you gained a healthy respect for not just the job and the franchising opportunities. but for the ruthless and efficient way Acquisitions Incorporated goes about its business. Why deal with the rest, when you can work for the best?\n\nPerhaps the rival did not treat you as well as you were hoping, or you washed out of that organization. Maybe you hope to leverage the knowledge you gained there for an advantage at Acquisitions Incorporated. Either way, you're now bringing your talents to the company, ready to put your skills to use.",
+    flavorText: "You were an intern at a rival of Acquisitions Incorporated.",
+    source: src.aquisitions,
+    skillProficiencyDescription:
+      "You are proficient in History and Investigation.",
+    skillProficiencies: {
+      default: [Skill.HISTORY, Skill.INVESTIGATION],
+    },
+    toolProficiencyDescription:
+      "You are proficient with one type of artisan's tools.",
+    toolProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...artisanIds],
+        },
+      ],
+    },
+    languageProficiencyDescription:
+      "You are proficient in one language of your choice.",
+    languageProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: Object.values(Language),
+        },
+      ],
+    },
+    equipmentDescription: [
+      `A set of ${i(itemIds.fineClothes, "fine clothes")}`,
+      `One set of artisan's tools`,
+      `A ${i(
+        itemIds.book,
+        "ledger"
+      )} from your previous employer containing a small piece of useful information`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing 10 ${i(
+        itemIds.goldPiece,
+        "gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.fineClothes, quantity: 1 },
+        { item: itemIds.book, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 10 },
+      ],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [
+            ...artisanToolItemIds.map((id) => [{ item: id, quantity: 1 }]),
+          ],
+        },
+      ],
+    },
+    suggestedCharacteristics:
+      "If you were happy with your previous internship. the parting of ways might have been amicable. If not, it might have involved armed guards removing you from the premises. If you were passed over at your previous position, it might have left you a blend of seething rage, practiced nonchalance, and keen knowledge of where the bodies are buried (perhaps literally).",
+    traits: [
+      "My previous employer didn't respect me, and now I'll do whatever I can to gain respect.",
+      "The job is important, but the relationships I forge with my coworkers are even more so.",
+      "The job is everything to me. Who needs relaxation, hobbies, and a social life?",
+      "I know I'm not the best and brightest, but if I put my best self forward, I can overcome anything.",
+      "My former boss was an idiot. So was my boss before that. And before that. I'm sure those were all coincidences.",
+      "This company is so much better than my previous one. It will always be the best until they stop paying me.",
+      "I know this dagger belongs to the company, but I'm sure they won't miss it. Or this flask. Or this armor.",
+      "It's only a matter of time before I'll be upper management. I just have to kiss up to my superiors and kick down those beneath me.",
+    ],
+    ideals: [
+      "**Advancement.** Money and power can be gained more easily within an organization. I plan to gain as much as possible. (Evil)",
+      "**Structure.** Life goes much more smoothly when you follow the rules and work within a system. (Lawful)",
+      "**Uncertainty.** The more chaos that swirls around me, the more opportunities I can find to profit. (Chaotic)",
+      "**Justice.** I can't stand people being treated unjustly. I do whatever it takes to stop injustice and those who flout the law. (Lawful)",
+      "**Pleasure.** What's the use of working hard and making money if you can't enjoy the finer things in life? (Any)",
+      "**Power.** Money is fine, but real power means never having to say you're sorry. (Evil)",
+    ],
+    bonds: [
+      "I have a family member in need. I consider them in everything I do.",
+      "My peers keep me grounded.",
+      "My past mistakes cost someone else dearly. I have to rectify that.",
+      "A childhood mentor put me on my current path. If I succeed, I want to repay that mentor in some way.",
+      "I value an oath of loyalty I took to a group of friends over everything else in my life.",
+      "Although I don't get along well with people, my pet means the world to me.",
+    ],
+    flaws: [
+      "I know what's best. Trust me.",
+      "Flaw? I have no flaws. I'm perfect.",
+      "My loyalties are … fluid.",
+      "If anything goes wrong, it must be someone else's fault. Let me explain that in detail.",
+      "There's right and there's wrong, and there's no gray area in between.",
+      "Our superiors might not like what you're doing. I'm going to have to put that in my report.",
     ],
   },
 ];

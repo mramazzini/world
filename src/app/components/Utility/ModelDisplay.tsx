@@ -34,23 +34,11 @@ const ModelDisplay = ({ model, id }: Props) => {
   switch (model) {
     case "Weapon":
       const d = data as WeaponInfo;
-      return (
-        <>
-          <p>{d.name}</p>
-        </>
-      );
+      return <>{d.name}</>;
     case "Armor":
-      return (
-        <>
-          <p>{data.name}</p>
-        </>
-      );
+      return <>{data.name}</>;
     case "Tool":
-      return (
-        <>
-          <p>{data.name}</p>
-        </>
-      );
+      return <>{data.name}</>;
   }
 };
 

@@ -285,4 +285,5 @@ export const itemIds = {
   woodenStake: 284,
   steelMirror: 285,
   leatherVest: 286,
+  merchantScale: 287,
 };

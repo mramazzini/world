@@ -13,15 +13,11 @@ interface Props {
   spellCastingModifier: number;
 }
 
-const SpellSection = ({
-  preparedSpell,
-  alwaysPrepared,
-  spell,
-  spellCastingAbility,
-  proficiencyBonus,
-  spellCastingModifier,
-}: Props) => {
+const SpellSection = ({ preparedSpell, alwaysPrepared, spell }: Props) => {
   if (!preparedSpell && !alwaysPrepared) return null;
+
+  
+
   return (
     <div tabIndex={0} className="bg-base-300 rounded-xl  mt-2">
       <div className="flex flex-row items-center justify-between px-4 pt-2">

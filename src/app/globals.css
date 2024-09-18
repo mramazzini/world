@@ -70,3 +70,100 @@ input[type="number"] {
   -webkit-filter: invert(0%);
   filter: invert(0%);
 }
+.table.table-link > tbody > tr > td {
+  height: 100%;
+  padding: 0;
+}
+
+.table.table-link > tbody > tr > td > a {
+  height: 100%;
+  display: inline-block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+}
+
+.markdown-content {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 700;
+    padding: 0.5rem 0;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  a {
+    color: #0070f3;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  ul {
+    padding-left: 1rem;
+  }
+
+  ul li {
+    list-style-type: disc;
+  }
+
+  ol {
+    padding-left: 1rem;
+  }
+
+  ol li {
+    list-style-type: decimal;
+  }
+
+  blockquote {
+    border-left: 5px solid #0070f3;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+  }
+
+  code {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+
+  pre {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  table {
+    @apply table table-zebra table-md bg-base-300;
+    th {
+      @apply bg-black/30;
+    }
+  }
+}

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Loading from "../UI/Loading";
 import "@/lib/string.extensions";
+import Link from "next/link";
 interface Props {
   classes: ClassInfo[];
 }
@@ -55,7 +56,7 @@ const ClassSearch = ({ classes }: Props) => {
         Create Class
       </Link> */}
 
-      <table className="table-zebra table-sm w-full">
+      <table className="table table-zebra table-sm w-full table-link">
         <thead>
           <tr>
             <th className="text-left bg-black/20 w-[5%] ">Name</th>
@@ -81,18 +82,18 @@ const ClassSearch = ({ classes }: Props) => {
                 className={`hover transition ease-in-out duration-50 ${
                   linkLoading ? "cursor-wait" : "cursor-pointer"
                 }`}
-                onClick={() => {
-                  handleLinkClick();
-                  router.push(`/class/${item.name}`);
-                }}
               >
                 <td>
-                  <p className="btn btn-xs btn-primary h-auto font-bold">
-                    {item.name.toCapitalCase()}
-                  </p>
+                  <Link href={`/class/${item.name}`}>
+                    <p className="btn btn-xs btn-primary h-auto font-bold">
+                      {item.name.toCapitalCase()}
+                    </p>
+                  </Link>
                 </td>
-                <td className="hidden md:table-cell">
-                  <p className="italic line-clamp-2 "> {item.flavorText}</p>
+                <td className="hidden md:table-cell ">
+                  <Link href={`/class/${item.name}`}>
+                    <p className="italic line-clamp-2 "> {item.flavorText}</p>
+                  </Link>
                 </td>
                 <td
                   className={` hidden md:table-cell ${
@@ -104,14 +105,21 @@ const ClassSearch = ({ classes }: Props) => {
                     router.push(`/class/${item.name}/subclass`);
                   }}
                 >
-                  <p className=" btn  btn-accent btn-xs h-auto  font-bold ">
-                    {item.subClassName}
-                  </p>
+                  <Link href={`/class/${item.name}/subclass`}>
+                    <p className=" btn  btn-accent btn-xs h-auto  font-bold ">
+                      {item.subClassName}
+                    </p>
+                  </Link>
                 </td>
-                <td>{item.source}</td>
+
+                <td>
+                  <Link href={`/class/${item.name}`}>{item.source}</Link>
+                </td>
                 <td className="hidden sm:table-cell">
-                  {item.updatedAt.getMonth()}/{item.updatedAt.getDate()}/
-                  {item.updatedAt.getFullYear()}
+                  <Link href={`/class/${item.name}`}>
+                    {item.updatedAt.getMonth()}/{item.updatedAt.getDate()}/
+                    {item.updatedAt.getFullYear()}
+                  </Link>
                 </td>
               </tr>
             );

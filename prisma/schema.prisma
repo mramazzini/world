@@ -180,6 +180,7 @@ model User {
   Tool           Tool[]
   Item           Item[]
   Character      Character[]
+  Feat           Feat[]
 }
 
 model Character {
@@ -377,7 +378,7 @@ model Race {
   /// [Feature]
   features Json[]
 
-  /// [AbilityScoreNumber]
+  /// [AbilityScoreChoice]
   abilityScores           Json
   abilityScoreDescription String
 
@@ -532,9 +533,13 @@ model Feat {
   id          Int      @id @default(autoincrement())
   name        String
   description String
+  /// [Feature]
+  features    Json[]
   source      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      Int?
 }
 
 model Message {

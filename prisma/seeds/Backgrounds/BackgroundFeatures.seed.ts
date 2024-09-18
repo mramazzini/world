@@ -50,6 +50,12 @@ const ids = {
   uthgardtTribeMember: 46,
   waterdhavianNoble: 47,
   witchlightHand: 48,
+  //aquisitionsInc
+  celebrityAdventurer: 49,
+  failedMerchant: 50,
+  gambler: 51,
+  plaintiff: 52,
+  rivalIntern: 53,
 };
 interface BackgroundFeature extends PrismaJson.Feature {
   backgroundId: number;
@@ -1747,6 +1753,156 @@ const BackgroundFeatures: BackgroundFeature[] = [
     name: "City Secrets",
     description:
       "You know the secret patterns and flow to cities and can find passages through the urban sprawl that others would miss. When you are not in combat, you (and companions you lead) can travel between any two locations in the city twice as fast as your speed would normally allow.",
+  },
+  {
+    backgroundId: ids.uthgardtTribeMember,
+    name: "Barbarian Tribes of Faerûn",
+    description:
+      "Though this section details the Uthgardt specifically, either it or the Outlander background can be used for a character whose origin lies with one of the other barbarian tribes in Faerûn.\n\nYou might be a fair-haired barbarian of the Reghed, dwelling in the shadow of the Reghed Glacier in the far North near Icewind Dale. You might also be of the nomadic Rashemi, noted for their savage berserkers and their masked witches. Perhaps you hail from one of the wood elf tribes in the Chondalwood, or the magic-hating human tribes of the sweltering jungles of Chult.\n\n**Uthgardt Tribes and Their Territories**: For most Uthgardt tribes, the only stability in their history is the site of their ancestral mound. Most of the Uthgardt holy sites have existed since antiquity, but the fortunes of the tribes that revere them have hardly been static. Following are brief descriptions of the Uthgardt tribes today.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["Tribe", "Description"],
+          data: [
+            {
+              Tribe: "Blue Bear",
+              Description:
+                "The easternmost of the Uthgardt are the Blue Bear – thought destroyed more than a century ago – who have recently emerged from inside the High Forest and reclaimed their ancestral mound at Stone Stand, just south of the Moon Pass and north of the forest. The Blue Bears have reoccupied much of their old territory in the time since they returned to prominence, though they don't venture near Hellgate Keep, considering it a taboo place.",
+            },
+            {
+              Tribe: "Black Lion and Red Tiger",
+              Description:
+                "North of Blue Bear territory, in the Glimmering Wood, is Beorunna's Well, a settlement of some size that near the ancient ancestral mound of the Red Tiger tribe. The settlement was founded some time ago by members of the Black Lion tribe, who put down roots here rather than continuing to live as nomads. Though the Red Tigers are less than comfortable with the present situation, they consider Beorunna's Well their holy site, so they make the best of things. Bands of Red Tiger tribespeople often winter in Beorunna's Well, and many of its hunters and trappers use the settlement as a place to sell the leather and furs they acquire in nearby forests.",
+            },
+
+            {
+              Tribe: "Sky Pony",
+              Description:
+                "In a part of the Glimmerwood called the Moonwood stands the One Stone, the ancestral mound of the Sky Pony tribe. These are a people divided; half of the tribe has settled and built a sizable steading around the One Stone, similar to what Black Lion has done at Beorunna's Well. The other half of the tribe considers this act an insult to their totem, so they launch raids on the settlement, burning as much of it as they can and then escaping, often on pegasus-back.",
+            },
+            {
+              Tribe: "Tree Ghost",
+              Description:
+                "In the depths of the High Forest stands the Grandfather Tree, the ancestral mound of the Tree Ghost tribe. The Tree Ghosts split off from the Blue Bears long ago and all but disappeared into the forest, although occasional reports reach civilization that they are still alive and can sometimes be seen clustered around the Grandfather Tree. Some sages postulate that the newly reborn Blue Bear tribe might well be Tree Ghost Uthgardt who are following a call from a revived Blue Bear totem.",
+            },
+            {
+              Tribe: "Great Worm",
+              Description:
+                "The Frost Hills, a small southern spike of the Spine of the World Mountains just north of the Evermoors, is the site of Great Worm Cavern, the ancestral mound of the Great Worm tribe. These Uthgardt are notoriously reclusive; it has been twenty years since the tribe has sent raiding parties out anywhere but against the orcs of the Spine Mountains.",
+            },
+            {
+              Tribe: "Black Raven",
+              Description:
+                "As forbidding as the Spine of the World Mountains they roam, the Black Ravens are fanatical in their adherence to the old Uthgardt ways. Ranging out from Raven Rock, their ancestral mound deep inside the mountains, they have been known to send raiding parties as far south as Silverymoon, but their most frequent targets are the caravans that come in and out of Mithral Hall.",
+            },
+            {
+              Tribe: "Elk",
+              Description:
+                "Flint Rock in the midst of the Evermoors is the ancestral mound of the Elk tribe. The Elk were once prolific raiders, extending their reach even into Nesme and Mithral Hall, but the tribe was shattered a handful of decades past by the forces of those cities. Though their numbers have replenished, the Elk remain mostly hunters and foragers. They are masters at avoiding or repulsing the threats of the Evermoors, and often hire themselves out as guides for outsiders.",
+            },
+            {
+              Tribe: "Thunderbeast",
+              Description:
+                "The Thunderbeast tribe has not been heard from in several years. When the Thunderbeasts made their annual pilgrimage to Morgur's Mound in Neverwinter Wood, they found their holy site desecrated. Soon thereafter, their chieftain took them back into the depths of the High Forest, and they have not emerged since.",
+            },
+            {
+              Tribe: "Gray Wolf",
+              Description:
+                "The Gray Wolf tribe, made up of lycanthropes, was destroyed by a Selunite crusade because of the tribe's curse. Some of the surviving Gray Wolves took shelter among other Uthgardt tribes.",
+            },
+            {
+              Tribe: "Griffon",
+              Description:
+                "The Griffon tribe came to an untimely end when it rose against the forces of Luruar allied with giants and orcs.",
+            },
+            {
+              Tribe: "Red Pony and Golden Eagle",
+              Description:
+                "The Red Pony and Golden Eagle tribes vanished centuries ago. They were last seen in the vicinity of the One Stone, the ancestral mound those tribes shared with Sky Pony.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.uthgardtTribeMember,
+    name: "Uthgardt Heritage",
+    description:
+      "You have an excellent knowledge of not only your tribe's territory, but also the terrain and natural resources of the rest of the North. You are familiar enough with any wilderness area that you find twice as much food and water as you normally would when you forage there.\n\nAdditionally, you can call upon the hospitality of your people, and those folk allied with your tribe, often including members of druid circles, tribes of nomadic elves, the Harpers, and the priesthoods devoted to the gods of the First Circle.",
+  },
+  {
+    backgroundId: ids.waterdhavianNoble,
+    name: "Kept in Style",
+    description:
+      "While you are in Waterdeep or elsewhere in the North your house sees to your everyday needs. Your name and signet are sufficient to cover most of your expenses; the inns, taverns, and festhalls you frequent are glad to record your debt and send an accounting to your family's estate in Waterdeep to settle what you owe.\n\nThis advantage enables you to live a comfortable lifestyle without having to pay 2 gp a day for it, or reduces the cost of a wealthy or aristocratic lifestyle by that amount. You may not maintain a less affluent lifestyle and use the difference as income – the benefit is a line of credit, not an actual monetary reward.",
+  },
+  {
+    backgroundId: ids.witchlightHand,
+    name: "Carnival Companion",
+    description:
+      "Over the years, you have earned the friendship of another carnival fixture. Roll a d8 and consult the Carnival Companion table to determine whom or what you've befriended, or you can choose an option that you like. Work with your DM to flesh out this friendship. This companion hangs around you while you're in the carnival, but it won't voluntarily leave the carnival.\n\nThe DM can use the Witchlight Hand stat block to represent hands, performers, and animal trainers who serve as carnival companions. Statistics for the other companions appear in the Monster Manual.",
+    extendedTable: [
+      {
+        "Carnival Companion": {
+          headers: ["d8", "Companion"],
+          data: [
+            { d8: "1", Companion: "Old, cantankerous Witchlight hand" },
+            { d8: "2", Companion: "Young, impressionable Witchlight hand" },
+            {
+              d8: "3",
+              Companion:
+                "Performer (such as an acrobat, a clown, or a musician)",
+            },
+            { d8: "4", Companion: "Retired performer" },
+            { d8: "5", Companion: "Seasoned animal trainer" },
+            { d8: "6", Companion: "Old blink dog" },
+            { d8: "7", Companion: "Cheery sprite" },
+            {
+              d8: "8",
+              Companion:
+                "Harmless, magical wisp of light (no stat block required) that has a flying speed of 30 feet, can hover, and sheds bright light in a 5-foot radius and dim light for an additional 5 feet",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.witchlightHand,
+    name: "Carnival Fixture",
+    description:
+      "The Witchlight Carnival provides you with free, modest lodging and food. In addition, you may wander about the carnival and partake of its many wonders at no cost to you, provided you don't disrupt its shows or cause any other trouble.",
+  },
+  {
+    backgroundId: ids.celebrityAdventurer,
+    name: "Name Dropping",
+    description:
+      "You know and have met any number of powerful people across the land - and some of them might even remember you. You might be able to wrangle minor assistance from a major figure in the campaign, at the DM's discretion. Additionally, the common folk treat you with deference, and your heritage and the stories you tell might be good for a free meal or a place to sleep.",
+  },
+  {
+    backgroundId: ids.failedMerchant,
+    name: "Supply Chain",
+    description:
+      "From your time as a merchant, you retain connections with wholesalers, suppliers, and other merchants and entrepreneurs. You can call upon these connections when looking for items or information.",
+  },
+  {
+    backgroundId: ids.gambler,
+    name: "Never Tell Me the Odds",
+    description:
+      "Odds and probability are your bread and butter. During downtime activities that involve games of chance or figuring odds on the best plan, you can get a solid sense of which choice is likely the best one and which opportunities seem too good to be true, at the DM's determination.",
+  },
+  {
+    backgroundId: ids.plaintiff,
+    name: "Legalese",
+    description:
+      "Your experience with your local legal system has given you a firm knowledge of the ins and outs of that system. Even when the law is not on your side, you can use complex terms like ex injuria jus non oritur and cogitationis poenam nemo patitur to frighten people into thinking you know what you're talking about. With common folks who don't know any better, you might be able to intimidate or deceive to get favors or special treatment.",
+  },
+  {
+    backgroundId: ids.rivalIntern,
+    name: "Inside Informant",
+    description:
+      "You have connections to your previous employer or other groups you dealt with during your previous employment. You can communicate with your contacts, gaining information at the DM's discretion.",
   },
 ];
 
