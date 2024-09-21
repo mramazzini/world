@@ -19,7 +19,12 @@ import { createCharacter } from "./seeds/_seeders/016_createCharacter.seeder";
 import createMaxyUser from "./seeds/_seeders/017_createMaxyUser.seeder";
 const db = new PrismaClient();
 
-const seedarr = [
+const seedarr: {
+  index: string;
+  callback: (db: PrismaClient) => Promise<void>;
+  description: string;
+  enabled?: boolean;
+}[] = [
   {
     index: "001",
     callback: createSpells,
@@ -102,13 +107,13 @@ const seedarr = [
     index: "014",
     callback: createSpecies,
     description: "Creating species from the species seed.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "015",
     callback: createVariants,
     description: "Creating variants from the variant seed.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "016",
@@ -120,7 +125,7 @@ const seedarr = [
     index: "017",
     callback: createMaxyUser,
     description: "Creating maxy user from the maxy user seed.",
-    enabled: true,
+    // enabled: true,
   },
 ];
 
