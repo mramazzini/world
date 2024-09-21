@@ -4,6 +4,7 @@ import {
   AbilityScoreValue,
   CallbackOptions,
   CharacterInfo,
+  SubClassID,
   ToolID,
   WeaponID,
 } from "@/lib/types";
@@ -11,6 +12,7 @@ import ItemChoiceHandler from "./ItemChoiceHandler";
 import ProficiencyChoiceHandler from "./ProficiencyChoiceHandler";
 import Image from "next/image";
 import { ArmorType, Language, Skill } from "@prisma/client";
+import SubclassChoiceHandler from "./SubclassChoiceHandler";
 interface Props {
   character: CharacterInfo;
   choiceData: PrismaJson.Choice;
@@ -110,6 +112,14 @@ const Choice = ({
             callback={runCallback}
           />
         );
+      case "Subclass":
+        return (
+          <SubclassChoiceHandler
+            choice={choice.choice as PrismaJson.SubclassChoice}
+            character={character}
+            callback={runCallback}
+          />
+        );
       default:
         return <p>Choice not found</p>;
     }
@@ -119,40 +129,21 @@ const Choice = ({
     character &&
     character.state &&
     !hidden && (
-      <div className="flex bg-base-200 rounded-xl p-4 flex-col  items-center w-96">
-        <p className="">{choiceData.description}</p>
-        <div className="divider  m-0"></div>
-        <div className="flex flex-row justify-center mt-2 join">
-          <p className="badge badge-secondary join-item min-w-16">
-            {choiceData.from}
-          </p>
-          <p className="badge badge-info join-item min-w-16">
-            {choiceData.model}
-          </p>
+      <div className="join join-vertical ">
+        <div className="flex bg-base-200 rounded-xl p-4 flex-col  items-center w-96 join-item ">
+          <p className="h-12">{choiceData.description}</p>
+          <div className="divider  m-0"></div>
+          <div className="flex flex-row justify-center mt-2 join join-horizontal">
+            <p className="badge badge-secondary join-item min-w-16">
+              {choiceData.from}
+            </p>
+            <p className="badge badge-info join-item min-w-16">
+              {choiceData.model}
+            </p>
+          </div>
+          <div className="divider mt-2"></div>
         </div>
-
-        {/* {hidden ? (
-          <>
-            <div className="divider mb-0 mt-2" />
-            <div className="w-full flex flex-col  h-full items-center justify-center">
-              <p className="text-center font-bold mb-2">Locked</p>
-              <p className="text-center mb-2">
-                Complete previous choices to unlock this one.
-              </p>
-              <Image
-                src="/lock.svg"
-                width={75}
-                height={75}
-                alt="lock"
-                className="opacity-40"
-              />
-            </div>
-          </>
-        ) : ( */}
-        <div className="flex flex-col w-full  ">
-          <RenderChoice {...choiceData} />
-        </div>
-        {/* )} */}
+        <RenderChoice {...choiceData} />
       </div>
     )
   );

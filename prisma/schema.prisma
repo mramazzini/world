@@ -710,7 +710,19 @@ model Armor {
   Item     Item[] @relation("ItemArmor")
 }
 
-//Prisma wont create the types if they are not in a model, so this is a dummy model
+//This represents a list of features that will typically be chosen from
+// Ex. Eldritch Invocations, Fighting Styles, etc.
+model FeatureCollection {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  /// [DetailedFeature]
+  features    Json[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+//Prisma wont create enum types if they are not in a model, so this is a dummy model
 model Enums {
   id           Int          @id @default(autoincrement())
   skill        Skill

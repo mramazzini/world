@@ -55,6 +55,7 @@ export interface CharacterInfo extends Character {
   } | null;
   Background: Background | null;
   Classes: ClassWithSpellList[] | null;
+  SubClasses: SubClass[] | null;
   Race: Race | null;
   SubRace: RaceVariant | null;
 
@@ -88,13 +89,21 @@ export type CallbackOptions =
   | ItemID[]
   | ArmorID[]
   | AbilityScoreValue[]
-  | PrismaJson.QuantityItem[][];
+  | PrismaJson.QuantityItem[][]
+  | SubClassID[];
 export interface SpellInfo extends Spell {
   SpellLists: SpellList[];
   User: {
     username: string | null;
   } | null;
 }
+
+export type ClassID = number;
+export type SubClassID = number;
+export type RaceID = number;
+export type RaceVariantID = number;
+export type BackgroundID = number;
+export type FeatID = number;
 export enum Unit {
   lb = "lb",
   oz = "oz",
@@ -280,6 +289,34 @@ declare global {
       // You choose a number of options from the options array equal to numberOfChoices. Each option is a FeatureEffect.
       choices?: FeatureEffectChoice;
     }
+
+    interface Prerequisite {
+      protocol: "AND" | "OR";
+      data:
+        | {
+            blackList?: boolean; //if true, the player must not have the listed items
+            level?: number;
+            Class?: ClassID;
+            SubClass?: SubClassID;
+            Race?: RaceID;
+            SubRace?: RaceVariantID;
+            Background?: BackgroundID;
+            Feat?: FeatID;
+            minimumAbilityScores?: AbilityScores;
+            Spellcaster?: boolean;
+            Spell: SpellID;
+            weaponProficiency?: WeaponID;
+            armorProficiency?: ArmorID;
+            toolProficiency?: ToolID;
+            skillProficiency?: Skill;
+          }[]
+        | Prerequisite[];
+    }
+    interface DetailedFeature extends Feature {
+      prerequisite: Prerequisite;
+      source: string;
+    }
+
     interface Trigger {
       onDamage?: {
         all?: boolean;
@@ -291,7 +328,6 @@ declare global {
           all?: boolean;
           rolledA: number[]; // attack roll rolled a specific num
         };
-
         damage?: {
           all?: boolean;
           rolledA: number[]; // damage roll rolled a specific num
@@ -562,7 +598,8 @@ declare global {
       | "AbilityScore"
       | "Weapon"
       | "Armor"
-      | "Tool";
+      | "Tool"
+      | "Subclass";
     type ChoiceType =
       | ItemChoice
       | LanguageChoice
@@ -571,7 +608,16 @@ declare global {
       | AbilityScoreChoice
       | WeaponChoice
       | ArmorChoice
-      | ToolChoice;
+      | ToolChoice
+      | SubclassChoice;
+
+    interface SubclassChoice {
+      default?: SubClassID[];
+      choices?: {
+        options: SubClassID[];
+        numberOfChoices: number;
+      }[];
+    }
 
     interface Choice {
       model: ChoiceModel;
@@ -693,6 +739,11 @@ declare global {
       effect: string | number;
     }
     interface CharacterState {
+      //will be used to link a model to a character
+      pendingLinks: {
+        subClass: SubClassID[];
+        Class: ClassID[];
+      };
       notes: MarkdownItem[];
       ideals: MarkdownItem[];
       bonds: MarkdownItem[];

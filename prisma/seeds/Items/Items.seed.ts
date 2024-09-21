@@ -2618,7 +2618,6 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.TOOL],
     toolId: toolIds.viol,
   },
-  // NOTE: due to the relationship between items and equipment packs, the equipmentPackId is added dynamically during npm run seed
   {
     id: 203,
     name: "Burglar's Pack",
@@ -2629,6 +2628,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.EQUIPMENT_PACK],
     flavorText:
       "A burglar's pack is a collection of items that are useful for breaking and entering.",
+    equipmentPackId: equipmentPackIds.burglar,
   },
   {
     id: 204,
@@ -2640,6 +2640,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.EQUIPMENT_PACK],
     flavorText:
       "A diplomat's pack is a collection of items that are useful for negotiating with others.",
+    equipmentPackId: equipmentPackIds.diplomat,
   },
   {
     id: 205,
@@ -2651,6 +2652,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.EQUIPMENT_PACK],
     flavorText:
       "A dungeoneer's pack is a collection of items that are useful for exploring dungeons.",
+    equipmentPackId: equipmentPackIds.dungeoneer,
   },
   {
     id: 206,
@@ -2662,6 +2664,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.EQUIPMENT_PACK],
     flavorText:
       "An entertainer's pack is a collection of items that are useful for performing.",
+    equipmentPackId: equipmentPackIds.entertainer,
   },
   {
     id: 207,
@@ -2673,6 +2676,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.EQUIPMENT_PACK],
     flavorText:
       "An explorer's pack is a collection of items that are useful for traveling.",
+    equipmentPackId: equipmentPackIds.explorer,
   },
   {
     id: 208,
@@ -2696,6 +2700,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.EQUIPMENT_PACK],
     flavorText:
       "A scholar's pack is a collection of items that are useful for studying.",
+    equipmentPackId: equipmentPackIds.scholar,
   },
   {
     id: 210,

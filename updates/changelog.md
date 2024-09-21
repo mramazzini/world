@@ -386,6 +386,8 @@ _09-17-2024_
 The following are known issues/things that are planned to be added:
 
 - Level up functionality
+- Saving and loading characters
+- Character Creation
 - Subclasses
 - Ability Score Improvements
 - Feats (both to wiki and character sheet)

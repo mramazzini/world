@@ -142,7 +142,7 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
     },
     Classes: {
       connect: {
-        id: 11, //wizard
+        id: 2, //wizard
       },
     },
     Race: {

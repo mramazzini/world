@@ -21,12 +21,12 @@ const ChooseChoices = ({ character, setCharacterState }: Props) => {
             "All Done!"
           )}
         </p>
-        <div className="flex flex-wrap justify-center gap-4  overflow-x-hidden">
+        <div className="flex flex-wrap justify-center  gap-4  overflow-x-hidden">
           {character.state.pendingChoices.map((choice, index) => {
             return (
               <Choice
                 key={index}
-                hidden={index !== 0}
+                hidden={false}
                 choiceData={choice}
                 character={character}
                 setCharacterState={setCharacterState}

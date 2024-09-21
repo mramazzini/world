@@ -1,20 +1,21 @@
 "use client";
-import { ArmorInfo, ToolInfo, WeaponInfo } from "@/lib/types";
+import { ArmorInfo, SubClassInfo, ToolInfo, WeaponInfo } from "@/lib/types";
 import {
   memoizeGetArmor,
+  memoizeGetSubclass,
   memoizeGetTool,
   memoizeGetWeapon,
 } from "./globalCache";
 import { useEffect, useState } from "react";
 interface Props {
-  model: "Weapon" | "Armor" | "Tool";
+  model: "Weapon" | "Armor" | "Tool" | "Subclass";
   id: number;
 }
 
 const ModelDisplay = ({ model, id }: Props) => {
-  const [data, setData] = useState<WeaponInfo | ArmorInfo | ToolInfo | null>(
-    null
-  );
+  const [data, setData] = useState<
+    WeaponInfo | ArmorInfo | ToolInfo | SubClassInfo | null
+  >(null);
 
   useEffect(() => {
     switch (model) {
@@ -27,6 +28,9 @@ const ModelDisplay = ({ model, id }: Props) => {
       case "Tool":
         memoizeGetTool(id).then((res) => setData(res));
         break;
+      case "Subclass":
+        memoizeGetSubclass(id).then((res) => setData(res));
+        break;
     }
   }, [model, id]);
 
@@ -38,6 +42,8 @@ const ModelDisplay = ({ model, id }: Props) => {
     case "Armor":
       return <>{data.name}</>;
     case "Tool":
+      return <>{data.name}</>;
+    case "Subclass":
       return <>{data.name}</>;
   }
 };

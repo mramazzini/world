@@ -25,6 +25,7 @@ import ChooseChoices from "./Choices/Choices";
 import SpellSheet from "./Spells/SpellSheet";
 import Notes from "./Notes/Notes";
 import Traits from "./Traits/Traits";
+import { applyPendingModels } from "../../Utility/characterStateFunctions/update/applyPendingModels";
 type Tab = "sheet" | "inventory" | "spells" | "notes" | "choices" | "traits";
 
 interface Props {
@@ -34,6 +35,14 @@ interface Props {
 const CharacterSheet = ({ charName }: Props) => {
   const [character, setCharacter] = useState<CharacterInfo | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("sheet");
+
+  useEffect(() => {
+    // check to see if class/subclass needs to be linked
+    if (!character) return;
+    if (!character.state) return;
+    if (!character.state.pendingLinks) return;
+    applyPendingModels(character);
+  }, [character?.state?.pendingLinks]);
 
   useEffect(() => {
     getCharacter(charName).then((res) => {
@@ -96,26 +105,28 @@ const CharacterSheet = ({ charName }: Props) => {
           CHA: 9,
         },
       };
-      console.log(res);
-      const char: CharacterInfo = {
-        ...res,
-        state: generateCharacter(
-          res,
-          res.name === "Constantine Wayfinder"
-            ? abilityScoresDemo.constantine
-            : res.name === "Orion Lysander"
-            ? abilityScoresDemo.orion
-            : res.name === "Boon"
-            ? abilityScoresDemo.boon
-            : res.name === "Jay Walker"
-            ? abilityScoresDemo.jay
-            : res.name === "Oliver Shorthand"
-            ? abilityScoresDemo.oliver
-            : abilityScoresDemo.ranis
-        ),
-      };
-      setCharacter(char);
-      console.log(char);
+      generateCharacter(
+        res,
+        res.name === "Constantine Wayfinder"
+          ? abilityScoresDemo.constantine
+          : res.name === "Orion Lysander"
+          ? abilityScoresDemo.orion
+          : res.name === "Boon"
+          ? abilityScoresDemo.boon
+          : res.name === "Jay Walker"
+          ? abilityScoresDemo.jay
+          : res.name === "Oliver Shorthand"
+          ? abilityScoresDemo.oliver
+          : abilityScoresDemo.ranis
+      ).then((c) => {
+        console.log(res);
+        const char: CharacterInfo = {
+          ...res,
+          state: c,
+        };
+        setCharacter(char);
+        console.log(char);
+      });
     });
   }, []);
 

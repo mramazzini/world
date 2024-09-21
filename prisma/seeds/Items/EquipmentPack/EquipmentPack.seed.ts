@@ -2,8 +2,9 @@ import { Prisma, PrismaClient } from "@prisma/client";
 import { itemIds } from "../ItemIds";
 const db = new PrismaClient();
 
-const EquipmentPackSeed: Prisma.EquipmentPackCreateInput[] = [
+const EquipmentPackSeed: Prisma.EquipmentPackCreateManyInput[] = [
   {
+    id: 1,
     name: "Burglar's Pack",
     itemsQuantity: [
       {
@@ -63,54 +64,9 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateInput[] = [
         quantity: 1,
       },
     ],
-    itemList: {
-      connect: [
-        {
-          id: itemIds.backpack,
-        },
-        {
-          id: itemIds.ballBearingsBag,
-        },
-        {
-          id: itemIds.stringTenFeet,
-        },
-        {
-          id: itemIds.bell,
-        },
-        {
-          id: itemIds.candle,
-        },
-        {
-          id: itemIds.crowbar,
-        },
-        {
-          id: itemIds.hammer,
-        },
-        {
-          id: itemIds.piton,
-        },
-        {
-          id: itemIds.lanternHooded,
-        },
-        {
-          id: itemIds.oilFlask,
-        },
-        {
-          id: itemIds.rations,
-        },
-        {
-          id: itemIds.tinderBox,
-        },
-        {
-          id: itemIds.waterskin,
-        },
-        {
-          id: itemIds.hempRope,
-        },
-      ],
-    },
   },
   {
+    id: 2,
     name: "Diplomat's Pack",
     itemsQuantity: [
       {
@@ -158,45 +114,9 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateInput[] = [
         quantity: 1,
       },
     ],
-    itemList: {
-      connect: [
-        {
-          id: itemIds.chest,
-        },
-        {
-          id: itemIds.caseMapOrScroll,
-        },
-        {
-          id: itemIds.fineClothes,
-        },
-        {
-          id: itemIds.ink,
-        },
-        {
-          id: itemIds.inkPen,
-        },
-        {
-          id: itemIds.lamp,
-        },
-        {
-          id: itemIds.oilFlask,
-        },
-        {
-          id: itemIds.paper,
-        },
-        {
-          id: itemIds.perfume,
-        },
-        {
-          id: itemIds.sealingWax,
-        },
-        {
-          id: itemIds.soap,
-        },
-      ],
-    },
   },
   {
+    id: 3,
     name: "Dungeoneer's Pack",
     itemsQuantity: [
       {
@@ -236,39 +156,9 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateInput[] = [
         quantity: 1,
       },
     ],
-    itemList: {
-      connect: [
-        {
-          id: itemIds.backpack,
-        },
-        {
-          id: itemIds.crowbar,
-        },
-        {
-          id: itemIds.hammer,
-        },
-        {
-          id: itemIds.piton,
-        },
-        {
-          id: itemIds.torch,
-        },
-        {
-          id: itemIds.tinderBox,
-        },
-        {
-          id: itemIds.rations,
-        },
-        {
-          id: itemIds.waterskin,
-        },
-        {
-          id: itemIds.hempRope,
-        },
-      ],
-    },
   },
   {
+    id: 4,
     name: "Entertainer's Pack",
     itemsQuantity: [
       {
@@ -300,33 +190,9 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateInput[] = [
         quantity: 1,
       },
     ],
-    itemList: {
-      connect: [
-        {
-          id: itemIds.backpack,
-        },
-        {
-          id: itemIds.bedroll,
-        },
-        {
-          id: itemIds.costumeClothes,
-        },
-        {
-          id: itemIds.candle,
-        },
-        {
-          id: itemIds.rations,
-        },
-        {
-          id: itemIds.waterskin,
-        },
-        {
-          id: itemIds.disguiseKit,
-        },
-      ],
-    },
   },
   {
+    id: 5,
     name: "Explorer's Pack",
     itemsQuantity: [
       {
@@ -362,36 +228,9 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateInput[] = [
         quantity: 1,
       },
     ],
-    itemList: {
-      connect: [
-        {
-          id: itemIds.backpack,
-        },
-        {
-          id: itemIds.bedroll,
-        },
-        {
-          id: itemIds.messKit,
-        },
-        {
-          id: itemIds.tinderBox,
-        },
-        {
-          id: itemIds.torch,
-        },
-        {
-          id: itemIds.rations,
-        },
-        {
-          id: itemIds.waterskin,
-        },
-        {
-          id: itemIds.hempRope,
-        },
-      ],
-    },
   },
   {
+    id: 6,
     name: "Priest's Pack",
     itemsQuantity: [
       {
@@ -431,39 +270,9 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateInput[] = [
         quantity: 1,
       },
     ],
-    itemList: {
-      connect: [
-        {
-          id: itemIds.backpack,
-        },
-        {
-          id: itemIds.blanket,
-        },
-        {
-          id: itemIds.candle,
-        },
-        {
-          id: itemIds.tinderBox,
-        },
-        {
-          id: itemIds.almsBox,
-        },
-        {
-          id: itemIds.blockOfIncense,
-        },
-        {
-          id: itemIds.vestments,
-        },
-        {
-          id: itemIds.rations,
-        },
-        {
-          id: itemIds.waterskin,
-        },
-      ],
-    },
   },
   {
+    id: 7,
     name: "Scholar's Pack",
     itemsQuantity: [
       {
@@ -495,33 +304,9 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateInput[] = [
         quantity: 1,
       },
     ],
-    itemList: {
-      connect: [
-        {
-          id: itemIds.backpack,
-        },
-        {
-          id: itemIds.book,
-        },
-        {
-          id: itemIds.ink,
-        },
-        {
-          id: itemIds.inkPen,
-        },
-        {
-          id: itemIds.parchment,
-        },
-        {
-          id: itemIds.bagOfSand,
-        },
-        {
-          id: itemIds.smallKnife,
-        },
-      ],
-    },
   },
   {
+    id: 8,
     name: "Monster Hunter's Pack",
     itemsQuantity: [
       {

@@ -4,6 +4,7 @@ import { getItem } from "@/lib/actions/db/item/read.actions";
 import { getArmor } from "@/lib/actions/db/armor/read.actions";
 import { getTool } from "@/lib/actions/db/tool/read.actions";
 import { getWeapon } from "@/lib/actions/db/weapons/read.actions";
+import { getSubclass } from "@/lib/actions/db/subclass/read.actions";
 
 const pendingQueries = new Map<string, Promise<any>>();
 
@@ -73,4 +74,9 @@ export const memoizeGetArmor = cacheFunction(
 export const memoizeGetTool = cacheFunction(
   (toolId: string) => `tool-${toolId}`,
   getTool
+);
+
+export const memoizeGetSubclass = cacheFunction(
+  (subclassId: string) => `subclass-${subclassId}`,
+  getSubclass
 );

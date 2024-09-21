@@ -3,8 +3,8 @@ import { Item, Spell, Tool, Weapon } from "@prisma/client";
 
 import Tooltip from "./Tooltip";
 import { useEffect, useState } from "react";
-import { SpellInfo } from "@/lib/types";
-type model = Item | SpellInfo;
+import { SpellInfo, SubClassInfo } from "@/lib/types";
+type model = Item | SpellInfo | SubClassInfo;
 
 interface Props<T extends model> {
   potential: T[];

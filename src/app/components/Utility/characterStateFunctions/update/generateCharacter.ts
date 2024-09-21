@@ -3,6 +3,7 @@ import {
   AbilityScores,
   AbilityScoreValue,
   CharacterInfo,
+  SubClassID,
   Time,
   ToolID,
   WeaponID,
@@ -11,6 +12,7 @@ import { AbilityToModifier } from "../calc/AbilityToModifier";
 import "@/lib/string.extensions";
 import { bulkAddToInventory } from "../../ChoiceFunctions/Inventory";
 import { ArmorType, Language, Skill } from "@prisma/client";
+import { generateSubclassChoice } from "../calc/generateSubclassChoice";
 
 const introMarkdown = `# Write your notes here
       
@@ -38,10 +40,10 @@ const bio = `> Bob is a cool adventurer.
      
 > Also incredibly lazy.`;
 
-export const generateCharacter = (
+export const generateCharacter = async (
   char: CharacterInfo,
   abilityScores: AbilityScores
-): PrismaJson.CharacterState => {
+): Promise<PrismaJson.CharacterState> => {
   if (!char.Classes || char.Classes.length == 0)
     throw new Error("Character has no classes");
   const classObj = char.Classes[0];
@@ -52,6 +54,11 @@ export const generateCharacter = (
   if (!char.SubRace) console.warn("Character has no SubRace");
   const subSpecies = char.SubRace;
   const state: PrismaJson.CharacterState = {
+    pendingLinks: {
+      subClass: [],
+      Class: [],
+    },
+
     notes: [introMarkdown],
     ideals: [],
     bonds: [],
@@ -530,6 +537,27 @@ export const generateCharacter = (
         },
       });
     }
+  }
+  // choose subclass
+  if (classObj.subClassFeatureLevels.includes(1)) {
+    state.pendingChoices.push({
+      choice: await generateSubclassChoice(classObj.id),
+      model: "Subclass" as PrismaJson.ChoiceModel,
+      from: `${classObj.subClassName}`,
+      description: `Choose your ${classObj.name.toCapitalCase()} subclass (${
+        classObj.subClassName
+      }).`,
+      callback: (s, c) => {
+        const subClass = c as SubClassID[];
+        return {
+          ...s,
+          pendingLinks: {
+            ...s.pendingLinks,
+            subClass: [...s.pendingLinks.subClass, ...subClass],
+          },
+        };
+      },
+    });
   }
 
   return state;
