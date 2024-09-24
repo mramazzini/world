@@ -46,7 +46,7 @@ const ItemPreview = ({
   ]);
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full col-span-2">
       {item ? (
         <div className="flex flex-col bg-base-100 rounded-xl border border-primary w-full my-4">
           <div className="flex flex-row justify-between items-center mt-4 mb-2 mx-4">
@@ -94,6 +94,7 @@ const ItemPreview = ({
                         character.state,
                         selectedItem.item
                       );
+                      console.log(newState);
                       updateState(newState as PrismaJson.CharacterState);
                     }}
                   >
@@ -109,6 +110,7 @@ const ItemPreview = ({
                       );
                     }) && (
                       <button
+                        key={index}
                         className="btn btn-secondary join-item"
                         disabled={
                           character.state?.equipped?.hands.items &&
@@ -139,6 +141,7 @@ const ItemPreview = ({
                       );
                     }) && (
                       <button
+                        key={index}
                         className="btn btn-secondary join-item"
                         disabled={
                           character.state?.equipped?.hands.items &&
@@ -171,9 +174,8 @@ const ItemPreview = ({
                   <button key={index} className="btn btn-secondary join-item">
                     Equip Arcane Focus
                   </button>
-                ) : type === ItemTypes.TOOL ? (
-                  ""
-                ) : type === ItemTypes.EQUIPMENT_PACK ? (
+                ) : type === ItemTypes.TOOL ? null : type ===
+                  ItemTypes.EQUIPMENT_PACK ? (
                   <button
                     key={index}
                     className="btn btn-secondary join-item"
@@ -192,9 +194,7 @@ const ItemPreview = ({
                   >
                     Unpack Equipment
                   </button>
-                ) : (
-                  <></>
-                )
+                ) : null
               )}
 
               <button

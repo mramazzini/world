@@ -1,6 +1,7 @@
 import { Fragment } from "react";
-import { Ability, ClassInfo } from "@/lib/types";
+import { ClassInfo } from "@/lib/types";
 import Loading from "../../../UI/Loading";
+import { Ability } from "@prisma/client";
 import Link from "next/link";
 import NewLineParse from "@/app/components/Utility/NewLineParse";
 import ClassTable from "@/app/components/ClassInfo/ClassTable";

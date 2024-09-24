@@ -1,6 +1,5 @@
-import { ArmorType, Class, Prisma, Skill } from "@prisma/client";
+import { ArmorType, Class, Prisma, Skill, Ability } from "@prisma/client";
 import {
-  Ability,
   Distance,
   SpellFocus,
   Time,

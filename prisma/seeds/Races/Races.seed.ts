@@ -1,12 +1,12 @@
 import { languages } from "@/lib/globalVars";
 import { src } from "@/lib/types";
-import { Ability } from "@/lib/types";
 import {
   Prisma,
   Size,
   CreatureType,
   Language,
   Skill,
+  Ability,
   DamageTypes,
 } from "@prisma/client";
 import { weaponIds } from "../Items/Weapons/Weapons.seed";
@@ -200,12 +200,8 @@ const Species: Prisma.RaceCreateManyInput[] = [
             Ability.INT,
             Ability.WIS,
           ],
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 1],
-            },
-          ],
+
+          options: [1, 1],
         },
       ],
     },
@@ -412,21 +408,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: [Ability.WIS],
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -475,21 +463,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [2, 1],
-            },
-          ],
+
+          options: [2, 1],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -630,21 +610,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -693,12 +665,8 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability).filter((a) => a !== Ability.CHA),
-          options: [
-            {
-              numberOfChoices: 1,
-              options: [1],
-            },
-          ],
+
+          options: [1],
         },
       ],
     },
@@ -759,21 +727,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -882,21 +842,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -1038,21 +990,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -1262,21 +1206,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -1370,21 +1306,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -1481,21 +1409,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -1609,21 +1529,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -1734,21 +1646,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -1831,21 +1735,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -1955,21 +1851,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -2095,21 +1983,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -2186,21 +2066,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -2307,21 +2179,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -2439,21 +2303,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -2515,21 +2371,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -2620,21 +2468,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -2800,21 +2640,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 1],
-            },
-          ],
+
+          options: [1, 1],
         },
       ],
     },
@@ -2900,21 +2732,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -3018,21 +2842,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -3188,21 +3004,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -3342,21 +3150,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -3471,21 +3271,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },
@@ -3629,21 +3421,13 @@ const Species: Prisma.RaceCreateManyInput[] = [
       choices: [
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 2],
-            },
-          ],
+
+          options: [1, 2],
         },
         {
           abilities: Object.values(Ability),
-          options: [
-            {
-              numberOfChoices: 3,
-              options: [1, 1, 1],
-            },
-          ],
+
+          options: [1, 1, 1],
         },
       ],
     },

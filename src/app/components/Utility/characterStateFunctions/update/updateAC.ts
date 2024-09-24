@@ -16,7 +16,6 @@ const baseArmorCalc = async (
   //if heavy add nothing
 
   const armorItem = (await memoizeGetItem(state.equipped.armor)) as ItemInfo;
-  console.log(armorItem);
   if (!armorItem)
     return {
       newAC: 10 + AbilityToModifier(state.abilityScores.DEX),
@@ -127,35 +126,43 @@ const baseArmorCalc = async (
 export const refreshAC = async (state: PrismaJson.CharacterState) => {
   //go through equipped items and check for shields
   const equippedItems = state.equipped.hands.items;
-  if (!equippedItems) return state;
-  const equippedData = equippedItems.map((i) => memoizeGetItem(i));
-  const equippedRes = (await Promise.all(equippedData)) as ItemInfo[];
-  if (!equippedRes) return state;
-  const shield = equippedRes.find(
-    (i) => i?.Armor?.armorType === ArmorType.SHIELDS
-  );
   const base = await baseArmorCalc(state);
-  if (!shield)
+
+  if (equippedItems) {
+    const equippedData = equippedItems.map((i) => memoizeGetItem(i));
+    const equippedRes = (await Promise.all(equippedData)) as ItemInfo[];
+    if (!equippedRes) return state;
+    const shield = equippedRes.find(
+      (i) => i?.Armor?.armorType === ArmorType.SHIELDS
+    );
+    if (!shield)
+      return {
+        ...state,
+        armorClass: base.newAC,
+        armorClassReasons: [...base.reasons],
+      };
+    const shieldData = shield.Armor;
+    const shieldAC = shieldData?.armorClass;
+    if (!shieldAC) return state;
     return {
       ...state,
-      armorClass: base.newAC,
-      armorClassReasons: [...base.reasons],
+
+      armorClass: base.newAC + shieldAC,
+      armorClassReasons: [
+        ...base.reasons,
+        {
+          reason: shield.name,
+          effect: "+" + shieldAC,
+        },
+      ],
     };
-  const shieldData = shield.Armor;
-  const shieldAC = shieldData?.armorClass;
-  if (!shieldAC) return state;
+  }
 
   return {
     ...state,
 
-    armorClass: base.newAC + shieldAC,
-    armorClassReasons: [
-      ...base.reasons,
-      {
-        reason: shield.name,
-        effect: "+" + shieldAC,
-      },
-    ],
+    armorClass: base.newAC,
+    armorClassReasons: [...base.reasons],
   };
 };
 

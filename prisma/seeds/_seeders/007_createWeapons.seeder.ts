@@ -13,7 +13,7 @@ export const createWeapons = async (db: PrismaClient) => {
         where: {
           id: Weapon.id,
         },
-        update: {},
+        update: Weapon,
         create: {
           ...Weapon,
           ammunitionId: null,

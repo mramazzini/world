@@ -6,8 +6,8 @@ import {
   Language,
   Prisma,
   Size,
+  Ability,
 } from "@prisma/client";
-import { Ability } from "@/lib/types";
 import { weaponIds } from "../../Items/Weapons/Weapons.seed";
 import { artisanIds, toolIds } from "../../Items/Tools/tools.seed";
 const ids = {
@@ -29,7 +29,7 @@ const ExoticVariants: Prisma.RaceVariantCreateManyInput[] = [
     flavorText:
       "Sequestered in high mountains atop tall trees, the aarakocra evoke fear and wonder.",
     abilityScores: {
-      fixedIncreases: [
+      default: [
         {
           ability: Ability.WIS,
           value: 1,
@@ -80,7 +80,7 @@ const ExoticVariants: Prisma.RaceVariantCreateManyInput[] = [
     abilityScoreDescription:
       "On top of your Charisma increase for being an Aasimar (VGM), your Wisdom score increases by 1.",
     abilityScores: {
-      fixedIncreases: [
+      default: [
         {
           ability: Ability.WIS,
           value: 1,
@@ -111,7 +111,7 @@ const ExoticVariants: Prisma.RaceVariantCreateManyInput[] = [
     abilityScoreDescription:
       "On top of your Charisma increase for being an Aasimar (VGM), your Constitution score increases by 1.",
     abilityScores: {
-      fixedIncreases: [
+      default: [
         {
           ability: Ability.CON,
           value: 1,
@@ -142,7 +142,7 @@ const ExoticVariants: Prisma.RaceVariantCreateManyInput[] = [
     abilityScoreDescription:
       "On top of your Charisma increase for being an Aasimar (VGM), your Strength score increases by 1.",
     abilityScores: {
-      fixedIncreases: [
+      default: [
         {
           ability: Ability.STR,
           value: 1,

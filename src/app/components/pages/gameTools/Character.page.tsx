@@ -1,12 +1,7 @@
 "use client";
 
 import { getCharacter } from "@/lib/actions/db/character/read.actions";
-import {
-  Ability,
-  AbilityScores,
-  CharacterInfo,
-  SpellListInfo,
-} from "@/lib/types";
+import { AbilityScores, CharacterInfo, SpellListInfo } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { generateCharacter } from "../../Utility/characterStateFunctions/update/generateCharacter";
 import Image from "next/image";
@@ -42,7 +37,7 @@ const CharacterSheet = ({ charName }: Props) => {
     if (!character.state) return;
     if (!character.state.pendingLinks) return;
     applyPendingModels(character);
-  }, [character?.state?.pendingLinks]);
+  }, [character]);
 
   useEffect(() => {
     getCharacter(charName).then((res) => {
@@ -105,20 +100,7 @@ const CharacterSheet = ({ charName }: Props) => {
           CHA: 9,
         },
       };
-      generateCharacter(
-        res,
-        res.name === "Constantine Wayfinder"
-          ? abilityScoresDemo.constantine
-          : res.name === "Orion Lysander"
-          ? abilityScoresDemo.orion
-          : res.name === "Boon"
-          ? abilityScoresDemo.boon
-          : res.name === "Jay Walker"
-          ? abilityScoresDemo.jay
-          : res.name === "Oliver Shorthand"
-          ? abilityScoresDemo.oliver
-          : abilityScoresDemo.ranis
-      ).then((c) => {
+      generateCharacter(res).then((c) => {
         console.log(res);
         const char: CharacterInfo = {
           ...res,

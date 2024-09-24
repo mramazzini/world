@@ -1,6 +1,5 @@
 "use client";
 import {
-  Ability,
   AbilityScoreValue,
   ArmorID,
   CallbackOptions,
@@ -11,7 +10,7 @@ import {
 } from "@/lib/types";
 import P from "@/app/components/Utility/FormatAndSanitize";
 import { useEffect, useState } from "react";
-import { ArmorType, Language, Skill } from "@prisma/client";
+import { Ability, ArmorType, Language, Skill } from "@prisma/client";
 import ArmorChoice from "./ArmorChoice";
 import SkillChoice from "./SkillChoice";
 import ModelDisplay from "@/app/components/Utility/ModelDisplay";
@@ -22,6 +21,7 @@ import LanguageChoice from "./LanguageChoice";
 
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
+import AbilityScoreChoice from "./AbilityScoreChoice";
 type ProficiencyType =
   | ArmorID
   | WeaponID
@@ -29,8 +29,7 @@ type ProficiencyType =
   | Skill
   | Ability
   | ToolID
-  | ArmorType
-  | AbilityScoreValue;
+  | ArmorType;
 
 interface Props {
   proficiency:
@@ -40,8 +39,7 @@ interface Props {
     | "skill"
     | "saving"
     | "tool"
-    | "ability"
-    | "abilityScore";
+    | "ability";
   character: CharacterInfo;
   choice: PrismaJson.ChoiceType;
   callback: (data: CallbackOptions) => void;
@@ -56,7 +54,8 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
 }: Props) => {
   const [selections, setSelections] = useState<T[]>([]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     //make sure that all selections are made
     let allSelectionsMade = true;
     if (!selections || selections.length === 0) {
@@ -94,10 +93,6 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
         return <P>{AbilityToText(item as Ability)}</P>;
       case "tool":
         return <ModelDisplay model="Tool" id={item as ToolID} />;
-      case "abilityScore":
-        return (item as AbilityScoreValue).ability
-          .toCapitalCase()
-          .replaceAll("_", " ");
 
       default:
         return "asd";
@@ -106,8 +101,22 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
   return (
     <>
       <dialog id={id} className="modal ">
-        <div className="modal-box overflow-visible">
-          <form onSubmit={handleSubmit}>
+        <div
+          className="modal-box "
+          style={{
+            height: "",
+            maxHeight: "calc(100vh - 5em)",
+            overflow: "visible",
+          }}
+        >
+          <form
+            onSubmit={handleSubmit}
+            className=" overflow-auto "
+            style={{
+              height: "",
+              maxHeight: "calc(80vh - 5em)",
+            }}
+          >
             <div className="flex bg-base-300 rounded-xl p-4 flex-col my-4">
               <p>You gain the following proficiencies:</p>
               <div className="divider divider-accent  m-0"></div>
@@ -117,7 +126,7 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
                 ))}
               </ul>
             </div>
-            <div className="max-h-[600px] overflow-auto">
+            <div className="">
               {proficiency == "armor" &&
                 choice.choices?.map((c, index) => {
                   if (index > 3) return;
@@ -263,7 +272,7 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
               : proficiency == "weapon"
               ? "/sword.svg"
               : proficiency == "language"
-              ? "/images/language.svg"
+              ? "/images/globe.svg"
               : proficiency == "skill"
               ? "/images/hand.svg"
               : proficiency == "saving"
@@ -272,7 +281,7 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
               ? "/images/alchemy.svg"
               : proficiency == "ability"
               ? "/images/strength.svg"
-              : "/images/abilityScore.svg"
+              : "/images/sparkles2.svg"
           }
           width={200}
           height={200}

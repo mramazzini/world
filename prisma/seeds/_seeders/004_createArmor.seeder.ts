@@ -12,7 +12,7 @@ export const createArmor = async (db: PrismaClient) => {
         where: {
           id: Armor.id,
         },
-        update: {},
+        update: Armor,
         create: Armor,
       });
       cinfo("Armor created");

@@ -1,5 +1,4 @@
 import {
-  Ability,
   AbilityScores,
   AbilityScoreValue,
   CallbackOptions,
@@ -9,11 +8,15 @@ import {
   WeaponID,
 } from "@/lib/types";
 import ItemChoiceHandler from "./ItemChoiceHandler";
+import { Ability } from "@prisma/client";
 import ProficiencyChoiceHandler from "./ProficiencyChoiceHandler";
 import Image from "next/image";
 import { ArmorType, Language, Skill } from "@prisma/client";
 import SubclassChoiceHandler from "./SubclassChoiceHandler";
+import CharacterAbilityScoreHandler from "./CharacterAbilityScoreHandler";
+import AbilityScoreHandler from "./AbilityScoreHandler";
 interface Props {
+  id: string;
   character: CharacterInfo;
   choiceData: PrismaJson.Choice;
   setCharacterState: (character: PrismaJson.CharacterState) => void;
@@ -21,26 +24,35 @@ interface Props {
 }
 
 const Choice = ({
+  id,
   choiceData,
   setCharacterState,
   character,
   hidden,
 }: Props) => {
-  const runCallback = (data: CallbackOptions) => {
-    console.log(data);
+  const runCallback = async (data: CallbackOptions) => {
     if (!character.state) return;
-    const newChoices = character.state.pendingChoices;
-    newChoices.shift();
-    const newState = {
-      ...choiceData.callback(character.state, data),
-      pendingChoices: newChoices,
-    };
-    console.log(newState);
-    setCharacterState(newState);
+
+    const callbackRes = await choiceData.callback(character.state, data);
+    const newChoices = callbackRes.pendingChoices;
+    const index = newChoices.findIndex((choice) => choice.id === id);
+    newChoices.splice(index, 1);
+    await setCharacterState({
+      ...callbackRes,
+      pendingChoices: [...newChoices],
+    });
   };
 
   const RenderChoice = (choice: PrismaJson.Choice) => {
     switch (choice.model) {
+      case "CharacterAbilityScoreSelection":
+        return (
+          <CharacterAbilityScoreHandler
+            choice={choice.choice as PrismaJson.AbilityScoreChoice}
+            character={character}
+            callback={runCallback}
+          />
+        );
       case "Item":
         return (
           <ItemChoiceHandler
@@ -105,8 +117,7 @@ const Choice = ({
         );
       case "AbilityScore":
         return (
-          <ProficiencyChoiceHandler<AbilityScoreValue>
-            proficiency="abilityScore"
+          <AbilityScoreHandler
             choice={choice.choice as PrismaJson.AbilityScoreChoice}
             character={character}
             callback={runCallback}
@@ -138,7 +149,9 @@ const Choice = ({
               {choiceData.from}
             </p>
             <p className="badge badge-info join-item min-w-16">
-              {choiceData.model}
+              {choiceData.model === "CharacterAbilityScoreSelection"
+                ? "Scores"
+                : choiceData.model}
             </p>
           </div>
           <div className="divider mt-2"></div>

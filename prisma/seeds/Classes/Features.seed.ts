@@ -148,7 +148,7 @@ const Features: ClassFeature[] = [
     description:
       "At 1st level, you know three cantrips of your choice from the wizard spell list. You learn additional wizard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Wizard table.",
   },
-  ...numberArray(1, 6).map((level) => {
+  ...numberArray(1, 5).map((level) => {
     const spellSlot = {} as { [key: number]: number };
     spellSlot[level] = 1;
     return {

@@ -107,13 +107,13 @@ const seedarr: {
     index: "014",
     callback: createSpecies,
     description: "Creating species from the species seed.",
-    // enabled: true,
+    enabled: true,
   },
   {
     index: "015",
     callback: createVariants,
     description: "Creating variants from the variant seed.",
-    // enabled: true,
+    enabled: true,
   },
   {
     index: "016",

@@ -82,6 +82,10 @@ input[type="number"] {
   padding: 0.5rem 0.75rem;
 }
 
+.collapse {
+  overflow: visible;
+}
+
 .markdown-content {
   h1 {
     font-size: 2rem;

@@ -200,7 +200,6 @@ const Tools = ({ character, pushLog }: Props) => {
         }
       });
       setTools(tools);
-      console.log(tools);
     });
   }, [character.state?.inventory]);
   return (

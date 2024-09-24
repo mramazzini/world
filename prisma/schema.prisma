@@ -438,7 +438,7 @@ model RaceVariant {
   description             String
   flavorText              String  @db.VarChar(200)
   source                  String
-  /// [AbilityScoreNumber]
+  /// [AbilityScoreChoice]
   abilityScores           Json?
   abilityScoreDescription String?
 

@@ -1,5 +1,4 @@
-import { Ability } from "@/lib/types";
-import { ArmorType, Prisma, Skill } from "@prisma/client";
+import { ArmorType, Prisma, Skill, Ability } from "@prisma/client";
 
 const ArmorSeed: Prisma.ArmorCreateManyInput[] = [
   {

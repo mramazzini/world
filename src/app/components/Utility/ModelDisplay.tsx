@@ -2,13 +2,14 @@
 import { ArmorInfo, SubClassInfo, ToolInfo, WeaponInfo } from "@/lib/types";
 import {
   memoizeGetArmor,
+  memoizeGetItem,
   memoizeGetSubclass,
   memoizeGetTool,
   memoizeGetWeapon,
 } from "./globalCache";
 import { useEffect, useState } from "react";
 interface Props {
-  model: "Weapon" | "Armor" | "Tool" | "Subclass";
+  model: "Weapon" | "Armor" | "Tool" | "Subclass" | "Item";
   id: number;
 }
 
@@ -31,6 +32,8 @@ const ModelDisplay = ({ model, id }: Props) => {
       case "Subclass":
         memoizeGetSubclass(id).then((res) => setData(res));
         break;
+      case "Item":
+        memoizeGetItem(id).then((res) => setData(res));
     }
   }, [model, id]);
 
@@ -44,6 +47,8 @@ const ModelDisplay = ({ model, id }: Props) => {
     case "Tool":
       return <>{data.name}</>;
     case "Subclass":
+      return <>{data.name}</>;
+    case "Item":
       return <>{data.name}</>;
   }
 };

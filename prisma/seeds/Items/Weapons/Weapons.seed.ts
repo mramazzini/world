@@ -1,6 +1,6 @@
 import { WeaponProperties } from "@/lib/globalVars";
-import { Ability, Property, WeaponPropertyNames } from "@/lib/types";
-import { DamageTypes, Prisma } from "@prisma/client";
+import { Property, WeaponPropertyNames } from "@/lib/types";
+import { DamageTypes, Prisma, Ability } from "@prisma/client";
 import { itemIds } from "../ItemIds";
 
 const { BLUDGEONING, PIERCING, SLASHING } = DamageTypes;

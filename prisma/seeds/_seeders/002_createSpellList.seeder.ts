@@ -12,7 +12,7 @@ export const createSpellList = async (db: PrismaClient) => {
         where: {
           id: SpellList.id,
         },
-        update: {},
+        update: SpellList,
         create: SpellList,
       });
       cinfo("Spell list created");

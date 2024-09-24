@@ -11,7 +11,7 @@ export const createTools = async (db: PrismaClient) => {
         where: {
           id: Tool.id,
         },
-        update: {},
+        update: Tool,
         create: Tool,
       });
       cinfo("Tool created");

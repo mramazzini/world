@@ -13,7 +13,7 @@ export const createItems = async (db: PrismaClient) => {
         where: {
           id: Item.id,
         },
-        update: {},
+        update: Item,
         create: {
           ...Item,
         },

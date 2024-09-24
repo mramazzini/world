@@ -15,7 +15,7 @@ export const createSpells = async (db: PrismaClient) => {
         where: {
           id: Spell.id,
         },
-        update: {},
+        update: Spell,
         create: Spell,
       });
       cinfo("Spell created");

@@ -50,7 +50,7 @@ export const createBackgrounds = async (db: PrismaClient) => {
         where: {
           id: Background.id,
         },
-        update: {},
+        update: Background,
         create: Background,
       });
       cinfo("Background created");

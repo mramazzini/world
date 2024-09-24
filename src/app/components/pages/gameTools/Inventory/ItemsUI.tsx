@@ -1,5 +1,6 @@
 "use client";
 import P from "@/app/components/Utility/FormatAndSanitize";
+import ModelDisplay from "@/app/components/Utility/ModelDisplay";
 import { CharacterInfo } from "@/lib/types";
 import numberArray from "@/lib/utils/numberArray";
 import { useState } from "react";
@@ -8,20 +9,25 @@ interface Props {
   character: CharacterInfo;
   updateState: (state: PrismaJson.CharacterState) => void;
   setSelectedItem: (item: PrismaJson.QuantityItem | null) => void;
+  selectedItem: PrismaJson.QuantityItem | null;
 }
 
 const GridItem = ({
   data,
   updateState,
   setSelectedItem,
+  selectedItem,
 }: {
   data?: PrismaJson.QuantityItem;
   updateState?: (state: PrismaJson.CharacterState) => void;
   setSelectedItem?: (item: PrismaJson.QuantityItem | null) => void;
+  selectedItem?: PrismaJson.QuantityItem | null;
 }) => {
   return data ? (
     <button
-      className="w-24 h-12  p-2 rounded-box flex flex-col items-center justify-center btn btn-neutral"
+      className={`w-24 h-12  p-2 rounded-box flex flex-col items-center justify-center btn btn-neutral ${
+        selectedItem?.item === data.item ? "btn-primary" : ""
+      }`}
       onClick={(e) => {
         e.preventDefault();
         if (!setSelectedItem) return;
@@ -29,7 +35,8 @@ const GridItem = ({
       }}
     >
       <span className="text-xs text-center">
-        {data.quantity} <P>{`^${data.item}{}^`}</P>
+        {data.quantity > 1 ? data.quantity : ""}{" "}
+        <ModelDisplay model="Item" id={data.item} />
       </span>
     </button>
   ) : (
@@ -41,7 +48,12 @@ const GridItem = ({
   );
 };
 
-const ItemsUI = ({ character, updateState, setSelectedItem }: Props) => {
+const ItemsUI = ({
+  character,
+  updateState,
+  setSelectedItem,
+  selectedItem,
+}: Props) => {
   if (!character.state) return null;
   return (
     <div className="flex flex-wrap gap-2 justify-center">
@@ -51,6 +63,7 @@ const ItemsUI = ({ character, updateState, setSelectedItem }: Props) => {
           data={item}
           updateState={updateState}
           setSelectedItem={setSelectedItem}
+          selectedItem={selectedItem}
         />
       ))}
       {numberArray(1, 56 - character.state.inventory.length).map((index) => (

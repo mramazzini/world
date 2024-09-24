@@ -1,5 +1,4 @@
 import {
-  Ability,
   AbilityScores,
   AbilityScoreValue,
   CharacterInfo,
@@ -8,11 +7,17 @@ import {
   ToolID,
   WeaponID,
 } from "@/lib/types";
+import { Ability } from "@prisma/client";
 import { AbilityToModifier } from "../calc/AbilityToModifier";
 import "@/lib/string.extensions";
 import { bulkAddToInventory } from "../../ChoiceFunctions/Inventory";
 import { ArmorType, Language, Skill } from "@prisma/client";
 import { generateSubclassChoice } from "../calc/generateSubclassChoice";
+import { updateAbilityScores } from "./updateAbilityScores";
+import { v4 } from "uuid";
+import { refreshAC } from "./updateAC";
+import { refreshHp } from "./refreshHp";
+import { refreshPassivePerception } from "./refreshPassivePerception";
 
 const introMarkdown = `# Write your notes here
       
@@ -40,9 +45,17 @@ const bio = `> Bob is a cool adventurer.
      
 > Also incredibly lazy.`;
 
+const abilityScores: AbilityScores = {
+  STR: 10,
+  DEX: 10,
+  CON: 10,
+  INT: 10,
+  WIS: 10,
+  CHA: 10,
+};
+
 export const generateCharacter = async (
-  char: CharacterInfo,
-  abilityScores: AbilityScores
+  char: CharacterInfo
 ): Promise<PrismaJson.CharacterState> => {
   if (!char.Classes || char.Classes.length == 0)
     throw new Error("Character has no classes");
@@ -94,14 +107,7 @@ export const generateCharacter = async (
     preparedSpells: [],
     userSubmittedSpells: [],
     abilityScores: abilityScores,
-    abilityScoreReasons: {
-      STR: [{ reason: "Base Ability Score", effect: abilityScores.STR }],
-      DEX: [{ reason: "Base Ability Score", effect: abilityScores.DEX }],
-      CON: [{ reason: "Base Ability Score", effect: abilityScores.CON }],
-      INT: [{ reason: "Base Ability Score", effect: abilityScores.INT }],
-      WIS: [{ reason: "Base Ability Score", effect: abilityScores.WIS }],
-      CHA: [{ reason: "Base Ability Score", effect: abilityScores.CHA }],
-    },
+    abilityScoreReasons: {},
     inventory: [],
     speed: {
       base: species.speed,
@@ -218,9 +224,122 @@ export const generateCharacter = async (
     ],
     pendingChoices: [],
   };
+
+  //This does not get calculated traditionally, the AbilityScoreValue[] is generated from the user's choice entirely.
+  state.pendingChoices.push({
+    id: v4(),
+    choice: {
+      default: [],
+      choices: [],
+    },
+    model: "CharacterAbilityScoreSelection" as PrismaJson.ChoiceModel,
+    from: "Character",
+    description: "Choose your character's Ability Scores",
+    callback: async (s, c) => {
+      const scores = c as AbilityScoreValue[];
+      const abilityScoresFromChoice: AbilityScores = {
+        STR: scores.find((a) => a.ability === "STR")?.value || 10,
+        DEX: scores.find((a) => a.ability === "DEX")?.value || 10,
+        CON: scores.find((a) => a.ability === "CON")?.value || 10,
+        INT: scores.find((a) => a.ability === "INT")?.value || 10,
+        WIS: scores.find((a) => a.ability === "WIS")?.value || 10,
+        CHA: scores.find((a) => a.ability === "CHA")?.value || 10,
+      };
+      const res = await updateAbilityScores(char, s, abilityScoresFromChoice);
+
+      if (subSpecies?.abilityScores) {
+        return {
+          ...res,
+          pendingChoices: [
+            ...res.pendingChoices,
+            {
+              id: v4(),
+              choice: subSpecies.abilityScores,
+              model: "AbilityScore" as PrismaJson.ChoiceModel,
+              from: subSpecies.name,
+              description: "Choose your character's ability score bonuses.",
+              callback: async (s, c) => {
+                const bonuses = c as AbilityScoreValue[];
+                const newState = { ...s };
+                for (const bonus of bonuses) {
+                  newState.abilityScores[bonus.ability] += bonus.value;
+                  newState.abilityScoreReasons[bonus.ability] = [
+                    ...(newState.abilityScoreReasons[bonus.ability] || []),
+                    {
+                      reason: subSpecies.name,
+                      effect: `+ ${bonus.value}`,
+                    },
+                  ];
+                }
+                const refreshedAC = await refreshAC(newState);
+                const refreshedHp = await refreshHp(char, refreshedAC);
+                const refreshedPP = await refreshPassivePerception(refreshedHp);
+
+                return {
+                  ...refreshedPP,
+                  abilityScores: {
+                    ...refreshedPP.abilityScores,
+                  },
+                  abilityScoreReasons: {
+                    ...refreshedPP.abilityScoreReasons,
+                  },
+                };
+              },
+            } as PrismaJson.Choice,
+          ],
+        };
+      }
+      const base = {
+        ...res,
+        pendingChoices: [
+          ...res.pendingChoices,
+          {
+            id: v4(),
+            choice: species.abilityScores,
+            model: "AbilityScore" as PrismaJson.ChoiceModel,
+            from: species.name,
+            description: "Choose your character's ability score bonuses.",
+            callback: async (s, c) => {
+              const bonuses = c as AbilityScoreValue[];
+              const newState = { ...s };
+              for (const bonus of bonuses) {
+                newState.abilityScores[bonus.ability] += bonus.value;
+                newState.abilityScoreReasons[bonus.ability] = [
+                  ...(newState.abilityScoreReasons[bonus.ability] || []),
+                  {
+                    reason: species.name,
+                    effect: `+ ${bonus.value}`,
+                  },
+                ];
+              }
+              const refreshedAC = await refreshAC(newState);
+              const refreshedHp = await refreshHp(char, refreshedAC);
+              const refreshedPP = await refreshPassivePerception(refreshedHp);
+
+              return {
+                ...refreshedPP,
+                abilityScores: {
+                  ...refreshedPP.abilityScores,
+                },
+                abilityScoreReasons: {
+                  ...refreshedPP.abilityScoreReasons,
+                },
+              };
+            },
+          } as PrismaJson.Choice,
+        ],
+      };
+      const refreshedAC = await refreshAC(base);
+      const refreshedHp = await refreshHp(char, refreshedAC);
+      const refreshedPP = await refreshPassivePerception(refreshedHp);
+      return { ...refreshedPP };
+    },
+  });
+
   //conditionally add class choices
   if (classObj.equipment) {
     state.pendingChoices.push({
+      id: v4(),
       choice: classObj.equipment,
       model: "Item" as PrismaJson.ChoiceModel,
       from: classObj.name.toCapitalCase(),
@@ -233,13 +352,13 @@ export const generateCharacter = async (
   }
   if (classObj.skills) {
     state.pendingChoices.push({
+      id: v4(),
       choice: classObj.skills,
       model: "Skill" as PrismaJson.ChoiceModel,
       from: classObj.name.toCapitalCase(),
       description: "Choose your character's skill proficiencies.",
       callback: (s, c) => {
         const skills = c as Skill[];
-        console.log("skills", skills);
         return {
           ...s,
           proficiencies: {
@@ -256,6 +375,7 @@ export const generateCharacter = async (
   }
   if (classObj.armor) {
     state.pendingChoices.push({
+      id: v4(),
       choice: classObj.armor,
       model: "Armor" as PrismaJson.ChoiceModel,
       from: classObj.name.toCapitalCase(),
@@ -278,6 +398,7 @@ export const generateCharacter = async (
   }
   if (classObj.tools) {
     state.pendingChoices.push({
+      id: v4(),
       choice: classObj.tools,
       model: "Tool" as PrismaJson.ChoiceModel,
       from: classObj.name.toCapitalCase(),
@@ -300,6 +421,7 @@ export const generateCharacter = async (
   }
   if (classObj.weapons) {
     state.pendingChoices.push({
+      id: v4(),
       choice: classObj.weapons,
       model: "Weapon" as PrismaJson.ChoiceModel,
       from: classObj.name.toCapitalCase(),
@@ -322,6 +444,7 @@ export const generateCharacter = async (
   }
   if (classObj.savingThrows) {
     state.pendingChoices.push({
+      id: v4(),
       choice: classObj.savingThrows,
       model: "Ability" as PrismaJson.ChoiceModel,
       from: classObj.name.toCapitalCase(),
@@ -345,6 +468,7 @@ export const generateCharacter = async (
   //conditionally add background choices
   if (background.equipment) {
     state.pendingChoices.push({
+      id: v4(),
       choice: background.equipment,
       model: "Item" as PrismaJson.ChoiceModel,
       from: background.name,
@@ -357,6 +481,7 @@ export const generateCharacter = async (
   }
   if (background.skillProficiencies) {
     state.pendingChoices.push({
+      id: v4(),
       choice: background.skillProficiencies,
       model: "Skill" as PrismaJson.ChoiceModel,
       from: background.name,
@@ -379,6 +504,7 @@ export const generateCharacter = async (
   }
   if (background.toolProficiencies) {
     state.pendingChoices.push({
+      id: v4(),
       choice: background.toolProficiencies,
       model: "Tool" as PrismaJson.ChoiceModel,
       from: background.name,
@@ -402,6 +528,7 @@ export const generateCharacter = async (
 
   if (background.languageProficiencies) {
     state.pendingChoices.push({
+      id: v4(),
       choice: background.languageProficiencies,
       model: "Language" as PrismaJson.ChoiceModel,
       from: background.name,
@@ -422,125 +549,198 @@ export const generateCharacter = async (
       },
     });
   }
-  //add race normally if no subrace
-  if (!subSpecies) {
-    // abilityscore bonuses
+  // abilityscore bonuses
 
-    //skill choice
-    if (species.skillProficiencies) {
-      state.pendingChoices.push({
-        choice: species.skillProficiencies,
-        model: "Skill" as PrismaJson.ChoiceModel,
-        from: species.name,
-        description: "Choose your character's skill proficiencies.",
-        callback: (s, c) => {
-          const skills = c as Skill[];
-          return {
-            ...s,
-            proficiencies: {
-              ...s.proficiencies,
-              skills: skills,
-              skillReasons: skills.map((skill) => ({
-                reason: species.name,
-                effect: "Proficient",
-              })),
-            },
-          };
-        },
-      });
-    }
-    //tool
-    if (species.toolProficiencies) {
-      state.pendingChoices.push({
-        choice: species.toolProficiencies,
-        model: "Tool" as PrismaJson.ChoiceModel,
-        from: species.name,
-        description: "Choose your character's tool proficiencies.",
-        callback: (s, c) => {
-          const tools = c as ToolID[];
-          return {
-            ...s,
-            proficiencies: {
-              ...s.proficiencies,
-              tools: tools,
-              toolReasons: tools.map((tool) => ({
-                reason: species.name,
-                effect: "Proficient",
-              })),
-            },
-          };
-        },
-      });
-    }
-    //languages
-    if (species.originLanguages) {
-      state.pendingChoices.push({
-        choice: species.originLanguages,
-        model: "Language" as PrismaJson.ChoiceModel,
-        from: species.name,
-        description: "Choose your character's language proficiencies.",
-        callback: (s, c) => {
-          const languages = c as Language[];
-          return {
-            ...s,
-            proficiencies: {
-              ...s.proficiencies,
-              languages: languages,
-              languageReasons: languages.map((language) => ({
-                reason: species.name,
-                effect: "Proficient",
-              })),
-            },
-          };
-        },
-      });
-    }
-    if (species.weaponProficiencies) {
-      state.pendingChoices.push({
-        choice: species.weaponProficiencies,
-        model: "Weapon" as PrismaJson.ChoiceModel,
-        from: species.name,
-        description: "Choose your character's weapon proficiencies.",
-        callback: (s, c) => {
-          const weapons = c as WeaponID[];
-          return {
-            ...s,
-            proficiencies: {
-              ...s.proficiencies,
-              weapons: weapons,
-              weaponReasons: weapons.map((weapon) => ({
-                reason: species.name,
-                effect: "Proficient",
-              })),
-            },
-          };
-        },
-      });
-    }
-    if (species.abilityScores) {
-      state.pendingChoices.push({
-        choice: species.abilityScores,
-        model: "AbilityScore" as PrismaJson.ChoiceModel,
-        from: species.name,
-        description: "Choose your character's ability score bonuses.",
-        callback: (s, c) => {
-          const bonuses = c as AbilityScoreValue[];
-          const newState = { ...s };
-          for (const bonus of bonuses) {
-            newState.abilityScores[bonus.ability] += bonus.amount;
-            newState.abilityScoreReasons[bonus.ability]?.push({
+  //skill choice
+  if (subSpecies?.skillProficiencies) {
+    state.pendingChoices.push({
+      id: v4(),
+      choice: subSpecies.skillProficiencies,
+      model: "Skill" as PrismaJson.ChoiceModel,
+      from: subSpecies.name,
+      description: "Choose your character's skill proficiencies.",
+      callback: (s, c) => {
+        const skills = c as Skill[];
+        return {
+          ...s,
+          proficiencies: {
+            ...s.proficiencies,
+            skills: skills,
+            skillReasons: skills.map((skill) => ({
+              reason: subSpecies.name,
+              effect: "Proficient",
+            })),
+          },
+        };
+      },
+    });
+  } else if (species.skillProficiencies) {
+    state.pendingChoices.push({
+      id: v4(),
+      choice: species.skillProficiencies,
+      model: "Skill" as PrismaJson.ChoiceModel,
+      from: species.name,
+      description: "Choose your character's skill proficiencies.",
+      callback: (s, c) => {
+        const skills = c as Skill[];
+        return {
+          ...s,
+          proficiencies: {
+            ...s.proficiencies,
+            skills: skills,
+            skillReasons: skills.map((skill) => ({
               reason: species.name,
-              effect: bonus.amount,
-            });
-          }
-          return newState;
-        },
-      });
-    }
+              effect: "Proficient",
+            })),
+          },
+        };
+      },
+    });
   }
+  //tool
+
+  if (subSpecies?.toolProficiencies) {
+    state.pendingChoices.push({
+      id: v4(),
+      choice: subSpecies.toolProficiencies,
+      model: "Tool" as PrismaJson.ChoiceModel,
+      from: subSpecies.name,
+      description: "Choose your character's tool proficiencies.",
+      callback: (s, c) => {
+        const tools = c as ToolID[];
+        return {
+          ...s,
+          proficiencies: {
+            ...s.proficiencies,
+            tools: tools,
+            toolReasons: tools.map((tool) => ({
+              reason: subSpecies.name,
+              effect: "Proficient",
+            })),
+          },
+        };
+      },
+    });
+  } else if (species.toolProficiencies) {
+    state.pendingChoices.push({
+      id: v4(),
+      choice: species.toolProficiencies,
+      model: "Tool" as PrismaJson.ChoiceModel,
+      from: species.name,
+      description: "Choose your character's tool proficiencies.",
+      callback: (s, c) => {
+        const tools = c as ToolID[];
+        return {
+          ...s,
+          proficiencies: {
+            ...s.proficiencies,
+            tools: tools,
+            toolReasons: tools.map((tool) => ({
+              reason: species.name,
+              effect: "Proficient",
+            })),
+          },
+        };
+      },
+    });
+  }
+  //languages
+  if (subSpecies?.originLanguages) {
+    state.pendingChoices.push({
+      id: v4(),
+      choice: subSpecies.originLanguages,
+      model: "Language" as PrismaJson.ChoiceModel,
+      from: subSpecies.name,
+      description: "Choose your character's language proficiencies.",
+      callback: (s, c) => {
+        const languages = c as Language[];
+        return {
+          ...s,
+          proficiencies: {
+            ...s.proficiencies,
+            languages: languages,
+            languageReasons: languages.map((language) => ({
+              reason: subSpecies.name,
+              effect: "Proficient",
+            })),
+          },
+        };
+      },
+    });
+  } else if (species.originLanguages) {
+    state.pendingChoices.push({
+      id: v4(),
+      choice: species.originLanguages,
+      model: "Language" as PrismaJson.ChoiceModel,
+      from: species.name,
+      description: "Choose your character's language proficiencies.",
+      callback: (s, c) => {
+        const languages = c as Language[];
+        return {
+          ...s,
+          proficiencies: {
+            ...s.proficiencies,
+            languages: languages,
+            languageReasons: languages.map((language) => ({
+              reason: species.name,
+              effect: "Proficient",
+            })),
+          },
+        };
+      },
+    });
+  }
+
+  if (subSpecies?.weaponProficiencies) {
+    state.pendingChoices.push({
+      id: v4(),
+      choice: subSpecies.weaponProficiencies,
+      model: "Weapon" as PrismaJson.ChoiceModel,
+      from: subSpecies.name,
+      description: "Choose your character's weapon proficiencies.",
+      callback: (s, c) => {
+        const weapons = c as WeaponID[];
+        return {
+          ...s,
+          proficiencies: {
+            ...s.proficiencies,
+            weapons: weapons,
+            weaponReasons: weapons.map((weapon) => ({
+              reason: subSpecies.name,
+              effect: "Proficient",
+            })),
+          },
+        };
+      },
+    });
+  } else if (species.weaponProficiencies) {
+    state.pendingChoices.push({
+      id: v4(),
+      choice: species.weaponProficiencies,
+      model: "Weapon" as PrismaJson.ChoiceModel,
+      from: species.name,
+      description: "Choose your character's weapon proficiencies.",
+      callback: (s, c) => {
+        const weapons = c as WeaponID[];
+        return {
+          ...s,
+          proficiencies: {
+            ...s.proficiencies,
+            weapons: weapons,
+            weaponReasons: weapons.map((weapon) => ({
+              reason: species.name,
+              effect: "Proficient",
+            })),
+          },
+        };
+      },
+    });
+  }
+
   // choose subclass
   if (classObj.subClassFeatureLevels.includes(1)) {
     state.pendingChoices.push({
+      id: v4(),
       choice: await generateSubclassChoice(classObj.id),
       model: "Subclass" as PrismaJson.ChoiceModel,
       from: `${classObj.subClassName}`,

@@ -18,26 +18,22 @@ const InventoryTab = ({ character, updateState }: Props) => {
     character &&
     character.state && (
       <div className="flex flex-col w-full">
-        <div className="flex flex-row w-full">
+        <div className="grid grid-cols-2 w-full">
           {/* loadout */}
-          <div className="w-1/2 flex flex-col">
-            <LoadoutUI character={character} setState={updateState} />
-          </div>
-          <div className="divider divider-primary divider-horizontal mb-4"></div>
+          <LoadoutUI character={character} setState={updateState} />
           {/* inventory */}
-          <div className="w-1/2 flex flex-col">
-            <ItemsUI
-              character={character}
-              updateState={updateState}
-              setSelectedItem={setSelectedItem}
-            />
-            <ItemPreview
-              character={character}
-              updateState={updateState}
-              setSelectedItem={setSelectedItem}
-              selectedItem={selectedItem}
-            />
-          </div>
+          <ItemsUI
+            character={character}
+            updateState={updateState}
+            setSelectedItem={setSelectedItem}
+            selectedItem={selectedItem}
+          />
+          <ItemPreview
+            character={character}
+            updateState={updateState}
+            setSelectedItem={setSelectedItem}
+            selectedItem={selectedItem}
+          />
         </div>
         <ItemFeatures inventory={character.state.inventory} />
       </div>

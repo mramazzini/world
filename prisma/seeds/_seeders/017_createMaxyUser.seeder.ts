@@ -20,7 +20,11 @@ const createMaxyUser = async (prisma: PrismaClient) => {
     where: {
       id: parseInt(process.env.ADMIN_ID),
     },
-    update: {},
+    update: {
+      email: process.env.ADMIN_EMAIL,
+      username: process.env.ADMIN_USERNAME,
+      password: hashedPassword,
+    },
     create: {
       id: parseInt(process.env.ADMIN_ID),
       email: process.env.ADMIN_EMAIL,

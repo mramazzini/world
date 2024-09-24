@@ -13,7 +13,7 @@ export const createEquipmentPacks = async (db: PrismaClient) => {
         where: {
           id: Pack.id,
         },
-        update: {},
+        update: Pack,
         create: {
           ...Pack,
           itemList: undefined,

@@ -11,9 +11,9 @@ import { roll } from "@/app/components/Utility/roll";
 import Tooltip from "@/app/components/Utility/Tooltip";
 import useLog from "@/app/components/Utility/useDicelog";
 import { skillAtritbuteMap, skills } from "@/lib/globalVars";
-import { Ability, ArmorInfo, CharacterInfo, WeaponID } from "@/lib/types";
+import { ArmorInfo, CharacterInfo, WeaponID } from "@/lib/types";
 import AbilityToText from "@/lib/utils/AbilityToText";
-import { Skill } from "@prisma/client";
+import { Skill, Ability } from "@prisma/client";
 import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
 import RenderLog from "./Log";
@@ -59,7 +59,7 @@ const MainSheet = ({ character, setCharacter }: Props) => {
     character &&
     character.state &&
     character.Classes && (
-      <div className="xl:grid md:gap-4 md:grid-flow-row grid-cols-1 md:grid-cols-12  ">
+      <div className="xl:grid flex gap-4 flex-col md:grid-flow-row grid-cols-1 md:grid-cols-12  ">
         <section className="flex flex-row bg-base-200 rounded-xl p-4  md:col-span-4 items-center ">
           <Image
             src={character.imageURL || "/images/hero.jpg"}
@@ -122,13 +122,13 @@ const MainSheet = ({ character, setCharacter }: Props) => {
           </div>
         </section>
         <section className="flex flex-row bg-base-200 rounded-xl p-4 md:col-span-5">
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-wrap gap-4 justify-center items-center w-full">
             {Object.entries(character.state.abilityScores).map(
               ([key, value]) => (
-                <div className="indicator" key={key}>
+                <div className="indicator " key={key}>
                   <Tooltip
                     element={
-                      <span className="indicator-item badge badge-info badge-sm p-2 flex justify-center items-center z-[1]">
+                      <span className="indicator-item badge badge-info badge-sm p-2 flex justify-center items-center z-[1] ">
                         i
                       </span>
                     }
@@ -343,10 +343,11 @@ const MainSheet = ({ character, setCharacter }: Props) => {
             </div>
           </div>
         </section>
+
         {/* Skills 1*/}
-        <section className="flex flex-row bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2 justify-center">
+        <section className="flex flex-row bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2  row-span-2 justify-center">
           <div className="bg-base-300 p-2 rounded-xl border-primary border">
-            <div className="flex flex-wrap justify-center">
+            <div className="flex flex-wrap justify-center items-center h-full">
               {Object.values(skills).map(
                 (skill, index) =>
                   index % 2 == 0 && (
@@ -416,7 +417,7 @@ const MainSheet = ({ character, setCharacter }: Props) => {
                               " "
                             )} is defined by the following:`}
                         </Tooltip>
-                        <p className="join-item bg-base-100 badge font-bold badge-lg w-32 text-xs whitespace-nowrap overflow-hidden text-ellipsis">
+                        <p className="join-item bg-base-100 badge font-bold badge-lg w-32 text-xs whitespace-nowrap text-ellipsis">
                           {skill.toCapitalCase().replaceAll("_", " ")}
                         </p>
                         <button
@@ -447,9 +448,9 @@ const MainSheet = ({ character, setCharacter }: Props) => {
             </div>
           </div>
         </section>
-        <section className="flex flex-row bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2 justify-center">
+        <section className="flex flex-row bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2  row-span-2 justify-center">
           <div className="bg-base-300 p-2 rounded-xl border-primary border">
-            <div className="flex flex-wrap justify-center">
+            <div className="flex flex-wrap justify-center items-center h-full">
               {Object.values(skills).map(
                 (skill, index) =>
                   index % 2 == 1 && (
@@ -537,7 +538,7 @@ const MainSheet = ({ character, setCharacter }: Props) => {
                               " "
                             )} is defined by the following:`}
                         </Tooltip>
-                        <p className="join-item bg-base-100 badge font-bold badge-lg w-32 text-xs whitespace-nowrap overflow-hidden text-ellipsis">
+                        <p className="join-item bg-base-100 badge font-bold badge-lg w-32 text-xs whitespace-nowrap  text-ellipsis">
                           {skill.toCapitalCase().replaceAll("_", " ")}
                         </p>
                         <button
@@ -566,101 +567,9 @@ const MainSheet = ({ character, setCharacter }: Props) => {
             </div>
           </div>
         </section>
-        {/* saving throw */}
-        <section className="bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2">
-          <div className="border border-primary rounded-xl bg-base-300 h-full">
-            <h2 className="pb-0 px-4 text-sm text-center">Saving Throws</h2>
-            <div className="divider m-0"></div>
-            <div className="flex flex-wrap justify-center ">
-              {Object.values(Ability).map((ability, index) => (
-                <div
-                  key={index}
-                  className="col-span-4 flex flex-row items-center join m-1"
-                >
-                  <Tooltip
-                    element={
-                      <span className=" bg-info text-info-content badge-lg badge p-2 flex justify-center items-center  join-item text-xs">
-                        i
-                      </span>
-                    }
-                    title={AbilityToText(ability)}
-                    additionalContent={
-                      <div className="bg-base-200 text-base-content">
-                        <table className="table  table-zebra table-xs  mt-2 rounded-xl">
-                          <thead>
-                            <tr className="bg-black/30">
-                              <th>Reason</th>
-                              <th>Effect</th>
-                            </tr>
-                          </thead>
-                          {/* ability modifier */}
-                          <tbody>
-                            <tr>
-                              <td>{AbilityToText(ability)}</td>
-                              <td>
-                                {character.state &&
-                                AbilityToModifier(
-                                  character.state.abilityScores[ability]
-                                ) >= 0
-                                  ? `+ ${AbilityToModifier(
-                                      character.state.abilityScores[ability]
-                                    )}`
-                                  : `- ${
-                                      character.state &&
-                                      Math.abs(
-                                        AbilityToModifier(
-                                          character.state.abilityScores[ability]
-                                        )
-                                      )
-                                    }`}
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    }
-                  >
-                    {`Your ${AbilityToText(
-                      ability
-                    )} saving throws are defined by the following:`}
-                  </Tooltip>
-                  <p className="join-item bg-base-100 badge font-bold badge-lg w-32 text-xs">
-                    {AbilityToText(ability)}
-                  </p>
-                  <button
-                    className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold w-10"
-                    onClick={() =>
-                      character.state &&
-                      handleRoll(
-                        AbilityToModifier(
-                          character.state.abilityScores[ability]
-                        ),
-                        ` ${AbilityToText(ability)} Saving Throw`
-                      )
-                    }
-                  >
-                    {character.state &&
-                    AbilityToModifier(character.state.abilityScores[ability]) >=
-                      0
-                      ? `+ ${AbilityToModifier(
-                          character.state.abilityScores[ability]
-                        )}`
-                      : `- ${
-                          character.state &&
-                          Math.abs(
-                            AbilityToModifier(
-                              character.state.abilityScores[ability]
-                            )
-                          )
-                        }`}
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+
         {/* AC, speed, proficiency bonus */}
-        <section className="bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2 whitespace-nowrap overflow-hidden text-ellipsis">
+        <section className="bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2 whitespace-nowrap   text-ellipsis row-span-2">
           <div className="flex flex-col justify-center h-full">
             <div className="flex flex-row items-center justify-between">
               <h2 className="pb-0 px-4 text-sm flex flex-row items-center">
@@ -967,10 +876,11 @@ const MainSheet = ({ character, setCharacter }: Props) => {
           </div>
         </section>
         {/* Resources (ki, rages, hitdie) */}
-        <section className="bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2">
+        <section className="bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2 row-span-2">
           <Resources character={character} setCharacter={setCharacter} />
         </section>
-        <section className="bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2 ">
+        {/* Spellcasting */}
+        <section className="bg-base-200 rounded-xl p-4 col-span-4 2xl:col-span-2 row-span-1 2xl:row-span-2">
           <div className="flex flex-col   rounded-xl border-secondary border bg-base-300 h-full">
             <h2 className="pb-0 px-4 text-sm text-center">Spellcasting</h2>
             <div className="divider m-0"></div>
@@ -1001,6 +911,10 @@ const MainSheet = ({ character, setCharacter }: Props) => {
                               </tr>
                             </thead>
                             <tbody>
+                              <tr>
+                                <td>Base Spell Save DC</td>
+                                <td>8</td>
+                              </tr>
                               <tr>
                                 <td>Proficiency</td>
                                 <td>+ {calcProficiency(calcLevel)}</td>
@@ -1162,12 +1076,188 @@ const MainSheet = ({ character, setCharacter }: Props) => {
             )}
           </div>
         </section>
+
+        {/* Initiative */}
+        <section className="bg-base-200 rounded-xl p-4 col-span-4 2xl:col-span-2 row-span-1 ">
+          <div className="border border-primary rounded-xl bg-base-300 flex flex-col items-center p-2 h-full">
+            <div className="flex flex-wrap justify-center items-center h-full">
+              <div className="col-span-4 flex flex-row items-center join m-1">
+                <Tooltip
+                  element={
+                    <span className=" bg-info text-info-content badge-lg badge p-2 flex justify-center items-center  join-item text-xs">
+                      i
+                    </span>
+                  }
+                  title="Initiative"
+                  additionalContent={
+                    <div className="bg-base-200 text-base-content">
+                      <table className="table  table-zebra table-xs  mt-2 rounded-xl">
+                        <thead>
+                          <tr className="bg-black/30">
+                            <th>Reason</th>
+                            <th>Effect</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Dexterity</td>
+                            <td>
+                              {character.state &&
+                              AbilityToModifier(
+                                character.state.abilityScores.DEX
+                              ) >= 0
+                                ? `+ ${AbilityToModifier(
+                                    character.state.abilityScores.DEX
+                                  )}`
+                                : `- ${
+                                    character.state &&
+                                    Math.abs(
+                                      AbilityToModifier(
+                                        character.state.abilityScores.DEX
+                                      )
+                                    )
+                                  }`}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  }
+                >
+                  Your Initiative is defined by the following:
+                </Tooltip>
+                <p className="join-item bg-base-100 badge font-bold badge-lg w-32 text-xs">
+                  Initiative
+                </p>
+                <button
+                  className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold w-10"
+                  onClick={() =>
+                    character.state &&
+                    handleRoll(
+                      AbilityToModifier(character.state.abilityScores.DEX),
+                      "Initiative"
+                    )
+                  }
+                >
+                  {character.state &&
+                  AbilityToModifier(character.state.abilityScores.DEX) >= 0
+                    ? `+ ${AbilityToModifier(
+                        character.state.abilityScores.DEX
+                      )}`
+                    : `- ${
+                        character.state &&
+                        Math.abs(
+                          AbilityToModifier(character.state.abilityScores.DEX)
+                        )
+                      }`}
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* saving throw */}
+
+        <section className="bg-base-200 rounded-xl p-4 col-span-4 2xl:col-span-2 row-span-1">
+          <div className="border border-primary rounded-xl bg-base-300 flex flex-col items-center p-2">
+            <h2 className=" text-center badge badge-neutral mb-1 ">
+              Saving Throws
+            </h2>
+            <div className="flex flex-wrap justify-center ">
+              {Object.values(Ability).map((ability, index) => (
+                <div
+                  key={index}
+                  className="col-span-4 flex flex-row items-center join m-1"
+                >
+                  <Tooltip
+                    element={
+                      <span className=" bg-info text-info-content badge-lg badge p-2 flex justify-center items-center  join-item text-xs">
+                        i
+                      </span>
+                    }
+                    title={AbilityToText(ability)}
+                    additionalContent={
+                      <div className="bg-base-200 text-base-content">
+                        <table className="table  table-zebra table-xs  mt-2 rounded-xl">
+                          <thead>
+                            <tr className="bg-black/30">
+                              <th>Reason</th>
+                              <th>Effect</th>
+                            </tr>
+                          </thead>
+                          {/* ability modifier */}
+                          <tbody>
+                            <tr>
+                              <td>{AbilityToText(ability)}</td>
+                              <td>
+                                {character.state &&
+                                AbilityToModifier(
+                                  character.state.abilityScores[ability]
+                                ) >= 0
+                                  ? `+ ${AbilityToModifier(
+                                      character.state.abilityScores[ability]
+                                    )}`
+                                  : `- ${
+                                      character.state &&
+                                      Math.abs(
+                                        AbilityToModifier(
+                                          character.state.abilityScores[ability]
+                                        )
+                                      )
+                                    }`}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    }
+                  >
+                    {`Your ${AbilityToText(
+                      ability
+                    )} saving throws are defined by the following:`}
+                  </Tooltip>
+                  <p className="join-item bg-base-100 badge font-bold badge-lg w-32 text-xs">
+                    {AbilityToText(ability)}
+                  </p>
+                  <button
+                    className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold w-10"
+                    onClick={() =>
+                      character.state &&
+                      handleRoll(
+                        AbilityToModifier(
+                          character.state.abilityScores[ability]
+                        ),
+                        ` ${AbilityToText(ability)} Saving Throw`
+                      )
+                    }
+                  >
+                    {character.state &&
+                    AbilityToModifier(character.state.abilityScores[ability]) >=
+                      0
+                      ? `+ ${AbilityToModifier(
+                          character.state.abilityScores[ability]
+                        )}`
+                      : `- ${
+                          character.state &&
+                          Math.abs(
+                            AbilityToModifier(
+                              character.state.abilityScores[ability]
+                            )
+                          )
+                        }`}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Log */}
         <section className="bg-base-200 rounded-xl p-4 col-span-6 2xl:col-span-5 row-span-2">
           <RenderLog log={log} pushLog={logPush} />
         </section>
 
-        <section className="bg-base-200 rounded-xl p-4 col-span-6 2xl:col-span-7 row-span-1">
+        <section className="bg-base-200 rounded-xl p-4 col-span-6 2xl:col-span-7 2xl:row-span-1 row-span-2">
           <Tools character={character} pushLog={logPush} />
         </section>
         <section className="bg-base-200 rounded-xl p-4 col-span-12 2xl:col-span-7 row-span-1 ">
@@ -1266,7 +1356,7 @@ const MainSheet = ({ character, setCharacter }: Props) => {
             )
             .map((featureInfo, index) => (
               <div
-                key={index}
+                key={`${featureInfo.feature.name}-${featureInfo.source}`}
                 tabIndex={0}
                 className="bg-base-300 rounded-xl p-4 collapse collapse-arrow mt-2 collapse-sm py-0"
               >

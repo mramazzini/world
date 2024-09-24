@@ -34,25 +34,24 @@ const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
     character &&
     character.state && (
       <>
-        <button
-          className="btn p-4 h-auto m-4 flex items-center justify-between flex-col btn-ghost border border-gray-500"
-          onClick={() => {
-            const modal = document.getElementById(id) as HTMLDialogElement;
-            modal.showModal();
-          }}
-        >
-          <Image
-            src={"/images/silhouette.svg"}
-            width={200}
-            height={200}
-            className="opacity-50"
-            alt="Choose a subclass"
-          />
-          <p className="divider">Choose a subclass</p>
-        </button>
         <dialog id={id} className="modal ">
-          <div className="modal-box overflow-visible">
-            <form onSubmit={handleSubmit}>
+          <div
+            className="modal-box "
+            style={{
+              height: "",
+              maxHeight: "calc(100vh - 5em)",
+              overflow: "visible",
+            }}
+          >
+            <form
+              onSubmit={handleSubmit}
+              className=" overflow-auto"
+              style={{
+                height: "",
+
+                maxHeight: "calc(80vh - 5em)",
+              }}
+            >
               <div className="flex bg-base-300 rounded-xl p-4 flex-col my-4 ">
                 <p>You gain the following items:</p>
                 <div className="divider divider-accent  m-0"></div>
@@ -64,7 +63,7 @@ const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
                   ))}
                 </ul>
               </div>
-              <div className="max-h-[600px] overflow-auto">
+              <div>
                 {choice.choices?.map((choice, index) => (
                   <ItemChoice
                     key={index}
@@ -85,7 +84,7 @@ const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
                   onClick={(e) => {
                     e.preventDefault();
                     const modal = document.getElementById(
-                      "subclassChoiceModal"
+                      id
                     ) as HTMLDialogElement;
                     modal.close();
                   }}
@@ -99,6 +98,22 @@ const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
             </form>
           </div>
         </dialog>
+        <button
+          className="btn p-4 h-auto m-4 flex items-center join-item justify-between flex-col btn-ghost border border-gray-500"
+          onClick={() => {
+            const modal = document.getElementById(id) as HTMLDialogElement;
+            modal.showModal();
+          }}
+        >
+          <Image
+            src={"/images/backpack.svg"}
+            width={200}
+            height={200}
+            className="opacity-50"
+            alt="Choose a subclass"
+          />
+          <p className="divider">Choose your Items</p>
+        </button>
       </>
     )
   );

@@ -7,8 +7,9 @@ import {
   Prisma,
   Size,
   Skill,
+  Ability,
 } from "@prisma/client";
-import { Ability } from "@/lib/types";
+
 import { weaponIds } from "../../Items/Weapons/Weapons.seed";
 import { artisanIds, toolIds } from "../../Items/Tools/tools.seed";
 const ids = {
@@ -277,7 +278,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience.",
     source: src.phb,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.WIS, value: 1 },
         { ability: Ability.CON, value: 2 },
       ],
@@ -291,7 +292,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     abilityScoreDescription:
       "On top of your Constitution increase from being a dwarf, your Strength score increases by 2.",
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.STR, value: 2 },
         { ability: Ability.CON, value: 2 },
       ],
@@ -313,7 +314,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     baseRaceId: ids.dwarf,
     source: src.eberron,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.INT, value: 1 },
         { ability: Ability.CON, value: 2 },
       ],
@@ -332,7 +333,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "Descended from an earlier subrace of dark-skinned elves, the drow were banished from the surface world for following the goddess Lolth down the path to evil and corruption.",
     source: src.phb,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 2 },
         { ability: Ability.CHA, value: 1 },
       ],
@@ -358,7 +359,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "As a high elf, you have a keen mind and a mastery of at least the basics of magic.",
     source: src.phb,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 2 },
         { ability: Ability.INT, value: 1 },
       ],
@@ -398,7 +399,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     flavorText:
       "As a wood elf, you have keen senses and intuition, and your fleet feet carry you quickly and stealthily through your native forests.",
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 2 },
         { ability: Ability.WIS, value: 1 },
       ],
@@ -427,7 +428,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     baseRaceId: ids.elf,
     source: src.wildemount,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 2 },
         { ability: Ability.INT, value: 1 },
       ],
@@ -445,7 +446,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     baseRaceId: ids.elf,
     source: src.eberron,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 2 },
         { ability: Ability.CHA, value: 1 },
       ],
@@ -463,7 +464,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     baseRaceId: ids.elf,
     source: src.kaladesh,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 2 },
         { ability: Ability.WIS, value: 1 },
       ],
@@ -483,7 +484,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     baseRaceId: ids.elf,
     source: src.kaladesh,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 2 },
         { ability: Ability.WIS, value: 1 },
       ],
@@ -525,7 +526,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "As a forest gnome, you have a natural knack for illusion and inherent quickness and stealth.",
     source: src.phb,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 1 },
         { ability: Ability.INT, value: 2 },
       ],
@@ -543,7 +544,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "As a rock gnome, you have a natural inventiveness and hardiness beyond that of other gnomes.",
     source: src.phb,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.CON, value: 1 },
         { ability: Ability.INT, value: 2 },
       ],
@@ -564,7 +565,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     baseRaceId: ids.gnome,
     source: src.eberron,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.INT, value: 2 },
         { ability: Ability.CHA, value: 1 },
       ],
@@ -639,7 +640,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "The Mark of Detection is a dragonmark that grants those who bear it powers of detection and the ability to ferret out danger.",
     source: src.eberron,
     abilityScores: {
-      fixedIncreases: [{ ability: Ability.WIS, value: 2 }],
+      default: [{ ability: Ability.WIS, value: 2 }],
       choices: [
         {
           abilities: [
@@ -649,12 +650,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
             Ability.INT,
             Ability.CHA,
           ], // All available abilities
-          options: [
-            {
-              numberOfChoices: 1,
-              options: [1],
-            },
-          ],
+          options: [1],
         },
       ],
     },
@@ -671,7 +667,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "The Mark of Storm is a dragonmark that bestows powers over the weather.",
     source: src.eberron,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 1 },
         { ability: Ability.CHA, value: 2 },
       ],
@@ -691,7 +687,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "The Mark of Finding is a dragonmark that grants those who bear it abilities related to locating people and objects.",
     source: src.eberron,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.WIS, value: 2 },
         { ability: Ability.CON, value: 1 },
       ],
@@ -713,7 +709,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "As a lightfoot halfling, you can easily hide from notice, even using other people as cover.",
     source: src.phb,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 2 },
         { ability: Ability.CHA, value: 1 },
       ],
@@ -731,7 +727,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "As a stout halfling, you're hardier than average and have some resistance to poison.",
     source: src.phb,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 2 },
         { ability: Ability.CON, value: 1 },
       ],
@@ -750,7 +746,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "Ghostwise halflings trace their ancestry back to a war among halfling tribes that sent their ancestors into flight from Luiren.",
     source: src.sword,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 2 },
         { ability: Ability.WIS, value: 1 },
       ],
@@ -768,7 +764,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "Long tied to the natural heart of the Lotusden Greenwood, these halflings have adapted to live synergistically with the chaotic laws of the wilds.",
     source: src.wildemount,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 2 },
         { ability: Ability.WIS, value: 1 },
       ],
@@ -787,7 +783,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
 
     source: src.eberron,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 2 },
         { ability: Ability.CHA, value: 1 },
       ],
@@ -805,7 +801,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "The Mark of Healing is a dragonmark that grants those who bear it powers related to healing and restoration.",
     source: src.eberron,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 2 },
         { ability: Ability.WIS, value: 1 },
       ],
@@ -824,7 +820,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "The Mark of Finding is a dragonmark that grants those who bear it abilities related to locating people and objects.",
     source: src.eberron,
     abilityScores: {
-      fixedIncreases: [{ ability: Ability.WIS, value: 2 }],
+      default: [{ ability: Ability.WIS, value: 2 }],
       choices: [
         {
           abilities: [
@@ -834,12 +830,8 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
             Ability.INT,
             Ability.CHA,
           ], // All available abilities
-          options: [
-            {
-              numberOfChoices: 1,
-              options: [1],
-            },
-          ],
+
+          options: [1],
         },
       ],
     },
@@ -861,7 +853,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "The Mark of Handling is a dragonmark that grants those who bear it powers related to animals and the natural world.",
     source: src.eberron,
     abilityScores: {
-      fixedIncreases: [{ ability: Ability.WIS, value: 2 }],
+      default: [{ ability: Ability.WIS, value: 2 }],
       choices: [
         {
           abilities: [
@@ -871,12 +863,8 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
             Ability.INT,
             Ability.CHA,
           ], // All available abilities
-          options: [
-            {
-              numberOfChoices: 1,
-              options: [1],
-            },
-          ],
+
+          options: [1],
         },
       ],
     },
@@ -893,7 +881,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "The Mark of Making is a dragonmark that grants those who bear it powers related to crafting and creation.",
     source: src.eberron,
     abilityScores: {
-      fixedIncreases: [{ ability: Ability.INT, value: 2 }],
+      default: [{ ability: Ability.INT, value: 2 }],
       choices: [
         {
           abilities: [
@@ -903,12 +891,8 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
             Ability.WIS,
             Ability.CHA,
           ], // All available abilities
-          options: [
-            {
-              numberOfChoices: 1,
-              options: [1],
-            },
-          ],
+
+          options: [1],
         },
       ],
     },
@@ -928,7 +912,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "The Mark of Passage is a dragonmark that grants those who bear it powers related to travel and movement.",
     source: src.eberron,
     abilityScores: {
-      fixedIncreases: [{ ability: Ability.DEX, value: 2 }],
+      default: [{ ability: Ability.DEX, value: 2 }],
       choices: [
         {
           abilities: [
@@ -938,12 +922,8 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
             Ability.WIS,
             Ability.CHA,
           ], // All available abilities
-          options: [
-            {
-              numberOfChoices: 1,
-              options: [1],
-            },
-          ],
+
+          options: [1],
         },
       ],
     },
@@ -962,7 +942,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "The Mark of Sentinel is a dragonmark that grants those who bear it powers related to protection and defense.",
     source: src.eberron,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.WIS, value: 1 },
         { ability: Ability.CON, value: 2 },
       ],
@@ -981,7 +961,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "Tieflings tied to Asmodeus are known for their cunning and charisma.",
     source: src.phb,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.INT, value: 1 },
         { ability: Ability.CHA, value: 2 },
       ],
@@ -999,7 +979,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "Tieflings tied to Baalzebul can corrupt others both physically and psychically.",
     source: src.mordenkainenFoes,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.INT, value: 1 },
         { ability: Ability.CHA, value: 2 },
       ],
@@ -1017,7 +997,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "Tieflings tied to Dispater are excellent spies and infiltrators.",
     source: src.mordenkainenFoes,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 1 },
         { ability: Ability.CHA, value: 2 },
       ],
@@ -1035,7 +1015,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "Tieflings tied to Fierna are known for their loyalty and their ability to manipulate others.",
     source: src.mordenkainenFoes,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.WIS, value: 1 },
         { ability: Ability.CHA, value: 2 },
       ],
@@ -1053,7 +1033,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "Glasya, Hell's criminal mastermind, grants her tiefiings magic that is useful for committing heists.",
     source: src.mordenkainenFoes,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 1 },
         { ability: Ability.CHA, value: 2 },
       ],
@@ -1071,7 +1051,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "Frozen Stygia is ruled by Levistus, an archdevil known for offering bargains to those who face an inescapable doom.",
     source: src.mordenkainenFoes,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.CON, value: 1 },
         { ability: Ability.CHA, value: 2 },
       ],
@@ -1089,7 +1069,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "Tieflings tied to Mammon excel at gathering and safeguarding wealth.",
     source: src.mordenkainenFoes,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.INT, value: 1 },
         { ability: Ability.CHA, value: 2 },
       ],
@@ -1106,7 +1086,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     flavorText: "Tieflings tied to Mephistopheles master some arcane magic.",
     source: src.mordenkainenFoes,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.INT, value: 1 },
         { ability: Ability.CHA, value: 2 },
       ],
@@ -1124,7 +1104,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
       "Tieflings with a blood tie to Zariel are stronger than the typical tiefling and receive magical abilities that aid them in battle.",
     source: src.mordenkainenFoes,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.STR, value: 1 },
         { ability: Ability.CHA, value: 2 },
       ],
@@ -1139,7 +1119,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     baseRaceId: ids.elf,
     source: src.kaladesh,
     abilityScores: {
-      fixedIncreases: [
+      default: [
         { ability: Ability.DEX, value: 2 },
         { ability: Ability.WIS, value: 1 },
       ],
@@ -1181,12 +1161,8 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
             Ability.WIS,
             Ability.CHA,
           ],
-          options: [
-            {
-              numberOfChoices: 2,
-              options: [1, 1],
-            },
-          ],
+
+          options: [1, 1],
         },
       ],
     },

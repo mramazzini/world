@@ -14,7 +14,8 @@ interface Props {
 const SubclassChoiceHandler = ({ callback, choice, character }: Props) => {
   const [selections, setSelections] = useState<SubClassID[]>([]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     //make sure that all selections are made
     let allSelectionsMade = true;
     if (!selections || selections.length === 0) {
@@ -57,9 +58,23 @@ const SubclassChoiceHandler = ({ callback, choice, character }: Props) => {
         <p className="divider">Choose a subclass</p>
       </button>
       <dialog id="subclassChoiceModal" className="modal ">
-        <div className="modal-box overflow-visible">
-          <form onSubmit={handleSubmit}>
-            <div className="max-h-[600px]  overflow-x-visible">
+        <div
+          className="modal-box "
+          style={{
+            height: "",
+            maxHeight: "calc(100vh - 5em)",
+            overflow: "visible",
+          }}
+        >
+          <form
+            onSubmit={handleSubmit}
+            className=" overflow-auto "
+            style={{
+              height: "",
+              maxHeight: "calc(80vh - 5em)",
+            }}
+          >
+            <div>
               {choice.choices?.map((choice, index) => {
                 return (
                   <SubclassChoice

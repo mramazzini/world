@@ -49,7 +49,7 @@ export const createVariants = async (db: PrismaClient) => {
         where: {
           id: v.id,
         },
-        update: {},
+        update: v,
         create: v,
       });
       cinfo("Classic variant created");
@@ -69,7 +69,7 @@ export const createVariants = async (db: PrismaClient) => {
         where: {
           id: r.id,
         },
-        update: {},
+        update: r,
         create: r,
       });
       cinfo("Exotic variant created");

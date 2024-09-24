@@ -1,4 +1,5 @@
 import {
+  Ability,
   Armor,
   ArmorType,
   Background,
@@ -224,10 +225,7 @@ declare global {
       default?: { ability: Ability; value: number }[]; // Fixed increases like Strength +2, Charisma +1
       choices?: {
         abilities: Ability[]; // Array of abilities that can be chosen
-        options: {
-          numberOfChoices: number; // Number of different abilities to increase (e.g., 1, 2, or 3)
-          options: number[]; // Array of values for each increase, e.g., [2, 1] or [1, 1, 1]
-        }[];
+        options: number[]; // Array of numbers that can be chosen
       }[];
     }
 
@@ -596,6 +594,7 @@ declare global {
       | "Skill"
       | "Ability"
       | "AbilityScore"
+      | "CharacterAbilityScoreSelection"
       | "Weapon"
       | "Armor"
       | "Tool"
@@ -610,7 +609,6 @@ declare global {
       | ArmorChoice
       | ToolChoice
       | SubclassChoice;
-
     interface SubclassChoice {
       default?: SubClassID[];
       choices?: {
@@ -620,6 +618,7 @@ declare global {
     }
 
     interface Choice {
+      id: string;
       model: ChoiceModel;
       choice: ChoiceType;
 
@@ -628,7 +627,7 @@ declare global {
       callback: (
         state: CharacterState,
         selections: CallbackOptions
-      ) => CharacterState;
+      ) => Promise<CharacterState> | CharacterState;
     }
 
     interface AbilityChoice {
@@ -857,14 +856,6 @@ export interface Property {
   name: string;
   description: string;
 }
-export enum Ability {
-  STR = "STR",
-  CON = "CON",
-  DEX = "DEX",
-  INT = "INT",
-  WIS = "WIS",
-  CHA = "CHA",
-}
 
 export interface Roll {
   rolls: {
@@ -884,7 +875,7 @@ export interface Log {
 }
 export interface AbilityScoreValue {
   ability: Ability;
-  amount: number;
+  value: number;
 }
 
 export interface AbilityScores {

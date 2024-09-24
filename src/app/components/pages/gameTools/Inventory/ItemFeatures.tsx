@@ -86,7 +86,7 @@ const ItemFeatures = ({ inventory }: Props) => {
       <div className="divider m-0"></div>
       {items.map((i, index) => {
         return (
-          <Fragment key={index}>
+          <Fragment key={i.id}>
             {i.features.map((f, index) => (
               <RenderItemFeature key={index} feature={f} item={i} />
             ))}

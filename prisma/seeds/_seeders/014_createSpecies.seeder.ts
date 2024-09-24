@@ -47,7 +47,7 @@ export const createSpecies = async (db: PrismaClient) => {
         where: {
           id: r.id,
         },
-        update: {},
+        update: r,
         create: r,
       });
       cinfo("Species created");

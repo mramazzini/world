@@ -12,7 +12,7 @@ export const createClasses = async (db: PrismaClient) => {
         where: {
           id: Class.id,
         },
-        update: {},
+        update: Class,
         create: Class,
       });
       cinfo("Class created");

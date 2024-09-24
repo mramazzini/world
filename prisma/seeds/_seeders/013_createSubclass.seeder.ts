@@ -62,7 +62,7 @@ export const createSubclass = async (db: PrismaClient) => {
         where: {
           id: SubClass.id,
         },
-        update: {},
+        update: SubClass,
         create: SubClass,
       });
       cinfo("Sub class created");

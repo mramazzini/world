@@ -1,5 +1,5 @@
-import { Prisma } from "@prisma/client";
-import { Ability, SpellFocus } from "@/lib/types";
+import { Prisma, Ability } from "@prisma/client";
+import { SpellFocus } from "@/lib/types";
 import { src } from "@/lib/types";
 import P from "@/app/components/Utility/FormatAndSanitize";
 import { spellListIds } from "../Spells/SpellLists/SpellLists.seed";
