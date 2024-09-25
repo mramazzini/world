@@ -63,6 +63,7 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
   },
   {
     name: "Boon",
+    imageURL: "/images/boon.jpg",
     Background: {
       connect: {
         id: 33, //outlander
