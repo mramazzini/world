@@ -7,7 +7,7 @@ import { AbilityScoreValue, CallbackOptions, CharacterInfo } from "@/lib/types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import ManualAbilityScoreChoice from "./AbilityScoreSelectors/ManualAbilityScoreChoice";
+import ManualAbilityScoreChoice from "../AbilityScoreSelectors/ManualAbilityScoreChoice";
 interface Props {
   choice: PrismaJson.AbilityScoreChoice;
   character: CharacterInfo;

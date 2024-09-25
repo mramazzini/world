@@ -2,7 +2,7 @@
 import { CharacterInfo, ItemInfo, WeaponPropertyNames } from "@/lib/types";
 import { memoizeGetItem } from "@/app/components/Utility/globalCache";
 import { Fragment, useEffect, useState } from "react";
-import ItemPage from "../../wiki/official/Item.page";
+import ItemPage from "../../../wiki/official/Item.page";
 import Image from "next/image";
 import { ArmorType, ItemTypes } from "@prisma/client";
 import {

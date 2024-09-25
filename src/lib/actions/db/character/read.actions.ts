@@ -97,6 +97,39 @@ export const getCharacter = async (
   }
 };
 
+export const getCharactersByUser = async (
+  userID: number
+): Promise<CharacterInfo[]> => {
+  const db = new PrismaClient();
+  const res = await db.character.findMany({
+    where: {
+      userId: userID,
+    },
+    include: {
+      Race: true,
+      Background: true,
+      SubClasses: true,
+      Classes: {
+        include: {
+          SpellList: {
+            include: {
+              Spells: true,
+            },
+          },
+        },
+      },
+      SubRace: true,
+      User: {
+        select: {
+          username: true,
+        },
+      },
+    },
+  });
+  await db.$disconnect();
+  return res;
+};
+
 export const getCharacterChunk = async (
   queryInfo: QueryParams
 ): Promise<CharacterInfo[] | null> => {
