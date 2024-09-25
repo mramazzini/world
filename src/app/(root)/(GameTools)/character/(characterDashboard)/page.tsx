@@ -29,8 +29,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Page() {
-  const user = await getUserId();
-  const characters = await getCharactersByUser(user);
-  return <CharacterSelector characters={characters} />;
+export default function Page() {
+  return <CharacterSelector />;
 }

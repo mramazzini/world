@@ -25,6 +25,7 @@ export const getCharacters = async (): Promise<CharacterInfo[]> => {
 
       User: {
         select: {
+          id: true,
           username: true,
         },
       },
@@ -59,6 +60,7 @@ export const getCharacter = async (
         SubRace: true,
         User: {
           select: {
+            id: true,
             username: true,
           },
         },
@@ -87,6 +89,7 @@ export const getCharacter = async (
         SubRace: true,
         User: {
           select: {
+            id: true,
             username: true,
           },
         },
@@ -121,6 +124,7 @@ export const getCharactersByUser = async (
       SubRace: true,
       User: {
         select: {
+          id: true,
           username: true,
         },
       },
@@ -157,6 +161,7 @@ export const getCharacterChunk = async (
         SubRace: true,
         User: {
           select: {
+            id: true,
             username: true,
           },
         },
@@ -188,6 +193,7 @@ export const getCharacterChunk = async (
       SubRace: true,
       User: {
         select: {
+          id: true,
           username: true,
         },
       },

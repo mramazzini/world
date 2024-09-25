@@ -1,11 +1,20 @@
+"use client";
+import { getCharactersByUser } from "@/lib/actions/db/character/read.actions";
 import { CharacterInfo } from "@/lib/types";
+import { getUserId } from "@/lib/utils/auth";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-interface Props {
-  characters: CharacterInfo[];
-}
+const CharacterSelector = () => {
+  const [characters, setCharacters] = useState<CharacterInfo[]>([]);
+  useEffect(() => {
+    getUserId().then((user) => {
+      getCharactersByUser(user).then((data) => {
+        setCharacters(data);
+      });
+    });
+  }, []);
 
-const CharacterSelector = ({ characters }: Props) => {
   return (
     <>
       <div className="flex flex-col p-4 md:p-8">

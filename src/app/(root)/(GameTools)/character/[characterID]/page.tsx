@@ -3,6 +3,7 @@ import {
   getCharacter,
   getCharacters,
 } from "@/lib/actions/db/character/read.actions";
+import { getUserId } from "@/lib/utils/auth";
 import { Metadata } from "next";
 
 if (process.env.DOMAIN_NAME === undefined) {
@@ -61,5 +62,14 @@ export default async function Page({ params }: Props) {
   if (!character) {
     return <div className="p-8">You do not have a character with that ID.</div>;
   }
+  const userID = await getUserId();
+  if (character.User?.id !== userID) {
+    return (
+      <div className="p-8">
+        You do not have permission to view this character.
+      </div>
+    );
+  }
+
   return <CharacterSheet characterData={character} />;
 }

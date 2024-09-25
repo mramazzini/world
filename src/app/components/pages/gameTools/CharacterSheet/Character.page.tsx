@@ -36,7 +36,6 @@ const CharacterSheet = ({ characterData }: Props) => {
         state: c,
       };
       setCharacter(char);
-      console.log(char);
     });
   }, []);
 
