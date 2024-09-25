@@ -1,6 +1,5 @@
 import CharacterCreate from "@/app/components/pages/gameTools/Character.page";
 import { Metadata } from "next";
-import { URL } from "url";
 
 if (process.env.DOMAIN_NAME === undefined) {
   throw new Error("DOMAIN_NAME is not defined");

@@ -347,7 +347,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 28,
-    name: "Ram, Portable",
+    name: "Portable Ram",
     description: "You can use a portable ram to break down doors. ",
     cost: { quantity: 4, unit: gp },
     weight: { quantity: 35, unit: lb },
@@ -395,7 +395,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 30,
-    name: "Rope (Hempen, 50 feet)",
+    name: "Hempen Rope (50 feet)",
     description:
       "Rope has 2 hit points and can be burst with a DC 17 Strength check.",
     cost: { quantity: 1, unit: gp },
@@ -406,7 +406,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 31,
-    name: "Rope (Silk, 50 feet)",
+    name: "Silken Rope (50 feet)",
     description:
       "Rope has 2 hit points and can be burst with a DC 17 Strength check.",
     cost: { quantity: 10, unit: gp },
@@ -497,7 +497,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 41,
-    name: "Tent, (Two Person)",
+    name: "Two Person Tent",
     description: "A small tent that can accommodate two people.",
     cost: { quantity: 2, unit: gp },
     weight: { quantity: 20, unit: lb },
@@ -571,7 +571,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 46,
-    name: "Ball Bearings (bag of 1,000)",
+    name: "Ball Bearings (bag of 1000)",
     description:
       "Ball bearings are small, metal spheres that can be scattered on the ground to make an area difficult to traverse.",
     cost: { quantity: 1, unit: gp },
@@ -732,7 +732,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 54,
-    name: "Lantern, Bullseye",
+    name: "Nullseye Lantern",
     description:
       "A bullseye lantern casts bright light in a 60-foot cone and dim light for an additional 60 feet.",
     cost: { quantity: 10, unit: gp },
@@ -751,7 +751,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 55,
-    name: "Lantern, Hooded",
+    name: "Hooded Lantern",
     description:
       "A hooded lantern casts bright light in a 30-foot radius and dim light for an additional 30 feet.",
     cost: { quantity: 5, unit: gp },
@@ -793,7 +793,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
   {
     id: 57,
-    name: "Poison, Basic (vial)",
+    name: "Basic Poison vial",
     description:
       "Basic poison is a toxic substance that can be applied to weapons.",
     cost: { quantity: 100, unit: gp },

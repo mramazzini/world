@@ -631,7 +631,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
     source: src.phb,
   },
   {
-    name: "Mark of Detection Half-Elf",
+    name: "Mark of Detection Half Elf",
     id: 33,
     description:
       "The Mark of Detection is a dragonmark that grants those who bear it powers of detection and the ability to ferret out danger whether from an ambush or a cup of poisoned wine.",
@@ -659,7 +659,7 @@ const ClassicVariants: Prisma.RaceVariantCreateManyInput[] = [
   },
   {
     id: 34,
-    name: "Mark of Storm Half-Elf",
+    name: "Mark of Storm Half Elf",
     description:
       "The Mark of Storm is a dragonmark that bestows powers over the weather, from calm winds to raging rainstorms.",
     baseRaceId: ids.halfElf,
