@@ -26,10 +26,7 @@ const CharacterSelector = () => {
           </div>
         )}
         {characters.map((character) => (
-          <Link
-            key={character.id}
-            href={`/gameTools/character/${character.id}`}
-          >
+          <Link key={character.id} href={`/character/${character.id}`}>
             {character.name}
           </Link>
         ))}

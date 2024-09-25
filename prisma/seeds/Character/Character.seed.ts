@@ -54,11 +54,7 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
         id: 3, //cleric
       },
     },
-    SubClasses: {
-      connect: {
-        id: 46, //life domain
-      },
-    },
+
     alignment: Alignment.CHAOTIC_GOOD,
   },
   {
@@ -154,6 +150,32 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
     SubRace: {
       connect: {
         id: 57, //variant
+      },
+    },
+  },
+  {
+    name: "Littlefoot",
+    alignment: Alignment.CHAOTIC_GOOD,
+    Background: {
+      connect: {
+        id: 33, //outlander
+      },
+    },
+    Classes: {
+      connect: {
+        id: 7, //druid
+      },
+    },
+
+    Race: {
+      connect: {
+        id: 4, //gnome
+      },
+    },
+
+    SubRace: {
+      connect: {
+        id: 24, //forest
       },
     },
   },
