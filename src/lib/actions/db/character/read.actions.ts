@@ -25,6 +25,7 @@ export const getCharacters = async (): Promise<CharacterInfo[]> => {
 
       User: {
         select: {
+          id: true,
           username: true,
         },
       },
@@ -59,6 +60,7 @@ export const getCharacter = async (
         SubRace: true,
         User: {
           select: {
+            id: true,
             username: true,
           },
         },
@@ -87,6 +89,7 @@ export const getCharacter = async (
         SubRace: true,
         User: {
           select: {
+            id: true,
             username: true,
           },
         },
@@ -95,6 +98,40 @@ export const getCharacter = async (
     await db.$disconnect();
     return res;
   }
+};
+
+export const getCharactersByUser = async (
+  userID: number
+): Promise<CharacterInfo[]> => {
+  const db = new PrismaClient();
+  const res = await db.character.findMany({
+    where: {
+      userId: userID,
+    },
+    include: {
+      Race: true,
+      Background: true,
+      SubClasses: true,
+      Classes: {
+        include: {
+          SpellList: {
+            include: {
+              Spells: true,
+            },
+          },
+        },
+      },
+      SubRace: true,
+      User: {
+        select: {
+          id: true,
+          username: true,
+        },
+      },
+    },
+  });
+  await db.$disconnect();
+  return res;
 };
 
 export const getCharacterChunk = async (
@@ -124,6 +161,7 @@ export const getCharacterChunk = async (
         SubRace: true,
         User: {
           select: {
+            id: true,
             username: true,
           },
         },
@@ -155,6 +193,7 @@ export const getCharacterChunk = async (
       SubRace: true,
       User: {
         select: {
+          id: true,
           username: true,
         },
       },

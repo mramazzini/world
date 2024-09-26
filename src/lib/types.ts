@@ -52,6 +52,7 @@ interface ClassWithSpellList extends Class {
 }
 export interface CharacterInfo extends Character {
   User: {
+    id: number;
     username: string | null;
   } | null;
   Background: Background | null;

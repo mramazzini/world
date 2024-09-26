@@ -7,7 +7,7 @@ import { AbilityScoreValue, CallbackOptions, CharacterInfo } from "@/lib/types";
 import Image from "next/image";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { v4 as uuidv4, v4 } from "uuid";
-import ManualAbilityScoreChoice from "./AbilityScoreSelectors/ManualAbilityScoreChoice";
+import ManualAbilityScoreChoice from "../AbilityScoreSelectors/ManualAbilityScoreChoice";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import AbilityScoreChoice from "./AbilityScoreChoice";
 interface Props {

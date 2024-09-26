@@ -174,16 +174,17 @@ const Navbar = () => {
                 />
               </Link>
 
-              <div
-                className="ml-auto p-4 cursor-pointer"
-                onClick={async () => {
+              <button
+                className="p-4 btn btn-ghost mx-2"
+                onClick={async (e) => {
+                  e.preventDefault();
                   await destroySession();
                   await checkToken();
                   router.push(pathname);
                 }}
               >
                 Logout
-              </div>
+              </button>
             </>
           ) : (
             <>

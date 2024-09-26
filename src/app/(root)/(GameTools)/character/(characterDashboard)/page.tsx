@@ -1,18 +1,23 @@
-import CharacterCreate from "@/app/components/pages/gameTools/Character.page";
+import CharacterSelector from "@/app/components/pages/gameTools/CharacterSelector/CharacterSelector.page";
+import {
+  getCharacters,
+  getCharactersByUser,
+} from "@/lib/actions/db/character/read.actions";
+import { getUserId } from "@/lib/utils/auth";
 import { Metadata } from "next";
 
 if (process.env.DOMAIN_NAME === undefined) {
   throw new Error("DOMAIN_NAME is not defined");
 }
 export const metadata: Metadata = {
-  title: "Create a Character - Max's DND",
+  title: "Character Dashboard - Max's DND",
   description: ".",
   metadataBase: new URL(process.env.DOMAIN_NAME),
   openGraph: {
     type: "website",
 
     title: "Max's DND",
-    description: "Create you Dungone's and Dragon'sfifth editon character.",
+    description: "Create",
     images: [
       {
         url: "https://www.maxdnd.com/images/hero.jpg",
@@ -25,5 +30,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <CharacterCreate charName="Jay Walker" />;
+  return <CharacterSelector />;
 }
