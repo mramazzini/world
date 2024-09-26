@@ -119,7 +119,7 @@ const seedarr: {
     index: "016",
     callback: createCharacter,
     description: "Creating characters from the character seed.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "017",

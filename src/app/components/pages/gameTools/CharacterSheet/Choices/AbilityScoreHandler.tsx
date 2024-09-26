@@ -101,6 +101,21 @@ const AbilityScoreHandler = ({ choice, character, callback }: Props) => {
                 );
               })}
               <div className="flex justify-end gap-4 mt-4">
+                {!choice.choices && (
+                  <button
+                    className="btn btn-primary"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleSubmit([]);
+                      const modal = document.getElementById(
+                        id
+                      ) as HTMLDialogElement;
+                      modal.close();
+                    }}
+                  >
+                    Confirm
+                  </button>
+                )}
                 <button
                   className="btn btn-error"
                   onClick={(e) => {

@@ -39,6 +39,7 @@ export const getCharacter = async (
   query: string | number
 ): Promise<CharacterInfo | null> => {
   const db = new PrismaClient();
+  console.log(typeof query);
   if (typeof query === "string") {
     const res = await db.character.findFirst({
       where: {

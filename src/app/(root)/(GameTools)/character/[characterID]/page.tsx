@@ -15,7 +15,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getCharacter(params.characterID.replaceAll("-", " "));
+  const data = await getCharacter(parseInt(params.characterID));
 
   if (!data) {
     return {
