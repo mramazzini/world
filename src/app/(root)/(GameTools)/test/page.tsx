@@ -1,10 +1,5 @@
 import CharacterSheet from "@/app/components/pages/gameTools/CharacterSheet/Character.page";
-import {
-  getCharacter,
-  getCharacters,
-} from "@/lib/actions/db/character/read.actions";
-import { getUserId } from "@/lib/utils/auth";
-import { Metadata } from "next";
+import { getCharacter } from "@/lib/actions/db/character/read.actions";
 
 if (process.env.DOMAIN_NAME === undefined) {
   throw new Error("DOMAIN_NAME is not defined");

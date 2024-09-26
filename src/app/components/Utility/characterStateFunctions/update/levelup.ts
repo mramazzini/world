@@ -1,9 +1,16 @@
 "use client";
-import { AbilityScoreValue, CharacterInfo, ClassID, Time } from "@/lib/types";
+import {
+  AbilityScoreValue,
+  CharacterInfo,
+  ClassID,
+  SubClassID,
+  Time,
+} from "@/lib/types";
 import { refreshHp } from "./refreshHp";
 import { v4 } from "uuid";
 import { refreshAC } from "./updateAC";
 import { refreshPassivePerception } from "./refreshPassivePerception";
+import { generateSubclassChoice } from "../calc/generateSubclassChoice";
 
 export const levelUp = async (
   character: CharacterInfo,
@@ -16,6 +23,12 @@ export const levelUp = async (
   if (state.pendingChoices.length > 0) return state; //don't allow level up if there are pending choices
   if (!classLevel) return state; //for now, disallow multiclassing
   if (classLevel >= 20) return state; //max level reached
+  let addSubclass = false;
+  const classObj = character.Classes?.find((c) => c.id === classID);
+  if (classObj?.subClassFeatureLevels[0] === classLevel + 1) {
+    addSubclass = true;
+  }
+
   //things to update
   //hit points
   //hit die number
@@ -46,11 +59,40 @@ export const levelUp = async (
     ],
   });
 
+  if (addSubclass) {
+    return {
+      ...hp,
+      pendingChoices: [
+        ...hp.pendingChoices,
+        {
+          id: v4(),
+          choice: await generateSubclassChoice(classID),
+          model: "Subclass" as PrismaJson.ChoiceModel,
+          from: `${classObj?.subClassName}`,
+          description: `Choose your ${classObj?.name.toCapitalCase()} subclass (${
+            classObj?.subClassName
+          }).`,
+          callback: (s, c) => {
+            const subClass = c as SubClassID[];
+            return {
+              ...s,
+              pendingLinks: {
+                ...s.pendingLinks,
+                subClass: [...s.pendingLinks.subClass, ...subClass],
+              },
+            };
+          },
+        },
+      ],
+    };
+  }
+
   if (ASILevels?.includes(classLevel + 1)) {
     return {
       ...hp,
       pendingChoices: [
         ...hp.pendingChoices,
+
         {
           id: v4(),
           model: "AbilityScore",

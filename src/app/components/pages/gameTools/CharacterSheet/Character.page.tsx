@@ -26,8 +26,10 @@ const CharacterSheet = ({ characterData }: Props) => {
     if (!character) return;
     if (!character.state) return;
     if (!character.state.pendingLinks) return;
-    applyPendingModels(character);
-  }, [character]);
+    applyPendingModels(character).then((c) => {
+      setCharacter(c);
+    });
+  }, [character?.state?.pendingLinks]);
 
   useEffect(() => {
     if (characterData.state) return setCharacter(characterData);

@@ -100,8 +100,15 @@ const ManualAbilityScoreChoice = ({ updateSelections }: Props) => {
                 </label>
                 <div className="divider divider-accent  m-0 mb-2"></div>
                 <select
+                  required
                   defaultValue={"Pick One"}
-                  className="select select-bordered   w-full mt-auto "
+                  className={`select select-bordered w-full mt-auto
+                  ${
+                    selections.find((s) => s.ability === ability)
+                      ? "select-secondary"
+                      : ""
+                  }
+                    `}
                   onChange={(e) => {
                     const value = parseInt(e.target.value);
                     const newSelections = [...selections];

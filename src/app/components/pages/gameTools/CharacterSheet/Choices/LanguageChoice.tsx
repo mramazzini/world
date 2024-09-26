@@ -44,7 +44,12 @@ const LanguageChoice = ({ choice, updateSelections }: Props) => {
           <select
             key={index}
             defaultValue={"Pick One"}
-            className="select select-bordered   w-full max-w-xs mt-2"
+            className={`select select-bordered   w-full max-w-xs mt-2
+            ${
+              selections.length >= choice.numberOfChoices
+                ? "select-secondary"
+                : ""
+            }`}
             onChange={(e) => {
               const index = e.target.value;
               const newSelections = [...selections];
