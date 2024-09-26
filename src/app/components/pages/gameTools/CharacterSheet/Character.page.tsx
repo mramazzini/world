@@ -30,6 +30,7 @@ const CharacterSheet = ({ characterData }: Props) => {
   }, [character]);
 
   useEffect(() => {
+    if (characterData.state) return setCharacter(characterData);
     generateCharacter(characterData).then((c) => {
       const char: CharacterInfo = {
         ...characterData,
