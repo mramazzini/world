@@ -1,9 +1,29 @@
 "use server";
 import { QUERY_LIMIT } from "@/lib/globalVars";
-import { QueryParams, SubClassInfo, SubclassSearchResults } from "@/lib/types";
+import {
+  QueryParams,
+  SubClassInfo,
+  SubclassSearchResults,
+} from "@/lib/utils/types/types";
 import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { Prisma, PrismaClient, SubClass } from "@prisma/client";
 import Fuse from "fuse.js";
+import { DBMetadata } from "@/lib/utils/types/metadata";
+
+export const getSubclassMetadata = async (): Promise<DBMetadata[]> => {
+  const db = new PrismaClient();
+  const res = await db.subClass.findMany({
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      updatedAt: true,
+      flavorText: true,
+    },
+  });
+  await db.$disconnect();
+  return res;
+};
 
 export async function getSubclasses({
   homebrew,

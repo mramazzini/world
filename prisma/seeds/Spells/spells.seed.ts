@@ -1,4 +1,4 @@
-import { SpellLevel } from "@/lib/types";
+import { SpellLevel } from "@/lib/utils/types/types";
 import { Prisma } from "@prisma/client";
 
 const SpellSeed: Prisma.SpellCreateManyInput[] = [

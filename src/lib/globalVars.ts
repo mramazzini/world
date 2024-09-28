@@ -1,5 +1,5 @@
 import { Language, Race, Skill } from "@prisma/client";
-import { Property, src, WeaponPropertyNames } from "./types";
+import { Property, src, WeaponPropertyNames } from "./utils/types/types";
 import { Ability } from "@prisma/client";
 export const QUERY_LIMIT = 30;
 export const NAVBAR_HEIGHT_REM = 4;

@@ -1,7 +1,7 @@
 import SearchPageComponent from "../SearchPage";
 
 import { useState } from "react";
-import { SpellListInfo, QueryParams } from "@/lib/types";
+import { SpellListInfo, QueryParams } from "@/lib/utils/types/types";
 import { SpellList } from "@prisma/client";
 import { getSpellListChunk } from "@/lib/actions/db/spellList/read.actions";
 import { officialSources } from "@/lib/globalVars";

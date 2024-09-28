@@ -2,7 +2,7 @@ import Info from "@/app/components/UI/Info";
 import Loading from "@/app/components/UI/Loading";
 import P from "@/app/components/Utility/FormatAndSanitize";
 import NewLineParse from "@/app/components/Utility/NewLineParse";
-import { ItemInfo, Property } from "@/lib/types";
+import { ItemInfo, Property } from "@/lib/utils/types/types";
 import Link from "next/link";
 import { WeaponProperties } from "@/lib/globalVars";
 import Tooltip from "@/app/components/Utility/Tooltip";

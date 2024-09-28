@@ -2,7 +2,7 @@
 import Info from "@/app/components/UI/Info";
 import JsonTable from "@/app/components/Utility/JsonTable";
 import Tooltip from "@/app/components/Utility/Tooltip";
-import { MarkdownItem } from "@/lib/types";
+import { MarkdownItem } from "@/lib/utils/types/types";
 import { Background } from "@prisma/client";
 import DOMPurify from "dompurify";
 import markdownIt from "markdown-it";

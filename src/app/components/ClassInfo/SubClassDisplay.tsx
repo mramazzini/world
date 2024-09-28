@@ -1,4 +1,4 @@
-import { SubClassInfo } from "@/lib/types";
+import { SubClassInfo } from "@/lib/utils/types/types";
 
 import "@/lib/string.extensions";
 

@@ -1,7 +1,7 @@
 "use server";
 import bcrypt from "bcrypt";
 import { PrismaClient, User } from "@prisma/client";
-import { AuthResult } from "@/lib/types";
+import { AuthResult } from "@/lib/utils/types/types";
 import {
   generateToken,
   validateEmail,

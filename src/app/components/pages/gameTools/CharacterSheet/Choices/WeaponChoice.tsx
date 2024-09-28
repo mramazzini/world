@@ -1,7 +1,7 @@
 "use client";
 
 import ModelDisplay from "@/app/components/Utility/ModelDisplay";
-import { WeaponID } from "@/lib/types";
+import { WeaponID } from "@/lib/utils/types/types";
 import numberArray from "@/lib/utils/numberArray";
 import { useEffect, useState } from "react";
 interface Props {

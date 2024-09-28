@@ -1,4 +1,4 @@
-import { Log, SpellLevel } from "@/lib/types";
+import { Log, SpellLevel } from "@/lib/utils/types/types";
 import { toSpellLevel } from "@/lib/utils/toSpellLevel";
 import { DamageTypes, Rarity } from "@prisma/client";
 import { Fragment, useEffect, useState } from "react";

@@ -7,7 +7,7 @@ import {
   src,
   SubClassInfo,
   SubclassSearchResults,
-} from "@/lib/types";
+} from "@/lib/utils/types/types";
 import {
   Class,
   PrismaClient,

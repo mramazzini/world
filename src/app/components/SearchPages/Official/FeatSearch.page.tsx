@@ -1,6 +1,6 @@
 import SearchPageComponent from "../SearchPage";
 
-import { FeatInfo, QueryParams } from "@/lib/types";
+import { FeatInfo, QueryParams } from "@/lib/utils/types/types";
 
 import { getFeatChunk } from "@/lib/actions/db/feat/read.actions";
 import { officialSources } from "@/lib/globalVars";

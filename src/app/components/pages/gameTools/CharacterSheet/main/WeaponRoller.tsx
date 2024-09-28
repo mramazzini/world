@@ -10,7 +10,7 @@ import {
   Log,
   WeaponID,
   WeaponInfo,
-} from "@/lib/types";
+} from "@/lib/utils/types/types";
 import { Ability } from "@prisma/client";
 import Image from "next/image";
 import { useState, useEffect } from "react";

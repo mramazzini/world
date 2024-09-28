@@ -7,7 +7,7 @@ import {
   SubClassID,
   ToolID,
   WeaponID,
-} from "@/lib/types";
+} from "@/lib/utils/types/types";
 import P from "@/app/components/Utility/FormatAndSanitize";
 import { useEffect, useState } from "react";
 import { Ability, ArmorType, Language, Skill } from "@prisma/client";

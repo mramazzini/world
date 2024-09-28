@@ -9,7 +9,7 @@ import {
 } from "react";
 import P from "./FormatAndSanitize";
 import Link from "next/link";
-import { Badge } from "@/lib/types";
+import { Badge } from "@/lib/utils/types/types";
 
 const Tooltip = ({
   element,

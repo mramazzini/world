@@ -1,10 +1,11 @@
 "use server";
 import { QUERY_LIMIT } from "@/lib/globalVars";
-import { QueryParams, SpellInfo } from "@/lib/types";
+import { QueryParams, SpellInfo } from "@/lib/utils/types/types";
 import { cerr } from "@/lib/utils/chalkLog";
 import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { PrismaClient, Spell } from "@prisma/client";
 import Fuse from "fuse.js";
+import { DBMetadata } from "@/lib/utils/types/metadata";
 
 export const getSpells = async (): Promise<SpellInfo[]> => {
   const db = await new PrismaClient();

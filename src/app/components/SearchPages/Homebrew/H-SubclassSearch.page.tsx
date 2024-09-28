@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { QueryParams, SubClassInfo } from "@/lib/types";
+import { QueryParams, SubClassInfo } from "@/lib/utils/types/types";
 import SearchPageComponent from "../SearchPage";
 import { getHomebrewSubclassChunk } from "@/lib/actions/db/subclass/read.actions";
 

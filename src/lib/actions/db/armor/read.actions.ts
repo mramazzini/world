@@ -1,6 +1,6 @@
 "use server";
 import { QUERY_LIMIT } from "@/lib/globalVars";
-import { ArmorInfo, QueryParams } from "@/lib/types";
+import { ArmorInfo, QueryParams } from "@/lib/utils/types/types";
 import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { PrismaClient } from "@prisma/client";
 import Fuse from "fuse.js";

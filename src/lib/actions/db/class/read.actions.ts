@@ -1,10 +1,27 @@
 "use server";
 import { QUERY_LIMIT } from "@/lib/globalVars";
-import { ClassInfo, QueryParams } from "@/lib/types";
+import { ClassInfo, QueryParams } from "@/lib/utils/types/types";
 import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { Class, PrismaClient } from "@prisma/client";
 import Fuse from "fuse.js";
 import { isAdministrator } from "@/lib/utils/auth";
+import { DBMetadata } from "@/lib/utils/types/metadata";
+
+export async function getClassMetadata(): Promise<DBMetadata[]> {
+  const db = new PrismaClient();
+  const res = await db.class.findMany({
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      flavorText: true,
+      updatedAt: true,
+    },
+  });
+  await db.$disconnect();
+  return res;
+}
+
 export async function getClasses(homebrew: boolean): Promise<ClassInfo[]> {
   const db = new PrismaClient();
   if (homebrew) {

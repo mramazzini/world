@@ -7,7 +7,7 @@ import Link from "next/link";
 import Info from "../UI/Info";
 import P from "../Utility/FormatAndSanitize";
 import { useState } from "react";
-import { Level, SpellLevel } from "@/lib/types";
+import { Level, SpellLevel } from "@/lib/utils/types/types";
 interface Props {
   classObj: Class;
 }

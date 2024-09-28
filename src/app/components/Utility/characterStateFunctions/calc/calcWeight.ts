@@ -1,6 +1,6 @@
 "use client";
 
-import { Unit } from "@/lib/types";
+import { Unit } from "@/lib/utils/types/types";
 import { memoizeGetItem } from "../../globalCache";
 
 export const calcWeight = async (state: PrismaJson.CharacterState) => {

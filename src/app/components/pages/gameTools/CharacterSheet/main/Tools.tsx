@@ -5,7 +5,7 @@ import {
   ItemInfo,
   Log,
   ToolInfo,
-} from "@/lib/types";
+} from "@/lib/utils/types/types";
 import { useEffect, useState } from "react";
 import { memoizeGetItem } from "@/app/components/Utility/globalCache";
 import Tooltip from "@/app/components/Utility/Tooltip";

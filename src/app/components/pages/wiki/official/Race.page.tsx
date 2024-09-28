@@ -1,4 +1,4 @@
-import { RaceInfo } from "@/lib/types";
+import { RaceInfo } from "@/lib/utils/types/types";
 import Link from "next/link";
 import NewLineParse from "@/app/components/Utility/NewLineParse";
 import GenerateTable from "@/app/components/UI/GenerateTable";

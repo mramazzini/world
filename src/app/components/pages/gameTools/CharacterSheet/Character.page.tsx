@@ -1,7 +1,11 @@
 "use client";
 
 import { getCharacter } from "@/lib/actions/db/character/read.actions";
-import { AbilityScores, CharacterInfo, SpellListInfo } from "@/lib/types";
+import {
+  AbilityScores,
+  CharacterInfo,
+  SpellListInfo,
+} from "@/lib/utils/types/types";
 import { useEffect, useState } from "react";
 import { generateCharacter } from "../../../Utility/characterStateFunctions/update/generateCharacter";
 import "@/lib/string.extensions";

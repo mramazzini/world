@@ -109,6 +109,7 @@ enum Language {
   AARAKOCRA
   GITH
   AQUAN
+  QUORI
 }
 
 enum DamageTypes {
@@ -207,19 +208,22 @@ model Character {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  User       User?     @relation(fields: [userId], references: [id])
+  userId     Int?
+  Campaign   Campaign? @relation(fields: [campaignId], references: [id])
+  campaignId Int?
 }
 
 model Campaign {
-  id           Int      @id @default(autoincrement())
+  id           Int         @id @default(autoincrement())
   name         String
   description  String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  GameMaster   User     @relation("GMCampaigns", fields: [gameMasterId], references: [id])
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  GameMaster   User        @relation("GMCampaigns", fields: [gameMasterId], references: [id])
   gameMasterId Int
-  Players      User[]   @relation("PlayerCampaigns")
+  Players      User[]      @relation("PlayerCampaigns")
+  Characters   Character[]
 }
 
 model Class {

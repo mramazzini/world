@@ -1,5 +1,5 @@
 "use client";
-import { CallbackOptions, CharacterInfo } from "@/lib/types";
+import { CallbackOptions, CharacterInfo } from "@/lib/utils/types/types";
 import P from "@/app/components/Utility/FormatAndSanitize";
 import { useEffect, useState } from "react";
 import ItemChoice from "./ItemChoice";

@@ -1,4 +1,4 @@
-import { SubRaceInfo } from "@/lib/types";
+import { SubRaceInfo } from "@/lib/utils/types/types";
 import NewLineParse from "@/app/components/Utility/NewLineParse";
 import Link from "next/link";
 import Info from "@/app/components/UI/Info";

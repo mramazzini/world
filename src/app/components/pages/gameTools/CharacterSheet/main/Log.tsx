@@ -1,5 +1,5 @@
 import { roll } from "@/app/components/Utility/roll";
-import { Log, Roll } from "@/lib/types";
+import { Log, Roll } from "@/lib/utils/types/types";
 import { toSpellLevel } from "@/lib/utils/toSpellLevel";
 import Image from "next/image";
 import { Fragment, useEffect, useRef } from "react";

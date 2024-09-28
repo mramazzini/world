@@ -1,6 +1,6 @@
 import SearchPageComponent from "../SearchPage";
 
-import { SubRaceInfo } from "@/lib/types";
+import { SubRaceInfo } from "@/lib/utils/types/types";
 
 import { officialSources, races } from "@/lib/globalVars";
 import { getSubRaceChunk } from "@/lib/actions/db/subrace/read.actions";

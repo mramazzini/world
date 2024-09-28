@@ -1,6 +1,6 @@
 "use client";
 import Tooltip from "@/app/components/Utility/Tooltip";
-import { CharacterInfo, Time } from "@/lib/types";
+import { CharacterInfo, Time } from "@/lib/utils/types/types";
 import Image from "next/image";
 
 interface Props {

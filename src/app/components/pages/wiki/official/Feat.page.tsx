@@ -1,4 +1,4 @@
-import { FeatInfo } from "@/lib/types";
+import { FeatInfo } from "@/lib/utils/types/types";
 
 interface Props {
   feat: FeatInfo | null;

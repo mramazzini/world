@@ -1,7 +1,7 @@
 "use server";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
-import { AuthResult } from "../types";
+import { AuthResult } from "./types/types";
 
 const expiration = "1h";
 const secret = new TextEncoder().encode("STORE SECRET IN ENV");

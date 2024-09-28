@@ -1,4 +1,9 @@
-import { CharacterInfo, Level, SpellLevel, SpellListInfo } from "@/lib/types";
+import {
+  CharacterInfo,
+  Level,
+  SpellLevel,
+  SpellListInfo,
+} from "@/lib/utils/types/types";
 import { Spell, SpellList } from "@prisma/client";
 import SpellSection from "./SpellSection";
 import { calcProficiency } from "@/app/components/Utility/characterStateFunctions/calc/calcProficiency";

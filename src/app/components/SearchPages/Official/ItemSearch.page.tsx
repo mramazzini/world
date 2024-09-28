@@ -1,7 +1,7 @@
 import SearchPageComponent from "../SearchPage";
 
 import { useState } from "react";
-import { ItemInfo, QueryParams } from "@/lib/types";
+import { ItemInfo, QueryParams } from "@/lib/utils/types/types";
 import { Item, Rarity } from "@prisma/client";
 import { getItemChunk } from "@/lib/actions/db/item/read.actions";
 import { officialSources } from "@/lib/globalVars";

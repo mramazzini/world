@@ -1,4 +1,4 @@
-import { src } from "@/lib/types";
+import { src } from "@/lib/utils/types/types";
 import { Language, Prisma, Skill } from "@prisma/client";
 import { itemIds } from "../Items/ItemIds";
 import {

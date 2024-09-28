@@ -1,7 +1,7 @@
 "use client";
 
 import { signup } from "@/lib/actions/auth/auth.actions";
-import { AuthResult } from "@/lib/types";
+import { AuthResult } from "@/lib/utils/types/types";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";

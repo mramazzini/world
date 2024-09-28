@@ -1,5 +1,5 @@
 "use client";
-import { MarkdownItem } from "@/lib/types";
+import { MarkdownItem } from "@/lib/utils/types/types";
 import MarkdownIt from "markdown-it";
 import DOMPurify from "dompurify";
 import { useState } from "react";

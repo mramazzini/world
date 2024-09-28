@@ -6,7 +6,7 @@ import {
   SubClassID,
   ToolID,
   WeaponID,
-} from "@/lib/types";
+} from "@/lib/utils/types/types";
 import ItemChoiceHandler from "./ItemChoiceHandler";
 import { Ability } from "@prisma/client";
 import ProficiencyChoiceHandler from "./ProficiencyChoiceHandler";

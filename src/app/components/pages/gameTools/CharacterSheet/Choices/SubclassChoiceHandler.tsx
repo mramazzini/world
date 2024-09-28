@@ -1,6 +1,10 @@
 "use client";
 
-import { CallbackOptions, CharacterInfo, SubClassID } from "@/lib/types";
+import {
+  CallbackOptions,
+  CharacterInfo,
+  SubClassID,
+} from "@/lib/utils/types/types";
 import { useEffect, useState } from "react";
 import SubclassChoice from "./SubclassChoice";
 import Image from "next/image";

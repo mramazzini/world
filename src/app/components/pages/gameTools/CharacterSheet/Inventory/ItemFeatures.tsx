@@ -8,7 +8,7 @@ import JsonTable from "@/app/components/Utility/JsonTable";
 import { Fragment, useState } from "react";
 import { useEffect } from "react";
 import { memoizeGetItem } from "@/app/components/Utility/globalCache";
-import { ItemInfo } from "@/lib/types";
+import { ItemInfo } from "@/lib/utils/types/types";
 interface Props {
   inventory: PrismaJson.QuantityItem[];
 }

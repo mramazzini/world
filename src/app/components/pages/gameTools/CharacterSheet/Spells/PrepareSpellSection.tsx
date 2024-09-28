@@ -1,5 +1,5 @@
 "use client";
-import { CharacterInfo } from "@/lib/types";
+import { CharacterInfo } from "@/lib/utils/types/types";
 import { toSpellLevel } from "@/lib/utils/toSpellLevel";
 import { DamageTypes } from "@prisma/client";
 import { Fragment, useState } from "react";

@@ -1,4 +1,4 @@
-import { RelationFieldOptions, SearchFieldOption } from "../types";
+import { RelationFieldOptions, SearchFieldOption } from "./types/types";
 
 //very scuffed function to generate query fields from the Searchbar.tsx component
 export const generateQueryFields = ({

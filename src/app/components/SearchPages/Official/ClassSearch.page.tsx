@@ -1,4 +1,4 @@
-import { ClassInfo } from "@/lib/types";
+import { ClassInfo } from "@/lib/utils/types/types";
 import Loading from "../../UI/Loading";
 import ClassSearch from "../../ClassInfo/ClassSearch";
 

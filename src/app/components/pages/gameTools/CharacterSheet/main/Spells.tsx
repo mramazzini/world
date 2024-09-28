@@ -1,5 +1,5 @@
 "use client";
-import { CharacterInfo, Log, SpellLevel } from "@/lib/types";
+import { CharacterInfo, Log, SpellLevel } from "@/lib/utils/types/types";
 import Image from "next/image";
 import PreparedSpellView from "../Spells/PreparedSpellView";
 import numberArray from "@/lib/utils/numberArray";

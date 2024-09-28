@@ -5,7 +5,7 @@ import {
   ClassID,
   SubClassID,
   Time,
-} from "@/lib/types";
+} from "@/lib/utils/types/types";
 import { refreshHp } from "./refreshHp";
 import { v4 } from "uuid";
 import { refreshAC } from "./updateAC";

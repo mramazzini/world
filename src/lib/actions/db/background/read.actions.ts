@@ -1,9 +1,25 @@
 "use server";
 import { QUERY_LIMIT } from "@/lib/globalVars";
-import { BackgroundInfo, QueryParams } from "@/lib/types";
+import { BackgroundInfo, QueryParams } from "@/lib/utils/types/types";
 import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { PrismaClient } from "@prisma/client";
 import Fuse from "fuse.js";
+import { DBMetadata } from "@/lib/utils/types/metadata";
+
+export const getBackgroundsMetadata = async (): Promise<DBMetadata[]> => {
+  const db = new PrismaClient();
+  const res = await db.background.findMany({
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      updatedAt: true,
+      flavorText: true,
+    },
+  });
+  await db.$disconnect();
+  return res;
+};
 
 export const getBackgrounds = async (): Promise<BackgroundInfo[]> => {
   const db = new PrismaClient();

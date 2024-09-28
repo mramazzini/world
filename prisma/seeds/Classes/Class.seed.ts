@@ -5,7 +5,7 @@ import {
   Time,
   Unit,
   WeaponPropertyNames,
-} from "@/lib/types";
+} from "@/lib/utils/types/types";
 import {
   martialIds,
   martialMeleeIds,

@@ -1,4 +1,4 @@
-import CharacterSelector from "@/app/components/pages/gameTools/CharacterSelector/CharacterSelector.page";
+import Dashboard from "@/app/components/pages/gameTools/Dashboard/Dashboard";
 import {
   getCharacters,
   getCharactersByUser,
@@ -30,5 +30,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <CharacterSelector />;
+  return <Dashboard />;
 }

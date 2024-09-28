@@ -1,6 +1,6 @@
-import { Currency } from "@/lib/types";
+import { Currency } from "@/lib/utils/types/types";
 import { Ability, ItemTypes, Prisma, Rarity } from "@prisma/client";
-import { Unit } from "@/lib/types";
+import { Unit } from "@/lib/utils/types/types";
 import { itemIds } from "../Items/ItemIds";
 
 import { weaponIds } from "./Weapons/Weapons.seed";

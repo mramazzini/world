@@ -1,5 +1,5 @@
 "use client";
-import { CharacterInfo } from "@/lib/types";
+import { CharacterInfo } from "@/lib/utils/types/types";
 import Choice from "./Choice";
 import { v4 } from "uuid";
 interface Props {

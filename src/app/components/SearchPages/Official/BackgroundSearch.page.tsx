@@ -1,7 +1,7 @@
 import SearchPageComponent from "../SearchPage";
 
 import { useState } from "react";
-import { BackgroundInfo, QueryParams } from "@/lib/types";
+import { BackgroundInfo, QueryParams } from "@/lib/utils/types/types";
 import { Background } from "@prisma/client";
 import { getBackgroundChunk } from "@/lib/actions/db/background/read.actions";
 import { officialSources } from "@/lib/globalVars";

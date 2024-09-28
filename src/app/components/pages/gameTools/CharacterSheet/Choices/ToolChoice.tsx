@@ -2,7 +2,7 @@
 
 import P from "@/app/components/Utility/FormatAndSanitize";
 import ModelDisplay from "@/app/components/Utility/ModelDisplay";
-import { ToolID } from "@/lib/types";
+import { ToolID } from "@/lib/utils/types/types";
 import numberArray from "@/lib/utils/numberArray";
 import { useEffect, useState } from "react";
 interface Props {

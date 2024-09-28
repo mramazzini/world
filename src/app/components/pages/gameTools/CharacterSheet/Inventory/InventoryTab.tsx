@@ -1,5 +1,5 @@
 "use client";
-import { CharacterInfo } from "@/lib/types";
+import { CharacterInfo } from "@/lib/utils/types/types";
 import LoadoutUI from "./LoadoutUI";
 import ItemsUI from "./ItemsUI";
 import { useState } from "react";

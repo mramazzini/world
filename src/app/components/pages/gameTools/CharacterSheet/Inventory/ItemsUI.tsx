@@ -1,7 +1,7 @@
 "use client";
 import P from "@/app/components/Utility/FormatAndSanitize";
 import ModelDisplay from "@/app/components/Utility/ModelDisplay";
-import { CharacterInfo } from "@/lib/types";
+import { CharacterInfo } from "@/lib/utils/types/types";
 import numberArray from "@/lib/utils/numberArray";
 import { useState } from "react";
 

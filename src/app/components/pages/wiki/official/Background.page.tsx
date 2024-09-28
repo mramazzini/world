@@ -1,4 +1,4 @@
-import { BackgroundInfo } from "@/lib/types";
+import { BackgroundInfo } from "@/lib/utils/types/types";
 import Loading from "../../../UI/Loading";
 import Link from "next/link";
 import P from "../../../Utility/FormatAndSanitize";

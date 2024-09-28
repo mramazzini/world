@@ -1,6 +1,6 @@
 import SubClassDisplay from "@/app/components/ClassInfo/SubClassDisplay";
 
-import { SubClassInfo } from "@/lib/types";
+import { SubClassInfo } from "@/lib/utils/types/types";
 
 import Loading from "../../../UI/Loading";
 

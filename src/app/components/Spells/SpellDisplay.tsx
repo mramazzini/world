@@ -1,4 +1,4 @@
-import { SpellInfo } from "@/lib/types";
+import { SpellInfo } from "@/lib/utils/types/types";
 import "@/lib/string.extensions";
 import numPlace from "@/lib/utils/numPlace";
 import JsonTable from "../Utility/JsonTable";

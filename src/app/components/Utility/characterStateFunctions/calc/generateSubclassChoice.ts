@@ -1,5 +1,5 @@
 import { getSubclassesByClass } from "@/lib/actions/db/subclass/read.actions";
-import { ClassID } from "@/lib/types";
+import { ClassID } from "@/lib/utils/types/types";
 
 export const generateSubclassChoice = async (
   classId: ClassID

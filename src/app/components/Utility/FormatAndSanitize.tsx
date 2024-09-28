@@ -4,7 +4,7 @@ import DOMPurify from "dompurify";
 import termDictionary from "./TermDictionary";
 import Tooltip from "./Tooltip";
 import { getSpell } from "@/lib/actions/db/spell/read.actions";
-import { ItemInfo, SpellInfo } from "@/lib/types";
+import { ItemInfo, SpellInfo } from "@/lib/utils/types/types";
 import { cerr } from "@/lib/utils/chalkLog";
 import ModelLink from "./ModelLink";
 import { Item, Spell } from "@prisma/client";

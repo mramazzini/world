@@ -81,6 +81,7 @@ export interface SubClassInfo extends SubClass {
     username: string | null;
   } | null;
 }
+
 export type CallbackOptions =
   | Skill[]
   | Ability[]

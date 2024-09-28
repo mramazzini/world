@@ -1,6 +1,6 @@
 "use server";
 import { QUERY_LIMIT } from "@/lib/globalVars";
-import { CharacterInfo, QueryParams } from "@/lib/types";
+import { CharacterInfo, QueryParams } from "@/lib/utils/types/types";
 import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { PrismaClient } from "@prisma/client";
 import Fuse from "fuse.js";
@@ -106,6 +106,9 @@ export const getCharactersByUser = async (
 ): Promise<CharacterInfo[]> => {
   const db = new PrismaClient();
   const res = await db.character.findMany({
+    orderBy: {
+      updatedAt: "desc",
+    },
     where: {
       userId: userID,
     },

@@ -161,17 +161,10 @@ const Navbar = () => {
           {isAuthenticated ? (
             <>
               <Link
-                href={DISCORD_INVITE}
-                target="_blank"
+                href={"/dashboard"}
                 className="flex items-center justify-center btn btn-ghost mx-2 border border-primary"
               >
-                <Image
-                  src="/images/discord.svg"
-                  alt="Discord"
-                  className="h-10 w-10 flex items-center justify-center"
-                  width={100}
-                  height={100}
-                />
+                Dashboard
               </Link>
 
               <button
@@ -188,19 +181,6 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link
-                href={DISCORD_INVITE}
-                target="_blank"
-                className="flex items-center justify-center btn btn-ghost mx-2 border border-primary"
-              >
-                <Image
-                  src="/images/discord.svg"
-                  alt="Discord"
-                  className="h-10 w-10 flex items-center justify-center"
-                  width={100}
-                  height={100}
-                />
-              </Link>
               <Link href="/login" className="p-4 btn btn-ghost mx-2">
                 Login
               </Link>

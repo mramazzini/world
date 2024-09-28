@@ -1,5 +1,9 @@
 "use client";
-import { CharacterInfo, SubClassID, SubClassInfo } from "@/lib/types";
+import {
+  CharacterInfo,
+  SubClassID,
+  SubClassInfo,
+} from "@/lib/utils/types/types";
 import { memoizeGetSubclass } from "../../globalCache";
 export const applyPendingModels = async (
   character: CharacterInfo

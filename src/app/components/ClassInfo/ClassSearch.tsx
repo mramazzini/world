@@ -1,6 +1,6 @@
 "use client";
 
-import { ClassInfo } from "@/lib/types";
+import { ClassInfo } from "@/lib/utils/types/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Loading from "../UI/Loading";

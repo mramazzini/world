@@ -1,5 +1,5 @@
 "use client";
-import { CharacterInfo, ItemID, ItemInfo } from "@/lib/types";
+import { CharacterInfo, ItemID, ItemInfo } from "@/lib/utils/types/types";
 import { memoizeGetItem } from "../../globalCache";
 
 export const unpackEquipment = async (

@@ -4,7 +4,7 @@ import P from "@/app/components/Utility/FormatAndSanitize";
 import { memoizeGetItem } from "@/app/components/Utility/globalCache";
 import ModelDisplay from "@/app/components/Utility/ModelDisplay";
 import Tooltip from "@/app/components/Utility/Tooltip";
-import { CharacterInfo, WeaponInfo } from "@/lib/types";
+import { CharacterInfo, WeaponInfo } from "@/lib/utils/types/types";
 import numberArray from "@/lib/utils/numberArray";
 import Image from "next/image";
 import { use, useEffect, useState } from "react";

@@ -1,6 +1,6 @@
 "use client";
 import { QUERY_LIMIT } from "@/lib/globalVars";
-import { QueryParams, SearchFieldOptions } from "@/lib/types";
+import { QueryParams, SearchFieldOptions } from "@/lib/utils/types/types";
 import { useState, useEffect, useRef } from "react";
 import "@/lib/string.extensions";
 import { usePathname, useRouter } from "next/navigation";

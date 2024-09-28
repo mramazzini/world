@@ -1,6 +1,6 @@
 "use client";
 import { searchEverything } from "@/lib/actions/db/general/read.actions";
-import { CombinedData, QueryParams } from "@/lib/types";
+import { CombinedData, QueryParams } from "@/lib/utils/types/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Loading from "./Loading";

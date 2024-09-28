@@ -3,7 +3,11 @@
 import Info from "@/app/components/UI/Info";
 import P from "@/app/components/Utility/FormatAndSanitize";
 import Tooltip from "@/app/components/Utility/Tooltip";
-import { AbilityScoreValue, CallbackOptions, CharacterInfo } from "@/lib/types";
+import {
+  AbilityScoreValue,
+  CallbackOptions,
+  CharacterInfo,
+} from "@/lib/utils/types/types";
 import Image from "next/image";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { v4 as uuidv4, v4 } from "uuid";

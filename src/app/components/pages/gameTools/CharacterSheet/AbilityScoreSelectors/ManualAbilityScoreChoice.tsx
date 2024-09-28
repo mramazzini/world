@@ -1,7 +1,7 @@
 "use client";
 
 import P from "@/app/components/Utility/FormatAndSanitize";
-import { AbilityScoreValue } from "@/lib/types";
+import { AbilityScoreValue } from "@/lib/utils/types/types";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import numberArray from "@/lib/utils/numberArray";
 import { Ability, Skill } from "@prisma/client";

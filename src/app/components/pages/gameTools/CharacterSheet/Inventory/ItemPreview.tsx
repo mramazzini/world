@@ -1,5 +1,9 @@
 "use client";
-import { CharacterInfo, ItemInfo, WeaponPropertyNames } from "@/lib/types";
+import {
+  CharacterInfo,
+  ItemInfo,
+  WeaponPropertyNames,
+} from "@/lib/utils/types/types";
 import { memoizeGetItem } from "@/app/components/Utility/globalCache";
 import { Fragment, useEffect, useState } from "react";
 import ItemPage from "../../../wiki/official/Item.page";

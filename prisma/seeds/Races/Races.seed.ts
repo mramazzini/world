@@ -1,5 +1,5 @@
 import { languages } from "@/lib/globalVars";
-import { src } from "@/lib/types";
+import { src } from "@/lib/utils/types/types";
 import {
   Prisma,
   Size,
@@ -3611,6 +3611,210 @@ const Species: Prisma.RaceCreateManyInput[] = [
         name: "Telepathic Insight",
         description:
           "You have advantage on all Wisdom and Charisma saving throws.",
+      },
+    ],
+  },
+  {
+    id: 58,
+    name: "Kender",
+    description:
+      "During the mythical origins of Krynn, Reorx, god of craft, indulged in an age of unfettered creation. Many peoples sprang from his divine forge, but not all among them remained as the god created them. Altered by unbridled magic, a group of gnomes were transformed and given almost supernatural curiosity and fearlessness. These were the first kender.\n\nOriginating on the world of Krynn, kender are diminutive Humanoids who look like humans with pointed ears and diverse appearances. Kender have a supernatural curiosity that drives them to adventure. Due to this inquisitiveness, many kender find themselves falling through portals to other planes and worlds.\n\nKender sometimes amass impressive collections of curiosities. Some might collect mundane knickknacks or relics from magical sites, while others might become professional thieves.",
+    flavorText:
+      "Kender have a supernatural curiosity that drives them to adventure.",
+    source: src.dragonQueen,
+    abilityScoreDescription:
+      "Increase one ability score by 2, and increase a different one by 1, or increase three different scores by 1.",
+    abilityScores: {
+      choices: [
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 2],
+        },
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 1, 1],
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+
+    size: Size.SMALL,
+    sizeDescription: "You are Small.",
+
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    languageDescription:
+      "You can speak, read, and write Common and One other language.",
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    alignment: "N/A",
+    age: "N/A",
+    features: [
+      {
+        name: "Fearless",
+        description:
+          "You have advantage on saving throws you make to avoid or end the frightened condition on yourself. When you fail a saving throw to avoid or end the frighted condition on yourself, you can choose to succeed instead. Once you succeed on a saving throw in this way, you can't do so again until you finish a long rest.",
+      },
+      {
+        name: "Kender Aptitude",
+        description:
+          "Thanks to the mystical origin of your people, you gain proficiency with one of the following skills of your choice: Insight, Investigation, Sleight of Hand, Stealth, or Survival.",
+      },
+      {
+        name: "Taunt",
+        description:
+          "You have an extraordinary ability to fluster creatures. As a bonus action, you can unleash a string of provoking words at a creature within 60 feet of yourself that can hear and understand you. The target must succeed on a Wisdom saving throw or it has disadvantage on attack rolls against targets other than you until the start of your next turn. The DC equals 8 + your proficiency bonus + your Intelligence, Wisdom, or Charisma modifier (choose when you select this race). You can use this bonus action a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
+      },
+    ],
+  },
+  {
+    id: 59,
+    name: "Kalashtar",
+    description:
+      "The kalashtar are a compound race created from the union of humanity and renegade spirits from the plane of dreams – spirits called quori. Kalashtar are often seen as wise, spiritual people with great compassion for others. But there is an unmistakable alien quality to the kalashtar, as they are haunted by the conflicts of their otherworldly spirits.",
+    flavorText:
+      "The kalashtar are a compound race created from the union of humanity and renegade spirits from the plane of dreams",
+    source: src.eberron,
+    abilityScoreDescription:
+      "Your Wisdom score increases by 2, and your Charisma score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.WIS,
+          value: 2,
+        },
+        {
+          ability: Ability.CHA,
+          value: 1,
+        },
+      ],
+    },
+    age: "Kalashtar develop physically at the same rate as humans do and have similar lifespans.",
+    alignment:
+      "The noble spirit tied to a kalashtar drives it toward lawful and good behavior. Most kalashtar combine strong self-discipline with compassion for all sentient beings, but some kalashtar resist the virtuous influence of their spirit.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Kalashtar are similar in build to humans, though they are typically a few inches taller. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    languageDescription:
+      "You can speak, read, and write Common, Quori and one other language of your choice.",
+    originLanguages: {
+      default: [Language.COMMON, Language.QUORI],
+      choices: [
+        {
+          options: Object.values(Language).filter(
+            (f) => f != Language.COMMON && f != Language.QUORI
+          ),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Dual Mind",
+        description: "You have advantage on all Wisdom saving throws.",
+      },
+      {
+        name: "Mental Discipline",
+        description: "You have resistance to psychic damage.",
+      },
+      {
+        name: "Mind Link",
+        description:
+          "You can speak telepathically to any creature you can see, provided the creature is within a number of feet of you equal to 10 times your level. You don't need to share a language with the creature for it to understand your telepathic utterances, but the creature must be able to understand at least one language. \n\nWhen you're using this trait to speak telepathically to a creature, you can use your action to give that creature the ability to speak telepathically with you for 1 hour or until you end this effect as an action. To use this ability, the creature must be able to see you and must be within this trait's range. You can give this ability to only one creature at a time; giving it to a creature takes it away from another creature who has it.",
+      },
+      {
+        name: "Severed from Dreams",
+        description:
+          "Kalashtar sleep, but they don’t connect to the plane of dreams as other creatures do. Instead, their minds draw from the memories of their otherworldly spirit while they sleep. As such, you are immune to magical spells and effects that require you to dream, like the Dream spell, but not to spells and effects that put you to sleep, like the Sleep spell.",
+      },
+    ],
+  },
+  {
+    id: 60,
+    name: "Warforged",
+    description:
+      "The warforged were built to fight in the Last War. The first warforged were mindless automatons, but House Cannith devoted vast resources to improving these steel soldiers. An unexpected breakthrough produced fully sentient soldiers, blending organic and inorganic materials. Warforged are made from wood and metal, but they can feel pain and emotion. Built as weapons, they must now find a purpose beyond the war. A warforged can be a steadfast ally, a cold-hearted killing machine, or a visionary in search of purpose and meaning.",
+    flavorText: "The warforged were built to fight in the Last War.",
+    source: src.eberron,
+    abilityScoreDescription:
+      "Your Constitution score increases by 2, and one other ability score of your choice increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.CON,
+          value: 2,
+        },
+      ],
+      choices: [
+        {
+          abilities: Object.values(Ability),
+
+          options: [1],
+        },
+      ],
+    },
+    age: "A typical warforged is between two and thirty years old. The maximum lifespan of the warforged remains a mystery; so far, warforged have shown no signs of deterioration due to age. You are immune to magical aging effects.",
+    alignment:
+      "Most warforged take comfort in order and discipline, tending toward law and neutrality. But some have absorbed the morality – or lack thereof – of the beings with which they served.",
+    size: Size.MEDIUM,
+    sizeDescription: "Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    languageDescription:
+      "You can speak, read, and write Common and one other language.",
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Constructed Resilience",
+        description:
+          "You were created to have remarkable fortitude, represented by the following benefits: ",
+        options: [
+          "You have advantage on saving throws against being poisoned, and you have resistance to poison damage.",
+          "You are immune to disease.",
+          "You don’t need to eat, drink, or breathe.",
+          "You don't need to sleep, and magic can't put you to sleep.",
+        ],
+      },
+      {
+        name: "Sentry's Rest",
+        description:
+          "When you take a long rest, you must spend at least six hours in an inactive, motionless state, rather than sleeping. In this state, you appear inert, but it doesn’t render you unconscious, and you can see and hear as normal.",
+      },
+      {
+        name: "Integrated Protection",
+        description:
+          "Your body has built-in defensive layers, which can be enhanced with armor.",
+        options: [
+          "You gain a +1 bonus to Armor Class.",
+          "You can don only armor with which you have proficiency. To don armor, you must incorporate it into your body over the course of 1 hour, during which you must remain in contact with the armor. To doff armor, you must spend 1 hour removing it. You can rest while donning or doffing armor in this way.",
+          "While you live, your armor can't be removed from your body against your will.",
+        ],
+      },
+      {
+        name: "Specialized Design",
+        description:
+          "You gain one skill proficiency and one tool proficiency of your choice.",
       },
     ],
   },

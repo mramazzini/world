@@ -8,7 +8,7 @@ import {
   ritualIds,
   spellIds,
 } from "../Spells/spells.seed";
-import { Time } from "@/lib/types";
+import { Time } from "@/lib/utils/types/types";
 
 const ids = {
   fighter: 1,

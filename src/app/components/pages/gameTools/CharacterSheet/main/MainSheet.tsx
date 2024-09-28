@@ -11,7 +11,7 @@ import { roll } from "@/app/components/Utility/roll";
 import Tooltip from "@/app/components/Utility/Tooltip";
 import useLog from "@/app/components/Utility/useDicelog";
 import { skillAtritbuteMap, skills } from "@/lib/globalVars";
-import { ArmorInfo, CharacterInfo, WeaponID } from "@/lib/types";
+import { ArmorInfo, CharacterInfo, WeaponID } from "@/lib/utils/types/types";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import { Skill, Ability } from "@prisma/client";
 import Image from "next/image";

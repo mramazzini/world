@@ -6,7 +6,7 @@ import {
   Time,
   ToolID,
   WeaponID,
-} from "@/lib/types";
+} from "@/lib/utils/types/types";
 import { Ability } from "@prisma/client";
 import { AbilityToModifier } from "../calc/AbilityToModifier";
 import "@/lib/string.extensions";

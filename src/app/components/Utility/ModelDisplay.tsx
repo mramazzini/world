@@ -1,5 +1,10 @@
 "use client";
-import { ArmorInfo, SubClassInfo, ToolInfo, WeaponInfo } from "@/lib/types";
+import {
+  ArmorInfo,
+  SubClassInfo,
+  ToolInfo,
+  WeaponInfo,
+} from "@/lib/utils/types/types";
 import {
   memoizeGetArmor,
   memoizeGetItem,

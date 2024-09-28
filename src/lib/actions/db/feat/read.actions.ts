@@ -1,5 +1,5 @@
 "use server";
-import { FeatInfo, QueryParams } from "@/lib/types";
+import { FeatInfo, QueryParams } from "@/lib/utils/types/types";
 import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { PrismaClient } from "@prisma/client";
 

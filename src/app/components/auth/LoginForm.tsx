@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { AuthResult } from "@/lib/types";
+import { AuthResult } from "@/lib/utils/types/types";
 import { login } from "@/lib/actions/auth/auth.actions";
 import { useRouter } from "next/navigation";
 import useErrorModal from "../modals/ErrorModal";

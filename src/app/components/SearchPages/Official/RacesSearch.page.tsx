@@ -1,6 +1,6 @@
 import SearchPageComponent from "../SearchPage";
 
-import { RaceInfo, QueryParams } from "@/lib/types";
+import { RaceInfo, QueryParams } from "@/lib/utils/types/types";
 
 import { getRaceChunk } from "@/lib/actions/db/race/get.actions";
 import { officialSources } from "@/lib/globalVars";

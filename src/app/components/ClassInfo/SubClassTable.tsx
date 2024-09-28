@@ -1,7 +1,7 @@
 "use client";
 // This is only required if the subclass is a spellcaster, and thus needs a spell slot table
 
-import { Level, SpellLevel, SubClassInfo } from "@/lib/types";
+import { Level, SpellLevel, SubClassInfo } from "@/lib/utils/types/types";
 import numberArray from "@/lib/utils/numberArray";
 import numPlace from "@/lib/utils/numPlace";
 import { useState } from "react";

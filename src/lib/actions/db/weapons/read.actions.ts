@@ -1,6 +1,6 @@
 "use server";
 import { QUERY_LIMIT } from "@/lib/globalVars";
-import { WeaponInfo, QueryParams } from "@/lib/types";
+import { WeaponInfo, QueryParams } from "@/lib/utils/types/types";
 import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { PrismaClient } from "@prisma/client";
 import Fuse from "fuse.js";
