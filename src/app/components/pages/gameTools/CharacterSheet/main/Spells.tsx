@@ -3,7 +3,7 @@ import { CharacterInfo, Log, SpellLevel } from "@/lib/utils/types/types";
 import Image from "next/image";
 import PreparedSpellView from "../Spells/PreparedSpellView";
 import numberArray from "@/lib/utils/numberArray";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   character: CharacterInfo;
@@ -26,6 +26,19 @@ const Spells = ({ character, logPush }: Props) => {
     }
   );
 
+  useEffect(() => {
+    if (!character.state) return;
+    if (!character.state.spellSlots) return;
+    setSpellSlotsState(character.state.spellSlots);
+  }, [character.state?.spellSlots]);
+
+  const handleRest = () => {
+    if (!character.state) return;
+    if (!character.state.spellSlots) return;
+
+    setSpellSlotsState(character.state.spellSlots);
+  };
+
   return (
     <div className="h-full flex flex-col">
       {/* <p>Tools</p>
@@ -35,40 +48,53 @@ const Spells = ({ character, logPush }: Props) => {
         {prepared && prepared.length > 0 ? (
           <>
             <div className="grid gap-4 w-full">
-              <div className="flex flex-row w-full items-center justify-center bg-neutral text-neutral-content rounded-xl p-4">
-                {numberArray(1, 9).map((level) => {
-                  if (!character.state) return null;
-                  const maxSlots = character.state.spellSlots;
-                  if (!maxSlots) return null;
-                  const levelMaxSlots = maxSlots[level as SpellLevel];
-                  if (!levelMaxSlots) return null;
-                  return (
-                    <div
-                      key={level}
-                      className="flex flex-col items-center justify-center"
-                    >
-                      <h4>Level {level} Spells</h4>
-                      <div className="join flex flex-row items-center justify-center join">
-                        <input
-                          type="number"
-                          className="input input-neutral text-neutral-content h-8 join-item w-12"
-                          value={spellSlotsState[level as SpellLevel]}
-                          onChange={(e) => {
-                            const newSlots = { ...spellSlotsState };
-                            newSlots[level as SpellLevel] = parseInt(
-                              e.target.value
-                            );
-                            setSpellSlotsState(newSlots);
-                          }}
-                        />
+              <div className="join flex flex-row items-center justify-center">
+                <div className="flex flex-wrap w-full items-center justify-center bg-neutral text-neutral-content rounded-xl p-4 gap-4 join-item">
+                  {numberArray(1, 9).map((level) => {
+                    if (!character.state) return null;
+                    const maxSlots = character.state.spellSlots;
+                    if (!maxSlots) return null;
+                    const levelMaxSlots = maxSlots[level as SpellLevel];
+                    if (!levelMaxSlots) return null;
+                    return (
+                      <div
+                        key={level}
+                        className="flex flex-col items-center justify-center "
+                      >
+                        <h4>Level {level} Spells</h4>
+                        <div className="join flex flex-row items-center justify-center join rounded-xl">
+                          <input
+                            type="number"
+                            className="input input-neutral text-neutral-content h-8 join-item w-12 "
+                            value={spellSlotsState[level as SpellLevel]}
+                            onChange={(e) => {
+                              const newSlots = { ...spellSlotsState };
+                              newSlots[level as SpellLevel] = parseInt(
+                                e.target.value
+                              );
+                              setSpellSlotsState(newSlots);
+                            }}
+                          />
 
-                        <div className="bg-base-300 text-base-content h-8 rounded-xl join-item flex items-center p-2">
-                          Max Slots: {levelMaxSlots}
+                          <div className="h-8 join-item flex items-center p-2 badge bg-base-300 text-base-content ">
+                            Max: {levelMaxSlots}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}{" "}
+                    );
+                  })}{" "}
+                </div>{" "}
+                <button
+                  onClick={handleRest}
+                  className="btn btn-secondary join-item h-full"
+                >
+                  <Image
+                    src="/images/refresh.svg"
+                    alt="Rest"
+                    width={24}
+                    height={24}
+                  />
+                </button>
               </div>
               {prepared.map((spell, index) => {
                 return (

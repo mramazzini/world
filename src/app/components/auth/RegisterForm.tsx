@@ -31,7 +31,7 @@ const RegisterForm = () => {
       openModal("");
 
       // Redirect to homepage
-      router.push("/");
+      router.push("/dashboard");
     } catch (error) {
       console.log(error);
       openModal("Something went wrong. Please try again later.");

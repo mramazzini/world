@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { getUserId, isAdministrator, verifyToken } from "./lib/utils/auth";
 import { getCharacter } from "./lib/actions/db/character/read.actions";
 
-const protectedRoutes = ["/class/create", "/character"];
+const protectedRoutes = ["/class/create", "/character", "/dashboard"];
 const adminRoutes = ["/admin", "/admin/messages"];
 
 export async function middleware(req: NextRequest) {

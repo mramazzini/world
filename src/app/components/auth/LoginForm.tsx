@@ -23,8 +23,9 @@ const LoginForm = () => {
         return;
       }
 
-      // Redirect to homepage
-      router.push("/");
+      // Redirect to last page
+
+      router.push("/dashboard");
     } catch (error) {
       console.log(error);
       openModal("Something went wrong. Please try again later.");

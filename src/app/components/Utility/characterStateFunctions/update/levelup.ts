@@ -3,6 +3,7 @@ import {
   AbilityScoreValue,
   CharacterInfo,
   ClassID,
+  Level,
   SubClassID,
   Time,
 } from "@/lib/utils/types/types";
@@ -37,7 +38,7 @@ export const levelUp = async (
     (c) => c.id === classID
   )?.abilityScoreLevels;
 
-  const hp = refreshHp(character, {
+  let hp = refreshHp(character, {
     ...newState,
     classLevels: [
       ...newState.classLevels.filter((c) => c.classId !== classID),
@@ -58,6 +59,27 @@ export const levelUp = async (
       },
     ],
   });
+
+  //spellevels for each class
+  const spellLevels = character.Classes?.map(
+    (c) => c.spellCastingInfo?.spellLevels
+  );
+  if (spellLevels && spellLevels.length > 0) {
+    const level = classLevel + 1;
+    console.log(level);
+    if (!spellLevels[0]) return hp;
+    const spellSlotsInput = spellLevels[0][level as Level];
+    console.log(spellSlotsInput, spellLevels);
+    if (spellSlotsInput) {
+      hp = {
+        ...hp,
+        spellSlots: {
+          ...(spellSlotsInput as PrismaJson.SpellSlots),
+        },
+      };
+      console.log(hp);
+    }
+  }
 
   if (addSubclass) {
     return {

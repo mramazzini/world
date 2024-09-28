@@ -19,7 +19,7 @@ const CreateCharacterModal = () => {
   const router = useRouter();
   const [sideBarMetadata, setSideBarMetadata] = useState<DBMetadata[]>([]);
   const [sideBarModel, setSideBarModel] = useState<
-    "class" | "species" | "variant" | "background" | null
+    "class" | "race" | "variant" | "background" | null
   >(null);
   const [variantsAvailable, setVariantsAvailable] = useState(false);
 
@@ -27,7 +27,7 @@ const CreateCharacterModal = () => {
     name: string;
     alignment: Alignment;
     class?: DBMetadata;
-    species?: DBMetadata;
+    race?: DBMetadata;
     variant?: DBMetadata;
     background?: DBMetadata;
   }>({
@@ -35,22 +35,27 @@ const CreateCharacterModal = () => {
     alignment: Alignment.TRUE_NEUTRAL,
   });
 
+  useEffect(() => {
+    console.log(sideBarModel);
+  }, [sideBarModel]);
+
   const id = v4();
 
   useEffect(() => {
     const fetchMetadata = async () => {
       let res: DBMetadata[] = [];
+      setSideBarMetadata([]);
       switch (sideBarModel) {
         case "class":
           res = await getClassMetadata();
           break;
-        case "species":
+        case "race":
           setNewChar((prev) => ({ ...prev, variant: undefined }));
           res = await getSpeciesMetadata();
           break;
         case "variant":
-          if (!newChar.species) return setSideBarModel(null);
-          res = await getVariantMetadataByRace(newChar.species.id);
+          if (!newChar.race) return setSideBarModel(null);
+          res = await getVariantMetadataByRace(newChar.race.id);
           break;
         case "background":
           res = await getBackgroundsMetadata();
@@ -68,7 +73,7 @@ const CreateCharacterModal = () => {
     console.log("asd", newChar);
     if (
       !newChar.class ||
-      !newChar.species ||
+      !newChar.race ||
       !newChar.background ||
       newChar.name.length == 0
     )
@@ -77,7 +82,7 @@ const CreateCharacterModal = () => {
       name: newChar.name,
       alignment: newChar.alignment,
       classId: newChar.class?.id,
-      raceId: newChar.species?.id,
+      raceId: newChar.race?.id,
       backgroundId: newChar.background?.id,
       userId: 1,
       variantId: newChar.variant?.id,
@@ -154,27 +159,28 @@ const CreateCharacterModal = () => {
                 className="btn btn-ghost border-primary w-full max-w-xs"
                 onClick={async (e) => {
                   e.preventDefault();
-                  setSideBarModel("species");
+                  setSideBarModel("race");
                 }}
               >
-                {newChar.species?.name.toCapitalCase() || "Choose Species"}
+                {newChar.race?.name || "Choose Species"}
               </button>
             </label>
-            {variantsAvailable && (
-              <label className="label">
-                Variant
-                <button
-                  className="btn btn-ghost border-primary w-full max-w-xs"
-                  onClick={async (e) => {
-                    e.preventDefault();
-                    if (!newChar.species) return setSideBarModel(null);
-                    setSideBarModel("variant");
-                  }}
-                >
-                  {newChar.variant?.name.toCapitalCase() || "Choose Variant"}
-                </button>
-              </label>
-            )}
+            <label className="label">
+              Variant
+              <button
+                disabled={!variantsAvailable}
+                className="btn btn-ghost border-primary w-full max-w-xs"
+                onClick={async (e) => {
+                  e.preventDefault();
+                  if (!newChar.race) return setSideBarModel(null);
+                  setSideBarModel("variant");
+                }}
+              >
+                {variantsAvailable
+                  ? newChar.variant?.name || "Choose Variant"
+                  : "No Variants Available"}
+              </button>
+            </label>
             <label className="label">
               Background
               <button
@@ -184,41 +190,10 @@ const CreateCharacterModal = () => {
                   setSideBarModel("background");
                 }}
               >
-                {newChar.background?.name.toCapitalCase() ||
-                  "Choose Background"}
+                {newChar.background?.name || "Choose Background"}
               </button>
             </label>
 
-            <SidebarMetaSelector
-              metadata={sideBarMetadata}
-              model={sideBarModel || ""}
-              show={sideBarModel !== null}
-              loading={sideBarMetadata.length === 0}
-              setSelected={async (metadata) => {
-                switch (sideBarModel) {
-                  case "class":
-                    setNewChar((prev) => ({ ...prev, class: metadata }));
-                    break;
-                  case "species":
-                    setNewChar((prev) => ({ ...prev, species: metadata }));
-                    const available = await getVariantMetadataByRace(
-                      metadata.id
-                    );
-                    setVariantsAvailable(available.length > 0);
-
-                    break;
-                  case "variant":
-                    setNewChar((prev) => ({ ...prev, variant: metadata }));
-                    break;
-                  case "background":
-                    setNewChar((prev) => ({ ...prev, background: metadata }));
-                    break;
-                  default:
-                    break;
-                }
-                setSideBarModel(null);
-              }}
-            />
             <div className="mt-2 w-full">
               <div className="flex justify-end gap-4">
                 <button
@@ -241,6 +216,36 @@ const CreateCharacterModal = () => {
             </div>
           </form>
         </div>
+
+        <SidebarMetaSelector
+          metadata={sideBarMetadata}
+          model={sideBarModel || ""}
+          show={sideBarModel !== null}
+          loading={sideBarMetadata.length === 0}
+          setSelected={async (metadata) => {
+            if (!metadata) return setSideBarModel(null);
+            switch (sideBarModel) {
+              case "class":
+                setNewChar((prev) => ({ ...prev, class: metadata }));
+                break;
+              case "race":
+                setNewChar((prev) => ({ ...prev, race: metadata }));
+                const available = await getVariantMetadataByRace(metadata.id);
+                setVariantsAvailable(available.length > 0);
+
+                break;
+              case "variant":
+                setNewChar((prev) => ({ ...prev, variant: metadata }));
+                break;
+              case "background":
+                setNewChar((prev) => ({ ...prev, background: metadata }));
+                break;
+              default:
+                break;
+            }
+            setSideBarModel(null);
+          }}
+        />
       </dialog>
     </>
   );
