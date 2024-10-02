@@ -364,7 +364,7 @@ const ClericSubclassFeatures: SubclassFeature[] = [
   {
     name: "Keeper of Souls",
     description:
-      "At 17th level, you can seize a trace of vitality from a parting soul and use it to heal the living. When an enemy you can see dies within 30 feet of you, you or one ally of your choice that is within 30 feet of you regains hit points equal to the enemy’s number of Hit Dice. You can use this feature only if you aren't incapacitated. Once you use it, you can't do so again until the start of your next turn.",
+      "At 17th level, you can seize a tspecies of vitality from a parting soul and use it to heal the living. When an enemy you can see dies within 30 feet of you, you or one ally of your choice that is within 30 feet of you regains hit points equal to the enemy’s number of Hit Dice. You can use this feature only if you aren't incapacitated. Once you use it, you can't do so again until the start of your next turn.",
     subClassId: ids.grave,
     levels: [17],
   },
@@ -936,7 +936,7 @@ const ClericSubclassFeatures: SubclassFeature[] = [
             },
             {
               "Cleric Level": "3rd",
-              Spells: "Mirror Image, Pass without Trace",
+              Spells: "Mirror Image, Pass without Tspecies",
             },
             {
               "Cleric Level": "5th",
@@ -1076,7 +1076,7 @@ const ClericSubclassFeatures: SubclassFeature[] = [
   {
     name: "Twilight Shroud",
     description:
-      "At 17th level, the twilight that you summon offers a protective embrace: you and your allies have half cover while in the sphere created by your Twilight Sanctuary.",
+      "At 17th level, the twilight that you summon offers a protective embspecies: you and your allies have half cover while in the sphere created by your Twilight Sanctuary.",
     subClassId: ids.twilight,
     levels: [17],
   },

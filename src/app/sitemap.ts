@@ -4,10 +4,10 @@ import { getSpells } from "@/lib/actions/db/spell/read.actions";
 import { MetadataRoute } from "next";
 import { getBackgrounds } from "@/lib/actions/db/background/read.actions";
 import { QUERY_LIMIT } from "@/lib/globalVars";
-import { getRaces } from "@/lib/actions/db/race/get.actions";
-import { getSubRaces } from "@/lib/actions/db/subrace/read.actions";
 import { getItems } from "@/lib/actions/db/item/read.actions";
 import { getSpellLists } from "@/lib/actions/db/spellList/read.actions";
+import { getSpecies } from "@/lib/actions/db/species/get.actions";
+import { getSubSpecies } from "@/lib/actions/db/subSpecies/read.actions";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteMap: MetadataRoute.Sitemap = [];
@@ -144,41 +144,44 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   }
 
-  const races = await getRaces();
+  const species = await getSpecies();
   siteMap.push({
-    url: `${process.env.DOMAIN_NAME}/race`,
+    url: `${process.env.DOMAIN_NAME}/species`,
     lastModified: new Date(),
     changeFrequency: "yearly",
     priority: 0.9,
   });
-  for (const r of races) {
+  for (const r of species) {
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/race/${r.name.replaceAll(" ", "-")}`,
+      url: `${process.env.DOMAIN_NAME}/species/${r.name.replaceAll(" ", "-")}`,
       lastModified: r.updatedAt,
       changeFrequency: "yearly",
       priority: 0.8,
     });
   }
 
-  const variants = await getSubRaces();
-  const subracePagesCount = Math.ceil(variants.length / QUERY_LIMIT);
-  for (let i = 1; i < subracePagesCount; i++) {
+  const variants = await getSubSpecies();
+  const subspeciesPagesCount = Math.ceil(variants.length / QUERY_LIMIT);
+  for (let i = 1; i < subspeciesPagesCount; i++) {
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/subrace?page=${i}`,
+      url: `${process.env.DOMAIN_NAME}/subspecies?page=${i}`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.7,
     });
   }
   siteMap.push({
-    url: `${process.env.DOMAIN_NAME}/subrace`,
+    url: `${process.env.DOMAIN_NAME}/subspecies`,
     lastModified: new Date(),
     changeFrequency: "yearly",
     priority: 0.9,
   });
   for (const v of variants) {
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/subrace/${v.name.replaceAll(" ", "-")}`,
+      url: `${process.env.DOMAIN_NAME}/subspecies/${v.name.replaceAll(
+        " ",
+        "-"
+      )}`,
       lastModified: v.updatedAt,
       changeFrequency: "yearly",
       priority: 0.8,

@@ -15,7 +15,7 @@ import {
   Background,
   Feat,
   Spell,
-  Race,
+  Species,
   Weapon,
 } from "@prisma/client";
 import { QUERY_LIMIT } from "@/lib/globalVars";
@@ -34,11 +34,11 @@ export const searchEverything = async (
       Class: true,
     },
   });
-  const races = await db.race.findMany({});
+  const species = await db.species.findMany({});
 
-  const subraces = await db.raceVariant.findMany({
+  const subspecies = await db.subSpecies.findMany({
     include: {
-      BaseRace: true,
+      species: true,
     },
   });
 
@@ -84,20 +84,20 @@ export const searchEverything = async (
       other: item.types.join(", "),
       lastUpdated: item.updatedAt,
     })),
-    ...races.map((r) => ({
+    ...species.map((r) => ({
       name: r.name,
       description: r.description,
       flavorText: r.description ? r.description : "No description available",
-      type: "Race",
+      type: "Species",
       other: r.size,
       lastUpdated: r.updatedAt,
     })),
-    ...subraces.map((r) => ({
+    ...subspecies.map((r) => ({
       name: r.name,
       description: r.description,
       flavorText: r.description ? r.description : "No description available",
-      type: "Subrace",
-      other: r.BaseRace.name,
+      type: "Subspecies",
+      other: r.species.name,
       lastUpdated: r.updatedAt,
     })),
 

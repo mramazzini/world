@@ -9,7 +9,7 @@ export const getCharacters = async (): Promise<CharacterInfo[]> => {
   const db = new PrismaClient();
   const res = await db.character.findMany({
     include: {
-      Race: true,
+      Species: true,
       Background: true,
       SubClasses: true,
       Classes: {
@@ -21,7 +21,7 @@ export const getCharacters = async (): Promise<CharacterInfo[]> => {
           },
         },
       },
-      SubRace: true,
+      SubSpecies: true,
 
       User: {
         select: {
@@ -46,7 +46,7 @@ export const getCharacter = async (
         name: query,
       },
       include: {
-        Race: true,
+        Species: true,
         Background: true,
         SubClasses: true,
         Classes: {
@@ -58,7 +58,7 @@ export const getCharacter = async (
             },
           },
         },
-        SubRace: true,
+        SubSpecies: true,
         User: {
           select: {
             id: true,
@@ -75,7 +75,7 @@ export const getCharacter = async (
         id: query,
       },
       include: {
-        Race: true,
+        Species: true,
         Background: true,
         SubClasses: true,
         Classes: {
@@ -87,7 +87,7 @@ export const getCharacter = async (
             },
           },
         },
-        SubRace: true,
+        SubSpecies: true,
         User: {
           select: {
             id: true,
@@ -113,7 +113,7 @@ export const getCharactersByUser = async (
       userId: userID,
     },
     include: {
-      Race: true,
+      Species: true,
       Background: true,
       SubClasses: true,
       Classes: {
@@ -125,7 +125,7 @@ export const getCharactersByUser = async (
           },
         },
       },
-      SubRace: true,
+      SubSpecies: true,
       User: {
         select: {
           id: true,
@@ -150,7 +150,7 @@ export const getCharacterChunk = async (
         relationalFields: queryInfo.relationalFields,
       }),
       include: {
-        Race: true,
+        Species: true,
         Background: true,
         SubClasses: true,
         Classes: {
@@ -162,7 +162,7 @@ export const getCharacterChunk = async (
             },
           },
         },
-        SubRace: true,
+        SubSpecies: true,
         User: {
           select: {
             id: true,
@@ -182,7 +182,7 @@ export const getCharacterChunk = async (
     }),
 
     include: {
-      Race: true,
+      Species: true,
       Background: true,
       SubClasses: true,
       Classes: {
@@ -194,7 +194,7 @@ export const getCharacterChunk = async (
           },
         },
       },
-      SubRace: true,
+      SubSpecies: true,
       User: {
         select: {
           id: true,

@@ -75,7 +75,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
     backgroundId: ids.anthropologist,
     name: "Cultural Chameleon",
     description:
-      "Before becoming an adventurer, you spent much of your adult life away from your homeland, living among people different from your kin. You came to understand these foreign cultures and the ways of their people, who eventually treated you as one of their own. One culture had more of an influence on you than any other, shaping your beliefs and customs. Choose a race whose culture you've adopted.",
+      "Before becoming an adventurer, you spent much of your adult life away from your homeland, living among people different from your kin. You came to understand these foreign cultures and the ways of their people, who eventually treated you as one of their own. One culture had more of an influence on you than any other, shaping your beliefs and customs. Choose a species whose culture you've adopted.",
   },
   {
     backgroundId: ids.anthropologist,
@@ -136,7 +136,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
     name: "Historical Knowledge",
     backgroundId: ids.archaeologist,
     description:
-      "When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether those were dwarves, elves, humans, yuan-ti, or some other known race. In addition, you can determine the monetary value of art objects more than a century old.",
+      "When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether those were dwarves, elves, humans, yuan-ti, or some other known species. In addition, you can determine the monetary value of art objects more than a century old.",
   },
 
   // athlete
@@ -168,7 +168,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
             },
             {
               d8: "5",
-              Event: "Chariot or horse race",
+              Event: "Chariot or horse species",
             },
             {
               d8: "6",
@@ -176,7 +176,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
             },
             {
               d8: "7",
-              Event: "Hoplite race (racing in full armor with a unit)",
+              Event: "Hoplite species (racing in full armor with a unit)",
             },
             {
               d8: "8",
@@ -587,7 +587,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
             },
             {
               Homeland: "The Underdark",
-              Description: `Though your home is physically closer to the Sword Coast than the other locations discussed here, it is far more unnatural. You hail from one of the settlements in the Underdark, each of which has its own strange customs and laws. If you are a native of one of the great subterranean cities or settlements, you are probably a member of the race that occupies the place but you might also have grown up there after being captured and brought below when you were a child.\n\nIf you are a true Underdark native, you might have come to the surface as an emissary of your people, or perhaps to escape accusations of criminal behavior (whether warranted or not). If you aren't a native, your reason for leaving "home" probably has something to do with getting away from a bad situation.`,
+              Description: `Though your home is physically closer to the Sword Coast than the other locations discussed here, it is far more unnatural. You hail from one of the settlements in the Underdark, each of which has its own strange customs and laws. If you are a native of one of the great subterranean cities or settlements, you are probably a member of the species that occupies the place but you might also have grown up there after being captured and brought below when you were a child.\n\nIf you are a true Underdark native, you might have come to the surface as an emissary of your people, or perhaps to escape accusations of criminal behavior (whether warranted or not). If you aren't a native, your reason for leaving "home" probably has something to do with getting away from a bad situation.`,
             },
           ],
         },
@@ -952,7 +952,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
   {
     name: "Guild Membership",
     description:
-      "As an established and respected member of a guild, you can rely on certain benefits that membership provides. Your fellow guild members will provide you with lodging and food if necessary, and pay for your funeral if needed. In some cities and towns, a guildhall offers a central place to meet other members of your profession, which can be a good place to meet potential patrons, allies, or hirelings.\n\nGuilds often wield tremendous political power. If you are accused of a crime, your guild will support you if a good case can be made for your innocence or the crime is justifiable. You can also gain access to powerful political figures through the guild, if you are a member in good standing. Such connections might require the donation of money or magic items to the guild's coffers.\n\nYou must pay dues of 5 gp per month to the guild. If you miss payments, you must make up back dues to remain in the guild's good graces.",
+      "As an established and respected member of a guild, you can rely on certain benefits that membership provides. Your fellow guild members will provide you with lodging and food if necessary, and pay for your funeral if needed. In some cities and towns, a guildhall offers a central place to meet other members of your profession, which can be a good place to meet potential patrons, allies, or hirelings.\n\nGuilds often wield tremendous political power. If you are accused of a crime, your guild will support you if a good case can be made for your innocence or the crime is justifiable. You can also gain access to powerful political figures through the guild, if you are a member in good standing. Such connections might require the donation of money or magic items to the guild's coffers.\n\nYou must pay dues of 5 gp per month to the guild. If you miss payments, you must make up back dues to remain in the guild's good graces",
     backgroundId: ids.guildArtisan,
   },
   {
@@ -1359,7 +1359,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
             {
               "Mercenary Company": "The Bloodaxes",
               Description:
-                "Founded in Sundabar nearly two centuries ago, the Bloodaxes were originally a group of dwarves outcast from their clans for crimes against the teachings of Moradin Soulforger. They began hiring out as mercenaries to whoever in the North would pay them. Since then the mercenary company has broadened its membership to other races , but every member is an exile, criminal, or misfit of some sort looking for a fresh start and a new family among the bold Bloodaxes.",
+                "Founded in Sundabar nearly two centuries ago, the Bloodaxes were originally a group of dwarves outcast from their clans for crimes against the teachings of Moradin Soulforger. They began hiring out as mercenaries to whoever in the North would pay them. Since then the mercenary company has broadened its membership to other races, but every member is an exile, criminal, or misfit of some sort looking for a fresh start and a new family among the bold Bloodaxes.",
             },
           ],
         },
@@ -1518,7 +1518,7 @@ const BackgroundFeatures: BackgroundFeature[] = [
             {
               d6: "3",
               "Rune Style":
-                "You engrave runes onto glass beads and thread them onto necklaces and bracelets.",
+                "You engrave runes onto glass beads and thread them onto necklaces and bspecieslets.",
             },
             {
               d6: "4",

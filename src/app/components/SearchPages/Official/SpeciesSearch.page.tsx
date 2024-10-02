@@ -1,23 +1,23 @@
 import SearchPageComponent from "../SearchPage";
 
-import { RaceInfo, QueryParams } from "@/lib/utils/types/types";
+import { SpeciesInfo, QueryParams } from "@/lib/utils/types/types";
 
-import { getRaceChunk } from "@/lib/actions/db/race/get.actions";
+import { getSpeciesChunk } from "@/lib/actions/db/species/get.actions";
 import { officialSources } from "@/lib/globalVars";
 interface Props {
-  races: RaceInfo[];
+  species: SpeciesInfo[];
 }
-const RaceSearchPage = ({ races }: Props) => {
+const SpeciesSearchPage = ({ species }: Props) => {
   return (
-    <SearchPageComponent<RaceInfo>
-      title="Racial Origin"
-      description="Races provide a unique set of abilities and traits to your character based on their heritage. They can provide additional skills, languages, and abilities. Select a Race to view more information."
-      createText="Create a Race ->"
-      homebrewOfficialText="View Homebrew Races ->"
-      searchPlaceholder="Search Race..."
-      routeName="race"
-      handleSearch={getRaceChunk}
-      staticInput={races}
+    <SearchPageComponent<SpeciesInfo>
+      title="Species"
+      description="Species provide a unique set of abilities and traits to your character based on their heritage. They can provide additional skills, languages, and abilities. Select a Species to view more information."
+      createText="Create a Species ->"
+      homebrewOfficialText="View Homebrew Species ->"
+      searchPlaceholder="Search Species..."
+      routeName="species"
+      handleSearch={getSpeciesChunk}
+      staticInput={species}
       table={[
         {
           headerWidth: 15,
@@ -58,4 +58,4 @@ const RaceSearchPage = ({ races }: Props) => {
   );
 };
 
-export default RaceSearchPage;
+export default SpeciesSearchPage;

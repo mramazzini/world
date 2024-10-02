@@ -2,130 +2,130 @@ import { Prisma } from "@prisma/client";
 
 import { ClassicVariantsIds } from "./ClassicVariants";
 
-interface RaceFeature extends PrismaJson.Feature {
-  raceVariantId: number;
+interface SpeciesFeature extends PrismaJson.Feature {
+  subSpeciesId: number;
 }
 
-const ClassicTraits: RaceFeature[] = [
+const ClassicTraits: SpeciesFeature[] = [
   //black dragonborn
   {
     name: "Acid Breath",
     description:
       "You can use your action to exhale destructive energy. It deals acid damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 acid damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.",
-    raceVariantId: ClassicVariantsIds.blackDragonborn,
+    subSpeciesId: ClassicVariantsIds.blackDragonborn,
   },
   {
     name: "Damage Resistance",
     description: "You have resistance to acid damage.",
-    raceVariantId: ClassicVariantsIds.blackDragonborn,
+    subSpeciesId: ClassicVariantsIds.blackDragonborn,
   },
   //blue
   {
     name: "Lightning Breath",
     description:
       "You can use your action to exhale destructive energy. It deals lightning damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 lightning damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.",
-    raceVariantId: ClassicVariantsIds.blueDragonborn,
+    subSpeciesId: ClassicVariantsIds.blueDragonborn,
   },
   {
     name: "Damage Resistance",
     description: "You have resistance to lightning damage.",
-    raceVariantId: ClassicVariantsIds.blueDragonborn,
+    subSpeciesId: ClassicVariantsIds.blueDragonborn,
   },
   //brass
   {
     name: "Fire Breath",
     description:
       "You can use your action to exhale destructive energy. It deals fire damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 fire damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.",
-    raceVariantId: ClassicVariantsIds.brassDragonborn,
+    subSpeciesId: ClassicVariantsIds.brassDragonborn,
   },
   {
     name: "Damage Resistance",
     description: "You have resistance to fire damage.",
-    raceVariantId: ClassicVariantsIds.brassDragonborn,
+    subSpeciesId: ClassicVariantsIds.brassDragonborn,
   },
   //bronze
   {
     name: "Lightning Breath",
     description:
       "You can use your action to exhale destructive energy. It deals lightning damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 lightning damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.",
-    raceVariantId: ClassicVariantsIds.bronzeDragonborn,
+    subSpeciesId: ClassicVariantsIds.bronzeDragonborn,
   },
   {
     name: "Damage Resistance",
     description: "You have resistance to lightning damage.",
-    raceVariantId: ClassicVariantsIds.bronzeDragonborn,
+    subSpeciesId: ClassicVariantsIds.bronzeDragonborn,
   },
   //copper
   {
     name: "Acid Breath",
     description:
       "You can use your action to exhale destructive energy. It deals acid damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 acid damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.",
-    raceVariantId: ClassicVariantsIds.copperDragonborn,
+    subSpeciesId: ClassicVariantsIds.copperDragonborn,
   },
   {
     name: "Damage Resistance",
     description: "You have resistance to acid damage.",
-    raceVariantId: ClassicVariantsIds.copperDragonborn,
+    subSpeciesId: ClassicVariantsIds.copperDragonborn,
   },
   //gold
   {
     name: "Fire Breath",
     description:
       "You can use your action to exhale destructive energy. It deals fire damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 fire damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.",
-    raceVariantId: ClassicVariantsIds.goldDragonborn,
+    subSpeciesId: ClassicVariantsIds.goldDragonborn,
   },
   {
     name: "Damage Resistance",
     description: "You have resistance to fire damage.",
-    raceVariantId: ClassicVariantsIds.goldDragonborn,
+    subSpeciesId: ClassicVariantsIds.goldDragonborn,
   },
   //green
   {
     name: "Poison Breath",
     description:
       "You can use your action to exhale destructive energy. It deals poison damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 poison damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.",
-    raceVariantId: ClassicVariantsIds.greenDragonborn,
+    subSpeciesId: ClassicVariantsIds.greenDragonborn,
   },
   {
     name: "Damage Resistance",
     description: "You have resistance to poison damage.",
-    raceVariantId: ClassicVariantsIds.greenDragonborn,
+    subSpeciesId: ClassicVariantsIds.greenDragonborn,
   },
   //red
   {
     name: "Fire Breath",
     description:
       "You can use your action to exhale destructive energy. It deals fire damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 fire damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.",
-    raceVariantId: ClassicVariantsIds.redDragonborn,
+    subSpeciesId: ClassicVariantsIds.redDragonborn,
   },
   {
     name: "Damage Resistance",
     description: "You have resistance to fire damage.",
-    raceVariantId: ClassicVariantsIds.redDragonborn,
+    subSpeciesId: ClassicVariantsIds.redDragonborn,
   },
   //silver
   {
     name: "Cold Breath",
     description:
       "You can use your action to exhale destructive energy. It deals cold damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 cold damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.",
-    raceVariantId: ClassicVariantsIds.silverDragonborn,
+    subSpeciesId: ClassicVariantsIds.silverDragonborn,
   },
   {
     name: "Damage Resistance",
     description: "You have resistance to cold damage.",
-    raceVariantId: ClassicVariantsIds.silverDragonborn,
+    subSpeciesId: ClassicVariantsIds.silverDragonborn,
   },
   //white
   {
     name: "Cold Breath",
     description:
       "You can use your action to exhale destructive energy. It deals cold damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 cold damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.",
-    raceVariantId: ClassicVariantsIds.whiteDragonborn,
+    subSpeciesId: ClassicVariantsIds.whiteDragonborn,
   },
   {
     name: "Damage Resistance",
     description: "You have resistance to cold damage.",
-    raceVariantId: ClassicVariantsIds.whiteDragonborn,
+    subSpeciesId: ClassicVariantsIds.whiteDragonborn,
   },
   //dwarves
   //hill
@@ -133,32 +133,32 @@ const ClassicTraits: RaceFeature[] = [
     name: "Dwarven Toughness",
     description:
       "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.",
-    raceVariantId: ClassicVariantsIds.hillDwarf,
+    subSpeciesId: ClassicVariantsIds.hillDwarf,
   },
   //mountain
   {
     name: "Dwarven Armor Training",
     description: "You have proficiency with light and medium armor.",
-    raceVariantId: ClassicVariantsIds.mountainDwarf,
+    subSpeciesId: ClassicVariantsIds.mountainDwarf,
   },
   //mark of warading
   {
     name: "Warder's Intuition",
     description:
       "Whenever you make an Intelligence (Investigation) check or an Ability Check involving Thieves' Tools, you can roll a d4 and add the number rolled to the total ability check.",
-    raceVariantId: ClassicVariantsIds.markOfWarding,
+    subSpeciesId: ClassicVariantsIds.markOfWarding,
   },
   {
     name: "Wards and Seals",
     description:
       "You can cast the Alarm and Mage Armor spells with this trait. Starting at 3rd level, you can also cast the Arcane Lock spell with it. Once you cast either spell with this trait, you can't cast that spell again until you finish a Long Rest. Intelligence is your Spellcasting Ability for these spells, and you don't require material components when you cast them with this trait.",
-    raceVariantId: ClassicVariantsIds.markOfWarding,
+    subSpeciesId: ClassicVariantsIds.markOfWarding,
   },
   {
     name: "Spells of the Mark",
     description:
       "If you have the Spellcasting or Pact Magic class feature, the spells on the Mark of Warding Spells table are added to the spell list of your Spellcasting class.",
-    raceVariantId: ClassicVariantsIds.markOfWarding,
+    subSpeciesId: ClassicVariantsIds.markOfWarding,
     extendedTable: [
       {
         "": {
@@ -194,92 +194,92 @@ const ClassicTraits: RaceFeature[] = [
     name: "Drow Magic",
     description:
       "You know the Dancing Lights cantrip. When you reach 3rd level, you can cast the Faerie Fire spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the Darkness spell once and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
-    raceVariantId: ClassicVariantsIds.darkElf,
+    subSpeciesId: ClassicVariantsIds.darkElf,
   },
   {
     name: "Superior Darkvision",
     description: "Your darkvision has a range of 120 feet, instead of 60.",
-    raceVariantId: ClassicVariantsIds.darkElf,
+    subSpeciesId: ClassicVariantsIds.darkElf,
   },
   {
     name: "Sunlight Sensitivity",
     description:
       "You have disadvantage on attack rolls and Wisdom (Perception) checks that rely on sight when you, the target of the attack, or whatever you are trying to perceive is in direct sunlight.",
-    raceVariantId: ClassicVariantsIds.darkElf,
+    subSpeciesId: ClassicVariantsIds.darkElf,
   },
   {
     name: "Drow Weapon Training",
     description:
       "You have proficiency with rapiers, shortswords, and hand crossbows.",
-    raceVariantId: ClassicVariantsIds.darkElf,
+    subSpeciesId: ClassicVariantsIds.darkElf,
   },
   //high elf
   {
     name: "Elf Weapon Training",
     description:
       "You have proficiency with the longsword, shortsword, shortbow, and longbow.",
-    raceVariantId: ClassicVariantsIds.highElf,
+    subSpeciesId: ClassicVariantsIds.highElf,
   },
   {
     name: "Cantrip",
     description:
       "You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.",
-    raceVariantId: ClassicVariantsIds.highElf,
+    subSpeciesId: ClassicVariantsIds.highElf,
   },
   {
     name: "Extra Language",
     description:
       "You can speak, read, and write one extra language of your choice.",
-    raceVariantId: ClassicVariantsIds.highElf,
+    subSpeciesId: ClassicVariantsIds.highElf,
   },
   //wood elf
   {
     name: "Elf Weapon Training",
     description:
       "You have proficiency with the longsword, shortsword, shortbow, and longbow.",
-    raceVariantId: ClassicVariantsIds.woodElf,
+    subSpeciesId: ClassicVariantsIds.woodElf,
   },
   {
     name: "Fleet of Foot",
     description: "Your base walking speed increases to 35 feet.",
-    raceVariantId: ClassicVariantsIds.woodElf,
+    subSpeciesId: ClassicVariantsIds.woodElf,
   },
   {
     name: "Mask of the Wild",
     description:
       "You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena.",
-    raceVariantId: ClassicVariantsIds.woodElf,
+    subSpeciesId: ClassicVariantsIds.woodElf,
   },
   //pallid elf
   {
     name: "Incisive Sense",
     description: "You have advantage on Investigation and Insight checks.",
-    raceVariantId: ClassicVariantsIds.pallidElf,
+    subSpeciesId: ClassicVariantsIds.pallidElf,
   },
   {
     name: "Blesing of the Moonweaver",
     description:
       "You know the Light cantrip. When you reach 3rd level, you can cast Sleep once, and it recharges after a long rest. When you reach 5th level, you can cast Invisibility (Self Only) once, and it recharges after a long rest. You do not need the material components required of the spells. Wisdom is your spellcasting ability for these spells.",
-    raceVariantId: ClassicVariantsIds.pallidElf,
+    subSpeciesId: ClassicVariantsIds.pallidElf,
   },
   //mark of shadow
   {
     name: "Cunning Intuition",
     description:
       "Whenever you roll a Dexterity (Stealth) check or a Charisma (Performance) check, roll a d4 and add the number rolled to the total ability check.",
-    raceVariantId: ClassicVariantsIds.markOfShadow,
+    subSpeciesId: ClassicVariantsIds.markOfShadow,
   },
   {
     name: "Shape Shadows",
     description:
       "You know the Minor Illusion cantrip. Starting at 3rd level, you can also cast the Invisibility spell with this trait. Once you cast either spell with this trait, you can't cast that spell again until you finish a long rest. Charisma is your Spellcasting Ability for these spells.",
-    raceVariantId: ClassicVariantsIds.markOfShadow,
+    subSpeciesId: ClassicVariantsIds.markOfShadow,
   },
   {
     name: "Spells of the Mark",
     description:
       "if you have the Spellcasting or Pact Magic class features, the spells on the Mark of Shadow Spells table are added to the spell list of your spellcasting class.",
-    raceVariantId: ClassicVariantsIds.markOfShadow,
+    subSpeciesId: ClassicVariantsIds.markOfShadow,
     extendedTable: [
       {
         "": {
@@ -291,7 +291,7 @@ const ClassicTraits: RaceFeature[] = [
             },
             {
               "Spell Level": "2nd",
-              Spells: "Darkness, Pass Without Trace",
+              Spells: "Darkness, Pass Without Tspecies",
             },
             {
               "Spell Level": "3rd",
@@ -315,55 +315,55 @@ const ClassicTraits: RaceFeature[] = [
     name: "Elf Weapon Training",
     description:
       "You have proficiency with the longsword, shortsword, shortbow, and longbow.",
-    raceVariantId: ClassicVariantsIds.bishtahar,
+    subSpeciesId: ClassicVariantsIds.bishtahar,
   },
   {
     name: "Fleet of Foot",
     description: "Your base walking speed increases to 35 feet.",
-    raceVariantId: ClassicVariantsIds.bishtahar,
+    subSpeciesId: ClassicVariantsIds.bishtahar,
   },
   {
     name: "Mask of the Wild",
     description:
       "You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena.",
-    raceVariantId: ClassicVariantsIds.bishtahar,
+    subSpeciesId: ClassicVariantsIds.bishtahar,
   },
   //tirahar
   {
     name: "Elf Weapon Training",
     description:
       "You have proficiency with the longsword, shortsword, shortbow, and longbow.",
-    raceVariantId: ClassicVariantsIds.tirahar,
+    subSpeciesId: ClassicVariantsIds.tirahar,
   },
   {
     name: "Fleet of Foot",
     description: "Your base walking speed increases to 35 feet.",
-    raceVariantId: ClassicVariantsIds.tirahar,
+    subSpeciesId: ClassicVariantsIds.tirahar,
   },
   {
     name: "Mask of the Wild",
     description:
       "You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena.",
-    raceVariantId: ClassicVariantsIds.tirahar,
+    subSpeciesId: ClassicVariantsIds.tirahar,
   },
   //vahadar
   {
     name: "Elf Weapon Training",
     description:
       "You have proficiency with the longsword, shortsword, shortbow, and longbow.",
-    raceVariantId: ClassicVariantsIds.vahadarElf,
+    subSpeciesId: ClassicVariantsIds.vahadarElf,
   },
   {
     name: "Cantrip",
     description:
       "You know one cantrip of your choice from the druid spell list. Wisdom is your spellcasting ability for it.",
-    raceVariantId: ClassicVariantsIds.vahadarElf,
+    subSpeciesId: ClassicVariantsIds.vahadarElf,
   },
   {
     name: "Extra Language",
     description:
       "You can speak, read, and write one extra language of your choice.",
-    raceVariantId: ClassicVariantsIds.vahadarElf,
+    subSpeciesId: ClassicVariantsIds.vahadarElf,
   },
   //gnome
   //forest
@@ -371,20 +371,20 @@ const ClassicTraits: RaceFeature[] = [
     name: "Natural Illusionist",
     description:
       "You know the Minor Illusion cantrip. Intelligence is your spellcasting ability for it.",
-    raceVariantId: ClassicVariantsIds.forestGnome,
+    subSpeciesId: ClassicVariantsIds.forestGnome,
   },
   {
     name: "Speak with Small Beasts",
     description:
       "Through sounds and gestures, you can communicate simple ideas with Small or smaller beasts.",
-    raceVariantId: ClassicVariantsIds.forestGnome,
+    subSpeciesId: ClassicVariantsIds.forestGnome,
   },
   // rock
   {
     name: "Artificer's Lore",
     description:
       "Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply.",
-    raceVariantId: ClassicVariantsIds.rockGnome,
+    subSpeciesId: ClassicVariantsIds.rockGnome,
   },
   {
     name: "Tinker",
@@ -414,26 +414,26 @@ const ClassicTraits: RaceFeature[] = [
         },
       },
     ],
-    raceVariantId: ClassicVariantsIds.rockGnome,
+    subSpeciesId: ClassicVariantsIds.rockGnome,
   },
   //mark of scribing
   {
     name: "Gifted Scribe",
     description:
       "Whenever you make an Intelligence (History) or an Ability Check involving Calligrapher's Supplies, you can roll a d4 and add the number rolled to the total ability check.",
-    raceVariantId: ClassicVariantsIds.markOfScribing,
+    subSpeciesId: ClassicVariantsIds.markOfScribing,
   },
   {
     name: "Scribe's Insight",
     description:
       "You know the Message cantrip. You can also cast the Comprehend Languages spell with this trait. Starting at 3rd level, you can also cast the Magic Mouth spell with it. Once you cast either spell with this trait, you can't cast that spell again until you finish a Long Rest. Intelligence is your Spellcasting Ability for these spells.",
-    raceVariantId: ClassicVariantsIds.markOfScribing,
+    subSpeciesId: ClassicVariantsIds.markOfScribing,
   },
   {
     name: "Spells of the Mark",
     description:
       "If you have the Spellcasting or Pact Magic class feature, the spells on the Mark of Scribing Spells table are added to the spell list of your Spellcasting class.",
-    raceVariantId: ClassicVariantsIds.markOfScribing,
+    subSpeciesId: ClassicVariantsIds.markOfScribing,
     extendedTable: [
       {
         "": {
@@ -469,47 +469,47 @@ const ClassicTraits: RaceFeature[] = [
   {
     name: "Skill Versatility",
     description: "You gain proficiency in two skills of your choice.",
-    raceVariantId: ClassicVariantsIds.generalElvenHeritage,
+    subSpeciesId: ClassicVariantsIds.generalElvenHeritage,
   },
   //high or wood elf
   {
     name: "Elf Weapon Training",
     description:
       "You have proficiency with the longsword, shortsword, shortbow, and longbow.",
-    raceVariantId: ClassicVariantsIds.highOrWoodElfDescent,
+    subSpeciesId: ClassicVariantsIds.highOrWoodElfDescent,
   },
   //high elf
   {
     name: "Cantrip",
     description:
       "You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.",
-    raceVariantId: ClassicVariantsIds.highElfDescent,
+    subSpeciesId: ClassicVariantsIds.highElfDescent,
   },
   //wood elf
   {
     name: "Fleet of Foot",
     description: "Your base walking speed increases to 35 feet.",
-    raceVariantId: ClassicVariantsIds.woodElfDescent,
+    subSpeciesId: ClassicVariantsIds.woodElfDescent,
   },
   //wood elf alternate
   {
     name: "Mask of the Wild",
     description:
       "You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena.",
-    raceVariantId: ClassicVariantsIds.woodElfDescentAlternate,
+    subSpeciesId: ClassicVariantsIds.woodElfDescentAlternate,
   },
   //dark elf
   {
     name: "Drow Magic",
     description:
       "You know the Dancing Lights cantrip. When you reach 3rd level, you can cast Faerie Fire once, and it recharges after a long rest. When you reach 5th level, you can cast Darkness once, and it recharges after a long rest. Charisma is your spellcasting ability for these spells.",
-    raceVariantId: ClassicVariantsIds.darkElfDescent,
+    subSpeciesId: ClassicVariantsIds.darkElfDescent,
   },
   //Aquatic elf
   {
     name: "Swim Speed",
     description: "You have a swim speed of 30 feet.",
-    raceVariantId: ClassicVariantsIds.aquaticHeritage,
+    subSpeciesId: ClassicVariantsIds.aquaticHeritage,
   },
 
   //mark of detection
@@ -517,19 +517,19 @@ const ClassicTraits: RaceFeature[] = [
     name: "Deductive Inuition",
     description:
       "Whenever you make a Intelligence (Investigation) or a Wisdom (Insight) check, you can roll a d4 and add the number rolled to the total ability check.",
-    raceVariantId: ClassicVariantsIds.markOfDetection,
+    subSpeciesId: ClassicVariantsIds.markOfDetection,
   },
   {
     name: "Magical Detection",
     description:
       "You can cast the Detect Magic and the Detect Poison and Disease spells with this trait. Starting at 3rd level, you can also cast the See Invisibility spell with it. Once you cast either spell with this trait, you can't cast that spell again until you finish a Long Rest. Intelligence is your Spellcasting Ability for these spells, and you don't require material components for them.",
-    raceVariantId: ClassicVariantsIds.markOfDetection,
+    subSpeciesId: ClassicVariantsIds.markOfDetection,
   },
   {
     name: "Spells of the Mark",
     description:
       "If you have the Spellcasting or Pact Magic class feature, the spells on the Mark of Detection Spells table are added to the spell list of your Spellcasting class.",
-    raceVariantId: ClassicVariantsIds.markOfDetection,
+    subSpeciesId: ClassicVariantsIds.markOfDetection,
     extendedTable: [
       {
         "": {
@@ -565,24 +565,24 @@ const ClassicTraits: RaceFeature[] = [
     name: "Windwright's Intuition",
     description:
       "Whenever you make a Dexterity (Acrobatics) check or any Ability Check involving Navigator's Tools, you can roll a d4 and add the number rolled to the total ability check.",
-    raceVariantId: ClassicVariantsIds.markOfStorm,
+    subSpeciesId: ClassicVariantsIds.markOfStorm,
   },
   {
     name: "Storm's Boon",
     description: "You have resistance to lightning damage.",
-    raceVariantId: ClassicVariantsIds.markOfStorm,
+    subSpeciesId: ClassicVariantsIds.markOfStorm,
   },
   {
     name: "Headwinds",
     description:
       "You know the Gust cantrip. Starting at 3rd level, you can also cast the Gust of Wind spell with it. Once you cast this spell with this trait, you can't cast that spell again until you finish a Long Rest. Charisma is your Spellcasting Ability for this spell.",
-    raceVariantId: ClassicVariantsIds.markOfStorm,
+    subSpeciesId: ClassicVariantsIds.markOfStorm,
   },
   {
     name: "Spells of the Mark",
     description:
       "If you have the Spellcasting or Pact Magic class feature, the spells on the Mark of Storm Spells table are added to the spell list of your Spellcasting class.",
-    raceVariantId: ClassicVariantsIds.markOfStorm,
+    subSpeciesId: ClassicVariantsIds.markOfStorm,
     extendedTable: [
       {
         "": {
@@ -619,19 +619,19 @@ const ClassicTraits: RaceFeature[] = [
     name: "Hunter's Intuition",
     description:
       "Whenever you make a Wisdom (Perception) or a Wisdom (Survival) check, you can roll a d4 and add the number rolled to the total ability check.",
-    raceVariantId: ClassicVariantsIds.markOfFindingOrk,
+    subSpeciesId: ClassicVariantsIds.markOfFindingOrk,
   },
   {
     name: "Finder's Magic",
     description:
       "You can cast the Hunter's Mark spell with this trait. Starting at 3rd level, you can also cast the Locate Object spell with it. Once you cast either spell with this trait, you can't cast that spell again until you finish a Long Rest. Wisdom is your Spellcasting Ability for these spells.",
-    raceVariantId: ClassicVariantsIds.markOfFindingOrk,
+    subSpeciesId: ClassicVariantsIds.markOfFindingOrk,
   },
   {
     name: "Spells of the Mark",
     description:
       "If you have the Spellcasting or Pact Magic class feature, the spells on the Mark of Finding Spells table are added to the spell list of your Spellcasting class.",
-    raceVariantId: ClassicVariantsIds.markOfFindingOrk,
+    subSpeciesId: ClassicVariantsIds.markOfFindingOrk,
     extendedTable: [
       {
         "": {
@@ -668,53 +668,53 @@ const ClassicTraits: RaceFeature[] = [
     name: "Naturally Stealthy",
     description:
       "You can attempt to hide even when you are only obscured by a creature that is at least one size larger than you.",
-    raceVariantId: ClassicVariantsIds.lightfootHalfling,
+    subSpeciesId: ClassicVariantsIds.lightfootHalfling,
   },
   //stout
   {
     name: "Stout Resilience",
     description:
       "You have advantage on saving throws against poison, and you have resistance to poison damage.",
-    raceVariantId: ClassicVariantsIds.stoutHalfling,
+    subSpeciesId: ClassicVariantsIds.stoutHalfling,
   },
   //ghostwise
   {
     name: "Silent Speech",
     description:
       "You can speak telepathically to any creature within 30 feet of you. The creature understands you only if the two of you share a language. You can speak telepathically in this way to one creature at a time.",
-    raceVariantId: ClassicVariantsIds.ghostwise,
+    subSpeciesId: ClassicVariantsIds.ghostwise,
   },
   //lotusden
   {
     name: "Children of the Woods",
     description:
       "You know the Druidcraft Cantrip. At 3rd level, you can cast the Entangle spell once per long rest. At 5th level, you can cast Spike Growth spell once per long rest. These spells don't require the material components normally required. Wisdom is your spellcasting ability for these spells.",
-    raceVariantId: ClassicVariantsIds.lotusden,
+    subSpeciesId: ClassicVariantsIds.lotusden,
   },
   {
     name: "Timberwalk",
     description:
       "Ability checks made to track you are at disadvantage and you can move through difficult terrain made of non-magical plants and overgrowth without expending extra movement.",
-    raceVariantId: ClassicVariantsIds.lotusden,
+    subSpeciesId: ClassicVariantsIds.lotusden,
   },
   //mark of hospitality
   {
     name: "Ever Hospitable",
     description:
       "Whenever you roll a Charisma (Persuasion) check or an ability check involving Brewer's Tools or Cook's Utensils, roll a d4 and add the number rolled to the total ability check.",
-    raceVariantId: ClassicVariantsIds.markOfHospitality,
+    subSpeciesId: ClassicVariantsIds.markOfHospitality,
   },
   {
     name: "Innkeeper's Magic",
     description:
       "You know the Prestidigitation cantrip. You can also cast Purify Food and Drink and Unseen Servant with this trait. Once you cast either spell with this trait, you can't cast that spell again until you finish a long rest. Charisma is your Spellcasting Ability for these spells.",
-    raceVariantId: ClassicVariantsIds.markOfHospitality,
+    subSpeciesId: ClassicVariantsIds.markOfHospitality,
   },
   {
     name: "Spells of the Mark",
     description:
       "If you have the Spellcasting or Pact Magic class feature, the spells on the Mark of Hospitality Spells table are added to the spell list of your Spellcasting class.",
-    raceVariantId: ClassicVariantsIds.markOfHospitality,
+    subSpeciesId: ClassicVariantsIds.markOfHospitality,
     extendedTable: [
       {
         "": {
@@ -750,19 +750,19 @@ const ClassicTraits: RaceFeature[] = [
     name: "Medical Intuition",
     description:
       "Whenever you roll a Wisdom (Medicine) check or an ability check involving an Herbalism Kit, roll a d4 and add the number rolled to the total ability check.",
-    raceVariantId: ClassicVariantsIds.markOfHealing,
+    subSpeciesId: ClassicVariantsIds.markOfHealing,
   },
   {
     name: "Healing Touch",
     description:
       "You can cast the Cure Wounds spell with this trait. Beginning at 3rd level, you can also cast the Lesser Restoration spell with this trait. Once you cast either spell with this trait, you can't cast that spell again until you finish a long rest. Wisdom is your Spellcasting Ability for these spells.",
-    raceVariantId: ClassicVariantsIds.markOfHealing,
+    subSpeciesId: ClassicVariantsIds.markOfHealing,
   },
   {
     name: "Spells of the Mark",
     description:
       "If you have the Spellcasting or Pact Magic class feature, the spells on the Mark of Healing Spells table are added to the spell list of your Spellcasting class.",
-    raceVariantId: ClassicVariantsIds.markOfHealing,
+    subSpeciesId: ClassicVariantsIds.markOfHealing,
     extendedTable: [
       {
         "": {
@@ -799,25 +799,25 @@ const ClassicTraits: RaceFeature[] = [
     name: "Darkvision",
     description:
       "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
-    raceVariantId: ClassicVariantsIds.markOfFindingHuman,
+    subSpeciesId: ClassicVariantsIds.markOfFindingHuman,
   },
   {
     name: "Hunter's Intuition",
     description:
       "Whenever you make a Wisdom (Perception) or a Wisdom (Survival) check, you can roll a d4 and add the number rolled to the total ability check.",
-    raceVariantId: ClassicVariantsIds.markOfFindingHuman,
+    subSpeciesId: ClassicVariantsIds.markOfFindingHuman,
   },
   {
     name: "Finder's Magic",
     description:
       "You can cast the Hunter's Mark spell with this trait. Starting at 3rd level, you can also cast the Locate Object spell with it. Once you cast either spell with this trait, you can't cast that spell again until you finish a Long Rest. Wisdom is your Spellcasting Ability for these spells.",
-    raceVariantId: ClassicVariantsIds.markOfFindingHuman,
+    subSpeciesId: ClassicVariantsIds.markOfFindingHuman,
   },
   {
     name: "Spells of the Mark",
     description:
       "If you have the Spellcasting or Pact Magic class feature, the spells on the Mark of Finding Spells table are added to the spell list of your Spellcasting class.",
-    raceVariantId: ClassicVariantsIds.markOfFindingHuman,
+    subSpeciesId: ClassicVariantsIds.markOfFindingHuman,
     extendedTable: [
       {
         "": {
@@ -853,26 +853,26 @@ const ClassicTraits: RaceFeature[] = [
     name: "Wild Intuition",
     description:
       "Whenever you make a Wisdom (Animal Handling) or a Intelligence (Nature) check, you can roll a d4 and add the number rolled to the total ability check.",
-    raceVariantId: ClassicVariantsIds.markOfHandling,
+    subSpeciesId: ClassicVariantsIds.markOfHandling,
   },
   {
     name: "Primal Connection",
     description:
       "You can cast the Animal Friendship spell and the Speak With Animals with this trait, requiring no material components. Once you cast either spell with this trait, you can't cast that spell again until you finish a Long Rest. Wisdom is your Spellcasting Ability for these spells.",
-    raceVariantId: ClassicVariantsIds.markOfHandling,
+    subSpeciesId: ClassicVariantsIds.markOfHandling,
   },
   {
     name: "The Bigger They Are",
     description:
       "Starting at 3rd level, you can target a Beast or a Monstrosity when you cast Animal Friendship or Speak With Animals, provided that the creature's intelligence is 3 or lower.",
-    raceVariantId: ClassicVariantsIds.markOfHandling,
+    subSpeciesId: ClassicVariantsIds.markOfHandling,
   },
 
   {
     name: "Spells of the Mark",
     description:
       "If you have the Spellcasting or Pact Magic class feature, the spells on the Mark of Handling Spells table are added to the spell list of your Spellcasting class.",
-    raceVariantId: ClassicVariantsIds.markOfHandling,
+    subSpeciesId: ClassicVariantsIds.markOfHandling,
     extendedTable: [
       {
         "": {
@@ -909,25 +909,25 @@ const ClassicTraits: RaceFeature[] = [
     name: "Artisan's Intuition",
     description:
       "Whenever you make an Intelligence (Arcana) or an Ability Check involving Artisan's Tools, you can roll a d4 and add the number rolled to the total ability check.",
-    raceVariantId: ClassicVariantsIds.markOfMaking,
+    subSpeciesId: ClassicVariantsIds.markOfMaking,
   },
   {
     name: "Artisan's Gift",
     description:
       "You gain proficiency in one type of Artisan's Tools of your choice.",
-    raceVariantId: ClassicVariantsIds.markOfMaking,
+    subSpeciesId: ClassicVariantsIds.markOfMaking,
   },
   {
     name: "Spellsmith",
     description:
       "You learn the Mending cantrip. You can also cast the Magic Weapon spell with this trait. When you do so, the spell lasts for 1 hour and doesn't require concentration. Once you cast this spell with this trait, you can't cast that spell again until you finish a Long Rest. Intelligence is your Spellcasting Ability for these spells.",
-    raceVariantId: ClassicVariantsIds.markOfMaking,
+    subSpeciesId: ClassicVariantsIds.markOfMaking,
   },
   {
     name: "Spells of the Mark",
     description:
       "If you have the Spellcasting or Pact Magic class feature, the spells on the Mark of Making Spells table are added to the spell list of your Spellcasting class.",
-    raceVariantId: ClassicVariantsIds.markOfMaking,
+    subSpeciesId: ClassicVariantsIds.markOfMaking,
     extendedTable: [
       {
         "": {
@@ -962,25 +962,25 @@ const ClassicTraits: RaceFeature[] = [
   {
     name: "Courier's Speed",
     description: "Your base walking speed increases to 35 feet.",
-    raceVariantId: ClassicVariantsIds.markOfPassage,
+    subSpeciesId: ClassicVariantsIds.markOfPassage,
   },
   {
     name: "Intuitive Motion",
     description:
       "Whenever you make an Dexterity (Acrobatics) or an Ability Check involving operating or maintaining a Land Vehicle, you can roll a d4 and add the number rolled to the total ability check.",
-    raceVariantId: ClassicVariantsIds.markOfPassage,
+    subSpeciesId: ClassicVariantsIds.markOfPassage,
   },
   {
     name: "Magical Passage",
     description:
       "You can cast the Misty Step spell with this trait. Once you cast this spell with this trait, you can't cast that spell again until you finish a Long Rest. Dexterity is your Spellcasting Ability for these spells.",
-    raceVariantId: ClassicVariantsIds.markOfPassage,
+    subSpeciesId: ClassicVariantsIds.markOfPassage,
   },
   {
     name: "Spells of the Mark",
     description:
       "If you have the Spellcasting or Pact Magic class feature, the spells on the Mark of Passage Spells table are added to the spell list of your Spellcasting class.",
-    raceVariantId: ClassicVariantsIds.markOfPassage,
+    subSpeciesId: ClassicVariantsIds.markOfPassage,
     extendedTable: [
       {
         "": {
@@ -992,7 +992,7 @@ const ClassicTraits: RaceFeature[] = [
             },
             {
               "Spell Level": "2nd",
-              Spells: "Misty Step, Pass Without Trace",
+              Spells: "Misty Step, Pass Without Tspecies",
             },
             {
               "Spell Level": "3rd",
@@ -1016,25 +1016,25 @@ const ClassicTraits: RaceFeature[] = [
     name: "Sentinel's Intuition",
     description:
       "Whenever you make a Wisdom (Insight) or a Wisdom (Perception) check, you can roll a d4 and add the number rolled to the total ability check.",
-    raceVariantId: ClassicVariantsIds.markOfSentinel,
+    subSpeciesId: ClassicVariantsIds.markOfSentinel,
   },
   {
     name: "Guardian's Shield",
     description:
       "You can cast the Shield spell with this trait. Once you cast this spell with this trait, you can't cast that spell again until you finish a Long Rest. Wisdom is your Spellcasting Ability for these spells.",
-    raceVariantId: ClassicVariantsIds.markOfSentinel,
+    subSpeciesId: ClassicVariantsIds.markOfSentinel,
   },
   {
     name: "Vigilant Guardian",
     description:
       "Once a creature that you can see within 5ft of you is hit with an attack roll, you can use your reaction to swap places with the creature, and you are hit by the attack instead. Once you use this trait, you can't do so again until you finish a long rest.",
-    raceVariantId: ClassicVariantsIds.markOfSentinel,
+    subSpeciesId: ClassicVariantsIds.markOfSentinel,
   },
   {
     name: "Spells of the Mark",
     description:
       "If you have the Spellcasting or Pact Magic class feature, the spells on the Mark of Sentinel Spells table are added to the spell list of your Spellcasting class.",
-    raceVariantId: ClassicVariantsIds.markOfSentinel,
+    subSpeciesId: ClassicVariantsIds.markOfSentinel,
     extendedTable: [
       {
         "": {
@@ -1072,70 +1072,70 @@ const ClassicTraits: RaceFeature[] = [
     name: "Infernal Legacy",
     description:
       "You know the Thaumaturgy cantrip. Once you reach 3rd level, you can cast the Hellish Rebuke spell once as a 2nd-level spell. Once you reach 5th level, you can also cast the Darkness spell once. You must finish a long rest to cast these spells again with this trait. Charisma is your spellcasting ability for these spells.",
-    raceVariantId: ClassicVariantsIds.asmodeus,
+    subSpeciesId: ClassicVariantsIds.asmodeus,
   },
   //baalzebul
   {
     name: "Legacy of Maladomini",
     description:
       "You know the Thaumaturgy cantrip. Once you reach 3rd level, you can cast the Ray of Sickness spell once as a 2nd-level spell. Once you reach 5th level, you can also cast the Crown of Madness spell once. You must finish a long rest to cast these spells again with this trait. Charisma is your spellcasting ability for these spells.",
-    raceVariantId: ClassicVariantsIds.baalzebul,
+    subSpeciesId: ClassicVariantsIds.baalzebul,
   },
   //dispater
   {
     name: "Legacy of Dis",
     description:
       "You know the Thaumaturgy cantrip. Once you reach 3rd level, you can cast the Disguise Self spell once as a 2nd-level spell. Once you reach 5th level, you can also cast the Detect Thoughts spell once. You must finish a long rest to cast these spells again with this trait. Charisma is your spellcasting ability for these spells.",
-    raceVariantId: ClassicVariantsIds.dispater,
+    subSpeciesId: ClassicVariantsIds.dispater,
   },
   //fierna
   {
     name: "Legacy of Phlegethos",
     description:
       "You know the Friends cantrip. Once you reach 3rd level, you can cast the Charm Person spell once as a 2nd-level spell. Once you reach 5th level, you can also cast the Suggestion spell once. You must finish a long rest to cast these spells again with this trait. Charisma is your spellcasting ability for these spells.",
-    raceVariantId: ClassicVariantsIds.fierna,
+    subSpeciesId: ClassicVariantsIds.fierna,
   },
   //glasya
   {
     name: "Legacy of Malbolge",
     description:
       "You know the Minor Illusion cantrip. Once you reach 3rd level, you can cast the Disguise Self spell once as a 2nd-level spell. Once you reach 5th level, you can also cast the Invisibility spell once. You must finish a long rest to cast these spells again with this trait. Charisma is your spellcasting ability for these spells.",
-    raceVariantId: ClassicVariantsIds.glasya,
+    subSpeciesId: ClassicVariantsIds.glasya,
   },
   //levistus
   {
     name: "Legacy of Stygia",
     description:
       "You know the Ray of Frost cantrip. Once you reach 3rd level, you can cast the Armor of Agathys spell once as a 2nd-level spell. Once you reach 5th level, you can also cast the Darkness spell once. You must finish a long rest to cast these spells again with this trait. Charisma is your spellcasting ability for these spells.",
-    raceVariantId: ClassicVariantsIds.levistus,
+    subSpeciesId: ClassicVariantsIds.levistus,
   },
   //mammon
   {
     name: "Legacy of Minauros",
     description:
       "You know the Mage Hand cantrip. Once you reach 3rd level, you can cast the Tenser's Floating Disk spell once as a 2nd-level spell. Once you reach 5th level, you can also cast the Arcane Lock spell once. You must finish a long rest to cast these spells again with this trait. Charisma is your spellcasting ability for these spells.",
-    raceVariantId: ClassicVariantsIds.mammon,
+    subSpeciesId: ClassicVariantsIds.mammon,
   },
   //mephistopheles
   {
     name: "Legacy of Cania",
     description:
       "You know the Mage Hand cantrip. Once you reach 3rd level, you can cast the Burning Hands spell once as a 2nd-level spell. Once you reach 5th level, you can also cast the Flame Blade spell once. You must finish a long rest to cast these spells again with this trait. Charisma is your spellcasting ability for these spells.",
-    raceVariantId: ClassicVariantsIds.mephistopheles,
+    subSpeciesId: ClassicVariantsIds.mephistopheles,
   },
   //zariel
   {
     name: "Legacy of Avernus",
     description:
       "You know the Thaumaturgy cantrip. Once you reach 3rd level, you can cast the Searing Smite spell once as a 2nd-level spell. Once you reach 5th level, you can also cast the Branding Smite spell once. You must finish a long rest to cast these spells again with this trait. Charisma is your spellcasting ability for these spells.",
-    raceVariantId: ClassicVariantsIds.zariel,
+    subSpeciesId: ClassicVariantsIds.zariel,
   },
 
   //   //chromatic
   //   {
   //     name: "Chromatic Ancestry",
   //     description:
-  //       "You trace your ancestry to a chromatic dragon, granting you a special magical affinity. Choose one type of dragon from the Chromatic Ancestry table. This determines the damage type for your other traits as shown in the table.",
+  //       "You tspecies your ancestry to a chromatic dragon, granting you a special magical affinity. Choose one type of dragon from the Chromatic Ancestry table. This determines the damage type for your other traits as shown in the table.",
   //     extendedTable: [
   //       {
   //         "": {
@@ -1165,31 +1165,31 @@ const ClassicTraits: RaceFeature[] = [
   //         },
   //       },
   //     ],
-  //     raceVariantId: ClassicVariantsIds.chromaticDragonborn,
+  //     subSpeciesId: ClassicVariantsIds.chromaticDragonborn,
   //   },
   //   {
   //     name: "Breath Weapon",
   //     description:
   //       "When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of magical energy in a 30-foot line that is 5 feet wide. Each creature in that area must make a Dexterity saving throw (DC = 8 + your Constitution modifier + your proficiency bonus). \n\nOn a failed save, the creature takes 1d10 damage of the type associated with your Chromatic Ancestry. On a successful save, it takes half as much damage.\n\n This damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).\n\n You can use your Breath Weapon a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
-  //     raceVariantId: ClassicVariantsIds.chromaticDragonborn,
+  //     subSpeciesId: ClassicVariantsIds.chromaticDragonborn,
   //   },
   //   {
   //     name: "Damage Resistance",
   //     description:
   //       "You have resistance to the damage type associated with your Chromatic Ancestry.",
-  //     raceVariantId: ClassicVariantsIds.chromaticDragonborn,
+  //     subSpeciesId: ClassicVariantsIds.chromaticDragonborn,
   //   },
   //   {
   //     name: "Chromatic Warding",
   //     description:
   //       "Starting at 5th level, as an action, you can channel your draconic energy to protect yourself. For 1 minute, you become immune to the damage type associated with your Chromatic Ancestry. Once you use this trait, you can’t do so again until you finish a long rest.",
-  //     raceVariantId: ClassicVariantsIds.chromaticDragonborn,
+  //     subSpeciesId: ClassicVariantsIds.chromaticDragonborn,
   //   },
   //   //metallic
   //   {
   //     name: "Metallic Ancestry",
   //     description:
-  //       "You trace your ancestry to a metallic dragon, granting you a special magical affinity. Choose one type of dragon from the Metallic Ancestry table. This determines the damage type for your other traits as shown in the table.",
+  //       "You tspecies your ancestry to a metallic dragon, granting you a special magical affinity. Choose one type of dragon from the Metallic Ancestry table. This determines the damage type for your other traits as shown in the table.",
   //     extendedTable: [
   //       {
   //         "": {
@@ -1219,25 +1219,25 @@ const ClassicTraits: RaceFeature[] = [
   //         },
   //       },
   //     ],
-  //     raceVariantId: ClassicVariantsIds.metallicDragonborn,
+  //     subSpeciesId: ClassicVariantsIds.metallicDragonborn,
   //   },
   //   {
   //     name: "Breath Weapon",
   //     description:
   //       "When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of magical energy in a 30-foot line that is 5 feet wide. Each creature in that area must make a Dexterity saving throw (DC = 8 + your Constitution modifier + your proficiency bonus). \n\nOn a failed save, the creature takes 1d10 damage of the type associated with your Metallic Ancestry. On a successful save, it takes half as much damage.\n\n This damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).\n\n You can use your Breath Weapon a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
-  //     raceVariantId: ClassicVariantsIds.metallicDragonborn,
+  //     subSpeciesId: ClassicVariantsIds.metallicDragonborn,
   //   },
   //   {
   //     name: "Damage Resistance",
   //     description:
   //       "You have resistance to the damage type associated with your Metallic Ancestry.",
-  //     raceVariantId: ClassicVariantsIds.metallicDragonborn,
+  //     subSpeciesId: ClassicVariantsIds.metallicDragonborn,
   //   },
   //   {
   //     name: "Metallic Breath Weapon",
   //     description:
   //       "At 5th level, you gain a second breath weapon. When you take the Attack action on your turn, you can replace one of your attacks with an exhalation in a 15-foot cone. The save DC for this breath is 8 + your Constitution modifier + your proficiency bonus. Whenever you use this trait, choose one: ",
-  //     raceVariantId: ClassicVariantsIds.metallicDragonborn,
+  //     subSpeciesId: ClassicVariantsIds.metallicDragonborn,
   //     extendedTable: [
   //       {
   //         "": {
@@ -1262,10 +1262,10 @@ const ClassicTraits: RaceFeature[] = [
   //   },
   //   //gem
   //   {
-  //     raceVariantId: ClassicVariantsIds.gemDragonborn,
+  //     subSpeciesId: ClassicVariantsIds.gemDragonborn,
   //     name: "Gem Ancestry",
   //     description:
-  //       "You trace your ancestry to a Gem dragon, granting you a special magical affinity. Choose one type of dragon from the Gem Ancestry table. This determines the damage type for your other traits as shown in the table.",
+  //       "You tspecies your ancestry to a Gem dragon, granting you a special magical affinity. Choose one type of dragon from the Gem Ancestry table. This determines the damage type for your other traits as shown in the table.",
   //     extendedTable: [
   //       {
   //         "": {
@@ -1297,7 +1297,7 @@ const ClassicTraits: RaceFeature[] = [
   //     ],
   //   },
   //   {
-  //     raceVariantId: ClassicVariantsIds.gemDragonborn,
+  //     subSpeciesId: ClassicVariantsIds.gemDragonborn,
   //     name: "Breath Weapon",
   //     description:
   //       "When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of magical energy in a 30-foot line that is 5 feet wide. Each creature in that area must make a Dexterity saving throw (DC = 8 + your Constitution modifier + your proficiency bonus). \n\nOn a failed save, the creature takes 1d10 damage of the type associated with your Gem Ancestry. On a successful save, it takes half as much damage.\n\n This damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).\n\n You can use your Breath Weapon a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
@@ -1306,19 +1306,19 @@ const ClassicTraits: RaceFeature[] = [
   //     name: "Draconic Resistance",
   //     description:
   //       "You have resistance to the damage type associated with your Gem Ancestry.",
-  //     raceVariantId: ClassicVariantsIds.gemDragonborn,
+  //     subSpeciesId: ClassicVariantsIds.gemDragonborn,
   //   },
   //   {
   //     name: "Psionic Mind",
   //     description:
   //       "You can telepathically speak to any creature you can see within 30 feet of you. You don’t need to share a language with the creature, but the creature must be able to understand at least one language.",
-  //     raceVariantId: ClassicVariantsIds.gemDragonborn,
+  //     subSpeciesId: ClassicVariantsIds.gemDragonborn,
   //   },
   //   {
   //     name: "Gem Flight",
   //     description:
   //       "Starting at 5th level, you can use a bonus action to manifest spectral wings on your body. These wings last for 1 minute. For the duration, you gain a flying speed equal to your walking speed and can hover. Once you use this trait, you can’t do so again until you finish a long rest.",
-  //     raceVariantId: ClassicVariantsIds.gemDragonborn,
+  //     subSpeciesId: ClassicVariantsIds.gemDragonborn,
   //   },
   //hill dwarf
 ];

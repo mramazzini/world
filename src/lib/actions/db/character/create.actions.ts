@@ -3,19 +3,19 @@
 import {
   BackgroundID,
   ClassID,
-  RaceID,
-  RaceVariantID,
+  SpeciesID,
+  SubSpeciesID,
 } from "@/lib/utils/types/types";
 import { Alignment, PrismaClient } from "@prisma/client";
 
 export interface CreateCharacterParams {
   name: string;
-  raceId: RaceID;
+  speciesId: SpeciesID;
   classId: ClassID;
   alignment: Alignment;
   backgroundId: BackgroundID;
   userId: number;
-  variantId?: RaceVariantID;
+  variantId?: SubSpeciesID;
 }
 export const createCharacter = async (
   params: CreateCharacterParams
@@ -34,8 +34,8 @@ export const createCharacter = async (
       User: {
         connect: { id: params.userId },
       },
-      Race: {
-        connect: { id: params.raceId },
+      Species: {
+        connect: { id: params.speciesId },
       },
     },
   });
@@ -46,7 +46,7 @@ export const createCharacter = async (
     await db.character.update({
       where: { id: res.id },
       data: {
-        SubRace: {
+        SubSpecies: {
           connect: { id: params.variantId },
         },
       },

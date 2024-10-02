@@ -1,4 +1,4 @@
-import { Language, Race, Skill } from "@prisma/client";
+import { Language, Species, Skill } from "@prisma/client";
 import { Property, src, WeaponPropertyNames } from "./utils/types/types";
 import { Ability } from "@prisma/client";
 export const QUERY_LIMIT = 30;
@@ -35,7 +35,7 @@ export const skillAtritbuteMap: Record<Skill, Ability> = {
 
 export const languages = Object.values(Language);
 
-export const races: string[] = [
+export const species: string[] = [
   "Human",
   "Elf",
   "Dwarf",

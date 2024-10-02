@@ -481,22 +481,19 @@ const termDictionary: {
       "A character's history and upbringing. Determines some of your character's starting equipment and abilities.",
   },
   {
-    term: "Subrace",
+    term: "Subspecies",
     definition:
-      "A more specific heritage based on your race. Grants additional racial traits.",
+      "A more specific heritage based on your species. Grants additional species traits.",
   },
   {
-    term: "Racial trait",
-    definition: "An ability that your character gains from their race/subrace.",
-  },
-  {
-    term: "Racial traits",
-    definition: "Abilities that your character gains from their race/subrace.",
-  },
-  {
-    term: "Race",
+    term: "Species trait",
     definition:
-      "A character's species. Determines many aspects of your character, including size, age, languages, Ability scores, and racial traits.",
+      "An ability that your character gains from their species/subspecies.",
+  },
+  {
+    term: "Species",
+    definition:
+      "A character's species. Determines many aspects of your character, including size, age, languages, Ability scores, and species traits.",
   },
   {
     term: "Size",

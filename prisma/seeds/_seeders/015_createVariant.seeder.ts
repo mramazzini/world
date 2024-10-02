@@ -1,17 +1,17 @@
 import { cerr, cinfo } from "@/lib/utils/chalkLog";
 import { PrismaClient } from "@prisma/client";
-import ExoticVariants from "../Races/Variants/ExoticVariants";
+import ExoticVariants from "../Species/Variants/ExoticVariants";
 import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
-import ClassicTraits from "../Races/Variants/ClassicTraits";
-import { ClassicVariants } from "../Races/Variants/ClassicVariants";
+import ClassicTraits from "../Species/Variants/ClassicTraits";
+import { ClassicVariants } from "../Species/Variants/ClassicVariants";
 
 export const createVariants = async (db: PrismaClient) => {
-  cinfo("Creating Classic Race Features");
+  cinfo("Creating Classic Species Features");
   for (const t of ClassicTraits) {
     try {
       cinfo("Creating classic trait:", t.name);
-      if (!t.raceVariantId) {
-        cerr("Classic trait missing raceId field:", t.name);
+      if (!t.subSpeciesId) {
+        cerr("Classic trait missing speciesId field:", t.name);
         return;
       }
       if (
@@ -21,9 +21,9 @@ export const createVariants = async (db: PrismaClient) => {
         cerr("Error verifying extended table integrity:", t.name);
         return;
       }
-      const r = ClassicVariants.find((r) => r.id === t.raceVariantId);
+      const r = ClassicVariants.find((r) => r.id === t.subSpeciesId);
       if (!r) {
-        cerr("Race not found for feature:", t.name);
+        cerr("Species not found for feature:", t.name);
         return;
       }
       if (!r.features) {
@@ -41,11 +41,11 @@ export const createVariants = async (db: PrismaClient) => {
   for (const v of ClassicVariants) {
     try {
       cinfo("Creating classic variant:", v.name);
-      if (!v.baseRaceId) {
-        cerr("Classic variant missing baseRaceId field:", v.name);
+      if (!v.speciesId) {
+        cerr("Classic variant missing subSpeciesId field:", v.name);
         return;
       }
-      await db.raceVariant.upsert({
+      await db.subSpecies.upsert({
         where: {
           id: v.id,
         },
@@ -65,7 +65,7 @@ export const createVariants = async (db: PrismaClient) => {
   for (const r of ExoticVariants) {
     try {
       cinfo("Creating exotic variant:", r.name);
-      await db.raceVariant.upsert({
+      await db.subSpecies.upsert({
         where: {
           id: r.id,
         },

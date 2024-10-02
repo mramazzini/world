@@ -6,11 +6,11 @@ import { Alignment } from "@prisma/client";
 import { alignmentToText } from "@/app/components/Utility/alignmentToText";
 import SidebarMetaSelector from "./SidebarMetaSelector";
 import { getClassMetadata } from "@/lib/actions/db/class/read.actions";
-import { getSpeciesMetadata } from "@/lib/actions/db/race/get.actions";
+import { getSpeciesMetadata } from "@/lib/actions/db/species/get.actions";
 import {
   getVariantMetadata,
-  getVariantMetadataByRace,
-} from "@/lib/actions/db/subrace/read.actions";
+  getVariantMetadataBySpecies,
+} from "@/lib/actions/db/subSpecies/read.actions";
 import { getBackgroundsMetadata } from "@/lib/actions/db/background/read.actions";
 import { createCharacter } from "@/lib/actions/db/character/create.actions";
 import { useRouter } from "next/navigation";
@@ -19,7 +19,7 @@ const CreateCharacterModal = () => {
   const router = useRouter();
   const [sideBarMetadata, setSideBarMetadata] = useState<DBMetadata[]>([]);
   const [sideBarModel, setSideBarModel] = useState<
-    "class" | "race" | "variant" | "background" | null
+    "class" | "species" | "variant" | "background" | null
   >(null);
   const [variantsAvailable, setVariantsAvailable] = useState(false);
 
@@ -27,7 +27,7 @@ const CreateCharacterModal = () => {
     name: string;
     alignment: Alignment;
     class?: DBMetadata;
-    race?: DBMetadata;
+    species?: DBMetadata;
     variant?: DBMetadata;
     background?: DBMetadata;
   }>({
@@ -49,13 +49,13 @@ const CreateCharacterModal = () => {
         case "class":
           res = await getClassMetadata();
           break;
-        case "race":
+        case "species":
           setNewChar((prev) => ({ ...prev, variant: undefined }));
           res = await getSpeciesMetadata();
           break;
         case "variant":
-          if (!newChar.race) return setSideBarModel(null);
-          res = await getVariantMetadataByRace(newChar.race.id);
+          if (!newChar.species) return setSideBarModel(null);
+          res = await getVariantMetadataBySpecies(newChar.species.id);
           break;
         case "background":
           res = await getBackgroundsMetadata();
@@ -73,7 +73,7 @@ const CreateCharacterModal = () => {
     console.log("asd", newChar);
     if (
       !newChar.class ||
-      !newChar.race ||
+      !newChar.species ||
       !newChar.background ||
       newChar.name.length == 0
     )
@@ -82,7 +82,7 @@ const CreateCharacterModal = () => {
       name: newChar.name,
       alignment: newChar.alignment,
       classId: newChar.class?.id,
-      raceId: newChar.race?.id,
+      speciesId: newChar.species?.id,
       backgroundId: newChar.background?.id,
       userId: 1,
       variantId: newChar.variant?.id,
@@ -159,10 +159,10 @@ const CreateCharacterModal = () => {
                 className="btn btn-ghost border-primary w-full max-w-xs"
                 onClick={async (e) => {
                   e.preventDefault();
-                  setSideBarModel("race");
+                  setSideBarModel("species");
                 }}
               >
-                {newChar.race?.name || "Choose Species"}
+                {newChar.species?.name || "Choose Species"}
               </button>
             </label>
             <label className="label">
@@ -172,7 +172,7 @@ const CreateCharacterModal = () => {
                 className="btn btn-ghost border-primary w-full max-w-xs"
                 onClick={async (e) => {
                   e.preventDefault();
-                  if (!newChar.race) return setSideBarModel(null);
+                  if (!newChar.species) return setSideBarModel(null);
                   setSideBarModel("variant");
                 }}
               >
@@ -228,9 +228,11 @@ const CreateCharacterModal = () => {
               case "class":
                 setNewChar((prev) => ({ ...prev, class: metadata }));
                 break;
-              case "race":
-                setNewChar((prev) => ({ ...prev, race: metadata }));
-                const available = await getVariantMetadataByRace(metadata.id);
+              case "species":
+                setNewChar((prev) => ({ ...prev, species: metadata }));
+                const available = await getVariantMetadataBySpecies(
+                  metadata.id
+                );
                 setVariantsAvailable(available.length > 0);
 
                 break;

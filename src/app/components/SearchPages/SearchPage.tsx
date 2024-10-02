@@ -10,12 +10,12 @@ import { useSearchParams } from "next/navigation";
 import {
   ClassInfo,
   QueryParams,
-  RaceInfo,
+  SpeciesInfo,
   SearchFieldOption,
   SearchFieldOptions,
   SubClassInfo,
   SubclassSearchResults,
-  SubRaceInfo,
+  SubSpeciesInfo,
   ItemInfo,
   SpellListInfo,
   FeatInfo,
@@ -31,8 +31,8 @@ type DataType =
   | ClassInfo
   | Spell
   | Background
-  | RaceInfo
-  | SubRaceInfo
+  | SpeciesInfo
+  | SubSpeciesInfo
   | ItemInfo
   | FeatInfo
   | SpellListInfo

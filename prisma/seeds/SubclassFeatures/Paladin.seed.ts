@@ -546,7 +546,7 @@ const PaladinSubclassFeatures: SubclassFeature[] = [
   {
     name: "Aura of Alacrity",
     description:
-      "At 7th level, you emanate an aura that fills you and your companions with supernatural speed, allowing you to race across a battlefield in formation. Your walking speed increases by 10 feet. In addition, if you aren't incapacitated, the walking speed of any ally who starts their turn within 5 feet of you increases by 10 feet until the end of that turn.\n\nAt 18th level, the range of this aura increases to 10 feet.",
+      "At 7th level, you emanate an aura that fills you and your companions with supernatural speed, allowing you to species across a battlefield in formation. Your walking speed increases by 10 feet. In addition, if you aren't incapacitated, the walking speed of any ally who starts their turn within 5 feet of you increases by 10 feet until the end of that turn.\n\nAt 18th level, the range of this aura increases to 10 feet.",
     levels: [7, 18],
     subClassId: ids.glory,
   },

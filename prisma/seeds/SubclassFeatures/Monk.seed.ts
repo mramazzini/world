@@ -698,7 +698,7 @@ const MonkSubclassFeatures: SubclassFeature[] = [
   {
     name: "Shadow Arts",
     description:
-      "Starting when you choose this tradition at 3rd level, you can use your ki to duplicate the effects of certain spells. As an action, you can spend 2 ki points to cast darkness, darkvision, pass without trace, or silence, without providing material components. Additionally, you gain the minor illusion cantrip if you don't already know it.",
+      "Starting when you choose this tradition at 3rd level, you can use your ki to duplicate the effects of certain spells. As an action, you can spend 2 ki points to cast darkness, darkvision, pass without tspecies, or silence, without providing material components. Additionally, you gain the minor illusion cantrip if you don't already know it.",
     subClassId: ids.shadow,
     levels: [3],
   },

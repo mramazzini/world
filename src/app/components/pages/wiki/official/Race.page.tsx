@@ -1,4 +1,4 @@
-import { RaceInfo } from "@/lib/utils/types/types";
+import { SpeciesInfo } from "@/lib/utils/types/types";
 import Link from "next/link";
 import NewLineParse from "@/app/components/Utility/NewLineParse";
 import GenerateTable from "@/app/components/UI/GenerateTable";
@@ -8,34 +8,35 @@ import JsonTable from "@/app/components/Utility/JsonTable";
 import FeatureList from "@/app/components/UI/FeatureList";
 
 interface Props {
-  race: RaceInfo | null;
+  species: SpeciesInfo | null;
 }
 
-const RacePage = ({ race }: Props) => {
+const SpeciesPage = ({ species }: Props) => {
   return (
     <main className="p-4 md:p-8">
-      {race && (
+      {species && (
         <>
           <div className="flex flex-col md:flex-row justify-between">
             <div className="flex flex-col md:w-4/5">
-              <h1>{race.name || "Class Name"}</h1>
+              <h1>{species.name || "Class Name"}</h1>
               <p className="italic pr-4">
                 <NewLineParse>
-                  {race.description || "Your Class Description will go here."}
+                  {species.description ||
+                    "Your Class Description will go here."}
                 </NewLineParse>
               </p>
               <p className="pt-4">
                 Source:
-                <span className="font-bold italic"> {race.source}</span>
+                <span className="font-bold italic"> {species.source}</span>
               </p>
             </div>
             <div className="flex justify-start items-start md:items-end my-2 flex-col ">
               {/* go back */}
               <Link
                 className={"btn btn-ghost border border-gray-500 w-full"}
-                href={`/race`}
+                href={`/species`}
               >
-                View all Races -&gt;
+                View all Species -&gt;
               </Link>
             </div>
           </div>
@@ -51,23 +52,23 @@ const RacePage = ({ race }: Props) => {
                   data: [
                     {
                       Name: "Age",
-                      Description: race.age,
+                      Description: species.age,
                     },
                     {
                       Name: "Alignment",
-                      Description: race.alignment,
+                      Description: species.alignment,
                     },
                     {
                       Name: "Size",
-                      Description: race.sizeDescription || race.size,
+                      Description: species.sizeDescription || species.size,
                     },
                     {
                       Name: "Speed",
-                      Description: `Your base walking speed is ${race.speed} ft.`,
+                      Description: `Your base walking speed is ${species.speed} ft.`,
                     },
                     {
                       Name: "Darkvision",
-                      Description: race.darkvisionDescription || "None",
+                      Description: species.darkvisionDescription || "None",
                     },
                   ],
                 },
@@ -81,48 +82,48 @@ const RacePage = ({ race }: Props) => {
                   <Info tooltip="Ability score improvements, or ASI, are numerical increases to your characters ability scores." />
                 </h2>
                 <div className="divider m-0"></div>
-                {race.abilityScoreDescription}
+                {species.abilityScoreDescription}
               </div>
               <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
                 <h2 className="pb-0">
                   Languages{" "}
                   <Info
-                    tooltip={`A character who is a ${race.name} is proficient in the following languages.`}
+                    tooltip={`A character who is a ${species.name} is proficient in the following languages.`}
                   />{" "}
                 </h2>
                 <div className="divider m-0"></div>
-                <p>{race.languageDescription}</p>
+                <p>{species.languageDescription}</p>
               </div>
-              {race.weaponProficiencyDescription !== null && (
+              {species.weaponProficiencyDescription !== null && (
                 <div className="bg-base-200 rounded-xl p-4  max-w-1/3 ">
                   <h2 className="pb-0 flex justify-between flex-row items-center">
                     <div>
                       Weapons{" "}
                       <Info
-                        tooltip={`A character who is a ${race.name} has proficiency with the following weapons.`}
+                        tooltip={`A character who is a ${species.name} has proficiency with the following weapons.`}
                       />
                     </div>
-                    {race.weaponProficiencyDescription !== null ? (
-                      <div className="badge badge-accent">{race.name}</div>
+                    {species.weaponProficiencyDescription !== null ? (
+                      <div className="badge badge-accent">{species.name}</div>
                     ) : (
-                      <div className="badge badge-neutral">{race.name}</div>
+                      <div className="badge badge-neutral">{species.name}</div>
                     )}
                   </h2>
                   <div className="divider m-0"></div>
-                  <p>{race.weaponProficiencyDescription || "None"}</p>
+                  <p>{species.weaponProficiencyDescription || "None"}</p>
                 </div>
               )}
             </div>
             <div className="divider mb-0"></div>
           </div>
           <div className="divider"></div>
-          <FeatureList features={race.features} />
+          <FeatureList features={species.features} />
           <div className="divider"></div>
-          {race.Variants.length > 0 && (
+          {species.Variants.length > 0 && (
             <div className="bg-base-300 p-4 rounded-xl">
               <h2 className="pb-0">
-                Subraces{" "}
-                <Info tooltip="Subraces allow your character to more closely identify with a specific heritage. Your subrace grants you a few extra racial traits that further empower your character." />
+                Subspecies{" "}
+                <Info tooltip="Subspecies allow your character to more closely identify with a specific heritage. Your subspecies grants you a few extra species traits that further empower your character." />
               </h2>
               <div className="divider"></div>
               <div className="bg-base-100">
@@ -132,13 +133,13 @@ const RacePage = ({ race }: Props) => {
                       "": {
                         headers: ["Name", "Description", "Source"],
                         headersLength: [15, 70, 15],
-                        links: race.Variants.map((variant) => {
-                          return `/subrace/${variant.name.replaceAll(
+                        links: species.Variants.map((variant) => {
+                          return `/subspecies/${variant.name.replaceAll(
                             " ",
                             "-"
                           )}`;
                         }),
-                        data: race.Variants.map((variant) => {
+                        data: species.Variants.map((variant) => {
                           return {
                             Name: variant.name,
                             Description: variant.flavorText,
@@ -158,4 +159,4 @@ const RacePage = ({ race }: Props) => {
   );
 };
 
-export default RacePage;
+export default SpeciesPage;

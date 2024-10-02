@@ -2,24 +2,24 @@ import { Metadata } from "next";
 
 import "@/lib/string.extensions";
 
-import SubRacePage from "@/app/components/pages/wiki/official/SubRace.page";
-import { getSubRace } from "@/lib/actions/db/subrace/read.actions";
+import SubSpeciesPage from "@/app/components/pages/wiki/official/SubRace.page";
+import { getSubSpecie } from "@/lib/actions/db/subSpecies/read.actions";
 import { getWeapons } from "@/lib/actions/db/weapons/read.actions";
 
 type Props = {
-  params: { subraceName: string };
+  params: { subspeciesName: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getSubRace(params.subraceName.replaceAll("-", " "));
+  const data = await getSubSpecie(params.subspeciesName.replaceAll("-", " "));
 
   if (!data) {
     return {
-      title: "Subrace Not Found - Max's DND Wiki",
-      description: "Subrace Not Found - Max's DND Wiki",
+      title: "Subspecies Not Found - Max's DND Wiki",
+      description: "Subspecies Not Found - Max's DND Wiki",
       openGraph: {
         type: "website",
-        title: "Subrace Not Found - Max's DND Wiki",
-        description: "Subrace Not Found - Max's DND Wiki",
+        title: "Subspecies Not Found - Max's DND Wiki",
+        description: "Subspecies Not Found - Max's DND Wiki",
         images: [
           {
             url: "https://www.maxdnd.com/images/hero.jpg",
@@ -59,9 +59,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Page = async ({ params }: Props) => {
-  const race = await getSubRace(params.subraceName.replaceAll("-", " "));
+  const species = await getSubSpecie(
+    params.subspeciesName.replaceAll("-", " ")
+  );
 
-  return <SubRacePage subRace={race} />;
+  return <SubSpeciesPage subSpecies={species} />;
 };
 
 export default Page;

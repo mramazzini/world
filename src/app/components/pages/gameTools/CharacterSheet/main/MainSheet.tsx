@@ -95,22 +95,25 @@ const MainSheet = ({ character, setCharacter, regenerateCharacter }: Props) => {
 
             <p className="italic">
               Level {calcLevel},{" "}
-              {character.SubRace ? (
+              {character.SubSpecies ? (
                 <a
-                  href={`/subrace/${character.SubRace?.name.replaceAll(
+                  href={`/subspecies/${character.SubSpecies?.name.replaceAll(
                     " ",
                     "-"
                   )}`}
                   className="hover:link"
                 >
-                  {character.SubRace?.name}
+                  {character.SubSpecies?.name}
                 </a>
               ) : (
                 <a
-                  href={`/race/${character.Race?.name.replaceAll(" ", "-")}`}
+                  href={`/species/${character.Species?.name.replaceAll(
+                    " ",
+                    "-"
+                  )}`}
                   className="hover:link"
                 >
-                  {character.Race?.name}
+                  {character.Species?.name}
                 </a>
               )}
               ,{" "}

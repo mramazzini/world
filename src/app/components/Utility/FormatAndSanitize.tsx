@@ -199,7 +199,7 @@ const P = ({
       let match;
       let matchIndexes = [];
       // indexes and length of term
-      //need to get curlybrace match length so that we can fill it with empty space,
+      //need to get curlybspecies match length so that we can fill it with empty space,
       let curlyMatches = [];
       while ((match = curlyRegex.exec(str)) !== null) {
         curlyMatches.push([match.index, match[0].length]);

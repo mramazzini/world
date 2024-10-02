@@ -1,24 +1,24 @@
 import SearchPageComponent from "../SearchPage";
 
-import { SubRaceInfo } from "@/lib/utils/types/types";
+import { SubSpeciesInfo } from "@/lib/utils/types/types";
 
-import { officialSources, races } from "@/lib/globalVars";
-import { getSubRaceChunk } from "@/lib/actions/db/subrace/read.actions";
+import { officialSources, species } from "@/lib/globalVars";
+import { getSubSpeciesChunk } from "@/lib/actions/db/subSpecies/read.actions";
 
 interface Props {
-  subRaces: SubRaceInfo[];
+  subSpecies: SubSpeciesInfo[];
 }
-const SubRaceSearchPage = ({ subRaces }: Props) => {
+const SubSpeciesSearchPage = ({ subSpecies }: Props) => {
   return (
-    <SearchPageComponent<SubRaceInfo>
-      title="Subraces"
-      description="Subraces are a slight variation of its base race, such as a Hill Dwarf or a Wood Elf. They provide additional abilities and features that differentiate your character from others."
-      createText="Create a Subrace ->"
-      homebrewOfficialText="View Homebrew Subraces ->"
-      searchPlaceholder="Search Subrace..."
-      routeName="subrace"
-      handleSearch={getSubRaceChunk}
-      staticInput={subRaces}
+    <SearchPageComponent<SubSpeciesInfo>
+      title="Subspecies"
+      description="Subspecies are a slight variation of its base species, such as a Hill Dwarf or a Wood Elf. They provide additional abilities and features that differentiate your character from others."
+      createText="Create a Subspecies ->"
+      homebrewOfficialText="View Homebrew Subspecies ->"
+      searchPlaceholder="Search Subspecies..."
+      routeName="subspecies"
+      handleSearch={getSubSpeciesChunk}
+      staticInput={subSpecies}
       table={[
         {
           headerWidth: 15,
@@ -57,13 +57,13 @@ const SubRaceSearchPage = ({ subRaces }: Props) => {
       relationalFields={[
         {
           index: 2,
-          model: "BaseRace",
-          alias: "Race",
+          model: "subSpecies",
+          alias: "Species",
           key: "name",
           modifiers: ["Button-Accent", "CapitalCase"],
           headerWidth: 5,
           priority: "all",
-          options: races,
+          options: species,
         },
       ]}
       homebrew={false}
@@ -71,4 +71,4 @@ const SubRaceSearchPage = ({ subRaces }: Props) => {
   );
 };
 
-export default SubRaceSearchPage;
+export default SubSpeciesSearchPage;

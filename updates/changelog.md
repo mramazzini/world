@@ -209,7 +209,7 @@ _2024-08-19_
 - Updated Sitemap to Reflect Changes
 - Massive metdata changes
 - Some pages now render server side (should reduce loading times)
-- Added Races to Database
+- Added Species to Database
 
 ---
 
@@ -217,8 +217,8 @@ _2024-08-19_
 _2024-08-24_
 
 - Racial Origin Page
-- Subrace Page
-- Added 9 different Races, with 54 unique subraces.
+- Subspecies Page
+- Added 9 different Species, with 54 unique subspeciess.
 - Cleaned up some tables
 - Updated UI to reflect new pages
 
@@ -250,8 +250,8 @@ Big UI overhaul + Items + Tooltip update
 
 - Class UI Changed
 - Subclass UI Changed
-- Race UI Changed
-- Subrace UI Changed
+- Species UI Changed
+- Subspecies UI Changed
 - Background UI Changed
 - Added 703 different item pages, categorized by Tool, Weapon, Spell Scroll, or Armor.
 - Item Search Page
@@ -281,7 +281,7 @@ _2024-09-03_
 **0.8.15 - 0.8.16**
 _2024-09-07_
 
-- Fixed Race page returning a 404
+- Fixed Species page returning a 404
 - You can see the demo for the new character sheet at https://maxdnd.com/character. It is not complete and many things are broken. Its more just for those who ask to click around in it.
 
 ---
@@ -289,14 +289,14 @@ _2024-09-07_
 **0.8.17**
 _2024-09-08_
 
-- Added half the exotic races
+- Added half the exotic species
 
 ---
 
 **0.8.18**
 _2024-09-09_
 
-- Added the other half of the exotic races
+- Added the other half of the exotic species
 
 ---
 
@@ -334,7 +334,7 @@ _09-17-2024_
     - Tool Section to roll relevant tool checks
     - Weapon Section to roll weapon attacks
     - Spell Section to roll Spell Damage Rolls
-    - A consolidated list of all features gained from Class, subclass, race, subrace, and background.
+    - A consolidated list of all features gained from Class, subclass, species, subspecies, and background.
 
   - Inventory Tab
 

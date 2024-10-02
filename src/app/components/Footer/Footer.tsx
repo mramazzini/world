@@ -40,12 +40,12 @@ const wikiLinks = [
     url: "/background",
   },
   {
-    name: "Races",
-    url: "/race",
+    name: "Species",
+    url: "/species",
   },
   {
-    name: "Subraces",
-    url: "/subrace",
+    name: "Subspecies",
+    url: "/subspecies",
   },
   {
     name: "Items",

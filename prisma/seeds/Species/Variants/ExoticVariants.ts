@@ -17,10 +17,10 @@ const ids = {
   changeling: 13,
 };
 
-const ExoticVariants: Prisma.RaceVariantCreateManyInput[] = [
+const ExoticVariants: Prisma.SubSpeciesCreateManyInput[] = [
   {
     id: 101,
-    baseRaceId: ids.aaracokkra,
+    speciesId: ids.aaracokkra,
     name: "Aaracokkra (EEPC)",
     description:
       "Sequestered in high mountains atop tall trees, the aarakocra evoke fear and wonder. Many of these birdfolk hail from the boundless vistas of the Elemental Plane of Air. They are immigrants, refugees, scouts, and explorers, their outposts functioning as footholds in a world both strange and alien.",
@@ -76,7 +76,7 @@ const ExoticVariants: Prisma.RaceVariantCreateManyInput[] = [
     flavorText:
       "Protector aasimar are charged by the powers of good to guard the weak, to strike at evil wherever it arises, and to stand vigilant against the darkness.",
     source: src.volo,
-    baseRaceId: ids.aasimarVGM,
+    speciesId: ids.aasimarVGM,
     abilityScoreDescription:
       "On top of your Charisma increase for being an Aasimar (VGM), your Wisdom score increases by 1.",
     abilityScores: {
@@ -107,7 +107,7 @@ const ExoticVariants: Prisma.RaceVariantCreateManyInput[] = [
     flavorText:
       "Scourge aasimar are imbued with a divine energy that blazes intensely within them.",
     source: src.volo,
-    baseRaceId: ids.aasimarVGM,
+    speciesId: ids.aasimarVGM,
     abilityScoreDescription:
       "On top of your Charisma increase for being an Aasimar (VGM), your Constitution score increases by 1.",
     abilityScores: {
@@ -138,7 +138,7 @@ const ExoticVariants: Prisma.RaceVariantCreateManyInput[] = [
     flavorText:
       "An aasimar who was touched by dark powers as a youth or who turns to evil in early adulthood can become one of the fallen.",
     source: src.volo,
-    baseRaceId: ids.aasimarVGM,
+    speciesId: ids.aasimarVGM,
     abilityScoreDescription:
       "On top of your Charisma increase for being an Aasimar (VGM), your Strength score increases by 1.",
     abilityScores: {

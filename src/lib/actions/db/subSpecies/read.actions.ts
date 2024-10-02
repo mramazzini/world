@@ -1,31 +1,55 @@
 "use server";
-import { RaceInfo, QueryParams } from "@/lib/utils/types/types";
+import {
+  SpeciesInfo,
+  QueryParams,
+  SubSpeciesInfo,
+} from "@/lib/utils/types/types";
 import { generateQueryFields } from "@/lib/utils/generateQueryFields";
 import { PrismaClient } from "@prisma/client";
 
 import Fuse from "fuse.js";
 import { DBMetadata } from "@/lib/utils/types/metadata";
 
-export const getSpeciesMetadata = async (): Promise<DBMetadata[]> => {
+export const getVariantMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
-  const res = await db.race.findMany({
+  const res = await db.subSpecies.findMany({
     select: {
       id: true,
       name: true,
       description: true,
-      flavorText: true,
       updatedAt: true,
+      flavorText: true,
     },
   });
   await db.$disconnect();
   return res;
 };
 
-export const getRaces = async (): Promise<RaceInfo[]> => {
+export const getVariantMetadataBySpecies = async (
+  speciesId: number
+): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
-  const res = await db.race.findMany({
+  const res = await db.subSpecies.findMany({
+    where: {
+      speciesId: speciesId,
+    },
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      updatedAt: true,
+      flavorText: true,
+    },
+  });
+  await db.$disconnect();
+  return res;
+};
+
+export const getSubSpecies = async (): Promise<SubSpeciesInfo[]> => {
+  const db = new PrismaClient();
+  const res = await db.subSpecies.findMany({
     include: {
-      Variants: true,
+      species: true,
       User: {
         select: {
           username: true,
@@ -37,17 +61,17 @@ export const getRaces = async (): Promise<RaceInfo[]> => {
   return res;
 };
 
-export const getRace = async (
+export const getSubSpecie = async (
   query: string | number
-): Promise<RaceInfo | null> => {
+): Promise<SubSpeciesInfo | null> => {
   const db = new PrismaClient();
   if (typeof query === "string") {
-    const res = await db.race.findFirst({
+    const res = await db.subSpecies.findFirst({
       where: {
         name: query,
       },
       include: {
-        Variants: true,
+        species: true,
         User: {
           select: {
             username: true,
@@ -58,12 +82,12 @@ export const getRace = async (
     await db.$disconnect();
     return res;
   } else {
-    const res = await db.race.findFirst({
+    const res = await db.subSpecies.findFirst({
       where: {
         id: query,
       },
       include: {
-        Variants: true,
+        species: true,
         User: {
           select: {
             username: true,
@@ -76,19 +100,19 @@ export const getRace = async (
   }
 };
 
-export const getRaceChunk = async (
+export const getSubSpeciesChunk = async (
   queryInfo: QueryParams
-): Promise<RaceInfo[] | null> => {
+): Promise<SubSpeciesInfo[] | null> => {
   const db = new PrismaClient();
   const { query, page } = queryInfo;
   if (query === "") {
-    const res = await db.race.findMany({
+    const res = await db.subSpecies.findMany({
       where: generateQueryFields({
         fields: queryInfo.searchFields,
         relationalFields: queryInfo.relationalFields,
       }),
       include: {
-        Variants: true,
+        species: true,
         User: {
           select: {
             username: true,
@@ -100,14 +124,14 @@ export const getRaceChunk = async (
     return res;
   }
 
-  const res: RaceInfo[] = await db.race.findMany({
+  const res: SubSpeciesInfo[] = await db.subSpecies.findMany({
     where: generateQueryFields({
       fields: queryInfo.searchFields,
       relationalFields: queryInfo.relationalFields,
     }),
 
     include: {
-      Variants: true,
+      species: true,
       User: {
         select: {
           username: true,

@@ -74,25 +74,25 @@ const Dashboard = () => {
                     <p className="italic">
                       Level{" "}
                       {character.state ? calculateLevel(character.state) : 1},{" "}
-                      {character.SubRace ? (
+                      {character.SubSpecies ? (
                         <a
-                          href={`/subrace/${character.SubRace?.name.replaceAll(
+                          href={`/subspecies/${character.SubSpecies?.name.replaceAll(
                             " ",
                             "-"
                           )}`}
                           className="hover:link"
                         >
-                          {character.SubRace?.name}
+                          {character.SubSpecies?.name}
                         </a>
                       ) : (
                         <a
-                          href={`/race/${character.Race?.name.replaceAll(
+                          href={`/species/${character.Species?.name.replaceAll(
                             " ",
                             "-"
                           )}`}
                           className="hover:link"
                         >
-                          {character.Race?.name}
+                          {character.Species?.name}
                         </a>
                       )}
                       ,{" "}

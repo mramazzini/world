@@ -162,22 +162,21 @@ enum Alignment {
 }
 
 model User {
-  id          Int           @id @default(autoincrement())
-  username    String        @unique
-  email       String        @unique
-  password    String
-  Classes     Class[]
-  SubClasses  SubClass[]
-  Races       Race[]
-  Background  Background[]
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  Spell       Spell[]
-  Messages    Message[]
-  RaceVariant RaceVariant[]
-
-  Campaigns      Campaign[]  @relation("PlayerCampaigns")
-  GMForCampaigns Campaign[]  @relation("GMCampaigns")
+  id             Int          @id @default(autoincrement())
+  username       String       @unique
+  email          String       @unique
+  password       String
+  Classes        Class[]
+  SubClasses     SubClass[]
+  Species        Species[]
+  Background     Background[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  Spell          Spell[]
+  Messages       Message[]
+  SubSpecies     SubSpecies[]
+  Campaigns      Campaign[]   @relation("PlayerCampaigns")
+  GMForCampaigns Campaign[]   @relation("GMCampaigns")
   Tool           Tool[]
   Item           Item[]
   Character      Character[]
@@ -196,11 +195,10 @@ model Character {
 
   SubClasses SubClass[] @relation("Character subClasses")
 
-  Race   Race @relation(fields: [raceId], references: [id])
-  raceId Int
-
-  SubRace   RaceVariant? @relation(fields: [subRaceId], references: [id])
-  subRaceId Int?
+  Species      Species     @relation(fields: [speciesId], references: [id])
+  speciesId    Int
+  SubSpecies   SubSpecies? @relation(fields: [subSpeciesId], references: [id])
+  subSpeciesId Int?
 
   /// [CharacterState]
   state Json?
@@ -371,7 +369,7 @@ model SubClass {
   Character Character[] @relation("Character subClasses")
 }
 
-model Race {
+model Species {
   id          Int     @id @default(autoincrement())
   srd         Boolean @default(false)
   name        String
@@ -427,15 +425,14 @@ model Race {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Variants RaceVariant[]
+  Variants SubSpecies[]
 
   User      User?       @relation(fields: [userId], references: [id])
   userId    Int?
   Character Character[]
 }
 
-// This model has optional fields, whose purpose is to override the origin race its attached to
-model RaceVariant {
+model SubSpecies {
   id                      Int     @id @default(autoincrement())
   srd                     Boolean @default(false)
   name                    String
@@ -495,9 +492,9 @@ model RaceVariant {
   User   User? @relation(fields: [userId], references: [id])
   userId Int?
 
-  BaseRace   Race        @relation(fields: [baseRaceId], references: [id])
-  baseRaceId Int
-  Character  Character[]
+  species   Species     @relation(fields: [speciesId], references: [id])
+  speciesId Int
+  Character Character[]
 }
 
 model Background {

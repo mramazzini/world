@@ -1,4 +1,4 @@
-import { SubRaceInfo } from "@/lib/utils/types/types";
+import { SubSpeciesInfo } from "@/lib/utils/types/types";
 import NewLineParse from "@/app/components/Utility/NewLineParse";
 import Link from "next/link";
 import Info from "@/app/components/UI/Info";
@@ -6,16 +6,16 @@ import P from "@/app/components/Utility/FormatAndSanitize";
 import GenerateTable from "@/app/components/UI/GenerateTable";
 
 interface Props {
-  subRace: SubRaceInfo | null;
+  subSpecies: SubSpeciesInfo | null;
 }
 import "@/lib/string.extensions";
 import { arraysEqual } from "@/lib/utils/arraysEqual";
 import { deepEqual } from "assert";
 import { objEqual } from "@/lib/utils/deepEqual";
 import JsonTable from "@/app/components/Utility/JsonTable";
-const SubRacePage = ({ subRace }: Props) => {
-  if (!subRace) return null;
-  const race = subRace.BaseRace;
+const SubSpeciesPage = ({ subSpecies }: Props) => {
+  if (!subSpecies) return null;
+  const species = subSpecies.species;
 
   interface Difference {
     age: TraitStatus;
@@ -33,9 +33,9 @@ const SubRacePage = ({ subRace }: Props) => {
     REPLACED = "REPLACED",
     NONE = "NONE",
   }
-  const calcDifference = (subRace: SubRaceInfo) => {
-    const base = subRace.BaseRace;
-    const sub = subRace;
+  const calcDifference = (subSpecies: SubSpeciesInfo) => {
+    const base = subSpecies.species;
+    const sub = subSpecies;
 
     // returns an object indicating the status of each trait
     let diff: Difference = {
@@ -113,40 +113,40 @@ const SubRacePage = ({ subRace }: Props) => {
     return diff;
   };
 
-  const difference = calcDifference(subRace);
+  const difference = calcDifference(subSpecies);
   return (
     <main className="p-4 md:p-8">
-      {subRace && (
+      {subSpecies && (
         <>
           <div className="flex flex-col md:flex-row justify-between">
             <div className="flex flex-col md:w-4/5">
-              <h1>{subRace.name || "Class Name"}</h1>
-              <p className="mb-4 font-bold">{race.name} Subrace</p>
+              <h1>{subSpecies.name || "Class Name"}</h1>
+              <p className="mb-4 font-bold">{species.name} Subspecies</p>
 
               <p className="italic pr-4">
                 <NewLineParse>
-                  {subRace.description ||
+                  {subSpecies.description ||
                     "Your Class Description will go here."}
                 </NewLineParse>
               </p>
               <p className="pt-4">
                 Source:
-                <span className="font-bold italic"> {subRace.source}</span>
+                <span className="font-bold italic"> {subSpecies.source}</span>
               </p>
             </div>
             <div className="flex justify-start items-start md:items-end my-2 flex-col ">
               {/* go back */}
               <Link
                 className={"btn btn-ghost border border-gray-500 w-full mb-2"}
-                href={`/subrace`}
+                href={`/subspecies`}
               >
-                View all Subraces -&gt;
+                View all Subspecies -&gt;
               </Link>
               <Link
                 className={"btn btn-ghost border border-gray-500 w-full "}
-                href={`/race/${race.name.replaceAll(" ", "-")}`}
+                href={`/species/${species.name.replaceAll(" ", "-")}`}
               >
-                See {race.name} Race -&gt;
+                See {species.name} Species -&gt;
               </Link>
             </div>
           </div>
@@ -157,7 +157,7 @@ const SubRacePage = ({ subRace }: Props) => {
               <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
                 <h2 className="pb-0">
                   What&apos;s new{" "}
-                  <Info tooltip="By selecting this subrace, you gain the following racial traits." />
+                  <Info tooltip="By selecting this subspecies, you gain the following species traits." />
                 </h2>
                 <div className="divider m-0"></div>
                 <ul className="list-disc pl-4">
@@ -166,10 +166,10 @@ const SubRacePage = ({ subRace }: Props) => {
                       return <li key={index}>{key.camelToCapitalCase()}</li>;
                     }
                   })}
-                  {subRace.features.map((trait, index) => (
+                  {subSpecies.features.map((trait, index) => (
                     <li key={index}>{trait.name}</li>
                   ))}
-                  {subRace.features.length == 0 &&
+                  {subSpecies.features.length == 0 &&
                     Object.values(difference).every(
                       (val) => val == TraitStatus.NONE
                     ) && <li>None</li>}
@@ -179,7 +179,7 @@ const SubRacePage = ({ subRace }: Props) => {
                 <h2 className="pb-0">
                   What&apos;s replaced{" "}
                   <Info
-                    tooltip={`By selecting this subrace, the following traits from your race are replaced.`}
+                    tooltip={`By selecting this subspecies, the following traits from your species are replaced.`}
                   />
                 </h2>
                 <div className="divider m-0"></div>
@@ -198,16 +198,16 @@ const SubRacePage = ({ subRace }: Props) => {
                 <h2 className="pb-0">
                   What&apos;s lost{" "}
                   <Info
-                    tooltip={`By selecting this subrace, the following traits from your race are lost`}
+                    tooltip={`By selecting this subspecies, the following traits from your species are lost`}
                   />
                 </h2>
                 <div className="divider m-0"></div>
 
                 <ul className="list-disc pl-4">
-                  {subRace.removedTraits.map((trait, index) => (
+                  {subSpecies.removedTraits.map((trait, index) => (
                     <li key={index}>{trait}</li>
                   ))}
-                  {subRace.removedTraits.length == 0 && <li>None</li>}
+                  {subSpecies.removedTraits.length == 0 && <li>None</li>}
                 </ul>
                 <ul className="list-disc pl-4"></ul>
               </div>
@@ -225,30 +225,30 @@ const SubRacePage = ({ subRace }: Props) => {
                   data: [
                     {
                       Name: "Age",
-                      Description: subRace.age || race.age,
+                      Description: subSpecies.age || species.age,
                     },
                     {
                       Name: "Alignment",
-                      Description: subRace.alignment || race.alignment,
+                      Description: subSpecies.alignment || species.alignment,
                     },
                     {
                       Name: "Size",
                       Description:
-                        subRace.sizeDescription ||
-                        race.sizeDescription ||
+                        subSpecies.sizeDescription ||
+                        species.sizeDescription ||
                         "N/A",
                     },
                     {
                       Name: "Speed",
                       Description: `Your base walking speed is ${
-                        subRace.speed || race.speed
+                        subSpecies.speed || species.speed
                       } ft.`,
                     },
                     {
                       Name: "Darkvision",
                       Description:
-                        subRace.darkvisionDescription ||
-                        race.darkvisionDescription ||
+                        subSpecies.darkvisionDescription ||
+                        species.darkvisionDescription ||
                         "None",
                     },
                   ],
@@ -263,50 +263,55 @@ const SubRacePage = ({ subRace }: Props) => {
                     Ability scores{" "}
                     <Info tooltip="Ability score improvements, or ASI, are numerical increases to your characters ability scores." />
                   </div>
-                  {subRace.abilityScoreDescription !== null ? (
-                    <div className="badge badge-accent">{subRace.name}</div>
+                  {subSpecies.abilityScoreDescription !== null ? (
+                    <div className="badge badge-accent">{subSpecies.name}</div>
                   ) : (
-                    <div className="badge badge-neutral">{race.name}</div>
+                    <div className="badge badge-neutral">{species.name}</div>
                   )}
                 </h2>
                 <div className="divider m-0"></div>
-                {subRace.abilityScoreDescription ||
-                  race.abilityScoreDescription}
+                {subSpecies.abilityScoreDescription ||
+                  species.abilityScoreDescription}
               </div>
               <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
                 <h2 className="pb-0 flex justify-between flex-row items-center">
                   <div>
                     Languages{" "}
                     <Info
-                      tooltip={`A character who is a ${subRace.name} is proficient in the following languages.`}
+                      tooltip={`A character who is a ${subSpecies.name} is proficient in the following languages.`}
                     />{" "}
                   </div>
-                  {subRace.languageDescription !== null ? (
-                    <div className="badge badge-accent">{subRace.name}</div>
+                  {subSpecies.languageDescription !== null ? (
+                    <div className="badge badge-accent">{subSpecies.name}</div>
                   ) : (
-                    <div className="badge badge-neutral">{race.name}</div>
+                    <div className="badge badge-neutral">{species.name}</div>
                   )}
                 </h2>
                 <div className="divider m-0"></div>
-                <p>{subRace.languageDescription || race.languageDescription}</p>
+                <p>
+                  {subSpecies.languageDescription ||
+                    species.languageDescription}
+                </p>
               </div>
-              {subRace.weaponProficiencyDescription !== null && (
+              {subSpecies.weaponProficiencyDescription !== null && (
                 <div className="bg-base-200 rounded-xl p-4  max-w-1/3 ">
                   <h2 className="pb-0 flex justify-between flex-row items-center">
                     <div>
                       Weapons{" "}
                       <Info
-                        tooltip={`A character who is a ${subRace.name} has proficiency with the following weapons.`}
+                        tooltip={`A character who is a ${subSpecies.name} has proficiency with the following weapons.`}
                       />
                     </div>
-                    {subRace.weaponProficiencyDescription !== null ? (
-                      <div className="badge badge-accent">{subRace.name}</div>
+                    {subSpecies.weaponProficiencyDescription !== null ? (
+                      <div className="badge badge-accent">
+                        {subSpecies.name}
+                      </div>
                     ) : (
-                      <div className="badge badge-neutral">{race.name}</div>
+                      <div className="badge badge-neutral">{species.name}</div>
                     )}
                   </h2>
                   <div className="divider m-0"></div>
-                  <p>{subRace.weaponProficiencyDescription || "None"}</p>
+                  <p>{subSpecies.weaponProficiencyDescription || "None"}</p>
                 </div>
               )}
             </div>
@@ -317,17 +322,19 @@ const SubRacePage = ({ subRace }: Props) => {
           <div className="divider"></div>
           <div className="bg-base-300 p-4 rounded-xl">
             <h2 className="pb-0">
-              Racial Traits{" "}
-              <Info tooltip="Unique Abilities granted to your character due to its subrace." />
+              Species Traits{" "}
+              <Info tooltip="Unique Abilities granted to your character due to its subspecies." />
             </h2>
             <div className="divider"></div>
-            {subRace.features.length > 0 && (
+            {subSpecies.features.length > 0 && (
               <>
-                {subRace.features.map((trait, index) => (
+                {subSpecies.features.map((trait, index) => (
                   <div key={index} className="bg-base-200 rounded-xl p-4 my-2">
                     <h3>
                       {trait.name}{" "}
-                      <div className="badge badge-accent">{subRace.name}</div>
+                      <div className="badge badge-accent">
+                        {subSpecies.name}
+                      </div>
                     </h3>
                     <div className="divider m-0"></div>
                     <p>
@@ -342,13 +349,13 @@ const SubRacePage = ({ subRace }: Props) => {
                 ))}
               </>
             )}
-            {race.features.map(
+            {species.features.map(
               (trait, index) =>
-                !subRace.removedTraits.includes(trait.name) && (
+                !subSpecies.removedTraits.includes(trait.name) && (
                   <div key={index} className="bg-base-200 rounded-xl p-4 my-2">
                     <h3>
                       {trait.name}{" "}
-                      <div className="badge badge-neutral">{race.name}</div>
+                      <div className="badge badge-neutral">{species.name}</div>
                     </h3>
                     <div className="divider m-0"></div>
                     <p>
@@ -369,4 +376,4 @@ const SubRacePage = ({ subRace }: Props) => {
   );
 };
 
-export default SubRacePage;
+export default SubSpeciesPage;

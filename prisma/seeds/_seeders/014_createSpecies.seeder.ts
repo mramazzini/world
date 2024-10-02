@@ -1,16 +1,16 @@
 import { cerr, cinfo } from "@/lib/utils/chalkLog";
 import { PrismaClient } from "@prisma/client";
-import Species from "../Races/Races.seed";
+import Species from "../Species/Species.seed";
 import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
-import Traits from "../Races/Traits.seed";
+import Traits from "../Species/Traits.seed";
 
 export const createSpecies = async (db: PrismaClient) => {
-  cinfo("Creating race features");
+  cinfo("Creating species features");
   for (const t of Traits) {
     try {
-      cinfo("Creating race features:", t.name);
-      if (!t.raceId) {
-        cerr("Trait missing raceId field:", t.name);
+      cinfo("Creating species features:", t.name);
+      if (!t.speciesId) {
+        cerr("Trait missing speciesId field:", t.name);
         return;
       }
       if (
@@ -20,9 +20,9 @@ export const createSpecies = async (db: PrismaClient) => {
         cerr("Error verifying extended table integrity:", t.name);
         return;
       }
-      const r = Species.find((r) => r.id === t.raceId);
+      const r = Species.find((r) => r.id === t.speciesId);
       if (!r) {
-        cerr("No Race for feature found:", t.name);
+        cerr("No Species for feature found:", t.name);
         return;
       }
       if (!r.features) {
@@ -30,20 +30,20 @@ export const createSpecies = async (db: PrismaClient) => {
       }
       r.features = [...(r.features as PrismaJson.Feature[]), t];
 
-      cinfo("Race Feature created");
+      cinfo("Species Feature created");
     } catch (error) {
-      cerr("Error creating race feature:", t.name, error);
+      cerr("Error creating species feature:", t.name, error);
       return;
     }
   }
-  cinfo("Race Features created");
+  cinfo("Species Features created");
 
   //create species and traits
   cinfo("Creating Species");
   for (const r of Species) {
     try {
       cinfo("Creating species:", r.name);
-      await db.race.upsert({
+      await db.species.upsert({
         where: {
           id: r.id,
         },

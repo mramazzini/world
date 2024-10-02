@@ -20,12 +20,13 @@ const SpellRollMaker = ({
         <input
           type="number"
           className="input input-bordered "
-          onChange={(e) =>
+          onChange={(e) => {
+            const val = parseInt(e.target.value);
             setSpellRoll({
               ...spellRoll,
-              numberOfDice: parseInt(e.target.value),
-            })
-          }
+              numberOfDice: val,
+            });
+          }}
         />
       </label>
       <label className="form-control w-1/4 px-1">
@@ -146,6 +147,7 @@ const PreparedSpellView = ({
                 {spellInput.spellRoll &&
                   spellInput.spellRoll.map((roll, index) => {
                     if (!spellInput.spellRoll) return null;
+                    if (roll.numberOfDice < 1) return null;
                     if (index == spellInput.spellRoll.length - 1) {
                       return (
                         <span key={index} className="mx-1 badge badge-neutral">
@@ -372,7 +374,7 @@ const PreparedSpellView = ({
                   >
                     {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((level) => (
                       <option key={level} value={level}>
-                        {level}
+                        {toSpellLevel(level)}
                       </option>
                     ))}
                   </select>

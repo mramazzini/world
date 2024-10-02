@@ -164,7 +164,7 @@ const druidSubclassFeatures: SubclassFeature[] = [
           data: [
             {
               "Druid Level": "3rd",
-              "Circle Spells": "Invisibility, Pass without Trace",
+              "Circle Spells": "Invisibility, Pass without Tspecies",
             },
             {
               "Druid Level": "5th",

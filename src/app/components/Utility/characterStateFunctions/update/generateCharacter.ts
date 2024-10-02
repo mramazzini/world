@@ -60,12 +60,12 @@ export const generateCharacter = async (
   if (!char.Classes || char.Classes.length == 0)
     throw new Error("Character has no classes");
   const classObj = char.Classes[0];
-  if (!char.Race) throw new Error("Character has no Race");
-  const species = char.Race;
+  if (!char.Species) throw new Error("Character has no Species");
+  const species = char.Species;
   if (!char.Background) throw new Error("Character has no Background");
   const background = char.Background;
-  if (!char.SubRace) console.warn("Character has no SubRace");
-  const subSpecies = char.SubRace;
+  if (!char.SubSpecies) console.warn("Character has no SubSpecies");
+  const subSpecies = char.SubSpecies;
   const state: PrismaJson.CharacterState = {
     pendingLinks: {
       subClass: [],

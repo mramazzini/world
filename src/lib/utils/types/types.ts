@@ -12,21 +12,21 @@ import {
   Language,
   Message,
   Prisma,
-  Race,
-  RaceVariant,
+  Species,
   Skill,
   Spell,
   SpellList,
   SubClass,
   Tool,
   Weapon,
+  SubSpecies,
 } from "@prisma/client";
 
 export enum Pages {
   Class = "Class",
   SubClass = "SubClass",
-  Race = "Race",
-  SubRace = "SubRace",
+  Species = "Species",
+  SubSpecies = "SubSpecies",
   Background = "Background",
   Feat = "Feat",
   Spell = "Spell",
@@ -58,8 +58,8 @@ export interface CharacterInfo extends Character {
   Background: Background | null;
   Classes: ClassWithSpellList[] | null;
   SubClasses: SubClass[] | null;
-  Race: Race | null;
-  SubRace: RaceVariant | null;
+  Species: Species | null;
+  SubSpecies: SubSpecies | null;
 
   // Inventory: any;
 }
@@ -103,8 +103,8 @@ export interface SpellInfo extends Spell {
 
 export type ClassID = number;
 export type SubClassID = number;
-export type RaceID = number;
-export type RaceVariantID = number;
+export type SpeciesID = number;
+export type SubSpeciesID = number;
 export type BackgroundID = number;
 export type FeatID = number;
 export enum Unit {
@@ -298,8 +298,8 @@ declare global {
             level?: number;
             Class?: ClassID;
             SubClass?: SubClassID;
-            Race?: RaceID;
-            SubRace?: RaceVariantID;
+            Species?: SpeciesID;
+            SubSpecies?: SubSpeciesID;
             Background?: BackgroundID;
             Feat?: FeatID;
             minimumAbilityScores?: AbilityScores;
@@ -974,15 +974,15 @@ export interface MessageInfo extends Message {
   } | null;
 }
 
-export interface RaceInfo extends Race {
+export interface SpeciesInfo extends Species {
   User: {
     username: string | null;
   } | null;
-  Variants: RaceVariant[];
+  Variants: SubSpecies[];
 }
 
-export interface SubRaceInfo extends RaceVariant {
-  BaseRace: Race;
+export interface SubSpeciesInfo extends SubSpecies {
+  species: Species;
   User: {
     username: string | null;
   } | null;

@@ -14,8 +14,8 @@ async function nuke() {
   // await db.class.deleteMany({});
 
   // await db.background.deleteMany({});
-  // await db.raceVariant.deleteMany({});
-  // await db.race.deleteMany({});
+  // await db.subSpecies.deleteMany({});
+  // await db.species.deleteMany({});
 
   // await db.armor.deleteMany({});
   // await db.equipmentPack.deleteMany({});

@@ -19,12 +19,12 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
   //   //     id: 1, // Oath of the gravekeeper TODO
   //   //   },
   //   // },
-  //   Race: {
+  //   Species: {
   //     connect: {
   //       id: 3, //elf
   //     },
   //   },
-  //   SubRace: {
+  //   SubSpecies: {
   //     connect: {
   //       id: 21, //Mark of shadow
   //     },
@@ -39,12 +39,12 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
   //       id: 42, //soldier
   //     },
   //   },
-  //   Race: {
+  //   Species: {
   //     connect: {
   //       id: 12, //Aasimar (VGM)
   //     },
   //   },
-  //   SubRace: {
+  //   SubSpecies: {
   //     connect: {
   //       id: 102, //protector
   //     },
@@ -71,7 +71,7 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
   //     },
   //   },
   //   alignment: Alignment.NEUTRAL_GOOD,
-  //   Race: {
+  //   Species: {
   //     connect: {
   //       id: 37, //Goliath (MMOM)
   //     },
@@ -85,7 +85,7 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
   //       id: 37, //runecarver
   //     },
   //   },
-  //   Race: {
+  //   Species: {
   //     connect: {
   //       id: 3, //elf
   //     },
@@ -100,7 +100,7 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
   //       id: 13, //artificer
   //     },
   //   },
-  //   SubRace: {
+  //   SubSpecies: {
   //     connect: {
   //       id: 20, // pallid elf
   //     },
@@ -122,7 +122,7 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
   //       id: 10, //ranger
   //     },
   //   },
-  //   Race: {
+  //   Species: {
   //     connect: {
   //       id: 39, //harengon
   //     },
@@ -142,12 +142,12 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
   //       id: 2, //wizard
   //     },
   //   },
-  //   Race: {
+  //   Species: {
   //     connect: {
   //       id: 8, //human
   //     },
   //   },
-  //   SubRace: {
+  //   SubSpecies: {
   //     connect: {
   //       id: 57, //variant
   //     },
@@ -172,13 +172,13 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
       },
     },
 
-    Race: {
+    Species: {
       connect: {
         id: 4, //gnome
       },
     },
 
-    SubRace: {
+    SubSpecies: {
       connect: {
         id: 24, //forest
       },

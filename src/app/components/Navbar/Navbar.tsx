@@ -43,12 +43,12 @@ const Navbar = () => {
       href: "/background",
     },
     {
-      name: "Races",
-      href: "/race",
+      name: "Species",
+      href: "/species",
     },
     {
-      name: "Subraces",
-      href: "/subrace",
+      name: "Subspecies",
+      href: "/subspecies",
     },
     {
       name: "Items",

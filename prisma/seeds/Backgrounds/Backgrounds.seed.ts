@@ -506,7 +506,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ideals: [
       "**Greater Good.** Our lot is to lay down our lives in defense of others. (Good)",
       "**Responsibility.** I do what I must and obey just authority. (Lawful)",
-      "**Independence.** When people follow orders blindly, they embrace a kind of tyranny. (Chaotic)",
+      "**Independence.** When people follow orders blindly, they embspecies a kind of tyranny. (Chaotic)",
       "**Might.** In life as in war, the stronger force wins. (Evil)",
       "**Live and Let Live.** Ideals aren't worth killing over or going to war for. (Neutral)",
       "**Nation.** My city, nation, or people are all that matter. (Any)",
@@ -1564,7 +1564,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
       "What I lack in stature, I make up for with sheer spite.",
       "I insist on being taken seriously as a full-grown adult. Nobody talks down to me!",
       "Crowded spaces make me uncomfortable. I’d much rather be in a wide-open field than a bustling tavern.",
-      "I embrace my shorter stature. It helps me stay unnoticed—and underestimated.",
+      "I embspecies my shorter stature. It helps me stay unnoticed—and underestimated.",
       "Every avalanche begins as a single pebble.",
       "The world always feels too big, and I’m afraid I’ll never find my place in it.",
     ],
@@ -1916,7 +1916,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
       ],
     },
     suggestedCharacteristics:
-      "Some hermits are well suited to a life of seclusion, whereas others chafe against it and long for company. Whether they embrace solitude or long to escape it, the solitary life shapes their attitudes and ideals. A few are driven slightly mad by their years apart from society.",
+      "Some hermits are well suited to a life of seclusion, whereas others chafe against it and long for company. Whether they embspecies solitude or long to escape it, the solitary life shapes their attitudes and ideals. A few are driven slightly mad by their years apart from society.",
     traits: [
       "I've been isolated for so long that I rarely speak, preferring gestures and the occasional grunt.",
       "I am utterly serene, even in the face of disaster.",
@@ -2112,7 +2112,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ideals: [
       "**Greater Good.** Our lot is to lay down our lives in defense of others. (Good)",
       "**Responsibility.** I do what I must and obey just authority. (Lawful)",
-      "**Independence.** When people follow orders blindly, they embrace a kind of tyranny. (Chaotic)",
+      "**Independence.** When people follow orders blindly, they embspecies a kind of tyranny. (Chaotic)",
       "**Might.** In life as in war, the stronger force wins. (Evil)",
       "**Live and Let Live.** Ideals aren't worth killing over or going to war for. (Neutral)",
       "**Nation.** My city, nation, or people are all that matter. (Any)",
@@ -2324,7 +2324,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ideals: [
       "**Greater Good.** Our lot is to lay down our lives in defense of others. (Good)",
       "**Responsibility.** I do what I must and obey just authority. (Lawful)",
-      "**Independence.** When people follow orders blindly, they embrace a kind of tyranny. (Chaotic)",
+      "**Independence.** When people follow orders blindly, they embspecies a kind of tyranny. (Chaotic)",
       "**Might.** In life as in war, the stronger force wins. (Evil)",
       "**Live and Let Live.** Ideals aren't worth killing over or going to war for. (Neutral)",
       "**Nation.** My city, nation, or people are all that matter. (Any)",
@@ -2467,7 +2467,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
       ],
     },
     suggestedCharacteristics:
-      "Use the tables for the Soldier background as the basis for your traits and motivations, modifying the entries when appropriate to suit your identity.\n\nYour bond could be associated with the company you traveled with previously, or with some of the comrades you served with. The ideal you embrace largely depends on your worldview and your motivation for fighting.\n\n*Editor's Note: I added the tables for the soldier background here for your convenience.*",
+      "Use the tables for the Soldier background as the basis for your traits and motivations, modifying the entries when appropriate to suit your identity.\n\nYour bond could be associated with the company you traveled with previously, or with some of the comrades you served with. The ideal you embspecies largely depends on your worldview and your motivation for fighting.\n\n*Editor's Note: I added the tables for the soldier background here for your convenience.*",
     traits: [
       "I'm always polite and respectful.",
       "I'm haunted by memories of war. I can't get the images of violence out of my mind.",
@@ -2481,7 +2481,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ideals: [
       "**Greater Good.** Our lot is to lay down our lives in defense of others. (Good)",
       "**Responsibility.** I do what I must and obey just authority. (Lawful)",
-      "**Independence.** When people follow orders blindly, they embrace a kind of tyranny. (Chaotic)",
+      "**Independence.** When people follow orders blindly, they embspecies a kind of tyranny. (Chaotic)",
       "**Might.** In life as in war, the stronger force wins. (Evil)",
       "**Live and Let Live.** Ideals aren't worth killing over or going to war for. (Neutral)",
       "**Nation.** My city, nation, or people are all that matter. (Any)",
@@ -3298,7 +3298,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ideals: [
       "Greater Good. Our lot is to lay down our lives in defense of others. (Good)",
       "Responsibility. I do what I must and obey just authority. (Lawful)",
-      "Independence. When people follow orders blindly, they embrace a kind of tyranny. (Chaotic)",
+      "Independence. When people follow orders blindly, they embspecies a kind of tyranny. (Chaotic)",
       "Might. In life as in war, the stronger force wins. (Evil)",
       "Live and Let Live. Ideals aren't worth killing over or going to war for. (Neutral)",
       "Nation. My city, nation, or people are all that matter. (Any)",

@@ -69,23 +69,23 @@ const CharacterAbilityScoreHandler = ({
               <div className="flex bg-base-300 rounded-xl p-4 flex-col my-4 ">
                 <p>Select your Ability Scores:</p>
                 <Tooltip
-                  element={<p>Note on Racial Ability Scores.</p>}
+                  element={<p>Note on Species Ability Scores.</p>}
                   additionalContent={
                     <p className="bg-base-300 text-base rounded-xl p-2 text-sm mt-2">
                       <strong>
-                        {character.SubRace?.abilityScoreDescription
-                          ? character.SubRace?.name
-                          : character.Race?.name}
+                        {character.SubSpecies?.abilityScoreDescription
+                          ? character.SubSpecies?.name
+                          : character.Species?.name}
                         :{" "}
                       </strong>
-                      {character.SubRace?.abilityScoreDescription
-                        ? character.SubRace?.abilityScoreDescription
-                        : character.Race?.abilityScoreDescription || ""}
+                      {character.SubSpecies?.abilityScoreDescription
+                        ? character.SubSpecies?.abilityScoreDescription
+                        : character.Species?.abilityScoreDescription || ""}
                     </p>
                   }
                 >
-                  Your racial ability scores are applied after you select your
-                  ability scores. For reference, your race describes your
+                  Your species ability scores are applied after you select your
+                  ability scores. For reference, your species describes your
                   ability score increase as follows:
                 </Tooltip>
                 <div className="divider divider-accent  m-0"></div>

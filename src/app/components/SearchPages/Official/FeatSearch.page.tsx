@@ -10,7 +10,7 @@ interface Props {
 const FeatSearchPage = ({ feats }: Props) => {
   return (
     <SearchPageComponent<FeatInfo>
-      title="Racial Origin"
+      title="Species"
       description="Feats provide a unique set of abilities and traits to your character based on their heritage. They can provide additional skills, languages, and abilities. Select a Feat to view more information."
       createText="Create a Feat ->"
       homebrewOfficialText="View Homebrew Feats ->"
