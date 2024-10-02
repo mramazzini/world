@@ -9,8 +9,7 @@ interface Props {
   subSpecies: SubSpeciesInfo | null;
 }
 import "@/lib/string.extensions";
-import { arraysEqual } from "@/lib/utils/arraysEqual";
-import { deepEqual } from "assert";
+
 import { objEqual } from "@/lib/utils/deepEqual";
 import JsonTable from "@/app/components/Utility/JsonTable";
 const SubSpeciesPage = ({ subSpecies }: Props) => {

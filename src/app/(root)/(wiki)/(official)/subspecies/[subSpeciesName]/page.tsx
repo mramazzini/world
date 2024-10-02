@@ -7,10 +7,10 @@ import { getSubSpecie } from "@/lib/actions/db/subSpecies/read.actions";
 import { getWeapons } from "@/lib/actions/db/weapons/read.actions";
 
 type Props = {
-  params: { subspeciesName: string };
+  params: { subSpeciesName: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getSubSpecie(params.subspeciesName.replaceAll("-", " "));
+  const data = await getSubSpecie(params.subSpeciesName.replaceAll("-", " "));
 
   if (!data) {
     return {
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const Page = async ({ params }: Props) => {
   const species = await getSubSpecie(
-    params.subspeciesName.replaceAll("-", " ")
+    params.subSpeciesName.replaceAll("-", " ")
   );
 
   return <SubSpeciesPage subSpecies={species} />;
