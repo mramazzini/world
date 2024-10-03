@@ -58,7 +58,9 @@ const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
                 <ul className="list-disc ml-4">
                   {choice.default?.map((itemData, index) => (
                     <li key={index}>
-                      <P>{`${itemData.quantity} ^${itemData.item}{}^`}</P>
+                      <P
+                        modalID={id}
+                      >{`${itemData.quantity} ^${itemData.item}{}^`}</P>
                     </li>
                   ))}
                 </ul>
@@ -66,6 +68,7 @@ const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
               <div>
                 {choice.choices?.map((choice, index) => (
                   <ItemChoice
+                    modalID={id}
                     key={index}
                     choice={choice}
                     updateSelections={(itemList) => {

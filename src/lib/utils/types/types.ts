@@ -889,7 +889,11 @@ export interface AbilityScores {
   CHA: number;
 }
 export enum src {
+  awMD = "Adventures with Muk: Dankwood",
   kaladesh = "Plane Shift: Kaladesh",
+  ixalan = "Plane Shift: Ixalan",
+  grung = "One Grung Above",
+  zendikar = "Plane Shift: Zendikar",
   homebrew = "Homebrew",
   tasha = "Tasha's Cauldron of Everything",
   xanathar = "Xanathar's Guide to Everything",

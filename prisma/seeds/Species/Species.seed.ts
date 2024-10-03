@@ -3818,6 +3818,1076 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
       },
     ],
   },
+  {
+    id: 61,
+    name: "Bugbear (MMOM)",
+    description:
+      "Neither bugs nor bears, bugbears are the hulking cousins of goblins and hobgoblins. With roots in the Feywild, early bugbears resided in hidden places, in hard-to-reach and shadowed spaces. Long ago and from out of the corner of your eye, they came to the Material Plane, urged to spread throughout the multiverse by the conquering god Maglubiyet. Centuries later, they still bear a fey gift for lurking just out of sight, and many of them have sneaked away from that god’s influence.\n\nThey are long of limb and covered in coarse hair, with wedge-shaped ears and pointed teeth. Despite their formidable build, bugbears are quiet skulkers, thanks to a fey magic that allows them to hide in spaces seemingly too small for them.",
+    flavorText:
+      "Neither bugs nor bears, bugbears are the hulking cousins of goblins and hobgoblins.",
+    source: src.mordenkainenMonsters,
+    abilityScoreDescription:
+      "When determining your character’s ability scores, increase one score by 2 and increase a different score by 1, or increase three different scores by 1. You can't raise any of your scores above 20.",
+    abilityScores: {
+      choices: [
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 2],
+        },
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 1, 1],
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    size: Size.MEDIUM,
+    sizeDescription: "You are Medium.",
+    speedDescription: "Your base walking speed is 30 feet.",
+    speed: 30,
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light and in darkness as if it were dim light. You discern colors in that darkness only as shades of gray.",
+    age: "N/A",
+    alignment: "N/A",
+    languageDescription:
+      "You can speak, read, and write Common and one other language.",
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    features: [
+      {
+        name: "Fey Ancestry",
+        description:
+          "You have advantage on saving throws you make to avoid or end the charmed condition on yourself.",
+      },
+      {
+        name: "Long-Limbed",
+        description:
+          "When you make a melee attack on your turn, your reach for it is 5 feet greater than normal.",
+      },
+      {
+        name: "Powerful Build",
+        description:
+          "You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.",
+      },
+      {
+        name: "Sneaky",
+        description:
+          "You are proficient in the Stealth skill. In addition, without squeezing, you can move through and stop in a space large enough for a Small creature.",
+      },
+      {
+        name: "Surprise Attack",
+        description:
+          "If you hit a creature with an attack roll, the creature takes an extra 2d6 damage if it hasn’t taken a turn yet in the current combat.",
+      },
+    ],
+  },
+  {
+    id: 62,
+    name: "Bugbear (VGM)",
+    description:
+      "Bugbears rely on stealth and strength to attack, preferring to operate at night. When they're not in battle, bugbears spend much of their time resting or dozing, and bully weaker creatures into doing their bidding. From the viewpoint of the rest of the world, their aggression and savagery are thankfully offset by their rarity and lethargy.",
+    abilityScoreDescription:
+      "Your Strength score increases by 2, and your Dexterity score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.STR,
+          value: 2,
+        },
+        {
+          ability: Ability.DEX,
+          value: 1,
+        },
+      ],
+    },
+    age: "Bugbears reach adulthood at age 16 and can live up to 80 years.",
+    alignment:
+      "Bugbears endure a harsh existence that demands each of them to remain self-sufficient, even at the expense of their fellows. They tend to be chaotic evil.",
+
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Bugbears are between 6 and 8 feet tall and weigh between 250 and 350 pounds. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+    languageDescription: "You can speak, read, and write Common and Goblin.",
+    originLanguages: {
+      default: [Language.COMMON, Language.GOBLIN],
+    },
+    creatureType: CreatureType.HUMANOID,
+    flavorText: "Bugbears rely on stealth and strength to attack.",
+    source: src.volo,
+    features: [
+      {
+        name: "Long-Limbed",
+        description:
+          "When you make a melee attack on your turn, your reach for it is 5 feet greater than normal.",
+      },
+      {
+        name: "Sneaky",
+        description: "You are proficient in the Stealth skill.",
+      },
+      {
+        name: "Powerful Build",
+        description:
+          "You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.",
+      },
+      {
+        name: "Surprise Attack",
+        description:
+          "If you surprise a creature and hit it with an attack on your first turn in combat, the attack deals an extra 2d6 damage to it. You can use this trait only once per combat.",
+      },
+    ],
+  },
+  {
+    id: 63,
+    name: "Centaur (MMOM)",
+    description:
+      "Centaurs gallop throughout the multiverse and trace their origins to many different realms. The centaurs presented here hail from the Feywild and mystically resonate with the natural world. From the waist up, they resemble elves, displaying all the elf varieties of skin tone. From the waist down, they have the bodies of horses.",
+    flavorText: "Centaurs gallop throughout the multiverse.",
+    source: src.mordenkainenMonsters,
+    abilityScoreDescription:
+      "When determining your character’s ability scores, increase one score by 2 and increase a different score by 1, or increase three different scores by 1. You can't raise any of your scores above 20.",
+    abilityScores: {
+      choices: [
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 2],
+        },
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 1, 1],
+        },
+      ],
+    },
+    age: "N/A",
+    alignment: "N/A",
+    creatureType: CreatureType.FEY,
+    size: Size.MEDIUM,
+    sizeDescription: "You are Medium.",
+    speed: 40,
+    speedDescription: "Your base walking speed is 40 feet.",
+    languageDescription:
+      "You can speak, read, and write Common and one other language.",
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    features: [
+      {
+        name: "Charge",
+        description:
+          "If you move at least 30 feet straight toward a target and then hit it with a melee weapon attack on the same turn, you can immediately follow that attack with a bonus action, making one attack against the target with your hooves.",
+      },
+      {
+        name: "Equine Build",
+        description:
+          "You count as one size larger when determining your carrying capacity and the weight you can push or drag. \n\nIn addition, any climb that requires hands and feet is especially difficult for you because of your equine legs. When you make such a climb, each foot of movement costs you 4 extra feet instead of the normal 1 extra foot.",
+      },
+      {
+        name: "Hooves",
+        description:
+          "You have hooves that you can use to make unarmed strikes. When you hit with them, the strike deals 1d6 + your Strength modifier bludgeoning damage, instead of the bludgeoning damage normal for an unarmed strike.",
+      },
+      {
+        name: "Natural Affinity",
+        description:
+          "Your fey connection to nature gives you an intuitive connection to the natural world and the animals within it. You therefore have proficiency in one of the following skills of your choice: Animal Handling, Medicine, Nature, or Survival.",
+      },
+    ],
+  },
+  {
+    id: 64,
+    name: "Centaur (GGR)",
+    description: `In the sprawling city of Ravnica, where "open road" seems like a contradiction and "open plain" is sheer nonsense, centaurs nevertheless retain a love of wide spaces and the freedom to travel. As much as they can, centaurs run-in wide plazas, spacious parks, and expanses of rubble and ruin. They race the wind, hooves thundering and tails streaming behind them, until the next wall looms in their path and brings them to a stop.\n\nCentaurs have the upper bodies, down to the waist, of muscular humans, displaying all the human variety of skin tones and features. Their ears are slightly pointed, but their faces are wider and squarer than those of elves. Below the waist, they have the bodies of small horses, with a similar range of coloration - from various s hades of chestnut or bay to dappled or even zebra like striped patterns. Most centaurs style their hair and their tails in a similar way. Selesnya centaurs favor long, flowing hair. Gruul centaurs cut their hair in rough. spiky styles.The upper bodies of centaurs are comparable to human torsos in size, and their lower equine bodies average about 4 feet tall al the withers. Though they are smaller than a human rider mounted on a horse, they fill similar roles as cavalry warriors. messengers, outriders, and scouts.`,
+    flavorText:
+      "In the sprawling city of Ravnica, where 'open road' seems like a contradiction and 'open plain' is sheer nonsense, centaurs nevertheless retain a love of wide spaces and the freedom to travel.",
+    source: src.ravnica,
+    abilityScoreDescription:
+      "Your Strength score increases by 2, and your Wisdom score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.STR,
+          value: 2,
+        },
+        {
+          ability: Ability.WIS,
+          value: 1,
+        },
+      ],
+    },
+    age: "Mature and age at about the same rate as humans.",
+    alignment:
+      "Centaurs are inclined toward neutrality. Those who join the Selesnya are more often neutral good, while those who join the Gruul are typically chaotic neutral.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Centaurs stand between 6 and 7 feet tall, with their equine bodies reaching about 4 feet at the withers. Your size is Medium.",
+    speedDescription: "Your base walking speed is 40 feet.",
+    speed: 40,
+    creatureType: CreatureType.FEY,
+    languageDescription:
+      "You can speak, read, and write Common and Sylvan. Sylvan is widely spoken in the Selesnya Conclave, for it is rich in vocabulary to describe natural phenomena and spiritual forces.",
+    originLanguages: {
+      default: [Language.COMMON, Language.SYLVAN],
+    },
+    features: [
+      {
+        name: "Charge",
+        description:
+          " If you move at least 30 feet straight toward a target and then hit it with a melee weapon attack on the same turn, you can immediately follow that attack with a bonus action, making one attack against the target with your hooves.",
+      },
+      {
+        name: "Equine Build",
+        description:
+          "You count as one size larger when determining your carrying capacity and the weight you can push or drag. In addition, any climb that requires hands and feet is especially difficult for you because of your equine legs. When you make such a climb, each foot of movement costs you 4 extra feet, instead of the normal 1 extra foot.",
+      },
+      {
+        name: "Hooves",
+        description:
+          "Your hooves are natural weapons, which you can use to make unarmed strikes. If you hit with them, you deal bludgeoning damage equal to 1d4 + your Strength modifier.",
+      },
+      {
+        name: "Survivor",
+        description:
+          "You have proficiency in one of the following skills: Animal Handling, Medicine, Nature, or Survival",
+      },
+    ],
+  },
+  {
+    id: 65,
+    name: "Centaur (MOoT)",
+    description:
+      "Powerful and curious, quick to act and knowledgeable of the wider world, centaurs seek to experience life's boundless bounty. The centaurs of Theros are divided into two groups: members of the far-traveling Lagonna band and the proud raiders of the Pheres band. These bands occupy territories situated between the three major human poleis, making them common sights to those who travel human lands. Not ones to settle in permanent homes, though, centaurs might be found wherever there are wonders to be witnessed and adventures to be had.\n\nThough centaurs share the same basic physiology, the centaur bands are commonly associated with their own distinct traits.\n\nLagonna band centaurs tend to be sleek and muscular, with powerful legs built for endurance rather than speed. They usually have coats of a single color, often with a shine that can look metallic in bright light.\n\nPheres band centaurs typically have long, nimble legs and lean bodies, and are often marked with natural color patterns on their hide. Pheres centaurs sometimes paint or tattoo their upper bodies to match the patterns on their lower half. Occasionally, a Pheres centaur is born with vertical stripes on their hooves, foretelling an exciting and adventurous life.",
+    flavorText:
+      "Powerful and curious, quick to act and knowledgeable of the wider world, centaurs seek to experience life's boundless bounty.",
+    source: src.theros,
+    abilityScoreDescription:
+      "Your Strength score increases by 2, and your Wisdom score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.STR,
+          value: 2,
+        },
+        {
+          ability: Ability.WIS,
+          value: 1,
+        },
+      ],
+    },
+    age: "Centaurs mature and age at about the same rate as humans.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Centaurs stand between 6 and 7 feet tall, with their equine bodies reaching about 4 feet at the withers. Pheres centaurs tend to be slightly larger than Lagonna centaurs. Your size is Medium.",
+    speed: 40,
+    alignment:
+      "Centaurs are inclined toward neutrality. Lagonna centaurs tend to be more lawful, while Pheres centaurs are more often chaotic.",
+    creatureType: CreatureType.FEY,
+    languageDescription: "You can speak, read, and write Common and Sylvan.",
+    originLanguages: {
+      default: [Language.COMMON, Language.SYLVAN],
+    },
+    features: [
+      {
+        name: "Charge",
+        description:
+          "If you move at least 30 feet straight toward a target and then hit it with a melee weapon attack on the same turn, you can immediately follow that attack with a bonus action, making one attack against the target with your hooves.",
+      },
+      {
+        name: "Hooves",
+        description:
+          "Your hooves are natural melee weapons, which you can use to make unarmed strikes. If you hit with them, you deal bludgeoning damage equal to 1d4 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.",
+      },
+      {
+        name: "Equine Build",
+        description:
+          "You count as one size larger when determining your carrying capacity and the weight you can push or drag. In addition, any climb that requires hands and feet is especially difficult for you because of your equine legs. When you make such a climb, each foot of movement costs you 4 extra feet, instead of the normal 1 extra foot.",
+      },
+      {
+        name: "Survivor",
+        description:
+          "You have proficiency in one of the following skills: Animal Handling, Medicine, Nature, or Survival.",
+      },
+    ],
+    speedDescription: "Your base walking speed is 40 feet.",
+  },
+  {
+    id: 66,
+    name: "Goblin (MMOM)",
+    description:
+      "A subterranean folk, goblins can be found in every corner of the multiverse, often beside their bugbear and hobgoblin kin. Long before the god Maglubiyet conquered them, early goblins served in the court of the Queen of Air and Darkness, one of the Feywild’s archfey. Goblins thrived in her dangerous domain thanks to a special boon from her—a supernatural knack for finding the weak spots in foes larger than themselves and for getting out of trouble. Goblins brought this fey boon with them to worlds across the Material Plane, even if they don’t remember the fey realm they inhabited before Maglubiyet’s rise. Now many goblins pursue their own destinies, escaping the plots of both archfey and gods.",
+    flavorText:
+      "A subterranean folk, goblins can be found in every corner of the multiverse.",
+    source: src.mordenkainenMonsters,
+    abilityScoreDescription:
+      "When determining your character’s ability scores, increase one score by 2 and increase a different score by 1, or increase three different scores by 1. You can't raise any of your scores above 20.",
+    abilityScores: {
+      choices: [
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 2],
+        },
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 1, 1],
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    size: Size.SMALL,
+    sizeDescription: "You are Small.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light and in darkness as if it were dim light. You discern colors in that darkness only as shades of gray.",
+    languageDescription:
+      "Your character can speak, read, and write Common and one other language.",
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    age: "N/A",
+    alignment: "N/A",
+    features: [
+      {
+        name: "Fury of the Small",
+        description:
+          "When you damage a creature with an attack or a spell and the creature’s size is larger than yours, you can cause the attack or spell to deal extra damage to the creature. The extra damage equals your proficiency bonus. ",
+      },
+      {
+        name: "Nimble Escape",
+        description:
+          "You can use this trait a number of times equal to your proficiency bonus, regaining all expended uses when you finish a long rest, and you can use it no more than once per turn.",
+      },
+      {
+        name: "Fey Ancestry",
+        description:
+          "You have advantage on saving throws you make to avoid or end the charmed condition on yourself.",
+      },
+    ],
+  },
+  {
+    id: 67,
+    name: "Goblin (VGM)",
+    description:
+      "Goblins occupy an uneasy place in a dangerous world, and they react by lashing out at any creatures they believe they can bully. Cunning in battle and cruel in victory, goblins are fawning and servile in defeat.",
+    abilityScoreDescription:
+      "Your Dexterity score increases by 2, and your Constitution score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.DEX,
+          value: 2,
+        },
+        {
+          ability: Ability.CON,
+          value: 1,
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    size: Size.SMALL,
+    sizeDescription:
+      "Goblins are between 3 and 4 feet tall and weigh between 40 and 80 pounds. Your size is Small.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+    languageDescription: "You can speak, read, and write Common and Goblin.",
+    originLanguages: {
+      default: [Language.COMMON, Language.GOBLIN],
+    },
+    features: [
+      {
+        name: "Fury of the Small",
+        description:
+          "When you damage a creature with an attack or a spell and the creature's size is larger than yours, you can cause the attack or spell to deal extra damage to the creature. The extra damage equals your level. Once you use this trait, you can't use it again until you finish a short or long rest.",
+      },
+      {
+        name: "Nimble Escape",
+        description:
+          "You can take the Disengage or Hide action as a bonus action on each of your turns.",
+      },
+    ],
+    flavorText: "Goblins occupy an uneasy place in a dangerous world.",
+    source: src.volo,
+    age: "Goblins reach adulthood at age 8 and live up to 60 years.",
+    alignment:
+      "Goblins are typically neutral evil, as they care only for their own needs. A few goblins might tend toward good or neutrality, but only rarely.",
+  },
+  {
+    id: 68,
+    name: "Goblin (AwMD)",
+    description:
+      "Dankwood goblins are much like any other run-of-the-mill goblin but they are much more gentle and artistic than the savage and uncouth goblins of the world.\n\nThey are inquisitive and have a magical bond with the small forest creatures with which they are often friends. They are fast and numble and love to explore. Because of this they make great adventurers and guides.",
+    flavorText:
+      "Dankwood goblins are much like any other run-of-the-mill goblin but they are much more gentle and artistic than the savage and uncouth goblins of the world.",
+    source: src.awMD,
+    abilityScoreDescription:
+      "Your Dexterity score increases by 2, and your Wisdom score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.DEX,
+          value: 2,
+        },
+        {
+          ability: Ability.WIS,
+          value: 1,
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    age: "Dankwood goblins reach adulthood at age 8 and live up to 60 years.",
+    alignment:
+      "Dankwood goblins are typically neutral or neutral good, though some mischievous dankwood goblins are chaotic neutral.",
+    size: Size.SMALL,
+    sizeDescription:
+      "Dankwood goblins are between 3 and 4 feet tall and weigh between 40 and 80 pounds. Your size is Small.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+    languageDescription: "You can speak, read, and write Common and Goblin.",
+    originLanguages: {
+      default: [Language.COMMON, Language.GOBLIN],
+    },
+    features: [
+      {
+        name: "Speak with Small Beasts",
+        description:
+          "Through sounds nad gestures you can communicate simple ideas with Small of smaller beasts. Dankwood goblins love animals and often keep squirrels, badgers, rabbits, moles, woodpeckers, and other creatures as beloved pets.",
+      },
+      {
+        name: "Nimble Escape",
+        description:
+          "You can take the Disengage or Hide action as a bonus action on each of your turns.",
+      },
+    ],
+  },
+  {
+    id: 69,
+    name: "Goblin (PSI)",
+    description:
+      "Goblins are native to Ixalan, and their eager curiosity drew them to the ships of the Brazen Coalition where the pirates first made landfall on the Sun Empire's shores. Though they still thrive in remote jungle colonies, goblins are most commonly seen swinging on the ropes of sleek pirate ships.\n\nGoblins stand about three feet tall, though they rarely stand upright. They prefer a crouched posture that lets them scramble quickly on all fours, aided by their long prehensile tails. Their hearing and eyesight make them excellent lookouts, and their agility serves them well as crew members on pirate ships. They climb, swing, and jump easily among a ship's ropes, and can get into tight spaces that humans can't. For better or worse, many goblins are also incorrigible pranksters, and they often have a hard time determining when a prank is inappropriate, is poorly timed, or has gone too far.",
+    abilityScoreDescription: "Your Dexteriy score increases by 2.",
+    age: "Goblins mature faster than humans, reaching adulthood around age 12. They age noticeably faster, and though few goblins live to old age, the most cautious rarely live longer than 50 years.",
+    alignment:
+      "Most goblins are wildly chaotic, with no particular inclination toward good or evil but a strong tendency toward mischief.",
+    flavorText:
+      "Goblins are native to Ixalan, and their eager curiosity drew them to the ships of the Brazen Coalition.",
+    source: src.ixalan,
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.DEX,
+          value: 2,
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    size: Size.SMALL,
+    sizeDescription:
+      "Goblins are between 3 and 4 feet tall and weigh about 40 pounds. Your size is Small.",
+    speed: 25,
+    speedDescription: "Your base walking speed is 25 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "Accustomed to life in the jungle night, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+    languageDescription: "You can speak, read, and write Common and Goblin.",
+    originLanguages: {
+      default: [Language.COMMON, Language.GOBLIN],
+    },
+    features: [
+      {
+        name: "Agile Climber",
+        description:
+          "You have a climbing speed of 25 feet. You can't use your climbing speed while you wear medium or heavy armor. ",
+      },
+    ],
+  },
+  {
+    id: 70,
+    name: "Goblin (PSZ)",
+    description:
+      "Goblins are an inquisitive and adaptable race hampered by their small size, their natural cowardice, and a severe shortage of common sense. They eagerly explore areas that others hesitate to enter, and obsessively fiddle with magic that more sensible folk would take careful precautions with. They prize ancient artifacts not for their inherent value, but primarily as a mark of status—for a precious trophy proves that its owner survived a delve into a deep and dangerous ruin.\n\nA typical goblin stands between three-and-a-half and five feet tall, with a slender, elongated build. Goblins' arms are unusually long and spindly, making them adept at climbing cliffs and trees. Their skin has a stony texture, ranging in color from red-brown to moss green or gray. Their ears are large and swept back, their eyes are intensely red, and many sport heavy bone protrusions on their spines or elbows. Males have similar growths jutting from their chins, while females have heavier growths on their foreheads.",
+    flavorText:
+      "Goblins are an inquisitive and adaptable race hampered by their small size.",
+    source: src.zendikar,
+    abilityScoreDescription: "Your Constitution score increases by 2.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.CON,
+          value: 2,
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    size: Size.SMALL,
+    sizeDescription:
+      "Goblins are between 3 and 4 feet tall and weigh about 40 pounds. Your size is Small.",
+    speed: 25,
+    speedDescription: "Your base walking speed is 25 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+    languageDescription: "You can speak, read, and write Common and Goblin.",
+    originLanguages: {
+      default: [Language.COMMON, Language.GOBLIN],
+    },
+    age: "Goblins mature faster than humans, reaching adulthood around age 12. They age noticeably faster, and though few goblins live to old age, the most cautious rarely live longer than 50 years.",
+    alignment:
+      "Most goblins are wildly chaotic, with no particular inclination toward good or evil but a strong tendency toward mischief.",
+    features: [
+      {
+        name: "Grit",
+        description:
+          "You have resistance to fire damage and psychic damage. In addition, when you are wearing no armor, your AC is equal to 11 + your Dexterity modifier.",
+      },
+      {
+        name: "Tribe",
+        description:
+          "Most goblins on Zendikar belong to one of three tribes: the Grotag, the Lavastep, and the Tuktuk. Choose one of these tribes. ",
+        extendedTable: [
+          {
+            "Goblin Tribes": {
+              headersLength: [15, 60, 25],
+              headers: ["Tribe", "Description", "Feature"],
+              data: [
+                {
+                  Tribe: "Grotag",
+                  Description:
+                    "Smaller and weaker than their cousins, and with larger hands and feet, goblins of the Grotag tribe attempt to live by their wits-though seldom with much success. When a Grotag goblin has the bright idea of trying to tame fleshpiercer mites, at least a few others will be willing to follow that goblin into a nest-usually to predictably horrible results. But though the Grotag seem to have a never-ending supply of bad ideas, and a horrible ratio of bad ideas to good, the Grotag likewise seem to have a never-ending supply of Grotag. As such, by trial and error (and more error), these goblins have stumbled across a great deal of knowledge useful for surviving the deep places of Zendikar, and for dealing with the creatures that live there. The Grotag imagine themselves to have a sort of empathy with beasts, and they lose hundreds of goblins each year to ill-advised attempts at monster taming. But, every now and again, one of these efforts is successful.",
+                  Feature:
+                    "**Grotag Tamer:** You have proficiency in the Animal Handling skill.",
+                },
+                {
+                  Tribe: "Lavastep",
+                  Description:
+                    "The Lavastep tribe is the most industrious of the goblin tribes, and possesses much hard-won knowledge of the geothermal activity in Akoum. More so than members of the other tribes, the Lavastep goblins build surprisingly effective equipment out of the crystal shards and veins of strange metals that occasionally boil up to the surface. The most warlike of their kind, Lavastep goblins frequently harass the kor, elves, and humans of Akoum.",
+                  Feature:
+                    "**Lavastep Grit:** You have advantage on Dexterity (Stealth) checks made to hide in rocky or subterranean environments.",
+                },
+                {
+                  Tribe: "Tuktuk",
+                  Description:
+                    "Among the goblins, the Tuktuk are most likely to hire themselves out as ruin guides to other races. Of course, their usual plan is to help find something of value, steal it, trigger a trap intentionally, and then run.",
+                  Feature:
+                    "**Tuktuk Cunning.** You have proficiency with thieves' tools.",
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 71,
+    name: "Grung",
+    description:
+      "Grungs are aggressive froglike humanoids found in rain forests and tropical jungles. They are fiercely territorial and see themselves as superior to most other creatures.\n\nGrung society is a caste system. Each caste lays eggs in a separate hatching pool, and juvenile grungs join their caste upon emergence from the hatchery. All grungs are a dull greenish gray when they are born, but each individual takes on the color of its caste as it grows to adulthood. From lowest to highest caste, grungs can be green, blue, purple, red, orange, or gold.\n\nAll grungs secrete a substance that is harmless to them but poisonous to other creatures. A grung also uses venom to poison its weapons. Grungs are always on the lookout for creatures they can capture and enslave. Grungs use slaves for all manner of menial tasks, but mostly they just like bossing them around. Slaves are fed mildly poisoned food to keep them lethargic and compliant. A creature afflicted in this way over a long period of time becomes a shell of its former self and can be restored to normalcy only by magic. Being amphibious, grungs require water to live; any grung that fails to immerse itself in water for at least 1 hour during a day becomes quite exhausted.",
+    flavorText:
+      "Grungs are aggressive froglike humanoids found in rain forests and tropical jungles.",
+    source: src.grung,
+    abilityScoreDescription:
+      "Your Dexterity score increases by 2, and your Constitution score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.DEX,
+          value: 2,
+        },
+        {
+          ability: Ability.CON,
+          value: 1,
+        },
+      ],
+    },
+    age: "Grungs mature to adulthood in a single year, but have been known to live up to 50 years.",
+    alignment:
+      "Most grungs are lawful, having been raised in a strict caste system. They tend toward evil as well, coming from a culture where social advancement occurs rarely, and most often because another member of your army has died and there is no one else of that caste to fill the vacancy.",
+    size: Size.SMALL,
+    sizeDescription:
+      " rungs stand between 2 ½ and 3 ½ feet tall and average about 30 pounds. Your size is Small.",
+    speed: 25,
+    speedDescription:
+      "You have a walking speed of 25 feet. Your sticky finger and toe pads give you a climb speed of 25 feet.",
+    languageDescription: "You can speak, read, and write Grung.",
+    originLanguages: {
+      default: [Language.GRUNG],
+    },
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Arboreal Alertness",
+        description: "You have proficiency in the Perception skill.",
+      },
+      {
+        name: "Poisonous Skin",
+        description:
+          "Any creature that grapples you or otherwise comes into direct contact with your skin must succeed on a DC 12 Constitution saving throw or become poisoned for 1 minute. A poisoned creature no longer in direct contact with you can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.\n\nYou can also apply this poison to any piercing weapon as part of an attack with that weapon, though when you hit the poison reacts differently. The target must succeed on a DC 12 Constitution saving throw or take 2d4 poison damage. ",
+      },
+      {
+        name: "Standing Leap",
+        description:
+          "Your long jump is up to 25 feet and your high jump is up to 15 feet, with or without a running start.",
+      },
+      {
+        name: "Poison Immunity",
+        description:
+          "You are immune to poison damage and the poisoned condition.",
+      },
+      {
+        name: "Water Dependency",
+        description:
+          "If you fail to immerse yourself in water for at least 1 hour during a day, you suffer 1 level of exhaustion at the end of that day. You can recover from this exhaustion only through magic or by immersing yourself in water for at least 1 hour.",
+      },
+    ],
+  },
+  {
+    id: 72,
+    name: "Hobgoblin (MMOM)",
+    description:
+      "Hobgoblins trace their origins to the ancient courts of the Feywild, where they first appeared with their goblin and bugbear kin. Many of them were driven from the Feywild by the conquering god Maglubiyet, who marshaled them as soldiers, but the fey realm left its mark; wherever they are in the multiverse, they continue to channel an aspect of the Feywild’s rule of reciprocity, which creates a mystical bond between the giver and the receiver of a gift.Hobgoblins are generally taller than their goblin cousins but not quite as big as bugbears. They have curved, pointed ears and noses that turn bright red or blue during displays of emotion.",
+    flavorText:
+      "Hobgoblins trace their origins to the ancient courts of the Feywild.",
+    source: src.mordenkainenMonsters,
+    abilityScoreDescription:
+      "When determining your character’s ability scores, increase one score by 2 and increase a different score by 1, or increase three different scores by 1. You can't raise any of your scores above 20.",
+
+    abilityScores: {
+      choices: [
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 2],
+        },
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 1, 1],
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Hobgoblins stand between 5 and 6 feet tall and weigh between 150 and 200 pounds. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light and in darkness as if it were dim light. You discern colors in that darkness only as shades of gray.",
+    languageDescription:
+      "You can speak, read, and write Common and one other language.",
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    age: "N/A",
+    alignment: "N/A",
+    features: [
+      {
+        name: "Fey Ancestry",
+        description:
+          "You have advantage on saving throws you make to avoid or end the charmed condition on yourself.",
+      },
+      {
+        name: "Fey Gift",
+        description:
+          "You can use this trait to take the Help action as a bonus action, and you can do so a number of times equal to your proficiency bonus. You regain all expended uses when you finish a long rest.\n\nStarting at 3rd level, choose one of the options below each time you take the Help action with this trait: ",
+        extendedTable: [
+          {
+            "": {
+              headers: ["Option", "Effect"],
+              data: [
+                {
+                  Option: "Hospitality",
+                  Effect:
+                    "You and the creature you help each gain a number of temporary hit points equal to 1d6 plus your proficiency bonus.",
+                },
+                {
+                  Option: "Passage",
+                  Effect:
+                    "You and the creature you help each increase your walking speeds by 10 feet until the start of your next turn.",
+                },
+                {
+                  Option: "Spite",
+                  Effect:
+                    "Until the start of your next turn, the first time the creature you help hits a target with an attack roll, that target has disadvantage on the next attack roll it makes within the next minute.",
+                },
+              ],
+            },
+          },
+        ],
+        levels: [1, 3],
+      },
+      {
+        name: "Fortune from the Many",
+        description:
+          "If you miss with an attack roll or fail an ability check or a saving throw, you can draw on your bonds of reciprocity to gain a bonus to the roll equal to the number of allies you can see within 30 feet of you (maximum bonus of +3). You can use this trait a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
+      },
+    ],
+  },
+  {
+    id: 73,
+    name: "Hobgoblin (VGM)",
+    description:
+      "War is the lifeblood of hobgoblins. Its glories are the dreams that inspire them. Its horrors don't feature in their nightmares. Cowardice is more terrible to hobgoblins than dying, for they carry their living acts into the afterlife. A hero in death becomes a hero eternal.",
+    flavorText: "War is the lifeblood of hobgoblins.",
+    source: src.volo,
+    abilityScoreDescription:
+      "Your Constitution score increases by 2, and your Intelligence score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.CON,
+          value: 2,
+        },
+        {
+          ability: Ability.INT,
+          value: 1,
+        },
+      ],
+    },
+    age: "Hobgoblins mature at the same rate as humans and have lifespans similar in length to theirs.",
+    alignment:
+      "Hobgoblin society is built on fidelity to a rigid, unforgiving code of conduct. As such, they tend toward lawful evil.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Hobgoblins are between 5 and 6 feet tall and weigh between 150 and 200 pounds. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+    languageDescription: "You can speak, read, and write Common and Goblin.",
+    originLanguages: {
+      default: [Language.COMMON, Language.GOBLIN],
+    },
+    features: [
+      {
+        name: "Martial Training",
+        description:
+          "You are proficient with two martial weapons of your choice and with light armor.",
+      },
+      {
+        name: "Saving Face",
+        description:
+          "Hobgoblins are careful not to show weakness in front of their allies, for fear of losing status. If you miss with an attack roll or fail an ability check or a saving throw, you can gain a bonus to the roll equal to the number of allies you can see within 30 feet of you (maximum bonus of +5). Once you use this trait, you can't use it again until you finish a short or long rest.",
+      },
+    ],
+    creatureType: CreatureType.HUMANOID,
+  },
+  {
+    id: 74,
+    name: "Kobold (MMOM)",
+    description:
+      "Some of the smallest draconic creatures in the multiverse, kobolds display their draconic ancestry in the glint of their scales and in their roars. Legends tell of the first kobolds emerging from the Underdark near the lairs of the earliest dragons. In some lands, kobolds serve chromatic or metallic dragons — even worshiping them as divine beings. In other places, kobolds know too well how dangerous those dragons can be and help others defend against draconic destruction.\n\nWhatever their relationship to dragons, kobold scales tend to be rust colored, although the occasional kobold sports a scale color more akin to that of a chromatic or a metallic dragon. A kobold’s cry can express a range of emotion: anger, resolve, elation, fear, and more. Regardless of the emotion expressed, their cry resonates with draconic power.",
+    flavorText: "Some of the smallest draconic creatures in the multiverse.",
+    source: src.mordenkainenMonsters,
+    abilityScoreDescription:
+      "When determining your character’s ability scores, increase one score by 2 and increase a different score by 1, or increase three different scores by 1. You can't raise any of your scores above 20.",
+    abilityScores: {
+      choices: [
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 2],
+        },
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 1, 1],
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    size: Size.SMALL,
+    sizeDescription: "You are Small.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light and in darkness as if it were dim light. You discern colors in that darkness only as shades of gray.",
+    languageDescription:
+      "You can speak, read, and write Common and one other Language.",
+    age: "N/A",
+    alignment: "N/A",
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    features: [
+      {
+        name: "Draconic Cry",
+        description:
+          "As a bonus action, you let out a cry at your enemies within 10 feet of you. Until the start of your next turn, you and your allies have advantage on attack rolls against any of those enemies who could hear you. You can use this trait a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
+      },
+      {
+        name: "Kobold Legacy",
+        description:
+          "Kobolds’ connection to dragons can manifest in unpredictable ways in an individual kobold. Choose one of the following legacy options for your kobold: ",
+        extendedTable: [
+          {
+            "": {
+              headers: ["Legacy", "Effect"],
+              data: [
+                {
+                  Legacy: "Craftiness",
+                  Effect:
+                    "You have proficiency in one of the following skills of your choice: Arcana, Investigation, Medicine, Sleight of Hand, or Survival.",
+                },
+                {
+                  Legacy: "Defiance",
+                  Effect:
+                    "You have advantage on saving throws to avoid or end the frightened condition on yourself.",
+                },
+                {
+                  Legacy: "Draconic Sorcery",
+                  Effect:
+                    "You know one cantrip of your choice from the sorcerer spell list. Intelligence, Wisdom, or Charisma is your spellcasting ability for that cantrip (choose when you select this race).",
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 75,
+    name: "Kobold (VGM)",
+    description:
+      "Kobolds are often dismissed as cowardly, foolish, and weak, but these little reptilian creatures actually have a strong social structure that stresses devotion to the tribe, are clever with their hands, and viciously work together in order to overcome their physical limitations.",
+    abilityScoreDescription: "Your Dexterity score increases by 2.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.DEX,
+          value: 2,
+        },
+      ],
+    },
+    age: "Kobolds reach adulthood at age 6 and can live up to 120 years.",
+    alignment:
+      "Kobolds are fundamentally selfish, making them evil, but their reliance on group structure and strength means they tend toward law.",
+    size: Size.SMALL,
+    sizeDescription:
+      "Kobolds are between 2 and 3 feet tall and weigh about 35 pounds. Your size is Small.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+    languageDescription: "You can speak, read, and write Common and Draconic.",
+    originLanguages: {
+      default: [Language.COMMON, Language.DRACONIC],
+    },
+    flavorText: "Kobolds are often dismissed as cowardly, foolish, and weak.",
+    source: src.volo,
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Pack Tactics",
+        description:
+          "You have advantage on an attack roll against a creature if at least one of your allies is within 5 feet of the creature and the ally isn't incapacitated.",
+      },
+      {
+        name: "Sunlight Sensitivity",
+        description:
+          "You have disadvantage on attack rolls and on Wisdom (Perception) checks that rely on sight when you, the target of your attack, or whatever you are trying to perceive is in direct sunlight.",
+      },
+      {
+        name: "Grovel, Cower, and Beg",
+        description:
+          "As an action on your turn, you can cower pathetically to distract nearby foes. Until the end of your next turn, your allies gain advantage on attack rolls against enemies within 10 feet of you that can see you. Once you use this trait, you can't use it again until you finish a short or long rest.",
+      },
+    ],
+  },
+  {
+    id: 76,
+    name: "Lizardfolk (MMOM)",
+    description:
+      "The saurian lizardfolk are thought by some sages to be distant cousins of dragonborn and kobolds. Despite their resemblance to those other scaled folk, however, lizardfolk are their own people and have lived on the worlds of the Material Plane since the worlds’ creation. Gifted by the gods with remarkable physical defenses and a mystical connection to the natural world, lizardfolk can survive with just their wits in situations that would be deadly for other folk. Because of that fact, many lizardfolk myths state that their people were placed by the gods in the Material Plane to guard its natural wonders.\n\nLizardfolk have colorful scales and exhibit a wide array of scale patterns. Their individual facial features are as varied as those of lizards.",
+    flavorText:
+      "The saurian lizardfolk are thought by some sages to be distant cousins of dragonborn and kobolds.",
+    source: src.mordenkainenMonsters,
+    abilityScoreDescription:
+      "When determining your character’s ability scores, increase one score by 2 and increase a different score by 1, or increase three different scores by 1. You can't raise any of your scores above 20.",
+    abilityScores: {
+      choices: [
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 2],
+        },
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 1, 1],
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    size: Size.MEDIUM,
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    swimDescription: "You have a swimming speed equal to your walking speed.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light and in darkness as if it were dim light. You discern colors in that darkness only as shades of gray.",
+    languageDescription:
+      "You can speak, read, and write Common and one other Language of your choice.",
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    age: "N/A",
+    alignment: "N/A",
+    features: [
+      {
+        name: "Bite",
+        description:
+          "You have a fanged maw that you can use to make unarmed strikes. When you hit with it, the strike deals 1d6 + your Strength modifier slashing damage, instead of the bludgeoning damage normal for an unarmed strike.",
+      },
+      {
+        name: "Hold Breath",
+        description: "You can hold your breath for up to 15 minutes at a time.",
+      },
+      {
+        name: "Hungry Jaws",
+        description:
+          " You can throw yourself into a feeding frenzy. As a bonus action, you can make a special attack with your Bite. If the attack hits, it deals its normal damage, and you gain temporary hit points equal to your proficiency bonus. You can use this trait a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
+      },
+      {
+        name: "Natural Armor",
+        description:
+          "You have tough, scaly skin. When you aren’t wearing armor, your base AC is 13 + your Dexterity modifier. You can use your natural armor to determine your AC if the armor you wear would leave you with a lower AC. A shield’s benefits apply as normal while you use your natural armor.",
+      },
+      {
+        name: "Nature's Intuition",
+        description:
+          "Thanks to your mystical connection to nature, you gain proficiency with two of the following skills of your choice: Animal Handling, Medicine, Nature, Perception, Stealth, or Survival.",
+      },
+    ],
+  },
+  {
+    id: 77,
+    name: "Lizardfolk (VGM)",
+    description:
+      "Lizardfolk possess an alien and inscrutable mindset, their desires and thoughts driven by a different set of basic principles than those of warm-blooded creatures. Their dismal swamp homes might lie hundreds of miles from the nearest human settlement, but the gap between their way of thinking and that of the smooth-skins is far greater.",
+    flavorText: "Lizardfolk possess an alien and inscrutable mindset.",
+    source: src.volo,
+    abilityScoreDescription:
+      "Your Constitution score increases by 2, and your Wisdom score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.CON,
+          value: 2,
+        },
+        {
+          ability: Ability.WIS,
+          value: 1,
+        },
+      ],
+    },
+    age: "Lizardfolk reach maturity around age 14 and can live to be about 60.",
+    alignment:
+      "Most lizardfolk are neutral. They see the world as a place of predators and prey, where life and death are natural processes. They wish only to survive, and prefer to leave other creatures to their own devices.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Lizardfolk are a little bulkier and taller than humans, and their colorful frills make them appear even larger. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    swimSpeed: 30,
+    swimDescription: "You have a swimming speed equal to your walking speed.",
+    darkvision: 60,
+    languageDescription: "You can speak, read, and write Draconic and Common.",
+    originLanguages: {
+      default: [Language.DRACONIC, Language.COMMON],
+    },
+    features: [
+      {
+        name: "Bite",
+        description:
+          "Your fanged maw is a natural weapon, which you can use to make unarmed strikes. If you hit with it, you deal piercing damage equal to 1d6 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.",
+      },
+      {
+        name: "Cunning Artisan",
+        description:
+          "As part of a short rest, you can harvest bone and hide from a slain beast, construct, dragon, monstrosity, or plant creature of size Small or larger to create one of the following items: a shield, a club, a javelin, or 1d4 darts or blowgun needles. To use this trait, you need a blade, such as a dagger, or appropriate artisan's tools, such as leatherworker's tools.",
+      },
+      {
+        name: "Hold Breath",
+        description: "You can hold your breath for up to 15 minutes at a time.",
+      },
+      {
+        name: "Hunter's Lore",
+        description:
+          "You gain proficiency with two of the following skills of your choice: Animal Handling, Nature, Perception, Stealth, and Survival.",
+      },
+      {
+        name: "Natural Armor",
+        description:
+          "You have tough, scaly skin. When you aren't wearing armor, your AC is 13 + your Dexterity modifier. You can use your natural armor to determine your AC if the armor you wear would leave you with a lower AC. A shield's benefits apply as normal while you use your natural armor.",
+      },
+      {
+        name: "Hungry Jaws",
+        description:
+          "In battle, you can throw yourself into a vicious feeding frenzy. As a bonus action, you can make a special attack with your bite. If the attack hits, it deals its normal damage, and you gain temporary hit points (minimum of 1) equal to your Constitution modifier, and you can't use this trait again until you finish a short or long rest.",
+      },
+    ],
+    creatureType: CreatureType.HUMANOID,
+  },
 ];
 
 export default Species;

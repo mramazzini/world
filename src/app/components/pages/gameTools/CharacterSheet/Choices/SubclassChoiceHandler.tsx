@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import SubclassChoice from "./SubclassChoice";
 import Image from "next/image";
+import { v4 } from "uuid";
 
 interface Props {
   choice: PrismaJson.SubclassChoice;
@@ -40,15 +41,13 @@ const SubclassChoiceHandler = ({ callback, choice, character }: Props) => {
         : (selections as CallbackOptions)
     );
   };
-
+  const id = v4();
   return (
     <>
       <button
         className="btn p-4 h-auto m-4 flex items-center justify-between flex-col btn-ghost border border-gray-500"
         onClick={() => {
-          const modal = document.getElementById(
-            "subclassChoiceModal"
-          ) as HTMLDialogElement;
+          const modal = document.getElementById(id) as HTMLDialogElement;
           modal.showModal();
         }}
       >
@@ -61,7 +60,7 @@ const SubclassChoiceHandler = ({ callback, choice, character }: Props) => {
         />
         <p className="divider">Choose a subclass</p>
       </button>
-      <dialog id="subclassChoiceModal" className="modal ">
+      <dialog className="modal " id={id}>
         <div
           className="modal-box "
           style={{
@@ -82,6 +81,7 @@ const SubclassChoiceHandler = ({ callback, choice, character }: Props) => {
               {choice.choices?.map((choice, index) => {
                 return (
                   <SubclassChoice
+                    modalID={id}
                     key={index}
                     choice={choice}
                     updateSelections={(subClassList) => {
@@ -100,7 +100,7 @@ const SubclassChoiceHandler = ({ callback, choice, character }: Props) => {
                 onClick={(e) => {
                   e.preventDefault();
                   const modal = document.getElementById(
-                    "subclassChoiceModal"
+                    id
                   ) as HTMLDialogElement;
                   modal.close();
                 }}

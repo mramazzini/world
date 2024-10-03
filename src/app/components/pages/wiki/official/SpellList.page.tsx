@@ -10,6 +10,7 @@ import NewLineParse from "../../../Utility/NewLineParse";
 import numberArray from "@/lib/utils/numberArray";
 import P from "@/app/components/Utility/FormatAndSanitize";
 import numPlace from "@/lib/utils/numPlace";
+import TooltipBody from "@/app/components/Utility/TooltipBody";
 
 interface Props {
   spellList: SpellListInfo | null;
@@ -72,7 +73,7 @@ const SpellListPage = ({ spellList }: Props) => {
                         activeTab === 0 ? "rounded-t-[0]" : ""
                       }`}
                     >
-                      <table className="table w-full table-zebra overflow-hidden table-md">
+                      <table className="table w-full table-zebra overflow-hidden table-link">
                         <thead>
                           <tr className="bg-black/30">
                             <th className="w-[20%]">Name</th>
@@ -102,14 +103,48 @@ const SpellListPage = ({ spellList }: Props) => {
                               }`}
                             >
                               <td>
-                                <P>{`%${spell.id}{${spell.name}}%`}</P>
+                                <Link
+                                  href={`/spells/${spell.name.replaceAll(
+                                    " ",
+                                    "-"
+                                  )}`}
+                                >
+                                  <P>{`%${spell.id}{${spell.name}}%`}</P>
+                                </Link>
                               </td>
-                              <td>{spell.range}</td>
+                              <td>
+                                {" "}
+                                <Link
+                                  href={`/spells/${spell.name.replaceAll(
+                                    " ",
+                                    "-"
+                                  )}`}
+                                >
+                                  {spell.range}
+                                </Link>
+                              </td>
                               <td className="hidden md:table-cell">
-                                {spell.duration}
+                                <Link
+                                  href={`/spells/${spell.name.replaceAll(
+                                    " ",
+                                    "-"
+                                  )}`}
+                                >
+                                  {spell.duration}
+                                </Link>
                               </td>
                               <td className="hidden lg:table-cell">
-                                {spell.castingTime}
+                                <Link
+                                  href={`/spells/${spell.name.replaceAll(
+                                    " ",
+                                    "-"
+                                  )}`}
+                                >
+                                  {spell.castingTime}
+                                </Link>
+                                <TooltipBody element={<span>asd</span>}>
+                                  asd
+                                </TooltipBody>
                               </td>
                             </tr>
                           ))}

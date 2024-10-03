@@ -88,9 +88,13 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
       case "language":
         return (item as Language).toCapitalCase().replaceAll("_", " ");
       case "skill":
-        return <P>{(item as Skill).toCapitalCase().replaceAll("_", " ")}</P>;
+        return (
+          <P modalID={id}>
+            {(item as Skill).toCapitalCase().replaceAll("_", " ")}
+          </P>
+        );
       case "saving":
-        return <P>{AbilityToText(item as Ability)}</P>;
+        return <P modalID={id}>{AbilityToText(item as Ability)}</P>;
       case "tool":
         return <ModelDisplay model="Tool" id={item as ToolID} />;
 

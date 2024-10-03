@@ -86,6 +86,11 @@ input[type="number"] {
   overflow: visible;
 }
 
+.modal[open] {
+  position: relative;
+  z-index: 1;
+}
+
 .markdown-content {
   h1 {
     font-size: 2rem;

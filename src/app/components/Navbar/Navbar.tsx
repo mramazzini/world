@@ -39,6 +39,10 @@ const Navbar = () => {
       href: "/spells",
     },
     {
+      name: "Spell Lists",
+      href: "/spell-list",
+    },
+    {
       name: "Backgrounds",
       href: "/background",
     },
@@ -53,10 +57,6 @@ const Navbar = () => {
     {
       name: "Items",
       href: "/item",
-    },
-    {
-      name: "Spell Lists",
-      href: "/spell-list",
     },
   ];
 

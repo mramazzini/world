@@ -69,6 +69,7 @@ const CharacterAbilityScoreHandler = ({
               <div className="flex bg-base-300 rounded-xl p-4 flex-col my-4 ">
                 <p>Select your Ability Scores:</p>
                 <Tooltip
+                  modalId={id}
                   element={<p>Note on Species Ability Scores.</p>}
                   additionalContent={
                     <p className="bg-base-300 text-base rounded-xl p-2 text-sm mt-2">

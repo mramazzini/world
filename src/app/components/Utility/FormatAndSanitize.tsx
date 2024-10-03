@@ -13,9 +13,11 @@ import { memoizeGetItem, memoizeGetSpell } from "./globalCache";
 
 const P = ({
   children,
+  modalID,
   layer = 0,
 }: {
   children: string | string[];
+  modalID?: string;
   layer?: number;
 }): ReactNode => {
   const [loading, setLoading] = useState(true);
@@ -262,6 +264,7 @@ const P = ({
         if (indexes[i].isItem) {
           const newElement = (
             <ModelLink
+              modalID={modalID}
               key={`item-${termIndex}-${index}`}
               potential={items}
               linkBase="item"
@@ -276,6 +279,7 @@ const P = ({
         if (indexes[i].isSpell) {
           const newElement = (
             <ModelLink
+              modalID={modalID}
               key={`spell-${termIndex}-${index}`}
               potential={spells}
               linkBase="spells"
@@ -304,6 +308,7 @@ const P = ({
 
         const newElement = (
           <Tooltip
+            modalId={modalID}
             key={`${term.term}-${termIndex}-${index}`}
             element={str.slice(termIndex, termIndex + term.term.length)}
             layer={layer}

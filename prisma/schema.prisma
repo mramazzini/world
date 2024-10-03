@@ -94,6 +94,7 @@ enum Language {
   ELVISH
   GIANT
   GNOMISH
+  GRUNG
   GOBLIN
   HALFLING
   ORC

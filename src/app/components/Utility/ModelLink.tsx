@@ -10,9 +10,15 @@ interface Props<T extends model> {
   potential: T[];
   children: string | string[];
   linkBase: string;
+  modalID?: string;
 }
 
-const ModelLink = ({ potential, children, linkBase }: Props<model>) => {
+const ModelLink = ({
+  potential,
+  children,
+  linkBase,
+  modalID,
+}: Props<model>) => {
   const [ready, setReady] = useState(false);
   useEffect(() => {
     // Simulate some data preparation time before rendering the tooltip
@@ -45,6 +51,7 @@ const ModelLink = ({ potential, children, linkBase }: Props<model>) => {
               ready ? (
                 modelObj ? (
                   <Tooltip
+                    modalId={modalID}
                     element={res && res[1] ? res[1] : modelObj.name}
                     title={modelObj.name}
                     link={`/${linkBase}/${modelObj.name.replaceAll(" ", "-")}`}

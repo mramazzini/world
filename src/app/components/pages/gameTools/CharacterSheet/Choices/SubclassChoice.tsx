@@ -11,10 +11,11 @@ interface Props {
     numberOfChoices: number;
     options: SubClassID[];
   };
+  modalID: string;
   updateSelections: (subClassList: SubClassID[]) => void;
 }
 
-const SubclassChoice = ({ choice, updateSelections }: Props) => {
+const SubclassChoice = ({ choice, updateSelections, modalID }: Props) => {
   const [selections, setSelections] = useState<number[]>([]);
   const [subclasses, setSubclasses] = useState<SubClassInfo[]>([]);
 
@@ -50,7 +51,11 @@ const SubclassChoice = ({ choice, updateSelections }: Props) => {
                   : "pl-2 "
               }
             >
-              <ModelLink potential={subclasses} linkBase="subclass">
+              <ModelLink
+                modalID={modalID}
+                potential={subclasses}
+                linkBase="subclass"
+              >
                 {subclass.toString()}
                 {`{${subclasses[index]?.name}}`}
               </ModelLink>

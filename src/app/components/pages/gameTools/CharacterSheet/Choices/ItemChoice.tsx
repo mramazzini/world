@@ -5,6 +5,7 @@ import { ItemInfo } from "@/lib/utils/types/types";
 import numberArray from "@/lib/utils/numberArray";
 import { useEffect, useState } from "react";
 interface Props {
+  modalID: string;
   choice: {
     numberOfChoices: number;
     options: PrismaJson.QuantityItem[][];
@@ -12,7 +13,7 @@ interface Props {
   updateSelections: (itemList: PrismaJson.QuantityItem[]) => void;
 }
 
-const ItemChoice = ({ choice, updateSelections }: Props) => {
+const ItemChoice = ({ choice, updateSelections, modalID }: Props) => {
   const [selections, setSelections] = useState<number[]>([]);
   const [options, setoptions] = useState<ItemInfo[]>([]);
 
@@ -50,7 +51,7 @@ const ItemChoice = ({ choice, updateSelections }: Props) => {
               }
             >
               {itemList.map((itemData, index) => (
-                <P key={index}>
+                <P key={index} modalID={modalID}>
                   {index == itemList.length - 1 && itemList.length > 1
                     ? "and "
                     : ""}
