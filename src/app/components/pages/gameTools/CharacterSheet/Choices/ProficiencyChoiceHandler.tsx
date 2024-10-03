@@ -162,6 +162,7 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
                     );
                   return (
                     <SkillChoice
+                      modalID={id}
                       key={index}
                       choice={
                         c as { numberOfChoices: number; options: Skill[] }

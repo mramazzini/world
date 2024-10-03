@@ -5,6 +5,7 @@ import numberArray from "@/lib/utils/numberArray";
 import { Skill } from "@prisma/client";
 import { useEffect, useState } from "react";
 interface Props {
+  modalID: string;
   choice: {
     numberOfChoices: number;
     options: Skill[];
@@ -12,7 +13,7 @@ interface Props {
   updateSelections: (SkillList: Skill[]) => void;
 }
 
-const SkillChoice = ({ choice, updateSelections }: Props) => {
+const SkillChoice = ({ choice, updateSelections, modalID }: Props) => {
   const [selections, setSelections] = useState<number[]>([]);
 
   useEffect(() => {
@@ -37,7 +38,10 @@ const SkillChoice = ({ choice, updateSelections }: Props) => {
                   : "pl-2 "
               }
             >
-              <P>{skill.toCapitalCase().replaceAll("_", " ")}</P>
+              <P modalID={modalID}>
+                {skill.toCapitalCase().replaceAll("_", " ")}
+                {""}
+              </P>
             </li>
           );
         })}
