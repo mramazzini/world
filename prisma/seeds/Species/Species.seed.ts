@@ -4888,6 +4888,529 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
     ],
     creatureType: CreatureType.HUMANOID,
   },
+  {
+    id: 78,
+    name: "Minotaur (MMOM)",
+    description:
+      "Minotaurs are barrel-chested humanoids with heads resembling those of bulls. Blessed with a supernaturally strong sense of direction, minotaurs make great navigators. Some sages believe minotaurs were first created by the Lady of Pain to patrol the magical mazes that she uses to trap her foes.\n\nMinotaur horns range in size from about 1 foot long to easily three times that length. Minotaurs often carve their horns to sharpen their edges, etch symbols of power into them, or sheathe them in bronze to prevent them from shattering during battle.\n\nThick hair extends down minotaurs’ necks and powerful backs, and some have long patches of hair on their chins and cheeks. Their legs end in heavy, cloven hooves, and they have long, tufted tails.",
+    flavorText:
+      "Minotaurs are barrel-chested humanoids with heads resembling those of bulls.",
+    source: src.mordenkainenMonsters,
+    abilityScoreDescription:
+      "When determining your character’s ability scores, increase one score by 2 and increase a different score by 1, or increase three different scores by 1. You can't raise any of your scores above 20.",
+    abilityScores: {
+      choices: [
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 2],
+        },
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 1, 1],
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    size: Size.MEDIUM,
+    sizeDescription: "You are Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    languageDescription:
+      "Your character can speak, read, and write Common and one other language",
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    features: [
+      {
+        name: "Horns",
+        description:
+          "You have horns that you can use to make unarmed strikes. When you hit with them, the strike deals 1d6 + your Strength modifier piercing damage, instead of the bludgeoning damage normal for an unarmed strike.",
+      },
+      {
+        name: "Goring Rush",
+        description:
+          "Immediately after you take the Dash action on your turn and move at least 20 feet, you can make one melee attack with your Horns as a bonus action.",
+      },
+      {
+        name: "Hammering Horns",
+        description:
+          "Immediately after you hit a creature with a melee attack as part of the Attack action on your turn, you can use a bonus action to attempt to push that target with your horns. The target must be within 5 feet of you and no more than one size larger than you. Unless it succeeds on a Strength saving throw against a DC equal to 8 + your proficiency bonus + your Strength modifier, you push it up to 10 feet away from you.",
+      },
+      {
+        name: "Labyrinthine Recall",
+        description:
+          "You always know which direction is north, and you have advantage on any Wisdom (Survival) check you make to navigate or track.",
+      },
+    ],
+    age: "N/A",
+    alignment: "N/A",
+  },
+  {
+    id: 79,
+    name: "Minotaur (GGtR)",
+    description:
+      "The minotaurs of Ravnica are strong in body. dedication, and courage. They are at home on the battlefield, willing to fight for their various causes. They combine a burning fury in battle with keen tactics that make them excellent commanders as well as valuable shock troops.\n\nMinotaurs are barrel-chested humanoids with heads resembling those of bulls. Their horns range in size from about 1 foot long to great, curling weapons easily three times that length. They often ornament their horns with metal rings or sheathe them in metal to protect them from damage.\n\nManes of shaggy fur extend down minotaurs' necks and powerful backs, and males have long tufts of hair on their chins and cheeks. Their legs end in heavy, cloven hooves. Minotaurs are born with long, tufted tails, but minotaurs of the Ordruun clan (and some others) have their tails docked as part of a coming-of-age ceremony; they find the heavy armor of the Boros legion much more comfortable without a long tail in the way.",
+    flavorText:
+      "The minotaurs of Ravnica are strong in body, dedication, and courage.",
+    source: src.ravnica,
+    abilityScoreDescription:
+      "Your Strength score increases by 2, and your Constitution score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.STR,
+          value: 2,
+        },
+        {
+          ability: Ability.CON,
+          value: 1,
+        },
+      ],
+    },
+    alignment:
+      "Most minotaurs who join the Boros Legion lean toward lawful alignments, while those associated with the Cult of Rakdos or the Gruul Clans tend toward chaotic alignments.",
+    age: "Minotaurs mature at about the same rate as humans and live for about as long.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Minotaurs average over 6 feet in height, and they have stocky builds. Your size is Medium.",
+    speedDescription: "Your base walking speed is 30 feet.",
+    speed: 30,
+    languageDescription: "You can speak, read, and write Common and Minotaur.",
+    originLanguages: {
+      default: [Language.COMMON, Language.MINOTAUR],
+    },
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Horns",
+        description:
+          "Your horns are natural melee weapons, which you can use to make unarmed strikes. If you hit with them, you deal piercing damage equal to 1d6 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.",
+      },
+      {
+        name: "Goring Rush",
+        description:
+          "Immediately after you use the Dash action on your turn and move at least 20 feet, you can make one melee attack with your horns as a bonus action.",
+      },
+      {
+        name: "Hammering Horns",
+        description:
+          "Immediately after you hit a creature with a melee attack as a part of the Attack action on your turn, you can use a bonus action to attempt to shove that target with your horns. The target must be within 5 feet of you and no more than one size larger than you. Unless it succeeds on a Strength saving throw against a DC equal to 8 + your proficiency bonus + your Strength modifier, you push it up to 10 feet away from you.",
+      },
+      {
+        name: "Imposing Presence",
+        description:
+          "You have proficiency in one of the following skills of your choice: Intimidation or Persuasion.",
+      },
+    ],
+  },
+  {
+    id: 80,
+    name: "Minotaur (MOoT)",
+    description:
+      "The minotaurs who dwell in the badlands of Phoberos and the remote polis of Skophos are caught between two worlds. Some follow the dark god Mogis, who has tyrannized them for ages untold and shown them a trail of slaughter that is all many minotaurs have ever known. Others, though, have emerged from this bloody path and found a world that welcomes those who pursue their own destinies and heroic callings.\n\nMinotaurs are barrel-chested humanoids with heads resembling those of bulls. Their horns range in size from about 1 foot long to great, curling weapons easily three times that length. Theros minotaurs often carve their horns to sharpen their edges, etch symbols of power into them, or sheathe them in bronze to prevent them from shattering during battle.\n\nThick hair extends down minotaurs' necks and powerful backs, and some have long patches of hair on their chins and cheeks. Their legs end in heavy, cloven hooves, and they have long, tufted tails. Minotaur priests often adorn themselves with sacred items, be they trophies from fallen foes, keepsakes from their homeland, or naturally occurring marks of their god's favor.",
+    flavorText:
+      "The minotaurs who dwell in the badlands of Phoberos and the remote polis of Skophos are caught between two worlds.",
+    source: src.theros,
+    creatureType: CreatureType.HUMANOID,
+    abilityScoreDescription:
+      "Your Strength score increases by 2, and your Constitution score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.STR,
+          value: 2,
+        },
+        {
+          ability: Ability.CON,
+          value: 1,
+        },
+      ],
+    },
+    age: "Minotaurs mature at about the same rate as humans and live for about as long.",
+    alignment:
+      "Minotaurs who leave the walls of Skophos have the opportunity to be free of its culture and pursue chaotic alignments, while those who remain within the polis and its tyrannical regime tend toward lawful alignments.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Minotaurs average over 6 feet in height, and they have stocky builds. Your size is Medium.",
+    speedDescription: "Your base walking speed is 30 feet",
+    speed: 30,
+    languageDescription: "You can speak, read, and write Common and Minotaur.",
+    originLanguages: {
+      default: [Language.COMMON, Language.MINOTAUR],
+    },
+    features: [
+      {
+        name: "Horns",
+        description:
+          "Your horns are natural melee weapons, which you can use to make unarmed strikes. If you hit with them, you deal piercing damage equal to 1d6 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.",
+      },
+      {
+        name: "Goring Rush",
+        description:
+          "Immediately after you use the Dash action on your turn and move at least 20 feet, you can make one melee attack with your horns as a bonus action.",
+      },
+      {
+        name: "Hammering Horns",
+        description:
+          "Immediately after you hit a creature with a melee attack as a part of the Attack action on your turn, you can use a bonus action to attempt to shove that target with your horns. The target must be within 5 feet of you and no more than one size larger than you. Unless it succeeds on a Strength saving throw against a DC equal to 8 + your proficiency bonus + your Strength modifier, you push it up to 10 feet away from you.",
+      },
+      {
+        name: "Imposing Presence",
+        description:
+          "You have proficiency in one of the following skills of your choice: Intimidation or Persuasion.",
+      },
+    ],
+  },
+  {
+    id: 81,
+    name: "Minotaur (PSA)",
+    description:
+      "Minotaurs are powerfully built, barrel-chested humanoids with heads resembling rams. Their horns curl tightly against the sides of their heads to encircle their ears, and manes of shaggy fur — shorter in females — fall over their broad shoulders. As their appearance suggests, they combine physical strength with stubbornness, bravado, and reckless bravery. They revel in combat, especially when the odds against them seem overwhelming.\n\nMinotaurs are rowdy, boisterous, and direct to the point of rudeness. They have no qualms about declaring what they want and defying others to keep it from them. In combat, they bellow loud challenges in defiance of their foes, and roar with laughter as they triumph.\n\nMinotaurs believe they hold a unique place among the races of Amonkhet. The khenra can look to Hazoret, the naga to Rhonas, and the aven to Kefnet to see themselves represented among the gods. Humans have no single god to look to, which explains why they demonstrate such variety. But only one god bears a pair of curving horns: the God-Pharaoh himself, who holds a special place for many of the minotaurs of Amonkhet.",
+    flavorText:
+      "Minotaurs are powerfully built, barrel-chested humanoids with heads resembling rams.",
+    abilityScoreDescription:
+      "Your Strength score increases by 2, and your Constitution score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.STR,
+          value: 2,
+        },
+        {
+          ability: Ability.CON,
+          value: 1,
+        },
+      ],
+    },
+    age: "Minotaurs develop more slowly than humans, reaching full maturity around the age of 20. They typically become acolytes at around 8 or 9 years old, making them among the older members of their crops. Once they reach maturity, though, minotaurs age quickly, rushing headlong through the trials (as they do all aspects of life) to complete them before they pass their peak. A minotaur allowed to die of old age would rarely live beyond 40.",
+    alignment:
+      "Most minotaurs lean toward chaotic alignments, and they have a slight inclination toward evil.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Minotaurs average over 6 feet in height, and they have stocky builds. Your size is Medium.",
+    speedDescription: "Your base walking speed is 30 feet.",
+    speed: 30,
+    languageDescription: "You can speak, read, and write Common and Minotaur.",
+    originLanguages: {
+      default: [Language.COMMON, Language.MINOTAUR],
+    },
+    source: src.amonkhet,
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Natural Weapon",
+        description:
+          "You can use your horns as a natural weapon to make unarmed strikes. If you hit with your horns, you deal bludgeoning damage equal to 1d6 + your Strength modifier.",
+      },
+      {
+        name: "Menacing",
+        description: "You gain proficiency in the Intimidation skill.",
+      },
+      {
+        name: "Relentless Endurance",
+        description:
+          "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a long rest.",
+      },
+      {
+        name: "Savage Attacks",
+        description:
+          "When you score a critical hit with a melee weapon attack, you can roll one of the weapon’s damage dice one additional time and add it to the extra damage of the critical hit.",
+      },
+    ],
+  },
+  {
+    id: 82,
+    name: "Orc (MMOM)",
+    description:
+      "Orcs trace their creation to the one-eyed god Gruumsh, an unstoppable warrior and powerful leader. The divine qualities of Gruumsh resonate within orcs, granting them a reflection of his toughness and tenacity that can’t be matched, and the god equipped his children to be able to live above or below ground.\n\nOn some worlds, such as Eberron, orcs were among the first defenders of the natural order from the encroachments of Fiends and other extraplanar threats. Gruumsh’s blessings have made orcs tireless guardians and mighty allies wherever they are found, even when they turn their devotion to other gods.",
+    flavorText: "Orcs trace their creation to the one-eyed god Gruumsh.",
+    source: src.mordenkainenMonsters,
+    abilityScoreDescription:
+      "When determining your character’s ability scores, increase one score by 2 and increase a different score by 1, or increase three different scores by 1. You can't raise any of your scores above 20.",
+    abilityScores: {
+      choices: [
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 2],
+        },
+        {
+          abilities: Object.values(Ability),
+
+          options: [1, 1, 1],
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    size: Size.MEDIUM,
+    sizeDescription: "You are Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light and in darkness as if it were dim light. You discern colors in that darkness only as shades of gray.",
+    languageDescription:
+      "Your character can speak, read, and write Common and one other language",
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    age: "N/A",
+    alignment: "N/A",
+    features: [
+      {
+        name: "Adrenaline Rush",
+        description:
+          "You can take the Dash action as a bonus action. You can use this trait a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.\n\n Whenever you use this trait, you gain a number of temporary hit points equal to your proficiency bonus.",
+      },
+      {
+        name: "Powerful Build",
+        description:
+          "You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.",
+      },
+      {
+        name: "Relentless Endurance",
+        description:
+          "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. Once you use this trait, you can’t do so again until you finish a long rest.",
+      },
+    ],
+  },
+  {
+    id: 83,
+    name: "Orc (VGM)",
+    description:
+      "Savage and fearless, orc tribes are ever in search of elves, dwarves, and humans to destroy. Motivated by their hatred of the civilized races of the world and their need to satisfy the demands of their deities, the orcs know that if they fight well and bring glory to their tribe, Gruumsh will call them home.",
+    flavorText:
+      "Savage and fearless, orc tribes are ever in search of elves, dwarves, and humans to destroy.",
+    source: src.volo,
+    abilityScoreDescription:
+      "Your Strength score increases by 2, and your Constitution score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.STR,
+          value: 2,
+        },
+        {
+          ability: Ability.CON,
+          value: 1,
+        },
+      ],
+    },
+    age: "Orcs reach adulthood at age 12 and live up to 50 years.",
+    alignment:
+      "Orcs are vicious raiders, who believe that the world should be theirs. They also respect strength above all else and believe the strong must bully the weak to ensure that weakness does not spread like a disease. They are usually chaotic evil.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Orcs are between 5 and 6 feet tall and weigh between 230 and 280 pounds. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+    languageDescription: "You can speak, read, and write Common and Orc.",
+    originLanguages: {
+      default: [Language.COMMON, Language.ORC],
+    },
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Aggressive",
+        description:
+          "As a bonus action, you can move up to your speed toward an enemy of your choice that you can see or hear. You must end this move closer to the enemy than you started.",
+      },
+      {
+        name: "Primal Intuition",
+        description:
+          "You have proficiency in two of the following skills of your choice: Animal Handling, Insight, Intimidation, Medicine, Nature, Perception, and Survival.",
+      },
+      {
+        name: "Powerful Build",
+        description:
+          "You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.",
+      },
+    ],
+  },
+  {
+    id: 84,
+    name: "Orc (ERLW)",
+    description:
+      "Thousands of years before humans came to Khorvaire, the land was dominated by wild orcs and goblinoids of the Dhakaani Empire. The goblin empire scattered the orc tribes and forced them into harsh and unwanted lands: the swamps of the Shadow Marches, the Demon Wastes, and the depths of the Ironroot Mountains. But in the Shadow Marches, the orcs learned the secrets of druidic magic from the dragon Vvaraak, becoming the first of the Gatekeepers. With the invasion of the alien daelkyr from Xoriat, the Gatekeepers put the dragon's teaching to the test, creating magical seals that bound the daelkyr in the depths of Khyber and protected Eberron against further incursion from the plane of madness.",
+    flavorText:
+      "Thousands of years before humans came to Khorvaire, the land was dominated by wild orcs and goblinoids of the Dhakaani Empire.",
+    source: src.eberron,
+    abilityScoreDescription:
+      "Your Strength score increases by 2, and your Constitution score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.STR,
+          value: 2,
+        },
+        {
+          ability: Ability.CON,
+          value: 1,
+        },
+      ],
+    },
+    age: "Orcs reach adulthood at age 12 and live up to 50 years.",
+    alignment:
+      "The orcs of Eberron are a passionate people, given to powerful emotion and deep faith. They are generally chaotic, but can be any alignment.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Orcs are usually over 6 feet tall and weigh between 230 and 280 pounds. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+    languageDescription: "You can speak, read, and write Common and Orc.",
+    originLanguages: {
+      default: [Language.COMMON, Language.ORC],
+    },
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Aggressive",
+        description:
+          "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      },
+      {
+        name: "Powerful Build",
+        description:
+          "You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.",
+      },
+      {
+        name: "Primal Intuition",
+        description:
+          "You have proficiency in two of the following skills of your choice: Animal Handling, Insight, Intimidation, Medicine, Nature, Perception, and Survival.",
+      },
+    ],
+  },
+  {
+    id: 85,
+    name: "Orc (EGtW)",
+    description:
+      "Orcs are one of Exandria's youngest races, and are said to have been born from elves seared by the blood of Gruumsh, the Ruiner, when Corellon pierced the orc god's eye on the field of battle. For long years, orcs were feared as mindless abominations, drawn to slaughter like moths to flame.\n\nStories tell of how the blood of the Ruiner flows in the veins of all orcs, driving them to commit acts of terrible violence and anger. Orcs call this fury hgar'Gruum, or the curse of ruin, and use it to refer to everything from battle rage to a bad temper. Half-orcs are said to have inherited the blood of the Ruiner, and to carry the same bloodlust and fury that orcs do.\n\nOrcs and half-orcs do feel a certain pull toward violence and anger. But the simple truth is that there is no curse of ruin. No supernatural power drives orcs to kill. Rather, they are simply victims of the same selfish, violent impulses that corrupt all mortal beings.",
+    flavorText:
+      "Orcs are one of Exandria's youngest races and are said to have been born from elves seared by the blood of Gruumsh.",
+    source: src.wildemount,
+    abilityScoreDescription:
+      "Your Strength score increases by 2, and your Constitution score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.STR,
+          value: 2,
+        },
+        {
+          ability: Ability.CON,
+          value: 1,
+        },
+      ],
+    },
+    age: "Orcs reach adulthood at age 16 and live up to 80 years.",
+    alignment:
+      "Orcs fear the curse of ruin that is said to plague their race, and tend strongly toward either chaos (accepting their fate), or toward law (rejecting it).",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Orcs stand easily 8 feet tall and corded with powerful muscles, weighing up to 280 pounds. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+    languageDescription: "You can speak, read, and write Common and Orc.",
+    originLanguages: {
+      default: [Language.COMMON, Language.ORC],
+    },
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Aggressive",
+        description:
+          "As a bonus action, you can move up to your speed toward an enemy of your choice that you can see or hear. You must end this move closer to the enemy than you started.",
+      },
+      {
+        name: "Powerful Build",
+        description:
+          "You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.",
+      },
+      {
+        name: "Primal Intuition",
+        description:
+          "You have proficiency in two of the following skills of your choice: Animal Handling, Insight, Intimidation, Medicine, Nature, Perception, and Survival.",
+      },
+    ],
+  },
+  {
+    id: 86,
+    name: "Orc (PSI)",
+    description:
+      "Orcs originally came from the same mountainous region where the kingdom of Torrezon was born, and they have been enemies of the Legion of Dusk since it was originally formed. The entire race has been declared anathema by the Church of Torrezon, and after centuries of fighting the Legion, the orcs have dwindled to only a few hundred in number. Some still live on remote islands near Torrezon, but many have joined the Brazen Coalition to serve on pirate ships — taking on any role that calls for an abundance of sheer muscle.\n\nOrcs are tall, standing head and shoulders above most humans, and are generally twice as broad. They often accentuate their bulging muscles by wearing tight-fitting bands and accessories around the thickest parts of their arms and necks. Their skin color ranges from light brown through gray to almost jet-black.",
+    flavorText:
+      "Orcs originally came from the same mountainous region where the kingdom of Torrezon was born.",
+    source: src.ixalan,
+    abilityScoreDescription:
+      "Your Strength score increases by 2, and your Constitution score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.STR,
+          value: 2,
+        },
+        {
+          ability: Ability.CON,
+          value: 1,
+        },
+      ],
+    },
+    age: "Orcs mature a little faster than humans, reaching adulthood around age 14. They age noticeably faster and rarely live longer than 75 years.",
+    alignment:
+      "Most orcs lean toward chaotic alignments, and many serve on pirate ships that encourage an inclination toward evil.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Orcs average over 6 feet in height, and they have strong, stocky builds. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",
+    languageDescription: "You can speak, read, and write Common and Orc.",
+    originLanguages: {
+      default: [Language.COMMON, Language.ORC],
+    },
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Menacing",
+        description: "You gain proficiency in the Intimidation skill.",
+      },
+      {
+        name: "Relentless Endurance",
+        description:
+          "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a long rest.",
+      },
+      {
+        name: "Savage Attacks",
+        description:
+          "When you score a critical hit with a melee weapon attack, you can roll one of the weapon’s damage dice one additional time and add it to the extra damage of the critical hit.",
+      },
+    ],
+  },
 ];
 
 export default Species;

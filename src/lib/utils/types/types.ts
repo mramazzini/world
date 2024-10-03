@@ -894,6 +894,7 @@ export enum src {
   ixalan = "Plane Shift: Ixalan",
   grung = "One Grung Above",
   zendikar = "Plane Shift: Zendikar",
+  amonkhet = "Plane Shift: Amonkhet",
   homebrew = "Homebrew",
   tasha = "Tasha's Cauldron of Everything",
   xanathar = "Xanathar's Guide to Everything",
