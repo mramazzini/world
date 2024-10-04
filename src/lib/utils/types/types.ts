@@ -715,7 +715,12 @@ declare global {
       displaySpellLevels: boolean; // If true, display the spell levels in the class description
       spellLevels: SpellLevels;
     }
-
+    interface CustomWeapon {
+      name: string;
+      damage: PrismaJson.Damage[];
+      isProficient: boolean;
+      flatDamage?: PrismaJson.FlatDamage;
+    }
     interface SpellRoll {
       type: DamageTypes | "healing";
       dice: 4 | 6 | 8 | 10 | 12 | 20 | 100;
@@ -727,6 +732,10 @@ declare global {
       type: DamageTypes; // type of damage ex. slashing, fire, etc.
       dice: number; // type of dice ex. 6 for d6 or 8 for d8
       numberOfDice: number; // number of dice rolled
+    }
+    interface FlatDamage {
+      type: DamageTypes; // type of damage ex. slashing, fire, etc.
+      amount: number; // amount of damage
     }
     interface WeaponProperty {
       property: Property;
@@ -808,6 +817,7 @@ declare global {
           items?: ItemID[]; // item id
         };
       };
+      customAttacks?: CustomWeapon[];
       customResources?: CustomResource[];
       deathSaves: {
         successes: number;

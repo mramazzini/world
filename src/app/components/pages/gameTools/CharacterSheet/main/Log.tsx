@@ -34,10 +34,17 @@ const RenderLog = ({ log, pushLog }: Props) => {
     return (
       <p>
         Roll{" "}
-        {Object.entries(rollMap).map(([key, value]) => {
+        {Object.entries(rollMap).map(([key, value], index) => {
+          if (index === Object.entries(rollMap).length - 1) {
+            return (
+              <span key={key}>
+                {value}d{key}
+              </span>
+            );
+          }
           return (
             <span key={key}>
-              {value}d{key}
+              {value}d{key} +{" "}
             </span>
           );
         })}

@@ -3,8 +3,8 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { AuthResult } from "./types/types";
 
-const expiration = "1h";
-const secret = new TextEncoder().encode("STORE SECRET IN ENV");
+const expiration = "48h";
+const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
 // we generate a token when they login or signup
 // its stored in cookies and sent with every request

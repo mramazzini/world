@@ -1300,6 +1300,7 @@ const MainSheet = ({ character, setCharacter, regenerateCharacter }: Props) => {
             equipped={character.state.equipped.hands.items || []}
             abilities={character.state.abilityScores}
             logPush={logPush}
+            customWeaponAttacks={character.state.customAttacks || []}
             proficiencyBonus={calcProficiency(calcLevel)}
             weaponProficiencies={character.state.proficiencies.weapons}
           />

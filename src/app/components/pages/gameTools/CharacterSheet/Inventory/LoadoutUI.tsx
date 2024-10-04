@@ -8,6 +8,7 @@ import { CharacterInfo, WeaponInfo } from "@/lib/utils/types/types";
 import numberArray from "@/lib/utils/numberArray";
 import Image from "next/image";
 import { use, useEffect, useState } from "react";
+import CustomWeaponsModal from "./CustomWeaponsModal";
 
 interface Props {
   character: CharacterInfo;
@@ -37,9 +38,17 @@ const LoadoutUI = ({ character, setState }: Props) => {
     character &&
     character.state && (
       <div className="grid grid-cols-6 w-full  gap-4 rounded-xl mb-4">
-        <section className="indicator indicator col-span-2  bg-base-200  rounded-xl p-4 w-full flex justify-center col-span-6">
+        <section
+          className="indicator col-span-2  bg-base-200  p-4 w-full flex justify-center flex-col items-start col-span-6 "
+          style={{
+            borderTopRightRadius: "0.75rem",
+            borderTopLeftRadius: "0.75rem",
+          }}
+        >
           <Tooltip
-            element={<span className="indicator-item badge badge-info">i</span>}
+            element={
+              <span className="indicator-item badge badge-info ">i</span>
+            }
             title="Number of Hands"
             additionalContent={
               <div className="bg-base-200 text-base-content">
@@ -67,7 +76,7 @@ const LoadoutUI = ({ character, setState }: Props) => {
             The number of weapons you can wield at once is determined by the
             number of hands you have and how many hands each weapon requires.
           </Tooltip>
-          <div className="flex flex-col bg-base-300 rounded-xl border border-primary w-full">
+          <div className="flex flex-col bg-base-300 rounded-t-xl border border-primary w-full bo">
             <p className="text-sm text-center px-2 pt-2 font-bold">Equipped</p>
             <div className="divider m-0" />
             <div className="flex flex-wrap justify-center">
@@ -131,6 +140,16 @@ const LoadoutUI = ({ character, setState }: Props) => {
               )}
             </div>
           </div>
+          <CustomWeaponsModal
+            initialWeapons={character.state.customAttacks || []}
+            setWeaponState={(weapons) => {
+              if (!character.state) return;
+              setState({
+                ...character.state,
+                customAttacks: weapons,
+              });
+            }}
+          />
         </section>
         <section className="indicator indicator    bg-base-200  rounded-xl p-4 w-full flex justify-center col-span-6">
           <Tooltip

@@ -14,6 +14,7 @@ import {
 import { Ability } from "@prisma/client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { v4 } from "uuid";
 
 const SingleWeapon = ({
   weapon,
@@ -22,6 +23,7 @@ const SingleWeapon = ({
   isVersatile,
   isProficient,
   proficiencyBonus,
+  flatDamage,
 }: {
   weapon: WeaponInfo;
   abilities: AbilityScores;
@@ -29,6 +31,7 @@ const SingleWeapon = ({
   isVersatile?: boolean;
   isProficient?: boolean;
   proficiencyBonus?: number;
+  flatDamage?: PrismaJson.FlatDamage;
 }) => {
   const [selectedAbility, setSelectedAbility] = useState<Ability>(Ability.STR);
   //   find the versatile damage
@@ -46,20 +49,23 @@ const SingleWeapon = ({
     profModifier = proficiencyBonus || 0;
   }
   return (
-    <div className=" join mb-2 w-full">
+    <div className=" join m-2 w-full">
       <span className="join-item border border-primary  p-2 bg-base-100 w-full items-center flex whitespace-nowrap overflow-hidden text-ellipsis">
         <strong>{weapon.name}: </strong>
-        {damage.map((damage, index) => (
-          <span key={index}>
-            <span className="badge">
-              {damage.numberOfDice}d{damage.dice}
-            </span>{" "}
-            <span>+ {AbilityToModifier(abilities[selectedAbility])} </span>
-            <span className="ml-2 badge badge-secondary">
-              {damage.type.toCapitalCase()}{" "}
-            </span>
-          </span>
-        ))}
+        {damage.map(
+          (damage, index) =>
+            damage.numberOfDice > 0 && (
+              <span key={index}>
+                <span className="badge badge-neutral ml-2">
+                  {damage.numberOfDice}d{damage.dice}
+                </span>{" "}
+                <span>+ {AbilityToModifier(abilities[selectedAbility])} </span>
+                <span className="ml-2 badge badge-secondary">
+                  {damage.type.toCapitalCase()}{" "}
+                </span>
+              </span>
+            )
+        )}
       </span>
       <div
         className={` px-2 join-item flex items-center text-center font-bold ${
@@ -68,11 +74,13 @@ const SingleWeapon = ({
             : "text-error-content bg-error"
         }`}
       >
-        <span className="mr-2">
-          {" "}
-          {isProficient ? "Proficient" : "Not Proficient"}{" "}
-        </span>
-        <Info tooltip="Proficiency in a weapon allows you to add your proficiency bonus to the attack roll." />
+        <Info
+          tooltip={`You are ${
+            isProficient
+              ? "proficient in this weapon"
+              : "not proficient in this weapon"
+          }. Proficiency in a weapon allows you to add your proficiency bonus to the attack roll.`}
+        />
       </div>
       <select
         className="join-item select select-bordered select-neutral"
@@ -115,22 +123,33 @@ const SingleWeapon = ({
       <button
         className="btn btn-accent join-item"
         onClick={() => {
-          const damageRolls = weapon.damage.map((damage) => {
-            return roll(damage.numberOfDice, damage.dice);
+          const damageRolls: {
+            rolled: number;
+            diceType: number;
+          }[] = [];
+          weapon.damage.forEach((damage) => {
+            for (let i = 0; i < damage.numberOfDice; i++) {
+              damageRolls.push({
+                rolled: roll(1, damage.dice),
+                diceType: damage.dice,
+              });
+            }
           });
-          const totalDamage = damageRolls.reduce((acc, cur) => acc + cur, 0);
+          const totalDamage = damageRolls.reduce(
+            (acc, cur) => acc + cur.rolled,
+            0
+          );
           logPush({
             from: `Damage Roll: ${weapon.name}`,
             roll: {
-              plus: AbilityToModifier(abilities[selectedAbility]),
-              rolls: weapon.damage.map((damage, index) => {
-                return {
-                  rolled: damageRolls[index],
-                  diceType: damage.dice,
-                };
-              }),
+              plus:
+                AbilityToModifier(abilities[selectedAbility]) +
+                (flatDamage?.amount || 0),
+              rolls: damageRolls,
               total:
-                totalDamage + AbilityToModifier(abilities[selectedAbility]),
+                totalDamage +
+                AbilityToModifier(abilities[selectedAbility]) +
+                (flatDamage?.amount || 0),
             },
             logType: "roll",
           });
@@ -148,6 +167,7 @@ interface Props {
   logPush: (newLog: Log) => void;
   proficiencyBonus: number;
   weaponProficiencies: WeaponID[];
+  customWeaponAttacks: PrismaJson.CustomWeapon[];
 }
 
 const WeaponRoller = ({
@@ -156,6 +176,7 @@ const WeaponRoller = ({
   logPush,
   proficiencyBonus,
   weaponProficiencies,
+  customWeaponAttacks,
 }: Props) => {
   const [weapons, setWeapons] = useState<WeaponInfo[]>([]);
   const [shields, setShields] = useState<ArmorInfo[]>([]);
@@ -194,18 +215,39 @@ const WeaponRoller = ({
       {/* <p className="">Equipped</p>
       <div className="divider  m-0"></div> */}
       <div className="h-full flex justify-center items-center w-full flex-col  bg-base-300 rounded-xl p-2">
-        {weapons.length > 0 ? (
-          weapons.map((weapon, index) => (
-            <SingleWeapon
-              key={index}
-              weapon={weapon}
-              abilities={abilities}
-              logPush={logPush}
-              isVersatile={versatile}
-              isProficient={weaponProficiencies.includes(weapon.id)}
-              proficiencyBonus={proficiencyBonus}
-            />
-          ))
+        {weapons.length > 0 || customWeaponAttacks.length > 0 ? (
+          <>
+            {weapons.map((weapon, index) => (
+              <SingleWeapon
+                key={index}
+                weapon={weapon}
+                abilities={abilities}
+                logPush={logPush}
+                isVersatile={versatile}
+                isProficient={weaponProficiencies.includes(weapon.id)}
+                proficiencyBonus={proficiencyBonus}
+              />
+            ))}
+            {customWeaponAttacks.map((weapon, index) => (
+              <SingleWeapon
+                key={index}
+                weapon={{
+                  name: weapon.name,
+                  damage: weapon.damage,
+                  properties: [],
+                  ammunition: null,
+                  ammunitionId: null,
+                  id: Math.floor(Math.random() * 100000),
+                  isSimple: true,
+                }}
+                flatDamage={weapon.flatDamage}
+                abilities={abilities}
+                logPush={logPush}
+                isProficient={weapon.isProficient}
+                proficiencyBonus={proficiencyBonus}
+              />
+            ))}
+          </>
         ) : (
           <div className="flex items-center justify-center flex-col">
             <p className="font-bold m-2">No Weapons Equipped...</p>

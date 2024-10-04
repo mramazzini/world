@@ -10,7 +10,6 @@ import NewLineParse from "../../../Utility/NewLineParse";
 import numberArray from "@/lib/utils/numberArray";
 import P from "@/app/components/Utility/FormatAndSanitize";
 import numPlace from "@/lib/utils/numPlace";
-import TooltipBody from "@/app/components/Utility/TooltipBody";
 
 interface Props {
   spellList: SpellListInfo | null;
@@ -142,9 +141,6 @@ const SpellListPage = ({ spellList }: Props) => {
                                 >
                                   {spell.castingTime}
                                 </Link>
-                                <TooltipBody element={<span>asd</span>}>
-                                  asd
-                                </TooltipBody>
                               </td>
                             </tr>
                           ))}
