@@ -42,11 +42,11 @@ const WeaponDisplay = ({
         />
         <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3  gap-2">
           {damage.map((dmg, index) => (
-            <span className="col-span-1 flex flex-row justify-center items-center">
-              <span
-                key={index}
-                className="bg-base-300 p-1 rounded-xl flex flex-row gap-2 items-center mx-2 w-full"
-              >
+            <span
+              key={index}
+              className="col-span-1 flex flex-row justify-center items-center"
+            >
+              <span className="bg-base-300 p-1 rounded-xl flex flex-row gap-2 items-center mx-2 w-full">
                 <select
                   value={dmg.numberOfDice}
                   className="select select-sm"
@@ -166,8 +166,8 @@ const CustomWeaponsModal = ({ initialWeapons, setWeaponState }: Props) => {
         <div className="modal-box max-w-full">
           <h3 className="font-bold text-lg">Custom Weapon Attacks</h3>
           <p className="text-sm text-neutral-content">
-            Use this form to add custom attacks to your character that aren't in
-            the system.
+            Use this form to add custom attacks to your character that
+            aren&apos;t in the system.
           </p>
           <div className="divider m-0"></div>
           <div className="modal-body">
