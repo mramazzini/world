@@ -34,16 +34,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${data.name} - Max's DND Wiki`,
     description:
-      data.description.length > 157
-        ? data.description.substring(0, 157) + "..."
-        : data.description,
+      data.flavorText.length > 157
+        ? data.flavorText.substring(0, 157) + "..."
+        : data.flavorText,
     openGraph: {
       type: "website",
       title: `${data.name} - Max's DND Wiki`,
       description:
-        data.description.length > 157
-          ? data.description.substring(0, 157) + "..."
-          : data.description,
+        data.flavorText.length > 157
+          ? data.flavorText.substring(0, 157) + "..."
+          : data.flavorText,
       images: [
         {
           url: "https://www.maxdnd.com/images/hero.jpg",

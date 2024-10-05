@@ -12,17 +12,7 @@ import {
 
 import { weaponIds } from "../../Items/Weapons/Weapons.seed";
 import { artisanIds, toolIds } from "../../Items/Tools/tools.seed";
-const ids = {
-  dragonborn: 1,
-  dwarf: 2,
-  elf: 3,
-  gnome: 4,
-  halfElf: 5,
-  halfOrc: 6,
-  halfling: 7,
-  human: 8,
-  tiefling: 9,
-};
+import { speciesIds as ids } from "../Species.seed";
 
 const ClassicVariants: Prisma.SubSpeciesCreateManyInput[] = [
   //dragonborn

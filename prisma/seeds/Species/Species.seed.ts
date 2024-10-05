@@ -11,6 +11,7 @@ import {
 } from "@prisma/client";
 import { weaponIds } from "../Items/Weapons/Weapons.seed";
 import { instrumentIds, toolIds } from "../Items/Tools/tools.seed";
+import { features } from "process";
 
 const Species: Prisma.SpeciesCreateManyInput[] = [
   {
@@ -5411,6 +5412,772 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
       },
     ],
   },
+  {
+    id: 87,
+    name: "Shifter MMOM",
+    description:
+      "Shifters are sometimes called weretouched, as they are descendants of people who contracted full or partial lycanthropy. Humanoids with a bestial aspect, shifters can’t fully change shape, but they can temporarily enhance their animalistic features by entering a state they call shifting.\n\nShifters are similar to humans in height and build but are typically more lithe and flexible. Their facial features have a bestial cast, often with large eyes and pointed ears; most shifters also have prominent canine teeth. They grow fur-like hair on nearly every part of their bodies. While a shifter’s appearance might remind an onlooker of an animal, they remain clearly identifiable as shifters even when at their most feral.",
+    flavorText:
+      "Shifters are sometimes called weretouched, as they are descendants of people who contracted full or partial lycanthropy.",
+    source: src.mordenkainenMonsters,
+    abilityScoreDescription:
+      "When determining your character’s ability scores, increase one score by 2 and increase a different score by 1, or increase three different scores by 1. You can't raise any of your scores above 20.",
+    abilityScores: {
+      choices: [
+        {
+          abilities: Object.values(Ability),
+          options: [1, 2],
+        },
+        {
+          abilities: Object.values(Ability),
+          options: [1, 1, 1],
+        },
+      ],
+    },
+    age: "N/A",
+    alignment: "N/A",
+    creatureType: CreatureType.HUMANOID,
+    size: Size.MEDIUM,
+    sizeDescription: "You are Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You discern colors in that darkness only as shades of gray.",
+    languageDescription:
+      "Your character can speak, read, and write Common and one other language",
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    features: [
+      {
+        name: "Lycnathrope",
+        description:
+          "Most shifters resemble a particular kind of lycanthrope. You can choose the kind of lycanthrope in your past, or you can determine it randomly by rolling on the Lycanthrope Ancestor table. The table also provides a suggestion for the Shifting option you might have as a result of your ancestry.",
+        extendedTable: [
+          {
+            "Lycanthrope Ancestor": {
+              headers: ["d6", "Ancestor", "Shifting Option"],
+              data: [
+                {
+                  d6: "1",
+                  Ancestor: "Werebear",
+                  "Shifting Option": "Beasthide",
+                },
+                {
+                  d6: "2",
+                  Ancestor: "Wereboar",
+                  "Shifting Option": "Beasthide",
+                },
+                {
+                  d6: "3",
+                  Ancestor: "Weretiger",
+                  "Shifting Option": "Swiftstride",
+                },
+                {
+                  d6: "4",
+                  Ancestor: "Werewolf (wolflike)",
+                  "Shifting Option": "Longtooth",
+                },
+                {
+                  d6: "5",
+                  Ancestor: "Werewolf (doglike)",
+                  "Shifting Option": "Wildhunt",
+                },
+                {
+                  d6: "6",
+                  Ancestor: "Wererat",
+                  "Shifting Option": "Swiftstride",
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        name: "Shifting",
+        description:
+          "As a bonus action, you can assume a more bestial appearance. This transformation lasts for 1 minute, until you die, or until you revert to your normal appearance as a bonus action. When you shift, you gain temporary hit points equal to 2 x your proficiency bonus. You can shift a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.\n\nWhenever you shift, you gain an additional benefit based on one of the following options (choose when you select this race): ",
+        extendedTable: [
+          {
+            "": {
+              headers: ["Option", "Benefit"],
+              data: [
+                {
+                  Option: "Beasthide",
+                  Benefit:
+                    "You gain 1d6 additional temporary hit points. While shifted, you have a +1 bonus to your Armor Class.",
+                },
+                {
+                  Option: "Longtooth",
+                  Benefit:
+                    "When you shift and as a bonus action on your other turns while shifted, you can use your elongated fangs to make an unarmed strike. If you hit with your fangs, you can deal piercing damage equal to 1d6 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.",
+                },
+                {
+                  Option: "Swiftstride",
+                  Benefit:
+                    "While shifted, your walking speed increases by 10 feet. Additionally, you can move up to 10 feet as a reaction when a creature ends its turn within 5 feet of you. This reactive movement doesn’t provoke opportunity attacks.",
+                },
+                {
+                  Option: "Wildhunt",
+                  Benefit:
+                    "While shifted, you have advantage on Wisdom checks, and no creature within 30 feet of you can make an attack roll with advantage against you unless you’re incapacitated.",
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 88,
+    name: "Shifter (ERLW)",
+    description:
+      "Shifters are sometimes called the weretouched, as many believe that they are the descendants of humans and lycanthropes. They are humanoids with a bestial aspect; while they cannot fully change shape they can temporarily enhance their animalistic features – a state they call shifting. Whatever their origins, shifters have evolved into a unique race. A shifter walks on the knife’s edge between the wilds and the world around them. Do they embrace their primal instincts or the path of civilization?",
+    flavorText: "Shifters are sometimes called the weretouched.",
+    abilityScoreDescription:
+      "Your ability scores are determined by your subspecies",
+    abilityScores: {
+      default: [],
+    },
+    source: src.eberron,
+
+    age: "Shifters are quick to mature both physically and emotionally, reaching young adulthood at age 10. They rarely live to be more than 70 years old.",
+    alignment:
+      "Shifters tend toward neutrality, being more focused on survival than concepts of good and evil. A love of personal freedom can drive shifters toward chaotic alignments.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Shifters range from 5 to almost 7 feet tall, depending on their subrace. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",
+    languageDescription: "You can read and write Common.",
+    originLanguages: {
+      default: [Language.COMMON],
+    },
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Shifting",
+        description:
+          "As a bonus action, you can assume a more bestial appearance. This transformation lasts for 1 minute, until you die, or until you revert to your normal appearance as a bonus action. When you shift, you gain temporary hit points equal to your level + your Constitution modifier (minimum of 1 temporary hit point). You also gain benefits that depend on your shifter subrace. Once you shift, you can’t do so again until you finish a short or long rest.",
+      },
+      {
+        name: "Keen Senses",
+        description: "You have proficiency in the Perception skill.",
+      },
+    ],
+  },
+  {
+    id: 89,
+    name: "Yuan Ti (MMOM)",
+    description:
+      "Yuan-ti were originally humans who transformed themselves into serpent folk through ancient rituals. Most yuan-ti were corrupted into monsters by those rites, but some yuan-ti instead became a new people who mix characteristics of humans and snakes.\n\nBlessed with resistance to magical and poisonous effects by the rituals that created them, each of these yuan-ti manifests their serpentine heritage in a variety of ways: a forked tongue, snake eyes, a snakelike nose, or some other ophidian characteristic. However a yuan-ti looks, they have the power to pursue great good or evil in the multiverse.",
+    flavorText:
+      "Yuan-ti were originally humans who transformed themselves into serpent folk through ancient rituals.",
+    source: src.mordenkainenMonsters,
+    abilityScoreDescription:
+      "When determining your character’s ability scores, increase one score by 2 and increase a different score by 1, or increase three different scores by 1. You can't raise any of your scores above 20.",
+    abilityScores: {
+      choices: [
+        {
+          abilities: Object.values(Ability),
+          options: [1, 2],
+        },
+        {
+          abilities: Object.values(Ability),
+          options: [1, 1, 1],
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    size: Size.MEDIUM,
+    sizeDescription: "You are Medium or Small.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light and in darkness as if it were dim light. You discern colors in that darkness only as shades of gray.",
+    languageDescription:
+      "Your character can speak, read, and write Common and one other language",
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+    age: "N/A",
+    alignment: "N/A",
+    features: [
+      {
+        name: "Magic Resistance",
+        description: "You have advantage on saving throws against spells",
+      },
+      {
+        name: "Poison Resistance",
+        description:
+          "You have advantage on saving throws you make to avoid or end the poisoned condition on yourself. You also have resistance to poison damage.",
+      },
+      {
+        name: "Serpentine Spellcasting",
+        description:
+          "You know the Poison Spray cantrip. You can cast Animal Friendship an unlimited number of times with this trait, but you can target only snakes with it. Starting at 3rd level, you can also cast Suggestion with this trait. Once you cast it, you can’t do so again until you finish a long rest. You can also cast it using any spell slots you have of 2nd level or higher. \n\nIntelligence, Wisdom, or Charisma is your spellcasting ability for these spells when you cast them with this trait (choose when you select this race).",
+      },
+    ],
+  },
+  {
+    id: 90,
+    name: "Yuan Ti (VGM)",
+    description:
+      "The serpent creatures known as yuan-ti are all that remains of an ancient, decadent human empire. Ages ago their dark gods taught them profane, cannibalistic rituals to mix their flesh with that of snakes, producing a caste-based society of hybrids in which the most snakelike are the leaders and the most humanlike are spies and agents in foreign lands.",
+    flavorText:
+      "The serpent creatures known as yuan-ti are all that remains of an ancient, decadent human empire.",
+    source: src.volo,
+    abilityScoreDescription:
+      "Your Charisma score increases by 2, and your Intelligence score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.CHA,
+          value: 2,
+        },
+        {
+          ability: Ability.INT,
+          value: 1,
+        },
+      ],
+    },
+    age: "Purebloods mature at the same rate as humans and have lifespans similar in length to theirs.",
+    alignment:
+      "Purebloods are devoid of emotion and see others as tools to manipulate. They care little for law or chaos and are typically neutral evil.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Purebloods match humans in average size and weight. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+    languageDescription:
+      "You can speak, read, and write Common, Abyssal, and Draconic.",
+    originLanguages: {
+      default: [Language.COMMON, Language.ABYSSAL, Language.DRACONIC],
+    },
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Innate Spellcasting",
+        description:
+          "You know the Poison Spray cantrip. You can cast Animal Friendship an unlimited number of times with this trait, but you can target only snakes with it. Starting at 3rd level, you can also cast Suggestion with this trait. Once you cast it, you can't do so again until you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      },
+      {
+        name: "Magic Resistance",
+        description:
+          "You have advantage on saving throws against spells and other magical effects.",
+      },
+    ],
+  },
+  {
+    id: 91,
+    name: "Aetherborn",
+    description:
+      "Aetherborn come into being spontaneously as part of the aether refinement process. Their bodies and minds are apparently formed out of some interaction between the volatile elements of aether that are removed during refinement and the psychic impressions created by the people involved in the process. But each aetherborn is a unique individual, not a mere copy of some other person’s mind and shape. This race is little understood, and few aetherborn are willing to waste any of their short lives allowing vedalken scholars to study their biological and psychological characteristics.\n\nAetherborn are a strange living by-product of the process of aether refinement, cast in humanoid form but lacking any of the biological qualities of other races. They don’t eat or sleep, and they don’t reproduce—nor do they have any physical sexual characteristics. Language that categorizes people into male or female categories thus breaks down when it comes to aetherborn. Most aetherborn prefer that others use the pronoun “they” to refer to them, since it doesn’t attribute a gender that they don’t possess. Only a relative few prefer “he” or “she,” having chosen to adopt a gender.",
+    flavorText:
+      "Aetherborn come into being spontaneously as part of the aether refinement process.",
+    abilityScoreDescription:
+      "Your Charisma score increases by 2, and two other ability scores of your choice increase by 1.",
+    abilityScores: {
+      choices: [
+        {
+          abilities: Object.values(Ability),
+          options: [1, 2],
+        },
+        {
+          abilities: Object.values(Ability),
+          options: [1, 1],
+        },
+      ],
+    },
+    source: src.kaladesh,
+    age: "Aetherborn come into being as adults and live no more than a few years.",
+    alignment:
+      "As a rule, aetherborn are driven by hedonism and self-interest, making them neutral at best and thoroughly evil at worst. Neutral aetherborn might devote much of their time (and wealth) to parties and social activity, while evil aetherborn are usually involved in the criminal underworld.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Aetherborn are about the same size as humans, ranging from 5 to 6 feet tall. They are quite light—only about 100 pounds—and their weight diminishes as they age and more and more of their substance returns to the aethersphere. Your size is Medium.",
+    speedDescription: " Your base walking speed is 30 feet.",
+    speed: 30,
+    darkvision: 60,
+    darkvisionDescription:
+      "Accustomed to the night, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",
+    languageDescription:
+      "You can speak, read, and write Common and two other languages of your choice.",
+    originLanguages: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          options: Object.values(Language).filter((f) => f != Language.COMMON),
+          numberOfChoices: 2,
+        },
+      ],
+    },
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Born of Aether",
+        description: "You have resistance to necrotic damage.",
+      },
+      {
+        name: "Menacing",
+        description: "You gain proficiency in the Intimidation skill.",
+      },
+    ],
+  },
+  {
+    id: 92,
+    name: "Aven",
+    description:
+      "Aven have humanlike bodies, arms, and legs, along with birdlike wings and heads. Two distinct varieties of aven are found in Naktamun. One has the head of a hawk or similar bird of prey, with short wings allowing fast flight. The other variety has the head of an ibis atop a long neck, with wide, angular wings better suited to soaring. All aven have lean bodies with feathers extending from their heads down to their shoulders.\n\nAven delight in flying above their foes, using their superior mobility to confound and outpace their opponents. They love soaring through the sky as well, though the Hekma limits their altitude. Like all people of Naktamun, they are grateful for the Hekma’s protective magic, of course. But they keenly anticipate the hour when the God-Pharaoh will return and dissolve the veil, letting them fly without limit in the afterlife.",
+    flavorText:
+      "Aven have humanlike bodies, arms, and legs, along with birdlike wings and heads.",
+    source: src.amonkhet,
+    abilityScoreDescription: "Your Dexterity score increases by 2.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.DEX,
+          value: 2,
+        },
+      ],
+    },
+    age: "Like humans, aven reach adulthood in their late teens and can theoretically live into their 80s. Of course, most find a glorious (or inglorious) death long before that point.",
+    alignment:
+      "Most aven lean toward some form of neutrality. Ibis-headed aven, focused more on knowledge than any other virtue, are usually neutral. Hawk-headed aven are inclined toward lawful neutral.",
+    creatureType: CreatureType.HUMANOID,
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Aven stand from 5 to 6 feet tall, but their bodies are slender and their bones are partially hollow to facilitate their flight. Your size is Medium.",
+    speed: 25,
+    speedDescription:
+      "Your base walking speed is 25 feet. You have a flying speed of 30 feet. You can’t use your flying speed while you wear medium or heavy armor. (If your campaign uses the variant rule for encumbrance, you can’t use your flying speed if you are encumbered.)",
+    languageDescription: "You can speak, read, and write Common and Aven.",
+    originLanguages: {
+      default: [Language.COMMON, Language.AVEN],
+    },
+  },
+  {
+    id: 93,
+    name: "Khenra",
+    description:
+      "The khenra of Amonkhet are tall and lean, with graceful bodies and heads that strongly resemble jackals. Their snouts are long and sharp, and their angular ears rise straight above their heads. Their bodies are covered in dark, sleek hair that ranges from the brown of the desert sands to ebony black. Despite their sharp teeth, they consider biting to be an uncouth and unworthy combat tactic.\n\nNearly every khenra is born a fraternal or identical twin, and a pair of khenra twins forms an extremely close emotional bond unknown to most other residents of Amonkhet. The death of one twin in training or the trials causes a tremendous shock to the survivor, who typically grows more aggressive and foolhardy in battle. The rare khenra who are born without twins are believed to have killed their siblings in the womb, and are thus viewed as natural-born initiates, sure to achieve a glorified death in the Trial of Zeal.",
+    flavorText:
+      "The khenra of Amonkhet are tall and lean, with graceful bodies and heads that strongly resemble jackals.",
+    source: src.amonkhet,
+    abilityScoreDescription:
+      "Your Dexterity score increases by 2, and your Strength score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.DEX,
+          value: 2,
+        },
+        {
+          ability: Ability.STR,
+          value: 1,
+        },
+      ],
+    },
+    age: "Khenra mature quickly, reaching adulthood in their early teens. Khenra initiates are usually the youngest in a crop, completing the trials by their late teens. Even without a violent death, they rarely live past 60.",
+    alignment:
+      "Most khenra lean toward chaotic alignments. They have no particular inclination toward good or evil.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Khenra have similar builds to humans. Your size is Medium.",
+    speed: 35,
+    speedDescription: "Your base walking speed is 35 feet.",
+    languageDescription: "You can speak, read, and write Common and Khenra.",
+    originLanguages: {
+      default: [Language.COMMON, Language.KHENRA],
+    },
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Khenra Weapon Training",
+        description:
+          "You have proficiency with the khopesh, spear, and javelin.",
+      },
+      {
+        name: "Khenra Twins",
+        description:
+          "If your twin is alive and you can see your twin, whenever you roll a 1 on an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll. If your twin is dead (or if you were born without a twin), you can’t be frightened.",
+      },
+    ],
+  },
+  {
+    id: 94,
+    name: "Kor",
+    description:
+      "Deeply reverent of the land and its sacred sites, the nomadic kor live a spare existence defined by their constant travels. Masters of ropes and hooks, they scale sheer cliffs and cross yawning chasms with such skill and agility that they sometimes seem almost to take flight.\n\nKor are tall, slender humanoids with light hair and gray, blue-gray, or ivory skin. All kor have slightly pointed ears, and males have short, fleshy barbels on their chins. They paint softly glowing geometric patterns on their faces and bodies, suggestive of the shapes and design of the hedrons that appear across Zendikar. Their clothing tends to leave their arms and shoulders free to facilitate climbing, and they keep most of their gear in pouches and slings at their waists.\n\nThe kor have a nonverbal language of hand signs and gestures that allows communication despite significant distance (particularly when augmented with whirling ropes) or howling winds. They also use this sign language among themselves when they wish to avoid being overheard, giving rise to misguided rumors that they are incapable of speech. When they do speak, they typically use as few words as possible to convey their meaning.",
+    flavorText:
+      "Deeply reverent of the land and its sacred sites, the nomadic kor live a spare existence defined by their constant travels.",
+    source: src.zendikar,
+    abilityScoreDescription:
+      "Your Dexterity score increases by 2, and your Wisdom score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.DEX,
+          value: 2,
+        },
+        {
+          ability: Ability.WIS,
+          value: 1,
+        },
+      ],
+    },
+    age: "Kor mature at the same rate as humans and live about as long.",
+    alignment:
+      "Most kor are lawful good, with a strong dedication to community and the traditions of their ancestors.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Kor average nearly 6 feet tall, but are much lighter and more slender than humans. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    climbDescription:
+      "You have a climbing speed of 30 feet as long as you are not encumbered or wearing heavy armor.",
+    climbSpeed: 30,
+    creatureType: CreatureType.HUMANOID,
+    languageDescription:
+      "You can speak, read, and write Common, and communicate in the silent speech of the kor.",
+    originLanguages: {
+      default: [Language.COMMON, Language.KOR],
+    },
+    features: [
+      {
+        name: "Kor Climbing",
+        description:
+          "You have proficiency in the Athletics and Acrobatics skills.",
+      },
+      {
+        name: "Lucky",
+        description:
+          "When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.",
+      },
+      {
+        name: "Brave",
+        description:
+          "You have advantage on saving throws against being frightened.",
+      },
+    ],
+  },
+  {
+    id: 95,
+    name: "Merfolk (PSI)",
+    description:
+      "The River Heralds are merfolk—a race of amphibious humanoids at home throughout the oceans, rivers, and rain forests of Ixalan. They stand between seven and eight feet tall, with skin that ranges from deep burgundy through many shades of violet and blue, to green, bright orange, and yellow. They are humanlike in shape, but have long fins extending from their shoulders, forearms, middle backs, and calves. Frills of fins also protrude from the backs of their heads. All merfolk can breathe air or filter oxygen from the water, and they can walk on land or swim with equal ease.",
+    abilityScoreDescription: "Your Charisma score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.CHA,
+          value: 1,
+        },
+      ],
+    },
+    flavorText:
+      "The River Heralds are merfolk—a race of amphibious humanoids at home throughout the oceans, rivers, and rain forests of Ixalan.",
+    source: src.ixalan,
+    age: "Merfolk mature at the same rate humans do and reach adulthood around the age of 20. They live considerably longer than humans, though, often reaching well over 100 years.",
+    alignment: "Most merfolk are neutral, living in close harmony with nature.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Merfolk are significantly taller than most humans, standing between seven and eight feet tall and averaging about 300 pounds. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    swimSpeed: 30,
+    swimDescription: "You have a swimming speed of 30 feet.",
+    creatureType: CreatureType.HUMANOID,
+    languageDescription:
+      "You can speak, read, and write Common (if it exists in your campaign), Merfolk and one additional language of your choice.",
+    originLanguages: {
+      default: [Language.COMMON, Language.MERFOLK],
+      choices: [
+        {
+          options: Object.values(Language).filter(
+            (f) => f != Language.COMMON && f != Language.MERFOLK
+          ),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+  },
+  {
+    id: 96,
+    name: "Merfolk (PSZ)",
+    description:
+      "Curious, thoughtful, and analytical, the merfolk of Zendikar are natural scholars and explorers. In the past, merfolk society was organized around their belief in three deities. But in the wake of the reappearance of the Eldrazi, the merfolk have realized that their faith was a web of lies, built on a corrupted memory of the Eldrazi titans handed down from generation to generation. In peaceful times, the merfolk might have fought over the ultimate meaning of this revelation. But faced with the danger presented by the Eldrazi broods, the merfolk have largely set aside their differences and joined together in a united force. Old grudges still linger, but the well-being of the merfolk race—and the world—far outweigh any ancient conflicts between creeds.\n\nMerfolk are associated with knowledge, logic, and strategy, though the traditional merfolk creeds express this connection in different ways.",
+    flavorText:
+      "Curious, thoughtful, and analytical, the merfolk of Zendikar are natural scholars and explorers.",
+    source: src.zendikar,
+    abilityScoreDescription: "Your Charisma score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.CHA,
+          value: 1,
+        },
+      ],
+    },
+    age: "Merfolk mature at the same rate humans do and reach adulthood around the age of 20. They live considerably longer than humans, though, often reaching well over 100 years.",
+    alignment:
+      "Most merfolk are neutral, though merfolk of the Emeria and Cosi creeds have chaotic leanings.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Merfolk are about the same size as humans. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    swimSpeed: 30,
+    swimDescription: "You have a swimming speed of 30 feet.",
+    creatureType: CreatureType.HUMANOID,
+    languageDescription:
+      "You can speak, read, and write Common, Merfolk, and one other language of your choice.",
+    originLanguages: {
+      default: [Language.COMMON, Language.MERFOLK],
+      choices: [
+        {
+          options: Object.values(Language).filter(
+            (f) => f != Language.COMMON && f != Language.MERFOLK
+          ),
+          numberOfChoices: 1,
+        },
+      ],
+    },
+  },
+  {
+    id: 116,
+    name: "Naga",
+    description:
+      "Naga resemble enormous snakes with shoulders, arms, and a torso that resembles a humanoid form. They typically hold their heads and torsos off the ground while moving, but they can increase their speed by lowering their bodies and using their hands for extra propulsion. They adorn their torsos with armor, jewelry, and a vague nod toward the clothing worn by other races. Male naga have broad hoods, wider than their shoulders, while females have narrower hoods and longer faces.",
+    flavorText:
+      "Naga resemble enormous snakes with shoulders, arms, and a torso that resembles a humanoid form.",
+    source: src.amonkhet,
+    abilityScoreDescription:
+      "Your Constitution score increases by 2, and your Intelligence score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.CON,
+          value: 2,
+        },
+        {
+          ability: Ability.INT,
+          value: 1,
+        },
+      ],
+    },
+    age: "Like humans, naga reach adulthood in their late teens. They show no signs of aging beyond that point except for growing larger, so in theory, a naga could live well over a century.",
+    alignment: "Most naga are either neutral or neutral evil in alignment.",
+    creatureType: CreatureType.HUMANOID,
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Naga stand about 5 feet tall when upright, but the total length of their bodies, head to tail, ranges from 10 to as much as 20 feet. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    languageDescription: "You can speak, read, and write Common and Naga.",
+    originLanguages: {
+      default: [Language.COMMON, Language.NAGA],
+    },
+    features: [
+      {
+        name: "Speed Burst",
+        description:
+          "By lowering your body to the ground and propelling yourself with your arms, you can move more quickly for a time. As a bonus action on your turn, if you have both hands free, you can increase your walking speed by 5 feet until the end of your turn.",
+      },
+      {
+        name: "Natural Weapons",
+        description:
+          "Your fanged maw and constricting serpentine body are natural weapons, which you can use to make unarmed strikes. If you hit with your bite, you deal piercing damage equal to 1d4 + your Strength modifier, and your target must make a Constitution saving throw (DC 8 + your proficiency bonus + your Constitution modifier). On a failed save, the target takes 1d4 poison damage. \n\nIf you hit with your constrict attack, you deal bludgeoning damage equal to 1d6 + your Strength modifier, and the target is grappled (escape DC 8 + your proficiency bonus + your Strength modifier). Until this grapple ends, the target is restrained, and you can’t constrict another target.",
+      },
+      {
+        name: "Poison Immunity",
+        description:
+          "You are immune to poison damage and the poisoned condition.",
+      },
+      {
+        name: "Poison Affinity",
+        description: "You gain proficiency with the poisoner’s kit.",
+      },
+    ],
+  },
+  {
+    id: 117,
+    name: "Siren",
+    description:
+      "Sirens are at home along the waters of the Stormwreck Sea. They settle on rocky coasts and remote islands, and even on floating piles of kelp. Sirens are mercurial creatures who can turn in an instant from lonely to repulsed, from desirous to hateful, from welcoming to irritated, from loving to murderous—and then back again. They are fascinated with ships, and enjoy toying with them. One siren might call out to a passing crew for company, only to capriciously draw the ship into an entangling mass of kelp. Another might lure a vessel onto jagged rocks so as to study the wreckage and learn more about the strange contraption. But as the number of Brazen Coalition ships passing through siren-controlled waters has increased over the years, a growing number of sirens have decided to satisfy their curiosity by taking positions on ship crews—including, in at least one case, the position of captain.\n\nSirens are humanoid creatures with birdlike features. Their long, slender arms extend into powerful wings that easily carry their light frames into the air. Their fingers bear sharp claws but are nimble enough to wield weapons and perform fine manipulation. Crests of feathery plumage start between their eyes and cover the backs of their heads.",
+    flavorText: "Sirens are at home along the waters of the Stormwreck Sea.",
+    abilityScoreDescription: "Your Charisma score increases by 2.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.CHA,
+          value: 2,
+        },
+      ],
+    },
+    source: src.ixalan,
+    age: "N/A",
+    alignment:
+      "Most sirens lean toward chaotic alignment, cherishing the freedom and independence that comes from joining a pirate crew.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Sirens stand about 5 to 6 feet tall, but their bodies are slender and their bones partially hollow to facilitate their flight. Your size is Medium.",
+    speedDescription: "Your base walking speed is 25 feet.",
+    speed: 25,
+    flightSpeed: 30,
+    flightDescription:
+      "You have a flying speed of 30 feet. You can’t use your flying speed while you wear medium or heavy armor. (If your campaign uses the variant rule for encumbrance, you can’t use your flying speed if you are encumbered.)",
+    creatureType: CreatureType.HUMANOID,
+    languageDescription: "You can speak, read, and write Common and Siren.",
+    originLanguages: {
+      default: [Language.COMMON, Language.SIREN],
+    },
+    features: [
+      {
+        name: "Siren Song",
+        description:
+          "You know the Friends cantrip and can cast it without material components.",
+      },
+    ],
+  },
+  {
+    id: 118,
+    name: "Vampire (PSI)",
+    description:
+      "Vampires are associated with necromancy. Their existence is predicated on draining the life from others to fuel their own existence, and on putting their own lives ahead of all other concerns. Philosophically, they do not constrain themselves with artificial rules of morality, but believe that the strong can and should take what they need from the weak.",
+    flavorText: "Vampires are associated with necromancy.",
+    source: src.ixalan,
+    abilityScoreDescription:
+      "Your Charisma score increases by 2, and your Intelligence score increases by 1.",
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.CHA,
+          value: 2,
+        },
+        {
+          ability: Ability.INT,
+          value: 1,
+        },
+      ],
+    },
+    age: "Vampires don’t mature and age in the same way that other races do.",
+    alignment:
+      "Vampires might not have an innate tendency toward evil, but many of them end up there. Evil or not, their strict hierarchies incline them toward a lawful alignment.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Vampires are about the same size and build as humans. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "Thanks to your heritage, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",
+    languageDescription: "You can speak, read, and write Common and Vampire.",
+    originLanguages: {
+      default: [Language.COMMON, Language.VAMPIRE],
+    },
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Bloodthirst",
+        description:
+          "You can drain blood and life energy from a willing creature, or one that is grappled by you, incapacitated, or restrained. Make a melee attack against the target. If you hit, you deal 1 piercing damage and 1d6 necrotic damage. The target’s hit point maximum is reduced by an amount equal to the necrotic damage taken, and you regain hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0.",
+      },
+      {
+        name: "Feast of Blood",
+        description:
+          "When you drain blood with your Bloodthirst ability, you experience a surge of vitality. Your speed increases by 10 feet, and you gain advantage on Strength and Dexterity checks and saving throws for 1 minute.",
+      },
+    ],
+  },
+  {
+    id: 119,
+    name: "Vampire (PSZ)",
+    description:
+      "Vampires are associated with necromancy. Their existence is predicated on draining the life from others to fuel their own existence, and on putting their own lives ahead of all other concerns. Philosophically, they do not constrain themselves with artificial rules of morality, but believe that the strong can and should take what they need from the weak.",
+    flavorText: "Vampires are associated with necromancy.",
+    source: src.zendikar,
+    abilityScoreDescription:
+      "Your Charisma score increases by 2, and your Intelligence score increases by 1.",
+    age: "Vampires don’t mature and age in the same way that other races do. Every living vampire is either a bloodchief, infected by the Eldrazi's influence in the distant reaches of history, or was spawned by a bloodchief from a living human. Most vampires are thus very old, but few have any memory of their earliest years.",
+    alignment:
+      "Vampires have no innate tendency toward evil, but consuming the life energy of other creatures often pushes them to that end. Regardless of their moral bent, the strict hierarchies of their bloodchiefs inclines them toward a lawful alignment.",
+    size: Size.MEDIUM,
+    sizeDescription:
+      "Vampires are about the same size and build as humans. Your size is Medium.",
+    speed: 30,
+    speedDescription: "Your base walking speed is 30 feet.",
+    darkvision: 60,
+    darkvisionDescription:
+      "Thanks to your heritage, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",
+    languageDescription: "You can speak, read, and write Common and Vampire.",
+    originLanguages: {
+      default: [Language.COMMON, Language.VAMPIRE],
+    },
+    creatureType: CreatureType.HUMANOID,
+    features: [
+      {
+        name: "Dark Thirst",
+        description:
+          " You can drain blood and life energy from a willing creature, or one that is grappled by you, incapacitated, or restrained. Make a melee attack against the target, using either Strength or Dexterity for your attack roll. If you hit, you deal 1 piercing damage and 1d6 necrotic damage. The target’s hit point maximum is reduced by an amount equal to the necrotic damage taken, and you regain hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. A humanoid killed in this way becomes a null.",
+      },
+      {
+        name: "Vampiric Resistance",
+        description: "You have resistance to necrotic damage.",
+      },
+    ],
+    abilityScores: {
+      default: [
+        {
+          ability: Ability.CHA,
+          value: 2,
+        },
+        {
+          ability: Ability.INT,
+          value: 1,
+        },
+      ],
+    },
+  },
 ];
+
+export const speciesIds = {
+  dragonborn: 1,
+  dwarf: 2,
+  elf: 3,
+  gnome: 4,
+  halfElf: 5,
+  halfOrc: 6,
+  halfling: 7,
+  human: 8,
+  tiefling: 9,
+  deepGnome: 15,
+  shifterERLW: 88,
+  aven: 92,
+  merfolkIxalan: 95,
+  merfolkZendikar: 96,
+  vampireIxalan: 118,
+};
 
 export default Species;

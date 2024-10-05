@@ -1,6 +1,7 @@
 import { cerr, cinfo, cwarn } from "@/lib/utils/chalkLog";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { SpellSeed } from "../Spells/spells.seed";
+import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
 
 export const createSpells = async (db: PrismaClient) => {
   cinfo("Creating spells");
@@ -57,6 +58,12 @@ const verifySpell = (spell: Prisma.SpellCreateManyInput) => {
   if (!spell.source) {
     cwarn("Spell missing source field:", spell);
     return false;
+  }
+  if (spell.extendedTable) {
+    if (!verifyTableIntegrity(spell.extendedTable as PrismaJson.Table[])) {
+      cwarn("Spell extended table failed integrity check:", spell);
+      return false;
+    }
   }
   return true;
 };

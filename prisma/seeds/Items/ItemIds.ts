@@ -286,4 +286,7 @@ export const itemIds = {
   steelMirror: 285,
   leatherVest: 286,
   merchantScale: 287,
+  packSaddle: 288,
+  rowboat: 289,
+  cloak: 290,
 };

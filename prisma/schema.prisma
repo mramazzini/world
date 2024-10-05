@@ -110,8 +110,16 @@ enum Language {
   AARAKOCRA
   GITH
   MINOTAUR
+  KHENRA
   AQUAN
+  NETHERESE
+  AVEN
   QUORI
+  KOR
+  VAMPIRE
+  NAGA
+  MERFOLK
+  SIREN
 }
 
 enum DamageTypes {
@@ -533,16 +541,20 @@ model Background {
 }
 
 model Feat {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String
+  id                Int    @id @default(autoincrement())
+  name              String
   /// [Feature]
-  features    Json[]
-  source      String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  User        User?    @relation(fields: [userId], references: [id])
-  userId      Int?
+  features          Json[]
+  flavorText        String @db.VarChar(200)
+  source            String
+  /// [Prerequisite]
+  prerequisites     Json?
+  prereqDescription String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
 }
 
 model Message {
@@ -719,7 +731,8 @@ model FeatureCollection {
   id          Int      @id @default(autoincrement())
   name        String
   description String
-  /// [DetailedFeature]
+  flavorText  String   @db.VarChar(200)
+  /// [Feature]
   features    Json[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

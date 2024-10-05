@@ -1523,4 +1523,5 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
   },
 ];
+
 export default Classes;

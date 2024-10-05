@@ -10,12 +10,12 @@ interface Props {
 const FeatSearchPage = ({ feats }: Props) => {
   return (
     <SearchPageComponent<FeatInfo>
-      title="Species"
-      description="Feats provide a unique set of abilities and traits to your character based on their heritage. They can provide additional skills, languages, and abilities. Select a Feat to view more information."
+      title="Feats"
+      description="Feats can be claimed by characters to give them special abilities. Whenever a character gains a level that grants them an Ability Score Improvement, they can choose to take a Feat instead."
       createText="Create a Feat ->"
       homebrewOfficialText="View Homebrew Feats ->"
       searchPlaceholder="Search Feat..."
-      routeName="feat"
+      routeName="feats"
       handleSearch={getFeatChunk}
       staticInput={feats}
       table={[

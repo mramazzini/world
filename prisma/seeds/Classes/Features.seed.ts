@@ -9,22 +9,7 @@ import {
   spellIds,
 } from "../Spells/spells.seed";
 import { Time } from "@/lib/utils/types/types";
-
-const ids = {
-  fighter: 1,
-  wizard: 2,
-  cleric: 3,
-  rogue: 4,
-  barbarian: 5,
-  bard: 6,
-  druid: 7,
-  monk: 8,
-  paladin: 9,
-  ranger: 10,
-  sorcerer: 11,
-  warlock: 12,
-  artificer: 13,
-};
+import { classIds as ids } from "./ClassIds";
 interface ClassFeature extends PrismaJson.Feature {
   classId: number;
   spellCasting?: boolean;

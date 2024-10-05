@@ -1,62 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { headers } from "next/headers";
-
-const ids = {
-  acolyte: 1,
-  anthropologist: 2,
-  archaeologist: 3,
-  athlete: 4,
-  charlatan: 5,
-  cityWatch: 6,
-  clanCrafter: 7,
-  cloisteredScholar: 8,
-  courtier: 9,
-  criminal: 10,
-  entertainer: 11,
-  faceless: 12,
-  factionAgent: 13,
-  farTraveler: 14,
-  feyLost: 15,
-  fisher: 16,
-  folkHero: 17,
-  giantFoundling: 18,
-  gladiator: 19,
-  guildArtisan: 20,
-  guildMerchant: 21,
-  hauntedOne: 22,
-  hermit: 23,
-  houseAgent: 24,
-  inheritor: 25,
-  investigatorSCAG: 26,
-  investigatorVRGR: 27,
-  knight: 28,
-  knightOfTheOrder: 29,
-  marine: 30,
-  mercenaryVeteran: 31,
-  noble: 32,
-  outlander: 33,
-  pirate: 34,
-  rewarded: 35,
-  ruined: 36,
-  runeCarver: 37,
-  sage: 38,
-  sailor: 39,
-  shipwright: 40,
-  smuggler: 41,
-  soldier: 42,
-  spy: 43,
-  urbanBountyHunter: 44,
-  urchin: 45,
-  uthgardtTribeMember: 46,
-  waterdhavianNoble: 47,
-  witchlightHand: 48,
-  //aquisitionsInc
-  celebrityAdventurer: 49,
-  failedMerchant: 50,
-  gambler: 51,
-  plaintiff: 52,
-  rivalIntern: 53,
-};
+import { backgroundIds as ids } from "./BackgroundIds";
 interface BackgroundFeature extends PrismaJson.Feature {
   backgroundId: number;
 }
@@ -1903,6 +1847,327 @@ const BackgroundFeatures: BackgroundFeature[] = [
     name: "Inside Informant",
     description:
       "You have connections to your previous employer or other groups you dealt with during your previous employment. You can communicate with your contacts, gaining information at the DM's discretion.",
+  },
+  {
+    backgroundId: ids.blackFistDoubleAgent,
+    name: "Double Agent",
+    description:
+      "You have a reliable and trusty contact within the Tears of Virulence garrison in Phlan to whom you pass information and secrets. In exchange, you can get away with minor criminal offenses within the town of Phlan. In addition, your Black Fist contacts can help you secure an audience with the Lord Regent, the Lord Sage, members of the Black Fist, or deposed nobles and authority figures who are sympathetic to the Phlan refugees and insurgents.",
+  },
+  {
+    backgroundId: ids.dragonCasualty,
+    name: "Dragonscarred",
+    description:
+      "Over a period of several months you were subject to magical and mundane torture at the claws of Vorgansharax and his minions. These experiments have left you horribly disfigured but mark you as a survivor of the Maimed Virulence.\n\nThis affords you a measure of fame and notoriety, for those who know of your harrowing ordeal are keen to hear the tale personally, but makes it difficult to disguise your appearance and hide from prying eyes. You can parley this attention into access to people and places you might not otherwise have for you and your companions. Nobles, scholars, mages, and those who seek to ferret out the secrets of the Maimed Virulence would all be keen to hear your tale of survival, and learn what secrets (if any) you might possess, and/or study your affliction with great interest.\n\nHowever, you fear that your afflictions are not completely mundane and that the Maimed Virulence may as yet have some nefarious reason for allowing your escape, as your scars burn with acidic fury and seem to writhe beneath your skin at times.",
+  },
+  {
+    backgroundId: ids.dragonCasualty,
+    name: "Disfigurement",
+    description:
+      "In addition to extensive scarring, you may choose one of the following options to represent your disfigurement. This disfigurement is purely cosmetic, misshapen, and horrific to look upon.",
+    extendedTable: [
+      {
+        "": {
+          headers: ["d6", "Disfigurement"],
+          data: [
+            {
+              d6: "1",
+              Disfigurement:
+                "Small non-functional wing(s) or alternately-misshapen, wing-like membranes along one or both arm",
+            },
+            {
+              d6: "2",
+              Disfigurement: "Elongated, claw-like hand(s) and/or feet",
+            },
+            {
+              d6: "3",
+              Disfigurement: "Painful green scales randomly embedded in skin",
+            },
+            {
+              d6: "4",
+              Disfigurement: "Bulbous, reptilian eye(s)",
+            },
+            {
+              d6: "5",
+              Disfigurement: "Enlarged dorsal spines",
+            },
+            {
+              d6: "6",
+              Disfigurement: "Hair replaced with small irregular spines",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.ironRogueBandit,
+    name: "Black Market Breeder",
+    description:
+      "You know how to find people who are always looking for stolen animals & vehicles, whether to provide for animal pit fights, or to supply some desperate rogues the means to get away faster on mounts during an illegal job. This contact not only provides you with information of what such animals & vehicles are in high demand in the area, but also offers to give you favors and information (DM choice) if you bring such animals & vehicles to them.",
+  },
+  {
+    backgroundId: ids.phlanInsurgent,
+    name: "Origin",
+    description:
+      "Removed from your life as a townsperson, you’ve adapted to rough life in the wilds surrounding Phlan. The trade you practiced still influences your outlook, the manner in which you approach situations, and the way you contribute to the resistance movement against the Maimed Virulence. You can roll on the following table to determine what your occupation was before the fall, or choose one that best fits your character (select from either the general column or the specific column, but not both).",
+    extendedTable: [
+      {
+        "": {
+          headers: ["d8", "Origin (General)", "Origin (Specific)"],
+          data: [
+            {
+              d8: "1",
+              "Origin (General)": "Fisher",
+              "Origin (Specific)": " 	Stojanow River worker",
+            },
+            {
+              d8: "2",
+              "Origin (General)": "Hunter",
+              "Origin (Specific)": " 	Twilight Marsh worker",
+            },
+            {
+              d8: "3",
+              "Origin (General)": "Hunter",
+              "Origin (Specific)": " 	Mantor’s Library scribe",
+            },
+            {
+              d8: "4",
+              "Origin (General)": "Craftsperson",
+              "Origin (Specific)": "Clergy of Ilmater",
+            },
+            {
+              d8: "5",
+              "Origin (General)": "Priest/Priestess",
+              "Origin (Specific)": "Laughing Goblin server",
+            },
+            {
+              d8: "6",
+              "Origin (General)": "Cook",
+              "Origin (Specific)": "Black Fist guard",
+            },
+            {
+              d8: "7",
+              "Origin (General)": "Servant",
+              "Origin (Specific)": "House Sokol retainer",
+            },
+            {
+              d8: "8",
+              "Origin (General)": "Unskilled Laborer",
+              "Origin (Specific)": "Bay of Phlan dockworker",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.phlanInsurgent,
+    name: "Guerilla",
+    description:
+      "You’ve come to know the surrounding forests, streams, caves, and other natural features in which you can take refuge — or set up ambushes. You can quickly survey your environment for advantageous features. Additionally, you can scavenge around your natural surroundings to cobble together simple supplies (such as improvised torches, rope, patches of fabric, etc.) that are consumed after use.",
+  },
+  {
+    backgroundId: ids.stojanowPrisoner,
+    name: "Ex-Convict",
+    description:
+      "The knowledge gained during your incarceration lets you gain insight into local guards and jailors. You know which will accept bribes, or look the other way for you. You can also seek shelter for yourself from authorities with other criminals in the area.",
+  },
+  {
+    backgroundId: ids.ticklebellyNomad,
+    name: "At Home in the Wild",
+    description:
+      "The wilderness is your home and you are comfortable dwelling in it. You can find a place to hide, rest, or recuperate when out in the wild. This place of rest is secure enough to conceal you from most natural threats. Threats that are supernatural, magical, or are actively seeking you out might do so with difficulty depending on the nature of the threat (as determined by the DM). However, this feature doesn’t shield or conceal you from scrying, mental probing, nor from threats that don’t necessarily require the five senses to find you.",
+  },
+  {
+    backgroundId: ids.caravanSpecialist,
+    name: "Wagonmaster",
+    description:
+      "You are used to being in charge of the operation and your reputation for reliability has you on a short list when the job is critical. Experience has taught you to rely on your gut. Others recognize this and look to you for direction when a situation gets serious. You are able to identify the most defensible locations for camping. If you are part of a caravan outfit, you are able to attract two additional workers who are loyal to you based on your reputation. You have an excellent memory for maps and geography and can always determine your cardinal directions while traveling.",
+  },
+  {
+    backgroundId: ids.earthspurMiner,
+    name: "Deep Miner",
+    description:
+      "You are used to navigating the deep places of the earth. You never get lost in caves or mines if you have either seen an accurate map of them or have been through them before. Furthermore, you are able to scrounge fresh water and food for yourself and as many as five other people each day if you are in a mine or natural caves.",
+  },
+  {
+    backgroundId: ids.harborfolk,
+    name: "Harborfolk",
+    description:
+      "You grew up on the docks and waters of Mulmaster Harbor. The harborfolk remember you and still treat you as one of them. They welcome you and your companions. While they might charge you for it, they'll always offer what food and shelter they have; they'll even hide you if the City Watch is after you (but not if the Hawks are).",
+  },
+  {
+    backgroundId: ids.mulmasterAristocrat,
+    name: "Highborn",
+    description:
+      "Mulmaster is run by and for its aristocracy. Every other class of citizen in the city defers to you, and even the priesthood, Soldiery, Hawks, and Cloaks treat you with deference. Other aristocrats and nobles accept you in their circles and likely know you or of you. Your connections can get you the ear of a Zor or Zora under the right circumstances.",
+  },
+  {
+    backgroundId: ids.phlanRefugee,
+    name: "Phlan Survivor",
+    description:
+      "Whatever your prior standing was, you are now one of the many refugees who have come to Mulmaster. You are able to find refuge with others from Phlan and those who sympathize with your plight. Within Mulmaster this means that you can find a place to bed down, recover, and hide from the watch with either other refugees from Phlan, or the Zhents within the ghettos.",
+  },
+  {
+    backgroundId: ids.cormanthorRefugee,
+    name: "Shelter of the Elven Clergy",
+    description:
+      "The clerics of Elventree have vowed to care for the Cormanthor refugees. They will help you when they can, including providing you and your companions with free healing and care at temples, shrines, and other established presences in Elventree. They will also provide you (but only you) with a poor lifestyle.",
+  },
+  {
+    backgroundId: ids.gateUrchin,
+    name: "Red Plume and Mage Guild Contacts",
+    description:
+      "You made a number of friends among the Red Plumes and the Mage's Guild when you lived at the Hillsfar Gate. They remember you fondly and help you in little ways when they can. You can invoke their assistance in and around Hillsfar to obtain food, as well as simple equipment for temporary use. You can also invoke it to gain access to the low-security areas of their garrisons, halls, and encampments.",
+  },
+  {
+    backgroundId: ids.hillsfarMerchant,
+    name: "Factor",
+    description:
+      "Although you’ve left the day-to-day life of a merchant behind, your family has assigned you the services of a loyal retainer from the business: a factor, husbanding agent, seafarer, caravan guard, or clerk. This individual is a commoner who can perform mundane tasks for you such as making purchases, delivering messages, and running errands. He or she will not fight for you and will not follow you into obviously dangerous areas (such as dungeons), and will leave if frequently endangered or abused. If he or she is killed, the family assigns you another within a few days.",
+  },
+  {
+    backgroundId: ids.hillsfarMerchant,
+    name: "Alternate Feature: Trade Contact",
+    description:
+      "You and your family have trade contacts such as caravan masters, shopkeepers, sailors, artisans, and farmers throughout the Moonsea region and all along the Sword Coast. Once per game session, when adventuring in either of those areas, you can use those contacts to get information about the local area or to pass a message to someone in those areas, even across the great distance between the two areas.",
+  },
+  {
+    backgroundId: ids.hillsfarSmuggler,
+    name: "Secret Passage",
+    description:
+      "You can call on your contacts within the smuggling community to secure secret passage into or out of Hillsfar for yourself and your adventuring companions, no questions asked, and no Red Plume entanglements. Because you’re calling in a favor, you can’t be certain they will be able to help on your timetable or at all. Your Dungeon Master will determine whether you can be smuggled into or out of the city. In return for your passage, you and your companions may owe the Rogues' Guild a favor and/or may have to pay bribes.",
+  },
+  {
+    backgroundId: ids.secretIdentity,
+    name: "Secret Identity",
+    description:
+      "You have created a secret identity that you use to conceal your true race and that offers a covering explanation for your presence in Hillsfar. In addition, you can forge documents, including official papers and personal letters, as long as you have seen an example of the kind of document or the handwriting you are trying to copy.",
+  },
+  {
+    backgroundId: ids.shadeFanatic,
+    name: "Secret Society",
+    description:
+      "You have a special way of communicating with others who feel the same way you do about the Shade. When you enter a village or larger city you can identify contacts who will give you information on those that would hinder your goals and those would help you simply because of your desire to see the Shade Enclave return in all its glory.",
+  },
+  {
+    backgroundId: ids.tradeSheriff,
+    name: "Investigative Services",
+    description:
+      "You are a part of a small force outside of Hillsfar. You have a special way of communicating with others and they seem to be at ease around you. You can invoke your rank to allow you access to a crime scene or to requisition equipment or horses on a temporary basis. When you enter a town or village around Hillsfar you can identify a contact who will give you information on the local rumors and would help you simply because of your desire to get answers and information for anyone wanting to disrupt trade.",
+  },
+  {
+    backgroundId: ids.dissenter,
+    name: "Shelter of Dissenters",
+    description:
+      "If they wish to have any hope of survival, whether hiding within the city or cast out into the desert, dissenters must help each other. You can find a place to hide, rest, or recuperate among other dissenters. They will help shield you from those who hunt you, possibly even risking their lives for you.",
+  },
+  {
+    backgroundId: ids.initiate,
+    name: "Trial of the Five Gods",
+    description:
+      "Your life is oriented around your participation in the five trials that will determine your worthiness in the afterlife. While you prepare for and undergo those trials, you have constant access to training. A comfortable place to live and regular meals are provided to you by servitor mummies (the anointed) under the supervision of viziers. You can enjoy these benefits only as long as you obey the societal norms of Naktamun—training for the trials (with or without your crop), obeying the orders of the gods, and following the instructions of their viziers. If you violate these norms, you risk being treated as a dissenter.",
+  },
+  {
+    backgroundId: ids.vizier,
+    name: "Voice of Authority",
+    description:
+      "Your voice is the voice of your god, at least in theory. Your job might include training and instructing initiates, and they are required to obey you. In any circumstance, an initiate is expected to defer to your voice and obey your commands. If you abuse this authority, though, your god might personally punish you.",
+  },
+  {
+    backgroundId: ids.knightOfSolamnia,
+    name: "Squire of Solamnia",
+    description:
+      "You gain the Squire of Solamnia feat.\n\nIn addition, the Knights of Solamnia provide you free, modest lodging and food at any of their fortresses or encampments.",
+  },
+  {
+    backgroundId: ids.knightOfSolamnia,
+    name: "Knight of Solamnia Trinket",
+    description:
+      "When you make your character, you may roll once on the Knight of Solamnia Trinkets table, instead of on the Trinkets table in the Player's Handbook, for your starting trinket.",
+    extendedTable: [
+      {
+        "Knight of Solamnia Trinkets": {
+          headers: ["d6", "Trinket"],
+          data: [
+            {
+              d6: "1",
+              Trinket: "A flat silver disk you record your heroics upon",
+            },
+            {
+              d6: "2",
+              Trinket: "A piece of a fallen knight's armor",
+            },
+            {
+              d6: "3",
+              Trinket: "A pendant featuring a crown, a rose, or a sword",
+            },
+            {
+              d6: "4",
+              Trinket: "The pommel of your mentor's sword",
+            },
+            {
+              d6: "5",
+              Trinket:
+                "A meaningful favor from someone you defended—perhaps a handkerchief or glove",
+            },
+            {
+              d6: "6",
+              Trinket: "A locket with a sketch of a silver dragon inside",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    backgroundId: ids.mageOfHighSorcery,
+    name: "Initiate of High Sorcery",
+    description:
+      "You gain the Initiate of High Sorcery feat.\n\nIn addition, the Mages of High Sorcery provide you with free, modest lodging and food indefinitely at any occupied Tower of High Sorcery and for one night at the home of an organization member.",
+  },
+  {
+    backgroundId: ids.mageOfHighSorcery,
+    name: "Mage of High Sorcery Trinket",
+    description:
+      "When you make your character, you may roll once on the Mage of High Sorcery Trinkets table, instead of on the Trinkets table in the Player's Handbook, for your starting trinket.",
+    extendedTable: [
+      {
+        "Mage of High Sorcery Trinkets": {
+          headers: ["d6", "Trinket"],
+          data: [
+            {
+              d6: "1",
+              Trinket: " 	An unopened letter from your first teacher",
+            },
+            {
+              d6: "2",
+              Trinket: "A broken wand made of black, red, or white wood",
+            },
+            {
+              d6: "3",
+              Trinket: "A scroll bearing an incomprehensible formula",
+            },
+            {
+              d6: "4",
+              Trinket:
+                "A purposeless device covered in colored stones that can fold into various enigmatic shapes",
+            },
+            {
+              d6: "5",
+              Trinket:
+                "A pouch or spell book emblazoned with the triple moon symbol of the Mages of High Sorcery",
+            },
+            {
+              d6: "6",
+              Trinket:
+                "A lens through which you can see Krynn's invisible black moon, Nuitari",
+            },
+          ],
+        },
+      },
+    ],
   },
 ];
 

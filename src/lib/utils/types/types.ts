@@ -295,26 +295,29 @@ declare global {
       data:
         | {
             blackList?: boolean; //if true, the player must not have the listed items
-            level?: number;
+            minLevel?: number;
             Class?: ClassID;
             SubClass?: SubClassID;
             Species?: SpeciesID;
             SubSpecies?: SubSpeciesID;
             Background?: BackgroundID;
             Feat?: FeatID;
-            minimumAbilityScores?: AbilityScores;
+            minAbilityScore?: AbilityScoreValue;
             Spellcaster?: boolean;
-            Spell: SpellID;
+            hasASpell?: boolean;
+            Spell?: SpellID;
             weaponProficiency?: WeaponID;
+            martialWeaponProficiency?: boolean;
+            simpleWeaponProficiency?: boolean;
+
             armorProficiency?: ArmorID;
+            lightArmorProficiency?: boolean;
+            mediumArmorProficiency?: boolean;
+            heavyArmorProficiency?: boolean;
             toolProficiency?: ToolID;
             skillProficiency?: Skill;
           }[]
         | Prerequisite[];
-    }
-    interface DetailedFeature extends Feature {
-      prerequisite: Prerequisite;
-      source: string;
     }
 
     interface Trigger {
@@ -899,10 +902,13 @@ export interface AbilityScores {
   CHA: number;
 }
 export enum src {
+  hillsfar = "State of Hillsfar",
+  mulmaster = "Mulmaster Bonds and Backgrounds",
   awMD = "Adventures with Muk: Dankwood",
   kaladesh = "Plane Shift: Kaladesh",
   ixalan = "Plane Shift: Ixalan",
   grung = "One Grung Above",
+  planescape = "Planescape - Adventures in the Multiverse",
   zendikar = "Plane Shift: Zendikar",
   amonkhet = "Plane Shift: Amonkhet",
   homebrew = "Homebrew",

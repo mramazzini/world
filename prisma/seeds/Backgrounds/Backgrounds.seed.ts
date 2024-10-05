@@ -13,6 +13,7 @@ import {
   getGemstoneIdsOfValue,
   instrumentItemIds,
 } from "../Items/Items.seed";
+import { backgroundIds } from "./BackgroundIds";
 
 const i = (id: number, str: string) => `^${id}{${str}}^`;
 
@@ -4303,6 +4304,1727 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
       "There's right and there's wrong, and there's no gray area in between.",
       "Our superiors might not like what you're doing. I'm going to have to put that in my report.",
     ],
+  },
+  {
+    id: backgroundIds.blackFistDoubleAgent,
+    name: "Black Fist Double Agent",
+    description:
+      "You are an informant for the Tears of Virulence who now lord over Phlan, but are also a double agent for the original town guard of Phlan, the Black Fist. For the Tears you’ve been tasked with ferreting out the secrets of Phlan's criminal underworld, insurgency, and the common peoples of Phlan. In exchange for reporting on the activities of dissenters, criminals, and other rebel elements, the Tears of Virulence leave you alone to conduct your affairs in peace.\n\nIn reality you work for the deposed Black Fists, sharing misinformation with the Tears of Virulence that often helps the Black Fists and other Phlan insurgents.\n\nSince the evacuation of Phlan, you are even busier today than you ever were previously, as the number of dissenters among the refugees grows daily, while you are afforded many opportunities to spy on the peoples of Mulmaster and Elventree, to the pleasure of your contact(s) within the Tears of Virulence.",
+    skillProficiencyDescription: "You are proficient in Deception and Insight.",
+    skillProficiencies: {
+      default: [Skill.DECEPTION, Skill.INSIGHT],
+    },
+    toolProficiencyDescription:
+      "You are proficient with Disguise Kits, and one type of artisan’s tools or gaming set",
+    toolProficiencies: {
+      default: [toolIds.disguiseKit],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...artisanIds, ...gamingKitIds],
+        },
+      ],
+    },
+    flavorText: "You are an informant for the Tears of Virulence.",
+    source: src.strahd,
+    // Disguise Kit, common clothes, a Tears of Virulence emblem, a writ of free agency signed by the Lord Regent, a set of artisan’s tools or gaming set you are proficient with, and a pouch with 15gp (payment for services rendered).
+    equipmentDescription: [
+      `A ${i(itemIds.disguiseKit, "disguise kit")}`,
+      `A set of ${i(itemIds.commonClothes, "common clothes")}`,
+      `A Tears of Virulence ${i(itemIds.emblem, "emblem")}`,
+      `A writ of free agency signed by the Lord Regent`,
+      `One set of artisan's tools or gaming set you are proficient with`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing 15 ${i(
+        itemIds.goldPiece,
+        "gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.disguiseKit, quantity: 1 },
+        { item: itemIds.commonClothes, quantity: 1 },
+        { item: itemIds.emblem, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 15 },
+      ],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [
+            ...artisanToolItemIds.map((id) => [{ item: id, quantity: 1 }]),
+            ...gamingKitItemIds.map((id) => [{ item: id, quantity: 1 }]),
+          ],
+        },
+      ],
+    },
+
+    traits: [
+      "People are only as trustworthy as you are valuable to them. Always strive to be the most valuable person around.",
+      "My eloquence and sophistication are tools I use to avoid arousing suspicion myself.",
+      "I am a thrill-seeker, excited by covert and dangerous missions.",
+      "I live by my wits and always check every lock twice, just to be certain.",
+      "I never admit to my mistakes lest they be used against me.",
+      "I take every effort to be unnoticeable and blend into the crowd. Passersby rarely give me a second look.",
+      "I am prepared for any eventuality; including the day my usefulness as a spy comes to an end.",
+      "I always make certain to know my enemy before acting, lest I bite off more than I can chew.",
+    ],
+    ideals: [
+      "**Suspicious.** In my experience, everybody has something to hide, and what they hide can usually hurt me. (Any)",
+      "**Secretive.** I trade in secrets, and am not about to let any of mine slip. (Any)",
+      "**Hedonist.** Life is short. I live my life to the fullest, as I know any day could be my last. (Chaotic)",
+      "**Selfless.** I use my position to help the downtrodden avoid persecution from the authorities. (Good)",
+      "**Patriotic.** I am a loyal supporter of Phlan and its leaders, and see my role as a solemn duty and necessary evil to prevent anarchy. (Lawful)",
+      "**Manipulative.** I use my knowledge to blackmail and manipulate others to my own benefit. (Evil)",
+    ],
+    bonds: [
+      "I was framed for a crime I did not commit, and seek to bring the true culprit to justice.",
+      "I am a part of an underground network that smuggles innocent civilians out of the city prior to being raided by the authorities.",
+      "I miss the glory days of Phlan, before the coming of the dragon.",
+      "I seek to prove myself worthy of joining the Black Fist as a member of their order.",
+      "My sibling was killed by a Tear of Virulence, and now I feed them false information whenever possible.",
+      "My family was wrongly imprisoned, and I act as an informant in order to secure their release.",
+    ],
+    flaws: [
+      "I think too highly of myself, and have an exaggerated sense of self-importance.",
+      "I have difficulty trusting strangers. I see spies and informants everywhere.",
+      "Years of getting away with minor crimes has left me believing that I am above the law, and have diplomatic immunity above my station.",
+      "Years of seeing innocent people suffer have left me despondent and pessimistic for the future.",
+      "My desire for vengeance often gets me into trouble.",
+      "I am a spendthrift, and share my wealth with the patrons of my favorite tavern.",
+    ],
+  },
+  {
+    id: backgroundIds.dragonCasualty,
+    name: "Dragon Casualty",
+    description: `When the Maimed Virulence descended upon Phlan, you were one of the unfortunate casualties of war. Captured during the initial assault, you have spent the last year of your life as a plaything of a capricious and malevolent overlord.\n\nWhile many of your fellow prisoners fell to the dragon's insatiable fury over the coming months, you and your fellow "survivors" were spared only for a worse fate as one of the dragon's magical experiments, leaving you and those who survived the torture scarred and disfigured.\n\nWhat reasons the dragon had for releasing you few survivors, nobody knows. You only fear that those who died under his terrible claw were the lucky ones, and you and your fellow Dragon scarred are doomed for a fate worse than death.`,
+    skillProficiencyDescription:
+      "You are proficient in Intimidation and Survival",
+    skillProficiencies: {
+      default: [Skill.INTIMIDATION, Skill.SURVIVAL],
+    },
+    toolProficiencyDescription: "Special (see origin below)",
+    toolProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [
+            toolIds.waterVehicle,
+            ...artisanIds,
+            ...gamingKitIds,
+            toolIds.landVehicles,
+            ...instrumentIds,
+            toolIds.alchemistSupplies,
+            toolIds.herbalismKit,
+            toolIds.thievesTools,
+            toolIds.forgeryKit,
+            toolIds.disguiseKit,
+          ],
+        },
+      ],
+    },
+    languageProficiencyDescription: "You can speak Draconic.",
+    languageProficiencies: {
+      default: [Language.DRACONIC],
+    },
+    source: src.strahd,
+    //  A dagger, tattered rags, a loaf of moldy bread, a small cast-off scale belonging to Vorgansharax – the Maimed Virulence, and a pouch with 5gp of various coins (salvaged during your escape from Phlan).
+    flavorText: "You were one of the unfortunate casualties of war.",
+    equipmentDescription: [
+      `A ${i(itemIds.dagger, "dagger")}`,
+      `A set of tattered rags`,
+      `A loaf of moldy bread`,
+      `A small cast-off scale belonging to Vorgansharax – the Maimed Virulence`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing 5gp of various coins`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.dagger, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 5 },
+      ],
+    },
+    traits: [
+      "I am driven to escape my past, and rarely stay in one place long.",
+      "I know secrets of the Maimed Virulence, but fear the harm that may befall me should others learn them.",
+      "Speaking of my ordeal helps soothe the still open wounds in my soul.",
+      "My former life is meaningless, and was ripped to shreds by the claws of Vorgansharax. All that matters now is what I do with the future.",
+      "I have faced the worst a dragon can deliver and survived. I am fearless, and my resolve unshakable.",
+      "I am haunted by my tortured past, and wake at night screaming at half-remembered horrors.",
+      "I sleep with my back to a wall or tree, and a weapon within arm’s reach.",
+      "I am slow to trust, but incredibly loyal to those who have earned it.",
+    ],
+    ideals: [
+      "**Survivor.** No matter the cost, I will take any action necessary to survive. (Any)",
+      "**Independence.** When in trouble, the only person I can rely on is myself. (Chaotic)",
+      "**Compassionate.** I have suffered long at the hands of a Dragon, and take pity and compassion on the suffering of others. (Good)",
+      "**Secretive.** I am withdrawn, and hide my monstrous appearance for fear of drawing unwanted attention. (Chaotic)",
+      "**Justice.** I have been wronged, and will not allow the same fate to befall others. (Lawful)",
+      "**Sycophant.** During my ordeal, I became a willing servant of the Maimed Virulence, and spy on his behalf. (Evil)",
+    ],
+    bonds: [
+      "I have sworn vengeance on the Maimed Virulence and those that follow him.",
+      "I long to reunite with friends and family who may dwell among the Phlan Refugees, and protect them.",
+      "While a prisoner of the Maimed Virulence, I overheard rumors of an item or treasure the Dragon seeks. I will have that treasure for myself!",
+      "I seek to reclaim and rebuild my former life to the best of my ability.",
+      "I have been reborn as a child of Vorgansharax. I will claim my birthright as his chosen heir and successor.",
+      "I attribute my survival to the work of the divine, and seek to prove myself worthy of the honor.",
+    ],
+    flaws: [
+      "I have been touched with dragon-greed, and have a lust for wealth which can never be satisfied.",
+      "I secretly believe others are plotting to harm me.",
+      "I no longer enjoy the simple pleasures in life. Food is but ashes and bile in my throat.",
+      "Anyone who refuses to celebrate my celebrity does not deserve my company.",
+      "I am paranoid and overly suspicious of others. Anyone may be an agent of the Maimed Virulence.",
+      "Once I make up my mind, I follow my chosen course of action regardless of the consequences.",
+    ],
+  },
+  {
+    id: backgroundIds.ironRogueBandit,
+    name: "Iron Route Bandit",
+    description:
+      "The Iron Route, once the primary trade route between Phlan and Zhentil Keep, used to be a site of extensive banditry until the Phlan’s recent occupation. Your time as an erstwhile bandit has given you plenty of experience in the saddle and a knack for acquiring and appraising other people’s mounts, pets, and vehicles among other things. This particular set of skills has become very lucrative for you by working for the underground as a horse thief for a local guild of thieves and other shadowy organizations.",
+    flavorText: "You are a horse thief for a local guild of thieves.",
+    skillProficiencyDescription:
+      "You are proficient in Animal Handling and Stealth.",
+    skillProficiencies: {
+      default: [Skill.ANIMAL_HANDLING, Skill.STEALTH],
+    },
+    toolProficiencyDescription:
+      "You are proficient with One type of gaming set, vehicles (land)",
+    toolProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...gamingKitIds, toolIds.landVehicles],
+        },
+      ],
+    },
+    //A set of dark common clothes, pack saddle, burglar’s pack and a pouch containing 5gp.
+    equipmentDescription: [
+      `A set of dark ${i(itemIds.commonClothes, "common clothes")}`,
+      `A pack saddle`,
+      `A ${i(itemIds.burglarsPack, "burglar's pack")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing 5gp`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.commonClothes, quantity: 1 },
+        { item: itemIds.packSaddle, quantity: 1 },
+        { item: itemIds.burglarsPack, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 5 },
+      ],
+    },
+    traits: [
+      "If people leave their gear unsecured, they must not want it very much.",
+      "I feel more comfortable sleeping under the open sky.",
+      "I always pre-plan my escape should things go bad; I always like to have an exit strategy.",
+      "I tend to give animal owners breeding and care advice whether or not they want it.",
+      "I lost a pet as a child and sadly reflect on it to this day.",
+      "I always form a powerful, emotional bond with my mount.",
+      "I recoil at the thought of killing someone else’s pet or mount.",
+      "I prefer to hang to the back of a scuffle or discussion. Better to have my enemies in front of me.",
+    ],
+    ideals: [
+      "**Loyalty.** Never bite the hand that feeds. (Good)",
+      "**Unpredictability.** Keep your enemy guessing and off-balance like a confused deer. (Chaotic)",
+      "**Power.** I strive to become leader of the pack at all costs. (Lawful)",
+      "**Freedom.** I bow to no one I don’t respect. (Chaotic)",
+      "**Resourcefulness.** Our wits are our most valuable resource in troubled times. (Any)",
+      "**Unity.** Lone wolves fail where the pack succeeds. (Any)",
+    ],
+    bonds: [
+      "I cannot leave a harmed animal behind; I must save it or put it out of its misery.",
+      "I leave behind my own personal calling cards when I do a job.",
+      "I do not trust people who do not have a pet, mount, or furry companion.",
+      "The pelt I wear on my back was from an animal that died saving my life. I will always cherish it.",
+      "If my pet does not like you, I do not like you!",
+      "Once you’ve ridden with me and fought by my side, I’ll be there for you odds be damned.",
+    ],
+    flaws: [
+      "I talk to animals; I believe they understand me, even if they do not.",
+      "I growl at and bite anyone who gets too close to my food while I am eating.",
+      "I strongly dislike enclosed spaces and require intoxication or firm encouragement to enter them.",
+      "I robbed the wrong caravan once. The owner is a powerful merchant who holds a grudge.",
+      "I’m an inveterate gambler.",
+      "I judge people based on how well they stand their ground in a fight. I got no time for cowards…",
+    ],
+  },
+  {
+    id: backgroundIds.phlanInsurgent,
+    name: "Phlan Insurgent",
+    description:
+      "The taking of Phlan by Vorgansharax is a clear memory in your mind. You were going about your everyday business when the green dragon's forces spilled out of the sewers and assailed your home. Many of Phlan's citizens, young and old alike, were captured, killed, or offered as tribute to the Maimed Virulence. You, yourself, were one of those captured. But, either with the help of adventurers or through your own wits and sheer determination, you escaped.\n\nRather than flee the region, you've chosen to stay and fight. Finding refuge outside the town and the deadly thicket surrounding it, you strike out against the Tears of the Virulence and their monstrous allies. You've learned to survive in dire and desperate circumstances, with supplies running low and the arrival of reinforcements uncertain. You've grown accustomed to acting under the cover of night, dealing what blows you can to avenge the friends and family you lost within the currently occupied Phlan. You will drive Vorgansharax out, or you die trying.",
+    flavorText:
+      "You were going about your everyday business when the green dragon's forces spilled out of the sewers and assailed your home.",
+    source: src.strahd,
+    skillProficiencyDescription: "You are proficient in Stealth and Survival.",
+    skillProficiencies: {
+      default: [Skill.STEALTH, Skill.SURVIVAL],
+    },
+    toolProficiencyDescription:
+      "You are proficient with one type of artisan’s tools and Land vehicles",
+    toolProficiencies: {
+      default: [toolIds.landVehicles],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...artisanIds],
+        },
+      ],
+    },
+    //A bag of 20 caltrops, a small trinket that connects you to the life you once had before the occupation of Phlan, a healer's kit, a set of dark common clothes that includes a cloak and hood, and a pouch containing 5gp
+    equipmentDescription: [
+      `A bag of 20 ${i(itemIds.caltropsBag, "caltrops")}`,
+      `A small ${i(
+        itemIds.trinket,
+        "trinket"
+      )} that connects you to the life you once had before the occupation of Phlan`,
+      `A ${i(itemIds.healerKit, "healer's kit")}`,
+      `A set of dark ${i(
+        itemIds.commonClothes,
+        "common clothes"
+      )} that includes a cloak and hood`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing 5gp`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.caltropsBag, quantity: 1 },
+        { item: itemIds.trinket, quantity: 1 },
+        { item: itemIds.healerKit, quantity: 1 },
+        { item: itemIds.commonClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 5 },
+      ],
+    },
+    suggestedCharacteristics:
+      "You have given up the life you knew as a citizen of Phlan. However, the Maimed Virulence’s invasion resonates deep inside you. Perhaps you have a few friends or family members who were able to escape with you. Or, perhaps, everyone you held dear either perished or went missing during the fall. You may know of someone who is, against all odds, surviving within the thicket and you long to liberate them from a life of peril within the town.",
+    traits: [
+      "My patience knows no bounds, so long as my goal is in sight.",
+      "In life and in struggle, the ends justify my actions.",
+      "If you aren’t helping me, you’d best at least stay out of my way.",
+      "I long for the life that was taken away from me.",
+      "Friends and family perished, tragically, before my eyes. I hope never to undergo that again.",
+      "Making the right choices in life is important to me. The choices I make might save not just my life, but the lives of others as well.",
+      "I can never allow my foes to get the drop on me.",
+      "Time is a precious resource that I must spend wisely.",
+    ],
+    ideals: [
+      "**Leadership.** The oppressed need someone to inspire them to courageous acts. (Good)",
+      "**Unpredictability.** Keeping the enemy guessing and off-balance is my tactical strength. (Chaos)",
+      "**Determination.** Threats to my home must be eliminated at all costs. (Any)",
+      "**Freedom.** Those who are enslaved and unjustly imprisoned deserve my aid. (Good)",
+      "**Resourcefulness.** Our wits are our most valuable resource in troubled times. (Any)",
+      "**Unity.** Working together, we can overcome all obstacles, even the most seemingly insurmountable ones. (Any)",
+    ],
+    bonds: [
+      "I’ll never let my fellow insurgents down. They are my only remaining friends.",
+      "I was separated from a loved one during my escape from town. I will find them.",
+      "One of the Tears of the Virulence was a trusted friend, until the day they betrayed the city. They will pay harshly for their transgressions.",
+      "An item I hold close is my last remaining connection to the family I lost during the fall.",
+      "The dragon who took my past life away from me will feel the full extent of my vengeance.",
+      "The knowledge in Mantor’s Library is an irreplaceable treasure that must be protected.",
+    ],
+    flaws: [
+      "I have no respect for those who flee. I harbor a deep grudge against the citizens who abandoned Phlan.",
+      "Ale is the only way I can escape the desperation of my circumstances.",
+      "It doesn’t take much to get me into a fight.",
+      "Being an insurgent means doing things that aren’t always ethical. I’m still learning to live with that.",
+      "My desire to liberate Phlan oftentimes clouds my judgment, despite my best efforts.",
+      "I relentlessly despise the Maimed Virulence and his allies. I’d abandon other goals in order to strike out at them.",
+    ],
+  },
+  {
+    id: backgroundIds.stojanowPrisoner,
+    name: "Stojanow Prisoner",
+    description: `"We need to leave, now!”\n\nThose words still haunt your dreams at night. When everyone was fleeing Phlan, you chose to stay. Whether out of an emotional attachment, or pursuit of riches, you made the decision that would affect the rest of your life.\n\nFood became scarcer for those without connections. You became a beggar and to stay alive you bartered information to any interested party with food or gold to spare. You were good at what you did, and thought you were invincible. That changed when you were captured by the Tears of Virulence, the soldiers of Vorgansharax, the Maimed Virulence, for selling secrets to those bent on overthrowing the dragon. They locked you in the cells of Stojanow Gate. The first weeks you hoped to stay alive. As the weeks turned into months, and the interrogations continued, you began to pray for death.`,
+    flavorText: "You were captured by the Tears of Virulence.",
+    source: src.strahd,
+    skillProficiencyDescription:
+      "You are proficient in Deception and Persuasion.",
+    skillProficiencies: {
+      default: [Skill.DECEPTION, Skill.PERSUASION],
+    },
+    toolProficiencyDescription:
+      "You are proficient with one type of gaming set and Thieves’ tools",
+    toolProficiencies: {
+      default: [toolIds.thievesTools],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...gamingKitIds],
+        },
+      ],
+    },
+    //A small knife, a set of common clothes, a trinket from the life you stayed behind to defend, and a pouch with 10gp
+    equipmentDescription: [
+      `A small ${i(itemIds.dagger, "knife")}`,
+      `A set of ${i(itemIds.commonClothes, "common clothes")}`,
+      `A ${i(
+        itemIds.trinket,
+        "trinket"
+      )} from the life you stayed behind to defend`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "10gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.dagger, quantity: 1 },
+        { item: itemIds.commonClothes, quantity: 1 },
+        { item: itemIds.trinket, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 10 },
+      ],
+    },
+    traits: [
+      "I am a bully; others will suffer as I have.",
+      "I always say yes even when I mean no; it’s just easier.",
+      "I aim to misbehave.",
+      "I go out of my way to frustrate or anger those in power.",
+      "I strive to obey the law. I will never again make the mistake of going against authority.",
+      "I always plan everything out. The one time I let others plan things it did not end well for me.",
+      "I take blame to protect others from pain.",
+      "I horde information, you never know what may come in handy.",
+    ],
+    ideals: [
+      "**Loss.** I freely give those who offend me what was so brutally denied me, death. (Chaos)",
+      "**Dedication.** I never betray those who trust me. (Law)",
+      "**Vengeance.** I use any means to get information I need; I have been well taught. (Evil)",
+      "**Redemption.** Everyone deserves a second chance. (Good)",
+      "**Resilience.** I can survive any challenge. (Any)",
+      "**Leadership.** The best teams are made up of those that society has discarded.",
+    ],
+    bonds: [
+      "I take up arms to help establish a free Phlan.",
+      "The horrors of my time in Stojanow haunt my dreams, only after a day of hard work can I find sleep.",
+      "I am indebted to those who freed me from prison, I will repay this debt.",
+      "My torturer survived the attack that set me free, I will find them.",
+      "I will not rest while others suffer fates similar to mine.",
+      "I am searching for a way to heal the scars of Stojanow, both physical and emotional.",
+    ],
+    flaws: [
+      "During stressful times, I find myself crying for no reason.",
+      "My nerve endings are shot from the interrogations; I am numb to all but the harshest touch.",
+      "I am incapable of standing up for myself.",
+      "I folded under the torture, and gave information that I promised would be kept secret. My life would be in jeopardy if others found out.",
+      "Survival is worth more than friendship.",
+      "The ghosts from my past hinder my actions.",
+    ],
+  },
+  {
+    id: backgroundIds.ticklebellyNomad,
+    name: "Ticklebelly Nomad",
+    description:
+      "You were born into a nomadic tribe that called the Ticklebelly Hills home. You migrated from location to location, living off the land with your tribe. The tribe would seasonally travel south into the Grass Sea and the Giant’s Cairn, north into the Dragonspine Mountains, and even occasionally east across the Stojanow River to the borders of the Quivering Forest. In your migrations, your people have come to know the stone giant tribes that populate the Giant’s Cairn.\n\nThe dragon cultists came to the hills one day — magic-users wearing purple and riding horrid beasts, black-clad warriors wearing wicked masks, and even soldiers from the nearby town of Phlan. Then the dragon called Vorgansharax arrived and laired in the hills, causing horrid thickets to grow and animals to act unusually. The cultists began raiding nomad camps for victims to offer to the wyrm. Eventually, the dragon moved on to attack Phlan, but life was never again the same for the nomads of the Ticklebelly Hills.",
+    flavorText:
+      "You were born into a nomadic tribe that called the Ticklebelly Hills home.",
+    skillProficiencyDescription:
+      "You are proficient in Animal Handling and Nature.",
+    skillProficiencies: {
+      default: [Skill.ANIMAL_HANDLING, Skill.NATURE],
+    },
+    toolProficiencyDescription: "You are proficient with Herbalism Kits.",
+    toolProficiencies: {
+      default: [toolIds.herbalismKit],
+    },
+    languageProficiencyDescription: "You can speak Giant.",
+    languageProficiencies: {
+      default: [Language.GIANT],
+    },
+    source: src.strahd,
+
+    //Herbalism kit, a small article of jewelry that is distinct to your tribe, a hunting trap, a set of common clothes, and a pouch containing 5gp
+    equipmentDescription: [
+      `A ${i(itemIds.herbalismKit, "herbalism kit")}`,
+      `A small article of ${i(
+        itemIds.jewelery,
+        "jewelery"
+      )} that is distinct to your tribe`,
+      `A ${i(itemIds.huntingTrap, "hunting trap")}`,
+      `A set of ${i(itemIds.commonClothes, "common clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "5gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.herbalismKit, quantity: 1 },
+        { item: itemIds.huntingTrap, quantity: 1 },
+        { item: itemIds.commonClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 5 },
+      ],
+    },
+    suggestedCharacteristics:
+      "Ticklebelly nomads only venture into civilization when necessary. You are social within your tribe, with tribes of other nomads, and even with the stone giant tribes that populate the Giant’s Cairn. However, other communities tend to either put you on your guard or put you in a state of wonder. Was it this wonder that enticed you into a life of adventuring? On the other hand, you are fiercely protective of and dedicated to your tribe. Perhaps it was this dedication that led you to venture out; either of your own will or at the behest of your tribe’s leaders.",
+    traits: [
+      "I eagerly inject myself into the unknown.",
+      "Villages, towns, and cities do not suit me. I’d rather be out in the wilderness any day.",
+      "I accomplish my tasks efficiently, using as few resources as possible.",
+      "It’s difficult for me to remain in one place for long.",
+      "I loudly brag about my tribe every chance I get.",
+      "Having walked among giants, I am fearless in the face of bigger creatures.",
+      "I am quiet and reserved, but observant. Nothing escapes my attention.",
+      "My word is my bond. I see a promise to completion, even if it conflicts with my beliefs.",
+    ],
+    ideals: [
+      "**Kinship.** Family is most important in life. Though I may be far from my own, the bonds of family must be protected in others’ lives as well. (Good)",
+      "**Preservation.** Nature must not be despoiled by encroaching civilization. (Any)",
+      "**Wanderlust.** One must expand their horizons by seeing the world and exploring. (Chaos)",
+      "**Isolation.** My tribe and its ways must be protected and shielded from outside influence. (Neutral)",
+      "**Protection.** Threats to the land and to the people must be dealt with at any and all costs. (Law)",
+      "**Belonging.** All creatures have a place in the world, so I strive to help others find theirs. (Good)",
+    ],
+    bonds: [
+      "I ache to return to my tribe and the family I left, but cannot until my obligations are fulfilled.",
+      "The dragon cultists that invaded my homeland stole away one of my tribe’s people. I will not know rest until I’ve found them.",
+      "The dragon’s presence in the hills destroyed valuable territory and resulted in deaths within my tribe. The creature must pay for what it has done.",
+      "I carry a trinket that spiritually and emotionally ties me to my people and my home.",
+      "I discovered a strange relic in the hills during my tribe’s wanderings. I must discover what it is.",
+      "One of the stone giant clans from the Giant’s Cairn has graced me with a mark of kinship.",
+    ],
+    flaws: [
+      "I throw myself and my friends into situations, rarely ever thinking about consequences.",
+      "Unfamiliar people and surroundings put me on edge.",
+      "I have absolutely no patience for slowpokes and those who prove indecisive.",
+      "My desire to experience new things causes me to make unsafe choices.",
+      "I am overly protective of nature, sometimes to the detriment of my companions and myself.",
+      "My lack of worldliness often proves my undoing in social, commercial, and hostile situations.",
+    ],
+  },
+  {
+    id: backgroundIds.caravanSpecialist,
+    name: "Caravan Specialist",
+    description:
+      "You are used to life on the road. You pride yourself at having traveled every major tradeway in the Moonsea region, including the best back roads and shortcuts. When traveling these roads, you know where the best inns, campsites, and water sources are located, as well as potential locations of danger such as ambush. Having worked the roads as long as you have, you have made many acquaintances and find it easy to pick up information and rumors floating from town to town. You are skilled with beasts of burden and handling and repairing wagons of all kinds.",
+    flavorText:
+      "You pride yourself at having traveled every major tradeway in the Moonsea region.",
+    source: src.mulmaster,
+    skillProficiencyDescription:
+      "You are proficient in Animal Handling and Survival.",
+    skillProficiencies: {
+      default: [Skill.ANIMAL_HANDLING, Skill.SURVIVAL],
+    },
+    toolProficiencyDescription: "You are proficient with Land vehicles.",
+    toolProficiencies: {
+      default: [toolIds.landVehicles],
+    },
+    languageProficiencyDescription:
+      "You can speak one additional language of your choice.",
+    languageProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: Object.values(Language),
+        },
+      ],
+    },
+    //Equipment: A whip, a tent, a regional map, a set of traveler's clothes, and a pouch containing 10gp
+    equipmentDescription: [
+      `A ${i(itemIds.whip, "whip")}`,
+      `A ${i(itemIds.tent, "tent")}`,
+      `A regional map`,
+      `A set of ${i(itemIds.travelersClothes, "traveler's clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "10gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.whip, quantity: 1 },
+        { item: itemIds.tent, quantity: 1 },
+        { item: itemIds.travelersClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 10 },
+      ],
+    },
+    traits: [
+      "Any group is only as strong as its weakest link. Everyone has to pull their own weight.",
+      "There's always someone out there trying to take what I've got. Always be vigilant.",
+      "Anything can be learned if you have the right teacher. Most folks just need a chance.",
+      "Early to bed and early to rise; this much at least is under my control.",
+      "You can listen to me or don't and wish you had. Everyone ends up on one side of that fence.",
+      "Eventually my hard work will be rewarded. Maybe that time has finally come.",
+      "A strong ox or horse is more reliable than most people I've met.",
+      "I never had time for books, but wish I had. I admire folks who have taken the time to learn.",
+    ],
+    ideals: [
+      "**Service.** Using my talents to help others is the best way of helping myself. (Good)",
+      "**Selfish.** What people don't know WILL hurt them, but why is that my problem? (Evil)",
+      "**Wanderer.** I go where the road takes me. Sometimes that's a good thing… (Chaotic)",
+      "**Fittest.** On the open road, the law of nature wins. Victims are the unprepared. (Lawful)",
+      "**Focused.** I simply have a job to do, and I'm going to do it. (Neutral)",
+      "**Motivated.** There's a reason I'm good at what I do, I pay attention to the details. (Any)",
+    ],
+    bonds: [
+      "My brother has a farm in Elmwood and I've helped him and his neighbors move their goods to Mulmaster and other surrounding towns. Those are good people.",
+      "A caravan I led was attacked by bandits and many innocents died. I swear that I will avenge them by killing any bandits I encounter.",
+      "The Soldiery are mostly good guys who understand the importance of protecting the roads. The City Watch is who you have to look out for. If they are inspecting your goods, get ready to pay a fine.",
+      "The new commander of Southroad Tower, Capt. Holke, understands the importance of safe roads. He's hired me for several jobs and I'm grateful.",
+      "There's always a road I haven't traveled before. I'm always looking for new places to explore.",
+      "Wealth and power mean little without the freedom to go where and when you want.",
+    ],
+    flaws: [
+      "I have trouble trusting people I've just met.",
+      "I enjoy the open road. Underground and tight spaces make me very nervous.",
+      "I expect others to heed my orders and have little respect or sympathy if they don't.",
+      "I am very prideful and have trouble admitting when I'm wrong.",
+      "Once I decide on a course of action, I do not waiver.",
+      "I like to explore, and my curiosity will sometimes get me into trouble.",
+    ],
+  },
+  {
+    id: backgroundIds.earthspurMiner,
+    name: "Earthspur Miner",
+    description:
+      "You are a down-on-your-luck miner from the Earthspur Mountains who is no stranger to hardship. You have spent a great deal of time living among the dwarves, goliaths, and denizens of the Underdark who also work mines in the area. At this point, you're just as comfortable working underground as above. You know how to read a seam, dicker for supplies with the deep gnomes, party with dwarves, and find your way back to the surface afterward. Unfortunately, you haven't struck it rich… yet. Although you've come to Mulmaster looking for work, the tall peaks and deep mines of the Earthspurs still call to you.",
+    flavorText:
+      "You are a down-on-your-luck miner from the Earthspur Mountains.",
+    source: src.mulmaster,
+    skillProficiencyDescription:
+      "You are proficient in Athletics and Survival.",
+    skillProficiencies: {
+      default: [Skill.ATHLETICS, Skill.SURVIVAL],
+    },
+    languageProficiencyDescription: "You can speak Dwarven and Undercommon.",
+    languageProficiencies: {
+      default: [Language.DWARVISH, Language.UNDERCOMMON],
+    },
+    //A shovel or a miner's pick, a block and tackle, a climber's kit , a set of common clothes, and a pouch containing 5gp
+    equipmentDescription: [
+      `A ${i(itemIds.shovel, "shovel")} or a ${i(
+        itemIds.minersPick,
+        "miner's pick"
+      )}`,
+      `A ${i(itemIds.blockAndTackle, "block and tackle")}`,
+      `A ${i(itemIds.climbingKit, "climber's kit")}`,
+      `A set of ${i(itemIds.commonClothes, "common clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "5gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.shovel, quantity: 1 },
+        { item: itemIds.blockAndTackle, quantity: 1 },
+        { item: itemIds.climbingKit, quantity: 1 },
+        { item: itemIds.commonClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 5 },
+      ],
+    },
+    traits: [
+      "Nothing bothers me for long.",
+      "I hate the horrors of the Underdark with a passion. They took my friends and family and almost got me.",
+      "Anything worth doing takes time and patience. I have learned to plan and wait for the things I want and to be patient to achieve my goals.",
+      "I can party with everyone. Whether with dwarves, or goliaths, or deep gnomes, I can find a way to have a good time.",
+      "I'd rather be mining. This is okay; mining is better.",
+      "I think that I will stumble upon great riches if I just keep looking.",
+      "People who don't work with their hands and who live in houses are soft and weak.",
+      "I wish I were more educated. I look up to people who are.",
+    ],
+    ideals: [
+      "**Generosity.** The riches of the earth are to be shared by all. (Good)",
+      "**Greed.** Gems and precious metals, I want them all for myself. (Evil)",
+      "**Mooch.** Property, schmoperty. If I need it, I take and use it. If I don't, I leave it for someone else. (Chaotic)",
+      "**Boundaries.** Everything and everyone has its prescribed place; I respect that and expect others to do the same. (Lawful)",
+      "**Let it Be.** I don't meddle in the affairs of others if I can avoid it. They're none of my business. (Neutral)",
+      "**Materialist.** I want riches to improve my life. (Any)",
+    ],
+    bonds: [
+      "The people of the Earthspur mines are my family. I will do anything to protect them.",
+      "A deep gnome saved my life when I was injured and alone. I owe his people a great debt.",
+      "I must behold and preserve the natural beauty of places below the earth.",
+      "Gems hold a special fascination for me, more than gold, land, magic, or power.",
+      "I want to explore new depths and scale new heights.",
+      "Someday I'm going to find the motherlode, then I'll spend the rest of my life in luxury.",
+    ],
+    flaws: [
+      "I'm uncomfortable spending time under the open sky. I'd rather be indoors or underground.",
+      "I'm not used to being around other people much and sometimes get grouchy about it.",
+      "Good tools are more reliable than people. In a cave-in, I would save a sturdy pick before a stranger.",
+      "I jealously guard my secrets, because I think others will take advantage of me if they learn what I know.",
+      "I am obsessed with getting rich. I always have a scheme brewing for making it big.",
+      "I'm afraid of the dark.",
+    ],
+  },
+  {
+    id: backgroundIds.harborfolk,
+    name: "Harborfolk",
+    description:
+      "You are one of the hundreds of small-time fishermen and -women who haul the bounty of Mulmaster's freshwater harbor to the city's markets each morning. You have spent countless days rowing in the waters in and around Mulmaster and know them and the other fisher folk, dockworkers, and port inhabitants better than anyone. Though you have left that life behind, you still visit once in a while.",
+    flavorText:
+      "You are one of the hundreds of small-time fishermen and -women who haul the bounty of Mulmaster's freshwater harbor to the city's markets each morning.",
+    source: src.mulmaster,
+    skillProficiencyDescription:
+      "You are proficient in Athletics and Sleight of Hand.",
+    skillProficiencies: {
+      default: [Skill.ATHLETICS, Skill.SLEIGHT_OF_HAND],
+    },
+    toolProficiencyDescription:
+      "You are proficient with Water vehicles, One type of gaming set.",
+    toolProficiencies: {
+      default: [toolIds.waterVehicle],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...gamingKitIds],
+        },
+      ],
+    },
+    //Fishing tackle, a dice set, playing card set, or Three Dragon Ante set, a set of common clothes, a rowboat, and a pouch containing 5gp
+    equipmentDescription: [
+      `${i(itemIds.fishingTackle, "Fishing tackle")},`,
+      `A ${i(itemIds.diceSet, "dice set")}, ${i(
+        itemIds.playingCardSet,
+        "playing card set"
+      )}, or ${i(itemIds.threeDragonAnteSet, "Three Dragon Ante set")}`,
+      `A set of ${i(itemIds.commonClothes, "common clothes")}`,
+      `A ${i(itemIds.rowboat, "rowboat")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "5gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.fishingTackle, quantity: 1 },
+        { item: itemIds.diceSet, quantity: 1 },
+        { item: itemIds.commonClothes, quantity: 1 },
+        { item: itemIds.rowboat, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 5 },
+      ],
+    },
+    traits: [
+      "I am curious. I want to know why things are the way they are and why people do the things that they do.",
+      "I can't sing, but that never stops me from doing it, loudly. Everyone loves a good sea shanty!",
+      "I think the High Blade is doing a terrific job, don't you?",
+      "I'm very excited that the House Built on Gold is being restored. I am a zealous worshipper of Waukeen.",
+      "I am quite superstitious. I see portents in everyday occurrences.",
+      "I resent the rich and enjoy thwarting their plans and spoiling their fun in small ways.",
+      "I have a sea story to fit every occasion.",
+      "I'm a fisher, but I secretly detest eating fish. I will do anything to avoid it.",
+    ],
+    ideals: [
+      "**Calm.** For all things, there is a tide. I set sail when it is right, and mend my nets when it is not. (Lawful)",
+      "**Windblown.** I go where the winds blow. No man or woman tells me where or when to sail. (Chaotic)",
+      "**Aspiring.** I will gain the favor of a Zor or Zora patron, maybe even one of the Blades! (Any)",
+      "**Salty.** I want people to look to me as an expert on plying Mulmaster Harbor. (Any)",
+      "**Selfless.** We are all children of the sea. I help everyone in peril afloat and ashore. (Good)",
+      "**Let them Drown.** I refuse to risk my hide to help others. They wouldn't help me if roles were reversed. (Evil)",
+    ],
+    bonds: [
+      "I once lost everything but my rowboat. I'll do anything to protect it.",
+      "My brother was in the Soldiery, but he was killed. I really look up to the men and women who serve.",
+      "The Cloaks killed my friend for spellcasting. I'll get them back somehow, someday.",
+      "The High House of Hurting helped me when I was hurt and asked nothing in return. I owe them my life.",
+      "I was robbed in the Zhent ghetto once. It will not happen again.",
+      "I would do anything to protect the other harborfolk. They are my family.",
+    ],
+    flaws: [
+      "I drink too much, which causes me to miss the tide.",
+      "I killed a drunk member of the City Watch in a brawl. I am terrified that they might find out.",
+      "I oversell myself and make promises I can't keep when I want to impress someone.",
+      "Book learning is a waste of time. I have no patience for people who don't speak from experience.",
+      "I almost always cheat. I can't help myself.",
+      "I am a secret informant for the Hawks. I send them reports about everything I see and hear, even what my friends and allies are up to.",
+    ],
+  },
+  {
+    id: backgroundIds.mulmasterAristocrat,
+    name: "Mulmaster Aristocrat",
+    description:
+      "From your hilltop home, you have looked down (literally and perhaps figuratively) on the unwashed masses of Mulmaster for your entire life. Your fur-trimmed robes and training in the visual and performing arts mark you as wealthy and perhaps well-born; you are a member of the City of Danger's aristocracy.\n\nNone of your immediate family members sits on the Council of Blades or is even a Zor or Zora… yet. Nevertheless, you are one of Mulmaster's elite, and whether you personally covet a higher standing or not, you are at home in the dance halls where the aristocracy gathers to plot, to scheme, to do business, to discuss the arts, and, above all, to see, and to be seen.",
+    source: src.mulmaster,
+    flavorText: "You are a member of the City of Danger's aristocracy.",
+    skillProficiencyDescription:
+      "You are proficient in Deception and Persuasion.",
+    skillProficiencies: {
+      default: [Skill.DECEPTION, Skill.PERSUASION],
+    },
+    toolProficiencyDescription:
+      "One type of artistic artisan's tools and one musical instrument.",
+    toolProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...artisanIds],
+        },
+        {
+          numberOfChoices: 1,
+          options: [...instrumentIds],
+        },
+      ],
+    },
+    //One set of artisan's tools or musical instrument, a set of fine clothes, and a purse containing 10gp
+    equipmentDescription: [
+      `One set of ${i(artisanIds[0], "artisan's tools")} or musical instrument`,
+      `A set of ${i(itemIds.fineClothes, "fine clothes")}`,
+      `A purse containing ${i(itemIds.goldPiece, "10gp")}`,
+    ],
+    equipment: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [
+            ...artisanToolItemIds.map((id) => [{ item: id, quantity: 1 }]),
+            ...instrumentItemIds.map((id) => [{ item: id, quantity: 1 }]),
+          ],
+        },
+      ],
+    },
+    traits: [
+      "My ambitions are boundless. I will be a Zor or Zora one day!",
+      "I must always look my best.",
+      "Beauty is everywhere. I can find it in even the homeliest person and the most horrible tragedy.",
+      "Décorum must be preserved at all costs.",
+      "I will not admit I am wrong if I can avoid it.",
+      "I am extremely well-educated and frequently remind others of that fact.",
+      "I take what I can today, because I do not know what tomorrow holds.",
+      "My life is full of dance, song, drink, and love.",
+    ],
+    ideals: [
+      "**Generous.** I have a responsibility to help and protect the less fortunate. (Good)",
+      "**Loyal.** My word, once given, is my bond. (Lawful)",
+      "**Callous.** I am unconcerned with any negative effects my actions may have on the lives and fortunes of others. (Evil)",
+      "**Impulsive.** I follow my heart. (Chaotic)",
+      "**Ignorant.** Explanations bore me. (Neutral)",
+      "**Isolationist.** I am concerned with the fortunes of my friends and family. Others must see to themselves. (Any)",
+    ],
+    bonds: [
+      "I have dedicated my wealth and my talents to the service of one of the city's many temples.",
+      "My family and I are loyal supporters of High Blade Jaseen Drakehorn. Our fortunes are inexorably tied to hers. I would do anything to support her.",
+      "Like many families who were close to High Blade Selfaril Uoumdolphin, mine has suffered greatly since his fall. We honor his memory in secret.",
+      "My family plotted with Rassendyll Uoumdolphin's brother. Betrayal is the quickest route to power.",
+      "Wealth and power are nothing. Fulfillment can only be found in artistic expression.",
+      "It's not how you feel, who you know, or what you can do - it's how you look, and I look fabulous.",
+    ],
+    flaws: [
+      "I have difficulty caring about anyone or anything other than myself.",
+      "Having grown up with wealth, I am careless with my finances. I overspend and am overly generous.",
+      "The ends (my advancement) justify any means.",
+      "I must have what I want and will brook no delay.",
+      "My family has lost everything. I must keep up appearances, lest we become a laughingstock.",
+      "I have no artistic sense. I hide that fact behind extreme opinions and have become a trendsetter.",
+    ],
+  },
+  {
+    id: backgroundIds.phlanRefugee,
+    name: "Phlan Refugee",
+    description:
+      "Gone are the happier days of walking into the Laughing Goblin Inn after a hard day’s labor. Everything has changed, and you are lucky to be alive. Back in Phlan you could count yourself among those street-wise folks who knew when to pay a bribe and who to work with to make a living. Your ability to listen to the winds of change have saved you before, and this time they allowed you to be one of the lucky few who escaped Phlan with something more than just the shirt on your back.",
+    flavorText:
+      "You are a one of the lucky few who escaped Phlan with something more than just the shirt on your back",
+    source: src.strahd,
+    skillProficiencyDescription: "You are proficient in Insight and Athletics.",
+    skillProficiencies: {
+      default: [Skill.INSIGHT, Skill.ATHLETICS],
+    },
+    toolProficiencyDescription:
+      "You are proficient with One type of Artisan's tools.",
+    toolProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...artisanIds],
+        },
+      ],
+    },
+    languageProficiencyDescription:
+      "You can speak one additional language of your choice.",
+    languageProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: Object.values(Language),
+        },
+      ],
+    },
+    //A set of artisan’s tools (one of your choice), a token of the life you once knew, a set of traveler’s clothes, and a pouch containing 15gp
+    equipmentDescription: [
+      `A set of artisan tools of your choice`,
+      `A token of the life you once knew`,
+      `A set of ${i(itemIds.travelersClothes, "traveler's clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "15gp"
+      )}`,
+    ],
+    equipment: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: artisanToolItemIds.map((id) => [{ item: id, quantity: 1 }]),
+        },
+      ],
+      default: [
+        { item: itemIds.travelersClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 15 },
+      ],
+    },
+    traits: [
+      "I may have lost everything I worked for most of my life, but there's work to be done. No time to linger on the past.",
+      "I worked hard to get where I am and I refuse to let a little hardship stop me from succeeding.",
+      "I protect those around me: You never know when one of them will be useful.",
+      "I have always gotten ahead by giving, why change now?",
+      "I prepare for everything. It paid off in Phlan and it will pay off again.",
+      "I will reclaim my home. Though the path may be long, I will never give up hope.",
+      "I never cared for personal hygiene, and am amazed that it bothers others.",
+      "I am always willing to volunteer my services, just as long as I don’t have to do anything.",
+    ],
+    ideals: [
+      "**Justice.** Corruption brought Phlan down. I will not tolerate that any longer. (Lawful)",
+      "**Acceptance.** Stability is a myth. To think you can control your future is futile. (Chaotic)",
+      "**Hope.** I am guided by a higher power and I trust that everything will be right in the end. (Good)",
+      "**Restraint.** I hate those who caused my loss. It is all I can do not to lash out at them. (Any)",
+      "**Strength.** As shown in Phlan, the strong survive. If you are weak you deserve what you get. (Evil)",
+      "**Openness.** I am always willing to share my life story with anyone who will listen. (Any)",
+    ],
+    bonds: [
+      "I have the chance at a new life and this time I am going to do things right.",
+      "The Lord Regent brought this suffering upon his people. I will see him brought to justice.",
+      "I await the day I will be able to return to my home in Phlan.",
+      "I will never forget the debt owed to Glevith of the Welcomers. I will be ready to repay that debt when called upon.",
+      "There was someone I cared about in Phlan. I will find out what happened to them.",
+      "Some say my life wasn't worth saving. I will prove them wrong.",
+    ],
+    flaws: [
+      "I used the lives of children to facilitate my escape from Phlan.",
+      "I am a sucker for the underdog, and always bet on the losing team.",
+      "I am incapable of standing up for myself.",
+      "I will borrow money from friends with no intention to repay it.",
+      "I am unable to keep secrets. A secret is just an untold story.",
+      "When something goes wrong, it's never my fault.",
+    ],
+  },
+  {
+    id: backgroundIds.cormanthorRefugee,
+    name: "Cormanthor Refugee",
+    description:
+      "You are one of hundreds of refugees who were driven from Hillsfar or who fled the destruction of Myth Drannor and who now shelter in hidden camps under the northern eaves of the Cormanthor Forest. If you grew up in the camps, you have never been to a settlement other than the village of Elventree. As a guest of the elves, you have learned their ways and the ways of the forest. You are also traumatized, as residual wild magic, energies released by the fall of Thultanar upon Myth Drannor, and the constant fear of raids hunting for non-humans to fight in Hillsfar's Arena, have taken their toll on you, as they have on everyone in the camps.",
+    flavorText:
+      "You are one of hundreds of refugees who were driven from Hillsfar or who fled the destruction of Myth Drannor",
+    source: src.hillsfar,
+    skillProficiencyDescription: "You are proficient in Nature and Survival.",
+    skillProficiencies: {
+      default: [Skill.NATURE, Skill.SURVIVAL],
+    },
+    toolProficiencyDescription:
+      "You are proficient with one type of artisan's tools.",
+    toolProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...artisanIds],
+        },
+      ],
+    },
+    languageProficiencyDescription: "You can speak Elvish.",
+    languageProficiencies: {
+      default: [Language.ELVISH],
+    },
+    //A two-person tent, artisan's tools, a holy symbol, a set of traveler's clothes, and a pouch containing 5gp
+    equipmentDescription: [
+      `A ${i(itemIds.tent, "two-person tent")}`,
+      `Artisan's tools of your choice`,
+      `A holy symbol`,
+      `A set of ${i(itemIds.travelersClothes, "traveler's clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "5gp"
+      )}`,
+    ],
+    equipment: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: artisanToolItemIds.map((id) => [{ item: id, quantity: 1 }]),
+        },
+        {
+          numberOfChoices: 1,
+          options: [
+            [
+              { item: itemIds.amulet, quantity: 1 },
+              { item: itemIds.emblem, quantity: 1 },
+              { item: itemIds.reliquary, quantity: 1 },
+            ],
+          ],
+        },
+      ],
+      default: [
+        { item: itemIds.tent, quantity: 1 },
+        { item: itemIds.travelersClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 5 },
+      ],
+    },
+    traits: [
+      "I long for a home that never really existed, whether in the camps, Hillsfar, or Myth Drannor.",
+      "Though I am not an elf, I am a fervent, radical worshipper of the elven gods.",
+      "I live in the moment, knowing my life could be turned upside down any day.",
+      "I appreciate beauty in all of its forms.",
+      "I hate the dark elves and the Netherese for each driving the elves out of Cormanthyr in the past.",
+      "I am a forest bumpkin who grew up in a tent in the woods and am wholly ignorant of city life.",
+      "I was raised alongside children of many other races. I harbor no racial prejudices at all.",
+      "The elves have just the right word for so many things that cannot be expressed as well in other languages. I pepper my speech with elven words, phrases, and sayings.",
+    ],
+    ideals: [
+      "**Patient.** The elves have taught me to think and plan for the long-term. (Lawful)",
+      "**Rebellious.** Governments and politicians drove my family to the camps. I subtly defy authority whenever I think I can get away with it. (Chaotic)",
+      "**Self-Absorbed.** I've had to look out for number one so long that it has become second nature. (Any)",
+      "**Wanderlust.** I want to see as much of the world beyond the camps as I can. (Any)",
+      "**Generous.** I give everything I can to help those in need, regardless of who they are. (Good)",
+      "**To the Abyss with Them.** The people of Hillsfar cast me out. I won't risk my hide to help them. (Evil)",
+    ],
+    bonds: [
+      "The elves took me in when I had nowhere else to go. In return, I do what I can to help elves in need.",
+      "I seek revenge against the people of Hillsfar for driving my family into the forest.",
+      "My family lost everything when they were driven from Hillsfar. I strive to rebuild that fortune.",
+      "The forest has provided me with food and shelter. In return, I protect forests and those who dwell within.",
+      "I am deeply, tragically in love with someone whose racial lifespan is far longer or shorter than mine.",
+      "Members of my extended family did not make it to the camps or have been kidnapped to fight in the Arena. I search for them tirelessly.",
+    ],
+    flaws: [
+      "I am very uncomfortable indoors and underground.",
+      "I am haughty. I grew up among the elves and emulate them. Other races are crude in comparison.",
+      "Elf this, elf that. I am sick and tired of the elves.",
+      "I am a miser. Having lost everything once before, I clutch my possessions and wealth very tightly.",
+      "I am a moocher. I am so used to others providing for me that I have come to expect everyone to do it.",
+      "I believe the gods have cursed me, my family, and all of the Cormanthor refugees. We are all doomed, doomed I tell you!",
+    ],
+  },
+  {
+    id: backgroundIds.gateUrchin,
+    name: "Gate Urchin",
+    description:
+      "All traffic into and out of the City of Trade passes through the Hillsfar Gate, making it the ideal place for the destitute to gather to panhandle, busk, gossip, and pick pockets. You grew up on the streets in the shadow of that great steel edifice, which houses both Red Plumes and Guild Mages. Though you may have moved on, you still have friends among them, and that life has had a lasting impact on you.",
+    flavorText:
+      "You grew up on the streets in the shadow of the great steel Hillsfar Gate.",
+    source: src.hillsfar,
+    skillProficiencyDescription:
+      "You are proficient in Sleight of Hand and Deception.",
+    skillProficiencies: {
+      default: [Skill.SLEIGHT_OF_HAND, Skill.DECEPTION],
+    },
+    toolProficiencyDescription:
+      "You are proficient with Thieves' Tools and one type of musical Instrument.",
+    toolProficiencies: {
+      default: [toolIds.thievesTools],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...instrumentIds],
+        },
+      ],
+    },
+    //A battered alms box, a musical instrument, a cast-off military jacket, cap, or scarf, a set of common clothes, and a pouch containing 10gp
+    equipmentDescription: [
+      `A battered ${i(itemIds.almsBox, "alms box")}`,
+      `A musical instrument`,
+      `A cast-off military jacket, cap, or scarf`,
+      `A set of ${i(itemIds.commonClothes, "common clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "10gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.almsBox, quantity: 1 },
+        { item: itemIds.commonClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 10 },
+      ],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [
+            ...instrumentItemIds.map((id) => [{ item: id, quantity: 1 }]),
+          ],
+        },
+      ],
+    },
+    traits: [
+      "I appreciate the simple things in life: a song, a warm meal, a sunny day. I don't need any more.",
+      "My problems are always caused by others. I'm never to blame.",
+      "I am afraid I could wind up back on the streets any day.",
+      "I get along with everyone.",
+      "I see people as marks for a con and have difficulty feeling true empathy for them.",
+      "I have a real flair for matchmaking. I can find anyone a spouse!",
+      "I think money is the true measure of appreciation and affection. Everything else is talk or an act.",
+      "I don't like having a lot of stuff, just a few simple things I need. I don't like being tied down and tend to leave things behind when I don't need them anymore.",
+    ],
+    ideals: [
+      "**Loyal.** I never rat out any of my friends, even when the Red Plumes or the Rogues' Guild ask. (Lawful)",
+      "**Adventurous.** I don't like doing the same thing every day. I crave variety. (Chaotic)",
+      "**Strong.** Only the strong survive. I respect those who are strong and powerful. (Any)",
+      "**Witty.** Brains are better than brawn. I rely on my wits and respect others who do the same. (Any)",
+      "**Honest.** Others can do what they want, but I won't lie or steal, even to feed my family. (Good)",
+      "**Ungrateful.** Those who give only do it to make themselves feel better. I steal from them. (Evil)",
+    ],
+    bonds: [
+      "The Joydancers of Lliira gave me my instrument when I really needed food. I hate them for that.",
+      "Busking has taught me to love music above all else.",
+      "The Rogues' Guild spared me when I did a job without cutting them in. I owe them a great debt.",
+      "I know people hate the Red Plumes, but some of them were really good to me. I help Red Plumes whenever I can, and I respect them. They're just doing what they have to do to get by in this world.",
+      "I will be wealthy someday. My descendants will live in comfort and style.",
+      "I know how hard life on the streets is. I do everything I can for those who have less than me.",
+    ],
+    flaws: [
+      "Though I no longer live at the Gate, I am still always concerned about where I will get my next meal.",
+      "Years of thieving have become habit. I sometimes steal from strangers without thinking about it.",
+      "I am ashamed of my origins. I pretend I am higher-born and fear others will find out the truth.",
+      "I think people who grew up in houses are soft, spoiled, and ungrateful. I frequently tell them so.",
+      "I am still very uncomfortable wearing nice clothes, sleeping in a warm bed, and eating fine food.",
+      "I do not trust anyone who has not had a hard life.",
+    ],
+  },
+  {
+    id: backgroundIds.hillsfarMerchant,
+    name: "Hillsfar Merchant",
+    description:
+      "Before becoming an adventurer, you were a successful merchant operating out of Hillsfar, the City of Trade. Your family operated warehouses, organized caravans, managed stores, or owned a ship, and has trade contacts throughout the Moonsea region, as well as up and down the length of the Sword Coast. Perhaps they import ore, uncut gems, untreated furs, or grain into the City of Trade, or they export fine cloth, faceted gems, fine furs, or Dragon's Breath, a brandy-like liquor. Regardless, you've largely given that life up for some reason and have chosen to seek adventure instead. Nevertheless, the training you received then, and perhaps the contacts you made, serve you well as an adventurer.",
+    flavorText: "You were a successful merchant operating out of Hillsfar.",
+    source: src.hillsfar,
+    skillProficiencyDescription:
+      "You are proficient in Insight and Persuasion.",
+    skillProficiencies: {
+      default: [Skill.INSIGHT, Skill.PERSUASION],
+    },
+    toolProficiencyDescription:
+      "You are proficient with land and water vehicles.",
+    toolProficiencies: {
+      default: [toolIds.landVehicles, toolIds.waterVehicle],
+    },
+    //A set of fine clothes, a signet ring, a letter of introduction from your family's trading house, and a purse containing 25gp
+    equipmentDescription: [
+      `A set of ${i(itemIds.fineClothes, "fine clothes")}`,
+      `A ${i(itemIds.signetRing, "signet ring")}`,
+      `A letter of introduction from your family's trading house`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "25gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.fineClothes, quantity: 1 },
+        { item: itemIds.signetRing, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 25 },
+      ],
+    },
+    traits: [
+      "I fill my evenings with wine or mead and song.",
+      "I greatly admire gladiators and enjoy the Arena.",
+      "I take my wealth for granted. It seldom occurs to me that others aren't rich themselves.",
+      "I leave broken hearts all around the Moonsea region and up and down the Sword Coast.",
+      "I work hard and seldom make time for fun.",
+      "I am particularly devout and pray often.",
+      "The Red Plumes caught me once. I hate them.",
+      "I ask a lot of questions to get information about those with whom I am working and dealing.",
+    ],
+    ideals: [
+      "**Frugal.** I spend my money very carefully. (Lawful)",
+      "**Profligate.** I tend to spend extravagantly. (Chaotic)",
+      "**Honest.** I deal with others above board. (Any)",
+      "**Sharp.** I seek to make the best deal possible. (Any)",
+      "**Charitable.** I give generously to others. (Good)",
+      "**Greedy.** I do not share my wealth with others. (Evil)",
+    ],
+    bonds: [
+      "I am fiercely loyal to those with whom I work.",
+      "I must uphold the good name of my family.",
+      "I will prove myself to my family as an adventurer.",
+      "Deals are sacrosanct. I never go back on my word.",
+      "I love making deals and negotiating agreements.",
+      "I guard my wealth jealously.",
+    ],
+    flaws: [
+      "I am a braggart. I promote myself shamelessly.",
+      "I am vain. I always wear the latest fashions.",
+      "I am a glutton. I eat and drink to excess.",
+      "I am a snob. I want only the finest things in life.",
+      "I am lazy. I want others to take care of everything.",
+      "I am overconfident. I overestimate my abilities.",
+    ],
+  },
+  {
+    id: backgroundIds.hillsfarSmuggler,
+    name: "Hillsfar Smuggler",
+    description: `Hillsfar is the City of Trade. However, the Great Law of Trade only protects "legitimate" trade, trade that passes through the city's sole gate, which the Red Plumes monitor and tax. And the Great Law of Humanity banishes non-humans from the city altogether. The two Great Laws create great demand and great risk for smugglers, who shepherd illicit goods and non-humans into and out of the city by secret routes. The Rogues' Guild tightly controls all of this activity, taking its cut from sanctioned jobs and exacting punishment for independent jobs.\n\nPerhaps you trafficked Dragon's Breath (a brandy-like liquor) to avoid tariffs, or contraband to avoid seizure, or maybe you are a human who sympathizes with the non-humans and worked as part of the network of secret routes and safe houses that helps them pass through Hillsfar. Either way, you have contacts in the smuggling community who can help you slip into and out of the city unnoticed, for a price.`,
+    flavorText:
+      "You have contacts in the smuggling community who can help you slip into and out of the city unnoticed.",
+    source: src.hillsfar,
+    skillProficiencyDescription:
+      "You are proficient in Perception and Stealth.",
+    skillProficiencies: {
+      default: [Skill.PERCEPTION, Skill.STEALTH],
+    },
+    toolProficiencyDescription: "You are proficient with Forgery Kits.",
+    toolProficiencies: {
+      default: [toolIds.forgeryKit],
+    },
+    languageProficiencyDescription: "You can speak one racial language.",
+    languageProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [
+            Language.DWARVISH,
+            Language.ELVISH,
+            Language.GNOMISH,
+            Language.GIANT,
+            Language.GOBLIN,
+            Language.HALFLING,
+            Language.ORC,
+            Language.DRACONIC,
+            Language.MINOTAUR,
+            Language.GITH,
+          ],
+        },
+      ],
+    },
+    //A forgery kit, a set of common clothes, and a pouch containing 5gp
+    equipmentDescription: [
+      `A ${i(itemIds.forgeryKit, "forgery kit")}`,
+      `A set of ${i(itemIds.commonClothes, "common clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "5gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.forgeryKit, quantity: 1 },
+        { item: itemIds.commonClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 5 },
+      ],
+    },
+    traits: [
+      "When I'm not smuggling, I gamble.",
+      "I just love halfling cooking and baking!",
+      "I party with dwarves whenever I can.",
+      "I'm a terrible singer, but I love to do it.",
+      "I was raised to honor Chauntea and still do.",
+      "The blood sports of the Arena sicken me.",
+      "I think non-humans are really interesting.",
+      "I exaggerate the tales of my exploits.",
+    ],
+    ideals: [
+      "**Fair.** I think everyone deserves to be treated fairly. I don't play favorites. (Lawful)",
+      "**Impulsive.** Planning is often a waste of time. No plan survives contact with reality. It's easier to dive in and deal with the consequences. (Chaotic)",
+      "**Curious.** I want to learn as much as I can about the people and places I encounter. (Any)",
+      "**Prepared.** I think success depends on preparing as much as possible in advance. (Any)",
+      "**Respectful.** I think everyone deserves to be treated with respect and dignity, regardless of their race, creed, color, or origin. (Good)",
+      "**Corrupt.** I will break the law or act dishonestly if the money is right. (Evil)",
+    ],
+    bonds: [
+      "I am loyal to the Rogues' Guild and would do anything for them.",
+      "I love the city of Hillsfar and my fellow Hillsfarians, despite the recent problems.",
+      "I admire the elves. I help them whenever I can.",
+      "A gnome helped me once. I pay the favor forward.",
+      "I enjoy tricking the Red Plumes at every opportunity.",
+      "I smuggled agricultural goods for non-human farmers. I try to help them when I can.",
+    ],
+    flaws: [
+      "My hatred for the Red Plumes burns so brightly that I have difficulty suppressing it around them.",
+      "The Red Plumes caught me once before, and I was branded for my crime. If they catch me again, for any offense, the punishment will be dire.",
+      "I treat all Hillsfarians poorly. I am disgusted with their failure to revolt against the Great Law of Humanity.",
+      "I have difficulty trusting strangers. Anyone could be a spy for the authorities.",
+      "I am greedy. There isn't much I won't do for money.",
+      "I'm an informant for the Red Plumes. They let me continue my activities, so long as I pass them information about illegal activity in Hillsfar.",
+    ],
+  },
+  {
+    id: backgroundIds.secretIdentity,
+    name: "Secret Identity",
+    description:
+      "Even though you are a non-human, despite Hillsfar's Great Law of Humanity, you continue to live in the City of Trade. You do so by maintaining a secret identity, forging documents, and even wearing a disguise. Few, if any, know you aren't human.\n\nIf you're a halfling or a gnome, you pass as a little person or a child. If you're a half-elf, half-orc, or genasi, you disguise your non-human features. Other races use a combination of disguise and concealing clothing to hide.\n\nYour reasons for doing so are your own. Perhaps you're a great dissident or the agent of a foreign power. Maybe you have a relationship with someone you cannot bear to leave. Regardless, this way of life has taken a heavy toll on you.",
+    flavorText: "You maintain a secret identity to live in the City of Trade.",
+    source: src.hillsfar,
+    skillProficiencyDescription: "You are proficient in Deception and Stealth.",
+    skillProficiencies: {
+      default: [Skill.DECEPTION, Skill.STEALTH],
+    },
+    toolProficiencyDescription:
+      "You are proficient with Disguise Kits and forgery kits.",
+    toolProficiencies: {
+      default: [toolIds.disguiseKit, toolIds.forgeryKit],
+    },
+    //A disguise kit, a forgery kit, a set of common clothes, a belt pouch, 5gp.
+    equipmentDescription: [
+      `A ${i(itemIds.disguiseKit, "disguise kit")}`,
+      `A ${i(itemIds.forgeryKit, "forgery kit")}`,
+      `A set of ${i(itemIds.commonClothes, "common clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "5gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.disguiseKit, quantity: 1 },
+        { item: itemIds.forgeryKit, quantity: 1 },
+        { item: itemIds.commonClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 5 },
+      ],
+    },
+    traits: [
+      "Despite its problems, I love Hillsfar; it's the greatest city in the world. The only one for me.",
+      "I move from place to place, never staying anywhere long and leaving nothing behind.",
+      "I think flattery is the best way to direct attention away from me.",
+      "I don't make friends easily. They're a liability I cannot afford.",
+      "Risk and danger exhilarate me. Pulling off schemes and deceptions is a rush.",
+      "The First Lord is right, humans are superior. I really admire them, despite the atrocities.",
+      "I avoid people of my own race, as well as things associated with my race, lest they give me away.",
+      "I live for the Arena. I admire gladiators and enjoy the thrill of blood on the sands!",
+    ],
+    ideals: [
+      "**Quisling.** Supporting the rulers of the land and following the laws is the road to salvation.",
+      "**Scoflaw.** The laws and lawmakers are corrupt. I follow laws only when it suits me. (Chaotic)",
+      "**Optimist.** Everyone is basically good. Though the government is misguided, it will all be okay. (Any)",
+      "**Secretive.** I am in the habit of not talking about myself. My business is none of yours. (Any)",
+      "**Heroic.** I do everything I can to help non-humans, regardless of the personal cost to me. (Good)",
+      "**Depraved.** I have lost my moral compass. The ends justify most any means. (Evil)",
+    ],
+    bonds: [
+      "The humans of Hillsfar have inflicted terrible harm on me, my family, and my race. I will have revenge.",
+      "I am part of an underground network that smuggles non-humans into and out of the city.",
+      "I am a partisan. I commit minor acts of defiance against the First Lord and Red Plumes when I can.",
+      "I am a spy. I report on events in and around Hillsfar.",
+      "My secret identity is the only thing protecting me from the Arena. I will stop at nothing to maintain it.",
+      "I am madly in love with a human who does not know my true identity, and I fear rejection if I reveal it.",
+    ],
+    flaws: [
+      "After years of denying who I am, I now despise myself and other members of my pathetic race.",
+      "Years of hiding have made me somewhat paranoid. I trust no one.",
+      "I've been lying so often and for so long that I can't help it anymore. I frequently lie for no reason at all.",
+      "I am ashamed. I failed to protect a member of my family who was seized and thrown into the Arena.",
+      "I am struggling with maintaining my secret identity. I subconsciously want to get caught and therefore sometimes let my secret identity slip.",
+      "Years of successfully deceiving others have made me cocky. I think no one can see through my lies.",
+    ],
+  },
+  {
+    id: backgroundIds.shadeFanatic,
+    name: "Shade Fanatic",
+    description:
+      "You grew up at a time when the wizards of Netheril were at war with the elves of Cormanthor. You recall sitting crosslegged hearing the stories of the glorious Thultanthar, also called the Shade Enclave and the City of Shade, and aspired to study there and maybe even did, for a time. Your dreams came crashing down a few years ago when Thultanthar fell from the sky upon Myth Drannor.\n\nYou know that there was a Netherese Garrison stationed near Hillsfar and have heard rumors that its downfall came from traitors within the ranks. You remain loyal to Netheril and seek other Shade loyalists and fanatics in the Cormanthor forest and the areas surrounding Hillsfar.",
+    flavorText:
+      "You remain loyal to Netheril and seek other Shade loyalists and fanatics.",
+    source: src.hillsfar,
+    skillProficiencyDescription:
+      "You are proficient in Deception and Intimidation skills.",
+    skillProficiencies: {
+      default: [Skill.DECEPTION, Skill.INTIMIDATION],
+    },
+    toolProficiencyDescription: "You are proficient with forgery kits.",
+    toolProficiencies: {
+      default: [toolIds.forgeryKit],
+    },
+    languageProficiencyDescription: "You can speak Netherese.",
+    languageProficiencies: {
+      default: [Language.NETHERESE],
+    },
+    //A forgery kit, a transparent cylinder of shadow that has no opening, a signet ring, a set of fine clothes, and 15gp.
+    equipmentDescription: [
+      `A ${i(itemIds.forgeryKit, "forgery kit")}`,
+      `A transparent cylinder of shadow that has no opening`,
+      `A ${i(itemIds.signetRing, "signet ring")}`,
+      `A set of ${i(itemIds.fineClothes, "fine clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "15gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.forgeryKit, quantity: 1 },
+        { item: itemIds.signetRing, quantity: 1 },
+        { item: itemIds.fineClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 15 },
+      ],
+    },
+    traits: [
+      "I am a bully; I try to hide it though.",
+      "I let my actions speak for themselves.",
+      "I am important; I will not let anyone forget that.",
+      "You are either with me or against me.",
+      "I know it is only a matter of time before I am betrayed by those I care for.",
+      "I never understand why people get so emotional.",
+      "They are out to get me. It is only my cunning that keeps me ahead of them.",
+      "Everyone has a choice; the one I make is always right though.",
+    ],
+    ideals: [
+      "**Hope.** I know even if I need to do evil acts, history will be my redemption. (Chaotic)",
+      "**Dedicated.** I can do anything I put my mind to. (Lawful)",
+      "**Exciting.** I have found the truth of the Shadovar and want to share it with everyone. (Any)",
+      "**Frugal.** I hoard my possessions knowing that someday I will be called upon to give everything I have to the cause. (Any)",
+      "**Eloquent.** I use my words to sway others to my beliefs. (Any)",
+      "**Compassionate.** It is through love that others will join our cause. (Good)",
+    ],
+    bonds: [
+      "They say the Shade broke the bonds of mortality; I want to find out how.",
+      "The whispers in my head remind me that there is power to be found in the shadows.",
+      "For the glory of Netheril, I will grow in power.",
+      "I once lived in Hillsfar; I was chased out before I was able to say farewell.",
+      "My true love was killed by the Red Plumes; I plot to make them suffer.",
+      "I had a loved one die in the arena of Hillsfar; I am out to prove that I am stronger than them!",
+    ],
+    flaws: [
+      "I always over-exaggerate my abilities.",
+      "I cannot bear to let those I care for out of my sight.",
+      "I am incapable of standing up for myself.",
+      "The group I am with has committed atrocities; I am always worried their actions will become public.",
+      "I always enjoy a good mug of ale … or five.",
+      "I know what I do is wrong, but am afraid to speak up about it.",
+    ],
+  },
+  {
+    id: backgroundIds.tradeSheriff,
+    name: "Trade Sheriff",
+    description:
+      "You are one of the many people that make sure the trade routes are clear at ALL times. You assure that the Great Law of Trade is followed at all costs. You work by yourself or in groups to quell bandits and brigands who might stop trade routes from going through. You investigate potential ambushes and possible rumors as to someone wanting to rob or stop caravans. You are as much an investigator as you are law enforcement.\n\nYou are able to go into a town/village around the Hillsfar area and find a contact that is willing to give you information from rumor to fact. This sometimes comes at a cost of a minor bribe of 1-9 silver pieces.",
+    flavorText:
+      "You are one of the many people that make sure the trade routes are clear at ALL times.",
+    source: src.hillsfar,
+    skillProficiencyDescription:
+      "You are proficient in Investigation and Persuasion.",
+    skillProficiencies: {
+      default: [Skill.INVESTIGATION, Skill.PERSUASION],
+    },
+    toolProficiencyDescription: "You are proficient with Thieves' Tools.",
+    toolProficiencies: {
+      default: [toolIds.thievesTools],
+    },
+    languageProficiencyDescription: "You are proficient in Elven.",
+    languageProficiencies: {
+      default: [Language.ELVISH],
+    },
+    //Thieves' tools, a gray cloak, Sheriff's insignia (badge), a set of fine clothes, and 17gp.
+    equipmentDescription: [
+      `A ${i(toolIds.thievesTools, "set of thieves' tools")}`,
+      `A ${i(itemIds.cloak, "gray cloak")}`,
+      `A Sheriff's ${i(itemIds.badge, "insignia")} (badge)`,
+      `A set of ${i(itemIds.fineClothes, "fine clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "17gp"
+      )}`,
+    ],
+    traits: [
+      "I am always polite and respectful.",
+      "I let my actions speak for themselves.",
+      "I am haunted by my past having seen the murder of a close friend or family member, and it is the one case I always needed to solve but have not been able to.",
+      "I am quick to judge and slow to vindicate.",
+      "I can be very persuasive and am able to ask questions where others might not be able to.",
+      "I have a quirky personality that seems to take others off their guard.",
+      "My sense of humor is considered by most to be awkward.",
+      "Everyone has a choice, and they can always make the right choice, mine!",
+    ],
+    ideals: [
+      "**Hope.** My job is to speak for the victim. (Good)",
+      "**Dedicated.** Once I start an investigation, until told to do so, I do not quit, no matter where it leads. (Lawful)",
+      "**Nation.** My city, nation, or people are all that matter. (Any)",
+      "**Mercenary.** When I do investigations, I expect answers immediately. (Any)",
+      "**Eloquent.** I use my words to sway others to give me answers. (Good)",
+      "**Might.** It is through threats and force that I get my answers. (Lawful)",
+    ],
+    bonds: [
+      "To this day, an unsolved case will always leave me haunted and bother me.",
+      "Through the might of my personality, I will solve an investigation or puzzle.",
+      "It is my right to believe what I will; just try and stop me.",
+      "I need to prove my worth to my fellow Sheriffs.",
+      "Someone I cared for died under suspicious circumstances. I will find out what happened to them and bring their killer to justice.",
+      "I speak for those that cannot speak for themselves.",
+    ],
+    flaws: [
+      "I always over-exaggerate my abilities.",
+      "I cannot bear to let those I care for out of my sight.",
+      "I took a bribe to tank an investigation, and I would do anything to keep it secret.",
+      "I have little respect for those that are of 'low' intelligence/race.",
+      "I always enjoy a good mug of ale … or five to cover up my past.",
+      "I speak for the First Lord of Hillsfar and make sure everyone knows it.",
+    ],
+  },
+  {
+    id: backgroundIds.dissenter,
+    name: "Dissenter",
+    description:
+      "Even in the carefully constructed and curated city-state of Naktamun, and in the presence of the five gods, some people rebel against the doctrines of the God-Pharaoh. They don’t challenge the existence of the gods, of course, for those gods are visible nearly every day in the streets of the city. Nor do they question the fact of life after death, which is plain to see in the anointed mummies that surround them, as well as the marauding mummies outside the Hekma. Rather, these dissenters simply refuse to follow the ordained course of life that leads to the glorious afterlife.\n\nSome dissenters are spurred by fear, not wanting to subject themselves to a violent death in the trials (or in training for the trials). Some are moved by conscience, unwilling to kill their crop-mates in the trials. For while they cannot deny that the gods exist, they can deny that the gods are just—and can fight to prove that the dictates of an unjust god need not be obeyed. Some believe that one god (probably Bontu) has corrupted the process of the trials and the path to the afterlife. Others correctly intuit that the God-Pharaoh did not actually have the people’s best interests in mind when he ordered their society.\n\nA character who is identified as a dissenter loses the benefit of the initiate’s or vizier’s background feature. In its place, the character gains the following feature:",
+    flavorText: "You refuse to follow the ordained course of life.",
+    source: src.amonkhet,
+  },
+  {
+    id: backgroundIds.initiate,
+    name: "Initiate",
+    description:
+      "You are an initiate, on the path to completing the trials of the five gods in the hope of earning a glorified death in the final Trial of Zeal. Some combination of your natural aptitude, your crop’s needs, and your teachers’ assessment while you were an acolyte led you to focus your training in one particular area of specialization—hand-to-hand combat, long-range combat, or spellcasting. But only a well-rounded initiate can be called truly worthy of the afterlife.\n\nIf you are a hand-to-hand specialist, consider the barbarian, fighter, monk, paladin, or rogue classes. As a long-range combat specialist, you might be a fighter, a ranger, or a rogue. If you are a spellcasting specialist, you might be a bard, sorcerer, or wizard. And beyond this initial choice, you might consider multiclassing or using feats to round out your skills in all three areas.",
+    source: src.amonkhet,
+    flavorText:
+      "You are on the path to completing the trials of the five gods.",
+    skillProficiencyDescription:
+      "You are proficient in Athletics and Intimidation.",
+    skillProficiencies: {
+      default: [Skill.ATHLETICS, Skill.INTIMIDATION],
+    },
+    toolProficiencyDescription:
+      "You are proficient with one gaming set and land vehicles.",
+    toolProficiencies: {
+      default: [toolIds.landVehicles],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...gamingKitIds],
+        },
+      ],
+    },
+    // A simple puzzle box, a scroll containing the basic teachings of the five gods, a gaming set, a set of common clothes, and a pouch containing 15gp. If you have completed any trials before the start of the campaign, you also have any cartouches you have earned.
+    equipmentDescription: [
+      `A simple puzzle box`,
+      `A ${i(
+        itemIds.parchment,
+        "scroll"
+      )} containing the basic teachings of the five gods`,
+      `A gaming set`,
+      `A set of ${i(itemIds.commonClothes, "common clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "15gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.parchment, quantity: 1 },
+        { item: itemIds.commonClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 15 },
+      ],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [
+            ...gamingKitItemIds.map((id) => [{ item: id, quantity: 1 }]),
+          ],
+        },
+      ],
+    },
+    suggestedCharacteristics:
+      "An initiate’s life is focused on the trials, but it doesn’t need to be all about the trials. Though some initiates are highly focused on their training, most undergo that training while also experiencing joy, sorrow, love, loss, anger, jealousy, hope, faith, delight—the whole range of mortal emotions and experience. The afterlife might be a constant presence in every initiate’s mind, but it is the culmination of a life well-lived—not a replacement for it.",
+    traits: [
+      "I always have a joke on hand when the mood gets too serious.",
+      "I use sarcasm and insults to keep a distance between myself and my crop-mates, because I don’t want to get attached to them.",
+      "I’ll settle for nothing less than perfection—in myself, in my cropmates, in everything.",
+      "I’m so focused on the glorious afterlife that nothing in this life can shake my calm resolve.",
+      "I enjoy using my skills to help those who lack those same skills.",
+      "I train hard so that I can play hard at the end of the day. I fully expect to play even harder in the glorious afterlife, but I’m not in a hurry to get there.",
+      "I’m perfectly happy letting others pick up the slack for me while I take it easy.",
+      "I’m constantly sizing up everyone around me, thinking about what kind of opponent they’ll be in the final trial.",
+    ],
+    ideals: [
+      "**Solidarity.** The thing that matters most of all is that we’re there for each other. (Lawful)",
+      "**Knowledge.** The world is a puzzle — a mystery waiting to be solved. (Neutral)",
+      "**Strength.** All that matters to me is my own perfection. Let everyone else seek that perfection in their own way. (Any)",
+      "**Ambition.** I’m going to prove that I deserve only the best — of everything. (Evil)",
+      "**Zeal.** Anything worth doing is worth throwing my whole self into. (Any)",
+      "**Redemption.** I will train all the harder to make up for the doubt I entertained when I was younger. (Any)",
+    ],
+    bonds: [
+      "One of my crop-mates is my dearest friend, and I hope we will face each other in the final trial.",
+      "I am in love with a vizier.",
+      "I am particularly drawn to one of the five gods, and I want nothing more than to win that god’s particular favor.",
+      "I am more devoted to Naktamun and its people than I am to any of the ideals of the gods.",
+      "My weapon was a gift from a beloved trainer who died in an accident.",
+      "I carry a memento of my time as an acolyte, and I treasure it above all other things.",
+    ],
+    flaws: [
+      "I’m easily distracted by an attractive person, which could be the death of me in the trials.",
+      "I really wanted to be a vizier, and I’m angry at the god who didn’t choose me.",
+      "Training for a lifetime to die in the end seems like a big waste of energy.",
+      "I’m not at all sure I’ll be able to grant a glorified death to any of my crop-mates.",
+      "I have a lasting grudge against one of my crop-mates, and each of us wants to see the other fail.",
+      "I think I’ve figured out that this world is not what it seems. Something dark is going on here.",
+    ],
+  },
+  {
+    id: backgroundIds.vizier,
+    name: "Vizier",
+    description:
+      "You are a vizier, a servant of your god. You perform tasks that are essential to facilitating the initiates’ journey, so the gods reward you with entry into the afterlife with the God-Pharaoh’s blessing. You hope to achieve the most honored status in the afterlife by being the best possible servant to your god.\n\nAs a vizier, you can have any class, but you are especially likely to be a cleric, a druid (particularly if you serve Rhonas), or a paladin.",
+    source: src.amonkhet,
+    flavorText: "You are a vizier, a servant of your god.",
+    skillProficiencyDescription: "You are proficient in History and Religion.",
+    skillProficiencies: {
+      default: [Skill.HISTORY, Skill.RELIGION],
+    },
+    toolProficiencyDescription:
+      "One type of artisan's tools, one type of musical instrument",
+    toolProficiencies: {
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [...artisanIds, ...instrumentIds],
+        },
+      ],
+    },
+    //A set of artisan’s tools or a musical instrument (one of your choice), a scroll of your god’s teachings, a vizier’s cartouche, a set of fine clothes, and a pouch containing 25gp
+    equipmentDescription: [
+      `A set of artisan's tools or a musical instrument (one of your choice)`,
+      `A ${i(itemIds.parchment, "scroll")} of your god’s teachings`,
+      `A vizier’s cartouche`,
+      `A set of ${i(itemIds.fineClothes, "fine clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "25gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.parchment, quantity: 1 },
+        { item: itemIds.fineClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 25 },
+      ],
+      choices: [
+        {
+          numberOfChoices: 1,
+          options: [
+            ...artisanToolItemIds.map((id) => [{ item: id, quantity: 1 }]),
+            ...instrumentItemIds.map((id) => [{ item: id, quantity: 1 }]),
+          ],
+        },
+      ],
+    },
+    suggestedCharacteristics:
+      "A vizier’s characteristics strongly reflect the ideals and personality of the god they serve.",
+    traits: [
+      "Everything I do, I do gracefully and deliberately, and with complete confidence. (Oketra)",
+      "Nothing can shake my rock-hard focus. (Oketra)",
+      "When I am at peace, I am an oasis of perfect calm in the world. When I am roused to anger, I am an embodiment of terror. (Kefnet)",
+      "I enjoy teasing acolytes and initiates with juicy tidbits of knowledge wrapped up in fiendishly difficult puzzles. (Kefnet)",
+      "I have the utmost faith in myself and my abilities. (Rhonas)",
+      "I get restless when life in the city feels too tame, too safe. (Rhonas)",
+      "I enjoy solitude as an opportunity to plan my victory. (Bontu)",
+      "I use satire as a way to undermine the teachings of the other gods. (Bontu)",
+      "I love, fight, and feast with equal zeal. (Hazoret)",
+      "I think of those in my care as my family, in a way that most people have trouble understanding. (Hazoret)",
+    ],
+    ideals: [
+      "**Solidarity.** The worthy must respect the worthy. In the afterlife, all will be united in goal and action. (Oketra)",
+      "**Knowledge.** The worthy shall cultivate a nimble mind, so as to perceive the wonders beyond imagination that wait in the afterlife. (Kefnet)",
+      "**Strength.** The worthy shall hone a strong body that can withstand the boundless energies of the afterlife. (Rhonas)",
+      "**Ambition.** The worthy shall strive for greatness, for supremacy in life leads to supremacy in the afterlife. (Bontu)",
+      "**Zeal.** The worthy shall rush to the God-Pharaoh's side with relentless passion, rising to overcome every obstacle in their way. (Hazoret)",
+      "**Naktamun.** The life of the city is ordered according to the plan of the God-Pharaoh, and that order must be preserved at all costs.",
+    ],
+    bonds: [
+      "My loyalty to my companions embodies the ideal of loyalty to my god. (Oketra)",
+      "The teachings of my god are more precious to me than any possession. (Kefnet)",
+      "I would do anything to defend the temple of my god from any harm or desecration. (Rhonas)",
+      "I am committed to the service of my god—because it’s my sure ticket into the afterlife. (Bontu)",
+      "I love my god and never want my service to end. (Hazoret)",
+      "I have a close friend or lover who is also a vizier.",
+    ],
+    flaws: [
+      "I am in love with an initiate, and I want to shield this person from death in the trials.",
+      "I secretly wish I had not been chosen as a vizier, so I could participate in the trials as an initiate.",
+      "I secretly question whether the gods care at all about us or what we do.",
+      "A vizier of another god seeks my death in retribution for a past insult.",
+      "I am terrified of what lies beyond the Gate to the Afterlife.",
+      "I secretly believe the God-Pharaoh’s return will not bring blessing to this world.",
+    ],
+  },
+  {
+    id: backgroundIds.knightOfSolamnia,
+    name: "Knight of Solamnia",
+    description:
+      "You have trained to be a valorous warrior known as a Knight of Solamnia. Strict rules guide your every action, and you work to uphold them as you strive to defend the weak and oppose evil. Your honor is as important to you as your life.",
+    flavorText:
+      "You have trained to be a valorous warrior known as a Knight of Solamnia.",
+    source: src.dragonQueen,
+    skillProficiencyDescription:
+      "You are proficient in Athletics and Survival.",
+    skillProficiencies: {
+      default: [Skill.ATHLETICS, Skill.SURVIVAL],
+    },
+    languageProficiencyDescription:
+      "You are proficient in two languages of your choice.",
+    languageProficiencies: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          numberOfChoices: 2,
+          options: Object.values(Language),
+        },
+      ],
+    },
+    //An insignia of rank, a deck of cards, a set of common clothes, and a pouch containing 10 gp.
+    equipmentDescription: [
+      `An ${i(itemIds.badge, "insignia")} of rank`,
+      `A ${i(itemIds.playingCardSet, "deck of cards")}`,
+      `A set of ${i(itemIds.commonClothes, "common clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "10gp"
+      )}`,
+    ],
+    equipment: {
+      default: [
+        { item: itemIds.badge, quantity: 1 },
+        { item: itemIds.playingCardSet, quantity: 1 },
+        { item: itemIds.commonClothes, quantity: 1 },
+        { item: itemIds.pouch, quantity: 1 },
+        { item: itemIds.goldPiece, quantity: 10 },
+      ],
+    },
+    suggestedCharacteristics:
+      "Any class that has martial prowess can be a good fit in the Knights of Solamnia. Fighters and Paladins make up the bulk of the knighthood’s forces. Clerics (often with the War Domain) can also be found among the knights' ranks.\n\nFor a more unusual take on a Knight of Solamnia character, consider playing a Bard of the College of Valor (or the College of Swords) or a Barbarian devoted to the ideals of the nature god Habbakuk (perhaps adopting the Path of the Zealot).",
+  },
+  {
+    id: backgroundIds.mageOfHighSorcery,
+    name: "Mage of High Sorcery",
+    description:
+      "Your talent for magic came to the attention of the Mages of High Sorcery, an organization of spellcasters that studies magic and prevent its misuse. You've trained among the Mages, but whether you'll face the dangerous tests required to become a full member of the group remains to be determined. Your passion for studying magic has likely already predisposed you toward one of the organization's three orders: the benevolent Order of the White Robes, the balance-pursuing Order of the Red Robes, or the ruthless Order of the Black Robes.\n\nIn the world of Krynn, many refer to the Mages of High Sorcery as the Wizards of High Sorcery. The organization accepts more than wizards, though, with sorcerers, warlocks, and other spellcasters included among their ranks.",
+    source: src.dragonQueen,
+    flavorText:
+      "Your talent for magic came to the attention of the Mages of High Sorcery.",
+    skillProficiencyDescription: "You are proficient in Arcana and History.",
+    skillProficiencies: {
+      default: [Skill.ARCANA, Skill.HISTORY],
+    },
+    languageProficiencyDescription:
+      "You are proficient in two languages of your choice.",
+    languageProficiencies: {
+      default: [Language.COMMON],
+      choices: [
+        {
+          numberOfChoices: 2,
+          options: Object.values(Language),
+        },
+      ],
+    },
+    //A bottle of colored ink, an ink pen, a set of common clothes, and a pouch containing 10 gp.
+    equipmentDescription: [
+      `A ${i(itemIds.ink, "bottle of colored ink")}`,
+      `An ${i(itemIds.inkPen, "ink pen")}`,
+      `A set of ${i(itemIds.commonClothes, "common clothes")}`,
+      `A ${i(itemIds.pouch, "belt pouch")} containing ${i(
+        itemIds.goldPiece,
+        "10gp"
+      )}`,
+    ],
+    suggestedCharacteristics:
+      "Mages of High Sorcery are typically Sorcerers, Warlocks, or Wizards and might have any subclass. Spellcasters who gain their magic through devotion are less likely to be welcomed among the traditionalist mages. Nevertheless, the Mages of High Sorcery are shrewd, and they rarely let unique opportunities or individuals pass them by. Even members of martial classes who train in magic might find a rare place among the group's three orders.",
   },
 ];
 

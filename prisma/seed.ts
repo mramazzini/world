@@ -15,8 +15,9 @@ import { itemToClass } from "./seeds/_seeders/012_ItemToClass.linker";
 import { createSubclass } from "./seeds/_seeders/013_createSubclass.seeder";
 import { createSpecies } from "./seeds/_seeders/014_createSpecies.seeder";
 import { createVariants } from "./seeds/_seeders/015_createVariant.seeder";
-import { createCharacter } from "./seeds/_seeders/016_createCharacter.seeder";
-import createMaxyUser from "./seeds/_seeders/017_createMaxyUser.seeder";
+import { createCharacter } from "./seeds/_seeders/017_createCharacter.seeder";
+import createMaxyUser from "./seeds/_seeders/018_createMaxyUser.seeder";
+import { createFeats } from "./seeds/_seeders/016_createFeats.seeder";
 const db = new PrismaClient();
 
 const seedarr: {
@@ -71,7 +72,7 @@ const seedarr: {
     index: "008",
     callback: createItems,
     description: "Creating items from the item seed.",
-    //enabled: true,
+    enabled: true,
   },
   {
     index: "009",
@@ -83,7 +84,7 @@ const seedarr: {
     index: "010",
     callback: createBackgrounds,
     description: "Creating backgrounds from the background seed.",
-    //enabled: true,
+    enabled: true,
   },
   {
     index: "011",
@@ -113,16 +114,22 @@ const seedarr: {
     index: "015",
     callback: createVariants,
     description: "Creating variants from the variant seed.",
-    //enabled: true,
+    enabled: true,
   },
   {
     index: "016",
+    callback: createFeats,
+    description: "Creating feats from the species seed.",
+    enabled: true,
+  },
+  {
+    index: "017",
     callback: createCharacter,
     description: "Creating characters from the character seed.",
     // enabled: true,
   },
   {
-    index: "017",
+    index: "018",
     callback: createMaxyUser,
     description: "Creating maxy user from the maxy user seed.",
     //enabled: true,
