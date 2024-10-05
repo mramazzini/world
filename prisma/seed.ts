@@ -72,7 +72,7 @@ const seedarr: {
     index: "008",
     callback: createItems,
     description: "Creating items from the item seed.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "009",
@@ -84,7 +84,7 @@ const seedarr: {
     index: "010",
     callback: createBackgrounds,
     description: "Creating backgrounds from the background seed.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "011",
@@ -108,19 +108,19 @@ const seedarr: {
     index: "014",
     callback: createSpecies,
     description: "Creating species from the species seed.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "015",
     callback: createVariants,
     description: "Creating variants from the variant seed.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "016",
     callback: createFeats,
     description: "Creating feats from the species seed.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "017",
