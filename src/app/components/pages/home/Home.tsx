@@ -20,6 +20,14 @@ const links = [
     href: "/spells",
   },
   {
+    name: "Spell Lists",
+    href: "/spell-list",
+  },
+  {
+    name: "Feats",
+    href: "/feats",
+  },
+  {
     name: "Backgrounds",
     href: "/background",
   },

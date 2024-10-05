@@ -11,11 +11,11 @@ interface Props {
 const SpellListSearchPage = ({ spellLists }: Props) => {
   return (
     <SearchPageComponent<SpellListInfo>
-      title="SpellLists"
-      description="SpellLists provide a list of spells that can be used by spellcasters. They can be used to create a spellbook or to prepare spells for the day. Select a SpellList to view more information."
-      createText="Create a SpellList ->"
+      title="Spell Lists"
+      description="Spell Lists provide a list of spells that can be used by spellcasters. Each spell list is associated to a class that has a Spellcasting Feature. They can be used to create a spellbook or to prepare spells for the day. Select a Spell List to view more information."
+      createText="Create a Spell List ->"
       homebrewOfficialText="View Homebrew SpellLists ->"
-      searchPlaceholder="Search SpellList..."
+      searchPlaceholder="Search Spell Lists..."
       routeName="spell-list"
       handleSearch={getSpellListChunk}
       staticInput={spellLists}
