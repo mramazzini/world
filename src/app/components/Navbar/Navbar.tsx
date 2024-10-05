@@ -47,6 +47,10 @@ const Navbar = () => {
       href: "/background",
     },
     {
+      name: "Feats",
+      href: "/feat",
+    },
+    {
       name: "Species",
       href: "/species",
     },

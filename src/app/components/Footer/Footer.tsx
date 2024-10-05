@@ -28,13 +28,22 @@ const wikiLinks = [
     url: "/class",
   },
   {
+    name: "Subclasses",
+    url: "/subclass",
+  },
+  {
     name: "Spells",
     url: "/spells",
   },
   {
-    name: "Subclasses",
-    url: "/subclass",
+    name: "Spell Lists",
+    url: "/spell-list",
   },
+  {
+    name: "Feats",
+    url: "/feats",
+  },
+
   {
     name: "Backgrounds",
     url: "/background",
@@ -50,10 +59,6 @@ const wikiLinks = [
   {
     name: "Items",
     url: "/item",
-  },
-  {
-    name: "Spell Lists",
-    url: "/spell-list",
   },
 ];
 
