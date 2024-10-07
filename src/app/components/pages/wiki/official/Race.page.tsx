@@ -6,6 +6,8 @@ import Info from "@/app/components/UI/Info";
 import P from "@/app/components/Utility/FormatAndSanitize";
 import JsonTable from "@/app/components/Utility/JsonTable";
 import FeatureList from "@/app/components/UI/FeatureList";
+import { AssociatedModel } from "@prisma/client";
+import CommentSection from "@/app/components/CommentSection/CommentSection";
 
 interface Props {
   species: SpeciesInfo | null;
@@ -153,6 +155,7 @@ const SpeciesPage = ({ species }: Props) => {
               </div>
             </div>
           )}
+          <CommentSection id={species.id} model={AssociatedModel.SPECIES} />
         </>
       )}
     </main>

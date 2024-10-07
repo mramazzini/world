@@ -18,6 +18,7 @@ import { createVariants } from "./seeds/_seeders/015_createVariant.seeder";
 import { createCharacter } from "./seeds/_seeders/017_createCharacter.seeder";
 import createMaxyUser from "./seeds/_seeders/018_createMaxyUser.seeder";
 import { createFeats } from "./seeds/_seeders/016_createFeats.seeder";
+import { createBlogPosts } from "./seeds/_seeders/019_createBlogPosts.seeder";
 const db = new PrismaClient();
 
 const seedarr: {
@@ -133,6 +134,12 @@ const seedarr: {
     callback: createMaxyUser,
     description: "Creating maxy user from the maxy user seed.",
     //enabled: true,
+  },
+  {
+    index: "019",
+    callback: createBlogPosts,
+    description: "Creating blogpost from the blogpost seed.",
+    enabled: true,
   },
 ];
 

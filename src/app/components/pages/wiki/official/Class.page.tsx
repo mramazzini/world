@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { ClassInfo } from "@/lib/utils/types/types";
 import Loading from "../../../UI/Loading";
-import { Ability } from "@prisma/client";
+import { Ability, AssociatedModel } from "@prisma/client";
 import Link from "next/link";
 import NewLineParse from "@/app/components/Utility/NewLineParse";
 import ClassTable from "@/app/components/ClassInfo/ClassTable";
@@ -17,6 +17,7 @@ import {
 } from "@/app/components/Utility/colorBefore";
 import FeatureList from "@/app/components/UI/FeatureList";
 import Feature from "@/app/components/UI/Feature";
+import CommentSection from "@/app/components/CommentSection/CommentSection";
 
 const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
   if (!classObj) return <span className="p-4">Class does not exist</span>;
@@ -371,6 +372,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
           </h2>
           <div className="divider"></div>
           <FeatureList features={regularFeatures} />
+          <CommentSection id={classObj.id} model={AssociatedModel.CLASS} />
         </>
       )}
     </main>

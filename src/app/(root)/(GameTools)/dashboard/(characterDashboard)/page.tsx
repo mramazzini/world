@@ -1,4 +1,4 @@
-import Dashboard from "@/app/components/pages/gameTools/Dashboard/Dashboard";
+import Dashboard from "@/app/components/gameTools/Dashboard/Dashboard";
 import {
   getCharacters,
   getCharactersByUser,

@@ -1,4 +1,4 @@
-import CharacterSheet from "@/app/components/pages/gameTools/CharacterSheet/Character.page";
+import CharacterSheet from "@/app/components/gameTools/CharacterSheet/Character.page";
 import { getCharacter } from "@/lib/actions/db/character/read.actions";
 
 if (process.env.DOMAIN_NAME === undefined) {

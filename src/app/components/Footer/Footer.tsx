@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import useContactModal from "../modals/ContactModal";
 import CreativeCommons from "../legal/CreativeCommon";
+
 const pageLinks = [
   {
     name: "Home",

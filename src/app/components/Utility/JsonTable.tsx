@@ -1,5 +1,5 @@
 import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
-import { cerr, cinfo, csuccess, cwarn } from "../../../lib/utils/chalkLog";
+import { cerr, cinfo, csuccess, cwarn } from "@/lib/utils/chalkLog";
 import React from "react";
 import GenerateTable from "../UI/GenerateTable";
 const JsonTable = ({ json }: { json: PrismaJson.Table[] }) => {

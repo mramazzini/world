@@ -10,6 +10,8 @@ import NewLineParse from "../../../Utility/NewLineParse";
 import numberArray from "@/lib/utils/numberArray";
 import P from "@/app/components/Utility/FormatAndSanitize";
 import numPlace from "@/lib/utils/numPlace";
+import { AssociatedModel } from "@prisma/client";
+import CommentSection from "@/app/components/CommentSection/CommentSection";
 
 interface Props {
   spellList: SpellListInfo | null;
@@ -228,6 +230,10 @@ const SpellListPage = ({ spellList }: Props) => {
               </Fragment>
             ))}
           </div>
+          <CommentSection
+            id={spellList.id}
+            model={AssociatedModel.SPELL_LIST}
+          />
         </>
       )}
     </main>

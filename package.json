@@ -20,7 +20,8 @@
     "nuke:prod": "env-cmd -f .env npx tsx scripts/nuke.ts",
     "logs": "vercel logs https://world-ashen.vercel.app/",
     "generate:background": "cd scripts/generateSeeds/Backgrounds && npx tsx backgrounds.ts",
-    "reseed-push": "npm run nuke:prod && git push origin main"
+    "reseed-push": "npm run nuke:prod && git push origin main",
+    "generate-top-pages": "cd scripts && npx tsx generateTopPages.ts"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"
@@ -35,6 +36,7 @@
     "@vercel/speed-insights": "^1.0.12",
     "bcrypt": "^5.1.1",
     "chalk": "^5.3.0",
+    "csv-parser": "^3.0.0",
     "dompurify": "^3.1.5",
     "fuse.js": "^7.0.0",
     "inquirer": "^11.0.2",

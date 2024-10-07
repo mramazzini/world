@@ -1,7 +1,9 @@
+import CommentSection from "@/app/components/CommentSection/CommentSection";
 import FeatureList from "@/app/components/UI/FeatureList";
 import Info from "@/app/components/UI/Info";
 import NewLineParse from "@/app/components/Utility/NewLineParse";
 import { FeatInfo } from "@/lib/utils/types/types";
+import { AssociatedModel } from "@prisma/client";
 import Link from "next/link";
 
 interface Props {
@@ -51,6 +53,7 @@ const FeatPage = ({ feat }: Props) => {
           <div className="divider"></div>
           <FeatureList features={feat.features} />
           <div className="divider"></div>
+          <CommentSection id={feat.id} model={AssociatedModel.FEAT} />
         </>
       )}
     </main>

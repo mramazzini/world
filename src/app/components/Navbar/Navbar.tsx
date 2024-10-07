@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { destroySession, verifyToken } from "@/lib/utils/auth";
+
 import { useState, useEffect } from "react";
-import { DISCORD_INVITE, NAVBAR_HEIGHT_REM } from "@/lib/globalVars";
+
 import HomeSearchBar from "../UI/HomeSearchBar";
 import Image from "next/image";
+import { destroySession, verifyToken } from "@/lib/utils/auth";
+import { NAVBAR_HEIGHT_REM } from "@/lib/globalVars";
 
 const Navbar = () => {
   //Block navbar on certain pages
@@ -177,7 +179,8 @@ const Navbar = () => {
                   e.preventDefault();
                   await destroySession();
                   await checkToken();
-                  router.push(pathname);
+                  //refresh page
+                  window.location.reload();
                 }}
               >
                 Logout
@@ -185,10 +188,10 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link href="/login" className="p-4 btn btn-ghost mx-2">
+              <Link href={`/login`} className="p-4 btn btn-ghost mx-2">
                 Login
               </Link>
-              <Link href="/register" className="p-4 btn btn-ghost mx-2">
+              <Link href={`/register`} className="p-4 btn btn-ghost mx-2">
                 Register
               </Link>
             </>
@@ -269,17 +272,18 @@ const Navbar = () => {
               onClick={async () => {
                 await destroySession();
                 await checkToken();
-                router.push(pathname);
+                //refresh page
+                window.location.reload();
               }}
             >
               Logout
             </div>
           ) : (
             <>
-              <Link href="/login" className="p-4 btn btn-ghost mr-2">
+              <Link href={`/login`} className="p-4 btn btn-ghost mr-2">
                 Login
               </Link>
-              <Link href="/register" className="p-4 btn btn-ghost">
+              <Link href={`/register`} className="p-4 btn btn-ghost">
                 Register
               </Link>
             </>

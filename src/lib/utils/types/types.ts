@@ -20,6 +20,7 @@ import {
   Tool,
   Weapon,
   SubSpecies,
+  Comment,
 } from "@prisma/client";
 
 export enum Pages {
@@ -1035,4 +1036,12 @@ export interface CombinedData {
 export interface QuantityDistance {
   quantity: number;
   unit: Distance;
+}
+
+export interface CommentInfo extends Comment {
+  User: {
+    id: number;
+    username: string | null;
+  } | null;
+  replies: Comment[];
 }

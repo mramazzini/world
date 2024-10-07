@@ -1,4 +1,4 @@
-import CharacterSheet from "@/app/components/pages/gameTools/CharacterSheet/Character.page";
+import CharacterSheet from "@/app/components/gameTools/CharacterSheet/Character.page";
 import {
   getCharacter,
   getCharacters,

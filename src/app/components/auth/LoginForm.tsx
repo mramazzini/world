@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { AuthResult } from "@/lib/utils/types/types";
 import { login } from "@/lib/actions/auth/auth.actions";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams, useSearchParams } from "next/navigation";
 import useErrorModal from "../modals/ErrorModal";
 const LoginForm = () => {
   const { ErrorModal, openModal } = useErrorModal();
   const router = useRouter();
+  const params = useSearchParams();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -24,8 +25,11 @@ const LoginForm = () => {
       }
 
       // Redirect to last page
-
-      router.push("/dashboard");
+      if (params.get("redirect")) {
+        router.push(params.get("redirect") as string);
+      } else {
+        router.push("/dashboard");
+      }
     } catch (error) {
       console.log(error);
       openModal("Something went wrong. Please try again later.");

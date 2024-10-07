@@ -11,6 +11,8 @@ import NewLineParse from "../../../Utility/NewLineParse";
 import FeatureList from "@/app/components/UI/FeatureList";
 import { Fragment } from "react";
 import DieTable from "@/app/components/UI/DieTable";
+import CommentSection from "@/app/components/CommentSection/CommentSection";
+import { AssociatedModel } from "@prisma/client";
 interface Props {
   background: BackgroundInfo | null;
 }
@@ -150,6 +152,10 @@ const BackgroundPage = ({ background }: Props) => {
               )}
             </>
           )}
+          <CommentSection
+            id={background.id}
+            model={AssociatedModel.BACKGROUND}
+          />
         </>
       )}
     </main>

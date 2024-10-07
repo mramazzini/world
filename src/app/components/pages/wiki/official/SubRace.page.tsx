@@ -12,6 +12,8 @@ import "@/lib/string.extensions";
 
 import { objEqual } from "@/lib/utils/deepEqual";
 import JsonTable from "@/app/components/Utility/JsonTable";
+import { AssociatedModel } from "@prisma/client";
+import CommentSection from "@/app/components/CommentSection/CommentSection";
 const SubSpeciesPage = ({ subSpecies }: Props) => {
   if (!subSpecies) return null;
   const species = subSpecies.species;
@@ -369,6 +371,10 @@ const SubSpeciesPage = ({ subSpecies }: Props) => {
                 )
             )}
           </div>
+          <CommentSection
+            id={subSpecies.id}
+            model={AssociatedModel.SUBSPECIES}
+          />
         </>
       )}
     </main>

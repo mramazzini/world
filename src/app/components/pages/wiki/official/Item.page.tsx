@@ -8,9 +8,10 @@ import { WeaponProperties } from "@/lib/globalVars";
 import Tooltip from "@/app/components/Utility/Tooltip";
 import Feature from "@/app/components/UI/Feature";
 import FeatureList from "@/app/components/UI/FeatureList";
-import { ArmorType, ItemTypes, Rarity } from "@prisma/client";
+import { ArmorType, AssociatedModel, ItemTypes, Rarity } from "@prisma/client";
 import { itemIds } from "../../../../../../prisma/seeds/Items/ItemIds";
 import JsonTable from "@/app/components/Utility/JsonTable";
+import CommentSection from "@/app/components/CommentSection/CommentSection";
 interface Props {
   item: ItemInfo | null;
 }
@@ -713,6 +714,7 @@ const ItemPage = ({ item }: Props) => {
               </div>
             </>
           )}
+          <CommentSection id={item.id} model={AssociatedModel.ITEM} />
         </>
       )}
     </main>

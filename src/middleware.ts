@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getUserId, isAdministrator, verifyToken } from "./lib/utils/auth";
-import { getCharacter } from "./lib/actions/db/character/read.actions";
+import { isAdministrator, verifyToken } from "./lib/utils/auth";
 
 const protectedRoutes = ["/class/create", "/character", "/dashboard"];
 const adminRoutes = ["/admin", "/admin/messages"];
@@ -20,6 +19,10 @@ export async function middleware(req: NextRequest) {
   // protected routes can only be accessed by logged in users
   if (!isAuthenticated && protectedRoutes.includes(req.nextUrl.pathname)) {
     const absoluteURL = new URL("/login", req.nextUrl.origin);
+    // Append the original pathname as a query parameter
+    console.log(req.nextUrl.pathname);
+    absoluteURL.searchParams.set("redirect", req.nextUrl.pathname);
+    console.log(absoluteURL.toString());
     return NextResponse.redirect(absoluteURL.toString());
   }
 }

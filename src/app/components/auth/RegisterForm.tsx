@@ -4,11 +4,13 @@ import { signup } from "@/lib/actions/auth/auth.actions";
 import { AuthResult } from "@/lib/utils/types/types";
 import Link from "next/link";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import useErrorModal from "../modals/ErrorModal";
 const RegisterForm = () => {
   const { ErrorModal, openModal } = useErrorModal();
   const router = useRouter();
+  const params = useSearchParams();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -30,8 +32,12 @@ const RegisterForm = () => {
 
       openModal("");
 
-      // Redirect to homepage
-      router.push("/dashboard");
+      // Redirect to last page
+      if (params.get("redirect")) {
+        router.push(params.get("redirect") as string);
+      } else {
+        router.push("/dashboard");
+      }
     } catch (error) {
       console.log(error);
       openModal("Something went wrong. Please try again later.");
