@@ -11,8 +11,6 @@ interface Props {
 
 const ChooseChoices = ({ character, setCharacterState }: Props) => {
   const [loading, setLoading] = useState(false);
-  if (!character) return null;
-  if (!character.state) return null;
 
   const runCallback = async (
     s: PrismaJson.CharacterState,
@@ -51,7 +49,9 @@ const ChooseChoices = ({ character, setCharacterState }: Props) => {
     resolveChoices().then(() => {
       setLoading(false);
     });
-  }, [character.state.pendingChoices]);
+  }, [character.state?.pendingChoices]);
+  if (!character) return null;
+  if (!character.state) return null;
 
   return (
     <div className="flex flex-col items-center w-full ">
