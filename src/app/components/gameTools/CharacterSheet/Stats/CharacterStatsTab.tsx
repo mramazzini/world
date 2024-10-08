@@ -55,7 +55,9 @@ const CharacterStatsTab = ({ character }: Props) => {
                     <td>Subclass(es)</td>
                     <td>
                       {character.SubClasses?.map((subClassData) => (
-                        <span className="capitalize">{subClassData.name} </span>
+                        <span key={subClassData.id} className="capitalize">
+                          {subClassData.name}{" "}
+                        </span>
                       ))}
                     </td>
                     <td>
