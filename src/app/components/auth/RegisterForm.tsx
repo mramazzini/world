@@ -3,11 +3,12 @@
 import { signup } from "@/lib/actions/auth/auth.actions";
 import { AuthResult } from "@/lib/utils/types/types";
 import Link from "next/link";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import useErrorModal from "../modals/ErrorModal";
-const RegisterForm = () => {
+import Loading from "../UI/Loading";
+const Register = () => {
   const { ErrorModal, openModal } = useErrorModal();
   const router = useRouter();
   const params = useSearchParams();
@@ -138,6 +139,13 @@ const RegisterForm = () => {
         </div>
       </form>
     </>
+  );
+};
+const RegisterForm = () => {
+  return (
+    <Suspense fallback={<Loading />}>
+      <Register />
+    </Suspense>
   );
 };
 

@@ -35,7 +35,9 @@ const Stats = () => {
   }, []);
   return (
     <>
-      <h2 className="text-center divider mb-4">September's Top Selections</h2>
+      <h2 className="text-center divider mb-4">
+        September&apos;s Top Selections
+      </h2>
       {Object.entries(topPages).map(
         ([category, pages]) =>
           category == tab && (
@@ -44,7 +46,7 @@ const Stats = () => {
               className="w-full flex-col flex items-center gap-4"
             >
               <p className="text-center">
-                September's most viewed {category.toCapitalCase()} is:
+                September&apos;s most viewed {category.toCapitalCase()} is:
               </p>
               <h3 className="badge badge-neutral badge-lg text-xl p-4 m-0 capitalize">
                 🥇 {pages[0].page.split("/")[2].replaceAll("-", " ")} 🥇

@@ -1,11 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { AuthResult } from "@/lib/utils/types/types";
 import { login } from "@/lib/actions/auth/auth.actions";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 import useErrorModal from "../modals/ErrorModal";
-const LoginForm = () => {
+import Loading from "../UI/Loading";
+const Login = () => {
   const { ErrorModal, openModal } = useErrorModal();
   const router = useRouter();
   const params = useSearchParams();
@@ -96,6 +97,14 @@ const LoginForm = () => {
         </div>
       </form>
     </>
+  );
+};
+
+const LoginForm = () => {
+  return (
+    <Suspense fallback={<Loading />}>
+      <Login />
+    </Suspense>
   );
 };
 
