@@ -752,6 +752,10 @@ declare global {
       reason: string;
       effect: string | number;
     }
+    interface TableOfContentItem {
+      title: string;
+      link: string;
+    }
     interface CharacterState {
       //will be used to link a model to a character
       pendingLinks: {

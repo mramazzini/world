@@ -25,7 +25,10 @@ h3 {
 h4 {
   font-size: 1rem;
 }
-
+*,
+html {
+  scroll-behavior: smooth !important;
+}
 h1,
 h2,
 h3,
@@ -36,9 +39,6 @@ h4 {
 
 .hover-parent:hover * {
   display: inline;
-}
-html {
-  scroll-behavior: smooth;
 }
 
 body {
@@ -92,15 +92,26 @@ input[type="number"] {
 }
 
 .markdown-content {
+  overflow-x: auto;
+
   h1 {
+    @apply divider;
+    margin: 2rem 0;
+
     font-size: 2rem;
   }
 
   h2 {
+    @apply md:divider;
+    margin: 2rem 0;
+
     font-size: 1.5rem;
   }
 
   h3 {
+    @apply md:divider;
+    margin: 2rem 0;
+
     font-size: 1.25rem;
   }
 
@@ -119,6 +130,7 @@ input[type="number"] {
   p {
     font-size: 1rem;
     line-height: 1.5;
+    margin: 0.5rem 0;
   }
 
   a {
@@ -132,11 +144,14 @@ input[type="number"] {
   }
 
   ul {
+    padding: 0.5rem 0;
     padding-left: 1rem;
   }
 
   ul li {
     list-style-type: disc;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
   }
 
   ol {
@@ -170,7 +185,7 @@ input[type="number"] {
   }
 
   table {
-    @apply table table-zebra table-md bg-base-300;
+    @apply table table-zebra table-sm lg:table-md bg-base-300 table-pin-rows table-pin-cols w-full;
     th {
       @apply bg-black/30;
     }

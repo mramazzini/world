@@ -742,14 +742,16 @@ model FeatureCollection {
 }
 
 model BlogPost {
-  id         Int      @id @default(autoincrement())
-  title      String
-  route      String   @unique
-  meta       String   @db.VarChar(200)
-  flavorText String   @db.VarChar(400)
-  content    String //markdown
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id              Int      @id @default(autoincrement())
+  title           String
+  route           String   @unique
+  meta            String   @db.VarChar(200)
+  flavorText      String   @db.VarChar(400)
+  content         String //markdown
+  /// [TableOfContentItem]
+  tableOfContents Json[] // array of objects with title and link
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   ImageURL String
   ImageAlt String
