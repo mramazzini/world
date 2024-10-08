@@ -8,6 +8,8 @@ import { getItems } from "@/lib/actions/db/item/read.actions";
 import { getSpellLists } from "@/lib/actions/db/spellList/read.actions";
 import { getSpecies } from "@/lib/actions/db/species/get.actions";
 import { getSubSpecies } from "@/lib/actions/db/subSpecies/read.actions";
+import { getFeats } from "@/lib/actions/db/feat/read.actions";
+import { getBlogposts } from "@/lib/actions/db/blogpost/read.actions";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteMap: MetadataRoute.Sitemap = [];
@@ -237,6 +239,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       )}`,
       lastModified: s.updatedAt,
       changeFrequency: "yearly",
+      priority: 0.8,
+    });
+  }
+
+  const feats = await getFeats();
+  const featPagesCount = Math.ceil(feats.length / QUERY_LIMIT);
+  for (let i = 1; i < featPagesCount; i++) {
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/feat?page=${i}`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    });
+  }
+  siteMap.push({
+    url: `${process.env.DOMAIN_NAME}/feat`,
+    lastModified: new Date(),
+    changeFrequency: "yearly",
+    priority: 0.9,
+  });
+  for (const f of feats) {
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/feat/${f.name.replaceAll(" ", "-")}`,
+      lastModified: f.updatedAt,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    });
+  }
+
+  const blogPosts = await getBlogposts();
+  for (const b of blogPosts) {
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/blog/${b.route}`,
+      lastModified: b.updatedAt,
+      changeFrequency: "never",
       priority: 0.8,
     });
   }
