@@ -99,6 +99,7 @@ const Spells = ({ character, logPush }: Props) => {
               {prepared.map((spell, index) => {
                 return (
                   <PreparedSpellView
+                    handleRemoveSpell={(index) => {}}
                     key={index}
                     index={index}
                     showEditor={false}
