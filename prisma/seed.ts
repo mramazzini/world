@@ -139,7 +139,7 @@ const seedarr: {
     index: "019",
     callback: createBlogPosts,
     description: "Creating blogpost from the blogpost seed.",
-    enabled: true,
+    // enabled: true,
   },
 ];
 
