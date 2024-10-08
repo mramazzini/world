@@ -14,7 +14,7 @@ const CharacterStatsTab = ({ character }: Props) => {
     character.state && (
       <div>
         <h2>Character Stats</h2>
-        <p>View your character's stats</p>
+        <p>View your character&apos;s stats</p>
         <div className="grid grid-cols-1 gap-4 my-4">
           <section className="bg-base-200 rounded-xl p-4 flex flex-col gap-4">
             <h3>Character Info</h3>
@@ -139,7 +139,7 @@ const CharacterStatsTab = ({ character }: Props) => {
                 <tr>
                   <td>Name</td>
                   <td>{character.name}</td>
-                  <td>Your character's name</td>
+                  <td>Your character&apos;s name</td>
                 </tr>
                 <tr>
                   <td>Level</td>
@@ -162,7 +162,7 @@ const CharacterStatsTab = ({ character }: Props) => {
                   <td>
                     {character.alignment.replaceAll("_", " ").toCapitalCase()}
                   </td>
-                  <td>Your character's moral compass.</td>
+                  <td>Your character&apos;s moral compass.</td>
                 </tr>
                 <tr>
                   <td>Creature Type</td>
