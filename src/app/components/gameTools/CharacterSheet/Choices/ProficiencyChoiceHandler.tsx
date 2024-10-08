@@ -9,7 +9,7 @@ import {
   WeaponID,
 } from "@/lib/utils/types/types";
 import P from "@/app/components/Utility/FormatAndSanitize";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Ability, ArmorType, Language, Skill } from "@prisma/client";
 import ArmorChoice from "./ArmorChoice";
 import SkillChoice from "./SkillChoice";
@@ -102,6 +102,7 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
         return "asd";
     }
   };
+
   return (
     <>
       <dialog id={id} className="modal ">

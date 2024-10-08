@@ -41,30 +41,37 @@ const SidebarMetaSelector = ({
             </thead>
             <tbody>
               {!loading &&
-                metadata.map((meta) => (
-                  <tr
-                    key={meta.id}
-                    onClick={() => setSelected(meta)}
-                    className="hover cursor-pointer"
-                  >
-                    <td onClick={() => setSelected(meta)} className="font-bold">
-                      {model === "class"
-                        ? meta.name.toCapitalCase()
-                        : meta.name}
-                    </td>
-                    <td className="w-[60%]">{meta.flavorText}</td>
-                    <td className="w-[25%]">
-                      <Link
-                        className="btn btn-accent  btn-xs "
-                        href={`/${model}/${meta.name.replaceAll(" ", "-")}`}
-                        target="_blank"
-                        onClick={(e) => e.stopPropagation()}
+                metadata
+                  .sort((a, b) =>
+                    a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+                  )
+                  .map((meta) => (
+                    <tr
+                      key={meta.id}
+                      onClick={() => setSelected(meta)}
+                      className="hover cursor-pointer"
+                    >
+                      <td
+                        onClick={() => setSelected(meta)}
+                        className="font-bold"
                       >
-                        Read More -&gt;
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
+                        {model === "class"
+                          ? meta.name.toCapitalCase()
+                          : meta.name}
+                      </td>
+                      <td className="w-[60%]">{meta.flavorText}</td>
+                      <td className="w-[25%]">
+                        <Link
+                          className="btn btn-accent  btn-xs "
+                          href={`/${model}/${meta.name.replaceAll(" ", "-")}`}
+                          target="_blank"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Read More -&gt;
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
             </tbody>
           </table>
           {loading && <Loading />}

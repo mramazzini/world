@@ -37,6 +37,10 @@ import SpellcastingStats from "./SpellcastingStats";
 import SavingThrowsRoller from "./SavingThrowsRoller";
 import IntiativeRoller from "./InitiativeRoller";
 import CharacterSheetFeatureDisplay from "./CharacterSheetFeatureDisplay";
+import {
+  saveCharacterToDB,
+  saveImageToCharacter,
+} from "@/app/components/Utility/saveCharacterToDB";
 interface Props {
   character: CharacterInfo;
   setCharacter: (character: CharacterInfo) => void;
@@ -44,11 +48,11 @@ interface Props {
 }
 
 const MainSheet = ({ character, setCharacter, regenerateCharacter }: Props) => {
-  useEffect(() => {
-    if (character) {
-      console.log(character);
-    }
-  }, [character]);
+  // useEffect(() => {
+  //   if (character) {
+  //     console.log(character);
+  //   }
+  // }, [character]);
 
   const { log, logPush } = useLog();
 
@@ -87,7 +91,17 @@ const MainSheet = ({ character, setCharacter, regenerateCharacter }: Props) => {
     character.Classes && (
       <div className="xl:grid flex gap-4 flex-col md:grid-flow-row grid-cols-1 md:grid-cols-12  ">
         <section className="flex flex-row bg-base-200 rounded-xl p-4 row-span-1 2xl:row-span-2 md:col-span-4 items-center ">
-          <CharacterIntro character={character} calcLevel={calcLevel} />
+          <CharacterIntro
+            character={character}
+            calcLevel={calcLevel}
+            setImage={(image: string) => {
+              setCharacter({
+                ...character,
+                imageURL: image,
+              });
+              saveImageToCharacter(character.id, image);
+            }}
+          />
         </section>
         <section className="flex flex-row bg-base-200 rounded-xl p-4 md:col-span-5 row-span-2">
           <AbilityScoreRoller character={character} handleRoll={handleRoll} />
@@ -147,12 +161,14 @@ const MainSheet = ({ character, setCharacter, regenerateCharacter }: Props) => {
         <section className="bg-base-200 rounded-xl p-4 col-span-4 2xl:col-span-2 row-span-1 ">
           <IntiativeRoller character={character} handleRoll={handleRoll} />
         </section>
+        {/* Level up */}
         <section className="flex flex-row bg-base-200 rounded-xl p-4 col-span-4 2xl:col-span-2 items-center justify-center ">
           <LevelUp
             levelUpCharacter={levelUpCharacter}
             hasPendingChoices={character.state.pendingChoices.length > 0}
           />
         </section>
+
         {/* Log */}
         <section className="bg-base-200 rounded-xl p-4 col-span-6 2xl:col-span-5 row-span-2">
           <RenderLog log={log} pushLog={logPush} />

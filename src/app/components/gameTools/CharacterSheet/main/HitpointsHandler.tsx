@@ -99,7 +99,7 @@ const HitPointsHandler = ({ character, setCharacter }: Props) => {
             {`Your hitpoints are defined by the following:`}
           </Tooltip>
           <div className="flex flex-col w-full">
-            <div className="rounded-t-xl px-2 pt-2 font-bold text-center border-primary text-xs border-t border-x w-48">
+            <div className="rounded-t-xl px-2 pt-2 font-bold text-center border-primary text-xs border-t border-x w-full">
               Hit Points
             </div>
             <div className="divider px-2 m-0 border-x border-primary"></div>

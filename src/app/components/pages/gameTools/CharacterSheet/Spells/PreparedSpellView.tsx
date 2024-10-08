@@ -79,6 +79,7 @@ const SpellRollMaker = ({
 };
 
 const PreparedSpellView = ({
+  handleRemoveSpell,
   spellInput,
   spellSlotsAvailable,
   setAvailableSlots,
@@ -87,6 +88,7 @@ const PreparedSpellView = ({
   showEditor,
   logPush,
 }: {
+  handleRemoveSpell: (index: number) => void;
   spellInput: PrismaJson.SheetSpell;
   updateSpell: (spell: PrismaJson.SheetSpell) => void;
   spellSlotsAvailable?: PrismaJson.SpellSlots;
@@ -200,18 +202,26 @@ const PreparedSpellView = ({
           </div>
         </div>
         {showEditor && (
-          <button
-            onClick={() => {
-              setSpell(spellInput);
-              const modal = document.getElementById(
-                `spell-editor-modal-${index}`
-              ) as HTMLDialogElement;
-              modal.showModal();
-            }}
-            className="btn btn-warning join-item h-full"
-          >
-            Edit
-          </button>
+          <>
+            <button
+              onClick={() => {
+                setSpell(spellInput);
+                const modal = document.getElementById(
+                  `spell-editor-modal-${index}`
+                ) as HTMLDialogElement;
+                modal.showModal();
+              }}
+              className="btn btn-warning join-item h-full"
+            >
+              Edit
+            </button>
+            <button
+              className="btn btn-error join-item h-full"
+              onClick={() => handleRemoveSpell(index)}
+            >
+              Remove
+            </button>
+          </>
         )}{" "}
         {logPush &&
           (spellInput.prepared ? (

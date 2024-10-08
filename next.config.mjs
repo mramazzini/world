@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "c.tenor.com",
+        hostname: "*",
         port: "",
         pathname: "/**",
       },

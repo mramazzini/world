@@ -16,7 +16,15 @@ import SpellSheet from "./Spells/SpellSheet";
 import Notes from "./Notes/Notes";
 import Traits from "./Traits/Traits";
 import { applyPendingModels } from "../../Utility/characterStateFunctions/update/applyPendingModels";
-type Tab = "sheet" | "inventory" | "spells" | "notes" | "choices" | "traits";
+import CharacterStatsTab from "./Stats/CharacterStatsTab";
+type Tab =
+  | "sheet"
+  | "inventory"
+  | "spells"
+  | "notes"
+  | "choices"
+  | "traits"
+  | "stats";
 
 interface Props {
   characterData: CharacterInfo;
@@ -154,6 +162,22 @@ const CharacterSheet = ({ characterData }: Props) => {
                 setState={setState}
                 background={character.Background}
               />
+            </div>
+            <input
+              type="radio"
+              name="charcter_tabs"
+              role="tab"
+              className={`tab tab-base-300 ${
+                activeTab === "stats" ? "tab-active" : ""
+              }`}
+              aria-label="Stats"
+              onClick={() => setActiveTab("stats")}
+            />
+            <div
+              role="tabpanel"
+              className="bg-base-300 p-4 rounded-xl tab-content "
+            >
+              <CharacterStatsTab character={character} />
             </div>
 
             <input

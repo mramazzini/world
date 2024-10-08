@@ -49,6 +49,7 @@ const PrepareSpellSection = ({ character, setState }: Props) => {
               character.state &&
               character.state.spellSlots && (
                 <PreparedSpellView
+                  handleRemoveSpell={handleRemoveSpell}
                   spellSlotsAvailable={character.state.spellSlots}
                   setAvailableSlots={(newSlots) => {
                     if (!character.state) return;

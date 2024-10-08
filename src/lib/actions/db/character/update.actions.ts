@@ -15,3 +15,14 @@ export const saveState = async (
   if (!res) return null;
   return Date.now();
 };
+
+export const saveImage = async (id: number, image: string) => {
+  const db = new PrismaClient();
+  const res = await db.character.update({
+    where: { id },
+    data: { imageURL: image },
+  });
+  await db.$disconnect();
+  if (!res) return null;
+  return Date.now();
+};
