@@ -27,7 +27,7 @@ export const generateQueryFields = ({
         continue;
       }
       // @ts-ignore
-      const d = parseInt(data);
+      const d = parseFloat(data);
       console.log(d, typeof d == "number" ? "is number" : "is not number");
       if (!Number.isNaN(d)) {
         if (d === -1) continue;

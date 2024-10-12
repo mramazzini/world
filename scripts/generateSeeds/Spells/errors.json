@@ -1,11 +1,4 @@
 [
-  {
-    "link": "https://dnd5e.wikidot.com/spell:tashas-caustic-brew",
-    "error": {}
-  },
-  { "link": "https://dnd5e.wikidot.com/spell:nathairs-mischief", "error": {} },
-  { "link": "https://dnd5e.wikidot.com/spell:pyrotechnics", "error": {} },
-  { "link": "https://dnd5e.wikidot.com/spell:spray-of-cards", "error": {} },
   { "link": "https://dnd5e.wikidot.com/spell:summon-beast", "error": {} },
   { "link": "https://dnd5e.wikidot.com/spell:warp-sense", "error": {} },
   { "link": "https://dnd5e.wikidot.com/spell:antagonize", "error": {} },

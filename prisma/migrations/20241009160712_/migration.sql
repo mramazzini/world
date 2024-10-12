@@ -1,0 +1,18 @@
+-- AlterTable
+ALTER TABLE "Creature" ADD COLUMN     "Acrobatics" INTEGER,
+ADD COLUMN     "AnimalHandling" INTEGER,
+ADD COLUMN     "Arcana" INTEGER,
+ADD COLUMN     "Athletics" INTEGER,
+ADD COLUMN     "Deception" INTEGER,
+ADD COLUMN     "History" INTEGER,
+ADD COLUMN     "Insight" INTEGER,
+ADD COLUMN     "Intimidation" INTEGER,
+ADD COLUMN     "Investigation" INTEGER,
+ADD COLUMN     "Medicine" INTEGER,
+ADD COLUMN     "Nature" INTEGER,
+ADD COLUMN     "Perception" INTEGER,
+ADD COLUMN     "Performance" INTEGER,
+ADD COLUMN     "Religion" INTEGER,
+ADD COLUMN     "SleightOfHand" INTEGER,
+ADD COLUMN     "Stealth" INTEGER,
+ADD COLUMN     "Survival" INTEGER;

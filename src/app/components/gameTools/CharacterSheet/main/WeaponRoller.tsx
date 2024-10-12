@@ -238,6 +238,7 @@ const WeaponRoller = ({
                   ammunition: null,
                   ammunitionId: null,
                   id: Math.floor(Math.random() * 100000),
+                  isRanged: false,
                   isSimple: true,
                 }}
                 flatDamage={weapon.flatDamage}

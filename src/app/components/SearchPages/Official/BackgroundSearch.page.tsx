@@ -53,6 +53,14 @@ const BackgroundSearchPage = ({ backgrounds }: Props) => {
           index: 3,
           priority: "md",
         },
+        {
+          headerWidth: 2,
+          header: "Last Updated",
+          dbHeader: "updatedAt",
+          modifiers: ["Date"],
+          index: 4,
+          priority: "md",
+        },
       ]}
       homebrew={false}
     />

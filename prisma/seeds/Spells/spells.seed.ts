@@ -1,4 +1,4 @@
-import { SpellLevel } from "@/lib/utils/types/types";
+import { SpellLevel, src } from "@/lib/utils/types/types";
 import { Prisma } from "@prisma/client";
 
 const SpellSeed: Prisma.SpellCreateManyInput[] = [
@@ -10706,6 +10706,99 @@ const SpellSeed: Prisma.SpellCreateManyInput[] = [
     ],
     upcastInfo: "",
   },
+  {
+    id: 490,
+    name: "Tasha's Caustic Brew",
+    description:
+      "A stream of acid emanates from you in a line 30 feet long and 5 feet wide in a direction you choose. Each creature in the line must succeed on a Dexterity saving throw or be covered in acid for the spell’s duration or until a creature uses its action to scrape or wash the acid off itself or another creature. A creature covered in the acid takes 2d4 acid damage at start of each of its turns.",
+    level: 1,
+    school: "EVOCATION",
+    castingTime: "1 action",
+    range: "Self",
+    verbal: true,
+    somatic: true,
+    material: true,
+    materialCost: "(a bit of rotten food)",
+    duration: "Concentration, up to 1 minute",
+    source: "Tasha's Cauldron of Everything",
+  },
+  {
+    id: 491,
+    name: "Nathair's Mischief",
+    description:
+      "You fill a 20-foot cube you can see within range with fey and draconic magic. Roll on the Mischievous Surge table to determine the magical effect produced, and roll again at the start of each of your turns until the spell ends. You can move the cube up to 10 feet before you roll.",
+    castingTime: "1 action",
+    range: "60 feet",
+    somatic: true,
+    material: true,
+    materialCost: "(a piece of crust from an apple pie)",
+    level: 2,
+    school: "ILLUSION",
+    verbal: false,
+    duration: "Concentration, up to 1 minute",
+    source: src.fizban,
+    extendedTable: [
+      {
+        "Mischievous Surge": {
+          headers: ["d4", "Effect"],
+          data: [
+            {
+              d4: "1",
+              Effect:
+                "The smell of apple pie fills the air, and each creature in the cube must succeed on a Wisdom saving throw or become charmed by you until the start of your next turn.",
+            },
+            {
+              d4: "2",
+              Effect:
+                "Bouquets of flowers appear all around, and each creature in the cube must succeed on a Dexterity saving throw or be blinded until the start of your next turn as the flowers spray water in their faces.",
+            },
+            {
+              d4: "3",
+              Effect:
+                "Each creature in the cube must succeed on a Wisdom saving throw or begin giggling until the start of your next turn. A giggling creature is incapacitated and uses all its movement to move in a random direction.",
+            },
+            {
+              d4: "4",
+              Effect:
+                "Drops of molasses appear and hover in the cube, turning it into difficult terrain until the start of your next turn.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 492,
+    name: "Pyrotechnics",
+    description:
+      "Choose an area of flame that you can see and that can fit within a 5-foot cube within range. You can extinguish the fire in that area, and you create either fireworks or smoke.\n\n**Fireworks.** The target explodes with a dazzling display of colors. Each creature within 10 feet of the target must succeed on a Constitution saving throw or become blinded until the end of your next turn.\n\n**Smoke.**Thick black smoke spreads out from the target in a 20-foot radius, moving around corners. The area of the smoke is heavily obscured. The smoke persists for 1 minute or until a strong wind disperses it.",
+    castingTime: "1 action",
+    range: "60 feet",
+    somatic: true,
+    verbal: true,
+    level: 2,
+    school: "TRANSMUTATION",
+    duration: "Instantaneous",
+    source: src.xanathar,
+  },
+  {
+    id: 493,
+    name: "Spray of Cards",
+    description:
+      "You spray a 15-foot cone of spectral cards. Each creature in that area must make a Dexterity saving throw. On a failed save, a creature takes 2d10 force damage and has the blinded condition until the end of its next turn. On a successful save, a creature takes half as much damage only.",
+    castingTime: "1 action",
+    range: "Self (15-foot cone)",
+    somatic: true,
+    verbal: true,
+    level: 2,
+    material: true,
+    materialCost: "(a deck of playing cards)",
+    school: "EVOCATION",
+    duration: "Instantaneous",
+    source: src.manyThings,
+    upcastInfo:
+      "When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d10 for each slot level above 2nd.",
+  },
 ];
 export const generateSpellLink = (spellId: number): string => {
   return `/spells/${SpellSeed.find(
@@ -10770,6 +10863,36 @@ const spellIds = {
   detectEvilAndGood: 67,
   protectionFromEvilAndGood: 104,
   augury: 130,
+  bless: 53,
+  identify: 95,
+  mageArmor: 101,
+  mirrorImage: 177,
+  counterspell: 219,
+  shockingGrasp: 36,
+  fly: 232,
+  lightningBolt: 244,
+  banishment: 278,
+  fireShield: 294,
+  stoneSkin: 316,
+  coneOfCold: 331,
+  scrying: 367,
+  wallOfForce: 376,
+  globeOfInvulnerability: 394,
+  teleport: 445,
+  mindBlank: 466,
+  timeStop: 486,
+  shieldOfFaith: 110,
+  holdPerson: 162,
+  spiritualWeapon: 197,
+  produceFlame: 29,
+  shillelagh: 35,
+  animalMessenger: 128,
+  barkskin: 131,
+  suggestion: 198,
+  greaterInvisibility: 300,
+  guidingBolt: 87,
+  lesserRestoration: 168,
+  spiritGuardians: 263,
 };
 const ritualIds = {
   alarm: 47,

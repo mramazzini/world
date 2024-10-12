@@ -15,10 +15,13 @@ import { itemToClass } from "./seeds/_seeders/012_ItemToClass.linker";
 import { createSubclass } from "./seeds/_seeders/013_createSubclass.seeder";
 import { createSpecies } from "./seeds/_seeders/014_createSpecies.seeder";
 import { createVariants } from "./seeds/_seeders/015_createVariant.seeder";
-import { createCharacter } from "./seeds/_seeders/017_createCharacter.seeder";
-import createMaxyUser from "./seeds/_seeders/018_createMaxyUser.seeder";
+import { createCharacter } from "./seeds/_seeders/020_createCharacter.seeder";
+import createMaxyUser from "./seeds/_seeders/022_createMaxyUser.seeder";
 import { createFeats } from "./seeds/_seeders/016_createFeats.seeder";
-import { createBlogPosts } from "./seeds/_seeders/019_createBlogPosts.seeder";
+import { createBlogPosts } from "./seeds/_seeders/021_createBlogPosts.seeder";
+import { createCreatures } from "./seeds/_seeders/017_createCreatures.seeder";
+import { linkCreatureToSpells } from "./seeds/_seeders/018_CreatureToSpell.linker";
+import { linkCreatureToItems } from "./seeds/_seeders/019_creatureToItem.linker";
 const db = new PrismaClient();
 
 const seedarr: {
@@ -31,7 +34,7 @@ const seedarr: {
     index: "001",
     callback: createSpells,
     description: "Creating spells from the spell seed.",
-    //enabled: true,
+    // enabled: true,
   },
   {
     index: "002",
@@ -67,13 +70,13 @@ const seedarr: {
     index: "007",
     callback: createWeapons,
     description: "Creating weapons from the weapons seed.",
-    //enabled: true,
+    enabled: true,
   },
   {
     index: "008",
     callback: createItems,
     description: "Creating items from the item seed.",
-    // enabled: true,
+    enabled: true,
   },
   {
     index: "009",
@@ -125,21 +128,40 @@ const seedarr: {
   },
   {
     index: "017",
+    callback: createCreatures,
+    description: "Creating creatures from the creature seed.",
+    enabled: true,
+  },
+  {
+    index: "018",
+    callback: linkCreatureToSpells,
+    description: "Linking creatures to spells.",
+    enabled: true,
+  },
+  {
+    index: "019",
+    callback: linkCreatureToItems,
+    description: "Linking creatures to items.",
+    enabled: true,
+  },
+
+  {
+    index: "020",
     callback: createCharacter,
     description: "Creating characters from the character seed.",
     // enabled: true,
   },
   {
-    index: "018",
-    callback: createMaxyUser,
-    description: "Creating maxy user from the maxy user seed.",
-    //enabled: true,
-  },
-  {
-    index: "019",
+    index: "021",
     callback: createBlogPosts,
     description: "Creating blogpost from the blogpost seed.",
     // enabled: true,
+  },
+  {
+    index: "022",
+    callback: createMaxyUser,
+    description: "Creating maxy user from the maxy user seed.",
+    //enabled: true,
   },
 ];
 

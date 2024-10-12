@@ -44,6 +44,10 @@ const links = [
     href: "/subspecies",
   },
   {
+    name: "Creatures",
+    href: "/creature",
+  },
+  {
     name: "Items",
     href: "/item",
   },

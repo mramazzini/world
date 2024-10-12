@@ -1322,6 +1322,20 @@ const SpellListToSpellArr = [
   { spellId: 488, spellListId: 8 },
   { spellId: 489, spellListId: 6 },
   { spellId: 489, spellListId: 8 },
+  { spellId: 490, spellListId: spellListIds.artificer },
+  { spellId: 490, spellListId: spellListIds.wizard },
+  { spellId: 490, spellListId: spellListIds.sorcerer },
+  { spellId: 491, spellListId: spellListIds.bard },
+  { spellId: 491, spellListId: spellListIds.wizard },
+  { spellId: 491, spellListId: spellListIds.sorcerer },
+  { spellId: 492, spellListId: spellListIds.bard },
+  { spellId: 492, spellListId: spellListIds.wizard },
+  { spellId: 492, spellListId: spellListIds.sorcerer },
+  { spellId: 492, spellListId: spellListIds.artificer },
+  { spellId: 493, spellListId: spellListIds.bard },
+  { spellId: 493, spellListId: spellListIds.wizard },
+  { spellId: 493, spellListId: spellListIds.sorcerer },
+  { spellId: 493, spellListId: spellListIds.warlock },
 ];
 
 export default SpellListToSpellArr;

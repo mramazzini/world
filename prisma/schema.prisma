@@ -101,6 +101,7 @@ enum Language {
   ABYSSAL
   CELESTIAL
   DRACONIC
+  WORG
   DEEP_SPEECH
   INFERNAL
   PRIMORDIAL
@@ -193,6 +194,7 @@ model User {
   Character      Character[]
   Feat           Feat[]
   Comment        Comment[]
+  Creature       Creature[]
 }
 
 model Character {
@@ -334,10 +336,12 @@ model Spell {
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 
-  User       User?       @relation(fields: [userId], references: [id])
-  userId     Int?
-  SpellLists SpellList[]
-  Item       Item[]      @relation("SpellScroll")
+  User                 User?       @relation(fields: [userId], references: [id])
+  userId               Int?
+  SpellLists           SpellList[]
+  Item                 Item[]      @relation("SpellScroll")
+  PreparedByCreature   Creature[]  @relation("CreaturePrepares")
+  FreelyCastByCreature Creature[]  @relation("CreatureFreelyCasts")
 }
 
 model SpellList {
@@ -686,6 +690,10 @@ model Item {
   AmmunitionFor Weapon[] @relation("WeaponAmmunition")
   Armor         Armor?   @relation("ItemArmor", fields: [armorId], references: [id])
   armorId       Int?
+
+  CreatureWielding Creature[] @relation("CreatureWields")
+  CreatureArmor    Creature[] @relation("CreatureArmor")
+  CreatureShield   Creature[] @relation("CreatureShield")
 }
 
 enum Rarity {
@@ -703,6 +711,7 @@ model Weapon {
 
   // if the weapon is simple or martial
   isSimple Boolean
+  isRanged Boolean?
 
   /// [Damage]
   damage     Json[] // AND array (ex 1d6 piercing and 2d6 fire)
@@ -772,6 +781,7 @@ enum AssociatedModel {
   BACKGROUND
   SPELL
   SPELL_LIST
+  CREATURE
 }
 
 model Comment {
@@ -792,6 +802,95 @@ model Comment {
   model       AssociatedModel
 
   modelId Int
+}
+
+enum ArmorClassProtocol {
+  REGULAR
+  NATURAL_ARMOR
+}
+
+model Creature {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  flavorText  String @db.VarChar(200)
+  STR         Int
+  DEX         Int
+  CON         Int
+  INT         Int
+  WIS         Int
+  CHA         Int
+
+  languageDescription String?
+
+  armorClassDescription String?
+  armorClassProtocol    ArmorClassProtocol @default(REGULAR)
+  shield                Boolean            @default(false)
+  naturalArmorBonus     Int?
+
+  hitDiceAmount Int
+
+  creatureType CreatureType
+  size         Size
+  alignment    Alignment?
+
+  spellcastingAbility Ability?
+  spellSaveDC         Int?
+  spellAttackBonus    Int?
+  casterLevel         Int?
+
+  saveProficiencies Ability[]
+  saveExpertise     Ability[]
+
+  skillProficiencies Skill[]
+  skillExpertise     Skill[]
+
+  wieldingItems Item[] @relation("CreatureWields")
+
+  armorEquipped   Item? @relation("CreatureArmor", fields: [armorEquippedId], references: [id])
+  armorEquippedId Int?
+
+  shieldEquipped   Item? @relation("CreatureShield", fields: [shieldEquippedId], references: [id])
+  shieldEquippedId Int?
+
+  spellsPrepared Spell[] @relation("CreaturePrepares")
+  freeSpells     Spell[] @relation("CreatureFreelyCasts")
+
+  speed                     Int
+  speedDescription          String?
+  climbingSpeed             Int?
+  climbingSpeedDescription  String?
+  flyingSpeed               Int?
+  flyingSpeedDescription    String?
+  swimmingSpeed             Int?
+  swimmingSpeedDescription  String?
+  burrowingSpeed            Int?
+  burrowingSpeedDescription String?
+
+  darkvision            Int?
+  darkvisionDescription String?
+
+  blindsight            Int?
+  blindsightDescription String?
+
+  challengeRating Float
+
+  damageImmunities      DamageTypes[]
+  damageResistances     DamageTypes[]
+  damageVulnerabilities DamageTypes[]
+
+  conditionImmunities String[]
+
+  /// [Feature]
+  features Json[]
+
+  /// [CreatureAction]
+  actions Json[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
 }
 
 //Prisma wont create enum types if they are not in a model, so this is a dummy model

@@ -19,6 +19,7 @@ import {
   ItemInfo,
   SpellListInfo,
   FeatInfo,
+  CreatureInfo,
 } from "@/lib/utils/types/types";
 import { Background, Spell } from "@prisma/client";
 import "@/lib/string.extensions";
@@ -36,6 +37,7 @@ type DataType =
   | ItemInfo
   | FeatInfo
   | SpellListInfo
+  | CreatureInfo
   | null;
 type Priority = "all" | "sm" | "md" | "lg" | "xl";
 type Modifier =

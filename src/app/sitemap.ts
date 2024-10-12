@@ -17,6 +17,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (process.env.DOMAIN_NAME === undefined) {
     throw new Error("DOMAIN_NAME is not defined in env");
   }
+  // /login
+  siteMap.push({
+    url: `${process.env.DOMAIN_NAME}/login`,
+    lastModified: new Date(),
+    changeFrequency: "never",
+    priority: 0.1,
+  });
+
+  // /register
+  siteMap.push({
+    url: `${process.env.DOMAIN_NAME}/register`,
+    lastModified: new Date(),
+    changeFrequency: "never",
+    priority: 0.1,
+  });
 
   const classes = await getClasses(false);
   siteMap.push({

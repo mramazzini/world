@@ -25,7 +25,7 @@ const SpellDisplay = ({ spell }: Props) => {
     return components;
   };
   return (
-    <div className="text-xl">
+    <div className="text-xl bg-base-300 rounded-xl p-4">
       <div className="flex flex-row justify-between items-center">
         <h1>{spell.name}</h1>
         <Link className="btn btn-ghost border border-gray-500" href={`/spells`}>
@@ -72,6 +72,7 @@ const SpellDisplay = ({ spell }: Props) => {
                 className="text-accent "
                 href={`/spell-list/${spellList.name?.replaceAll(" ", "-")}`}
                 key={index}
+                target="_blank"
               >
                 {spellList.name && (
                   <Tooltip element={spellList.name} layer={0} format={false}>
@@ -132,6 +133,7 @@ const SpellDisplay = ({ spell }: Props) => {
           </p>
         </>
       )}
+      <div className="divider"></div>
     </div>
   );
 };

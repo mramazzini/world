@@ -289,4 +289,5 @@ export const itemIds = {
   packSaddle: 288,
   rowboat: 289,
   cloak: 290,
+  gladiatorSpear: 291,
 };

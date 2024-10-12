@@ -47,6 +47,10 @@ export const searchEverything = async (
   const backgrounds = await db.background.findMany({});
   const spellLists = await db.spellList.findMany({});
 
+  const feats = await db.feat.findMany({});
+
+  const creatures = await db.creature.findMany({});
+
   const combined: CombinedData[] = [
     ...spells.map((spell) => ({
       name: spell.name,
@@ -116,6 +120,22 @@ export const searchEverything = async (
       type: "Spell-List",
       other: "",
       lastUpdated: spellList.updatedAt,
+    })),
+    ...feats.map((feat) => ({
+      name: feat.name,
+      description: feat.flavorText,
+      flavorText: feat.flavorText,
+      type: "Feats",
+      other: feat.prereqDescription,
+      lastUpdated: feat.updatedAt,
+    })),
+    ...creatures.map((creature) => ({
+      name: creature.name,
+      description: creature.description,
+      flavorText: creature.description,
+      type: "Creature",
+      other: creature.creatureType,
+      lastUpdated: creature.updatedAt,
     })),
   ];
   const fuse = new Fuse(combined, {

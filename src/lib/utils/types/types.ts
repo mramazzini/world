@@ -21,6 +21,7 @@ import {
   Weapon,
   SubSpecies,
   Comment,
+  Creature,
 } from "@prisma/client";
 
 export enum Pages {
@@ -63,6 +64,17 @@ export interface CharacterInfo extends Character {
   SubSpecies: SubSpecies | null;
 
   // Inventory: any;
+}
+
+export interface CreatureInfo extends Creature {
+  User: {
+    username: string | null;
+  } | null;
+  wieldingItems: ItemInfo[];
+  armorEquipped: ItemInfo | null;
+  shieldEquipped: ItemInfo | null;
+  spellsPrepared: Spell[];
+  freeSpells: Spell[];
 }
 
 export interface BackgroundInfo extends Background {
@@ -213,6 +225,17 @@ export type SpellID = number;
 
 declare global {
   namespace PrismaJson {
+    interface RollRequest {
+      name: string;
+      formula: string;
+    }
+
+    interface CreatureAction {
+      name: string;
+      description: string;
+      actionType: "action" | "bonus action" | "reaction" | "legendary action";
+      rolls?: RollRequest[];
+    }
     // you can use classes, interfaces, types, etc.
     interface Table {
       [key: string]: TableData;

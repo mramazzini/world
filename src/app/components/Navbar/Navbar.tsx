@@ -61,6 +61,10 @@ const Navbar = () => {
       href: "/subspecies",
     },
     {
+      name: "Creatures",
+      href: "/creature",
+    },
+    {
       name: "Items",
       href: "/item",
     },

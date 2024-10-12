@@ -33,12 +33,6 @@ const Dashboard = () => {
   return (
     <>
       <div className="flex flex-col p-4 md:p-8">
-        {characters.length === 0 && !loadingCharacters && (
-          <div className="">
-            You do not have any characters. DM Maxy on the Discord server to add
-            your character to your dashboard.
-          </div>
-        )}
         <div className="flex flex-row items-center justify-center w-full gap-4">
           <section className="flex flex-col items-center justify-start bg-base-300 rounded-xl p-4 w-1/2 gap-4 h-[80vh]  ">
             <div className="flex grow bg-base-200 w-full p-4 flex flex-col xl:flex-row items-center h-auto justify-between">

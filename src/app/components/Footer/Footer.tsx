@@ -58,6 +58,10 @@ const wikiLinks = [
     url: "/subspecies",
   },
   {
+    name: "Creatures",
+    url: "/creature",
+  },
+  {
     name: "Items",
     url: "/item",
   },
