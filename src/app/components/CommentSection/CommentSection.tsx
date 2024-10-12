@@ -78,7 +78,11 @@ const CommentSection = ({ id, model }: Props) => {
                   onChange={(e) => setText(e.target.value)}
                 />
                 <div className="divider">
-                  <button type="submit" className="btn btn-accent w-48">
+                  <button
+                    type="submit"
+                    className="btn btn-accent w-48"
+                    disabled={text.length === 0}
+                  >
                     Submit
                   </button>
                 </div>
