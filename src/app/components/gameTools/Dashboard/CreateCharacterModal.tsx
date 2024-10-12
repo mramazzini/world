@@ -14,6 +14,7 @@ import {
 import { getBackgroundsMetadata } from "@/lib/actions/db/background/read.actions";
 import { createCharacter } from "@/lib/actions/db/character/create.actions";
 import { useRouter } from "next/navigation";
+import { getUserId } from "@/lib/utils/auth";
 
 const CreateCharacterModal = () => {
   const router = useRouter();
@@ -70,7 +71,6 @@ const CreateCharacterModal = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("asd", newChar);
     if (
       !newChar.class ||
       !newChar.species ||
@@ -84,7 +84,7 @@ const CreateCharacterModal = () => {
       classId: newChar.class?.id,
       speciesId: newChar.species?.id,
       backgroundId: newChar.background?.id,
-      userId: 1,
+      userId: await getUserId(),
       variantId: newChar.variant?.id,
     });
 
