@@ -19,6 +19,7 @@ export const Query: Command = {
     },
   ],
   run: async (client: Client, interaction: CommandInteraction) => {
+    console.log("Query command received");
     const query = interaction.options.get("query")?.value as string;
     const params: QueryParams = {
       query,
@@ -30,6 +31,7 @@ export const Query: Command = {
     const result = await searchEverything(params);
 
     if (!result || result.length == 0) {
+      console.error("No results found");
       await interaction.followUp({
         ephemeral: true,
         content: "> **No results found**",
@@ -49,7 +51,7 @@ export const Query: Command = {
       "-"
     )}>
     `;
-
+    console.log("Sending response");
     await interaction.followUp({
       ephemeral: true,
       content,
