@@ -64,7 +64,7 @@ const SpellRollMaker = ({
           defaultValue={DamageTypes.NONE}
         >
           {Object.values(DamageTypes)
-            .filter((f) => f !== DamageTypes.NULL)
+            .filter((f) => f !== DamageTypes.NONE)
             .map((type) => (
               <option key={type} value={type}>
                 {type.toCapitalCase()}

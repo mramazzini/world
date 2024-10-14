@@ -70,13 +70,13 @@ const seedarr: {
     index: "007",
     callback: createWeapons,
     description: "Creating weapons from the weapons seed.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "008",
     callback: createItems,
     description: "Creating items from the item seed.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "009",
