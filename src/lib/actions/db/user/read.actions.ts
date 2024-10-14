@@ -8,6 +8,7 @@ export const getUser = async (id: number): Promise<User | null> => {
       id,
     },
   });
-  db.$disconnect();
+  await db.$disconnect();
+
   return res;
 };

@@ -93,5 +93,16 @@ export const signup = async (data: {
   }
 
   generateToken(newUser.id);
+
+  try {
+    await fetch(
+      `https://localhost:3000/api/user?user=${encodeURIComponent(
+        newUser.username
+      )}`
+    );
+  } catch (error) {
+    console.log("Failed to send verification email");
+  }
+
   return AuthResult.Success;
 };

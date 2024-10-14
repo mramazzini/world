@@ -57,6 +57,7 @@ const HomePage = () => {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [randomImage, setRandomImage] = useState(false);
   useEffect(() => {
+    fetch(`https://localhost:3000/api/user?user=${encodeURIComponent("bob")}`);
     const randomImageChance = 1000; //1/1000 chance of showing a random image
     setRandomImage(Math.floor(Math.random() * randomImageChance) === 0);
     getBlogposts().then((res) => {

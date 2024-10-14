@@ -1,11 +1,13 @@
 "use server";
 import { getUserId } from "@/lib/utils/auth";
 import { AssociatedModel, CommentType, PrismaClient } from "@prisma/client";
+import { getUser } from "../user/read.actions";
 
 export const createComment = async (
   model: AssociatedModel,
   id: number,
-  text: string
+  text: string,
+  location: string
 ) => {
   const db = new PrismaClient();
   const userId = await getUserId();
@@ -27,6 +29,12 @@ export const createComment = async (
     console.error("Error creating comment", error);
   } finally {
     await db.$disconnect();
+    const user = await getUser(userId);
+    if (!user) {
+      console.error("Error getting user");
+      return;
+    }
+    // sendComment(text, location, user.username);
   }
 };
 

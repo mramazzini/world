@@ -65,7 +65,7 @@ const CommentSection = ({ id, model }: Props) => {
 
                   // Submit comment
                   setLoading(true);
-                  await createComment(model, id, text);
+                  await createComment(model, id, text, pathname);
                   await getComments();
                   setText("");
                   setLoading(false);
