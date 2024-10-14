@@ -3,7 +3,7 @@ import { Client, ClientOptions } from "discord.js";
 import ready from "./listeners/ready";
 import interactionCreate from "./listeners/interactionCreate";
 
-(async () => {
+export const initializeBot = async () => {
   const token = process.env.DISCORD_BOT_TOKEN;
 
   console.log("Bot is starting...");
@@ -19,4 +19,4 @@ import interactionCreate from "./listeners/interactionCreate";
   await interactionCreate(client);
 
   console.log("Bot is started");
-})();
+};
