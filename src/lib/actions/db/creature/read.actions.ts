@@ -80,6 +80,11 @@ export const getCreatures = async (): Promise<CreatureInfo[]> => {
       },
       spellsPrepared: true,
       freeSpells: true,
+      CreatureLimitedSpells: {
+        include: {
+          Spell: true,
+        },
+      },
       shieldEquipped: {
         include: {
           Weapon: {
@@ -175,6 +180,11 @@ export const getCreature = async (
         },
         spellsPrepared: true,
         freeSpells: true,
+        CreatureLimitedSpells: {
+          include: {
+            Spell: true,
+          },
+        },
         shieldEquipped: {
           include: {
             Weapon: {
@@ -263,6 +273,11 @@ export const getCreature = async (
           },
         },
         spellsPrepared: true,
+        CreatureLimitedSpells: {
+          include: {
+            Spell: true,
+          },
+        },
         freeSpells: true,
         shieldEquipped: {
           include: {
@@ -362,6 +377,11 @@ export const getCreatureChunk = async (
         },
         spellsPrepared: true,
         freeSpells: true,
+        CreatureLimitedSpells: {
+          include: {
+            Spell: true,
+          },
+        },
         shieldEquipped: {
           include: {
             Weapon: {
@@ -454,6 +474,11 @@ export const getCreatureChunk = async (
       },
       spellsPrepared: true,
       freeSpells: true,
+      CreatureLimitedSpells: {
+        include: {
+          Spell: true,
+        },
+      },
       shieldEquipped: {
         include: {
           Weapon: {

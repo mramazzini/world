@@ -27,6 +27,33 @@ export const linkCreatureToSpells = async (db: PrismaClient) => {
         });
         continue;
       }
+      if (CreatureToSpell.limited) {
+        cinfo(
+          "Creature with id: ",
+          CreatureToSpell.creatureId,
+          " has a limited spell with id: ",
+          CreatureToSpell.spellId
+        );
+        await db.creatureLimitedSpell.upsert({
+          where: {
+            creatureId_spellId: {
+              creatureId: CreatureToSpell.creatureId,
+              spellId: CreatureToSpell.spellId,
+            },
+          },
+          create: {
+            creatureId: CreatureToSpell.creatureId,
+            spellId: CreatureToSpell.spellId,
+            amount: CreatureToSpell.limited.amount,
+            time: CreatureToSpell.limited.time,
+          },
+          update: {
+            amount: CreatureToSpell.limited.amount,
+            time: CreatureToSpell.limited.time,
+          },
+        });
+        continue;
+      }
       cinfo(
         "Creature with id: ",
         CreatureToSpell.creatureId,

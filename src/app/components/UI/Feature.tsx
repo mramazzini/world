@@ -1,6 +1,7 @@
 import { numberColor, numberColorBefore } from "../Utility/colorBefore";
 import P from "../Utility/FormatAndSanitize";
 import JsonTable from "../Utility/JsonTable";
+import RollRequest from "./RollRequest";
 
 interface Props {
   feature: PrismaJson.Feature;
@@ -60,6 +61,13 @@ const Feature = ({ feature }: Props) => {
             <JsonTable json={feature.extendedTable} />
           </div>
           <div className="divider m-0"></div>
+        </>
+      )}
+      {feature.rolls && (
+        <>
+          {feature.rolls.map((roll, index) => (
+            <RollRequest key={index} name={roll.name} formula={roll.formula} />
+          ))}
         </>
       )}
     </div>

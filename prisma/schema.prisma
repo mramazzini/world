@@ -123,6 +123,25 @@ enum Language {
   SIREN
 }
 
+enum Condition {
+  BLINDED
+  CHARMED
+  DEAFENED
+  FATIGUED
+  FRIGHTENED
+  GRAPPLED
+  INCAPACITATED
+  INVISIBLE
+  PARALYZED
+  PETRIFIED
+  POISONED
+  PRONE
+  RESTRAINED
+  STUNNED
+  UNCONSCIOUS
+  EXHAUSTION
+}
+
 enum DamageTypes {
   ACID
   BLUDGEONING
@@ -137,8 +156,10 @@ enum DamageTypes {
   RADIANT
   SLASHING
   THUNDER
+  MAGICAL_BLUDGEONING
+  MAGICAL_PIERCING
+  MAGICAL_SLASHING
   NONE
-  NULL
   OTHER
 }
 
@@ -336,12 +357,13 @@ model Spell {
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 
-  User                 User?       @relation(fields: [userId], references: [id])
+  User                 User?                  @relation(fields: [userId], references: [id])
   userId               Int?
   SpellLists           SpellList[]
-  Item                 Item[]      @relation("SpellScroll")
-  PreparedByCreature   Creature[]  @relation("CreaturePrepares")
-  FreelyCastByCreature Creature[]  @relation("CreatureFreelyCasts")
+  Item                 Item[]                 @relation("SpellScroll")
+  PreparedByCreature   Creature[]             @relation("CreaturePrepares")
+  FreelyCastByCreature Creature[]             @relation("CreatureFreelyCasts")
+  CreatureLimitedSpell CreatureLimitedSpell[]
 }
 
 model SpellList {
@@ -830,17 +852,15 @@ model Creature {
 
   hitDiceAmount Int
 
-  creatureType CreatureType
-  size         Size
-  alignment    Alignment?
+  creatureType         CreatureType
+  size                 Size
+  alignmentDescription String?
+  alignmentOptions     Alignment[]
 
   spellcastingAbility Ability?
-  spellSaveDC         Int?
-  spellAttackBonus    Int?
   casterLevel         Int?
 
   saveProficiencies Ability[]
-  saveExpertise     Ability[]
 
   skillProficiencies Skill[]
   skillExpertise     Skill[]
@@ -873,6 +893,12 @@ model Creature {
   blindsight            Int?
   blindsightDescription String?
 
+  trueSight            Int?
+  trueSightDescription String?
+
+  tremorsense            Int?
+  tremorsenseDescription String?
+
   challengeRating Float
 
   damageImmunities      DamageTypes[]
@@ -881,11 +907,17 @@ model Creature {
 
   conditionImmunities String[]
 
+  legendaryActionAmount Int?
+  /// [LegendaryAction]
+  legendaryActions      Json[]
+
   /// [Feature]
   features Json[]
 
   /// [CreatureAction]
   actions Json[]
+
+  CreatureLimitedSpells CreatureLimitedSpell[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -893,20 +925,48 @@ model Creature {
   userId    Int?
 }
 
+enum Time {
+  ACTION
+  BONUS_ACTION
+  REACTION
+  ROUND
+  MINUTE
+  HOUR
+  DAY
+  WEEK
+  MONTH
+  YEAR
+}
+
+model CreatureLimitedSpell {
+  creatureId Int
+  spellId    Int
+  amount     Int
+  time       Time
+  Creature   Creature @relation(fields: [creatureId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  Spell      Spell    @relation(fields: [spellId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
+  @@id([creatureId, spellId])
+}
+
 //Prisma wont create enum types if they are not in a model, so this is a dummy model
 model Enums {
-  id           Int          @id @default(autoincrement())
-  skill        Skill
-  ability      Ability
-  armorType    ArmorType
-  size         Size
-  spellSchool  SpellSchool
-  currency     Currency
-  damageTypes  DamageTypes
-  creatureType CreatureType
-  alignment    Alignment
-  language     Language
-  rarity       Rarity
-  itemTypes    ItemTypes
-  unit         Unit
+  id                 Int                @id @default(autoincrement())
+  skill              Skill
+  ability            Ability
+  armorType          ArmorType
+  size               Size
+  spellSchool        SpellSchool
+  currency           Currency
+  damageTypes        DamageTypes
+  creatureType       CreatureType
+  alignment          Alignment
+  language           Language
+  rarity             Rarity
+  itemTypes          ItemTypes
+  unit               Unit
+  commentType        CommentType
+  associatedModel    AssociatedModel
+  armorClassProtocol ArmorClassProtocol
+  conditions         Condition
 }

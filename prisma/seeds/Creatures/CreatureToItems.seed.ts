@@ -59,7 +59,7 @@ const CreatureToItemsSeed: {
   },
   {
     creatureID: creatureIds.gladiator,
-    itemID: itemIds.gladiatorSpear,
+    itemID: itemIds.spear,
   },
   {
     creatureID: creatureIds.guard,
@@ -121,6 +121,38 @@ const CreatureToItemsSeed: {
   {
     creatureID: creatureIds.veteran,
     itemID: itemIds.shortsword,
+  },
+  {
+    creatureID: creatureIds.deva,
+    itemID: itemIds.mace,
+  },
+  {
+    creatureID: creatureIds.planetar,
+    itemID: itemIds.greatsword,
+  },
+  {
+    creatureID: creatureIds.solar,
+    itemID: itemIds.greatsword,
+  },
+  {
+    creatureID: creatureIds.solar,
+    itemID: itemIds.longbow,
+  },
+  {
+    creatureID: creatureIds.flyingSword,
+    itemID: itemIds.longsword,
+  },
+  {
+    creatureID: creatureIds.azer,
+    itemID: itemIds.warhammer,
+  },
+  {
+    creatureID: creatureIds.bugbear,
+    itemID: itemIds.morningstar,
+  },
+  {
+    creatureID: creatureIds.bugbear,
+    itemID: itemIds.javelin,
   },
 ];
 

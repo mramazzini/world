@@ -10893,6 +10893,14 @@ const spellIds = {
   guidingBolt: 87,
   lesserRestoration: 168,
   spiritGuardians: 263,
+  commune: 329,
+  raiseDead: 364,
+  bladeBarrier: 380,
+  dispelEvilAndGood: 342,
+  flameStrike: 347,
+  controlWeather: 454,
+  insectPlague: 355,
+  resurrection: 440,
 };
 const ritualIds = {
   alarm: 47,

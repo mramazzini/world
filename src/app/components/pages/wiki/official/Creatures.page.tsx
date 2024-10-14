@@ -35,12 +35,13 @@ import numPlace from "@/lib/utils/numPlace";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import numberArray from "@/lib/utils/numberArray";
 import { fullCaster } from "../../../../../../prisma/seeds/Classes/SpellSlotsUtil";
+import RollRequest from "@/app/components/UI/RollRequest";
 interface Props {
   creature: CreatureInfo;
 }
 const CreaturePage = ({ creature }: Props) => {
   const [showAllSkills, setShowAllSkills] = useState(false);
-
+  console.log(creature);
   const rollFromFormula = (formula: string) => {
     console.log(formula);
     const data = formula
@@ -338,7 +339,8 @@ const CreaturePage = ({ creature }: Props) => {
                 <td>Alignment</td>
                 <td>
                   <span className="font-bold">
-                    {creature.alignment?.toCapitalCase().replaceAll("_", " ") ||
+                    {creature.alignmentDescription ||
+                      creature.alignmentOptions[0] ||
                       "Unaligned"}
                   </span>
                 </td>
@@ -389,12 +391,21 @@ const CreaturePage = ({ creature }: Props) => {
                   <span className=" font-bold">
                     Passive Perception {calcPP(creature)}{" "}
                     {creature.darkvision &&
-                      `Darkvision ${creature.darkvision} ft`}{" "}
+                      `, Darkvision ${creature.darkvision} ft`}{" "}
+                    {creature.darkvisionDescription &&
+                      `(${creature.darkvisionDescription})`}{" "}
                     {creature.blindsight &&
-                      `Blindsight ${creature.blindsight} ft`}{" "}
-                    {/* {creature.tremorsense &&
-                      `Tremorsense ${creature.tremorsense} ft`}{" "}
-                    {creature.truesight && `Truesight ${creature.truesight} ft`} */}
+                      `, Blindsight ${creature.blindsight} ft`}{" "}
+                    {creature.blindsightDescription &&
+                      `(${creature.blindsightDescription})`}{" "}
+                    {creature.tremorsense &&
+                      `, Tremorsense ${creature.tremorsense} ft`}{" "}
+                    {creature.tremorsenseDescription &&
+                      `(${creature.tremorsenseDescription})`}{" "}
+                    {creature.trueSight &&
+                      `, Truesight ${creature.trueSight} ft`}{" "}
+                    {creature.trueSightDescription &&
+                      `(${creature.trueSightDescription})`}
                   </span>
                 </td>
               </tr>
@@ -560,25 +571,45 @@ const CreaturePage = ({ creature }: Props) => {
                     <div className="flex flex-row gap-2 items-center">
                       <h4>Rolls:</h4>
                       {action.rolls.map((roll, index) => (
-                        <div
-                          className="flex flex-row join items-center"
+                        <RollRequest
                           key={index}
-                        >
-                          <p className="bg-neutral text-neutral-content join-item h-auto p-1 px-2">
-                            {roll.name}:{" "}
-                            <span className="badge">{roll.formula}</span>
-                          </p>
-                          <button
-                            key={index}
-                            className="btn btn-accent btn-sm join-item"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              console.log(rollFromFormula(roll.formula));
-                            }}
-                          >
-                            Roll
-                          </button>
-                        </div>
+                          name={roll.name}
+                          formula={roll.formula}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {creature.legendaryActions.length > 0 && (
+          <div className="flex flex-col gap-4 bg-base-300 rounded-xl p-4 w-full">
+            <h2 className="divider">Legendary Actions</h2>
+            <p className="px-4">
+              The {creature.name} can take {creature.legendaryActionAmount}{" "}
+              legendary actions, choosing from the options below. Only one
+              legendary action option can be used at a time and only at the end
+              of another creature's turn. The {creature.name} regains spent
+              legendary actions at the start of its turn.
+            </p>
+            <ul className="flex flex-col gap-4">
+              {creature.legendaryActions.map((action, index) => (
+                <li key={index} className="bg-base-200 rounded-xl p-4">
+                  <h3>{action.name}</h3>
+                  <p>
+                    <P>{action.description}</P>
+                  </p>
+                  {action.rolls && (
+                    <div className="flex flex-row gap-2 items-center">
+                      <h4>Rolls:</h4>
+                      {action.rolls.map((roll, index) => (
+                        <RollRequest
+                          key={index}
+                          name={roll.name}
+                          formula={roll.formula}
+                        />
                       ))}
                     </div>
                   )}
@@ -624,6 +655,7 @@ const CreaturePage = ({ creature }: Props) => {
                           <h4 className="text-xl p-0 mb-2">
                             <P>{`^${item.id}{${item.name}}^`}</P>
                           </h4>
+
                           <div>
                             {WeaponDescription(
                               item.Weapon,
@@ -631,7 +663,8 @@ const CreaturePage = ({ creature }: Props) => {
                               creature.DEX,
                               combatRatingToProficiency(
                                 creature.challengeRating
-                              )
+                              ),
+                              creature.size
                             ).map((attack, index) => (
                               <Fragment key={index}>
                                 <div>
@@ -640,50 +673,16 @@ const CreaturePage = ({ creature }: Props) => {
                                   <div className="flex flex-row gap-2 items-center">
                                     <h4>Rolls:</h4>
                                     {attack.attackDiceFormula && (
-                                      <div className="flex flex-row join items-center">
-                                        <p className="bg-neutral text-neutral-content join-item h-auto p-1 px-2">
-                                          Attack:{" "}
-                                          <span className="badge">
-                                            {attack.attackDiceFormula}
-                                          </span>
-                                        </p>
-                                        <button
-                                          className="btn btn-accent btn-sm join-item"
-                                          onClick={(e) => {
-                                            e.preventDefault();
-                                            console.log(
-                                              rollFromFormula(
-                                                attack.attackDiceFormula
-                                              )
-                                            );
-                                          }}
-                                        >
-                                          Roll
-                                        </button>
-                                      </div>
+                                      <RollRequest
+                                        name="Attack"
+                                        formula={attack.attackDiceFormula}
+                                      />
                                     )}
                                     {attack.damageDiceFormula && (
-                                      <div className="flex flex-row join items-center">
-                                        <p className="bg-neutral text-neutral-content join-item h-auto p-1 px-2">
-                                          Damage:{" "}
-                                          <span className="badge">
-                                            {attack.damageDiceFormula}
-                                          </span>
-                                        </p>
-                                        <button
-                                          className="btn btn-accent btn-sm join-item"
-                                          onClick={(e) => {
-                                            e.preventDefault();
-                                            console.log(
-                                              rollFromFormula(
-                                                attack.damageDiceFormula
-                                              )
-                                            );
-                                          }}
-                                        >
-                                          Roll
-                                        </button>
-                                      </div>
+                                      <RollRequest
+                                        name="Damage"
+                                        formula={attack.damageDiceFormula}
+                                      />
                                     )}
                                   </div>
                                 </div>
@@ -691,83 +690,110 @@ const CreaturePage = ({ creature }: Props) => {
                               </Fragment>
                             ))}
                           </div>
+                          <FeatureList features={item.features} />
                         </li>
                       )
                   )}
                 </ul>
               )}
             </div>
-            {creature.casterLevel &&
-              creature.spellcastingAbility &&
-              creature.spellSaveDC &&
-              creature.spellAttackBonus && (
-                <div className="flex flex-col gap-4 bg-base-300 rounded-xl p-4 w-full">
-                  <h2 className="divider">Spells </h2>
-                  <p>
-                    The {creature.name} is a(n) {numPlace(creature.casterLevel)}{" "}
-                    level spellcaster. Its spellcasting ability is{" "}
-                    <span className="font-bold badge">
-                      {AbilityToText(creature.spellcastingAbility)}
-                    </span>
-                    . It has a spell save DC of{" "}
-                    <span className="font-bold badge">
-                      {creature.spellSaveDC}
-                    </span>{" "}
-                    and a spell attack bonus of{" "}
-                    <span className="font-bold badge">
-                      +{creature.spellAttackBonus}
-                    </span>
-                    .
-                  </p>
-
-                  <div className="bg-base-200 rounded-xl p-4 grid gap-4 grid-cols-1 lg:grid-cols-3">
-                    {/* at will */}
-                    {creature.freeSpells.length > 0 && (
-                      <div className="bg-base-100 rounded-xl p-4">
-                        <h3 className="p-0">Free Spells and Cantrips</h3>
-                        <div className="divider m-0" />
-                        <ul>
-                          {creature.freeSpells.map((spell, index) => (
-                            <li key={index} className="list-disc ml-4">
-                              <p>
-                                <P>{`%${spell.id}{${spell.name}}%`}</P> (at
-                                will)
-                              </p>
-                            </li>
-                          ))}
-                          {creature.spellsPrepared.length > 0 && (
-                            <>
-                              {creature.spellsPrepared
-                                .filter((spell) => spell.level === 0)
-                                .map((spell, index) => (
-                                  <li key={index} className="list-disc ml-4">
-                                    <p>
-                                      <P>{`%${spell.id}{${spell.name}}%`}</P>
-                                    </p>
-                                  </li>
-                                ))}
-                            </>
+            {creature.spellcastingAbility && (
+              <div className="flex flex-col gap-4 bg-base-300 rounded-xl p-4 w-full">
+                <h2 className="divider">Spells </h2>
+                <div className="bg-base-200 rounded-xl p-4">
+                  <h3 className="p-0">Spellcasting</h3>
+                  <div className="divider m-0" />
+                  <ul>
+                    <li className="list-disc ml-4">
+                      <p>
+                        <span className="font-bold">
+                          Spellcasting Ability:{" "}
+                        </span>
+                        {AbilityToText(creature.spellcastingAbility)}
+                      </p>
+                    </li>
+                    <li className="list-disc ml-4">
+                      <p>
+                        <span className="font-bold">Spell Save DC: </span>
+                        {8 +
+                          combatRatingToProficiency(creature.challengeRating) +
+                          AbilityToModifier(
+                            creature.spellcastingAbility === Ability.CHA
+                              ? creature.CHA
+                              : creature.spellcastingAbility === Ability.INT
+                              ? creature.INT
+                              : creature.WIS
                           )}
-                        </ul>
-                      </div>
-                    )}
-                    {creature.spellsPrepared.length > 0 && (
-                      <>
-                        {numberArray(1, 9).map((level) => {
-                          const levelData =
-                            fullCaster[creature.casterLevel as Level];
-                          if (!levelData) return null;
-                          const spellLevelData = levelData[level as SpellLevel];
-                          return (
+                      </p>
+                    </li>
+                    <li className="list-disc ml-4">
+                      <p>
+                        <span className="font-bold">Spell Attack Bonus: </span>
+                        {combatRatingToProficiency(creature.challengeRating) +
+                          AbilityToModifier(
+                            creature.spellcastingAbility === Ability.CHA
+                              ? creature.CHA
+                              : creature.spellcastingAbility === Ability.INT
+                              ? creature.INT
+                              : creature.WIS
+                          )}
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+                <div className="bg-base-200 rounded-xl p-4 grid gap-4 grid-cols-1 lg:grid-cols-3">
+                  {/* at will */}
+                  {(creature.freeSpells.length > 0 ||
+                    creature.spellsPrepared.some(
+                      (spell) => spell.level === 0
+                    )) && (
+                    <div className="bg-base-100 rounded-xl p-4">
+                      <h3 className="p-0">Free Spells and Cantrips</h3>
+                      <div className="divider m-0" />
+                      <ul>
+                        {creature.freeSpells.map((spell, index) => (
+                          <li key={index} className="list-disc ml-4">
+                            <p>
+                              <P>{`%${spell.id}{${spell.name}}%`}</P> (at will)
+                            </p>
+                          </li>
+                        ))}
+                        {creature.spellsPrepared.length > 0 && (
+                          <>
+                            {creature.spellsPrepared
+                              .filter((spell) => spell.level === 0)
+                              .map((spell, index) => (
+                                <li key={index} className="list-disc ml-4">
+                                  <p>
+                                    <P>{`%${spell.id}{${spell.name}}%`}</P>
+                                  </p>
+                                </li>
+                              ))}
+                          </>
+                        )}
+                      </ul>
+                    </div>
+                  )}
+
+                  <>
+                    {numberArray(1, 9).map((level) => {
+                      const levelData =
+                        fullCaster[creature.casterLevel as Level];
+                      //not a traditional caster, so exclude spell slots
+                      if (!levelData)
+                        return (
+                          (creature.spellsPrepared.some(
+                            (spell) => spell.level === level
+                          ) ||
+                            creature.CreatureLimitedSpells.some(
+                              (spell) => spell.Spell.level === level
+                            )) && (
                             <div
                               key={level}
                               className="bg-base-100 rounded-xl p-4"
                             >
-                              <h3 className="p-0">
-                                {numPlace(level)} Level ({spellLevelData} Slots)
-                              </h3>
+                              <h3 className="p-0">{numPlace(level)} Level</h3>
                               <div className="divider m-0" />
-
                               <ul>
                                 {creature.spellsPrepared
                                   .filter((spell) => spell.level === level)
@@ -778,15 +804,47 @@ const CreaturePage = ({ creature }: Props) => {
                                       </p>
                                     </li>
                                   ))}
+                                {creature.CreatureLimitedSpells.filter(
+                                  (spell) => spell.Spell.level === level
+                                ).map((spell, index) => (
+                                  <li key={index} className="list-disc ml-4">
+                                    <p>
+                                      <P>{`%${spell.spellId}{${spell.Spell.name}}%`}</P>{" "}
+                                      ({spell.amount}/
+                                      {spell.time.toCapitalCase()})
+                                    </p>
+                                  </li>
+                                ))}
                               </ul>
                             </div>
-                          );
-                        })}
-                      </>
-                    )}
-                  </div>
+                          )
+                        );
+                      const spellLevelData = levelData[level as SpellLevel];
+                      return (
+                        <div key={level} className="bg-base-100 rounded-xl p-4">
+                          <h3 className="p-0">
+                            {numPlace(level)} Level ({spellLevelData} Slots)
+                          </h3>
+                          <div className="divider m-0" />
+
+                          <ul>
+                            {creature.spellsPrepared
+                              .filter((spell) => spell.level === level)
+                              .map((spell, index) => (
+                                <li key={index} className="list-disc ml-4">
+                                  <p>
+                                    <P>{`%${spell.id}{${spell.name}}%`}</P>
+                                  </p>
+                                </li>
+                              ))}
+                          </ul>
+                        </div>
+                      );
+                    })}
+                  </>
                 </div>
-              )}
+              </div>
+            )}
           </>
         )}
       </div>

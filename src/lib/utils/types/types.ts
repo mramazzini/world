@@ -22,6 +22,7 @@ import {
   SubSpecies,
   Comment,
   Creature,
+  CreatureLimitedSpell,
 } from "@prisma/client";
 
 export enum Pages {
@@ -33,6 +34,12 @@ export enum Pages {
   Feat = "Feat",
   Spell = "Spell",
   Item = "Item",
+}
+export interface WeaponAttack {
+  name: string;
+  description: string;
+  attackDiceFormula: string;
+  damageDiceFormula: string;
 }
 export interface Badge {
   text: string;
@@ -65,6 +72,9 @@ export interface CharacterInfo extends Character {
 
   // Inventory: any;
 }
+export interface CreatureLimitedSpellWithSpell extends CreatureLimitedSpell {
+  Spell: Spell;
+}
 
 export interface CreatureInfo extends Creature {
   User: {
@@ -75,6 +85,7 @@ export interface CreatureInfo extends Creature {
   shieldEquipped: ItemInfo | null;
   spellsPrepared: Spell[];
   freeSpells: Spell[];
+  CreatureLimitedSpells: CreatureLimitedSpellWithSpell[];
 }
 
 export interface BackgroundInfo extends Background {
@@ -229,11 +240,17 @@ declare global {
       name: string;
       formula: string;
     }
+    interface LegendaryAction {
+      name: string;
+      description: string;
+      rolls?: RollRequest[];
+      cost: number;
+    }
 
     interface CreatureAction {
       name: string;
       description: string;
-      actionType: "action" | "bonus action" | "reaction" | "legendary action";
+      actionType: "action" | "bonus action" | "reaction";
       rolls?: RollRequest[];
     }
     // you can use classes, interfaces, types, etc.
@@ -306,6 +323,7 @@ declare global {
       itemsRequired?: ItemChoice[]; //required to have in inventory to use this feature. This is different from item cost. This is more like a key to unlock the feature, while cost gets spent. No need to put items here if they are in cost.
       abilityScoreTriggers?: AbilityScoreTrigger;
       effect?: FeatureEffect;
+      rolls?: RollRequest[];
       leveledFeatures?: {
         [K in Level]?: FeatureEffect;
       };

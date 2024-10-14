@@ -3,6 +3,7 @@ import {
   Ability,
   Alignment,
   ArmorClassProtocol,
+  Condition,
   CreatureType,
   DamageTypes,
   Language,
@@ -436,7 +437,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
       "A blink dog takes its name from its ability to blink in and out of existence.",
     size: Size.MEDIUM,
     creatureType: CreatureType.FEY,
-    alignment: Alignment.LAWFUL_GOOD,
+    alignmentOptions: [Alignment.LAWFUL_GOOD],
     challengeRating: 0.25,
 
     hitDiceAmount: 4,
@@ -912,7 +913,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     size: Size.MEDIUM,
     creatureType: CreatureType.MONSTROSITY,
     challengeRating: 1,
-
+    alignmentOptions: [Alignment.NEUTRAL_EVIL],
     hitDiceAmount: 6,
     speed: 40,
     STR: 15,
@@ -1810,7 +1811,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     size: Size.LARGE,
     creatureType: CreatureType.BEAST,
     challengeRating: 1,
-
+    alignmentOptions: [Alignment.NEUTRAL_GOOD],
     hitDiceAmount: 4,
     speed: 10,
     flyingSpeed: 80,
@@ -2221,7 +2222,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     size: Size.LARGE,
     creatureType: CreatureType.BEAST,
     challengeRating: 0.25,
-
+    alignmentOptions: [Alignment.TRUE_NEUTRAL],
     hitDiceAmount: 3,
     speed: 5,
     flyingSpeed: 60,
@@ -2756,7 +2757,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     size: Size.LARGE,
     creatureType: CreatureType.BEAST,
     challengeRating: 1,
-
+    alignmentOptions: [Alignment.NEUTRAL_EVIL],
     hitDiceAmount: 3,
     speed: 10,
     flyingSpeed: 60,
@@ -4561,7 +4562,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     size: Size.LARGE,
     creatureType: CreatureType.MONSTROSITY,
     challengeRating: 3,
-
+    alignmentOptions: [Alignment.NEUTRAL_EVIL],
     hitDiceAmount: 10,
     speed: 50,
     STR: 18,
@@ -4688,7 +4689,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     size: Size.LARGE,
     creatureType: CreatureType.MONSTROSITY,
     challengeRating: 1,
-    alignment: Alignment.NEUTRAL_EVIL,
+    alignmentOptions: [Alignment.NEUTRAL_EVIL],
 
     hitDiceAmount: 4,
     speed: 50,
@@ -4700,10 +4701,37 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 8,
     skillExpertise: [Skill.PERCEPTION],
     languageDescription: "Goblin, Worg",
+    features: [
+      {
+        name: "Keen Hearing and Smell",
+        description:
+          "The worg has advantage on Wisdom (Perception) checks that rely on hearing or smell.",
+      },
+    ],
+    actions: [
+      {
+        name: "Bite",
+        actionType: "action",
+        description:
+          "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (2d6 + 3) piercing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone.",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 5",
+          },
+          {
+            name: "Damage",
+            formula: "2d6 + 3",
+          },
+        ],
+      },
+    ],
   },
   {
     id: 88,
     name: "Acolyte",
+    alignmentDescription: "Any alignment",
+    alignmentOptions: Object.values(Alignment),
     description:
       "Acolytes are junior members of a clergy, usually answerable to a priest. They perform a variety of functions in a temple and are granted minor spellcasting power by their deities.",
     flavorText:
@@ -4727,12 +4755,12 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     languageDescription: "Any one language (usually Common)",
 
     spellcastingAbility: Ability.WIS,
-    spellSaveDC: 12,
-    spellAttackBonus: 4,
     casterLevel: 1,
   },
   {
     id: 89,
+    alignmentDescription: "Any alignment",
+    alignmentOptions: Object.values(Alignment),
     name: "Archmage",
     description:
       "Archmages are powerful (and usually quite old) spellcasters dedicated to the study of the arcane arts. Benevolent ones counsel kings and queens, while evil ones rule as tyrants and pursue lichdom. Those who are neither good nor evil sequester themselves in remote towers to practice their magic without interruption. \nAn archmage typically has one or more apprentice mages, and an archmage’s abode has numerous magical wards and guardians to discourage interlopers.",
@@ -4757,8 +4785,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     languageDescription: "Any six languages",
 
     spellcastingAbility: Ability.INT,
-    spellSaveDC: 17,
-    spellAttackBonus: 9,
     casterLevel: 18,
     features: [
       {
@@ -4774,13 +4800,21 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   },
   {
     id: 90,
+    alignmentDescription: "Any non-good alignment",
+    alignmentOptions: [
+      Alignment.NEUTRAL_EVIL,
+      Alignment.LAWFUL_EVIL,
+      Alignment.CHAOTIC_EVIL,
+      Alignment.CHAOTIC_NEUTRAL,
+      Alignment.LAWFUL_NEUTRAL,
+      Alignment.TRUE_NEUTRAL,
+    ],
     name: "Assassin",
     description:
       "Trained in the use of poison, assassins are remorseless killers who work for nobles, guildmasters, sovereigns, and anyone else who can afford them.",
     flavorText: "Assassins are killers who eliminate targets for pay.",
     size: Size.MEDIUM,
     creatureType: CreatureType.HUMANOID,
-    alignment: Alignment.NEUTRAL_EVIL,
     challengeRating: 8,
     armorClassDescription: "Studded Leather",
     armorEquippedId: itemIds.studdedLeatherArmor,
@@ -4814,6 +4848,12 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
         name: "Sneak Attack",
         description:
           "Once per turn, the assassin deals an extra 14 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of the assassin that isn't incapacitated and the assassin doesn't have disadvantage on the attack roll.",
+        rolls: [
+          {
+            name: "Sneak Attack Damage",
+            formula: "4d6",
+          },
+        ],
       },
       {
         name: "Poison",
@@ -4832,6 +4872,15 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 91,
     name: "Bandit",
+    alignmentDescription: "Any non-lawful alignment",
+    alignmentOptions: [
+      Alignment.CHAOTIC_EVIL,
+      Alignment.CHAOTIC_NEUTRAL,
+      Alignment.NEUTRAL_EVIL,
+      Alignment.CHAOTIC_GOOD,
+      Alignment.NEUTRAL_GOOD,
+      Alignment.TRUE_NEUTRAL,
+    ],
     description:
       "Bandits rove in gangs and are sometimes led by thugs, veterans, or spellcasters. Not all bandits are evil. Oppression, drought, disease, or famine can often drive otherwise honest folk to a life of banditry.\nPirates are bandits of the high seas. They might be freebooters interested only in treasure and murder, or they might be privateers sanctioned by the crown to attack and plunder an enemy nation’s vessels.",
     flavorText:
@@ -4856,6 +4905,15 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 92,
     name: "Bandit Captain",
+    alignmentDescription: "Any non-lawful alignment",
+    alignmentOptions: [
+      Alignment.CHAOTIC_EVIL,
+      Alignment.CHAOTIC_NEUTRAL,
+      Alignment.NEUTRAL_EVIL,
+      Alignment.CHAOTIC_GOOD,
+      Alignment.NEUTRAL_GOOD,
+      Alignment.TRUE_NEUTRAL,
+    ],
     description:
       "It takes a strong personality, ruthless cunning, and a silver tongue to keep a gang of bandits in line. The bandit captain has these qualities in spades\nIn addition to managing a crew of selfish malcontents, the pirate captain is a variation of the bandit captain, with a ship to protect and command. To keep the crew in line, the captain must mete out rewards and punishment on a regular basis.\nMore than treasure, a bandit captain or pirate captain craves infamy. A prisoner who appeals to the captain’s vanity or ego is more likely to be treated fairly than a prisoner who does not or claims not to know anything of the captain’s colorful reputation.",
     flavorText:
@@ -4900,6 +4958,12 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 93,
     name: "Berserker",
+    alignmentDescription: "Any Chaotic alignment",
+    alignmentOptions: [
+      Alignment.CHAOTIC_EVIL,
+      Alignment.CHAOTIC_NEUTRAL,
+      Alignment.CHAOTIC_GOOD,
+    ],
     description:
       "Hailing from uncivilized lands, unpredictable berserkers come together in war parties and seek conflict wherever they can find it.",
     flavorText:
@@ -4931,6 +4995,8 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 94,
     name: "Commoner",
+    alignmentDescription: "Any alignment",
+    alignmentOptions: Object.values(Alignment),
     description:
       "Commoners include peasants, serfs, slaves, servants, pilgrims, merchants, artisans, and hermits.",
     flavorText:
@@ -4953,6 +5019,15 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 95,
     name: "Cultist",
+    alignmentDescription: "Any non-good alignment",
+    alignmentOptions: [
+      Alignment.LAWFUL_EVIL,
+      Alignment.NEUTRAL_EVIL,
+      Alignment.CHAOTIC_EVIL,
+      Alignment.CHAOTIC_NEUTRAL,
+      Alignment.LAWFUL_NEUTRAL,
+      Alignment.TRUE_NEUTRAL,
+    ],
     description:
       "Cultists swear allegiance to dark powers such as elemental princes, demon lords, or archdevils. Most conceal their loyalties to avoid being ostracized, imprisoned, or executed for their beliefs. Unlike evil acolytes, cultists often show signs of madness in their beliefs and practices.",
     flavorText:
@@ -4986,6 +5061,15 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 96,
     name: "Cult Fanatic",
+    alignmentDescription: "Any non-good alignment",
+    alignmentOptions: [
+      Alignment.LAWFUL_EVIL,
+      Alignment.NEUTRAL_EVIL,
+      Alignment.CHAOTIC_EVIL,
+      Alignment.CHAOTIC_NEUTRAL,
+      Alignment.LAWFUL_NEUTRAL,
+      Alignment.TRUE_NEUTRAL,
+    ],
     description:
       "Fanatics are often part of a cult’s leadership, using their charisma and dogma to influence and prey on those of weak will. Most are interested in personal power above all else.",
     flavorText: "Fanatics are often part of a cult’s leadership.",
@@ -5007,8 +5091,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     challengeRating: 2,
     spellcastingAbility: Ability.WIS,
-    spellSaveDC: 11,
-    spellAttackBonus: 3,
     casterLevel: 4,
     actions: [
       {
@@ -5029,6 +5111,8 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 97,
     name: "Druid",
+    alignmentDescription: "Any alignment",
+    alignmentOptions: Object.values(Alignment),
     description:
       "Druids dwell in forests and other secluded wilderness locations, where they protect the natural world from monsters and the encroachment of civilization. Some are tribal shamans who heal the sick, pray to animal spirits, and provide spiritual guidance.",
     flavorText:
@@ -5049,13 +5133,13 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     creatureType: CreatureType.HUMANOID,
     size: Size.MEDIUM,
     spellcastingAbility: Ability.WIS,
-    spellSaveDC: 12,
-    spellAttackBonus: 4,
     casterLevel: 4,
     languageDescription: "Druidic plus any two languages",
   },
   {
     id: 98,
+    alignmentDescription: "Any alignment",
+    alignmentOptions: Object.values(Alignment),
     name: "Gladiator",
     description:
       "Gladiators battle for the entertainment of raucous crowds. Some gladiators are brutal pit fighters who treat each match as a life-­‐‑or-­‐‑death struggle, while others are professional duelists who command huge fees but rarely fight to the death.",
@@ -5126,6 +5210,8 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 99,
     name: "Guard",
+    alignmentDescription: "Any alignment",
+    alignmentOptions: Object.values(Alignment),
     description:
       "Guards include members of a city watch, sentries in a citadel or fortified town, and the bodyguards of merchants and nobles.",
     flavorText:
@@ -5152,6 +5238,8 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 100,
     name: "Knight",
+    alignmentDescription: "Any alignment",
+    alignmentOptions: Object.values(Alignment),
     description:
       "Knights are warriors who pledge service to rulers, religious orders, and noble causes. A knight’s alignment determines the extent to which a pledge is honored. Whether undertaking a quest or patrolling a realm, a knight often travels with an entourage that includes squires and hirelings who are commoners.",
     flavorText:
@@ -5205,6 +5293,8 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 101,
     name: "Mage",
+    alignmentDescription: "Any alignment",
+    alignmentOptions: Object.values(Alignment),
     description:
       "Mages spend their lives in the study and practice of magic. Good-­‐‑aligned mages offer counsel to nobles and others in power, while evil mages dwell in isolated sites to perform unspeakable experiments without interference.",
     flavorText: "Mages spend their lives in the study and practice of magic.",
@@ -5227,12 +5317,13 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     size: Size.MEDIUM,
     challengeRating: 6,
     spellcastingAbility: Ability.INT,
-    spellSaveDC: 14,
-    spellAttackBonus: 6,
   },
   {
     id: 102,
     name: "Noble",
+    alignmentDescription: "Any alignment",
+    alignmentOptions: Object.values(Alignment),
+
     description:
       "Nobles wield great authority and influence as members of the upper class, possessing wealth and connections that can make them as powerful as monarchs and generals. A noble often travels in the company of guards, as well as servants who are commoners.\nThe noble’s statistics can also be used to represent courtiers who aren’t of noble birth.",
     flavorText:
@@ -5267,6 +5358,9 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 103,
     name: "Priest",
+    alignmentDescription: "Any alignment",
+    alignmentOptions: Object.values(Alignment),
+
     description:
       "Priests bring the teachings of their gods to the common folk. They are the spiritual leaders of temples and shrines and often hold positions of influence in their communities. Evil priests might work openly under a tyrant, or they might be the leaders of religious sects hidden in the shadows of good society, overseeing depraved rites. A priest typically has one or more acolytes to help with religious ceremonies and other sacred duties",
     flavorText: "Priests bring the teachings of their gods to the common folk.",
@@ -5290,8 +5384,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     skillProficiencies: [Skill.PERSUASION],
     languageDescription: "Any two languages",
     spellcastingAbility: Ability.WIS,
-    spellSaveDC: 13,
-    spellAttackBonus: 5,
     casterLevel: 5,
     actions: [
       {
@@ -5311,6 +5403,8 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 104,
     name: "Scout",
+    alignmentDescription: "Any alignment",
+    alignmentOptions: Object.values(Alignment),
     description:
       "Scouts are skilled hunters and trackers who offer their services for a fee. Most hunt wild game, but a few work as bounty hunters, serve as guides, or provide military reconnaissance.",
     flavorText:
@@ -5356,6 +5450,8 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 105,
     name: "Spy",
+    alignmentDescription: "Any alignment",
+    alignmentOptions: Object.values(Alignment),
     description:
       "Rulers, nobles, merchants, guildmasters, and other wealthy individuals use spies to gain the upper hand in a world of cutthroat politics. A spy is trained to secretly gather information. Loyal spies would rather die than divulge information that could compromise them or their employers.",
     flavorText:
@@ -5393,6 +5489,12 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
         name: "Sneak Attack (1/Turn)",
         description:
           "Once per turn, the spy can deal an extra 7 (2d6) damage to one creature it hits with an attack if it has advantage on the attack roll. The spy doesn’t need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn’t incapacitated, and the spy doesn’t have disadvantage on the attack roll.",
+        rolls: [
+          {
+            name: "Damage",
+            formula: "2d6",
+          },
+        ],
       },
     ],
     actions: [
@@ -5406,6 +5508,15 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 106,
     name: "Thug",
+    alignmentDescription: "Any non-good alignment",
+    alignmentOptions: [
+      Alignment.LAWFUL_EVIL,
+      Alignment.NEUTRAL_EVIL,
+      Alignment.CHAOTIC_EVIL,
+      Alignment.CHAOTIC_NEUTRAL,
+      Alignment.LAWFUL_NEUTRAL,
+      Alignment.TRUE_NEUTRAL,
+    ],
     description:
       "Thugs are ruthless enforcers skilled at intimidation and violence. They work for money and have few scruples.",
     flavorText:
@@ -5445,6 +5556,9 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 107,
     name: "Tribal Warrior",
+    alignmentDescription: "Any alignment",
+    alignmentOptions: Object.values(Alignment),
+
     description:
       "Tribal warriors live beyond civilization, most oftensubsisting on fishing and hunting. Each tribe acts in accordance with the wishes of its chief, who is the greatest or oldest warrior of the tribe or a tribe member blessed by the gods",
     flavorText:
@@ -5477,6 +5591,8 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 108,
     name: "Veteran",
+    alignmentDescription: "Any alignment",
+    alignmentOptions: Object.values(Alignment),
     description:
       "Veterans are professional fighters that take up arms for pay or to protect something they believe in or value. Their ranks include soldiers retired from long service and warriors who never served anyone but themselves.",
     flavorText: "Veterans are professional fighters that take up arms for pay.",
@@ -5504,6 +5620,1353 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
         actionType: "action",
         description:
           "The veteran makes two longsword attacks. If it has a shortsword drawn, it can also make a shortsword attack.",
+      },
+    ],
+  },
+  {
+    id: 109,
+    name: "Aboleth",
+    description:
+      "Aboleths are large aberrations that use their psionic powers to enslave other creatures.",
+    flavorText:
+      "Aboleths are large aberrations that use their psionic powers to enslave other creatures.",
+    size: Size.LARGE,
+    creatureType: CreatureType.ABERRATION,
+    alignmentOptions: [Alignment.LAWFUL_EVIL],
+    challengeRating: 10,
+    armorClassDescription: "natural armor",
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    naturalArmorBonus: 8,
+    hitDiceAmount: 18,
+    speed: 10,
+    swimmingSpeed: 40,
+    STR: 21,
+    DEX: 9,
+    CON: 15,
+    INT: 18,
+    WIS: 15,
+    CHA: 18,
+    skillExpertise: [Skill.HISTORY, Skill.PERCEPTION],
+    saveProficiencies: [Ability.CON, Ability.INT, Ability.WIS],
+    darkvision: 120,
+    languageDescription: "Deep Speech, telepathy 120 ft.",
+    features: [
+      {
+        name: "Amphibious",
+        description: "The aboleth can breathe air and water.",
+      },
+      {
+        name: "Mucous Cloud",
+        description:
+          "While underwater, the aboleth is surrounded by transformative mucus. A creature that touches the aboleth or that hits it with a melee attack while within 5 feet of it must make a DC 14 Constitution saving throw. On a failure, the creature is diseased for 1d4 hours. The diseased creature can breathe only underwater.",
+      },
+      {
+        name: "Probing Telepathy",
+        description:
+          "If a creature communicates telepathically with the aboleth, the aboleth learns the creature’s greatest desires if the aboleth can see the creature.",
+      },
+    ],
+    actions: [
+      {
+        name: "Multiattack",
+        description: "The aboleth makes three tentacle attacks.",
+        actionType: "action",
+      },
+      {
+        name: "Tentacle",
+        actionType: "action",
+        description:
+          "Melee Weapon Attack: +9 to hit, reach 10 ft., one target. Hit: 12 (2d6 + 5) bludgeoning damage. If the target is a creature, it must succeed on a DC 14 Constitution saving throw or become diseased. The disease has no effect for 1 minute and can be removed by any magic that cures disease. After 1 minute, the diseased creature’s skin becomes translucent and slimy, the creature can’t regain hit points unless it is underwater, and the disease can be removed only by heal or another disease-­‐curing spell of 6th level or higher. When the creature is outside a body of water, it takes 6 (1d12) acid damage every 10 minutes unless moisture is applied to the skin before 10 minutes have passed.",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 9",
+          },
+          {
+            name: "Damage",
+            formula: "2d6 + 5",
+          },
+          {
+            name: "Acid Damage",
+            formula: "1d12",
+          },
+        ],
+      },
+      {
+        name: "Tail",
+        actionType: "action",
+        description:
+          "Melee Weapon Attack: +9 to hit, reach 10 ft. one target. Hit: 15 (3d6 + 5) bludgeoning damage.",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 9",
+          },
+          {
+            name: "Damage",
+            formula: "3d6 + 5",
+          },
+        ],
+      },
+      {
+        name: "Enslave (3/Day)",
+        actionType: "action",
+        description:
+          "The aboleth targets one creature it can see within 30 feet of it. The target must succeed on a DC 14 Wisdom saving throw or be magically charmed by the aboleth until the aboleth dies or until it is on a different plane of existence from the target. The charmed target is under the aboleth’s control and can’t take reactions, and the aboleth and the target can communicate telepathically with each other over any distance. Whenever the charmed target takes damage, the target can repeat the saving throw. On a success, the effect ends. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from the aboleth.",
+      },
+    ],
+    legendaryActionAmount: 3,
+    legendaryActions: [
+      {
+        name: "Detect",
+        description: "The aboleth makes a Wisdom (Perception) check.",
+        cost: 1,
+      },
+      {
+        name: "Tail Swipe",
+        description: "The aboleth makes one tail attack.",
+        cost: 1,
+      },
+      {
+        name: "Psychic Drain (Costs 2 Actions)",
+        description:
+          "One creature charmed by the aboleth takes 10 (3d6) psychic damage, and the aboleth regains hit points equal to the damage the creature takes.",
+        cost: 2,
+        rolls: [
+          {
+            name: "Damage",
+            formula: "3d6",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 110,
+    name: "Deva",
+    description:
+      "Devas are shapeshifting celestial beings of great power and lawful good alignment.",
+    flavorText:
+      "Devas are shapeshifting angelic beings of great power and lawful good alignment.",
+    size: Size.MEDIUM,
+    creatureType: CreatureType.CELESTIAL,
+    alignmentOptions: [Alignment.LAWFUL_GOOD],
+    challengeRating: 10,
+    naturalArmorBonus: 3,
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    armorClassDescription: "natural armor",
+    hitDiceAmount: 16,
+    speed: 30,
+    flyingSpeed: 90,
+    STR: 18,
+    DEX: 18,
+    CON: 18,
+    INT: 17,
+    WIS: 20,
+    CHA: 20,
+    saveProficiencies: [Ability.WIS, Ability.CHA],
+    skillProficiencies: [Skill.INSIGHT, Skill.PERCEPTION],
+    damageResistances: [
+      DamageTypes.RADIANT,
+      DamageTypes.MAGICAL_BLUDGEONING,
+      DamageTypes.MAGICAL_PIERCING,
+      DamageTypes.MAGICAL_SLASHING,
+    ],
+    conditionImmunities: [
+      Condition.CHARMED,
+      Condition.EXHAUSTION,
+      Condition.FRIGHTENED,
+    ],
+    darkvision: 120,
+    languageDescription: "All, telepathy 120 ft.",
+
+    spellcastingAbility: Ability.CHA,
+
+    features: [
+      {
+        name: "Angelic Weapons",
+        description:
+          "The deva’s weapon attacks are magical. When the deva hits with any weapon, the weapon deals an extra 4d8 radiant damage.",
+        rolls: [
+          {
+            name: "Angelic Weapon Damage",
+            formula: "4d8",
+          },
+        ],
+      },
+      {
+        name: "Magic Resistance",
+        description:
+          "The deva has advantage on saving throws against spells and other magical effects.",
+      },
+    ],
+    actions: [
+      {
+        name: "Multiattack",
+        description: "The deva makes two melee attacks.",
+        actionType: "action",
+      },
+      {
+        name: "Healing Touch (3/Day)",
+        actionType: "action",
+        description:
+          "The deva touches another creature. The target magically regains 20 (4d8 + 2) hit points and is freed from any curse, disease, poison, blindness, or deafness.",
+        rolls: [
+          {
+            name: "Healing",
+            formula: "4d8 + 2",
+          },
+        ],
+      },
+      {
+        name: "Change Shape",
+        actionType: "action",
+        description:
+          "The deva magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the deva’s choice).\n\nIn a new form, the deva retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and special senses are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks.",
+      },
+    ],
+  },
+  {
+    id: 111,
+    name: "Planetar",
+    description: "Planetars are angelic celestial beings of great power.",
+    flavorText: "Planetars are angelic celestial beings of great power.",
+    size: Size.LARGE,
+    creatureType: CreatureType.CELESTIAL,
+    alignmentOptions: [Alignment.LAWFUL_GOOD],
+    challengeRating: 16,
+    armorClassDescription: "natural armor",
+    naturalArmorBonus: 4,
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    hitDiceAmount: 16,
+    speed: 40,
+    flyingSpeed: 120,
+    STR: 24,
+    DEX: 20,
+    CON: 24,
+    INT: 19,
+    WIS: 22,
+    CHA: 25,
+    saveProficiencies: [Ability.WIS, Ability.CHA, Ability.CON],
+    skillProficiencies: [Skill.PERCEPTION],
+    damageResistances: [
+      DamageTypes.RADIANT,
+      DamageTypes.MAGICAL_BLUDGEONING,
+      DamageTypes.MAGICAL_PIERCING,
+      DamageTypes.MAGICAL_SLASHING,
+    ],
+    conditionImmunities: [
+      Condition.CHARMED,
+      Condition.EXHAUSTION,
+      Condition.FRIGHTENED,
+    ],
+    trueSight: 120,
+    languageDescription: "All, telepathy 120 ft.",
+    spellcastingAbility: Ability.CHA,
+    features: [
+      {
+        name: "Angelic Weapons",
+        description:
+          "The planetar’s weapon attacks are magical. When the planetar hits with any weapon, the weapon deals an extra 5d8 radiant damage.",
+        rolls: [
+          {
+            name: "Angelic Weapon Damage",
+            formula: "5d8",
+          },
+        ],
+      },
+      {
+        name: "Divine Awareness",
+        description: "The planetar knows if it hears a lie.",
+      },
+      {
+        name: "Magic Resistance",
+        description:
+          "The planetar has advantage on saving throws against spells and other magical effects.",
+      },
+    ],
+    actions: [
+      {
+        name: "Multiattack",
+        description: "The planetar makes two melee attacks.",
+        actionType: "action",
+      },
+
+      {
+        name: "Healing Touch (4/Day)",
+        actionType: "action",
+        description:
+          "The planetar touches another creature. The target magically regains 30 (6d8 + 3) hit points and is freed from any curse, disease, poison, blindness, or deafness.",
+        rolls: [
+          {
+            name: "Healing",
+            formula: "6d8 + 3",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 112,
+    name: "Solar",
+    description: "Solars are extremely powerful angelic beings.",
+    flavorText: "Solars are extremely powerful angelic beings.",
+    size: Size.LARGE,
+    creatureType: CreatureType.CELESTIAL,
+    alignmentOptions: [Alignment.LAWFUL_GOOD],
+    challengeRating: 21,
+    armorClassDescription: "natural armor",
+    hitDiceAmount: 18,
+    naturalArmorBonus: 5,
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    speed: 50,
+    flyingSpeed: 150,
+    STR: 26,
+    DEX: 22,
+
+    CON: 26,
+    INT: 25,
+    WIS: 25,
+    CHA: 30,
+    saveProficiencies: [Ability.WIS, Ability.CHA, Ability.INT],
+    skillProficiencies: [Skill.PERCEPTION],
+    damageResistances: [
+      DamageTypes.RADIANT,
+      DamageTypes.MAGICAL_BLUDGEONING,
+      DamageTypes.MAGICAL_PIERCING,
+      DamageTypes.MAGICAL_SLASHING,
+    ],
+    damageImmunities: [DamageTypes.NECROTIC, DamageTypes.POISON],
+    conditionImmunities: [
+      Condition.CHARMED,
+      Condition.EXHAUSTION,
+      Condition.FRIGHTENED,
+      Condition.POISONED,
+    ],
+    trueSight: 120,
+    languageDescription: "All, telepathy 120 ft.",
+    spellcastingAbility: Ability.CHA,
+    features: [
+      {
+        name: "Angelic Weapons",
+        description:
+          "The solar’s weapon attacks are magical. When the solar hits with any weapon, the weapon deals an extra 6d8 radiant damage (included in the attack).",
+        rolls: [
+          {
+            name: "Angelic Weapon Damage",
+            formula: "6d8",
+          },
+        ],
+      },
+      {
+        name: "Divine Awareness",
+        description: "The solar knows if it hears a lie.",
+      },
+      {
+        name: "Magic Resistance",
+        description:
+          "The solar has advantage on saving throws against spells and other magical effects.",
+      },
+      {
+        name: "Slaying Longbow",
+        description:
+          "Whenever the solar lands a hit with its longbow, if the target has less than 100 hit points, it must succeed on a DC 15 Constitution saving throw or die.",
+      },
+    ],
+    actions: [
+      {
+        name: "Multiattack",
+        description: "The solar makes two greatsword attacks.",
+        actionType: "action",
+      },
+      {
+        name: "Flying Sword",
+        description:
+          " The solar releases its greatsword to hover magically in an unoccupied space within 5 feet of it. If the solar can see the sword, the solar can mentally command it as a bonus action to fly up to 50 feet and either make one attack against a target or return to the solar’s hands. If the hovering sword is targeted by any effect, the solar is considered to be holding it. The hovering sword falls if the solar dies.",
+        actionType: "bonus action",
+      },
+      {
+        name: "Healing Touch (4/Day)",
+        actionType: "action",
+        description:
+          "The solar touches another creature. The target magically regains 40 (8d8 + 4) hit points and is freed from any curse, disease, poison, blindness, or deafness.",
+      },
+    ],
+    legendaryActionAmount: 3,
+    legendaryActions: [
+      {
+        name: "Teleport",
+        description:
+          "The solar magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see.",
+        cost: 1,
+      },
+      {
+        cost: 2,
+        name: "Searing Burst",
+        description:
+          "The solar emits magical, divine energy. Each creature of its choice in a 10-­‐‑foot radius must make a DC 23 Dexterity saving throw, taking 14 (4d6) fire damage plus 14 (4d6) radiant damage on a failed save, or half as much damage on a successful one.",
+        rolls: [
+          {
+            name: "Fire Damage",
+            formula: "4d6",
+          },
+          {
+            name: "Radiant Damage",
+            formula: "4d6",
+          },
+        ],
+      },
+      {
+        cost: 3,
+        name: "Blinding Gaze",
+        description:
+          "The solar targets one creature it can see within 30 feet of it. If the target can see the solar, the target must succeed on a DC 15 Constitution saving throw or be blinded until magic such as the lesser restoration spell removes the blindness.",
+      },
+    ],
+  },
+  {
+    id: 113,
+    name: "Animated Armor",
+    description: "Animated armor is a suit of armor animated by magic.",
+    flavorText: "Animated armor is a suit of armor animated by magic.",
+    size: Size.MEDIUM,
+    creatureType: CreatureType.CONSTRUCT,
+
+    challengeRating: 1,
+    armorClassDescription: "natural armor",
+    naturalArmorBonus: 8,
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    hitDiceAmount: 6,
+    speed: 25,
+    STR: 14,
+    DEX: 11,
+    CON: 13,
+    INT: 1,
+    WIS: 3,
+    CHA: 1,
+    damageImmunities: [DamageTypes.POISON, DamageTypes.PSYCHIC],
+    conditionImmunities: [
+      Condition.CHARMED,
+      Condition.EXHAUSTION,
+      Condition.FRIGHTENED,
+      Condition.PARALYZED,
+      Condition.PETRIFIED,
+      Condition.BLINDED,
+      Condition.DEAFENED,
+      Condition.POISONED,
+    ],
+    blindsight: 60,
+    blindsightDescription: "blind beyond this radius",
+    features: [
+      {
+        name: "Antimagic Susceptibility",
+        description:
+          "The armor is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the armor must succeed on a Constitution saving throw against the caster’s spell save DC or fall unconscious for 1 minute.",
+      },
+      {
+        name: "False Appearance",
+        description:
+          "While the armor remains motionless, it is indistinguishable from a normal suit of armor.",
+      },
+    ],
+    actions: [
+      {
+        name: "Multiattack",
+        description: "The armor makes two melee attacks.",
+        actionType: "action",
+      },
+      {
+        actionType: "action",
+        name: "Slam",
+        description:
+          "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) bludgeoning damage.",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 4",
+          },
+          {
+            name: "Damage",
+            formula: "1d6 + 2",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 114,
+    name: "Flying Sword",
+    description:
+      "A flying sword is a sword enchanted to fly and fight on its own.",
+    flavorText:
+      "A flying sword is a sword enchanted to fly and fight on its own.",
+    size: Size.SMALL,
+    creatureType: CreatureType.CONSTRUCT,
+    challengeRating: 0.25,
+    armorClassDescription: "natural armor",
+    naturalArmorBonus: 5,
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    hitDiceAmount: 5,
+    speed: 0,
+    flyingSpeed: 50,
+    STR: 12,
+    DEX: 15,
+    CON: 11,
+    INT: 1,
+    WIS: 5,
+    CHA: 1,
+    damageImmunities: [DamageTypes.POISON, DamageTypes.PSYCHIC],
+    saveProficiencies: [Ability.DEX],
+    conditionImmunities: [
+      Condition.CHARMED,
+      Condition.EXHAUSTION,
+      Condition.FRIGHTENED,
+      Condition.PARALYZED,
+      Condition.PETRIFIED,
+      Condition.BLINDED,
+      Condition.DEAFENED,
+      Condition.POISONED,
+    ],
+    blindsight: 60,
+    blindsightDescription: "blind beyond this radius",
+    features: [
+      {
+        name: "Antimagic Susceptibility",
+        description:
+          "The sword is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the sword must succeed on a Constitution saving throw against the caster’s spell save DC or fall unconscious for 1 minute.",
+      },
+      {
+        name: "False Appearance",
+        description:
+          "While the sword remains motionless and isn’t flying, it is indistinguishable from a normal sword.",
+      },
+    ],
+  },
+  {
+    id: 115,
+    name: "Rug of Smothering",
+    description: "A rug of smothering is a magic rug that attacks creatures.",
+    flavorText: "A rug of smothering is a magic rug that attacks creatures.",
+    size: Size.LARGE,
+    creatureType: CreatureType.CONSTRUCT,
+    challengeRating: 2,
+    hitDiceAmount: 6,
+    speed: 10,
+    STR: 17,
+    DEX: 14,
+    CON: 10,
+    INT: 1,
+    WIS: 3,
+    CHA: 1,
+    damageImmunities: [DamageTypes.POISON, DamageTypes.PSYCHIC],
+    conditionImmunities: [
+      Condition.CHARMED,
+      Condition.EXHAUSTION,
+      Condition.FRIGHTENED,
+      Condition.PARALYZED,
+      Condition.PETRIFIED,
+      Condition.BLINDED,
+      Condition.DEAFENED,
+      Condition.POISONED,
+    ],
+    blindsight: 60,
+    blindsightDescription: "blind beyond this radius",
+    features: [
+      {
+        name: "False Appearance",
+        description:
+          "While the rug remains motionless, it is indistinguishable from a normal rug.",
+      },
+      {
+        name: "Anti-Magic Susceptibility",
+        description:
+          "The rug is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the rug must succeed on a Constitution saving throw against the caster’s spell save DC or fall unconscious for 1 minute.",
+      },
+      {
+        name: "Damage Transfer",
+        description:
+          "While it is grappling a creature, the rug takes only half the damage dealt to it, and the creature grappled by the rug takes the other half.",
+      },
+    ],
+    actions: [
+      {
+        name: "Smother",
+        description:
+          "Melee Weapon Attack: +5 to hit, reach 5 ft., one Medium or smaller creature. Hit: The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and the rug can’t smother another target. In addition, at the start of each of the target’s turns, the target takes 10 (2d6 + 3) bludgeoning damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 5",
+          },
+          {
+            name: "Damage",
+            formula: "2d6 + 3",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 116,
+    name: "Ankheg",
+    description: "Ankhegs are acid-spraying insect monstrosities.",
+    flavorText: "Ankhegs are acid-spraying insect monstrosities.",
+    size: Size.LARGE,
+    creatureType: CreatureType.MONSTROSITY,
+    armorClassDescription: "natural armor",
+    naturalArmorBonus: 4,
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    challengeRating: 2,
+    hitDiceAmount: 6,
+    speed: 30,
+    burrowingSpeed: 10,
+    STR: 17,
+    DEX: 11,
+    CON: 13,
+    INT: 1,
+    WIS: 13,
+    CHA: 6,
+    darkvision: 60,
+    tremorsense: 60,
+    features: [
+      {
+        name: "Prone AC",
+        description: "While prone, the ankheg’s AC is 11.",
+      },
+    ],
+    actions: [
+      {
+        name: "Bite",
+        description:
+          "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage plus 3 (1d6) acid damage. If the target is a Large or smaller creature, it is grappled (escape DC 13). Until this grapple ends, the ankheg can bite only the grappled creature and has advantage on attack rolls to do so.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 5",
+          },
+          {
+            name: "Slashing Damage",
+            formula: "2d6 + 3",
+          },
+          {
+            name: "Acid Damage",
+            formula: "1d6",
+          },
+        ],
+      },
+      {
+        name: "Acid Spray (Recharge 6)",
+        description:
+          "The ankheg spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC 13 Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Damage",
+            formula: "3d6",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 117,
+    name: "Azer",
+    description:
+      "Azer are dwarf-like creatures from the Elemental Plane of Fire.",
+    flavorText:
+      "Azer are dwarf-like creatures from the Elemental Plane of Fire.",
+    size: Size.MEDIUM,
+    creatureType: CreatureType.ELEMENTAL,
+    alignmentOptions: [Alignment.LAWFUL_GOOD, Alignment.LAWFUL_NEUTRAL],
+    challengeRating: 2,
+    armorClassDescription: "natural armor, shield",
+    naturalArmorBonus: 4,
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    hitDiceAmount: 3,
+    shieldEquippedId: itemIds.shield,
+    speed: 30,
+    STR: 17,
+    DEX: 12,
+    CON: 15,
+    INT: 12,
+    WIS: 13,
+    CHA: 10,
+    saveProficiencies: [Ability.CON],
+    damageImmunities: [DamageTypes.FIRE, DamageTypes.POISON],
+    conditionImmunities: [Condition.POISONED],
+    languageDescription: "Ignan",
+    features: [
+      {
+        name: "Heated Body",
+        description:
+          "A creature that touches the azer or hits it with a melee attack while within 5 feet of it takes 5 (1d10) fire damage.",
+        rolls: [
+          {
+            name: "Damage",
+            formula: "1d10",
+          },
+        ],
+      },
+      {
+        name: "Heated Weapons",
+        description:
+          "When the azer hits with a metal melee weapon, it deals an extra 3 (1d6) fire damage (included in the attack).",
+        rolls: [
+          {
+            name: "Fire Damage",
+            formula: "1d6",
+          },
+        ],
+      },
+      {
+        name: "Illumination",
+        description:
+          "The azer sheds bright light in a 10-foot radius and dim light for an additional 10 feet.",
+      },
+    ],
+  },
+  {
+    id: 118,
+    name: "Basilisk",
+    description:
+      "Basilisiks are reptilian monsters that can turn creatures to stone.",
+    flavorText:
+      "Basilisiks are reptilian monsters that can turn creatures to stone.",
+    size: Size.MEDIUM,
+    creatureType: CreatureType.MONSTROSITY,
+    armorClassDescription: "natural armor",
+    naturalArmorBonus: 6,
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    challengeRating: 3,
+    hitDiceAmount: 8,
+    speed: 20,
+    STR: 16,
+    DEX: 8,
+    CON: 15,
+    INT: 2,
+    WIS: 8,
+    CHA: 7,
+    darkvision: 60,
+    features: [
+      {
+        name: "Petrifying Gaze",
+        description:
+          "If a creature starts its turn within 30 feet of the basilisk and the two of them can see each other, the basilisk can force the creature to make a DC 12 Constitution saving throw if the basilisk isn’t incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified until freed by the greater restoration spell or other magic.\n\nA creature that isn’t surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can’t see the basilisk until the start of its next turn, when it can avert its eyes again. If it looks at the basilisk in the meantime, it must immediately make the save.\n\nIf the basilisk sees its reflection within 30 feet of it in bright light, it mistakes itself for a rival and targets itself with its gaze.",
+      },
+    ],
+    actions: [
+      {
+        name: "Bite",
+        description:
+          "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage plus 7 (2d6) poison damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 5",
+          },
+          {
+            name: "Piercing Damage",
+            formula: "2d6 + 3",
+          },
+          {
+            name: "Poison Damage",
+            formula: "2d6",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 119,
+    name: "Behir",
+    description: "Behirs are huge serpentine monsters with lightning breath.",
+    flavorText: "Behirs are huge serpentine monsters with lightning breath.",
+    size: Size.HUGE,
+    alignmentOptions: [Alignment.NEUTRAL_EVIL],
+    creatureType: CreatureType.MONSTROSITY,
+    armorClassDescription: "natural armor",
+    naturalArmorBonus: 4,
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    challengeRating: 11,
+    hitDiceAmount: 16,
+    speed: 50,
+    climbingSpeed: 40,
+    STR: 23,
+    DEX: 16,
+    CON: 18,
+    INT: 7,
+    WIS: 14,
+    CHA: 12,
+    skillProficiencies: [Skill.PERCEPTION, Skill.STEALTH],
+    damageImmunities: [DamageTypes.LIGHTNING],
+    darkvision: 90,
+    languageDescription: "Draconic",
+    actions: [
+      {
+        name: "Multiattack",
+        description:
+          "The behir makes two attacks: one with its bite and one to constrict.",
+        actionType: "action",
+      },
+      {
+        name: "Bite",
+        description:
+          "Melee Weapon Attack: +10 to hit, reach 10 ft., one target. Hit: 22 (3d10 + 6) piercing damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 10",
+          },
+          {
+            name: "Damage",
+            formula: "3d10 + 6",
+          },
+        ],
+      },
+      {
+        name: "Constrict",
+        description:
+          "Melee Weapon Attack: +10 to hit, reach 5 ft., one Large or smaller creature. Hit: 17 (2d10 + 6) bludgeoning damage plus 17 (2d10 + 6) slashing damage. The target is grappled (escape DC 16) if the behir isn’t already constricting a creature, and the target is restrained until this grapple ends.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 10",
+          },
+          {
+            name: "Bludgeoning Damage",
+            formula: "2d10 + 6",
+          },
+          {
+            name: "Slashing Damage",
+            formula: "2d10 + 6",
+          },
+        ],
+      },
+      {
+        name: "Lightning Breath (Recharge 5-6)",
+        description:
+          "The behir exhales a line of lightning that is 20 feet long and 5 feet wide. Each creature in that line must make a DC 16 Dexterity saving throw, taking 66 (12d10) lightning damage on a failed save, or half as much damage on a successful one.\n\nThe behir must roll a d6 to determine if it can use this action again. On a roll of 5 or 6, the behir can use this action again.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Damage",
+            formula: "12d10",
+          },
+          {
+            name: "Recharge",
+            formula: "1d6",
+          },
+        ],
+      },
+      {
+        name: "Swallow",
+        description:
+          "The behir makes one bite attack against a Medium or smaller target it is grappling. If the attack hits, the target is also swallowed, and the grapple ends. While swallowed, the target is blinded and restrained, it has total cover against attacks and other effects outside the behir, and it takes 21 (6d6) acid damage at the start of each of the behir’s turns. A behir can have only one creature swallowed at a time.\n\nIf the behir takes 30 damage or more on a single turn from the swallowed creature, the behir must succeed on a DC 14 Constitution saving throw at the end of that turn or regurgitate the creature, which falls prone in a space within 10 feet of the behir. If the behir dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 15 feet of movement, exiting prone.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Acid Damage",
+            formula: "6d6",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 120,
+    name: "Bugbear",
+    description: "Bugbears are hairy goblinoids that are skilled at ambushing.",
+    flavorText: "Bugbears are hairy goblinoids that are skilled at ambushing.",
+    size: Size.MEDIUM,
+    creatureType: CreatureType.HUMANOID,
+    alignmentOptions: [Alignment.CHAOTIC_EVIL],
+    challengeRating: 1,
+    armorClassDescription: "hide armor, shield",
+    armorEquippedId: itemIds.hideArmor,
+    shieldEquippedId: itemIds.shield,
+    hitDiceAmount: 5,
+    speed: 30,
+    STR: 15,
+    DEX: 14,
+    CON: 13,
+    INT: 8,
+    WIS: 11,
+    CHA: 9,
+    skillProficiencies: [Skill.SURVIVAL],
+    skillExpertise: [Skill.STEALTH],
+    darkvision: 60,
+    languageDescription: "Common, Goblin",
+    features: [
+      {
+        name: "Brute",
+        description:
+          "A melee weapon deals one extra die of its damage when the bugbear hits with it (included in the attack).",
+      },
+      {
+        name: "Surprise Attack",
+        description:
+          "If the bugbear surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack.",
+        rolls: [
+          {
+            name: "Damage",
+            formula: "2d6",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 121,
+    name: "Bulette",
+    description: "Bulettes are massive, armored, land-shark monsters.",
+    flavorText: "Bulettes are massive, armored, land-shark monsters.",
+    size: Size.LARGE,
+    creatureType: CreatureType.MONSTROSITY,
+    challengeRating: 5,
+    armorClassDescription: "natural armor",
+    naturalArmorBonus: 7,
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    hitDiceAmount: 9,
+    speed: 40,
+    burrowingSpeed: 40,
+    STR: 19,
+    DEX: 11,
+    CON: 21,
+    INT: 2,
+    WIS: 10,
+    CHA: 5,
+    skillExpertise: [Skill.PERCEPTION],
+    darkvision: 60,
+    tremorsense: 60,
+    features: [
+      {
+        name: "Standing Leap",
+        description:
+          "The bulette can long jump up to 30 feet and high jump up to 15 feet, with or without a running start.",
+      },
+    ],
+    actions: [
+      {
+        name: "Bite",
+        description:
+          "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 30 (4d12 + 4) piercing damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 7",
+          },
+          {
+            name: "Damage",
+            formula: "4d12 + 4",
+          },
+        ],
+      },
+      {
+        name: "Deadly Leap",
+        description:
+          " If the bulette jumps at least 15 feet as part of its movement, it can then use this action to land on its feet in a space that contains one or more other creatures. Each of those creatures must succeed on a DC 16 Strength or Dexterity saving throw (target’s choice) or be knocked prone and take 14 (3d6 + 4) bludgeoning damage plus 14 (3d6 + 4) slashing damage. On a successful save, the creature takes only half the damage, isn’t knocked prone, and is pushed 5 feet out of the bulette’s space into an unoccupied space of the creature’s choice. If no unoccupied space is within range, the creature instead falls prone in the bulette’s space.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Bludgeoning Damage",
+            formula: "3d6 + 4",
+          },
+          {
+            name: "Slashing Damage",
+            formula: "3d6 + 4",
+          },
+        ],
+      },
+    ],
+  },
+  // CENTAURS ARE MESSED UP AND THE WEAPON CALCS ARE WRONG ON THE SRD
+  // {
+  //   id:  122,
+  //   name: "Centaur",
+  //   description:
+  // }
+  {
+    id: 123,
+    name: "Chimera",
+    description:
+      "Chimeras are monstrous beasts with the heads of a lion, a goat, and a dragon.",
+    flavorText:
+      "Chimeras are monstrous beasts with the heads of a lion, a goat, and a dragon.",
+    size: Size.LARGE,
+    creatureType: CreatureType.MONSTROSITY,
+    challengeRating: 6,
+    armorClassDescription: "natural armor",
+    naturalArmorBonus: 14,
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    hitDiceAmount: 12,
+    speed: 30,
+    flyingSpeed: 60,
+    STR: 19,
+    DEX: 11,
+    CON: 19,
+    INT: 3,
+    WIS: 14,
+    CHA: 10,
+    darkvision: 60,
+    skillExpertise: [Skill.PERCEPTION],
+    languageDescription: "Understands Draconic but can’t speak it",
+    actions: [
+      {
+        name: "Multiattack",
+        description:
+          "The chimera makes three attacks: one with its bite, one with its horns, and one with its claws. When its fire breath is available, it can use the breath in place of its bite or horns.",
+        actionType: "action",
+      },
+      {
+        name: "Bite",
+        description:
+          "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) piercing damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 7",
+          },
+          {
+            name: "Damage",
+            formula: "2d6 + 4",
+          },
+        ],
+      },
+      {
+        name: "Horns",
+        description:
+          "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 10 (1d12 + 4) bludgeoning damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 7",
+          },
+          {
+            name: "Damage",
+            formula: "1d12 + 4",
+          },
+        ],
+      },
+      {
+        name: "Claws",
+        description:
+          "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 14 (2d6 + 4) slashing damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 7",
+          },
+          {
+            name: "Damage",
+            formula: "2d6 + 4",
+          },
+        ],
+      },
+      {
+        name: "Fire Breath (Recharge 5-6)",
+        description:
+          "The dragon head exhales fire in a 15-foot cone. Each creature in that area must make a DC 15 Dexterity saving throw, taking 31 (7d8) fire damage on a failed save, or half as much damage on a successful one.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Damage",
+            formula: "7d8",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 124,
+    name: "Chuul",
+    description: "Chuuls are monstrous, lobster-like creatures.",
+    flavorText: "Chuuls are monstrous, lobster-like creatures.",
+    alignmentOptions: [Alignment.CHAOTIC_EVIL],
+    size: Size.LARGE,
+    creatureType: CreatureType.ABERRATION,
+    challengeRating: 4,
+    armorClassDescription: "natural armor",
+    naturalArmorBonus: 6,
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    hitDiceAmount: 11,
+    speed: 30,
+    swimmingSpeed: 30,
+    STR: 19,
+    DEX: 10,
+    CON: 16,
+    INT: 5,
+    WIS: 11,
+    CHA: 5,
+    darkvision: 60,
+    skillExpertise: [Skill.PERCEPTION],
+    damageImmunities: [DamageTypes.POISON],
+    conditionImmunities: [Condition.POISONED],
+    languageDescription: "Understands Deep Speech but can’t speak it",
+    features: [
+      {
+        name: "Amphibious",
+        description: "The chuul can breathe air and water.",
+      },
+      {
+        name: "Sense Magic",
+        description:
+          "The chuul senses magic within 120 feet of it at will. This trait otherwise works like the detect magic spell but isn’t itself magical.",
+      },
+    ],
+    actions: [
+      {
+        name: "Multiattack",
+        description:
+          "The chuul makes two pincer attacks. If the chuul is grappling a creature, the chuul can also use its tentacles once.",
+        actionType: "action",
+      },
+      {
+        name: "Pincer",
+        description:
+          "Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 10 (2d6 + 4) bludgeoning damage. The target is grappled (escape DC 13) if it is a Large or smaller creature and the chuul doesn’t have two other creatures grappled.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 6",
+          },
+          {
+            name: "Damage",
+            formula: "2d6 + 4",
+          },
+        ],
+      },
+      {
+        name: "Tentacles",
+        description:
+          "One creature grappled by the chuul must succeed on a DC 13 Constitution saving throw or be poisoned for 1 minute. Until this poison ends, the target is paralyzed. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.",
+        actionType: "action",
+      },
+    ],
+  },
+  {
+    id: 125,
+    name: "Cloaker",
+    description: "Cloakers are shadowy, flying, manta-ray-like creatures.",
+    flavorText: "Cloakers are shadowy, flying, manta-ray-like creatures.",
+    size: Size.LARGE,
+    creatureType: CreatureType.ABERRATION,
+    alignmentOptions: [Alignment.CHAOTIC_NEUTRAL],
+    challengeRating: 8,
+    armorClassDescription: "natural armor",
+    naturalArmorBonus: 2,
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    hitDiceAmount: 12,
+    speed: 10,
+    flyingSpeed: 40,
+    STR: 17,
+    DEX: 15,
+    CON: 12,
+    INT: 13,
+    WIS: 12,
+    CHA: 14,
+    skillProficiencies: [Skill.STEALTH],
+    darkvision: 60,
+    languageDescription: "Deep Speech, Undercommon",
+    features: [
+      {
+        name: "Damage Transfer",
+        description:
+          "While attached to a creature, the cloaker takes only half the damage dealt to it (rounded down), and that creature takes the other half.",
+      },
+      {
+        name: "False Appearance",
+        description:
+          "While the cloaker remains motionless without its underside exposed, it is indistinguishable from a dark leather cloak.",
+      },
+      {
+        name: "Light Sensitivity",
+        description:
+          "While in bright light, the cloaker has disadvantage on attack rolls and Wisdom (Perception) checks that rely on sight.",
+      },
+    ],
+    actions: [
+      {
+        name: "Multiattack",
+        description:
+          "The cloaker makes two attacks: one with its bite and one with its tail.",
+        actionType: "action",
+      },
+      {
+        name: "Bite",
+        description:
+          "Melee Weapon Attack: +6 to hit, reach 5 ft., one creature. Hit: 10 (2d6 + 3) piercing damage, and if the target is Large or smaller, the cloaker attaches to it. If the cloaker has advantage against the target, the cloaker attaches to the target’s head, and the target is blinded and unable to breathe while the cloaker is attached. While attached, the cloaker can make this attack only against the target and has advantage on the attack roll. The cloaker can detach itself by spending 5 feet of its movement. A creature, including the target, can take its action to detach the cloaker by succeeding on a DC 16 Strength check.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 6",
+          },
+          {
+            name: "Damage",
+            formula: "2d6 + 3",
+          },
+        ],
+      },
+      {
+        name: "Tail",
+        description:
+          "Melee Weapon Attack: +6 to hit, reach 10 ft., one creature. Hit: 7 (1d8 + 3) slashing damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 6",
+          },
+          {
+            name: "Damage",
+            formula: "1d8 + 3",
+          },
+        ],
+      },
+      {
+        name: "Moan",
+        description:
+          "Each creature within 60 feet of the cloaker that can hear its moan and that isn’t an aberration must succeed on a DC 13 Wisdom saving throw or become frightened until the end of the cloaker’s next turn. If a creature’s saving throw is successful, the creature is immune to the cloaker’s moan for the next 24 hours",
+        actionType: "action",
+      },
+      {
+        name: "Phantasms (Recharge after a Short or Long Rest)",
+        description:
+          "The cloaker magically creates three illusory duplicates of itself if it isn’t in bright light. The duplicates move with it and mimic its actions, shifting position so as to make it impossible to track which cloaker is the real one. If the cloaker is ever in an area of bright light, the duplicates disappear.\n\nWhenever any creature targets the cloaker with an attack or a harmful spell while a duplicate remains, that creature rolls randomly to determine whether it targets the cloaker or one of the duplicates. A creature is unaffected by this magical effect if it can’t see or if it relies on senses other than sight.\n\nA duplicate has the cloaker’s AC and uses its saving throws. If an attack hits a duplicate, or if a duplicate fails a saving throw against an effect that deals damage, the duplicate disappears",
+        actionType: "action",
+      },
+    ],
+  },
+  {
+    id: 126,
+    name: "Cockatrice",
+    description:
+      "Cockatrices are small, bird-like creatures with a petrifying gaze.",
+    flavorText:
+      "Cockatrices are small, bird-like creatures with a petrifying gaze.",
+    size: Size.SMALL,
+    hitDiceAmount: 6,
+    creatureType: CreatureType.MONSTROSITY,
+    challengeRating: 0.5,
+    speed: 20,
+    flyingSpeed: 40,
+    STR: 6,
+    DEX: 12,
+    CON: 12,
+    INT: 2,
+    WIS: 13,
+    CHA: 5,
+    darkvision: 60,
+    actions: [
+      {
+        name: "Bite",
+        description:
+          "Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 3 (1d4 + 1) piercing damage, and the target must succeed on a DC 11 Constitution saving throw against being magically petrified. On a failed save, the creature begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified for 24 hours.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 3",
+          },
+          {
+            name: "Damage",
+            formula: "1d4 + 1",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 127,
+    name: "Couatl",
+    description:
+      "Couatls are shapeshifting winged serpents with divine powers.",
+    flavorText: "Couatls are shapeshifting winged serpents with divine powers.",
+    size: Size.MEDIUM,
+    creatureType: CreatureType.CELESTIAL,
+    alignmentOptions: [Alignment.LAWFUL_GOOD],
+    challengeRating: 4,
+    armorClassDescription: "natural armor",
+    naturalArmorBonus: 4,
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    hitDiceAmount: 13,
+    speed: 30,
+    flyingSpeed: 90,
+    STR: 16,
+    DEX: 20,
+    CON: 17,
+    INT: 18,
+    WIS: 20,
+    CHA: 18,
+    saveProficiencies: [Ability.WIS, Ability.CHA, Ability.CON],
+    damageResistances: [DamageTypes.RADIANT],
+    damageImmunities: [
+      DamageTypes.PSYCHIC,
+      DamageTypes.SLASHING,
+      DamageTypes.PIERCING,
+      DamageTypes.BLUDGEONING,
+    ],
+    trueSight: 120,
+    languageDescription: "all, telepathy 120 ft.",
+    features: [
+      {
+        name: "Magic Weapons",
+        description: "The couatl’s weapon attacks are magical.",
+      },
+      {
+        name: "Shielded Mind",
+        description:
+          "The couatl is immune to scrying and to any effect that would sense its emotions, read its thoughts, or detect its location.",
+      },
+    ],
+    actions: [
+      {
+        name: "Bite",
+        description:
+          "Melee Weapon Attack: +8 to hit, reach 5 ft., one creature. Hit: 8 (1d6 + 5) piercing damage, and the target must succeed on a DC 13 Constitution saving throw or be poisoned for 24 hours. Until this poison ends, the target is unconscious. Another creature can use an action to shake the target awake",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 6",
+          },
+          {
+            name: "Damage",
+            formula: "1d6 + 5",
+          },
+        ],
+      },
+      {
+        name: "Constrict",
+        description:
+          "Melee Weapon Attack: +6 to hit, reach 10 ft., one Medium or smaller creature. Hit: 10 (2d6 + 3) bludgeoning damage, and the target is grappled (escape DC 15). Until this grapple ends, the target is restrained, and the couatl can’t constrict another target.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 6",
+          },
+          {
+            name: "Damage",
+            formula: "2d6 + 3",
+          },
+        ],
+      },
+      {
+        name: "Change Shape",
+        description:
+          " The couatl magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the couatl’s choice).\n\nIn a new form, the couatl retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and other actions are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks. If the new form has a bite attack, the couatl can use its bite in that form.",
+        actionType: "action",
       },
     ],
   },
@@ -5619,6 +7082,18 @@ export const creatureIds = {
   thug: 106,
   tribalWarrior: 107,
   veteran: 108,
+  aboleth: 109,
+  deva: 110,
+  planetar: 111,
+  solar: 112,
+  animatedArmor: 113,
+  flyingSword: 114,
+  rugOfSmothering: 115,
+  ankheg: 116,
+  azer: 117,
+  basilisk: 118,
+  behir: 119,
+  bugbear: 120,
 };
 
 export default CreatureSeed;

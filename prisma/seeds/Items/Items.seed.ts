@@ -3469,15 +3469,6 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.CLOTHES],
     flavorText: "A cloak is a long, loose outer garment.",
   },
-  {
-    id: 291,
-    name: "Gladiator Spear",
-    description: "A spear for the Gladiator Statblock",
-    rarity: Rarity.COMMON,
-    types: [ItemTypes.WEAPON],
-    weaponId: weaponIds.gladiatorSpear,
-    flavorText: "A spear for the Gladiator Statblock",
-  },
 
   ...SpellSeed.map((spell) => ({
     id: spell.id && 10000 + spell.id,

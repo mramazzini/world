@@ -1,12 +1,17 @@
-import { WeaponInfo, WeaponPropertyNames } from "@/lib/utils/types/types";
-import { Weapon } from "@prisma/client";
+import {
+  WeaponAttack,
+  WeaponInfo,
+  WeaponPropertyNames,
+} from "@/lib/utils/types/types";
+import { Size, Weapon } from "@prisma/client";
 import { AbilityToModifier } from "./characterStateFunctions/calc/AbilityToModifier";
 
 const WeaponDescription = (
   weapon: Weapon,
   strength: number,
   dexterity: number,
-  profBonus: number
+  profBonus: number,
+  creatureSize?: Size
 ) => {
   const thrown = weapon.properties.find(
     (prop) => prop.property.name === WeaponPropertyNames.Thrown
@@ -40,12 +45,15 @@ const WeaponDescription = (
   const isRanged = weapon.isRanged;
   const dexMod = AbilityToModifier(dexterity);
   const strMod = AbilityToModifier(strength);
-  interface WeaponAttack {
-    name: string;
-    description: string;
-    attackDiceFormula: string;
-    damageDiceFormula: string;
-  }
+  const sizeMultiplier =
+    creatureSize === Size.LARGE
+      ? 2
+      : creatureSize === Size.HUGE
+      ? 3
+      : creatureSize === Size.GARGANTUAN
+      ? 4
+      : 1;
+
   let attacks: WeaponAttack[] = [];
 
   // All ranged attacks are dex based
@@ -57,12 +65,16 @@ const WeaponDescription = (
       } to hit, range (${minRange}/${maxRange}) ft., one target. Hit: ${weapon.damage.map(
         (d, index) => {
           if (index === weapon.damage.length - 1) {
-            return `${d.numberOfDice}d${d.dice} + ${dexMod} ${d.type
+            return `${d.numberOfDice * sizeMultiplier}d${
+              d.dice
+            } + ${dexMod} ${d.type
               .toCapitalCase()
               .replaceAll("_", " ")} damage.`;
           }
 
-          return `${d.numberOfDice}d${d.dice} + ${dexMod} ${d.type
+          return `${d.numberOfDice * sizeMultiplier}d${
+            d.dice
+          } + ${dexMod} ${d.type
             .toCapitalCase()
             .replaceAll("_", " ")} damage + `;
         }
@@ -70,10 +82,10 @@ const WeaponDescription = (
       attackDiceFormula: `1d20 + ${dexMod + profBonus}`,
       damageDiceFormula: `${weapon.damage.map((d, index) => {
         if (index === weapon.damage.length - 1) {
-          return `${d.numberOfDice}d${d.dice} + ${dexMod}`;
+          return `${d.numberOfDice * sizeMultiplier}d${d.dice} + ${dexMod}`;
         }
 
-        return `${d.numberOfDice}d${d.dice} + ${dexMod} + `;
+        return `${d.numberOfDice * sizeMultiplier}d${d.dice} + ${dexMod} + `;
       })}`,
     });
   } else {
@@ -85,22 +97,26 @@ const WeaponDescription = (
         hasReach ? "5 ft., 10 ft." : "5 ft."
       }, one target. Hit: ${weapon.damage.map((d, index) => {
         if (index === weapon.damage.length - 1) {
-          return `${d.numberOfDice}d${d.dice} + ${modifier} ${d.type
+          return `${d.numberOfDice * sizeMultiplier}d${
+            d.dice
+          } + ${modifier} ${d.type
             .toCapitalCase()
             .replaceAll("_", " ")} damage`;
         }
 
-        return `${d.numberOfDice}d${d.dice} + ${modifier} ${d.type
+        return `${d.numberOfDice * sizeMultiplier}d${
+          d.dice
+        } + ${modifier} ${d.type
           .toCapitalCase()
           .replaceAll("_", " ")} damage + `;
       })}`,
       attackDiceFormula: `1d20 + ${modifier + profBonus}`,
       damageDiceFormula: `${weapon.damage.map((d, index) => {
         if (index === weapon.damage.length - 1) {
-          return `${d.numberOfDice}d${d.dice} + ${modifier}`;
+          return `${d.numberOfDice * sizeMultiplier}d${d.dice} + ${modifier}`;
         }
 
-        return `${d.numberOfDice}d${d.dice} + ${modifier} + `;
+        return `${d.numberOfDice * sizeMultiplier}d${d.dice} + ${modifier} + `;
       })}`,
     });
 
@@ -110,13 +126,15 @@ const WeaponDescription = (
         name: "Melee weapon Attack (Two-handed)",
         description: `+${modifier + profBonus} to hit, reach ${
           hasReach ? "5 ft., 10 ft." : "5 ft."
-        }, one target. Hit: ${versatileDamage.numberOfDice}d${
+        }, one target. Hit: ${versatileDamage.numberOfDice * sizeMultiplier}d${
           versatileDamage.dice
         } + ${modifier} ${versatileDamage.type
           .toCapitalCase()
           .replaceAll("_", " ")} damage if used with two hands.`,
         attackDiceFormula: `1d20 + ${modifier + profBonus}`,
-        damageDiceFormula: `${versatileDamage.numberOfDice}d${versatileDamage.dice} + ${modifier}`,
+        damageDiceFormula: `${versatileDamage.numberOfDice * sizeMultiplier}d${
+          versatileDamage.dice
+        } + ${modifier}`,
       });
     }
     // if thrown, add a second description for thrown range
@@ -128,12 +146,16 @@ const WeaponDescription = (
         } to hit, range (${thrownMinRange}/${thrownMaxRange}) ft., one target. Hit: ${weapon.damage.map(
           (d, index) => {
             if (index === weapon.damage.length - 1) {
-              return `${d.numberOfDice}d${d.dice} + ${modifier} ${d.type
+              return `${d.numberOfDice * sizeMultiplier}d${
+                d.dice
+              } + ${modifier} ${d.type
                 .toCapitalCase()
                 .replaceAll("_", " ")} damage.`;
             }
 
-            return `${d.numberOfDice}d${d.dice} + ${modifier} ${d.type
+            return `${d.numberOfDice * sizeMultiplier}d${
+              d.dice
+            } + ${modifier} ${d.type
               .toCapitalCase()
               .replaceAll("_", " ")} damage + `;
           }
@@ -141,10 +163,12 @@ const WeaponDescription = (
         attackDiceFormula: `1d20 + ${modifier + profBonus}`,
         damageDiceFormula: `${weapon.damage.map((d, index) => {
           if (index === weapon.damage.length - 1) {
-            return `${d.numberOfDice}d${d.dice} + ${modifier}`;
+            return `${d.numberOfDice * sizeMultiplier}d${d.dice} + ${modifier}`;
           }
 
-          return `${d.numberOfDice}d${d.dice} + ${modifier} + `;
+          return `${d.numberOfDice * sizeMultiplier}d${
+            d.dice
+          } + ${modifier} + `;
         })}`,
       });
     }

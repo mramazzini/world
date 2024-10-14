@@ -545,22 +545,15 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
   },
   {
     id: 39,
-    name: "Gladiator Spear",
+    name: "Planetar Greatsword",
     isSimple: true,
-    damage: [{ dice: 6, numberOfDice: 2, type: PIERCING }],
+    damage: [{ dice: 6, numberOfDice: 4, type: SLASHING }],
     properties: [
       {
-        property: WeaponProperties.Thrown,
-        range: 20,
-        maxRange: 60,
+        property: WeaponProperties.Heavy,
       },
       {
-        property: WeaponProperties.Versatile,
-        versatileDamage: {
-          type: PIERCING,
-          dice: 8,
-          numberOfDice: 2,
-        },
+        property: WeaponProperties["Two-Handed"],
       },
     ],
   },
@@ -605,7 +598,7 @@ const weaponIds = {
   longbow: 36,
   net: 37,
   hoopak: 38,
-  gladiatorSpear: 39,
+  planetarGreatsword: 39,
 };
 
 const martialIds = Weapons.filter((w) => !w.isSimple)

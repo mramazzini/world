@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma, Time } from "@prisma/client";
 import { creatureIds } from "./Creature.seed";
 import { spellIds } from "../Spells/spells.seed";
 
@@ -6,6 +6,10 @@ const CreatureToSpellSeed: {
   creatureId: number;
   spellId: number;
   free?: boolean;
+  limited?: {
+    amount: number;
+    time: Time;
+  };
 }[] = [
   {
     creatureId: creatureIds.acolyte,
@@ -124,6 +128,57 @@ const CreatureToSpellSeed: {
   ].map((spellId) => ({
     creatureId: creatureIds.priest,
     spellId,
+  })),
+  ...[spellIds.detectEvilAndGood].map((spellId) => ({
+    creatureId: creatureIds.deva,
+    spellId,
+    free: true,
+  })),
+  ...[spellIds.commune, spellIds.raiseDead].map((spellId) => ({
+    creatureId: creatureIds.deva,
+    spellId,
+    limited: { amount: 1, time: Time.DAY },
+  })),
+  ...[spellIds.detectEvilAndGood, spellIds.invisibility].map((spellId) => ({
+    creatureId: creatureIds.planetar,
+    spellId,
+    free: true,
+  })),
+  ...[
+    spellIds.bladeBarrier,
+    spellIds.dispelEvilAndGood,
+    spellIds.flameStrike,
+    spellIds.raiseDead,
+  ].map((spellId) => ({
+    creatureId: creatureIds.planetar,
+    spellId,
+    limited: { amount: 3, time: Time.DAY },
+  })),
+  ...[spellIds.commune, spellIds.controlWeather, spellIds.insectPlague].map(
+    (spellId) => ({
+      creatureId: creatureIds.planetar,
+      spellId,
+      limited: { amount: 1, time: Time.DAY },
+    })
+  ),
+  ...[spellIds.detectEvilAndGood, spellIds.invisibility].map((spellId) => ({
+    creatureId: creatureIds.solar,
+    spellId,
+    free: true,
+  })),
+  ...[
+    spellIds.bladeBarrier,
+    spellIds.dispelEvilAndGood,
+    spellIds.resurrection,
+  ].map((spellId) => ({
+    creatureId: creatureIds.solar,
+    spellId,
+    limited: { amount: 3, time: Time.DAY },
+  })),
+  ...[spellIds.commune, spellIds.controlWeather].map((spellId) => ({
+    creatureId: creatureIds.solar,
+    spellId,
+    limited: { amount: 1, time: Time.DAY },
   })),
 ];
 
