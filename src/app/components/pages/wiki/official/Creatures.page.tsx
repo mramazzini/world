@@ -591,7 +591,7 @@ const CreaturePage = ({ creature }: Props) => {
               The {creature.name} can take {creature.legendaryActionAmount}{" "}
               legendary actions, choosing from the options below. Only one
               legendary action option can be used at a time and only at the end
-              of another creature's turn. The {creature.name} regains spent
+              of another creatur&apos;s turn. The {creature.name} regains spent
               legendary actions at the start of its turn.
             </p>
             <ul className="flex flex-col gap-4">
