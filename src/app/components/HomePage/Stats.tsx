@@ -35,7 +35,7 @@ const Stats = () => {
   }, []);
   return (
     <>
-      <h2 className="text-center divider mb-4">
+      <h2 className="text-center lg:divider lg:mb-4">
         September&apos;s Top Selections
       </h2>
       {Object.entries(topPages).map(
@@ -48,7 +48,7 @@ const Stats = () => {
               <p className="text-center">
                 September&apos;s most viewed {category.toCapitalCase()} is:
               </p>
-              <h3 className="badge badge-neutral badge-lg text-xl p-4 m-0 capitalize">
+              <h3 className="badge badge-neutral badge-lg text-xl  m-0 capitalize h-auto text-center">
                 🥇 {pages[0].page.split("/")[2].replaceAll("-", " ")} 🥇
               </h3>
               <Link

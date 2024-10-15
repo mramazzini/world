@@ -8,6 +8,7 @@ import {
   validateSecureString,
 } from "@/lib/utils/auth";
 import { createUser } from "../db/general/create.actions";
+import { sendNewUserMessage } from "@/lib/webhook/DiscordWebhook";
 
 const db = new PrismaClient();
 
@@ -95,11 +96,7 @@ export const signup = async (data: {
   generateToken(newUser.id);
 
   try {
-    await fetch(
-      `https://localhost:3000/api/user?user=${encodeURIComponent(
-        newUser.username
-      )}`
-    );
+    sendNewUserMessage(newUser.username);
   } catch (error) {
     console.log("Failed to send verification email");
   }

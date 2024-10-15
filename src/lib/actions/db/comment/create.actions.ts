@@ -2,6 +2,7 @@
 import { getUserId } from "@/lib/utils/auth";
 import { AssociatedModel, CommentType, PrismaClient } from "@prisma/client";
 import { getUser } from "../user/read.actions";
+import { sendComment } from "@/lib/webhook/DiscordWebhook";
 
 export const createComment = async (
   model: AssociatedModel,
@@ -34,7 +35,7 @@ export const createComment = async (
       console.error("Error getting user");
       return;
     }
-    // sendComment(text, location, user.username);
+    sendComment(text, location, user.username);
   }
 };
 

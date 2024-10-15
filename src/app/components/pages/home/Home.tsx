@@ -10,6 +10,7 @@ import Stats from "../../HomePage/Stats";
 import { getBlogposts } from "@/lib/actions/db/blogpost/read.actions";
 import { BlogPost } from "@prisma/client";
 import BlogPostPreview from "../../HomePage/BlogPostPreview";
+import Trivia from "../../HomePage/Trivia";
 const links = [
   {
     name: "Classes",
@@ -57,7 +58,6 @@ const HomePage = () => {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [randomImage, setRandomImage] = useState(false);
   useEffect(() => {
-    fetch(`https://localhost:3000/api/user?user=${encodeURIComponent("bob")}`);
     const randomImageChance = 1000; //1/1000 chance of showing a random image
     setRandomImage(Math.floor(Math.random() * randomImageChance) === 0);
     getBlogposts().then((res) => {
@@ -157,34 +157,35 @@ const HomePage = () => {
         </section>
         <section className="col-span-12 md:col-span-12  lg:col-span-12  xl:col-span-8 row-span-1 bg-base-300 p-4 rounded-xl">
           <div className="bg-base-300 p-4 rounded-xl w-full flex flex-col">
-            <h3 className="text-center divider">Latest Update: Feats</h3>
-            <time className="text-center w-full italic">October 5st, 2024</time>
+            <h3 className="text-center divider">Latest Update: The Gremlin</h3>
+
+            <time className="text-center w-full italic">
+              October 14th, 2024
+            </time>
             <ul className="list-disc list-inside">
               <li>
-                Added every feat (yes all of them). A total of 108. See them{" "}
-                <Link href="/feats" className="text-primary hover:link">
-                  here.
-                </Link>
+                Created The Gremlin, a Discord bot to query the wiki and roll
+                dice.
               </li>
-              <li>Moved Spellist to Spells on navbar</li>
+              <li>Home Screen Display Bug Fix</li>
               <li>
-                You now log out automatically 48 hours after logging in. (before
-                it was an hour)
+                Added a discord webhook to announce new users and comments
               </li>
+            </ul>
+            <time className="text-center w-full italic">
+              October 13th, 2024
+            </time>
+            <div className="divider"></div>
+            <ul className="list-disc list-inside">
+              <li>Added 17 more creatures</li>
+              <li>Added Legendary Actions to creatures</li>
               <li>
-                Tooltips no longer overflow on most containers. This should fix
-                most of the jankiness when interacting with them.
+                Creatures with spells that can be cast at a certain interval no
+                longer display them as spell slots (ex: Deva (1/day))
               </li>
+              <li>Alignment correctly display an accurate description</li>
             </ul>
 
-            <div className="divider"></div>
-            <time className="text-center w-full italic">October 4st, 2024</time>
-            <ul className="list-disc list-inside">
-              <li>Custom Weapon Attacks on character sheet</li>
-              <li>Added 12 more Species and 6 subspecies</li>
-              <li>Added 23 Backgrounds</li>
-              <li>Feats Page and Search Page</li>
-            </ul>
             <div className="divider">
               <Link
                 href="/changelog"
@@ -194,6 +195,43 @@ const HomePage = () => {
               </Link>
             </div>
           </div>
+        </section>
+        {/* Gremlin bot */}
+        <section className="col-span-12 md:col-span-8 bg-base-300 p-4 rounded-xl">
+          <div className="flex flex-col items-center">
+            <h3 className="text-center divider">The Gremlin</h3>
+            <p>
+              <strong>The Gremlin</strong> is a discord bot that can help you
+              with your Dungeons and Dragons needs. It can roll dice, look up
+              spells, and query this wiki for any info you may need.{" "}
+            </p>
+            <div className="divider"></div>
+            <div className="bg-base-200 p-4 rounded-xl flex flex-col lg:flex-row items-center">
+              <Image
+                src={"/home/gremlin.webp"}
+                alt={"Gremlin Bot"}
+                width={256}
+                height={256}
+                className="rounded-xl m-4"
+              />
+              <div className="divider divider-horizontal"></div>
+              <div className="flex flex-col gap-4">
+                <p>
+                  <strong>Invite The Gremlin to your server!</strong>
+                </p>
+
+                <Link
+                  href="https://discord.com/oauth2/authorize?client_id=1295232285804597299&permissions=8&integration_type=0&scope=bot+applications.commands"
+                  className="btn btn-ghost border-gray-500"
+                >
+                  Invite Gremlin -&gt;
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="col-span-12 md:col-span-4 bg-base-300 p-4 rounded-xl">
+          <Trivia />
         </section>
       </div>
     </main>
