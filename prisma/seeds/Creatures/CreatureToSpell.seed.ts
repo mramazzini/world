@@ -180,6 +180,15 @@ const CreatureToSpellSeed: {
     spellId,
     limited: { amount: 1, time: Time.DAY },
   })),
+  ...[spellIds.detectMagic, spellIds.fireball].map((spellId) => ({
+    creatureId: creatureIds.pitFiend,
+    spellId,
+  })),
+  ...[spellIds.holdMonster, spellIds.wallOfFire].map((spellId) => ({
+    creatureId: creatureIds.pitFiend,
+    spellId,
+    limited: { amount: 3, time: Time.DAY },
+  })),
 ];
 
 export default CreatureToSpellSeed;

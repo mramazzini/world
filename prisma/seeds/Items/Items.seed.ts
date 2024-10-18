@@ -3469,6 +3469,1106 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
     types: [ItemTypes.CLOTHES],
     flavorText: "A cloak is a long, loose outer garment.",
   },
+  //adamantine armor missing for now
+  {
+    id: itemIds.amuletOfHealth,
+    name: "Amulet of Health",
+    description:
+      "An amulet of health is a magical amulet that grants the wearer an enhancement bonus to Constitution.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.AMULET, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "An amulet of health is a magical amulet that grants the wearer an enhancement bonus to Constitution.",
+    features: [
+      {
+        name: "Amulet of Health",
+        description:
+          "Your Constitution score is 19 while you wear this amulet. It has no effect on you if your Constitution is already 19 or higher.",
+      },
+    ],
+  },
+  {
+    id: itemIds.amuletOfProofAgainstDetectionAndLocation,
+    name: "Amulet of Proof Against Detection and Location",
+    description:
+      "An amulet of proof against detection and location is a magical amulet that grants the wearer protection from divination magic.",
+    rarity: Rarity.UNCOMMON,
+    types: [ItemTypes.AMULET, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "An amulet of proof against detection and location is a magical amulet that grants the wearer protection from divination magic.",
+    features: [
+      {
+        name: "Proof Against Detection and Location",
+        description:
+          "While wearing this amulet, you are hidden from divination magic. You can't be targeted by such magic or perceived through magical scrying sensors.",
+      },
+    ],
+  },
+  {
+    id: itemIds.amuletOfThePlanes,
+    name: "Amulet of the Planes",
+    description:
+      "An amulet of the planes is a magical amulet that grants the wearer the ability to cast the plane shift spell.",
+    rarity: Rarity.VERY_RARE,
+    types: [ItemTypes.AMULET, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "An amulet of the planes is a magical amulet that grants the wearer the ability to cast the plane shift spell.",
+    features: [
+      {
+        name: "Amulet of the Planes",
+        description:
+          "While wearing this amulet, you can use an action to name a location that you are familiar with on another plane of existence. Then make a DC 15 Intelligence check. On a successful check, you cast the plane shift spell. On a failure, you and each creature and object within 15 feet of you travel to a random destination. Roll a d100. On a 1–60, you travel to a random location on the plane you named. On a 61–100, you travel to a randomly determined plane of existence.",
+      },
+    ],
+  },
+  {
+    id: itemIds.animatedShield,
+    description:
+      "An animated shield is a magical shield that can defend itself.",
+    name: "Animated Shield",
+    rarity: Rarity.VERY_RARE,
+    types: [ItemTypes.ARMOR, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "An animated shield is a magical shield that can defend itself.",
+    armorId: armorIds.shield,
+  },
+  //make statblock
+  // {
+  //   id: itemIds.apparatusOfTheCrab,
+  //   name: "Apparatus of the Crab",
+  //   description:
+  //     "An apparatus of the crab is a magical item that is a large, lobster-like mechanical construct.",
+  //   rarity: Rarity.LEGENDARY,
+  //   types: [ItemTypes.WONDROUS_ITEM],
+  //   flavorText:
+  //     "An apparatus of the crab is a magical item that is a large, lobster-like mechanical construct.",
+  //     features: [
+  //       {
+  //         name:
+  //       }
+  //     ]
+  // },
+  {
+    id: itemIds.armorOfInvulnerability,
+    name: "Armor of Invulnerability",
+    description:
+      "Armor of invulnerability is a magical armor that grants the wearer resistance to nonmagical weapons.",
+    rarity: Rarity.LEGENDARY,
+    types: [ItemTypes.ARMOR],
+    armorId: armorIds.plateArmor,
+    requiresAttunement: true,
+    flavorText:
+      "Armor of invulnerability is a magical armor that grants the wearer resistance to nonmagical weapons.",
+    features: [
+      {
+        name: "Invulnerability",
+        description:
+          "You have resistance to nonmagical damage while you wear this armor. Additionally, you can use an action to make yourself immune to nonmagical damage for 10 minutes or until you are no longer wearing the armor. Once this special action is used, it can’t be used again until the next dawn.",
+      },
+    ],
+  },
+  //armor of resistance
+  // armor of vulnerability
+  {
+    id: itemIds.arrowCatchingShield,
+    name: "Arrow-Catching Shield",
+    description:
+      "An arrow-catching shield is a magical shield that can catch arrows.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.ARMOR],
+    armorId: armorIds.shield,
+    requiresAttunement: true,
+    flavorText:
+      "An arrow-catching shield is a magical shield that can catch arrows.",
+    features: [
+      {
+        name: "Arrow-Catching",
+        description:
+          "You gain a +2 bonus to AC against ranged attacks while you wield this shield. This bonus is in addition to the shield’s normal bonus to AC. In addition, whenever an attacker makes a ranged attack against a target within 5 feet of you, you can use your reaction to become the target of the attack instead.",
+      },
+    ],
+  },
+  {
+    id: itemIds.bagOfBeans,
+    name: "Bag of Beans",
+    description:
+      "A bag of beans is a magical bag that contains a number of beans that do different effects.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.WONDROUS_ITEM],
+    weight: { quantity: 0.5, unit: lb },
+    flavorText:
+      "A bag of beans is a magical bag that contains a number of beans that do different effects.",
+    features: [
+      {
+        name: "Bag of Beans",
+        description:
+          "Inside this heavy cloth bag are 3d4 dry beans. Thebag weighs 1/2 pound plus 1/4 pound for each bean it contains.\n\n If you dump the bag’s contents out on the ground, they explode in a 10-foot radius, extending from the beans. Each creature in the area, including you, must make a DC 15 Dexterity saving throw, taking 5d4 fire damage on a failed save, or half as much damage on a successful one. The fire ignites flammable objects in the area that aren’t being worn or carried.\n\n If you remove a bean from the bag, plant it in dirt or sand, and then water it, the bean produces an effect 1 minute later from the ground where it was planted. The GM can choose an effect from the following table, determine it randomly, or create an effect.",
+        extendedTable: [
+          {
+            "": {
+              headers: ["d100", "Effect"],
+              data: [
+                {
+                  d100: "01",
+                  Effect:
+                    "5d4 toadstools sprout. If a creature eats a toadstool, roll any die. On an odd roll, the eater must succeed on a DC 15 Constitution saving throw or take 5d6 poison damage and become poisoned for 1 hour. On an even roll, the eater gains 5d6 temporary hit points for 1 hour.",
+                },
+                {
+                  d100: "02 - 10",
+                  Effect:
+                    "5d4 toadstools sprout. If a creature eats a toadstool, roll any die. On an odd roll, the eater must succeed on a DC 15 Constitution saving throw or take 5d6 poison damage and become poisoned for 1 hour. On an even roll, the eater gains 5d6 temporary hit points for 1 hour.",
+                },
+                {
+                  d100: "11 - 20",
+                  Effect:
+                    "A treant sprouts. There’s a 50 percent chance that the treant is chaotic evil and attacks.",
+                },
+                {
+                  d100: "21 - 30",
+                  Effect:
+                    "An animate, immobile stone statue in your likeness rises. It makes verbal threats against you. If you leave it and others come near, it describes you as the most heinous of villains and directs the newcomers to find and attack you. If you are on the same plane of existence as the statue, it knows where you are. The statue becomes inanimate after 24 hours.",
+                },
+                {
+                  d100: "31 - 40",
+                  Effect:
+                    "A campfire with blue flames springs forth and burns for 24 hours (or until it is extinguished).",
+                },
+                {
+                  d100: "41 - 50",
+                  Effect: "1d6 + 6 shriekers sprout.",
+                },
+                {
+                  d100: "51 - 60",
+                  Effect:
+                    "1d4 + 8 bright pink toads crawl forth. Whenever a toad is touched, it transforms into a Large or smaller monster of the GM’s choice. The monster remains for 1 minute, then disappears in a puff of bright pink smoke",
+                },
+                {
+                  d100: "61 - 70",
+                  Effect: "A hungry bulette burrows up and attacks",
+                },
+                {
+                  d100: "71 - 80",
+                  Effect:
+                    "A fruit tree grows. It has 1d10 + 20 fruit, 1d8 of which act as randomly determined magic potions, while one acts as an ingested poison of the GM’s choice. The tree vanishes after 1 hour. Picked fruit remains, retaining any magic for 30 days.",
+                },
+                {
+                  d100: "81 - 90",
+                  Effect:
+                    "A nest of 1d4 + 3 eggs springs up. Any creature that eats an egg must make a DC 20 Constitution saving throw. On a successful save, a creature permanently increases its lowest ability score by 1, randomly choosing among equally low scores. On a failed save, the creature takes 10d6 force damage from an internal magical explosion.",
+                },
+                {
+                  d100: "91 - 99",
+                  Effect:
+                    "A pyramid with a 60-­‐foot-­‐square base bursts upward. Inside is a sarcophagus containing a mummy lord. The pyramid is treated as the mummy lord’s lair, and its sarcophagus contains treasure of the GM’s choic",
+                },
+                {
+                  d100: "00",
+                  Effect:
+                    "A giant beanstalk sprouts, growing to a height of the GM’s choice. The top leads where the GM chooses, such as to a great view, a cloud giant’s castle, or a different plane of existence.",
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: itemIds.bagOfDevouring,
+    name: "Bag of Devouring",
+    description:
+      "A bag of devouring is a magical bag that can consume objects and creatures.",
+    rarity: Rarity.VERY_RARE,
+    types: [ItemTypes.WONDROUS_ITEM],
+    flavorText:
+      "A bag of devouring is a magical bag that can consume objects and creatures.",
+    features: [
+      {
+        name: "Devouring",
+        description:
+          "This bag superficially resembles a bag of holding but is a feeding orifice for a gigantic extradimensional creature. Turning the bag inside out closes the orifice.\n\nThe extradimensional creature attached to the bag can sense whatever is placed inside the bag. Animal or vegetable matter placed wholly in the bag is devoured and lost forever. When part of a living creature is placed in the bag, as happens when someone reaches inside it, there is a 50 percent chance that the creature is pulled inside the bag. A creature inside the bag can use its action to try to escape with a successful DC 15 Strength check. Another creature can use its action to reach into the bag to pull a creature out, doing so with a successful DC 20 Strength check (provided it isn’t pulled inside the bag first). Any creature that starts its turn inside the bag is devoured, its body destroyed.\n\nInanimate objects can be stored in the bag, which can hold a cubic foot of such material. However, once each day, the bag swallows any objects inside it and spits them out into another plane of existence. The GM determines the time and plane.\n\nIf the bag is pierced or torn, it is destroyed, and anything contained within it is transported to a random location on the Astral Plane.",
+      },
+    ],
+  },
+  {
+    id: itemIds.bagOfHolding,
+    name: "Bag of Holding",
+    description:
+      "A bag of holding is a magical bag that can store a large amount of items.",
+    rarity: Rarity.UNCOMMON,
+    types: [ItemTypes.WONDROUS_ITEM],
+    weight: { quantity: 15, unit: lb },
+    flavorText:
+      "A bag of holding is a magical bag that can store a large amount of items.",
+    features: [
+      {
+        name: "Holding",
+        description:
+          "This bag has an interior space considerably larger than its outside dimensions, roughly 2 feet in diameter at the mouth and 4 feet deep. The bag can hold up to 500 pounds, not exceeding a volume of 64 cubic feet. The bag weighs 15 pounds, regardless of its contents. Retrieving an item from the bag requires an action.\n\nIf the bag is overloaded, pierced, or torn, it ruptures and is destroyed, and its contents are scattered in the Astral Plane. If the bag is turned inside out, its contents spill forth, unharmed, but the bag must be put right before it can be used again. Breathing creatures inside the bag can survive up to a number of minutes equal to 10 divided by the number of creatures (minimum 1 minute), after which time they begin to suffocate.\n\nPlacing a bag of holding inside an extradimensional space created by a handy haversack, portable hole, or similar item instantly destroys both items and opens a gate to the Astral Plane. The gate originates where the one item was placed inside the other. Any creature within 10 feet of the gate is sucked through it to a random location on the Astral Plane. The gate then closes. The gate is one-way only and can’t be reopened.",
+      },
+    ],
+  },
+  {
+    id: itemIds.beadOfForce,
+    name: "Bead of Force",
+    description:
+      "A bead of force is a magical bead that can create a force field around a target.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.WONDROUS_ITEM],
+    weight: { quantity: 1, unit: oz },
+    flavorText:
+      "A bead of force is a magical bead that can create a force field around a target.",
+    features: [
+      {
+        name: "Bead of Force",
+        description:
+          "This small black sphere measures 3/4 of an inch in diameter and weighs an ounce. Typically, 1d4 + 4 beads of force are found together.\n\nYou can use an action to throw the bead up to 60 feet. The bead explodes on impact and is destroyed. Each creature within a 10-foot radius of where the bead landed must succeed on a DC 15 Dexterity saving throw or take 5d4 force damage. A sphere of transparent force then encloses the area for 1 minute. Any creature that failed the save and is completely within the area is trapped inside this sphere. Creatures that succeeded on the save, or are partially within the area, are pushed away from the center of the sphere until they are no longer inside it. Only breathable air can pass through the sphere’s wall. No attack or other effect can.\n\nAn enclosed creature can use its action to push against the sphere’s wall, moving the sphere up to half the creature’s walking speed. The sphere can be picked up, and its magic causes it to weigh only 1 pound, regardless of the weight of creatures inside.",
+      },
+    ],
+  },
+  {
+    id: itemIds.beltOfDwarvenkind,
+    name: "Belt of Dwarvenkind",
+    description:
+      "A belt of dwarvenkind is a magical belt that grants the wearer dwarven-like abilities.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.BELT, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A belt of dwarvenkind is a magical belt that grants the wearer dwarven-like abilities.",
+    features: [
+      {
+        name: "Dwarvenkind",
+        description:
+          "While wearing this belt, you gain the following benefits:\n\n- Your Constitution score increases by 2, to a maximum of 20.\n- You have advantage on Charisma (Persuasion) checks made to interact with dwarves.\n- You can speak, read, and write Dwarvish.\n\nIn addition, while attuned to the belt, you have a 50 percent chance each day at dawn of growing a full beard if you’re capable of growing one, or a visibly thicker beard if you already have one.\nIf you aren’t a dwarf, you gain the following additional benefits while wearing the belt:\n\n- You have advantage on saving throws against poison, and you have resistance against poison damage.\n- You have darkvision out to a range of 60 feet.\n- You can speak, read, and write Dwarvish.",
+      },
+    ],
+  },
+  {
+    id: itemIds.beltOfHillGiantStrength,
+    name: "Belt of Hill Giant Strength",
+    description:
+      "A belt of Hill Giant Strength is a magical belt that grants the wearer an enhancement bonus to Strength.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.BELT, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A belt of Hill Giant Strength is a magical belt that grants the wearer an enhancement bonus to Strength.",
+    features: [
+      {
+        name: "Hill Giant Strength",
+        description:
+          "While wearing this belt, your Strength score changes to 21. If your Strength is already equal to or greater than 21, the item has no effect on you.",
+      },
+    ],
+  },
+  {
+    id: itemIds.beltOfStormGiantStrength,
+    name: "Belt of Storm Giant Strength",
+    description:
+      "A belt of Storm Giant Strength is a magical belt that grants the wearer an enhancement bonus to Strength.",
+    rarity: Rarity.LEGENDARY,
+    types: [ItemTypes.BELT, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A belt of Storm Giant Strength is a magical belt that grants the wearer an enhancement bonus to Strength.",
+    features: [
+      {
+        name: "Storm Giant Strength",
+        description:
+          "While wearing this belt, your Strength score changes to 29. If your Strength is already equal to or greater than 29, the item has no effect on you.",
+      },
+    ],
+  },
+  {
+    id: itemIds.beltOfStoneGiantStrength,
+    name: "Belt of Stone Giant Strength",
+    description:
+      "A belt of Stone Giant Strength is a magical belt that grants the wearer an enhancement bonus to Strength.",
+    rarity: Rarity.VERY_RARE,
+    types: [ItemTypes.BELT, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A belt of Stone Giant Strength is a magical belt that grants the wearer an enhancement bonus to Strength.",
+    features: [
+      {
+        name: "Stone Giant Strength",
+        description:
+          "While wearing this belt, your Strength score changes to 23. If your Strength is already equal to or greater than 23, the item has no effect on you.",
+      },
+    ],
+  },
+  {
+    id: itemIds.beltOfFireGiantStrength,
+    name: "Belt of Fire Giant Strength",
+    description:
+      "A belt of Fire Giant Strength is a magical belt that grants the wearer an enhancement bonus to Strength.",
+    rarity: Rarity.VERY_RARE,
+    types: [ItemTypes.BELT, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A belt of Fire Giant Strength is a magical belt that grants the wearer an enhancement bonus to Strength.",
+    features: [
+      {
+        name: "Fire Giant Strength",
+        description:
+          "While wearing this belt, your Strength score changes to 25. If your Strength is already equal to or greater than 25, the item has no effect on you.",
+      },
+    ],
+  },
+  {
+    id: itemIds.beltOfFrostGiantStrength,
+    name: "Belt of Frost Giant Strength",
+    description:
+      "A belt of Frost Giant Strength is a magical belt that grants the wearer an enhancement bonus to Strength.",
+    rarity: Rarity.VERY_RARE,
+    types: [ItemTypes.BELT, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A belt of Frost Giant Strength is a magical belt that grants the wearer an enhancement bonus to Strength.",
+    features: [
+      {
+        name: "Frost Giant Strength",
+        description:
+          "While wearing this belt, your Strength score changes to 23. If your Strength is already equal to or greater than 23, the item has no effect on you.",
+      },
+    ],
+  },
+  {
+    id: itemIds.beltOfCloudGiantStrength,
+    name: "Belt of Cloud Giant Strength",
+    description:
+      "A belt of Cloud Giant Strength is a magical belt that grants the wearer an enhancement bonus to Strength.",
+    rarity: Rarity.LEGENDARY,
+    types: [ItemTypes.BELT, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A belt of Cloud Giant Strength is a magical belt that grants the wearer an enhancement bonus to Strength.",
+    features: [
+      {
+        name: "Cloud Giant Strength",
+        description:
+          "While wearing this belt, your Strength score changes to 27. If your Strength is already equal to or greater than 27, the item has no effect on you.",
+      },
+    ],
+  },
+  //berserker axe
+  {
+    id: itemIds.bootsOfElvenkind,
+    name: "Boots of Elvenkind",
+    description:
+      "Boots of elvenkind are magical boots that grant the wearer the ability to move silently.",
+    rarity: Rarity.UNCOMMON,
+    types: [ItemTypes.BOOTS, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "Boots of elvenkind are magical boots that grant the wearer the ability to move silently.",
+    features: [
+      {
+        name: "Elvenkind",
+        description:
+          "While you wear these boots, your steps make no sound, regardless of the surface you are moving across. You also have advantage on Dexterity (Stealth) checks that rely on moving silently.",
+      },
+    ],
+  },
+  {
+    id: itemIds.bootsOfLevitation,
+    name: "Boots of Levitation",
+    description:
+      "Boots of levitation are magical boots that grant the wearer the ability to levitate.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.BOOTS, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "Boots of levitation are magical boots that grant the wearer the ability to levitate.",
+    features: [
+      {
+        name: "Levitation",
+        description:
+          "While you wear these boots, you can use an action to cast the levitate spell on yourself at will.",
+      },
+    ],
+  },
+  {
+    id: itemIds.bootsOfSpeed,
+    name: "Boots of Speed",
+    description:
+      "Boots of speed are magical boots that grant the wearer increased speed.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.BOOTS, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "Boots of speed are magical boots that grant the wearer increased speed.",
+    features: [
+      {
+        name: "Speed",
+        description:
+          "While you wear these boots, you can use a bonus action and click the boots’ heels together. If you do, the boots double your walking speed, and any creature that makes an opportunity attack against you has disadvantage on the attack roll. If you click your heels together again, you end the effect.\n\nWhen the boots’ property has been used for a total of 10 minutes, the magic ceases to function until you finish a long rest.",
+      },
+    ],
+  },
+  {
+    id: itemIds.bootsOfStridingAndSpringing,
+    name: "Boots of Striding and Springing",
+    description:
+      "Boots of striding and springing are magical boots that grant the wearer increased speed and jumping ability.",
+    rarity: Rarity.UNCOMMON,
+    types: [ItemTypes.BOOTS, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "Boots of striding and springing are magical boots that grant the wearer increased speed and jumping ability.",
+    features: [
+      {
+        name: "Striding and Springing",
+        description:
+          "While you wear these boots, your walking speed becomes 30 feet, unless your walking speed is higher, and your speed isn’t reduced if you are encumbered or wearing heavy armor. In addition, you can jump three times the normal distance, though you can’t jump farther than your remaining movement would allow.",
+      },
+    ],
+  },
+  {
+    id: itemIds.bootsOfTheWinterlands,
+    name: "Boots of the Winterlands",
+    description:
+      "Boots of the Winterlands are magical boots that grant the wearer the ability to travel across icy terrain.",
+    rarity: Rarity.UNCOMMON,
+    types: [ItemTypes.BOOTS, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "Boots of the Winterlands are magical boots that grant the wearer the ability to travel across icy terrain.",
+    features: [
+      {
+        name: "Winterlands",
+        description:
+          "These furred boots are snug and feel quite warm. While you wear them, you gain the following benefits:" +
+          "\n- You have resistance to cold damage." +
+          "\n- You ignore difficult terrain created by ice or snow." +
+          "\n- You can tolerate temperatures as low as -50 degrees Fahrenheit without any additional protection. If you wear heavy clothes, you can tolerate temperatures as low as -100 degrees Fahrenheit.",
+      },
+    ],
+  },
+  {
+    id: itemIds.bowlOfCommandingWaterElementals,
+    name: "Bowl of Commanding Water Elementals",
+    description:
+      "A bowl of commanding water elementals is a magical bowl that can summon water elementals.",
+    flavorText:
+      "A bowl of commanding water elementals is a magical bowl that can summon water elementals.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.WONDROUS_ITEM],
+    weight: { quantity: 3, unit: lb },
+    features: [
+      {
+        name: "Commanding Water Elementals",
+        description:
+          "While this bowl is filled with water, you can use an action to speak the bowl’s command word and summon a water elemental, as if you had cast the conjure elemental spell. The bowl can’t be used this way again until the next dawn.\n\nThe bowl is about 1 foot in diameter and half as deep. It weighs 3 pounds and holds about 3 gallons.",
+      },
+    ],
+  },
+  {
+    id: itemIds.bracersOfArchery,
+    name: "Bracers of Archery",
+    description: "Bracers of archery are magical bracers that improve archery.",
+    rarity: Rarity.UNCOMMON,
+    flavorText: "Bracers of archery are magical bracers that improve archery.",
+    types: [ItemTypes.BRACERS, ItemTypes.WONDROUS_ITEM],
+    features: [
+      {
+        name: "Archery",
+        description:
+          "While wearing these bracers, you have proficiency with the longbow and shortbow, and you gain a +2 bonus to damage rolls on ranged attacks made with such weapons.",
+      },
+    ],
+  },
+  {
+    id: itemIds.bracersOfDefense,
+    name: "Bracers of Defense",
+    description:
+      "Bracers of defense are magical bracers that grant the wearer an enhancement bonus to AC.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.BRACERS, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "Bracers of defense are magical bracers that grant the wearer an enhancement bonus to AC.",
+    features: [
+      {
+        name: "Defense",
+        description:
+          "While wearing these bracers, you gain a +2 bonus to AC if you are wearing no armor and using no shield.",
+      },
+    ],
+  },
+  {
+    id: itemIds.brazierOfCommandingFireElementals,
+    name: "Brazier of Commanding Fire Elementals",
+    description:
+      "A brazier of commanding fire elementals is a magical brazier that can summon fire elementals.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.WONDROUS_ITEM],
+    weight: { quantity: 5, unit: lb },
+    flavorText:
+      "A brazier of commanding fire elementals is a magical brazier that can summon fire elementals.",
+    features: [
+      {
+        name: "Commanding Fire Elementals",
+        description:
+          "While a fire burns in this brass brazier, you can use an action to speak the brazier’s command word and summon a fire elemental, as if you had cast the conjure elemental spell. The brazier can’t be used this way again until the next dawn.",
+      },
+    ],
+  },
+  {
+    id: itemIds.broochOfShielding,
+    name: "Brooch of Shielding",
+    description:
+      "A brooch of shielding is a magical brooch that grants the wearer protection from magic missiles.",
+    rarity: Rarity.UNCOMMON,
+    types: [ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A brooch of shielding is a magical brooch that grants the wearer protection from magic missiles.",
+    features: [
+      {
+        name: "Shielding",
+        description:
+          "While wearing this brooch, you have resistance to force damage, and you have immunity to damage from the magic missile spell.",
+      },
+    ],
+  },
+  {
+    id: itemIds.broomOfFlying,
+    name: "Broom of Flying",
+    description: "A broom of flying is a magical broom that can fly.",
+    rarity: Rarity.UNCOMMON,
+    types: [ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText: "A broom of flying is a magical broom that can fly.",
+    weight: { quantity: 3, unit: lb },
+    features: [
+      {
+        name: "Flying",
+        description:
+          "This wooden broom, which weighs 3 pounds, functions like a mundane broom until you stand astride it and speak its command word. It then hovers beneath you and can be ridden in the air. It has a flying speed of 50 feet. It can carry up to 400 pounds, but its flying speed becomes 30 feet while carrying over 200 pounds. The broom stops hovering when you land.\n\nYou can send the broom to travel alone to a destination within 1 mile of you if you speak the command word, name the location, and are familiar with that place. The broom comes back to you when you speak another command word, provided that the broom is still within 1 mile of you.",
+      },
+    ],
+  },
+  {
+    id: itemIds.candleOfInvocation,
+    name: "Candle of Invocation",
+    description:
+      "A candle of invocation is a magical candle that improves the abilities of creatures around it based on their alignment.",
+    rarity: Rarity.VERY_RARE,
+    types: [ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A candle of invocation is a magical candle that improves the abilities of creatures around it based on their alignment.",
+    features: [
+      {
+        name: "Candle of Invocation",
+        description:
+          "This slender taper is dedicated to a deity and shares that deity’s alignment. The candle’s alignment can be detected with the detect evil and good spell. The GM chooses the god and associated alignment or determines the alignment randomly.\n\nThe candle’s magic is activated when the candle is lit, which requires an action. After burning for 4 hours, the candle is destroyed. You can snuff it out early for use at a later time. Deduct the time it burned in increments of 1 minute from the candle’s total burn time.\n\nWhile lit, the candle sheds dim light in a 30-foot radius. Any creature within that light whose alignment matches that of the candle makes attack rolls, saving throws, and ability checks with advantage. In addition, a cleric or druid in the light whose alignment matches the candle’s can cast 1st- level spells he or she has prepared without expending spell slots, though the spell’s effect is as if cast with a 1st-level slot.",
+        extendedTable: [
+          {
+            "": {
+              headers: ["d20", "Alignment"],
+              data: [
+                {
+                  d20: "01 - 02",
+                  Alignment: "Chaotic evil",
+                },
+                {
+                  d20: "03 - 04",
+                  Alignment: "Chaotic neutral",
+                },
+                {
+                  d20: "05 - 07",
+                  Alignment: "Chaotic good",
+                },
+                {
+                  d20: "08 - 09",
+                  Alignment: "Neutral evil",
+                },
+                {
+                  d20: "10 - 11",
+                  Alignment: "True neutral",
+                },
+                {
+                  d20: "12 - 13",
+                  Alignment: "Neutral good",
+                },
+                {
+                  d20: "14 - 15",
+                  Alignment: "Lawful evil",
+                },
+                {
+                  d20: "16 - 17",
+                  Alignment: "Lawful neutral",
+                },
+                {
+                  d20: "18 - 20",
+                  Alignment: "Lawful good",
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: itemIds.capeOfTheMountebank,
+    name: "Cape of the Mountebank",
+    description:
+      "A cape of the mountebank is a magical cape that grants the wearer the ability to teleport.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.WONDROUS_ITEM],
+    flavorText:
+      "A cape of the mountebank is a magical cape that grants the wearer the ability to teleport.",
+    features: [
+      {
+        name: "Mountebank",
+        description:
+          "This cape smells faintly of brimstone. While wearing it, you can use it to cast the dimension door spell as an action. This property of the cape can’t be used again until the next dawn.\n\nWhen you disappear, you leave behind a cloud of smoke, and you appear in a similar cloud of smoke at your destination. The smoke lightly obscures the space you left and the space you appear in, and it dissipates at the end of your next turn. A light or stronger wind disperses the smoke",
+      },
+    ],
+  },
+  //carpet of flying
+  {
+    id: itemIds.censerOfControllingAirElementals,
+    name: "Censer of Controlling Air Elementals",
+    description:
+      "A censer of controlling air elementals is a magical censer that can summon air elementals.",
+    rarity: Rarity.RARE,
+
+    types: [ItemTypes.WONDROUS_ITEM],
+    flavorText:
+      "A censer of controlling air elementals is a magical censer that can summon air elementals.",
+    weight: { quantity: 1, unit: lb },
+    features: [
+      {
+        name: "Controlling Air Elementals",
+        description:
+          "While incense is burning in this censer, you can use an action to speak the censer’s command word and summon an air elemental, as if you had cast the conjure elemental spell. The censer can’t be used this way again until the next dawn.\n\nThe censer is about 6 inches high and weighs 1 pound.",
+      },
+    ],
+  },
+  {
+    id: itemIds.chimeOfOpening,
+    name: "Chime of Opening",
+    description:
+      "A chime of opening is a magical chime that can open locked doors.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.WONDROUS_ITEM],
+    flavorText:
+      "A chime of opening is a magical chime that can open locked doors.",
+    weight: { quantity: 1, unit: lb },
+    features: [
+      {
+        name: "Opening",
+        description:
+          "This hollow metal tube measures about 1 foot long and weighs 1 pound. You can strike it as an action, pointing it at an object within 120 feet of you that can be opened, such as a door, lid, or lock. The chime issues a clear tone, and one lock or latch on the object opens unless the sound can’t reach the object. If no locks are present, the object simply opens.",
+      },
+    ],
+  },
+  {
+    id: itemIds.circletOfBlasting,
+    name: "Circlet of Blasting",
+    description:
+      "A circlet of blasting is a magical circlet that can cast the scorching ray spell.",
+    rarity: Rarity.UNCOMMON,
+    types: [ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A circlet of blasting is a magical circlet that can cast the scorching ray spell.",
+    features: [
+      {
+        name: "Blasting",
+        description: `While wearing this circlet, you can use an action to cast the %${spellIds.scorchingRay}{scorching ray}% spell with it. When you make the spell’s attacks, you do so with an attack bonus of +5. The circlet can’t be used this way again until the next dawn.`,
+      },
+    ],
+  },
+  {
+    id: itemIds.cloakOfArachnida,
+    name: "Cloak of Arachnida",
+    description:
+      "A cloak of arachnida is a magical cloak that grants the wearer spider-like abilities.",
+    rarity: Rarity.VERY_RARE,
+    types: [ItemTypes.CLOAK, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A cloak of arachnida is a magical cloak that grants the wearer spider-like abilities.",
+    features: [
+      {
+        name: "Arachnida",
+        description:
+          "This fine garment is made of black silk interwoven with faint silvery threads. While wearing it, you gain the following benefits.",
+        options: [
+          "You have resistance to poison damage.",
+          "You have a climbing speed equal to your walking speed.",
+          "You can move up, down, and across vertical surfaces and upside down along ceilings, while leaving your hands free.",
+          "You can’t be caught in webs of any sort and can move through webs as if they were difficult terrain.",
+          `You can use an action to cast the ${spellIds.web} spell (save DC 13). The web created by the spell fills twice its normal area. Once used, this property of the cloak can’t be used again until the next dawn.`,
+        ],
+      },
+    ],
+  },
+  {
+    id: itemIds.cloakOfDisplacement,
+    name: "Cloak of Displacement",
+    description:
+      "A cloak of displacement is a magical cloak that grants the wearer the ability to create an illusion of themselves.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.CLOAK, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A cloak of displacement is a magical cloak that grants the wearer the ability to create an illusion of themselves.",
+    features: [
+      {
+        name: "Displacement",
+        description:
+          "While you wear this cloak, it projects an illusion that makes you appear to be standing in a place near your actual location, causing any creature to have disadvantage on attack rolls against you. If you take damage, the property ceases to function until the start of your next turn. This property is suppressed while you are incapacitated, restrained, or otherwise unable to move",
+      },
+    ],
+  },
+  {
+    id: itemIds.cloakOfElvenkind,
+    name: "Cloak of Elvenkind",
+    description:
+      "A cloak of elvenkind is a magical cloak that grants the wearer the ability to move stealthy.",
+    rarity: Rarity.UNCOMMON,
+    types: [ItemTypes.CLOAK, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A cloak of elvenkind is a magical cloak that grants the wearer the ability to move stealthy.",
+    features: [
+      {
+        name: "Elvenkind",
+        description:
+          "While you wear this cloak with its hood up, Wisdom (Perception) checks made to see you have disadvantage, and you have advantage on Dexterity (Stealth) checks made to hide, as the cloak’s color shifts to camouflage you. Pulling the hood up or down requires an action.",
+      },
+    ],
+  },
+  {
+    id: itemIds.cloakOfProtection,
+    name: "Cloak of Protection",
+    description:
+      "A cloak of protection is a magical cloak that grants the wearer an enhancement bonus to AC and saving throws.",
+    rarity: Rarity.UNCOMMON,
+    types: [ItemTypes.CLOAK, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A cloak of protection is a magical cloak that grants the wearer an enhancement bonus to AC and saving throws.",
+  },
+  {
+    id: itemIds.cloakOfTheBat,
+    name: "Cloak of the Bat",
+    description:
+      "A cloak of the bat is a magical cloak that grants the wearer the ability to fly and transform into a bat.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.CLOAK, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A cloak of the bat is a magical cloak that grants the wearer the ability to fly and transform into a bat.",
+    features: [
+      {
+        name: "Bat",
+        description:
+          "While wearing this cloak, you have advantage on Dexterity (Stealth) checks. In an area of dim light or darkness, you can grip the edges of the cloak with both hands and use it to fly at a speed of 40 feet. If you ever fail to grip the cloak’s edges while flying in this way, or if you are no longer in dim light or darkness, you lose this flying speed.\n\nWhile wearing the cloak in an area of dim light or darkness, you can use your action to cast polymorph on yourself, transforming into a bat. While you are in the form of the bat, you retain your Intelligence, Wisdom, and Charisma scores. The cloak can’t be used this way again until the next dawn.",
+      },
+    ],
+  },
+  {
+    id: itemIds.cloakOfTheMantaRay,
+    name: "Cloak of the Manta Ray",
+    description:
+      "A cloak of the manta ray is a magical cloak that grants the wearer the ability to breathe underwater and swim.",
+    rarity: Rarity.UNCOMMON,
+    types: [ItemTypes.CLOAK, ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A cloak of the manta ray is a magical cloak that grants the wearer the ability to breathe underwater and swim.",
+    features: [
+      {
+        name: "Manta Ray",
+        description:
+          "While wearing this cloak with its hood up, you can breathe underwater, and you have a swimming speed of 60 feet. Pulling the hood up or down requires an action.",
+      },
+    ],
+  },
+  // the crystal balls
+  {
+    id: itemIds.cubeOfForce,
+    name: "Cube of Force",
+    description:
+      "A cube of force is a magical cube that can create a force field around the user.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.WONDROUS_ITEM],
+    requiresAttunement: true,
+    flavorText:
+      "A cube of force is a magical cube that can create a force field around the user.",
+    features: [
+      {
+        name: "Force",
+        description:
+          "This cube is about an inch across. Each face has a distinct marking on it that can be pressed. The cube starts with 36 charges, and it regains 1d20 expended charges daily at dawn.\n\nYou can use an action to press one of the cube’s faces, expending a number of charges based on the chosen face, as shown in the Cube of Force Faces table. Each face has a different effect. If the cube has insufficient charges remaining, nothing happens. Otherwise, a barrier of invisible force springs into existence, forming a cube 15 feet on a side. The barrier is centered on you, moves with you, and lasts for 1 minute, until you use an action to press the cube’s sixth face, or the cube runs out of charges. You can change the barrier’s effect by pressing a different face of the cube and expending the requisite number of charges, resetting the duration.\n\nIf your movement causes the barrier to come into contact with a solid object that can’t pass through the cube, you can’t move any closer to that object as long as the barrier remains",
+        extendedTable: [
+          {
+            "Cube of Force Faces": {
+              headers: ["Face", "Charges", "Effect"],
+              data: [
+                {
+                  Face: "1",
+                  Charges: "1",
+                  Effect:
+                    "Gases, wind, and fog can’t pass through the barrier.",
+                },
+                {
+                  Face: "2",
+                  Charges: "2",
+                  Effect:
+                    "Nonliving matter can’t pass through the barrier. Walls, floors, and ceilings can pass through at your discretion",
+                },
+                {
+                  Face: "3",
+                  Charges: "3",
+                  Effect: "Living matter can’t pass through the barrier.",
+                },
+                {
+                  Face: "4",
+                  Charges: "4",
+                  Effect: "Spell effects can’t pass through the barrier",
+                },
+                {
+                  Face: "5",
+                  Charges: "5",
+                  Effect:
+                    "Nothing can pass through the barrier. Walls, floors, and ceilings can pass through at your discretion.",
+                },
+                {
+                  Face: "6",
+                  Charges: "0",
+                  Effect: "The barrier deactivates.",
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        name: "Barrier Deactivation",
+        description:
+          "The cube loses charges when the barrier is targeted by certain spells or comes into contact with certain spell or magic item effects, as shown in the table below.",
+        extendedTable: [
+          {
+            "": {
+              headers: ["Spell or item", "Charges Lost"],
+              data: [
+                {
+                  Effect: `%${spellIds.disintegrate}{Disintegrate}%`,
+                  "Charges Lost": "1d12",
+                },
+                {
+                  Effect: `^${itemIds.hornOfBlasting}{Horn of blasting}^`,
+                  "Charges Lost": "1d10",
+                },
+                {
+                  Effect: `%${spellIds.passwall}{Passwall}%`,
+                  "Charges Lost": "1d6",
+                },
+                {
+                  Effect: `%${spellIds.prismaticSpray}{Prismatic spray}%`,
+                  "Charges Lost": "1d20",
+                },
+                {
+                  Effect: `%${spellIds.wallOfFire}{Wall of fire}%`,
+                  "Charges Lost": "1d4",
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: itemIds.cubicGate,
+    name: "Cubic Gate",
+    description: "A cubic gate is a magical cube that can create portals.",
+    rarity: Rarity.LEGENDARY,
+    types: [ItemTypes.WONDROUS_ITEM],
+    flavorText: "A cubic gate is a magical cube that can create portals.",
+    features: [
+      {
+        name: "Gate",
+        description: `This cube is 3 inches across and radiates palpable magical energy. The six sides of the cube are each keyed to a different plane of existence, one of which is the Material Plane. The other sides are linked to planes determined by the GM.\n\nou can use an action to press one side of the cube to cast the %${spellIds.gate}{gate}% spell with it, opening a portal to the plane keyed to that side. Alternatively, if you use an action to press one side twice, you can cast the %${spellIds.planeShift}{plane shift}% spell (save DC 17) with the cube and transport the targets to the plane keyed to that side.`,
+      },
+    ],
+  },
+  {
+    id: itemIds.daggerOfVenom,
+    name: "Dagger of Venom",
+    description:
+      "A dagger of venom is a magical dagger that can poison its target.",
+    rarity: Rarity.RARE,
+    types: [ItemTypes.WEAPON],
+    weaponId: weaponIds.dagger,
+    flavorText:
+      "A dagger of venom is a magical dagger that can poison its target.",
+    features: [
+      {
+        name: "+1 Dagger",
+        description: "This weapon has a +1 bonus to attack and damage rolls.",
+      },
+      {
+        name: "Venom",
+        description:
+          "You can use an action to cause thick, black poison to coat the blade. The poison remains for 1 minute or until an attack using this weapon hits a creature. That creature must succeed on a DC 15 Constitution saving throw or take 2d10 poison damage and become poisoned for 1 minute. The dagger can’t be used this way again until the next dawn",
+      },
+    ],
+  },
+  {
+    id: itemIds.decanterOfEndlessWater,
+    name: "Decanter of Endless Water",
+    description:
+      "A decanter of endless water is a magical decanter that can produce water.",
+    rarity: Rarity.UNCOMMON,
+    types: [ItemTypes.WONDROUS_ITEM],
+    flavorText:
+      "A decanter of endless water is a magical decanter that can produce water.",
+    weight: { quantity: 2, unit: lb },
+    features: [
+      {
+        name: "Endless Water",
+        description:
+          "This stoppered flask sloshes when shaken, as if it contains water. The decanter weighs 2 pounds.\n\nYou can use an action to remove the stopper and speak one of three command words, whereupon an amount of fresh water or salt water (your choice) pours out of the flask. The water stops pouring out at the start of your next turn. Choose from the following options:",
+        options: [
+          "**Stream.** The decanter produces 1 gallon of water.",
+          "**Fountain.** The decanter produces 5 gallons of water.",
+          "**Geyser.** produces 30 gallons of water that gushes forth in a geyser 30 feet long and 1 foot wide. As a bonus action while holding the decanter, you can aim the geyser at a creature you can see within 30 feet of you. The target must succeed on a DC 13 Strength saving throw or take 1d4 bludgeoning damage and fall prone. Instead of a creature, you can target an object that isn’t being worn or carried and that weighs no more than 200 pounds. The object is either knocked over or pushed up to 15 feet away from you.",
+        ],
+      },
+    ],
+  },
+  {
+    id: itemIds.deckOfIllusions,
+    name: "Deck of Illusions",
+    description:
+      "A deck of illusions is a magical deck of cards that can create illusions. This box contains a set of parchment cards. A full deck has 34 cards. A deck found as treasure is usually missing 1d20 − 1 cards.",
+    rarity: Rarity.UNCOMMON,
+    types: [ItemTypes.WONDROUS_ITEM],
+    flavorText:
+      "A deck of illusions is a magical deck of cards that can create illusions.",
+    features: [
+      {
+        name: "Create Illusions",
+        description:
+          "The magic of the deck functions only if cards are drawn at random (you can use an altered deck of playing cards to simulate the deck). You can use an action to draw a card at random from the deck and throw it to the ground at a point within 30 feet of you.\n\nAn illusion of one or more creatures forms over the thrown card and remains until dispelled. An illusory creature appears real, of the appropriate size, and behaves as if it were a real creature except that it can do no harm. While you are within 120 feet of the illusory creature and can see it, you can use an action to move it magically anywhere within 30 feet of its card. Any physical interaction with the illusory creature reveals it to be an illusion, because objects pass through it. Someone who uses an action to visually inspect the creature identifies it as illusory with a successful DC 15 Intelligence (Investigation) check. The creature then appears translucent. The illusion lasts until its card is moved or the illusion is dispelled. When the illusion ends, the image on its card disappears, and that card can’t be used again.",
+        extendedTable: [
+          {
+            "": {
+              headers: ["Playing Card", "Creature"],
+              data: [
+                { "Playing Card": "Ace of hearts", Creature: "Red dragon" },
+                {
+                  "Playing Card": "King of hearts",
+                  Creature: "Knight and four guards",
+                },
+                {
+                  "Playing Card": "Queen of hearts",
+                  Creature: "Succubus or incubus",
+                },
+                { "Playing Card": "Jack of hearts", Creature: "Druid" },
+                { "Playing Card": "Ten of hearts", Creature: "Cloud giant" },
+                { "Playing Card": "Nine of hearts", Creature: "Ettin" },
+                { "Playing Card": "Eight of hearts", Creature: "Bugbear" },
+                { "Playing Card": "Two of hearts", Creature: "Goblin" },
+                { "Playing Card": "Ace of diamonds", Creature: "Beholder" },
+                {
+                  "Playing Card": "King of diamonds",
+                  Creature: "Archmage and mage apprentice",
+                },
+                { "Playing Card": "Queen of diamonds", Creature: "Night hag" },
+                { "Playing Card": "Jack of diamonds", Creature: "Assassin" },
+                { "Playing Card": "Ten of diamonds", Creature: "Fire giant" },
+                { "Playing Card": "Nine of diamonds", Creature: "Ogre mage" },
+                { "Playing Card": "Eight of diamonds", Creature: "Gnoll" },
+                { "Playing Card": "Two of diamonds", Creature: "Kobold" },
+                { "Playing Card": "Ace of spades", Creature: "Lich" },
+                {
+                  "Playing Card": "King of spades",
+                  Creature: "Priest and two acolytes",
+                },
+                { "Playing Card": "Queen of spades", Creature: "Medusa" },
+                { "Playing Card": "Jack of spades", Creature: "Veteran" },
+                { "Playing Card": "Ten of spades", Creature: "Frost giant" },
+                { "Playing Card": "Nine of spades", Creature: "Troll" },
+                { "Playing Card": "Eight of spades", Creature: "Hobgoblin" },
+                { "Playing Card": "Two of spades", Creature: "Goblin" },
+                { "Playing Card": "Ace of clubs", Creature: "Iron golem" },
+                {
+                  "Playing Card": "King of clubs",
+                  Creature: "Bandit captain and three bandits",
+                },
+                { "Playing Card": "Queen of clubs", Creature: "Erinyes" },
+                { "Playing Card": "Jack of clubs", Creature: "Berserker" },
+                { "Playing Card": "Ten of clubs", Creature: "Hill giant" },
+                { "Playing Card": "Nine of clubs", Creature: "Ogre" },
+                { "Playing Card": "Eight of clubs", Creature: "Orc" },
+                { "Playing Card": "Two of clubs", Creature: "Kobold" },
+                {
+                  "Playing Card": "Jokers (2)",
+                  Creature: "You (the deck’s owner)",
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: itemIds.deckOfManyThings,
+    name: "Deck of Many Things",
+    description:
+      "A deck of many things is a magical deck of cards with a variety of effects that can alter reality. Usually found in a box or pouch, this deck contains anumber of cards made of ivory or vellum. Most (75 percent) of these decks have only thirteen cards, but the rest have twenty-­two",
+    rarity: Rarity.LEGENDARY,
+    types: [ItemTypes.WONDROUS_ITEM],
+    flavorText:
+      "A deck of many things is a magical deck of cards with a variety of effects that can alter reality.",
+    features: [
+      {
+        name: "Draw Cards",
+        description:
+          "Before you draw a card, you must declare how many cards you intend to draw and then draw them randomly (you can use an altered deck of playing cards to simulate the deck). Any cards drawn in excess of this number have no effect. Otherwise, as soon as you draw a card from the deck, its magic takes effect. You must draw each card no more than 1 hour after the previous draw. If you fail to draw the chosen number, the remaining number of cards fly from the deck on their own and take effect all at once. Once a card is drawn, it fades from existence. Unless the card is the Fool or the Jester, the card reappears in the deck, making it possible to draw the same card twice.",
+      },
+    ],
+  },
+  {
+    id: itemIds.demonArmor,
+    name: "Demon Armor",
+    description:
+      "Demon armor is a cursed magical suit of armor of demonic armor.",
+    rarity: Rarity.VERY_RARE,
+    types: [ItemTypes.ARMOR],
+    armorId: armorIds.plateArmor,
+    requiresAttunement: true,
+    flavorText:
+      "Demon armor is a cursed magical suit of armor of demonic armor.",
+    features: [
+      {
+        name: "Demon Armor",
+        description:
+          "While wearing this armor, you gain a +1 bonus to AC, and you can understand and speak Abyssal. In addition, the armor’s clawed gauntlets turn unarmed strikes with your hands into magic weapons that deal slashing damage, with a +1 bonus to attack rolls and damage rolls and a damage die of 1d8.",
+      },
+      {
+        name: "Cursed",
+        description:
+          "Once you don this cursed armor, you can’t doff it unless you are targeted by the remove curse spell or similar magic. While wearing the armor, you have disadvantage on attack rolls against demons and on saving throws against their spells and special abilities.",
+      },
+    ],
+  },
 
   ...SpellSeed.map((spell) => ({
     id: spell.id && 10000 + spell.id,

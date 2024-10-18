@@ -9,6 +9,7 @@ export const createWeapons = async (db: PrismaClient) => {
   for (const Weapon of Weapons) {
     try {
       cinfo("Creating weapon:", Weapon.name);
+      Weapon.ammunitionId = undefined;
       await db.weapon.upsert({
         where: {
           id: Weapon.id,
@@ -16,7 +17,6 @@ export const createWeapons = async (db: PrismaClient) => {
         update: Weapon,
         create: {
           ...Weapon,
-          ammunitionId: null,
         },
       });
       cinfo("Weapon created");

@@ -156,9 +156,12 @@ enum DamageTypes {
   RADIANT
   SLASHING
   THUNDER
-  MAGICAL_BLUDGEONING
-  MAGICAL_PIERCING
-  MAGICAL_SLASHING
+  NON_MAGICAL_BLUDGEONING
+  NON_MAGICAL_PIERCING
+  NON_MAGICAL_SLASHING
+  NON_SILVERED_BLUDGEONING
+  NON_SILVERED_PIERCING
+  NON_SILVERED_SLASHING
   NONE
   OTHER
 }
@@ -637,6 +640,12 @@ enum ItemTypes {
   CURRENCY
   SPELL_SCROLL
   GEMSTONE
+  WONDROUS_ITEM
+  AMULET
+  BELT
+  BOOTS
+  BRACERS
+  CLOAK
 }
 
 enum Unit {
@@ -662,13 +671,14 @@ model EquipmentPack {
 }
 
 model Item {
-  id          Int    @id @default(autoincrement())
-  name        String
-  description String
-  flavorText  String @db.VarChar(200)
-  rarity      Rarity
+  id                 Int     @id @default(autoincrement())
+  name               String
+  description        String
+  flavorText         String  @db.VarChar(200)
+  requiresAttunement Boolean @default(false)
+  rarity             Rarity
   /// [CurrencyAmount]
-  cost        Json?
+  cost               Json?
 
   /// [QuantityUnit]
   weight Json?

@@ -40,31 +40,31 @@ const seedarr: {
     index: "002",
     callback: createSpellList,
     description: "Creating spell lists from the spell list seed.",
-    //enabled: true,
+    // enabled: true,
   },
   {
     index: "003",
     callback: linkSpellListToSpell,
     description: "Linking spell lists to spells.",
-    //enabled: true,
+    // enabled: true,
   },
   {
     index: "004",
     callback: createArmor,
     description: "Creating armor from the armor seed.",
-    //enabled: true,
+    // enabled: true,
   },
   {
     index: "005",
     callback: createEquipmentPacks,
     description: "Creating equipment packs from the equipment pack seed.",
-    //enabled: true,
+    // enabled: true,
   },
   {
     index: "006",
     callback: createTools,
     description: "Creating tools from the tools seed.",
-    //enabled: true,
+    // enabled: true,
   },
   {
     index: "007",
@@ -82,7 +82,7 @@ const seedarr: {
     index: "009",
     callback: ammunitionToWeapon,
     description: "Linking ammunition to weapons.",
-    //enabled: true,
+    // enabled: true,
   },
   {
     index: "010",
@@ -94,19 +94,19 @@ const seedarr: {
     index: "011",
     callback: createClasses,
     description: "Creating classes from the class seed.",
-    //enabled: true,
+    // enabled: true,
   },
   {
     index: "012",
     callback: itemToClass,
     description: "Linking items to classes.",
-    //enabled: true,
+    // enabled: true,
   },
   {
     index: "013",
     callback: createSubclass,
     description: "Creating subclasses from the subclass seed.",
-    //enabled: true,
+    // enabled: true,
   },
   {
     index: "014",
@@ -130,19 +130,19 @@ const seedarr: {
     index: "017",
     callback: createCreatures,
     description: "Creating creatures from the creature seed.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "018",
     callback: linkCreatureToSpells,
     description: "Linking creatures to spells.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "019",
     callback: linkCreatureToItems,
     description: "Linking creatures to items.",
-    enabled: true,
+    // enabled: true,
   },
 
   {
@@ -161,7 +161,7 @@ const seedarr: {
     index: "022",
     callback: createMaxyUser,
     description: "Creating maxy user from the maxy user seed.",
-    //enabled: true,
+    enabled: true,
   },
 ];
 

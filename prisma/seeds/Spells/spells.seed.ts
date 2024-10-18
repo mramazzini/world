@@ -10901,6 +10901,15 @@ const spellIds = {
   controlWeather: 454,
   insectPlague: 355,
   resurrection: 440,
+  holdMonster: 351,
+  wallOfFire: 320,
+  scorchingRay: 188,
+  web: 203,
+  disintegrate: 388,
+  passwall: 362,
+  prismaticSpray: 437,
+  planeShift: 435,
+  gate: 474,
 };
 const ritualIds = {
   alarm: 47,

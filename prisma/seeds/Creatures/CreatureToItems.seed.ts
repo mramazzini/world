@@ -154,6 +154,30 @@ const CreatureToItemsSeed: {
     creatureID: creatureIds.bugbear,
     itemID: itemIds.javelin,
   },
+  {
+    creatureID: creatureIds.balor,
+    itemID: itemIds.longsword,
+  },
+  {
+    creatureID: creatureIds.marilith,
+    itemID: itemIds.longsword,
+  },
+  {
+    creatureID: creatureIds.beardedDevil,
+    itemID: itemIds.glaive,
+  },
+  {
+    creatureID: creatureIds.erinyes,
+    itemID: itemIds.longbow,
+  },
+  {
+    creatureID: creatureIds.erinyes,
+    itemID: itemIds.longsword,
+  },
+  {
+    creatureID: creatureIds.pitFiend,
+    itemID: itemIds.mace,
+  },
 ];
 
 export default CreatureToItemsSeed;
