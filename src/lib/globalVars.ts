@@ -3,7 +3,7 @@ import { Property, src, WeaponPropertyNames } from "./utils/types/types";
 import { Ability } from "@prisma/client";
 export const QUERY_LIMIT = 30;
 export const NAVBAR_HEIGHT_REM = 4;
-export const VERSION = "0.7.3";
+export const VERSION = "0.10.0";
 export const officialSources: string[] = Object.values(src).filter(
   (s) => s !== src.homebrew
 );

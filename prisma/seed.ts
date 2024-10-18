@@ -34,13 +34,13 @@ const seedarr: {
     index: "001",
     callback: createSpells,
     description: "Creating spells from the spell seed.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "002",
     callback: createSpellList,
     description: "Creating spell lists from the spell list seed.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "003",
