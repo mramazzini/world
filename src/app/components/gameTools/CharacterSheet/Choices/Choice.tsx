@@ -15,6 +15,18 @@ import { ArmorType, Language, Skill } from "@prisma/client";
 import SubclassChoiceHandler from "./SubclassChoiceHandler";
 import CharacterAbilityScoreHandler from "./CharacterAbilityScoreHandler";
 import AbilityScoreHandler from "./AbilityScoreHandler";
+import { ItemToInventory } from "@/app/components/Utility/characterStateFunctions/update/ItemToInventory";
+import { addArmorProficiencies } from "@/app/components/Utility/characterStateFunctions/update/addArmorProficiencies";
+import { addToolProficiencies } from "@/app/components/Utility/characterStateFunctions/update/addToolProficiencies";
+import { updateAbilityScores } from "@/app/components/Utility/characterStateFunctions/update/updateAbilityScores";
+import { generateSubclassChoice } from "@/app/components/Utility/characterStateFunctions/calc/generateSubclassChoice";
+import { SpeciesAbilityScoreIncrease } from "@/app/components/Utility/characterStateFunctions/update/speciesAbilityScoreIncrease";
+import { addLanguageProficiencies } from "@/app/components/Utility/characterStateFunctions/update/addLanguageProficiencies";
+import { addSavingThrowProficiencies } from "@/app/components/Utility/characterStateFunctions/update/addSavingThrowProficiencies";
+import { addSkillProficiencies } from "@/app/components/Utility/characterStateFunctions/update/addSkillProficiencies";
+import { addWeaponProficiencies } from "@/app/components/Utility/characterStateFunctions/update/addWeaponProficiencies";
+import { setAbilityScore } from "@/app/components/Utility/characterStateFunctions/update/setAbilityScore";
+import { subclassSelection } from "@/app/components/Utility/characterStateFunctions/update/subclassSelection";
 interface Props {
   id: string;
   character: CharacterInfo;
@@ -32,8 +44,28 @@ const Choice = ({
 }: Props) => {
   const runCallback = async (data: CallbackOptions) => {
     if (!character.state) return;
+    const callback: PrismaJson.StateCallback =
+      choiceData.callbackProtocol == "ItemToInventory"
+        ? ItemToInventory
+        : choiceData.callbackProtocol == "addArmorProficiencies"
+        ? addArmorProficiencies
+        : choiceData.callbackProtocol == "addToolProficiencies"
+        ? addToolProficiencies
+        : choiceData.callbackProtocol == "SetAbilityScore"
+        ? setAbilityScore
+        : choiceData.callbackProtocol == "SubclassSelection"
+        ? subclassSelection
+        : choiceData.callbackProtocol == "SpeciesAbilityScoreIncrease"
+        ? SpeciesAbilityScoreIncrease
+        : choiceData.callbackProtocol == "addLanguageProficiencies"
+        ? addLanguageProficiencies
+        : choiceData.callbackProtocol == "addSavingThrowProficiencies"
+        ? addSavingThrowProficiencies
+        : choiceData.callbackProtocol == "addSkillProficiencies"
+        ? addSkillProficiencies
+        : addWeaponProficiencies;
 
-    const callbackRes = await choiceData.callback(character.state, data);
+    const callbackRes = await callback(character, data, choiceData.from);
     const newChoices = callbackRes.pendingChoices;
     const index = newChoices.findIndex((choice) => choice.id === id);
     newChoices.splice(index, 1);

@@ -40,41 +40,36 @@ const SidebarMetaSelector = ({
               </tr>
             </thead>
             <tbody>
-              {!loading &&
-                metadata
-                  .sort((a, b) =>
-                    a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-                  )
-                  .map((meta) => (
-                    <tr
-                      key={meta.id}
-                      onClick={() => setSelected(meta)}
-                      className="hover cursor-pointer"
-                    >
-                      <td
-                        onClick={() => setSelected(meta)}
-                        className="font-bold"
+              {loading ? (
+                <Loading />
+              ) : (
+                metadata.map((meta) => (
+                  <tr
+                    key={v4()}
+                    onClick={() => setSelected(meta)}
+                    className="hover cursor-pointer"
+                  >
+                    <td onClick={() => setSelected(meta)} className="font-bold">
+                      {model === "class"
+                        ? meta.name.toCapitalCase()
+                        : meta.name}
+                    </td>
+                    <td className="w-[60%]">{meta.flavorText}</td>
+                    <td className="w-[25%]">
+                      <Link
+                        className="btn btn-accent  btn-xs "
+                        href={`/${model}/${meta.name.replaceAll(" ", "-")}`}
+                        target="_blank"
+                        onClick={(e) => e.stopPropagation()}
                       >
-                        {model === "class"
-                          ? meta.name.toCapitalCase()
-                          : meta.name}
-                      </td>
-                      <td className="w-[60%]">{meta.flavorText}</td>
-                      <td className="w-[25%]">
-                        <Link
-                          className="btn btn-accent  btn-xs "
-                          href={`/${model}/${meta.name.replaceAll(" ", "-")}`}
-                          target="_blank"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          Read More -&gt;
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
+                        Read More -&gt;
+                      </Link>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
-          {loading && <Loading />}
         </div>
         <div className="flex justify-center m-2">
           <button className="btn btn-primary" onClick={() => setSelected(null)}>

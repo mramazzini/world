@@ -311,6 +311,11 @@ declare global {
       addSpellcastingModifier?: boolean;
       components?: string;
     }
+    type StateCallback = (
+      character: CharacterInfo,
+      selections: CallbackOptions,
+      from: string
+    ) => Promise<PrismaJson.CharacterState> | PrismaJson.CharacterState;
 
     interface Feature {
       name: string;
@@ -671,12 +676,20 @@ declare global {
 
       from: string;
       description?: string;
-      callback: (
-        state: CharacterState,
-        selections: CallbackOptions
-      ) => Promise<CharacterState> | CharacterState;
+      callbackProtocol: CallbackProtocol;
     }
-
+    type CallbackProtocol =
+      | "addLanguageProficiencies"
+      | "addSkillProficiencies"
+      | "addToolProficiencies"
+      | "addArmorProficiencies"
+      | "addWeaponProficiencies"
+      | "addSavingThrowProficiencies"
+      | "ItemToInventory"
+      | "SetAbilityScore"
+      | "AbilityScoreIncrease"
+      | "SpeciesAbilityScoreIncrease"
+      | "SubclassSelection";
     interface AbilityChoice {
       default?: Ability[];
       choices?: {

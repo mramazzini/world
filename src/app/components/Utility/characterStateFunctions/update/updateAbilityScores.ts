@@ -5,9 +5,10 @@ import { refreshHp } from "./refreshHp";
 
 export const updateAbilityScores = async (
   character: CharacterInfo,
-  state: PrismaJson.CharacterState,
-  scores: AbilityScores
+  scores: AbilityScores,
+  from: string
 ): Promise<PrismaJson.CharacterState> => {
+  const state = character.state as PrismaJson.CharacterState;
   const updated: PrismaJson.CharacterState = {
     ...state,
     abilityScores: scores,

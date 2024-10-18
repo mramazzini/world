@@ -15,8 +15,7 @@ interface Props {
 
 const ItemChoice = ({ choice, updateSelections, modalID }: Props) => {
   const [selections, setSelections] = useState<number[]>([]);
-  const [options, setoptions] = useState<ItemInfo[]>([]);
-
+  const [options, setOptions] = useState<ItemInfo[]>([]);
   useEffect(() => {
     //get item ids and Quantities
     const itemQuantities = selections.map((index) => choice.options[index]);
@@ -27,7 +26,7 @@ const ItemChoice = ({ choice, updateSelections, modalID }: Props) => {
     choice.options.forEach((itemList) => {
       itemList.forEach((itemData) => {
         memoizeGetItem(itemData.item).then((item) => {
-          setoptions((prev) => [...prev, item]);
+          setOptions((prev) => [...prev, item]);
         });
       });
     });

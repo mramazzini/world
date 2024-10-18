@@ -94,16 +94,7 @@ export const levelUp = async (
           description: `Choose your ${classObj?.name.toCapitalCase()} subclass (${
             classObj?.subClassName
           }).`,
-          callback: (s, c) => {
-            const subClass = c as SubClassID[];
-            return {
-              ...s,
-              pendingLinks: {
-                ...s.pendingLinks,
-                subClass: [...s.pendingLinks.subClass, ...subClass],
-              },
-            };
-          },
+          callbackProtocol: "SubclassSelection",
         },
       ],
     };
@@ -134,35 +125,7 @@ export const levelUp = async (
           from: `${character.Classes?.find(
             (c) => c.id === classID
           )?.name.toCapitalCase()}`,
-          callback: async (s, c) => {
-            const bonuses = c as AbilityScoreValue[];
-            const newState = { ...s };
-            for (const bonus of bonuses) {
-              newState.abilityScores[bonus.ability] += bonus.value;
-              newState.abilityScoreReasons[bonus.ability] = [
-                ...(newState.abilityScoreReasons[bonus.ability] || []),
-                {
-                  reason: `${character.Classes?.find(
-                    (c) => c.id === classID
-                  )?.name.toCapitalCase()} Class ASI`,
-                  effect: `+ ${bonus.value}`,
-                },
-              ];
-            }
-            const refreshedAC = await refreshAC(newState);
-            const refreshedHp = await refreshHp(character, refreshedAC);
-            const refreshedPP = await refreshPassivePerception(refreshedHp);
-
-            return {
-              ...refreshedPP,
-              abilityScores: {
-                ...refreshedPP.abilityScores,
-              },
-              abilityScoreReasons: {
-                ...refreshedPP.abilityScoreReasons,
-              },
-            };
-          },
+          callbackProtocol: "AbilityScoreIncrease",
         },
       ],
     };
