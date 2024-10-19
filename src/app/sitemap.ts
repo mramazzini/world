@@ -269,14 +269,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   }
   siteMap.push({
-    url: `${process.env.DOMAIN_NAME}/feat`,
+    url: `${process.env.DOMAIN_NAME}/feats`,
     lastModified: new Date(),
     changeFrequency: "yearly",
     priority: 0.9,
   });
   for (const f of feats) {
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/feat/${f.name.replaceAll(" ", "-")}`,
+      url: `${process.env.DOMAIN_NAME}/feats/${f.name.replaceAll(" ", "-")}`,
       lastModified: f.updatedAt,
       changeFrequency: "yearly",
       priority: 0.8,
