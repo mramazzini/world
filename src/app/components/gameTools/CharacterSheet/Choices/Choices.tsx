@@ -13,8 +13,6 @@ interface Props {
 
 const ChooseChoices = ({ character, setCharacterState }: Props) => {
   const [loading, setLoading] = useState(false);
-  if (!character) return null;
-  if (!character.state) return null;
 
   useEffect(() => {
     // check to see if choice can be auto resolved
@@ -61,6 +59,8 @@ const ChooseChoices = ({ character, setCharacterState }: Props) => {
       setLoading(false);
     });
   }, [character.state?.pendingChoices]);
+  if (!character) return null;
+  if (!character.state) return null;
 
   return (
     <div className="flex flex-col items-center w-full ">

@@ -88,7 +88,7 @@ const Login = () => {
             </LoadingButton>
             <div className="divider divider-accent"></div>
             <p className="">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link href="/register" className="text-blue-500">
                 Register -&gt;
               </Link>
