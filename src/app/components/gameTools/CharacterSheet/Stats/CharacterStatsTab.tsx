@@ -296,6 +296,12 @@ const CharacterStatsTab = ({ character }: Props) => {
                 <li key={prof}>{prof.toCapitalCase().replaceAll("_", " ")}</li>
               ))}
             </ul>
+            <h4 className="divider">Saving Throws</h4>
+            <ul className="list-disc pl-4">
+              {character.state.proficiencies.savingThrows.map((prof) => (
+                <li key={prof}>{prof.toCapitalCase().replaceAll("_", " ")}</li>
+              ))}
+            </ul>
           </section>
         </div>
       </div>

@@ -44,7 +44,6 @@ interface Props {
   choice: PrismaJson.ChoiceType;
   callback: (data: CallbackOptions) => void;
 }
-let latest = 0;
 
 const ProficiencyChoiceHandler = <T extends ProficiencyType>({
   choice,
@@ -53,7 +52,7 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
   proficiency,
 }: Props) => {
   const [selections, setSelections] = useState<T[]>([]);
-
+  console.log(choice);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     //make sure that all selections are made

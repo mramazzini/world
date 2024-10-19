@@ -5,6 +5,7 @@ import { v4 } from "uuid";
 import { useEffect, useState } from "react";
 import Loading from "@/app/components/UI/Loading";
 import { runCallback } from "@/app/Utility/characterStateFunctions/update/runCallback";
+import { removeChoice } from "@/app/Utility/characterStateFunctions/update/removeChoice";
 interface Props {
   character: CharacterInfo;
   setCharacterState: (character: PrismaJson.CharacterState) => void;
@@ -16,16 +17,14 @@ const ChooseChoices = ({ character, setCharacterState }: Props) => {
   if (!character.state) return null;
 
   useEffect(() => {
-    // check to se if choice can be auto resolved
+    // check to see if choice can be auto resolved
     if (!character) return;
     if (!character.state) return;
     if (!character.state.pendingChoices) return;
 
     const pendingChoices = character.state.pendingChoices;
     const resolveChoices = async () => {
-      let s: PrismaJson.CharacterState =
-        character.state as PrismaJson.CharacterState;
-
+      let tempCharacter = { ...character };
       for (const choiceData of pendingChoices) {
         const validProtocols: PrismaJson.CallbackProtocol[] = [
           "SpeciesAbilityScoreIncrease",
@@ -40,8 +39,15 @@ const ChooseChoices = ({ character, setCharacterState }: Props) => {
           continue;
         }
         if (!choiceData.choice.choices) {
-          s = await runCallback(
-            character,
+          if (!choiceData.choice.default) {
+            tempCharacter.state = removeChoice(
+              tempCharacter.state as PrismaJson.CharacterState,
+              choiceData.id
+            );
+            continue;
+          }
+          tempCharacter.state = await runCallback(
+            tempCharacter,
             choiceData.callbackProtocol,
             choiceData.from,
             choiceData.id,
@@ -49,7 +55,7 @@ const ChooseChoices = ({ character, setCharacterState }: Props) => {
           );
         }
       }
-      setCharacterState({ ...s });
+      setCharacterState(tempCharacter.state as PrismaJson.CharacterState);
     };
     resolveChoices().then(() => {
       setLoading(false);

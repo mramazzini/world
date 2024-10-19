@@ -9,6 +9,7 @@ import { addLanguageProficiencies } from "../../ChoiceFunctions/addLanguageProfi
 import { addSavingThrowProficiencies } from "../../ChoiceFunctions/addSavingThrowProficiencies";
 import { addSkillProficiencies } from "../../ChoiceFunctions/addSkillProficiencies";
 import { addWeaponProficiencies } from "../../ChoiceFunctions/addWeaponProficiencies";
+import { removeChoice } from "./removeChoice";
 
 export const runCallback = async (
   character: CharacterInfo,
@@ -17,6 +18,7 @@ export const runCallback = async (
   choiceId: string,
   data: CallbackOptions
 ): Promise<PrismaJson.CharacterState> => {
+  if (!data) return character.state as PrismaJson.CharacterState;
   const callback: PrismaJson.StateCallback =
     protocol == "ItemToInventory"
       ? ItemToInventory
@@ -37,13 +39,19 @@ export const runCallback = async (
       : protocol == "addSkillProficiencies"
       ? addSkillProficiencies
       : addWeaponProficiencies;
-
   const callbackRes = await callback(character, data, from);
-  const newChoices = callbackRes.pendingChoices;
-  const index = newChoices.findIndex((choice) => choice.id === choiceId);
-  newChoices.splice(index, 1);
+  console.log(
+    "Resolved ",
+    protocol,
+    " from ",
+    from,
+    " with ",
+    data,
+    " to ",
+    callbackRes
+  );
+  const removedChoice = removeChoice(callbackRes, choiceId);
   return {
-    ...callbackRes,
-    pendingChoices: [...newChoices],
+    ...removedChoice,
   };
 };

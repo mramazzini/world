@@ -14,6 +14,7 @@ import { ArmorType, Language, Skill } from "@prisma/client";
 import SubclassChoiceHandler from "./SubclassChoiceHandler";
 import CharacterAbilityScoreHandler from "./CharacterAbilityScoreHandler";
 import AbilityScoreHandler from "./AbilityScoreHandler";
+import { runCallback } from "@/app/Utility/characterStateFunctions/update/runCallback";
 
 interface Props {
   id: string;
@@ -30,7 +31,121 @@ const Choice = ({
   character,
   hidden,
 }: Props) => {
-  const runCallback = async (data: CallbackOptions) => {};
+  const callback = async (data: CallbackOptions) => {
+    const s = await runCallback(
+      character,
+      choiceData.callbackProtocol,
+      choiceData.from,
+      id,
+      data
+    );
+    setCharacterState({ ...s });
+  };
+
+  const filterChoice = (choice: PrismaJson.Choice) => {
+    //need to filter out choices that the user already has
+    if (choice.model === "Skill") {
+      const skillChoice = choice.choice as PrismaJson.SkillChoice;
+      const skills: Skill[] = character.state?.proficiencies.skills || [];
+      const newChoice: PrismaJson.SkillChoice = {
+        ...skillChoice,
+        choices: skillChoice.choices?.map((c) => {
+          if (c.options.some((o) => skills.includes(o))) {
+            return {
+              ...c,
+              options: c.options.filter((o) => !skills.includes(o)),
+              numberOfChoices: Math.min(
+                c.numberOfChoices,
+                c.options.filter((o) => !skills.includes(o)).length
+              ),
+            };
+          }
+        }) as PrismaJson.SkillChoice["choices"],
+      };
+      return { ...newChoice };
+    }
+    if (choice.model === "Language") {
+      const languageChoice = choice.choice as PrismaJson.LanguageChoice;
+      const languages: Language[] =
+        character.state?.proficiencies.languages || [];
+      const newChoice: PrismaJson.LanguageChoice = {
+        ...languageChoice,
+        choices: languageChoice.choices?.map((c) => {
+          if (c.options.some((o) => languages.includes(o))) {
+            return {
+              ...c,
+              options: c.options.filter((o) => !languages.includes(o)),
+              numberOfChoices: Math.min(
+                c.numberOfChoices,
+                c.options.filter((o) => !languages.includes(o)).length
+              ),
+            };
+          }
+        }) as PrismaJson.LanguageChoice["choices"],
+      };
+      return { ...newChoice };
+    }
+    if (choice.model === "Armor") {
+      const armorChoice = choice.choice as PrismaJson.ArmorChoice;
+      const armors: ArmorType[] = character.state?.proficiencies.armor || [];
+      const newChoice: PrismaJson.ArmorChoice = {
+        ...armorChoice,
+        choices: armorChoice.choices?.map((c) => {
+          if (c.options.some((o) => armors.includes(o))) {
+            return {
+              ...c,
+              options: c.options.filter((o) => !armors.includes(o)),
+              numberOfChoices: Math.min(
+                c.numberOfChoices,
+                c.options.filter((o) => !armors.includes(o)).length
+              ),
+            };
+          }
+        }) as PrismaJson.ArmorChoice["choices"],
+      };
+      return { ...newChoice };
+    }
+    if (choice.model === "Weapon") {
+      const weaponChoice = choice.choice as PrismaJson.WeaponChoice;
+      const weapons: WeaponID[] = character.state?.proficiencies.weapons || [];
+      const newChoice: PrismaJson.WeaponChoice = {
+        ...weaponChoice,
+        choices: weaponChoice.choices?.map((c) => {
+          if (c.options.some((o) => weapons.includes(o))) {
+            return {
+              ...c,
+              options: c.options.filter((o) => !weapons.includes(o)),
+              numberOfChoices: Math.min(
+                c.numberOfChoices,
+                c.options.filter((o) => !weapons.includes(o)).length
+              ),
+            };
+          }
+        }) as PrismaJson.WeaponChoice["choices"],
+      };
+      return { ...newChoice };
+    }
+    if (choice.model === "Tool") {
+      const toolChoice = choice.choice as PrismaJson.ToolChoice;
+      const tools: ToolID[] = character.state?.proficiencies.tools || [];
+      const newChoice: PrismaJson.ToolChoice = {
+        ...toolChoice,
+        choices: toolChoice.choices?.map((c) => {
+          if (c.options.some((o) => tools.includes(o))) {
+            return {
+              ...c,
+              options: c.options.filter((o) => !tools.includes(o)),
+              numberOfChoices: Math.min(
+                c.numberOfChoices,
+                c.options.filter((o) => !tools.includes(o)).length
+              ),
+            };
+          }
+        }) as PrismaJson.ToolChoice["choices"],
+      };
+      return { ...newChoice };
+    }
+  };
 
   const RenderChoice = (choice: PrismaJson.Choice) => {
     switch (choice.model) {
@@ -39,7 +154,7 @@ const Choice = ({
           <CharacterAbilityScoreHandler
             choice={choice.choice as PrismaJson.AbilityScoreChoice}
             character={character}
-            callback={runCallback}
+            callback={callback}
           />
         );
       case "Item":
@@ -47,7 +162,7 @@ const Choice = ({
           <ItemChoiceHandler
             choice={choice.choice as PrismaJson.ItemChoice}
             character={character}
-            callback={runCallback}
+            callback={callback}
           />
         );
       case "Armor":
@@ -56,7 +171,7 @@ const Choice = ({
             proficiency="armor"
             choice={choice.choice as PrismaJson.ArmorChoice}
             character={character}
-            callback={runCallback}
+            callback={callback}
           />
         );
       case "Weapon":
@@ -65,7 +180,7 @@ const Choice = ({
             proficiency="weapon"
             choice={choice.choice as PrismaJson.WeaponChoice}
             character={character}
-            callback={runCallback}
+            callback={callback}
           />
         );
       case "Language":
@@ -74,7 +189,7 @@ const Choice = ({
             proficiency="language"
             choice={choice.choice as PrismaJson.LanguageChoice}
             character={character}
-            callback={runCallback}
+            callback={callback}
           />
         );
       case "Tool":
@@ -83,16 +198,16 @@ const Choice = ({
             proficiency="tool"
             choice={choice.choice as PrismaJson.ToolChoice}
             character={character}
-            callback={runCallback}
+            callback={callback}
           />
         );
       case "Skill":
         return (
           <ProficiencyChoiceHandler<Skill>
             proficiency="skill"
-            choice={choice.choice as PrismaJson.SkillChoice}
+            choice={filterChoice(choice) as PrismaJson.SkillChoice}
             character={character}
-            callback={runCallback}
+            callback={callback}
           />
         );
       case "Ability":
@@ -101,7 +216,7 @@ const Choice = ({
             proficiency="saving"
             choice={choice.choice as PrismaJson.AbilityChoice}
             character={character}
-            callback={runCallback}
+            callback={callback}
           />
         );
       case "AbilityScore":
@@ -109,7 +224,7 @@ const Choice = ({
           <AbilityScoreHandler
             choice={choice.choice as PrismaJson.AbilityScoreChoice}
             character={character}
-            callback={runCallback}
+            callback={callback}
           />
         );
       case "Subclass":
@@ -117,7 +232,7 @@ const Choice = ({
           <SubclassChoiceHandler
             choice={choice.choice as PrismaJson.SubclassChoice}
             character={character}
-            callback={runCallback}
+            callback={callback}
           />
         );
       default:
