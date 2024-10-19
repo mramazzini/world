@@ -40,9 +40,7 @@ const SidebarMetaSelector = ({
               </tr>
             </thead>
             <tbody>
-              {loading ? (
-                <Loading />
-              ) : (
+              {!loading &&
                 metadata.map((meta) => (
                   <tr
                     key={v4()}
@@ -66,10 +64,10 @@ const SidebarMetaSelector = ({
                       </Link>
                     </td>
                   </tr>
-                ))
-              )}
+                ))}
             </tbody>
           </table>
+          {loading && <Loading />}
         </div>
         <div className="flex justify-center m-2">
           <button className="btn btn-primary" onClick={() => setSelected(null)}>

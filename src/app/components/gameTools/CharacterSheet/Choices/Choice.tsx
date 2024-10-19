@@ -10,21 +10,11 @@ import {
 import ItemChoiceHandler from "./ItemChoiceHandler";
 import { Ability } from "@prisma/client";
 import ProficiencyChoiceHandler from "./ProficiencyChoiceHandler";
-import Image from "next/image";
 import { ArmorType, Language, Skill } from "@prisma/client";
 import SubclassChoiceHandler from "./SubclassChoiceHandler";
 import CharacterAbilityScoreHandler from "./CharacterAbilityScoreHandler";
 import AbilityScoreHandler from "./AbilityScoreHandler";
-import { addArmorProficiencies } from "@/app/Utility/ChoiceFunctions/addArmorProficiencies";
-import { addToolProficiencies } from "@/app/Utility/ChoiceFunctions/addToolProficiencies";
-import { addLanguageProficiencies } from "@/app/Utility/ChoiceFunctions/addLanguageProficiencies";
-import { addSavingThrowProficiencies } from "@/app/Utility/ChoiceFunctions/addSavingThrowProficiencies";
-import { addSkillProficiencies } from "@/app/Utility/ChoiceFunctions/addSkillProficiencies";
-import { addWeaponProficiencies } from "@/app/Utility/ChoiceFunctions/addWeaponProficiencies";
-import { subclassSelection } from "@/app/Utility/ChoiceFunctions/subclassSelection";
-import { ItemToInventory } from "@/app/Utility/ChoiceFunctions/ItemToInventory";
-import { setAbilityScore } from "@/app/Utility/ChoiceFunctions/setAbilityScore";
-import { SpeciesAbilityScoreIncrease } from "@/app/Utility/ChoiceFunctions/speciesAbilityScoreIncrease";
+
 interface Props {
   id: string;
   character: CharacterInfo;
@@ -40,38 +30,7 @@ const Choice = ({
   character,
   hidden,
 }: Props) => {
-  const runCallback = async (data: CallbackOptions) => {
-    if (!character.state) return;
-    const callback: PrismaJson.StateCallback =
-      choiceData.callbackProtocol == "ItemToInventory"
-        ? ItemToInventory
-        : choiceData.callbackProtocol == "addArmorProficiencies"
-        ? addArmorProficiencies
-        : choiceData.callbackProtocol == "addToolProficiencies"
-        ? addToolProficiencies
-        : choiceData.callbackProtocol == "SetAbilityScore"
-        ? setAbilityScore
-        : choiceData.callbackProtocol == "SubclassSelection"
-        ? subclassSelection
-        : choiceData.callbackProtocol == "SpeciesAbilityScoreIncrease"
-        ? SpeciesAbilityScoreIncrease
-        : choiceData.callbackProtocol == "addLanguageProficiencies"
-        ? addLanguageProficiencies
-        : choiceData.callbackProtocol == "addSavingThrowProficiencies"
-        ? addSavingThrowProficiencies
-        : choiceData.callbackProtocol == "addSkillProficiencies"
-        ? addSkillProficiencies
-        : addWeaponProficiencies;
-
-    const callbackRes = await callback(character, data, choiceData.from);
-    const newChoices = callbackRes.pendingChoices;
-    const index = newChoices.findIndex((choice) => choice.id === id);
-    newChoices.splice(index, 1);
-    await setCharacterState({
-      ...callbackRes,
-      pendingChoices: [...newChoices],
-    });
-  };
+  const runCallback = async (data: CallbackOptions) => {};
 
   const RenderChoice = (choice: PrismaJson.Choice) => {
     switch (choice.model) {

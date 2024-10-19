@@ -130,19 +130,19 @@ const seedarr: {
     index: "017",
     callback: createCreatures,
     description: "Creating creatures from the creature seed.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "018",
     callback: linkCreatureToSpells,
     description: "Linking creatures to spells.",
-    enabled: true,
+    // enabled: true,
   },
   {
     index: "019",
     callback: linkCreatureToItems,
     description: "Linking creatures to items.",
-    enabled: true,
+    // enabled: true,
   },
 
   {
