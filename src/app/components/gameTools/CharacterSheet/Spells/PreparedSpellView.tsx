@@ -2,7 +2,7 @@ import { Log, SpellLevel } from "@/lib/utils/types/types";
 import { toSpellLevel } from "@/lib/utils/toSpellLevel";
 import { DamageTypes, Rarity } from "@prisma/client";
 import { Fragment, useEffect, useState } from "react";
-import { roll } from "@/app/components/Utility/roll";
+import { roll } from "@/app/Utility/roll";
 import numberArray from "@/lib/utils/numberArray";
 const SpellRollMaker = ({
   spellRoll,

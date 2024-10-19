@@ -4,7 +4,7 @@ import {
   ItemInfo,
   WeaponPropertyNames,
 } from "@/lib/utils/types/types";
-import { memoizeGetItem } from "@/app/components/Utility/globalCache";
+import { memoizeGetItem } from "@/app/Utility/globalCache";
 import { Fragment, useEffect, useState } from "react";
 import ItemPage from "../../../pages/wiki/official/Item.page";
 import Image from "next/image";
@@ -12,10 +12,10 @@ import { ArmorType, ItemTypes } from "@prisma/client";
 import {
   refreshAC,
   updateAC,
-} from "@/app/components/Utility/characterStateFunctions/update/updateAC";
-import { unpackEquipment } from "@/app/components/Utility/characterStateFunctions/update/unpackEquipment";
+} from "@/app/Utility/characterStateFunctions/update/updateAC";
+import { unpackEquipment } from "@/app/Utility/characterStateFunctions/update/unpackEquipment";
 import { WeaponProperties } from "@/lib/globalVars";
-import { equipWeapon } from "@/app/components/Utility/characterStateFunctions/update/equipWeapon";
+import { equipWeapon } from "@/app/Utility/characterStateFunctions/update/equipWeapon";
 interface Props {
   character: CharacterInfo;
   updateState: (state: PrismaJson.CharacterState) => void;

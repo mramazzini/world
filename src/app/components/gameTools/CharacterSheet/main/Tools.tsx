@@ -7,16 +7,16 @@ import {
   ToolInfo,
 } from "@/lib/utils/types/types";
 import { useEffect, useState } from "react";
-import { memoizeGetItem } from "@/app/components/Utility/globalCache";
-import Tooltip from "@/app/components/Utility/Tooltip";
+import { memoizeGetItem } from "@/app/Utility/globalCache";
+import Tooltip from "@/app/Utility/Tooltip";
 import { Ability } from "@prisma/client";
 import AbilityToText from "@/lib/utils/AbilityToText";
-import { roll } from "@/app/components/Utility/roll";
-import { calcProficiency } from "@/app/components/Utility/characterStateFunctions/calc/calcProficiency";
-import { calculateLevel } from "@/app/components/Utility/characterStateFunctions/calc/calcLevel";
-import { AbilityToModifier } from "@/app/components/Utility/characterStateFunctions/calc/AbilityToModifier";
-import P from "@/app/components/Utility/FormatAndSanitize";
-import { calcSkillModifier } from "@/app/components/Utility/characterStateFunctions/calc/calcSkillModifier";
+import { roll } from "@/app/Utility/roll";
+import { calcProficiency } from "@/app/Utility/characterStateFunctions/calc/calcProficiency";
+import { calculateLevel } from "@/app/Utility/characterStateFunctions/calc/calcLevel";
+import { AbilityToModifier } from "@/app/Utility/characterStateFunctions/calc/AbilityToModifier";
+import P from "@/app/Utility/FormatAndSanitize";
+import { calcSkillModifier } from "@/app/Utility/characterStateFunctions/calc/calcSkillModifier";
 import Image from "next/image";
 interface Props {
   character: CharacterInfo;

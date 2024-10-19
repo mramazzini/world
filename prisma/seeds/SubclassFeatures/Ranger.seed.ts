@@ -1,4 +1,4 @@
-import P from "@/app/components/Utility/FormatAndSanitize";
+import P from "@/app/Utility/FormatAndSanitize";
 import { Prisma } from "@prisma/client";
 
 const ids = {

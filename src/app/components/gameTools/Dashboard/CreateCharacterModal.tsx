@@ -3,7 +3,7 @@ import { DBMetadata } from "@/lib/utils/types/metadata";
 import { useEffect, useState } from "react";
 import { v4 } from "uuid";
 import { Alignment } from "@prisma/client";
-import { alignmentToText } from "@/app/components/Utility/alignmentToText";
+import { alignmentToText } from "@/app/Utility/alignmentToText";
 import SidebarMetaSelector from "./SidebarMetaSelector";
 import { getClassMetadata } from "@/lib/actions/db/class/read.actions";
 import { getSpeciesMetadata } from "@/lib/actions/db/species/get.actions";

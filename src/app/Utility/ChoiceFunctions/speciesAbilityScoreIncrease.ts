@@ -1,7 +1,7 @@
 import { AbilityScoreValue, CharacterInfo } from "@/lib/utils/types/types";
-import { refreshAC } from "./updateAC";
-import { refreshHp } from "./refreshHp";
-import { refreshPassivePerception } from "./refreshPassivePerception";
+import { refreshAC } from "../characterStateFunctions/update/updateAC";
+import { refreshHp } from "../characterStateFunctions/update/refreshHp";
+import { refreshPassivePerception } from "../characterStateFunctions/update/refreshPassivePerception";
 
 export const SpeciesAbilityScoreIncrease: PrismaJson.StateCallback = async (
   char,

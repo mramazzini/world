@@ -1,4 +1,4 @@
-import { getPotentialItemsFromClass } from "@/app/components/Utility/idExtraction";
+import { getPotentialItemsFromClass } from "@/app/Utility/idExtraction";
 import { cerr, cinfo } from "@/lib/utils/chalkLog";
 import { PrismaClient } from "@prisma/client";
 import Classes from "../Classes/Class.seed";

@@ -1,7 +1,7 @@
-import { AbilityToModifier } from "@/app/components/Utility/characterStateFunctions/calc/AbilityToModifier";
-import { calculateLevel } from "@/app/components/Utility/characterStateFunctions/calc/calcLevel";
-import P from "@/app/components/Utility/FormatAndSanitize";
-import ModelDisplay from "@/app/components/Utility/ModelDisplay";
+import { AbilityToModifier } from "@/app/Utility/characterStateFunctions/calc/AbilityToModifier";
+import { calculateLevel } from "@/app/Utility/characterStateFunctions/calc/calcLevel";
+import P from "@/app/Utility/FormatAndSanitize";
+import ModelDisplay from "@/app/Utility/ModelDisplay";
 import { CharacterInfo } from "@/lib/utils/types/types";
 import Link from "next/link";
 

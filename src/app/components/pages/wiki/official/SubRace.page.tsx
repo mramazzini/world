@@ -1,8 +1,8 @@
 import { SubSpeciesInfo } from "@/lib/utils/types/types";
-import NewLineParse from "@/app/components/Utility/NewLineParse";
+import NewLineParse from "@/app/Utility/NewLineParse";
 import Link from "next/link";
 import Info from "@/app/components/UI/Info";
-import P from "@/app/components/Utility/FormatAndSanitize";
+import P from "@/app/Utility/FormatAndSanitize";
 import GenerateTable from "@/app/components/UI/GenerateTable";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 import "@/lib/string.extensions";
 
 import { objEqual } from "@/lib/utils/deepEqual";
-import JsonTable from "@/app/components/Utility/JsonTable";
+import JsonTable from "@/app/Utility/JsonTable";
 import { AssociatedModel } from "@prisma/client";
 import CommentSection from "@/app/components/CommentSection/CommentSection";
 const SubSpeciesPage = ({ subSpecies }: Props) => {

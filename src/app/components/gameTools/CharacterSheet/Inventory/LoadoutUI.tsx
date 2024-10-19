@@ -1,9 +1,9 @@
 "use client";
-import { calcWeight } from "@/app/components/Utility/characterStateFunctions/calc/calcWeight";
-import P from "@/app/components/Utility/FormatAndSanitize";
-import { memoizeGetItem } from "@/app/components/Utility/globalCache";
-import ModelDisplay from "@/app/components/Utility/ModelDisplay";
-import Tooltip from "@/app/components/Utility/Tooltip";
+import { calcWeight } from "@/app/Utility/characterStateFunctions/calc/calcWeight";
+import P from "@/app/Utility/FormatAndSanitize";
+import { memoizeGetItem } from "@/app/Utility/globalCache";
+import ModelDisplay from "@/app/Utility/ModelDisplay";
+import Tooltip from "@/app/Utility/Tooltip";
 import { CharacterInfo, WeaponInfo } from "@/lib/utils/types/types";
 import numberArray from "@/lib/utils/numberArray";
 import Image from "next/image";

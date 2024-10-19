@@ -1,4 +1,4 @@
-import Tooltip from "@/app/components/Utility/Tooltip";
+import Tooltip from "@/app/Utility/Tooltip";
 import { CharacterInfo } from "@/lib/utils/types/types";
 
 interface Props {

@@ -7,7 +7,7 @@ import {
   SpellListInfo,
 } from "@/lib/utils/types/types";
 import { useEffect, useState } from "react";
-import { generateCharacter } from "../../Utility/characterStateFunctions/update/generateCharacter";
+import { generateCharacter } from "../../../Utility/characterStateFunctions/update/generateCharacter";
 import "@/lib/string.extensions";
 import MainSheet from "./main/MainSheet";
 import InventoryTab from "./Inventory/InventoryTab";
@@ -15,7 +15,7 @@ import ChooseChoices from "./Choices/Choices";
 import SpellSheet from "./Spells/SpellSheet";
 import Notes from "./Notes/Notes";
 import Traits from "./Traits/Traits";
-import { applyPendingModels } from "../../Utility/characterStateFunctions/update/applyPendingModels";
+import { applyPendingModels } from "../../../Utility/characterStateFunctions/update/applyPendingModels";
 import CharacterStatsTab from "./Stats/CharacterStatsTab";
 type Tab =
   | "sheet"

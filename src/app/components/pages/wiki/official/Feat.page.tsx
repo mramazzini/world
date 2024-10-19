@@ -1,7 +1,7 @@
 import CommentSection from "@/app/components/CommentSection/CommentSection";
 import FeatureList from "@/app/components/UI/FeatureList";
 import Info from "@/app/components/UI/Info";
-import NewLineParse from "@/app/components/Utility/NewLineParse";
+import NewLineParse from "@/app/Utility/NewLineParse";
 import { FeatInfo } from "@/lib/utils/types/types";
 import { AssociatedModel } from "@prisma/client";
 import Link from "next/link";

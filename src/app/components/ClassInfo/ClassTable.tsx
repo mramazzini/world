@@ -5,7 +5,7 @@ import numberArray from "@/lib/utils/numberArray";
 import numPlace from "@/lib/utils/numPlace";
 import Link from "next/link";
 import Info from "../UI/Info";
-import P from "../Utility/FormatAndSanitize";
+import P from "../../Utility/FormatAndSanitize";
 import { useState } from "react";
 import { Level, SpellLevel } from "@/lib/utils/types/types";
 interface Props {

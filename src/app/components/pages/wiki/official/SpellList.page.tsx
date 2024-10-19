@@ -6,9 +6,9 @@ import Link from "next/link";
 import "@/lib/string.extensions";
 import { useRouter } from "next/navigation";
 
-import NewLineParse from "../../../Utility/NewLineParse";
+import NewLineParse from "../../../../Utility/NewLineParse";
 import numberArray from "@/lib/utils/numberArray";
-import P from "@/app/components/Utility/FormatAndSanitize";
+import P from "@/app/Utility/FormatAndSanitize";
 import numPlace from "@/lib/utils/numPlace";
 import { AssociatedModel } from "@prisma/client";
 import CommentSection from "@/app/components/CommentSection/CommentSection";

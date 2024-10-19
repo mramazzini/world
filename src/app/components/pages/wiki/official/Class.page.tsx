@@ -3,18 +3,15 @@ import { ClassInfo } from "@/lib/utils/types/types";
 import Loading from "../../../UI/Loading";
 import { Ability, AssociatedModel } from "@prisma/client";
 import Link from "next/link";
-import NewLineParse from "@/app/components/Utility/NewLineParse";
+import NewLineParse from "@/app/Utility/NewLineParse";
 import ClassTable from "@/app/components/ClassInfo/ClassTable";
-import P from "@/app/components/Utility/FormatAndSanitize";
+import P from "@/app/Utility/FormatAndSanitize";
 import "@/lib/string.extensions";
 import Info from "@/app/components/UI/Info";
 import AbilityToText from "@/lib/utils/AbilityToText";
-import JsonTable from "@/app/components/Utility/JsonTable";
+import JsonTable from "@/app/Utility/JsonTable";
 import numPlace from "@/lib/utils/numPlace";
-import {
-  numberColor,
-  numberColorBefore,
-} from "@/app/components/Utility/colorBefore";
+import { numberColor, numberColorBefore } from "@/app/Utility/colorBefore";
 import FeatureList from "@/app/components/UI/FeatureList";
 import Feature from "@/app/components/UI/Feature";
 import CommentSection from "@/app/components/CommentSection/CommentSection";

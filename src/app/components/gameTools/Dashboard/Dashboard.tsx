@@ -1,7 +1,7 @@
 "use client";
 import Loading from "@/app/components/UI/Loading";
-import { alignmentToText } from "@/app/components/Utility/alignmentToText";
-import { calculateLevel } from "@/app/components/Utility/characterStateFunctions/calc/calcLevel";
+import { alignmentToText } from "@/app/Utility/alignmentToText";
+import { calculateLevel } from "@/app/Utility/characterStateFunctions/calc/calcLevel";
 import "@/lib/string.extensions";
 import {
   getCharacters,

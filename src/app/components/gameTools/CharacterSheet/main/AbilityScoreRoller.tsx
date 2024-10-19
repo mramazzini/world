@@ -1,5 +1,5 @@
-import { AbilityToModifier } from "@/app/components/Utility/characterStateFunctions/calc/AbilityToModifier";
-import Tooltip from "@/app/components/Utility/Tooltip";
+import { AbilityToModifier } from "@/app/Utility/characterStateFunctions/calc/AbilityToModifier";
+import Tooltip from "@/app/Utility/Tooltip";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import { CharacterInfo } from "@/lib/utils/types/types";
 import { Ability } from "@prisma/client";

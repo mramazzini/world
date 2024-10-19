@@ -1,4 +1,4 @@
-import P from "@/app/components/Utility/FormatAndSanitize";
+import P from "@/app/Utility/FormatAndSanitize";
 import {
   Ability,
   Alignment,
@@ -8962,8 +8962,8 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
   {
     id: 152,
     name: "Adult Black Dragon",
-    description: "Adult Black Dragons are large swamp-dwelling dragons.",
-    flavorText: "Adult Black Dragons are large swamp-dwelling dragons.",
+    description: "Adult Black Dragons are huge swamp-dwelling dragons.",
+    flavorText: "Adult Black Dragons are huge swamp-dwelling dragons.",
     size: Size.HUGE,
     creatureType: CreatureType.DRAGON,
     alignmentOptions: [Alignment.CHAOTIC_EVIL],
@@ -9094,6 +9094,571 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
         description:
           "The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 19 Dexterity saving throw or take 13 (2d6 + 6) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed",
         cost: 2,
+        rolls: [
+          {
+            name: "Damage",
+            formula: "2d6 + 6",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 153,
+    name: "Young Black Dragon",
+    description: "Young Black Dragons are large swamp-dwelling dragons.",
+    flavorText: "Young Black Dragons are large swamp-dwelling dragons.",
+    size: Size.LARGE,
+    creatureType: CreatureType.DRAGON,
+    alignmentOptions: [Alignment.CHAOTIC_EVIL],
+    hitDiceAmount: 15,
+    naturalArmorBonus: 6,
+    armorClassDescription: "Natural Armor",
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    speed: 40,
+    flyingSpeed: 80,
+    swimmingSpeed: 40,
+    challengeRating: 7,
+    STR: 19,
+    DEX: 14,
+    CON: 17,
+    INT: 12,
+    WIS: 11,
+    CHA: 15,
+    saveProficiencies: [Ability.DEX, Ability.CON, Ability.WIS, Ability.CHA],
+    damageImmunities: [DamageTypes.ACID],
+    skillExpertise: [Skill.PERCEPTION],
+    skillProficiencies: [Skill.STEALTH],
+    darkvision: 120,
+    blindsight: 30,
+    languageDescription: "Common, Draconic",
+    features: [
+      {
+        name: "Amphibious",
+        description: "The dragon can breathe air and water.",
+      },
+    ],
+    actions: [
+      {
+        name: "Multiattack",
+        description:
+          "The dragon makes three attacks: one with its bite and two with its claws.",
+        actionType: "action",
+      },
+      {
+        name: "Bite",
+        description:
+          "Melee Weapon Attack: +7 to hit, reach 10 ft., one target. Hit: 15 (2d10 + 4) piercing damage plus 4 (1d8) acid damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 7",
+          },
+        ],
+      },
+      {
+        name: "Claw",
+        description:
+          "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 7",
+          },
+          {
+            name: "Slashing Damage",
+            formula: "2d6 + 4",
+          },
+        ],
+      },
+      {
+        name: "Acid Breath (Recharge 5-6)",
+        description:
+          "The dragon exhales acid in a 30-­‐foot line that is 5 feet wide. Each creature in that line must make a DC 14 Dexterity saving throw, taking 49 (11d8) acid damage on a failed save, or half as much damage on a successful one.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Damage",
+            formula: "11d8",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 154,
+    name: "Black Dragon Wyrmling",
+    description: "Black Dragon Wyrmlings are small swamp-dwelling dragons.",
+    flavorText: "Black Dragon Wyrmlings are small swamp-dwelling dragons.",
+    size: Size.MEDIUM,
+    creatureType: CreatureType.DRAGON,
+    alignmentOptions: [Alignment.CHAOTIC_EVIL],
+    hitDiceAmount: 6,
+    naturalArmorBonus: 5,
+    armorClassDescription: "Natural Armor",
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    speed: 30,
+    swimmingSpeed: 30,
+    flyingSpeed: 60,
+    challengeRating: 2,
+    STR: 15,
+    DEX: 14,
+    CON: 13,
+    INT: 10,
+    WIS: 11,
+    CHA: 13,
+    saveProficiencies: [Ability.DEX, Ability.CON, Ability.WIS, Ability.CHA],
+    damageImmunities: [DamageTypes.ACID],
+    skillExpertise: [Skill.PERCEPTION],
+    skillProficiencies: [Skill.STEALTH],
+    darkvision: 60,
+    blindsight: 10,
+    languageDescription: "Common, Draconic",
+    features: [
+      {
+        name: "Amphibious",
+        description: "The dragon can breathe air and water.",
+      },
+    ],
+    actions: [
+      {
+        name: "Bite",
+        description:
+          "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (1d10 + 2) piercing damage plus 2 (1d4) acid damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 4",
+          },
+          {
+            name: "Piercing Damage",
+            formula: "1d10 + 2",
+          },
+          {
+            name: "Acid Damage",
+            formula: "1d4",
+          },
+        ],
+      },
+      {
+        name: "Acid Breath (Recharge 5-6)",
+        description:
+          "The dragon exhales acid in a 15-­‐foot line that is 5 feet wide. Each creature in that line must make a DC 11 Dexterity saving throw, taking 22 (5d8) acid damage on a failed save, or half as much damage on a successful one.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Damage",
+            formula: "5d8",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 155,
+    name: "Ancient Blue Dragon",
+    description: "Massive Lawful Evil desert-dwelling dragons.",
+    flavorText: "Massive Lawful Evil desert-dwelling dragons.",
+    size: Size.GARGANTUAN,
+    creatureType: CreatureType.DRAGON,
+    alignmentOptions: [Alignment.LAWFUL_EVIL],
+    hitDiceAmount: 26,
+    naturalArmorBonus: 12,
+    armorClassDescription: "Natural Armor",
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    speed: 40,
+    flyingSpeed: 80,
+    burrowingSpeed: 40,
+    challengeRating: 23,
+    STR: 29,
+    DEX: 10,
+    CON: 27,
+    INT: 18,
+    WIS: 17,
+    CHA: 21,
+    saveProficiencies: [Ability.DEX, Ability.CON, Ability.WIS, Ability.CHA],
+    damageImmunities: [DamageTypes.LIGHTNING],
+    skillExpertise: [Skill.PERCEPTION],
+    skillProficiencies: [Skill.STEALTH],
+    darkvision: 120,
+    blindsight: 60,
+    languageDescription: "Common, Draconic",
+    features: [
+      {
+        name: "Legendary Resistance (3/Day)",
+        description:
+          "If the dragon fails a saving throw, it can choose to succeed instead.",
+      },
+    ],
+    actions: [
+      {
+        name: "Multiattack",
+        description:
+          "The dragon can use its Frightful Presence. It then makes three attacks: one with its bite and two with its claws.",
+        actionType: "action",
+      },
+      {
+        name: "Bite",
+        description:
+          " Melee Weapon Attack: +16 to hit, reach 15 ft., one target. Hit: 20 (2d10 + 9) piercing damage plus 11 (2d10) lightning damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 16",
+          },
+          {
+            name: "Piercing Damage",
+            formula: "2d10 + 9",
+          },
+          {
+            name: "Lightning Damage",
+            formula: "2d10",
+          },
+        ],
+      },
+      {
+        name: "Claw",
+        description:
+          "Melee Weapon Attack: +16 to hit, reach 10 ft., one target. Hit: 16 (2d6 + 9) slashing damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 16",
+          },
+          {
+            name: "Slashing Damage",
+            formula: "2d6 + 9",
+          },
+        ],
+      },
+      {
+        name: "Tail",
+        description:
+          " Melee Weapon Attack: +16 to hit, reach 20 ft., one target. Hit: 18 (2d8 + 9) bludgeoning damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 16",
+          },
+          {
+            name: "Bludgeoning Damage",
+            formula: "2d8 + 9",
+          },
+        ],
+      },
+      {
+        name: "Frightful Presence",
+        description:
+          " Each creature of the dragon’s choice that is within 120 feet of the dragon and aware of it must succeed on a DC 20 Wisdom saving throw or become frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature’s saving throw is successful or the effect ends for it, the creature is immune to the dragon’s Frightful Presence for the next 24 hours.",
+        actionType: "action",
+      },
+      {
+        name: "Lightning Breath (Recharge 5-6)",
+        description:
+          "The dragon exhales lightning in a 120-­‐foot line that is 10 feet wide. Each creature in that line must make a DC 23 Dexterity saving throw, taking 88 (16d10) lightning damage on a failed save, or half as much damage on a successful one.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Damage",
+            formula: "16d10",
+          },
+        ],
+      },
+    ],
+    legendaryActionAmount: 3,
+    legendaryActions: [
+      {
+        name: "Detect",
+        description: "The dragon makes a Wisdom (Perception) check.",
+        cost: 1,
+      },
+      {
+        name: "Tail Attack",
+        description: "The dragon makes a tail attack.",
+        cost: 1,
+      },
+      {
+        name: "Wing Attack (Costs 2 Actions)",
+        description:
+          "The dragon beats its wings. Each creature within 15 feet of the dragon must succeed on a DC 24 Dexterity saving throw or take 16 (2d6 + 9) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.",
+        cost: 2,
+      },
+    ],
+  },
+  {
+    id: 156,
+    name: "Adult Blue Dragon",
+    description: "Adult Blue Dragons are huge desert-dwelling dragons.",
+    flavorText: "Adult Blue Dragons are huge desert-dwelling dragons.",
+    size: Size.HUGE,
+    creatureType: CreatureType.DRAGON,
+    alignmentOptions: [Alignment.LAWFUL_EVIL],
+    hitDiceAmount: 18,
+    naturalArmorBonus: 9,
+    armorClassDescription: "Natural Armor",
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    speed: 40,
+    flyingSpeed: 80,
+    burrowingSpeed: 30,
+    challengeRating: 16,
+    STR: 25,
+    DEX: 10,
+    CON: 23,
+    INT: 16,
+    WIS: 15,
+    CHA: 19,
+    saveProficiencies: [Ability.DEX, Ability.CON, Ability.WIS, Ability.CHA],
+    damageImmunities: [DamageTypes.LIGHTNING],
+    skillExpertise: [Skill.PERCEPTION],
+    skillProficiencies: [Skill.STEALTH],
+    darkvision: 120,
+    blindsight: 60,
+    languageDescription: "Common, Draconic",
+    features: [
+      {
+        name: "Legendary Resistance (3/Day)",
+        description:
+          "If the dragon fails a saving throw, it can choose to succeed instead.",
+      },
+    ],
+    actions: [
+      {
+        name: "Multiattack",
+        description:
+          "The dragon can use its Frightful Presence. It then makes three attacks: one with its bite and two with its claws.",
+        actionType: "action",
+      },
+      {
+        name: "Bite",
+        description:
+          "Melee Weapon Attack: +12 to hit, reach 10 ft., one target. Hit: 18 (2d10 + 7) piercing damage plus 5 (1d10) lightning damage.",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 12",
+          },
+          {
+            name: "Piercing Damage",
+            formula: "2d10 + 7",
+          },
+          {
+            name: "Lightning Damage",
+            formula: "1d10",
+          },
+        ],
+        actionType: "action",
+      },
+      {
+        name: "Claw",
+        description:
+          "Melee Weapon Attack: +12 to hit, reach 5 ft., one target. Hit: 14 (2d6 + 7) slashing damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+
+            formula: "1d20 + 12",
+          },
+          {
+            name: "Slashing Damage",
+            formula: "2d6 + 7",
+          },
+        ],
+      },
+      {
+        name: "Tail",
+        description:
+          "Melee Weapon Attack: +12 to hit, reach 15 ft., one target. Hit: 16 (2d8 + 7) bludgeoning damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 12",
+          },
+          {
+            name: "Bludgeoning Damage",
+            formula: "2d8 + 7",
+          },
+        ],
+      },
+      {
+        name: "Frightful Presence",
+        description:
+          "Each creature of the dragon’s choice that is within 120 feet of the dragon and aware of it must succeed on a DC 17 Wisdom saving throw or become frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature’s saving throw is successful or the effect ends for it, the creature is immune to the dragon’s Frightful Presence for the next 24 hours.",
+        actionType: "action",
+      },
+      {
+        name: "Lightning Breath (Recharge 5-6)",
+        description:
+          "The dragon exhales lightning in a 90-­‐foot line that is 5 feet wide. Each creature in that line must make a DC 19 Dexterity saving throw, taking 66 (12d10) lightning damage on a failed save, or half as much damage on a successful one",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Damage",
+            formula: "12d10",
+          },
+        ],
+      },
+    ],
+    legendaryActionAmount: 3,
+    legendaryActions: [
+      {
+        name: "Detect",
+        description: "The dragon makes a Wisdom (Perception) check.",
+        cost: 1,
+      },
+      {
+        name: "Tail Attack",
+        description: "The dragon makes a tail attack.",
+        cost: 1,
+      },
+      {
+        name: "Wing Attack (Costs 2 Actions)",
+        description:
+          "The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 20 Dexterity saving throw or take 14 (2d6 + 7) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.",
+        rolls: [
+          {
+            name: "Damage",
+            formula: "2d6 + 7",
+          },
+        ],
+        cost: 2,
+      },
+    ],
+  },
+  {
+    id: 157,
+    name: "Young Blue Dragon",
+    description: "Young Blue Dragons are large desert-dwelling dragons.",
+    flavorText: "Young Blue Dragons are large desert-dwelling dragons.",
+    size: Size.LARGE,
+    creatureType: CreatureType.DRAGON,
+    alignmentOptions: [Alignment.LAWFUL_EVIL],
+    hitDiceAmount: 16,
+    naturalArmorBonus: 8,
+    armorClassDescription: "Natural Armor",
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    speed: 40,
+    flyingSpeed: 80,
+    burrowingSpeed: 20,
+    challengeRating: 9,
+    STR: 21,
+    DEX: 10,
+    CON: 19,
+    INT: 14,
+    WIS: 13,
+    CHA: 17,
+    saveProficiencies: [Ability.DEX, Ability.CON, Ability.WIS, Ability.CHA],
+    damageImmunities: [DamageTypes.LIGHTNING],
+    skillExpertise: [Skill.PERCEPTION],
+    skillProficiencies: [Skill.STEALTH],
+    darkvision: 120,
+    blindsight: 30,
+    languageDescription: "Common, Draconic",
+    actions: [
+      {
+        name: "Multiattack",
+        description:
+          "The dragon makes three attacks: one with its bite and two with its claws.",
+        actionType: "action",
+      },
+      {
+        name: "Bite",
+        description:
+          "Melee Weapon Attack: +9 to hit, reach 10 ft., one target. Hit: 16 (2d10 + 5) piercing damage plus 5 (1d10) lightning damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 9",
+          },
+          {
+            name: "Piercing Damage",
+            formula: "2d10 + 5",
+          },
+          {
+            name: "Lightning Damage",
+            formula: "1d10",
+          },
+        ],
+      },
+      {
+        name: "Claw",
+        description:
+          "Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 12 (2d6 + 5) slashing damage.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Attack",
+            formula: "1d20 + 9",
+          },
+          {
+            name: "Slashing Damage",
+            formula: "2d6 + 5",
+          },
+        ],
+      },
+      {
+        name: "Lightning Breath (Recharge 5-6)",
+        description:
+          "The dragon exhales lightning in an 60-­‐foot line that is 5 feet wide. Each creature in that line must make a DC 16 Dexterity saving throw, taking 55 (10d10) lightning damage on a failed save, or half as much damage on a successful one.",
+        actionType: "action",
+        rolls: [
+          {
+            name: "Damage",
+            formula: "10d10",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 158,
+    name: "Blue Dragon Wyrmling",
+    description: "Blue Dragon Wyrmlings are small desert-dwelling dragons.",
+    flavorText: "Blue Dragon Wyrmlings are small desert-dwelling dragons.",
+    size: Size.MEDIUM,
+    creatureType: CreatureType.DRAGON,
+    alignmentOptions: [Alignment.CHAOTIC_EVIL],
+    hitDiceAmount: 8,
+    naturalArmorBonus: 7,
+    armorClassDescription: "Natural Armor",
+    armorClassProtocol: ArmorClassProtocol.NATURAL_ARMOR,
+    speed: 30,
+    burrowingSpeed: 15,
+    flyingSpeed: 60,
+    challengeRating: 3,
+    STR: 17,
+    DEX: 10,
+    CON: 15,
+    INT: 12,
+    WIS: 11,
+    CHA: 15,
+    saveProficiencies: [Ability.DEX, Ability.CON, Ability.WIS, Ability.CHA],
+    damageImmunities: [DamageTypes.LIGHTNING],
+    skillExpertise: [Skill.PERCEPTION],
+    skillProficiencies: [Skill.STEALTH],
+    darkvision: 60,
+    blindsight: 10,
+    languageDescription: "Draconic",
+    actions: [
+      {
+        name: "Bite",
+        description:
+          "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d10 + 3) piercing damage plus 3 (1d6) lightning damage.",
+        actionType: "action",
+      },
+      {
+        name: "Lightning Breath (Recharge 5-6)",
+        description:
+          "The dragon exhales lightning in a 30-­‐foot line that is 5 feet wide. Each creature in that line must make a DC 12 Dexterity saving throw, taking 22 (4d10) lightning damage on a failed save, or half as much damage on a successful one.",
+        actionType: "action",
       },
     ],
   },

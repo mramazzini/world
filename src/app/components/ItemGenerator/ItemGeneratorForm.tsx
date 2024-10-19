@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { DamageTypes, Weapon } from "@prisma/client";
 import Input from "../UI/Input";
 import List from "../UI/List";
-import P from "../Utility/FormatAndSanitize";
+import P from "../../Utility/FormatAndSanitize";
 import Loading from "../UI/Loading";
 import { getWeapons } from "@/lib/actions/db/weapons/read.actions";
 

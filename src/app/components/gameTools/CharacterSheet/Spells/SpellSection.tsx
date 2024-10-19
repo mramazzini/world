@@ -1,5 +1,5 @@
-import P from "@/app/components/Utility/FormatAndSanitize";
-import JsonTable from "@/app/components/Utility/JsonTable";
+import P from "@/app/Utility/FormatAndSanitize";
+import JsonTable from "@/app/Utility/JsonTable";
 import { toSpellLevel } from "@/lib/utils/toSpellLevel";
 import { Ability, Spell } from "@prisma/client";
 import { Fragment } from "react";

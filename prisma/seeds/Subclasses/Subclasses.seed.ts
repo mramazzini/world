@@ -1,7 +1,7 @@
 import { Prisma, Ability } from "@prisma/client";
 import { SpellFocus } from "@/lib/utils/types/types";
 import { src } from "@/lib/utils/types/types";
-import P from "@/app/components/Utility/FormatAndSanitize";
+import P from "@/app/Utility/FormatAndSanitize";
 import { spellListIds } from "../Spells/SpellLists/SpellLists.seed";
 import { spellIds } from "../Spells/spells.seed";
 import { thirdCaster } from "../Classes/SpellSlotsUtil";

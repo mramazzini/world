@@ -13,15 +13,24 @@ import { sendNewUserMessage } from "@/lib/webhook/DiscordWebhook";
 const db = new PrismaClient();
 
 export const login = async (data: {
-  email: string;
+  emailOrUsername: string;
   password: string;
 }): Promise<AuthResult> => {
-  const { email, password } = data;
+  const { emailOrUsername, password } = data;
+
   const user = await db.user.findFirst({
     where: {
-      email,
+      OR: [
+        {
+          email: emailOrUsername,
+        },
+        {
+          username: emailOrUsername,
+        },
+      ],
     },
   });
+
   if (!user) {
     return AuthResult.UserNotFound;
   }

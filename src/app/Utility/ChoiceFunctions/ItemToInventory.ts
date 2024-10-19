@@ -1,5 +1,5 @@
 import { CharacterInfo } from "@/lib/utils/types/types";
-import { bulkAddToInventory } from "../../ChoiceFunctions/Inventory";
+import { bulkAddToInventory } from "./Inventory";
 
 export const ItemToInventory: PrismaJson.StateCallback = (char, selections) => {
   const state = char.state as PrismaJson.CharacterState;

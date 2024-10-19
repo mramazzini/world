@@ -1,7 +1,7 @@
-import { calculateLevel } from "@/app/components/Utility/characterStateFunctions/calc/calcLevel";
-import { calcProficiency } from "@/app/components/Utility/characterStateFunctions/calc/calcProficiency";
-import { calcSkillModifier } from "@/app/components/Utility/characterStateFunctions/calc/calcSkillModifier";
-import Tooltip from "@/app/components/Utility/Tooltip";
+import { calculateLevel } from "@/app/Utility/characterStateFunctions/calc/calcLevel";
+import { calcProficiency } from "@/app/Utility/characterStateFunctions/calc/calcProficiency";
+import { calcSkillModifier } from "@/app/Utility/characterStateFunctions/calc/calcSkillModifier";
+import Tooltip from "@/app/Utility/Tooltip";
 import { skillAtritbuteMap } from "@/lib/globalVars";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import { CharacterInfo } from "@/lib/utils/types/types";

@@ -1,10 +1,10 @@
 "use client";
 import Info from "@/app/components/UI/Info";
-import { AbilityToModifier } from "@/app/components/Utility/characterStateFunctions/calc/AbilityToModifier";
-import { combatRatingToProficiency } from "@/app/components/Utility/combatRatingToProficiency";
-import P from "@/app/components/Utility/FormatAndSanitize";
-import NewLineParse from "@/app/components/Utility/NewLineParse";
-import Tooltip from "@/app/components/Utility/Tooltip";
+import { AbilityToModifier } from "@/app/Utility/characterStateFunctions/calc/AbilityToModifier";
+import { combatRatingToProficiency } from "@/app/Utility/combatRatingToProficiency";
+import P from "@/app/Utility/FormatAndSanitize";
+import NewLineParse from "@/app/Utility/NewLineParse";
+import Tooltip from "@/app/Utility/Tooltip";
 import { skillAtritbuteMap, WeaponProperties } from "@/lib/globalVars";
 import {
   ArmorInfo,
@@ -26,11 +26,11 @@ import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
 import "@/lib/string.extensions";
 import { getArmor } from "@/lib/actions/db/armor/read.actions";
-import { sizeToHitDie } from "@/app/components/Utility/sizeToHitdie";
+import { sizeToHitDie } from "@/app/Utility/sizeToHitdie";
 import FeatureList from "@/app/components/UI/FeatureList";
 import CommentSection from "@/app/components/CommentSection/CommentSection";
-import WeaponDescription from "@/app/components/Utility/WeaponDescription";
-import ModelLink from "@/app/components/Utility/ModelLink";
+import WeaponDescription from "@/app/Utility/WeaponDescription";
+import ModelLink from "@/app/Utility/ModelLink";
 import numPlace from "@/lib/utils/numPlace";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import numberArray from "@/lib/utils/numberArray";
@@ -591,7 +591,7 @@ const CreaturePage = ({ creature }: Props) => {
               The {creature.name} can take {creature.legendaryActionAmount}{" "}
               legendary actions, choosing from the options below. Only one
               legendary action option can be used at a time and only at the end
-              of another creatur&apos;s turn. The {creature.name} regains spent
+              of another creature&apos;s turn. The {creature.name} regains spent
               legendary actions at the start of its turn.
             </p>
             <ul className="flex flex-col gap-4">

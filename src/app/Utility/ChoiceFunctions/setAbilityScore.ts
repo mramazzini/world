@@ -4,11 +4,12 @@ import {
   CallbackOptions,
   CharacterInfo,
 } from "@/lib/utils/types/types";
-import { updateAbilityScores } from "./updateAbilityScores";
-import { refreshAC } from "./updateAC";
-import { refreshHp } from "./refreshHp";
-import { refreshPassivePerception } from "./refreshPassivePerception";
+
 import { v4 } from "uuid";
+import { updateAbilityScores } from "../characterStateFunctions/update/updateAbilityScores";
+import { refreshAC } from "../characterStateFunctions/update/updateAC";
+import { refreshHp } from "../characterStateFunctions/update/refreshHp";
+import { refreshPassivePerception } from "../characterStateFunctions/update/refreshPassivePerception";
 
 export const setAbilityScore: PrismaJson.StateCallback = async (
   char,

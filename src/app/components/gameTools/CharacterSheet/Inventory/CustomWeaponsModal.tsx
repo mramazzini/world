@@ -1,5 +1,5 @@
 "use client";
-import { AbilityToModifier } from "@/app/components/Utility/characterStateFunctions/calc/AbilityToModifier";
+import { AbilityToModifier } from "@/app/Utility/characterStateFunctions/calc/AbilityToModifier";
 import { WeaponInfo } from "@/lib/utils/types/types";
 import { DamageTypes } from "@prisma/client";
 import { useState } from "react";

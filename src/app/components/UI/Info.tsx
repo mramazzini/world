@@ -1,8 +1,8 @@
 //Hoverable Info icon that deisplay a tooltip that display the string from props
 
-import P from "../Utility/FormatAndSanitize";
-import termDictionary from "../Utility/TermDictionary";
-import Tooltip from "../Utility/Tooltip";
+import P from "../../Utility/FormatAndSanitize";
+import termDictionary from "../../Utility/TermDictionary";
+import Tooltip from "../../Utility/Tooltip";
 
 interface Props {
   tooltip: string;

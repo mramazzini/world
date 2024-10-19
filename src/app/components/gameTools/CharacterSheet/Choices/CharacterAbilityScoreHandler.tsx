@@ -1,8 +1,8 @@
 "use client";
 
 import Info from "@/app/components/UI/Info";
-import P from "@/app/components/Utility/FormatAndSanitize";
-import Tooltip from "@/app/components/Utility/Tooltip";
+import P from "@/app/Utility/FormatAndSanitize";
+import Tooltip from "@/app/Utility/Tooltip";
 import {
   AbilityScoreValue,
   CallbackOptions,

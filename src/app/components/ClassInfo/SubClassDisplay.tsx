@@ -2,16 +2,16 @@ import { SubClassInfo } from "@/lib/utils/types/types";
 
 import "@/lib/string.extensions";
 
-import P from "../Utility/FormatAndSanitize";
+import P from "../../Utility/FormatAndSanitize";
 
 import Link from "next/link";
-import JsonTable from "../Utility/JsonTable";
+import JsonTable from "../../Utility/JsonTable";
 import SubClassTable from "./SubClassTable";
 import Info from "../UI/Info";
 
 import Loading from "../UI/Loading";
-import NewLineParse from "../Utility/NewLineParse";
-import { numberColor, numberColorBefore } from "../Utility/colorBefore";
+import NewLineParse from "../../Utility/NewLineParse";
+import { numberColor, numberColorBefore } from "../../Utility/colorBefore";
 import Feature from "../UI/Feature";
 interface Props {
   subClass: SubClassInfo;

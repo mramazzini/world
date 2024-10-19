@@ -1,15 +1,12 @@
 "use client";
-import { AbilityToModifier } from "@/app/components/Utility/characterStateFunctions/calc/AbilityToModifier";
-import { calcProficiency } from "@/app/components/Utility/characterStateFunctions/calc/calcProficiency";
-import {
-  numberColor,
-  numberColorBefore,
-} from "@/app/components/Utility/colorBefore";
-import P from "@/app/components/Utility/FormatAndSanitize";
-import JsonTable from "@/app/components/Utility/JsonTable";
-import { roll } from "@/app/components/Utility/roll";
-import Tooltip from "@/app/components/Utility/Tooltip";
-import useLog from "@/app/components/Utility/useDicelog";
+import { AbilityToModifier } from "@/app/Utility/characterStateFunctions/calc/AbilityToModifier";
+import { calcProficiency } from "@/app/Utility/characterStateFunctions/calc/calcProficiency";
+import { numberColor, numberColorBefore } from "@/app/Utility/colorBefore";
+import P from "@/app/Utility/FormatAndSanitize";
+import JsonTable from "@/app/Utility/JsonTable";
+import { roll } from "@/app/Utility/roll";
+import Tooltip from "@/app/Utility/Tooltip";
+import useLog from "@/app/Utility/useDicelog";
 import { skillAtritbuteMap, skills } from "@/lib/globalVars";
 import { ArmorInfo, CharacterInfo, WeaponID } from "@/lib/utils/types/types";
 import AbilityToText from "@/lib/utils/AbilityToText";
@@ -20,11 +17,11 @@ import RenderLog from "./Log";
 import WeaponRoller from "./WeaponRoller";
 import Resources from "./Resources";
 import Tools from "./Tools";
-import { calculateLevel } from "@/app/components/Utility/characterStateFunctions/calc/calcLevel";
-import { calcSkillModifier } from "@/app/components/Utility/characterStateFunctions/calc/calcSkillModifier";
-import { alignmentToText } from "@/app/components/Utility/alignmentToText";
+import { calculateLevel } from "@/app/Utility/characterStateFunctions/calc/calcLevel";
+import { calcSkillModifier } from "@/app/Utility/characterStateFunctions/calc/calcSkillModifier";
+import { alignmentToText } from "@/app/Utility/alignmentToText";
 import Spells from "./Spells";
-import { levelUp } from "@/app/components/Utility/characterStateFunctions/update/levelup";
+import { levelUp } from "@/app/Utility/characterStateFunctions/update/levelup";
 import LevelUp from "./LevelUp";
 import Save from "./Save";
 import { saveState } from "@/lib/actions/db/character/update.actions";
@@ -40,7 +37,7 @@ import CharacterSheetFeatureDisplay from "./CharacterSheetFeatureDisplay";
 import {
   saveCharacterToDB,
   saveImageToCharacter,
-} from "@/app/components/Utility/saveCharacterToDB";
+} from "@/app/Utility/saveCharacterToDB";
 interface Props {
   character: CharacterInfo;
   setCharacter: (character: CharacterInfo) => void;

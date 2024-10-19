@@ -1,7 +1,7 @@
 "use client";
 
-import P from "@/app/components/Utility/FormatAndSanitize";
-import ModelDisplay from "@/app/components/Utility/ModelDisplay";
+import P from "@/app/Utility/FormatAndSanitize";
+import ModelDisplay from "@/app/Utility/ModelDisplay";
 import { ToolID } from "@/lib/utils/types/types";
 import numberArray from "@/lib/utils/numberArray";
 import { useEffect, useState } from "react";

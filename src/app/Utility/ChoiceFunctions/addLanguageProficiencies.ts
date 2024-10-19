@@ -12,7 +12,7 @@ export const addLanguageProficiencies: PrismaJson.StateCallback = (
     ...s,
     proficiencies: {
       ...s.proficiencies,
-      languages: languages,
+      languages: [...s.proficiencies.languages, ...languages],
       languageReasons: languages.map((language) => ({
         reason: from,
         effect: "Proficient",

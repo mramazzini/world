@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import P from "../Utility/FormatAndSanitize";
+import P from "../../Utility/FormatAndSanitize";
 import { useState } from "react";
 
 //function to generate a single table

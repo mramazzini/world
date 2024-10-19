@@ -1,6 +1,6 @@
 "use client";
 
-import P from "@/app/components/Utility/FormatAndSanitize";
+import P from "@/app/Utility/FormatAndSanitize";
 import numberArray from "@/lib/utils/numberArray";
 import { Skill } from "@prisma/client";
 import { useEffect, useState } from "react";

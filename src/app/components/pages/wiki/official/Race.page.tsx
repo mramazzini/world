@@ -1,10 +1,10 @@
 import { SpeciesInfo } from "@/lib/utils/types/types";
 import Link from "next/link";
-import NewLineParse from "@/app/components/Utility/NewLineParse";
+import NewLineParse from "@/app/Utility/NewLineParse";
 import GenerateTable from "@/app/components/UI/GenerateTable";
 import Info from "@/app/components/UI/Info";
-import P from "@/app/components/Utility/FormatAndSanitize";
-import JsonTable from "@/app/components/Utility/JsonTable";
+import P from "@/app/Utility/FormatAndSanitize";
+import JsonTable from "@/app/Utility/JsonTable";
 import FeatureList from "@/app/components/UI/FeatureList";
 import { AssociatedModel } from "@prisma/client";
 import CommentSection from "@/app/components/CommentSection/CommentSection";

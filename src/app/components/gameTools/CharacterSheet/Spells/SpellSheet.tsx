@@ -6,14 +6,11 @@ import {
 } from "@/lib/utils/types/types";
 import { Spell, SpellList } from "@prisma/client";
 import SpellSection from "./SpellSection";
-import { calcProficiency } from "@/app/components/Utility/characterStateFunctions/calc/calcProficiency";
+import { calcProficiency } from "@/app/Utility/characterStateFunctions/calc/calcProficiency";
 import numberArray from "@/lib/utils/numberArray";
-import JsonTable from "@/app/components/Utility/JsonTable";
-import P from "@/app/components/Utility/FormatAndSanitize";
-import {
-  numberColor,
-  numberColorBefore,
-} from "@/app/components/Utility/colorBefore";
+import JsonTable from "@/app/Utility/JsonTable";
+import P from "@/app/Utility/FormatAndSanitize";
+import { numberColor, numberColorBefore } from "@/app/Utility/colorBefore";
 import PrepareSpellSection from "./PrepareSpellSection";
 
 interface Props {

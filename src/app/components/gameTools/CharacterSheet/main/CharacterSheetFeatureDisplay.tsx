@@ -1,10 +1,7 @@
-import { calculateLevel } from "@/app/components/Utility/characterStateFunctions/calc/calcLevel";
-import {
-  numberColor,
-  numberColorBefore,
-} from "@/app/components/Utility/colorBefore";
-import P from "@/app/components/Utility/FormatAndSanitize";
-import JsonTable from "@/app/components/Utility/JsonTable";
+import { calculateLevel } from "@/app/Utility/characterStateFunctions/calc/calcLevel";
+import { numberColor, numberColorBefore } from "@/app/Utility/colorBefore";
+import P from "@/app/Utility/FormatAndSanitize";
+import JsonTable from "@/app/Utility/JsonTable";
 import { CharacterInfo } from "@/lib/utils/types/types";
 import { Fragment } from "react";
 

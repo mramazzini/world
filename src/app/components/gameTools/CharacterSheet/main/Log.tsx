@@ -1,4 +1,4 @@
-import { roll } from "@/app/components/Utility/roll";
+import { roll } from "@/app/Utility/roll";
 import { Log, Roll } from "@/lib/utils/types/types";
 import { toSpellLevel } from "@/lib/utils/toSpellLevel";
 import Image from "next/image";

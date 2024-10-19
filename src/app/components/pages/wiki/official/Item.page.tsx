@@ -1,16 +1,16 @@
 import Info from "@/app/components/UI/Info";
 import Loading from "@/app/components/UI/Loading";
-import P from "@/app/components/Utility/FormatAndSanitize";
-import NewLineParse from "@/app/components/Utility/NewLineParse";
+import P from "@/app/Utility/FormatAndSanitize";
+import NewLineParse from "@/app/Utility/NewLineParse";
 import { ItemInfo, Property } from "@/lib/utils/types/types";
 import Link from "next/link";
 import { WeaponProperties } from "@/lib/globalVars";
-import Tooltip from "@/app/components/Utility/Tooltip";
+import Tooltip from "@/app/Utility/Tooltip";
 import Feature from "@/app/components/UI/Feature";
 import FeatureList from "@/app/components/UI/FeatureList";
 import { ArmorType, AssociatedModel, ItemTypes, Rarity } from "@prisma/client";
 import { itemIds } from "../../../../../../prisma/seeds/Items/ItemIds";
-import JsonTable from "@/app/components/Utility/JsonTable";
+import JsonTable from "@/app/Utility/JsonTable";
 import CommentSection from "@/app/components/CommentSection/CommentSection";
 interface Props {
   item: ItemInfo | null;

@@ -1,6 +1,6 @@
-import { numberColor, numberColorBefore } from "../Utility/colorBefore";
-import P from "../Utility/FormatAndSanitize";
-import JsonTable from "../Utility/JsonTable";
+import { numberColor, numberColorBefore } from "../../Utility/colorBefore";
+import P from "../../Utility/FormatAndSanitize";
+import JsonTable from "../../Utility/JsonTable";
 import RollRequest from "./RollRequest";
 
 interface Props {

@@ -1,6 +1,6 @@
 "use client";
 
-import ModelDisplay from "@/app/components/Utility/ModelDisplay";
+import ModelDisplay from "@/app/Utility/ModelDisplay";
 import { WeaponID } from "@/lib/utils/types/types";
 import numberArray from "@/lib/utils/numberArray";
 import { useEffect, useState } from "react";

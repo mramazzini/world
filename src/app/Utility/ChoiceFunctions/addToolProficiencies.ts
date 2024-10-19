@@ -11,7 +11,7 @@ export const addToolProficiencies: PrismaJson.StateCallback = (
     ...state,
     proficiencies: {
       ...state.proficiencies,
-      tools: tools,
+      tools: [...state.proficiencies.tools, ...tools],
       toolReasons: tools.map((tool) => ({
         reason: from,
         effect: "Proficient",

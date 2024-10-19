@@ -1,7 +1,7 @@
 "use client";
-import { memoizeGetSubclass } from "@/app/components/Utility/globalCache";
-import ModelDisplay from "@/app/components/Utility/ModelDisplay";
-import ModelLink from "@/app/components/Utility/ModelLink";
+import { memoizeGetSubclass } from "@/app/Utility/globalCache";
+import ModelDisplay from "@/app/Utility/ModelDisplay";
+import ModelLink from "@/app/Utility/ModelLink";
 import { SubClassID, SubClassInfo } from "@/lib/utils/types/types";
 import numberArray from "@/lib/utils/numberArray";
 import { useEffect, useState } from "react";

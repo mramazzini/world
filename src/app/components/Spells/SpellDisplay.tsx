@@ -1,11 +1,11 @@
 import { SpellInfo } from "@/lib/utils/types/types";
 import "@/lib/string.extensions";
 import numPlace from "@/lib/utils/numPlace";
-import JsonTable from "../Utility/JsonTable";
-import P from "../Utility/FormatAndSanitize";
+import JsonTable from "../../Utility/JsonTable";
+import P from "../../Utility/FormatAndSanitize";
 import Link from "next/link";
 import React, { Fragment } from "react";
-import Tooltip from "../Utility/Tooltip";
+import Tooltip from "../../Utility/Tooltip";
 interface Props {
   spell: SpellInfo;
 }

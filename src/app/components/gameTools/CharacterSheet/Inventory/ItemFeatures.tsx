@@ -1,13 +1,10 @@
 "use client";
-import {
-  numberColor,
-  numberColorBefore,
-} from "@/app/components/Utility/colorBefore";
-import P from "@/app/components/Utility/FormatAndSanitize";
-import JsonTable from "@/app/components/Utility/JsonTable";
+import { numberColor, numberColorBefore } from "@/app/Utility/colorBefore";
+import P from "@/app/Utility/FormatAndSanitize";
+import JsonTable from "@/app/Utility/JsonTable";
 import { Fragment, useState } from "react";
 import { useEffect } from "react";
-import { memoizeGetItem } from "@/app/components/Utility/globalCache";
+import { memoizeGetItem } from "@/app/Utility/globalCache";
 import { ItemInfo } from "@/lib/utils/types/types";
 interface Props {
   inventory: PrismaJson.QuantityItem[];

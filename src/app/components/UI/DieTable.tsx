@@ -1,4 +1,4 @@
-import JsonTable from "../Utility/JsonTable";
+import JsonTable from "../../Utility/JsonTable";
 
 interface Props {
   data: (string | number)[];

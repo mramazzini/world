@@ -1,4 +1,4 @@
-import { alignmentToText } from "@/app/components/Utility/alignmentToText";
+import { alignmentToText } from "@/app/Utility/alignmentToText";
 import { CharacterInfo } from "@/lib/utils/types/types";
 import Image from "next/image";
 import { Fragment } from "react";

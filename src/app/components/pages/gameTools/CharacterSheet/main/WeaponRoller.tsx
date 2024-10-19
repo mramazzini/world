@@ -1,8 +1,8 @@
 "use client";
 import Info from "@/app/components/UI/Info";
-import { AbilityToModifier } from "@/app/components/Utility/characterStateFunctions/calc/AbilityToModifier";
-import { memoizeGetItem } from "@/app/components/Utility/globalCache";
-import { roll } from "@/app/components/Utility/roll";
+import { AbilityToModifier } from "@/app/Utility/characterStateFunctions/calc/AbilityToModifier";
+import { memoizeGetItem } from "@/app/Utility/globalCache";
+import { roll } from "@/app/Utility/roll";
 import {
   AbilityScores,
   ArmorInfo,

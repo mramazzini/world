@@ -8,12 +8,12 @@ import {
   ToolID,
   WeaponID,
 } from "@/lib/utils/types/types";
-import P from "@/app/components/Utility/FormatAndSanitize";
+import P from "@/app/Utility/FormatAndSanitize";
 import { useEffect, useState } from "react";
 import { Ability, ArmorType, Language, Skill } from "@prisma/client";
 import ArmorChoice from "./ArmorChoice";
 import SkillChoice from "./SkillChoice";
-import ModelDisplay from "@/app/components/Utility/ModelDisplay";
+import ModelDisplay from "@/app/Utility/ModelDisplay";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import ToolChoice from "./ToolChoice";
 import WeaponChoice from "./WeaponChoice";

@@ -1,13 +1,13 @@
 import { BackgroundInfo } from "@/lib/utils/types/types";
 import Loading from "../../../UI/Loading";
 import Link from "next/link";
-import P from "../../../Utility/FormatAndSanitize";
+import P from "../../../../Utility/FormatAndSanitize";
 import "@/lib/string.extensions";
 import { languages, skills } from "@/lib/globalVars";
 import { arraysEqual } from "@/lib/utils/arraysEqual";
 
 import Info from "../../../UI/Info";
-import NewLineParse from "../../../Utility/NewLineParse";
+import NewLineParse from "../../../../Utility/NewLineParse";
 import FeatureList from "@/app/components/UI/FeatureList";
 import { Fragment } from "react";
 import DieTable from "@/app/components/UI/DieTable";
