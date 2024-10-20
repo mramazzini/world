@@ -16,9 +16,6 @@ interface Props {
 }
 
 const SkillRoller = ({ character, handleRoll, skills }: Props) => {
-  console.log(
-    calcSkillModifier(character.state as PrismaJson.CharacterState, "RELIGION")
-  );
   return (
     <>
       <div className="bg-base-300 p-2 rounded-xl border-primary border">
