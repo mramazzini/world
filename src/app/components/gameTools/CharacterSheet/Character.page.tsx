@@ -17,6 +17,7 @@ import Notes from "./Notes/Notes";
 import Traits from "./Traits/Traits";
 import { applyPendingModels } from "../../../Utility/characterStateFunctions/update/applyPendingModels";
 import CharacterStatsTab from "./Stats/CharacterStatsTab";
+
 type Tab =
   | "sheet"
   | "inventory"
