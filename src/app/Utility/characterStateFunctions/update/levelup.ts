@@ -18,6 +18,7 @@ export const levelUp = async (
   state: PrismaJson.CharacterState,
   classID: ClassID
 ): Promise<PrismaJson.CharacterState> => {
+  console.log(character);
   const newState = { ...state };
   const classes = state.classLevels;
   const classLevel = classes.find((c) => c.classId === classID)?.level;
@@ -29,7 +30,6 @@ export const levelUp = async (
   if (classObj?.subClassFeatureLevels[0] === classLevel + 1) {
     addSubclass = true;
   }
-
   //things to update
   //hit points
   //hit die number
@@ -63,13 +63,11 @@ export const levelUp = async (
   //spellevels for each class
   const spellLevels = character.Classes?.map(
     (c) => c.spellCastingInfo?.spellLevels
-  );
+  ).filter((s) => s);
   if (spellLevels && spellLevels.length > 0) {
     const level = classLevel + 1;
-    console.log(level);
     if (!spellLevels[0]) return hp;
     const spellSlotsInput = spellLevels[0][level as Level];
-    console.log(spellSlotsInput, spellLevels);
     if (spellSlotsInput) {
       hp = {
         ...hp,
@@ -77,10 +75,9 @@ export const levelUp = async (
           ...(spellSlotsInput as PrismaJson.SpellSlots),
         },
       };
-      console.log(hp);
     }
   }
-
+  console.log(addSubclass);
   if (addSubclass) {
     return {
       ...hp,

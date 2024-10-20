@@ -133,28 +133,28 @@ const Features: ClassFeature[] = [
     description:
       "At 1st level, you know three cantrips of your choice from the wizard spell list. You learn additional wizard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Wizard table.",
   },
-  ...numberArray(1, 5).map((level) => {
-    const spellSlot = {} as { [key: number]: number };
-    spellSlot[level] = 1;
-    return {
-      classId: ids.wizard,
-      name: `Recover ${level} Level Spell`,
-      description: `Use Arcane Recovery to recover a ${level} level spell.`,
-      hideInSheet: true,
-      effect: {
-        spellSlotRegained: spellSlot,
-        active: {
-          cost: {
-            customResource: {
-              resource: "Arcane Recovery",
-              quantity: level,
-            },
-            time: { quantity: 1, unit: Time.shortRest },
-          },
-        },
-      },
-    } as ClassFeature;
-  }),
+  // ...numberArray(1, 5).map((level) => {
+  //   const spellSlot = {} as { [key: number]: number };
+  //   spellSlot[level] = 1;
+  //   return {
+  //     classId: ids.wizard,
+  //     name: `Recover ${level} Level Spell`,
+  //     description: `Use Arcane Recovery to recover a ${level} level spell.`,
+  //     hideInSheet: true,
+  //     effect: {
+  //       spellSlotRegained: spellSlot,
+  //       active: {
+  //         cost: {
+  //           customResource: {
+  //             resource: "Arcane Recovery",
+  //             quantity: level,
+  //           },
+  //           time: { quantity: 1, unit: Time.shortRest },
+  //         },
+  //       },
+  //     },
+  //   } as ClassFeature;
+  // }),
   {
     classId: ids.wizard,
     levels: [20],
@@ -192,28 +192,28 @@ const Features: ClassFeature[] = [
     name: "Copying a Spell into the Spellbook",
     description: `When you find a wizard spell of 1st level or higher, you can add it to your ^${itemIds.spellBook}{spellbook}^ if it is of a spell level you can prepare and if you can spare the time to decipher and copy it.\n\nCopying a spell into your ^${itemIds.spellBook}{spellbook}^ involves reproducing the basic form of the spell, then deciphering the unique system of notation used by the wizard who wrote it. You must practice the spell until you understand the sounds or gestures required, then transcribe it into your ^${itemIds.spellBook}{spellbook}^ using your own notation.\n\nFor each level of the spell, the process takes 2 hours and costs 50 ^${itemIds.goldPiece}{gp}^. The cost represents material components you expend as you experiment with the spell to master it, as well as the fine ^${itemIds.ink}{inks}^ you need to record it. Once you have spent this time and money, you can prepare the spell just like your other spells.`,
   },
-  ...numberArray(1, 9).map((level) => {
-    return {
-      classId: ids.wizard,
-      spellCasting: true,
-      name: `Copy Level ${level} Spell`,
-      description: `Copy a level ${level} spell into a spellbook.`,
-      hideInSheet: true,
-      effect: {
-        active: {
-          cost: {
-            items: {
-              default: [{ item: itemIds.goldPiece, quantity: 50 * level }],
-            },
-            time: {
-              quantity: 2 * level,
-              unit: Time.hour,
-            },
-          },
-        },
-      },
-    };
-  }),
+  // ...numberArray(1, 9).map((level) => {
+  //   return {
+  //     classId: ids.wizard,
+  //     spellCasting: true,
+  //     name: `Copy Level ${level} Spell`,
+  //     description: `Copy a level ${level} spell into a spellbook.`,
+  //     hideInSheet: true,
+  //     effect: {
+  //       active: {
+  //         cost: {
+  //           items: {
+  //             default: [{ item: itemIds.goldPiece, quantity: 50 * level }],
+  //           },
+  //           time: {
+  //             quantity: 2 * level,
+  //             unit: Time.hour,
+  //           },
+  //         },
+  //       },
+  //     },
+  //   };
+  // }),
   {
     spellCasting: true,
     classId: ids.wizard,
