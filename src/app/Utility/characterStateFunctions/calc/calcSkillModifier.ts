@@ -15,6 +15,7 @@ export const calcSkillModifier = (
   const proficiency = state.proficiencies.skills.includes(skill);
   const expertise = state.proficiencies.skillExpertise.includes(skill);
   const prof = calcProficiency(calculateLevel(state));
+  console.log(base, prof, expertise);
   if (expertise) {
     return base + prof * 2;
   }

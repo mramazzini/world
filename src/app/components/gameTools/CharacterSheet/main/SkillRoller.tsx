@@ -1,3 +1,4 @@
+import { AbilityToModifier } from "@/app/Utility/characterStateFunctions/calc/AbilityToModifier";
 import { calculateLevel } from "@/app/Utility/characterStateFunctions/calc/calcLevel";
 import { calcProficiency } from "@/app/Utility/characterStateFunctions/calc/calcProficiency";
 import { calcSkillModifier } from "@/app/Utility/characterStateFunctions/calc/calcSkillModifier";
@@ -5,7 +6,7 @@ import Tooltip from "@/app/Utility/Tooltip";
 import { skillAtritbuteMap } from "@/lib/globalVars";
 import AbilityToText from "@/lib/utils/AbilityToText";
 import { CharacterInfo } from "@/lib/utils/types/types";
-import { Skill } from "@prisma/client";
+import { Ability, Skill } from "@prisma/client";
 import { Fragment } from "react";
 
 interface Props {
@@ -15,6 +16,9 @@ interface Props {
 }
 
 const SkillRoller = ({ character, handleRoll, skills }: Props) => {
+  console.log(
+    calcSkillModifier(character.state as PrismaJson.CharacterState, "RELIGION")
+  );
   return (
     <>
       <div className="bg-base-300 p-2 rounded-xl border-primary border">
@@ -44,14 +48,23 @@ const SkillRoller = ({ character, handleRoll, skills }: Props) => {
                             <td>{AbilityToText(skillAtritbuteMap[skill])}</td>
                             <td>
                               {character.state &&
-                              calcSkillModifier(character.state, skill) >= 0
-                                ? `+ ${calcSkillModifier(
-                                    character.state,
-                                    skill
+                              AbilityToModifier(
+                                character.state.abilityScores[
+                                  skillAtritbuteMap[skill] as Ability
+                                ]
+                              ) >= 0
+                                ? `+ ${AbilityToModifier(
+                                    character.state.abilityScores[
+                                      skillAtritbuteMap[skill] as Ability
+                                    ]
                                   )}`
                                 : character.state &&
                                   `- ${Math.abs(
-                                    calcSkillModifier(character.state, skill)
+                                    AbilityToModifier(
+                                      character.state.abilityScores[
+                                        skillAtritbuteMap[skill] as Ability
+                                      ]
+                                    )
                                   )}`}
                             </td>
                           </tr>
@@ -62,10 +75,9 @@ const SkillRoller = ({ character, handleRoll, skills }: Props) => {
                               <tr>
                                 <td>Proficient</td>
                                 <td>
-                                  +{" "}
-                                  {calcProficiency(
-                                    calculateLevel(character.state) || 1
-                                  )}
+                                  {`+ ${calcProficiency(
+                                    calculateLevel(character.state)
+                                  )}`}
                                 </td>
                               </tr>
                             )}
