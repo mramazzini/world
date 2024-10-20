@@ -24,12 +24,29 @@ const Register = () => {
   const { ErrorModal, openModal } = useErrorModal();
   const router = useRouter();
   const params = useSearchParams();
-  const handleSubmit = async (values: SignupUserInput) => {
+  const handleSubmit = async (
+    values: SignupUserInput,
+    setSubmitting: (isSubmitting: boolean) => void
+  ) => {
     try {
-      const err = await signup(values);
+      let timeout = false;
+      const timeoutPromise = new Promise<never>((_, reject) =>
+        setTimeout(() => {
+          timeout = true;
+          reject(new Error("Login request timed out. Please try again."));
+        }, 5000)
+      );
+
+      const err = await Promise.race([signup(values), timeoutPromise]);
+
+      if (timeout) {
+        setSubmitting(false);
+        return;
+      }
 
       if (err != AuthResult.Success) {
         console.error(err);
+        setSubmitting(false);
         openModal(err);
         return;
       }
@@ -77,7 +94,7 @@ const Register = () => {
           }
           validationSchema={signupSchema}
           onSubmit={(values, actions) => {
-            handleSubmit(values);
+            handleSubmit(values, actions.setSubmitting);
           }}
         >
           {({ errors, touched, isSubmitting }) => (
@@ -86,6 +103,7 @@ const Register = () => {
                 label="Email"
                 name="email"
                 formProps={{
+                  placeholder: "Email",
                   type: "email",
                 }}
               />
@@ -94,6 +112,7 @@ const Register = () => {
                 name="username"
                 formProps={{
                   type: "text",
+                  placeholder: "Username",
                 }}
               />
               <FormField
@@ -101,6 +120,7 @@ const Register = () => {
                 name="password"
                 formProps={{
                   type: "password",
+                  placeholder: "Password",
                 }}
               />
               <FormField
@@ -108,6 +128,7 @@ const Register = () => {
                 name="confirmPassword"
                 formProps={{
                   type: "password",
+                  placeholder: "Confirm Password",
                 }}
               />
               <LoadingButton type="submit" isLoading={isSubmitting}>

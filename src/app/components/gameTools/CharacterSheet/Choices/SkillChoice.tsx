@@ -22,7 +22,6 @@ const SkillChoice = ({ choice, updateSelections, modalID }: Props) => {
     //make sure all selected
     updateSelections(skillList);
   }, [selections]);
-
   return (
     <div className="flex bg-base-300 rounded-xl p-4 flex-col mb-4">
       <p>Choose {choice.numberOfChoices} from:</p>

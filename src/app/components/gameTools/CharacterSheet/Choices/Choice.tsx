@@ -60,6 +60,7 @@ const Choice = ({
               ),
             };
           }
+          return c;
         }) as PrismaJson.SkillChoice["choices"],
       };
       return { ...newChoice };
@@ -81,6 +82,7 @@ const Choice = ({
               ),
             };
           }
+          return c;
         }) as PrismaJson.LanguageChoice["choices"],
       };
       return { ...newChoice };
@@ -101,6 +103,7 @@ const Choice = ({
               ),
             };
           }
+          return c;
         }) as PrismaJson.ArmorChoice["choices"],
       };
       return { ...newChoice };
@@ -121,6 +124,7 @@ const Choice = ({
               ),
             };
           }
+          return c;
         }) as PrismaJson.WeaponChoice["choices"],
       };
       return { ...newChoice };
@@ -141,6 +145,7 @@ const Choice = ({
               ),
             };
           }
+          return c;
         }) as PrismaJson.ToolChoice["choices"],
       };
       return { ...newChoice };

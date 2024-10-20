@@ -20,15 +20,36 @@ const Login = () => {
   const { ErrorModal, openModal } = useErrorModal();
   const router = useRouter();
   const params = useSearchParams();
-  const handleSubmit = async (values: UserInput) => {
+  const handleSubmit = async (
+    values: UserInput,
+    setSubmitting: (isSubmitting: boolean) => void
+  ) => {
     try {
-      const err = await login({
-        emailOrUsername: values.emailOrUsername,
-        password: values.password,
-      });
+      let timeout = false;
+      const timeoutPromise = new Promise<never>((_, reject) =>
+        setTimeout(() => {
+          timeout = true;
+          reject(new Error("Login request timed out. Please try again."));
+        }, 5000)
+      );
+
+      // Race between the login function and the timeout
+      const err = await Promise.race([
+        login({
+          emailOrUsername: values.emailOrUsername,
+          password: values.password,
+        }),
+        timeoutPromise,
+      ]);
+
+      if (timeout) {
+        setSubmitting(false);
+        return;
+      }
 
       if (err != AuthResult.Success) {
         console.log(err);
+        setSubmitting(false);
         openModal(err);
         return;
       }
@@ -41,7 +62,11 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
-      openModal("Something went wrong. Please try again later.");
+      openModal(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again later."
+      );
     }
   };
 
@@ -62,7 +87,7 @@ const Login = () => {
         }
         validationSchema={loginSchema}
         onSubmit={(values, actions) => {
-          handleSubmit(values);
+          handleSubmit(values, actions.setSubmitting);
         }}
       >
         {({ errors, touched, isSubmitting }) => (
