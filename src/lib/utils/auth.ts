@@ -3,7 +3,7 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { AuthResult } from "./types/types";
 
-const expiration = "48h";
+const expiration = "1 week";
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
 // we generate a token when they login or signup

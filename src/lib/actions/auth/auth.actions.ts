@@ -85,13 +85,12 @@ export const signup = async (data: {
 
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(password, saltRounds);
-  const oneHourFromNow = new Date();
-  oneHourFromNow.setHours(oneHourFromNow.getHours() + 1);
+  const oneWeekFromNow = new Date();
+  oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
   const newUser = await createUser({
     email,
     password: hashedPassword,
     username: data.username,
-    // verificationExpiry: oneHourFromNow,
   });
 
   //   await sendAccountConfirmationEmail(

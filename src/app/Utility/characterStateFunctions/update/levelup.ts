@@ -77,7 +77,7 @@ export const levelUp = async (
       };
     }
   }
-  console.log(addSubclass);
+
   if (addSubclass) {
     return {
       ...hp,
