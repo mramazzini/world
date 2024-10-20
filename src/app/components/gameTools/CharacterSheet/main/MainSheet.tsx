@@ -24,7 +24,10 @@ import Spells from "./Spells";
 import { levelUp } from "@/app/Utility/characterStateFunctions/update/levelup";
 import LevelUp from "./LevelUp";
 import Save from "./Save";
-import { saveState } from "@/lib/actions/db/character/update.actions";
+import {
+  linkCharacterToSubClass,
+  saveState,
+} from "@/lib/actions/db/character/update.actions";
 import CharacterIntro from "./CharacterIntro";
 import AbilityScoreRoller from "./AbilityScoreRoller";
 import HitPointsHandler from "./HitpointsHandler";
@@ -38,6 +41,7 @@ import {
   saveCharacterToDB,
   saveImageToCharacter,
 } from "@/app/Utility/saveCharacterToDB";
+import { getCharacter } from "@/lib/actions/db/character/read.actions";
 interface Props {
   character: CharacterInfo;
   setCharacter: (character: CharacterInfo) => void;
@@ -45,12 +49,6 @@ interface Props {
 }
 
 const MainSheet = ({ character, setCharacter, regenerateCharacter }: Props) => {
-  // useEffect(() => {
-  //   if (character) {
-  //     console.log(character);
-  //   }
-  // }, [character]);
-
   const { log, logPush } = useLog();
 
   const handleRoll = (modifier: number, from: string, dice: number = 20) => {

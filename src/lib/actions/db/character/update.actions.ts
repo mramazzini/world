@@ -26,3 +26,23 @@ export const saveImage = async (id: number, image: string) => {
   if (!res) return null;
   return Date.now();
 };
+
+export const linkCharacterToSubClass = async (
+  id: number,
+  subClassId: number
+) => {
+  const db = new PrismaClient();
+  const res = await db.character.update({
+    where: { id },
+    data: {
+      Classes: {
+        connect: {
+          id: subClassId,
+        },
+      },
+    },
+  });
+  await db.$disconnect();
+  if (!res) return null;
+  return Date.now();
+};

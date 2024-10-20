@@ -11,6 +11,7 @@ interface Props {
 
 const CharacterSheetFeatureDisplay = ({ character }: Props) => {
   const calcLevel = character.state ? calculateLevel(character.state) : 1;
+  console.log(character);
   return (
     character.state && (
       <>

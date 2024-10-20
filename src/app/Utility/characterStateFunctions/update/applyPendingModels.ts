@@ -46,6 +46,8 @@ export const applyPendingModels = async (
           };
         }),
       ];
+      newCharacter.state.pendingLinks.subClass =
+        newCharacter.state.pendingLinks.subClass.filter((s) => s !== subclass);
     }
   }
   //   if (pendingClasses) {
