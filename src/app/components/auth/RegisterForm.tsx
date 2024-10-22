@@ -49,6 +49,7 @@ const Register = () => {
     } catch (error) {
       console.log(error);
       openModal("Something went wrong. Please try again later.");
+      setSubmitting(false);
     }
   };
 

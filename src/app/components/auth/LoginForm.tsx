@@ -51,6 +51,7 @@ const Login = () => {
           ? error.message
           : "Something went wrong. Please try again later."
       );
+      setSubmitting(false);
     }
   };
 
