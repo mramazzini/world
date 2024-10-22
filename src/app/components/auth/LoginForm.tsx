@@ -25,27 +25,11 @@ const Login = () => {
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
     try {
-      let timeout = false;
-      const timeoutPromise = new Promise<never>((_, reject) =>
-        setTimeout(() => {
-          timeout = true;
-          reject(new Error("Login request timed out. Please try again."));
-        }, 5000)
-      );
-
       // Race between the login function and the timeout
-      const err = await Promise.race([
-        login({
-          emailOrUsername: values.emailOrUsername,
-          password: values.password,
-        }),
-        timeoutPromise,
-      ]);
-
-      if (timeout) {
-        setSubmitting(false);
-        return;
-      }
+      const err = await login({
+        emailOrUsername: values.emailOrUsername,
+        password: values.password,
+      });
 
       if (err != AuthResult.Success) {
         console.log(err);

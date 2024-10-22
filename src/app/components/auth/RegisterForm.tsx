@@ -29,20 +29,7 @@ const Register = () => {
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
     try {
-      let timeout = false;
-      const timeoutPromise = new Promise<never>((_, reject) =>
-        setTimeout(() => {
-          timeout = true;
-          reject(new Error("Login request timed out. Please try again."));
-        }, 5000)
-      );
-
-      const err = await Promise.race([signup(values), timeoutPromise]);
-
-      if (timeout) {
-        setSubmitting(false);
-        return;
-      }
+      const err = await signup(values);
 
       if (err != AuthResult.Success) {
         console.error(err);
