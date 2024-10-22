@@ -18,7 +18,7 @@ export const generateToken = async (id: number) => {
     .sign(secret);
 
   cookies().set("token", token, {
-    maxAge: 60 * 60,
+    maxAge: 60 * 60 * 24 * 7, // 1 week
     httpOnly: true, // prevent client-side access
   });
 
