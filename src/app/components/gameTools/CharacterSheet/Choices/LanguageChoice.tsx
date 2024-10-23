@@ -39,7 +39,7 @@ const LanguageChoice = ({ choice, updateSelections }: Props) => {
           );
         })}
       </ul>
-      {numberArray(1, choice.numberOfChoices).map((_, index) => {
+      {numberArray(1, choice.numberOfChoices).map((choiceIndex, index) => {
         return (
           <select
             key={index}
@@ -52,11 +52,11 @@ const LanguageChoice = ({ choice, updateSelections }: Props) => {
             }`}
             onChange={(e) => {
               const index = e.target.value;
+
               const newSelections = [...selections];
-              if (newSelections.length >= choice.numberOfChoices) {
-                newSelections.shift();
-              }
-              newSelections.push(Language[index as Language]);
+
+              newSelections[choiceIndex] = Language[index as Language];
+
               setSelections(newSelections);
             }}
           >

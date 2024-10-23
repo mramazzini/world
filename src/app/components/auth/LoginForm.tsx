@@ -40,7 +40,12 @@ const Login = () => {
 
       // Redirect to last page
       if (params.get("redirect")) {
-        router.push(params.get("redirect") as string);
+        const redirect = params.get("redirect") as string;
+        if (redirect) {
+          router.push(redirect);
+        } else {
+          router.push("/dashboard");
+        }
       } else {
         router.push("/dashboard");
       }
@@ -51,6 +56,8 @@ const Login = () => {
           ? error.message
           : "Something went wrong. Please try again later."
       );
+      setSubmitting(false);
+    } finally {
       setSubmitting(false);
     }
   };

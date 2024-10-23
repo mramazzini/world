@@ -52,7 +52,6 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
   proficiency,
 }: Props) => {
   const [selections, setSelections] = useState<T[]>([]);
-  console.log(choice);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     //make sure that all selections are made

@@ -14,7 +14,9 @@ interface Props {
 }
 
 const ToolChoice = ({ choice, updateSelections }: Props) => {
-  const [selections, setSelections] = useState<number[]>([]);
+  const [selections, setSelections] = useState<number[]>(
+    new Array<number>(choice.numberOfChoices - 1)
+  );
 
   useEffect(() => {
     //get tools
@@ -43,7 +45,7 @@ const ToolChoice = ({ choice, updateSelections }: Props) => {
           );
         })}
       </ul>
-      {numberArray(1, choice.numberOfChoices).map((_, index) => {
+      {numberArray(1, choice.numberOfChoices).map((choiceIndex, index) => {
         return (
           <select
             key={index}
@@ -57,10 +59,9 @@ const ToolChoice = ({ choice, updateSelections }: Props) => {
             onChange={(e) => {
               const index = parseInt(e.target.value);
               const newSelections = [...selections];
-              if (newSelections.length >= choice.numberOfChoices) {
-                newSelections.shift();
-              }
-              newSelections.push(index);
+
+              newSelections[choiceIndex] = index;
+
               setSelections(newSelections);
             }}
           >

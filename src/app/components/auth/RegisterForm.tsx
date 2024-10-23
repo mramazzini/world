@@ -42,13 +42,20 @@ const Register = () => {
 
       // Redirect to last page
       if (params.get("redirect")) {
-        router.push(params.get("redirect") as string);
+        const redirect = params.get("redirect") as string;
+        if (redirect) {
+          router.push(redirect);
+        } else {
+          router.push("/dashboard");
+        }
       } else {
         router.push("/dashboard");
       }
     } catch (error) {
       console.log(error);
       openModal("Something went wrong. Please try again later.");
+      setSubmitting(false);
+    } finally {
       setSubmitting(false);
     }
   };
@@ -125,7 +132,7 @@ const Register = () => {
               <div className="divider divider-accent"></div>
               <p className="">
                 Already have an account?{" "}
-                <Link href="/register" className="text-blue-500">
+                <Link href="/login" className="text-blue-500">
                   Login -&gt;
                 </Link>
               </p>

@@ -17,9 +17,10 @@ export const generateToken = async (id: number) => {
     .setExpirationTime(expiration)
     .sign(secret);
 
-  cookies().set("token", token, {
+  await cookies().set("token", token, {
     maxAge: 60 * 60 * 24 * 7, // 1 week
     httpOnly: true, // prevent client-side access
+    sameSite: "strict", // only send on same site
   });
 
   return token;
@@ -27,7 +28,7 @@ export const generateToken = async (id: number) => {
 
 // we destroy the token when they logout
 export const destroySession = async () => {
-  cookies().set("token", "", {
+  await cookies().set("token", "", {
     maxAge: 0,
   });
 };

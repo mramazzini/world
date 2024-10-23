@@ -14,7 +14,10 @@ interface Props {
 }
 
 const SkillChoice = ({ choice, updateSelections, modalID }: Props) => {
-  const [selections, setSelections] = useState<number[]>([]);
+  console.log(choice.numberOfChoices);
+  const [selections, setSelections] = useState<number[]>(
+    new Array<number>(choice.numberOfChoices - 1)
+  );
 
   useEffect(() => {
     //get skills
@@ -45,10 +48,10 @@ const SkillChoice = ({ choice, updateSelections, modalID }: Props) => {
           );
         })}
       </ul>
-      {numberArray(1, choice.numberOfChoices).map((_, index) => {
+      {numberArray(1, choice.numberOfChoices).map((_, choiceIndex) => {
         return (
           <select
-            key={index}
+            key={choiceIndex}
             defaultValue={"Pick One"}
             className={`select select-bordered   w-full max-w-xs mt-2
             ${
@@ -59,16 +62,19 @@ const SkillChoice = ({ choice, updateSelections, modalID }: Props) => {
             onChange={(e) => {
               const index = parseInt(e.target.value);
               const newSelections = [...selections];
-              if (newSelections.length >= choice.numberOfChoices) {
-                newSelections.shift();
-              }
-              newSelections.push(index);
+
+              newSelections[choiceIndex] = index;
+
               setSelections(newSelections);
             }}
           >
             <option disabled>Pick One</option>
             {choice.options.map((skill, index) => (
-              <option key={index} value={index}>
+              <option
+                key={index}
+                value={index}
+                disabled={selections.some((selection) => selection === index)}
+              >
                 {skill.toCapitalCase().replaceAll("_", " ")}
               </option>
             ))}
