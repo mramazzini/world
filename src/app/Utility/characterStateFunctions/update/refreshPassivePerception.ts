@@ -1,7 +1,6 @@
 export const refreshPassivePerception = (
   state: PrismaJson.CharacterState
 ): PrismaJson.CharacterState => {
-  console.log("pp", state);
   const perception = state.abilityScores.WIS;
   const perceptionMod = Math.floor((perception - 10) / 2);
   const passivePerception = 10 + perceptionMod;

@@ -6,7 +6,6 @@ const useLog = () => {
   const [log, updateLog] = useState<Log[]>([]);
 
   const logPush = (newLog: Log) => {
-    console.log(newLog);
     updateLog((prev) => {
       return [...prev, newLog];
     });

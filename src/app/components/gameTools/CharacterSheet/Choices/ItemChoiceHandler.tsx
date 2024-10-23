@@ -16,7 +16,6 @@ const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //make sure that all selections are made
-    console.log("selections", selections);
     let allSelectionsMade = true;
     selections.forEach((selection) => {
       if (!selection || selection.length === 0) {

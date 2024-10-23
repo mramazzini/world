@@ -18,7 +18,6 @@ const Save = ({ id, state, regenerateCharacter }: Props) => {
   const handleClick = async () => {
     setLoading(true);
     try {
-      console.log(state);
       const response = await fetch("/api/saveCharacter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

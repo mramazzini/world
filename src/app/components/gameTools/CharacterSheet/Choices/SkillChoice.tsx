@@ -14,7 +14,6 @@ interface Props {
 }
 
 const SkillChoice = ({ choice, updateSelections, modalID }: Props) => {
-  console.log(choice.numberOfChoices);
   const [selections, setSelections] = useState<number[]>(
     new Array<number>(choice.numberOfChoices - 1)
   );

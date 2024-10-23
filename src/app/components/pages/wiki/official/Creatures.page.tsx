@@ -41,9 +41,7 @@ interface Props {
 }
 const CreaturePage = ({ creature }: Props) => {
   const [showAllSkills, setShowAllSkills] = useState(false);
-  console.log(creature);
   const rollFromFormula = (formula: string) => {
-    console.log(formula);
     const data = formula
       .replaceAll(" - ", " + -")
       .split("+")

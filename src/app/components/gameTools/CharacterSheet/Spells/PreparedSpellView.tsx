@@ -246,14 +246,12 @@ const PreparedSpellView = ({
                 className="btn btn-accent join-item h-1/2"
                 onClick={(e) => {
                   e.preventDefault();
-                  console.log("casting spell as a" + rollSpellLevel + " spell");
                   const rollResults = spellInput.spellRoll?.map((r) => {
                     const rollRes = numberArray(1, r.numberOfDice).map(() =>
                       roll(1, r.dice)
                     );
                     return rollRes;
                   });
-                  console.log(rollResults);
                   if (!rollResults) return;
                   const logList = [];
                   logList.push({
@@ -322,7 +320,6 @@ const PreparedSpellView = ({
                   }
 
                   logList.forEach((log) => {
-                    console.log(log);
                     logPush(log);
                   });
                 }}
@@ -570,7 +567,6 @@ const PreparedSpellView = ({
                       `spell-editor-modal-${index}`
                     ) as HTMLDialogElement;
                     modal.close();
-                    console.log(spell);
                   }}
                 >
                   Save

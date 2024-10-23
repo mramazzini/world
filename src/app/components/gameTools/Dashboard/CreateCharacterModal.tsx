@@ -36,10 +36,6 @@ const CreateCharacterModal = () => {
     alignment: Alignment.TRUE_NEUTRAL,
   });
 
-  useEffect(() => {
-    console.log(sideBarModel);
-  }, [sideBarModel]);
-
   const id = "createCharacterModal";
 
   useEffect(() => {

@@ -39,10 +39,7 @@ const Trivia = () => {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  console.log(
-                    question.correctIndex,
-                    question.answers.indexOf(answer)
-                  );
+
                   handleClick(question.answers.indexOf(answer));
                 }}
                 className={`btn w-full ${

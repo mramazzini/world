@@ -10,8 +10,6 @@ export const generateQueryFields = ({
   relationalFields: RelationFieldOptions[];
   additionalWhere?: any;
 }) => {
-  console.log(relationalFields);
-
   const res = {
     ...additionalWhere,
   };
@@ -28,7 +26,6 @@ export const generateQueryFields = ({
       }
       // @ts-ignore
       const d = parseFloat(data);
-      console.log(d, typeof d == "number" ? "is number" : "is not number");
       if (!Number.isNaN(d)) {
         if (d === -1) continue;
         // @ts-ignore
@@ -51,6 +48,5 @@ export const generateQueryFields = ({
       },
     };
   }
-  console.log(res);
   return res;
 };

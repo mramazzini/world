@@ -24,7 +24,6 @@ export const getFeat = async (
   query: string | number
 ): Promise<FeatInfo | null> => {
   const db = new PrismaClient();
-  console.log("query", query);
   if (typeof query === "string") {
     const res = await db.feat.findFirst({
       where: {

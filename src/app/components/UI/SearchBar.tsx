@@ -50,13 +50,11 @@ const SearchBar = ({
   };
 
   const handlePageChange = (newPage: number) => {
-    console.log(newPage);
     if (newPage < 0 || (length < QUERY_LIMIT && newPage > queryInfo.page))
       return;
 
     setQuery({ ...queryInfo, page: newPage });
     componentSearch({ ...queryInfo, page: newPage });
-    console.log({ ...queryInfo, page: newPage });
   };
 
   return (

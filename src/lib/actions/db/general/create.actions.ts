@@ -6,7 +6,6 @@ export const createUser = async (
 ): Promise<User | null> => {
   try {
     const db = new PrismaClient();
-    console.log(data);
     const res = db.user.create({
       data,
     });

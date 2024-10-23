@@ -25,7 +25,6 @@ const SearchTable = () => {
     };
     searchEverything(req).then((res) => {
       setData(res);
-      console.log(res);
     });
   }, [query, page]);
   const handleLoad = () => {

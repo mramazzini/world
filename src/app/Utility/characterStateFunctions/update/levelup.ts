@@ -18,7 +18,6 @@ export const levelUp = async (
   state: PrismaJson.CharacterState,
   classID: ClassID
 ): Promise<PrismaJson.CharacterState> => {
-  console.log(character);
   const newState = { ...state };
   const classes = state.classLevels;
   const classLevel = classes.find((c) => c.classId === classID)?.level;

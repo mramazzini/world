@@ -20,9 +20,7 @@ export async function middleware(req: NextRequest) {
   if (!isAuthenticated && protectedRoutes.includes(req.nextUrl.pathname)) {
     const absoluteURL = new URL("/login", req.nextUrl.origin);
     // Append the original pathname as a query parameter
-    console.log(req.nextUrl.pathname);
     absoluteURL.searchParams.set("redirect", req.nextUrl.pathname);
-    console.log(absoluteURL.toString());
     return NextResponse.redirect(absoluteURL.toString());
   }
 }

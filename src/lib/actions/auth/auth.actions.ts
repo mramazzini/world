@@ -49,8 +49,6 @@ export const signup = async (data: {
   confirmPassword: string;
   username: string;
 }): Promise<AuthResult> => {
-  console.log("createUser");
-
   const { email, password, confirmPassword } = data;
   const user = await db.user.findFirst({
     where: {

@@ -35,7 +35,6 @@ const UploadJsonFile = ({ setClass }: Props): React.ReactNode => {
       }
 
       setSuccess("Successfully Generated Class.");
-      console.log(success);
     } catch (e) {
       console.log(e);
       setError("Error Generating Class. Please check the file and try again.");

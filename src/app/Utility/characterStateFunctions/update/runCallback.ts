@@ -40,16 +40,7 @@ export const runCallback = async (
       ? addSkillProficiencies
       : addWeaponProficiencies;
   const callbackRes = await callback(character, data, from);
-  console.log(
-    "Resolved ",
-    protocol,
-    " from ",
-    from,
-    " with ",
-    data,
-    " to ",
-    callbackRes
-  );
+
   const removedChoice = removeChoice(callbackRes, choiceId);
   return {
     ...removedChoice,

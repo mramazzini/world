@@ -19,15 +19,12 @@ import Resources from "./Resources";
 import Tools from "./Tools";
 import { calculateLevel } from "@/app/Utility/characterStateFunctions/calc/calcLevel";
 import { calcSkillModifier } from "@/app/Utility/characterStateFunctions/calc/calcSkillModifier";
-import { alignmentToText } from "@/app/Utility/alignmentToText";
+
 import Spells from "./Spells";
 import { levelUp } from "@/app/Utility/characterStateFunctions/update/levelup";
 import LevelUp from "./LevelUp";
 import Save from "./Save";
-import {
-  linkCharacterToSubClass,
-  saveState,
-} from "@/lib/actions/db/character/update.actions";
+
 import CharacterIntro from "./CharacterIntro";
 import AbilityScoreRoller from "./AbilityScoreRoller";
 import HitPointsHandler from "./HitpointsHandler";
@@ -37,11 +34,7 @@ import SpellcastingStats from "./SpellcastingStats";
 import SavingThrowsRoller from "./SavingThrowsRoller";
 import IntiativeRoller from "./InitiativeRoller";
 import CharacterSheetFeatureDisplay from "./CharacterSheetFeatureDisplay";
-import {
-  saveCharacterToDB,
-  saveImageToCharacter,
-} from "@/app/Utility/saveCharacterToDB";
-import { getCharacter } from "@/lib/actions/db/character/read.actions";
+import { saveImageToCharacter } from "@/app/Utility/saveCharacterToDB";
 interface Props {
   character: CharacterInfo;
   setCharacter: (character: CharacterInfo) => void;

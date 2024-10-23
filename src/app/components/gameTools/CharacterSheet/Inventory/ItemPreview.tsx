@@ -68,7 +68,6 @@ const ItemPreview = ({
                       e.preventDefault();
                       if (!character.state) return;
                       if (!selectedItem?.item) return;
-                      console.log(selectedItem.item);
                       const newState = await equipWeapon(
                         character.state,
                         selectedItem.item,
@@ -98,7 +97,6 @@ const ItemPreview = ({
                         character.state,
                         selectedItem.item
                       );
-                      console.log(newState);
                       updateState(newState as PrismaJson.CharacterState);
                     }}
                   >
