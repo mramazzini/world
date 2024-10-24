@@ -48,6 +48,7 @@ const ModelDisplay = ({ model, id }: Props) => {
         break;
       case 'Item':
         memoizeGetItem(id).then((res) => setData(res));
+        break;
       case 'Feat':
         memoizeGetFeat(id).then((res) => setData(res));
     }
