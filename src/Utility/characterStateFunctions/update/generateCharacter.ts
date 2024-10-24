@@ -55,6 +55,7 @@ export const generateCharacter = async (
     pendingLinks: {
       subClass: [],
       Class: [],
+      feats: [],
     },
 
     notes: [introMarkdown],
