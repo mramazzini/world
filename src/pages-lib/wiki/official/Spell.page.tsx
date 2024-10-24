@@ -1,6 +1,6 @@
 'use client';
 import SpellDisplay from '@/components/Spells/SpellDisplay';
-import { SpellInfo } from '@/lib/utils/types/types';
+import { SpellInfo } from '@/lib/types/types';
 import Loading from '@/components/UI/Loading';
 import CommentSection from '@/components/CommentSection/CommentSection';
 import { AssociatedModel } from '@prisma/client';

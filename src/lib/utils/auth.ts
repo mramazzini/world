@@ -1,7 +1,7 @@
 'use server';
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
-import { AuthResult } from './types/types';
+import { AuthResult } from '../types/types';
 
 const expiration = '1 week';
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);

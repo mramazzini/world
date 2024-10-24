@@ -1,4 +1,4 @@
-import { src } from '@/lib/utils/types/types';
+import { src } from '@/lib/types/types';
 import { Language, Prisma, Size, Ability } from '@prisma/client';
 import { speciesIds } from '../Species.seed';
 const ids = {

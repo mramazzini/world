@@ -1,5 +1,5 @@
 'use server';
-import { SpellListInfo, QueryParams } from '@/lib/utils/types/types';
+import { SpellListInfo, QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';

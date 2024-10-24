@@ -2,7 +2,7 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import termDictionary from './TermDictionary';
 import Tooltip from './Tooltip';
-import { ItemInfo, SpellInfo } from '@/lib/utils/types/types';
+import { ItemInfo, SpellInfo } from '@/lib/types/types';
 import ModelLink from './ModelLink';
 import { memoizeGetItem, memoizeGetSpell } from './globalCache';
 

@@ -1,4 +1,4 @@
-import Dashboard from '@/components/gameTools/Dashboard/Dashboard';
+import Dashboard from '@/pages-lib/Dashboard';
 
 import { Metadata } from 'next';
 

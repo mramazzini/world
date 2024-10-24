@@ -1,5 +1,5 @@
 import { searchEverything } from '@/lib/actions/db/general/read.actions';
-import { QueryParams } from '@/lib/utils/types/types';
+import { QueryParams } from '@/lib/types/types';
 
 export async function GET(req: Request) {
   const params = new URL(req.url).searchParams;

@@ -1,7 +1,7 @@
 'use client';
 import { Suspense } from 'react';
 import Link from 'next/link';
-import { AuthResult } from '@/lib/utils/types/types';
+import { AuthResult } from '@/lib/types/types';
 import { login } from '@/lib/actions/auth/auth.actions';
 import { useRouter, useSearchParams } from 'next/navigation';
 import useErrorModal from '../../hooks/ErrorModal';

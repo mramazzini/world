@@ -1,6 +1,6 @@
 import SearchPageComponent from '../SearchPage';
 
-import { CreatureInfo } from '@/lib/utils/types/types';
+import { CreatureInfo } from '@/lib/types/types';
 import { CreatureType, Size } from '@prisma/client';
 import { getCreatureChunk } from '@/lib/actions/db/creature/read.actions';
 interface Props {

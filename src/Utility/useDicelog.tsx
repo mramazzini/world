@@ -1,5 +1,5 @@
 'use client';
-import { Log } from '@/lib/utils/types/types';
+import { Log } from '@/lib/types/types';
 import { useState } from 'react';
 
 const useLog = () => {

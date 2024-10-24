@@ -1,4 +1,4 @@
-import { WeaponID } from '@/lib/utils/types/types';
+import { WeaponID } from '@/lib/types/types';
 
 export const addWeaponProficiencies: PrismaJson.StateCallback = (
   char,

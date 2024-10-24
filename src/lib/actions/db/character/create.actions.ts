@@ -5,7 +5,7 @@ import {
   ClassID,
   SpeciesID,
   SubSpeciesID,
-} from '@/lib/utils/types/types';
+} from '@/lib/types/types';
 import { Alignment, PrismaClient } from '@prisma/client';
 
 export interface CreateCharacterParams {

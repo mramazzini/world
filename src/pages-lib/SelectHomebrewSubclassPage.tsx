@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 import Loading from '@/components/UI/Loading';
-import { QueryParams, SubClassInfo } from '@/lib/utils/types/types';
+import { QueryParams, SubClassInfo } from '@/lib/types/types';
 import SearchBar from '@/components/UI/SearchBar';
 import { getSubclassChunkByClass } from '@/lib/actions/db/subclass/read.actions';
 

@@ -238,6 +238,8 @@ model Character {
   SubSpecies   SubSpecies? @relation(fields: [subSpeciesId], references: [id])
   subSpeciesId Int?
 
+  Feats Feat[]
+
   /// [CharacterState]
   state Json?
 
@@ -579,10 +581,11 @@ model Feat {
   prerequisites     Json?
   prereqDescription String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    Int?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  User       User?       @relation(fields: [userId], references: [id])
+  userId     Int?
+  Characters Character[]
 }
 
 model Message {

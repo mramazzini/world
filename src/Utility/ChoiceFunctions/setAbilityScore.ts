@@ -1,4 +1,4 @@
-import { AbilityScores, AbilityScoreValue } from '@/lib/utils/types/types';
+import { AbilityScores, AbilityScoreValue } from '@/lib/types/types';
 
 import { v4 } from 'uuid';
 import { updateAbilityScores } from '../characterStateFunctions/update/updateAbilityScores';

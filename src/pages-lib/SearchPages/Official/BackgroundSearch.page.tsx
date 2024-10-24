@@ -1,6 +1,6 @@
 import SearchPageComponent from '../SearchPage';
 
-import { BackgroundInfo } from '@/lib/utils/types/types';
+import { BackgroundInfo } from '@/lib/types/types';
 import { getBackgroundChunk } from '@/lib/actions/db/background/read.actions';
 import { officialSources } from '@/lib/globalVars';
 interface Props {

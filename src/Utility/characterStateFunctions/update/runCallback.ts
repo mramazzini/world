@@ -1,4 +1,4 @@
-import { CallbackOptions, CharacterInfo } from '@/lib/utils/types/types';
+import { CallbackOptions, CharacterInfo } from '@/lib/types/types';
 import { ItemToInventory } from '../../ChoiceFunctions/ItemToInventory';
 import { addArmorProficiencies } from '../../ChoiceFunctions/addArmorProficiencies';
 import { addToolProficiencies } from '../../ChoiceFunctions/addToolProficiencies';
@@ -10,6 +10,9 @@ import { addSavingThrowProficiencies } from '../../ChoiceFunctions/addSavingThro
 import { addSkillProficiencies } from '../../ChoiceFunctions/addSkillProficiencies';
 import { addWeaponProficiencies } from '../../ChoiceFunctions/addWeaponProficiencies';
 import { removeChoice } from './removeChoice';
+import { chooseASIorFeat } from '@/Utility/ChoiceFunctions/chooseFeatOrASI';
+import { abilityScoreIncrease } from '@/Utility/ChoiceFunctions/abilityScoreIncrease';
+import { addFeats } from '@/Utility/ChoiceFunctions/addFeat';
 
 export const runCallback = async (
   character: CharacterInfo,
@@ -38,7 +41,18 @@ export const runCallback = async (
                     ? addSavingThrowProficiencies
                     : protocol == 'addSkillProficiencies'
                       ? addSkillProficiencies
-                      : addWeaponProficiencies;
+                      : protocol == 'addWeaponProficiencies'
+                        ? addWeaponProficiencies
+                        : protocol == 'ASIOrFeatSelection'
+                          ? chooseASIorFeat
+                          : protocol == 'AbilityScoreIncrease'
+                            ? abilityScoreIncrease
+                            : protocol == 'FeatSelection'
+                              ? addFeats
+                              : (character, data, from) => {
+                                  console.log('Unknown protocol', protocol);
+                                  return character.state as PrismaJson.CharacterState;
+                                };
   const callbackRes = await callback(character, data, from);
 
   const removedChoice = removeChoice(callbackRes, choiceId);

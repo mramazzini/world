@@ -4,7 +4,7 @@ import { Class } from '@prisma/client';
 import numberArray from '@/lib/utils/numberArray';
 import numPlace from '@/lib/utils/numPlace';
 import { useState } from 'react';
-import { Level, SpellLevel } from '@/lib/utils/types/types';
+import { Level, SpellLevel } from '@/lib/types/types';
 interface Props {
   classObj: Class;
 }

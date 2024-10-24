@@ -1,6 +1,6 @@
 'use server';
 import Fuse from 'fuse.js';
-import { CombinedData, QueryParams } from '@/lib/utils/types/types';
+import { CombinedData, QueryParams } from '@/lib/types/types';
 import { PrismaClient, Background } from '@prisma/client';
 import { QUERY_LIMIT } from '@/lib/globalVars';
 

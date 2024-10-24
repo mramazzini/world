@@ -1,5 +1,11 @@
 'use client';
-import { CharacterInfo, ClassID, Level, Time } from '@/lib/utils/types/types';
+import {
+  ASIorFeat,
+  CharacterInfo,
+  ClassID,
+  Level,
+  Time,
+} from '@/lib/types/types';
 import { refreshHp } from './refreshHp';
 import { v4 } from 'uuid';
 import { generateSubclassChoice } from '../calc/generateSubclassChoice';
@@ -95,24 +101,21 @@ export const levelUp = async (
 
         {
           id: v4(),
-          model: 'AbilityScore',
-          description: 'Your class grants you an ability score improvement.',
+          model: 'ASI or Feat',
+          description:
+            'Choose between taking a feat or increasing your ability scores.',
           choice: {
             choices: [
               {
-                abilities: ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'],
-                options: [1, 1],
-              },
-              {
-                abilities: ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'],
-                options: [2],
+                numberOfChoices: 1,
+                options: [ASIorFeat.ASI, ASIorFeat.Feat],
               },
             ],
-          } as PrismaJson.AbilityScoreChoice,
+          } as PrismaJson.ASIorFeatChoice,
           from: `${character.Classes?.find(
             (c) => c.id === classID
           )?.name.toCapitalCase()}`,
-          callbackProtocol: 'AbilityScoreIncrease',
+          callbackProtocol: 'ASIOrFeatSelection',
         },
       ],
     };

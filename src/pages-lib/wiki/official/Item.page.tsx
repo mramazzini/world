@@ -2,7 +2,7 @@ import Info from '@/components/UI/Info';
 import Loading from '@/components/UI/Loading';
 import P from '@/Utility/FormatAndSanitize';
 import NewLineParse from '@/Utility/NewLineParse';
-import { ItemInfo } from '@/lib/utils/types/types';
+import { ItemInfo } from '@/lib/types/types';
 import Link from 'next/link';
 import Tooltip from '@/Utility/Tooltip';
 import Feature from '@/components/UI/Feature';

@@ -1,5 +1,5 @@
 'use server';
-import { ToolInfo, QueryParams } from '@/lib/utils/types/types';
+import { ToolInfo, QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import P from './FormatAndSanitize';
 import Link from 'next/link';
-import { Badge } from '@/lib/utils/types/types';
+import { Badge } from '@/lib/types/types';
 
 const Tooltip = ({
   element,

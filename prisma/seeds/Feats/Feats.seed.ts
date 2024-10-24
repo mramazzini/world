@@ -1,4 +1,4 @@
-import { src } from '@/lib/utils/types/types';
+import { src } from '@/lib/types/types';
 import { Ability, Prisma } from '@prisma/client';
 import { ClassicVariantsIds } from '../Species/Variants/ClassicVariants';
 import { spellIds } from '../Spells/spells.seed';

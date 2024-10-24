@@ -1,5 +1,5 @@
 'use server';
-import { CharacterInfo, QueryParams } from '@/lib/utils/types/types';
+import { CharacterInfo, QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
@@ -20,6 +20,7 @@ export const getCharacters = async (): Promise<CharacterInfo[]> => {
           },
         },
       },
+      Feats: true,
       SubSpecies: true,
 
       User: {
@@ -47,6 +48,8 @@ export const getCharacter = async (
         Species: true,
         Background: true,
         SubClasses: true,
+        Feats: true,
+
         Classes: {
           include: {
             SpellList: {
@@ -75,6 +78,8 @@ export const getCharacter = async (
       include: {
         Species: true,
         Background: true,
+        Feats: true,
+
         SubClasses: true,
         Classes: {
           include: {
@@ -114,6 +119,8 @@ export const getCharactersByUser = async (
       Species: true,
       Background: true,
       SubClasses: true,
+      Feats: true,
+
       Classes: {
         include: {
           SpellList: {
@@ -150,6 +157,8 @@ export const getCharacterChunk = async (
       include: {
         Species: true,
         Background: true,
+        Feats: true,
+
         SubClasses: true,
         Classes: {
           include: {
@@ -183,6 +192,8 @@ export const getCharacterChunk = async (
       Species: true,
       Background: true,
       SubClasses: true,
+      Feats: true,
+
       Classes: {
         include: {
           SpellList: {

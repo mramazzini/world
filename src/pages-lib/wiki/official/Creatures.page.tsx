@@ -4,12 +4,7 @@ import { combatRatingToProficiency } from '@/Utility/combatRatingToProficiency';
 import P from '@/Utility/FormatAndSanitize';
 import NewLineParse from '@/Utility/NewLineParse';
 import { skillAtritbuteMap } from '@/lib/globalVars';
-import {
-  CreatureInfo,
-  ItemInfo,
-  Level,
-  SpellLevel,
-} from '@/lib/utils/types/types';
+import { CreatureInfo, ItemInfo, Level, SpellLevel } from '@/lib/types/types';
 import {
   Ability,
   ArmorClassProtocol,

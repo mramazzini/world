@@ -1,13 +1,15 @@
 'use client';
 import {
   ArmorInfo,
+  FeatInfo,
   ItemInfo,
   SubClassInfo,
   ToolInfo,
   WeaponInfo,
-} from '@/lib/utils/types/types';
+} from '@/lib/types/types';
 import {
   memoizeGetArmor,
+  memoizeGetFeat,
   memoizeGetItem,
   memoizeGetSubclass,
   memoizeGetTool,
@@ -15,13 +17,19 @@ import {
 } from './globalCache';
 import { useEffect, useState } from 'react';
 interface Props {
-  model: 'Weapon' | 'Armor' | 'Tool' | 'Subclass' | 'Item';
+  model: 'Weapon' | 'Armor' | 'Tool' | 'Subclass' | 'Item' | 'Feat';
   id: number;
 }
 
 const ModelDisplay = ({ model, id }: Props) => {
   const [data, setData] = useState<
-    WeaponInfo | ArmorInfo | ToolInfo | SubClassInfo | ItemInfo | null
+    | WeaponInfo
+    | ArmorInfo
+    | ToolInfo
+    | SubClassInfo
+    | ItemInfo
+    | FeatInfo
+    | null
   >(null);
 
   useEffect(() => {
@@ -40,6 +48,8 @@ const ModelDisplay = ({ model, id }: Props) => {
         break;
       case 'Item':
         memoizeGetItem(id).then((res) => setData(res));
+      case 'Feat':
+        memoizeGetFeat(id).then((res) => setData(res));
     }
   }, [model, id]);
 
@@ -56,6 +66,8 @@ const ModelDisplay = ({ model, id }: Props) => {
     case 'Subclass':
       return <>{data.name}</>;
     case 'Item':
+      return <>{data.name}</>;
+    case 'Feat':
       return <>{data.name}</>;
   }
 };

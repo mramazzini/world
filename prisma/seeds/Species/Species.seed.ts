@@ -1,5 +1,5 @@
 import { languages } from '@/lib/globalVars';
-import { src } from '@/lib/utils/types/types';
+import { src } from '@/lib/types/types';
 import {
   Prisma,
   Size,

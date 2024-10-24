@@ -1,5 +1,5 @@
 'use client';
-import { ItemID, ItemInfo } from '@/lib/utils/types/types';
+import { ItemID, ItemInfo } from '@/lib/types/types';
 import { memoizeGetItem } from '../../globalCache';
 import { AbilityToModifier } from '../calc/AbilityToModifier';
 import { ArmorType } from '@prisma/client';

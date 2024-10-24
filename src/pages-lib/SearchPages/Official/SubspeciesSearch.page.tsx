@@ -1,6 +1,6 @@
 import SearchPageComponent from '../SearchPage';
 
-import { SubSpeciesInfo } from '@/lib/utils/types/types';
+import { SubSpeciesInfo } from '@/lib/types/types';
 
 import { officialSources, species } from '@/lib/globalVars';
 import { getSubSpeciesChunk } from '@/lib/actions/db/subSpecies/read.actions';

@@ -18,7 +18,7 @@ import {
   SpellListInfo,
   FeatInfo,
   CreatureInfo,
-} from '@/lib/utils/types/types';
+} from '@/lib/types/types';
 import { Background, Spell } from '@prisma/client';
 import '@/lib/string.extensions';
 import numPlace from '@/lib/utils/numPlace';

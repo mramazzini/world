@@ -1,4 +1,4 @@
-import CharacterSheet from '@/components/gameTools/CharacterSheet/Character.page';
+import CharacterSheet from '@/components/CharacterSheet/Character.page';
 import { getCharacter } from '@/lib/actions/db/character/read.actions';
 import { getUserId } from '@/lib/utils/auth';
 import { Metadata } from 'next';

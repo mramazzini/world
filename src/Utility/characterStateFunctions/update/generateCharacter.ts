@@ -1,4 +1,4 @@
-import { AbilityScores, CharacterInfo, Time } from '@/lib/utils/types/types';
+import { AbilityScores, CharacterInfo, Time } from '@/lib/types/types';
 import { AbilityToModifier } from '../calc/AbilityToModifier';
 import '@/lib/string.extensions';
 import { generateSubclassChoice } from '../calc/generateSubclassChoice';

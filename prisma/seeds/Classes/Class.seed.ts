@@ -1,5 +1,5 @@
 import { ArmorType, Prisma, Skill, Ability } from '@prisma/client';
-import { SpellFocus } from '@/lib/utils/types/types';
+import { SpellFocus } from '@/lib/types/types';
 import { simpleIds, weaponIds } from '../Items/Weapons/Weapons.seed';
 import { itemIds } from '../Items/ItemIds';
 import {

@@ -1,4 +1,4 @@
-import { WeaponAttack, WeaponPropertyNames } from '@/lib/utils/types/types';
+import { WeaponAttack, WeaponPropertyNames } from '@/lib/types/types';
 import { Size, Weapon } from '@prisma/client';
 import { AbilityToModifier } from './characterStateFunctions/calc/AbilityToModifier';
 

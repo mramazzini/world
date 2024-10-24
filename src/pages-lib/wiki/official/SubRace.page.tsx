@@ -1,4 +1,4 @@
-import { SubSpeciesInfo } from '@/lib/utils/types/types';
+import { SubSpeciesInfo } from '@/lib/types/types';
 import NewLineParse from '@/Utility/NewLineParse';
 import Link from 'next/link';
 import Info from '@/components/UI/Info';

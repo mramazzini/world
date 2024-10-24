@@ -1,4 +1,4 @@
-import { SpeciesInfo } from '@/lib/utils/types/types';
+import { SpeciesInfo } from '@/lib/types/types';
 import Link from 'next/link';
 import NewLineParse from '@/Utility/NewLineParse';
 import GenerateTable from '@/components/UI/GenerateTable';

@@ -1,4 +1,4 @@
-import { SubClassInfo } from '@/lib/utils/types/types';
+import { SubClassInfo } from '@/lib/types/types';
 import SearchPageComponent from '../SearchPage';
 import { classes, officialSources } from '@/lib/globalVars';
 import { getSubclassChunk } from '@/lib/actions/db/subclass/read.actions';

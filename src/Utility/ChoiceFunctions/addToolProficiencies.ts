@@ -1,4 +1,4 @@
-import { ToolID } from '@/lib/utils/types/types';
+import { ToolID } from '@/lib/types/types';
 
 export const addToolProficiencies: PrismaJson.StateCallback = (
   char,

@@ -1,6 +1,6 @@
 import SearchPageComponent from '../SearchPage';
 
-import { ItemInfo } from '@/lib/utils/types/types';
+import { ItemInfo } from '@/lib/types/types';
 import { Rarity } from '@prisma/client';
 import { getItemChunk } from '@/lib/actions/db/item/read.actions';
 interface Props {

@@ -1,6 +1,6 @@
 'use client';
 import { Fragment, useState } from 'react';
-import { SpellListInfo } from '@/lib/utils/types/types';
+import { SpellListInfo } from '@/lib/types/types';
 import Loading from '@/components/UI/Loading';
 import Link from 'next/link';
 import '@/lib/string.extensions';

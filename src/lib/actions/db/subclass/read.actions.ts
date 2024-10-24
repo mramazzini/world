@@ -1,10 +1,10 @@
 'use server';
 import { QUERY_LIMIT } from '@/lib/globalVars';
-import { QueryParams, SubClassInfo } from '@/lib/utils/types/types';
+import { QueryParams, SubClassInfo } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { Prisma, PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
-import { DBMetadata } from '@/lib/utils/types/metadata';
+import { DBMetadata } from '@/lib/types/metadata';
 
 export const getSubclassMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();

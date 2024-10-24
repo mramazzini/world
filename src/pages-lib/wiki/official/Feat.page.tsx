@@ -2,7 +2,7 @@ import CommentSection from '@/components/CommentSection/CommentSection';
 import FeatureList from '@/components/UI/FeatureList';
 import Info from '@/components/UI/Info';
 import NewLineParse from '@/Utility/NewLineParse';
-import { FeatInfo } from '@/lib/utils/types/types';
+import { FeatInfo } from '@/lib/types/types';
 import { AssociatedModel } from '@prisma/client';
 import Link from 'next/link';
 

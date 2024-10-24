@@ -35,9 +35,26 @@ export const linkCharacterToSubClass = async (
   const res = await db.character.update({
     where: { id },
     data: {
-      Classes: {
+      SubClasses: {
         connect: {
           id: subClassId,
+        },
+      },
+    },
+  });
+  await db.$disconnect();
+  if (!res) return null;
+  return Date.now();
+};
+
+export const linkCharacterToFeat = async (id: number, featId: number) => {
+  const db = new PrismaClient();
+  const res = await db.character.update({
+    where: { id },
+    data: {
+      Feats: {
+        connect: {
+          id: featId,
         },
       },
     },

@@ -1,6 +1,6 @@
 import { Prisma, Ability } from '@prisma/client';
-import { SpellFocus } from '@/lib/utils/types/types';
-import { src } from '@/lib/utils/types/types';
+import { SpellFocus } from '@/lib/types/types';
+import { src } from '@/lib/types/types';
 import { spellListIds } from '../Spells/SpellLists/SpellLists.seed';
 import { spellIds } from '../Spells/spells.seed';
 import { thirdCaster } from '../Classes/SpellSlotsUtil';

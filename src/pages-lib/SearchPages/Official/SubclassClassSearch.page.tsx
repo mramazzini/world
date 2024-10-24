@@ -1,4 +1,4 @@
-import { QueryParams, SubClassInfo } from '@/lib/utils/types/types';
+import { QueryParams, SubClassInfo } from '@/lib/types/types';
 import SearchPageComponent from '../SearchPage';
 import { officialSources } from '@/lib/globalVars';
 

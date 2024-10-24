@@ -1,9 +1,27 @@
 'use server';
-import { FeatInfo, QueryParams } from '@/lib/utils/types/types';
+import { DBMetadata } from '@/lib/types/metadata';
+import { FeatInfo, QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 
 import Fuse from 'fuse.js';
+
+export const getFeatsMetadata = async (): Promise<DBMetadata[]> => {
+  const db = new PrismaClient();
+  const res = await db.feat.findMany({
+    select: {
+      id: true,
+      name: true,
+      updatedAt: true,
+      flavorText: true,
+    },
+  });
+  await db.$disconnect();
+  return res.map((feat) => ({
+    ...feat,
+    description: feat.flavorText,
+  }));
+};
 
 export const getFeats = async (): Promise<FeatInfo[]> => {
   const db = new PrismaClient();

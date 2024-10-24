@@ -1,4 +1,4 @@
-import { AbilityScoreValue } from '@/lib/utils/types/types';
+import { AbilityScoreValue } from '@/lib/types/types';
 import { refreshAC } from '../characterStateFunctions/update/updateAC';
 import { refreshHp } from '../characterStateFunctions/update/refreshHp';
 import { refreshPassivePerception } from '../characterStateFunctions/update/refreshPassivePerception';

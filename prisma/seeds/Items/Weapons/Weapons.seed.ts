@@ -1,5 +1,5 @@
 import { WeaponProperties } from '@/lib/globalVars';
-import { WeaponPropertyNames } from '@/lib/utils/types/types';
+import { WeaponPropertyNames } from '@/lib/types/types';
 import { DamageTypes, Prisma } from '@prisma/client';
 import { itemIds } from '../ItemIds';
 

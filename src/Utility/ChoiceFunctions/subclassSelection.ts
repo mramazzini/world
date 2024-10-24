@@ -1,4 +1,4 @@
-import { SubClassID } from '@/lib/utils/types/types';
+import { SubClassID } from '@/lib/types/types';
 
 export const subclassSelection: PrismaJson.StateCallback = async (
   char,

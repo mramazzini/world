@@ -3,7 +3,7 @@ import DieTable from '@/components/UI/DieTable';
 import FeatureList from '@/components/UI/FeatureList';
 import Info from '@/components/UI/Info';
 import Loading from '@/components/UI/Loading';
-import { BackgroundInfo } from '@/lib/utils/types/types';
+import { BackgroundInfo } from '@/lib/types/types';
 import P from '@/Utility/FormatAndSanitize';
 import NewLineParse from '@/Utility/NewLineParse';
 import { AssociatedModel } from '@prisma/client';

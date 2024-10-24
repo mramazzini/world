@@ -1,10 +1,10 @@
 'use server';
-import { SpeciesInfo, QueryParams } from '@/lib/utils/types/types';
+import { SpeciesInfo, QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 
 import Fuse from 'fuse.js';
-import { DBMetadata } from '@/lib/utils/types/metadata';
+import { DBMetadata } from '@/lib/types/metadata';
 
 export const getSpeciesMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();

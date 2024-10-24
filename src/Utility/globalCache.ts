@@ -5,6 +5,7 @@ import { getTool } from '@/lib/actions/db/tool/read.actions';
 import { getWeapon } from '@/lib/actions/db/weapons/read.actions';
 import { getSubclass } from '@/lib/actions/db/subclass/read.actions';
 import { getSpell } from '@/lib/actions/db/spell/read.actions';
+import { getFeat } from '@/lib/actions/db/feat/read.actions';
 
 const pendingQueries = new Map<string, unknown>();
 
@@ -82,4 +83,9 @@ export const memoizeGetTool = cacheFunction(
 export const memoizeGetSubclass = cacheFunction(
   (subclassId: string | number) => `subclass-${subclassId}`,
   getSubclass
+);
+
+export const memoizeGetFeat = cacheFunction(
+  (featId: string | number) => `feat-${featId}`,
+  getFeat
 );

@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { ClassInfo } from '@/lib/utils/types/types';
+import { ClassInfo } from '@/lib/types/types';
 import Loading from '@/components/UI/Loading';
 import { Ability, AssociatedModel } from '@prisma/client';
 import Link from 'next/link';
