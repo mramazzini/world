@@ -1,6 +1,5 @@
-import { Prisma, PrismaClient } from "@prisma/client";
-import { itemIds } from "../ItemIds";
-const db = new PrismaClient();
+import { Prisma } from '@prisma/client';
+import { itemIds } from '../ItemIds';
 
 const EquipmentPackSeed: Prisma.EquipmentPackCreateManyInput[] = [
   {

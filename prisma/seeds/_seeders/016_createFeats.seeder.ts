@@ -1,15 +1,15 @@
-import { cerr, cinfo, cwarn } from "@/lib/utils/chalkLog";
-import { Prisma, PrismaClient } from "@prisma/client";
-import FeatSeed from "../Feats/Feats.seed";
-import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
+import { cerr, cinfo } from '@/lib/utils/chalkLog';
+import { PrismaClient } from '@prisma/client';
+import FeatSeed from '../Feats/Feats.seed';
+import verifyTableIntegrity from '@/lib/utils/verifyTableIntegrity';
 export const createFeats = async (db: PrismaClient) => {
-  cinfo("Creating Feats");
+  cinfo('Creating Feats');
   for (const feat of FeatSeed) {
     try {
-      cinfo("Creating feat:", feat.name);
+      cinfo('Creating feat:', feat.name);
       //make sure feat has a featId and levels
       if (!feat.id) {
-        cerr("Feat missing id field:", feat.name);
+        cerr('Feat missing id field:', feat.name);
         return;
       }
 
@@ -18,7 +18,7 @@ export const createFeats = async (db: PrismaClient) => {
         for (const feature of feat.features as PrismaJson.Feature[]) {
           if (feature.extendedTable) {
             if (!verifyTableIntegrity(feature.extendedTable)) {
-              cerr("Error verifying table integrity for feat:", feat.name);
+              cerr('Error verifying table integrity for feat:', feat.name);
               return;
             }
           }
@@ -31,9 +31,9 @@ export const createFeats = async (db: PrismaClient) => {
         create: feat,
       });
 
-      cinfo("Feat created");
+      cinfo('Feat created');
     } catch (error) {
-      cerr("Error creating feat", feat.name, error);
+      cerr('Error creating feat', feat.name, error);
       return;
     }
   }

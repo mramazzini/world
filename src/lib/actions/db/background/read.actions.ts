@@ -1,10 +1,9 @@
-"use server";
-import { QUERY_LIMIT } from "@/lib/globalVars";
-import { BackgroundInfo, QueryParams } from "@/lib/utils/types/types";
-import { generateQueryFields } from "@/lib/utils/generateQueryFields";
-import { PrismaClient } from "@prisma/client";
-import Fuse from "fuse.js";
-import { DBMetadata } from "@/lib/utils/types/metadata";
+'use server';
+import { BackgroundInfo, QueryParams } from '@/lib/utils/types/types';
+import { generateQueryFields } from '@/lib/utils/generateQueryFields';
+import { PrismaClient } from '@prisma/client';
+import Fuse from 'fuse.js';
+import { DBMetadata } from '@/lib/utils/types/metadata';
 
 export const getBackgroundsMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
@@ -40,7 +39,7 @@ export const getBackground = async (
   query: string | number
 ): Promise<BackgroundInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === "string") {
+  if (typeof query === 'string') {
     const res = await db.background.findFirst({
       where: {
         name: query,
@@ -78,7 +77,7 @@ export const getBackgroundChunk = async (
 ): Promise<BackgroundInfo[] | null> => {
   const db = new PrismaClient();
   const { query } = queryInfo;
-  if (query === "") {
+  if (query === '') {
     const res = await db.background.findMany({
       where: generateQueryFields({
         fields: queryInfo.searchFields,
@@ -113,10 +112,10 @@ export const getBackgroundChunk = async (
 
   const fuse = new Fuse(res, {
     keys: [
-      { name: "name", weight: 1 },
-      { name: "description", weight: 1 },
-      { name: "Features.name", weight: 0.5 },
-      { name: "Features.description", weight: 0.5 },
+      { name: 'name', weight: 1 },
+      { name: 'description', weight: 1 },
+      { name: 'Features.name', weight: 0.5 },
+      { name: 'Features.description', weight: 0.5 },
     ],
   });
 

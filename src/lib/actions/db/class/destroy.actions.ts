@@ -1,5 +1,5 @@
-"use server";
-import { PrismaClient } from "@prisma/client";
+'use server';
+import { PrismaClient } from '@prisma/client';
 
 export const deleteClasses = async () => {
   const db = new PrismaClient();

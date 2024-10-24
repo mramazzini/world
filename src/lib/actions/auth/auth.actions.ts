@@ -1,14 +1,14 @@
-"use server";
-import bcrypt from "bcrypt";
-import { PrismaClient, User } from "@prisma/client";
-import { AuthResult } from "@/lib/utils/types/types";
+'use server';
+import bcrypt from 'bcrypt';
+import { PrismaClient } from '@prisma/client';
+import { AuthResult } from '@/lib/utils/types/types';
 import {
   generateToken,
   validateEmail,
   validateSecureString,
-} from "@/lib/utils/auth";
-import { createUser } from "../db/general/create.actions";
-import { sendNewUserMessage } from "@/lib/webhook/DiscordWebhook";
+} from '@/lib/utils/auth';
+import { createUser } from '../db/general/create.actions';
+import { sendNewUserMessage } from '@/lib/webhook/DiscordWebhook';
 
 const db = new PrismaClient();
 
@@ -104,7 +104,7 @@ export const signup = async (data: {
   try {
     sendNewUserMessage(newUser.username);
   } catch (error) {
-    console.log("Failed to send verification email");
+    console.error('Failed to send verification email', error);
   }
 
   return AuthResult.Success;

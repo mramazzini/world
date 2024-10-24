@@ -1,5 +1,5 @@
-"use server";
-import { PrismaClient, User } from "@prisma/client";
+'use server';
+import { PrismaClient, User } from '@prisma/client';
 
 export const getUser = async (id: number): Promise<User | null> => {
   const db = new PrismaClient();

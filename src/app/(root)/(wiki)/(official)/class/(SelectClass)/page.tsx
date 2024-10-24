@@ -1,22 +1,22 @@
-import ClassSearchPage from "@/app/components/SearchPages/Official/ClassSearch.page";
-import { getClasses } from "@/lib/actions/db/class/read.actions";
-import { Metadata } from "next";
+import ClassSearchPage from '@/page/SearchPages/Official/ClassSearch.page';
+import { getClasses } from '@/lib/actions/db/class/read.actions';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Official Classes - Max's DND Wiki",
   description:
-    "A vast collection of classes for your DND campaign. Choose from offical content or user submitted homebrew classes.",
+    'A vast collection of classes for your DND campaign. Choose from offical content or user submitted homebrew classes.',
   openGraph: {
-    type: "website",
+    type: 'website',
     title: "Official Classes - Max's DND Wiki",
     description:
-      "A vast collection of classes for your DND campaign. Choose from offical content or user submitted homebrew classes.",
+      'A vast collection of classes for your DND campaign. Choose from offical content or user submitted homebrew classes.',
     images: [
       {
-        url: "https://www.maxdnd.com/images/hero.jpg",
+        url: 'https://www.maxdnd.com/images/hero.jpg',
         width: 1440,
         height: 1920,
-        alt: "Dungeons and Dragons Fire Dragon Attack",
+        alt: 'Dungeons and Dragons Fire Dragon Attack',
       },
     ],
   },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${process.env.DOMAIN_NAME}/class`,
   },
 };
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 const Page = async () => {
   const classes = await getClasses(false);
   if (!classes) {

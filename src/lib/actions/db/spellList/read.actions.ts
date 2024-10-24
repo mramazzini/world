@@ -1,9 +1,8 @@
-"use server";
-import { QUERY_LIMIT } from "@/lib/globalVars";
-import { SpellListInfo, QueryParams } from "@/lib/utils/types/types";
-import { generateQueryFields } from "@/lib/utils/generateQueryFields";
-import { PrismaClient } from "@prisma/client";
-import Fuse from "fuse.js";
+'use server';
+import { SpellListInfo, QueryParams } from '@/lib/utils/types/types';
+import { generateQueryFields } from '@/lib/utils/generateQueryFields';
+import { PrismaClient } from '@prisma/client';
+import Fuse from 'fuse.js';
 
 export const getSpellLists = async (): Promise<SpellListInfo[]> => {
   const db = new PrismaClient();
@@ -20,7 +19,7 @@ export const getSpellList = async (
   query: string | number
 ): Promise<SpellListInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === "string") {
+  if (typeof query === 'string') {
     const res = await db.spellList.findFirst({
       where: {
         name: query,
@@ -50,7 +49,7 @@ export const getSpellListChunk = async (
 ): Promise<SpellListInfo[] | null> => {
   const db = new PrismaClient();
   const { query } = queryInfo;
-  if (query === "") {
+  if (query === '') {
     const res = await db.spellList.findMany({
       where: generateQueryFields({
         fields: queryInfo.searchFields,
@@ -77,10 +76,10 @@ export const getSpellListChunk = async (
 
   const fuse = new Fuse(res, {
     keys: [
-      { name: "name", weight: 1 },
-      { name: "description", weight: 1 },
-      { name: "Features.name", weight: 0.5 },
-      { name: "Features.description", weight: 0.5 },
+      { name: 'name', weight: 1 },
+      { name: 'description', weight: 1 },
+      { name: 'Features.name', weight: 0.5 },
+      { name: 'Features.description', weight: 0.5 },
     ],
   });
 

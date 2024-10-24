@@ -1,5 +1,5 @@
-import { itemIds } from "../Items/ItemIds";
-import { creatureIds } from "./Creature.seed";
+import { itemIds } from '../Items/ItemIds';
+import { creatureIds } from './Creature.seed';
 
 const CreatureToItemsSeed: {
   creatureID: number;

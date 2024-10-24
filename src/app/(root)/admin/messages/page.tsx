@@ -1,7 +1,7 @@
-"use client";
-import { getMessages } from "@/lib/actions/db/message/read.actions";
-import { MessageInfo } from "@/lib/utils/types/types";
-import { useState, useEffect } from "react";
+'use client';
+import { getMessages } from '@/lib/actions/db/message/read.actions';
+import { MessageInfo } from '@/lib/utils/types/types';
+import { useState, useEffect } from 'react';
 const MessagesPage = () => {
   const [messages, setMessages] = useState<MessageInfo[]>([]);
   useEffect(() => {
@@ -13,7 +13,7 @@ const MessagesPage = () => {
     <main className="p-8">
       <h1>Messages</h1>
       <h2>
-        {messages.length} {messages.length === 1 ? "message" : "messages"}
+        {messages.length} {messages.length === 1 ? 'message' : 'messages'}
       </h2>
       <div className="divider"></div>
       <div className="flex flex-col">
@@ -24,21 +24,21 @@ const MessagesPage = () => {
           >
             <div className="w-full flex flex-row justify-between">
               <h2 className="text-xl font-bold ">
-                User:{" "}
+                User:{' '}
                 {item.User?.username ? (
                   <span>{item.User?.username}</span>
                 ) : (
-                  "Anonymous"
+                  'Anonymous'
                 )}
               </h2>
               <h2 className="text-xl font-bold">
                 {new Date(item.createdAt).toLocaleDateString() +
-                  " " +
+                  ' ' +
                   new Date(item.createdAt).toLocaleTimeString()}
               </h2>
             </div>
             <h3 className="text-lg font-bold">
-              Email:{" "}
+              Email:{' '}
               {item.email ||
                 (item.User?.email && (
                   <span>{item.email || item.User?.email}</span>

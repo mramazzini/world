@@ -1,4 +1,4 @@
-import { Alignment, Prisma } from "@prisma/client";
+import { Alignment, Prisma } from '@prisma/client';
 
 const CharacterSeed: Prisma.CharacterCreateInput[] = [
   // {
@@ -154,7 +154,7 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
   //   },
   // },
   {
-    name: "Littlefoot",
+    name: 'Littlefoot',
     alignment: Alignment.CHAOTIC_GOOD,
     User: {
       connect: {

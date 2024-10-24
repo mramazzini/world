@@ -1,6 +1,6 @@
-"use server";
-import { AssociatedModel, PrismaClient } from "@prisma/client";
-import { CommentInfo } from "@/lib/utils/types/types";
+'use server';
+import { AssociatedModel, PrismaClient } from '@prisma/client';
+import { CommentInfo } from '@/lib/utils/types/types';
 
 export const getCommentsByModel = async (
   model: AssociatedModel,
@@ -25,7 +25,7 @@ export const getCommentsByModel = async (
     });
     return comments;
   } catch (error) {
-    console.error("Error getting comments", error);
+    console.error('Error getting comments', error);
     return [];
   } finally {
     await db.$disconnect();

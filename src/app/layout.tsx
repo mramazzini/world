@@ -1,14 +1,13 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Navbar from "./components/Navbar/Navbar";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
-import Footer from "./components/Footer/Footer";
-import { NAVBAR_HEIGHT_REM } from "@/lib/globalVars";
-import { Suspense } from "react";
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Navbar from '@/components/Navbar/Navbar';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
+import Footer from '@/components/Footer/Footer';
+import { NAVBAR_HEIGHT_REM } from '@/lib/globalVars';
+import { Suspense } from 'react';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({
   children,

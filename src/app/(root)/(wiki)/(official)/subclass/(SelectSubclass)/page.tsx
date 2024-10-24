@@ -1,23 +1,22 @@
-import SubclassSearchPage from "@/app/components/SearchPages/Official/SubclassSearch.page";
-import Loading from "@/app/components/UI/Loading";
-import { getSubclasses } from "@/lib/actions/db/subclass/read.actions";
-import { Metadata } from "next";
+import SubclassSearchPage from '@/page/SearchPages/Official/SubclassSearch.page';
+import { getSubclasses } from '@/lib/actions/db/subclass/read.actions';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Subclasses - Max's DND Wiki",
   description:
-    "A vast collection of subclasses for your DND campaign. Choose from offical content or user submitted homebrew subclasses.",
+    'A vast collection of subclasses for your DND campaign. Choose from offical content or user submitted homebrew subclasses.',
   openGraph: {
-    type: "website",
+    type: 'website',
     title: "Subclasses - Max's DND Wiki",
     description:
-      "A vast collection of subclasses for your DND campaign. Choose from offical content or user submitted homebrew subclasses.",
+      'A vast collection of subclasses for your DND campaign. Choose from offical content or user submitted homebrew subclasses.',
     images: [
       {
-        url: "https://www.maxdnd.com/images/hero.jpg",
+        url: 'https://www.maxdnd.com/images/hero.jpg',
         width: 1440,
         height: 1920,
-        alt: "Dungeons and Dragons Fire Dragon Attack",
+        alt: 'Dungeons and Dragons Fire Dragon Attack',
       },
     ],
   },
@@ -25,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${process.env.DOMAIN_NAME}/subclass`,
   },
 };
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 const Page = async () => {
   const subclasses = await getSubclasses({ homebrew: false });
   if (!subclasses) {

@@ -1,9 +1,8 @@
-"use server";
-import { QUERY_LIMIT } from "@/lib/globalVars";
-import { ArmorInfo, QueryParams } from "@/lib/utils/types/types";
-import { generateQueryFields } from "@/lib/utils/generateQueryFields";
-import { PrismaClient } from "@prisma/client";
-import Fuse from "fuse.js";
+'use server';
+import { ArmorInfo, QueryParams } from '@/lib/utils/types/types';
+import { generateQueryFields } from '@/lib/utils/generateQueryFields';
+import { PrismaClient } from '@prisma/client';
+import Fuse from 'fuse.js';
 
 export const getArmors = async (): Promise<ArmorInfo[]> => {
   const db = new PrismaClient();
@@ -16,7 +15,7 @@ export const getArmor = async (
   query: string | number
 ): Promise<ArmorInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === "string") {
+  if (typeof query === 'string') {
     const res = await db.armor.findFirst({
       where: {
         name: query,
@@ -40,7 +39,7 @@ export const getArmorChunk = async (
 ): Promise<ArmorInfo[] | null> => {
   const db = new PrismaClient();
   const { query } = queryInfo;
-  if (query === "") {
+  if (query === '') {
     const res = await db.armor.findMany({
       where: generateQueryFields({
         fields: queryInfo.searchFields,
@@ -59,7 +58,7 @@ export const getArmorChunk = async (
   });
 
   const fuse = new Fuse(res, {
-    keys: [{ name: "name", weight: 1 }],
+    keys: [{ name: 'name', weight: 1 }],
   });
 
   const results = fuse.search(query);

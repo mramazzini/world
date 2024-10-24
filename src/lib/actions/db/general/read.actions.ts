@@ -1,24 +1,8 @@
-"use server";
-import Fuse, { FuseSearchOptions, IFuseOptions } from "fuse.js";
-import {
-  ClassInfo,
-  CombinedData,
-  QueryParams,
-  src,
-  SubClassInfo,
-  SubclassSearchResults,
-} from "@/lib/utils/types/types";
-import {
-  Class,
-  PrismaClient,
-  SubClass,
-  Background,
-  Feat,
-  Spell,
-  Species,
-  Weapon,
-} from "@prisma/client";
-import { QUERY_LIMIT } from "@/lib/globalVars";
+'use server';
+import Fuse from 'fuse.js';
+import { CombinedData, QueryParams } from '@/lib/utils/types/types';
+import { PrismaClient, Background } from '@prisma/client';
+import { QUERY_LIMIT } from '@/lib/globalVars';
 
 export const searchEverything = async (
   queryInfo: QueryParams
@@ -56,7 +40,7 @@ export const searchEverything = async (
       name: spell.name,
       description: spell.description,
       flavorText: spell.description,
-      type: "Spells",
+      type: 'Spells',
       other: spell.school,
       lastUpdated: spell.updatedAt,
     })),
@@ -64,7 +48,7 @@ export const searchEverything = async (
       name: class_.name,
       description: class_.description,
       flavorText: class_.description,
-      type: "Class",
+      type: 'Class',
       other: class_.subClassDescription,
       lastUpdated: class_.updatedAt,
     })),
@@ -72,35 +56,35 @@ export const searchEverything = async (
       name: subclass.name,
       description: subclass.description
         ? subclass.description
-        : "No description available.",
+        : 'No description available.',
       flavorText: subclass.description
         ? subclass.description
-        : "No description available.",
-      type: "Subclass",
-      other: subclass.Class?.name || "",
+        : 'No description available.',
+      type: 'Subclass',
+      other: subclass.Class?.name || '',
       lastUpdated: subclass.updatedAt,
     })),
     ...items.map((item) => ({
       name: item.name,
       description: item.description,
       flavorText: item.flavorText,
-      type: "Item",
-      other: item.types.join(", "),
+      type: 'Item',
+      other: item.types.join(', '),
       lastUpdated: item.updatedAt,
     })),
     ...species.map((r) => ({
       name: r.name,
       description: r.description,
-      flavorText: r.description ? r.description : "No description available",
-      type: "Species",
+      flavorText: r.description ? r.description : 'No description available',
+      type: 'Species',
       other: r.size,
       lastUpdated: r.updatedAt,
     })),
     ...subspecies.map((r) => ({
       name: r.name,
       description: r.description,
-      flavorText: r.description ? r.description : "No description available",
-      type: "Subspecies",
+      flavorText: r.description ? r.description : 'No description available',
+      type: 'Subspecies',
       other: r.species.name,
       lastUpdated: r.updatedAt,
     })),
@@ -109,23 +93,23 @@ export const searchEverything = async (
       name: background.name,
       description: background.description,
       flavorText: background.description,
-      type: "Background",
-      other: "",
+      type: 'Background',
+      other: '',
       lastUpdated: background.updatedAt,
     })),
     ...spellLists.map((spellList) => ({
       name: spellList.name,
       description: spellList.description,
       flavorText: spellList.description,
-      type: "Spell-List",
-      other: "",
+      type: 'Spell-List',
+      other: '',
       lastUpdated: spellList.updatedAt,
     })),
     ...feats.map((feat) => ({
       name: feat.name,
       description: feat.flavorText,
       flavorText: feat.flavorText,
-      type: "Feats",
+      type: 'Feats',
       other: feat.prereqDescription,
       lastUpdated: feat.updatedAt,
     })),
@@ -133,18 +117,18 @@ export const searchEverything = async (
       name: creature.name,
       description: creature.description,
       flavorText: creature.description,
-      type: "Creature",
+      type: 'Creature',
       other: creature.creatureType,
       lastUpdated: creature.updatedAt,
     })),
   ];
   const fuse = new Fuse(combined, {
     keys: [
-      { name: "name", weight: 1 },
-      { name: "description", weight: 1 },
-      { name: "flavorText", weight: 1 },
-      { name: "type", weight: 1 },
-      { name: "other", weight: 0.75 },
+      { name: 'name', weight: 1 },
+      { name: 'description', weight: 1 },
+      { name: 'flavorText', weight: 1 },
+      { name: 'type', weight: 1 },
+      { name: 'other', weight: 0.75 },
     ],
     includeScore: true,
   });

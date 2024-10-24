@@ -294,7 +294,6 @@ model Class {
   /// [ToolChoice]
   tools            Json
   toolsDescription String
-  potentialTools   Tool[] @relation("ToolClass")
 
   /// [ArmorChoice]
   armor            Json
@@ -303,14 +302,12 @@ model Class {
   /// [WeaponChoice]
   weapons           Json
   weaponDescription String
-  potentialWeapons  Weapon[] @relation("WeaponClass")
 
   abilityScoreLevels Int[]
 
   /// [ItemChoice]
   equipment            Json //this is the starting items for the class
   equipmentDescription String[]
-  potentialEquipment   Item[]   @relation("ItemClass")
 
   isSpellCaster    Boolean @default(false)
   /// [SpellCastingInfo]
@@ -618,7 +615,6 @@ model Tool {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Class     Class[]  @relation("ToolClass")
 }
 
 enum ItemTypes {
@@ -715,8 +711,6 @@ model Item {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Classes Class[] @relation("ItemClass")
-
   Weapon        Weapon?  @relation("ItemWeapon", fields: [weaponId], references: [id])
   weaponId      Int?
   AmmunitionFor Weapon[] @relation("WeaponAmmunition")
@@ -751,9 +745,8 @@ model Weapon {
   properties Json[] // AND array (ex finesse, light, thrown(20/60))
   Item       Item[] @relation("ItemWeapon")
 
-  ammunition   Item?   @relation("WeaponAmmunition", fields: [ammunitionId], references: [id])
+  ammunition   Item? @relation("WeaponAmmunition", fields: [ammunitionId], references: [id])
   ammunitionId Int?
-  Class        Class[] @relation("WeaponClass")
 }
 
 model Armor {

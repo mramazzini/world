@@ -1,8 +1,8 @@
-"use server";
-import { getUserId } from "@/lib/utils/auth";
-import { AssociatedModel, CommentType, PrismaClient } from "@prisma/client";
-import { getUser } from "../user/read.actions";
-import { sendComment } from "@/lib/webhook/DiscordWebhook";
+'use server';
+import { getUserId } from '@/lib/utils/auth';
+import { AssociatedModel, CommentType, PrismaClient } from '@prisma/client';
+import { getUser } from '../user/read.actions';
+import { sendComment } from '@/lib/webhook/DiscordWebhook';
 
 export const createComment = async (
   model: AssociatedModel,
@@ -13,7 +13,7 @@ export const createComment = async (
   const db = new PrismaClient();
   const userId = await getUserId();
   if (userId === -1) {
-    console.error("Error getting user id");
+    console.error('Error getting user id');
     return;
   }
   try {
@@ -27,16 +27,16 @@ export const createComment = async (
       },
     });
   } catch (error) {
-    console.error("Error creating comment", error);
+    console.error('Error creating comment', error);
   } finally {
     await db.$disconnect();
-    const user = await getUser(userId);
-    if (!user) {
-      console.error("Error getting user");
-      return;
-    }
-    sendComment(text, location, user.username);
   }
+  const user = await getUser(userId);
+  if (!user) {
+    console.error('Error getting user');
+    return null;
+  }
+  sendComment(text, location, user.username);
 };
 
 export const createReply = async (
@@ -48,7 +48,7 @@ export const createReply = async (
   const db = new PrismaClient();
   const userId = await getUserId();
   if (userId === -1) {
-    console.error("Error getting user id");
+    console.error('Error getting user id');
     return;
   }
   try {
@@ -63,7 +63,7 @@ export const createReply = async (
       },
     });
   } catch (error) {
-    console.error("Error creating reply", error);
+    console.error('Error creating reply', error);
   } finally {
     await db.$disconnect();
   }

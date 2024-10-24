@@ -1,14 +1,10 @@
-"use server";
-import {
-  SpeciesInfo,
-  QueryParams,
-  SubSpeciesInfo,
-} from "@/lib/utils/types/types";
-import { generateQueryFields } from "@/lib/utils/generateQueryFields";
-import { PrismaClient } from "@prisma/client";
+'use server';
+import { QueryParams, SubSpeciesInfo } from '@/lib/utils/types/types';
+import { generateQueryFields } from '@/lib/utils/generateQueryFields';
+import { PrismaClient } from '@prisma/client';
 
-import Fuse from "fuse.js";
-import { DBMetadata } from "@/lib/utils/types/metadata";
+import Fuse from 'fuse.js';
+import { DBMetadata } from '@/lib/utils/types/metadata';
 
 export const getVariantMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
@@ -65,7 +61,7 @@ export const getSubSpecie = async (
   query: string | number
 ): Promise<SubSpeciesInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === "string") {
+  if (typeof query === 'string') {
     const res = await db.subSpecies.findFirst({
       where: {
         name: query,
@@ -104,8 +100,8 @@ export const getSubSpeciesChunk = async (
   queryInfo: QueryParams
 ): Promise<SubSpeciesInfo[] | null> => {
   const db = new PrismaClient();
-  const { query, page } = queryInfo;
-  if (query === "") {
+  const { query } = queryInfo;
+  if (query === '') {
     const res = await db.subSpecies.findMany({
       where: generateQueryFields({
         fields: queryInfo.searchFields,
@@ -142,13 +138,13 @@ export const getSubSpeciesChunk = async (
 
   const fuse = new Fuse(res, {
     keys: [
-      { name: "name", weight: 1 },
-      { name: "description", weight: 1 },
-      { name: "age", weight: 0.5 },
-      { name: "alignment", weight: 0.5 },
-      { name: "size", weight: 0.5 },
-      { name: "speedDescription", weight: 0.5 },
-      { name: "languageDescription", weight: 0.5 },
+      { name: 'name', weight: 1 },
+      { name: 'description', weight: 1 },
+      { name: 'age', weight: 0.5 },
+      { name: 'alignment', weight: 0.5 },
+      { name: 'size', weight: 0.5 },
+      { name: 'speedDescription', weight: 0.5 },
+      { name: 'languageDescription', weight: 0.5 },
     ],
   });
 

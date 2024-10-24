@@ -1,13 +1,13 @@
-import { cerr, cinfo } from "@/lib/utils/chalkLog";
-import { PrismaClient } from "@prisma/client";
-import Classes from "../Classes/Class.seed";
+import { cerr, cinfo } from '@/lib/utils/chalkLog';
+import { PrismaClient } from '@prisma/client';
+import Classes from '../Classes/Class.seed';
 
 export const createClasses = async (db: PrismaClient) => {
   // Create classes
-  cinfo("Creating classes");
+  cinfo('Creating classes');
   for (const Class of Classes) {
     try {
-      cinfo("Creating class:", Class.name);
+      cinfo('Creating class:', Class.name);
       await db.class.upsert({
         where: {
           id: Class.id,
@@ -15,11 +15,11 @@ export const createClasses = async (db: PrismaClient) => {
         update: Class,
         create: Class,
       });
-      cinfo("Class created");
+      cinfo('Class created');
     } catch (error) {
-      cerr("Error creating class:", Class.name, error);
+      cerr('Error creating class:', Class.name, error);
       return;
     }
   }
-  cinfo("Classes created");
+  cinfo('Classes created');
 };

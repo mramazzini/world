@@ -1,22 +1,22 @@
-import SelectSpellPage from "@/app/components/SearchPages/Official/SpellSearch.page";
-import { getSpells } from "@/lib/actions/db/spell/read.actions";
-import { Metadata } from "next";
+import SelectSpellPage from '@/page/SearchPages/Official/SpellSearch.page';
+import { getSpells } from '@/lib/actions/db/spell/read.actions';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Spells - Max's DND Wiki",
   description:
-    "A vast collection of spells for your DND campaign. Choose from offical content or user submitted homebrew spells.",
+    'A vast collection of spells for your DND campaign. Choose from offical content or user submitted homebrew spells.',
   openGraph: {
-    type: "website",
+    type: 'website',
     title: "Spells - Max's DND Wiki",
     description:
-      "A vast collection of spells for your DND campaign. Choose from offical content or user submitted homebrew spells.",
+      'A vast collection of spells for your DND campaign. Choose from offical content or user submitted homebrew spells.',
     images: [
       {
-        url: "https://www.maxdnd.com/images/hero.jpg",
+        url: 'https://www.maxdnd.com/images/hero.jpg',
         width: 1440,
         height: 1920,
-        alt: "Dungeons and Dragons Fire Dragon Attack",
+        alt: 'Dungeons and Dragons Fire Dragon Attack',
       },
     ],
   },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${process.env.DOMAIN_NAME}/spells`,
   },
 };
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 const Spells = async () => {
   const spells = await getSpells();
   if (!spells) {

@@ -1,12 +1,15 @@
-export function objEqual(obj1: any, obj2: any): boolean {
+export function objEqual(
+  obj1: Record<string | number | symbol, unknown> | null,
+  obj2: Record<string | number | symbol, unknown> | null
+): boolean {
   // Check if both are strictly equal (covers primitives and object references)
   if (obj1 === obj2) return true;
 
   // If either is not an object or is null, return false
   if (
-    typeof obj1 !== "object" ||
+    typeof obj1 !== 'object' ||
     obj1 === null ||
-    typeof obj2 !== "object" ||
+    typeof obj2 !== 'object' ||
     obj2 === null
   ) {
     return false;
@@ -21,6 +24,7 @@ export function objEqual(obj1: any, obj2: any): boolean {
 
   // Recursively compare each key and value
   for (const key of keys1) {
+    // @ts-expect-error - TS doesn't know that the key is valid
     if (!keys2.includes(key) || !objEqual(obj1[key], obj2[key])) {
       return false;
     }

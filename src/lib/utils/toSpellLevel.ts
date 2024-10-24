@@ -1,6 +1,6 @@
 export const toSpellLevel = (level: number | string) => {
   let newLevel = level;
-  if (typeof level === "string") {
+  if (typeof level === 'string') {
     newLevel = parseInt(level);
     if (isNaN(newLevel)) {
       return level;
@@ -8,13 +8,13 @@ export const toSpellLevel = (level: number | string) => {
   }
   switch (newLevel) {
     case 0:
-      return "Cantrip";
+      return 'Cantrip';
     case 1:
-      return "1st";
+      return '1st';
     case 2:
-      return "2nd";
+      return '2nd';
     case 3:
-      return "3rd";
+      return '3rd';
     default:
       return `${level}th`;
   }

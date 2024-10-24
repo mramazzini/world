@@ -1,4 +1,7 @@
-export function arraysEqual(arr1: Array<any>, arr2: Array<any>): boolean {
+export function arraysEqual(
+  arr1: Array<unknown>,
+  arr2: Array<unknown>
+): boolean {
   if (arr1.length !== arr2.length) return false;
 
   const sortedArr1 = arr1.slice().sort();

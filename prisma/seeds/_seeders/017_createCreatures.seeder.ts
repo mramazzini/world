@@ -1,9 +1,9 @@
-import { cerr, cinfo } from "@/lib/utils/chalkLog";
-import { ArmorClassProtocol, PrismaClient } from "@prisma/client";
-import CreatureSeed from "../Creatures/Creature.seed";
+import { cerr, cinfo } from '@/lib/utils/chalkLog';
+import { ArmorClassProtocol, PrismaClient } from '@prisma/client';
+import CreatureSeed from '../Creatures/Creature.seed';
 export const createCreatures = async (db: PrismaClient) => {
   //create creatures
-  cinfo("Creating creatures");
+  cinfo('Creating creatures');
   for (const Creature of CreatureSeed) {
     //ensure that if the creature is using natural armor, it specifies the protocol and the natural armor bonus
     if (
@@ -14,10 +14,10 @@ export const createCreatures = async (db: PrismaClient) => {
       )
     ) {
       cerr(
-        "Creature is using natural armor but does not have a natural armor bonus"
+        'Creature is using natural armor but does not have a natural armor bonus'
       );
       throw new Error(
-        "Creature is using natural armor but does not have a natural armor bonus"
+        'Creature is using natural armor but does not have a natural armor bonus'
       );
     }
 
@@ -32,10 +32,9 @@ export const createCreatures = async (db: PrismaClient) => {
     };
     const hitDie = sizeToHitDie[Creature.size];
     if (!hitDie) {
-      cerr("Invalid size for creature");
-      throw new Error("Invalid size for creature");
+      cerr('Invalid size for creature');
+      throw new Error('Invalid size for creature');
     }
-    const expectedFormula = `${hitDie}d${Creature}`;
 
     try {
       await db.creature.upsert({
@@ -46,7 +45,7 @@ export const createCreatures = async (db: PrismaClient) => {
         create: Creature,
       });
     } catch (error) {
-      cerr("Error creating creature", error);
+      cerr('Error creating creature', error);
     }
   }
 };

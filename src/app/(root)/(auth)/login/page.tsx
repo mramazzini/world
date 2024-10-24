@@ -1,23 +1,22 @@
 // import LoginForm from "@/src/components/LoginForm";
-import LoginForm from "@/app/components/auth/LoginForm";
-import { Metadata } from "next";
-import Link from "next/link";
+import LoginForm from '@/components/Forms/LoginForm';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Login - Max's DND Wiki",
-  description: "Login to your account to create and access your saved content.",
+  description: 'Login to your account to create and access your saved content.',
   openGraph: {
-    type: "website",
+    type: 'website',
 
     title: "Login - Max's DND Wiki",
     description:
-      "Login to your account to create and access your saved content.",
+      'Login to your account to create and access your saved content.',
     images: [
       {
-        url: "https://www.maxdnd.com/images/hero.jpg",
+        url: 'https://www.maxdnd.com/images/hero.jpg',
         width: 1440,
         height: 1920,
-        alt: "Dungeons and Dragons Fire Dragon Attack",
+        alt: 'Dungeons and Dragons Fire Dragon Attack',
       },
     ],
   },

@@ -1,10 +1,9 @@
-"use server";
-import { QUERY_LIMIT } from "@/lib/globalVars";
-import { ItemInfo, QueryParams } from "@/lib/utils/types/types";
-import { generateQueryFields } from "@/lib/utils/generateQueryFields";
-import { PrismaClient } from "@prisma/client";
-import Fuse from "fuse.js";
-import { DBMetadata } from "@/lib/utils/types/metadata";
+'use server';
+import { ItemInfo, QueryParams } from '@/lib/utils/types/types';
+import { generateQueryFields } from '@/lib/utils/generateQueryFields';
+import { PrismaClient } from '@prisma/client';
+import Fuse from 'fuse.js';
+import { DBMetadata } from '@/lib/utils/types/metadata';
 
 export const getItemsMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
@@ -55,7 +54,7 @@ export const getItem = async (
   query: string | number
 ): Promise<ItemInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === "string") {
+  if (typeof query === 'string') {
     const res = await db.item.findFirst({
       where: {
         name: query,
@@ -123,7 +122,7 @@ export const getItemChunk = async (
 ): Promise<ItemInfo[] | null> => {
   const db = new PrismaClient();
   const { query } = queryInfo;
-  if (query === "") {
+  if (query === '') {
     const res = await db.item.findMany({
       where: generateQueryFields({
         fields: queryInfo.searchFields,
@@ -188,9 +187,9 @@ export const getItemChunk = async (
 
   const fuse = new Fuse(res, {
     keys: [
-      { name: "name", weight: 1 },
-      { name: "description", weight: 1 },
-      { name: "type", weight: 1 },
+      { name: 'name', weight: 1 },
+      { name: 'description', weight: 1 },
+      { name: 'type', weight: 1 },
     ],
   });
 

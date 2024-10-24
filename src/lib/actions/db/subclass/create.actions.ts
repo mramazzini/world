@@ -1,5 +1,5 @@
-"use server";
-import { Prisma, PrismaClient } from "@prisma/client";
+'use server';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 export const createSubClass = async (
   classID: number,

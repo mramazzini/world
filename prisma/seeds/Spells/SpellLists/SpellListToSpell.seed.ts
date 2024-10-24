@@ -1,4 +1,4 @@
-import { spellListIds } from "./SpellLists.seed";
+import { spellListIds } from './SpellLists.seed';
 
 const SpellListToSpellArr = [
   { spellId: 0, spellListId: 9 },

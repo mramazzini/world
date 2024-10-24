@@ -4,23 +4,23 @@
 export const topPages = {
   item: [
     {
-      page: "/item/Chain-Mail",
+      page: '/item/Chain-Mail',
       visits: 12,
     },
     {
-      page: "/item/Scroll-of-Earth-Tremor",
+      page: '/item/Scroll-of-Earth-Tremor',
       visits: 11,
     },
     {
-      page: "/item/Scale-Mail",
+      page: '/item/Scale-Mail',
       visits: 8,
     },
     {
-      page: "/item/Ladder-(10-foot)",
+      page: '/item/Ladder-(10-foot)',
       visits: 7,
     },
     {
-      page: "/item/Grappling-Hook",
+      page: '/item/Grappling-Hook',
       visits: 5,
     },
     {
@@ -32,15 +32,15 @@ export const topPages = {
       visits: 3,
     },
     {
-      page: "/item/Scroll-of-Sunbeam",
+      page: '/item/Scroll-of-Sunbeam',
       visits: 3,
     },
     {
-      page: "/item/Glaive",
+      page: '/item/Glaive',
       visits: 2,
     },
     {
-      page: "/item/Scroll-of-Tree-Stride",
+      page: '/item/Scroll-of-Tree-Stride',
       visits: 2,
     },
     {
@@ -52,11 +52,11 @@ export const topPages = {
       visits: 2,
     },
     {
-      page: "/item/Scroll-of-Reincarnate",
+      page: '/item/Scroll-of-Reincarnate',
       visits: 2,
     },
     {
-      page: "/item/Abacus",
+      page: '/item/Abacus',
       visits: 1,
     },
     {
@@ -64,15 +64,15 @@ export const topPages = {
       visits: 1,
     },
     {
-      page: "/item/Backpack",
+      page: '/item/Backpack',
       visits: 1,
     },
     {
-      page: "/item/Crossbow-(Light)",
+      page: '/item/Crossbow-(Light)',
       visits: 1,
     },
     {
-      page: "/item/Dagger",
+      page: '/item/Dagger',
       visits: 1,
     },
     {
@@ -80,7 +80,7 @@ export const topPages = {
       visits: 1,
     },
     {
-      page: "/item/Dulcimer",
+      page: '/item/Dulcimer',
       visits: 1,
     },
     {
@@ -92,43 +92,43 @@ export const topPages = {
       visits: 1,
     },
     {
-      page: "/item/Fishing-Tackle",
+      page: '/item/Fishing-Tackle',
       visits: 1,
     },
     {
-      page: "/item/Forgery-Kit",
+      page: '/item/Forgery-Kit',
       visits: 1,
     },
     {
-      page: "/item/Herbalism-Kit",
+      page: '/item/Herbalism-Kit',
       visits: 1,
     },
     {
-      page: "/item/Hourglass",
+      page: '/item/Hourglass',
       visits: 1,
     },
     {
-      page: "/item/Leather-Armor",
+      page: '/item/Leather-Armor',
       visits: 1,
     },
     {
-      page: "/item/Longbow",
+      page: '/item/Longbow',
       visits: 1,
     },
     {
-      page: "/item/Mace",
+      page: '/item/Mace',
       visits: 1,
     },
     {
-      page: "/item/Orb",
+      page: '/item/Orb',
       visits: 1,
     },
     {
-      page: "/item/Piton",
+      page: '/item/Piton',
       visits: 1,
     },
     {
-      page: "/item/Plate-Armor",
+      page: '/item/Plate-Armor',
       visits: 1,
     },
     {
@@ -136,59 +136,59 @@ export const topPages = {
       visits: 1,
     },
     {
-      page: "/item/Prayer-Book",
+      page: '/item/Prayer-Book',
       visits: 1,
     },
     {
-      page: "/item/Quarterstaff",
+      page: '/item/Quarterstaff',
       visits: 1,
     },
     {
-      page: "/item/Robes",
+      page: '/item/Robes',
       visits: 1,
     },
     {
-      page: "/item/Scroll-of-Cloudkill",
+      page: '/item/Scroll-of-Cloudkill',
       visits: 1,
     },
     {
-      page: "/item/Scroll-of-Disguise-Self",
+      page: '/item/Scroll-of-Disguise-Self',
       visits: 1,
     },
     {
-      page: "/item/Scroll-of-Fireball",
+      page: '/item/Scroll-of-Fireball',
       visits: 1,
     },
     {
-      page: "/item/Scroll-of-Invisibility",
+      page: '/item/Scroll-of-Invisibility',
       visits: 1,
     },
     {
-      page: "/item/Scroll-of-Ravenous-Void",
+      page: '/item/Scroll-of-Ravenous-Void',
       visits: 1,
     },
     {
-      page: "/item/Scroll-of-Revivify",
+      page: '/item/Scroll-of-Revivify',
       visits: 1,
     },
     {
-      page: "/item/Scroll-of-Shocking-Grasp",
+      page: '/item/Scroll-of-Shocking-Grasp',
       visits: 1,
     },
     {
-      page: "/item/Scroll-of-Wall-of-Ice",
+      page: '/item/Scroll-of-Wall-of-Ice',
       visits: 1,
     },
     {
-      page: "/item/Sickle",
+      page: '/item/Sickle',
       visits: 1,
     },
     {
-      page: "/item/Spellbook",
+      page: '/item/Spellbook',
       visits: 1,
     },
     {
-      page: "/item/Warhammer",
+      page: '/item/Warhammer',
       visits: 1,
     },
     {
@@ -198,355 +198,355 @@ export const topPages = {
   ],
   subclass: [
     {
-      page: "/subclass/Horizon-Walker-Conclave",
+      page: '/subclass/Horizon-Walker-Conclave',
       visits: 28,
     },
     {
-      page: "/subclass/Life-Domain",
+      page: '/subclass/Life-Domain',
       visits: 7,
     },
     {
-      page: "/subclass/Drakewarden",
+      page: '/subclass/Drakewarden',
       visits: 7,
     },
     {
-      page: "/subclass/Storm-Herald",
+      page: '/subclass/Storm-Herald',
       visits: 6,
     },
     {
-      page: "/subclass/Storm-Sorcery",
+      page: '/subclass/Storm-Sorcery',
       visits: 5,
     },
     {
-      page: "/subclass/Battle-Master",
+      page: '/subclass/Battle-Master',
       visits: 4,
     },
     {
-      page: "/subclass/College-of-Eloquence",
+      page: '/subclass/College-of-Eloquence',
       visits: 4,
     },
     {
-      page: "/subclass/Tempest-Domain",
+      page: '/subclass/Tempest-Domain',
       visits: 4,
     },
     {
-      page: "/subclass/Forge-Domain",
+      page: '/subclass/Forge-Domain',
       visits: 4,
     },
     {
-      page: "/subclass/Oath-of-Vengeance",
+      page: '/subclass/Oath-of-Vengeance',
       visits: 4,
     },
     {
-      page: "/subclass/Arcane-Archer",
+      page: '/subclass/Arcane-Archer',
       visits: 2,
     },
     {
-      page: "/subclass/Circle-of-the-Land",
+      page: '/subclass/Circle-of-the-Land',
       visits: 2,
     },
     {
-      page: "/subclass/Oath-of-the-Ancients",
+      page: '/subclass/Oath-of-the-Ancients',
       visits: 2,
     },
     {
-      page: "/subclass/Oathbreaker",
+      page: '/subclass/Oathbreaker',
       visits: 2,
     },
     {
-      page: "/subclass/The-Great-Old-One",
+      page: '/subclass/The-Great-Old-One',
       visits: 2,
     },
   ],
   background: [
     {
-      page: "/background/Rune-Carver",
+      page: '/background/Rune-Carver',
       visits: 13,
     },
     {
-      page: "/background/Investigator-(VRGR)",
+      page: '/background/Investigator-(VRGR)',
       visits: 6,
     },
     {
-      page: "/background/Feylost",
+      page: '/background/Feylost',
       visits: 6,
     },
     {
-      page: "/background/Sailor",
+      page: '/background/Sailor',
       visits: 6,
     },
     {
-      page: "/background/Acolyte",
+      page: '/background/Acolyte',
       visits: 5,
     },
     {
-      page: "/background/Investigator-(VRGR",
+      page: '/background/Investigator-(VRGR',
       visits: 5,
     },
     {
-      page: "/background/Faceless",
+      page: '/background/Faceless',
       visits: 3,
     },
     {
-      page: "/background/Rival-Intern",
+      page: '/background/Rival-Intern',
       visits: 3,
     },
     {
-      page: "/background/Spy",
+      page: '/background/Spy',
       visits: 3,
     },
     {
-      page: "/background/Charlatan",
+      page: '/background/Charlatan',
       visits: 2,
     },
     {
-      page: "/background/Cloistered-Scholar",
+      page: '/background/Cloistered-Scholar',
       visits: 2,
     },
     {
-      page: "/background/Outlander",
+      page: '/background/Outlander',
       visits: 2,
     },
     {
-      page: "/background/Athlete",
+      page: '/background/Athlete',
       visits: 1,
     },
     {
-      page: "/background/Criminal",
+      page: '/background/Criminal',
       visits: 1,
     },
     {
-      page: "/background/Entertainer",
+      page: '/background/Entertainer',
       visits: 1,
     },
     {
-      page: "/background/Fisher",
+      page: '/background/Fisher',
       visits: 1,
     },
     {
-      page: "/background/Gambler",
+      page: '/background/Gambler',
       visits: 1,
     },
     {
-      page: "/background/Guild-Artisan",
+      page: '/background/Guild-Artisan',
       visits: 1,
     },
     {
-      page: "/background/Hermit",
+      page: '/background/Hermit',
       visits: 1,
     },
     {
-      page: "/background/Plaintiff",
+      page: '/background/Plaintiff',
       visits: 1,
     },
     {
-      page: "/background/Ruined",
+      page: '/background/Ruined',
       visits: 1,
     },
     {
-      page: "/background/Shipwright",
+      page: '/background/Shipwright',
       visits: 1,
     },
     {
-      page: "/background/Smuggler",
+      page: '/background/Smuggler',
       visits: 1,
     },
     {
-      page: "/background/Soldier",
+      page: '/background/Soldier',
       visits: 1,
     },
   ],
   species: [
     {
-      page: "/species/Aasimar-(VGM)",
+      page: '/species/Aasimar-(VGM)',
       visits: 13,
     },
     {
-      page: "/species/Air-Genasi-(EEPC)",
+      page: '/species/Air-Genasi-(EEPC)',
       visits: 11,
     },
     {
-      page: "/species/Human",
+      page: '/species/Human',
       visits: 9,
     },
     {
-      page: "/species/Air-Genasi-(MMOM)",
+      page: '/species/Air-Genasi-(MMOM)',
       visits: 7,
     },
     {
-      page: "/species/Water-Genasi-(MMOM)",
+      page: '/species/Water-Genasi-(MMOM)',
       visits: 6,
     },
     {
-      page: "/species/Fire-Genasi-(MMOM)",
+      page: '/species/Fire-Genasi-(MMOM)',
       visits: 5,
     },
     {
-      page: "/species/Dwarf",
+      page: '/species/Dwarf',
       visits: 4,
     },
     {
-      page: "/species/Warforged",
+      page: '/species/Warforged',
       visits: 4,
     },
     {
-      page: "/species/Air-Genasi-(EEPC)",
+      page: '/species/Air-Genasi-(EEPC)',
       visits: 3,
     },
     {
-      page: "/species/Aarakocra-(MMOM)",
+      page: '/species/Aarakocra-(MMOM)',
       visits: 2,
     },
     {
-      page: "/species/Aasimar-(MMOM)",
+      page: '/species/Aasimar-(MMOM)',
       visits: 2,
     },
     {
-      page: "/species/Harengon-(MMOM)",
+      page: '/species/Harengon-(MMOM)',
       visits: 2,
     },
     {
-      page: "/species/Aasimar",
+      page: '/species/Aasimar',
       visits: 1,
     },
     {
-      page: "/species/Dragonborn",
+      page: '/species/Dragonborn',
       visits: 1,
     },
     {
-      page: "/species/Eladrin-(MToF)",
+      page: '/species/Eladrin-(MToF)',
       visits: 1,
     },
     {
-      page: "/species/Elf",
+      page: '/species/Elf',
       visits: 1,
     },
     {
-      page: "/species/Fairy-(MMOM)",
+      page: '/species/Fairy-(MMOM)',
       visits: 1,
     },
     {
-      page: "/species/Fire-Genasi-(EEPC)",
+      page: '/species/Fire-Genasi-(EEPC)',
       visits: 1,
     },
     {
-      page: "/species/Goliath-(EEPC)",
+      page: '/species/Goliath-(EEPC)',
       visits: 1,
     },
     {
-      page: "/species/Harengon-(TWBtW)",
+      page: '/species/Harengon-(TWBtW)',
       visits: 1,
     },
     {
-      page: "/species/Shadar-Kai-(MToF)",
+      page: '/species/Shadar-Kai-(MToF)',
       visits: 1,
     },
     {
-      page: "/species/Tiefling",
+      page: '/species/Tiefling',
       visits: 1,
     },
     {
-      page: "/species/Verdan",
+      page: '/species/Verdan',
       visits: 1,
     },
     {
-      page: "/species/Air-Genasi-(MMOM)",
+      page: '/species/Air-Genasi-(MMOM)',
       visits: 1,
     },
     {
-      page: "/species/Changeling-(Eberron)",
+      page: '/species/Changeling-(Eberron)',
       visits: 1,
     },
     {
-      page: "/species/Eladrin-(MToF)",
+      page: '/species/Eladrin-(MToF)',
       visits: 1,
     },
     {
-      page: "/species/Elf",
+      page: '/species/Elf',
       visits: 1,
     },
   ],
   class: [
     {
-      page: "/class/cleric",
+      page: '/class/cleric',
       visits: 26,
     },
     {
-      page: "/class/artificer",
+      page: '/class/artificer',
       visits: 19,
     },
     {
-      page: "/class/fighter",
+      page: '/class/fighter',
       visits: 16,
     },
     {
-      page: "/class/bard",
+      page: '/class/bard',
       visits: 12,
     },
     {
-      page: "/class/wizard",
+      page: '/class/wizard',
       visits: 8,
     },
     {
-      page: "/class/druid",
+      page: '/class/druid',
       visits: 8,
     },
     {
-      page: "/class/paladin",
+      page: '/class/paladin',
       visits: 7,
     },
     {
-      page: "/class/barbarian",
+      page: '/class/barbarian',
       visits: 7,
     },
     {
-      page: "/class/monk",
+      page: '/class/monk',
       visits: 7,
     },
     {
-      page: "/class/ranger",
+      page: '/class/ranger',
       visits: 6,
     },
     {
-      page: "/class/sorcerer",
+      page: '/class/sorcerer',
       visits: 3,
     },
     {
-      page: "/class/warlock",
+      page: '/class/warlock',
       visits: 2,
     },
     {
-      page: "/class/rogue",
+      page: '/class/rogue',
       visits: 1,
     },
   ],
   spells: [
     {
-      page: "/spells/Comprehend-Languages",
+      page: '/spells/Comprehend-Languages',
       visits: 13,
     },
     {
-      page: "/spells/Toll-the-Dead",
+      page: '/spells/Toll-the-Dead',
       visits: 10,
     },
     {
-      page: "/spells/Distort-Value",
+      page: '/spells/Distort-Value',
       visits: 10,
     },
     {
-      page: "/spells/Enlarge-Reduce",
+      page: '/spells/Enlarge-Reduce',
       visits: 10,
     },
     {
-      page: "/spells/Mending",
+      page: '/spells/Mending',
       visits: 10,
     },
     {
-      page: "/spells/Light",
+      page: '/spells/Light',
       visits: 9,
     },
     {
-      page: "/spells/Chromatic-Orb",
+      page: '/spells/Chromatic-Orb',
       visits: 9,
     },
     {
@@ -554,161 +554,161 @@ export const topPages = {
       visits: 7,
     },
     {
-      page: "/spells/Sleep",
+      page: '/spells/Sleep',
       visits: 7,
     },
     {
-      page: "/spells/Guidance",
+      page: '/spells/Guidance',
       visits: 7,
     },
     {
-      page: "/spells/Mage-Hand",
+      page: '/spells/Mage-Hand',
       visits: 6,
     },
     {
-      page: "/spells/Charm-Person",
+      page: '/spells/Charm-Person',
       visits: 6,
     },
     {
-      page: "/spells/Gift-of-Alacrity",
+      page: '/spells/Gift-of-Alacrity',
       visits: 5,
     },
     {
-      page: "/spells/Command",
+      page: '/spells/Command',
       visits: 5,
     },
     {
-      page: "/spells/Blade-Ward",
+      page: '/spells/Blade-Ward',
       visits: 5,
     },
     {
-      page: "/spells/Expeditious-Retreat",
+      page: '/spells/Expeditious-Retreat',
       visits: 5,
     },
     {
-      page: "/spells/Longstrider",
+      page: '/spells/Longstrider',
       visits: 5,
     },
     {
-      page: "/spells/Bless",
+      page: '/spells/Bless',
       visits: 4,
     },
     {
-      page: "/spells/Shocking-Grasp",
+      page: '/spells/Shocking-Grasp',
       visits: 4,
     },
     {
-      page: "/spells/Cure-Wounds",
+      page: '/spells/Cure-Wounds',
       visits: 4,
     },
     {
-      page: "/spells/Guiding-Bolt",
+      page: '/spells/Guiding-Bolt',
       visits: 4,
     },
     {
-      page: "/spells/Minor-Illusion",
+      page: '/spells/Minor-Illusion',
       visits: 4,
     },
     {
-      page: "/spells/Finger-of-Death",
+      page: '/spells/Finger-of-Death',
       visits: 3,
     },
     {
-      page: "/spells/Healing-Word",
+      page: '/spells/Healing-Word',
       visits: 3,
     },
     {
-      page: "/spells/Purify-Food-and-Drink",
+      page: '/spells/Purify-Food-and-Drink',
       visits: 3,
     },
     {
-      page: "/spells/Absorb-Elements",
+      page: '/spells/Absorb-Elements',
       visits: 3,
     },
     {
-      page: "/spells/Ceremony",
+      page: '/spells/Ceremony',
       visits: 3,
     },
     {
-      page: "/spells/Dancing-Lights",
+      page: '/spells/Dancing-Lights',
       visits: 3,
     },
     {
-      page: "/spells/Detect-Magic",
+      page: '/spells/Detect-Magic',
       visits: 3,
     },
     {
-      page: "/spells/Elemental-Weapon",
+      page: '/spells/Elemental-Weapon',
       visits: 3,
     },
     {
-      page: "/spells/Green-Flame-Blade",
+      page: '/spells/Green-Flame-Blade',
       visits: 3,
     },
     {
-      page: "/spells/Thunderwave",
+      page: '/spells/Thunderwave',
       visits: 3,
     },
     {
-      page: "/spells/Calm-Emotions",
+      page: '/spells/Calm-Emotions',
       visits: 2,
     },
     {
-      page: "/spells/Cordon-of-Arrows",
+      page: '/spells/Cordon-of-Arrows',
       visits: 2,
     },
     {
-      page: "/spells/Produce-Flame",
+      page: '/spells/Produce-Flame',
       visits: 2,
     },
     {
-      page: "/spells/Sacred-Flame",
+      page: '/spells/Sacred-Flame',
       visits: 2,
     },
     {
-      page: "/spells/Spare-the-Dying",
+      page: '/spells/Spare-the-Dying',
       visits: 2,
     },
     {
-      page: "/spells/Thaumaturgy",
+      page: '/spells/Thaumaturgy',
       visits: 2,
     },
     {
-      page: "/spells/Vortex-Warp",
+      page: '/spells/Vortex-Warp',
       visits: 2,
     },
     {
-      page: "/spells/Word-of-Radiance",
+      page: '/spells/Word-of-Radiance',
       visits: 2,
     },
   ],
   subspecies: [
     {
-      page: "/subspecies/Stout-Halfling",
+      page: '/subspecies/Stout-Halfling',
       visits: 5,
     },
     {
-      page: "/subspecies/Protector-Aasimar",
+      page: '/subspecies/Protector-Aasimar',
       visits: 4,
     },
     {
-      page: "/subspecies/Ghostwise-Halfling",
+      page: '/subspecies/Ghostwise-Halfling',
       visits: 4,
     },
     {
-      page: "/subspecies/Variant-Human",
+      page: '/subspecies/Variant-Human',
       visits: 4,
     },
     {
-      page: "/subspecies/Pallid-Elf",
+      page: '/subspecies/Pallid-Elf',
       visits: 3,
     },
     {
-      page: "/subspecies/Mark-of-Shadow-Elf",
+      page: '/subspecies/Mark-of-Shadow-Elf',
       visits: 2,
     },
     {
-      page: "/subspecies/High-Elf",
+      page: '/subspecies/High-Elf',
       visits: 2,
     },
   ],

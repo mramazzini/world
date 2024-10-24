@@ -1,9 +1,8 @@
-"use server";
-import { QUERY_LIMIT } from "@/lib/globalVars";
-import { WeaponInfo, QueryParams } from "@/lib/utils/types/types";
-import { generateQueryFields } from "@/lib/utils/generateQueryFields";
-import { PrismaClient } from "@prisma/client";
-import Fuse from "fuse.js";
+'use server';
+import { WeaponInfo, QueryParams } from '@/lib/utils/types/types';
+import { generateQueryFields } from '@/lib/utils/generateQueryFields';
+import { PrismaClient } from '@prisma/client';
+import Fuse from 'fuse.js';
 
 export const getWeapons = async (): Promise<WeaponInfo[]> => {
   const db = new PrismaClient();
@@ -20,7 +19,7 @@ export const getWeapon = async (
   query: string | number
 ): Promise<WeaponInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === "string") {
+  if (typeof query === 'string') {
     const res = await db.weapon.findFirst({
       where: {
         name: query,
@@ -50,7 +49,7 @@ export const getWeaponChunk = async (
 ): Promise<WeaponInfo[] | null> => {
   const db = new PrismaClient();
   const { query } = queryInfo;
-  if (query === "") {
+  if (query === '') {
     const res = await db.weapon.findMany({
       where: generateQueryFields({
         fields: queryInfo.searchFields,
@@ -75,7 +74,7 @@ export const getWeaponChunk = async (
   });
 
   const fuse = new Fuse(res, {
-    keys: [{ name: "name", weight: 1 }],
+    keys: [{ name: 'name', weight: 1 }],
   });
 
   const results = fuse.search(query);

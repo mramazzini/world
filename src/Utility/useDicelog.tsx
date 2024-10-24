@@ -1,0 +1,17 @@
+'use client';
+import { Log } from '@/lib/utils/types/types';
+import { useState } from 'react';
+
+const useLog = () => {
+  const [log, updateLog] = useState<Log[]>([]);
+
+  const logPush = (newLog: Log) => {
+    updateLog((prev) => {
+      return [...prev, newLog];
+    });
+  };
+
+  return { log, logPush };
+};
+
+export default useLog;

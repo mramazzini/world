@@ -1,38 +1,35 @@
-import CharacterSheet from "@/app/components/gameTools/CharacterSheet/Character.page";
-import {
-  getCharacter,
-  getCharacters,
-} from "@/lib/actions/db/character/read.actions";
-import { getUserId } from "@/lib/utils/auth";
-import { Metadata } from "next";
+import CharacterSheet from '@/components/gameTools/CharacterSheet/Character.page';
+import { getCharacter } from '@/lib/actions/db/character/read.actions';
+import { getUserId } from '@/lib/utils/auth';
+import { Metadata } from 'next';
 
 if (process.env.DOMAIN_NAME === undefined) {
-  throw new Error("DOMAIN_NAME is not defined");
+  throw new Error('DOMAIN_NAME is not defined');
 }
 
 interface Props {
   params: { characterID: string };
 }
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const characterID = parseInt(params.characterID);
   if (isNaN(characterID)) {
-    console.error("Invalid characterID:", params.characterID);
+    console.error('Invalid characterID:', params.characterID);
     return {
       title: "Character Not Found - Max's DND Wiki",
       description: "Character Not Found - Max's DND Wiki",
       openGraph: {
-        type: "website",
+        type: 'website',
         title: "Character Not Found - Max's DND Wiki",
         description: "Character Not Found - Max's DND Wiki",
         images: [
           {
-            url: "https://www.maxdnd.com/images/hero.jpg",
+            url: 'https://www.maxdnd.com/images/hero.jpg',
             width: 1440,
             height: 1920,
-            alt: "Dungeons and Dragons Fire Dragon Attack",
+            alt: 'Dungeons and Dragons Fire Dragon Attack',
           },
         ],
       },
@@ -45,15 +42,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: "Character Not Found - Max's DND Wiki",
       description: "Character Not Found - Max's DND Wiki",
       openGraph: {
-        type: "website",
+        type: 'website',
         title: "Character Not Found - Max's DND Wiki",
         description: "Character Not Found - Max's DND Wiki",
         images: [
           {
-            url: "https://www.maxdnd.com/images/hero.jpg",
+            url: 'https://www.maxdnd.com/images/hero.jpg',
             width: 1440,
             height: 1920,
-            alt: "Dungeons and Dragons Fire Dragon Attack",
+            alt: 'Dungeons and Dragons Fire Dragon Attack',
           },
         ],
       },
@@ -62,18 +59,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${data.name} - Max's DND Wiki`,
-    description: "View and edit your character sheet.",
+    description: 'View and edit your character sheet.',
 
     openGraph: {
-      type: "website",
+      type: 'website',
       title: `${data.name} - Max's DND Wiki`,
-      description: "View and edit your character sheet.",
+      description: 'View and edit your character sheet.',
       images: [
         {
-          url: "https://www.maxdnd.com/images/hero.jpg",
+          url: 'https://www.maxdnd.com/images/hero.jpg',
           width: 1440,
           height: 1920,
-          alt: "Dungeons and Dragons Fire Dragon Attack",
+          alt: 'Dungeons and Dragons Fire Dragon Attack',
         },
       ],
     },
@@ -99,7 +96,7 @@ export default async function Page({ params }: Props) {
 
     return <CharacterSheet characterData={character} />;
   } catch (error) {
-    console.error("Error loading character:", error);
+    console.error('Error loading character:', error);
     return <div className="p-8">Error loading character</div>;
   }
 }

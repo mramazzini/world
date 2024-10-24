@@ -1,0 +1,121 @@
+'use client';
+import Link from 'next/link';
+import useContactModal from '../../hooks/ContactModal';
+
+const pageLinks = [
+  {
+    name: 'Home',
+    url: '/',
+  },
+  {
+    name: 'Login',
+    url: '/login',
+  },
+  {
+    name: 'Register',
+    url: '/register',
+  },
+  {
+    name: 'Change Log',
+    url: '/changelog',
+  },
+];
+
+const wikiLinks = [
+  {
+    name: 'Classes',
+    url: '/class',
+  },
+  {
+    name: 'Subclasses',
+    url: '/subclass',
+  },
+  {
+    name: 'Spells',
+    url: '/spells',
+  },
+  {
+    name: 'Spell Lists',
+    url: '/spell-list',
+  },
+  {
+    name: 'Feats',
+    url: '/feats',
+  },
+
+  {
+    name: 'Backgrounds',
+    url: '/background',
+  },
+  {
+    name: 'Species',
+    url: '/species',
+  },
+  {
+    name: 'Subspecies',
+    url: '/subspecies',
+  },
+  {
+    name: 'Creatures',
+    url: '/creature',
+  },
+  {
+    name: 'Items',
+    url: '/item',
+  },
+];
+
+const Footer = () => {
+  const { ContactModal, openModal } = useContactModal();
+  return (
+    <>
+      <ContactModal />
+      <footer className=" bg-neutral text-neutral-content p-10 mt-auto w-full">
+        <div className="footer">
+          <nav>
+            <div className="footer-title">Links</div>
+            {pageLinks.map((link) => (
+              <Link key={link.url} href={link.url} className="link link-hover">
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+          <nav>
+            <div className="footer-title">Wiki</div>
+            {wikiLinks.map((link) => (
+              <Link key={link.url} href={link.url} className="link link-hover">
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+          {/* <nav>
+            <div className="footer-title">Create</div>
+            {createLinks.map((link) => (
+              <Link key={link.url} href={link.url} className="link link-hover">
+                {link.name}
+              </Link>
+            ))}
+          </nav> */}
+          {/* <nav>
+          <div className="footer-title">Legal</div>
+          {legalLinks.map((link) => (
+            <Link key={link.url} href={link.url} className="link link-hover">
+              {link.name}
+            </Link>
+          ))}
+        </nav> */}
+
+          <div>
+            <div className="footer-title">Contact</div>
+            <button onClick={openModal} className="btn btn-primary">
+              Contact us -&gt;
+            </button>
+          </div>
+        </div>
+        <div className="divider"></div>
+      </footer>
+    </>
+  );
+};
+
+export default Footer;

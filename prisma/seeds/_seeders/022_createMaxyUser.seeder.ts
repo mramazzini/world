@@ -1,6 +1,6 @@
-import { Prisma, PrismaClient, Skill } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
-import bcrypt from "bcrypt";
+import bcrypt from 'bcrypt';
 
 // Create Maxy User
 const createMaxyUser = async (prisma: PrismaClient) => {
@@ -12,7 +12,7 @@ const createMaxyUser = async (prisma: PrismaClient) => {
     process.env.ADMIN_USERNAME === undefined ||
     password === undefined
   ) {
-    throw new Error("Admin credentials not set in .env file");
+    throw new Error('Admin credentials not set in .env file');
   }
 
   const hashedPassword = await bcrypt.hash(password, saltRounds);

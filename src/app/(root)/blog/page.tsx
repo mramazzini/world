@@ -1,10 +1,8 @@
-"use client";
-import BlogsPage from "@/app/components/pages/blog/Blogs.page";
-import HomePage from "@/app/components/pages/home/Home";
-import Loading from "@/app/components/UI/Loading";
+'use client';
+import Loading from '@/components/UI/Loading';
 // import { Metadata } from "next";
-import { useRouter } from "next/navigation"; // Import the useRouter hook
-import { useEffect } from "react";
+import { useRouter } from 'next/navigation'; // Import the useRouter hook
+import { useEffect } from 'react';
 // if (process.env.DOMAIN_NAME === undefined) {
 //   throw new Error("DOMAIN_NAME is not defined");
 // }
@@ -32,7 +30,7 @@ export default function Home() {
 
   useEffect(() => {
     // Redirect to home page
-    router.push("/");
+    router.push('/');
   }, [router]);
   return <Loading />;
 }

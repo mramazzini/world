@@ -1,10 +1,9 @@
-"use server";
-import { QUERY_LIMIT } from "@/lib/globalVars";
-import { CreatureInfo, QueryParams } from "@/lib/utils/types/types";
-import { generateQueryFields } from "@/lib/utils/generateQueryFields";
-import { PrismaClient } from "@prisma/client";
-import Fuse from "fuse.js";
-import { DBMetadata } from "@/lib/utils/types/metadata";
+'use server';
+import { CreatureInfo, QueryParams } from '@/lib/utils/types/types';
+import { generateQueryFields } from '@/lib/utils/generateQueryFields';
+import { PrismaClient } from '@prisma/client';
+import Fuse from 'fuse.js';
+import { DBMetadata } from '@/lib/utils/types/metadata';
 
 export const getCreaturesMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
@@ -119,7 +118,7 @@ export const getCreature = async (
   query: string | number
 ): Promise<CreatureInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === "string") {
+  if (typeof query === 'string') {
     const res = await db.creature.findFirst({
       where: {
         name: query,
@@ -315,7 +314,7 @@ export const getCreatureChunk = async (
 ): Promise<CreatureInfo[] | null> => {
   const db = new PrismaClient();
   const { query } = queryInfo;
-  if (query === "") {
+  if (query === '') {
     const res = await db.creature.findMany({
       where: generateQueryFields({
         fields: queryInfo.searchFields,
@@ -508,11 +507,11 @@ export const getCreatureChunk = async (
 
   const fuse = new Fuse(res, {
     keys: [
-      { name: "name", weight: 1 },
-      { name: "description", weight: 1 },
-      { name: "creatureType", weight: 0.5 },
-      { name: "size", weight: 0.5 },
-      { name: "flavorText", weight: 1 },
+      { name: 'name', weight: 1 },
+      { name: 'description', weight: 1 },
+      { name: 'creatureType', weight: 0.5 },
+      { name: 'size', weight: 0.5 },
+      { name: 'flavorText', weight: 1 },
     ],
   });
 

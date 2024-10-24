@@ -1,4 +1,4 @@
-import { RelationFieldOptions, SearchFieldOption } from "./types/types";
+import { RelationFieldOptions, SearchFieldOption } from './types/types';
 
 //very scuffed function to generate query fields from the Searchbar.tsx component
 export const generateQueryFields = ({
@@ -8,7 +8,7 @@ export const generateQueryFields = ({
 }: {
   fields: SearchFieldOption[] | undefined;
   relationalFields: RelationFieldOptions[];
-  additionalWhere?: any;
+  additionalWhere?: Record<string, unknown>;
 }) => {
   const res = {
     ...additionalWhere,
@@ -19,20 +19,17 @@ export const generateQueryFields = ({
       const { data, key, enum: isEnum } = field;
 
       if (isEnum) {
-        if (data === "NONE") continue;
-        // @ts-ignore
+        if (data === 'NONE') continue;
         res[key] = { equals: data };
         continue;
       }
-      // @ts-ignore
+      //@ts-expect-error - We intentionally want to check if the data is a number
       const d = parseFloat(data);
       if (!Number.isNaN(d)) {
         if (d === -1) continue;
-        // @ts-ignore
         res[key] = { equals: d };
-      } else if (typeof data === "string") {
-        // @ts-ignore
-        res[key] = { contains: data, mode: "insensitive" };
+      } else if (typeof data === 'string') {
+        res[key] = { contains: data, mode: 'insensitive' };
       }
     }
   }
@@ -40,11 +37,10 @@ export const generateQueryFields = ({
   for (const field of relationalFields) {
     const { model, key, data } = field;
 
-    // @ts-ignore
     res[model] = {
       [key]: {
         contains: data,
-        mode: "insensitive",
+        mode: 'insensitive',
       },
     };
   }

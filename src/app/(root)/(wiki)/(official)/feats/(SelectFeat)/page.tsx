@@ -1,20 +1,20 @@
-import FeatSearchPage from "@/app/components/SearchPages/Official/FeatSearch.page";
-import { getFeats } from "@/lib/actions/db/feat/read.actions";
-import { Metadata } from "next";
+import FeatSearchPage from '@/page/SearchPages/Official/FeatSearch.page';
+import { getFeats } from '@/lib/actions/db/feat/read.actions';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Feats - Max's DND Wiki",
-  description: "A vast collection of Feats for your DND 5e campaign.",
+  description: 'A vast collection of Feats for your DND 5e campaign.',
   openGraph: {
-    type: "website",
+    type: 'website',
     title: "Feats - Max's DND Wiki",
-    description: "A vast collection of Feats for your DND 5e campaign.",
+    description: 'A vast collection of Feats for your DND 5e campaign.',
     images: [
       {
-        url: "https://www.maxdnd.com/images/hero.jpg",
+        url: 'https://www.maxdnd.com/images/hero.jpg',
         width: 1440,
         height: 1920,
-        alt: "Dungeons and Dragons Fire Dragon Attack",
+        alt: 'Dungeons and Dragons Fire Dragon Attack',
       },
     ],
   },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     canonical: `${process.env.DOMAIN_NAME}/feat`,
   },
 };
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 const Page = async () => {
   const feats = await getFeats();
   if (!feats) {

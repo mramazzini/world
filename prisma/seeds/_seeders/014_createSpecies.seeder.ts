@@ -1,28 +1,28 @@
-import { cerr, cinfo } from "@/lib/utils/chalkLog";
-import { PrismaClient } from "@prisma/client";
-import Species from "../Species/Species.seed";
-import verifyTableIntegrity from "@/lib/utils/verifyTableIntegrity";
-import Traits from "../Species/Traits.seed";
+import { cerr, cinfo } from '@/lib/utils/chalkLog';
+import { PrismaClient } from '@prisma/client';
+import Species from '../Species/Species.seed';
+import verifyTableIntegrity from '@/lib/utils/verifyTableIntegrity';
+import Traits from '../Species/Traits.seed';
 
 export const createSpecies = async (db: PrismaClient) => {
-  cinfo("Creating species features");
+  cinfo('Creating species features');
   for (const t of Traits) {
     try {
-      cinfo("Creating species features:", t.name);
+      cinfo('Creating species features:', t.name);
       if (!t.speciesId) {
-        cerr("Trait missing speciesId field:", t.name);
+        cerr('Trait missing speciesId field:', t.name);
         return;
       }
       if (
         t.extendedTable &&
         !verifyTableIntegrity(t.extendedTable as PrismaJson.Table[])
       ) {
-        cerr("Error verifying extended table integrity:", t.name);
+        cerr('Error verifying extended table integrity:', t.name);
         return;
       }
       const r = Species.find((r) => r.id === t.speciesId);
       if (!r) {
-        cerr("No Species for feature found:", t.name);
+        cerr('No Species for feature found:', t.name);
         return;
       }
       if (!r.features) {
@@ -30,19 +30,19 @@ export const createSpecies = async (db: PrismaClient) => {
       }
       r.features = [...(r.features as PrismaJson.Feature[]), t];
 
-      cinfo("Species Feature created");
+      cinfo('Species Feature created');
     } catch (error) {
-      cerr("Error creating species feature:", t.name, error);
+      cerr('Error creating species feature:', t.name, error);
       return;
     }
   }
-  cinfo("Species Features created");
+  cinfo('Species Features created');
 
   //create species and traits
-  cinfo("Creating Species");
+  cinfo('Creating Species');
   for (const r of Species) {
     try {
-      cinfo("Creating species:", r.name);
+      cinfo('Creating species:', r.name);
       await db.species.upsert({
         where: {
           id: r.id,
@@ -50,11 +50,11 @@ export const createSpecies = async (db: PrismaClient) => {
         update: r,
         create: r,
       });
-      cinfo("Species created");
+      cinfo('Species created');
     } catch (error) {
-      cerr("Error creating species:", r.name, error);
+      cerr('Error creating species:', r.name, error);
       return;
     }
   }
-  cinfo("Species created");
+  cinfo('Species created');
 };

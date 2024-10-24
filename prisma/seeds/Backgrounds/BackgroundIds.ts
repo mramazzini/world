@@ -1,5 +1,3 @@
-import { init } from "next/dist/compiled/webpack/webpack";
-
 export const backgroundIds = {
   acolyte: 1,
   anthropologist: 2,

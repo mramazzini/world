@@ -11,7 +11,6 @@ import {
   Item,
   Language,
   Message,
-  Prisma,
   Species,
   Skill,
   Spell,
@@ -23,17 +22,17 @@ import {
   Comment,
   Creature,
   CreatureLimitedSpell,
-} from "@prisma/client";
+} from '@prisma/client';
 
 export enum Pages {
-  Class = "Class",
-  SubClass = "SubClass",
-  Species = "Species",
-  SubSpecies = "SubSpecies",
-  Background = "Background",
-  Feat = "Feat",
-  Spell = "Spell",
-  Item = "Item",
+  Class = 'Class',
+  SubClass = 'SubClass',
+  Species = 'Species',
+  SubSpecies = 'SubSpecies',
+  Background = 'Background',
+  Feat = 'Feat',
+  Spell = 'Spell',
+  Item = 'Item',
 }
 export interface WeaponAttack {
   name: string;
@@ -43,14 +42,11 @@ export interface WeaponAttack {
 }
 export interface Badge {
   text: string;
-  color: "badge-primary" | "badge-secondary" | "badge-accent" | "badge-neutral";
+  color: 'badge-primary' | 'badge-secondary' | 'badge-accent' | 'badge-neutral';
 }
 export interface ClassInfo extends Class {
   SubClasses: SubClass[];
-  potentialTools: Tool[];
-  potentialEquipment: Item[];
   SpellList: SpellList | null;
-  potentialWeapons: Weapon[];
   User: {
     username: string | null;
   } | null;
@@ -132,43 +128,43 @@ export type SubSpeciesID = number;
 export type BackgroundID = number;
 export type FeatID = number;
 export enum Unit {
-  lb = "lb",
-  oz = "oz",
-  pint = "pint",
-  quart = "quart",
-  gal = "gal",
-  hour = "hour",
-  day = "day",
-  week = "week",
-  month = "month",
-  year = "year",
-  minute = "minute",
-  second = "second",
-  cp = "cp",
-  sp = "sp",
-  ep = "ep",
-  gp = "gp",
-  pp = "pp",
+  lb = 'lb',
+  oz = 'oz',
+  pint = 'pint',
+  quart = 'quart',
+  gal = 'gal',
+  hour = 'hour',
+  day = 'day',
+  week = 'week',
+  month = 'month',
+  year = 'year',
+  minute = 'minute',
+  second = 'second',
+  cp = 'cp',
+  sp = 'sp',
+  ep = 'ep',
+  gp = 'gp',
+  pp = 'pp',
 }
 export enum Distance {
-  ft = "ft",
-  mi = "mi",
-  m = "m",
-  km = "km",
-  inch = "inch",
-  mile = "mile",
+  ft = 'ft',
+  mi = 'mi',
+  m = 'm',
+  km = 'km',
+  inch = 'inch',
+  mile = 'mile',
 }
 export enum Time {
-  hour = "hour",
-  day = "day",
-  week = "week",
-  month = "month",
-  year = "year",
-  minute = "minute",
-  second = "second",
-  longRest = "long rest",
-  shortRest = "short rest",
-  rest = "short or long rest",
+  hour = 'hour',
+  day = 'day',
+  week = 'week',
+  month = 'month',
+  year = 'year',
+  minute = 'minute',
+  second = 'second',
+  longRest = 'long rest',
+  shortRest = 'short rest',
+  rest = 'short or long rest',
 }
 export interface SubclassSearchResults extends SubClass {
   Class: {
@@ -176,11 +172,11 @@ export interface SubclassSearchResults extends SubClass {
   } | null;
 }
 export enum Currency {
-  cp = "cp",
-  sp = "sp",
-  ep = "ep",
-  gp = "gp",
-  pp = "pp",
+  cp = 'cp',
+  sp = 'sp',
+  ep = 'ep',
+  gp = 'gp',
+  pp = 'pp',
 }
 export type Level =
   | 1
@@ -205,25 +201,25 @@ export type Level =
   | 20;
 export type SpellLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 export enum WeaponPropertyNames {
-  Ammunition = "Ammunition",
-  Finesse = "Finesse",
-  Heavy = "Heavy",
-  Light = "Light",
-  Loading = "Loading",
-  Range = "Range",
-  Reach = "Reach",
-  Special = "Special",
-  Thrown = "Thrown",
-  TwoHanded = "Two-Handed",
-  Versatile = "Versatile",
+  Ammunition = 'Ammunition',
+  Finesse = 'Finesse',
+  Heavy = 'Heavy',
+  Light = 'Light',
+  Loading = 'Loading',
+  Range = 'Range',
+  Reach = 'Reach',
+  Special = 'Special',
+  Thrown = 'Thrown',
+  TwoHanded = 'Two-Handed',
+  Versatile = 'Versatile',
 }
 export enum SpellFocus {
-  ARCANE_FOCUS = "arcane focus",
-  HOLY_SYMBOL = "holy symbol",
-  DRUIDIC_FOCUS = "druidic focus",
-  MUSICAL_INSTRUMENT = "musical instrument",
-  ARTISAN_TOOLS = "artisan tools",
-  NONE = "none",
+  ARCANE_FOCUS = 'arcane focus',
+  HOLY_SYMBOL = 'holy symbol',
+  DRUIDIC_FOCUS = 'druidic focus',
+  MUSICAL_INSTRUMENT = 'musical instrument',
+  ARTISAN_TOOLS = 'artisan tools',
+  NONE = 'none',
 }
 export interface SpellListInfo extends SpellList {
   Spells: Spell[];
@@ -250,7 +246,7 @@ declare global {
     interface CreatureAction {
       name: string;
       description: string;
-      actionType: "action" | "bonus action" | "reaction";
+      actionType: 'action' | 'bonus action' | 'reaction';
       rolls?: RollRequest[];
     }
     // you can use classes, interfaces, types, etc.
@@ -338,7 +334,7 @@ declare global {
     }
 
     interface Prerequisite {
-      protocol: "AND" | "OR";
+      protocol: 'AND' | 'OR';
       data:
         | {
             blackList?: boolean; //if true, the player must not have the listed items
@@ -564,12 +560,12 @@ declare global {
     }
 
     type CombatTime =
-      | "Action"
-      | "Bonus Action"
-      | "Reaction"
-      | "Free Action"
-      | "Movement"
-      | "Other";
+      | 'Action'
+      | 'Bonus Action'
+      | 'Reaction'
+      | 'Free Action'
+      | 'Movement'
+      | 'Other';
 
     type SpellSlots = {
       [K in SpellLevel]?: number;
@@ -641,16 +637,16 @@ declare global {
       meleeOnly?: boolean;
     }
     type ChoiceModel =
-      | "Item"
-      | "Language"
-      | "Skill"
-      | "Ability"
-      | "AbilityScore"
-      | "CharacterAbilityScoreSelection"
-      | "Weapon"
-      | "Armor"
-      | "Tool"
-      | "Subclass";
+      | 'Item'
+      | 'Language'
+      | 'Skill'
+      | 'Ability'
+      | 'AbilityScore'
+      | 'CharacterAbilityScoreSelection'
+      | 'Weapon'
+      | 'Armor'
+      | 'Tool'
+      | 'Subclass';
     type ChoiceType =
       | ItemChoice
       | LanguageChoice
@@ -679,17 +675,17 @@ declare global {
       callbackProtocol: CallbackProtocol;
     }
     type CallbackProtocol =
-      | "addLanguageProficiencies"
-      | "addSkillProficiencies"
-      | "addToolProficiencies"
-      | "addArmorProficiencies"
-      | "addWeaponProficiencies"
-      | "addSavingThrowProficiencies"
-      | "ItemToInventory"
-      | "SetAbilityScore"
-      | "AbilityScoreIncrease"
-      | "SpeciesAbilityScoreIncrease"
-      | "SubclassSelection";
+      | 'addLanguageProficiencies'
+      | 'addSkillProficiencies'
+      | 'addToolProficiencies'
+      | 'addArmorProficiencies'
+      | 'addWeaponProficiencies'
+      | 'addSavingThrowProficiencies'
+      | 'ItemToInventory'
+      | 'SetAbilityScore'
+      | 'AbilityScoreIncrease'
+      | 'SpeciesAbilityScoreIncrease'
+      | 'SubclassSelection';
     interface AbilityChoice {
       default?: Ability[];
       choices?: {
@@ -740,7 +736,7 @@ declare global {
     interface Equipment {
       name: string;
       description?: string;
-      type: "Tool" | "Weapon" | "Armor" | "Misc";
+      type: 'Tool' | 'Weapon' | 'Armor' | 'Misc';
     }
     interface CurrencyAmount {
       quantity: number;
@@ -780,7 +776,7 @@ declare global {
       flatDamage?: PrismaJson.FlatDamage;
     }
     interface SpellRoll {
-      type: DamageTypes | "healing";
+      type: DamageTypes | 'healing';
       dice: 4 | 6 | 8 | 10 | 12 | 20 | 100;
       numberOfDice: number;
     }
@@ -941,7 +937,7 @@ export interface Roll {
 }
 
 export interface Log {
-  logType: "roll" | "info" | "spell";
+  logType: 'roll' | 'info' | 'spell';
   roll?: Roll;
   info?: string;
   from?: string;
@@ -961,57 +957,57 @@ export interface AbilityScores {
   CHA: number;
 }
 export enum src {
-  hillsfar = "State of Hillsfar",
-  mulmaster = "Mulmaster Bonds and Backgrounds",
-  awMD = "Adventures with Muk: Dankwood",
-  kaladesh = "Plane Shift: Kaladesh",
-  ixalan = "Plane Shift: Ixalan",
-  grung = "One Grung Above",
-  planescape = "Planescape - Adventures in the Multiverse",
-  zendikar = "Plane Shift: Zendikar",
-  amonkhet = "Plane Shift: Amonkhet",
-  homebrew = "Homebrew",
+  hillsfar = 'State of Hillsfar',
+  mulmaster = 'Mulmaster Bonds and Backgrounds',
+  awMD = 'Adventures with Muk: Dankwood',
+  kaladesh = 'Plane Shift: Kaladesh',
+  ixalan = 'Plane Shift: Ixalan',
+  grung = 'One Grung Above',
+  planescape = 'Planescape - Adventures in the Multiverse',
+  zendikar = 'Plane Shift: Zendikar',
+  amonkhet = 'Plane Shift: Amonkhet',
+  homebrew = 'Homebrew',
   tasha = "Tasha's Cauldron of Everything",
   xanathar = "Xanathar's Guide to Everything",
   volo = "Volo's Guide to Monsters",
   sword = "Sword Coast Adventurer's Guide",
-  Bigby = "Bigby Presents: The Glory of the Giants",
+  Bigby = 'Bigby Presents: The Glory of the Giants',
   mordenkainenFoes = "Mordenkainen's Tome of Foes",
-  mordenkainenMonsters = "Mordenkainen Presents: Monsters of the Multiverse",
-  eberron = "Eberron: Rising from the Last War",
-  theros = "Mythic Odysseys of Theros",
+  mordenkainenMonsters = 'Mordenkainen Presents: Monsters of the Multiverse',
+  eberron = 'Eberron: Rising from the Last War',
+  theros = 'Mythic Odysseys of Theros',
   ravnica = "Guildmaster's Guide to Ravnica",
   wildemount = "Explorer's Guide to Wildemount",
   phb = "Player's Handbook",
   vanRichten = "Van Richten's Guide to Ravenloft",
   dmg = "Dungeon Master's Guide",
   fizban = "Fizban's Treasury of Dragons",
-  dragonQueen = "Dragonlance: Shadow of the Dragon Queen",
-  tomb = "Tomb of Annihilation",
-  descent = "Descent into Avernus",
-  witchlight = "The Wild Beyond the Witchlight",
+  dragonQueen = 'Dragonlance: Shadow of the Dragon Queen',
+  tomb = 'Tomb of Annihilation',
+  descent = 'Descent into Avernus',
+  witchlight = 'The Wild Beyond the Witchlight',
   eepc = "Elemental Evil Player's Companion",
-  locathah = "Locathah Rising",
-  strixhaven = "Strixhaven: A Curriculum of Chaos",
-  tortle = "The Tortle Package",
-  aquisitions = "Acquisitions Incorporated",
-  saltmarsh = "Ghosts of Saltmarsh",
-  strahd = "Curse of Strahd",
+  locathah = 'Locathah Rising',
+  strixhaven = 'Strixhaven: A Curriculum of Chaos',
+  tortle = 'The Tortle Package',
+  aquisitions = 'Acquisitions Incorporated',
+  saltmarsh = 'Ghosts of Saltmarsh',
+  strahd = 'Curse of Strahd',
   ravenloft = "Van Richten's Guide to Ravenloft",
-  manyThings = "Book of Many Things",
+  manyThings = 'Book of Many Things',
 }
 
 export enum AuthResult {
-  InvalidCredentials = "Invalid Credentials",
-  UserNotFound = "User Not Found",
-  UserAlreadyExists = "User Already Exists",
-  EmailAlreadyExists = "Email Already Exists",
-  EmailNotValid = "Email Not Valid",
-  PasswordsDoNotMatch = "Passwords Do Not Match",
-  PasswordTooShort = "Password Too Short, Must Be At Least 8 Characters",
-  TokenExpired = "Token Expired",
-  Success = "Success",
-  FailedToCreateUser = "Failed To Create User",
+  InvalidCredentials = 'Invalid Credentials',
+  UserNotFound = 'User Not Found',
+  UserAlreadyExists = 'User Already Exists',
+  EmailAlreadyExists = 'Email Already Exists',
+  EmailNotValid = 'Email Not Valid',
+  PasswordsDoNotMatch = 'Passwords Do Not Match',
+  PasswordTooShort = 'Password Too Short, Must Be At Least 8 Characters',
+  TokenExpired = 'Token Expired',
+  Success = 'Success',
+  FailedToCreateUser = 'Failed To Create User',
 }
 
 export interface QueryOptions {

@@ -1,11 +1,10 @@
-"use server";
-import { QUERY_LIMIT } from "@/lib/globalVars";
-import { ClassInfo, QueryParams } from "@/lib/utils/types/types";
-import { generateQueryFields } from "@/lib/utils/generateQueryFields";
-import { Class, PrismaClient } from "@prisma/client";
-import Fuse from "fuse.js";
-import { isAdministrator } from "@/lib/utils/auth";
-import { DBMetadata } from "@/lib/utils/types/metadata";
+'use server';
+import { QUERY_LIMIT } from '@/lib/globalVars';
+import { ClassInfo, QueryParams } from '@/lib/utils/types/types';
+import { generateQueryFields } from '@/lib/utils/generateQueryFields';
+import { PrismaClient } from '@prisma/client';
+import Fuse from 'fuse.js';
+import { DBMetadata } from '@/lib/utils/types/metadata';
 
 export async function getClassMetadata(): Promise<DBMetadata[]> {
   const db = new PrismaClient();
@@ -33,9 +32,6 @@ export async function getClasses(homebrew: boolean): Promise<ClassInfo[]> {
       },
       include: {
         SubClasses: true,
-        potentialEquipment: true,
-        potentialTools: true,
-        potentialWeapons: true,
         SpellList: true,
         User: {
           select: {
@@ -50,9 +46,6 @@ export async function getClasses(homebrew: boolean): Promise<ClassInfo[]> {
   const res = await db.class.findMany({
     include: {
       SubClasses: true,
-      potentialEquipment: true,
-      potentialTools: true,
-      potentialWeapons: true,
       SpellList: true,
       User: {
         select: {
@@ -69,18 +62,14 @@ export async function getClass(
   query: string | number
 ): Promise<ClassInfo | null> {
   const db = new PrismaClient();
-  const isAdmin = await isAdministrator();
 
-  if (typeof query === "string") {
+  if (typeof query === 'string') {
     const res = await db.class.findFirst({
       where: {
         name: query,
       },
 
       include: {
-        potentialEquipment: true,
-        potentialTools: true,
-        potentialWeapons: true,
         SubClasses: true,
         SpellList: true,
         User: {
@@ -99,9 +88,6 @@ export async function getClass(
         id: query,
       },
       include: {
-        potentialEquipment: true,
-        potentialTools: true,
-        potentialWeapons: true,
         SubClasses: true,
         SpellList: true,
         User: {
@@ -121,15 +107,12 @@ export async function getClassChunk(
   query: string
 ): Promise<ClassInfo[]> {
   const db = new PrismaClient();
-  if (query === "") {
+  if (query === '') {
     const res = await db.class.findMany({
       take: QUERY_LIMIT,
       skip: page * QUERY_LIMIT,
       include: {
         SubClasses: true,
-        potentialEquipment: true,
-        potentialTools: true,
-        potentialWeapons: true,
         SpellList: true,
         User: {
           select: {
@@ -144,9 +127,6 @@ export async function getClassChunk(
   const res: ClassInfo[] = await db.class.findMany({
     include: {
       SubClasses: true,
-      potentialEquipment: true,
-      potentialTools: true,
-      potentialWeapons: true,
       SpellList: true,
       User: {
         select: {
@@ -157,11 +137,11 @@ export async function getClassChunk(
   });
   const fuse = new Fuse(res, {
     keys: [
-      { name: "name", weight: 1 },
-      { name: "description", weight: 0.33 },
-      { name: "flavorText", weight: 0.5 },
-      { name: "Features.name", weight: 0.5 },
-      { name: "Features.description", weight: 0.33 },
+      { name: 'name', weight: 1 },
+      { name: 'description', weight: 0.33 },
+      { name: 'flavorText', weight: 0.5 },
+      { name: 'Features.name', weight: 0.5 },
+      { name: 'Features.description', weight: 0.33 },
     ],
   });
   const results = fuse.search(query);
@@ -179,7 +159,7 @@ export const getHomebrewClassChunk = async (
 ): Promise<ClassInfo[]> => {
   const db = new PrismaClient();
   const { query, page } = queryInfo;
-  if (query === "") {
+  if (query === '') {
     const res = await db.class.findMany({
       take: QUERY_LIMIT,
       skip: page * QUERY_LIMIT,
@@ -193,9 +173,6 @@ export const getHomebrewClassChunk = async (
         },
       }),
       include: {
-        potentialEquipment: true,
-        potentialTools: true,
-        potentialWeapons: true,
         SubClasses: true,
         SpellList: true,
         User: {
@@ -216,9 +193,6 @@ export const getHomebrewClassChunk = async (
     },
     include: {
       SubClasses: true,
-      potentialEquipment: true,
-      potentialTools: true,
-      potentialWeapons: true,
       SpellList: true,
       User: {
         select: {
@@ -229,11 +203,11 @@ export const getHomebrewClassChunk = async (
   });
   const fuse = new Fuse(res, {
     keys: [
-      { name: "name", weight: 1 },
-      { name: "description", weight: 0.33 },
-      { name: "flavorText", weight: 0.5 },
-      { name: "Features.name", weight: 0.5 },
-      { name: "Features.description", weight: 0.33 },
+      { name: 'name', weight: 1 },
+      { name: 'description', weight: 0.33 },
+      { name: 'flavorText', weight: 0.5 },
+      { name: 'Features.name', weight: 0.5 },
+      { name: 'Features.description', weight: 0.33 },
     ],
   });
   const results = fuse.search(query);

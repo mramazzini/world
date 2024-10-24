@@ -1,13 +1,13 @@
-"use server";
+'use server';
 
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 export const getMessages = async () => {
   const db = new PrismaClient();
   const res = await db.message.findMany({
     //sort by newest first
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
     include: {
       User: {

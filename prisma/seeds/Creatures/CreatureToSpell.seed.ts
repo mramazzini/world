@@ -1,6 +1,6 @@
-import { Prisma, Time } from "@prisma/client";
-import { creatureIds } from "./Creature.seed";
-import { spellIds } from "../Spells/spells.seed";
+import { Time } from '@prisma/client';
+import { creatureIds } from './Creature.seed';
+import { spellIds } from '../Spells/spells.seed';
 
 const CreatureToSpellSeed: {
   creatureId: number;

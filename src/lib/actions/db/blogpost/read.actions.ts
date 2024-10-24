@@ -1,5 +1,5 @@
-"use server";
-import { BlogPost, PrismaClient } from "@prisma/client";
+'use server';
+import { BlogPost, PrismaClient } from '@prisma/client';
 
 export const getBlogposts = async (): Promise<BlogPost[]> => {
   const db = new PrismaClient();
@@ -7,7 +7,7 @@ export const getBlogposts = async (): Promise<BlogPost[]> => {
     const blogposts = await db.blogPost.findMany({});
     return blogposts;
   } catch (error) {
-    console.error("Error getting blogposts", error);
+    console.error('Error getting blogposts', error);
     return [];
   } finally {
     await db.$disconnect();
@@ -24,7 +24,7 @@ export const getBlogPost = async (route: string): Promise<BlogPost | null> => {
     });
     return blogpost;
   } catch (error) {
-    console.error("Error getting blogpost", error);
+    console.error('Error getting blogpost', error);
     return null;
   } finally {
     await db.$disconnect();

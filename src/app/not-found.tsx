@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 const Page = () => {
   return (
@@ -7,8 +7,8 @@ const Page = () => {
       <p>Sorry, the page you are looking for does not exist.</p> <br />
       <p>
         This website is still under development. To view previous and upcoming
-        changes{" "}
-        <Link href={"/changelog"} className="font-bold hover:link text-accent">
+        changes{' '}
+        <Link href={'/changelog'} className="font-bold hover:link text-accent">
           Click Here
         </Link>
       </p>

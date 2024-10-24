@@ -1,12 +1,12 @@
-"use server";
+'use server';
 
 import {
   BackgroundID,
   ClassID,
   SpeciesID,
   SubSpeciesID,
-} from "@/lib/utils/types/types";
-import { Alignment, PrismaClient } from "@prisma/client";
+} from '@/lib/utils/types/types';
+import { Alignment, PrismaClient } from '@prisma/client';
 
 export interface CreateCharacterParams {
   name: string;

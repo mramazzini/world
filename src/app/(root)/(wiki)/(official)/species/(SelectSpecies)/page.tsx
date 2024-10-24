@@ -1,20 +1,20 @@
-import SpeciesSearchPage from "@/app/components/SearchPages/Official/SpeciesSearch.page";
-import { getSpecies } from "@/lib/actions/db/species/get.actions";
-import { Metadata } from "next";
+import SpeciesSearchPage from '@/page/SearchPages/Official/SpeciesSearch.page';
+import { getSpecies } from '@/lib/actions/db/species/get.actions';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Species Origins - Max's DND Wiki",
-  description: "A vast collection of Species for your DND 5e campaign.",
+  description: 'A vast collection of Species for your DND 5e campaign.',
   openGraph: {
-    type: "website",
+    type: 'website',
     title: "Species - Max's DND Wiki",
-    description: "A vast collection of Species for your DND 5e campaign.",
+    description: 'A vast collection of Species for your DND 5e campaign.',
     images: [
       {
-        url: "https://www.maxdnd.com/images/hero.jpg",
+        url: 'https://www.maxdnd.com/images/hero.jpg',
         width: 1440,
         height: 1920,
-        alt: "Dungeons and Dragons Fire Dragon Attack",
+        alt: 'Dungeons and Dragons Fire Dragon Attack',
       },
     ],
   },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     canonical: `${process.env.DOMAIN_NAME}/species`,
   },
 };
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 const Page = async () => {
   const species = await getSpecies();
   if (!species) {

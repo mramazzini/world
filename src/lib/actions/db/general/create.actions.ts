@@ -1,5 +1,5 @@
-"use server";
-import { PrismaClient, Prisma, User } from "@prisma/client";
+'use server';
+import { PrismaClient, Prisma, User } from '@prisma/client';
 
 export const createUser = async (
   data: Prisma.UserCreateInput

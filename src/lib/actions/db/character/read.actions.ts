@@ -1,9 +1,8 @@
-"use server";
-import { QUERY_LIMIT } from "@/lib/globalVars";
-import { CharacterInfo, QueryParams } from "@/lib/utils/types/types";
-import { generateQueryFields } from "@/lib/utils/generateQueryFields";
-import { PrismaClient } from "@prisma/client";
-import Fuse from "fuse.js";
+'use server';
+import { CharacterInfo, QueryParams } from '@/lib/utils/types/types';
+import { generateQueryFields } from '@/lib/utils/generateQueryFields';
+import { PrismaClient } from '@prisma/client';
+import Fuse from 'fuse.js';
 
 export const getCharacters = async (): Promise<CharacterInfo[]> => {
   const db = new PrismaClient();
@@ -39,7 +38,7 @@ export const getCharacter = async (
   query: string | number
 ): Promise<CharacterInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === "string") {
+  if (typeof query === 'string') {
     const res = await db.character.findFirst({
       where: {
         name: query,
@@ -106,7 +105,7 @@ export const getCharactersByUser = async (
   const db = new PrismaClient();
   const res = await db.character.findMany({
     orderBy: {
-      updatedAt: "desc",
+      updatedAt: 'desc',
     },
     where: {
       userId: userID,
@@ -142,7 +141,7 @@ export const getCharacterChunk = async (
 ): Promise<CharacterInfo[] | null> => {
   const db = new PrismaClient();
   const { query } = queryInfo;
-  if (query === "") {
+  if (query === '') {
     const res = await db.character.findMany({
       where: generateQueryFields({
         fields: queryInfo.searchFields,
@@ -205,10 +204,10 @@ export const getCharacterChunk = async (
 
   const fuse = new Fuse(res, {
     keys: [
-      { name: "name", weight: 1 },
-      { name: "description", weight: 1 },
-      { name: "Features.name", weight: 0.5 },
-      { name: "Features.description", weight: 0.5 },
+      { name: 'name', weight: 1 },
+      { name: 'description', weight: 1 },
+      { name: 'Features.name', weight: 0.5 },
+      { name: 'Features.description', weight: 0.5 },
     ],
   });
 

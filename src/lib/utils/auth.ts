@@ -1,9 +1,9 @@
-"use server";
-import { SignJWT, jwtVerify } from "jose";
-import { cookies } from "next/headers";
-import { AuthResult } from "./types/types";
+'use server';
+import { SignJWT, jwtVerify } from 'jose';
+import { cookies } from 'next/headers';
+import { AuthResult } from './types/types';
 
-const expiration = "1 week";
+const expiration = '1 week';
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
 // we generate a token when they login or signup
@@ -11,16 +11,16 @@ const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 export const generateToken = async (id: number) => {
   const jwt = await new SignJWT();
   const token = await jwt
-    .setProtectedHeader({ alg: "HS256" })
+    .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
     .setSubject(id.toString())
     .setExpirationTime(expiration)
     .sign(secret);
 
-  await cookies().set("token", token, {
+  await cookies().set('token', token, {
     maxAge: 60 * 60 * 24 * 7, // 1 week
     httpOnly: true, // prevent client-side access
-    sameSite: "strict", // only send on same site
+    sameSite: 'strict', // only send on same site
   });
 
   return token;
@@ -28,7 +28,7 @@ export const generateToken = async (id: number) => {
 
 // we destroy the token when they logout
 export const destroySession = async () => {
-  await cookies().set("token", "", {
+  await cookies().set('token', '', {
     maxAge: 0,
   });
 };
@@ -38,7 +38,7 @@ export const destroySession = async () => {
 
 export const verifyToken = async () => {
   try {
-    const token = cookies().get("token");
+    const token = cookies().get('token');
 
     if (!token) return false;
 
@@ -47,14 +47,14 @@ export const verifyToken = async () => {
 
     return true;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return false;
   }
 };
 
 export const getUserId = async () => {
   try {
-    const token = cookies().get("token");
+    const token = cookies().get('token');
 
     if (!token) return -1;
 
@@ -65,7 +65,7 @@ export const getUserId = async () => {
     }
     return -1;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return -1;
   }
 };

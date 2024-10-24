@@ -1,16 +1,16 @@
-import { PrismaClient } from "@prisma/client";
-import CreatureToSpellSeed from "../Creatures/CreatureToSpell.seed";
-import { cerr, cinfo } from "@/lib/utils/chalkLog";
+import { PrismaClient } from '@prisma/client';
+import CreatureToSpellSeed from '../Creatures/CreatureToSpell.seed';
+import { cerr, cinfo } from '@/lib/utils/chalkLog';
 
 export const linkCreatureToSpells = async (db: PrismaClient) => {
-  cinfo("Linking creatures to spells");
+  cinfo('Linking creatures to spells');
   for (const CreatureToSpell of CreatureToSpellSeed) {
     try {
       if (CreatureToSpell.free) {
         cinfo(
-          "Creature with id: ",
+          'Creature with id: ',
           CreatureToSpell.creatureId,
-          " has a free spell with id: ",
+          ' has a free spell with id: ',
           CreatureToSpell.spellId
         );
         await db.creature.update({
@@ -29,9 +29,9 @@ export const linkCreatureToSpells = async (db: PrismaClient) => {
       }
       if (CreatureToSpell.limited) {
         cinfo(
-          "Creature with id: ",
+          'Creature with id: ',
           CreatureToSpell.creatureId,
-          " has a limited spell with id: ",
+          ' has a limited spell with id: ',
           CreatureToSpell.spellId
         );
         await db.creatureLimitedSpell.upsert({
@@ -55,9 +55,9 @@ export const linkCreatureToSpells = async (db: PrismaClient) => {
         continue;
       }
       cinfo(
-        "Creature with id: ",
+        'Creature with id: ',
         CreatureToSpell.creatureId,
-        " has a spell with id: ",
+        ' has a spell with id: ',
         CreatureToSpell.spellId
       );
       await db.creature.update({
@@ -73,7 +73,7 @@ export const linkCreatureToSpells = async (db: PrismaClient) => {
         },
       });
     } catch (error) {
-      cerr("Error linking creature to spell", error);
+      cerr('Error linking creature to spell', error);
     }
   }
 };

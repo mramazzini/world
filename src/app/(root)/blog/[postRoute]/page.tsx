@@ -1,8 +1,7 @@
-import { Metadata } from "next";
-
-import "@/lib/string.extensions";
-import BlogsPage from "@/app/components/pages/blog/Blogs.page";
-import { getBlogPost } from "@/lib/actions/db/blogpost/read.actions";
+import { Metadata } from 'next';
+import '@/lib/string.extensions';
+import { getBlogPost } from '@/lib/actions/db/blogpost/read.actions';
+import BlogsPage from '@/page/blog/Blogs.page';
 
 type Props = {
   params: { postRoute: string };
@@ -15,16 +14,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: "Blog Post Not Found - Max's DND Wiki",
       description: "Blog Post Not Found - Max's DND Wiki",
       openGraph: {
-        type: "website",
+        type: 'website',
         title: "Blog Post Not Found - Max's DND Wiki",
         description: "Blog Post Not Found - Max's DND Wiki",
 
         images: [
           {
-            url: "https://www.maxdnd.com/images/hero.jpg",
+            url: 'https://www.maxdnd.com/images/hero.jpg',
             width: 1440,
             height: 1920,
-            alt: "Dungeons and Dragons Fire Dragon Attack",
+            alt: 'Dungeons and Dragons Fire Dragon Attack',
           },
         ],
       },
@@ -35,21 +34,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${data.title} - Max's DND Wiki`,
     description:
       data.flavorText.length > 157
-        ? data.flavorText.substring(0, 157) + "..."
+        ? data.flavorText.substring(0, 157) + '...'
         : data.flavorText,
     openGraph: {
-      type: "website",
+      type: 'website',
       title: `${data.title} - Max's DND Wiki`,
       description:
         data.flavorText.length > 157
-          ? data.flavorText.substring(0, 157) + "..."
+          ? data.flavorText.substring(0, 157) + '...'
           : data.flavorText,
       images: [
         {
-          url: "https://www.maxdnd.com/images/hero.jpg",
+          url: 'https://www.maxdnd.com/images/hero.jpg',
           width: 1440,
           height: 1920,
-          alt: "Dungeons and Dragons Fire Dragon Attack",
+          alt: 'Dungeons and Dragons Fire Dragon Attack',
         },
       ],
     },
