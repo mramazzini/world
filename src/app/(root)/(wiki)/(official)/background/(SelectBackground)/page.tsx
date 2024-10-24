@@ -1,4 +1,4 @@
-import BackgroundSearchPage from '@/page/SearchPages/Official/BackgroundSearch.page';
+import BackgroundSearchPage from '@/pages-lib/SearchPages/Official/BackgroundSearch.page';
 import { getBackgrounds } from '@/lib/actions/db/background/read.actions';
 import { Metadata } from 'next';
 

@@ -1,4 +1,4 @@
-import HomePage from '@/page/home/Home';
+import HomePage from '@/pages-lib/home/Home';
 import { Metadata } from 'next';
 
 if (process.env.DOMAIN_NAME === undefined) {

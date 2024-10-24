@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 import '@/lib/string.extensions';
-import SubClassPage from '@/page/wiki/official/Subclass.page';
+import SubClassPage from '@/pages-lib/wiki/official/Subclass.page';
 import { getSubclass } from '@/lib/actions/db/subclass/read.actions';
 
 type Props = {

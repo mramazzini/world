@@ -1,4 +1,4 @@
-import FeatSearchPage from '@/page/SearchPages/Official/FeatSearch.page';
+import FeatSearchPage from '@/pages-lib/SearchPages/Official/FeatSearch.page';
 import { getFeats } from '@/lib/actions/db/feat/read.actions';
 import { Metadata } from 'next';
 

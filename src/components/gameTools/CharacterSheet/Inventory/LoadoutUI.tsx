@@ -16,6 +16,7 @@ interface Props {
 const LoadoutUI = ({ character, setState }: Props) => {
   const [currentWeight, setCurrentWeight] =
     useState<null | PrismaJson.QuantityUnit>(null);
+
   useEffect(() => {
     if (!character.state) return;
     calcWeight(character.state).then((res) => setCurrentWeight(res));

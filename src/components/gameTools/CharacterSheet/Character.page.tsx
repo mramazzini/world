@@ -50,13 +50,14 @@ const CharacterSheet = ({ characterData }: Props) => {
     });
   }, [characterData]);
 
-  const setState = useCallback(
-    (newState: PrismaJson.CharacterState) => {
-      if (!character) return;
-      setCharacter({ ...character, state: newState });
-    },
-    [character]
-  );
+  const setState = useCallback((newState: PrismaJson.CharacterState) => {
+    setCharacter((prevCharacter) => {
+      if (!prevCharacter) return prevCharacter;
+      if (JSON.stringify(prevCharacter.state) === JSON.stringify(newState))
+        return prevCharacter;
+      return { ...prevCharacter, state: newState };
+    });
+  }, []);
 
   return (
     <main className="p-4 md:p-8">

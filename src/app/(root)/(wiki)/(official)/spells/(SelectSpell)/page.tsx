@@ -1,4 +1,4 @@
-import SelectSpellPage from '@/page/SearchPages/Official/SpellSearch.page';
+import SelectSpellPage from '@/pages-lib/SearchPages/Official/SpellSearch.page';
 import { getSpells } from '@/lib/actions/db/spell/read.actions';
 import { Metadata } from 'next';
 

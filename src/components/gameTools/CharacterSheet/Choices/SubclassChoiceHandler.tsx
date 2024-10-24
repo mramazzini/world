@@ -1,7 +1,7 @@
 'use client';
 
 import { CallbackOptions, SubClassID } from '@/lib/utils/types/types';
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import SubclassChoice from './SubclassChoice';
 import Image from 'next/image';
 import { v4 } from 'uuid';
@@ -16,34 +16,41 @@ const SubclassChoiceHandler = ({ callback, choice }: Props) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    //make sure that all selections are made
-    let allSelectionsMade = true;
-    if (!selections || selections.length === 0) {
-      allSelectionsMade = false;
-    }
-    if (!choice.choices) {
-      allSelectionsMade = true;
-    }
-    if (!allSelectionsMade) {
-      return;
-    }
-    //callback
+
+    // Check if all selections are made
+    if (!selections || selections.length === 0) return;
+    if (choice.choices && selections.length !== choice.choices.length) return;
+
+    // Prepare the callback data
     const arr: CallbackOptions = selections as CallbackOptions;
     const defArr: CallbackOptions = choice.default as CallbackOptions;
-    callback(
-      choice.default
-        ? (arr.concat(defArr) as CallbackOptions)
-        : (selections as CallbackOptions)
-    );
+    const combinedSelections = choice.default ? arr.concat(defArr) : selections;
+
+    callback(combinedSelections as CallbackOptions);
   };
-  const id = v4();
+
+  const updateSelections = useCallback((subClassList: SubClassID[]) => {
+    setSelections((prevSelections) => {
+      // Shallow comparison to check if the new selections are different
+      if (
+        prevSelections.length === subClassList.length &&
+        prevSelections.every((val, idx) => val === subClassList[idx])
+      ) {
+        return prevSelections; // No update if the selections are the same
+      }
+      return subClassList;
+    });
+  }, []);
+
+  const id = useMemo(() => v4(), []);
+
   return (
     <>
       <button
         className="btn p-4 h-auto m-4 flex items-center justify-between flex-col btn-ghost border border-gray-500"
         onClick={() => {
           const modal = document.getElementById(id) as HTMLDialogElement;
-          modal.showModal();
+          if (modal) modal.showModal();
         }}
       >
         <Image
@@ -55,39 +62,30 @@ const SubclassChoiceHandler = ({ callback, choice }: Props) => {
         />
         <p className="divider">Choose a subclass</p>
       </button>
-      <dialog className="modal " id={id}>
+      <dialog className="modal" id={id}>
         <div
-          className="modal-box "
+          className="modal-box"
           style={{
-            height: '',
             maxHeight: 'calc(100vh - 5em)',
             overflow: 'visible',
           }}
         >
           <form
             onSubmit={handleSubmit}
-            className=" overflow-auto "
+            className="overflow-auto"
             style={{
-              height: '',
               maxHeight: 'calc(80vh - 5em)',
             }}
           >
             <div>
-              {choice.choices?.map((choice, index) => {
-                return (
-                  <SubclassChoice
-                    modalID={id}
-                    key={index}
-                    choice={choice}
-                    updateSelections={(subClassList) => {
-                      setSelections(() => {
-                        const newSelections = subClassList;
-                        return newSelections as SubClassID[];
-                      });
-                    }}
-                  />
-                );
-              })}
+              {choice.choices?.map((choice, index) => (
+                <SubclassChoice
+                  modalID={id}
+                  key={index}
+                  choice={choice}
+                  updateSelections={updateSelections}
+                />
+              ))}
             </div>
             <div className="flex justify-end gap-4">
               <button
@@ -97,7 +95,7 @@ const SubclassChoiceHandler = ({ callback, choice }: Props) => {
                   const modal = document.getElementById(
                     id
                   ) as HTMLDialogElement;
-                  modal.close();
+                  if (modal) modal.close();
                 }}
               >
                 Cancel

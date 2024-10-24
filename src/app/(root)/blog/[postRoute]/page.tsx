@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import '@/lib/string.extensions';
 import { getBlogPost } from '@/lib/actions/db/blogpost/read.actions';
-import BlogsPage from '@/page/blog/Blogs.page';
+import BlogsPage from '@/pages-lib/blog/Blogs.page';
 
 type Props = {
   params: { postRoute: string };

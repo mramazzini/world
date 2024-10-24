@@ -1,4 +1,4 @@
-import SpeciesSearchPage from '@/page/SearchPages/Official/SpeciesSearch.page';
+import SpeciesSearchPage from '@/pages-lib/SearchPages/Official/SpeciesSearch.page';
 import { getSpecies } from '@/lib/actions/db/species/get.actions';
 import { Metadata } from 'next';
 

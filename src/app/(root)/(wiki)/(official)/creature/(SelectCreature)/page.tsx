@@ -1,4 +1,4 @@
-import CreatureSearchPage from '@/page/SearchPages/Official/CreatureSearch.page';
+import CreatureSearchPage from '@/pages-lib/SearchPages/Official/CreatureSearch.page';
 import { getCreatures } from '@/lib/actions/db/creature/read.actions';
 import { Metadata } from 'next';
 

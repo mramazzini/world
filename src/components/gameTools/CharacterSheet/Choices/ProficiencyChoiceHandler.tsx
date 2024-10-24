@@ -7,7 +7,7 @@ import {
   WeaponID,
 } from '@/lib/utils/types/types';
 import P from '@/Utility/FormatAndSanitize';
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Ability, ArmorType, Language, Skill } from '@prisma/client';
 import ArmorChoice from './ArmorChoice';
 import SkillChoice from './SkillChoice';
@@ -48,10 +48,10 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
   proficiency,
 }: Props) => {
   const [selections, setSelections] = useState<T[]>([]);
-
   const handleSubmit = (e: React.FormEvent) => {
+    console.log('Submit');
     e.preventDefault();
-    //make sure that all selections are made
+    // Make sure that all selections are made
     let allSelectionsMade = true;
     if (!selections || selections.length === 0) {
       allSelectionsMade = false;
@@ -60,9 +60,10 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
       allSelectionsMade = true;
     }
     if (!allSelectionsMade) {
+      console.error('Not all selections made');
       return;
     }
-    //callback
+    // Callback
     const arr: CallbackOptions = selections as CallbackOptions;
     const defArr: CallbackOptions = choice.default as CallbackOptions;
     callback(
@@ -71,32 +72,36 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
         : (selections as CallbackOptions)
     );
   };
-  const id = uuidv4();
-  const parseChoiceItem = (item: T) => {
-    switch (proficiency) {
-      case 'armor':
-        return (item as ArmorType).toCapitalCase().replaceAll('_', ' ');
-      case 'ability':
-        return AbilityToText(item as Ability);
-      case 'weapon':
-        return <ModelDisplay model="Weapon" id={item as WeaponID} />;
-      case 'language':
-        return (item as Language).toCapitalCase().replaceAll('_', ' ');
-      case 'skill':
-        return (
-          <P modalID={id}>
-            {(item as Skill).toCapitalCase().replaceAll('_', ' ')}
-          </P>
-        );
-      case 'saving':
-        return <P modalID={id}>{AbilityToText(item as Ability)}</P>;
-      case 'tool':
-        return <ModelDisplay model="Tool" id={item as ToolID} />;
 
-      default:
-        return 'asd';
-    }
-  };
+  const id = useMemo(() => uuidv4(), []);
+  const parseChoiceItem = useCallback(
+    (item: T) => {
+      switch (proficiency) {
+        case 'armor':
+          return (item as ArmorType).toCapitalCase().replaceAll('_', ' ');
+        case 'ability':
+          return AbilityToText(item as Ability);
+        case 'weapon':
+          return <ModelDisplay model="Weapon" id={item as WeaponID} />;
+        case 'language':
+          return (item as Language).toCapitalCase().replaceAll('_', ' ');
+        case 'skill':
+          return (
+            <P modalID={id}>
+              {(item as Skill).toCapitalCase().replaceAll('_', ' ')}
+            </P>
+          );
+        case 'saving':
+          return <P modalID={id}>{AbilityToText(item as Ability)}</P>;
+        case 'tool':
+          return <ModelDisplay model="Tool" id={item as ToolID} />;
+        default:
+          return 'asd';
+      }
+    },
+    [proficiency, id]
+  );
+
   return (
     <>
       <dialog id={id} className="modal ">

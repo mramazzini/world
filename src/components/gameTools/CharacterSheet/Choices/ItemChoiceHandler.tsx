@@ -1,7 +1,7 @@
 'use client';
 import { CallbackOptions, CharacterInfo } from '@/lib/utils/types/types';
 import P from '@/Utility/FormatAndSanitize';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import ItemChoice from './ItemChoice';
 interface Props {
   character: CharacterInfo;
@@ -12,6 +12,20 @@ import { v4 as uuidv4 } from 'uuid';
 import Image from 'next/image';
 const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
   const [selections, setSelections] = useState<PrismaJson.QuantityItem[][]>([]);
+
+  const updateSelections = useCallback(
+    (itemList: PrismaJson.QuantityItem[], index: number) => {
+      setSelections((prev) => {
+        if (JSON.stringify(prev[index]) === JSON.stringify(itemList)) {
+          return prev;
+        }
+        const newSelections = [...prev];
+        newSelections[index] = itemList;
+        return newSelections;
+      });
+    },
+    []
+  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,13 +84,9 @@ const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
                     modalID={id}
                     key={index}
                     choice={choice}
-                    updateSelections={(itemList) => {
-                      setSelections((prev) => {
-                        const newSelections = [...prev];
-                        newSelections[index] = itemList;
-                        return newSelections;
-                      });
-                    }}
+                    updateSelections={(itemList) =>
+                      updateSelections(itemList, index)
+                    }
                   />
                 ))}
               </div>

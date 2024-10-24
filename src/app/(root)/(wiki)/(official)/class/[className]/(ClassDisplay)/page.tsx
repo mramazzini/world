@@ -1,4 +1,4 @@
-import ClassPage from '@/page/wiki/official/Class.page';
+import ClassPage from '@/pages-lib/wiki/official/Class.page';
 import { Metadata } from 'next';
 
 import '@/lib/string.extensions';

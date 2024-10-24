@@ -1,4 +1,4 @@
-import HomeSearchPage from '@/page/SearchPages/General/HomeSearch.page';
+import HomeSearchPage from '@/pages-lib/SearchPages/General/HomeSearch.page';
 import { Metadata } from 'next';
 
 if (process.env.DOMAIN_NAME === undefined) {

@@ -1,4 +1,4 @@
-import SubclassSearchPage from '@/page/SearchPages/Official/SubclassSearch.page';
+import SubclassSearchPage from '@/pages-lib/SearchPages/Official/SubclassSearch.page';
 import { getSubclasses } from '@/lib/actions/db/subclass/read.actions';
 import { Metadata } from 'next';
 

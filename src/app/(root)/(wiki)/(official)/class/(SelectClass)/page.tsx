@@ -1,4 +1,4 @@
-import ClassSearchPage from '@/page/SearchPages/Official/ClassSearch.page';
+import ClassSearchPage from '@/pages-lib/SearchPages/Official/ClassSearch.page';
 import { getClasses } from '@/lib/actions/db/class/read.actions';
 import { Metadata } from 'next';
 

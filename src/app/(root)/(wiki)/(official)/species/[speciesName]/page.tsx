@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import '@/lib/string.extensions';
 import { getSpecie } from '@/lib/actions/db/species/get.actions';
-import SpeciesPage from '@/page/wiki/official/Race.page';
+import SpeciesPage from '@/pages-lib/wiki/official/Race.page';
 
 type Props = {
   params: { speciesName: string };

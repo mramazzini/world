@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import '@/lib/string.extensions';
 
 import { getCreature } from '@/lib/actions/db/creature/read.actions';
-import CreaturePage from '@/page/wiki/official/Creatures.page';
+import CreaturePage from '@/pages-lib/wiki/official/Creatures.page';
 
 type Props = {
   params: { creatureName: string };

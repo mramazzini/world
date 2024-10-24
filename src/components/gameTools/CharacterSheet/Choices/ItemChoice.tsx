@@ -3,7 +3,7 @@ import P from '@/Utility/FormatAndSanitize';
 import { memoizeGetItem } from '@/Utility/globalCache';
 import { ItemInfo } from '@/lib/utils/types/types';
 import numberArray from '@/lib/utils/numberArray';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 interface Props {
   modalID: string;
   choice: {
@@ -16,24 +16,31 @@ interface Props {
 const ItemChoice = ({ choice, updateSelections, modalID }: Props) => {
   const [selections, setSelections] = useState<number[]>([]);
   const [options, setOptions] = useState<ItemInfo[]>([]);
-  useEffect(() => {
-    //get item ids and Quantities
-    const itemQuantities = selections.map((index) => choice.options[index]);
-    updateSelections(itemQuantities.flat());
-  }, [selections, updateSelections, choice.options]);
+
+  const itemQuantities = useMemo(
+    () => selections.map((index) => choice.options[index]).flat(),
+    [selections, choice.options]
+  );
 
   useEffect(() => {
-    try {
-      choice.options.forEach((itemList) => {
-        itemList.forEach((itemData) => {
-          memoizeGetItem(itemData.item).then((item) => {
-            setOptions((prev) => [...prev, item] as ItemInfo[]);
-          });
-        });
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    // Only update selections when itemQuantities changes
+    updateSelections(itemQuantities);
+  }, [itemQuantities, updateSelections]);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const items = await Promise.all(
+          choice.options.flat().map(async (itemData) => {
+            return memoizeGetItem(itemData.item);
+          })
+        );
+        setOptions(items as ItemInfo[]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchItems();
   }, [choice.options]);
   return (
     <div className="flex bg-base-300 rounded-xl p-4 flex-col mb-4">

@@ -13,7 +13,6 @@ interface Props {
 
 const LanguageChoice = ({ choice, updateSelections }: Props) => {
   const [selections, setSelections] = useState<Language[]>([]);
-
   useEffect(() => {
     //get language types
     updateSelections(selections);
@@ -39,7 +38,7 @@ const LanguageChoice = ({ choice, updateSelections }: Props) => {
           );
         })}
       </ul>
-      {numberArray(1, choice.numberOfChoices).map((choiceIndex, index) => {
+      {numberArray(0, choice.numberOfChoices - 1).map((choiceIndex, index) => {
         return (
           <select
             key={index}
@@ -52,11 +51,11 @@ const LanguageChoice = ({ choice, updateSelections }: Props) => {
             }`}
             onChange={(e) => {
               const index = e.target.value;
-
+              console.log(index);
               const newSelections = [...selections];
 
               newSelections[choiceIndex] = Language[index as Language];
-
+              console.log(newSelections);
               setSelections(newSelections);
             }}
           >

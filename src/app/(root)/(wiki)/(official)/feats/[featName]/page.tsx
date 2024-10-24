@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import '@/lib/string.extensions';
 import { getFeat } from '@/lib/actions/db/feat/read.actions';
-import FeatPage from '@/page/wiki/official/Feat.page';
+import FeatPage from '@/pages-lib/wiki/official/Feat.page';
 
 type Props = {
   params: { featName: string };

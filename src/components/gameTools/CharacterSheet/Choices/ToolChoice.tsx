@@ -3,7 +3,8 @@
 import ModelDisplay from '@/Utility/ModelDisplay';
 import { ToolID } from '@/lib/utils/types/types';
 import numberArray from '@/lib/utils/numberArray';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
+
 interface Props {
   choice: {
     numberOfChoices: number;
@@ -17,62 +18,72 @@ const ToolChoice = ({ choice, updateSelections }: Props) => {
     new Array<number>(choice.numberOfChoices - 1)
   );
 
+  // Memoize the list of selected tools
+  const toolList = useMemo(
+    () =>
+      selections
+        .map((index) => choice.options[index])
+        .filter((tool) => tool !== undefined),
+    [selections, choice.options]
+  );
+
   useEffect(() => {
-    //get tools
-    const toolList = selections.map((index) => choice.options[index]);
-    //make sure all selected
     updateSelections(toolList);
-  }, [selections, updateSelections, choice.options]);
+  }, [toolList, updateSelections]);
+
+  // Memoize the select options to avoid unnecessary re-renders
+  const toolOptions = useMemo(
+    () =>
+      choice.options.map((tool, index) => (
+        <option key={index} value={index}>
+          <ModelDisplay model="Tool" id={tool as ToolID} />
+        </option>
+      )),
+    [choice.options]
+  );
+
+  // Memoize the `onChange` handler to prevent unnecessary re-renders
+  const handleSelectChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>, choiceIndex: number) => {
+      const index = parseInt(e.target.value);
+      const newSelections = [...selections];
+      newSelections[choiceIndex] = index;
+      setSelections(newSelections);
+    },
+    [selections]
+  );
 
   return (
     <div className="flex bg-base-300 rounded-xl p-4 flex-col mb-4">
       <p>Choose {choice.numberOfChoices} from:</p>
-      <div className="divider divider-accent  m-0"></div>
+      <div className="divider divider-accent m-0"></div>
       <ul className="list-disc ml-4">
-        {choice.options.map((tool, index) => {
-          return (
-            <li
-              key={index}
-              className={
-                selections.some((selection) => selection === index)
-                  ? 'pl-2 bg-neutral  rounded-xl'
-                  : 'pl-2 '
-              }
-            >
-              <ModelDisplay model="Tool" id={tool as ToolID} />
-            </li>
-          );
-        })}
-      </ul>
-      {numberArray(1, choice.numberOfChoices).map((choiceIndex, index) => {
-        return (
-          <select
+        {choice.options.map((tool, index) => (
+          <li
             key={index}
-            defaultValue={'Pick One'}
-            className={`select select-bordered   w-full max-w-xs mt-2
-            ${
-              selections.length >= choice.numberOfChoices
-                ? 'select-secondary'
-                : ''
-            }`}
-            onChange={(e) => {
-              const index = parseInt(e.target.value);
-              const newSelections = [...selections];
-
-              newSelections[choiceIndex] = index;
-
-              setSelections(newSelections);
-            }}
+            className={
+              selections.includes(index) ? 'pl-2 bg-neutral rounded-xl' : 'pl-2'
+            }
           >
-            <option disabled>Pick One</option>
-            {choice.options.map((tool, index) => (
-              <option key={index} value={index}>
-                <ModelDisplay model="Tool" id={tool as ToolID} />
-              </option>
-            ))}
-          </select>
-        );
-      })}
+            <ModelDisplay model="Tool" id={tool as ToolID} />
+          </li>
+        ))}
+      </ul>
+      {numberArray(0, choice.numberOfChoices - 1).map((_, choiceIndex) => (
+        <select
+          key={choiceIndex}
+          defaultValue="Pick One"
+          className={`select select-bordered w-full max-w-xs mt-2 ${
+            selections.length >= choice.numberOfChoices
+              ? 'select-secondary'
+              : ''
+          }`}
+          onChange={(e) => handleSelectChange(e, choiceIndex)}
+        >
+          <option disabled>Pick One</option>
+          {toolOptions}
+        </select>
+      ))}
     </div>
   );
 };

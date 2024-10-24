@@ -1,4 +1,4 @@
-import ItemSearchPage from '@/page/SearchPages/Official/ItemSearch.page';
+import ItemSearchPage from '@/pages-lib/SearchPages/Official/ItemSearch.page';
 import { getItems } from '@/lib/actions/db/item/read.actions';
 import { Metadata } from 'next';
 

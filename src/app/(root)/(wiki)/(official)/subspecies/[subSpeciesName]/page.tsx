@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import '@/lib/string.extensions';
 
-import SubSpeciesPage from '@/page/wiki/official/SubRace.page';
+import SubSpeciesPage from '@/pages-lib/wiki/official/SubRace.page';
 import { getSubSpecie } from '@/lib/actions/db/subSpecies/read.actions';
 
 type Props = {

@@ -44,7 +44,7 @@ const WeaponChoice = ({ choice, updateSelections }: Props) => {
           );
         })}
       </ul>
-      {numberArray(1, choice.numberOfChoices).map((choiceIndex, index) => {
+      {numberArray(0, choice.numberOfChoices - 1).map((choiceIndex, index) => {
         return (
           <select
             key={index}

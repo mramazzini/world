@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import '@/lib/string.extensions';
 import { getItem } from '@/lib/actions/db/item/read.actions';
-import ItemPage from '@/page/wiki/official/Item.page';
+import ItemPage from '@/pages-lib/wiki/official/Item.page';
 
 type Props = {
   params: { itemName: string };

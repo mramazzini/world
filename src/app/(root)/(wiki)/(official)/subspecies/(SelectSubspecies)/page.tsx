@@ -1,4 +1,4 @@
-import SubSpeciesSearchPage from '@/page/SearchPages/Official/SubspeciesSearch.page';
+import SubSpeciesSearchPage from '@/pages-lib/SearchPages/Official/SubspeciesSearch.page';
 import { getSubSpecies } from '@/lib/actions/db/subSpecies/read.actions';
 import { Metadata } from 'next';
 

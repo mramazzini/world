@@ -1,4 +1,4 @@
-import ChangelogPage from '@/page/community/Changelog.page';
+import ChangelogPage from '@/pages-lib/community/Changelog.page';
 
 export const metadata = {
   title: "Change Log - Max's DnD Wiki",

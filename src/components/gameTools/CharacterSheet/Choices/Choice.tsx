@@ -31,6 +31,7 @@ const Choice = ({
 }: Props) => {
   const callback = useCallback(
     async (data: CallbackOptions) => {
+      console.log('callback', data);
       const s = await runCallback(
         character,
         choiceData.callbackProtocol,
@@ -40,7 +41,7 @@ const Choice = ({
       );
       setCharacterState({ ...s });
     },
-    [character, choiceData, id, setCharacterState]
+    [character, choiceData, id]
   );
 
   const filterChoice = (choice: PrismaJson.Choice) => {

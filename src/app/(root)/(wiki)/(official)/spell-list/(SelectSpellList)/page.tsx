@@ -1,4 +1,4 @@
-import SpellListSearchPage from '@/page/SearchPages/Official/SpellListSearch.page';
+import SpellListSearchPage from '@/pages-lib/SearchPages/Official/SpellListSearch.page';
 
 import { getSpellLists } from '@/lib/actions/db/spellList/read.actions';
 import { Metadata } from 'next';

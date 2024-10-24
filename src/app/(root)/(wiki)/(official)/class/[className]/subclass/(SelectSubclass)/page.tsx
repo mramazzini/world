@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import '@/lib/string.extensions';
 import { getClass } from '@/lib/actions/db/class/read.actions';
 import { getSubclassesByClass } from '@/lib/actions/db/subclass/read.actions';
-import SubclassClassSearchPage from '@/page/SearchPages/Official/SubclassClassSearch.page';
+import SubclassClassSearchPage from '@/pages-lib/SearchPages/Official/SubclassClassSearch.page';
 
 type Props = {
   params: { className: string };
