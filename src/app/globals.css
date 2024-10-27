@@ -120,6 +120,16 @@ input[type='number'] {
   }
 }
 
+.spider {
+  transition: all 0.3s;
+}
+
+.spider:hover {
+  transform: translateY(-50px)
+}
+
+
+
 .markdown-content {
   overflow-x: auto;
 

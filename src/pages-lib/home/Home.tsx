@@ -43,7 +43,7 @@ const HomePage = () => {
             height={128}
             className="hidden md:block md:w-16 md:h-16 h-12 w-12 lg:w-24 lg:h-24 xl:w-32 xl:h-32 owl absolute right-[20px] top-[20px]"
           />
-          <div className="hidden absolute left-[12%] bottom-[100px] md:flex flex-col items-center justify-start">
+          <div className="hidden absolute left-[12%] bottom-[100px] md:flex flex-col items-center justify-start spider">
             <div className="h-screen w-[2px] bg-gray-700 relative top-2"></div>
             <Image
               src={'/home/spider.svg'}
