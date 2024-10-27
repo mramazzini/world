@@ -14,8 +14,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getClass(params.className);
   if (!data) {
     return {
-      title: "Class Not Found - Max's DND Wiki",
-      description: "Class Not Found - Max's DND Wiki",
+      title: "Class Not Found - Max's DND",
+      description: "Class Not Found - Max's DND",
       openGraph: {
         type: 'website',
 
@@ -31,11 +31,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
   return {
-    title: `${data.name.toCapitalCase()} Subclasses - Max's DND Wiki`,
+    title: `${data.name.toCapitalCase()} Subclasses - Max's DND`,
     description: `A list of subclasses for the ${data.name.toCapitalCase()} class in Dungeons and Dragons 5th Edition.`,
     openGraph: {
       type: 'website',
-      title: `${data.name.toCapitalCase()} Subclasses - Max's DND Wiki`,
+      title: `${data.name.toCapitalCase()} Subclasses - Max's DND`,
       description: `A list of subclasses for the ${data.name.toCapitalCase()} class in Dungeons and Dragons 5th Edition.`,
       images: [
         {

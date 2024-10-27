@@ -3,12 +3,12 @@ import { getItems } from '@/lib/actions/db/item/read.actions';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Items - Max's DnD Wiki",
+  title: "Items - Max's DND",
   description:
     'A list of Items for your Dungeons and Dragons Fifth Edition character to utilize.',
   openGraph: {
     type: 'website',
-    title: "Items - Max's DnD Wiki",
+    title: "Items - Max's DND",
     description:
       'A list of Items for your Dungeons and Dragons Fifth Edition character to utilize.',
     images: [

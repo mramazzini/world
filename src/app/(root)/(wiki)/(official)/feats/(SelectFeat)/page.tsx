@@ -3,11 +3,11 @@ import { getFeats } from '@/lib/actions/db/feat/read.actions';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Feats - Max's DND Wiki",
+  title: "Feats - Max's DND",
   description: 'A vast collection of Feats for your DND 5e campaign.',
   openGraph: {
     type: 'website',
-    title: "Feats - Max's DND Wiki",
+    title: "Feats - Max's DND",
     description: 'A vast collection of Feats for your DND 5e campaign.',
     images: [
       {

@@ -13,12 +13,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!data) {
     return {
-      title: "Spell Not Found - Max's DND Wiki",
-      description: "Spell Not Found - Max's DND Wiki",
+      title: "Spell Not Found - Max's DND",
+      description: "Spell Not Found - Max's DND",
       openGraph: {
         type: 'website',
-        title: "Spell Not Found - Max's DND Wiki",
-        description: "Spell Not Found - Max's DND Wiki",
+        title: "Spell Not Found - Max's DND",
+        description: "Spell Not Found - Max's DND",
         images: [
           {
             url: 'https://www.maxdnd.com/images/hero.jpg',
@@ -32,14 +32,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${data.name} - Max's DND Wiki`,
+    title: `${data.name} - Max's DND`,
     description:
       data.description.length > 157
         ? data.description.substring(0, 157) + '...'
         : data.description,
     openGraph: {
       type: 'website',
-      title: `${data.name} - Max's DND Wiki`,
+      title: `${data.name} - Max's DND`,
       description:
         data.description.length > 157
           ? data.description.substring(0, 157) + '...'

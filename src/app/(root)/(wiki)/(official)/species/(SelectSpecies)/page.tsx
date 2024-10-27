@@ -3,11 +3,11 @@ import { getSpecies } from '@/lib/actions/db/species/get.actions';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Species Origins - Max's DND Wiki",
+  title: "Species Origins - Max's DND",
   description: 'A vast collection of Species for your DND 5e campaign.',
   openGraph: {
     type: 'website',
-    title: "Species - Max's DND Wiki",
+    title: "Species - Max's DND",
     description: 'A vast collection of Species for your DND 5e campaign.',
     images: [
       {

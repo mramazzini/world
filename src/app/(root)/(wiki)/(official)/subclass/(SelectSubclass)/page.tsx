@@ -3,12 +3,12 @@ import { getSubclasses } from '@/lib/actions/db/subclass/read.actions';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Subclasses - Max's DND Wiki",
+  title: "Subclasses - Max's DND",
   description:
     'A vast collection of subclasses for your DND campaign. Choose from offical content or user submitted homebrew subclasses.',
   openGraph: {
     type: 'website',
-    title: "Subclasses - Max's DND Wiki",
+    title: "Subclasses - Max's DND",
     description:
       'A vast collection of subclasses for your DND campaign. Choose from offical content or user submitted homebrew subclasses.',
     images: [

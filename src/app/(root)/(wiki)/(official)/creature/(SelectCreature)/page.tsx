@@ -3,12 +3,12 @@ import { getCreatures } from '@/lib/actions/db/creature/read.actions';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Creatures - Max's DnD Wiki",
+  title: "Creatures - Max's DND",
   description:
     'Creatures are statblocks that represent Non-player characters. Use these to have an easy reference for creatures for your characters to interact/fight with.',
   openGraph: {
     type: 'website',
-    title: "Creatures - Max's DnD Wiki",
+    title: "Creatures - Max's DND",
     description:
       'Creatures are statblocks that represent Non-player characters. Use these to have an easy reference for creatures for your characters to interact/fight with.',
     images: [

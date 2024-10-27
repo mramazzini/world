@@ -4,12 +4,12 @@ import { getSpellLists } from '@/lib/actions/db/spellList/read.actions';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Spell-lists - Max's DnD Wiki",
+  title: "Spell-lists - Max's DND",
   description:
     'Spell-lists are a collection of spells that a character can learn and cast in Dungeons and Dragons Fifth Edition.',
   openGraph: {
     type: 'website',
-    title: "SpellLists - Max's DnD Wiki",
+    title: "SpellLists - Max's DND",
     description:
       'Spell-lists are a collection of spells that a character can learn and cast in Dungeons and Dragons Fifth Edition.',
     images: [

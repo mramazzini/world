@@ -13,12 +13,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!data) {
     return {
-      title: "Subspecies Not Found - Max's DND Wiki",
-      description: "Subspecies Not Found - Max's DND Wiki",
+      title: "Subspecies Not Found - Max's DND",
+      description: "Subspecies Not Found - Max's DND",
       openGraph: {
         type: 'website',
-        title: "Subspecies Not Found - Max's DND Wiki",
-        description: "Subspecies Not Found - Max's DND Wiki",
+        title: "Subspecies Not Found - Max's DND",
+        description: "Subspecies Not Found - Max's DND",
         images: [
           {
             url: 'https://www.maxdnd.com/images/hero.jpg',
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${data.name} - Max's DND Wiki`,
+    title: `${data.name} - Max's DND`,
 
     description:
       data.description.length > 157
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         : data.description,
     openGraph: {
       type: 'website',
-      title: `${data.name} - Max's DND Wiki`,
+      title: `${data.name} - Max's DND`,
       description:
         data.description.length > 157
           ? data.description.substring(0, 157) + '...'

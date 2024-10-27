@@ -1,8 +1,8 @@
-# Max's DnD Wiki
+# Max's DND
 
 > 🚧 **Under Construction:** This website is currently under development. Some features may not be fully functional or available. 🚧
 
-Welcome to Max's DnD Wiki! This website is a comprehensive repository of all things Dungeons & Dragons. From spells and subclasses to magical items and lore, you'll find everything you need to enhance your campaign.
+Welcome to Max's DnD! This website is a comprehensive repository of all things Dungeons & Dragons. From spells and subclasses to magical items and lore, you'll find everything you need to enhance your campaign.
 
 ## Features
 

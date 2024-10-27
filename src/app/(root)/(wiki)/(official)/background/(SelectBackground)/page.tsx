@@ -3,12 +3,12 @@ import { getBackgrounds } from '@/lib/actions/db/background/read.actions';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Backgrounds - Max's DnD Wiki",
+  title: "Backgrounds - Max's DND",
   description:
     'A list of Background origins for your Dungeons and Dragons Fifth Edition character.',
   openGraph: {
     type: 'website',
-    title: "Backgrounds - Max's DnD Wiki",
+    title: "Backgrounds - Max's DND",
     description:
       'A list of Background origins for your Dungeons and Dragons Fifth Edition character.',
     images: [

@@ -1,13 +1,13 @@
 import RegisterForm from '@/components/Forms/RegisterForm';
 import { Metadata } from 'next';
 export const metadata: Metadata = {
-  title: "Create an Account - Max's DND Wiki",
+  title: "Create an Account - Max's DND",
   description:
     'Create an account to create and store Classes, Subclasses, and more.',
   openGraph: {
     type: 'website',
 
-    title: "Login - Max's DND Wiki",
+    title: "Login - Max's DND",
     description:
       'Create an account to create and store Classes, Subclasses, and more.',
     images: [

@@ -3,11 +3,11 @@ import { getSubSpecies } from '@/lib/actions/db/subSpecies/read.actions';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Subspecies - Max's DND Wiki",
+  title: "Subspecies - Max's DND",
   description: 'A vast collection of Subspecies for your DND 5e campaign.',
   openGraph: {
     type: 'website',
-    title: "Subspecies - Max's DND Wiki",
+    title: "Subspecies - Max's DND",
     description: 'A vast collection of Subspecies for your DND 5e campaign.',
     images: [
       {

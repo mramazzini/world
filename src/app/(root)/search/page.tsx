@@ -5,12 +5,12 @@ if (process.env.DOMAIN_NAME === undefined) {
   throw new Error('DOMAIN_NAME is not defined');
 }
 export const metadata: Metadata = {
-  title: "Max's DND Wiki",
+  title: "Max's DND",
   description:
     'Search for everything you need to build your character in Dungeons and Dragons 5th Edition. Classes, Subclasses, Species, Spells, Backgrounds and more.',
   openGraph: {
     type: 'website',
-    title: "Max's DND Wiki",
+    title: "Max's DND",
     description:
       'Search for everything you need to build your character in Dungeons and Dragons 5th Edition. Classes, Subclasses, Species, Spells, Backgrounds and more.',
     images: [

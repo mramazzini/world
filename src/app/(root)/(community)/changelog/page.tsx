@@ -1,12 +1,12 @@
 import ChangelogPage from '@/pages-lib/community/Changelog.page';
 
 export const metadata = {
-  title: "Change Log - Max's DnD Wiki",
-  description: "View previous and upcoming updates for Max's DnD Wiki",
+  title: "Change Log - Max's DND",
+  description: "View previous and upcoming updates for Max's DND",
   openGraph: {
     type: 'website',
-    title: "Change Log - Max's DnD Wiki",
-    description: "View previous and upcoming updates for Max's DnD Wiki",
+    title: "Change Log - Max's DND",
+    description: "View previous and upcoming updates for Max's DND",
     images: [
       {
         url: 'https://www.maxdnd.com/images/hero.jpg',

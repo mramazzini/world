@@ -18,12 +18,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (isNaN(characterID)) {
     console.error('Invalid characterID:', params.characterID);
     return {
-      title: "Character Not Found - Max's DND Wiki",
-      description: "Character Not Found - Max's DND Wiki",
+      title: "Character Not Found - Max's DND",
+      description: "Character Not Found - Max's DND",
       openGraph: {
         type: 'website',
-        title: "Character Not Found - Max's DND Wiki",
-        description: "Character Not Found - Max's DND Wiki",
+        title: "Character Not Found - Max's DND",
+        description: "Character Not Found - Max's DND",
         images: [
           {
             url: 'https://www.maxdnd.com/images/hero.jpg',
@@ -39,12 +39,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!data) {
     return {
-      title: "Character Not Found - Max's DND Wiki",
-      description: "Character Not Found - Max's DND Wiki",
+      title: "Character Not Found - Max's DND",
+      description: "Character Not Found - Max's DND",
       openGraph: {
         type: 'website',
-        title: "Character Not Found - Max's DND Wiki",
-        description: "Character Not Found - Max's DND Wiki",
+        title: "Character Not Found - Max's DND",
+        description: "Character Not Found - Max's DND",
         images: [
           {
             url: 'https://www.maxdnd.com/images/hero.jpg',
@@ -58,12 +58,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${data.name} - Max's DND Wiki`,
+    title: `${data.name} - Max's DND`,
     description: 'View and edit your character sheet.',
 
     openGraph: {
       type: 'website',
-      title: `${data.name} - Max's DND Wiki`,
+      title: `${data.name} - Max's DND`,
       description: 'View and edit your character sheet.',
       images: [
         {

@@ -11,12 +11,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getClass(params.className);
   if (!data) {
     return {
-      title: "Class Not Found - Max's DND Wiki",
-      description: "Class Not Found - Max's DND Wiki",
+      title: "Class Not Found - Max's DND",
+      description: "Class Not Found - Max's DND",
       openGraph: {
         type: 'website',
-        title: "Class Not Found - Max's DND Wiki",
-        description: "Class Not Found - Max's DND Wiki",
+        title: "Class Not Found - Max's DND",
+        description: "Class Not Found - Max's DND",
         images: [
           {
             url: 'https://www.maxdnd.com/images/hero.jpg',
@@ -29,14 +29,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
   return {
-    title: `${data.name.toCapitalCase()} - Max's DND Wiki`,
+    title: `${data.name.toCapitalCase()} - Max's DND`,
     description:
       data.description.length > 157
         ? data.description.substring(0, 157) + '...'
         : data.description,
     openGraph: {
       type: 'website',
-      title: `${data.name.toCapitalCase()} - Max's DND Wiki`,
+      title: `${data.name.toCapitalCase()} - Max's DND`,
       description:
         data.description.length > 157
           ? data.description.substring(0, 157) + '...'

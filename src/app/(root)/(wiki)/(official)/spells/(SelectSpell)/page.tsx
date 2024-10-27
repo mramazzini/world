@@ -3,12 +3,12 @@ import { getSpells } from '@/lib/actions/db/spell/read.actions';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Spells - Max's DND Wiki",
+  title: "Spells - Max's DND",
   description:
     'A vast collection of spells for your DND campaign. Choose from offical content or user submitted homebrew spells.',
   openGraph: {
     type: 'website',
-    title: "Spells - Max's DND Wiki",
+    title: "Spells - Max's DND",
     description:
       'A vast collection of spells for your DND campaign. Choose from offical content or user submitted homebrew spells.',
     images: [

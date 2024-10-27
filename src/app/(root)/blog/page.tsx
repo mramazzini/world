@@ -8,13 +8,13 @@ import { useEffect } from 'react';
 // }
 // export const metadata: Metadata = {
 //   title: "Max's DND Blog",
-//   description: "Read about the latest updates and news from Max's DND Wiki.",
+//   description: "Read about the latest updates and news from Max's DND.",
 //   metadataBase: new URL(process.env.DOMAIN_NAME),
 //   openGraph: {
 //     type: "website",
 
 //     title: "Max's DND Blog",
-//     description: "Read about the latest updates and news from Max's DND Wiki.",
+//     description: "Read about the latest updates and news from Max's DND.",
 //     images: [
 //       {
 //         url: "https://www.maxdnd.com/images/hero.jpg",
