@@ -1,6 +1,5 @@
 'use client';
 import { useCallback } from 'react';
-
 interface OpenModalButtonProps extends React.HTMLProps<HTMLButtonElement> {
   modalid: string;
   modaltype: 'open' | 'close';
