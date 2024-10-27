@@ -144,14 +144,14 @@ const Navbar = () => {
           <div
             onMouseEnter={() => setShowNavbarMenu(true)}
             onMouseLeave={() => setShowNavbarMenu(false)}
-            className={`absolute hidden md:flex flex-col items-center top-16 w-[100vw]  gap-4 bg-base-300 p-4 z-[2] transition-all duration-300 ease-in-out ${
+            className={`absolute hidden md:flex flex-col items-center top-16 w-[100vw]  gap-4 bg-base-300  z-[2] transition-all duration-300 ease-in-out ${
               showNavbarMenu
                 ? 'h-auto opacity-100 '
                 : 'overflow-hidden h-0 opacity-0'
             } `}
           >
             <div className="w-full max-w-[1800px] flex flex-col items-center gap-2">
-              <ul className="flex flex-wrap items-center justify-center gap-2 ">
+              <ul className="flex flex-wrap items-center justify-center gap-2 p-4">
                 {wikiLinks.map((link, index) => (
                   <Link key={index} href={link.href}>
                     <div className="btn">{link.name}</div>
