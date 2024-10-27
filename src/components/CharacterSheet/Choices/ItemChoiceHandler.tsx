@@ -8,10 +8,14 @@ interface Props {
   choice: PrismaJson.ItemChoice;
   callback: (data: CallbackOptions) => void;
 }
-import { v4 as uuidv4 } from 'uuid';
 import Image from 'next/image';
+import useModal from '@/hooks/useModal';
+import Modal from '@/components/UI/Modal/Modal';
+import ModalBox from '@/components/UI/Modal/ModalBox';
+import ModalButton from '@/components/UI/Modal/ModalButton';
 const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
   const [selections, setSelections] = useState<PrismaJson.QuantityItem[][]>([]);
+  const { id, closeModal } = useModal();
 
   const updateSelections = useCallback(
     (itemList: PrismaJson.QuantityItem[], index: number) => {
@@ -42,14 +46,12 @@ const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
     //callback
     callback(choice.default ? [...selections, choice.default] : selections);
   };
-  const id = uuidv4();
   return (
     character &&
     character.state && (
       <>
-        <dialog id={id} className="modal ">
-          <div
-            className="modal-box "
+        <Modal id={id}>
+          <ModalBox
             style={{
               height: '',
               maxHeight: 'calc(100vh - 5em)',
@@ -60,8 +62,6 @@ const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
               onSubmit={handleSubmit}
               className=" overflow-auto"
               style={{
-                height: '',
-
                 maxHeight: 'calc(80vh - 5em)',
               }}
             >
@@ -95,10 +95,7 @@ const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
                   className="btn btn-error"
                   onClick={(e) => {
                     e.preventDefault();
-                    const modal = document.getElementById(
-                      id
-                    ) as HTMLDialogElement;
-                    modal.close();
+                    closeModal();
                   }}
                 >
                   Cancel
@@ -108,14 +105,12 @@ const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
                 </button>
               </div>
             </form>
-          </div>
-        </dialog>
-        <button
+          </ModalBox>
+        </Modal>
+        <ModalButton
           className="btn p-4 h-auto m-4 flex items-center join-item justify-between flex-col btn-ghost border border-gray-500"
-          onClick={() => {
-            const modal = document.getElementById(id) as HTMLDialogElement;
-            modal.showModal();
-          }}
+          modalid={id}
+          modaltype="open"
         >
           <Image
             src={'/images/backpack.svg'}
@@ -125,7 +120,7 @@ const ItemChoiceHandler = ({ choice, callback, character }: Props) => {
             alt="Choose a subclass"
           />
           <p className="divider">Choose your Items</p>
-        </button>
+        </ModalButton>
       </>
     )
   );

@@ -2,7 +2,9 @@ import { Language, Skill } from '@prisma/client';
 import { Property, src, WeaponPropertyNames } from './types/types';
 import { Ability } from '@prisma/client';
 export const QUERY_LIMIT = 30;
+export const NAVBAR_HEIGHT_TAILWIND = 'h-16';
 export const NAVBAR_HEIGHT_REM = 4;
+export const EXPANDED_NAVBAR_HEIGHT_REM = 16;
 export const VERSION = '0.12.0';
 export const officialSources: string[] = Object.values(src).filter(
   (s) => s !== src.homebrew
@@ -119,3 +121,46 @@ export const WeaponProperties: Record<WeaponPropertyNames, Property> = {
       'This weapon can be used with one or two hands. A damage value in parentheses appears with the property—the damage when the weapon is used with two hands to make a melee attack.',
   },
 };
+
+export const wikiLinks = [
+  {
+    name: 'Classes',
+    href: '/class',
+  },
+  {
+    name: 'Subclasses',
+    href: '/subclass',
+  },
+  {
+    name: 'Spells',
+    href: '/spells',
+  },
+  {
+    name: 'Spell Lists',
+    href: '/spell-list',
+  },
+  {
+    name: 'Backgrounds',
+    href: '/background',
+  },
+  {
+    name: 'Feats',
+    href: '/feats',
+  },
+  {
+    name: 'Species',
+    href: '/species',
+  },
+  {
+    name: 'Subspecies',
+    href: '/subspecies',
+  },
+  {
+    name: 'Creatures',
+    href: '/creature',
+  },
+  {
+    name: 'Items',
+    href: '/item',
+  },
+];

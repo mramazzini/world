@@ -1,5 +1,5 @@
 import { getFeats } from '@/lib/actions/db/feat/read.actions';
-import { ASIorFeat, FeatID } from '@/lib/types/types';
+import { ASIorFeat } from '@/lib/types/types';
 import { Ability } from '@prisma/client';
 import { v4 } from 'uuid';
 

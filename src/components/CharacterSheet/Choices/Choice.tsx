@@ -43,7 +43,7 @@ const Choice = ({
       );
       setCharacterState({ ...s });
     },
-    [character, choiceData, id]
+    [character, choiceData, id, setCharacterState]
   );
 
   const filterChoice = (choice: PrismaJson.Choice) => {

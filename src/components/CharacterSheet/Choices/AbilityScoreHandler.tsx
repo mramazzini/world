@@ -7,9 +7,14 @@ import {
 } from '@/lib/types/types';
 import Image from 'next/image';
 import { Fragment } from 'react';
-import { v4 as uuidv4, v4 } from 'uuid';
 import AbilityToText from '@/lib/utils/AbilityToText';
 import AbilityScoreChoice from './AbilityScoreChoice';
+import Modal from '@/components/UI/Modal/Modal';
+import useModal from '@/hooks/useModal';
+import ModalBox from '@/components/UI/Modal/ModalBox';
+import OpenModalButton from '@/components/UI/Modal/ModalButton';
+import ModalButton from '@/components/UI/Modal/ModalButton';
+import { v4 } from 'uuid';
 interface Props {
   choice: PrismaJson.AbilityScoreChoice;
   character: CharacterInfo;
@@ -17,6 +22,7 @@ interface Props {
 }
 
 const AbilityScoreHandler = ({ choice, character, callback }: Props) => {
+  const { id } = useModal();
   const handleSubmit = (selections: AbilityScoreValue[]) => {
     //make sure that all selections are made
     let allSelectionsMade = true;
@@ -40,14 +46,12 @@ const AbilityScoreHandler = ({ choice, character, callback }: Props) => {
     );
   };
 
-  const id = uuidv4();
   return (
     character &&
     character.state && (
       <>
-        <dialog id={id} className="modal ">
-          <div
-            className="modal-box  "
+        <Modal id={id}>
+          <ModalBox
             style={{
               height: '',
               maxHeight: 'calc(100vh - 5em)',
@@ -103,43 +107,33 @@ const AbilityScoreHandler = ({ choice, character, callback }: Props) => {
               })}
               <div className="flex justify-end gap-4 mt-4">
                 {!choice.choices && (
-                  <button
+                  <ModalButton
+                    modaltype="close"
+                    modalid={id}
                     className="btn btn-primary"
                     onClick={(e) => {
                       e.preventDefault();
                       handleSubmit([]);
-                      const modal = document.getElementById(
-                        id
-                      ) as HTMLDialogElement;
-                      modal.close();
                     }}
                   >
                     Confirm
-                  </button>
+                  </ModalButton>
                 )}
-                <button
+                <ModalButton
+                  modaltype="close"
                   className="btn btn-error"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const modal = document.getElementById(
-                      id
-                    ) as HTMLDialogElement;
-                    modal.close();
-                  }}
+                  modalid={id}
                 >
                   Cancel
-                </button>
+                </ModalButton>
               </div>
             </form>
-          </div>
-        </dialog>
-        <button
+          </ModalBox>
+        </Modal>
+        <OpenModalButton
           className="btn p-4 h-auto flex items-center justify-between flex-col btn-ghost border border-gray-500 join-item"
-          onClick={() => {
-            const modal = document.getElementById(id) as HTMLDialogElement;
-
-            modal.showModal();
-          }}
+          modalid={id}
+          modaltype="open"
         >
           <Image
             src={'/images/sparkles2.svg'}
@@ -149,7 +143,7 @@ const AbilityScoreHandler = ({ choice, character, callback }: Props) => {
             alt="Choose a subclass"
           />
           <p className="divider">Choose Ability Scores</p>
-        </button>
+        </OpenModalButton>
       </>
     )
   );

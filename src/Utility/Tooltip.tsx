@@ -16,7 +16,7 @@ const Tooltip = ({
   link,
   linkText,
   badges,
-  modalId,
+  modalid,
 }: {
   element: ReactNode;
   children?: string;
@@ -27,7 +27,7 @@ const Tooltip = ({
   link?: string;
   linkText?: string;
   badges?: Badge[];
-  modalId?: string;
+  modalid?: string;
 }) => {
   let style: { group: string; groupHover: string } = {
     group: '',
@@ -77,7 +77,7 @@ const Tooltip = ({
     switch (layer) {
       case 0:
         style = {
-          group: `text-primary font-bold cursor-pointer hover:text-primary/70 group/zero relative`,
+          group: `text-primary font-bold cursor-pointer hover:text-primary/70 group/zero relative `,
           groupHover: `transform translate-x-[-100%] bg-neutral group-hover/zero:inline text-sm text-neutral-content  rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-[100]  shadow-md h-auto group-focus/zero:inline`,
         };
         break;
@@ -100,7 +100,7 @@ const Tooltip = ({
     switch (layer) {
       case 0:
         style = {
-          group: `text-primary font-bold cursor-pointer hover:text-primary/70 group/zero relative`,
+          group: `text-primary font-bold cursor-pointer hover:text-primary/70 group/zero relative `,
           groupHover: `group-hover/zero:inline text-sm text-neutral-content bg-neutral rounded p-4 w-[200px] md:w-[400px] font-bold absolute z-[100] shadow-md transform h-auto group-focus/zero:inline
       `,
         };
@@ -154,7 +154,7 @@ const Tooltip = ({
             )}
 
             {format ? (
-              <P layer={layer + 1} modalID={modalId}>
+              <P layer={layer + 1} modalID={modalid}>
                 {children || ''}
               </P>
             ) : (
@@ -183,8 +183,8 @@ const Tooltip = ({
               </>
             )}
           </span>,
-          modalId
-            ? document.getElementById(modalId) || document.body
+          modalid
+            ? document.getElementById(modalid) || document.body
             : document.body
         )}
     </span>

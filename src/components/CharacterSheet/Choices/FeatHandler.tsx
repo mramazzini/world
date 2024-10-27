@@ -1,17 +1,15 @@
 'use client';
 
-import {
-  CallbackOptions,
-  CharacterInfo,
-  FeatID,
-  SubClassID,
-} from '@/lib/types/types';
-import { useEffect, useMemo, useState } from 'react';
+import { CallbackOptions, CharacterInfo } from '@/lib/types/types';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { v4 } from 'uuid';
 import { DBMetadata } from '@/lib/types/metadata';
 import SidebarMetaSelector from '@/components/Dashboard/SidebarMetaSelector';
 import { getFeatsMetadata } from '@/lib/actions/db/feat/read.actions';
+import Modal from '@/components/UI/Modal/Modal';
+import ModalBox from '@/components/UI/Modal/ModalBox';
+import useModal from '@/hooks/useModal';
+import ModalButton from '@/components/UI/Modal/ModalButton';
 
 interface Props {
   choice: PrismaJson.FeatChoice;
@@ -24,6 +22,7 @@ const FeatHandler = ({ callback }: Props) => {
   const [chosenFeat, setChosenFeat] = useState<DBMetadata | null>(null);
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
+  const { id } = useModal();
   useEffect(() => {
     setLoading(true);
     getFeatsMetadata()
@@ -49,16 +48,12 @@ const FeatHandler = ({ callback }: Props) => {
     callback([chosenFeat?.id] as CallbackOptions);
   };
 
-  const id = useMemo(() => v4(), []);
-
   return (
     <>
-      <button
+      <ModalButton
         className="btn p-4 h-auto m-4 flex items-center justify-between flex-col btn-ghost border border-gray-500"
-        onClick={() => {
-          const modal = document.getElementById(id) as HTMLDialogElement;
-          if (modal) modal.showModal();
-        }}
+        modalid={id}
+        modaltype="open"
       >
         <Image
           src={'/images/silhouette.svg'}
@@ -68,10 +63,9 @@ const FeatHandler = ({ callback }: Props) => {
           alt="Choose a subclass"
         />
         <p className="divider">Choose a feat</p>
-      </button>
-      <dialog className="modal" id={id}>
-        <div
-          className="modal-box"
+      </ModalButton>
+      <Modal id={id}>
+        <ModalBox
           style={{
             maxHeight: 'calc(100vh - 5em)',
             overflow: 'visible',
@@ -100,24 +94,19 @@ const FeatHandler = ({ callback }: Props) => {
             </div>
 
             <div className="flex justify-end gap-4">
-              <button
+              <ModalButton
+                modalid={id}
                 className="btn btn-error"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const modal = document.getElementById(
-                    id
-                  ) as HTMLDialogElement;
-                  if (modal) modal.close();
-                }}
+                modaltype="close"
               >
                 Cancel
-              </button>
+              </ModalButton>
               <button className="btn btn-primary" type="submit">
                 Submit
               </button>
             </div>
           </form>
-        </div>
+        </ModalBox>
         <SidebarMetaSelector
           model="feat"
           metadata={metadata}
@@ -125,7 +114,7 @@ const FeatHandler = ({ callback }: Props) => {
           loading={loading}
           show={show}
         />
-      </dialog>
+      </Modal>
     </>
   );
 };

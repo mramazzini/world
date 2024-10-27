@@ -4,14 +4,14 @@ import { CharacterInfo } from '@/lib/types/types';
 import { useCallback, useEffect, useState } from 'react';
 import { generateCharacter } from '../../Utility/characterStateFunctions/update/generateCharacter';
 import '@/lib/string.extensions';
-import MainSheet from './main/MainSheet';
-import InventoryTab from './Inventory/InventoryTab';
-import ChooseChoices from './Choices/Choices';
-import SpellSheet from './Spells/SpellSheet';
-import Notes from './Notes/Notes';
-import Traits from './Traits/Traits';
+import MainSheet from '@/components/CharacterSheet/main/MainSheet';
+import InventoryTab from '@/components/CharacterSheet/Inventory/InventoryTab';
+import ChooseChoices from '@/components/CharacterSheet/Choices/Choices';
+import SpellSheet from '@/components/CharacterSheet/Spells/SpellSheet';
+import Notes from '@/components/CharacterSheet/Notes/Notes';
+import Traits from '@/components/CharacterSheet/Traits/Traits';
 import { applyPendingModels } from '../../Utility/characterStateFunctions/update/applyPendingModels';
-import CharacterStatsTab from './Stats/CharacterStatsTab';
+import CharacterStatsTab from '@/components/CharacterSheet/Stats/CharacterStatsTab';
 
 type Tab =
   | 'sheet'

@@ -1,4 +1,7 @@
-import { v4 } from 'uuid';
+import Modal from '@/components/UI/Modal/Modal';
+import ModalBox from '@/components/UI/Modal/ModalBox';
+import ModalButton from '@/components/UI/Modal/ModalButton';
+import useModal from '@/hooks/useModal';
 
 interface Props {
   hasPendingChoices: boolean;
@@ -6,7 +9,7 @@ interface Props {
 }
 
 const LevelUp = ({ levelUpCharacter, hasPendingChoices }: Props) => {
-  const id = v4();
+  const { id } = useModal();
   return (
     <>
       <button
@@ -20,24 +23,24 @@ const LevelUp = ({ levelUpCharacter, hasPendingChoices }: Props) => {
       >
         {hasPendingChoices ? 'You have pending choices...' : 'Level Up'}
       </button>
-      <dialog id={id} className="modal">
-        <div className="modal-box">
+      <Modal id={id}>
+        <ModalBox>
           <h3 className="font-bold text-lg w-full text-center">
             Confirm level Up!
           </h3>
 
           <div className="flex flex-row gap-4 w-full items-center justify-center my-4">
-            <button
+            <ModalButton
+              modaltype="close"
+              modalid={id}
               className="btn btn-success"
               onClick={(e) => {
                 e.preventDefault();
                 levelUpCharacter();
-                const modal = document.getElementById(id) as HTMLDialogElement;
-                modal.close();
               }}
             >
               Confirm
-            </button>
+            </ModalButton>
             <button
               className="btn btn-error"
               onClick={(e) => {
@@ -49,8 +52,8 @@ const LevelUp = ({ levelUpCharacter, hasPendingChoices }: Props) => {
               Cancel
             </button>
           </div>
-        </div>
-      </dialog>
+        </ModalBox>
+      </Modal>
     </>
   );
 };

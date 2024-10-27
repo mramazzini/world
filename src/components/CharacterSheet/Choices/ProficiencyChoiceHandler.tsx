@@ -7,7 +7,7 @@ import {
   WeaponID,
 } from '@/lib/types/types';
 import P from '@/Utility/FormatAndSanitize';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Ability, ArmorType, Language, Skill } from '@prisma/client';
 import ArmorChoice from './ArmorChoice';
 import SkillChoice from './SkillChoice';
@@ -18,7 +18,10 @@ import WeaponChoice from './WeaponChoice';
 import LanguageChoice from './LanguageChoice';
 
 import Image from 'next/image';
-import { v4 as uuidv4 } from 'uuid';
+import useModal from '@/hooks/useModal';
+import Modal from '@/components/UI/Modal/Modal';
+import ModalBox from '@/components/UI/Modal/ModalBox';
+import ModalButton from '@/components/UI/Modal/ModalButton';
 type ProficiencyType =
   | ArmorID
   | WeaponID
@@ -48,6 +51,7 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
   proficiency,
 }: Props) => {
   const [selections, setSelections] = useState<T[]>([]);
+  const { id } = useModal();
   const handleSubmit = (e: React.FormEvent) => {
     console.log('Submit');
     e.preventDefault();
@@ -73,7 +77,6 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
     );
   };
 
-  const id = useMemo(() => uuidv4(), []);
   const parseChoiceItem = useCallback(
     (item: T) => {
       switch (proficiency) {
@@ -104,9 +107,8 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
 
   return (
     <>
-      <dialog id={id} className="modal ">
-        <div
-          className="modal-box "
+      <Modal id={id}>
+        <ModalBox
           style={{
             height: '',
             maxHeight: 'calc(100vh - 5em)',
@@ -244,31 +246,24 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
                 })}
             </div>
             <div className="flex justify-end gap-4">
-              <button
+              <ModalButton
                 className="btn btn-error"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const modal = document.getElementById(
-                    id
-                  ) as HTMLDialogElement;
-                  modal.close();
-                }}
+                modalid={id}
+                modaltype="close"
               >
                 Cancel
-              </button>
+              </ModalButton>
               <button className="btn btn-primary" type="submit">
                 Submit
               </button>
             </div>
           </form>
-        </div>
-      </dialog>
-      <button
+        </ModalBox>
+      </Modal>
+      <ModalButton
         className="btn p-4 h-auto flex items-center justify-between flex-col btn-ghost border border-gray-500 join-item"
-        onClick={() => {
-          const modal = document.getElementById(id) as HTMLDialogElement;
-          modal.showModal();
-        }}
+        modalid={id}
+        modaltype="open"
       >
         <Image
           src={
@@ -331,7 +326,7 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
                           ? 'ability scores'
                           : 'proficiencies'}
         </p>
-      </button>
+      </ModalButton>
     </>
   );
 };

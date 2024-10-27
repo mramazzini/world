@@ -11,6 +11,10 @@ import { getBackgroundsMetadata } from '@/lib/actions/db/background/read.actions
 import { createCharacter } from '@/lib/actions/db/character/create.actions';
 import { useRouter } from 'next/navigation';
 import { getUserId } from '@/lib/utils/auth';
+import useModal from '@/hooks/useModal';
+import Modal from '../UI/Modal/Modal';
+import ModalBox from '../UI/Modal/ModalBox';
+import ModalButton from '../UI/Modal/ModalButton';
 
 const CreateCharacterModal = () => {
   const router = useRouter();
@@ -19,7 +23,7 @@ const CreateCharacterModal = () => {
     'class' | 'species' | 'variant' | 'background' | null
   >(null);
   const [variantsAvailable, setVariantsAvailable] = useState(false);
-
+  const { id } = useModal();
   const [newChar, setNewChar] = useState<{
     name: string;
     alignment: Alignment;
@@ -31,8 +35,6 @@ const CreateCharacterModal = () => {
     name: '',
     alignment: Alignment.TRUE_NEUTRAL,
   });
-
-  const id = 'createCharacterModal';
 
   useEffect(() => {
     const fetchMetadata = async () => {
@@ -85,17 +87,15 @@ const CreateCharacterModal = () => {
 
   return (
     <>
-      <button
-        onClick={() => {
-          const el = document.getElementById(id) as HTMLDialogElement;
-          el.showModal();
-        }}
+      <ModalButton
+        modaltype="open"
+        modalid={id}
         className="btn btn-ghost border-gray-500"
       >
         Create a Character -&gt;
-      </button>
-      <dialog id={id} className="modal">
-        <div className="modal-box flex flex-col items-center ">
+      </ModalButton>
+      <Modal id={id}>
+        <ModalBox className="flex flex-col items-center ">
           <h3 className="font-bold text-lg">Character Creator</h3>
 
           <form className="flex flex-col gap-4 w-full" onSubmit={handleSubmit}>
@@ -188,26 +188,24 @@ const CreateCharacterModal = () => {
 
             <div className="mt-2 w-full">
               <div className="flex justify-end gap-4">
-                <button
+                <ModalButton
+                  modaltype="close"
+                  modalid={id}
                   className="btn btn-error"
                   onClick={(e) => {
                     e.preventDefault();
-                    const modal = document.getElementById(
-                      id
-                    ) as HTMLDialogElement;
                     setSideBarModel(null);
-                    modal.close();
                   }}
                 >
                   Cancel
-                </button>
+                </ModalButton>
                 <button className="btn btn-primary" type="submit">
                   Submit
                 </button>
               </div>
             </div>
           </form>
-        </div>
+        </ModalBox>
 
         <SidebarMetaSelector
           metadata={sideBarMetadata}
@@ -240,7 +238,7 @@ const CreateCharacterModal = () => {
             setSideBarModel(null);
           }}
         />
-      </dialog>
+      </Modal>
     </>
   );
 };

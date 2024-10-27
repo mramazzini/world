@@ -1,4 +1,8 @@
 'use client';
+import Modal from '@/components/UI/Modal/Modal';
+import ModalBox from '@/components/UI/Modal/ModalBox';
+import ModalButton from '@/components/UI/Modal/ModalButton';
+import useModal from '@/hooks/useModal';
 import { CharacterInfo, Time } from '@/lib/types/types';
 import Image from 'next/image';
 
@@ -8,6 +12,7 @@ interface Props {
 }
 
 const Resources = ({ character, setCharacter }: Props) => {
+  const { id } = useModal();
   const createResource = () => {
     if (!character.state || !character.state.customResources) return;
     const newResources = [...character.state.customResources];
@@ -103,18 +108,15 @@ const Resources = ({ character, setCharacter }: Props) => {
       </div>
       <div className="divider m-0"></div>
       {/* create or edit resources */}
-      <button
+      <ModalButton
         className="btn btn-ghost border-gray-500 btn-sm w-full"
-        onClick={() =>
-          (
-            document.getElementById('resource_modal') as HTMLDialogElement
-          ).showModal()
-        }
+        modalid={id}
+        modaltype="open"
       >
         Edit Resources
-      </button>
-      <dialog id="resource_modal" className="modal">
-        <div className="modal-box p-4 w-auto max-w-full">
+      </ModalButton>
+      <Modal id={id}>
+        <ModalBox className=" p-4 w-auto max-w-full">
           <h3 className="font-bold text-lg">
             Adjust your Custom Resources Here.
           </h3>
@@ -239,8 +241,8 @@ const Resources = ({ character, setCharacter }: Props) => {
               <button className="btn">Close</button>
             </form>
           </div>
-        </div>
-      </dialog>
+        </ModalBox>
+      </Modal>
     </>
   ) : (
     ''

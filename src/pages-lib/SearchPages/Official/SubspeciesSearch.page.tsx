@@ -2,7 +2,7 @@ import SearchPageComponent from '../SearchPage';
 
 import { SubSpeciesInfo } from '@/lib/types/types';
 
-import { officialSources, species } from '@/lib/globalVars';
+import { officialSources } from '@/lib/globalVars';
 import { getSubSpeciesChunk } from '@/lib/actions/db/subSpecies/read.actions';
 
 interface Props {
@@ -42,7 +42,7 @@ const SubSpeciesSearchPage = ({ subSpecies }: Props) => {
           header: 'Source',
           searchFields: officialSources,
           modifiers: [],
-          index: 3,
+          index: 2,
           priority: 'md',
         },
         {
@@ -50,20 +50,8 @@ const SubSpeciesSearchPage = ({ subSpecies }: Props) => {
           header: 'Last Updated',
           dbHeader: 'updatedAt',
           modifiers: ['Date'],
-          index: 4,
+          index: 3,
           priority: 'md',
-        },
-      ]}
-      relationalFields={[
-        {
-          index: 2,
-          model: 'subSpecies',
-          alias: 'Species',
-          key: 'name',
-          modifiers: ['Button-Accent', 'CapitalCase'],
-          headerWidth: 5,
-          priority: 'all',
-          options: species,
         },
       ]}
       homebrew={false}

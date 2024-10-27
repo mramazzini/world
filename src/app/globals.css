@@ -8,6 +8,8 @@
   }
 }
 
+
+
 /* custom scrollbar */
 
 h1 {
@@ -84,11 +86,6 @@ input[type='number'] {
 
 .collapse {
   overflow: visible;
-}
-
-.modal[open] {
-  position: relative;
-  z-index: 1;
 }
 
 .owl {

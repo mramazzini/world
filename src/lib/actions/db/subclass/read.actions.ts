@@ -51,6 +51,11 @@ export async function getSubclasses({
     return res;
   }
   const res = await db.subClass.findMany({
+    where: {
+      userId: {
+        equals: null,
+      },
+    },
     include: {
       Class: {
         select: {
@@ -85,6 +90,9 @@ export async function getSubclassChunkByClass(
           Class: {
             name: className,
           },
+          userId: {
+            equals: null,
+          },
         },
       }),
       include: {
@@ -110,6 +118,9 @@ export async function getSubclassChunkByClass(
       additionalWhere: {
         Class: {
           name: className,
+        },
+        userId: {
+          equals: null,
         },
       },
     }),

@@ -302,7 +302,7 @@ const P = ({
 
         const newElement = (
           <Tooltip
-            modalId={modalID}
+            modalid={modalID}
             key={`${term.term}-${termIndex}-${index}`}
             element={str.slice(termIndex, termIndex + term.term.length)}
             layer={layer}

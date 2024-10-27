@@ -51,7 +51,11 @@ export interface ClassInfo extends Class {
     username: string | null;
   } | null;
 }
-export interface FeatInfo extends Feat {}
+export interface FeatInfo extends Feat {
+  User: {
+    username: string | null;
+  } | null;
+}
 interface ClassWithSpellList extends Class {
   SpellList: SpellListInfo | null;
 }
@@ -1007,7 +1011,6 @@ export enum src {
   ravnica = "Guildmaster's Guide to Ravnica",
   wildemount = "Explorer's Guide to Wildemount",
   phb = "Player's Handbook",
-  vanRichten = "Van Richten's Guide to Ravenloft",
   dmg = "Dungeon Master's Guide",
   fizban = "Fizban's Treasury of Dragons",
   dragonQueen = 'Dragonlance: Shadow of the Dragon Queen',

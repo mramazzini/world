@@ -6,6 +6,7 @@ import { Analytics } from '@vercel/analytics/react';
 import Footer from '@/components/Footer/Footer';
 import { NAVBAR_HEIGHT_REM } from '@/lib/globalVars';
 import { Suspense } from 'react';
+import NavbarSmall from '@/components/Navbar/NavbarSmall';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
       >
         <Suspense>
           <Navbar />
+          <NavbarSmall />
         </Suspense>
 
         <div

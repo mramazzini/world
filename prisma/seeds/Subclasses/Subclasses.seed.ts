@@ -347,7 +347,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     description:
       "Bards of the College of Spirits seek tales with inherent power-be they legends, histories, or fictions-and bring their subjects to life. Using occult trappings, these bards conjure spiritual embodiments of powerful forces to change the world once more. Such spirits are capricious, though, and what a bard summons isn't always entirely under their control.",
     classId: ids.bard,
-    source: src.vanRichten,
+    source: src.ravenloft,
     flavorText:
       'Bards of the College of Spirits seek tales with inherent power and bring their subjects to life using occult trappings.',
   },
@@ -927,6 +927,7 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     flavorText:
       'An Oathbreaker is a paladin who breaks their sacred oaths to pursue some dark ambition or serve an evil power.',
   },
+
   // ranger
   {
     name: 'Beast Master Conclave',

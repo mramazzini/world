@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import SubClasses from '../Subclasses/Subclasses.seed';
 import verifyTableIntegrity from '@/lib/utils/verifyTableIntegrity';
 import SubclassFeatures from '../SubclassFeatures';
+import HomebrewSubclassesSeed from '../Subclasses/HomebrewSubclasses.seed';
 
 export const createSubclass = async (db: PrismaClient) => {
   cinfo('Creating Subclass features');
@@ -72,4 +73,36 @@ export const createSubclass = async (db: PrismaClient) => {
     }
   }
   cinfo('Sub classes created');
+
+  //creatt homebrew subclasses
+  cinfo('Creating homebrew subclasses');
+  for (const HomebrewSubclass of HomebrewSubclassesSeed) {
+    try {
+      //make sure subclass has a class
+      if (!HomebrewSubclass.classId) {
+        console.error(
+          'Homebrew subclass missing classId field:',
+          HomebrewSubclass.name
+        );
+        return;
+      }
+      cinfo('Creating homebrew subclass:', HomebrewSubclass.name);
+      await db.subClass.upsert({
+        where: {
+          id: HomebrewSubclass.id,
+        },
+        update: HomebrewSubclass,
+        create: HomebrewSubclass,
+      });
+      cinfo('Homebrew subclass created');
+    } catch (error) {
+      console.error(
+        'Error creating homebrew subclass:',
+        HomebrewSubclass.name,
+        error
+      );
+      return;
+    }
+  }
+  cinfo('Homebrew subclasses created');
 };

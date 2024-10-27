@@ -1,12 +1,15 @@
 'use client';
 import Loading from '@/components/UI/Loading';
+import Modal from '@/components/UI/Modal/Modal';
+import ModalBox from '@/components/UI/Modal/ModalBox';
+import ModalButton from '@/components/UI/Modal/ModalButton';
 import Image from 'next/image';
 import { Suspense, useState } from 'react';
 interface Props {
-  modalId: string;
+  modalid: string;
   setImage: (image: string) => void;
 }
-const ImageUploadModal = ({ modalId, setImage }: Props) => {
+const ImageUploadModal = ({ modalid, setImage }: Props) => {
   const [image, setImageUrl] = useState('');
   const [valid, setValid] = useState(false);
   const [message, setMessage] = useState('');
@@ -17,8 +20,8 @@ const ImageUploadModal = ({ modalId, setImage }: Props) => {
   };
   return (
     <>
-      <dialog id={modalId} className="modal">
-        <div className="modal-box">
+      <Modal id={modalid}>
+        <ModalBox>
           <h3 className="font-bold text-lg">
             Only Static image links are supported
           </h3>
@@ -74,7 +77,7 @@ const ImageUploadModal = ({ modalId, setImage }: Props) => {
                     e.preventDefault();
                     setImage(image);
                     const modal = document.getElementById(
-                      modalId
+                      modalid
                     ) as HTMLDialogElement;
                     if (modal) modal.close();
                   }}
@@ -82,22 +85,13 @@ const ImageUploadModal = ({ modalId, setImage }: Props) => {
                   Set Image
                 </button>
               )}
-              <button
-                className="btn"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const modal = document.getElementById(
-                    modalId
-                  ) as HTMLDialogElement;
-                  if (modal) modal.close();
-                }}
-              >
+              <ModalButton modaltype="close" className="btn" modalid={modalid}>
                 Close
-              </button>
+              </ModalButton>
             </form>
           </div>
-        </div>
-      </dialog>
+        </ModalBox>
+      </Modal>
     </>
   );
 };

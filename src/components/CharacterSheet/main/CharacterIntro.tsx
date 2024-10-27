@@ -3,6 +3,7 @@ import { CharacterInfo } from '@/lib/types/types';
 import Image from 'next/image';
 import { Fragment } from 'react';
 import ImageUploadModal from './ImageUploadModal';
+import useModal from '@/hooks/useModal';
 
 interface Props {
   character: CharacterInfo;
@@ -11,10 +12,10 @@ interface Props {
 }
 
 const CharacterIntro = ({ character, calcLevel, setImage }: Props) => {
-  const id = 'image-upload-modal';
+  const { id, openModal, closeModal } = useModal();
   return (
     <>
-      <ImageUploadModal modalId={id} setImage={setImage} />
+      <ImageUploadModal modalid={id} setImage={setImage} />
       {character.imageURL ? (
         <Image
           src={character.imageURL}
@@ -23,8 +24,7 @@ const CharacterIntro = ({ character, calcLevel, setImage }: Props) => {
           className="rounded-lg w-[100px] h-[100px] object-cover object-center mr-4 btn btn-ghost p-0"
           alt="Character Image Not Found"
           onClick={() => {
-            const modal = document.getElementById(id) as HTMLDialogElement;
-            if (modal) modal.showModal();
+            closeModal();
           }}
         />
       ) : (
@@ -34,8 +34,7 @@ const CharacterIntro = ({ character, calcLevel, setImage }: Props) => {
           height={200}
           className="w-[100px] h-[100px] btn-ghost object-cover object-center mr-4  btn p-0 opacity-70 border-gray-500"
           onClick={() => {
-            const modal = document.getElementById(id) as HTMLDialogElement;
-            if (modal) modal.showModal();
+            openModal();
           }}
           alt="Fighter"
         />

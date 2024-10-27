@@ -1,7 +1,10 @@
 'use client';
+import Modal from '@/components/UI/Modal/Modal';
+import ModalBox from '@/components/UI/Modal/ModalBox';
+import ModalButton from '@/components/UI/Modal/ModalButton';
+import useModal from '@/hooks/useModal';
 import { DamageTypes } from '@prisma/client';
 import { useState } from 'react';
-import { v4 } from 'uuid';
 
 const WeaponDisplay = ({
   name,
@@ -145,23 +148,21 @@ interface Props {
 }
 
 const CustomWeaponsModal = ({ initialWeapons, setWeaponState }: Props) => {
-  const id = v4();
+  const { id, closeModal } = useModal();
   const [weapons, setWeapons] =
     useState<PrismaJson.CustomWeapon[]>(initialWeapons);
   return (
     <>
-      <button
+      <ModalButton
+        modaltype="open"
+        modalid={id}
         className="btn btn-sm rounded-t-none btn-primary w-full"
-        onClick={() => {
-          const modal = document.getElementById(id) as HTMLDialogElement;
-          modal.showModal();
-        }}
       >
         Edit Custom Attacks
-      </button>
+      </ModalButton>
 
-      <dialog className="modal" id={id}>
-        <div className="modal-box max-w-full">
+      <Modal id={id}>
+        <ModalBox className="max-w-full">
           <h3 className="font-bold text-lg">Custom Weapon Attacks</h3>
           <p className="text-sm text-neutral-content">
             Use this form to add custom attacks to your character that
@@ -230,30 +231,24 @@ const CustomWeaponsModal = ({ initialWeapons, setWeaponState }: Props) => {
             onSubmit={(e) => {
               e.preventDefault();
               setWeaponState(weapons);
-              const modal = document.getElementById(id) as HTMLDialogElement;
-              modal.close();
+              closeModal();
             }}
           >
             <div className="flex justify-end gap-4">
-              <button
+              <ModalButton
+                modalid={id}
                 className="btn btn-error"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const modal = document.getElementById(
-                    id
-                  ) as HTMLDialogElement;
-                  modal.close();
-                }}
+                modaltype="close"
               >
                 Cancel
-              </button>
+              </ModalButton>
               <button className="btn btn-primary" type="submit">
                 Submit
               </button>
             </div>
           </form>
-        </div>
-      </dialog>
+        </ModalBox>
+      </Modal>
     </>
   );
 };

@@ -39,7 +39,7 @@ const SubSpeciesPage = ({ subSpecies }: Props) => {
     const sub = subSpecies;
 
     // returns an object indicating the status of each trait
-    let diff: Difference = {
+    const diff: Difference = {
       age:
         base.age === null && sub.age !== null
           ? TraitStatus.NEW

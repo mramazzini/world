@@ -1,10 +1,13 @@
 'use client';
 
 import { CallbackOptions, SubClassID } from '@/lib/types/types';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import SubclassChoice from './SubclassChoice';
 import Image from 'next/image';
-import { v4 } from 'uuid';
+import useModal from '@/hooks/useModal';
+import Modal from '@/components/UI/Modal/Modal';
+import ModalBox from '@/components/UI/Modal/ModalBox';
+import ModalButton from '@/components/UI/Modal/ModalButton';
 
 interface Props {
   choice: PrismaJson.SubclassChoice;
@@ -13,6 +16,7 @@ interface Props {
 
 const SubclassChoiceHandler = ({ callback, choice }: Props) => {
   const [selections, setSelections] = useState<SubClassID[]>([]);
+  const { id } = useModal();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,16 +46,12 @@ const SubclassChoiceHandler = ({ callback, choice }: Props) => {
     });
   }, []);
 
-  const id = useMemo(() => v4(), []);
-
   return (
     <>
-      <button
+      <ModalButton
+        modaltype="open"
         className="btn p-4 h-auto m-4 flex items-center justify-between flex-col btn-ghost border border-gray-500"
-        onClick={() => {
-          const modal = document.getElementById(id) as HTMLDialogElement;
-          if (modal) modal.showModal();
-        }}
+        modalid={id}
       >
         <Image
           src={'/images/silhouette.svg'}
@@ -61,10 +61,9 @@ const SubclassChoiceHandler = ({ callback, choice }: Props) => {
           alt="Choose a subclass"
         />
         <p className="divider">Choose a subclass</p>
-      </button>
-      <dialog className="modal" id={id}>
-        <div
-          className="modal-box"
+      </ModalButton>
+      <Modal id={id}>
+        <ModalBox
           style={{
             maxHeight: 'calc(100vh - 5em)',
             overflow: 'visible',
@@ -88,25 +87,20 @@ const SubclassChoiceHandler = ({ callback, choice }: Props) => {
               ))}
             </div>
             <div className="flex justify-end gap-4">
-              <button
+              <ModalButton
                 className="btn btn-error"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const modal = document.getElementById(
-                    id
-                  ) as HTMLDialogElement;
-                  if (modal) modal.close();
-                }}
+                modalid={id}
+                modaltype="close"
               >
                 Cancel
-              </button>
+              </ModalButton>
               <button className="btn btn-primary" type="submit">
                 Submit
               </button>
             </div>
           </form>
-        </div>
-      </dialog>
+        </ModalBox>
+      </Modal>
     </>
   );
 };

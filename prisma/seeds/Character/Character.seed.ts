@@ -153,37 +153,37 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
   //     },
   //   },
   // },
-  {
-    name: 'Littlefoot',
-    alignment: Alignment.CHAOTIC_GOOD,
-    User: {
-      connect: {
-        id: 1,
-      },
-    },
-    Background: {
-      connect: {
-        id: 33, //outlander
-      },
-    },
-    Classes: {
-      connect: {
-        id: 7, //druid
-      },
-    },
+  // {
+  //   name: 'Littlefoot',
+  //   alignment: Alignment.CHAOTIC_GOOD,
+  //   User: {
+  //     connect: {
+  //       id: 1,
+  //     },
+  //   },
+  //   Background: {
+  //     connect: {
+  //       id: 33, //outlander
+  //     },
+  //   },
+  //   Classes: {
+  //     connect: {
+  //       id: 7, //druid
+  //     },
+  //   },
 
-    Species: {
-      connect: {
-        id: 4, //gnome
-      },
-    },
+  //   Species: {
+  //     connect: {
+  //       id: 4, //gnome
+  //     },
+  //   },
 
-    SubSpecies: {
-      connect: {
-        id: 24, //forest
-      },
-    },
-  },
+  //   SubSpecies: {
+  //     connect: {
+  //       id: 24, //forest
+  //     },
+  //   },
+  // },
 ];
 
 export default CharacterSeed;

@@ -50,7 +50,7 @@ const ModelLink = ({
               ready ? (
                 modelObj ? (
                   <Tooltip
-                    modalId={modalID}
+                    modalid={modalID}
                     element={res && res[1] ? res[1] : modelObj.name}
                     title={modelObj.name}
                     link={`/${linkBase}/${modelObj.name.replaceAll(' ', '-')}`}

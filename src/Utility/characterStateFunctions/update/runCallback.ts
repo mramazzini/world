@@ -50,7 +50,12 @@ export const runCallback = async (
                             : protocol == 'FeatSelection'
                               ? addFeats
                               : (character, data, from) => {
-                                  console.log('Unknown protocol', protocol);
+                                  console.log(
+                                    'Unknown protocol',
+                                    protocol,
+                                    data,
+                                    from
+                                  );
                                   return character.state as PrismaJson.CharacterState;
                                 };
   const callbackRes = await callback(character, data, from);

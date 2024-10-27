@@ -386,14 +386,13 @@ const SearchPageComponent = <T extends DataType>({
                               }
                             } else if (relCol) {
                               const hasHeader = Object.hasOwnProperty.call(
-                                // @ts-expect-error - model is a string
-                                item[relCol.model],
+                                item,
                                 relCol.key
                               );
                               if (hasHeader) {
                                 const data = applyModifiers(
-                                  // @ts-expect-error - model is a string
-                                  item[relCol.model][relCol.key],
+                                  // @ts-expect-error - key is a string
+                                  item[relCol.key],
                                   relCol.modifiers || []
                                 );
                                 return (

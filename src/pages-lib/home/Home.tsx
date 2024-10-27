@@ -1,6 +1,6 @@
 'use client';
 
-import { DISCORD_INVITE } from '@/lib/globalVars';
+import { DISCORD_INVITE, wikiLinks } from '@/lib/globalVars';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,48 +11,6 @@ import HomeSearchBar from '@/components/UI/HomeSearchBar';
 import BlogPostPreview from '@/components/HomePage/BlogPostPreview';
 import Stats from '@/components/HomePage/Stats';
 import Trivia from '@/components/HomePage/Trivia';
-const links = [
-  {
-    name: 'Classes',
-    href: '/class',
-  },
-  {
-    name: 'Subclasses',
-    href: '/subclass',
-  },
-  {
-    name: 'Spells',
-    href: '/spells',
-  },
-  {
-    name: 'Spell Lists',
-    href: '/spell-list',
-  },
-  {
-    name: 'Feats',
-    href: '/feats',
-  },
-  {
-    name: 'Backgrounds',
-    href: '/background',
-  },
-  {
-    name: 'Species',
-    href: '/species',
-  },
-  {
-    name: 'Subspecies',
-    href: '/subspecies',
-  },
-  {
-    name: 'Creatures',
-    href: '/creature',
-  },
-  {
-    name: 'Items',
-    href: '/item',
-  },
-];
 
 const HomePage = () => {
   const [hideChat, setHideChat] = useState(false);
@@ -69,7 +27,6 @@ const HomePage = () => {
   }, []);
   return (
     <>
-      {' '}
       <main className="p-4 md:p-8 flex flex-col bg-base-100 items-center relative min-h-screen">
         <div className="bg-base-300 p-4 w-full rounded-xl h-full flex flex-col items-center justify-center gap-4 relative">
           <Image
@@ -77,16 +34,16 @@ const HomePage = () => {
             alt={'Dungeons and Dragons Logo'}
             width={128}
             height={128}
-            className=" md:w-16 md:h-16 h-12 w-12 lg:w-24 lg:h-24 xl:w-32 xl:h-32 owl absolute left-[20px] top-[20px]"
+            className="hidden md:block md:w-16 md:h-16 h-12 w-12 lg:w-24 lg:h-24 xl:w-32 xl:h-32 owl absolute left-[20px] top-[20px]"
           />
           <Image
             src={'/home/pumpkin.svg'}
             alt={'Dungeons and Dragons Logo'}
             width={128}
             height={128}
-            className=" md:w-16 md:h-16 h-12 w-12 lg:w-24 lg:h-24 xl:w-32 xl:h-32 owl absolute right-[20px] top-[20px]"
+            className="hidden md:block md:w-16 md:h-16 h-12 w-12 lg:w-24 lg:h-24 xl:w-32 xl:h-32 owl absolute right-[20px] top-[20px]"
           />
-          <div className="absolute left-[12%] bottom-[100px] flex flex-col items-center justify-start">
+          <div className="hidden absolute left-[12%] bottom-[100px] md:flex flex-col items-center justify-start">
             <div className="h-screen w-[2px] bg-gray-700 relative top-2"></div>
             <Image
               src={'/home/spider.svg'}
@@ -96,7 +53,7 @@ const HomePage = () => {
               className=" md:w-12 md:h-12 h-6 w-6 lg:w-18 lg:h-18 xl:w-24 xl:h-24"
             />
           </div>
-          <div className="fixed top-50 right-[-10px] flex flex-row items-center">
+          <div className="hidden  fixed top-50 right-[-10px] md:flex flex-row items-center">
             <div className="chat chat-end top-[-32px] relative chat-sm">
               <div
                 className={`chat-bubble opacity-0 w-64 ${hideChat && 'opacity-100'}`}
@@ -122,7 +79,7 @@ const HomePage = () => {
 
           <div className="divider m-0"></div>
           <div className="flex flex-wrap justify-center">
-            {links.map((link, index) => (
+            {wikiLinks.map((link, index) => (
               <Link key={index} href={link.href}>
                 <div className="btn m-2">{link.name}</div>
               </Link>

@@ -8,8 +8,8 @@ import { getUserId } from '@/lib/utils/auth';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useEffect, useState } from 'react';
-import DashboardSkeleton from '../components/Dashboard/DashboardSkeleton';
-import CreateCharacterModal from '../components/Dashboard/CreateCharacterModal';
+import DashboardSkeleton from '@/components/Dashboard/DashboardSkeleton';
+import CreateCharacterModal from '@/components/Dashboard/CreateCharacterModal';
 
 const Dashboard = () => {
   const [characters, setCharacters] = useState<CharacterInfo[]>([]);
@@ -28,8 +28,8 @@ const Dashboard = () => {
   return (
     <>
       <div className="flex flex-col p-4 md:p-8">
-        <div className="flex flex-row items-center justify-center w-full gap-4">
-          <section className="flex flex-col items-center justify-start bg-base-300 rounded-xl p-4 w-1/2 gap-4 h-[80vh]  ">
+        <div className="flex flex-col lg:flex-row items-center justify-center w-full gap-4">
+          <section className="flex flex-col items-center justify-start bg-base-300 rounded-xl p-4 lg:w-1/2 gap-4 h-[80vh] w-full  ">
             <div className="flex grow bg-base-200 w-full p-4 flex flex-col xl:flex-row items-center h-auto justify-between">
               <h2 className="text-2xl">
                 Your Characters
@@ -121,26 +121,18 @@ const Dashboard = () => {
             </div>
           </section>
 
-          <section className="flex flex-col items-center justify-start bg-base-300 rounded-xl p-4 w-1/2 gap-4 h-[80vh]  ">
+          <section className="flex flex-col items-center justify-start bg-base-300 rounded-xl p-4 lg:w-1/2 gap-4 h-[80vh]  w-full">
             <div className="flex grow bg-base-200 w-full p-4 flex flex-col xl:flex-row items-center h-auto justify-between">
               <h2 className="text-2xl">
-                Your Campaigns
+                Your Homebrew
                 <div className="divider m-0 divider-secondary" />
               </h2>
-              <div className="indicator">
-                <div className="indicator-item badge badge-error indicator-center">
-                  Coming Soon
-                </div>
-                <button disabled className="btn btn-accent">
-                  Create a Campaign -&gt;
-                </button>
-              </div>
+              <Link href="/workshop" className="btn btn-ghost border-gray-500">
+                Create Homebrew -&gt;
+              </Link>
             </div>
             <div className="divider m-0 divider-primary"></div>
-            <div className="flex flex-col items-center justify-start h-[80%] overflow-auto w-full gap-4">
-              {<DashboardSkeleton />}
-              {/* campaign info here */}
-            </div>
+            <div className="flex flex-col items-center justify-start h-[80%] overflow-auto w-full gap-4"></div>
           </section>
         </div>
       </div>
