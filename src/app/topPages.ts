@@ -684,12 +684,12 @@ export const topPages = {
   ],
   subspecies: [
     {
-      page: '/subspecies/Stout-Halfling',
-      visits: 5,
+      page: '/subspecies/Protector-Aasimar',
+      visits: 6,
     },
     {
-      page: '/subspecies/Protector-Aasimar',
-      visits: 4,
+      page: '/subspecies/Stout-Halfling',
+      visits: 5,
     },
     {
       page: '/subspecies/Ghostwise-Halfling',
@@ -712,4 +712,5 @@ export const topPages = {
       visits: 2,
     },
   ],
+  creature: [],
 };

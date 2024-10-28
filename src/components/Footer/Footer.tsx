@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import ContactModal from '../../hooks/ContactModal';
+import ContactModal from '../Modals/ContactModal';
 import { wikiLinks } from '@/lib/globalVars';
 
 const pageLinks = [

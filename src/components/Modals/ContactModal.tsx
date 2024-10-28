@@ -6,10 +6,10 @@ import { useState, useEffect } from 'react';
 import { getUser } from '@/lib/actions/db/user/read.actions';
 import { User } from '@prisma/client';
 import { createMessage } from '@/lib/actions/db/message/create.actions';
-import Loading from '../components/UI/Loading';
+import Loading from '../UI/Loading';
 import Modal from '@/components/UI/Modal/Modal';
 import ModalBox from '@/components/UI/Modal/ModalBox';
-import useModal from './useModal';
+import useModal from '../../hooks/useModal';
 import ModalButton from '@/components/UI/Modal/ModalButton';
 
 const ContactModal = () => {

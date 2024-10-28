@@ -73,8 +73,8 @@ const HomePage = () => {
           </div>
           <h1 className="text-center">Max&apos;s DnD</h1>
           <p className="text-center w-[75%]">
-            Welcome to the Max&apos;s DnD! Here you can find information on any
-            and all things Dungeons and Dragons 5th Edition.
+            Welcome to Max&apos;s DnD! Here you can find information on any and
+            all things Dungeons and Dragons 5th Edition.
           </p>
 
           <div className="divider m-0"></div>

@@ -1,15 +1,16 @@
 'use client';
 import { Suspense } from 'react';
 import Link from 'next/link';
-import { AuthResult } from '@/lib/types/types';
-import { login } from '@/lib/actions/auth/auth.actions';
 import { useRouter, useSearchParams } from 'next/navigation';
-import useErrorModal from '../../hooks/ErrorModal';
+
 import Loading from '../UI/Loading';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import FormField from '../UI/Formik/FormField';
 import LoadingButton from '../UI/Formik/LoadingButton';
+import useMessageModal from '@/hooks/useMessageModal';
+import ErrorModal from '../Modals/ErrorModal';
+import { useAuth } from '@/hooks/useAuth';
 
 interface UserInput {
   emailOrUsername: string;
@@ -17,48 +18,30 @@ interface UserInput {
 }
 
 const Login = () => {
-  const { ErrorModal, openModal } = useErrorModal();
+  const { openModal, id, message } = useMessageModal();
+  const { isLoading, login } = useAuth();
   const router = useRouter();
   const params = useSearchParams();
 
-  const handleSubmit = async (
-    values: UserInput,
-    setSubmitting: (isSubmitting: boolean) => void
-  ) => {
-    try {
-      // Race between the login function and the timeout
-      const err = await login({
-        emailOrUsername: values.emailOrUsername,
-        password: values.password,
-      });
+  const handleSubmit = async (values: UserInput) => {
+    const errorMessage = await login(values);
 
-      if (err != AuthResult.Success) {
-        setSubmitting(false);
-        openModal(err);
-        return;
-      }
+    if (errorMessage) {
+      return openModal(
+        errorMessage || 'Something went wrong. Please try again later.'
+      );
+    }
 
-      // Redirect to last page
-      if (params?.get('redirect')) {
-        const redirect = params.get('redirect') as string;
-        if (redirect) {
-          router.push(redirect);
-        } else {
-          router.push('/dashboard');
-        }
+    // Redirect to last page
+    if (params?.get('redirect')) {
+      const redirect = params.get('redirect') as string;
+      if (redirect) {
+        router.push(redirect);
       } else {
         router.push('/dashboard');
       }
-    } catch (error) {
-      console.error(error);
-      openModal(
-        error instanceof Error
-          ? error.message
-          : 'Something went wrong. Please try again later.'
-      );
-      setSubmitting(false);
-    } finally {
-      setSubmitting(false);
+    } else {
+      router.push('/dashboard');
     }
   };
 
@@ -66,23 +49,24 @@ const Login = () => {
     emailOrUsername: Yup.string().required('Required'),
     password: Yup.string().required('Required'),
   });
+
   return (
-    <div className="bg-base-300 p-4 rounded-xl">
-      <h1 className="text-3xl font-bold mb-4 divider">Login</h1>
-      {ErrorModal}
-      <Formik
-        initialValues={
-          {
-            emailOrUsername: '',
-            password: '',
-          } as UserInput
-        }
-        validationSchema={loginSchema}
-        onSubmit={(values, actions) => {
-          handleSubmit(values, actions.setSubmitting);
-        }}
-      >
-        {({ isSubmitting }) => (
+    <>
+      <ErrorModal id={id} message={message} />
+      <div className="bg-base-300 p-4 rounded-xl">
+        <h1 className="text-3xl font-bold mb-4 divider">Login</h1>
+        <Formik
+          initialValues={
+            {
+              emailOrUsername: '',
+              password: '',
+            } as UserInput
+          }
+          validationSchema={loginSchema}
+          onSubmit={(values) => {
+            handleSubmit(values);
+          }}
+        >
           <Form>
             <FormField
               name="emailOrUsername"
@@ -100,20 +84,20 @@ const Login = () => {
                 placeholder: 'Password',
               }}
             />
-            <LoadingButton type="submit" isLoading={isSubmitting}>
+            <LoadingButton type="submit" isLoading={isLoading}>
               Login
             </LoadingButton>
             <div className="divider divider-accent"></div>
             <p className="">
               Don&apos;t have an account?{' '}
-              <Link href="/register" className="text-blue-500">
+              <Link href="/register" className="text-info hover:link">
                 Register -&gt;
               </Link>
             </p>
           </Form>
-        )}
-      </Formik>
-    </div>
+        </Formik>
+      </div>
+    </>
   );
 };
 

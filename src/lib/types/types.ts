@@ -1038,7 +1038,7 @@ export enum AuthResult {
   PasswordTooShort = 'Password Too Short, Must Be At Least 8 Characters',
   TokenExpired = 'Token Expired',
   Success = 'Success',
-  FailedToCreateUser = 'Failed To Create User',
+  FailedToCreateUser = 'Failed To Create User, Please Try Again',
 }
 
 export interface QueryOptions {
