@@ -10,6 +10,7 @@ import { getSpecies } from '@/lib/actions/db/species/get.actions';
 import { getSubSpecies } from '@/lib/actions/db/subSpecies/read.actions';
 import { getFeats } from '@/lib/actions/db/feat/read.actions';
 import { getBlogposts } from '@/lib/actions/db/blogpost/read.actions';
+import { getCreatures } from '@/lib/actions/db/creature/read.actions';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteMap: MetadataRoute.Sitemap = [];
@@ -54,19 +55,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'yearly',
       priority: 0.8,
     });
-
-    siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/class/${c.name}/subclass`,
-      lastModified: c.updatedAt,
-      changeFrequency: 'yearly',
-      priority: 0.9,
-    });
-    // siteMap.push({
-    //   url: `${process.env.DOMAIN_NAME}/homebrew/class/create`,
-    //   lastModified: c.updatedAt,
-    //   changeFrequency: "yearly",
-    //   priority: 0.7,
-    // });
   }
   const subclasses = await getSubclasses({ homebrew: false });
   for (const s of subclasses) {
@@ -282,6 +270,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     });
   }
+
+  const creatures = await getCreatures();
+  const creaturePagesCount = Math.ceil(creatures.length / QUERY_LIMIT);
+  for (let i = 1; i < creaturePagesCount; i++) {
+    siteMap.push({
+      url: `${process.env.DOMAIN_NAME}/creature?page=${i}`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.7,
+    });
+  }
+  siteMap.push({
+    url: `${process.env.DOMAIN_NAME}/creature`,
+    lastModified: new Date(),
+    changeFrequency: 'yearly',
+    priority: 0.9,
+  });
 
   const blogPosts = await getBlogposts();
   for (const b of blogPosts) {

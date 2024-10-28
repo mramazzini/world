@@ -32,12 +32,6 @@ const SubClassDisplay = ({ subClass }: Props) => {
           </p>
         </div>
         <div className="flex justify-center items-start md:items-end my-2 flex-col ">
-          <Link
-            className={'btn btn-ghost border border-gray-500 mb-2 w-full'}
-            href={`/class/${className}/subclass`}
-          >
-            View All {className.toCapitalCase()} Subclasses -&gt;
-          </Link>
           {/* go back */}
           <Link
             className={'btn btn-ghost border border-gray-500 w-full'}
