@@ -3,6 +3,9 @@ import Tooltip from '@/Utility/Tooltip';
 import AbilityToText from '@/lib/utils/AbilityToText';
 import { Ability } from '@prisma/client';
 import { CharacterInfo } from '@/lib/types/types';
+import { useMemo } from 'react';
+import { calcProficiency } from '@/Utility/characterStateFunctions/calc/calcProficiency';
+import { calculateLevel } from '@/Utility/characterStateFunctions/calc/calcLevel';
 
 interface Props {
   character: CharacterInfo;
@@ -10,6 +13,11 @@ interface Props {
 }
 
 const SavingThrowsRoller = ({ character, handleRoll }: Props) => {
+  const proficencyBonus = useMemo(() => {
+    return (
+      (character.state && calcProficiency(calculateLevel(character.state))) || 2
+    );
+  }, [character]);
   return (
     <>
       {' '}
@@ -61,6 +69,22 @@ const SavingThrowsRoller = ({ character, handleRoll }: Props) => {
                                 }`}
                           </td>
                         </tr>
+                        {/* proficient */}
+                        {character.state?.proficiencies.savingThrows.includes(
+                          ability
+                        ) && (
+                          <tr>
+                            <td>Proficient</td>
+                            <td>
+                              {character.state &&
+                              character.state.proficiencies.savingThrows.includes(
+                                ability
+                              )
+                                ? `+ ${proficencyBonus}`
+                                : ''}
+                            </td>
+                          </tr>
+                        )}
                       </tbody>
                     </table>
                   </div>
@@ -78,22 +102,43 @@ const SavingThrowsRoller = ({ character, handleRoll }: Props) => {
                 onClick={() =>
                   character.state &&
                   handleRoll(
-                    AbilityToModifier(character.state.abilityScores[ability]),
+                    AbilityToModifier(character.state.abilityScores[ability]) +
+                      (character.state.proficiencies.savingThrows.includes(
+                        ability
+                      )
+                        ? proficencyBonus
+                        : 0),
                     ` ${AbilityToText(ability)} Saving Throw`
                   )
                 }
               >
                 {character.state &&
-                AbilityToModifier(character.state.abilityScores[ability]) >= 0
-                  ? `+ ${AbilityToModifier(
-                      character.state.abilityScores[ability]
-                    )}`
+                AbilityToModifier(character.state.abilityScores[ability]) +
+                  (character.state.proficiencies.savingThrows.includes(ability)
+                    ? proficencyBonus
+                    : 0) >=
+                  0
+                  ? `+ ${
+                      AbilityToModifier(
+                        character.state.abilityScores[ability]
+                      ) +
+                      (character.state.proficiencies.savingThrows.includes(
+                        ability
+                      )
+                        ? proficencyBonus
+                        : 0)
+                    }`
                   : `- ${
                       character.state &&
                       Math.abs(
                         AbilityToModifier(
                           character.state.abilityScores[ability]
-                        )
+                        ) +
+                          (character.state.proficiencies.savingThrows.includes(
+                            ability
+                          )
+                            ? proficencyBonus
+                            : 0)
                       )
                     }`}
               </button>
