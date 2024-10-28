@@ -124,7 +124,7 @@ const ItemPage = ({ item }: Props) => {
                   </li>
                   <li className="ml-4">
                     <span className="font-bold">Rarity:</span>{' '}
-                    {item.rarity.toCapitalCase()}
+                    {item.rarity.toCapitalCase().replaceAll('_', ' ')}
                   </li>
                   {item.AmmunitionFor && item.AmmunitionFor.length > 0 && (
                     <li className="ml-4">
