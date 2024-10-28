@@ -150,10 +150,12 @@ const Navbar = () => {
           >
             <div className="w-full max-w-[1800px] flex flex-col items-center gap-2">
               <ul className="flex flex-wrap items-center justify-center gap-2 p-4">
-                {wikiLinks.map((link, index) => (
-                  <Link key={index} href={link.href}>
-                    <div className="btn">{link.name}</div>
-                  </Link>
+                {wikiLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href}>
+                      <div className="btn">{link.name}</div>
+                    </Link>
+                  </li>
                 ))}
               </ul>
             </div>
