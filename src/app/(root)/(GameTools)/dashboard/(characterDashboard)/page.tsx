@@ -1,4 +1,4 @@
-import Dashboard from '@/pages-lib/Dashboard/Dashboard';
+import Dashboard from '@/pages-lib/Dashboard/Dashboard.page';
 
 import { Metadata } from 'next';
 
