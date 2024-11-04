@@ -9,11 +9,11 @@ import {
   simpleMeleeItemIds,
   simpleRangedItemIds,
 } from '../Items/Items.seed';
-import { artisanIds, instrumentIds, toolIds } from '../Items/Tools/tools.seed';
+import { artisanIds, instrumentIds, toolIds } from '../Items/Tools/Tool.seed';
 import { spellIds } from '../Spells/spells.seed';
 import { spellListIds } from '../Spells/SpellLists/SpellLists.seed';
 import { fullCaster, halfCaster, warlockSpellSlots } from './SpellSlotsUtil';
-import Features from './Features.seed';
+
 const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: 1,
@@ -128,7 +128,6 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subClassDescription:
       'At 3rd level, you choose an archetype that you strive to emulate in your combat styles and techniques. The archetype you choose grants you features at 3rd level and again at 7th, 10th, 15th, and 18th level.',
     subClassFeatureLevels: [3, 7, 10, 15, 18],
-    features: Features.filter((feature) => feature.classId === 1),
   },
 
   {
@@ -237,14 +236,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       ability: Ability.INT,
       spellFocus: SpellFocus.ARCANE_FOCUS,
       spellLevels: fullCaster,
-      features: Features.filter(
-        (feature) => feature.classId === 2 && feature.spellCasting
-      ),
     },
     spellListId: spellListIds.wizard,
-    features: Features.filter(
-      (feature) => feature.classId === 2 && !feature.spellCasting
-    ),
   },
   {
     id: 3,
@@ -353,9 +346,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
 
     flavorText:
       'Clerics are intermediaries between the mortal world and the distant planes of the gods, using their divine magic to heal the wounded, bless the righteous, and smite the wicked.',
-    features: Features.filter(
-      (feature) => feature.classId === 3 && !feature.spellCasting
-    ),
+
     spellListId: spellListIds.cleric,
     isSpellCaster: true,
     spellCastingInfo: {
@@ -369,9 +360,6 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       ability: Ability.WIS,
       spellFocus: SpellFocus.HOLY_SYMBOL,
       spellLevels: fullCaster,
-      features: Features.filter(
-        (feature) => feature.classId === 3 && feature.spellCasting
-      ),
     },
   },
   {
@@ -478,7 +466,6 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subClassFeatureLevels: [3, 9, 13, 17],
     flavorText:
       'Rogues are cunning and elusive adversaries. Using their wits and agility, they excel in stealth and deception.',
-    features: Features.filter((feature) => feature.classId === 4),
   },
   {
     id: 5,
@@ -560,7 +547,6 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subClassFeatureLevels: [3, 6, 10, 14],
     flavorText:
       'Barbarians are fierce warriors who draw their power from a primal connection to the spirits of nature and the world around them to fuel an unquenchable rage.',
-    features: Features.filter((feature) => feature.classId === 5),
   },
   {
     id: 6,
@@ -654,9 +640,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
 
     flavorText:
       'Bards are the masters of song, speech, and the magic they contain. They use their talents to inspire allies, demoralize foes, manipulate minds, create illusions, and even heal wounds.',
-    features: Features.filter(
-      (feature) => feature.classId === 6 && !feature.spellCasting
-    ),
+
     spellListId: spellListIds.bard,
     spellCastingInfo: {
       ability: Ability.CHA,
@@ -668,9 +652,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       levelAquired: 1,
       displaySpellLevels: true,
       spellLevels: fullCaster,
-      features: Features.filter(
-        (feature) => feature.classId === 6 && feature.spellCasting
-      ),
+
       spellFocus: SpellFocus.MUSICAL_INSTRUMENT,
     },
   },
@@ -778,9 +760,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
 
     flavorText:
       "Druids are the embodiment of nature's resilience, cunning, and fury. They claim no mastery over nature, but see themselves as extensions of nature's indomitable will.",
-    features: Features.filter(
-      (feature) => feature.classId === 7 && !feature.spellCasting
-    ),
+
     spellListId: spellListIds.druid,
     isSpellCaster: true,
     spellCastingInfo: {
@@ -794,9 +774,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       levelAquired: 1,
       displaySpellLevels: true,
       spellLevels: fullCaster,
-      features: Features.filter(
-        (feature) => feature.classId === 7 && feature.spellCasting
-      ),
+
       spellFocus: SpellFocus.DRUIDIC_FOCUS,
     },
   },
@@ -882,7 +860,6 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subClassFeatureLevels: [3, 6, 11, 17],
     flavorText:
       'Monks are martial artists who use ki to perform amazing feats. They are masters of unarmed combat, and they are known for their ability to catch arrows, dodge blows, and move with extraordinary speed.',
-    features: Features.filter((feature) => feature.classId === 8),
   },
   {
     id: 9,
@@ -984,9 +961,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
 
     flavorText:
       'Paladins are holy warriors bound to a sacred oath, using their divine magic to heal the wounded, bless the righteous, and smite the wicked.',
-    features: Features.filter(
-      (feature) => feature.classId === 9 && !feature.spellCasting
-    ),
+
     spellListId: spellListIds.paladin,
     spellCastingInfo: {
       ability: Ability.CHA,
@@ -1001,9 +976,6 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       levelAquired: 2,
       spellLevels: halfCaster,
       displaySpellLevels: true,
-      features: Features.filter(
-        (feature) => feature.classId === 9 && feature.spellCasting
-      ),
     },
   },
   {
@@ -1111,9 +1083,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
 
     flavorText:
       'Rangers are hunters and wilderness warriors who use their knowledge of the land and their fighting skills to protect the wild places of the world.',
-    features: Features.filter(
-      (feature) => feature.classId === 10 && !feature.spellCasting
-    ),
+
     spellListId: spellListIds.ranger,
     spellCastingInfo: {
       ability: Ability.WIS,
@@ -1124,9 +1094,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       levelAquired: 2,
       displaySpellLevels: true,
       spellLevels: halfCaster,
-      features: Features.filter(
-        (feature) => feature.classId === 10 && feature.spellCasting
-      ),
+
       spellFocus: SpellFocus.DRUIDIC_FOCUS,
       description:
         'By the time you reach 2nd level, you have learned to use the magical essence of nature to cast spells, much as a druid does.',
@@ -1228,9 +1196,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subClassFeatureLevels: [1, 6, 14, 18],
     flavorText:
       'Sorcerers are spellcasters who draw on innate magic. They are the masters of the arcane, using their knowledge and power to cast spells that can change the world around them.',
-    features: Features.filter(
-      (feature) => feature.classId === 11 && !feature.spellCasting
-    ),
+
     spellListId: spellListIds.sorcerer,
     spellCastingInfo: {
       ability: Ability.CHA,
@@ -1243,9 +1209,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       levelAquired: 1,
       displaySpellLevels: true,
       spellLevels: fullCaster,
-      features: Features.filter(
-        (feature) => feature.classId === 11 && feature.spellCasting
-      ),
+
       spellFocus: SpellFocus.ARCANE_FOCUS,
     },
   },
@@ -1353,9 +1317,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
 
     flavorText:
       "Warlocks are wielders of magic who have forged a pact with an otherworldly being. Whether it's a demon, a devil, a fey, or some other powerful entity, warlocks draw their power from their patron.",
-    features: Features.filter(
-      (feature) => feature.classId === 12 && !feature.spellCasting
-    ),
+
     spellListId: spellListIds.warlock,
     spellCastingInfo: {
       ability: Ability.CHA,
@@ -1368,9 +1330,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       levelAquired: 1,
       displaySpellLevels: false,
       spellLevels: warlockSpellSlots,
-      features: Features.filter(
-        (feature) => feature.classId === 12 && feature.spellCasting
-      ),
+
       spellFocus: SpellFocus.ARCANE_FOCUS,
     },
   },
@@ -1470,9 +1430,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subClassDescription:
       'At 3rd level, you choose the type of specialist you are. Your choice grants you features at 5th level and again at 9th and 15th level.',
     subClassFeatureLevels: [3, 5, 9, 15],
-    features: Features.filter(
-      (feature) => feature.classId === 13 && !feature.spellCasting
-    ),
+
     spellListId: spellListIds.artificer,
     spellCastingInfo: {
       displaySpellLevels: true,
@@ -1493,9 +1451,6 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       castingSpellsDescription:
         "The Artificer table shows how many spell slots you have to cast your artificer spells. To cast one of your artificer spells of 1st level or higher, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
       preparingSpellsDescription: `You prepare the list of artificer spells that are available for you to cast, choosing from the artificer spell list. When you do so, choose a number of artificer spells equal to your Intelligence modifier + half your artificer level, rounded down (minimum of one spell). The spells must be of a level for which you have spell slots.\n\nFor example, if you are a 5th-level artificer, you have four 1st-level and two 2nd-level spell slots. With an Intelligence of 14, your list of prepared spells can include four spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell %${spellIds.cureWounds}{Cure Wounds}%, you can cast it using a lst-level or a 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.\n\nYou can change your list of prepared spells when you finish a long rest. Preparing a new list of artificer spells requires time spent tinkering with your spellcasting focuses: at least 1 minute per spell level for each spell on your list.`,
-      features: Features.filter(
-        (feature) => feature.classId === 13 && feature.spellCasting
-      ),
     },
   },
 ];

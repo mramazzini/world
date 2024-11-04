@@ -1,6 +1,5 @@
 'use client';
 
-import { CharacterInfo } from '@/lib/types/types';
 import { useCallback, useEffect, useState } from 'react';
 import { generateCharacter } from '../../Utility/characterStateFunctions/update/generateCharacter';
 import '@/lib/string.extensions';
@@ -12,6 +11,7 @@ import Notes from '@/components/CharacterSheet/Notes/Notes';
 import Traits from '@/components/CharacterSheet/Traits/Traits';
 import { applyPendingModels } from '../../Utility/characterStateFunctions/update/applyPendingModels';
 import CharacterStatsTab from '@/components/CharacterSheet/Stats/CharacterStatsTab';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 
 type Tab =
   | 'sheet'
@@ -49,7 +49,6 @@ const CharacterSheet = ({ characterData }: Props) => {
       setCharacter(char);
     });
   }, [characterData]);
-  console.log('character', character);
   const setState = useCallback((newState: PrismaJson.CharacterState) => {
     setCharacter((prevCharacter) => {
       if (!prevCharacter) return prevCharacter;

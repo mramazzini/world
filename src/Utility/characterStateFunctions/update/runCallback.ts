@@ -1,4 +1,4 @@
-import { CallbackOptions, CharacterInfo } from '@/lib/types/types';
+import { CallbackOptions } from '@/lib/types/types';
 import { ItemToInventory } from '../../ChoiceFunctions/ItemToInventory';
 import { addArmorProficiencies } from '../../ChoiceFunctions/addArmorProficiencies';
 import { addToolProficiencies } from '../../ChoiceFunctions/addToolProficiencies';
@@ -13,6 +13,7 @@ import { removeChoice } from './removeChoice';
 import { chooseASIorFeat } from '@/Utility/ChoiceFunctions/chooseFeatOrASI';
 import { abilityScoreIncrease } from '@/Utility/ChoiceFunctions/abilityScoreIncrease';
 import { addFeats } from '@/Utility/ChoiceFunctions/addFeat';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 
 export const runCallback = async (
   character: CharacterInfo,
@@ -50,7 +51,7 @@ export const runCallback = async (
                             : protocol == 'FeatSelection'
                               ? addFeats
                               : (character, data, from) => {
-                                  console.log(
+                                  console.error(
                                     'Unknown protocol',
                                     protocol,
                                     data,

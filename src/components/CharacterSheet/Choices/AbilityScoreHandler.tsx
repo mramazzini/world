@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  AbilityScoreValue,
-  CallbackOptions,
-  CharacterInfo,
-} from '@/lib/types/types';
+import { AbilityScoreValue, CallbackOptions } from '@/lib/types/types';
 import Image from 'next/image';
 import { Fragment } from 'react';
 import AbilityToText from '@/lib/utils/AbilityToText';
@@ -15,6 +11,7 @@ import ModalBox from '@/components/UI/Modal/ModalBox';
 import OpenModalButton from '@/components/UI/Modal/ModalButton';
 import ModalButton from '@/components/UI/Modal/ModalButton';
 import { v4 } from 'uuid';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 interface Props {
   choice: PrismaJson.AbilityScoreChoice;
   character: CharacterInfo;

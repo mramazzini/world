@@ -3,7 +3,7 @@ import { calculateLevel } from '@/Utility/characterStateFunctions/calc/calcLevel
 import { calcProficiency } from '@/Utility/characterStateFunctions/calc/calcProficiency';
 import Tooltip from '@/Utility/Tooltip';
 import AbilityToText from '@/lib/utils/AbilityToText';
-import { CharacterInfo } from '@/lib/types/types';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 import { Ability } from '@prisma/client';
 import Image from 'next/image';
 

@@ -1,4 +1,4 @@
-import { CharacterInfo } from '@/lib/types/types';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 import { calculateLevel } from '../calc/calcLevel';
 import { AbilityToModifier } from '../calc/AbilityToModifier';
 

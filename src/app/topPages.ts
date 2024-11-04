@@ -4,241 +4,125 @@
 export const topPages = {
   item: [
     {
-      page: '/item/Chain-Mail',
-      visits: 12,
-    },
-    {
-      page: '/item/Scroll-of-Earth-Tremor',
+      page: '/item/Spiked-Armor',
       visits: 11,
     },
     {
-      page: '/item/Scale-Mail',
-      visits: 8,
-    },
-    {
-      page: '/item/Ladder-(10-foot)',
-      visits: 7,
-    },
-    {
-      page: '/item/Grappling-Hook',
-      visits: 5,
-    },
-    {
-      page: "/item/Explorer's-Pack",
-      visits: 4,
-    },
-    {
-      page: "/item/Priest's-Pack",
-      visits: 3,
+      page: '/item/Chain-Mail',
+      visits: 11,
     },
     {
       page: '/item/Scroll-of-Sunbeam',
+      visits: 10,
+    },
+    {
+      page: '/item/Scroll-of-Skill-Empowerment',
+      visits: 9,
+    },
+    {
+      page: '/item/Crowbar',
+      visits: 8,
+    },
+    {
+      page: '/item/Blue-Spinel',
+      visits: 6,
+    },
+    {
+      page: '/item/Scroll-of-Plane-Shift',
+      visits: 6,
+    },
+    {
+      page: '/item/Scroll-of-Sequester',
+      visits: 5,
+    },
+    {
+      page: '/item/Block-of-Incense',
       visits: 3,
     },
     {
-      page: '/item/Glaive',
-      visits: 2,
+      page: '/item/Crossbow-(Hand)',
+      visits: 3,
     },
     {
-      page: '/item/Scroll-of-Tree-Stride',
-      visits: 2,
+      page: "/item/Explorer's-Pack",
+      visits: 3,
+    },
+    {
+      page: '/item/Prayer-Book',
+      visits: 3,
     },
     {
       page: "/item/Thieves'-Tools",
+      visits: 3,
+    },
+    {
+      page: "/item/Diplomat's-Pack",
+      visits: 3,
+    },
+    {
+      page: '/item/Leather-Armor',
+      visits: 3,
+    },
+    {
+      page: '/item/Dagger',
+      visits: 2,
+    },
+    {
+      page: "/item/Entertainer's-Pack",
+      visits: 2,
+    },
+    {
+      page: '/item/Grappling-Hook',
+      visits: 2,
+    },
+    {
+      page: '/item/Scale-Mail',
+      visits: 2,
+    },
+    {
+      page: '/item/Scroll-of-Vortex-Warp',
       visits: 2,
     },
     {
       page: "/item/Tinker's-Tools",
       visits: 2,
     },
-    {
-      page: '/item/Scroll-of-Reincarnate',
-      visits: 2,
-    },
-    {
-      page: '/item/Abacus',
-      visits: 1,
-    },
-    {
-      page: "/item/Alchemist's-Supplies",
-      visits: 1,
-    },
-    {
-      page: '/item/Backpack',
-      visits: 1,
-    },
-    {
-      page: '/item/Crossbow-(Light)',
-      visits: 1,
-    },
-    {
-      page: '/item/Dagger',
-      visits: 1,
-    },
-    {
-      page: "/item/Diplomat's-Pack",
-      visits: 1,
-    },
-    {
-      page: '/item/Dulcimer',
-      visits: 1,
-    },
-    {
-      page: "/item/Dungeoneer's-Pack",
-      visits: 1,
-    },
-    {
-      page: "/item/Entertainer's-Pack",
-      visits: 1,
-    },
-    {
-      page: '/item/Fishing-Tackle',
-      visits: 1,
-    },
-    {
-      page: '/item/Forgery-Kit',
-      visits: 1,
-    },
-    {
-      page: '/item/Herbalism-Kit',
-      visits: 1,
-    },
-    {
-      page: '/item/Hourglass',
-      visits: 1,
-    },
-    {
-      page: '/item/Leather-Armor',
-      visits: 1,
-    },
-    {
-      page: '/item/Longbow',
-      visits: 1,
-    },
-    {
-      page: '/item/Mace',
-      visits: 1,
-    },
-    {
-      page: '/item/Orb',
-      visits: 1,
-    },
-    {
-      page: '/item/Piton',
-      visits: 1,
-    },
-    {
-      page: '/item/Plate-Armor',
-      visits: 1,
-    },
-    {
-      page: "/item/Poisoner's-Kit",
-      visits: 1,
-    },
-    {
-      page: '/item/Prayer-Book',
-      visits: 1,
-    },
-    {
-      page: '/item/Quarterstaff',
-      visits: 1,
-    },
-    {
-      page: '/item/Robes',
-      visits: 1,
-    },
-    {
-      page: '/item/Scroll-of-Cloudkill',
-      visits: 1,
-    },
-    {
-      page: '/item/Scroll-of-Disguise-Self',
-      visits: 1,
-    },
-    {
-      page: '/item/Scroll-of-Fireball',
-      visits: 1,
-    },
-    {
-      page: '/item/Scroll-of-Invisibility',
-      visits: 1,
-    },
-    {
-      page: '/item/Scroll-of-Ravenous-Void',
-      visits: 1,
-    },
-    {
-      page: '/item/Scroll-of-Revivify',
-      visits: 1,
-    },
-    {
-      page: '/item/Scroll-of-Shocking-Grasp',
-      visits: 1,
-    },
-    {
-      page: '/item/Scroll-of-Wall-of-Ice',
-      visits: 1,
-    },
-    {
-      page: '/item/Sickle',
-      visits: 1,
-    },
-    {
-      page: '/item/Spellbook',
-      visits: 1,
-    },
-    {
-      page: '/item/Warhammer',
-      visits: 1,
-    },
-    {
-      page: "/item/Woodcarver's-Tools",
-      visits: 1,
-    },
   ],
   subclass: [
     {
-      page: '/subclass/Horizon-Walker-Conclave',
-      visits: 28,
-    },
-    {
-      page: '/subclass/Life-Domain',
-      visits: 7,
+      page: '/subclass/Path-of-the-Giant',
+      visits: 9,
     },
     {
       page: '/subclass/Drakewarden',
-      visits: 7,
+      visits: 9,
     },
     {
       page: '/subclass/Storm-Herald',
-      visits: 6,
-    },
-    {
-      page: '/subclass/Storm-Sorcery',
       visits: 5,
     },
     {
-      page: '/subclass/Battle-Master',
+      page: '/subclass/Battle-Smith',
       visits: 4,
     },
     {
-      page: '/subclass/College-of-Eloquence',
+      page: '/subclass/Oath-of-the-Ancients',
       visits: 4,
     },
     {
-      page: '/subclass/Tempest-Domain',
-      visits: 4,
+      page: '/subclass/The-Hexblade',
+      visits: 3,
     },
     {
-      page: '/subclass/Forge-Domain',
-      visits: 4,
-    },
-    {
-      page: '/subclass/Oath-of-Vengeance',
-      visits: 4,
+      page: '/subclass/Arcana-Domain',
+      visits: 2,
     },
     {
       page: '/subclass/Arcane-Archer',
+      visits: 2,
+    },
+    {
+      page: '/subclass/Banneret',
       visits: 2,
     },
     {
@@ -246,37 +130,57 @@ export const topPages = {
       visits: 2,
     },
     {
-      page: '/subclass/Oath-of-the-Ancients',
+      page: '/subclass/Circle-of-the-Moon',
       visits: 2,
     },
     {
-      page: '/subclass/Oathbreaker',
+      page: '/subclass/College-of-Spirits',
       visits: 2,
     },
     {
-      page: '/subclass/The-Great-Old-One',
+      page: '/subclass/Death-Domain',
+      visits: 2,
+    },
+    {
+      page: '/subclass/Lunar-Sorcery',
+      visits: 2,
+    },
+    {
+      page: '/subclass/School-of-Divination',
+      visits: 2,
+    },
+    {
+      page: '/subclass/Swarmkeeper',
+      visits: 2,
+    },
+    {
+      page: '/subclass/War-Magic',
+      visits: 2,
+    },
+    {
+      page: '/subclass/Way-of-the-Astral-Self',
+      visits: 2,
+    },
+    {
+      page: '/subclass/Way-of-the-Long-Death',
       visits: 2,
     },
   ],
   background: [
     {
-      page: '/background/Rune-Carver',
+      page: '/background/Urban-Bounty-Hunter',
       visits: 13,
+    },
+    {
+      page: '/background/Sailor',
+      visits: 7,
     },
     {
       page: '/background/Investigator-(VRGR)',
       visits: 6,
     },
     {
-      page: '/background/Feylost',
-      visits: 6,
-    },
-    {
-      page: '/background/Sailor',
-      visits: 6,
-    },
-    {
-      page: '/background/Acolyte',
+      page: '/background/Faction-Agent',
       visits: 5,
     },
     {
@@ -284,19 +188,19 @@ export const topPages = {
       visits: 5,
     },
     {
-      page: '/background/Faceless',
+      page: '/background/Guild-Artisan',
+      visits: 4,
+    },
+    {
+      page: '/background/Haunted-One',
       visits: 3,
     },
     {
-      page: '/background/Rival-Intern',
+      page: '/background/Ruined',
       visits: 3,
     },
     {
-      page: '/background/Spy',
-      visits: 3,
-    },
-    {
-      page: '/background/Charlatan',
+      page: '/background/Investigator',
       visits: 2,
     },
     {
@@ -304,11 +208,11 @@ export const topPages = {
       visits: 2,
     },
     {
-      page: '/background/Outlander',
-      visits: 2,
+      page: '/background/Acolyte',
+      visits: 1,
     },
     {
-      page: '/background/Athlete',
+      page: '/background/Anthropologist',
       visits: 1,
     },
     {
@@ -316,265 +220,249 @@ export const topPages = {
       visits: 1,
     },
     {
-      page: '/background/Entertainer',
+      page: '/background/Faceless',
       visits: 1,
     },
     {
-      page: '/background/Fisher',
+      page: '/background/Knight',
       visits: 1,
     },
     {
-      page: '/background/Gambler',
+      page: '/background/Mage-of-High-Sorcery',
       visits: 1,
     },
     {
-      page: '/background/Guild-Artisan',
+      page: '/background/Outlander',
       visits: 1,
     },
     {
-      page: '/background/Hermit',
-      visits: 1,
-    },
-    {
-      page: '/background/Plaintiff',
-      visits: 1,
-    },
-    {
-      page: '/background/Ruined',
+      page: '/background/Rune-Carver',
       visits: 1,
     },
     {
       page: '/background/Shipwright',
       visits: 1,
     },
-    {
-      page: '/background/Smuggler',
-      visits: 1,
-    },
-    {
-      page: '/background/Soldier',
-      visits: 1,
-    },
   ],
   species: [
     {
-      page: '/species/Aasimar-(VGM)',
-      visits: 13,
-    },
-    {
       page: '/species/Air-Genasi-(EEPC)',
-      visits: 11,
-    },
-    {
-      page: '/species/Human',
-      visits: 9,
-    },
-    {
-      page: '/species/Air-Genasi-(MMOM)',
       visits: 7,
     },
     {
-      page: '/species/Water-Genasi-(MMOM)',
-      visits: 6,
-    },
-    {
-      page: '/species/Fire-Genasi-(MMOM)',
-      visits: 5,
-    },
-    {
-      page: '/species/Dwarf',
-      visits: 4,
-    },
-    {
       page: '/species/Warforged',
-      visits: 4,
-    },
-    {
-      page: '/species/Air-Genasi-(EEPC)',
-      visits: 3,
-    },
-    {
-      page: '/species/Aarakocra-(MMOM)',
-      visits: 2,
-    },
-    {
-      page: '/species/Aasimar-(MMOM)',
-      visits: 2,
-    },
-    {
-      page: '/species/Harengon-(MMOM)',
-      visits: 2,
-    },
-    {
-      page: '/species/Aasimar',
-      visits: 1,
-    },
-    {
-      page: '/species/Dragonborn',
-      visits: 1,
-    },
-    {
-      page: '/species/Eladrin-(MToF)',
-      visits: 1,
-    },
-    {
-      page: '/species/Elf',
-      visits: 1,
-    },
-    {
-      page: '/species/Fairy-(MMOM)',
-      visits: 1,
-    },
-    {
-      page: '/species/Fire-Genasi-(EEPC)',
-      visits: 1,
-    },
-    {
-      page: '/species/Goliath-(EEPC)',
-      visits: 1,
-    },
-    {
-      page: '/species/Harengon-(TWBtW)',
-      visits: 1,
-    },
-    {
-      page: '/species/Shadar-Kai-(MToF)',
-      visits: 1,
-    },
-    {
-      page: '/species/Tiefling',
-      visits: 1,
-    },
-    {
-      page: '/species/Verdan',
-      visits: 1,
+      visits: 7,
     },
     {
       page: '/species/Air-Genasi-(MMOM)',
-      visits: 1,
+      visits: 6,
     },
     {
-      page: '/species/Changeling-(Eberron)',
-      visits: 1,
-    },
-    {
-      page: '/species/Eladrin-(MToF)',
-      visits: 1,
+      page: '/species/Water-Genasi-(MMOM)',
+      visits: 4,
     },
     {
       page: '/species/Elf',
-      visits: 1,
+      visits: 4,
+    },
+    {
+      page: '/species/Aarakocra-(MMOM)',
+      visits: 3,
+    },
+    {
+      page: '/species/Dwarf',
+      visits: 3,
+    },
+    {
+      page: '/species/Verdan',
+      visits: 3,
+    },
+    {
+      page: '/species/Dragonborn',
+      visits: 2,
+    },
+    {
+      page: '/species/Eladrin-(MToF)',
+      visits: 2,
     },
   ],
   class: [
     {
-      page: '/class/cleric',
-      visits: 26,
+      page: '/class/ranger',
+      visits: 36,
     },
     {
-      page: '/class/artificer',
+      page: '/class/barbarian',
       visits: 19,
     },
     {
-      page: '/class/fighter',
-      visits: 16,
+      page: '/class/artificer',
+      visits: 14,
     },
     {
       page: '/class/bard',
       visits: 12,
     },
     {
+      page: '/class/druid',
+      visits: 9,
+    },
+    {
+      page: '/class/sorcerer',
+      visits: 9,
+    },
+    {
       page: '/class/wizard',
       visits: 8,
-    },
-    {
-      page: '/class/druid',
-      visits: 8,
-    },
-    {
-      page: '/class/paladin',
-      visits: 7,
-    },
-    {
-      page: '/class/barbarian',
-      visits: 7,
     },
     {
       page: '/class/monk',
       visits: 7,
     },
     {
-      page: '/class/ranger',
+      page: '/class/cleric',
       visits: 6,
     },
     {
-      page: '/class/sorcerer',
+      page: '/class/fighter',
+      visits: 6,
+    },
+    {
+      page: '/class/paladin',
+      visits: 3,
+    },
+    {
+      page: '/class/rogue',
       visits: 3,
     },
     {
       page: '/class/warlock',
-      visits: 2,
-    },
-    {
-      page: '/class/rogue',
       visits: 1,
     },
   ],
   spells: [
     {
-      page: '/spells/Comprehend-Languages',
+      page: '/spells/Longstrider',
+      visits: 17,
+    },
+    {
+      page: '/spells/Dancing-Lights',
+      visits: 17,
+    },
+    {
+      page: '/spells/Detect-Magic',
       visits: 13,
     },
     {
-      page: '/spells/Toll-the-Dead',
-      visits: 10,
+      page: '/spells/Enhance-Ability',
+      visits: 13,
     },
     {
-      page: '/spells/Distort-Value',
-      visits: 10,
-    },
-    {
-      page: '/spells/Enlarge-Reduce',
-      visits: 10,
+      page: '/spells/Dark-Star',
+      visits: 11,
     },
     {
       page: '/spells/Mending',
+      visits: 11,
+    },
+    {
+      page: "/spells/Tasha's-Mind-Whip",
       visits: 10,
     },
     {
-      page: '/spells/Light',
-      visits: 9,
-    },
-    {
       page: '/spells/Chromatic-Orb',
+      visits: 10,
+    },
+    {
+      page: '/spells/Prestidigitation',
       visits: 9,
     },
     {
-      page: "/spells/Rime's-Binding-Ice",
-      visits: 7,
+      page: '/spells/Booming-Blade',
+      visits: 9,
     },
     {
-      page: '/spells/Sleep',
-      visits: 7,
-    },
-    {
-      page: '/spells/Guidance',
-      visits: 7,
-    },
-    {
-      page: '/spells/Mage-Hand',
-      visits: 6,
+      page: '/spells/Hold-Monster',
+      visits: 8,
     },
     {
       page: '/spells/Charm-Person',
+      visits: 8,
+    },
+    {
+      page: '/spells/Produce-Flame',
+      visits: 7,
+    },
+    {
+      page: '/spells/Toll-the-Dead',
+      visits: 7,
+    },
+    {
+      page: '/spells/Vortex-Warp',
+      visits: 7,
+    },
+    {
+      page: '/spells/Dissonant-Whispers',
+      visits: 7,
+    },
+    {
+      page: '/spells/Absorb-Elements',
+      visits: 7,
+    },
+    {
+      page: '/spells/Expeditious-Retreat',
+      visits: 7,
+    },
+    {
+      page: '/spells/Burning-Hands',
+      visits: 7,
+    },
+    {
+      page: '/spells/Protection-from-Evil-and-Good',
       visits: 6,
     },
     {
-      page: '/spells/Gift-of-Alacrity',
+      page: '/spells/Light',
+      visits: 6,
+    },
+    {
+      page: '/spells/Chill-Touch',
+      visits: 6,
+    },
+    {
+      page: '/spells/Minor-Illusion',
+      visits: 6,
+    },
+    {
+      page: '/spells/Feather-Fall',
       visits: 5,
     },
     {
-      page: '/spells/Command',
+      page: '/spells/Shocking-Grasp',
+      visits: 5,
+    },
+    {
+      page: '/spells/Aid',
+      visits: 5,
+    },
+    {
+      page: '/spells/Calm-Emotions',
+      visits: 5,
+    },
+    {
+      page: '/spells/Comprehend-Languages',
+      visits: 5,
+    },
+    {
+      page: '/spells/Cure-Wounds',
+      visits: 5,
+    },
+    {
+      page: '/spells/Fire-Bolt',
+      visits: 5,
+    },
+    {
+      page: '/spells/Green-Flame-Blade',
       visits: 5,
     },
     {
@@ -582,35 +470,71 @@ export const topPages = {
       visits: 5,
     },
     {
-      page: '/spells/Expeditious-Retreat',
-      visits: 5,
-    },
-    {
-      page: '/spells/Longstrider',
-      visits: 5,
-    },
-    {
-      page: '/spells/Bless',
+      page: '/spells/Encode-Thoughts',
       visits: 4,
     },
     {
-      page: '/spells/Shocking-Grasp',
+      page: '/spells/Mind-Sliver',
       visits: 4,
     },
     {
-      page: '/spells/Cure-Wounds',
+      page: '/spells/Entangle',
       visits: 4,
     },
     {
-      page: '/spells/Guiding-Bolt',
+      page: '/spells/Friends',
       visits: 4,
     },
     {
-      page: '/spells/Minor-Illusion',
+      page: '/spells/Identify',
       visits: 4,
     },
     {
-      page: '/spells/Finger-of-Death',
+      page: '/spells/Detect-Thoughts',
+      visits: 4,
+    },
+    {
+      page: '/spells/Chaos-Bolt',
+      visits: 3,
+    },
+    {
+      page: '/spells/Conjure-Animals',
+      visits: 3,
+    },
+    {
+      page: '/spells/False-Life',
+      visits: 3,
+    },
+    {
+      page: '/spells/Hail-of-Thorns',
+      visits: 3,
+    },
+    {
+      page: '/spells/Locate-Object',
+      visits: 3,
+    },
+    {
+      page: '/spells/Mage-Hand',
+      visits: 3,
+    },
+    {
+      page: '/spells/Magic-Mouth',
+      visits: 3,
+    },
+    {
+      page: '/spells/Summon-Lesser-Demons',
+      visits: 3,
+    },
+    {
+      page: '/spells/Thaumaturgy',
+      visits: 3,
+    },
+    {
+      page: '/spells/Thunderclap',
+      visits: 3,
+    },
+    {
+      page: '/spells/Gust',
       visits: 3,
     },
     {
@@ -618,31 +542,11 @@ export const topPages = {
       visits: 3,
     },
     {
-      page: '/spells/Purify-Food-and-Drink',
+      page: '/spells/Kinetic-Jaunt',
       visits: 3,
     },
     {
-      page: '/spells/Absorb-Elements',
-      visits: 3,
-    },
-    {
-      page: '/spells/Ceremony',
-      visits: 3,
-    },
-    {
-      page: '/spells/Dancing-Lights',
-      visits: 3,
-    },
-    {
-      page: '/spells/Detect-Magic',
-      visits: 3,
-    },
-    {
-      page: '/spells/Elemental-Weapon',
-      visits: 3,
-    },
-    {
-      page: '/spells/Green-Flame-Blade',
+      page: '/spells/Sword-Burst',
       visits: 3,
     },
     {
@@ -650,67 +554,194 @@ export const topPages = {
       visits: 3,
     },
     {
-      page: '/spells/Calm-Emotions',
+      page: '/spells/Arms-of-Hadar',
       visits: 2,
     },
     {
-      page: '/spells/Cordon-of-Arrows',
+      page: '/spells/Bless',
       visits: 2,
     },
     {
-      page: '/spells/Produce-Flame',
+      page: '/spells/Control-Flames',
       visits: 2,
     },
     {
-      page: '/spells/Sacred-Flame',
+      page: "/spells/Hunter's-Mark",
       visits: 2,
     },
     {
-      page: '/spells/Spare-the-Dying',
+      page: '/spells/Invisibility',
       visits: 2,
     },
     {
-      page: '/spells/Thaumaturgy',
+      page: '/spells/Jump',
       visits: 2,
     },
     {
-      page: '/spells/Vortex-Warp',
+      page: '/spells/Message',
       visits: 2,
     },
     {
-      page: '/spells/Word-of-Radiance',
+      page: '/spells/Mirror-Image',
+      visits: 2,
+    },
+    {
+      page: '/spells/Mold-Earth',
+      visits: 2,
+    },
+    {
+      page: "/spells/Mordenkainen's-Magnificent-Mansion",
+      visits: 2,
+    },
+    {
+      page: '/spells/Poison-Spray',
+      visits: 2,
+    },
+    {
+      page: '/spells/Ray-of-Frost',
+      visits: 2,
+    },
+    {
+      page: '/spells/Silent-Image',
+      visits: 2,
+    },
+    {
+      page: '/spells/True-Strike',
       visits: 2,
     },
   ],
   subspecies: [
     {
+      page: '/subspecies/Bronze-Dragonborn',
+      visits: 14,
+    },
+    {
       page: '/subspecies/Protector-Aasimar',
-      visits: 6,
+      visits: 9,
+    },
+    {
+      page: '/subspecies/Rock-Gnome',
+      visits: 7,
     },
     {
       page: '/subspecies/Stout-Halfling',
-      visits: 5,
-    },
-    {
-      page: '/subspecies/Ghostwise-Halfling',
       visits: 4,
-    },
-    {
-      page: '/subspecies/Variant-Human',
-      visits: 4,
-    },
-    {
-      page: '/subspecies/Pallid-Elf',
-      visits: 3,
-    },
-    {
-      page: '/subspecies/Mark-of-Shadow-Elf',
-      visits: 2,
     },
     {
       page: '/subspecies/High-Elf',
       visits: 2,
     },
+    {
+      page: '/subspecies/Variant-Human',
+      visits: 2,
+    },
   ],
-  creature: [],
+  creature: [
+    {
+      page: '/creature/Giant-Ape',
+      visits: 9,
+    },
+    {
+      page: '/creature/Tiger',
+      visits: 5,
+    },
+    {
+      page: '/creature/Bulette',
+      visits: 4,
+    },
+    {
+      page: '/creature/Giant-Toad',
+      visits: 4,
+    },
+    {
+      page: '/creature/Black-Bear',
+      visits: 3,
+    },
+    {
+      page: '/creature/Brown-Bear',
+      visits: 3,
+    },
+    {
+      page: '/creature/Bandit',
+      visits: 2,
+    },
+    {
+      page: '/creature/Cult-Fanatic',
+      visits: 2,
+    },
+    {
+      page: '/creature/Balor',
+      visits: 2,
+    },
+    {
+      page: '/creature/Archmage',
+      visits: 1,
+    },
+    {
+      page: '/creature/Assassin',
+      visits: 1,
+    },
+    {
+      page: '/creature/Bandit-Captain',
+      visits: 1,
+    },
+    {
+      page: '/creature/Berserker',
+      visits: 1,
+    },
+    {
+      page: '/creature/Boar',
+      visits: 1,
+    },
+    {
+      page: '/creature/Bugbear',
+      visits: 1,
+    },
+    {
+      page: '/creature/Constrictor-Snake',
+      visits: 1,
+    },
+    {
+      page: '/creature/Crocodile',
+      visits: 1,
+    },
+    {
+      page: '/creature/Giant-Badger',
+      visits: 1,
+    },
+    {
+      page: '/creature/Giant-Frog',
+      visits: 1,
+    },
+    {
+      page: '/creature/Giant-Octopus',
+      visits: 1,
+    },
+    {
+      page: '/creature/Imp',
+      visits: 1,
+    },
+    {
+      page: '/creature/Marilith',
+      visits: 1,
+    },
+    {
+      page: '/creature/Nalfeshnee',
+      visits: 1,
+    },
+    {
+      page: '/creature/Pit-Fiend',
+      visits: 1,
+    },
+  ],
+  feats: [
+    {
+      page: '/feats/Cartomancer',
+      visits: 3,
+    },
+    {
+      page: '/feats/Gift-of-the-Chromatic-Dragon',
+      visits: 3,
+    },
+  ],
 };

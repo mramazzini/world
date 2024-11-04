@@ -2,41 +2,39 @@
 import Info from '@/components/UI/Info';
 import { AbilityToModifier } from '@/Utility/characterStateFunctions/calc/AbilityToModifier';
 import { memoizeGetItem } from '@/Utility/globalCache';
-import { roll } from '@/Utility/roll';
-import {
-  AbilityScores,
-  ItemInfo,
-  Log,
-  WeaponID,
-  WeaponInfo,
-} from '@/lib/types/types';
+import { roll, rollFromFormula } from '@/Utility/roll';
+import { AbilityScores, Log, WeaponID } from '@/lib/types/types';
 import { Ability } from '@prisma/client';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import {
+  ItemInfo,
+  ItemWeaponDataInfo,
+  WeaponInfo,
+} from '@/lib/types/modelInfo';
 
 const SingleWeapon = ({
-  weapon,
+  weaponData,
   abilities,
   logPush,
   isVersatile,
   isProficient,
   proficiencyBonus,
-  flatDamage,
 }: {
-  weapon: WeaponInfo;
+  weaponData: WeaponInfo;
   abilities: AbilityScores;
   logPush: (newLog: Log) => void;
   isVersatile?: boolean;
   isProficient?: boolean;
   proficiencyBonus?: number;
-  flatDamage?: PrismaJson.FlatDamage;
 }) => {
   const [selectedAbility, setSelectedAbility] = useState<Ability>(Ability.STR);
   //   find the versatile damage
+  const weapon = weaponData;
   let damage = weapon.damage;
   if (isVersatile) {
-    const versatileProperty = weapon.properties.find(
-      (p) => p.property.name === 'Versatile'
+    const versatileProperty = weapon.WeaponPropertyInstance.find(
+      (p) => p.Property.name === 'Versatile'
     );
     if (versatileProperty && versatileProperty.versatileDamage) {
       damage = [versatileProperty.versatileDamage];
@@ -52,10 +50,10 @@ const SingleWeapon = ({
         <strong>{weapon.name}: </strong>
         {damage.map(
           (damage, index) =>
-            damage.numberOfDice > 0 && (
+            damage.formula && (
               <span key={index}>
                 <span className="badge badge-neutral ml-2">
-                  {damage.numberOfDice}d{damage.dice}
+                  {damage.formula}
                 </span>{' '}
                 <span>+ {AbilityToModifier(abilities[selectedAbility])} </span>
                 <span className="ml-2 badge badge-secondary">
@@ -126,12 +124,13 @@ const SingleWeapon = ({
             diceType: number;
           }[] = [];
           weapon.damage.forEach((damage) => {
-            for (let i = 0; i < damage.numberOfDice; i++) {
+            const rollRes = rollFromFormula(damage.formula);
+            rollRes.rolls.forEach((r) => {
               damageRolls.push({
-                rolled: roll(1, damage.dice),
-                diceType: damage.dice,
+                rolled: r.rolled.reduce((acc, cur) => acc + cur, 0),
+                diceType: r.diceType,
               });
-            }
+            });
           });
           const totalDamage = damageRolls.reduce(
             (acc, cur) => acc + cur.rolled,
@@ -140,14 +139,9 @@ const SingleWeapon = ({
           logPush({
             from: `Damage Roll: ${weapon.name}`,
             roll: {
-              plus:
-                AbilityToModifier(abilities[selectedAbility]) +
-                (flatDamage?.amount || 0),
               rolls: damageRolls,
-              total:
-                totalDamage +
-                AbilityToModifier(abilities[selectedAbility]) +
-                (flatDamage?.amount || 0),
+              total: totalDamage,
+              plus: 0,
             },
             logType: 'roll',
           });
@@ -176,7 +170,7 @@ const WeaponRoller = ({
   weaponProficiencies,
   customWeaponAttacks,
 }: Props) => {
-  const [weapons, setWeapons] = useState<WeaponInfo[]>([]);
+  const [weapons, setWeapons] = useState<ItemWeaponDataInfo[]>([]);
   const [versatile, setVersatile] = useState<boolean>(false);
   useEffect(() => {
     const fetchWeapons = async () => {
@@ -185,8 +179,8 @@ const WeaponRoller = ({
       const weaponResults = [];
       const shieldResults = [];
       for (const weapon of res) {
-        if (weapon.Weapon) {
-          weaponResults.push(weapon.Weapon);
+        if (weapon.ItemWeaponData) {
+          weaponResults.push(weapon.ItemWeaponData);
         }
         if (weapon.Armor) {
           shieldResults.push(weapon.Armor);
@@ -195,7 +189,9 @@ const WeaponRoller = ({
       if (
         equipped.length === 1 &&
         weaponResults[0] &&
-        weaponResults[0].properties.some((p) => p.property.name === 'Versatile')
+        weaponResults[0].Weapon.WeaponPropertyInstance.some(
+          (p) => p.Property.name === 'Versatile'
+        )
       ) {
         setVersatile(true);
       } else {
@@ -216,28 +212,28 @@ const WeaponRoller = ({
             {weapons.map((weapon, index) => (
               <SingleWeapon
                 key={index}
-                weapon={weapon}
+                weaponData={weapon.Weapon}
                 abilities={abilities}
                 logPush={logPush}
                 isVersatile={versatile}
-                isProficient={weaponProficiencies.includes(weapon.id)}
+                isProficient={weaponProficiencies.includes(weapon.weaponId)}
                 proficiencyBonus={proficiencyBonus}
               />
             ))}
             {customWeaponAttacks.map((weapon, index) => (
               <SingleWeapon
                 key={index}
-                weapon={{
+                weaponData={{
                   name: weapon.name,
                   damage: weapon.damage,
-                  properties: [],
+                  SpecialProperties: [],
+                  WeaponPropertyInstance: [],
                   ammunition: null,
                   ammunitionId: null,
                   id: Math.floor(Math.random() * 100000),
                   isRanged: false,
                   isSimple: true,
                 }}
-                flatDamage={weapon.flatDamage}
                 abilities={abilities}
                 logPush={logPush}
                 isProficient={weapon.isProficient}

@@ -1,11 +1,11 @@
 'use client';
-import { CharacterInfo, SubClassInfo } from '@/lib/types/types';
 import { memoizeGetSubclass } from '../../globalCache';
 import { getFeat } from '@/lib/actions/db/feat/read.actions';
 import {
   linkCharacterToFeat,
   linkCharacterToSubClass,
 } from '@/lib/actions/db/character/update.actions';
+import { CharacterInfo, SubClassInfo } from '@/lib/types/modelInfo';
 export const applyPendingModels = async (
   character: CharacterInfo
 ): Promise<CharacterInfo> => {
@@ -51,15 +51,6 @@ export const applyPendingModels = async (
         return character;
       }
 
-      newCharacter.state.features = [
-        ...(newCharacter.state?.features || []),
-        ...subclassData.features.map((f) => {
-          return {
-            feature: f,
-            source: subclassData.name,
-          };
-        }),
-      ];
       newCharacter.state.pendingLinks.subClass =
         newCharacter.state.pendingLinks.subClass.filter((s) => s !== subclass);
     }
@@ -81,15 +72,7 @@ export const applyPendingModels = async (
         console.error('No state found on character');
         return character;
       }
-      newCharacter.state.features = [
-        ...(newCharacter.state?.features || []),
-        ...featData.features.map((f) => {
-          return {
-            feature: f,
-            source: featData.name,
-          };
-        }),
-      ];
+
       newCharacter.state.pendingLinks.feats =
         newCharacter.state.pendingLinks.feats.filter((f) => f !== feat);
     }

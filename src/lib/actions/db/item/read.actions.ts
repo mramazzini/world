@@ -1,9 +1,10 @@
 'use server';
-import { ItemInfo, QueryParams } from '@/lib/types/types';
+import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
 import { DBMetadata } from '@/lib/types/metadata';
+import { ItemInfo } from '@/lib/types/modelInfo';
 
 export const getItemsMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
@@ -24,14 +25,33 @@ export const getItems = async (): Promise<ItemInfo[]> => {
   const db = new PrismaClient();
   const res = await db.item.findMany({
     include: {
-      Weapon: {
+      ItemWeaponData: {
         include: {
-          ammunition: true,
+          Weapon: {
+            include: {
+              ammunition: true,
+              SpecialProperties: true,
+              WeaponPropertyInstance: {
+                include: {
+                  Property: true,
+                },
+              },
+            },
+          },
         },
       },
       Spell: true,
-      Armor: true,
-      Tool: true,
+      Features: true,
+      Armor: {
+        include: {
+          Features: true,
+        },
+      },
+      Tool: {
+        include: {
+          Features: true,
+        },
+      },
       AmmunitionFor: true,
 
       EquipmentPack: {
@@ -60,14 +80,33 @@ export const getItem = async (
         name: query,
       },
       include: {
-        Weapon: {
+        ItemWeaponData: {
           include: {
-            ammunition: true,
+            Weapon: {
+              include: {
+                ammunition: true,
+                SpecialProperties: true,
+                WeaponPropertyInstance: {
+                  include: {
+                    Property: true,
+                  },
+                },
+              },
+            },
           },
         },
         Spell: true,
-        Armor: true,
-        Tool: true,
+        Features: true,
+        Armor: {
+          include: {
+            Features: true,
+          },
+        },
+        Tool: {
+          include: {
+            Features: true,
+          },
+        },
         AmmunitionFor: true,
 
         EquipmentPack: {
@@ -90,14 +129,33 @@ export const getItem = async (
         id: query,
       },
       include: {
-        Weapon: {
+        ItemWeaponData: {
           include: {
-            ammunition: true,
+            Weapon: {
+              include: {
+                ammunition: true,
+                SpecialProperties: true,
+                WeaponPropertyInstance: {
+                  include: {
+                    Property: true,
+                  },
+                },
+              },
+            },
           },
         },
         Spell: true,
-        Armor: true,
-        Tool: true,
+        Features: true,
+        Armor: {
+          include: {
+            Features: true,
+          },
+        },
+        Tool: {
+          include: {
+            Features: true,
+          },
+        },
         AmmunitionFor: true,
 
         EquipmentPack: {
@@ -129,14 +187,33 @@ export const getItemChunk = async (
         relationalFields: queryInfo.relationalFields,
       }),
       include: {
-        Weapon: {
+        ItemWeaponData: {
           include: {
-            ammunition: true,
+            Weapon: {
+              include: {
+                ammunition: true,
+                SpecialProperties: true,
+                WeaponPropertyInstance: {
+                  include: {
+                    Property: true,
+                  },
+                },
+              },
+            },
           },
         },
         Spell: true,
-        Armor: true,
-        Tool: true,
+        Features: true,
+        Armor: {
+          include: {
+            Features: true,
+          },
+        },
+        Tool: {
+          include: {
+            Features: true,
+          },
+        },
         AmmunitionFor: true,
 
         EquipmentPack: {
@@ -162,14 +239,33 @@ export const getItemChunk = async (
     }),
 
     include: {
-      Weapon: {
+      ItemWeaponData: {
         include: {
-          ammunition: true,
+          Weapon: {
+            include: {
+              ammunition: true,
+              SpecialProperties: true,
+              WeaponPropertyInstance: {
+                include: {
+                  Property: true,
+                },
+              },
+            },
+          },
         },
       },
       Spell: true,
-      Armor: true,
-      Tool: true,
+      Features: true,
+      Armor: {
+        include: {
+          Features: true,
+        },
+      },
+      Tool: {
+        include: {
+          Features: true,
+        },
+      },
       AmmunitionFor: true,
 
       EquipmentPack: {

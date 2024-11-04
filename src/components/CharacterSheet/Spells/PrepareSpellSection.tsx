@@ -1,5 +1,5 @@
 'use client';
-import { CharacterInfo } from '@/lib/types/types';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 import PreparedSpellView from './PreparedSpellView';
 
 interface Props {

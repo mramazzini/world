@@ -1,9 +1,10 @@
 'use server';
-import { CreatureInfo, QueryParams } from '@/lib/types/types';
+import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
 import { DBMetadata } from '@/lib/types/metadata';
+import { CreatureInfo } from '@/lib/types/modelInfo';
 
 export const getCreaturesMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
@@ -31,14 +32,34 @@ export const getCreatures = async (): Promise<CreatureInfo[]> => {
       },
       wieldingItems: {
         include: {
-          Weapon: {
+          Features: true,
+
+          ItemWeaponData: {
             include: {
-              ammunition: true,
+              Weapon: {
+                include: {
+                  SpecialProperties: true,
+                  ammunition: true,
+                  WeaponPropertyInstance: {
+                    include: {
+                      Property: true,
+                    },
+                  },
+                },
+              },
             },
           },
           Spell: true,
-          Armor: true,
-          Tool: true,
+          Armor: {
+            include: {
+              Features: true,
+            },
+          },
+          Tool: {
+            include: {
+              Features: true,
+            },
+          },
           AmmunitionFor: true,
 
           EquipmentPack: {
@@ -55,14 +76,32 @@ export const getCreatures = async (): Promise<CreatureInfo[]> => {
       },
       armorEquipped: {
         include: {
-          Weapon: {
+          ItemWeaponData: {
             include: {
-              ammunition: true,
+              Weapon: {
+                include: {
+                  SpecialProperties: true,
+                  ammunition: true,
+                  WeaponPropertyInstance: {
+                    include: {
+                      Property: true,
+                    },
+                  },
+                },
+              },
             },
           },
           Spell: true,
-          Armor: true,
-          Tool: true,
+          Armor: {
+            include: {
+              Features: true,
+            },
+          },
+          Tool: {
+            include: {
+              Features: true,
+            },
+          },
           AmmunitionFor: true,
 
           EquipmentPack: {
@@ -75,6 +114,7 @@ export const getCreatures = async (): Promise<CreatureInfo[]> => {
               username: true,
             },
           },
+          Features: true,
         },
       },
       spellsPrepared: true,
@@ -84,16 +124,36 @@ export const getCreatures = async (): Promise<CreatureInfo[]> => {
           Spell: true,
         },
       },
+      Features: true,
       shieldEquipped: {
         include: {
-          Weapon: {
+          Features: true,
+          ItemWeaponData: {
             include: {
-              ammunition: true,
+              Weapon: {
+                include: {
+                  SpecialProperties: true,
+                  ammunition: true,
+                  WeaponPropertyInstance: {
+                    include: {
+                      Property: true,
+                    },
+                  },
+                },
+              },
             },
           },
           Spell: true,
-          Armor: true,
-          Tool: true,
+          Armor: {
+            include: {
+              Features: true,
+            },
+          },
+          Tool: {
+            include: {
+              Features: true,
+            },
+          },
           AmmunitionFor: true,
 
           EquipmentPack: {
@@ -131,14 +191,34 @@ export const getCreature = async (
         },
         wieldingItems: {
           include: {
-            Weapon: {
+            Features: true,
+
+            ItemWeaponData: {
               include: {
-                ammunition: true,
+                Weapon: {
+                  include: {
+                    SpecialProperties: true,
+                    ammunition: true,
+                    WeaponPropertyInstance: {
+                      include: {
+                        Property: true,
+                      },
+                    },
+                  },
+                },
               },
             },
             Spell: true,
-            Armor: true,
-            Tool: true,
+            Armor: {
+              include: {
+                Features: true,
+              },
+            },
+            Tool: {
+              include: {
+                Features: true,
+              },
+            },
             AmmunitionFor: true,
 
             EquipmentPack: {
@@ -155,14 +235,32 @@ export const getCreature = async (
         },
         armorEquipped: {
           include: {
-            Weapon: {
+            ItemWeaponData: {
               include: {
-                ammunition: true,
+                Weapon: {
+                  include: {
+                    SpecialProperties: true,
+                    ammunition: true,
+                    WeaponPropertyInstance: {
+                      include: {
+                        Property: true,
+                      },
+                    },
+                  },
+                },
               },
             },
             Spell: true,
-            Armor: true,
-            Tool: true,
+            Armor: {
+              include: {
+                Features: true,
+              },
+            },
+            Tool: {
+              include: {
+                Features: true,
+              },
+            },
             AmmunitionFor: true,
 
             EquipmentPack: {
@@ -175,6 +273,7 @@ export const getCreature = async (
                 username: true,
               },
             },
+            Features: true,
           },
         },
         spellsPrepared: true,
@@ -184,16 +283,36 @@ export const getCreature = async (
             Spell: true,
           },
         },
+        Features: true,
         shieldEquipped: {
           include: {
-            Weapon: {
+            Features: true,
+            ItemWeaponData: {
               include: {
-                ammunition: true,
+                Weapon: {
+                  include: {
+                    SpecialProperties: true,
+                    ammunition: true,
+                    WeaponPropertyInstance: {
+                      include: {
+                        Property: true,
+                      },
+                    },
+                  },
+                },
               },
             },
             Spell: true,
-            Armor: true,
-            Tool: true,
+            Armor: {
+              include: {
+                Features: true,
+              },
+            },
+            Tool: {
+              include: {
+                Features: true,
+              },
+            },
             AmmunitionFor: true,
 
             EquipmentPack: {
@@ -225,14 +344,34 @@ export const getCreature = async (
         },
         wieldingItems: {
           include: {
-            Weapon: {
+            Features: true,
+
+            ItemWeaponData: {
               include: {
-                ammunition: true,
+                Weapon: {
+                  include: {
+                    SpecialProperties: true,
+                    ammunition: true,
+                    WeaponPropertyInstance: {
+                      include: {
+                        Property: true,
+                      },
+                    },
+                  },
+                },
               },
             },
             Spell: true,
-            Armor: true,
-            Tool: true,
+            Armor: {
+              include: {
+                Features: true,
+              },
+            },
+            Tool: {
+              include: {
+                Features: true,
+              },
+            },
             AmmunitionFor: true,
 
             EquipmentPack: {
@@ -249,14 +388,32 @@ export const getCreature = async (
         },
         armorEquipped: {
           include: {
-            Weapon: {
+            ItemWeaponData: {
               include: {
-                ammunition: true,
+                Weapon: {
+                  include: {
+                    SpecialProperties: true,
+                    ammunition: true,
+                    WeaponPropertyInstance: {
+                      include: {
+                        Property: true,
+                      },
+                    },
+                  },
+                },
               },
             },
             Spell: true,
-            Armor: true,
-            Tool: true,
+            Armor: {
+              include: {
+                Features: true,
+              },
+            },
+            Tool: {
+              include: {
+                Features: true,
+              },
+            },
             AmmunitionFor: true,
 
             EquipmentPack: {
@@ -269,25 +426,46 @@ export const getCreature = async (
                 username: true,
               },
             },
+            Features: true,
           },
         },
         spellsPrepared: true,
+        freeSpells: true,
         CreatureLimitedSpells: {
           include: {
             Spell: true,
           },
         },
-        freeSpells: true,
+        Features: true,
         shieldEquipped: {
           include: {
-            Weapon: {
+            Features: true,
+            ItemWeaponData: {
               include: {
-                ammunition: true,
+                Weapon: {
+                  include: {
+                    SpecialProperties: true,
+                    ammunition: true,
+                    WeaponPropertyInstance: {
+                      include: {
+                        Property: true,
+                      },
+                    },
+                  },
+                },
               },
             },
             Spell: true,
-            Armor: true,
-            Tool: true,
+            Armor: {
+              include: {
+                Features: true,
+              },
+            },
+            Tool: {
+              include: {
+                Features: true,
+              },
+            },
             AmmunitionFor: true,
 
             EquipmentPack: {
@@ -328,14 +506,34 @@ export const getCreatureChunk = async (
         },
         wieldingItems: {
           include: {
-            Weapon: {
+            Features: true,
+
+            ItemWeaponData: {
               include: {
-                ammunition: true,
+                Weapon: {
+                  include: {
+                    SpecialProperties: true,
+                    ammunition: true,
+                    WeaponPropertyInstance: {
+                      include: {
+                        Property: true,
+                      },
+                    },
+                  },
+                },
               },
             },
             Spell: true,
-            Armor: true,
-            Tool: true,
+            Armor: {
+              include: {
+                Features: true,
+              },
+            },
+            Tool: {
+              include: {
+                Features: true,
+              },
+            },
             AmmunitionFor: true,
 
             EquipmentPack: {
@@ -352,14 +550,32 @@ export const getCreatureChunk = async (
         },
         armorEquipped: {
           include: {
-            Weapon: {
+            ItemWeaponData: {
               include: {
-                ammunition: true,
+                Weapon: {
+                  include: {
+                    SpecialProperties: true,
+                    ammunition: true,
+                    WeaponPropertyInstance: {
+                      include: {
+                        Property: true,
+                      },
+                    },
+                  },
+                },
               },
             },
             Spell: true,
-            Armor: true,
-            Tool: true,
+            Armor: {
+              include: {
+                Features: true,
+              },
+            },
+            Tool: {
+              include: {
+                Features: true,
+              },
+            },
             AmmunitionFor: true,
 
             EquipmentPack: {
@@ -372,6 +588,7 @@ export const getCreatureChunk = async (
                 username: true,
               },
             },
+            Features: true,
           },
         },
         spellsPrepared: true,
@@ -381,16 +598,36 @@ export const getCreatureChunk = async (
             Spell: true,
           },
         },
+        Features: true,
         shieldEquipped: {
           include: {
-            Weapon: {
+            Features: true,
+            ItemWeaponData: {
               include: {
-                ammunition: true,
+                Weapon: {
+                  include: {
+                    SpecialProperties: true,
+                    ammunition: true,
+                    WeaponPropertyInstance: {
+                      include: {
+                        Property: true,
+                      },
+                    },
+                  },
+                },
               },
             },
             Spell: true,
-            Armor: true,
-            Tool: true,
+            Armor: {
+              include: {
+                Features: true,
+              },
+            },
+            Tool: {
+              include: {
+                Features: true,
+              },
+            },
             AmmunitionFor: true,
 
             EquipmentPack: {
@@ -425,14 +662,34 @@ export const getCreatureChunk = async (
       },
       wieldingItems: {
         include: {
-          Weapon: {
+          Features: true,
+
+          ItemWeaponData: {
             include: {
-              ammunition: true,
+              Weapon: {
+                include: {
+                  SpecialProperties: true,
+                  ammunition: true,
+                  WeaponPropertyInstance: {
+                    include: {
+                      Property: true,
+                    },
+                  },
+                },
+              },
             },
           },
           Spell: true,
-          Armor: true,
-          Tool: true,
+          Armor: {
+            include: {
+              Features: true,
+            },
+          },
+          Tool: {
+            include: {
+              Features: true,
+            },
+          },
           AmmunitionFor: true,
 
           EquipmentPack: {
@@ -449,14 +706,32 @@ export const getCreatureChunk = async (
       },
       armorEquipped: {
         include: {
-          Weapon: {
+          ItemWeaponData: {
             include: {
-              ammunition: true,
+              Weapon: {
+                include: {
+                  SpecialProperties: true,
+                  ammunition: true,
+                  WeaponPropertyInstance: {
+                    include: {
+                      Property: true,
+                    },
+                  },
+                },
+              },
             },
           },
           Spell: true,
-          Armor: true,
-          Tool: true,
+          Armor: {
+            include: {
+              Features: true,
+            },
+          },
+          Tool: {
+            include: {
+              Features: true,
+            },
+          },
           AmmunitionFor: true,
 
           EquipmentPack: {
@@ -469,6 +744,7 @@ export const getCreatureChunk = async (
               username: true,
             },
           },
+          Features: true,
         },
       },
       spellsPrepared: true,
@@ -478,16 +754,36 @@ export const getCreatureChunk = async (
           Spell: true,
         },
       },
+      Features: true,
       shieldEquipped: {
         include: {
-          Weapon: {
+          Features: true,
+          ItemWeaponData: {
             include: {
-              ammunition: true,
+              Weapon: {
+                include: {
+                  SpecialProperties: true,
+                  ammunition: true,
+                  WeaponPropertyInstance: {
+                    include: {
+                      Property: true,
+                    },
+                  },
+                },
+              },
             },
           },
           Spell: true,
-          Armor: true,
-          Tool: true,
+          Armor: {
+            include: {
+              Features: true,
+            },
+          },
+          Tool: {
+            include: {
+              Features: true,
+            },
+          },
           AmmunitionFor: true,
 
           EquipmentPack: {

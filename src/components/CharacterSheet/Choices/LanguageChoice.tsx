@@ -51,11 +51,9 @@ const LanguageChoice = ({ choice, updateSelections }: Props) => {
             }`}
             onChange={(e) => {
               const index = e.target.value;
-              console.log(index);
               const newSelections = [...selections];
 
               newSelections[choiceIndex] = Language[index as Language];
-              console.log(newSelections);
               setSelections(newSelections);
             }}
           >

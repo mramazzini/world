@@ -6,7 +6,7 @@ import {
   gamingKitIds,
   instrumentIds,
   toolIds,
-} from '../Items/Tools/tools.seed';
+} from '../Items/Tools/Tool.seed';
 import {
   artisanToolItemIds,
   gamingKitItemIds,

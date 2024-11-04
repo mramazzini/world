@@ -1,27 +1,14 @@
-import { WeaponProperties } from '@/lib/globalVars';
-import { WeaponPropertyNames } from '@/lib/types/types';
 import { DamageTypes, Prisma } from '@prisma/client';
 import { itemIds } from '../ItemIds';
+import generateId from '../../_helpers/generateId';
 
 const { BLUDGEONING, PIERCING, SLASHING } = DamageTypes;
 
 //helper functions
 const d = (damage: number, type: DamageTypes): PrismaJson.Damage[] => [
-  { dice: damage, numberOfDice: 1, type },
+  { formula: `1d${damage}`, type },
 ];
-const p = (property: string[]): PrismaJson.WeaponProperty[] => {
-  const res = property.map((prop) => {
-    if (
-      !Object.values(WeaponPropertyNames).includes(prop as WeaponPropertyNames)
-    ) {
-      throw new Error(`Property ${prop} is not a valid weapon property`);
-    }
-    return {
-      property: WeaponProperties[prop as WeaponPropertyNames],
-    };
-  });
-  return res;
-};
+
 const Weapons: Prisma.WeaponCreateManyInput[] = [
   {
     id: 1,
@@ -29,7 +16,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     damage: d(4, BLUDGEONING),
     isSimple: true,
     isRanged: false,
-    properties: p(['Light']),
   },
   {
     id: 2,
@@ -37,14 +23,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     damage: d(4, PIERCING),
     isSimple: true,
     isRanged: false,
-
-    properties: p(['Finesse', 'Light']).concat([
-      {
-        property: WeaponProperties.Thrown,
-        range: 20,
-        maxRange: 60,
-      },
-    ]),
   },
   {
     id: 3,
@@ -52,8 +30,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     damage: d(8, BLUDGEONING),
     isSimple: true,
     isRanged: false,
-
-    properties: p(['Two-Handed']),
   },
   {
     id: 4,
@@ -61,14 +37,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     damage: d(6, SLASHING),
     isSimple: true,
     isRanged: false,
-
-    properties: p(['Light']).concat([
-      {
-        property: WeaponProperties.Thrown,
-        range: 20,
-        maxRange: 60,
-      },
-    ]),
   },
   {
     id: 5,
@@ -76,14 +44,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: true,
     damage: d(6, PIERCING),
     isRanged: false,
-
-    properties: [
-      {
-        property: WeaponProperties.Thrown,
-        range: 30,
-        maxRange: 120,
-      },
-    ],
   },
   {
     isSimple: true,
@@ -91,13 +51,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     name: 'Light Hammer',
     isRanged: false,
     damage: d(4, BLUDGEONING),
-    properties: p(['Light']).concat([
-      {
-        property: WeaponProperties.Thrown,
-        range: 20,
-        maxRange: 60,
-      },
-    ]),
   },
   {
     id: 7,
@@ -111,16 +64,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     name: 'Quarterstaff',
     damage: d(6, BLUDGEONING),
     isSimple: true,
-    properties: [
-      {
-        property: WeaponProperties.Versatile,
-        versatileDamage: {
-          type: DamageTypes.BLUDGEONING,
-          dice: 8,
-          numberOfDice: 1,
-        },
-      },
-    ],
   },
   {
     id: 9,
@@ -128,28 +71,12 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     name: 'Sickle',
     isRanged: false,
     damage: d(4, SLASHING),
-    properties: p(['Light']),
   },
   {
     id: 10,
     name: 'Spear',
     isSimple: true,
     damage: d(6, PIERCING),
-    properties: [
-      {
-        property: WeaponProperties.Thrown,
-        range: 20,
-        maxRange: 60,
-      },
-      {
-        property: WeaponProperties.Versatile,
-        versatileDamage: {
-          type: DamageTypes.PIERCING,
-          dice: 8,
-          numberOfDice: 1,
-        },
-      },
-    ],
   },
   {
     id: 11,
@@ -157,13 +84,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: true,
     isSimple: true,
     damage: d(8, PIERCING),
-    properties: p(['Ammunition', 'Loading', 'Two-Handed']).concat([
-      {
-        property: WeaponProperties.Range,
-        range: 80,
-        maxRange: 320,
-      },
-    ]),
+
     ammunitionId: itemIds.crossbowBolt,
   },
   {
@@ -172,16 +93,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: true,
     isSimple: true,
     damage: d(4, PIERCING),
-    properties: [
-      {
-        property: WeaponProperties.Finesse,
-      },
-      {
-        property: WeaponProperties.Thrown,
-        range: 20,
-        maxRange: 60,
-      },
-    ],
   },
   {
     id: 13,
@@ -189,13 +100,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: true,
     name: 'Shortbow',
     damage: d(6, PIERCING),
-    properties: p(['Ammunition', 'Two-Handed']).concat([
-      {
-        property: WeaponProperties.Range,
-        range: 80,
-        maxRange: 320,
-      },
-    ]),
+
     ammunitionId: itemIds.arrow,
   },
   {
@@ -204,16 +109,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: true,
     name: 'Sling',
     damage: d(4, BLUDGEONING),
-    properties: [
-      {
-        property: WeaponProperties.Ammunition,
-      },
-      {
-        property: WeaponProperties.Range,
-        range: 30,
-        maxRange: 120,
-      },
-    ],
+
     ammunitionId: itemIds.slingBullet,
   },
   {
@@ -222,16 +118,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: false,
     isSimple: false,
     damage: d(8, SLASHING),
-    properties: [
-      {
-        property: WeaponProperties.Versatile,
-        versatileDamage: {
-          type: DamageTypes.SLASHING,
-          dice: 10,
-          numberOfDice: 1,
-        },
-      },
-    ],
   },
   {
     id: 16,
@@ -246,7 +132,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: false,
     name: 'Glaive',
     damage: d(10, SLASHING),
-    properties: p(['Heavy', 'Reach', 'Two-Handed']),
   },
   {
     id: 18,
@@ -254,14 +139,12 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
     name: 'Greataxe',
     damage: d(12, SLASHING),
-    properties: p(['Heavy', 'Two-Handed']),
   },
   {
     id: 19,
     isSimple: false,
     name: 'Greatsword',
-    damage: [{ dice: 6, numberOfDice: 2, type: SLASHING }],
-    properties: p(['Heavy', 'Two-Handed']),
+    damage: [{ formula: '2d6', type: SLASHING }],
   },
   {
     id: 20,
@@ -269,7 +152,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: false,
     name: 'Halberd',
     damage: d(10, SLASHING),
-    properties: p(['Heavy', 'Reach', 'Two-Handed']),
   },
   {
     id: 21,
@@ -277,26 +159,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     name: 'Lance',
     isRanged: false,
     damage: d(12, PIERCING),
-    properties: p(['Reach']).concat([
-      {
-        property: WeaponProperties.Special,
-        special: [
-          {
-            name: 'Lance Disadvantage',
-            description:
-              'You have disadvantage when you use a lance to attack a target within 5 feet of you. Also, a lance requires two hands to wield when you aren’t mounted.',
-            effect: {
-              attackRollAdvantages: [
-                {
-                  situation: 'Attacking with a lance while 5ft from target',
-                  disadvantage: true,
-                },
-              ],
-            },
-          },
-        ],
-      },
-    ]),
   },
   {
     id: 22,
@@ -304,24 +166,13 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: false,
     name: 'Longsword',
     damage: d(8, SLASHING),
-    properties: [
-      {
-        property: WeaponProperties.Versatile,
-        versatileDamage: {
-          type: DamageTypes.SLASHING,
-          dice: 10,
-          numberOfDice: 1,
-        },
-      },
-    ],
   },
   {
     id: 23,
     isRanged: false,
     isSimple: false,
     name: 'Maul',
-    damage: [{ dice: 6, numberOfDice: 2, type: BLUDGEONING }],
-    properties: p(['Heavy', 'Two-Handed']),
+    damage: [{ formula: '2d6', type: BLUDGEONING }],
   },
   {
     id: 24,
@@ -336,7 +187,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isSimple: false,
     name: 'Pike',
     damage: d(10, PIERCING),
-    properties: p(['Heavy', 'Reach', 'Two-Handed']),
   },
   {
     id: 26,
@@ -344,7 +194,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     name: 'Rapier',
     isSimple: false,
     damage: d(8, PIERCING),
-    properties: p(['Finesse']),
   },
   {
     id: 27,
@@ -352,7 +201,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: false,
     isSimple: false,
     damage: d(6, SLASHING),
-    properties: p(['Finesse', 'Light']),
   },
   {
     id: 28,
@@ -360,7 +208,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: false,
     name: 'Shortsword',
     damage: d(6, PIERCING),
-    properties: p(['Finesse', 'Light']),
   },
   {
     id: 29,
@@ -368,21 +215,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: false,
     name: 'Trident',
     damage: d(6, PIERCING),
-    properties: [
-      {
-        property: WeaponProperties.Thrown,
-        range: 20,
-        maxRange: 60,
-      },
-      {
-        property: WeaponProperties.Versatile,
-        versatileDamage: {
-          type: DamageTypes.PIERCING,
-          dice: 8,
-          numberOfDice: 1,
-        },
-      },
-    ],
   },
   {
     id: 30,
@@ -397,16 +229,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: false,
     isSimple: false,
     damage: d(8, BLUDGEONING),
-    properties: [
-      {
-        property: WeaponProperties.Versatile,
-        versatileDamage: {
-          type: DamageTypes.BLUDGEONING,
-          dice: 10,
-          numberOfDice: 1,
-        },
-      },
-    ],
   },
   {
     id: 32,
@@ -414,7 +236,6 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: false,
     isSimple: false,
     damage: d(4, SLASHING),
-    properties: p(['Finesse', 'Reach']),
   },
   {
     id: 33,
@@ -422,19 +243,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: true,
     isSimple: false,
     damage: d(1, PIERCING),
-    properties: [
-      {
-        property: WeaponProperties.Ammunition,
-      },
-      {
-        property: WeaponProperties.Loading,
-      },
-      {
-        property: WeaponProperties.Range,
-        range: 25,
-        maxRange: 100,
-      },
-    ],
+
     ammunitionId: itemIds.blowgunNeedle,
   },
   {
@@ -443,13 +252,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: true,
     isSimple: false,
     damage: d(6, PIERCING),
-    properties: p(['Ammunition', 'Light', 'Loading']).concat([
-      {
-        property: WeaponProperties.Range,
-        range: 30,
-        maxRange: 120,
-      },
-    ]),
+
     ammunitionId: itemIds.crossbowBolt,
   },
   {
@@ -458,13 +261,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: true,
     isSimple: false,
     damage: d(10, PIERCING),
-    properties: p(['Two-Handed', 'Ammunition', 'Heavy', 'Loading']).concat([
-      {
-        property: WeaponProperties.Range,
-        range: 100,
-        maxRange: 400,
-      },
-    ]),
+
     ammunitionId: itemIds.crossbowBolt,
   },
   {
@@ -473,13 +270,7 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     isRanged: true,
     isSimple: false,
     damage: d(8, PIERCING),
-    properties: p(['Ammunition', 'Heavy', 'Two-Handed']).concat([
-      {
-        property: WeaponProperties.Range,
-        range: 150,
-        maxRange: 600,
-      },
-    ]),
+
     ammunitionId: itemIds.arrow,
   },
   {
@@ -488,74 +279,12 @@ const Weapons: Prisma.WeaponCreateManyInput[] = [
     name: 'Net',
     isSimple: false,
     damage: [],
-    properties: [
-      {
-        property: WeaponProperties.Special,
-        special: [
-          {
-            name: 'Net',
-            description:
-              'A Large or smaller creature hit by a net is restrained until it is freed.\n\nA creature can use its action to make a DC 10 Strength check, freeing itself or another creature within its reach on a success. Dealing 5 slashing damage to the net (AC 10) also frees the creature without harming it, ending the effect and destroying the net. When you use an action, bonus action, or reaction to attack with a net, you can make only one attack regardless of the number of attacks you can normally make.\n\nA net has no effect on creatures that are formless, or creatures that are Huge or larger.',
-          },
-        ],
-      },
-      {
-        property: WeaponProperties.Thrown,
-        range: 5,
-        maxRange: 15,
-      },
-    ],
   },
   {
     id: 38,
     name: 'Hoopak',
     isSimple: false,
     damage: d(6, PIERCING),
-    properties: [
-      {
-        property: WeaponProperties.Ammunition,
-      },
-      {
-        property: WeaponProperties.Finesse,
-      },
-      {
-        property: WeaponProperties.Special,
-        special: [
-          {
-            name: 'Hoopak Melee',
-            description:
-              'When you make a melee attack with a hoopak, you ignore its ammunition property.',
-          },
-          {
-            name: 'Hoopak Ranged',
-            description:
-              'You can use the hoopak as a martial ranged weapon. If you do, it uses the ammunition property, uses sling bullets, and deals 1d4 bludgeoning damage on a hit.',
-          },
-        ],
-      },
-      {
-        property: WeaponProperties['Two-Handed'],
-      },
-      {
-        property: WeaponProperties.Range,
-        range: 40,
-        maxRange: 160,
-      },
-    ],
-  },
-  {
-    id: 39,
-    name: 'Planetar Greatsword',
-    isSimple: true,
-    damage: [{ dice: 6, numberOfDice: 4, type: SLASHING }],
-    properties: [
-      {
-        property: WeaponProperties.Heavy,
-      },
-      {
-        property: WeaponProperties['Two-Handed'],
-      },
-    ],
   },
 ];
 
@@ -598,45 +327,69 @@ const weaponIds = {
   longbow: 36,
   net: 37,
   hoopak: 38,
-  planetarGreatsword: 39,
 };
 
-const martialIds = Weapons.filter((w) => !w.isSimple)
-  .map((w) => w.id)
-  .filter((id) => id) as number[];
-const martialMeleeIds = Weapons.filter((w) => {
-  const { properties } = w;
-  const pr = properties as PrismaJson.WeaponProperty[];
-  return pr && pr.some((p) => p.property === WeaponProperties.Finesse);
-})
-  .map((w) => w.id)
-  .filter((id) => id) as number[];
+let count = 1;
 
-const martialRangedIds = Weapons.filter((w) => {
-  const { properties } = w;
-  const pr = properties as PrismaJson.WeaponProperty[];
-  return pr && pr.some((p) => p.property === WeaponProperties.Range);
+const WeaponSpecialFeatures: Prisma.FeatureCreateManyInput[] = [
+  {
+    weaponId: weaponIds.lance,
+    name: 'Reach',
+    description:
+      'This weapon adds 5 feet to your reach when you attack with it, as well as when determining your reach for opportunity attacks with it.',
+  },
+  {
+    weaponId: weaponIds.net,
+    name: 'Use Net',
+    description:
+      'A Large or smaller creature hit by a net is restrained until it is freed. A net has no effect on creatures that are formless, or creatures that are Huge or larger. A creature can use its action to make a DC 10 Strength check, freeing itself or another creature within its reach on a success. Dealing 5 slashing damage to the net (AC 10) also frees the creature without harming it, ending the effect and destroying the net. When you use an action, bonus action, or reaction to attack with a net, you can make only one attack regardless of the number of attacks you can normally make.',
+  },
+].map((feature, index, arr) => {
+  const featureParent = Weapons.find(
+    (weapon) => weapon.id === feature.weaponId
+  );
+  if (!featureParent?.name) throw new Error('Feature must have a name');
+  const id = generateId('weapon', feature.name, featureParent.name, count);
+  count++;
+  const nextWeaponFeature = arr[index + 1];
+  if (!nextWeaponFeature) return { ...feature, id };
+  if (nextWeaponFeature.weaponId !== feature.weaponId) {
+    count = 1;
+  }
+  return { ...feature, id };
 });
 
+const martialIds = Weapons.filter((w) => !w.isSimple).map(
+  (w) => w.id
+) as number[];
+const martialMeleeIds = Weapons.filter((w) => {
+  const isMelee = !w.isRanged;
+  const isMartial = !w.isSimple;
+  return isMelee && isMartial;
+}).map((w) => w.id) as number[];
+
+const martialRangedIds = Weapons.filter((w) => {
+  const isRanged = w.isRanged;
+  const isMartial = !w.isSimple;
+  return isRanged && isMartial;
+}).map((w) => w.id) as number[];
+
 const simpleMeleeIds = Weapons.filter((w) => {
-  const { properties } = w;
-  const pr = properties as PrismaJson.WeaponProperty[];
-  return pr && pr.some((p) => p.property === WeaponProperties.Finesse);
-})
-  .map((w) => w.id)
-  .filter((id) => id) as number[];
+  const isMelee = !w.isRanged;
+  const isSimple = w.isSimple;
+  return isMelee && isSimple;
+}).map((w) => w.id) as number[];
 
 const simpleRangedIds = Weapons.filter((w) => {
-  const { properties } = w;
-  const pr = properties as PrismaJson.WeaponProperty[];
-  return pr && pr.some((p) => p.property === WeaponProperties.Range);
-})
-  .map((w) => w.id)
-  .filter((id) => id) as number[];
+  const isRanged = w.isRanged;
+  const isSimple = w.isSimple;
+  return isRanged && isSimple;
+}).map((w) => w.id) as number[];
 
 const simpleIds = Weapons.filter((w) => w.isSimple)
   .map((w) => w.id)
   .filter((id) => id) as number[];
+
 export {
   weaponIds,
   Weapons,
@@ -646,4 +399,5 @@ export {
   martialRangedIds,
   simpleMeleeIds,
   simpleRangedIds,
+  WeaponSpecialFeatures,
 };

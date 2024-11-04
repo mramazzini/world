@@ -11,18 +11,20 @@ type Tab =
   | 'item'
   | 'subclass'
   | 'species'
-  | 'subspecies';
+  | 'subspecies'
+  | 'creature';
 
 const Stats = () => {
   const [tab, setTab] = useState<Tab>('species');
-  const classImg = '/cleric.webp';
-  const backgroundImg = '/runecarver.webp';
-  const itemImg = '/chainmail.webp';
-  const subclassImg = '/horizonwalker.webp';
-  const speciesImg = '/aasimar.webp';
-  const subspeciesImg = '/stouthalfling.webp';
+  const classImg = '/Ranger.webp';
+  const backgroundImg = '/UrbanBountyHunter.webp';
+  const itemImg = '/SpikedArmor.webp';
+  const subclassImg = '/PathOfTheGiant.webp';
+  const speciesImg = '/AirGenasi.webp';
+  const subspeciesImg = '/BronzeDragonborn.webp';
+  const creatureImg = '/GiantApe.webp';
   useEffect(() => {
-    const random = Math.floor(Math.random() * 6);
+    const random = Math.floor(Math.random() * 7);
     const tabs: Tab[] = [
       'class',
       'background',
@@ -30,6 +32,7 @@ const Stats = () => {
       'subclass',
       'species',
       'subspecies',
+      'creature',
     ];
     setTab(tabs[random]);
   }, []);
@@ -69,7 +72,11 @@ const Stats = () => {
                           ? subclassImg
                           : category == 'species'
                             ? speciesImg
-                            : subspeciesImg
+                            : category == 'subspecies'
+                              ? subspeciesImg
+                              : category == 'creature'
+                                ? creatureImg
+                                : creatureImg
                 }`}
                 alt={category}
                 width={1024}

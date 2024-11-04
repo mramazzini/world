@@ -1,28 +1,14 @@
 import {
   Ability,
-  Armor,
   ArmorType,
-  Background,
-  Character,
-  Class,
   DamageTypes,
-  EquipmentPack,
-  Feat,
-  Item,
   Language,
-  Message,
-  Species,
   Skill,
   Spell,
-  SpellList,
   SubClass,
-  Tool,
-  Weapon,
-  SubSpecies,
-  Comment,
-  Creature,
   CreatureLimitedSpell,
 } from '@prisma/client';
+import { CharacterInfo } from './modelInfo';
 
 export enum Pages {
   Class = 'Class',
@@ -44,68 +30,11 @@ export interface Badge {
   text: string;
   color: 'badge-primary' | 'badge-secondary' | 'badge-accent' | 'badge-neutral';
 }
-export interface ClassInfo extends Class {
-  SubClasses: SubClass[];
-  SpellList: SpellList | null;
-  User: {
-    username: string | null;
-  } | null;
-}
-export interface FeatInfo extends Feat {
-  User: {
-    username: string | null;
-  } | null;
-}
-interface ClassWithSpellList extends Class {
-  SpellList: SpellListInfo | null;
-}
-export interface CharacterInfo extends Character {
-  User: {
-    id: number;
-    username: string | null;
-  } | null;
-  Background: Background | null;
-  Classes: ClassWithSpellList[] | null;
-  SubClasses: SubClass[] | null;
-  Feats: Feat[] | null;
-  Species: Species | null;
-  SubSpecies: SubSpecies | null;
 
-  // Inventory: any;
-}
 export interface CreatureLimitedSpellWithSpell extends CreatureLimitedSpell {
   Spell: Spell;
 }
 
-export interface CreatureInfo extends Creature {
-  User: {
-    username: string | null;
-  } | null;
-  wieldingItems: ItemInfo[];
-  armorEquipped: ItemInfo | null;
-  shieldEquipped: ItemInfo | null;
-  spellsPrepared: Spell[];
-  freeSpells: Spell[];
-  CreatureLimitedSpells: CreatureLimitedSpellWithSpell[];
-}
-
-export interface BackgroundInfo extends Background {
-  User: {
-    username: string | null;
-  } | null;
-}
-export interface ArmorInfo extends Armor {}
-export interface ToolInfo extends Tool {}
-
-export interface SubClassInfo extends SubClass {
-  Class: {
-    name: string | null;
-  } | null;
-
-  User: {
-    username: string | null;
-  } | null;
-}
 export enum ASIorFeat {
   ASI = 'ASI',
   Feat = 'Feat',
@@ -124,12 +53,6 @@ export type CallbackOptions =
   | PrismaJson.QuantityItem[][]
   | SubClassID[]
   | ASIorFeat[];
-export interface SpellInfo extends Spell {
-  SpellLists: SpellList[];
-  User: {
-    username: string | null;
-  } | null;
-}
 
 export type ClassID = number;
 export type SubClassID = number;
@@ -231,9 +154,7 @@ export enum SpellFocus {
   ARTISAN_TOOLS = 'artisan tools',
   NONE = 'none',
 }
-export interface SpellListInfo extends SpellList {
-  Spells: Spell[];
-}
+
 export type ArmorID = number;
 export type WeaponID = number;
 export type ItemID = number;
@@ -331,26 +252,6 @@ declare global {
       from: string
     ) => Promise<PrismaJson.CharacterState> | PrismaJson.CharacterState;
 
-    interface Feature {
-      name: string;
-      description: string;
-      options?: string[];
-      extendedTable?: Table[];
-      postTableData?: string;
-      tableColumns?: TableColumnData[];
-      levels?: number[]; //levels that the feature is gained
-      itemsRequired?: ItemChoice[]; //required to have in inventory to use this feature. This is different from item cost. This is more like a key to unlock the feature, while cost gets spent. No need to put items here if they are in cost.
-      abilityScoreTriggers?: AbilityScoreTrigger;
-      effect?: FeatureEffect;
-      rolls?: RollRequest[];
-      leveledFeatures?: {
-        [K in Level]?: FeatureEffect;
-      };
-      hideInSheet?: boolean; //if true, this feature will not be displayed in the character sheet. Active features will still be useable.
-      // You choose a number of options from the options array equal to numberOfChoices. Each option is a FeatureEffect.
-      choices?: FeatureEffectChoice;
-    }
-
     interface Prerequisite {
       protocol: 'AND' | 'OR';
       data:
@@ -381,140 +282,6 @@ declare global {
         | Prerequisite[];
     }
 
-    interface Trigger {
-      onDamage?: {
-        all?: boolean;
-        rolledA: number[]; // damage rolled a specific num
-      };
-      onRoll: {
-        allowChaining?: boolean; // if true, the trigger can be used multiple times in a single roll (e.g., rerolling 1s and 2s, over and over)
-        attack?: {
-          all?: boolean;
-          rolledA: number[]; // attack roll rolled a specific num
-        };
-        damage?: {
-          all?: boolean;
-          rolledA: number[]; // damage roll rolled a specific num
-        };
-        savingThrow?: {
-          all?: boolean;
-          rolledA: number[]; // saving throw rolled a specific num
-        };
-
-        abilityCheck?: {
-          all?: boolean;
-          rolledA: number[]; // ability check rolled a specific num
-        };
-        skillCheck?: {
-          all?: boolean;
-          rolledA: number[]; // skill check rolled a specific num
-        };
-        initiative?: {
-          all?: boolean;
-          rolledA: number[]; // initiative rolled a specific num
-        };
-        d4?: {
-          all?: boolean;
-          rolledA: number[]; // d4 rolled a specific num
-        };
-        d6?: {
-          all?: boolean;
-          rolledA: number[]; // d6 rolled a specific num
-        };
-        d8?: {
-          all?: boolean;
-          rolledA: number[]; // d8 rolled a specific num
-        };
-        d10?: {
-          all?: boolean;
-          rolledA: number[]; // d10 rolled a specific num
-        };
-        d12?: {
-          all?: boolean;
-          rolledA: number[]; // d12 rolled a specific num
-        };
-        d20?: {
-          all?: boolean;
-          rolledA: number[]; // d20 rolled a specific num
-        };
-      };
-    }
-    interface FeatureEffect {
-      reroll?: {
-        damageDie?: Trigger;
-      };
-
-      ASI?: AbilityScoreChoice;
-      //Adds languages to the player's language proficiencies
-      languageChoices?: LanguageChoice;
-      //adds armor to the player's armor proficiencies
-      armorChoices?: ArmorChoice;
-      //adds weapons to the player's weapon proficiencies
-      weaponChoices?: WeaponChoice;
-      //adds tools to the player's tool proficiencies
-      toolChoices?: ToolChoice;
-      //adds skills to the player's skill proficiencies
-      skillChoices?: SkillChoice;
-      //i DONT REMEMBER TBH
-      abilityChoices?: AbilityChoice;
-      //Sets the metadata for the feature specific resource.
-      setResourceData?: CustomResource[];
-      ACBonus?: number; //Increases the player's AC
-      //Increases the player's resource amount
-      resourceAmountIncrease?: { resourceName: string; amount: number }[]; //cant go past max or below 0
-      //Adds certain spells to the player's prepared spells (like a cleric's domain spells)
-      preparedSpellChoices?: {
-        gain?: SpellChoice;
-        lose?: SpellChoice;
-      };
-      //adds certain spells to the player's available spells (like a wizard's spellbook)
-      availableSpellChoices?: {
-        gain?: SpellChoice;
-        lose?: SpellChoice;
-      };
-      customSpells?: CustomizedSpell[]; //custom spells need to be set, and are unique to the feature. They cannot be added or removed.
-      //regains spell slots
-      spellSlotRegained?: SpellSlots;
-      //grants advantage on certain skill checks
-      skillRollAdvantages?: SkillRollAdvantage[];
-      //grants advantage on certain ability checks
-      abilityRollAdvantages?: AbilityRollAdvantage[];
-      //grants bonuses to certain skill checks
-      skillRollBonuses?: SkillRollBonus[];
-      //grants bonuses to certain ability checks
-      abilityRollBonuses?: AbilityRollBonus[];
-      //grants bonuses to attack rolls
-      attackRollAdvantages?: AttackRollAdvantage[];
-      //grants bonuses to damage rolls
-      attackRollBonuses?: AttackRollBonus[];
-      //grants bonuses to saving throws
-      damageRollBonuses?: DamageRollBonus[];
-      //grants advantage to saving throws
-      savingThrowAdvantages?: AbilityRollAdvantage[];
-      //grants bonuses to saving throws
-      savingThrowBonuses?: AbilityRollBonus[];
-      //grants bonuses to speed
-      speedBonus?: number;
-      //grants the character the ability to ritual cast certain spells
-      ritualCasting?: {
-        spellPrepared: boolean;
-        spells?: SpellChoice;
-        fromSpellList?: true; //defaults to current spellList
-      };
-
-      blindSight?: QuantityDistance;
-      //grants the player items
-      itemsGranted?: ItemChoice;
-      //if the feature is active, you only gain the benefits when the feature is activated. Otherwise, the benefits are always active.
-      active?: {
-        levelRequired?: number;
-        cost?: Cost;
-        uses?: QuantityTime; //3 per day, 1 per short rest, etc. If not present, it is assumed to be at-will
-      };
-      //if you need to be equipped with certain items to use the feature
-      mustEquip?: EquipmentSetup[]; //or array
-    }
-
     interface WeaponPropertyChoice {
       default?: WeaponPropertyNames[];
       choices?: {
@@ -543,14 +310,6 @@ declare global {
       shieldless?: boolean; // If the player needs to be unshielded to use the feature.
     }
 
-    interface FeatureEffectChoice {
-      numberOfChoices: number;
-      options: {
-        name: string;
-        description: string;
-        effect: FeatureEffect;
-      }[];
-    }
     interface CustomizedSpell {
       spells: SpellChoice;
       noSpellSlot?: boolean;
@@ -796,7 +555,6 @@ declare global {
       ability: Ability;
       spellFocus: SpellFocus;
       spellFocusDescription?: string;
-      features: Feature[];
       displaySpellLevels: boolean; // If true, display the spell levels in the class description
       spellLevels: SpellLevels;
     }
@@ -804,7 +562,6 @@ declare global {
       name: string;
       damage: PrismaJson.Damage[];
       isProficient: boolean;
-      flatDamage?: PrismaJson.FlatDamage;
     }
     interface SpellRoll {
       type: DamageTypes | 'healing';
@@ -813,22 +570,10 @@ declare global {
     }
 
     interface Damage {
-      // ex. 1d6 fire damage
       type: DamageTypes; // type of damage ex. slashing, fire, etc.
-      dice: number; // type of dice ex. 6 for d6 or 8 for d8
-      numberOfDice: number; // number of dice rolled
+      formula: string; // damage formula ex. 1d6
     }
-    interface FlatDamage {
-      type: DamageTypes; // type of damage ex. slashing, fire, etc.
-      amount: number; // amount of damage
-    }
-    interface WeaponProperty {
-      property: Property;
-      versatileDamage?: Damage; // versatile damage
-      range?: number; // range in feet
-      maxRange?: number; // max range in feet
-      special?: Feature[]; // special properties
-    }
+
     interface Reason {
       reason: string;
       effect: string | number;
@@ -946,18 +691,12 @@ declare global {
         savingThrows: Ability[];
         savingThrowsReasons: Reason[];
       };
-      features: { feature: Feature; source: string }[];
       pendingChoices: Choice[];
     }
   }
 }
 
 export type MarkdownItem = string;
-
-export interface Property {
-  name: string;
-  description: string;
-}
 
 export interface Roll {
   rolls: {
@@ -1073,42 +812,6 @@ export interface RelationFieldOptions {
   data: string;
 }
 
-export interface MessageInfo extends Message {
-  User: {
-    id: number;
-    email: string | null;
-    username: string | null;
-  } | null;
-}
-
-export interface SpeciesInfo extends Species {
-  User: {
-    username: string | null;
-  } | null;
-  Variants: SubSpecies[];
-}
-
-export interface SubSpeciesInfo extends SubSpecies {
-  species: Species;
-  User: {
-    username: string | null;
-  } | null;
-}
-export interface ItemInfo extends Item {
-  User: {
-    username: string | null;
-  } | null;
-  Weapon: WeaponInfo | null;
-  Armor: Armor | null;
-  Tool: Tool | null;
-  AmmunitionFor: Weapon[] | null;
-  EquipmentPack: EquipmentPack | null;
-  Spell: Spell | null;
-}
-export interface WeaponInfo extends Weapon {
-  ammunition: Item | null;
-}
-
 export interface CombinedData {
   name: string;
   description: string;
@@ -1121,12 +824,4 @@ export interface CombinedData {
 export interface QuantityDistance {
   quantity: number;
   unit: Distance;
-}
-
-export interface CommentInfo extends Comment {
-  User: {
-    id: number;
-    username: string | null;
-  } | null;
-  replies: Comment[];
 }

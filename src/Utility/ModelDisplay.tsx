@@ -6,7 +6,7 @@ import {
   SubClassInfo,
   ToolInfo,
   WeaponInfo,
-} from '@/lib/types/types';
+} from '@/lib/types/modelInfo';
 import {
   memoizeGetArmor,
   memoizeGetFeat,

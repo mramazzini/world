@@ -1,6 +1,8 @@
 import { cerr, cinfo } from '@/lib/utils/chalkLog';
 import { ArmorClassProtocol, PrismaClient } from '@prisma/client';
 import CreatureSeed from '../Creatures/Creature.seed';
+import CreatureFeaturesSeed from '../Creatures/CreatureFeatures.seed';
+import createFeature from '../_helpers/createFeature';
 export const createCreatures = async (db: PrismaClient) => {
   //create creatures
   cinfo('Creating creatures');
@@ -46,6 +48,25 @@ export const createCreatures = async (db: PrismaClient) => {
       });
     } catch (error) {
       cerr('Error creating creature', error);
+      return;
+    }
+  }
+
+  //create creature features
+  cinfo('Creatures created');
+  cinfo('Creating Creature features');
+  for (const CreatureFeature of CreatureFeaturesSeed) {
+    try {
+      cinfo('Creating creature features:', CreatureFeature.name);
+      if (!CreatureFeature.creatureId) {
+        cerr('Creature missing creatureId field:', CreatureFeature.name);
+        return;
+      }
+      await createFeature(db, CreatureFeature);
+      cinfo('Creature Feature created');
+    } catch (error) {
+      cerr('Error creating creature feature:', CreatureFeature.name, error);
+      return;
     }
   }
 };

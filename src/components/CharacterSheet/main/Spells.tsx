@@ -1,9 +1,10 @@
 'use client';
-import { CharacterInfo, Log, SpellLevel } from '@/lib/types/types';
+import { Log, SpellLevel } from '@/lib/types/types';
 import Image from 'next/image';
 import PreparedSpellView from '../Spells/PreparedSpellView';
 import numberArray from '@/lib/utils/numberArray';
 import { useEffect, useState } from 'react';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 
 interface Props {
   character: CharacterInfo;

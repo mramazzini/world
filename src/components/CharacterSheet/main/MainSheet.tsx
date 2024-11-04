@@ -2,7 +2,7 @@
 import { calcProficiency } from '@/Utility/characterStateFunctions/calc/calcProficiency';
 import { roll } from '@/Utility/roll';
 import useLog from '@/Utility/useDicelog';
-import { CharacterInfo } from '@/lib/types/types';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 import { Skill } from '@prisma/client';
 import RenderLog from './Log';
 import WeaponRoller from './WeaponRoller';
@@ -54,7 +54,6 @@ const MainSheet = ({ character, setCharacter, regenerateCharacter }: Props) => {
       character.state,
       character.Classes[0].id
     );
-    console.log(newState);
     setCharacter({
       ...character,
       state: {

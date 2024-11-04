@@ -1,4 +1,3 @@
-import { SpellInfo } from '@/lib/types/types';
 import '@/lib/string.extensions';
 import numPlace from '@/lib/utils/numPlace';
 import JsonTable from '../../Utility/JsonTable';
@@ -6,6 +5,7 @@ import P from '../../Utility/FormatAndSanitize';
 import Link from 'next/link';
 import React, { Fragment } from 'react';
 import Tooltip from '../../Utility/Tooltip';
+import { SpellInfo } from '@/lib/types/modelInfo';
 interface Props {
   spell: SpellInfo;
 }

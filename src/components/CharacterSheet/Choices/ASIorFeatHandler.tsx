@@ -1,6 +1,6 @@
 'use client';
 
-import { ASIorFeat, CallbackOptions, CharacterInfo } from '@/lib/types/types';
+import { ASIorFeat, CallbackOptions } from '@/lib/types/types';
 import Image from 'next/image';
 import { useState } from 'react';
 import P from '@/Utility/FormatAndSanitize';
@@ -8,6 +8,7 @@ import Modal from '@/components/UI/Modal/Modal';
 import ModalBox from '@/components/UI/Modal/ModalBox';
 import useModal from '@/hooks/useModal';
 import ModalButton from '@/components/UI/Modal/ModalButton';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 interface Props {
   choice: PrismaJson.ASIorFeatChoice;
   character: CharacterInfo;

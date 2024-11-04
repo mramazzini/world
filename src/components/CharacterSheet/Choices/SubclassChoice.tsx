@@ -3,9 +3,10 @@
 import { memoizeGetSubclass } from '@/Utility/globalCache';
 import ModelDisplay from '@/Utility/ModelDisplay';
 import ModelLink from '@/Utility/ModelLink';
-import { SubClassID, SubClassInfo } from '@/lib/types/types';
+import { SubClassID } from '@/lib/types/types';
 import numberArray from '@/lib/utils/numberArray';
 import { useEffect, useState } from 'react';
+import { SubClassInfo } from '@/lib/types/modelInfo';
 
 interface Props {
   choice: {

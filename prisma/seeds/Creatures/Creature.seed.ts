@@ -11,7 +11,11 @@ import {
 } from '@prisma/client';
 import { itemIds } from '../Items/ItemIds';
 
-const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
+interface CreatureSeedType extends Prisma.CreatureCreateManyInput {
+  features?: Prisma.FeatureCreateManyInput[];
+}
+
+const CreatureSeed: CreatureSeedType[] = [
   {
     id: 1,
     name: 'Ape',
@@ -94,13 +98,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 6,
     damageVulnerabilities: [DamageTypes.FIRE],
     damageResistances: [DamageTypes.PIERCING],
-    features: [
-      {
-        name: 'False Appearance',
-        description:
-          'While the shrub remains motionless, it is indistinguishable from a normal shrub.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -147,13 +144,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 7,
     damageVulnerabilities: [DamageTypes.FIRE],
     damageResistances: [DamageTypes.PIERCING, DamageTypes.BLUDGEONING],
-    features: [
-      {
-        name: 'False Appearance',
-        description:
-          'While the tree remains motionless, it is indistinguishable from a normal tree.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -228,13 +218,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 12,
     CHA: 6,
     challengeRating: 0,
-    features: [
-      {
-        name: 'Pack Tactics',
-        description:
-          'The baboon has advantage on an attack roll against a creature if at least one of the baboon’s allies is within 5 feet of the creature and the ally isn’t incapacitated. ',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -277,13 +260,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 12,
     CHA: 5,
     darkvision: 30,
-    features: [
-      {
-        name: 'Keen Smell',
-        description:
-          'The badger has advantage on Wisdom (Perception) checks that rely on smell.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -323,17 +299,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 12,
     CHA: 4,
     blindsight: 60,
-    features: [
-      {
-        name: 'Echolocation',
-        description: "The bat can't use its blindsight while deafened.",
-      },
-      {
-        name: 'Keen Hearing',
-        description:
-          'The bat has advantage on Wisdom (Perception) checks that rely on hearing.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -378,13 +343,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     INT: 2,
     WIS: 12,
     CHA: 7,
-    features: [
-      {
-        name: 'Keen Smell',
-        description:
-          'The bear has advantage on Wisdom (Perception) checks that rely on smell.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -448,13 +406,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 11,
     skillProficiencies: [Skill.PERCEPTION, Skill.STEALTH],
     languageDescription: "Understands Sylvan but can't speak it.",
-    features: [
-      {
-        name: 'Keen Hearing and Smell',
-        description:
-          'The dog has advantage on Wisdom (Perception) checks that rely on hearing or smell.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -507,18 +458,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 5,
     skillProficiencies: [Skill.PERCEPTION],
     challengeRating: 0.125,
-    features: [
-      {
-        name: 'Keen Sight',
-        description:
-          'The hawk has advantage on Wisdom (Perception) checks that rely on sight.',
-      },
-      {
-        name: 'Pack Tactics',
-        description:
-          'The hawk has advantage on an attack roll against a creature if at least one of the hawk’s allies is within 5 feet of the creature and the ally isn’t incapacitated.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -559,18 +498,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     INT: 2,
     WIS: 9,
     CHA: 5,
-    features: [
-      {
-        name: 'Charge',
-        description:
-          'If the boar moves at least 20 feet straight toward a target and then hits it with a tusk attack on the same turn, the target takes an extra 3 (1d6) slashing damage. If the target is a creature, it must succeed on a DC 11 Strength saving throw or be knocked prone.',
-      },
-      {
-        name: 'Relentless (Recharges after a Short or Long Rest)',
-        description:
-          'If the boar takes 7 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -617,13 +544,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 13,
     CHA: 7,
     skillProficiencies: [Skill.PERCEPTION],
-    features: [
-      {
-        name: 'Keen Smell',
-        description:
-          'The bear has advantage on Wisdom (Perception) checks that rely on smell.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -724,13 +644,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 12,
     CHA: 7,
     skillExpertise: [Skill.PERCEPTION, Skill.STEALTH],
-    features: [
-      {
-        name: 'Keen Smell',
-        description:
-          'The cat has advantage on Wisdom (Perception) checks that rely on smell.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -830,12 +743,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 2,
     skillProficiencies: [Skill.STEALTH],
     blindsight: 30,
-    features: [
-      {
-        name: 'Amphibious',
-        description: 'The crab can breathe air and water.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -877,12 +784,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 10,
     CHA: 5,
     skillProficiencies: [Skill.STEALTH],
-    features: [
-      {
-        name: 'Hold Breath',
-        description: 'The crocodile can hold its breath for 15 minutes.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -925,13 +826,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     skillProficiencies: [Skill.STEALTH],
     skillExpertise: [Skill.PERCEPTION],
-    features: [
-      {
-        name: 'Two-Headed',
-        description:
-          'The dog has advantage on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, or knocked unconscious.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -1016,18 +910,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 12,
     CHA: 7,
     skillProficiencies: [Skill.PERCEPTION, Skill.STEALTH],
-    features: [
-      {
-        name: 'Keen Hearing and Smell',
-        description:
-          'The wolf has advantage on Wisdom (Perception) checks that rely on hearing or smell.',
-      },
-      {
-        name: 'Pack Tactics',
-        description:
-          'The wolf has advantage on an attack roll against a creature if at least one of the wolf’s allies is within 5 feet of the creature and the ally isn’t incapacitated.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -1105,13 +987,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 14,
     CHA: 7,
     skillProficiencies: [Skill.PERCEPTION],
-    features: [
-      {
-        name: 'Keen Sight',
-        description:
-          'The eagle has advantage on Wisdom (Perception) checks that rely on sight.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -1153,13 +1028,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     INT: 3,
     WIS: 11,
     CHA: 6,
-    features: [
-      {
-        name: 'Trampling Charge',
-        description:
-          'If the elephant moves at least 20 feet straight toward a creature and then hits it with a gore attack on the same turn, that target must succeed on a DC 12 Strength saving throw or be knocked prone. If the target is prone, the elephant can make one stomp attack against it as a bonus action.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -1214,13 +1082,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 10,
     CHA: 6,
 
-    features: [
-      {
-        name: 'Charge',
-        description:
-          'If the elk moves at least 20 feet straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 7 (2d6) damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone.',
-      },
-    ],
     actions: [
       {
         name: 'Ram',
@@ -1283,13 +1144,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 5,
 
     blindsight: 10,
-    features: [
-      {
-        name: 'Flyby',
-        description:
-          "The snake doesn't provoke opportunity attacks when it flies out of an enemy's reach.",
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -1331,18 +1185,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 3,
     skillProficiencies: [Skill.STEALTH, Skill.PERCEPTION],
     darkvision: 30,
-
-    features: [
-      {
-        name: 'Amphibious',
-        description: 'The frog can breathe air and water.',
-      },
-      {
-        name: 'Standing Leap',
-        description:
-          "The frog's long jump is up to 10 feet and its high jump is up to 5 feet, with or without a running start.",
-      },
-    ],
   },
   {
     id: 27,
@@ -1426,13 +1268,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 5,
     darkvision: 30,
 
-    features: [
-      {
-        name: 'Keen Smell',
-        description:
-          'The badger has advantage on Wisdom (Perception) checks that rely on smell.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -1494,17 +1329,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 6,
 
     blindsight: 60,
-    features: [
-      {
-        name: 'Echolocation',
-        description: "The bat can't use its blindsight while deafened.",
-      },
-      {
-        name: 'Keen Hearing',
-        description:
-          'The bat has advantage on Wisdom (Perception) checks that rely on hearing.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -1544,18 +1368,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     INT: 2,
     WIS: 7,
     CHA: 5,
-    features: [
-      {
-        name: 'Charge',
-        description:
-          'If the boar moves at least 20 feet straight toward a target and then hits it with a tusk attack on the same turn, the target takes an extra 7 (2d6) slashing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone.',
-      },
-      {
-        name: 'Relentless (Recharges after a Short or Long Rest)',
-        description:
-          'If the boar takes 10 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -1710,12 +1522,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 3,
     skillProficiencies: [Skill.STEALTH],
     blindsight: 30,
-    features: [
-      {
-        name: 'Amphibious',
-        description: 'The crab can breathe air and water.',
-      },
-    ],
     actions: [
       {
         name: 'Claw',
@@ -1757,13 +1563,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 10,
     CHA: 7,
     skillExpertise: [Skill.STEALTH],
-
-    features: [
-      {
-        name: 'Hold Breath',
-        description: 'The crocodile can hold its breath for 30 minutes.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -1820,13 +1619,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 14,
     CHA: 10,
     skillProficiencies: [Skill.PERCEPTION],
-    features: [
-      {
-        name: 'Keen Sight',
-        description:
-          'The eagle has advantage on Wisdom (Perception) checks that rely on sight.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -1893,13 +1685,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     skillProficiencies: [Skill.PERCEPTION],
     languageDescription:
       'Giant Elk, understands Common, Elvish, and Sylvan but can’t speak them',
-    features: [
-      {
-        name: 'Charge',
-        description:
-          'If the elk moves at least 20 feet straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 7 (2d6) damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be knocked prone.',
-      },
-    ],
     actions: [
       {
         name: 'Ram',
@@ -1962,13 +1747,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 3,
 
     blindsight: 30,
-    features: [
-      {
-        name: 'Illumination',
-        description:
-          'The beetle sheds bright light in a 10-­‐‑foot radius and dim light for an additional 10 feet.',
-      },
-    ],
+
     actions: [
       {
         actionType: 'action',
@@ -2068,18 +1847,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 12,
     CHA: 6,
 
-    features: [
-      {
-        name: 'Charge',
-        description:
-          'If the goat moves at least 20 feet straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 5 (2d4) bludgeoning damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone.',
-      },
-      {
-        name: 'Sure-Footed',
-        description:
-          'The goat has advantage on Strength and Dexterity saving throws made against effects that would knock it prone.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -2122,13 +1889,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 7,
     skillProficiencies: [Skill.PERCEPTION],
     darkvision: 60,
-    features: [
-      {
-        name: 'Rampage',
-        description:
-          'When the hyena reduces a creature to 0 hit points with a melee attack on its turn, the hyena can take a bonus action to move up to half its speed and make a bite attack.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -2170,22 +1930,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     skillProficiencies: [Skill.STEALTH],
     darkvision: 60,
 
-    features: [
-      {
-        name: 'Hold Breath',
-        description:
-          'While out of water, the octopus can hold its breath for 1 hour.',
-      },
-      {
-        name: 'Underwater Camouflage',
-        description:
-          'The octopus has advantage on Dexterity (Stealth) checks made while underwater.',
-      },
-      {
-        name: 'Water Breathing',
-        description: 'The octopus can breathe only underwater.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -2233,18 +1977,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     skillProficiencies: [Skill.PERCEPTION, Skill.STEALTH],
 
     darkvision: 120,
-    features: [
-      {
-        name: 'Keen Hearing and Sight',
-        description:
-          'The owl has advantage on Wisdom (Perception) checks that rely on hearing or sight.',
-      },
-      {
-        name: 'Flyby',
-        description:
-          "The owl doesn't provoke opportunity attacks when it flies out of an enemy's reach.",
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -2328,18 +2060,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 4,
 
     darkvision: 60,
-    features: [
-      {
-        name: 'Keen Smell',
-        description:
-          'The rat has advantage on Wisdom (Perception) checks that rely on smell.',
-      },
-      {
-        name: 'Pack Tactics',
-        description:
-          'The rat has advantage on an attack roll against a creature if at least one of the rat’s allies is within 5 feet of the creature and the ally isn’t incapacitated.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -2380,18 +2100,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 4,
 
     darkvision: 60,
-    features: [
-      {
-        name: 'Keen Smell',
-        description:
-          'The rat has advantage on Wisdom (Perception) checks that rely on smell.',
-      },
-      {
-        name: 'Pack Tactics',
-        description:
-          'The rat has advantage on an attack roll against a creature if at least one of the rat’s allies is within 5 feet of the creature and the ally isn’t incapacitated.',
-      },
-    ],
+
     actions: [
       {
         actionType: 'action',
@@ -2502,17 +2211,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 12,
     CHA: 5,
 
-    features: [
-      {
-        name: 'Water Breathing',
-        description: 'The sea horse can breathe only underwater.',
-      },
-      {
-        name: 'Charge',
-        description:
-          'If the sea horse moves at least 20 feet straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 7 (2d6) bludgeoning damage. It the target is a creature, it must succeed on a DC 11 Strength saving throw or be knocked prone.',
-      },
-    ],
     actions: [
       {
         name: 'Ram',
@@ -2558,17 +2256,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 5,
     skillProficiencies: [Skill.PERCEPTION],
     blindsight: 60,
-    features: [
-      {
-        name: 'Blood Frenzy',
-        description:
-          'The shark has advantage on melee attack rolls against any creature that doesn’t have all its hit points.',
-      },
-      {
-        name: 'Water Breathing',
-        description: 'The shark can breathe only underwater.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -2615,23 +2302,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     blindsight: 10,
     darkvision: 60,
 
-    features: [
-      {
-        name: 'Spider Climb',
-        description:
-          'The spider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.',
-      },
-      {
-        name: 'Web Sense',
-        description:
-          'While in contact with a web, the spider knows the exact location of any other creature in contact with the same web.',
-      },
-      {
-        name: 'Web Walker',
-        description:
-          'The spider ignores movement restrictions caused by webbing.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -2691,17 +2361,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 3,
 
     darkvision: 30,
-    features: [
-      {
-        name: 'Amphibious',
-        description: 'The toad can breathe air and water.',
-      },
-      {
-        name: 'Standing Leap',
-        description:
-          'The toad’s long jump is up to 20 feet and its high jump is up to 10 feet, with or without a running start.',
-      },
-    ],
+
     actions: [
       {
         actionType: 'action',
@@ -2767,18 +2427,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 7,
     skillProficiencies: [Skill.PERCEPTION],
 
-    features: [
-      {
-        name: 'Keen Sight',
-        description:
-          'The vulture has advantage on Wisdom (Perception) checks that rely on sight.',
-      },
-      {
-        name: 'Pack Tactics',
-        description:
-          'The vulture has advantage on an attack roll against a creature if at least one of the vulture’s allies is within 5 feet of the creature and the ally isn’t incapacitated.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -2882,13 +2530,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     darkvision: 60,
     skillProficiencies: [Skill.PERCEPTION, Skill.STEALTH],
-    features: [
-      {
-        name: 'Keen Hearing and Smell',
-        description:
-          'The weasel has advantage on Wisdom (Perception) checks that rely on hearing or smell.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -2933,23 +2574,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     blindsight: 10,
     skillExpertise: [Skill.STEALTH],
     skillProficiencies: [Skill.PERCEPTION],
-    features: [
-      {
-        name: 'Spider Climb',
-        description:
-          'The spider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.',
-      },
-      {
-        name: 'Web Sense',
-        description:
-          'While in contact with a web, the spider knows the exact location of any other creature in contact with the same web.',
-      },
-      {
-        name: 'Web Walker',
-        description:
-          'The spider ignores movement restrictions caused by webbing.',
-      },
-    ],
     actions: [
       {
         actionType: 'action',
@@ -2990,18 +2614,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     INT: 2,
     WIS: 10,
     CHA: 5,
-    features: [
-      {
-        name: 'Sure-Footed',
-        description:
-          'The goat has advantage on Strength and Dexterity saving throws made against effects that would knock it prone.',
-      },
-      {
-        name: 'Charge',
-        description:
-          'If the goat moves at least 20 feet straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 2 (1d4) bludgeoning damage. If the target is a creature, it must succeed on a DC 10 Strength saving throw or be knocked prone.',
-      },
-    ],
     actions: [
       {
         name: 'Ram',
@@ -3048,17 +2660,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     blindsight: 30,
     skillProficiencies: [Skill.PERCEPTION],
-    features: [
-      {
-        name: 'Blood Frenzy',
-        description:
-          'The shark has advantage on melee attack rolls against any creature that doesn’t have all its hit points.',
-      },
-      {
-        name: 'Water Breathing',
-        description: 'The shark can breathe only underwater.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -3098,13 +2699,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 12,
     CHA: 5,
     skillProficiencies: [Skill.PERCEPTION],
-    features: [
-      {
-        name: 'Pack Tactics',
-        description:
-          'The hyena has advantage on an attack roll against a creature if at least one of the hyena’s allies is within 5 feet of the creature and the ally isn’t incapacitated.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -3142,18 +2736,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 12,
     CHA: 6,
 
-    features: [
-      {
-        name: 'Pack Tactics',
-        description:
-          'The jackal has advantage on an attack roll against a creature if at least one of the jackal’s allies is within 5 feet of the creature and the ally isn’t incapacitated.',
-      },
-      {
-        name: 'Keen Hearing and Smell',
-        description:
-          'The jackal has advantage on Wisdom (Perception) checks that rely on hearing or smell.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -3196,21 +2778,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 7,
     skillProficiencies: [Skill.PERCEPTION],
     blindsight: 120,
-    features: [
-      {
-        name: 'Echolocation',
-        description: 'The whale can’t use its blindsight while deafened.',
-      },
-      {
-        name: 'Hold Breath',
-        description: 'The whale can hold its breath for 30 minutes.',
-      },
-      {
-        name: 'Keen Hearing',
-        description:
-          'The whale has advantage on Wisdom (Perception) checks that rely on hearing.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -3249,28 +2816,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 8,
     skillExpertise: [Skill.STEALTH],
     skillProficiencies: [Skill.PERCEPTION],
-    features: [
-      {
-        name: 'Keen Smell',
-        description:
-          'The lion has advantage on Wisdom (Perception) checks that rely on smell.',
-      },
-      {
-        name: 'Pack Tactics',
-        description:
-          'The lion has advantage on an attack roll against a creature if at least one of the lion’s allies is within 5 feet of the creature and the ally isn’t incapacitated.',
-      },
-      {
-        name: 'Pounce',
-        description:
-          'If the lion moves at least 20 feet straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a DC 13 Strength saving throw or be knocked prone. If the target is prone, the lion can make one bite attack against it as a bonus action.',
-      },
-      {
-        name: 'Running Leap',
-        description:
-          'With a 10-foot running start, the lion can long jump up to 25 feet.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -3367,13 +2912,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 11,
     CHA: 6,
 
-    features: [
-      {
-        name: 'Trampling Charge',
-        description:
-          'If the mammoth moves at least 20 feet straight toward a creature and then hits it with a gore attack on the same turn, that target must succeed on a DC 18 Strength saving throw or be knocked prone. If the target is prone, the mammoth can make one stomp attack against it as a bonus action',
-      },
-    ],
     actions: [
       {
         name: 'Gore',
@@ -3430,13 +2968,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 12,
     CHA: 7,
     skillProficiencies: [Skill.PERCEPTION],
-    features: [
-      {
-        name: 'Keen Hearing and Smell',
-        description:
-          'The mastiff has advantage on Wisdom (Perception) checks that rely on hearing or smell.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -3474,18 +3005,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 10,
     CHA: 5,
 
-    features: [
-      {
-        name: 'Sure-Footed',
-        description:
-          'The mule has advantage on Strength and Dexterity saving throws made against effects that would knock it prone.',
-      },
-      {
-        name: 'Beast of Burden',
-        description:
-          'The mule is considered to be a Large animal for the purpose of determining its carrying capacity.',
-      },
-    ],
     actions: [
       {
         name: 'Hooves',
@@ -3526,21 +3045,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     skillProficiencies: [Skill.STEALTH, Skill.PERCEPTION],
     darkvision: 30,
-    features: [
-      {
-        name: 'Hold Breath',
-        description: 'The octopus can hold its breath for 30 minutes.',
-      },
-      {
-        name: 'Underwater Camouflage',
-        description:
-          'The octopus has advantage on Dexterity (Stealth) checks made while underwater.',
-      },
-      {
-        name: 'Water Breathing',
-        description: 'The octopus can breathe only underwater.',
-      },
-    ],
     actions: [
       {
         name: 'Tentacles',
@@ -3606,18 +3110,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
         ],
       },
     ],
-    features: [
-      {
-        name: 'Flyby',
-        description:
-          'The owl doesn’t provoke opportunity attacks when it flies out of an enemy’s reach.',
-      },
-      {
-        name: 'Keen Hearing and Sight',
-        description:
-          'The owl has advantage on Wisdom (Perception) checks that rely on hearing or sight.',
-      },
-    ],
   },
   {
     id: 67,
@@ -3641,18 +3133,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     skillExpertise: [Skill.STEALTH],
     skillProficiencies: [Skill.PERCEPTION],
-    features: [
-      {
-        name: 'Keen Smell',
-        description:
-          'The panther has advantage on Wisdom (Perception) checks that rely on smell.',
-      },
-      {
-        name: 'Pounce',
-        description:
-          'If the panther moves at least 20 feet straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a DC 12 Strength saving throw or be knocked prone. If the target is prone, the panther can make one bite attack against it as a bonus action.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -3714,18 +3194,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     darkvision: 60,
     skillExpertise: [Skill.STEALTH],
-    features: [
-      {
-        name: 'Spider Climb',
-        description:
-          'The spider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.',
-      },
-      {
-        name: 'Web Walker',
-        description:
-          'The spider ignores movement restrictions caused by webbing.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -3822,13 +3290,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 13,
     CHA: 7,
     skillProficiencies: [Skill.PERCEPTION],
-    features: [
-      {
-        name: 'Keen Smell',
-        description:
-          'The bear has advantage on Wisdom (Perception) checks that rely on smell.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -3891,18 +3352,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 2,
 
     darkvision: 60,
-    features: [
-      {
-        name: 'Blood Frenzy',
-        description:
-          'The quipper has advantage on melee attack rolls against any creature that doesn’t have all its hit points.',
-      },
-
-      {
-        name: 'Water Breathing',
-        description: 'The quipper can breathe only underwater.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -3941,13 +3390,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 4,
 
     darkvision: 30,
-    features: [
-      {
-        name: 'Keen Smell',
-        description:
-          'The rat has advantage on Wisdom (Perception) checks that rely on smell.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -3986,13 +3428,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 12,
     CHA: 6,
     skillProficiencies: [Skill.PERCEPTION],
-    features: [
-      {
-        name: 'Mimicry',
-        description:
-          'The raven can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check.',
-      },
-    ],
     actions: [
       {
         name: 'Beak',
@@ -4035,17 +3470,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     blindsight: 30,
     skillProficiencies: [Skill.PERCEPTION],
-    features: [
-      {
-        name: 'Pack Tactics',
-        description:
-          'The shark has advantage on an attack roll against a creature if at least one of the shark’s allies is within 5 feet of the creature and the ally isn’t incapacitated.',
-      },
-      {
-        name: 'Water Breathing',
-        description: 'The shark can breathe only underwater.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -4087,14 +3511,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     INT: 2,
     WIS: 12,
     CHA: 6,
-
-    features: [
-      {
-        name: 'Charge',
-        description:
-          'If the rhinoceros moves at least 20 feet straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra 9 (2d8) bludgeoning damage. If the target is a creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.',
-      },
-    ],
     actions: [
       {
         name: 'Gore',
@@ -4174,18 +3590,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 8,
     skillProficiencies: [Skill.PERCEPTION],
     skillExpertise: [Skill.STEALTH],
-    features: [
-      {
-        name: 'Keen Smell',
-        description:
-          'The tiger has advantage on Wisdom (Perception) checks that rely on smell.',
-      },
-      {
-        name: 'Pounce',
-        description:
-          'If the tiger moves at least 20 feet straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a DC 14 Strength saving throw or be knocked prone. If the target is prone, the tiger can make one bite attack against it as a bonus action.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -4285,13 +3689,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     INT: 1,
     WIS: 10,
     CHA: 2,
-
-    features: [
-      {
-        name: 'Water Breathing',
-        description: 'The sea horse can breathe only underwater.',
-      },
-    ],
   },
   {
     id: 80,
@@ -4315,23 +3712,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     darkvision: 30,
 
-    features: [
-      {
-        name: 'Web Sense',
-        description:
-          'While in contact with a web, the spider knows the exact location of any other creature in contact with the same web.',
-      },
-      {
-        name: 'Web Walker',
-        description:
-          'The spider ignores movement restrictions caused by webbing.',
-      },
-      {
-        name: 'Spider Climb',
-        description:
-          'The spider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -4376,18 +3756,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     skillExpertise: [Skill.STEALTH],
 
     darkvision: 60,
-    features: [
-      {
-        name: 'Keen Smell',
-        description:
-          'The tiger has advantage on Wisdom (Perception) checks that rely on smell.',
-      },
-      {
-        name: 'Pounce',
-        description:
-          'If the tiger moves at least 20 feet straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a DC 14 Strength saving throw or be knocked prone. If the target is prone, the tiger can make one bite attack against it as a bonus action.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -4479,13 +3847,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 12,
     CHA: 7,
 
-    features: [
-      {
-        name: 'Trampling Charge',
-        description:
-          'If the horse moves at least 20 feet straight toward a creature and then hits it with a hooves attack on the same turn, that target must succeed on a DC 14 Strength saving throw or be knocked prone. If the target is prone, the horse can make another attack with its hooves against it as a bonus action.',
-      },
-    ],
     actions: [
       {
         name: 'Hooves',
@@ -4542,13 +3903,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
         ],
       },
     ],
-    features: [
-      {
-        name: 'Keen Hearing and Smell',
-        description:
-          'The weasel has advantage on Wisdom (Perception) checks that rely on hearing or smell.',
-      },
-    ],
   },
   {
     id: 85,
@@ -4572,23 +3926,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     skillProficiencies: [Skill.STEALTH],
     skillExpertise: [Skill.PERCEPTION],
     damageImmunities: [DamageTypes.COLD],
-    features: [
-      {
-        name: 'Keen Hearing and Smell',
-        description:
-          'The wolf has advantage on Wisdom (Perception) checks that rely on hearing or smell.',
-      },
-      {
-        name: 'Pack Tactics',
-        description:
-          'The wolf has advantage on an attack roll against a creature if at least one of the wolf’s allies is within 5 feet of the creature and the ally isn’t incapacitated.',
-      },
-      {
-        name: 'Snow Camouflage',
-        description:
-          'The wolf has advantage on Dexterity (Stealth) checks made to hide in snowy terrain.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -4646,18 +3983,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     skillProficiencies: [Skill.PERCEPTION, Skill.STEALTH],
 
-    features: [
-      {
-        name: 'Keen Hearing and Smell',
-        description:
-          'The wolf has advantage on Wisdom (Perception) checks that rely on hearing or smell.',
-      },
-      {
-        name: 'Pack Tactics',
-        description:
-          'The wolf has advantage on an attack roll against a creature if at least one of the wolf’s allies is within 5 feet of the creature and the ally isn’t incapacitated.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -4699,13 +4024,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 8,
     skillExpertise: [Skill.PERCEPTION],
     languageDescription: 'Goblin, Worg',
-    features: [
-      {
-        name: 'Keen Hearing and Smell',
-        description:
-          'The worg has advantage on Wisdom (Perception) checks that rely on hearing or smell.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -4784,17 +4102,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     spellcastingAbility: Ability.INT,
     casterLevel: 18,
-    features: [
-      {
-        name: 'Magic Resistance',
-        description:
-          'The archmage has advantage on saving throws against spells and other magical effects.',
-      },
-      {
-        name: 'Spell Damage Resistance',
-        description: 'The archmage has resistance to damage from spells.',
-      },
-    ],
   },
   {
     id: 90,
@@ -4831,34 +4138,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     damageResistances: [DamageTypes.POISON],
     languageDescription: "Thieves' Cant plus any two languages",
-    features: [
-      {
-        name: 'Assassinate',
-        description:
-          "During its first turn, the assassin has advantage on attack rolls against any creature that hasn't taken a turn. Any hit the assassin scores against a surprised creature is a critical hit.",
-      },
-      {
-        name: 'Evasion',
-        description:
-          'When subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, the assassin instead takes no damage if it succeeds on the saving throw, and only half damage if it fails.',
-      },
-      {
-        name: 'Sneak Attack',
-        description:
-          "Once per turn, the assassin deals an extra 14 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of the assassin that isn't incapacitated and the assassin doesn't have disadvantage on the attack roll.",
-        rolls: [
-          {
-            name: 'Sneak Attack Damage',
-            formula: '4d6',
-          },
-        ],
-      },
-      {
-        name: 'Poison',
-        description:
-          'When an Assassin lands an attack, targets must make a DC 15 Constitution saving throw, taking 24 (7d6) poison damage on a failed save, or half as much damage on a successful one.',
-      },
-    ],
+
     actions: [
       {
         name: 'Multiattack',
@@ -4982,13 +4262,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 9,
 
     challengeRating: 2,
-    features: [
-      {
-        name: 'Reckless',
-        description:
-          'At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn.',
-      },
-    ],
   },
   {
     id: 94,
@@ -5048,13 +4321,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     challengeRating: 0.125,
     languageDescription: 'Any one language (usually Common)',
-    features: [
-      {
-        name: 'Dark Devotion',
-        description:
-          'The cultist has advantage on saving throws against being charmed or frightened.',
-      },
-    ],
   },
   {
     id: 96,
@@ -5095,14 +4361,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
         name: 'Multiattack',
         actionType: 'action',
         description: 'The fanatic makes two melee attacks.',
-      },
-    ],
-
-    features: [
-      {
-        name: 'Dark Devotion',
-        description:
-          'The fanatic has advantage on saving throws against being charmed or frightened.',
       },
     ],
   },
@@ -5161,18 +4419,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     skillProficiencies: [Skill.INTIMIDATION],
     skillExpertise: [Skill.ATHLETICS],
     saveProficiencies: [Ability.STR, Ability.CON, Ability.DEX],
-    features: [
-      {
-        name: 'Brave',
-        description:
-          'The gladiator has advantage on saving throws against being frightened.',
-      },
-      {
-        name: 'Brute',
-        description:
-          'A melee weapon deals one extra die of its damage when the gladiator hits with it (included in the attack).',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -5260,13 +4506,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     saveProficiencies: [Ability.WIS, Ability.CON],
 
     languageDescription: 'Any one language (usually Common)',
-    features: [
-      {
-        name: 'Brave',
-        description:
-          'The knight has advantage on saving throws against being frightened.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -5430,13 +4669,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     challengeRating: 0.5,
     creatureType: CreatureType.HUMANOID,
     size: Size.MEDIUM,
-    features: [
-      {
-        name: 'Keen Hearing and Sight',
-        description:
-          'The scout has advantage on Wisdom (Perception) checks that rely on hearing or sight.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -5477,24 +4709,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     skillExpertise: [Skill.PERCEPTION, Skill.INVESTIGATION],
 
     languageDescription: 'Any two languages',
-    features: [
-      {
-        name: 'Cunning Action',
-        description:
-          'On each of its turns, the spy can use a bonus action to take the Dash, Disengage, or Hide action.',
-      },
-      {
-        name: 'Sneak Attack (1/Turn)',
-        description:
-          'Once per turn, the spy can deal an extra 7 (2d6) damage to one creature it hits with an attack if it has advantage on the attack roll. The spy doesn’t need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn’t incapacitated, and the spy doesn’t have disadvantage on the attack roll.',
-        rolls: [
-          {
-            name: 'Damage',
-            formula: '2d6',
-          },
-        ],
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -5536,13 +4750,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     skillProficiencies: [Skill.INTIMIDATION],
 
     challengeRating: 0.5,
-    features: [
-      {
-        name: 'Pack Tactics',
-        description:
-          'The thug has advantage on an attack roll against a creature if at least one of the thug’s allies is within 5 feet of the creature and the ally isn’t incapacitated.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -5578,13 +4785,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     challengeRating: 0.125,
     languageDescription: 'Any one language (usually Common)',
-    features: [
-      {
-        name: 'Pack Tactics',
-        description:
-          'The warrior has advantage on an attack roll against a creature if at least one of the warrior’s allies is within 5 feet of the creature and the ally isn’t incapacitated.',
-      },
-    ],
   },
   {
     id: 108,
@@ -5648,22 +4848,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     saveProficiencies: [Ability.CON, Ability.INT, Ability.WIS],
     darkvision: 120,
     languageDescription: 'Deep Speech, telepathy 120 ft.',
-    features: [
-      {
-        name: 'Amphibious',
-        description: 'The aboleth can breathe air and water.',
-      },
-      {
-        name: 'Mucous Cloud',
-        description:
-          'While underwater, the aboleth is surrounded by transformative mucus. A creature that touches the aboleth or that hits it with a melee attack while within 5 feet of it must make a DC 14 Constitution saving throw. On a failure, the creature is diseased for 1d4 hours. The diseased creature can breathe only underwater.',
-      },
-      {
-        name: 'Probing Telepathy',
-        description:
-          'If a creature communicates telepathically with the aboleth, the aboleth learns the creature’s greatest desires if the aboleth can see the creature.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -5780,24 +4964,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     spellcastingAbility: Ability.CHA,
 
-    features: [
-      {
-        name: 'Angelic Weapons',
-        description:
-          'The deva’s weapon attacks are magical. When the deva hits with any weapon, the weapon deals an extra 4d8 radiant damage.',
-        rolls: [
-          {
-            name: 'Angelic Weapon Damage',
-            formula: '4d8',
-          },
-        ],
-      },
-      {
-        name: 'Magic Resistance',
-        description:
-          'The deva has advantage on saving throws against spells and other magical effects.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -5861,28 +5027,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     trueSight: 120,
     languageDescription: 'All, telepathy 120 ft.',
     spellcastingAbility: Ability.CHA,
-    features: [
-      {
-        name: 'Angelic Weapons',
-        description:
-          'The planetar’s weapon attacks are magical. When the planetar hits with any weapon, the weapon deals an extra 5d8 radiant damage.',
-        rolls: [
-          {
-            name: 'Angelic Weapon Damage',
-            formula: '5d8',
-          },
-        ],
-      },
-      {
-        name: 'Divine Awareness',
-        description: 'The planetar knows if it hears a lie.',
-      },
-      {
-        name: 'Magic Resistance',
-        description:
-          'The planetar has advantage on saving throws against spells and other magical effects.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -5944,33 +5088,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     trueSight: 120,
     languageDescription: 'All, telepathy 120 ft.',
     spellcastingAbility: Ability.CHA,
-    features: [
-      {
-        name: 'Angelic Weapons',
-        description:
-          'The solar’s weapon attacks are magical. When the solar hits with any weapon, the weapon deals an extra 6d8 radiant damage (included in the attack).',
-        rolls: [
-          {
-            name: 'Angelic Weapon Damage',
-            formula: '6d8',
-          },
-        ],
-      },
-      {
-        name: 'Divine Awareness',
-        description: 'The solar knows if it hears a lie.',
-      },
-      {
-        name: 'Magic Resistance',
-        description:
-          'The solar has advantage on saving throws against spells and other magical effects.',
-      },
-      {
-        name: 'Slaying Longbow',
-        description:
-          'Whenever the solar lands a hit with its longbow, if the target has less than 100 hit points, it must succeed on a DC 15 Constitution saving throw or die.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -6055,18 +5172,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     ],
     blindsight: 60,
     blindsightDescription: 'blind beyond this radius',
-    features: [
-      {
-        name: 'Antimagic Susceptibility',
-        description:
-          'The armor is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the armor must succeed on a Constitution saving throw against the caster’s spell save DC or fall unconscious for 1 minute.',
-      },
-      {
-        name: 'False Appearance',
-        description:
-          'While the armor remains motionless, it is indistinguishable from a normal suit of armor.',
-      },
-    ],
+
     actions: [
       {
         name: 'Multiattack',
@@ -6127,18 +5233,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     ],
     blindsight: 60,
     blindsightDescription: 'blind beyond this radius',
-    features: [
-      {
-        name: 'Antimagic Susceptibility',
-        description:
-          'The sword is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the sword must succeed on a Constitution saving throw against the caster’s spell save DC or fall unconscious for 1 minute.',
-      },
-      {
-        name: 'False Appearance',
-        description:
-          'While the sword remains motionless and isn’t flying, it is indistinguishable from a normal sword.',
-      },
-    ],
   },
   {
     id: 115,
@@ -6169,23 +5263,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     ],
     blindsight: 60,
     blindsightDescription: 'blind beyond this radius',
-    features: [
-      {
-        name: 'False Appearance',
-        description:
-          'While the rug remains motionless, it is indistinguishable from a normal rug.',
-      },
-      {
-        name: 'Anti-Magic Susceptibility',
-        description:
-          'The rug is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the rug must succeed on a Constitution saving throw against the caster’s spell save DC or fall unconscious for 1 minute.',
-      },
-      {
-        name: 'Damage Transfer',
-        description:
-          'While it is grappling a creature, the rug takes only half the damage dealt to it, and the creature grappled by the rug takes the other half.',
-      },
-    ],
     actions: [
       {
         name: 'Smother',
@@ -6227,12 +5304,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 6,
     darkvision: 60,
     tremorsense: 60,
-    features: [
-      {
-        name: 'Prone AC',
-        description: 'While prone, the ankheg’s AC is 11.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -6295,35 +5366,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     damageImmunities: [DamageTypes.FIRE, DamageTypes.POISON],
     conditionImmunities: [Condition.POISONED],
     languageDescription: 'Ignan',
-    features: [
-      {
-        name: 'Heated Body',
-        description:
-          'A creature that touches the azer or hits it with a melee attack while within 5 feet of it takes 5 (1d10) fire damage.',
-        rolls: [
-          {
-            name: 'Damage',
-            formula: '1d10',
-          },
-        ],
-      },
-      {
-        name: 'Heated Weapons',
-        description:
-          'When the azer hits with a metal melee weapon, it deals an extra 3 (1d6) fire damage (included in the attack).',
-        rolls: [
-          {
-            name: 'Fire Damage',
-            formula: '1d6',
-          },
-        ],
-      },
-      {
-        name: 'Illumination',
-        description:
-          'The azer sheds bright light in a 10-foot radius and dim light for an additional 10 feet.',
-      },
-    ],
   },
   {
     id: 118,
@@ -6347,13 +5389,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 8,
     CHA: 7,
     darkvision: 60,
-    features: [
-      {
-        name: 'Petrifying Gaze',
-        description:
-          'If a creature starts its turn within 30 feet of the basilisk and the two of them can see each other, the basilisk can force the creature to make a DC 12 Constitution saving throw if the basilisk isn’t incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified until freed by the greater restoration spell or other magic.\n\nA creature that isn’t surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can’t see the basilisk until the start of its next turn, when it can avert its eyes again. If it looks at the basilisk in the meantime, it must immediately make the save.\n\nIf the basilisk sees its reflection within 30 feet of it in bright light, it mistakes itself for a rival and targets itself with its gaze.',
-      },
-    ],
+
     actions: [
       {
         name: 'Bite',
@@ -6499,24 +5535,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     skillExpertise: [Skill.STEALTH],
     darkvision: 60,
     languageDescription: 'Common, Goblin',
-    features: [
-      {
-        name: 'Brute',
-        description:
-          'A melee weapon deals one extra die of its damage when the bugbear hits with it (included in the attack).',
-      },
-      {
-        name: 'Surprise Attack',
-        description:
-          'If the bugbear surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack.',
-        rolls: [
-          {
-            name: 'Damage',
-            formula: '2d6',
-          },
-        ],
-      },
-    ],
   },
   {
     id: 121,
@@ -6541,13 +5559,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     skillExpertise: [Skill.PERCEPTION],
     darkvision: 60,
     tremorsense: 60,
-    features: [
-      {
-        name: 'Standing Leap',
-        description:
-          'The bulette can long jump up to 30 feet and high jump up to 15 feet, with or without a running start.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -6709,17 +5720,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     damageImmunities: [DamageTypes.POISON],
     conditionImmunities: [Condition.POISONED],
     languageDescription: 'Understands Deep Speech but can’t speak it',
-    features: [
-      {
-        name: 'Amphibious',
-        description: 'The chuul can breathe air and water.',
-      },
-      {
-        name: 'Sense Magic',
-        description:
-          'The chuul senses magic within 120 feet of it at will. This trait otherwise works like the detect magic spell but isn’t itself magical.',
-      },
-    ],
+
     actions: [
       {
         name: 'Multiattack',
@@ -6775,23 +5776,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     skillProficiencies: [Skill.STEALTH],
     darkvision: 60,
     languageDescription: 'Deep Speech, Undercommon',
-    features: [
-      {
-        name: 'Damage Transfer',
-        description:
-          'While attached to a creature, the cloaker takes only half the damage dealt to it (rounded down), and that creature takes the other half.',
-      },
-      {
-        name: 'False Appearance',
-        description:
-          'While the cloaker remains motionless without its underside exposed, it is indistinguishable from a dark leather cloak.',
-      },
-      {
-        name: 'Light Sensitivity',
-        description:
-          'While in bright light, the cloaker has disadvantage on attack rolls and Wisdom (Perception) checks that rely on sight.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -6916,17 +5900,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     ],
     trueSight: 120,
     languageDescription: 'all, telepathy 120 ft.',
-    features: [
-      {
-        name: 'Magic Weapons',
-        description: 'The couatl’s weapon attacks are magical.',
-      },
-      {
-        name: 'Shielded Mind',
-        description:
-          'The couatl is immune to scrying and to any effect that would sense its emotions, read its thoughts, or detect its location.',
-      },
-    ],
+
     actions: [
       {
         name: 'Bite',
@@ -6987,17 +5961,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     CHA: 5,
     blindsight: 60,
     skillProficiencies: [Skill.STEALTH],
-    features: [
-      {
-        name: 'Echolocation',
-        description: 'The darkmantle can’t use its blindsight while deafened.',
-      },
-      {
-        name: 'False Appearance',
-        description:
-          'While the darkmantle remains motionless, it is indistinguishable from a cave formation such as a stalactite.',
-      },
-    ],
     actions: [
       {
         name: 'Crush',
@@ -7046,50 +6009,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     conditionImmunities: [Condition.POISONED],
     trueSight: 120,
     languageDescription: 'Abyssal, telepathy 120 ft.',
-    features: [
-      {
-        name: 'Death Throes',
-        description:
-          'When the balor dies, it explodes, and each creature within 30 feet of it must make a DC 20 Dexterity saving throw, taking 70 (20d6) fire damage on a failed save, or half as much damage on a successful one. The explosion ignites flammable objects in that area that aren’t being worn or carried, and it destroys the balor’s weapons.',
-        rolls: [
-          {
-            name: 'Damage',
-            formula: '20d6',
-          },
-        ],
-      },
-      {
-        name: 'Fire Aura',
-        description:
-          'At the start of each of the balor’s turns, each creature within 5 feet of it takes 10 (3d6) fire damage, and flammable objects in the aura that aren’t being worn or carried ignite. A creature that touches the balor or hits it with a melee attack while within 5 feet of it takes 10 (3d6) fire damage.',
-        rolls: [
-          {
-            name: 'Damage',
-            formula: '3d6',
-          },
-        ],
-      },
-      {
-        name: 'Magic Resistance',
-        description:
-          'The balor has advantage on saving throws against spells and other magical effects.',
-      },
-      {
-        name: 'Magic Weapons',
-        description: 'The balor’s weapon attacks are magical.',
-      },
-      {
-        name: 'Improved Longsword Attack',
-        description:
-          'The balor’s longsword deals an extra 13 (3d8) lightning damage. If the balor scores a critical hit, it rolls damage dice three times, instead of twice.',
-        rolls: [
-          {
-            name: 'Lightning Damage',
-            formula: '3d8',
-          },
-        ],
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -7235,13 +6154,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     trueSight: 120,
     languageDescription: 'Abyssal, telepathy 120 ft.',
     spellcastingAbility: Ability.INT,
-    features: [
-      {
-        name: 'Magic Resistance',
-        description:
-          'The glabrezu has advantage on saving throws against spells and other magical effects.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -7315,18 +6227,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     conditionImmunities: [Condition.POISONED],
     darkvision: 120,
     languageDescription: 'Abyssal, telepathy 120 ft.',
-    features: [
-      {
-        name: 'Magic Resistance',
-        description:
-          'The hezrou has advantage on saving throws against spells and other magical effects.',
-      },
-      {
-        name: 'Stench',
-        description:
-          'Any creature that starts its turn within 10 feet of the hezrou must succeed on a DC 14 Constitution saving throw or be poisoned until the start of its next turn. On a successful saving throw, the creature is immune to the hezrou’s stench for 24 hours.',
-      },
-    ],
+
     actions: [
       {
         name: 'Multiattack',
@@ -7403,22 +6304,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     trueSight: 120,
     languageDescription: 'Abyssal, telepathy 120 ft.',
 
-    features: [
-      {
-        name: 'Magic Resistance',
-        description:
-          'The marilith has advantage on saving throws against spells and other magical effects.',
-      },
-      {
-        name: 'Magic Weapons',
-        description: 'The marilith’s weapon attacks are magical.',
-      },
-      {
-        name: 'Reactive',
-        description:
-          'The marilith can take one reaction on every turn in combat.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -7491,13 +6376,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     conditionImmunities: [Condition.POISONED],
     trueSight: 120,
     languageDescription: 'Abyssal, telepathy 120 ft.',
-    features: [
-      {
-        name: 'Magic Resistance',
-        description:
-          'The nalfeshnee has advantage on saving throws against spells and other magical effects.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -7587,18 +6465,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     conditionImmunities: [Condition.POISONED],
     darkvision: 120,
     languageDescription: 'Abyssal, Common',
-    features: [
-      {
-        name: 'Shapechanger',
-        description:
-          'The quasit can use its action to polymorph into a beast form that resembles a bat (speed 10 ft., fly 40 ft.), a centipede (40 ft., climb 40 ft.), or a toad (40 ft., swim 40 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn’t transformed. It reverts to its true form if it dies.',
-      },
-      {
-        name: 'Magic Resistance',
-        description:
-          'The quasit has advantage on saving throws against spells and other magical effects.',
-      },
-    ],
     actions: [
       {
         name: 'Claws (Bite in Beast Form)',
@@ -7664,13 +6530,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     conditionImmunities: [Condition.POISONED],
     darkvision: 120,
     languageDescription: 'Abyssal, telepathy 120 ft.',
-    features: [
-      {
-        name: 'Magic Resistance',
-        description:
-          'The vrock has advantage on saving throws against spells and other magical effects.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -7762,29 +6621,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     conditionImmunities: [Condition.POISONED],
     darkvision: 120,
     languageDescription: 'Infernal, telepathy 120 ft.',
-    features: [
-      {
-        name: 'Devil’s Sight',
-        description:
-          'Magical darkness doesn’t impede the barbed devil’s darkvision.',
-      },
-      {
-        name: 'Magic Resistance',
-        description:
-          'The barbed devil has advantage on saving throws against spells and other magical effects.',
-      },
-      {
-        name: 'Barbed Hide',
-        description:
-          'At the start of each of its turns, the barbed devil deals 5 (1d10) piercing damage to any creature grappling it.',
-        rolls: [
-          {
-            name: 'Damage',
-            formula: '1d10',
-          },
-        ],
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -7870,38 +6706,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     conditionImmunities: [Condition.POISONED],
     darkvision: 120,
     languageDescription: 'Infernal, telepathy 120 ft.',
-    features: [
-      {
-        name: 'Devil’s Sight',
-        description:
-          'Magical darkness doesn’t impede the bearded devil’s darkvision.',
-      },
-      {
-        name: 'Magic Resistance',
-        description:
-          'The bearded devil has advantage on saving throws against spells and other magical effects.',
-      },
-      {
-        name: 'Steadfast',
-        description:
-          'The bearded devil can’t be frightened while it can see an allied creature within 30 feet of it.',
-      },
-      {
-        name: 'Glaive Weapon Attack',
-        description:
-          'Whenever the bearded devil hits a creature with its glaive, if the target is a creature other than an undead or a construct, it must succeed on a DC 12 Constitution saving throw or lose 5 (1d10) hit points at the start of each of its turns due to an infernal wound. Each time the devil hits the wounded target with this attack, the damage dealt by the wound increases by 5 (1d10). Any creature can take an action to stanch the wound with a successful DC 12 Wisdom (Medicine) check. The wound also closes if the target receives magical healing.',
-        rolls: [
-          {
-            name: 'Attack',
-            formula: '1d20 + 5',
-          },
-          {
-            name: 'Damage',
-            formula: '1d10 + 3',
-          },
-        ],
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -7956,18 +6760,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     conditionImmunities: [Condition.POISONED],
     darkvision: 120,
     languageDescription: 'Infernal, telepathy 120 ft.',
-    features: [
-      {
-        name: 'Devil’s Sight',
-        description:
-          'Magical darkness doesn’t impede the bone devil’s darkvision.',
-      },
-      {
-        name: 'Magic Resistance',
-        description:
-          'The bone devil has advantage on saving throws against spells and other magical effects.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -8042,18 +6834,7 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
 
     darkvision: 120,
     languageDescription: 'Infernal, telepathy 120 ft.',
-    features: [
-      {
-        name: 'Devil’s Sight',
-        description:
-          'Magical darkness doesn’t impede the chain devil’s darkvision.',
-      },
-      {
-        name: 'Magic Resistance',
-        description:
-          'The chain devil has advantage on saving throws against spells and other magical effects.',
-      },
-    ],
+
     actions: [
       {
         name: 'Multiattack',
@@ -8120,34 +6901,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     trueSight: 120,
     languageDescription: 'Infernal, telepathy 120 ft.',
     armorEquippedId: itemIds.scaleMail,
-    features: [
-      {
-        name: 'Hellish Weapons',
-        description:
-          'The erinyes’s weapon attacks are magical and deal an extra 13 (3d8) poison damage on a hit.',
-        rolls: [
-          {
-            name: 'Damage',
-            formula: '3d8',
-          },
-        ],
-      },
-      {
-        name: 'Magic Resistance',
-        description:
-          'The erinyes has advantage on saving throws against spells and other magical effects.',
-      },
-      {
-        name: 'Longbow Poison',
-        description:
-          'When the erinyes lands an attack with its longbow, the target must succeed on a DC 14 Constitution saving throw or be poisoned. The poison lasts until it is removed by the lesser restoration spell or similar magic.',
-      },
-      {
-        name: 'Parry',
-        description:
-          'The erinyes adds 4 to its AC against one melee attack that would hit it. To do so, the erinyes must see the attacker and be wielding a melee weapon.',
-      },
-    ],
   },
   {
     id: 142,
@@ -8178,18 +6931,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     conditionImmunities: [Condition.POISONED],
     darkvision: 120,
     languageDescription: 'Infernal, telepathy 120 ft.',
-    features: [
-      {
-        name: 'Devil’s Sight',
-        description:
-          'Magical darkness doesn’t impede the horned devil’s darkvision.',
-      },
-      {
-        name: 'Magic Resistance',
-        description:
-          'The horned devil has advantage on saving throws against spells and other magical effects.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -8276,18 +7017,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     challengeRating: 14,
     blindsight: 60,
     languageDescription: 'Infernal, telepathy 120 ft.',
-    features: [
-      {
-        name: 'Devil’s Sight',
-        description:
-          'Magical darkness doesn’t impede the ice devil’s darkvision.',
-      },
-      {
-        name: 'Magic Resistance',
-        description:
-          'The ice devil has advantage on saving throws against spells and other magical effects.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -8379,22 +7108,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     conditionImmunities: [Condition.POISONED],
     darkvision: 120,
     languageDescription: 'Infernal, Common',
-    features: [
-      {
-        name: 'Shapechanger',
-        description:
-          'The imp can use its action to polymorph into a beast form that resembles a rat (speed 20 ft.), a raven (20 ft., fly 60 ft.), or a spider (20 ft., climb 20 ft.), or back into its true form. Its statistic sare the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn’t transformed. It reverts to its true form if it dies.',
-      },
-      {
-        name: "Devil's Sight",
-        description: 'Magical darkness doesn’t impede the imp’s darkvision.',
-      },
-      {
-        name: 'Magic Resistance',
-        description:
-          'The imp has advantage on saving throws against spells and other magical effects.',
-      },
-    ],
     actions: [
       {
         name: 'Sting (Bite in Beast form)',
@@ -8451,17 +7164,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     languageDescription:
       "Understands Infernal but can't speak it, telepathy 60 ft.",
-    features: [
-      {
-        name: "Devil's Sight",
-        description: 'Magical darkness doesn’t impede the lemure’s darkvision.',
-      },
-      {
-        name: 'Hellish Rejuvenation',
-        description:
-          'A lemure that dies in the Nine Hells comes back to life with all its hit points in 1d10 days unless it is killed by a good-aligned creature with a bless spell cast on it or its body is sprinkled with holy water.',
-      },
-    ],
     actions: [
       {
         name: 'Fist',
@@ -8511,22 +7213,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     conditionImmunities: [Condition.POISONED],
     trueSight: 120,
     languageDescription: 'Infernal, telepathy 120 ft.',
-    features: [
-      {
-        name: 'Fear Aura',
-        description:
-          'Any creature hostile to the pit fiend thatstarts its turn within 20 feet of the pit fiend must make a DC 21 Wisdom saving throw, unless the pit fiend is incapacitated. On a failed save, the creature is frightened until the start of its next turn. If a creature’s saving throw is successful, the creature is immune to the pit fiend’s Fear Aura for the next 24 hours',
-      },
-      {
-        name: 'Magic Resistance',
-        description:
-          'The pit fiend has advantage on saving throws against spells and other magical effects.',
-      },
-      {
-        name: 'Magic Weapons',
-        description: "The pit fiend's weapon attacks are magical.",
-      },
-    ],
     spellcastingAbility: Ability.CHA,
 
     actions: [
@@ -8595,12 +7281,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     WIS: 12,
     CHA: 5,
     skillProficiencies: [Skill.PERCEPTION, Skill.STEALTH],
-    features: [
-      {
-        name: 'Hold Breath',
-        description: 'The plesiosaurus can hold its breath for 1 hour.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -8639,13 +7319,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     INT: 2,
     WIS: 11,
     CHA: 5,
-    features: [
-      {
-        name: 'Trampling Charge',
-        description:
-          'If the triceratops moves at least 20 feet straight toward a creature and then hits it with a gore attack on the same turn, that target must succeed on a DC 13 Strength saving throw or be knocked prone.\n\nIf the target is prone, the triceratops can make one attack with its horns against it as a bonus action.',
-      },
-    ],
     actions: [
       {
         name: 'Gore',
@@ -8764,29 +7437,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     skillProficiencies: [Skill.INSIGHT],
     conditionImmunities: [Condition.CHARMED],
     darkvision: 60,
-    features: [
-      {
-        name: 'Shapechanger',
-        description:
-          'The doppelganger can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn’t transformed. It reverts to its true form if it dies.',
-      },
-      {
-        name: 'Ambusher',
-        description:
-          'In the first round of a combat, the doppelganger has advantage on attack rolls against any creature it has surprised.',
-      },
-      {
-        name: 'Surprise Attack',
-        description:
-          'If the doppelganger surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack',
-        rolls: [
-          {
-            name: 'Damage',
-            formula: '3d6',
-          },
-        ],
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -8846,17 +7496,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     skillProficiencies: [Skill.STEALTH],
     darkvision: 120,
     blindsight: 60,
-    features: [
-      {
-        name: 'Amphibious',
-        description: 'The dragon can breathe air and water.',
-      },
-      {
-        name: 'Legendary Resistance (3/Day)',
-        description:
-          'If the dragon fails a saving throw, it can choose to succeed instead.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -8986,17 +7625,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     blindsight: 60,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Amphibious',
-        description: 'The dragon can breathe air and water.',
-      },
-      {
-        name: 'Legendary Resistance (3/Day)',
-        description:
-          'If the dragon fails a saving throw, it can choose to succeed instead.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -9130,12 +7758,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     blindsight: 30,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Amphibious',
-        description: 'The dragon can breathe air and water.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -9214,12 +7836,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 60,
     blindsight: 10,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Amphibious',
-        description: 'The dragon can breathe air and water.',
-      },
-    ],
     actions: [
       {
         name: 'Bite',
@@ -9284,13 +7900,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     blindsight: 60,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Legendary Resistance (3/Day)',
-        description:
-          'If the dragon fails a saving throw, it can choose to succeed instead.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -9418,13 +8027,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     blindsight: 60,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Legendary Resistance (3/Day)',
-        description:
-          'If the dragon fails a saving throw, it can choose to succeed instead.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -9695,17 +8297,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     blindsight: 60,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Legendary Resistance (3/Day)',
-        description:
-          'If the dragon fails a saving throw, it can choose to succeed instead.',
-      },
-      {
-        name: 'Amphibious',
-        description: 'The dragon can breathe air and water.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -9839,17 +8430,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     blindsight: 60,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Amphibious',
-        description: 'The dragon can breathe air and water.',
-      },
-      {
-        name: 'Legendary Resistance (3/Day)',
-        description:
-          'If the dragon fails a saving throw, it can choose to succeed instead.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -9978,12 +8558,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     blindsight: 30,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Amphibious',
-        description: 'The dragon can breathe air and water.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -10139,13 +8713,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     blindsight: 60,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Legendary Resistance (3/Day)',
-        description:
-          'If the dragon fails a saving throw, it can choose to succeed instead.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -10281,13 +8848,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     blindsight: 60,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Legendary Resistance (3/Day)',
-        description:
-          'If the dragon fails a saving throw, it can choose to succeed instead.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -10573,18 +9133,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     blindsight: 60,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Ice Walk',
-        description:
-          'The dragon can move across and climb icy surfaces without needing to make an ability check. Additionally, difficult terrain composed of ice or snow doesn’t cost it extra moment.',
-      },
-      {
-        name: 'Legendary Resistance (3/Day)',
-        description:
-          'If the dragon fails a saving throw, it can choose to succeed instead.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -10715,18 +9263,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     blindsight: 60,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Ice Walk',
-        description:
-          'The dragon can move across and climb icy surfaces without needing to make an ability check. Additionally, difficult terrain composed of ice or snow doesn’t cost it extra moment.',
-      },
-      {
-        name: 'Legendary Resistance (3/Day)',
-        description:
-          'If the dragon fails a saving throw, it can choose to succeed instead.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -10857,13 +9393,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     blindsight: 30,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Ice Walk',
-        description:
-          'The dragon can move across and climb icy surfaces without needing to make an ability check. Additionally, difficult terrain composed of ice or snow doesn’t cost it extra moment.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -11020,13 +9549,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     blindsight: 60,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Legendary Resistance (3/Day)',
-        description:
-          'If the dragon fails a saving throw, it can choose to succeed instead.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',
@@ -11165,13 +9687,6 @@ const CreatureSeed: Prisma.CreatureCreateManyInput[] = [
     darkvision: 120,
     blindsight: 60,
     languageDescription: 'Common, Draconic',
-    features: [
-      {
-        name: 'Legendary Resistance (3/Day)',
-        description:
-          'If the dragon fails a saving throw, it can choose to succeed instead.',
-      },
-    ],
     actions: [
       {
         name: 'Multiattack',

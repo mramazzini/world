@@ -1,4 +1,3 @@
-import { SpeciesInfo } from '@/lib/types/types';
 import Link from 'next/link';
 import NewLineParse from '@/Utility/NewLineParse';
 import GenerateTable from '@/components/UI/GenerateTable';
@@ -7,6 +6,7 @@ import JsonTable from '@/Utility/JsonTable';
 import FeatureList from '@/components/UI/FeatureList';
 import { AssociatedModel } from '@prisma/client';
 import CommentSection from '@/components/CommentSection/CommentSection';
+import { SpeciesInfo } from '@/lib/types/modelInfo';
 
 interface Props {
   species: SpeciesInfo | null;
@@ -118,7 +118,7 @@ const SpeciesPage = ({ species }: Props) => {
             <div className="divider mb-0"></div>
           </div>
           <div className="divider"></div>
-          <FeatureList features={species.features} />
+          <FeatureList features={species.Features} />
           <div className="divider"></div>
           {species.Variants.length > 0 && (
             <div className="bg-base-300 p-4 rounded-xl">

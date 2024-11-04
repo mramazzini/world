@@ -1,4 +1,4 @@
-import { CharacterInfo } from '@/lib/types/types';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 import { AbilityToModifier } from '@/Utility/characterStateFunctions/calc/AbilityToModifier';
 import Tooltip from '@/Utility/Tooltip';
 

@@ -1,10 +1,11 @@
 'use client';
-import { CallbackOptions, CharacterInfo } from '@/lib/types/types';
+import { CallbackOptions } from '@/lib/types/types';
 import Choice from './Choice';
 import { useEffect, useState } from 'react';
 import { runCallback } from '@/Utility/characterStateFunctions/update/runCallback';
 import { removeChoice } from '@/Utility/characterStateFunctions/update/removeChoice';
 import Loading from '@/components/UI/Loading';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 interface Props {
   character: CharacterInfo;
   setCharacterState: (character: PrismaJson.CharacterState) => void;

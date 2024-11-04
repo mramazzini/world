@@ -1,9 +1,4 @@
-import {
-  CallbackOptions,
-  CharacterInfo,
-  ToolID,
-  WeaponID,
-} from '@/lib/types/types';
+import { CallbackOptions, ToolID, WeaponID } from '@/lib/types/types';
 import ItemChoiceHandler from './ItemChoiceHandler';
 import { Ability } from '@prisma/client';
 import ProficiencyChoiceHandler from './ProficiencyChoiceHandler';
@@ -15,6 +10,7 @@ import { runCallback } from '@/Utility/characterStateFunctions/update/runCallbac
 import { useCallback } from 'react';
 import ASIorFeatHandler from './ASIorFeatHandler';
 import FeatHandler from './FeatHandler';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 
 interface Props {
   id: string;
@@ -33,7 +29,6 @@ const Choice = ({
 }: Props) => {
   const callback = useCallback(
     async (data: CallbackOptions) => {
-      console.log('callback', data);
       const s = await runCallback(
         character,
         choiceData.callbackProtocol,

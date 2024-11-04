@@ -1,6 +1,7 @@
 'use client';
-import { ItemID, ItemInfo } from '@/lib/types/types';
+import { ItemID } from '@/lib/types/types';
 import { memoizeGetItem } from '../../globalCache';
+import { ItemInfo } from '@/lib/types/modelInfo';
 
 export const equipWeapon = async (
   state: PrismaJson.CharacterState,
@@ -27,9 +28,10 @@ export const equipWeapon = async (
   }
 
   //if the requested weapon is two-handed, we just equip it
-  const twoHandedWeapon = itemData.Weapon?.properties.some(
-    (p) => p.property.name === 'Two-Handed'
-  );
+  const twoHandedWeapon =
+    itemData.ItemWeaponData?.Weapon?.WeaponPropertyInstance.some(
+      (p) => p.Property.name === 'Two-Handed'
+    );
   if (twoHandedWeapon) {
     return {
       ...state,
@@ -45,7 +47,9 @@ export const equipWeapon = async (
   const equippedRes = (await Promise.all(equippedData)) as ItemInfo[];
   if (!equippedRes) return state;
   const equippedTwoHandedWeapon = equippedRes.find((i) =>
-    i?.Weapon?.properties.some((p) => p.property.name === 'Two-Handed')
+    i?.ItemWeaponData?.Weapon?.WeaponPropertyInstance.some(
+      (p) => p.Property.name === 'Two-Handed'
+    )
   );
   //if a two handed weapon equipped, we just equip the new weapon
   if (equippedTwoHandedWeapon) {

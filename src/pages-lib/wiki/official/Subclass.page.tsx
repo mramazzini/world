@@ -1,10 +1,9 @@
 import SubClassDisplay from '@/components/ClassInfo/SubClassDisplay';
 
-import { SubClassInfo } from '@/lib/types/types';
-
 import Loading from '@/components/UI/Loading';
 import CommentSection from '@/components/CommentSection/CommentSection';
 import { AssociatedModel } from '@prisma/client';
+import { SubClassInfo } from '@/lib/types/modelInfo';
 
 const SubClassPage = ({ subclass }: { subclass: SubClassInfo | null }) => {
   if (!subclass) return <span className="p-4">Subclass does not exist</span>;

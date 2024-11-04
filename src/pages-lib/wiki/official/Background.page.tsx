@@ -3,7 +3,7 @@ import DieTable from '@/components/UI/DieTable';
 import FeatureList from '@/components/UI/FeatureList';
 import Info from '@/components/UI/Info';
 import Loading from '@/components/UI/Loading';
-import { BackgroundInfo } from '@/lib/types/types';
+import { BackgroundInfo } from '@/lib/types/modelInfo';
 import P from '@/Utility/FormatAndSanitize';
 import NewLineParse from '@/Utility/NewLineParse';
 import { AssociatedModel } from '@prisma/client';
@@ -96,7 +96,7 @@ const BackgroundPage = ({ background }: Props) => {
             <Info tooltip="Abilities that your background grants your character." />
           </h2>
           <div className="divider"> </div>
-          <FeatureList features={background.features} />
+          <FeatureList features={background.Features} />
           <div className="divider"></div>
           {background.suggestedCharacteristics && (
             <>

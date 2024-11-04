@@ -2,7 +2,7 @@
 import { calcWeight } from '@/Utility/characterStateFunctions/calc/calcWeight';
 import P from '@/Utility/FormatAndSanitize';
 import Tooltip from '@/Utility/Tooltip';
-import { CharacterInfo } from '@/lib/types/types';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 import numberArray from '@/lib/utils/numberArray';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';

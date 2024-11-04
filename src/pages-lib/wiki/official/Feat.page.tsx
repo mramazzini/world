@@ -1,8 +1,8 @@
 import CommentSection from '@/components/CommentSection/CommentSection';
 import FeatureList from '@/components/UI/FeatureList';
 import Info from '@/components/UI/Info';
+import { FeatInfo } from '@/lib/types/modelInfo';
 import NewLineParse from '@/Utility/NewLineParse';
-import { FeatInfo } from '@/lib/types/types';
 import { AssociatedModel } from '@prisma/client';
 import Link from 'next/link';
 
@@ -51,7 +51,7 @@ const FeatPage = ({ feat }: Props) => {
             <Info tooltip="Your Feat provides the following abilities." />
           </h2>
           <div className="divider"></div>
-          <FeatureList features={feat.features} />
+          <FeatureList features={feat.Features} />
           <div className="divider"></div>
           <CommentSection id={feat.id} model={AssociatedModel.FEAT} />
         </>

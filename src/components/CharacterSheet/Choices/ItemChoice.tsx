@@ -1,7 +1,7 @@
 'use client';
 import P from '@/Utility/FormatAndSanitize';
 import { memoizeGetItem } from '@/Utility/globalCache';
-import { ItemInfo } from '@/lib/types/types';
+import { ItemInfo } from '@/lib/types/modelInfo';
 import numberArray from '@/lib/utils/numberArray';
 import { useEffect, useMemo, useState } from 'react';
 interface Props {

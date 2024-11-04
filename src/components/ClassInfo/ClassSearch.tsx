@@ -1,6 +1,6 @@
 'use client';
 
-import { ClassInfo } from '@/lib/types/types';
+import { ClassInfo } from '@/lib/types/modelInfo';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Loading from '../UI/Loading';

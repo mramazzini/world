@@ -2,9 +2,9 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import termDictionary from './TermDictionary';
 import Tooltip from './Tooltip';
-import { ItemInfo, SpellInfo } from '@/lib/types/types';
 import ModelLink from './ModelLink';
 import { memoizeGetItem, memoizeGetSpell } from './globalCache';
+import { ItemInfo, SpellInfo } from '@/lib/types/modelInfo';
 
 const P = ({
   children,

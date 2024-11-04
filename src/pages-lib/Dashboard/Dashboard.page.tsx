@@ -3,7 +3,7 @@ import { alignmentToText } from '@/Utility/alignmentToText';
 import { calculateLevel } from '@/Utility/characterStateFunctions/calc/calcLevel';
 import '@/lib/string.extensions';
 import { getCharactersByUser } from '@/lib/actions/db/character/read.actions';
-import { CharacterInfo } from '@/lib/types/types';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 import { getUserId } from '@/lib/utils/auth';
 import Image from 'next/image';
 import Link from 'next/link';

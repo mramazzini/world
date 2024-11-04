@@ -1,11 +1,5 @@
 'use client';
-import {
-  ArmorID,
-  CallbackOptions,
-  CharacterInfo,
-  ToolID,
-  WeaponID,
-} from '@/lib/types/types';
+import { ArmorID, CallbackOptions, ToolID, WeaponID } from '@/lib/types/types';
 import P from '@/Utility/FormatAndSanitize';
 import { useCallback, useState } from 'react';
 import { Ability, ArmorType, Language, Skill } from '@prisma/client';
@@ -22,6 +16,7 @@ import useModal from '@/hooks/useModal';
 import Modal from '@/components/UI/Modal/Modal';
 import ModalBox from '@/components/UI/Modal/ModalBox';
 import ModalButton from '@/components/UI/Modal/ModalButton';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 type ProficiencyType =
   | ArmorID
   | WeaponID
@@ -53,7 +48,6 @@ const ProficiencyChoiceHandler = <T extends ProficiencyType>({
   const [selections, setSelections] = useState<T[]>([]);
   const { id } = useModal();
   const handleSubmit = (e: React.FormEvent) => {
-    console.log('Submit');
     e.preventDefault();
     // Make sure that all selections are made
     let allSelectionsMade = true;

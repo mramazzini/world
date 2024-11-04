@@ -1,6 +1,6 @@
 'use client';
 
-import { CallbackOptions, CharacterInfo } from '@/lib/types/types';
+import { CallbackOptions } from '@/lib/types/types';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { DBMetadata } from '@/lib/types/metadata';
@@ -10,6 +10,7 @@ import Modal from '@/components/UI/Modal/Modal';
 import ModalBox from '@/components/UI/Modal/ModalBox';
 import useModal from '@/hooks/useModal';
 import ModalButton from '@/components/UI/Modal/ModalButton';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 
 interface Props {
   choice: PrismaJson.FeatChoice;

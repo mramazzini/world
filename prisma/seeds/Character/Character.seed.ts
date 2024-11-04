@@ -1,4 +1,4 @@
-import { Alignment, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 const CharacterSeed: Prisma.CharacterCreateInput[] = [
   // {
@@ -54,7 +54,6 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
   //       id: 3, //cleric
   //     },
   //   },
-
   //   alignment: Alignment.CHAOTIC_GOOD,
   // },
   // {
@@ -105,7 +104,6 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
   //       id: 20, // pallid elf
   //     },
   //   },
-
   //   alignment: Alignment.TRUE_NEUTRAL,
   // },
   // {
@@ -171,13 +169,11 @@ const CharacterSeed: Prisma.CharacterCreateInput[] = [
   //       id: 7, //druid
   //     },
   //   },
-
   //   Species: {
   //     connect: {
   //       id: 4, //gnome
   //     },
   //   },
-
   //   SubSpecies: {
   //     connect: {
   //       id: 24, //forest

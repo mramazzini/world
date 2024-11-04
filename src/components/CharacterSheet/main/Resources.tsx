@@ -3,7 +3,8 @@ import Modal from '@/components/UI/Modal/Modal';
 import ModalBox from '@/components/UI/Modal/ModalBox';
 import ModalButton from '@/components/UI/Modal/ModalButton';
 import useModal from '@/hooks/useModal';
-import { CharacterInfo, Time } from '@/lib/types/types';
+import { CharacterInfo } from '@/lib/types/modelInfo';
+import { Time } from '@/lib/types/types';
 import Image from 'next/image';
 
 interface Props {

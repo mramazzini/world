@@ -1,8 +1,9 @@
-import { AbilityScores, CharacterInfo, Time } from '@/lib/types/types';
+import { AbilityScores, Time } from '@/lib/types/types';
 import { AbilityToModifier } from '../calc/AbilityToModifier';
 import '@/lib/string.extensions';
 import { generateSubclassChoice } from '../calc/generateSubclassChoice';
 import { v4 } from 'uuid';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 
 const introMarkdown = `# Write your notes here
       
@@ -167,25 +168,7 @@ export const generateCharacter = async (
       { reason: 'Base Passive Perception', effect: 10 },
       { reason: 'Wis Modifier', effect: AbilityToModifier(abilityScores.WIS) },
     ],
-    features: [
-      ...classObj.features.map((f) => ({
-        feature: f,
-        source: classObj.name.toCapitalCase(),
-      })),
-      ...(classObj.spellCastingInfo?.features.map((f) => ({
-        feature: f,
-        source: classObj.name.toCapitalCase(),
-      })) || []),
-      ...background.features.map((f) => ({
-        feature: f,
-        source: background.name,
-      })),
-      ...species.features.map((f) => ({ feature: f, source: species.name })),
-      ...(subSpecies?.features.map((f) => ({
-        feature: f,
-        source: subSpecies.name,
-      })) || []),
-    ],
+
     equipped: {
       hands: {
         numberOfHands: 2,

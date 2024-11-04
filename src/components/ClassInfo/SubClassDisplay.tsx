@@ -1,5 +1,4 @@
-import { SubClassInfo } from '@/lib/types/types';
-
+import { SubClassInfo } from '@/lib/types/modelInfo';
 import '@/lib/string.extensions';
 
 import Link from 'next/link';
@@ -8,7 +7,7 @@ import Info from '../UI/Info';
 
 import Loading from '../UI/Loading';
 import NewLineParse from '../../Utility/NewLineParse';
-import Feature from '../UI/Feature';
+import FeatureList from '../UI/FeatureList';
 interface Props {
   subClass: SubClassInfo;
 }
@@ -61,11 +60,7 @@ const SubClassDisplay = ({ subClass }: Props) => {
           <Info tooltip="Subclasses provide additional features that make your character more powerful as they level up." />
         </h2>
         <div className="divider"></div>
-        <div className="grid grid-cols-1 gap-4">
-          {subClass.features.map((feature, index) => (
-            <Feature key={index} feature={feature} />
-          ))}
-        </div>
+        <FeatureList features={subClass.Features} />
       </div>
     </>
   );

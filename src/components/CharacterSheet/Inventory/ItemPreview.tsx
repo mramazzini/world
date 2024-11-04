@@ -1,5 +1,4 @@
 'use client';
-import { CharacterInfo, ItemInfo } from '@/lib/types/types';
 import { memoizeGetItem } from '@/Utility/globalCache';
 import { Fragment, useEffect, useState } from 'react';
 import ItemPage from '@/pages-lib/wiki/official/Item.page';
@@ -10,8 +9,8 @@ import {
   updateAC,
 } from '@/Utility/characterStateFunctions/update/updateAC';
 import { unpackEquipment } from '@/Utility/characterStateFunctions/update/unpackEquipment';
-import { WeaponProperties } from '@/lib/globalVars';
 import { equipWeapon } from '@/Utility/characterStateFunctions/update/equipWeapon';
+import { CharacterInfo, ItemInfo } from '@/lib/types/modelInfo';
 interface Props {
   character: CharacterInfo;
   updateState: (state: PrismaJson.CharacterState) => void;
@@ -99,11 +98,11 @@ const ItemPreview = ({
                   </button>
                 ) : type === ItemTypes.WEAPON ? (
                   <Fragment key={index}>
-                    {!item.Weapon?.properties.some((p) => {
-                      return (
-                        p.property.name === WeaponProperties['Two-Handed'].name
-                      );
-                    }) && (
+                    {!item.ItemWeaponData?.Weapon.WeaponPropertyInstance.some(
+                      (p) => {
+                        return p.Property.name === 'Two-Handed';
+                      }
+                    ) && (
                       <button
                         key={index}
                         className="btn btn-secondary join-item"
@@ -130,11 +129,11 @@ const ItemPreview = ({
                       </button>
                     )}
 
-                    {item.Weapon?.properties.some((p) => {
-                      return (
-                        p.property.name === WeaponProperties['Two-Handed'].name
-                      );
-                    }) && (
+                    {item.ItemWeaponData?.Weapon.WeaponPropertyInstance?.some(
+                      (p) => {
+                        return p.Property.name === 'Two-Handed';
+                      }
+                    ) && (
                       <button
                         key={index}
                         className="btn btn-secondary join-item"

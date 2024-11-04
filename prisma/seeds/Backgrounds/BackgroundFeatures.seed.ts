@@ -1,9 +1,10 @@
+import { Prisma } from '@prisma/client';
 import { backgroundIds as ids } from './BackgroundIds';
-interface BackgroundFeature extends PrismaJson.Feature {
-  backgroundId: number;
-}
+import Backgrounds from './Backgrounds.seed';
+import generateId from '../_helpers/generateId';
+let count = 1;
 
-const BackgroundFeatures: BackgroundFeature[] = [
+const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   //acolyte
   {
     backgroundId: ids.acolyte,
@@ -11,7 +12,6 @@ const BackgroundFeatures: BackgroundFeature[] = [
     description:
       'As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.\n\nYou might also have ties to a specific temple dedicated to your chosen deity or pantheon, and you have a residence there. This could be the temple where you used to serve, if you remain on good terms with it, or a temple where you have found a new home. While near your temple, you can call upon the priests for assistance, provided the assistance you ask for is not hazardous and you remain in good standing with your temple.',
   },
-
   //anthropologist
   {
     backgroundId: ids.anthropologist,
@@ -2167,6 +2167,19 @@ const BackgroundFeatures: BackgroundFeature[] = [
       },
     ],
   },
-];
+].map((feature, index, arr) => {
+  const featureParent = Backgrounds.find(
+    (background) => background.id === feature.backgroundId
+  );
+  if (!featureParent?.name) throw new Error('Feature must have a name');
+  const id = generateId('background', feature.name, featureParent.name, count);
+  count++;
+  const nextBackgroundFeature = arr[index + 1];
+  if (!nextBackgroundFeature) return { ...feature, id };
+  if (nextBackgroundFeature.backgroundId !== feature.backgroundId) {
+    count = 1;
+  }
+  return { ...feature, id };
+});
 
 export default BackgroundFeatures;
