@@ -4,7 +4,10 @@
 function toCapitalCase(str: string): string {
   if (str.length === 0) return str as string;
   if (str.length === 1) return str.toUpperCase();
-  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  const strArr = str.split(' ');
+  return strArr
+    .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
 }
 
 function camelToCapitalCase(str: string): string {
