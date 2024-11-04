@@ -69,7 +69,7 @@ const CharacterSheetFeatureDisplay = ({ character }: Props) => {
               <div className="collapse-title p-0 flex flex-row items-center justify-between pl-4 pr-8">
                 <div className="flex flex-row items-center">
                   <h3 className="p-0">{featureInfo.name}</h3>
-                  <span className="badge badge-secondary mx-4 font-bold">
+                  <span className="badge badge-secondary mx-4 font-bold capitalize">
                     {featureInfo.id.split('-')[2]}
                   </span>
                 </div>
@@ -149,7 +149,7 @@ const CharacterSheetFeatureDisplay = ({ character }: Props) => {
               <div className="collapse-title p-0 flex flex-row items-center justify-between pl-4 pr-8">
                 <div className="flex flex-row items-center">
                   <h3 className="p-0">{featureInfo.name}</h3>
-                  <span className="badge badge-secondary mx-4 font-bold">
+                  <span className="badge badge-secondary mx-4 font-bold capitalize">
                     {featureInfo.id.split('-')[2]}
                   </span>
                 </div>

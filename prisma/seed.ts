@@ -116,7 +116,7 @@ const seedarr: {
     index: '017',
     callback: createCreatures,
     description: 'Creating creatures from the creature seed.',
-    enabled: true,
+    // enabled: true,
   },
   {
     index: '018',
@@ -147,7 +147,7 @@ const seedarr: {
     index: '022',
     callback: createMaxyUser,
     description: 'Creating maxy user from the maxy user seed.',
-    // //enabled: true,
+    enabled: true,
   },
 ];
 
