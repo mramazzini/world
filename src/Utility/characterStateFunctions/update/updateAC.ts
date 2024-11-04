@@ -1,8 +1,9 @@
 'use client';
-import { ItemID, ItemInfo } from '@/lib/types/types';
+import { ItemID } from '@/lib/types/types';
 import { memoizeGetItem } from '../../globalCache';
 import { AbilityToModifier } from '../calc/AbilityToModifier';
 import { ArmorType } from '@prisma/client';
+import { ItemInfo } from '@/lib/types/modelInfo';
 
 const baseArmorCalc = async (
   state: PrismaJson.CharacterState

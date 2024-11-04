@@ -15,6 +15,8 @@ export const getMessages = async () => {
           id: true,
           username: true,
           email: true,
+          updatedAt: true,
+          createdAt: true,
         },
       },
     },

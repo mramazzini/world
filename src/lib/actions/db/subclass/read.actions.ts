@@ -1,10 +1,11 @@
 'use server';
 import { QUERY_LIMIT } from '@/lib/globalVars';
-import { QueryParams, SubClassInfo } from '@/lib/types/types';
+import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { Prisma, PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
 import { DBMetadata } from '@/lib/types/metadata';
+import { SubClassInfo } from '@/lib/types/modelInfo';
 
 export const getSubclassMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
@@ -35,6 +36,16 @@ export async function getSubclasses({
         },
       },
       include: {
+        SpellCastingFeatures: {
+          include: {
+            SubClassColumnedFeature: true,
+          },
+        },
+        Features: {
+          include: {
+            SubClassColumnedFeature: true,
+          },
+        },
         Class: {
           select: {
             name: true,
@@ -57,6 +68,16 @@ export async function getSubclasses({
       },
     },
     include: {
+      SpellCastingFeatures: {
+        include: {
+          SubClassColumnedFeature: true,
+        },
+      },
+      Features: {
+        include: {
+          SubClassColumnedFeature: true,
+        },
+      },
       Class: {
         select: {
           name: true,
@@ -96,6 +117,16 @@ export async function getSubclassChunkByClass(
         },
       }),
       include: {
+        SpellCastingFeatures: {
+          include: {
+            SubClassColumnedFeature: true,
+          },
+        },
+        Features: {
+          include: {
+            SubClassColumnedFeature: true,
+          },
+        },
         Class: {
           select: {
             name: true,
@@ -125,6 +156,16 @@ export async function getSubclassChunkByClass(
       },
     }),
     include: {
+      SpellCastingFeatures: {
+        include: {
+          SubClassColumnedFeature: true,
+        },
+      },
+      Features: {
+        include: {
+          SubClassColumnedFeature: true,
+        },
+      },
       Class: {
         select: {
           name: true,
@@ -175,6 +216,16 @@ export async function getHomebrewSubclassChunk(
         } as Prisma.SubClassWhereInput,
       }),
       include: {
+        SpellCastingFeatures: {
+          include: {
+            SubClassColumnedFeature: true,
+          },
+        },
+        Features: {
+          include: {
+            SubClassColumnedFeature: true,
+          },
+        },
         Class: {
           select: {
             name: true,
@@ -201,6 +252,16 @@ export async function getHomebrewSubclassChunk(
       } as Prisma.SubClassWhereInput,
     }),
     include: {
+      SpellCastingFeatures: {
+        include: {
+          SubClassColumnedFeature: true,
+        },
+      },
+      Features: {
+        include: {
+          SubClassColumnedFeature: true,
+        },
+      },
       Class: {
         select: {
           name: true,
@@ -242,6 +303,16 @@ export async function getSubclass(
           name: query,
         },
         include: {
+          SpellCastingFeatures: {
+            include: {
+              SubClassColumnedFeature: true,
+            },
+          },
+          Features: {
+            include: {
+              SubClassColumnedFeature: true,
+            },
+          },
           Class: {
             select: {
               name: true,
@@ -262,6 +333,16 @@ export async function getSubclass(
           id: query,
         },
         include: {
+          SpellCastingFeatures: {
+            include: {
+              SubClassColumnedFeature: true,
+            },
+          },
+          Features: {
+            include: {
+              SubClassColumnedFeature: true,
+            },
+          },
           Class: {
             select: {
               name: true,
@@ -297,6 +378,16 @@ export const getSubclassesByClass = async (
         },
       },
       include: {
+        SpellCastingFeatures: {
+          include: {
+            SubClassColumnedFeature: true,
+          },
+        },
+        Features: {
+          include: {
+            SubClassColumnedFeature: true,
+          },
+        },
         User: {
           select: {
             username: true,
@@ -320,6 +411,16 @@ export const getSubclassesByClass = async (
       },
     },
     include: {
+      SpellCastingFeatures: {
+        include: {
+          SubClassColumnedFeature: true,
+        },
+      },
+      Features: {
+        include: {
+          SubClassColumnedFeature: true,
+        },
+      },
       User: {
         select: {
           username: true,
@@ -351,6 +452,16 @@ export async function getSubclassChunk(
       take: QUERY_LIMIT,
       skip: page * QUERY_LIMIT,
       include: {
+        SpellCastingFeatures: {
+          include: {
+            SubClassColumnedFeature: true,
+          },
+        },
+        Features: {
+          include: {
+            SubClassColumnedFeature: true,
+          },
+        },
         User: {
           select: {
             username: true,
@@ -373,6 +484,16 @@ export async function getSubclassChunk(
       relationalFields: queryInfo.relationalFields,
     }),
     include: {
+      SpellCastingFeatures: {
+        include: {
+          SubClassColumnedFeature: true,
+        },
+      },
+      Features: {
+        include: {
+          SubClassColumnedFeature: true,
+        },
+      },
       User: {
         select: {
           username: true,

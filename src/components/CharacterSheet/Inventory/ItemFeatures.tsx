@@ -5,7 +5,8 @@ import JsonTable from '@/Utility/JsonTable';
 import { Fragment, useState } from 'react';
 import { useEffect } from 'react';
 import { memoizeGetItem } from '@/Utility/globalCache';
-import { ItemInfo } from '@/lib/types/types';
+import { ItemInfo } from '@/lib/types/modelInfo';
+import { Feature } from '@prisma/client';
 interface Props {
   inventory: PrismaJson.QuantityItem[];
 }
@@ -14,7 +15,7 @@ const RenderItemFeature = ({
   feature,
   item,
 }: {
-  feature: PrismaJson.Feature;
+  feature: Feature;
   item: ItemInfo;
 }) => {
   return (
@@ -85,14 +86,14 @@ const ItemFeatures = ({ inventory }: Props) => {
       {items.map((i) => {
         return (
           <Fragment key={i.id}>
-            {i.features.map((f, index) => (
+            {i.Features.map((f, index) => (
               <RenderItemFeature key={index} feature={f} item={i} />
             ))}
 
-            {i.Tool?.features.map((f, index) => (
+            {i.Tool?.Features.map((f, index) => (
               <RenderItemFeature key={index} feature={f} item={i} />
             ))}
-            {i.Armor?.features.map((f, index) => (
+            {i.Armor?.Features.map((f, index) => (
               <RenderItemFeature key={index} feature={f} item={i} />
             ))}
           </Fragment>

@@ -3,7 +3,7 @@ import { Item } from '@prisma/client';
 
 import Tooltip from './Tooltip';
 import { useEffect, useState } from 'react';
-import { SpellInfo, SubClassInfo } from '@/lib/types/types';
+import { SpellInfo, SubClassInfo } from '@/lib/types/modelInfo';
 type model = Item | SpellInfo | SubClassInfo;
 
 interface Props<T extends model> {

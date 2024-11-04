@@ -1,12 +1,17 @@
 'use server';
-import { ToolInfo, QueryParams } from '@/lib/types/types';
+import { ToolInfo } from '@/lib/types/modelInfo';
+import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
 
 export const getTools = async (): Promise<ToolInfo[]> => {
   const db = new PrismaClient();
-  const res = await db.tool.findMany({});
+  const res = await db.tool.findMany({
+    include: {
+      Features: true,
+    },
+  });
   await db.$disconnect();
   return res;
 };
@@ -20,6 +25,9 @@ export const getTool = async (
       where: {
         name: query,
       },
+      include: {
+        Features: true,
+      },
     });
     await db.$disconnect();
     return res;
@@ -27,6 +35,9 @@ export const getTool = async (
     const res = await db.tool.findFirst({
       where: {
         id: query,
+      },
+      include: {
+        Features: true,
       },
     });
     await db.$disconnect();
@@ -45,6 +56,9 @@ export const getToolChunk = async (
         fields: queryInfo.searchFields,
         relationalFields: queryInfo.relationalFields,
       }),
+      include: {
+        Features: true,
+      },
     });
     await db.$disconnect();
     return res;
@@ -55,6 +69,9 @@ export const getToolChunk = async (
       fields: queryInfo.searchFields,
       relationalFields: queryInfo.relationalFields,
     }),
+    include: {
+      Features: true,
+    },
   });
 
   const fuse = new Fuse(res, {

@@ -2,33 +2,28 @@ import Info from '@/components/UI/Info';
 import Loading from '@/components/UI/Loading';
 import P from '@/Utility/FormatAndSanitize';
 import NewLineParse from '@/Utility/NewLineParse';
-import { ItemInfo } from '@/lib/types/types';
 import Link from 'next/link';
 import Tooltip from '@/Utility/Tooltip';
-import Feature from '@/components/UI/Feature';
 import FeatureList from '@/components/UI/FeatureList';
 import { ArmorType, AssociatedModel, ItemTypes, Rarity } from '@prisma/client';
 import { itemIds } from '../../../../prisma/seeds/Items/ItemIds';
 import JsonTable from '@/Utility/JsonTable';
 import CommentSection from '@/components/CommentSection/CommentSection';
+import { ItemInfo, WeaponPropertyInstanceInfo } from '@/lib/types/modelInfo';
 interface Props {
   item: ItemInfo | null;
 }
 const ItemPage = ({ item }: Props) => {
-  const propertyTooltip = (prop: PrismaJson.WeaponProperty) => {
+  const propertyTooltip = (prop: WeaponPropertyInstanceInfo) => {
     const tooltip = (
       <Tooltip
-        element={`${prop.property.name}${
-          prop.range
-            ? ` (${prop.range}${prop.maxRange ? `, ${prop.maxRange}` : ''})`
-            : ''
-        }${
+        element={`${prop.Property.name}${prop.range ? ` (${prop.range})` : ''}${
           prop.versatileDamage
-            ? ` (${prop.versatileDamage.numberOfDice}d${prop.versatileDamage.dice})`
+            ? ` (${prop.versatileDamage.formula} ${prop.versatileDamage.type.toCapitalCase().replaceAll('_', ' ')})`
             : ''
         }`}
       >
-        {prop.property.description}
+        {prop.Property.description}
       </Tooltip>
     );
     return tooltip;
@@ -166,7 +161,7 @@ const ItemPage = ({ item }: Props) => {
                 <div className="divider m-0"></div>
               </div>
             </div>
-            {item.features.length > 0 && (
+            {item.Features.length > 0 && (
               <>
                 <div className="divider"></div>
                 <h2>
@@ -176,7 +171,7 @@ const ItemPage = ({ item }: Props) => {
                   />
                 </h2>
                 <div className="divider "></div>
-                <FeatureList features={item.features} />
+                <FeatureList features={item.Features} />
               </>
             )}
             <div className="divider mb-0"></div>
@@ -384,7 +379,7 @@ const ItemPage = ({ item }: Props) => {
                   </div>
                 </div>
                 <div className="divider" />
-                {item.Armor.features.length > 0 && (
+                {item.Armor.Features.length > 0 && (
                   <>
                     <h2>
                       Armor Features{' '}
@@ -393,7 +388,7 @@ const ItemPage = ({ item }: Props) => {
                       />
                     </h2>
                     <div className="divider "></div>
-                    <FeatureList features={item.Armor.features} />
+                    <FeatureList features={item.Armor.Features} />
                     <div className="divider "></div>
                   </>
                 )}
@@ -487,7 +482,7 @@ const ItemPage = ({ item }: Props) => {
               <div className="divider "></div>
             </>
           )}
-          {item.Weapon && (
+          {item.ItemWeaponData && item.ItemWeaponData && (
             <>
               <div className="bg-base-300 rounded-xl p-4">
                 <h2 className="pb-0">
@@ -502,57 +497,72 @@ const ItemPage = ({ item }: Props) => {
                     <ul className="list-disc ">
                       <li className="ml-4">
                         <span className="font-bold">Damage:</span>{' '}
-                        {item.Weapon.damage.length > 0
-                          ? item.Weapon.damage.map((d, index) => {
-                              if (!item.Weapon) return null;
-                              if (index == item.Weapon.damage.length - 1) {
+                        {item.ItemWeaponData.Weapon.damage.length > 0
+                          ? item.ItemWeaponData.Weapon.damage.map(
+                              (d, index) => {
+                                if (!item.ItemWeaponData) return null;
+                                if (
+                                  index ==
+                                  item.ItemWeaponData.Weapon.damage.length - 1
+                                ) {
+                                  return (
+                                    <span key={index}>
+                                      {d.formula} {d.type.toCapitalCase()}
+                                    </span>
+                                  );
+                                }
                                 return (
                                   <span key={index}>
-                                    {d.numberOfDice}d{d.dice}{' '}
-                                    {d.type.toCapitalCase()}
+                                    {d.formula} {d.type.toCapitalCase()},{' '}
                                   </span>
                                 );
                               }
-                              return (
-                                <span key={index}>
-                                  {d.numberOfDice}d{d.dice}{' '}
-                                  {d.type.toCapitalCase()},{' '}
-                                </span>
-                              );
-                            })
+                            )
                           : 'N/A'}
                       </li>
                       <li className="ml-4">
                         <span className="font-bold">Properties:</span>{' '}
-                        {item.Weapon.properties.map((prop, index) => {
-                          if (!item.Weapon) return null;
-                          if (index == item.Weapon.properties.length - 1) {
+                        {item.ItemWeaponData.Weapon.WeaponPropertyInstance.map(
+                          (prop, index) => {
+                            if (!item.ItemWeaponData) return null;
+                            if (
+                              index ==
+                              item.ItemWeaponData.Weapon.WeaponPropertyInstance
+                                .length -
+                                1
+                            ) {
+                              return (
+                                <span key={index}>
+                                  {' '}
+                                  {propertyTooltip(prop)}
+                                </span>
+                              );
+                            }
                             return (
-                              <span key={index}> {propertyTooltip(prop)}</span>
+                              <span key={index}>{propertyTooltip(prop)}, </span>
                             );
                           }
-                          return (
-                            <span key={index}>{propertyTooltip(prop)}, </span>
-                          );
-                        })}
+                        )}
                       </li>
-                      {item.Weapon.ammunition && (
+                      {item.ItemWeaponData.Weapon.ammunition && (
                         <li className="ml-4">
                           <span className="font-bold">Ammunition:</span>{' '}
-                          <P>{`^${item.Weapon.ammunition.id}{${item.Weapon.ammunition.name}}^`}</P>
+                          <P>{`^${item.ItemWeaponData.Weapon.ammunition.id}{${item.ItemWeaponData.Weapon.ammunition.name}}^`}</P>
                         </li>
                       )}
                     </ul>
                     <div className="divider m-0"></div>
                   </div>{' '}
-                  {item.Weapon.properties.some((w) => w.special) && (
+                  {item.ItemWeaponData.Weapon.SpecialProperties.length > 0 && (
                     <>
                       <div className="divider m-0"></div>
-                      {item.Weapon.properties.map((prop) => {
-                        return prop.special?.map((special, index) => (
-                          <Feature key={index} feature={special} />
-                        ));
-                      })}
+                      {item.ItemWeaponData.Weapon.SpecialProperties && (
+                        <FeatureList
+                          features={
+                            item.ItemWeaponData.Weapon.SpecialProperties
+                          }
+                        />
+                      )}
                       <div className="divider m-0"></div>
                     </>
                   )}
@@ -697,7 +707,7 @@ const ItemPage = ({ item }: Props) => {
                     <div className="divider "></div>
                   </>
                 )}
-                {item.Tool.features.length > 0 && (
+                {item.Tool.Features.length > 0 && (
                   <>
                     <h2>
                       Tool Features{' '}
@@ -706,7 +716,7 @@ const ItemPage = ({ item }: Props) => {
                       />
                     </h2>
                     <div className="divider "></div>
-                    <FeatureList features={item.Tool.features} />
+                    <FeatureList features={item.Tool.Features} />
                     <div className="divider "></div>
                   </>
                 )}

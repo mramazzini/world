@@ -1,7 +1,7 @@
 'use client';
 import { createComment } from '@/lib/actions/db/comment/create.actions';
 import { getCommentsByModel } from '@/lib/actions/db/comment/read.actions';
-import { CommentInfo } from '@/lib/types/types';
+import { CommentInfo } from '@/lib/types/modelInfo';
 import { AssociatedModel } from '@prisma/client';
 import { useCallback, useEffect, useState } from 'react';
 import { getUserId } from '@/lib/utils/auth';

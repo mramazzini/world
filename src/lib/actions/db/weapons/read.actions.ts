@@ -1,5 +1,6 @@
 'use server';
-import { WeaponInfo, QueryParams } from '@/lib/types/types';
+import { WeaponInfo } from '@/lib/types/modelInfo';
+import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
@@ -9,6 +10,12 @@ export const getWeapons = async (): Promise<WeaponInfo[]> => {
   const res = await db.weapon.findMany({
     include: {
       ammunition: true,
+      SpecialProperties: true,
+      WeaponPropertyInstance: {
+        include: {
+          Property: true,
+        },
+      },
     },
   });
   await db.$disconnect();
@@ -25,7 +32,13 @@ export const getWeapon = async (
         name: query,
       },
       include: {
+        SpecialProperties: true,
         ammunition: true,
+        WeaponPropertyInstance: {
+          include: {
+            Property: true,
+          },
+        },
       },
     });
     await db.$disconnect();
@@ -36,7 +49,13 @@ export const getWeapon = async (
         id: query,
       },
       include: {
+        SpecialProperties: true,
         ammunition: true,
+        WeaponPropertyInstance: {
+          include: {
+            Property: true,
+          },
+        },
       },
     });
     await db.$disconnect();
@@ -56,7 +75,13 @@ export const getWeaponChunk = async (
         relationalFields: queryInfo.relationalFields,
       }),
       include: {
+        SpecialProperties: true,
         ammunition: true,
+        WeaponPropertyInstance: {
+          include: {
+            Property: true,
+          },
+        },
       },
     });
     await db.$disconnect();
@@ -69,7 +94,13 @@ export const getWeaponChunk = async (
       relationalFields: queryInfo.relationalFields,
     }),
     include: {
+      SpecialProperties: true,
       ammunition: true,
+      WeaponPropertyInstance: {
+        include: {
+          Property: true,
+        },
+      },
     },
   });
 

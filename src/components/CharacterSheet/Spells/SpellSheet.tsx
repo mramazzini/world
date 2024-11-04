@@ -1,8 +1,9 @@
-import { CharacterInfo, SpellLevel } from '@/lib/types/types';
+import { SpellLevel } from '@/lib/types/types';
 import SpellSection from './SpellSection';
 import { calcProficiency } from '@/Utility/characterStateFunctions/calc/calcProficiency';
 import numberArray from '@/lib/utils/numberArray';
 import PrepareSpellSection from './PrepareSpellSection';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 
 interface Props {
   character: CharacterInfo;

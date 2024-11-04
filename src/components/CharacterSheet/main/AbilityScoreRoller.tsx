@@ -1,8 +1,8 @@
 import { AbilityToModifier } from '@/Utility/characterStateFunctions/calc/AbilityToModifier';
 import Tooltip from '@/Utility/Tooltip';
 import AbilityToText from '@/lib/utils/AbilityToText';
-import { CharacterInfo } from '@/lib/types/types';
 import { Ability } from '@prisma/client';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 
 interface Props {
   character: CharacterInfo;

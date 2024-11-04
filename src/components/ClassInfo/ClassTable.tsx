@@ -1,16 +1,17 @@
 'use client';
 
-import { Class } from '@prisma/client';
 import numberArray from '@/lib/utils/numberArray';
 import numPlace from '@/lib/utils/numPlace';
 import { useState } from 'react';
 import { Level, SpellLevel } from '@/lib/types/types';
+import { ClassInfo } from '@/lib/types/modelInfo';
 interface Props {
-  classObj: Class;
+  classObj: ClassInfo;
 }
 
 const ClassTable = ({ classObj }: Props) => {
-  const features = classObj.features;
+  const features = classObj.Features;
+  const spellCastingFeatures = classObj.SpellcastingFeatures;
   const spellCasting = classObj.spellCastingInfo;
   const [expand, setExpand] = useState(false);
   return (
@@ -24,28 +25,28 @@ const ClassTable = ({ classObj }: Props) => {
 
               {features &&
                 features.map((feature) => {
-                  const tableCol = feature.tableColumns;
+                  const tableCol = feature.columnedFeatures;
 
                   if (!tableCol) return null;
                   return tableCol.map((col, index) => {
                     return (
                       <th key={index} className="text-left bg-black/20">
-                        {col.title}
+                        {col.name}
                       </th>
                     );
                   });
                 })}
               <th className="text-left bg-black/20 ">Features</th>
               {/* spellcasting features */}
-              {spellCasting &&
-                spellCasting.features.map((feature) => {
-                  const tableCol = feature.tableColumns;
+              {spellCastingFeatures &&
+                spellCastingFeatures.map((feature) => {
+                  const tableCol = feature.columnedFeatures;
 
                   if (!tableCol) return null;
                   return tableCol.map((col, index) => {
                     return (
                       <th key={index} className="text-left bg-black/20">
-                        {col.title}
+                        {col.name}
                       </th>
                     );
                   });
@@ -83,10 +84,10 @@ const ClassTable = ({ classObj }: Props) => {
                 {/* proficiency bonus */}
                 <td>+{Math.ceil(num / 4) + 1}</td>
                 {features.map((feature) => {
-                  const tableCol = feature.tableColumns;
+                  const tableCol = feature.columnedFeatures;
                   if (!tableCol) return null;
                   return tableCol.map((col, index) => {
-                    return <td key={index}>{col.col[num as Level]}</td>;
+                    return <td key={index}>{col.rows[num - 1]}</td>;
                   });
                 })}
                 {/* features */}
@@ -97,7 +98,6 @@ const ClassTable = ({ classObj }: Props) => {
                         <li>Spellcasting </li>
                       )}
                     {features.map((feature, index) => {
-                      if (feature.hideInSheet) return null;
                       const lvls = feature.levels;
 
                       return (
@@ -133,13 +133,13 @@ const ClassTable = ({ classObj }: Props) => {
                 </td>
 
                 {/* spellcasting features */}
-                {spellCasting &&
-                  spellCasting.features.map((feature) => {
-                    const tableCol = feature.tableColumns;
+                {spellCastingFeatures &&
+                  spellCastingFeatures.map((feature) => {
+                    const tableCol = feature.columnedFeatures;
 
                     if (!tableCol) return null;
                     return tableCol.map((col, index) => {
-                      return <td key={index}>{col.col[num as Level]}</td>;
+                      return <td key={index}>{col.rows[num - 1]}</td>;
                     });
                   })}
                 {/* spell slots */}

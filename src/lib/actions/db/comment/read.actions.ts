@@ -1,6 +1,6 @@
 'use server';
+import { CommentInfo } from '@/lib/types/modelInfo';
 import { AssociatedModel, PrismaClient } from '@prisma/client';
-import { CommentInfo } from '@/lib/types/types';
 
 export const getCommentsByModel = async (
   model: AssociatedModel,

@@ -5,7 +5,7 @@ import { calcSkillModifier } from '@/Utility/characterStateFunctions/calc/calcSk
 import Tooltip from '@/Utility/Tooltip';
 import { skillAtritbuteMap } from '@/lib/globalVars';
 import AbilityToText from '@/lib/utils/AbilityToText';
-import { CharacterInfo } from '@/lib/types/types';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 import { Ability, Skill } from '@prisma/client';
 import { Fragment } from 'react';
 

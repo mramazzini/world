@@ -1,9 +1,9 @@
 import { alignmentToText } from '@/Utility/alignmentToText';
-import { CharacterInfo } from '@/lib/types/types';
 import Image from 'next/image';
 import { Fragment } from 'react';
 import ImageUploadModal from './ImageUploadModal';
 import useModal from '@/hooks/useModal';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 
 interface Props {
   character: CharacterInfo;

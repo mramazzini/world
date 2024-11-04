@@ -1,10 +1,11 @@
 'use server';
 import { QUERY_LIMIT } from '@/lib/globalVars';
-import { ClassInfo, QueryParams } from '@/lib/types/types';
+import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
 import { DBMetadata } from '@/lib/types/metadata';
+import { ClassInfo } from '@/lib/types/modelInfo';
 
 export async function getClassMetadata(): Promise<DBMetadata[]> {
   const db = new PrismaClient();
@@ -33,6 +34,16 @@ export async function getClasses(homebrew: boolean): Promise<ClassInfo[]> {
       include: {
         SubClasses: true,
         SpellList: true,
+        Features: {
+          include: {
+            columnedFeatures: true,
+          },
+        },
+        SpellcastingFeatures: {
+          include: {
+            columnedFeatures: true,
+          },
+        },
         User: {
           select: {
             username: true,
@@ -46,6 +57,16 @@ export async function getClasses(homebrew: boolean): Promise<ClassInfo[]> {
   const res = await db.class.findMany({
     include: {
       SubClasses: true,
+      Features: {
+        include: {
+          columnedFeatures: true,
+        },
+      },
+      SpellcastingFeatures: {
+        include: {
+          columnedFeatures: true,
+        },
+      },
       SpellList: true,
       User: {
         select: {
@@ -71,6 +92,16 @@ export async function getClass(
 
       include: {
         SubClasses: true,
+        Features: {
+          include: {
+            columnedFeatures: true,
+          },
+        },
+        SpellcastingFeatures: {
+          include: {
+            columnedFeatures: true,
+          },
+        },
         SpellList: true,
         User: {
           select: {
@@ -89,6 +120,16 @@ export async function getClass(
       },
       include: {
         SubClasses: true,
+        Features: {
+          include: {
+            columnedFeatures: true,
+          },
+        },
+        SpellcastingFeatures: {
+          include: {
+            columnedFeatures: true,
+          },
+        },
         SpellList: true,
         User: {
           select: {
@@ -112,6 +153,16 @@ export async function getClassChunk(
       take: QUERY_LIMIT,
       skip: page * QUERY_LIMIT,
       include: {
+        Features: {
+          include: {
+            columnedFeatures: true,
+          },
+        },
+        SpellcastingFeatures: {
+          include: {
+            columnedFeatures: true,
+          },
+        },
         SubClasses: true,
         SpellList: true,
         User: {
@@ -127,6 +178,16 @@ export async function getClassChunk(
   const res: ClassInfo[] = await db.class.findMany({
     include: {
       SubClasses: true,
+      Features: {
+        include: {
+          columnedFeatures: true,
+        },
+      },
+      SpellcastingFeatures: {
+        include: {
+          columnedFeatures: true,
+        },
+      },
       SpellList: true,
       User: {
         select: {
@@ -174,6 +235,16 @@ export const getHomebrewClassChunk = async (
       }),
       include: {
         SubClasses: true,
+        Features: {
+          include: {
+            columnedFeatures: true,
+          },
+        },
+        SpellcastingFeatures: {
+          include: {
+            columnedFeatures: true,
+          },
+        },
         SpellList: true,
         User: {
           select: {
@@ -193,6 +264,16 @@ export const getHomebrewClassChunk = async (
     },
     include: {
       SubClasses: true,
+      Features: {
+        include: {
+          columnedFeatures: true,
+        },
+      },
+      SpellcastingFeatures: {
+        include: {
+          columnedFeatures: true,
+        },
+      },
       SpellList: true,
       User: {
         select: {

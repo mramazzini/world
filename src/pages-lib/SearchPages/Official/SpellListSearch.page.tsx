@@ -1,6 +1,6 @@
 import SearchPageComponent from '../SearchPage';
 
-import { SpellListInfo } from '@/lib/types/types';
+import { SpellListInfo } from '@/lib/types/modelInfo';
 import { getSpellListChunk } from '@/lib/actions/db/spellList/read.actions';
 interface Props {
   spellLists: SpellListInfo[];

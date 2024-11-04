@@ -5,15 +5,13 @@ import { createSpellList } from './seeds/_seeders/002_createSpellList.seeder';
 import { linkSpellListToSpell } from './seeds/_seeders/003_SpellListToSpell.linker';
 import { createArmor } from './seeds/_seeders/004_createArmor.seeder';
 import { createEquipmentPacks } from './seeds/_seeders/005_createEquipmentPacks.seeder';
-import { createTools } from './seeds/_seeders/006_createTools.seeder';
 import { createWeapons } from './seeds/_seeders/007_createWeapons.seeder';
 import { createItems } from './seeds/_seeders/008_createItems.seeder';
-import { ammunitionToWeapon } from './seeds/_seeders/009_AmmunitionToWeapon.linker';
 import { createBackgrounds } from './seeds/_seeders/010_createBackgrounds.seeder';
 import { createClasses } from './seeds/_seeders/011_createClasses.seeder';
 import { createSubclass } from './seeds/_seeders/013_createSubclass.seeder';
 import { createSpecies } from './seeds/_seeders/014_createSpecies.seeder';
-import { createVariants } from './seeds/_seeders/015_createVariant.seeder';
+import { createSubspecies } from './seeds/_seeders/015_createSubSpecies.seeder';
 import { createCharacter } from './seeds/_seeders/020_createCharacter.seeder';
 import createMaxyUser from './seeds/_seeders/022_createMaxyUser.seeder';
 import { createFeats } from './seeds/_seeders/016_createFeats.seeder';
@@ -21,6 +19,7 @@ import { createBlogPosts } from './seeds/_seeders/021_createBlogPosts.seeder';
 import { createCreatures } from './seeds/_seeders/017_createCreatures.seeder';
 import { linkCreatureToSpells } from './seeds/_seeders/018_CreatureToSpell.linker';
 import { linkCreatureToItems } from './seeds/_seeders/019_creatureToItem.linker';
+import { createTool } from './seeds/_seeders/006_createTools.seeder';
 const db = new PrismaClient();
 
 const seedarr: {
@@ -33,67 +32,61 @@ const seedarr: {
     index: '001',
     callback: createSpells,
     description: 'Creating spells from the spell seed.',
-    //  enabled:true,
+    //enabled: true,
   },
   {
     index: '002',
     callback: createSpellList,
     description: 'Creating spell lists from the spell list seed.',
-    //  enabled:true,
+    //enabled: true,
   },
   {
     index: '003',
     callback: linkSpellListToSpell,
     description: 'Linking spell lists to spells.',
-    //  enabled:true,
+    //enabled: true,
   },
   {
     index: '004',
     callback: createArmor,
     description: 'Creating armor from the armor seed.',
-    //  enabled:true,
+    //enabled: true,
   },
   {
     index: '005',
     callback: createEquipmentPacks,
     description: 'Creating equipment packs from the equipment pack seed.',
-    //  enabled:true,
+    //enabled: true,
   },
   {
     index: '006',
-    callback: createTools,
+    callback: createTool,
     description: 'Creating tools from the tools seed.',
-    //  enabled:true,
+    //enabled: true,
   },
   {
     index: '007',
     callback: createWeapons,
     description: 'Creating weapons from the weapons seed.',
-    //  enabled:true,
+    //enabled: true,
   },
   {
     index: '008',
     callback: createItems,
     description: 'Creating items from the item seed.',
-    //  enabled:true,
-  },
-  {
-    index: '009',
-    callback: ammunitionToWeapon,
-    description: 'Linking ammunition to weapons.',
-    //  enabled:true,
+    //enabled: true,
   },
   {
     index: '010',
     callback: createBackgrounds,
     description: 'Creating backgrounds from the background seed.',
-    //  enabled:true,
+    //enabled: true,
   },
   {
     index: '011',
     callback: createClasses,
     description: 'Creating classes from the class seed.',
-    //  enabled:true,
+    enabled: true,
   },
   {
     index: '013',
@@ -105,37 +98,37 @@ const seedarr: {
     index: '014',
     callback: createSpecies,
     description: 'Creating species from the species seed.',
-    //  enabled:true,
+    //enabled: true,
   },
   {
     index: '015',
-    callback: createVariants,
-    description: 'Creating variants from the variant seed.',
-    //  enabled:true,
+    callback: createSubspecies,
+    description: 'Creating subspecies from subspecies seed.',
+    //enabled: true,
   },
   {
     index: '016',
     callback: createFeats,
     description: 'Creating feats from the species seed.',
-    //  enabled:true,
+    //enabled: true,
   },
   {
     index: '017',
     callback: createCreatures,
     description: 'Creating creatures from the creature seed.',
-    //  enabled:true,
+    //enabled: true,
   },
   {
     index: '018',
     callback: linkCreatureToSpells,
     description: 'Linking creatures to spells.',
-    //  enabled:true,
+    //enabled: true,
   },
   {
     index: '019',
     callback: linkCreatureToItems,
     description: 'Linking creatures to items.',
-    //  enabled:true,
+    //enabled: true,
   },
 
   {
@@ -148,13 +141,13 @@ const seedarr: {
     index: '021',
     callback: createBlogPosts,
     description: 'Creating blogpost from the blogpost seed.',
-    //  enabled:true,
+    //enabled: true,
   },
   {
     index: '022',
     callback: createMaxyUser,
     description: 'Creating maxy user from the maxy user seed.',
-    //  enabled:true,
+    // //enabled: true,
   },
 ];
 

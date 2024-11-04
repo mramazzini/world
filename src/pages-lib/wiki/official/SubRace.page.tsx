@@ -1,4 +1,3 @@
-import { SubSpeciesInfo } from '@/lib/types/types';
 import NewLineParse from '@/Utility/NewLineParse';
 import Link from 'next/link';
 import Info from '@/components/UI/Info';
@@ -14,6 +13,7 @@ import JsonTable from '@/Utility/JsonTable';
 import { AssociatedModel } from '@prisma/client';
 import CommentSection from '@/components/CommentSection/CommentSection';
 import { objEqual } from '@/lib/utils/deepEqual';
+import { SubSpeciesInfo } from '@/lib/types/modelInfo';
 const SubSpeciesPage = ({ subSpecies }: Props) => {
   if (!subSpecies) return null;
   const species = subSpecies.species;
@@ -168,10 +168,10 @@ const SubSpeciesPage = ({ subSpecies }: Props) => {
                       return <li key={index}>{key.camelToCapitalCase()}</li>;
                     }
                   })}
-                  {subSpecies.features.map((trait, index) => (
+                  {subSpecies.Features.map((trait, index) => (
                     <li key={index}>{trait.name}</li>
                   ))}
-                  {subSpecies.features.length == 0 &&
+                  {subSpecies.Features.length == 0 &&
                     Object.values(difference).every(
                       (val) => val == TraitStatus.NONE
                     ) && <li>None</li>}
@@ -328,9 +328,9 @@ const SubSpeciesPage = ({ subSpecies }: Props) => {
               <Info tooltip="Unique Abilities granted to your character due to its subspecies." />
             </h2>
             <div className="divider"></div>
-            {subSpecies.features.length > 0 && (
+            {subSpecies.Features.length > 0 && (
               <>
-                {subSpecies.features.map((trait, index) => (
+                {subSpecies.Features.map((trait, index) => (
                   <div key={index} className="bg-base-200 rounded-xl p-4 my-2">
                     <h3>
                       {trait.name}{' '}
@@ -351,7 +351,7 @@ const SubSpeciesPage = ({ subSpecies }: Props) => {
                 ))}
               </>
             )}
-            {species.features.map(
+            {species.Features.map(
               (trait, index) =>
                 !subSpecies.removedTraits.includes(trait.name) && (
                   <div key={index} className="bg-base-200 rounded-xl p-4 my-2">

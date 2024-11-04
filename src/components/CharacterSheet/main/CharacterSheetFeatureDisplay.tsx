@@ -2,8 +2,8 @@ import { calculateLevel } from '@/Utility/characterStateFunctions/calc/calcLevel
 import { numberColor, numberColorBefore } from '@/Utility/colorBefore';
 import P from '@/Utility/FormatAndSanitize';
 import JsonTable from '@/Utility/JsonTable';
-import { CharacterInfo } from '@/lib/types/types';
-import { Fragment } from 'react';
+import { CharacterInfo } from '@/lib/types/modelInfo';
+import { Fragment, useMemo } from 'react';
 
 interface Props {
   character: CharacterInfo;
@@ -11,27 +11,55 @@ interface Props {
 
 const CharacterSheetFeatureDisplay = ({ character }: Props) => {
   const calcLevel = character.state ? calculateLevel(character.state) : 1;
+  const features = useMemo(() => {
+    if (!character.Classes) return [];
+    if (!character.Species) return [];
+    const ClassFeatures = character.Classes[0].Features.concat(
+      character.Classes[0].SpellcastingFeatures
+    );
+    const SubclassFeatures =
+      character.SubClasses && character.SubClasses[0]
+        ? character.SubClasses[0].Features
+        : [];
+    const SpeciesFeatures = character.Species.Features;
+    const SubSpeciesFeatures = character.SubSpecies
+      ? character.SubSpecies.Features
+      : [];
+    const FeatFeatures = character.Feats?.flatMap((f) => f.Features) || [];
+    const BackgroundFeatures = character.Background?.Features || [];
+    return [
+      ...ClassFeatures,
+      ...SubclassFeatures,
+      ...SpeciesFeatures,
+      ...SubSpeciesFeatures,
+      ...FeatFeatures,
+      ...BackgroundFeatures,
+    ];
+  }, [
+    character.Background,
+    character.Classes,
+    character.Feats,
+    character.Species,
+    character.SubClasses,
+    character.SubSpecies,
+  ]);
   return (
     character.state && (
       <>
         {' '}
         <h2 className="pb-0 px-4">Features</h2>
         <div className="divider m-0" />
-        {character.state.features
+        {features
           .sort((a, b) => {
-            if (a.feature.levels === undefined) return -1; // Put a first if its levels are undefined
-            if (b.feature.levels === undefined) return 1; // Put b first if its levels are undefined
+            if (a.levels === undefined) return -1; // Put a first if its levels are undefined
+            if (b.levels === undefined) return 1; // Put b first if its levels are undefined
 
-            const minA = Math.min(...a.feature.levels);
-            const minB = Math.min(...b.feature.levels);
+            const minA = Math.min(...a.levels);
+            const minB = Math.min(...b.levels);
 
             return minA - minB;
           })
-          .filter(
-            (f) =>
-              f.feature.levels?.some((level) => level <= calcLevel) ||
-              !f.feature.levels
-          )
+          .filter((f) => !f.levels?.some((level) => level > calcLevel))
           .map((featureInfo, index) => (
             <div
               key={index}
@@ -40,19 +68,18 @@ const CharacterSheetFeatureDisplay = ({ character }: Props) => {
               <input type="checkbox" />
               <div className="collapse-title p-0 flex flex-row items-center justify-between pl-4 pr-8">
                 <div className="flex flex-row items-center">
-                  <h3 className="p-0">{featureInfo.feature.name}</h3>
+                  <h3 className="p-0">{featureInfo.name}</h3>
                   <span className="badge badge-secondary mx-4 font-bold">
-                    {featureInfo.source}
+                    {featureInfo.id.split('-')[2]}
                   </span>
                 </div>
                 <div className="flex flex-wrap items-center">
-                  {featureInfo.feature.levels &&
-                  featureInfo.feature.levels.length == 20 ? (
+                  {featureInfo.levels && featureInfo.levels.length == 20 ? (
                     <span className="badge badge-accent font-bold rounded-full">
                       All Levels
                     </span>
                   ) : (
-                    featureInfo.feature.levels?.map((level, index) => {
+                    featureInfo.levels?.map((level, index) => {
                       return (
                         <div
                           className={`bg-neutral rounded-full w-8 h-8 flex justify-center items-center text-neutral-content font-bold ${numberColor(
@@ -70,13 +97,17 @@ const CharacterSheetFeatureDisplay = ({ character }: Props) => {
                 </div>
               </div>
               <div className="collapse-content">
-                <p className="mb-4">
-                  <P>{featureInfo.feature.description}</P>
+                <div className="divider m-0"></div>
+
+                <p className="">
+                  <P>{featureInfo.description}</P>
                 </p>
-                {featureInfo.feature.options && (
+                <div className="divider m-0"></div>
+
+                {featureInfo.options && (
                   <>
                     <ul className="list-disc ">
-                      {featureInfo.feature.options.map((option, index) => (
+                      {featureInfo.options.map((option, index) => (
                         <Fragment key={index}>
                           <li className="ml-4">
                             <P>{option}</P>
@@ -87,13 +118,14 @@ const CharacterSheetFeatureDisplay = ({ character }: Props) => {
                     </ul>
                   </>
                 )}
-                {featureInfo.feature.extendedTable && (
-                  <JsonTable json={featureInfo.feature.extendedTable} />
-                )}
-                {featureInfo.feature.postTableData && (
+                {featureInfo.extendedTable &&
+                  featureInfo.extendedTable.length > 0 && (
+                    <JsonTable json={featureInfo.extendedTable} />
+                  )}
+                {featureInfo.postTableData && (
                   <>
                     <div className="bg-base-100">
-                      {featureInfo.feature.postTableData}
+                      {featureInfo.postTableData}
                     </div>
                     <div className="divider m-0"></div>
                   </>
@@ -106,35 +138,28 @@ const CharacterSheetFeatureDisplay = ({ character }: Props) => {
         <h2 className="py-0 px-4">Locked Features</h2>
         <p className="italic px-4">Level up to unlock these features</p>
         <div className="divider m-1" />
-        {character.state.features
-          .filter(
-            (f) =>
-              !(
-                f.feature.levels?.some((level) => level <= calcLevel) ||
-                !f.feature.levels
-              )
-          )
+        {features
+          .filter((f) => f.levels?.some((level) => level > calcLevel))
           .map((featureInfo) => (
             <div
-              key={`${featureInfo.feature.name}-${featureInfo.source}`}
+              key={featureInfo.id}
               className="bg-base-300 rounded-xl p-4 collapse collapse-arrow mt-2 collapse-sm py-0"
             >
               <input type="checkbox" />
               <div className="collapse-title p-0 flex flex-row items-center justify-between pl-4 pr-8">
                 <div className="flex flex-row items-center">
-                  <h3 className="p-0">{featureInfo.feature.name}</h3>
+                  <h3 className="p-0">{featureInfo.name}</h3>
                   <span className="badge badge-secondary mx-4 font-bold">
-                    {featureInfo.source}
+                    {featureInfo.id.split('-')[2]}
                   </span>
                 </div>
                 <div className="flex flex-wrap items-center">
-                  {featureInfo.feature.levels &&
-                  featureInfo.feature.levels.length == 20 ? (
+                  {featureInfo.levels && featureInfo.levels.length == 20 ? (
                     <span className="badge badge-accent font-bold rounded-full">
                       All Levels
                     </span>
                   ) : (
-                    featureInfo.feature.levels?.map((level, index) => {
+                    featureInfo.levels?.map((level, index) => {
                       return (
                         <div
                           className={`bg-neutral rounded-full w-8 h-8 flex justify-center items-center text-neutral-content font-bold ${numberColor(
@@ -152,14 +177,15 @@ const CharacterSheetFeatureDisplay = ({ character }: Props) => {
                 </div>
               </div>
               <div className="collapse-content">
+                <div className="divider m-0"></div>
                 <p>
-                  <P>{featureInfo.feature.description}</P>
+                  <P>{featureInfo.description}</P>
                 </p>
                 <div className="divider m-0"></div>
-                {featureInfo.feature.options && (
+                {featureInfo.options && (
                   <>
                     <ul className="list-disc ">
-                      {featureInfo.feature.options.map((option, index) => (
+                      {featureInfo.options.map((option, index) => (
                         <Fragment key={index}>
                           <li className="ml-4">
                             <P>{option}</P>
@@ -170,18 +196,19 @@ const CharacterSheetFeatureDisplay = ({ character }: Props) => {
                     </ul>
                   </>
                 )}
-                {featureInfo.feature.extendedTable && (
+                {featureInfo.extendedTable &&
+                  featureInfo.extendedTable.length > 0 && (
+                    <>
+                      <div className="bg-base-100">
+                        <JsonTable json={featureInfo.extendedTable} />
+                      </div>
+                      <div className="divider m-0"></div>
+                    </>
+                  )}
+                {featureInfo.postTableData && (
                   <>
                     <div className="bg-base-100">
-                      <JsonTable json={featureInfo.feature.extendedTable} />
-                    </div>
-                    <div className="divider m-0"></div>
-                  </>
-                )}
-                {featureInfo.feature.postTableData && (
-                  <>
-                    <div className="bg-base-100">
-                      {featureInfo.feature.postTableData}
+                      {featureInfo.postTableData}
                     </div>
                     <div className="divider m-0"></div>
                   </>

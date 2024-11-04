@@ -1,6 +1,6 @@
 import SearchPageComponent from '../SearchPage';
 
-import { SpeciesInfo } from '@/lib/types/types';
+import { SpeciesInfo } from '@/lib/types/modelInfo';
 
 import { getSpeciesChunk } from '@/lib/actions/db/species/get.actions';
 import { officialSources } from '@/lib/globalVars';

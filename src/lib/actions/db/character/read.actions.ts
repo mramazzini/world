@@ -1,5 +1,6 @@
 'use server';
-import { CharacterInfo, QueryParams } from '@/lib/types/types';
+import { CharacterInfo } from '@/lib/types/modelInfo';
+import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
@@ -8,11 +9,25 @@ export const getCharacters = async (): Promise<CharacterInfo[]> => {
   const db = new PrismaClient();
   const res = await db.character.findMany({
     include: {
-      Species: true,
-      Background: true,
-      SubClasses: true,
+      Species: {
+        include: {
+          Features: true,
+        },
+      },
+      Background: {
+        include: {
+          Features: true,
+        },
+      },
+      SubClasses: {
+        include: {
+          Features: true,
+        },
+      },
       Classes: {
         include: {
+          Features: true,
+          SpellcastingFeatures: true,
           SpellList: {
             include: {
               Spells: true,
@@ -20,8 +35,16 @@ export const getCharacters = async (): Promise<CharacterInfo[]> => {
           },
         },
       },
-      Feats: true,
-      SubSpecies: true,
+      Feats: {
+        include: {
+          Features: true,
+        },
+      },
+      SubSpecies: {
+        include: {
+          Features: true,
+        },
+      },
 
       User: {
         select: {
@@ -45,13 +68,25 @@ export const getCharacter = async (
         name: query,
       },
       include: {
-        Species: true,
-        Background: true,
-        SubClasses: true,
-        Feats: true,
-
+        Species: {
+          include: {
+            Features: true,
+          },
+        },
+        Background: {
+          include: {
+            Features: true,
+          },
+        },
+        SubClasses: {
+          include: {
+            Features: true,
+          },
+        },
         Classes: {
           include: {
+            Features: true,
+            SpellcastingFeatures: true,
             SpellList: {
               include: {
                 Spells: true,
@@ -59,7 +94,16 @@ export const getCharacter = async (
             },
           },
         },
-        SubSpecies: true,
+        Feats: {
+          include: {
+            Features: true,
+          },
+        },
+        SubSpecies: {
+          include: {
+            Features: true,
+          },
+        },
         User: {
           select: {
             id: true,
@@ -76,13 +120,25 @@ export const getCharacter = async (
         id: query,
       },
       include: {
-        Species: true,
-        Background: true,
-        Feats: true,
-
-        SubClasses: true,
+        Species: {
+          include: {
+            Features: true,
+          },
+        },
+        Background: {
+          include: {
+            Features: true,
+          },
+        },
+        SubClasses: {
+          include: {
+            Features: true,
+          },
+        },
         Classes: {
           include: {
+            Features: true,
+            SpellcastingFeatures: true,
             SpellList: {
               include: {
                 Spells: true,
@@ -90,7 +146,16 @@ export const getCharacter = async (
             },
           },
         },
-        SubSpecies: true,
+        Feats: {
+          include: {
+            Features: true,
+          },
+        },
+        SubSpecies: {
+          include: {
+            Features: true,
+          },
+        },
         User: {
           select: {
             id: true,
@@ -116,13 +181,25 @@ export const getCharactersByUser = async (
       userId: userID,
     },
     include: {
-      Species: true,
-      Background: true,
-      SubClasses: true,
-      Feats: true,
-
+      Species: {
+        include: {
+          Features: true,
+        },
+      },
+      Background: {
+        include: {
+          Features: true,
+        },
+      },
+      SubClasses: {
+        include: {
+          Features: true,
+        },
+      },
       Classes: {
         include: {
+          Features: true,
+          SpellcastingFeatures: true,
           SpellList: {
             include: {
               Spells: true,
@@ -130,7 +207,16 @@ export const getCharactersByUser = async (
           },
         },
       },
-      SubSpecies: true,
+      Feats: {
+        include: {
+          Features: true,
+        },
+      },
+      SubSpecies: {
+        include: {
+          Features: true,
+        },
+      },
       User: {
         select: {
           id: true,
@@ -155,13 +241,25 @@ export const getCharacterChunk = async (
         relationalFields: queryInfo.relationalFields,
       }),
       include: {
-        Species: true,
-        Background: true,
-        Feats: true,
-
-        SubClasses: true,
+        Species: {
+          include: {
+            Features: true,
+          },
+        },
+        Background: {
+          include: {
+            Features: true,
+          },
+        },
+        SubClasses: {
+          include: {
+            Features: true,
+          },
+        },
         Classes: {
           include: {
+            Features: true,
+            SpellcastingFeatures: true,
             SpellList: {
               include: {
                 Spells: true,
@@ -169,7 +267,16 @@ export const getCharacterChunk = async (
             },
           },
         },
-        SubSpecies: true,
+        Feats: {
+          include: {
+            Features: true,
+          },
+        },
+        SubSpecies: {
+          include: {
+            Features: true,
+          },
+        },
         User: {
           select: {
             id: true,
@@ -189,13 +296,25 @@ export const getCharacterChunk = async (
     }),
 
     include: {
-      Species: true,
-      Background: true,
-      SubClasses: true,
-      Feats: true,
-
+      Species: {
+        include: {
+          Features: true,
+        },
+      },
+      Background: {
+        include: {
+          Features: true,
+        },
+      },
+      SubClasses: {
+        include: {
+          Features: true,
+        },
+      },
       Classes: {
         include: {
+          Features: true,
+          SpellcastingFeatures: true,
           SpellList: {
             include: {
               Spells: true,
@@ -203,7 +322,16 @@ export const getCharacterChunk = async (
           },
         },
       },
-      SubSpecies: true,
+      Feats: {
+        include: {
+          Features: true,
+        },
+      },
+      SubSpecies: {
+        include: {
+          Features: true,
+        },
+      },
       User: {
         select: {
           id: true,

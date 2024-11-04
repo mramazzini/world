@@ -1,43 +1,10 @@
 import { cerr, cinfo } from '@/lib/utils/chalkLog';
 import { PrismaClient } from '@prisma/client';
 import Species from '../Species/Species.seed';
-import verifyTableIntegrity from '@/lib/utils/verifyTableIntegrity';
-import Traits from '../Species/Traits.seed';
+import SpeciesFeaturesSeed from '../Species/SpeciesFeatures.seed';
+import createFeature from '../_helpers/createFeature';
 
 export const createSpecies = async (db: PrismaClient) => {
-  cinfo('Creating species features');
-  for (const t of Traits) {
-    try {
-      cinfo('Creating species features:', t.name);
-      if (!t.speciesId) {
-        cerr('Trait missing speciesId field:', t.name);
-        return;
-      }
-      if (
-        t.extendedTable &&
-        !verifyTableIntegrity(t.extendedTable as PrismaJson.Table[])
-      ) {
-        cerr('Error verifying extended table integrity:', t.name);
-        return;
-      }
-      const r = Species.find((r) => r.id === t.speciesId);
-      if (!r) {
-        cerr('No Species for feature found:', t.name);
-        return;
-      }
-      if (!r.features) {
-        r.features = [];
-      }
-      r.features = [...(r.features as PrismaJson.Feature[]), t];
-
-      cinfo('Species Feature created');
-    } catch (error) {
-      cerr('Error creating species feature:', t.name, error);
-      return;
-    }
-  }
-  cinfo('Species Features created');
-
   //create species and traits
   cinfo('Creating Species');
   for (const r of Species) {
@@ -57,4 +24,22 @@ export const createSpecies = async (db: PrismaClient) => {
     }
   }
   cinfo('Species created');
+
+  cinfo('Creating species features');
+  for (const t of SpeciesFeaturesSeed) {
+    try {
+      cinfo('Creating species features:', t.name);
+      if (!t.speciesId) {
+        cerr('Trait missing speciesId field:', t.name);
+        return;
+      }
+      await createFeature(db, t);
+
+      cinfo('Species Feature created');
+    } catch (error) {
+      cerr('Error creating species feature:', t.name, error);
+      return;
+    }
+  }
+  cinfo('Species Features created');
 };

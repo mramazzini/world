@@ -1,28 +1,12 @@
-import { ArmorType, Prisma, Skill, Ability } from '@prisma/client';
+import { ArmorType, Prisma } from '@prisma/client';
 
+//ArmorFeatureId start at 1
 const ArmorSeed: Prisma.ArmorCreateManyInput[] = [
   {
     id: 1,
     name: 'Padded Armor',
     armorClass: 11,
     armorType: ArmorType.LIGHT,
-    features: [
-      {
-        name: 'Stealth Disadvantage',
-        description: 'Padded Armor imposes disadvantage on Stealth checks.',
-        effect: {
-          skillRollAdvantages: [
-            {
-              skill: {
-                default: [Skill.STEALTH],
-              },
-              always: true,
-              situation: 'Padded Armor imposes disadvantage on Stealth checks.',
-            },
-          ],
-        },
-      },
-    ],
   },
   {
     id: 2,
@@ -53,49 +37,13 @@ const ArmorSeed: Prisma.ArmorCreateManyInput[] = [
     name: 'Scale Mail',
     armorClass: 14,
     armorType: ArmorType.MEDIUM,
-    features: [
-      {
-        name: 'Stealth Disadvantage',
-        description: 'Scale Mail Armor imposes disadvantage on Stealth checks.',
-        effect: {
-          skillRollAdvantages: [
-            {
-              skill: {
-                default: [Skill.STEALTH],
-              },
-              always: true,
-              situation:
-                'Scale Mail Armor imposes disadvantage on Stealth checks.',
-            },
-          ],
-        },
-      },
-    ],
   },
   {
     id: 7,
     name: 'Spiked Armor',
     armorClass: 14,
     armorType: ArmorType.MEDIUM,
-    features: [
-      {
-        name: 'Stealth Disadvantage',
-        description: 'Spiked Armor imposes disadvantage on Stealth checks.',
-        effect: {
-          skillRollAdvantages: [
-            {
-              skill: {
-                default: [Skill.STEALTH],
-              },
-              always: true,
-              situation: 'Spiked Armor imposes disadvantage on Stealth checks.',
-            },
-          ],
-        },
-      },
-    ],
   },
-
   {
     id: 8,
     name: 'Breastplate',
@@ -107,155 +55,30 @@ const ArmorSeed: Prisma.ArmorCreateManyInput[] = [
     name: 'Half Plate',
     armorClass: 15,
     armorType: ArmorType.MEDIUM,
-    features: [
-      {
-        name: 'Stealth Disadvantage',
-        description:
-          'BreastPlate Armor imposes disadvantage on Stealth checks.',
-        effect: {
-          skillRollAdvantages: [
-            {
-              skill: {
-                default: [Skill.STEALTH],
-              },
-              always: true,
-              situation:
-                'BreastPlate Armor imposes advantage on Stealth checks.',
-            },
-          ],
-        },
-      },
-    ],
   },
   {
     id: 10,
     name: 'Ring Mail',
     armorClass: 14,
     armorType: ArmorType.HEAVY,
-    features: [
-      {
-        name: 'Stealth Disadvantage',
-        description: 'Ring Mail Armor imposes disadvantage on Stealth checks.',
-        effect: {
-          skillRollAdvantages: [
-            {
-              skill: {
-                default: [Skill.STEALTH],
-              },
-              always: true,
-              situation:
-                'Scale Mail Armor imposes disadvantage on Stealth checks.',
-            },
-          ],
-        },
-      },
-    ],
   },
   {
     id: 11,
     name: 'Chain Mail',
     armorClass: 16,
     armorType: ArmorType.HEAVY,
-    features: [
-      {
-        name: 'Stealth Disadvantage',
-        description: 'Chain Mail Armor imposes disadvantage on Stealth checks.',
-        effect: {
-          skillRollAdvantages: [
-            {
-              skill: {
-                default: [Skill.STEALTH],
-              },
-              always: true,
-              situation:
-                'Chain Mail Armor imposes disadvantage on Stealth checks.',
-            },
-          ],
-        },
-      },
-      {
-        name: 'Chain Mail Strength Requirement',
-        description:
-          'Chain Mail requires a Strength of 13 to wear. Otherwise, you have a -10 penalty to your speed.',
-        abilityScoreTriggers: {
-          abilities: [Ability.STR],
-          lessThan: 13,
-        },
-        effect: {
-          speedBonus: -10,
-        },
-      },
-    ],
   },
   {
     id: 12,
     name: 'Splint Armor',
     armorClass: 17,
     armorType: ArmorType.HEAVY,
-    features: [
-      {
-        name: 'Stealth Disadvantage',
-        description: 'Splint Armor imposes disadvantage on Stealth checks.',
-        effect: {
-          skillRollAdvantages: [
-            {
-              skill: {
-                default: [Skill.STEALTH],
-              },
-              always: true,
-              situation: 'Splint Armor imposes disadvantage on Stealth checks.',
-            },
-          ],
-        },
-      },
-      {
-        name: 'Splint Armor Strength Requirement',
-        description:
-          'Splint Armor requires a Strength of 15 to wear. Otherwise, you have a -10 penalty to your speed.',
-        abilityScoreTriggers: {
-          abilities: [Ability.STR],
-          lessThan: 15,
-        },
-        effect: {
-          speedBonus: -10,
-        },
-      },
-    ],
   },
   {
     id: 13,
     name: 'Plate Armor',
     armorClass: 18,
     armorType: ArmorType.HEAVY,
-    features: [
-      {
-        name: 'Stealth Disadvantage',
-        description: 'Splint Armor imposes disadvantage on Stealth checks.',
-        effect: {
-          skillRollAdvantages: [
-            {
-              skill: {
-                default: [Skill.STEALTH],
-              },
-              always: true,
-              situation: 'Splint Armor imposes disadvantage on Stealth checks.',
-            },
-          ],
-        },
-      },
-      {
-        name: 'Plate Armor Strength Requirement',
-        description:
-          'Plate Armor requires a Strength of 15 to wear. Otherwise, you have a -10 penalty to your speed.',
-        abilityScoreTriggers: {
-          abilities: [Ability.STR],
-          lessThan: 15,
-        },
-        effect: {
-          speedBonus: -10,
-        },
-      },
-    ],
   },
   {
     id: 14,

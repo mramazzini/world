@@ -1,12 +1,17 @@
 'use server';
-import { ArmorInfo, QueryParams } from '@/lib/types/types';
+import { ArmorInfo } from '@/lib/types/modelInfo';
+import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
 
 export const getArmors = async (): Promise<ArmorInfo[]> => {
   const db = new PrismaClient();
-  const res = await db.armor.findMany({});
+  const res = await db.armor.findMany({
+    include: {
+      Features: true,
+    },
+  });
   await db.$disconnect();
   return res;
 };
@@ -20,6 +25,9 @@ export const getArmor = async (
       where: {
         name: query,
       },
+      include: {
+        Features: true,
+      },
     });
     await db.$disconnect();
     return res;
@@ -27,6 +35,9 @@ export const getArmor = async (
     const res = await db.armor.findFirst({
       where: {
         id: query,
+      },
+      include: {
+        Features: true,
       },
     });
     await db.$disconnect();
@@ -45,6 +56,9 @@ export const getArmorChunk = async (
         fields: queryInfo.searchFields,
         relationalFields: queryInfo.relationalFields,
       }),
+      include: {
+        Features: true,
+      },
     });
     await db.$disconnect();
     return res;
@@ -55,6 +69,9 @@ export const getArmorChunk = async (
       fields: queryInfo.searchFields,
       relationalFields: queryInfo.relationalFields,
     }),
+    include: {
+      Features: true,
+    },
   });
 
   const fuse = new Fuse(res, {

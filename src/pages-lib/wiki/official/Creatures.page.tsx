@@ -4,7 +4,7 @@ import { combatRatingToProficiency } from '@/Utility/combatRatingToProficiency';
 import P from '@/Utility/FormatAndSanitize';
 import NewLineParse from '@/Utility/NewLineParse';
 import { skillAtritbuteMap } from '@/lib/globalVars';
-import { CreatureInfo, ItemInfo, Level, SpellLevel } from '@/lib/types/types';
+import { Level, SpellLevel } from '@/lib/types/types';
 import {
   Ability,
   ArmorClassProtocol,
@@ -24,6 +24,7 @@ import AbilityToText from '@/lib/utils/AbilityToText';
 import numberArray from '@/lib/utils/numberArray';
 import RollRequest from '@/components/UI/RollRequest';
 import { fullCaster } from '../../../../prisma/seeds/Classes/SpellSlotsUtil';
+import { CreatureInfo, ItemInfo } from '@/lib/types/modelInfo';
 interface Props {
   creature: CreatureInfo;
 }
@@ -542,7 +543,7 @@ const CreaturePage = ({ creature }: Props) => {
 
         <div className="flex flex-col gap-4 bg-base-300 rounded-xl p-4 w-full">
           <h2 className="divider">Abilities</h2>
-          <FeatureList features={creature.features} />
+          <FeatureList features={creature.Features} />
         </div>
         {creature.actions.length > 0 && (
           <div className="flex flex-col gap-4 bg-base-300 rounded-xl p-4 w-full">
@@ -640,7 +641,7 @@ const CreaturePage = ({ creature }: Props) => {
                 <ul className="flex flex-col gap-4">
                   {creature.wieldingItems.map(
                     (item, index) =>
-                      item.Weapon && (
+                      item.ItemWeaponData && (
                         <li key={index} className="bg-base-200 rounded-xl p-4">
                           <h4 className="text-xl p-0 mb-2">
                             <P>{`^${item.id}{${item.name}}^`}</P>
@@ -648,7 +649,7 @@ const CreaturePage = ({ creature }: Props) => {
 
                           <div>
                             {WeaponDescription(
-                              item.Weapon,
+                              item.ItemWeaponData,
                               creature.STR,
                               creature.DEX,
                               combatRatingToProficiency(
@@ -680,7 +681,7 @@ const CreaturePage = ({ creature }: Props) => {
                               </Fragment>
                             ))}
                           </div>
-                          <FeatureList features={item.features} />
+                          <FeatureList features={item.Features} />
                         </li>
                       )
                   )}

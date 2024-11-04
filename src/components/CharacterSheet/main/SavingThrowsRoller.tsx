@@ -2,7 +2,7 @@ import { AbilityToModifier } from '@/Utility/characterStateFunctions/calc/Abilit
 import Tooltip from '@/Utility/Tooltip';
 import AbilityToText from '@/lib/utils/AbilityToText';
 import { Ability } from '@prisma/client';
-import { CharacterInfo } from '@/lib/types/types';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 import { useMemo } from 'react';
 import { calcProficiency } from '@/Utility/characterStateFunctions/calc/calcProficiency';
 import { calculateLevel } from '@/Utility/characterStateFunctions/calc/calcLevel';

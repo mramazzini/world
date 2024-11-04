@@ -1,11 +1,13 @@
+import { Prisma } from '@prisma/client';
 import { itemIds } from '../Items/ItemIds';
 import { generateSpellLink, spellIds } from '../Spells/spells.seed';
 import { classIds as ids } from './ClassIds';
-interface ClassFeature extends PrismaJson.Feature {
-  classId: number;
-  spellCasting?: boolean;
-}
-const Features: ClassFeature[] = [
+import generateId from '../_helpers/generateId';
+import Classes from './Class.seed';
+
+let count = 1;
+
+const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   // Fighter
   {
     name: 'Action Surge',
@@ -117,35 +119,13 @@ const Features: ClassFeature[] = [
   },
   // Wizard
   {
-    classId: ids.wizard,
-    spellCasting: true,
+    spellCastingClassId: ids.wizard,
     name: 'Cantrips',
     levels: [1, 4, 10],
     description:
       'At 1st level, you know three cantrips of your choice from the wizard spell list. You learn additional wizard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Wizard table.',
   },
-  // ...numberArray(1, 5).map((level) => {
-  //   const spellSlot = {} as { [key: number]: number };
-  //   spellSlot[level] = 1;
-  //   return {
-  //     classId: ids.wizard,
-  //     name: `Recover ${level} Level Spell`,
-  //     description: `Use Arcane Recovery to recover a ${level} level spell.`,
-  //     hideInSheet: true,
-  //     effect: {
-  //       spellSlotRegained: spellSlot,
-  //       active: {
-  //         cost: {
-  //           customResource: {
-  //             resource: "Arcane Recovery",
-  //             quantity: level,
-  //           },
-  //           time: { quantity: 1, unit: Time.shortRest },
-  //         },
-  //       },
-  //     },
-  //   } as ClassFeature;
-  // }),
+
   {
     classId: ids.wizard,
     levels: [20],
@@ -171,61 +151,32 @@ const Features: ClassFeature[] = [
     description: `You have learned to regain some of your magical energy by studying your ^${itemIds.spellBook}{spellbook}^. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.\n\nFor example, if you're a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots.`,
   },
   {
-    classId: ids.wizard,
-    spellCasting: true,
-    name: 'Spellbook',
+    spellCastingClassId: ids.wizard,
 
+    name: 'Spellbook',
     description: `As a wizard, you have a ^${itemIds.spellBook}{spellbook}^ containing six 1st-level wizard spells of your choice. Your ^${itemIds.spellBook}{spellbook}^ is the repository of the wizard spells you know, except your cantrips, which are fixed in your mind.\n\nThe spells that you add to your ^${itemIds.spellBook}{spellbook}^ as you gain levels reflect the arcane research you conduct on your own, as well as intellectual breakthroughs you have had about the nature of the multiverse. You might find other spells during your adventures. You could discover a spell recorded on a scroll in an evil wizard's chest, for example, or in a dusty tome in an ancient library.\n\nYour ^${itemIds.spellBook}{spellbook}^ is a unique compilation of spells, with its own decorative flourishes and margin notes. It might be a plain, functional leather volume that you received as a gift from your master, a finely bound gilt-edged tome you found in an ancient library or even a loose collection of notes scrounged together after you lost your previous ^${itemIds.spellBook}{spellbook}^ in a mishap.`,
   },
   {
-    classId: ids.wizard,
-    spellCasting: true,
+    spellCastingClassId: ids.wizard,
+
     name: 'Copying a Spell into the Spellbook',
     description: `When you find a wizard spell of 1st level or higher, you can add it to your ^${itemIds.spellBook}{spellbook}^ if it is of a spell level you can prepare and if you can spare the time to decipher and copy it.\n\nCopying a spell into your ^${itemIds.spellBook}{spellbook}^ involves reproducing the basic form of the spell, then deciphering the unique system of notation used by the wizard who wrote it. You must practice the spell until you understand the sounds or gestures required, then transcribe it into your ^${itemIds.spellBook}{spellbook}^ using your own notation.\n\nFor each level of the spell, the process takes 2 hours and costs 50 ^${itemIds.goldPiece}{gp}^. The cost represents material components you expend as you experiment with the spell to master it, as well as the fine ^${itemIds.ink}{inks}^ you need to record it. Once you have spent this time and money, you can prepare the spell just like your other spells.`,
   },
-  // ...numberArray(1, 9).map((level) => {
-  //   return {
-  //     classId: ids.wizard,
-  //     spellCasting: true,
-  //     name: `Copy Level ${level} Spell`,
-  //     description: `Copy a level ${level} spell into a spellbook.`,
-  //     hideInSheet: true,
-  //     effect: {
-  //       active: {
-  //         cost: {
-  //           items: {
-  //             default: [{ item: itemIds.goldPiece, quantity: 50 * level }],
-  //           },
-  //           time: {
-  //             quantity: 2 * level,
-  //             unit: Time.hour,
-  //           },
-  //         },
-  //       },
-  //     },
-  //   };
-  // }),
+
   {
-    spellCasting: true,
-    classId: ids.wizard,
+    spellCastingClassId: ids.wizard,
     name: 'Replacing the Spellbook',
     description: `You can copy a spell from your own ^${itemIds.spellBook}{spellbook}^ into another book-for example, if you want to make a backup copy of your ^${itemIds.spellBook}{spellbook}^. This is just like copying a new spell into your ^${itemIds.spellBook}{spellbook}^, but faster and easier, since you understand your own notation and already know how to cast the spell. You need spend only 1 hour and 10 ^${itemIds.goldPiece}{gp}^ for each level of the copied spell.\n\nIf you lose your ^${itemIds.spellBook}{spellbook}^, you can use the same procedure to transcribe the spells that you have prepared into a new ^${itemIds.spellBook}{spellbook}^. Filling out the remainder of your ^${itemIds.spellBook}{spellbook}^ requires you to find new spells to do so, as normal. For this reason, many wizards keep backup ^${itemIds.spellBook}{spellbooks}^ in a safe place.`,
   },
   {
-    classId: ids.wizard,
-    spellCasting: true,
+    spellCastingClassId: ids.wizard,
+
     name: 'Ritual Casting',
     description: `You can cast a wizard spell as a ritual if that spell has the ritual tag and you have the spell in your ^${itemIds.spellBook}{spellbook}^. You don't need to have the spell prepared.`,
-    effect: {
-      ritualCasting: {
-        spellPrepared: true,
-        fromSpellList: true,
-      },
-    },
   },
   {
-    classId: ids.wizard,
-    spellCasting: true,
+    spellCastingClassId: ids.wizard,
+
     name: 'Learning Spells of 1st Level and Higher',
     description: `Each time you gain a wizard level, you can add two wizard spells of your choice to your ^${itemIds.spellBook}{spellbook}^ for free. Each of these spells must be of a level for which you have spell slots, as shown on the Wizard table. On your adventures, you might find other spells that you can add to your ^${itemIds.spellBook}{spellbook}^.`,
   },
@@ -235,82 +186,20 @@ const Features: ClassFeature[] = [
     name: 'Cantrips',
     description:
       'You know two cantrips of your choice from the bard spell list. You learn additional bard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Bard table.',
-    spellCasting: true,
-
-    classId: ids.bard,
-    tableColumns: [
-      {
-        title: 'Cantrips Known',
-        col: {
-          1: 2,
-          2: 2,
-          3: 2,
-          4: 3,
-          5: 3,
-          6: 3,
-          7: 3,
-          8: 3,
-          9: 3,
-          10: 4,
-          11: 4,
-          12: 4,
-          13: 4,
-          14: 4,
-          15: 4,
-          16: 4,
-          17: 4,
-          18: 4,
-          19: 4,
-          20: 4,
-        },
-      },
-    ],
+    spellCastingClassId: ids.bard,
   },
   {
     name: 'Spells Known',
     description:
       'You know four 1st-level spells of your choice from the bard spell list.\n\nThe Spells Known column of the Bard table shows when you learn more bard spells of your choice. Each of these spells must be of a level for which you have spell slots, as shown on the table. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the bard spells you know and replace it with another spell from the bard spell list, which also must be of a level for which you have spell slots.',
-    spellCasting: true,
-    classId: ids.bard,
-    tableColumns: [
-      {
-        title: 'Spells Known',
-        col: {
-          1: 4,
-          2: 5,
-          3: 6,
-          4: 7,
-          5: 8,
-          6: 9,
-          7: 10,
-          8: 11,
-          9: 12,
-          10: 14,
-          11: 15,
-          12: 15,
-          13: 16,
-          14: 18,
-          15: 19,
-          16: 19,
-          17: 20,
-          18: 22,
-          19: 22,
-          20: 22,
-        },
-      },
-    ],
+
+    spellCastingClassId: ids.bard,
   },
   {
     name: 'Ritual Casting',
     description: `You can cast any bard spell you know as a ritual if that spell has the ritual tag.`,
-    spellCasting: true,
-    classId: ids.bard,
-    effect: {
-      ritualCasting: {
-        spellPrepared: true,
-        fromSpellList: true,
-      },
-    },
+
+    spellCastingClassId: ids.bard,
   },
   {
     name: 'Bardic Inspiration',
@@ -435,20 +324,12 @@ const Features: ClassFeature[] = [
     description:
       'At 1st level, you know three cantrips of your choice from the cleric spell list. You learn additional cleric cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Cleric table.',
     levels: [1, 4, 10],
-    classId: ids.cleric,
-    spellCasting: true,
+    spellCastingClassId: ids.cleric,
   },
   {
     name: 'Ritual Casting',
     description: `You can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared.`,
-    classId: ids.cleric,
-    spellCasting: true,
-    effect: {
-      ritualCasting: {
-        spellPrepared: true,
-        fromSpellList: true,
-      },
-    },
+    spellCastingClassId: ids.cleric,
   },
   // Rogue
   {
@@ -463,33 +344,6 @@ const Features: ClassFeature[] = [
       "Beginning at 1st level, you know how to strike subtly and exploit a foe's distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.\n\n You don't need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn't incapacitated, and you don't have disadvantage on the attack roll. \n\nThe amount of the extra damage increases as you gain levels in this class, as shown in the Sneak Attack column of the Rogue table.",
     classId: ids.rogue,
     levels: [1],
-    tableColumns: [
-      {
-        title: 'Sneak Attack',
-        col: {
-          1: '1d6',
-          2: '1d6',
-          3: '2d6',
-          4: '2d6',
-          5: '3d6',
-          6: '3d6',
-          7: '4d6',
-          8: '4d6',
-          9: '5d6',
-          10: '5d6',
-          11: '6d6',
-          12: '6d6',
-          13: '7d6',
-          14: '7d6',
-          15: '8d6',
-          16: '8d6',
-          17: '9d6',
-          18: '9d6',
-          19: '10d6',
-          20: '10d6',
-        },
-      },
-    ],
   },
   {
     name: "Thieves' Cant",
@@ -571,58 +425,6 @@ const Features: ClassFeature[] = [
       'You have advantage on Strength checks and Strength saving throws.',
       'When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.',
       'You have resistance to bludgeoning, piercing, and slashing damage.',
-    ],
-    tableColumns: [
-      {
-        title: 'Rages',
-        col: {
-          1: 2,
-          2: 2,
-          3: 3,
-          4: 3,
-          5: 3,
-          6: 4,
-          7: 4,
-          8: 4,
-          9: 4,
-          10: 4,
-          11: 4,
-          12: 5,
-          13: 5,
-          14: 5,
-          15: 5,
-          16: 5,
-          17: 6,
-          18: 6,
-          19: 6,
-          20: 'Unlimited',
-        },
-      },
-      {
-        title: 'Rage Damage',
-        col: {
-          1: '+2',
-          2: '+2',
-          3: '+2',
-          4: '+2',
-          5: '+2',
-          6: '+2',
-          7: '+2',
-          8: '+2',
-          9: '+3',
-          10: '+3',
-          11: '+3',
-          12: '+3',
-          13: '+3',
-          14: '+3',
-          15: '+3',
-          16: '+4',
-          17: '+4',
-          18: '+4',
-          19: '+4',
-          20: '+4',
-        },
-      },
     ],
   },
   {
@@ -713,35 +515,8 @@ const Features: ClassFeature[] = [
     name: 'Cantrips',
     description:
       'At 1st level, you know two cantrips of your choice from the druid spell list. You learn additional druid cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Druid table.',
-    spellCasting: true,
-    classId: ids.druid,
-    tableColumns: [
-      {
-        title: 'Cantrips Known',
-        col: {
-          1: 2,
-          2: 2,
-          3: 2,
-          4: 3,
-          5: 3,
-          6: 3,
-          7: 3,
-          8: 3,
-          9: 3,
-          10: 4,
-          11: 4,
-          12: 4,
-          13: 4,
-          14: 4,
-          15: 4,
-          16: 4,
-          17: 4,
-          18: 4,
-          19: 4,
-          20: 4,
-        },
-      },
-    ],
+
+    spellCastingClassId: ids.druid,
   },
   {
     name: 'Druidic',
@@ -753,14 +528,8 @@ const Features: ClassFeature[] = [
   {
     name: 'Ritual Casting',
     description: `You can cast a druid spell as a ritual if that spell has the ritual tag and you have the spell prepared.`,
-    spellCasting: true,
-    classId: ids.druid,
-    effect: {
-      ritualCasting: {
-        spellPrepared: true,
-        fromSpellList: true,
-      },
-    },
+
+    spellCastingClassId: ids.druid,
   },
   {
     name: 'Wild Shape',
@@ -856,33 +625,6 @@ const Features: ClassFeature[] = [
     ],
     levels: [1],
     classId: ids.monk,
-    tableColumns: [
-      {
-        title: 'Martial Arts',
-        col: {
-          1: '1d4',
-          2: '1d4',
-          3: '1d4',
-          4: '1d4',
-          5: '1d6',
-          6: '1d6',
-          7: '1d6',
-          8: '1d6',
-          9: '1d8',
-          10: '1d8',
-          11: '1d8',
-          12: '1d8',
-          13: '1d8',
-          14: '1d8',
-          15: '1d8',
-          16: '1d8',
-          17: '1d10',
-          18: '1d10',
-          19: '1d10',
-          20: '1d10',
-        },
-      },
-    ],
   },
   {
     name: 'Ki',
@@ -895,66 +637,12 @@ const Features: ClassFeature[] = [
     ],
     levels: [2],
     classId: ids.monk,
-    tableColumns: [
-      {
-        title: 'Ki Points',
-        col: {
-          1: '-',
-          2: 2,
-          3: 3,
-          4: 4,
-          5: 5,
-          6: 6,
-          7: 7,
-          8: 8,
-          9: 9,
-          10: 10,
-          11: 11,
-          12: 12,
-          13: 13,
-          14: 14,
-          15: 15,
-          16: 16,
-          17: 17,
-          18: 18,
-          19: 19,
-          20: 20,
-        },
-      },
-    ],
   },
   {
     name: 'Unarmored Movement',
     description: `Starting at 2nd level, your speed increases by 10 feet while you are not wearing armor or wielding a ^${itemIds.shield}{shield}^. This bonus increases when you reach certain monk levels, as shown in the Monk table.\n\n At 9th level, you gain the ability to move along vertical surfaces and across liquids on your turn without falling during the move.`,
     levels: [2, 9],
     classId: ids.monk,
-    tableColumns: [
-      {
-        title: 'Unarmored Movement',
-        col: {
-          1: '-',
-          2: '+10 ft.',
-          3: '+10 ft.',
-          4: '+10 ft.',
-          5: '+10 ft.',
-          6: '+15 ft.',
-          7: '+15 ft.',
-          8: '+15 ft.',
-          9: '+15 ft.',
-          10: '+20 ft.',
-          11: '+20 ft.',
-          12: '+20 ft.',
-          13: '+20 ft.',
-          14: '+25 ft.',
-          15: '+25 ft.',
-          16: '+25 ft.',
-          17: '+25 ft.',
-          18: '+30 ft.',
-          19: '+30 ft.',
-          20: '+30 ft.',
-        },
-      },
-    ],
   },
   {
     name: 'Dedicated Weapon',
@@ -1236,75 +924,15 @@ const Features: ClassFeature[] = [
     name: 'Cantrips',
     description:
       'At 1st level, you know four cantrips of your choice from the sorcerer spell list. You learn additional sorcerer cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Sorcerer table.',
-    spellCasting: true,
-    classId: ids.sorcerer,
-    effect: {
-      ritualCasting: {
-        spellPrepared: true,
-        fromSpellList: true,
-      },
-    },
-    tableColumns: [
-      {
-        title: 'Cantrips Known',
-        col: {
-          1: 4,
-          2: 4,
-          3: 4,
-          4: 5,
-          5: 5,
-          6: 5,
-          7: 5,
-          8: 5,
-          9: 5,
-          10: 6,
-          11: 6,
-          12: 6,
-          13: 6,
-          14: 6,
-          15: 6,
-          16: 6,
-          17: 6,
-          18: 6,
-          19: 6,
-          20: 6,
-        },
-      },
-    ],
+
+    spellCastingClassId: ids.sorcerer,
   },
   {
     name: 'Spells Known',
     description:
       'You know two 1st-level spells of your choice from the sorcerer spell list.\n\nThe Spells Known column of the Sorcerer table shows when you learn more sorcerer spells of your choice. Each of these spells must be of a level for which you have spell slots. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the sorcerer spells you know and replace it with another spell from the sorcerer spell list, which also must be of a level for which you have spell slots.',
-    spellCasting: true,
-    classId: ids.sorcerer,
-    tableColumns: [
-      {
-        title: 'Spells Known',
-        col: {
-          1: 2,
-          2: 3,
-          3: 4,
-          4: 5,
-          5: 6,
-          6: 7,
-          7: 8,
-          8: 9,
-          9: 10,
-          10: 11,
-          11: 12,
-          12: 12,
-          13: 13,
-          14: 13,
-          15: 14,
-          16: 14,
-          17: 15,
-          18: 15,
-          19: 15,
-          20: 15,
-        },
-      },
-    ],
+
+    spellCastingClassId: ids.sorcerer,
   },
   {
     name: 'Font of Magic',
@@ -1344,33 +972,6 @@ const Features: ClassFeature[] = [
               'Sorcery Point Cost': '7',
             },
           ],
-        },
-      },
-    ],
-    tableColumns: [
-      {
-        title: 'Sorcery Points',
-        col: {
-          1: '-',
-          2: 2,
-          3: 3,
-          4: 4,
-          5: 5,
-          6: 6,
-          7: 7,
-          8: 8,
-          9: 9,
-          10: 10,
-          11: 11,
-          12: 12,
-          13: 13,
-          14: 14,
-          15: 15,
-          16: 16,
-          17: 17,
-          18: 18,
-          19: 19,
-          20: 20,
         },
       },
     ],
@@ -1476,94 +1077,15 @@ const Features: ClassFeature[] = [
     name: 'Cantrips',
     description:
       'You know two cantrips of your choice from the warlock spell list. You learn additional warlock cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Warlock table.',
-    spellCasting: true,
-    classId: ids.warlock,
-    tableColumns: [
-      {
-        title: 'Cantrips Known',
-        col: {
-          1: 2,
-          2: 2,
-          3: 2,
-          4: 3,
-          5: 3,
-          6: 3,
-          7: 3,
-          8: 3,
-          9: 3,
-          10: 4,
-          11: 4,
-          12: 4,
-          13: 4,
-          14: 4,
-          15: 4,
-          16: 4,
-          17: 4,
-          18: 4,
-          19: 4,
-          20: 4,
-        },
-      },
-    ],
+
+    spellCastingClassId: ids.warlock,
   },
   {
     name: 'Spells Known',
     description:
       "At 1st level, you know two 1st-level spells of your choice from the warlock spell list.\n\nThe Spells Known column of the Warlock table shows when you learn more warlock spells of your choice of 1st level or higher. A spell you choose must be of a level no higher than what's shown in the table's Slot Level column for your level. When you reach 6th level, for example, you learn a new warlock spell, which can be 1st, 2nd, or 3rd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the warlock spells you know and replace it with another spell from the warlock spell list, which also must be of a level for which you have spell slots.",
-    spellCasting: true,
-    classId: ids.warlock,
-    tableColumns: [
-      {
-        title: 'Spells Known',
-        col: {
-          1: 2,
-          2: 3,
-          3: 4,
-          4: 5,
-          5: 6,
-          6: 7,
-          7: 8,
-          8: 9,
-          9: 10,
-          10: 10,
-          11: 11,
-          12: 11,
-          13: 12,
-          14: 12,
-          15: 13,
-          16: 13,
-          17: 14,
-          18: 14,
-          19: 15,
-          20: 15,
-        },
-      },
-      {
-        title: 'Slot Level',
-        col: {
-          1: '1st',
-          2: '1st',
-          3: '2nd',
-          4: '2nd',
-          5: '3rd',
-          6: '3rd',
-          7: '4th',
-          8: '4th',
-          9: '5th',
-          10: '5th',
-          11: '5th',
-          12: '5th',
-          13: '5th',
-          14: '5th',
-          15: '5th',
-          16: '5th',
-          17: '5th',
-          18: '5th',
-          19: '5th',
-          20: '5th',
-        },
-      },
-    ],
+
+    spellCastingClassId: ids.warlock,
   },
   {
     name: 'Eldritch Invocations',
@@ -1571,33 +1093,6 @@ const Features: ClassFeature[] = [
       'In your study of occult lore, you have unearthed eldritch invocations, fragments of forbidden knowledge that imbue you with an abiding magical ability. At 2nd level, you gain two eldritch invocations of your choice. When you gain certain warlock levels, you gain additional invocations of your choice, as shown in the Invocations Known column of the Warlock table. A level prerequisite refers to your level in this class. Additionally, when you gain a level in this class, you can choose one of the invocations you know and replace it with another invocation that you could learn at that level.',
     levels: [2],
     classId: ids.warlock,
-    tableColumns: [
-      {
-        title: 'Invocations Known',
-        col: {
-          1: '-',
-          2: 2,
-          3: 2,
-          4: 2,
-          5: 3,
-          6: 3,
-          7: 4,
-          8: 4,
-          9: 5,
-          10: 5,
-          11: 5,
-          12: 6,
-          13: 6,
-          14: 6,
-          15: 7,
-          16: 7,
-          17: 7,
-          18: 8,
-          19: 8,
-          20: 8,
-        },
-      },
-    ],
   },
   {
     name: 'Pact Boon',
@@ -1632,35 +1127,7 @@ const Features: ClassFeature[] = [
     name: 'Spells Known',
     description:
       'You know two 1st-level spells of your choice from the ranger spell list.\n\nThe Spells Known column of the Ranger table shows when you learn more ranger spells of your choice. Each of these spells must be of a level for which you have spell slots. For instance, when you reach 5th level in this class, you can learn one new spell of 1st or 2nd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the ranger spells you know and replace it with another spell from the ranger spell list, which also must be of a level for which you have spell slots.',
-    classId: ids.ranger,
-    spellCasting: true,
-    tableColumns: [
-      {
-        title: 'Spells Known',
-        col: {
-          1: '-',
-          2: 2,
-          3: 3,
-          4: 4,
-          5: 4,
-          6: 4,
-          7: 5,
-          8: 5,
-          9: 6,
-          10: 6,
-          11: 7,
-          12: 7,
-          13: 8,
-          14: 8,
-          15: 9,
-          16: 9,
-          17: 10,
-          18: 10,
-          19: 11,
-          20: 11,
-        },
-      },
-    ],
+    spellCastingClassId: ids.ranger,
   },
   {
     name: 'Favored Enemy',
@@ -1908,52 +1375,17 @@ const Features: ClassFeature[] = [
   },
   //Artificer
   {
-    classId: ids.artificer,
+    spellCastingClassId: ids.artificer,
     name: 'Cantrips',
     description:
       'At 1st level, you know two cantrips of your choice from the artificer spell list. At higher levels, you learn additional artificer cantrips of your choice, as shown in the Cantrips Known column of the Artificer table.\n\nWhen you gain a level in this class, you can replace one of the artificer cantrips you know with another cantrip from the artificer spell list.',
-    spellCasting: true,
-    tableColumns: [
-      {
-        title: 'Cantrips Known',
-        col: {
-          1: 2,
-          2: 2,
-          3: 2,
-          4: 2,
-          5: 2,
-          6: 2,
-          7: 2,
-          8: 2,
-          9: 2,
-          10: 3,
-          11: 3,
-          12: 3,
-          13: 3,
-          14: 4,
-          15: 4,
-          16: 4,
-          17: 4,
-          18: 4,
-          19: 4,
-          20: 4,
-        },
-      },
-    ],
   },
   {
-    classId: ids.artificer,
+    spellCastingClassId: ids.artificer,
     name: 'Ritual Casting',
     description:
       'You can cast an artificer spell as a ritual if that spell has the ritual tag and you have the spell prepared.',
     levels: [1],
-    spellCasting: true,
-    effect: {
-      ritualCasting: {
-        spellPrepared: true,
-        fromSpellList: true,
-      },
-    },
   },
   {
     classId: ids.artificer,
@@ -1988,58 +1420,7 @@ const Features: ClassFeature[] = [
     name: 'Infuse Item',
     description:
       "At 2nd level, you've gained the ability to imbue mundane items with certain magical infusions, turning those objects into magic items.\n\n**Infusions Known**\n\nWhen you gain this feature, pick four artificer infusions to learn, chosen from the table below. You learn additional infusions of your choice when you reach certain levels in this class, as shown in the Infusions Known column of the Artificer table.\n\nWhenever you gain a level in this class, you can replace one of the artificer infusions you learned with a new one.\n\n**Infusing an Item**\n\nWhenever you finish a long rest, you can touch a nonmagical object and imbue it with one of your artificer infusions, turning it into a magic item. An infusion works on only certain kinds of objects, as specified in the infusion's description. If the item requires attunement, you can attune yourself to it the instant you infuse the item. If you decide to attune to the item later, you must do so using the normal process for attunement (see the attunement rules in the Dungeon Master's Guide).\n\nYour infusion remains in an item indefinitely, but when you die, the infusion vanishes after a number of days equal to your Intelligence modifier (minimum of 1 day). The infusion also vanishes if you replace your knowledge of the infusion.\n\nYou can infuse more than one nonmagical object at the end of a long rest; the maximum number of objects appears in the Infused Items column of the Artificer table. You must touch each of the objects, and each of your infusions can be in only one object at a time. Moreover, no object can bear more than one of your infusions at a time. If you try to exceed your maximum number of infusions, the oldest infusion ends, and then the new infusion applies.\n\nIf an infusion ends on an item that contains other things, like a bag of holding, its contents harmlessly appear in and around its space.",
-    tableColumns: [
-      {
-        title: 'Infusions Known',
-        col: {
-          1: '-',
-          2: 4,
-          3: 4,
-          4: 4,
-          5: 4,
-          6: 6,
-          7: 6,
-          8: 6,
-          9: 6,
-          10: 8,
-          11: 8,
-          12: 8,
-          13: 8,
-          14: 10,
-          15: 10,
-          16: 10,
-          17: 10,
-          18: 12,
-          19: 12,
-          20: 12,
-        },
-      },
-      {
-        title: 'Infused Items',
-        col: {
-          1: '-',
-          2: 2,
-          3: 2,
-          4: 2,
-          5: 2,
-          6: 3,
-          7: 3,
-          8: 3,
-          9: 3,
-          10: 4,
-          11: 4,
-          12: 4,
-          13: 4,
-          14: 5,
-          15: 5,
-          16: 5,
-          17: 5,
-          18: 6,
-          19: 6,
-          20: 6,
-        },
-      },
-    ],
+
     extendedTable: [
       {
         'Artificer Infusions': {
@@ -2243,347 +1624,362 @@ const Features: ClassFeature[] = [
       'Below is the stat block for the Homunculus Servant that you can create with the Homunculus Servant infusion.',
     levels: [],
     classId: ids.artificer,
-    extendedTable: [
-      {
-        'Homunculus Servant': {
-          headers: ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'],
-          data: [
-            {
-              STR: '4 (-3)',
-              DEX: '15 (+2)',
-              CON: '12 (+1)',
-              INT: '10 (+0)',
-              WIS: '10 (+0)',
-              CHA: '7 (-2)',
-            },
-          ],
-        },
-      },
-      {
-        '': {
-          headers: ['Stat', 'Value'],
-          data: [
-            {
-              Stat: 'Creature Type',
-              Value: 'Tiny Construct',
-            },
-            {
-              Stat: 'Armor Class',
-              Value: '13 (natural armor)',
-            },
-            {
-              Stat: 'Hit Points',
-              Value:
-                '1 + your Intelligence modifier + your artificer level (the homunculus has a number of Hit Dice [d4s] equal to your artificer level)',
-            },
-            {
-              Stat: 'Speed',
-              Value: '20 ft., fly 30 ft.',
-            },
-            {
-              Stat: 'Saving Throws',
-              Value: 'Dex +2 plus PB',
-            },
-            {
-              Stat: 'Skills',
-              Value: 'Perception +0 plus PB x 2, Stealth +2 plus PB',
-            },
-            {
-              Stat: 'Damage Immunities',
-              Value: 'Poison',
-            },
-            {
-              Stat: 'Condition Immunities',
-              Value: 'Exhaustion, Poisoned',
-            },
-            {
-              Stat: 'Senses',
-              Value: 'darkvision 60 ft., passive Perception 10 + (PB x 2)',
-            },
-            {
-              Stat: 'Languages',
-              Value: 'understands the languages you speak',
-            },
-            {
-              Stat: 'Proficiency Bonus (PB)',
-              Value: 'equals your bonus',
-            },
-            {
-              Stat: 'Evasion',
-              Value:
-                "If the homunculus is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, it instead takes no damage if it succeeds on the saving throw, and only half damage if it fails. It can't use this trait if it's incapacitated.",
-            },
-          ],
-        },
-      },
-      {
-        '': {
-          headers: ['Action', 'Description'],
-          data: [
-            {
-              Action: 'Force Strike',
-              Description:
-                'Ranged Weapon Attack: your spell attack modifier to hit, range 30 ft., one target you can see. Hit: 1d4 + PB force damage.',
-            },
-          ],
-        },
-      },
-      {
-        '': {
-          headers: ['Reaction', 'Description'],
-          data: [
-            {
-              Reaction: 'Channel Magic',
-              Description:
-                'The homunculus delivers a spell you cast that has a range of touch. The homunculus must be within 120 feet of you.',
-            },
-          ],
-        },
-      },
-    ],
+    // extendedTable: [
+    //   {
+    //     'Homunculus Servant': {
+    //       headers: ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'],
+    //       data: [
+    //         {
+    //           STR: '4 (-3)',
+    //           DEX: '15 (+2)',
+    //           CON: '12 (+1)',
+    //           INT: '10 (+0)',
+    //           WIS: '10 (+0)',
+    //           CHA: '7 (-2)',
+    //         },
+    //       ],
+    //     },
+    //   },
+    //   {
+    //     '': {
+    //       headers: ['Stat', 'Value'],
+    //       data: [
+    //         {
+    //           Stat: 'Creature Type',
+    //           Value: 'Tiny Construct',
+    //         },
+    //         {
+    //           Stat: 'Armor Class',
+    //           Value: '13 (natural armor)',
+    //         },
+    //         {
+    //           Stat: 'Hit Points',
+    //           Value:
+    //             '1 + your Intelligence modifier + your artificer level (the homunculus has a number of Hit Dice [d4s] equal to your artificer level)',
+    //         },
+    //         {
+    //           Stat: 'Speed',
+    //           Value: '20 ft., fly 30 ft.',
+    //         },
+    //         {
+    //           Stat: 'Saving Throws',
+    //           Value: 'Dex +2 plus PB',
+    //         },
+    //         {
+    //           Stat: 'Skills',
+    //           Value: 'Perception +0 plus PB x 2, Stealth +2 plus PB',
+    //         },
+    //         {
+    //           Stat: 'Damage Immunities',
+    //           Value: 'Poison',
+    //         },
+    //         {
+    //           Stat: 'Condition Immunities',
+    //           Value: 'Exhaustion, Poisoned',
+    //         },
+    //         {
+    //           Stat: 'Senses',
+    //           Value: 'darkvision 60 ft., passive Perception 10 + (PB x 2)',
+    //         },
+    //         {
+    //           Stat: 'Languages',
+    //           Value: 'understands the languages you speak',
+    //         },
+    //         {
+    //           Stat: 'Proficiency Bonus (PB)',
+    //           Value: 'equals your bonus',
+    //         },
+    //         {
+    //           Stat: 'Evasion',
+    //           Value:
+    //             "If the homunculus is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, it instead takes no damage if it succeeds on the saving throw, and only half damage if it fails. It can't use this trait if it's incapacitated.",
+    //         },
+    //       ],
+    //     },
+    //   },
+    //   {
+    //     '': {
+    //       headers: ['Action', 'Description'],
+    //       data: [
+    //         {
+    //           Action: 'Force Strike',
+    //           Description:
+    //             'Ranged Weapon Attack: your spell attack modifier to hit, range 30 ft., one target you can see. Hit: 1d4 + PB force damage.',
+    //         },
+    //       ],
+    //     },
+    //   },
+    //   {
+    //     '': {
+    //       headers: ['Reaction', 'Description'],
+    //       data: [
+    //         {
+    //           Reaction: 'Channel Magic',
+    //           Description:
+    //             'The homunculus delivers a spell you cast that has a range of touch. The homunculus must be within 120 feet of you.',
+    //         },
+    //       ],
+    //     },
+    //   },
+    // ],
   },
-
   {
     name: 'Replicable Items Infusion',
     description:
       'Below is a list of items that you can replicate with the Replicate Magic Item infusion.',
     levels: [],
     classId: ids.artificer,
-    extendedTable: [
-      {
-        'Replicable Magic Items (2nd-Level Artificer)': {
-          headers: ['Magic Item', 'Attunement'],
-          data: [
-            {
-              'Magic Item': 'Alchemy Jug',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Bag of Holding',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Cap of Water Breathing',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Goggles of Night',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Rope of Climbing',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Sending Stones',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Wand of Magic Detection',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Wand of Secrets',
-              Attunement: 'No',
-            },
-          ],
-        },
-      },
-      {
-        'Replicable Magic Items (6th-Level Artificer)': {
-          headers: ['Magic Item', 'Attunement'],
-          data: [
-            {
-              'Magic Item': 'Boots of Elvenkind',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Cloak of Elvenkind',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Cloak of the Manta Ray',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Eyes of Charming',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Gloves of Thievery',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Lantern of Revealing',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Pipes of Haunting',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Ring of Water Walking',
-              Attunement: 'No',
-            },
-          ],
-        },
-      },
-      {
-        'Replicable Magic Items (10th-level artificer)': {
-          headers: ['Magic Item', 'Attunement'],
-          data: [
-            {
-              'Magic Item': 'Boots of Striding and Springing',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Boots of the Winterlands',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Bspeciesrs of Archery',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Brooch of Shielding',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Cloak of Protection',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Eyes of the Eagle',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Gauntlets of Ogre Power',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Gloves of Missile Snaring',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Gloves of Swimming and Climbing',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Hat of Disguise',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Headband of Intellect',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Helm of Telepathy',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Medallion of Thoughts',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Necklace of Adaptation',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Periapt of Wound Closure',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Pipes of the Sewers',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Quiver of Ehlonna',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Ring of Jumping',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Ring of Mind Shielding',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Slippers of Spider Climbing',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Ventilating Lungs',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Winged Boots',
-              Attunement: 'Yes',
-            },
-          ],
-        },
-      },
-      {
-        'Replicable Magic Items (14th-level artificer)': {
-          headers: ['Magic Item', 'Attunement'],
-          data: [
-            {
-              'Magic Item': 'Amulet of Health',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Arcane Propulsion Arm',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Belt of Hill Giant Strength',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Boots of Levitation',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Boots of Speed',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Bspeciesrs of Defense',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Cloak of the Bat',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Dimensional Shackles',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Gem of Seeing',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Horn of Blasting',
-              Attunement: 'No',
-            },
-            {
-              'Magic Item': 'Ring of Free Action',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Ring of Protection',
-              Attunement: 'Yes',
-            },
-            {
-              'Magic Item': 'Ring of the Ram',
-              Attunement: 'Yes',
-            },
-          ],
-        },
-      },
-    ],
+    // extendedTable: [
+    //   {
+    //     'Replicable Magic Items (2nd-Level Artificer)': {
+    //       headers: ['Magic Item', 'Attunement'],
+    //       data: [
+    //         {
+    //           'Magic Item': 'Alchemy Jug',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Bag of Holding',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Cap of Water Breathing',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Goggles of Night',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Rope of Climbing',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Sending Stones',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Wand of Magic Detection',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Wand of Secrets',
+    //           Attunement: 'No',
+    //         },
+    //       ],
+    //     },
+    //   },
+    //   {
+    //     'Replicable Magic Items (6th-Level Artificer)': {
+    //       headers: ['Magic Item', 'Attunement'],
+    //       data: [
+    //         {
+    //           'Magic Item': 'Boots of Elvenkind',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Cloak of Elvenkind',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Cloak of the Manta Ray',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Eyes of Charming',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Gloves of Thievery',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Lantern of Revealing',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Pipes of Haunting',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Ring of Water Walking',
+    //           Attunement: 'No',
+    //         },
+    //       ],
+    //     },
+    //   },
+    //   {
+    //     'Replicable Magic Items (10th-level artificer)': {
+    //       headers: ['Magic Item', 'Attunement'],
+    //       data: [
+    //         {
+    //           'Magic Item': 'Boots of Striding and Springing',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Boots of the Winterlands',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Bspeciesrs of Archery',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Brooch of Shielding',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Cloak of Protection',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Eyes of the Eagle',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Gauntlets of Ogre Power',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Gloves of Missile Snaring',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Gloves of Swimming and Climbing',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Hat of Disguise',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Headband of Intellect',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Helm of Telepathy',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Medallion of Thoughts',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Necklace of Adaptation',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Periapt of Wound Closure',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Pipes of the Sewers',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Quiver of Ehlonna',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Ring of Jumping',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Ring of Mind Shielding',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Slippers of Spider Climbing',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Ventilating Lungs',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Winged Boots',
+    //           Attunement: 'Yes',
+    //         },
+    //       ],
+    //     },
+    //   },
+    //   {
+    //     'Replicable Magic Items (14th-level artificer)': {
+    //       headers: ['Magic Item', 'Attunement'],
+    //       data: [
+    //         {
+    //           'Magic Item': 'Amulet of Health',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Arcane Propulsion Arm',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Belt of Hill Giant Strength',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Boots of Levitation',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Boots of Speed',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Bspeciesrs of Defense',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Cloak of the Bat',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Dimensional Shackles',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Gem of Seeing',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Horn of Blasting',
+    //           Attunement: 'No',
+    //         },
+    //         {
+    //           'Magic Item': 'Ring of Free Action',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Ring of Protection',
+    //           Attunement: 'Yes',
+    //         },
+    //         {
+    //           'Magic Item': 'Ring of the Ram',
+    //           Attunement: 'Yes',
+    //         },
+    //       ],
+    //     },
+    //   },
+    // ],
   },
-];
+].map((feature, index, arr) => {
+  const featureParent = Classes.find(
+    (c) => c.id === feature.classId || c.id === feature.spellCastingClassId
+  );
+  if (!featureParent) throw new Error(`Error creating feature ${feature.name}`);
+  const id = generateId('class', feature.name, featureParent.name, count);
+  count++;
+  const nextClassFeature = arr[index + 1];
+  if (!nextClassFeature) return { ...feature, id };
+  if (
+    nextClassFeature.classId !== feature.classId ||
+    nextClassFeature.spellCastingClassId !== feature.spellCastingClassId
+  ) {
+    count = 1;
+  }
+  return { ...feature, id };
+});
 
-export default Features;
+export default ClassFeaturesSeed;

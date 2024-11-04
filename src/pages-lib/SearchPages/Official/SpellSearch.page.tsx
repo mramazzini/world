@@ -1,6 +1,6 @@
 import { Spell, SpellSchool } from '@prisma/client';
 import SearchPageComponent from '../SearchPage';
-import { SpellInfo } from '@/lib/types/types';
+import { SpellInfo } from '@/lib/types/modelInfo';
 import { getSpellChunk } from '@/lib/actions/db/spell/read.actions';
 
 const spellSchoolOptions = Object.values(SpellSchool);

@@ -1,6 +1,6 @@
 'use client';
 import ModelDisplay from '@/Utility/ModelDisplay';
-import { CharacterInfo } from '@/lib/types/types';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 import numberArray from '@/lib/utils/numberArray';
 
 interface Props {

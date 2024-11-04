@@ -1,6 +1,6 @@
 'use client';
 import { getMessages } from '@/lib/actions/db/message/read.actions';
-import { MessageInfo } from '@/lib/types/types';
+import { MessageInfo } from '@/lib/types/modelInfo';
 import { useState, useEffect } from 'react';
 const MessagesPage = () => {
   const [messages, setMessages] = useState<MessageInfo[]>([]);

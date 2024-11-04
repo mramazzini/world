@@ -1,11 +1,5 @@
 'use client';
-import {
-  AbilityScores,
-  CharacterInfo,
-  ItemInfo,
-  Log,
-  ToolInfo,
-} from '@/lib/types/types';
+import { AbilityScores, Log } from '@/lib/types/types';
 import { useEffect, useState } from 'react';
 import { memoizeGetItem } from '@/Utility/globalCache';
 import Tooltip from '@/Utility/Tooltip';
@@ -17,6 +11,7 @@ import { calculateLevel } from '@/Utility/characterStateFunctions/calc/calcLevel
 import { AbilityToModifier } from '@/Utility/characterStateFunctions/calc/AbilityToModifier';
 import { calcSkillModifier } from '@/Utility/characterStateFunctions/calc/calcSkillModifier';
 import Image from 'next/image';
+import { CharacterInfo, ItemInfo, ToolInfo } from '@/lib/types/modelInfo';
 interface Props {
   character: CharacterInfo;
   pushLog: (log: Log) => void;

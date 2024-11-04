@@ -1,11 +1,7 @@
 'use client';
 
 import Tooltip from '@/Utility/Tooltip';
-import {
-  AbilityScoreValue,
-  CallbackOptions,
-  CharacterInfo,
-} from '@/lib/types/types';
+import { AbilityScoreValue, CallbackOptions } from '@/lib/types/types';
 import Image from 'next/image';
 import { useState } from 'react';
 import ManualAbilityScoreChoice from '../AbilityScoreSelectors/ManualAbilityScoreChoice';
@@ -13,6 +9,7 @@ import Modal from '@/components/UI/Modal/Modal';
 import ModalBox from '@/components/UI/Modal/ModalBox';
 import useModal from '@/hooks/useModal';
 import ModalButton from '@/components/UI/Modal/ModalButton';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 interface Props {
   choice: PrismaJson.AbilityScoreChoice;
   character: CharacterInfo;

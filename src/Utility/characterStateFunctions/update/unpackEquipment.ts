@@ -1,6 +1,7 @@
 'use client';
-import { ItemID, ItemInfo } from '@/lib/types/types';
+import { ItemID } from '@/lib/types/types';
 import { memoizeGetItem } from '../../globalCache';
+import { ItemInfo } from '@/lib/types/modelInfo';
 
 export const unpackEquipment = async (
   state: PrismaJson.CharacterState,

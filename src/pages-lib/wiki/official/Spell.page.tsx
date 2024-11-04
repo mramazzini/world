@@ -1,9 +1,9 @@
 'use client';
 import SpellDisplay from '@/components/Spells/SpellDisplay';
-import { SpellInfo } from '@/lib/types/types';
 import Loading from '@/components/UI/Loading';
 import CommentSection from '@/components/CommentSection/CommentSection';
 import { AssociatedModel } from '@prisma/client';
+import { SpellInfo } from '@/lib/types/modelInfo';
 const SpellPage = ({ spell }: { spell: SpellInfo | null }) => {
   // if (!spellName) return <span className="p-4">Spell does not exist!</span>;
   return (

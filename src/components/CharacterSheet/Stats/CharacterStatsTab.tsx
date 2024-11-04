@@ -2,7 +2,7 @@ import { AbilityToModifier } from '@/Utility/characterStateFunctions/calc/Abilit
 import { calculateLevel } from '@/Utility/characterStateFunctions/calc/calcLevel';
 import P from '@/Utility/FormatAndSanitize';
 import ModelDisplay from '@/Utility/ModelDisplay';
-import { CharacterInfo } from '@/lib/types/types';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 import Link from 'next/link';
 
 interface Props {

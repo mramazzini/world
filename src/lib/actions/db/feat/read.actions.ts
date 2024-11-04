@@ -1,6 +1,7 @@
 'use server';
 import { DBMetadata } from '@/lib/types/metadata';
-import { FeatInfo, QueryParams } from '@/lib/types/types';
+import { FeatInfo } from '@/lib/types/modelInfo';
+import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 
@@ -27,6 +28,7 @@ export const getFeats = async (): Promise<FeatInfo[]> => {
   const db = new PrismaClient();
   const res = await db.feat.findMany({
     include: {
+      Features: true,
       User: {
         select: {
           username: true,
@@ -48,6 +50,7 @@ export const getFeat = async (
         name: query,
       },
       include: {
+        Features: true,
         User: {
           select: {
             username: true,
@@ -63,6 +66,7 @@ export const getFeat = async (
         id: query,
       },
       include: {
+        Features: true,
         User: {
           select: {
             username: true,
@@ -87,6 +91,7 @@ export const getFeatChunk = async (
         relationalFields: queryInfo.relationalFields,
       }),
       include: {
+        Features: true,
         User: {
           select: {
             username: true,
@@ -105,6 +110,7 @@ export const getFeatChunk = async (
     }),
 
     include: {
+      Features: true,
       User: {
         select: {
           username: true,

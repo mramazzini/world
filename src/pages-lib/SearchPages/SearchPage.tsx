@@ -9,21 +9,20 @@ import { QUERY_LIMIT } from '@/lib/globalVars';
 import { useSearchParams } from 'next/navigation';
 import {
   ClassInfo,
-  QueryParams,
   SpeciesInfo,
-  SearchFieldOptions,
   SubClassInfo,
   SubSpeciesInfo,
   ItemInfo,
   SpellListInfo,
   FeatInfo,
   CreatureInfo,
-} from '@/lib/types/types';
+} from '@/lib/types/modelInfo';
 import { Background, Spell } from '@prisma/client';
 import '@/lib/string.extensions';
 import numPlace from '@/lib/utils/numPlace';
 import { toSpellLevel } from '@/lib/utils/toSpellLevel';
 import numberArray from '@/lib/utils/numberArray';
+import { QueryParams, SearchFieldOptions } from '@/lib/types/types';
 
 type DataType =
   | SubClassInfo

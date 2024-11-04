@@ -10923,6 +10923,7 @@ const spellIds = {
   blight: 279,
   phantasmalKiller: 309,
   cloudkill: 328,
+  bladeWard: 1,
 };
 const ritualIds = {
   alarm: 47,

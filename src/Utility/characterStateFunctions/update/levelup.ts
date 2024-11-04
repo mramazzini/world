@@ -1,14 +1,9 @@
 'use client';
-import {
-  ASIorFeat,
-  CharacterInfo,
-  ClassID,
-  Level,
-  Time,
-} from '@/lib/types/types';
+import { ASIorFeat, ClassID, Level, Time } from '@/lib/types/types';
 import { refreshHp } from './refreshHp';
 import { v4 } from 'uuid';
 import { generateSubclassChoice } from '../calc/generateSubclassChoice';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 
 export const levelUp = async (
   character: CharacterInfo,

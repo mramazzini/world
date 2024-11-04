@@ -1,6 +1,5 @@
 'use client';
 import { Fragment, useState } from 'react';
-import { SpellListInfo } from '@/lib/types/types';
 import Loading from '@/components/UI/Loading';
 import Link from 'next/link';
 import '@/lib/string.extensions';
@@ -12,6 +11,7 @@ import P from '@/Utility/FormatAndSanitize';
 import numPlace from '@/lib/utils/numPlace';
 import { AssociatedModel } from '@prisma/client';
 import CommentSection from '@/components/CommentSection/CommentSection';
+import { SpellListInfo } from '@/lib/types/modelInfo';
 
 interface Props {
   spellList: SpellListInfo | null;

@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import { ClassInfo } from '@/lib/types/types';
 import Loading from '@/components/UI/Loading';
 import { Ability, AssociatedModel } from '@prisma/client';
 import Link from 'next/link';
@@ -11,72 +10,68 @@ import Info from '@/components/UI/Info';
 import AbilityToText from '@/lib/utils/AbilityToText';
 import numPlace from '@/lib/utils/numPlace';
 import FeatureList from '@/components/UI/FeatureList';
-import Feature from '@/components/UI/Feature';
 import CommentSection from '@/components/CommentSection/CommentSection';
+import { ClassInfo, FeatureWithClassColumn } from '@/lib/types/modelInfo';
 
 const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
   if (!classObj) return <span className="p-4">Class does not exist</span>;
-  const spellCastingFeatures = classObj.spellCastingInfo?.features.sort(
-    (a, b) => {
-      if (a.levels === undefined) return -1; // Put a first if its levels are undefined
-      if (b.levels === undefined) return 1; // Put b first if its levels are undefined
+  const spellCastingFeatures = classObj.SpellcastingFeatures.sort((a, b) => {
+    if (a.levels === undefined) return -1; // Put a first if its levels are undefined
+    if (b.levels === undefined) return 1; // Put b first if its levels are undefined
 
-      const minA = Math.min(...a.levels);
-      const minB = Math.min(...b.levels);
+    const minA = Math.min(...a.levels);
+    const minB = Math.min(...b.levels);
 
-      return minA - minB;
-    }
-  );
+    return minA - minB;
+  });
   const lvls = classObj.abilityScoreLevels.sort((a, b) => a - b);
-  const regularFeatures = classObj.features
-    .concat([
-      {
-        levels: classObj.abilityScoreLevels,
-        name: 'Ability Score Improvement',
-        description: `When you reach ${numPlace(
-          lvls[0]
-        )} level, and again at ${lvls
-          .map((l, i) => {
-            if (i === 0) return;
-            if (i === lvls.length - 1) return `and ${numPlace(l)} level,`;
-            return numPlace(l);
-          })
-          .filter((l) => l !== undefined)
-          .join(
-            ', '
-          )} you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.`,
-      } as PrismaJson.Feature,
-      {
-        levels: classObj.subClassFeatureLevels,
-        name: `Subclass: ${classObj.subClassName}`,
-        description: classObj.subClassDescription,
-        extendedTable: [
-          {
-            '': {
-              headers: ['Subclass', 'Description'],
-              links: classObj.SubClasses.map((subClass) => {
-                return `/subclass/${subClass.name.replaceAll(' ', '-')}`;
-              }),
-              data: classObj.SubClasses.map((subClass) => {
-                return {
-                  Subclass: subClass.name,
-                  Description: subClass.flavorText,
-                };
-              }),
-            },
+  const regularFeatures = classObj.Features.concat([
+    {
+      levels: classObj.abilityScoreLevels,
+      name: 'Ability Score Improvement',
+      description: `When you reach ${numPlace(
+        lvls[0]
+      )} level, and again at ${lvls
+        .map((l, i) => {
+          if (i === 0) return;
+          if (i === lvls.length - 1) return `and ${numPlace(l)} level,`;
+          return numPlace(l);
+        })
+        .filter((l) => l !== undefined)
+        .join(
+          ', '
+        )} you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.`,
+    } as unknown as FeatureWithClassColumn,
+    {
+      levels: classObj.subClassFeatureLevels,
+      name: `Subclass: ${classObj.subClassName}`,
+      description: classObj.subClassDescription,
+      extendedTable: [
+        {
+          '': {
+            headers: ['Subclass', 'Description'],
+            links: classObj.SubClasses.map((subClass) => {
+              return `/subclass/${subClass.name.replaceAll(' ', '-')}`;
+            }),
+            data: classObj.SubClasses.map((subClass) => {
+              return {
+                Subclass: subClass.name,
+                Description: subClass.flavorText,
+              };
+            }),
           },
-        ],
-      },
-    ])
-    .sort((a, b) => {
-      if (a.levels === undefined) return -1; // Put a first if its levels are undefined
-      if (b.levels === undefined) return 1; // Put b first if its levels are undefined
+        },
+      ],
+    } as unknown as FeatureWithClassColumn,
+  ]).sort((a, b) => {
+    if (a.levels === undefined) return -1; // Put a first if its levels are undefined
+    if (b.levels === undefined) return 1; // Put b first if its levels are undefined
 
-      const minA = Math.min(...a.levels);
-      const minB = Math.min(...b.levels);
+    const minA = Math.min(...a.levels);
+    const minB = Math.min(...b.levels);
 
-      return minA - minB;
-    });
+    return minA - minB;
+  });
 
   return (
     <main className="p-4 md:p-8">
@@ -354,10 +349,9 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
                     <div className="divider m-0"></div>
                   </div>
                 )}
-                {spellCastingFeatures &&
-                  spellCastingFeatures.map((feature, index) => (
-                    <Feature key={index} feature={feature} />
-                  ))}
+                {spellCastingFeatures && (
+                  <FeatureList features={spellCastingFeatures} />
+                )}
               </div>
             </>
           )}

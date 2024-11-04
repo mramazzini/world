@@ -1,5 +1,5 @@
 import Tooltip from '@/Utility/Tooltip';
-import { CharacterInfo } from '@/lib/types/types';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 
 interface Props {
   character: CharacterInfo;

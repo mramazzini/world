@@ -1,7 +1,8 @@
 'use client';
+import { SubClassInfo } from '@/lib/types/modelInfo';
 // This is only required if the subclass is a spellcaster, and thus needs a spell slot table
 
-import { Level, SpellLevel, SubClassInfo } from '@/lib/types/types';
+import { Level, SpellLevel } from '@/lib/types/types';
 import numberArray from '@/lib/utils/numberArray';
 import numPlace from '@/lib/utils/numPlace';
 import { useState } from 'react';
@@ -12,6 +13,8 @@ interface Props {
 
 const SubClassTable: React.FC<Props> = ({ subClass }) => {
   const spellCasting = subClass.spellCastingInfo;
+  const spellCastingFeatures = subClass.SpellCastingFeatures;
+  console.log(subClass);
   const [expand, setExpand] = useState(false);
   if (!spellCasting) return null;
   return (
@@ -20,14 +23,14 @@ const SubClassTable: React.FC<Props> = ({ subClass }) => {
         <table className="table table-zebra sm:table-xs md:table-sm lg:table-md my-4 table-pin-rows   max-w-[1800px] ">
           <thead>
             <tr>
-              <th className="text-left bg-black/20 w-[5%]">Level</th>
-              {spellCasting.features.map((feature) => {
-                const cols = feature.tableColumns;
+              <th className="text-left bg-black/20 w-[20%]">Level</th>
+              {spellCastingFeatures.map((feature) => {
+                const cols = feature.SubClassColumnedFeature;
                 if (!cols) return null;
                 return cols.map((col, index) => {
                   return (
                     <th key={index} className="text-left bg-black/20">
-                      {col.title}
+                      {col.name}
                     </th>
                   );
                 });
@@ -62,13 +65,13 @@ const SubClassTable: React.FC<Props> = ({ subClass }) => {
                 <tr key={num}>
                   <th>{num}</th>
                   {/* spellcasting features */}
-                  {spellCasting &&
-                    spellCasting.features.map((feature) => {
-                      const tableCol = feature.tableColumns;
+                  {spellCastingFeatures &&
+                    spellCastingFeatures.map((feature) => {
+                      const tableCol = feature.SubClassColumnedFeature;
 
                       if (!tableCol) return null;
                       return tableCol.map((col, index) => {
-                        return <td key={index}>{col.col[num as Level]}</td>;
+                        return <td key={index}>{col.rows[num - 1]}</td>;
                       });
                     })}
                   {/* spell slots */}

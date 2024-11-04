@@ -1,7 +1,8 @@
-import { AbilityScores, CharacterInfo } from '@/lib/types/types';
+import { AbilityScores } from '@/lib/types/types';
 import { refreshAC } from './updateAC';
 import { refreshPassivePerception } from './refreshPassivePerception';
 import { refreshHp } from './refreshHp';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 
 export const updateAbilityScores = async (
   character: CharacterInfo,
