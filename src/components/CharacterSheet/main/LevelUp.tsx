@@ -2,14 +2,30 @@ import Modal from '@/components/UI/Modal/Modal';
 import ModalBox from '@/components/UI/Modal/ModalBox';
 import ModalButton from '@/components/UI/Modal/ModalButton';
 import useModal from '@/hooks/useModal';
+import { setCharacterState } from '@/store/characterSlice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { levelUp } from '@/Utility/characterStateFunctions/update/levelup';
 
 interface Props {
   hasPendingChoices: boolean;
-  levelUpCharacter: () => void;
 }
 
-const LevelUp = ({ levelUpCharacter, hasPendingChoices }: Props) => {
+const LevelUp = ({ hasPendingChoices }: Props) => {
   const { id } = useModal();
+  const dispatch = useAppDispatch();
+  const character = useAppSelector((state) => state.character);
+
+  const levelUpCharacter = async () => {
+    if (!character.Classes) return;
+    if (!character.state) return;
+    const newState = await levelUp(
+      character,
+      character.state,
+      character.Classes[0].id
+    );
+    dispatch(setCharacterState(newState));
+  };
+
   return (
     <>
       <button

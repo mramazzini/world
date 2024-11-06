@@ -10,23 +10,22 @@ import {
 } from '@/Utility/characterStateFunctions/update/updateAC';
 import { unpackEquipment } from '@/Utility/characterStateFunctions/update/unpackEquipment';
 import { equipWeapon } from '@/Utility/characterStateFunctions/update/equipWeapon';
-import { CharacterInfo, ItemInfo } from '@/lib/types/modelInfo';
+import { ItemInfo } from '@/lib/types/modelInfo';
+import { useAppSelector } from '@/store/hooks';
+import { useDispatch } from 'react-redux';
+import { setCharacterState } from '@/store/characterSlice';
 interface Props {
-  character: CharacterInfo;
-  updateState: (state: PrismaJson.CharacterState) => void;
   setSelectedItem: (item: PrismaJson.QuantityItem | null) => void;
   selectedItem: PrismaJson.QuantityItem | null;
 }
 
-const ItemPreview = ({
-  character,
-  updateState,
-  setSelectedItem,
-  selectedItem,
-}: Props) => {
+const ItemPreview = ({ setSelectedItem, selectedItem }: Props) => {
   const [item, setItem] = useState<ItemInfo | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleteAmount, setDeleteAmount] = useState(1);
+  const state = useAppSelector((state) => state.character.state);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (!selectedItem) return;
     memoizeGetItem(selectedItem.item).then((item) => {
@@ -34,12 +33,16 @@ const ItemPreview = ({
     });
   }, [selectedItem]);
 
-  useEffect(() => {
-    if (!character.state) return;
-    refreshAC(character.state).then((res) =>
-      updateState(res as PrismaJson.CharacterState)
-    );
-  }, [character.state, updateState]);
+  // useEffect(() => {
+  //   if (!state) return;
+
+  //   refreshAC(state).then((res) => {
+  //     if (res !== state) {
+  //       // Check if the new state is different
+  //       dispatch(setCharacterState(res));
+  //     }
+  //   });
+  // }, [state, dispatch]);
 
   return (
     <div className="flex flex-col w-full col-span-2">
@@ -53,22 +56,23 @@ const ItemPreview = ({
                   <button
                     key={index}
                     className="btn btn-secondary join-item"
-                    disabled={character.state?.equipped?.hands.items?.includes(
+                    disabled={state?.equipped?.hands.items?.includes(
                       selectedItem?.item || -1
                     )}
                     onClick={async (e) => {
                       e.preventDefault();
-                      if (!character.state) return;
+                      if (!state) return;
                       if (!selectedItem?.item) return;
                       const newState = await equipWeapon(
-                        character.state,
+                        state,
                         selectedItem.item,
                         1
                       );
-                      updateState(newState as PrismaJson.CharacterState);
+                      const acState = await refreshAC(newState);
+                      dispatch(setCharacterState(acState));
                     }}
                   >
-                    {character.state?.equipped?.hands.items?.includes(
+                    {state?.equipped?.hands.items?.includes(
                       selectedItem?.item || -1
                     )
                       ? 'Equipped'
@@ -78,21 +82,16 @@ const ItemPreview = ({
                   <button
                     key={index}
                     className="btn btn-secondary join-item"
-                    disabled={
-                      character.state?.equipped?.armor === selectedItem?.item
-                    }
+                    disabled={state?.equipped?.armor === selectedItem?.item}
                     onClick={async (e) => {
                       e.preventDefault();
-                      if (!character.state) return;
+                      if (!state) return;
                       if (!selectedItem?.item) return;
-                      const newState = await updateAC(
-                        character.state,
-                        selectedItem.item
-                      );
-                      updateState(newState as PrismaJson.CharacterState);
+                      const newState = await updateAC(state, selectedItem.item);
+                      dispatch(setCharacterState(newState));
                     }}
                   >
-                    {character.state?.equipped?.armor === selectedItem?.item
+                    {state?.equipped?.armor === selectedItem?.item
                       ? 'Equipped'
                       : 'Equip Armor'}
                   </button>
@@ -107,22 +106,23 @@ const ItemPreview = ({
                         key={index}
                         className="btn btn-secondary join-item"
                         disabled={
-                          character.state?.equipped?.hands.items &&
+                          state?.equipped?.hands.items &&
                           (selectedItem?.quantity || 0) <=
-                            character.state?.equipped?.hands.items?.filter(
+                            state?.equipped?.hands.items?.filter(
                               (item) => item === selectedItem?.item
                             ).length
                         }
                         onClick={async (e) => {
                           e.preventDefault();
-                          if (!character.state) return;
+                          if (!state) return;
                           if (!selectedItem?.item) return;
                           const newState = await equipWeapon(
-                            character.state,
+                            state,
                             selectedItem.item,
                             1
                           );
-                          updateState(newState as PrismaJson.CharacterState);
+                          const acState = await refreshAC(newState);
+                          dispatch(setCharacterState(acState));
                         }}
                       >
                         Equip Weapon
@@ -138,22 +138,23 @@ const ItemPreview = ({
                         key={index}
                         className="btn btn-secondary join-item"
                         disabled={
-                          character.state?.equipped?.hands.items &&
+                          state?.equipped?.hands.items &&
                           (selectedItem?.quantity || 0) <=
-                            character.state?.equipped?.hands.items?.filter(
+                            state?.equipped?.hands.items?.filter(
                               (item) => item === selectedItem?.item
                             ).length
                         }
                         onClick={async (e) => {
                           e.preventDefault();
-                          if (!character.state) return;
+                          if (!state) return;
                           if (!selectedItem?.item) return;
                           const newState = await equipWeapon(
-                            character.state,
+                            state,
                             selectedItem.item,
                             2
                           );
-                          updateState(newState as PrismaJson.CharacterState);
+                          const acState = await refreshAC(newState);
+                          dispatch(setCharacterState(acState));
                         }}
                       >
                         Equip Two-Handed
@@ -175,13 +176,13 @@ const ItemPreview = ({
                     className="btn btn-secondary join-item"
                     onClick={async (e) => {
                       e.preventDefault();
-                      if (!character.state) return;
+                      if (!state) return;
                       if (!selectedItem?.item) return;
                       const newState = await unpackEquipment(
-                        character.state,
+                        state,
                         selectedItem.item
                       );
-                      updateState(newState as PrismaJson.CharacterState);
+                      dispatch(setCharacterState(newState));
                       setSelectedItem(null);
                       setItem(null);
                     }}
@@ -219,7 +220,7 @@ const ItemPreview = ({
                 onClick={async (e) => {
                   e.preventDefault();
                   if (confirmDelete) {
-                    const newState = { ...character.state };
+                    const newState = { ...state };
                     if (!newState) return;
                     if (!newState.inventory) return;
                     //remove items
@@ -234,7 +235,9 @@ const ItemPreview = ({
                       newState.inventory.splice(index, 1);
                     }
 
-                    updateState(newState as PrismaJson.CharacterState);
+                    dispatch(
+                      setCharacterState(newState as PrismaJson.CharacterState)
+                    );
 
                     setConfirmDelete(false);
                   } else {

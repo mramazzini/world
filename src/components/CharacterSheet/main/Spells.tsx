@@ -4,17 +4,17 @@ import Image from 'next/image';
 import PreparedSpellView from '../Spells/PreparedSpellView';
 import numberArray from '@/lib/utils/numberArray';
 import { useEffect, useState } from 'react';
-import { CharacterInfo } from '@/lib/types/modelInfo';
+import { useAppSelector } from '@/store/hooks';
 
 interface Props {
-  character: CharacterInfo;
   logPush: (newLog: Log) => void;
 }
 
-const Spells = ({ character, logPush }: Props) => {
-  const prepared = character.state?.userSubmittedSpells;
+const Spells = ({ logPush }: Props) => {
+  const state = useAppSelector((state) => state.character.state);
+  const prepared = state?.userSubmittedSpells;
   const [spellSlotsState, setSpellSlotsState] = useState<PrismaJson.SpellSlots>(
-    character.state?.spellSlots || {
+    state?.spellSlots || {
       1: 0,
       2: 0,
       3: 0,
@@ -28,16 +28,16 @@ const Spells = ({ character, logPush }: Props) => {
   );
 
   useEffect(() => {
-    if (!character.state) return;
-    if (!character.state.spellSlots) return;
-    setSpellSlotsState(character.state.spellSlots);
-  }, [character.state]);
+    if (!state) return;
+    if (!state.spellSlots) return;
+    setSpellSlotsState(state.spellSlots);
+  }, [state]);
 
   const handleRest = () => {
-    if (!character.state) return;
-    if (!character.state.spellSlots) return;
+    if (!state) return;
+    if (!state.spellSlots) return;
 
-    setSpellSlotsState(character.state.spellSlots);
+    setSpellSlotsState(state.spellSlots);
   };
 
   return (
@@ -52,8 +52,8 @@ const Spells = ({ character, logPush }: Props) => {
               <div className="join flex flex-row items-center justify-center">
                 <div className="flex flex-wrap w-full items-center justify-center bg-neutral text-neutral-content rounded-xl p-4 gap-4 join-item">
                   {numberArray(1, 9).map((level) => {
-                    if (!character.state) return null;
-                    const maxSlots = character.state.spellSlots;
+                    if (!state) return null;
+                    const maxSlots = state.spellSlots;
                     if (!maxSlots) return null;
                     const levelMaxSlots = maxSlots[level as SpellLevel];
                     if (!levelMaxSlots) return null;
@@ -101,10 +101,8 @@ const Spells = ({ character, logPush }: Props) => {
                 return (
                   <PreparedSpellView
                     handleRemoveSpell={(index) => {
-                      if (!character.state) return;
-                      const newSpells = [
-                        ...character.state.userSubmittedSpells,
-                      ];
+                      if (!state) return;
+                      const newSpells = [...state.userSubmittedSpells];
                       newSpells.splice(index, 1);
                     }}
                     key={index}
@@ -112,10 +110,8 @@ const Spells = ({ character, logPush }: Props) => {
                     showEditor={false}
                     spellInput={spell}
                     updateSpell={(newSpell) => {
-                      if (!character.state) return;
-                      const newSpells = [
-                        ...character.state.userSubmittedSpells,
-                      ];
+                      if (!state) return;
+                      const newSpells = [...state.userSubmittedSpells];
                       newSpells[index] = newSpell;
                     }}
                     logPush={logPush}

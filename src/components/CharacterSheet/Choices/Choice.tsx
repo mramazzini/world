@@ -10,23 +10,19 @@ import { runCallback } from '@/Utility/characterStateFunctions/update/runCallbac
 import { useCallback } from 'react';
 import ASIorFeatHandler from './ASIorFeatHandler';
 import FeatHandler from './FeatHandler';
-import { CharacterInfo } from '@/lib/types/modelInfo';
+import { useAppSelector } from '@/store/hooks';
+import { useDispatch } from 'react-redux';
+import { setCharacterState } from '@/store/characterSlice';
 
 interface Props {
   id: string;
-  character: CharacterInfo;
   choiceData: PrismaJson.Choice;
-  setCharacterState: (character: PrismaJson.CharacterState) => void;
   hidden: boolean;
 }
 
-const Choice = ({
-  id,
-  choiceData,
-  setCharacterState,
-  character,
-  hidden,
-}: Props) => {
+const Choice = ({ id, choiceData, hidden }: Props) => {
+  const character = useAppSelector((state) => state.character);
+  const dispatch = useDispatch();
   const callback = useCallback(
     async (data: CallbackOptions) => {
       const s = await runCallback(
@@ -36,9 +32,10 @@ const Choice = ({
         id,
         data
       );
-      setCharacterState({ ...s });
+      dispatch(setCharacterState(s));
     },
-    [character, choiceData, id, setCharacterState]
+
+    [character, choiceData, id, dispatch]
   );
 
   const filterChoice = (choice: PrismaJson.Choice) => {

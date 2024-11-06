@@ -1,16 +1,13 @@
-import { calculateLevel } from '@/Utility/characterStateFunctions/calc/calcLevel';
 import { numberColor, numberColorBefore } from '@/Utility/colorBefore';
 import P from '@/Utility/FormatAndSanitize';
 import JsonTable from '@/Utility/JsonTable';
-import { CharacterInfo } from '@/lib/types/modelInfo';
 import { Fragment, useMemo } from 'react';
+import useLevel from '@/hooks/useLevel';
+import { useAppSelector } from '@/store/hooks';
 
-interface Props {
-  character: CharacterInfo;
-}
-
-const CharacterSheetFeatureDisplay = ({ character }: Props) => {
-  const calcLevel = character.state ? calculateLevel(character.state) : 1;
+const CharacterSheetFeatureDisplay = () => {
+  const character = useAppSelector((state) => state.character);
+  const level = useLevel();
   const features = useMemo(() => {
     if (!character.Classes) return [];
     if (!character.Species) return [];
@@ -59,7 +56,7 @@ const CharacterSheetFeatureDisplay = ({ character }: Props) => {
 
             return minA - minB;
           })
-          .filter((f) => !f.levels?.some((level) => level > calcLevel))
+          .filter((f) => !f.levels?.some((l) => l > level))
           .map((featureInfo, index) => (
             <div
               key={index}
@@ -139,7 +136,7 @@ const CharacterSheetFeatureDisplay = ({ character }: Props) => {
         <p className="italic px-4">Level up to unlock these features</p>
         <div className="divider m-1" />
         {features
-          .filter((f) => f.levels?.some((level) => level > calcLevel))
+          .filter((f) => f.levels?.some((l) => l > level))
           .map((featureInfo) => (
             <div
               key={featureInfo.id}

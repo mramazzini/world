@@ -3,15 +3,11 @@ import SpellSection from './SpellSection';
 import { calcProficiency } from '@/Utility/characterStateFunctions/calc/calcProficiency';
 import numberArray from '@/lib/utils/numberArray';
 import PrepareSpellSection from './PrepareSpellSection';
-import { CharacterInfo } from '@/lib/types/modelInfo';
-
-interface Props {
-  character: CharacterInfo;
-  setState: (state: PrismaJson.CharacterState) => void;
-}
+import { useAppSelector } from '@/store/hooks';
 
 //user needs to be able to select spells to prepare, view the rules for spellcasting for their class, and view the spells they have prepared. Any spells automatically granted to them should be readily available as well.
-const SpellSheet = ({ character, setState }: Props) => {
+const SpellSheet = () => {
+  const character = useAppSelector((state) => state.character);
   if (!character || !character.state || !character.Classes) return <div></div>;
   const classObj = character.Classes[0];
   if (!classObj) return <div></div>;
@@ -53,7 +49,7 @@ const SpellSheet = ({ character, setState }: Props) => {
           })}{' '}
         </div>
       </div>
-      <PrepareSpellSection character={character} setState={setState} />
+      <PrepareSpellSection />
 
       <div className="grid grid-cols-2 gap-4 mt-4"></div>
 

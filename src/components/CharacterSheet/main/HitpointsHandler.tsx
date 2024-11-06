@@ -1,14 +1,12 @@
 'use client';
 import { useState } from 'react';
 import Tooltip from '@/Utility/Tooltip';
-import { CharacterInfo } from '@/lib/types/modelInfo';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { setCharacter } from '@/store/characterSlice';
 
-interface Props {
-  character: CharacterInfo;
-  setCharacter: (character: CharacterInfo) => void;
-}
-
-const HitPointsHandler = ({ character, setCharacter }: Props) => {
+const HitPointsHandler = () => {
+  const character = useAppSelector((state) => state.character);
+  const dispatch = useAppDispatch();
   const [hpDeltaValue, setHpDeltaValue] = useState<number>(1);
   return (
     character.state && (
@@ -127,7 +125,7 @@ const HitPointsHandler = ({ character, setCharacter }: Props) => {
                       effect: `- ${Math.abs(hpDeltaValue)}`,
                     });
                     newChar.state.hp.current -= hpDeltaValue;
-                    setCharacter(newChar);
+                    dispatch(setCharacter(newChar));
                   }}
                 >
                   -{' '}
@@ -155,7 +153,7 @@ const HitPointsHandler = ({ character, setCharacter }: Props) => {
                       effect: `+ ${hpDeltaValue}`,
                     });
                     newChar.state.hp.current += hpDeltaValue;
-                    setCharacter(newChar);
+                    dispatch(setCharacter(newChar));
                   }}
                 >
                   +

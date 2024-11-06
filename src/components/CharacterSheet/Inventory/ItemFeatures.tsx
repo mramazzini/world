@@ -7,9 +7,7 @@ import { useEffect } from 'react';
 import { memoizeGetItem } from '@/Utility/globalCache';
 import { ItemInfo } from '@/lib/types/modelInfo';
 import { Feature } from '@prisma/client';
-interface Props {
-  inventory: PrismaJson.QuantityItem[];
-}
+import { useAppSelector } from '@/store/hooks';
 
 const RenderItemFeature = ({
   feature,
@@ -67,18 +65,20 @@ const RenderItemFeature = ({
   );
 };
 
-const ItemFeatures = ({ inventory }: Props) => {
+const ItemFeatures = () => {
+  const inventory = useAppSelector((state) => state.character.state?.inventory);
   const [items, setItems] = useState<ItemInfo[]>([]);
   useEffect(() => {
     try {
-      const promises = inventory.map((item) => memoizeGetItem(item.item));
+      const promises = inventory?.map((item) => memoizeGetItem(item.item));
+      if (!promises) return;
       Promise.all(promises).then((items) => {
         setItems(items as ItemInfo[]);
       });
     } catch (error) {
       console.error(error);
     }
-  }, [inventory.length, inventory]);
+  }, [inventory]);
   return (
     <section className=" bg-base-200 rounded-xl p-4 col-span-12">
       <h2 className="pb-0 px-4">Features</h2>

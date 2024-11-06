@@ -28,7 +28,7 @@ export const applyPendingModels = async (
     return character;
   }
 
-  const newCharacter = { ...character };
+  let newCharacter = { ...character };
   if (pendingSubclasses) {
     for (const subclass of pendingSubclasses) {
       try {
@@ -42,17 +42,27 @@ export const applyPendingModels = async (
       if (!subclassData) {
         continue;
       }
-      newCharacter.SubClasses = [
-        ...(newCharacter.SubClasses || []),
-        subclassData,
-      ];
+      newCharacter = {
+        ...newCharacter,
+        SubClasses: [...(newCharacter.SubClasses || []), subclassData],
+      };
       if (!newCharacter.state) {
         console.error('No state found on character');
         return character;
       }
 
-      newCharacter.state.pendingLinks.subClass =
-        newCharacter.state.pendingLinks.subClass.filter((s) => s !== subclass);
+      newCharacter = {
+        ...newCharacter,
+        state: {
+          ...newCharacter.state,
+          pendingLinks: {
+            ...newCharacter.state.pendingLinks,
+            subClass: newCharacter.state.pendingLinks.subClass.filter(
+              (s) => s !== subclass
+            ),
+          },
+        },
+      };
     }
   }
   if (pendingFeats) {
@@ -67,14 +77,27 @@ export const applyPendingModels = async (
       if (!featData) {
         continue;
       }
-      newCharacter.Feats = [...(newCharacter.Feats || []), featData];
+      newCharacter = {
+        ...newCharacter,
+        Feats: [...(newCharacter.Feats || []), featData],
+      };
       if (!newCharacter.state) {
         console.error('No state found on character');
         return character;
       }
 
-      newCharacter.state.pendingLinks.feats =
-        newCharacter.state.pendingLinks.feats.filter((f) => f !== feat);
+      newCharacter = {
+        ...newCharacter,
+        state: {
+          ...newCharacter.state,
+          pendingLinks: {
+            ...newCharacter.state.pendingLinks,
+            feats: newCharacter.state.pendingLinks.feats.filter(
+              (f) => f !== feat
+            ),
+          },
+        },
+      };
     }
   }
 

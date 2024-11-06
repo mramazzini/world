@@ -1,6 +1,5 @@
 'use client';
 import { alignmentToText } from '@/Utility/alignmentToText';
-import { calculateLevel } from '@/Utility/characterStateFunctions/calc/calcLevel';
 import '@/lib/string.extensions';
 import { getCharactersByUser } from '@/lib/actions/db/character/read.actions';
 import { CharacterInfo } from '@/lib/types/modelInfo';
@@ -14,10 +13,12 @@ import ConfirmModal from '@/components/Modals/ConfirmModal';
 import useModal from '@/hooks/useModal';
 import ModalButton from '@/components/UI/Modal/ModalButton';
 import { deleteCharacter } from '@/lib/actions/db/character/delete.actions';
+import useLevel from '@/hooks/useLevel';
 
 const Dashboard = () => {
   const [characters, setCharacters] = useState<CharacterInfo[]>([]);
   const [loadingCharacters, setCharactersLoading] = useState(true);
+  const level = useLevel();
   const { id } = useModal();
   const [removeCharacterId, setRemoveCharacterId] = useState<number | null>(
     null
@@ -88,8 +89,7 @@ const Dashboard = () => {
                     </h2>
 
                     <p className="italic">
-                      Level{' '}
-                      {character.state ? calculateLevel(character.state) : 1},{' '}
+                      Level {level},{' '}
                       {character.SubSpecies ? (
                         <a
                           href={`/subspecies/${character.SubSpecies?.name.replaceAll(

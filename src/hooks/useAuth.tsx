@@ -1,10 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../store/store';
 import * as authSlice from '../store/authSlice';
 import { useState } from 'react';
 import { login, signup } from '@/lib/actions/auth/auth.actions';
 import { AuthResult } from '@/lib/types/types';
 import { getUserId } from '@/lib/utils/auth';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 interface SignupInput {
   email: string;
@@ -26,9 +25,9 @@ interface UseAuthReturn {
 }
 
 export const useAuth = (): UseAuthReturn => {
-  const dispatch = useDispatch<AppDispatch>();
-  const userID = useSelector((state: RootState) => state.auth.userId);
-  const loggedIn = useSelector((state: RootState) => state.auth.loggedIn);
+  const dispatch = useAppDispatch();
+  const userID = useAppSelector((state) => state.auth.userId);
+  const loggedIn = useAppSelector((state) => state.auth.loggedIn);
   const [isLoading, setLoading] = useState<boolean>(false);
 
   const loginHandler = async (values: LoginInput) => {

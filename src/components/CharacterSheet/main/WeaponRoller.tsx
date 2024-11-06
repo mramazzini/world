@@ -1,37 +1,33 @@
 'use client';
 import Info from '@/components/UI/Info';
-import { AbilityToModifier } from '@/Utility/characterStateFunctions/calc/AbilityToModifier';
-import { memoizeGetItem } from '@/Utility/globalCache';
 import { roll, rollFromFormula } from '@/Utility/roll';
-import { AbilityScores, Log, WeaponID } from '@/lib/types/types';
+import { Log } from '@/lib/types/types';
 import { Ability } from '@prisma/client';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import {
-  ItemInfo,
-  ItemWeaponDataInfo,
-  WeaponInfo,
-} from '@/lib/types/modelInfo';
+import { useState, useMemo } from 'react';
+import { WeaponInfo } from '@/lib/types/modelInfo';
+import useInventory from '@/hooks/useInventory';
+import { useAppSelector } from '@/store/hooks';
+import useModifier from '@/hooks/useModifier';
+import useProficiency from '@/hooks/useProficiency';
 
 const SingleWeapon = ({
   weaponData,
-  abilities,
   logPush,
-  isVersatile,
-  isProficient,
-  proficiencyBonus,
 }: {
   weaponData: WeaponInfo;
-  abilities: AbilityScores;
   logPush: (newLog: Log) => void;
-  isVersatile?: boolean;
-  isProficient?: boolean;
-  proficiencyBonus?: number;
 }) => {
   const [selectedAbility, setSelectedAbility] = useState<Ability>(Ability.STR);
-  //   find the versatile damage
+  const { isVersatile } = useInventory();
+  const { getWeaponProficiency, proficiencyBonus } = useProficiency();
+  const { getAbilityModifier } = useModifier();
+
+  const isProficient = getWeaponProficiency(weaponData.id);
+
   const weapon = weaponData;
   let damage = weapon.damage;
+
   if (isVersatile) {
     const versatileProperty = weapon.WeaponPropertyInstance.find(
       (p) => p.Property.name === 'Versatile'
@@ -40,10 +36,7 @@ const SingleWeapon = ({
       damage = [versatileProperty.versatileDamage];
     }
   }
-  let profModifier = 0;
-  if (isProficient) {
-    profModifier = proficiencyBonus || 0;
-  }
+
   return (
     <div className=" join m-2 w-full">
       <span className="join-item border border-primary  p-2 bg-base-100 w-full items-center flex whitespace-nowrap overflow-hidden text-ellipsis">
@@ -55,7 +48,7 @@ const SingleWeapon = ({
                 <span className="badge badge-neutral ml-2">
                   {damage.formula}
                 </span>{' '}
-                <span>+ {AbilityToModifier(abilities[selectedAbility])} </span>
+                <span>+ {getAbilityModifier(selectedAbility)} </span>
                 <span className="ml-2 badge badge-secondary">
                   {damage.type.toCapitalCase()}{' '}
                 </span>
@@ -97,8 +90,7 @@ const SingleWeapon = ({
           logPush({
             from: `Attack Roll: ${weapon.name}`,
             roll: {
-              plus:
-                AbilityToModifier(abilities[selectedAbility]) + profModifier,
+              plus: getAbilityModifier(selectedAbility) + proficiencyBonus,
               rolls: [
                 {
                   rolled: rollRes,
@@ -107,8 +99,8 @@ const SingleWeapon = ({
               ],
               total:
                 rollRes +
-                AbilityToModifier(abilities[selectedAbility]) +
-                profModifier,
+                getAbilityModifier(selectedAbility) +
+                proficiencyBonus,
             },
             logType: 'roll',
           });
@@ -154,70 +146,29 @@ const SingleWeapon = ({
 };
 
 interface Props {
-  equipped: WeaponID[];
-  abilities: AbilityScores;
   logPush: (newLog: Log) => void;
-  proficiencyBonus: number;
-  weaponProficiencies: WeaponID[];
-  customWeaponAttacks: PrismaJson.CustomWeapon[];
 }
 
-const WeaponRoller = ({
-  equipped,
-  abilities,
-  logPush,
-  proficiencyBonus,
-  weaponProficiencies,
-  customWeaponAttacks,
-}: Props) => {
-  const [weapons, setWeapons] = useState<ItemWeaponDataInfo[]>([]);
-  const [versatile, setVersatile] = useState<boolean>(false);
-  useEffect(() => {
-    const fetchWeapons = async () => {
-      const weaponData = equipped.map((weapon) => memoizeGetItem(weapon));
-      const res = (await Promise.all(weaponData)) as ItemInfo[];
-      const weaponResults = [];
-      const shieldResults = [];
-      for (const weapon of res) {
-        if (weapon.ItemWeaponData) {
-          weaponResults.push(weapon.ItemWeaponData);
-        }
-        if (weapon.Armor) {
-          shieldResults.push(weapon.Armor);
-        }
-      }
-      if (
-        equipped.length === 1 &&
-        weaponResults[0] &&
-        weaponResults[0].Weapon.WeaponPropertyInstance.some(
-          (p) => p.Property.name === 'Versatile'
-        )
-      ) {
-        setVersatile(true);
-      } else {
-        setVersatile(false);
-      }
-      setWeapons(weaponResults);
-    };
-    fetchWeapons();
-  }, [equipped]);
+const WeaponRoller = ({ logPush }: Props) => {
+  const { equippedWeapons } = useInventory();
+  const weaponAttacks = useAppSelector(
+    (state) => state.character.state?.customAttacks
+  );
+
+  const customWeaponAttacks = useMemo(() => {
+    return weaponAttacks || [];
+  }, [weaponAttacks]);
 
   return (
     <div className="flex flex-col h-full w-full">
-      {/* <p className="">Equipped</p>
-      <div className="divider  m-0"></div> */}
       <div className="h-full flex justify-center items-center w-full flex-col  bg-base-300 rounded-xl p-2">
-        {weapons.length > 0 || customWeaponAttacks.length > 0 ? (
+        {equippedWeapons.length > 0 || customWeaponAttacks.length > 0 ? (
           <>
-            {weapons.map((weapon, index) => (
+            {equippedWeapons.map((weapon, index) => (
               <SingleWeapon
                 key={index}
                 weaponData={weapon.Weapon}
-                abilities={abilities}
                 logPush={logPush}
-                isVersatile={versatile}
-                isProficient={weaponProficiencies.includes(weapon.weaponId)}
-                proficiencyBonus={proficiencyBonus}
               />
             ))}
             {customWeaponAttacks.map((weapon, index) => (
@@ -234,10 +185,7 @@ const WeaponRoller = ({
                   isRanged: false,
                   isSimple: true,
                 }}
-                abilities={abilities}
                 logPush={logPush}
-                isProficient={weapon.isProficient}
-                proficiencyBonus={proficiencyBonus}
               />
             ))}
           </>

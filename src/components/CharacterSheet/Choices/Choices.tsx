@@ -5,14 +5,14 @@ import { useEffect, useState } from 'react';
 import { runCallback } from '@/Utility/characterStateFunctions/update/runCallback';
 import { removeChoice } from '@/Utility/characterStateFunctions/update/removeChoice';
 import Loading from '@/components/UI/Loading';
-import { CharacterInfo } from '@/lib/types/modelInfo';
-interface Props {
-  character: CharacterInfo;
-  setCharacterState: (character: PrismaJson.CharacterState) => void;
-}
+import { useAppSelector } from '@/store/hooks';
+import { useDispatch } from 'react-redux';
+import { setCharacterState } from '@/store/characterSlice';
 
-const ChooseChoices = ({ character, setCharacterState }: Props) => {
+const ChooseChoices = () => {
   const [loading, setLoading] = useState(false);
+  const character = useAppSelector((state) => state.character);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // check to see if choice can be auto resolved
@@ -53,12 +53,14 @@ const ChooseChoices = ({ character, setCharacterState }: Props) => {
           );
         }
       }
-      setCharacterState(tempCharacter.state as PrismaJson.CharacterState);
+      dispatch(
+        setCharacterState(tempCharacter.state as PrismaJson.CharacterState)
+      );
     };
     resolveChoices().then(() => {
       setLoading(false);
     });
-  }, [character.state?.pendingChoices, character, setCharacterState]);
+  }, [character.state?.pendingChoices, character, dispatch]);
   if (!character) return null;
   if (!character.state) return null;
 
@@ -82,8 +84,6 @@ const ChooseChoices = ({ character, setCharacterState }: Props) => {
                 key={choice.id}
                 hidden={false}
                 choiceData={choice}
-                character={character}
-                setCharacterState={setCharacterState}
               />
             );
           })

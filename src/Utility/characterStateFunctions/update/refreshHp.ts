@@ -1,5 +1,4 @@
 import { CharacterInfo } from '@/lib/types/modelInfo';
-import { calculateLevel } from '../calc/calcLevel';
 import { AbilityToModifier } from '../calc/AbilityToModifier';
 
 export const refreshHp = (
@@ -10,7 +9,7 @@ export const refreshHp = (
   if (!character.Classes) return state;
   const hitDie = character.Classes[0].hitDie;
   const conMod = AbilityToModifier(state.abilityScores.CON);
-  const level = calculateLevel(state);
+  const level = state.classLevels.reduce((acc, cur) => acc + cur.level, 0);
 
   const maxHp = hitDie + conMod * level + Math.ceil((hitDie / 2) * (level - 1));
 

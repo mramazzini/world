@@ -1,11 +1,9 @@
 'use client';
 import ModelDisplay from '@/Utility/ModelDisplay';
-import { CharacterInfo } from '@/lib/types/modelInfo';
 import numberArray from '@/lib/utils/numberArray';
+import { useAppSelector } from '@/store/hooks';
 
 interface Props {
-  character: CharacterInfo;
-  updateState: (state: PrismaJson.CharacterState) => void;
   setSelectedItem: (item: PrismaJson.QuantityItem | null) => void;
   selectedItem: PrismaJson.QuantityItem | null;
 }
@@ -44,11 +42,12 @@ const GridItem = ({
   );
 };
 
-const ItemsUI = ({ character, setSelectedItem, selectedItem }: Props) => {
-  if (!character.state) return null;
+const ItemsUI = ({ setSelectedItem, selectedItem }: Props) => {
+  const state = useAppSelector((state) => state.character.state);
+  if (!state) return null;
   return (
     <div className="flex flex-wrap gap-2 justify-center">
-      {character.state.inventory.map((item, index) => (
+      {state.inventory.map((item, index) => (
         <GridItem
           key={index}
           data={item}
@@ -56,7 +55,7 @@ const ItemsUI = ({ character, setSelectedItem, selectedItem }: Props) => {
           selectedItem={selectedItem}
         />
       ))}
-      {numberArray(1, 56 - character.state.inventory.length).map((index) => (
+      {numberArray(1, 56 - state.inventory.length).map((index) => (
         <GridItem key={index} />
       ))}
     </div>

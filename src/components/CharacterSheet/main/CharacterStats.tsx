@@ -1,11 +1,8 @@
+import { useAppSelector } from '@/store/hooks';
 import Tooltip from '@/Utility/Tooltip';
-import { CharacterInfo } from '@/lib/types/modelInfo';
 
-interface Props {
-  character: CharacterInfo;
-}
-
-const CharacterStats = ({ character }: Props) => {
+const CharacterStats = () => {
+  const character = useAppSelector((state) => state.character);
   return (
     character.state && (
       <>

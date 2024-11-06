@@ -1,17 +1,21 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { generateCharacter } from '../../Utility/characterStateFunctions/update/generateCharacter';
 import '@/lib/string.extensions';
 import MainSheet from '@/components/CharacterSheet/main/MainSheet';
 import InventoryTab from '@/components/CharacterSheet/Inventory/InventoryTab';
 import ChooseChoices from '@/components/CharacterSheet/Choices/Choices';
 import SpellSheet from '@/components/CharacterSheet/Spells/SpellSheet';
-import Notes from '@/components/CharacterSheet/Notes/Notes';
+// import Notes from '@/components/CharacterSheet/Notes/Notes';
 import Traits from '@/components/CharacterSheet/Traits/Traits';
 import { applyPendingModels } from '../../Utility/characterStateFunctions/update/applyPendingModels';
 import CharacterStatsTab from '@/components/CharacterSheet/Stats/CharacterStatsTab';
 import { CharacterInfo } from '@/lib/types/modelInfo';
+import { useAppSelector } from '@/store/hooks';
+import { useDispatch } from 'react-redux';
+import { setCharacter } from '@/store/characterSlice';
+import Loading from '@/components/UI/Loading';
 
 type Tab =
   | 'sheet'
@@ -28,35 +32,37 @@ interface Props {
 
 const CharacterSheet = ({ characterData }: Props) => {
   const [activeTab, setActiveTab] = useState<Tab>('sheet');
-  const [character, setCharacter] = useState<CharacterInfo | null>(null);
+  const character = useAppSelector((state) => state.character);
+  const [isInitialized, setIsInitialized] = useState(false);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     // check to see if class/subclass needs to be linked
-    if (!character) return;
     if (!character.state) return;
     if (!character.state.pendingLinks) return;
     applyPendingModels(character).then((c) => {
-      setCharacter(c);
+      dispatch(setCharacter(c));
     });
-  }, [character]);
+  }, [character, dispatch]);
 
   useEffect(() => {
-    if (characterData.state) return setCharacter(characterData);
+    if (isInitialized && character.state) return;
+    setIsInitialized(true);
+
+    if (characterData.state) {
+      dispatch(setCharacter(characterData));
+      return;
+    }
+
     generateCharacter(characterData).then((c) => {
-      const char: CharacterInfo = {
-        ...characterData,
-        state: c,
-      };
-      setCharacter(char);
+      dispatch(
+        setCharacter({
+          ...characterData,
+          state: c,
+        })
+      );
     });
-  }, [characterData]);
-  const setState = useCallback((newState: PrismaJson.CharacterState) => {
-    setCharacter((prevCharacter) => {
-      if (!prevCharacter) return prevCharacter;
-      if (JSON.stringify(prevCharacter.state) === JSON.stringify(newState))
-        return prevCharacter;
-      return { ...prevCharacter, state: newState };
-    });
-  }, []);
+  }, [characterData, dispatch, character.state, isInitialized]);
 
   return (
     <main className="p-4 md:p-8">
@@ -78,7 +84,7 @@ const CharacterSheet = ({ characterData }: Props) => {
           Character sheets are currently in beta, and bugs are to be expected.
         </span>
       </div>
-      {character && character.state && (
+      {character.state ? (
         <>
           <div role="tablist" className="tabs tabs-lifted">
             <input
@@ -95,19 +101,7 @@ const CharacterSheet = ({ characterData }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <MainSheet
-                character={character}
-                setCharacter={setCharacter}
-                regenerateCharacter={() => {
-                  generateCharacter(character).then((c) => {
-                    const char: CharacterInfo = {
-                      ...character,
-                      state: c,
-                    };
-                    setCharacter(char);
-                  });
-                }}
-              />
+              <MainSheet />
             </div>
             {/* dummy tabs for now */}
             <input
@@ -124,7 +118,7 @@ const CharacterSheet = ({ characterData }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <InventoryTab character={character} updateState={setState} />
+              <InventoryTab />
             </div>
             <input
               type="radio"
@@ -140,7 +134,7 @@ const CharacterSheet = ({ characterData }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <SpellSheet character={character} setState={setState} />
+              <SpellSheet />
             </div>
             <input
               type="radio"
@@ -156,11 +150,7 @@ const CharacterSheet = ({ characterData }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <Traits
-                state={character.state}
-                setState={setState}
-                background={character.Background}
-              />
+              <Traits />
             </div>
             <input
               type="radio"
@@ -176,7 +166,7 @@ const CharacterSheet = ({ characterData }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <CharacterStatsTab character={character} />
+              <CharacterStatsTab />
             </div>
 
             <input
@@ -192,15 +182,7 @@ const CharacterSheet = ({ characterData }: Props) => {
             <div
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
-            >
-              <Notes
-                notes={character.state.notes}
-                updateNotes={(notes) => {
-                  if (!character.state) return;
-                  setState({ ...character.state, notes });
-                }}
-              />
-            </div>
+            ></div>
             <input
               type="radio"
               name="charcter_tabs"
@@ -216,13 +198,12 @@ const CharacterSheet = ({ characterData }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <ChooseChoices
-                character={character}
-                setCharacterState={setState}
-              />
+              <ChooseChoices />
             </div>
           </div>
         </>
+      ) : (
+        <Loading />
       )}
     </main>
   );

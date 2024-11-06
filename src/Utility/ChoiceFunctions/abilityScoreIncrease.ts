@@ -10,17 +10,30 @@ export const abilityScoreIncrease: PrismaJson.StateCallback = async (
 ) => {
   const bonuses = c as AbilityScoreValue[];
   const s = character.state as PrismaJson.CharacterState;
-  const newState = { ...s };
+
+  // Copy the current ability scores and reasons to avoid modifying the original state
+  const updatedAbilityScores = { ...s.abilityScores };
+  const updatedAbilityScoreReasons = { ...s.abilityScoreReasons };
+
   for (const bonus of bonuses) {
-    newState.abilityScores[bonus.ability] += bonus.value;
-    newState.abilityScoreReasons[bonus.ability] = [
-      ...(newState.abilityScoreReasons[bonus.ability] || []),
+    updatedAbilityScores[bonus.ability] =
+      (updatedAbilityScores[bonus.ability] || 0) + bonus.value;
+    updatedAbilityScoreReasons[bonus.ability] = [
+      ...(updatedAbilityScoreReasons[bonus.ability] || []),
       {
         reason: from,
         effect: `+ ${bonus.value}`,
       },
     ];
   }
+
+  // Construct a new state object without modifying the original state directly
+  const newState = {
+    ...s,
+    abilityScores: updatedAbilityScores,
+    abilityScoreReasons: updatedAbilityScoreReasons,
+  };
+
   const refreshedAC = await refreshAC(newState);
   const refreshedHp = await refreshHp(character, refreshedAC);
   const refreshedPP = await refreshPassivePerception(refreshedHp);

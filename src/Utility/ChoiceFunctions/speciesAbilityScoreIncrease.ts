@@ -11,19 +11,28 @@ export const SpeciesAbilityScoreIncrease: PrismaJson.StateCallback = async (
   const bonuses = c as AbilityScoreValue[];
   const species = char.subSpeciesId ? char.SubSpecies : char.Species;
 
-  const newState = { ...(char.state as PrismaJson.CharacterState) };
+  let newState = { ...(char.state as PrismaJson.CharacterState) };
   if (!species) {
     return newState;
   }
   for (const bonus of bonuses) {
-    newState.abilityScores[bonus.ability] += bonus.value;
-    newState.abilityScoreReasons[bonus.ability] = [
-      ...(newState.abilityScoreReasons[bonus.ability] || []),
-      {
-        reason: from,
-        effect: `+ ${bonus.value}`,
+    newState = {
+      ...newState,
+      abilityScores: {
+        ...newState.abilityScores,
+        [bonus.ability]: newState.abilityScores[bonus.ability] + bonus.value,
       },
-    ];
+      abilityScoreReasons: {
+        ...newState.abilityScoreReasons,
+        [bonus.ability]: [
+          ...(newState.abilityScoreReasons[bonus.ability] || []),
+          {
+            reason: from,
+            effect: `+ ${bonus.value}`,
+          },
+        ],
+      },
+    };
   }
   const refreshedAC = await refreshAC(newState);
   const refreshedHp = await refreshHp(char, refreshedAC);

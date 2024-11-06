@@ -1,43 +1,34 @@
 'use client';
-import { AbilityScores, Log } from '@/lib/types/types';
-import { useEffect, useState } from 'react';
-import { memoizeGetItem } from '@/Utility/globalCache';
+import { Log } from '@/lib/types/types';
+import { useState } from 'react';
 import Tooltip from '@/Utility/Tooltip';
 import { Ability } from '@prisma/client';
 import AbilityToText from '@/lib/utils/AbilityToText';
 import { roll } from '@/Utility/roll';
-import { calcProficiency } from '@/Utility/characterStateFunctions/calc/calcProficiency';
-import { calculateLevel } from '@/Utility/characterStateFunctions/calc/calcLevel';
-import { AbilityToModifier } from '@/Utility/characterStateFunctions/calc/AbilityToModifier';
-import { calcSkillModifier } from '@/Utility/characterStateFunctions/calc/calcSkillModifier';
 import Image from 'next/image';
-import { CharacterInfo, ItemInfo, ToolInfo } from '@/lib/types/modelInfo';
+import { ToolInfo } from '@/lib/types/modelInfo';
+import useModifier from '@/hooks/useModifier';
+import useProficiency from '@/hooks/useProficiency';
+import useInventory from '@/hooks/useInventory';
 interface Props {
-  character: CharacterInfo;
   pushLog: (log: Log) => void;
 }
 
 const Tool = ({
-  isProficient,
   tool,
   pushLog,
-  abilities,
-  state,
-  proficiencyBonus,
 }: {
-  isProficient: boolean;
   tool: ToolInfo;
-  state: PrismaJson.CharacterState;
   pushLog: (log: Log) => void;
-  abilities: AbilityScores;
-  proficiencyBonus: number;
 }) => {
   const [selectedAbility, setSelectedAbility] = useState<Ability>(Ability.STR);
+  const { getSkillModifier, getToolModifier } = useModifier();
+  const { getToolProficiency } = useProficiency();
   return (
     <div className="flex flex-col items-center border-primary border p-2 rounded-xl ">
       <p>{tool.name}</p>
       <p className="text-xs">
-        {isProficient ? (
+        {getToolProficiency(tool.id) ? (
           <span className="badge-success badge badge-xs">Proficient</span>
         ) : (
           <span className="badge-error badge badge-xs">Not Proficient</span>
@@ -81,37 +72,20 @@ const Tool = ({
                     diceType: 20,
                   },
                 ],
-                plus:
-                  AbilityToModifier(abilities[selectedAbility]) +
-                  (isProficient ? proficiencyBonus : 0),
-                total:
-                  rollRes +
-                  AbilityToModifier(abilities[selectedAbility]) +
-                  (isProficient ? proficiencyBonus : 0),
+                plus: getToolModifier(tool.id, selectedAbility),
+                total: rollRes + getToolModifier(tool.id, selectedAbility),
               },
             });
           }}
         >
-          {AbilityToModifier(abilities[selectedAbility]) +
-            (isProficient ? proficiencyBonus : 0) >=
-          0 ? (
-            <span>
-              +{' '}
-              {AbilityToModifier(abilities[selectedAbility]) +
-                (isProficient ? proficiencyBonus : 0)}
-            </span>
+          {getToolModifier(tool.id, selectedAbility) >= 0 ? (
+            <span>+ {getToolModifier(tool.id, selectedAbility)}</span>
           ) : (
-            <span>
-              -{' '}
-              {Math.abs(
-                AbilityToModifier(abilities[selectedAbility]) +
-                  (isProficient ? proficiencyBonus : 0)
-              )}
-            </span>
+            <span>- {Math.abs(getToolModifier(tool.id, selectedAbility))}</span>
           )}
         </button>
       </div>
-      {isProficient &&
+      {getToolProficiency(tool.id) &&
         tool.skills.map((skill, index) => (
           <div className="join mx-2 mt-1" key={index}>
             <Tooltip
@@ -161,17 +135,17 @@ const Tool = ({
                         diceType: 20,
                       },
                     ],
-                    plus: calcSkillModifier(state, skill.skill),
+                    plus: getSkillModifier(skill.skill),
                     total:
                       Math.max(rollRes1, rollRes2) +
-                      calcSkillModifier(state, skill.skill),
+                      getSkillModifier(skill.skill),
                   },
                 });
               }}
             >
-              {calcSkillModifier(state, skill.skill) >= 0
-                ? `+ ${calcSkillModifier(state, skill.skill)}`
-                : `- ${Math.abs(calcSkillModifier(state, skill.skill))}`}
+              {getSkillModifier(skill.skill) >= 0
+                ? `+ ${getSkillModifier(skill.skill)}`
+                : `- ${getSkillModifier(skill.skill)}`}
             </button>
           </div>
         ))}
@@ -179,47 +153,15 @@ const Tool = ({
   );
 };
 
-const Tools = ({ character, pushLog }: Props) => {
-  const [tools, setTools] = useState<ToolInfo[]>([]);
-  useEffect(() => {
-    if (!character.state?.inventory) return;
-    const promises = character.state.inventory.map(
-      (item) => memoizeGetItem(item.item) as Promise<ItemInfo>
-    );
-    Promise.all(promises).then((items) => {
-      const tools: ToolInfo[] = [];
-      items.forEach((item) => {
-        if (item.Tool) {
-          tools.push(item.Tool);
-        }
-      });
-      setTools(tools);
-    });
-  }, [character.state?.inventory]);
+const Tools = ({ pushLog }: Props) => {
+  const { tools } = useInventory();
+
   return (
     <div className="h-full flex flex-col">
-      {/* <p>Tools</p>
-      <div className="divider m-0"></div> */}
       <div className="flex flex-row bg-base-300 rounded-xl p-4 h-full items-center justify-center">
         {tools.length > 0 ? (
           tools.map((tool, index) => {
-            const isProficient =
-              character.state?.proficiencies?.tools?.includes(tool.id) || false;
-            return (
-              character.state && (
-                <Tool
-                  key={index}
-                  isProficient={isProficient}
-                  tool={tool}
-                  state={character.state}
-                  pushLog={pushLog}
-                  abilities={character.state.abilityScores}
-                  proficiencyBonus={calcProficiency(
-                    calculateLevel(character.state)
-                  )}
-                />
-              )
-            );
+            return <Tool key={index} tool={tool} pushLog={pushLog} />;
           })
         ) : (
           <div className="flex items-center justify-center flex-col">

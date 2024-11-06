@@ -1,21 +1,21 @@
-import { AbilityToModifier } from '@/Utility/characterStateFunctions/calc/AbilityToModifier';
-import { calculateLevel } from '@/Utility/characterStateFunctions/calc/calcLevel';
-import { calcProficiency } from '@/Utility/characterStateFunctions/calc/calcProficiency';
-import { calcSkillModifier } from '@/Utility/characterStateFunctions/calc/calcSkillModifier';
 import Tooltip from '@/Utility/Tooltip';
 import { skillAtritbuteMap } from '@/lib/globalVars';
 import AbilityToText from '@/lib/utils/AbilityToText';
-import { CharacterInfo } from '@/lib/types/modelInfo';
-import { Ability, Skill } from '@prisma/client';
+import { Skill } from '@prisma/client';
 import { Fragment } from 'react';
+import useModifier from '@/hooks/useModifier';
+import { useAppSelector } from '@/store/hooks';
+import useProficiency from '@/hooks/useProficiency';
 
 interface Props {
-  character: CharacterInfo;
   handleRoll: (modifier: number, reason: string, diceSize: number) => void;
   skills: Skill[];
 }
 
-const SkillRoller = ({ character, handleRoll, skills }: Props) => {
+const SkillRoller = ({ handleRoll, skills }: Props) => {
+  const { getSkillModifier } = useModifier();
+  const { proficiencyBonus } = useProficiency();
+  const state = useAppSelector((state) => state.character.state);
   return (
     <>
       <div className="bg-base-300 p-2 rounded-xl border-primary border">
@@ -44,40 +44,17 @@ const SkillRoller = ({ character, handleRoll, skills }: Props) => {
                           <tr>
                             <td>{AbilityToText(skillAtritbuteMap[skill])}</td>
                             <td>
-                              {character.state &&
-                              AbilityToModifier(
-                                character.state.abilityScores[
-                                  skillAtritbuteMap[skill] as Ability
-                                ]
-                              ) >= 0
-                                ? `+ ${AbilityToModifier(
-                                    character.state.abilityScores[
-                                      skillAtritbuteMap[skill] as Ability
-                                    ]
-                                  )}`
-                                : character.state &&
-                                  `- ${Math.abs(
-                                    AbilityToModifier(
-                                      character.state.abilityScores[
-                                        skillAtritbuteMap[skill] as Ability
-                                      ]
-                                    )
-                                  )}`}
+                              {getSkillModifier(skill) >= 0
+                                ? `+ ${getSkillModifier(skill)}`
+                                : `- ${getSkillModifier(skill)}`}
                             </td>
                           </tr>
-                          {character.state &&
-                            character.state.proficiencies.skills.includes(
-                              skill
-                            ) && (
-                              <tr>
-                                <td>Proficient</td>
-                                <td>
-                                  {`+ ${calcProficiency(
-                                    calculateLevel(character.state)
-                                  )}`}
-                                </td>
-                              </tr>
-                            )}
+                          {state?.proficiencies.skills.includes(skill) && (
+                            <tr>
+                              <td>Proficient</td>
+                              <td>{`+ ${proficiencyBonus}`}</td>
+                            </tr>
+                          )}
                         </tbody>
                       </table>
                     </div>
@@ -93,21 +70,16 @@ const SkillRoller = ({ character, handleRoll, skills }: Props) => {
                 <button
                   className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold w-10"
                   onClick={() =>
-                    character.state &&
                     handleRoll(
-                      calcSkillModifier(character.state, skill),
+                      getSkillModifier(skill),
                       skill.toCapitalCase().replaceAll('_', ' '),
                       20
                     )
                   }
                 >
-                  {character.state &&
-                  calcSkillModifier(character.state, skill) >= 0
-                    ? `+ ${calcSkillModifier(character.state, skill)}`
-                    : `- ${
-                        character.state &&
-                        Math.abs(calcSkillModifier(character.state, skill))
-                      }`}
+                  {getSkillModifier(skill) >= 0
+                    ? `+ ${getSkillModifier(skill)}`
+                    : `- ${Math.abs(getSkillModifier(skill))}`}
                 </button>
               </div>
             </Fragment>

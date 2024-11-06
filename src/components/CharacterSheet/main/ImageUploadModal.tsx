@@ -3,21 +3,32 @@ import Loading from '@/components/UI/Loading';
 import Modal from '@/components/UI/Modal/Modal';
 import ModalBox from '@/components/UI/Modal/ModalBox';
 import ModalButton from '@/components/UI/Modal/ModalButton';
+import { setImageUrl } from '@/store/characterSlice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { saveImageToCharacter } from '@/Utility/saveCharacterToDB';
 import Image from 'next/image';
 import { Suspense, useState } from 'react';
 interface Props {
   modalid: string;
-  setImage: (image: string) => void;
 }
-const ImageUploadModal = ({ modalid, setImage }: Props) => {
-  const [image, setImageUrl] = useState('');
+const ImageUploadModal = ({ modalid }: Props) => {
+  const dispatch = useAppDispatch();
+  const character = useAppSelector((state) => state.character);
+  const image = useAppSelector((state) => state.character.imageURL);
   const [valid, setValid] = useState(false);
   const [message, setMessage] = useState('');
+
   const validUrl = (str: string) => {
     const regex =
       /^(https?:\/\/)?([a-zA-Z0-9.-]+(\.[a-zA-Z]{2,})+)(:[0-9]{1,5})?(\/[^\s]*)?$/;
     return regex.test(str);
   };
+
+  const saveImage = async (image: string) => {
+    await dispatch(setImageUrl(image));
+    await saveImageToCharacter(character.id, image);
+  };
+
   return (
     <>
       <Modal id={modalid}>
@@ -34,19 +45,19 @@ const ImageUploadModal = ({ modalid, setImage }: Props) => {
               type="text"
               placeholder="Image URL"
               className="input input-bordered grow  join-item"
-              value={image}
+              value={image || ''}
               onChange={(e) => {
                 setValid(false);
-                setImageUrl(e.target.value);
+                dispatch(setImageUrl(e.target.value));
               }}
             />
             <button
               className="btn join-item "
               onClick={(e) => {
                 e.preventDefault();
-                if (!validUrl(image)) return setMessage('Invalid URL');
+                if (!validUrl(image || '')) return setMessage('Invalid URL');
                 setValid(true);
-                setImageUrl(image);
+                dispatch(setImageUrl(image || ''));
                 setMessage('');
               }}
             >
@@ -75,7 +86,7 @@ const ImageUploadModal = ({ modalid, setImage }: Props) => {
                   className="btn mr-2"
                   onClick={async (e) => {
                     e.preventDefault();
-                    setImage(image);
+                    await saveImage(image);
                     const modal = document.getElementById(
                       modalid
                     ) as HTMLDialogElement;

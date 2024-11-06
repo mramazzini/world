@@ -103,17 +103,21 @@ export interface FeatInfo extends Feat {
     username: string | null;
   } | null;
 }
-export interface CharacterInfo extends Character {
+export interface CharacterInfo
+  extends Omit<Character, 'createdAt' | 'updatedAt'> {
   User: {
     id: number;
     username: string | null;
   } | null;
-  Background: BackgroundWithFeatures | null;
-  Classes: ClassWithSpellListAndFeatures[] | null;
-  SubClasses: SubClassWithFeatures[] | null;
-  Feats: FeatWithFeatures[] | null;
-  Species: SpeciesWithFeatures | null;
-  SubSpecies: SubSpeciesWithFeatures | null;
+  Background: Omit<BackgroundWithFeatures, 'createdAt' | 'updatedAt'> | null;
+  Classes: Omit<
+    ClassWithSpellListAndFeatures[],
+    'createdAt' | 'updatedAt'
+  > | null;
+  SubClasses: Omit<SubClassWithFeatures[], 'createdAt' | 'updatedAt'> | null;
+  Feats: Omit<FeatWithFeatures[], 'createdAt' | 'updatedAt'> | null;
+  Species: Omit<SpeciesWithFeatures, 'createdAt' | 'updatedAt'> | null;
+  SubSpecies: Omit<SubSpeciesWithFeatures, 'createdAt' | 'updatedAt'> | null;
 
   // Inventory: any;
 }

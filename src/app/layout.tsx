@@ -9,7 +9,7 @@ import Footer from '@/components/Footer/Footer';
 import { NAVBAR_HEIGHT_REM } from '@/lib/globalVars';
 import { Suspense } from 'react';
 import NavbarSmall from '@/components/Navbar/NavbarSmall';
-import store from '@/store/store';
+import makeStore from '@/store/store';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Provider store={store}>
+    <Provider store={makeStore()}>
       <html lang="en">
         <head>
           {/* charset */}

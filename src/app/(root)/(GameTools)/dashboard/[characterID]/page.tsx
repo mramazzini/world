@@ -93,7 +93,6 @@ export default async function Page({ params }: Props) {
         </div>
       );
     }
-
     return <CharacterSheet characterData={character} />;
   } catch (error) {
     console.error('Error loading character:', error);

@@ -2,14 +2,14 @@ import { AbilityToModifier } from '@/Utility/characterStateFunctions/calc/Abilit
 import Tooltip from '@/Utility/Tooltip';
 import AbilityToText from '@/lib/utils/AbilityToText';
 import { Ability } from '@prisma/client';
-import { CharacterInfo } from '@/lib/types/modelInfo';
+import { useAppSelector } from '@/store/hooks';
 
 interface Props {
-  character: CharacterInfo;
   handleRoll: (modifier: number, reason: string) => void;
 }
 
-const AbilityScoreRoller = ({ character, handleRoll }: Props) => {
+const AbilityScoreRoller = ({ handleRoll }: Props) => {
+  const character = useAppSelector((state) => state.character);
   return (
     character.state && (
       <>

@@ -3,19 +3,17 @@ import Image from 'next/image';
 import { Fragment } from 'react';
 import ImageUploadModal from './ImageUploadModal';
 import useModal from '@/hooks/useModal';
-import { CharacterInfo } from '@/lib/types/modelInfo';
+import { useAppSelector } from '@/store/hooks';
+import useLevel from '@/hooks/useLevel';
 
-interface Props {
-  character: CharacterInfo;
-  calcLevel: number;
-  setImage: (image: string) => void;
-}
-
-const CharacterIntro = ({ character, calcLevel, setImage }: Props) => {
+const CharacterIntro = () => {
   const { id, openModal, closeModal } = useModal();
+  const character = useAppSelector((state) => state.character);
+  const level = useLevel();
+  console.log(character);
   return (
     <>
-      <ImageUploadModal modalid={id} setImage={setImage} />
+      <ImageUploadModal modalid={id} />
       {character.imageURL ? (
         <Image
           src={character.imageURL}
@@ -46,7 +44,7 @@ const CharacterIntro = ({ character, calcLevel, setImage }: Props) => {
         </h2>
 
         <p className="italic">
-          Level {calcLevel},{' '}
+          Level {level},{' '}
           {character.SubSpecies ? (
             <a
               href={`/subspecies/${character.SubSpecies?.name.replaceAll(

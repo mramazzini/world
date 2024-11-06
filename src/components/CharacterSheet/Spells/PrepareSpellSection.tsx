@@ -1,13 +1,16 @@
 'use client';
-import { CharacterInfo } from '@/lib/types/modelInfo';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import PreparedSpellView from './PreparedSpellView';
+import { setCharacterState } from '@/store/characterSlice';
 
-interface Props {
-  character: CharacterInfo;
-  setState: (state: PrismaJson.CharacterState) => void;
-}
+const PrepareSpellSection = () => {
+  const character = useAppSelector((state) => state.character);
+  const dispatch = useAppDispatch();
 
-const PrepareSpellSection = ({ character, setState }: Props) => {
+  const setState = (newState: PrismaJson.CharacterState) => {
+    dispatch(setCharacterState(newState));
+  };
+
   const handleAddSpell = () => {
     if (!character.state) return;
     setState({

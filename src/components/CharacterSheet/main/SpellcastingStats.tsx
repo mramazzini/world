@@ -1,35 +1,33 @@
-import { AbilityToModifier } from '@/Utility/characterStateFunctions/calc/AbilityToModifier';
-import { calculateLevel } from '@/Utility/characterStateFunctions/calc/calcLevel';
-import { calcProficiency } from '@/Utility/characterStateFunctions/calc/calcProficiency';
 import Tooltip from '@/Utility/Tooltip';
 import AbilityToText from '@/lib/utils/AbilityToText';
-import { CharacterInfo } from '@/lib/types/modelInfo';
-import { Ability } from '@prisma/client';
 import Image from 'next/image';
+import { useAppSelector } from '@/store/hooks';
+import useSpellcaster from '@/hooks/useSpellcaster';
+import useProficiency from '@/hooks/useProficiency';
 
 interface Props {
-  character: CharacterInfo;
   handleRoll: (modifier: number, reason: string, die: number) => void;
 }
 
-const SpellcastingStats = ({ character, handleRoll }: Props) => {
+const SpellcastingStats = ({ handleRoll }: Props) => {
+  const character = useAppSelector((state) => state.character);
+  const { ability, modifier, isSpellCaster, spellSaveDC, spellAttackBonus } =
+    useSpellcaster();
+  const { proficiencyBonus } = useProficiency();
   return (
     character.state &&
     character.Classes && (
       <>
-        {' '}
         <div className="flex flex-col   rounded-xl border-secondary border bg-base-300 h-full">
           <h2 className="pb-0 px-4 text-sm text-center">Spellcasting</h2>
           <div className="divider m-0"></div>
-          {character.Classes[0].spellCastingInfo ? (
+          {isSpellCaster ? (
             <div className="flex flex-wrap justify-center flex-col px-4 pb-4">
               {/* spellcasting ability, spell save, spell attack roll */}
               <div className="flex flex-row items-center justify-between w-full">
                 <h3 className="p-0 text-base">Ability</h3>
                 <div className="flex flex-row items-center">
-                  <p className="badge badge-secondary  font-bold">
-                    {character.Classes[0].spellCastingInfo?.ability}
-                  </p>
+                  <p className="badge badge-secondary  font-bold">{ability}</p>
                 </div>
               </div>
               <div className="divider m-0"></div>
@@ -54,40 +52,14 @@ const SpellcastingStats = ({ character, handleRoll }: Props) => {
                             </tr>
                             <tr>
                               <td>Proficiency</td>
-                              <td>
-                                +{' '}
-                                {calcProficiency(
-                                  calculateLevel(character.state)
-                                )}
-                              </td>
+                              <td>+ {proficiencyBonus}</td>
                             </tr>
                             <tr>
+                              <td>{AbilityToText(ability)} Modifier</td>
                               <td>
-                                {AbilityToText(
-                                  character.Classes[0].spellCastingInfo
-                                    ?.ability as Ability
-                                )}{' '}
-                                Modifier
-                              </td>
-                              <td>
-                                {AbilityToModifier(
-                                  character.state.abilityScores[
-                                    character.Classes[0].spellCastingInfo
-                                      ?.ability as Ability
-                                  ]
-                                ) > 0
-                                  ? `+ ${AbilityToModifier(
-                                      character.state.abilityScores[
-                                        character.Classes[0].spellCastingInfo
-                                          ?.ability as Ability
-                                      ]
-                                    )}`
-                                  : AbilityToModifier(
-                                      character.state.abilityScores[
-                                        character.Classes[0].spellCastingInfo
-                                          ?.ability as Ability
-                                      ]
-                                    )}
+                                {modifier >= 0
+                                  ? `+ ${modifier}`
+                                  : `- ${modifier}`}
                               </td>
                             </tr>
                           </tbody>
@@ -101,14 +73,7 @@ const SpellcastingStats = ({ character, handleRoll }: Props) => {
                     }
                   />
                   <p className="badge badge-secondary  font-bold join-item">
-                    {8 +
-                      calcProficiency(calculateLevel(character.state)) +
-                      AbilityToModifier(
-                        character.state.abilityScores[
-                          character.Classes[0].spellCastingInfo
-                            ?.ability as Ability
-                        ]
-                      )}
+                    {spellSaveDC}
                   </p>
                 </div>
               </div>
@@ -130,40 +95,14 @@ const SpellcastingStats = ({ character, handleRoll }: Props) => {
                           <tbody>
                             <tr>
                               <td>Proficiency</td>
-                              <td>
-                                +{' '}
-                                {calcProficiency(
-                                  calculateLevel(character.state)
-                                )}
-                              </td>
+                              <td>+ {proficiencyBonus}</td>
                             </tr>
                             <tr>
+                              <td>{modifier} Modifier</td>
                               <td>
-                                {AbilityToText(
-                                  character.Classes[0].spellCastingInfo
-                                    ?.ability as Ability
-                                )}{' '}
-                                Modifier
-                              </td>
-                              <td>
-                                {AbilityToModifier(
-                                  character.state.abilityScores[
-                                    character.Classes[0].spellCastingInfo
-                                      ?.ability as Ability
-                                  ]
-                                ) > 0
-                                  ? `+ ${AbilityToModifier(
-                                      character.state.abilityScores[
-                                        character.Classes[0].spellCastingInfo
-                                          ?.ability as Ability
-                                      ]
-                                    )}`
-                                  : AbilityToModifier(
-                                      character.state.abilityScores[
-                                        character.Classes[0].spellCastingInfo
-                                          ?.ability as Ability
-                                      ]
-                                    )}
+                                {modifier > 0
+                                  ? `+ ${modifier}`
+                                  : `- ${modifier}`}
                               </td>
                             </tr>
                           </tbody>
@@ -182,28 +121,11 @@ const SpellcastingStats = ({ character, handleRoll }: Props) => {
                       return (
                         character.state &&
                         character.Classes &&
-                        handleRoll(
-                          calcProficiency(calculateLevel(character.state)) +
-                            AbilityToModifier(
-                              character.state.abilityScores[
-                                character.Classes[0].spellCastingInfo
-                                  ?.ability as Ability
-                              ]
-                            ),
-                          'Spell Attack Roll',
-                          20
-                        )
+                        handleRoll(spellAttackBonus, 'Spell Attack Roll', 20)
                       );
                     }}
                   >
-                    +{' '}
-                    {calcProficiency(calculateLevel(character.state)) +
-                      AbilityToModifier(
-                        character.state.abilityScores[
-                          character.Classes[0].spellCastingInfo
-                            ?.ability as Ability
-                        ]
-                      )}
+                    + {spellAttackBonus}
                   </button>
                 </div>
               </div>

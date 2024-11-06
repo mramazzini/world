@@ -2,15 +2,12 @@
 import JsonTable from '@/Utility/JsonTable';
 import Tooltip from '@/Utility/Tooltip';
 import { MarkdownItem } from '@/lib/types/types';
-import { Background } from '@prisma/client';
+import { setCharacterState } from '@/store/characterSlice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import DOMPurify from 'dompurify';
 import markdownIt from 'markdown-it';
 import { useState } from 'react';
-interface Props {
-  state: PrismaJson.CharacterState;
-  setState: (character: PrismaJson.CharacterState) => void;
-  background: Background | null;
-}
+
 const md = markdownIt();
 
 const Trait = ({
@@ -161,11 +158,22 @@ const ListEditor = ({
   );
 };
 
-const Traits = ({ state, setState, background }: Props) => {
+const Traits = () => {
+  const state = useAppSelector((state) => state.character.state);
+  const background = useAppSelector((state) => state.character.Background);
+  const dispatch = useAppDispatch();
+
+  const setState = (newState: PrismaJson.CharacterState) => {
+    dispatch(setCharacterState(newState));
+  };
+
   const traitLength = background?.traits?.length || 0;
   const idealsLength = background?.ideals?.length || 0;
   const bondsLength = background?.bonds?.length || 0;
   const flawsLength = background?.flaws?.length || 0;
+
+  if (!state) return null;
+
   return (
     <div className="flex flex-col w-full bg-base-200 p-4">
       <h2 className="font-bold">Personality Traits</h2>

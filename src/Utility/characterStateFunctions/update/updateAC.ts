@@ -172,9 +172,14 @@ export const updateAC = async (
   state: PrismaJson.CharacterState,
   itemId: ItemID
 ) => {
-  const newState = { ...state };
+  const newState = {
+    ...state,
+    equipped: {
+      ...state.equipped,
+      armor: itemId,
+    },
+  };
 
-  newState.equipped.armor = itemId;
   const res = await refreshAC(newState);
   return {
     ...res,

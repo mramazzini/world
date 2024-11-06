@@ -3,20 +3,18 @@ import Modal from '@/components/UI/Modal/Modal';
 import ModalBox from '@/components/UI/Modal/ModalBox';
 import ModalButton from '@/components/UI/Modal/ModalButton';
 import useModal from '@/hooks/useModal';
-import { CharacterInfo } from '@/lib/types/modelInfo';
 import { Time } from '@/lib/types/types';
+import { setCharacterState } from '@/store/characterSlice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import Image from 'next/image';
 
-interface Props {
-  character: CharacterInfo;
-  setCharacter: (character: CharacterInfo) => void;
-}
-
-const Resources = ({ character, setCharacter }: Props) => {
+const Resources = () => {
+  const state = useAppSelector((state) => state.character.state);
+  const dispatch = useAppDispatch();
   const { id } = useModal();
   const createResource = () => {
-    if (!character.state || !character.state.customResources) return;
-    const newResources = [...character.state.customResources];
+    if (!state || !state.customResources) return;
+    const newResources = [...state.customResources];
     newResources.push({
       name: '',
       current: 1,
@@ -24,20 +22,19 @@ const Resources = ({ character, setCharacter }: Props) => {
       description: '',
       resetType: { quantity: 0, unit: Time.day },
     });
-    setCharacter({
-      ...character,
-      state: {
-        ...character.state,
+    dispatch(
+      setCharacterState({
+        ...state,
         customResources: newResources,
-      },
-    });
+      })
+    );
   };
-  if (!character.state) return null;
-  return character.state.customResources ? (
+  if (!state) return null;
+  return state.customResources ? (
     <>
       <div className="flex flex-col  overflow-scroll max-h-64">
         <div className="flex flex-wrap justify-center">
-          {character.state.customResources.map((resource, index) => (
+          {state.customResources.map((resource, index) => (
             <div
               key={index}
               className="col-span-4 flex flex-row items-center join m-1 w-full"
@@ -62,19 +59,16 @@ const Resources = ({ character, setCharacter }: Props) => {
               <button
                 className="join-item btn btn-error btn-xs"
                 onClick={() => {
-                  if (!character.state || !character.state.customResources)
-                    return;
-                  if (character.state.customResources[index].current <= 0)
-                    return;
-                  const newResources = [...character.state.customResources];
+                  if (!state || !state.customResources) return;
+                  if (state.customResources[index].current <= 0) return;
+                  const newResources = [...state.customResources];
                   newResources[index].current -= 1;
-                  setCharacter({
-                    ...character,
-                    state: {
-                      ...character.state,
+                  dispatch(
+                    setCharacterState({
+                      ...state,
                       customResources: newResources,
-                    },
-                  });
+                    })
+                  );
                 }}
               >
                 -
@@ -83,22 +77,20 @@ const Resources = ({ character, setCharacter }: Props) => {
               <button
                 className="join-item btn btn-success btn-xs"
                 onClick={() => {
-                  if (!character.state || !character.state.customResources)
-                    return;
+                  if (!state || !state.customResources) return;
                   if (
-                    character.state.customResources[index].current ===
-                    character.state.customResources[index].max
+                    state.customResources[index].current ===
+                    state.customResources[index].max
                   )
                     return;
-                  const newResources = [...character.state.customResources];
+                  const newResources = [...state.customResources];
                   newResources[index].current += 1;
-                  setCharacter({
-                    ...character,
-                    state: {
-                      ...character.state,
+                  dispatch(
+                    setCharacterState({
+                      ...state,
                       customResources: newResources,
-                    },
-                  });
+                    })
+                  );
                 }}
               >
                 +
@@ -130,7 +122,7 @@ const Resources = ({ character, setCharacter }: Props) => {
                 <th>Max</th>
                 <th></th>
               </tr>
-              {character.state.customResources.map((resource, index) => (
+              {state.customResources.map((resource, index) => (
                 <tr key={index}>
                   <td>
                     <input
@@ -140,22 +132,15 @@ const Resources = ({ character, setCharacter }: Props) => {
                       placeholder="Ex. Charges, Ki Points, etc."
                       className="input input-bordered input-sm"
                       onChange={(e) => {
-                        if (
-                          !character.state ||
-                          !character.state.customResources
-                        )
-                          return;
-                        const newResources = [
-                          ...character.state.customResources,
-                        ];
+                        if (!state || !state.customResources) return;
+                        const newResources = [...state.customResources];
                         newResources[index].name = e.target.value;
-                        setCharacter({
-                          ...character,
-                          state: {
-                            ...character.state,
+                        dispatch(
+                          setCharacterState({
+                            ...state,
                             customResources: newResources,
-                          },
-                        });
+                          })
+                        );
                       }}
                     />
                   </td>
@@ -167,23 +152,16 @@ const Resources = ({ character, setCharacter }: Props) => {
                       value={resource.max}
                       className="input input-bordered input-sm"
                       onChange={(e) => {
-                        if (
-                          !character.state ||
-                          !character.state.customResources
-                        )
-                          return;
-                        const newResources = [
-                          ...character.state.customResources,
-                        ];
+                        if (!state || !state.customResources) return;
+                        const newResources = [...state.customResources];
                         newResources[index].max = parseInt(e.target.value);
                         newResources[index].current = parseInt(e.target.value);
-                        setCharacter({
-                          ...character,
-                          state: {
-                            ...character.state,
+                        dispatch(
+                          setCharacterState({
+                            ...state,
                             customResources: newResources,
-                          },
-                        });
+                          })
+                        );
                       }}
                     />
                   </td>
@@ -193,22 +171,15 @@ const Resources = ({ character, setCharacter }: Props) => {
                       className="btn btn-error btn-sm"
                       disabled={resource.name === 'Hit Dice'}
                       onClick={() => {
-                        if (
-                          !character.state ||
-                          !character.state.customResources
-                        )
-                          return;
-                        const newResources = [
-                          ...character.state.customResources,
-                        ];
+                        if (!state || !state.customResources) return;
+                        const newResources = [...state.customResources];
                         newResources.splice(index, 1);
-                        setCharacter({
-                          ...character,
-                          state: {
-                            ...character.state,
+                        dispatch(
+                          setCharacterState({
+                            ...state,
                             customResources: newResources,
-                          },
-                        });
+                          })
+                        );
                       }}
                     >
                       <Image

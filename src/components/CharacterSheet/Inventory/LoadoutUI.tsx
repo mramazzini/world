@@ -2,18 +2,18 @@
 import { calcWeight } from '@/Utility/characterStateFunctions/calc/calcWeight';
 import P from '@/Utility/FormatAndSanitize';
 import Tooltip from '@/Utility/Tooltip';
-import { CharacterInfo } from '@/lib/types/modelInfo';
 import numberArray from '@/lib/utils/numberArray';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import CustomWeaponsModal from './CustomWeaponsModal';
+import { useAppSelector } from '@/store/hooks';
+import { useDispatch } from 'react-redux';
+import { setCharacterState } from '@/store/characterSlice';
+import { refreshAC } from '@/Utility/characterStateFunctions/update/updateAC';
 
-interface Props {
-  character: CharacterInfo;
-  setState: (state: PrismaJson.CharacterState) => void;
-}
-
-const LoadoutUI = ({ character, setState }: Props) => {
+const LoadoutUI = () => {
+  const dispatch = useDispatch();
+  const character = useAppSelector((state) => state.character);
   const [currentWeight, setCurrentWeight] =
     useState<null | PrismaJson.QuantityUnit>(null);
 
@@ -78,13 +78,13 @@ const LoadoutUI = ({ character, setState }: Props) => {
                     character.state?.equipped.hands.items[i - 1] ? (
                       <div className="indicator">
                         <button
-                          onClick={() => {
+                          onClick={async () => {
                             const newHands = [
                               ...(character.state?.equipped.hands.items || []),
                             ];
                             newHands.splice(i - 1, 1);
                             if (!character.state) return;
-                            setState({
+                            const newState = await refreshAC({
                               ...character.state,
                               equipped: {
                                 ...character.state.equipped,
@@ -94,6 +94,7 @@ const LoadoutUI = ({ character, setState }: Props) => {
                                 },
                               },
                             });
+                            dispatch(setCharacterState(newState));
                           }}
                           className="indicator-item  bg-error flex justify-center items-center hover:bg-error/80 rounded-full w-4 h-4 top-[-5px] right-[-5px] cursor-pointer"
                         >
@@ -132,10 +133,12 @@ const LoadoutUI = ({ character, setState }: Props) => {
             initialWeapons={character.state.customAttacks || []}
             setWeaponState={(weapons) => {
               if (!character.state) return;
-              setState({
-                ...character.state,
-                customAttacks: weapons,
-              });
+              dispatch(
+                setCharacterState({
+                  ...character.state,
+                  customAttacks: weapons,
+                })
+              );
             }}
           />
         </section>

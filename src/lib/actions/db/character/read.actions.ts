@@ -6,7 +6,14 @@ import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
 
 export const getCharacters = async (): Promise<CharacterInfo[]> => {
-  const db = new PrismaClient();
+  const db = new PrismaClient({
+    omit: {
+      character: {
+        createdAt: true,
+        updatedAt: true,
+      },
+    },
+  });
   const res = await db.character.findMany({
     include: {
       Species: {
@@ -55,13 +62,52 @@ export const getCharacters = async (): Promise<CharacterInfo[]> => {
     },
   });
   await db.$disconnect();
-  return res;
+  return res as CharacterInfo[];
 };
 
 export const getCharacter = async (
   query: string | number
 ): Promise<CharacterInfo | null> => {
-  const db = new PrismaClient();
+  const db = new PrismaClient({
+    omit: {
+      character: {
+        createdAt: true,
+        updatedAt: true,
+      },
+      species: {
+        createdAt: true,
+        updatedAt: true,
+      },
+      feature: {
+        createdAt: true,
+        updatedAt: true,
+      },
+      background: {
+        createdAt: true,
+        updatedAt: true,
+      },
+      class: {
+        createdAt: true,
+        updatedAt: true,
+      },
+      subClass: {
+        createdAt: true,
+        updatedAt: true,
+      },
+      spell: {
+        createdAt: true,
+        updatedAt: true,
+      },
+      feat: {
+        createdAt: true,
+        updatedAt: true,
+      },
+      spellList: {
+        createdAt: true,
+        updatedAt: true,
+      },
+    },
+  });
   if (typeof query === 'string') {
     const res = await db.character.findFirst({
       where: {
@@ -113,12 +159,13 @@ export const getCharacter = async (
       },
     });
     await db.$disconnect();
-    return res;
+    return res as CharacterInfo;
   } else {
     const res = await db.character.findFirst({
       where: {
         id: query,
       },
+
       include: {
         Species: {
           include: {
@@ -165,14 +212,21 @@ export const getCharacter = async (
       },
     });
     await db.$disconnect();
-    return res;
+    return res as CharacterInfo;
   }
 };
 
 export const getCharactersByUser = async (
   userID: number
 ): Promise<CharacterInfo[]> => {
-  const db = new PrismaClient();
+  const db = new PrismaClient({
+    omit: {
+      character: {
+        createdAt: true,
+        updatedAt: true,
+      },
+    },
+  });
   const res = await db.character.findMany({
     orderBy: {
       updatedAt: 'desc',
@@ -232,7 +286,14 @@ export const getCharactersByUser = async (
 export const getCharacterChunk = async (
   queryInfo: QueryParams
 ): Promise<CharacterInfo[] | null> => {
-  const db = new PrismaClient();
+  const db = new PrismaClient({
+    omit: {
+      character: {
+        createdAt: true,
+        updatedAt: true,
+      },
+    },
+  });
   const { query } = queryInfo;
   if (query === '') {
     const res = await db.character.findMany({

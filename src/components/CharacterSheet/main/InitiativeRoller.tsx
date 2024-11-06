@@ -1,13 +1,13 @@
-import { CharacterInfo } from '@/lib/types/modelInfo';
+import { useAppSelector } from '@/store/hooks';
 import { AbilityToModifier } from '@/Utility/characterStateFunctions/calc/AbilityToModifier';
 import Tooltip from '@/Utility/Tooltip';
 
 interface Props {
-  character: CharacterInfo;
   handleRoll: (modifier: number, reason: string) => void;
 }
 
-const IntiativeRoller = ({ character, handleRoll }: Props) => {
+const IntiativeRoller = ({ handleRoll }: Props) => {
+  const character = useAppSelector((state) => state.character);
   return (
     <>
       <div className="border border-primary rounded-xl bg-base-300 flex flex-col items-center p-2 h-full">

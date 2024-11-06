@@ -1,15 +1,13 @@
+import useLevel from '@/hooks/useLevel';
+import { useAppSelector } from '@/store/hooks';
 import { AbilityToModifier } from '@/Utility/characterStateFunctions/calc/AbilityToModifier';
-import { calculateLevel } from '@/Utility/characterStateFunctions/calc/calcLevel';
 import P from '@/Utility/FormatAndSanitize';
 import ModelDisplay from '@/Utility/ModelDisplay';
-import { CharacterInfo } from '@/lib/types/modelInfo';
 import Link from 'next/link';
 
-interface Props {
-  character: CharacterInfo;
-}
-
-const CharacterStatsTab = ({ character }: Props) => {
+const CharacterStatsTab = () => {
+  const character = useAppSelector((state) => state.character);
+  const level = useLevel();
   return (
     character.state && (
       <div>
@@ -142,7 +140,7 @@ const CharacterStatsTab = ({ character }: Props) => {
                 </tr>
                 <tr>
                   <td>Level</td>
-                  <td>{calculateLevel(character.state)}</td>
+                  <td>{level}</td>
                   <td>
                     Describes how powerful your character is. You gain levels as
                     your progress through the game
