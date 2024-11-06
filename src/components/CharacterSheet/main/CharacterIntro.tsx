@@ -10,7 +10,6 @@ const CharacterIntro = () => {
   const { id, openModal, closeModal } = useModal();
   const character = useAppSelector((state) => state.character);
   const level = useLevel();
-  console.log(character);
   return (
     <>
       <ImageUploadModal modalid={id} />
