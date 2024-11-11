@@ -23,7 +23,7 @@ export const createEquipmentPacks = async (db: PrismaClient) => {
       cinfo('Equipment pack created');
     } catch (error) {
       cerr('Error creating equipment pack:', Pack.name, error);
-      return;
+      throw new Error('Error creating equipment pack');
     }
   }
   cinfo('Equipment packs created');

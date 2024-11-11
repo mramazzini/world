@@ -26,7 +26,7 @@ export const createArmor = async (db: PrismaClient) => {
       cinfo('Armor created');
     } catch (error) {
       cerr('Error creating armor:', Armor.name, error);
-      return;
+      throw new Error('Error creating armor');
     }
   }
   cinfo('Armor created');

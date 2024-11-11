@@ -16,7 +16,7 @@ export const createSubclass = async (db: PrismaClient) => {
       //make sure subclass has a classId and levels
       if (!SubClass.classId) {
         console.error('Subclass missing classId field:', SubClass.name);
-        return;
+        throw new Error('Error creating subclass ');
       }
       cinfo('Creating sub class:', SubClass.name);
       await db.subClass.upsert({
@@ -29,7 +29,7 @@ export const createSubclass = async (db: PrismaClient) => {
       cinfo('Sub class created');
     } catch (error) {
       console.error('Error creating sub class:', SubClass.name, error);
-      return;
+      throw new Error('Error creating sub class');
     }
   }
   cinfo('Sub classes created');
@@ -44,7 +44,7 @@ export const createSubclass = async (db: PrismaClient) => {
           'Homebrew subclass missing classId field:',
           HomebrewSubclass.name
         );
-        return;
+        throw new Error('Error creating subclass');
       }
       cinfo('Creating homebrew subclass:', HomebrewSubclass.name);
       await db.subClass.upsert({
@@ -61,7 +61,7 @@ export const createSubclass = async (db: PrismaClient) => {
         HomebrewSubclass.name,
         error
       );
-      return;
+      throw new Error('Error creating homebrew subclass');
     }
   }
   cinfo('Homebrew subclasses created');
@@ -80,18 +80,18 @@ export const createSubclass = async (db: PrismaClient) => {
           SubclassFeature.name,
           SubclassFeature.id
         );
-        return;
+        throw new Error('Error creating subclass feature');
       }
       if (!SubclassFeature.levels) {
         cerr('Subclass feature missing levels field:', SubclassFeature.name);
-        return;
+        throw new Error('Error creating subclass feature');
       }
       await createFeature(db, SubclassFeature);
 
       cinfo('Subclass feature created');
     } catch (error) {
       cerr('Error creating subclass feature', SubclassFeature.name, error);
-      return;
+      throw new Error('Error creating subclass feature');
     }
   }
   cinfo('Subclass features created');
@@ -112,14 +112,14 @@ export const createSubclass = async (db: PrismaClient) => {
           'Homebrew subclass feature missing subClassId field:',
           HomebrewSubclassFeature.name
         );
-        return;
+        throw new Error('Error creating homebrew subclass feature');
       }
       if (!HomebrewSubclassFeature.levels) {
         cerr(
           'Homebrew subclass feature missing levels field:',
           HomebrewSubclassFeature.name
         );
-        return;
+        throw new Error('Error creating homebrew subclass feature');
       }
       await createFeature(db, HomebrewSubclassFeature);
 
@@ -130,7 +130,7 @@ export const createSubclass = async (db: PrismaClient) => {
         HomebrewSubclassFeature.name,
         error
       );
-      return;
+      throw new Error('Error creating homebrew subclass feature');
     }
   }
   cinfo('Homebrew subclass features created');

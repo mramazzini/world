@@ -4,7 +4,6 @@ import Navbar from '@/components/Navbar/Navbar';
 import NavbarSmall from '@/components/Navbar/NavbarSmall';
 import { NAVBAR_HEIGHT_REM } from '@/lib/globalVars';
 import { useAppSelector } from '@/store/hooks';
-import { Suspense } from 'react';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const hasPageMaxWidth = useAppSelector(
@@ -13,10 +12,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const showNav = useAppSelector((state) => state.layout.showNav);
   return (
     <>
-      <Suspense>
-        <Navbar />
-        <NavbarSmall />
-      </Suspense>
+      <Navbar />
+      <NavbarSmall />
       <div
         className={`${hasPageMaxWidth ? 'max-w-[1800px]' : ''} w-full h-full`}
         style={{

@@ -26,7 +26,7 @@ export const createTool = async (db: PrismaClient) => {
       cinfo('Tool created');
     } catch (error) {
       cerr('Error creating tool:', Tool.name, error);
-      return;
+      throw new Error('Error creating tool');
     }
   }
   cinfo('Tool created');

@@ -28,23 +28,28 @@ export const getWeapon = async ({
   type,
 }: SingleDataQuery): Promise<WeaponInfo | null> => {
   const db = new PrismaClient();
-
-  const res = await db.weapon.findFirst({
-    where: {
-      [type]: query,
-    },
-    include: {
-      SpecialProperties: true,
-      ammunition: true,
-      WeaponPropertyInstance: {
-        include: {
-          Property: true,
+  try {
+    const res = await db.weapon.findFirst({
+      where: {
+        [type]: query,
+      },
+      include: {
+        SpecialProperties: true,
+        ammunition: true,
+        WeaponPropertyInstance: {
+          include: {
+            Property: true,
+          },
         },
       },
-    },
-  });
-  await db.$disconnect();
-  return res;
+    });
+    return res;
+  } catch (error) {
+    console.error('Error getting weapon', error);
+    return null;
+  } finally {
+    await db.$disconnect();
+  }
 };
 
 export const getWeaponChunk = async (

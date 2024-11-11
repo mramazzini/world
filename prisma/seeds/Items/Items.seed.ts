@@ -3645,7 +3645,7 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
   },
 
   ...SpellSeed.map((spell) => ({
-    id: spell.id && 10000 + spell.id,
+    id: spell.id,
     name: `Scroll of ${spell.name}`,
     description: `This is a spell scroll for the spell ${spell.name}.`,
     types: [ItemTypes.SPELL_SCROLL],

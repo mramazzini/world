@@ -36,7 +36,7 @@ export const linkSpellListToSpell = async (db: PrismaClient) => {
         SpellListToSpell.spellId,
         error
       );
-      return;
+      throw new Error('Error linking spell to spell list');
     }
   }
 };

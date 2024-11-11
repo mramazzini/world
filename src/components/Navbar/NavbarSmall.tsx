@@ -3,7 +3,7 @@ import { wikiLinks } from '@/lib/globalVars';
 import { destroySession, verifyToken } from '@/lib/utils/auth';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import HomeSearchBar from '../UI/HomeSearchBar';
 
 export const NavbarSmall = () => {
@@ -112,7 +112,10 @@ export const NavbarSmall = () => {
       </nav>
       {!isHomepage && (
         <div className="md:hidden w-full pb-4 border-b border-primary bg-base-200">
-          <HomeSearchBar small />
+          <Suspense>
+            {' '}
+            <HomeSearchBar small />{' '}
+          </Suspense>
         </div>
       )}
     </>

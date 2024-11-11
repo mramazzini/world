@@ -36,7 +36,15 @@ export function cacheFunction<
 
         // console.log("Cache miss", key);
         // console.log("Fetching from server", key);
-        const result = await fetchFunction(query);
+        const result = await fetchFunction({
+          query: query.query.toString(),
+          type: query.type,
+        });
+
+        if (result === null) {
+          return null;
+        }
+
         await putInDb(key, result);
         return result;
       } catch (error) {
@@ -57,27 +65,27 @@ export function cacheFunction<
 }
 
 export const memoizeGetItem = cacheFunction(
-  (itemId) => `item-${itemId}`,
+  (itemId: string) => `item-${itemId}`,
   getItem
 );
 
 export const memoizeGetSpell = cacheFunction(
-  (spellId: string | number) => `spell-${spellId}`,
+  (spellId: string) => `spell-${spellId}`,
   getSpell
 );
 
 export const memoizeGetWeapon = cacheFunction(
-  (weaponId: string | number) => `weapon-${weaponId}`,
+  (weaponId: string) => `weapon-${weaponId}`,
   getWeapon
 );
 
 export const memoizeGetArmor = cacheFunction(
-  (armorId: string | number) => `armor-${armorId}`,
+  (armorId: string) => `armor-${armorId}`,
   getArmor
 );
 
 export const memoizeGetTool = cacheFunction(
-  (toolId: string | number) => `tool-${toolId}`,
+  (toolId: string) => `tool-${toolId}`,
   getTool
 );
 
@@ -87,6 +95,6 @@ export const memoizeGetSubclass = cacheFunction(
 );
 
 export const memoizeGetFeat = cacheFunction(
-  (featId: string | number) => `feat-${featId}`,
+  (featId: string) => `feat-${featId}`,
   getFeat
 );

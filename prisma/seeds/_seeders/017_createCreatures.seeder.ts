@@ -48,7 +48,7 @@ export const createCreatures = async (db: PrismaClient) => {
       });
     } catch (error) {
       cerr('Error creating creature', error);
-      return;
+      throw new Error('Error creating creature');
     }
   }
 
@@ -60,13 +60,13 @@ export const createCreatures = async (db: PrismaClient) => {
       cinfo('Creating creature features:', CreatureFeature.name);
       if (!CreatureFeature.creatureId) {
         cerr('Creature missing creatureId field:', CreatureFeature.name);
-        return;
+        throw new Error('Creature missing creatureId field');
       }
       await createFeature(db, CreatureFeature);
       cinfo('Creature Feature created');
     } catch (error) {
       cerr('Error creating creature feature:', CreatureFeature.name, error);
-      return;
+      throw new Error('Error creating creature feature');
     }
   }
 };

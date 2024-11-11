@@ -18,7 +18,7 @@ export const createSpellList = async (db: PrismaClient) => {
       cinfo('Spell list created');
     } catch (error) {
       cerr('Error creating spell list:', SpellList.name, error);
-      return;
+      throw new Error('Error creating spell list');
     }
   }
   cinfo('Spell lists created');

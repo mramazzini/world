@@ -20,7 +20,7 @@ export const createSpecies = async (db: PrismaClient) => {
       cinfo('Species created');
     } catch (error) {
       cerr('Error creating species:', r.name, error);
-      return;
+      throw new Error('Error creating species');
     }
   }
   cinfo('Species created');
@@ -31,14 +31,14 @@ export const createSpecies = async (db: PrismaClient) => {
       cinfo('Creating species features:', t.name);
       if (!t.speciesId) {
         cerr('Trait missing speciesId field:', t.name);
-        return;
+        throw new Error('Trait missing speciesId field');
       }
       await createFeature(db, t);
 
       cinfo('Species Feature created');
     } catch (error) {
       cerr('Error creating species feature:', t.name, error);
-      return;
+      throw new Error('Error creating species feature');
     }
   }
   cinfo('Species Features created');

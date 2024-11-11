@@ -26,6 +26,7 @@ export const linkCreatureToItems = async (db: PrismaClient) => {
       });
     } catch (error) {
       cerr('Error linking creature to item', error);
+      throw new Error('Error linking creature to item');
     }
   }
 };

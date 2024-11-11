@@ -1,9 +1,7 @@
 'use client';
-import useModal from '@/hooks/useModal';
 import { NAVBAR_HEIGHT_REM } from '@/lib/globalVars';
 import { toggleSideNav } from '@/store/workshopSlice';
 import { useDispatch } from 'react-redux';
-import CreateHomebrewModal from '../CreateHomebrewModal/CreateHomebrewModal';
 import { useCallback, useMemo } from 'react';
 import useWorkshopTab from '@/hooks/useWorkshopTab';
 import { syncWorkshopItem } from '@/lib/actions/db/workshop/create.actions';
@@ -15,7 +13,6 @@ const WorkshopTopNav = () => {
   const itemsToDelete = useAppSelector((state) => state.workshop.itemsToDelete);
   const tab = useWorkshopTab();
   const features = useWorkshopFeatures();
-  const { id } = useModal();
 
   const title = useMemo(() => (tab ? tab?.name : "Max's Workshop"), [tab]);
 
@@ -61,7 +58,6 @@ const WorkshopTopNav = () => {
             />
           </svg>
         </button>{' '}
-        <CreateHomebrewModal modalId={id} />
         <button className="btn btn-ghost">Settings</button>
         <button className="btn btn-ghost">Help</button>
       </div>

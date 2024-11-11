@@ -11,7 +11,7 @@ export const createFeats = async (db: PrismaClient) => {
       //make sure feat has a featId and levels
       if (!feat.id) {
         cerr('Feat missing id field:', feat.name);
-        return;
+        throw new Error('Error creating feat');
       }
 
       //upsert feat
@@ -24,7 +24,7 @@ export const createFeats = async (db: PrismaClient) => {
       cinfo('Feat created');
     } catch (error) {
       cerr('Error creating feat', feat.name, error);
-      return;
+      throw new Error('Error creating feat');
     }
   }
   //create feat features
@@ -36,14 +36,14 @@ export const createFeats = async (db: PrismaClient) => {
       //make sure featFeature has a featId
       if (!featFeature.featId) {
         cerr('Feat missing featId field:', featFeature.name);
-        return;
+        throw new Error('Error creating feat feature');
       }
       //@ts-expect-error Extendedtable is valid
       await createFeature(db, featFeature);
       cinfo('Feat Feature created');
     } catch (error) {
       cerr('Error creating feat feature:', featFeature.name, error);
-      return;
+      throw new Error('Error creating feat feature');
     }
   }
 };

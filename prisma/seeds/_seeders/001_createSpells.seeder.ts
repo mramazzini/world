@@ -10,7 +10,7 @@ export const createSpells = async (db: PrismaClient) => {
       cinfo('Creating spell:', Spell.name);
       if (!verifySpell(Spell)) {
         cerr('Error verifying spell:', Spell.name);
-        return;
+        throw new Error('Error creating spell');
       }
       await db.spell.upsert({
         where: {
@@ -22,7 +22,7 @@ export const createSpells = async (db: PrismaClient) => {
       cinfo('Spell created');
     } catch (error) {
       cerr('Error creating spell:', Spell.name, error);
-      return;
+      throw new Error('Error creating spell');
     }
   }
   cinfo('Spells created');

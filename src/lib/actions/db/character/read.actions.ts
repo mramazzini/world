@@ -114,57 +114,63 @@ export const getCharacter = async ({
       },
     },
   });
-  const res = await db.character.findFirst({
-    where: {
-      [type]: query,
-    },
-    include: {
-      Species: {
-        include: {
-          Features: true,
-        },
+  try {
+    const res = await db.character.findFirst({
+      where: {
+        [type]: query,
       },
-      Background: {
-        include: {
-          Features: true,
+      include: {
+        Species: {
+          include: {
+            Features: true,
+          },
         },
-      },
-      SubClasses: {
-        include: {
-          Features: true,
+        Background: {
+          include: {
+            Features: true,
+          },
         },
-      },
-      Classes: {
-        include: {
-          Features: true,
-          SpellcastingFeatures: true,
-          SpellList: {
-            include: {
-              Spells: true,
+        SubClasses: {
+          include: {
+            Features: true,
+          },
+        },
+        Classes: {
+          include: {
+            Features: true,
+            SpellcastingFeatures: true,
+            SpellList: {
+              include: {
+                Spells: true,
+              },
             },
           },
         },
-      },
-      Feats: {
-        include: {
-          Features: true,
+        Feats: {
+          include: {
+            Features: true,
+          },
+        },
+        SubSpecies: {
+          include: {
+            Features: true,
+          },
+        },
+        User: {
+          select: {
+            id: true,
+            username: true,
+          },
         },
       },
-      SubSpecies: {
-        include: {
-          Features: true,
-        },
-      },
-      User: {
-        select: {
-          id: true,
-          username: true,
-        },
-      },
-    },
-  });
-  await db.$disconnect();
-  return res as CharacterInfo;
+    });
+    return res;
+  } catch (error) {
+    console.error('Error getting character', error);
+    return null;
+  } finally {
+    await db.$disconnect();
+  }
 };
 
 export const getCharactersByUser = async (

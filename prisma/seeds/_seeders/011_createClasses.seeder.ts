@@ -21,7 +21,7 @@ export const createClasses = async (db: PrismaClient) => {
       cinfo('Class created');
     } catch (error) {
       cerr('Error creating class:', Class.name, error);
-      return;
+      throw new Error('Error creating class');
     }
   }
   cinfo('Classes created');
@@ -33,13 +33,13 @@ export const createClasses = async (db: PrismaClient) => {
       cinfo('Creating class feature:', feature.name);
       if (!feature.classId && !feature.spellCastingClassId) {
         cerr('Feature missing classId field:', feature.name);
-        return;
+        throw new Error('Feature missing classId field');
       }
       await createFeature(db, feature);
       cinfo('Class feature created');
     } catch (error) {
       cerr('Error creating class feature:', feature.name, error);
-      return;
+      throw new Error('Error creating class feature');
     }
   }
   cinfo('Class features created');
@@ -58,7 +58,7 @@ export const createClasses = async (db: PrismaClient) => {
       cinfo('Columned feature created');
     } catch (error) {
       cerr('Error creating columned feature:', columnedFeature.name, error);
-      return;
+      throw new Error('Error creating columned feature');
     }
   }
 };

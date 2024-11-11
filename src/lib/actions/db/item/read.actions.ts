@@ -75,55 +75,60 @@ export const getItem = async ({
   type,
 }: SingleDataQuery): Promise<ItemInfo | null> => {
   const db = new PrismaClient();
-
-  const res = await db.item.findFirst({
-    where: {
-      [type]: query,
-    },
-    include: {
-      ItemWeaponData: {
-        include: {
-          Weapon: {
-            include: {
-              ammunition: true,
-              SpecialProperties: true,
-              WeaponPropertyInstance: {
-                include: {
-                  Property: true,
+  try {
+    const res = await db.item.findFirst({
+      where: {
+        [type]: query,
+      },
+      include: {
+        ItemWeaponData: {
+          include: {
+            Weapon: {
+              include: {
+                ammunition: true,
+                SpecialProperties: true,
+                WeaponPropertyInstance: {
+                  include: {
+                    Property: true,
+                  },
                 },
               },
             },
           },
         },
-      },
-      Spell: true,
-      Features: true,
-      Armor: {
-        include: {
-          Features: true,
+        Spell: true,
+        Features: true,
+        Armor: {
+          include: {
+            Features: true,
+          },
         },
-      },
-      Tool: {
-        include: {
-          Features: true,
+        Tool: {
+          include: {
+            Features: true,
+          },
         },
-      },
-      AmmunitionFor: true,
+        AmmunitionFor: true,
 
-      EquipmentPack: {
-        include: {
-          items: true,
+        EquipmentPack: {
+          include: {
+            items: true,
+          },
+        },
+        User: {
+          select: {
+            username: true,
+          },
         },
       },
-      User: {
-        select: {
-          username: true,
-        },
-      },
-    },
-  });
-  await db.$disconnect();
-  return res;
+    });
+    return res;
+  } catch (error) {
+    console.error('Error getting item', error);
+    return null;
+  } finally {
+    await db.$disconnect();
+  }
 };
 
 export const getItemChunk = async (

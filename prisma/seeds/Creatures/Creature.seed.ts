@@ -438,7 +438,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '0',
+    id: '10',
     name: 'Blood Hawk',
     description:
       'Taking its name from its crimson feathers and aggressive nature, the blood hawk fearlessly attacks almost any animal, stabbing it with its daggerlike beak. Blood hawks flock together in large numbers, attacking as a pack to take down prey.',
@@ -478,7 +478,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '11',
     name: 'Boar',
     description: 'A boar is a wild pig.',
     flavorText: 'A boar is a wild pig.',
@@ -522,7 +522,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '2',
+    id: '12',
     name: 'Brown Bear',
     description:
       'Brown bears are powerful predators found in many forests and caves.',
@@ -586,7 +586,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '13',
     name: 'Camel',
     description:
       'Camels are pack animals known for their ability to travel long distances without water.',
@@ -624,7 +624,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '14',
     name: 'Cat',
     description:
       'Cats are small, carnivorous mammals that are often kept as pets.',
@@ -664,7 +664,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '5',
+    id: '15',
     name: 'Constrictor Snake',
     description: 'Constrictor snakes are large, muscular snakes.',
     flavorText: 'Constrictor snakes are large, muscular snakes.',
@@ -719,7 +719,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '16',
     name: 'Crab',
     description:
       'Crabs are small, hard-­‐‑shelled creatures found along the coast.',
@@ -763,7 +763,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '17',
     name: 'Crocodile',
     description: 'Crocodiles are large, aquatic reptiles.',
     flavorText: 'Crocodiles are large, aquatic reptiles.',
@@ -804,7 +804,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '8',
+    id: '18',
     name: 'Death Dog',
     description:
       'A death dog is an ugly two-­‐‑headed hound that roams plains, and deserts. Hate burns in a death dog’s heart, and a taste for humanoid flesh drives it to attack travelers and explorers. Death dog saliva carries a foul disease that causes a victim’s flesh to slowly rot off the bone.',
@@ -851,7 +851,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '19',
     name: 'Deer',
     description: 'Deer are graceful, swift creatures that inhabit forests.',
     flavorText: 'Deer are graceful, swift creatures that inhabit forests.',
@@ -887,7 +887,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '0',
+    id: '20',
     name: 'Dire Wolf',
     description:
       'Dire wolves are large wolves that hunt in packs and are known to attack anything that enters their territory.',
@@ -930,7 +930,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '21',
     name: 'Draft Horse',
     description: 'Draft horses are large, strong horses bred for heavy labor',
 
@@ -968,7 +968,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '2',
+    id: '22',
     name: 'Eagle',
     description:
       'Eagles are large birds of prey known for their keen eyesight.',
@@ -1007,7 +1007,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '23',
     name: 'Elephant',
     description:
       'Elephants are large, intelligent mammals known for their strength and memory.',
@@ -1064,7 +1064,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '24',
     name: 'Elk',
     description:
       'Elk are large herbivores that inhabit forests and grasslands.',
@@ -1122,7 +1122,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '5',
+    id: '25',
     name: 'Flying Snake',
     description:
       'A flying snake is a brightly colored, winged serpent found in remote jungles. Tribespeople and cultists sometimes domesticate flying snakes to serve as messengers that deliver scrolls wrapped in their coils.',
@@ -1164,7 +1164,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '26',
     name: 'Frog',
     description:
       'A frog has no effective attacks. It feeds on small insects and typically dwells near water, in trees, or underground. The frog’s statistics can also be used to represent a toad.',
@@ -1187,7 +1187,7 @@ const CreatureSeed: CreatureSeedType[] = [
     darkvision: 30,
   },
   {
-    id: '7',
+    id: '27',
     name: 'Giant Ape',
     description:
       'Giant apes are territorial primates that are known for their strength and intelligence.',
@@ -1249,7 +1249,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '8',
+    id: '28',
     name: 'Giant Badger',
     description: 'Giant badgers are large, burrowing mammals.',
     flavorText: 'Giant badgers are large, burrowing mammals.',
@@ -1310,7 +1310,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '29',
     name: 'Giant Bat',
     description: 'Giant bats are large, flying mammals.',
     flavorText: 'Giant bats are large, flying mammals.',
@@ -1349,7 +1349,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '0',
+    id: '30',
     name: 'Giant Boar',
     description: 'Giant boars are large, wild pigs.',
     flavorText: 'Giant boars are large, wild pigs.',
@@ -1392,7 +1392,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '31',
     name: 'Giant Centipede',
     description: 'Giant centipedes are large, venomous arthropods.',
     flavorText: 'Giant centipedes are large, venomous arthropods.',
@@ -1441,7 +1441,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '2',
+    id: '32',
     name: 'Giant Constrictor Snake',
     description: 'Giant constrictor snakes are large, muscular snakes.',
     flavorText: 'Giant constrictor snakes are large, muscular snakes.',
@@ -1497,7 +1497,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '33',
     name: 'Giant Crab',
     description:
       'Giant crabs are large, hard-­‐‑shelled creatures found along the coast.',
@@ -1542,7 +1542,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '34',
     name: 'Giant Crocodile',
     description: 'Giant crocodiles are large, aquatic reptiles.',
     flavorText: 'Giant crocodiles are large, aquatic reptiles.',
@@ -1599,7 +1599,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '5',
+    id: '35',
     name: 'Giant Eagle',
     description:
       'A giant eagle is a noble creature that speaks its own language and understands speech in the Common tongue. A mated pair of giant eagles typically has up to four eggs or young in their nest (treat the young as normal eagles).',
@@ -1661,7 +1661,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '36',
     name: 'Giant Elk',
     description:
       'The majestic giant elk is rare to the point that its appearance is often taken as a foreshadowing of an important event, such as the birth of a king. Legends tell of gods that take the form of giant elk when visiting the Material Plane. Many cultures therefore believe that to hunt these creatures is to invite divine wrath.',
@@ -1725,7 +1725,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '37',
     name: 'Giant Fire Beetle',
     description:
       'A giant fire beetle is a nocturnal creature that takes its name from a pair of glowing glands that give off light. Miners and adventurers prize these creatures, for a giant fire beetle’s glands continue to shed light for 1d6 days after the beetle dies. Giant fire beetles are most commonly found underground and in dark forests',
@@ -1768,7 +1768,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '8',
+    id: '38',
     name: 'Giant Frog',
     description: 'Giant frogs are large, carnivorous amphibians.',
     flavorText: 'Giant frogs are large, carnivorous amphibians.',
@@ -1827,7 +1827,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '39',
     name: 'Giant Goat',
     description: 'Giant goats are large, sure-­‐‑footed herbivores.',
     flavorText: 'Giant goats are large, sure-­‐‑footed herbivores.',
@@ -1871,7 +1871,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '0',
+    id: '40',
     name: 'Giant Hyena',
     description: 'Giant hyenas are large, carnivorous mammals.',
     flavorText: 'Giant hyenas are large, carnivorous mammals.',
@@ -1909,7 +1909,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '41',
     name: 'Giant Octopus',
     description: 'Giant octopuses are large, aquatic creatures.',
     flavorText: 'Giant octopuses are large, aquatic creatures.',
@@ -1956,7 +1956,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '2',
+    id: '42',
     name: 'Giant Owl',
     description:
       'Giant owls often befriend fey and other sylvan creatures and are guardians of their woodland realms.',
@@ -1997,7 +1997,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '43',
     name: 'Giant Poisonous Snake',
     description: 'Giant poisonous snakes are large, venomous serpents.',
     flavorText: 'Giant poisonous snakes are large, venomous serpents.',
@@ -2041,7 +2041,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '44',
     name: 'Giant Rat',
     description: 'Giant rats are large, disease-­‐‑ridden rodents.',
     flavorText: 'Giant rats are large, disease-­‐‑ridden rodents.',
@@ -2080,7 +2080,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '5',
+    id: '45',
     name: 'Diseased Giant Rat',
     description:
       'Some giant rats carry vile diseases that they spread with their bites.',
@@ -2121,7 +2121,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '46',
     name: 'Giant Scorpion',
     description: 'Giant scorpions are large, venomous arachnids.',
     flavorText: 'Giant scorpions are large, venomous arachnids.',
@@ -2188,7 +2188,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '47',
     name: 'Giant Sea Horse',
     description:
       'Like their smaller kin, giant sea horses are shy, colorful fish with elongated bodies and curled tails. Aquatic elves train them as mounts.',
@@ -2235,7 +2235,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '8',
+    id: '48',
     name: 'Giant Shark',
     description:
       'A giant shark is 30 feet long and normally found in deep oceans. Utterly fearless, it preys on anything that crosses its path, including whales and ships.',
@@ -2276,7 +2276,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '49',
     name: 'Giant Spider',
     description:
       'To snare its prey, a giant spider spins elaborate webs or shoots sticky strands of webbing from its abdomen. Giant spiders are most commonly found underground, making their lairs on ceilings or in dark, web-­‐‑filled crevices. Such lairs are often festooned with web cocoons holding past victims.',
@@ -2342,7 +2342,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '0',
+    id: '50',
     name: 'Giant Toad',
     description: 'Giant toads are large, carnivorous amphibians.',
     flavorText: 'Giant toads are large, carnivorous amphibians.',
@@ -2406,7 +2406,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '51',
     name: 'Giant Vulture',
     description:
       'A giant vulture has advanced intelligence and a malevolent bent. Unlike its smaller kin, it will attack a wounded creature to hasten its end. Giant vultures have been known to haunt a thirsty, starving creature for days to enjoy its suffering.',
@@ -2469,7 +2469,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '2',
+    id: '52',
     name: 'Giant Wasp',
     description: 'Giant wasps are aggressive, carnivorous insects.',
     flavorText: 'Giant wasps are aggressive, carnivorous insects.',
@@ -2511,7 +2511,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '53',
     name: 'Giant Weasel',
     description: 'Giant weasels are large, carnivorous mammals.',
     flavorText: 'Giant weasels are large, carnivorous mammals.',
@@ -2550,7 +2550,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '54',
     name: 'Giant Wolf Spider',
     description:
       'Smaller than a giant spider, a giant wolf spider hunts prey across open ground or hides in a burrow or crevice, or in a hidden cavity beneath debris.',
@@ -2598,7 +2598,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '5',
+    id: '55',
     name: 'Goat',
     description: 'Goats are domesticated herd animals.',
     flavorText: 'Goats are domesticated herd animals.',
@@ -2638,7 +2638,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '56',
     name: 'Hunter Shark',
     description:
       'Smaller than a giant shark but larger and fiercer than a reef shark, a hunter shark haunts deep waters. It usually hunts alone, but multiple hunter sharks might feed in the same area. A fully grown hunter shark is 15 to 20 feet long',
@@ -2680,7 +2680,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '57',
     name: 'Hyena',
     description:
       'Hyenas are pack hunters known for their cunning and their unnerving vocalizations.',
@@ -2719,7 +2719,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '8',
+    id: '58',
     name: 'Jackal',
     description: 'Jackals are opportunnistic scavengers.',
     flavorText: 'Jackals are opportunnistic scavengers.',
@@ -2756,7 +2756,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '59',
     name: 'Killer Whale',
     description: 'Killer whales are powerful ocean predators.',
     flavorText: 'Killer whales are powerful ocean predators.',
@@ -2798,7 +2798,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '0',
+    id: '60',
     name: 'Lion',
     description: 'Lions are powerful felines.',
     flavorText: 'Lions are powerful felines.',
@@ -2852,7 +2852,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '61',
     name: 'Lizard',
     description: 'Lizards are small reptiles.',
     flavorText: 'Lizards are small reptiles.',
@@ -2890,7 +2890,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '2',
+    id: '62',
     name: 'Mammoth',
     description:
       'A mammoth is an elephantine creature with thick fur and long tusks. Stockier and fiercer than normal elephants, mammoths inhabit a wide range of climes, from subarctic to subtropical.',
@@ -2948,7 +2948,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '63',
     name: 'Mastiff',
     description:
       'Mastiffs are impressive hounds prized by humanoids for their loyalty and keen senses. Mastiffs can be trained as guard dogs, hunting dogs, and war dogs. Halflings and other Small humanoids ride them as mounts.',
@@ -2988,7 +2988,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '64',
     name: 'Mule',
     description: 'Mules are hybrids of horses and donkeys.',
     flavorText: 'Mules are hybrids of horses and donkeys.',
@@ -3025,7 +3025,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '5',
+    id: '65',
     name: 'Octopus',
     description: 'Octopuses are intelligent, eight-armed mollusks.',
     flavorText: 'Octopuses are intelligent, eight-armed mollusks.',
@@ -3071,7 +3071,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '66',
     name: 'Owl',
     description: 'Owls are nocturnal birds of prey.',
     flavorText: 'Owls are nocturnal birds of prey.',
@@ -3112,7 +3112,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '67',
     name: 'Panther',
     description: ' Panthers are powerful, graceful, and cunning felines.',
     flavorText: ' Panthers are powerful, graceful, and cunning felines.',
@@ -3169,7 +3169,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '8',
+    id: '68',
     name: 'Phase Spider',
     description:
       'A phase spider possesses the magical ability to phase in and out of the Ethereal Plane. It seems to appear out of nowhere and quickly vanishes after attacking. Its movement on the Ethereal Plane before coming back to the Material Plane makes it seem like it can teleport.',
@@ -3224,7 +3224,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '69',
     name: 'Poisonous Snake',
     description: 'Poisonous snakes are small, aggressive reptiles.',
     flavorText: 'Poisonous snakes are small, aggressive reptiles.',
@@ -3267,7 +3267,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '0',
+    id: '70',
     name: 'Polar Bear',
     description:
       'Polar bears are fearsome predators that live in the most frigid waters of the world.',
@@ -3332,7 +3332,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '71',
     name: 'Quipper',
     description:
       'A quipper is a carnivorous fish with sharp teeth. Quippers can adapt to any aquatic environment, including cold subterranean lakes. They frequently gather in swarms; the statistics for a swarm of quippers appear later in this appendix.',
@@ -3372,7 +3372,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '2',
+    id: '72',
     name: 'Rat',
     description: 'Rats are small, scurrying rodents.',
     flavorText: 'Rats are small, scurrying rodents.',
@@ -3410,7 +3410,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '73',
     name: 'Raven',
     description: 'Ravens are small, black birds that can mimic sounds.',
     flavorText: 'Ravens are small, black birds that can mimic sounds.',
@@ -3448,7 +3448,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '74',
     name: 'Reef Shark',
     description:
       'Smaller than giant sharks and hunter sharks, reef sharks inhabit shallow waters and coral reefs, gathering in small packs to hunt. A full-­‐‑grown specimen measures 6 to 10 feet long.',
@@ -3490,7 +3490,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '5',
+    id: '75',
     name: 'Rhinoceros',
     description:
       'Rhinoceroses are large herbivores with one or two horns on their noses.',
@@ -3535,7 +3535,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '76',
     name: 'Riding Horse',
     description: 'Riding horses are trained for battle and travel.',
     flavorText: 'Riding horses are trained for battle and travel.',
@@ -3572,7 +3572,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '77',
     name: 'Saber-Toothed Tiger',
     description: 'Saber-toothed tigers are large, prehistoric felines.',
     flavorText: 'Saber-toothed tigers are large, prehistoric felines.',
@@ -3626,7 +3626,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '8',
+    id: '78',
     name: 'Scorpion',
     description: 'Scorpions are predatory arachnids.',
     flavorText: 'Scorpions are predatory arachnids.',
@@ -3672,7 +3672,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '79',
     name: 'Sea Horse',
     description: 'Sea horses are tiny fish with horse-like heads.',
     flavorText: 'Sea horses are tiny fish with horse-like heads.',
@@ -3691,7 +3691,7 @@ const CreatureSeed: CreatureSeedType[] = [
     CHA: 2,
   },
   {
-    id: '0',
+    id: '80',
     name: 'Spider',
     description: 'Spiders are small, eight-legged arachnids.',
     flavorText: 'Spiders are small, eight-legged arachnids.',
@@ -3736,7 +3736,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '81',
     name: 'Tiger',
     description: 'Tigers are large, predatory cats.',
     flavorText: 'Tigers are large, predatory cats.',
@@ -3792,7 +3792,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '2',
+    id: '82',
     name: 'Vulture',
     description: 'Vultures are large birds of prey that feed on carrion.',
     flavorText: 'Vultures are large birds of prey that feed on carrion.',
@@ -3830,7 +3830,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '83',
     name: 'Warhorse',
     description: 'Warhorses are trained for battle.',
     flavorText: 'Warhorses are trained for battle.',
@@ -3867,7 +3867,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '84',
     name: 'Weasel',
     description: 'Weasels are small, furry mammals.',
     flavorText: 'Weasels are small, furry mammals.',
@@ -3905,7 +3905,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '5',
+    id: '85',
     name: 'Winter Wolf',
     description:
       'The arctic-­‐‑dwelling winter wolf is as large as a dire wolf but has snow-­‐‑white fur and pale blue eyes. Frost giants use these evil creatures as guards and hunting companions, putting the wolves’ deadly breath weapon to use against their foes. Winter wolves communicate with one another using growls and barks, but they speak Common and Giant well enough to follow simple conversations.',
@@ -3962,7 +3962,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '86',
     name: 'Wolf',
     description:
       'Wolves are pack hunters known for their persistence and cunning.',
@@ -4003,7 +4003,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '87',
     name: 'Worg',
     description:
       'A worg is an evil predator that delights in hunting and devouring creatures weaker than itself. Cunning and malevolent, worgs roam across the remote wilderness or are raised by goblins and hobgoblins. Those creatures use worgs as mounts, but a worg will turn on its rider if it feels mistreated or malnourished. Worgs speak in their own language and Goblin, and a few learn to speak Common as well.',
@@ -4044,7 +4044,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '8',
+    id: '88',
     name: 'Acolyte',
     alignmentDescription: 'Any alignment',
     alignmentOptions: Object.values(Alignment),
@@ -4074,7 +4074,7 @@ const CreatureSeed: CreatureSeedType[] = [
     casterLevel: 1,
   },
   {
-    id: '9',
+    id: '89',
     alignmentDescription: 'Any alignment',
     alignmentOptions: Object.values(Alignment),
     name: 'Archmage',
@@ -4104,7 +4104,7 @@ const CreatureSeed: CreatureSeedType[] = [
     casterLevel: 18,
   },
   {
-    id: '0',
+    id: '90',
     alignmentDescription: 'Any non-good alignment',
     alignmentOptions: [
       Alignment.NEUTRAL_EVIL,
@@ -4148,7 +4148,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '91',
     name: 'Bandit',
     alignmentDescription: 'Any non-lawful alignment',
     alignmentOptions: [
@@ -4181,7 +4181,7 @@ const CreatureSeed: CreatureSeedType[] = [
     creatureType: CreatureType.HUMANOID,
   },
   {
-    id: '2',
+    id: '92',
     name: 'Bandit Captain',
     alignmentDescription: 'Any non-lawful alignment',
     alignmentOptions: [
@@ -4234,7 +4234,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '93',
     name: 'Berserker',
     alignmentDescription: 'Any Chaotic alignment',
     alignmentOptions: [
@@ -4264,7 +4264,7 @@ const CreatureSeed: CreatureSeedType[] = [
     challengeRating: 2,
   },
   {
-    id: '4',
+    id: '94',
     name: 'Commoner',
     alignmentDescription: 'Any alignment',
     alignmentOptions: Object.values(Alignment),
@@ -4288,7 +4288,7 @@ const CreatureSeed: CreatureSeedType[] = [
     languageDescription: 'Any one language (usually Common)',
   },
   {
-    id: '5',
+    id: '95',
     name: 'Cultist',
     alignmentDescription: 'Any non-good alignment',
     alignmentOptions: [
@@ -4323,7 +4323,7 @@ const CreatureSeed: CreatureSeedType[] = [
     languageDescription: 'Any one language (usually Common)',
   },
   {
-    id: '6',
+    id: '96',
     name: 'Cult Fanatic',
     alignmentDescription: 'Any non-good alignment',
     alignmentOptions: [
@@ -4365,7 +4365,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '97',
     name: 'Druid',
     alignmentDescription: 'Any alignment',
     alignmentOptions: Object.values(Alignment),
@@ -4393,7 +4393,7 @@ const CreatureSeed: CreatureSeedType[] = [
     languageDescription: 'Druidic plus any two languages',
   },
   {
-    id: '8',
+    id: '98',
     alignmentDescription: 'Any alignment',
     alignmentOptions: Object.values(Alignment),
     name: 'Gladiator',
@@ -4452,7 +4452,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '99',
     name: 'Guard',
     alignmentDescription: 'Any alignment',
     alignmentOptions: Object.values(Alignment),
@@ -4480,7 +4480,7 @@ const CreatureSeed: CreatureSeedType[] = [
     languageDescription: 'Any one language (usually Common)',
   },
   {
-    id: '0',
+    id: '100',
     name: 'Knight',
     alignmentDescription: 'Any alignment',
     alignmentOptions: Object.values(Alignment),
@@ -4528,7 +4528,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '101',
     name: 'Mage',
     alignmentDescription: 'Any alignment',
     alignmentOptions: Object.values(Alignment),
@@ -4556,7 +4556,7 @@ const CreatureSeed: CreatureSeedType[] = [
     spellcastingAbility: Ability.INT,
   },
   {
-    id: '2',
+    id: '102',
     name: 'Noble',
     alignmentDescription: 'Any alignment',
     alignmentOptions: Object.values(Alignment),
@@ -4593,7 +4593,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '103',
     name: 'Priest',
     alignmentDescription: 'Any alignment',
     alignmentOptions: Object.values(Alignment),
@@ -4638,7 +4638,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '104',
     name: 'Scout',
     alignmentDescription: 'Any alignment',
     alignmentOptions: Object.values(Alignment),
@@ -4678,7 +4678,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '5',
+    id: '105',
     name: 'Spy',
     alignmentDescription: 'Any alignment',
     alignmentOptions: Object.values(Alignment),
@@ -4718,7 +4718,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '106',
     name: 'Thug',
     alignmentDescription: 'Any non-good alignment',
     alignmentOptions: [
@@ -4759,7 +4759,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '107',
     name: 'Tribal Warrior',
     alignmentDescription: 'Any alignment',
     alignmentOptions: Object.values(Alignment),
@@ -4787,7 +4787,7 @@ const CreatureSeed: CreatureSeedType[] = [
     languageDescription: 'Any one language (usually Common)',
   },
   {
-    id: '8',
+    id: '108',
     name: 'Veteran',
     alignmentDescription: 'Any alignment',
     alignmentOptions: Object.values(Alignment),
@@ -4822,7 +4822,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '109',
     name: 'Aboleth',
     description:
       'Aboleths are large aberrations that use their psionic powers to enslave other creatures.',
@@ -4924,7 +4924,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '0',
+    id: '110',
     name: 'Deva',
     description:
       'Devas are shapeshifting celestial beings of great power and lawful good alignment.',
@@ -4991,7 +4991,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '111',
     name: 'Planetar',
     description: 'Planetars are angelic celestial beings of great power.',
     flavorText: 'Planetars are angelic celestial beings of great power.',
@@ -5049,7 +5049,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '2',
+    id: '112',
     name: 'Solar',
     description: 'Solars are extremely powerful angelic beings.',
     flavorText: 'Solars are extremely powerful angelic beings.',
@@ -5140,7 +5140,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '113',
     name: 'Animated Armor',
     description: 'Animated armor is a suit of armor animated by magic.',
     flavorText: 'Animated armor is a suit of armor animated by magic.',
@@ -5198,7 +5198,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '114',
     name: 'Flying Sword',
     description:
       'A flying sword is a sword enchanted to fly and fight on its own.',
@@ -5235,7 +5235,7 @@ const CreatureSeed: CreatureSeedType[] = [
     blindsightDescription: 'blind beyond this radius',
   },
   {
-    id: '5',
+    id: '115',
     name: 'Rug of Smothering',
     description: 'A rug of smothering is a magic rug that attacks creatures.',
     flavorText: 'A rug of smothering is a magic rug that attacks creatures.',
@@ -5283,7 +5283,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '116',
     name: 'Ankheg',
     description: 'Ankhegs are acid-spraying insect monstrosities.',
     flavorText: 'Ankhegs are acid-spraying insect monstrosities.',
@@ -5340,7 +5340,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '117',
     name: 'Azer',
     description:
       'Azer are dwarf-like creatures from the Elemental Plane of Fire.',
@@ -5368,7 +5368,7 @@ const CreatureSeed: CreatureSeedType[] = [
     languageDescription: 'Ignan',
   },
   {
-    id: '8',
+    id: '118',
     name: 'Basilisk',
     description:
       'Basilisiks are reptilian monsters that can turn creatures to stone.',
@@ -5414,7 +5414,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '119',
     name: 'Behir',
     description: 'Behirs are huge serpentine monsters with lightning breath.',
     flavorText: 'Behirs are huge serpentine monsters with lightning breath.',
@@ -5512,7 +5512,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '0',
+    id: '120',
     name: 'Bugbear',
     description: 'Bugbears are hairy goblinoids that are skilled at ambushing.',
     flavorText: 'Bugbears are hairy goblinoids that are skilled at ambushing.',
@@ -5537,7 +5537,7 @@ const CreatureSeed: CreatureSeedType[] = [
     languageDescription: 'Common, Goblin',
   },
   {
-    id: '1',
+    id: '121',
     name: 'Bulette',
     description: 'Bulettes are massive, armored, land-shark monsters.',
     flavorText: 'Bulettes are massive, armored, land-shark monsters.',
@@ -5601,7 +5601,7 @@ const CreatureSeed: CreatureSeedType[] = [
   //   description:
   // }
   {
-    id: '3',
+    id: '123',
     name: 'Chimera',
     description:
       'Chimeras are monstrous beasts with the heads of a lion, a goat, and a dragon.',
@@ -5695,7 +5695,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '124',
     name: 'Chuul',
     description: 'Chuuls are monstrous, lobster-like creatures.',
     flavorText: 'Chuuls are monstrous, lobster-like creatures.',
@@ -5753,7 +5753,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '5',
+    id: '125',
     name: 'Cloaker',
     description: 'Cloakers are shadowy, flying, manta-ray-like creatures.',
     flavorText: 'Cloakers are shadowy, flying, manta-ray-like creatures.',
@@ -5830,7 +5830,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '126',
     name: 'Cockatrice',
     description:
       'Cockatrices are small, bird-like creatures with a petrifying gaze.',
@@ -5869,7 +5869,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '127',
     name: 'Couatl',
     description:
       'Couatls are shapeshifting winged serpents with divine powers.',
@@ -5943,7 +5943,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '8',
+    id: '128',
     name: 'Darkmantle',
     description: 'Darkmantles are small, flying, tentacled creatures.',
     flavorText: 'Darkmantles are small, flying, tentacled creatures.',
@@ -5977,7 +5977,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '129',
     name: 'Balor',
     description: 'Balors are powerful, demonic, fire-wielding creatures.',
     flavorText: 'Balors are powerful, demonic, fire-wielding creatures.',
@@ -6046,7 +6046,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '0',
+    id: '130',
     name: 'Dretch',
     description: 'Dretches are small demons with a foul stench.',
     flavorText: 'Dretches are small demons with a foul stench.',
@@ -6122,7 +6122,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '131',
     name: 'Glabrezu',
     description: 'Glabrezus are powerful, spellcasting demons.',
     flavorText: 'Glabrezus are powerful, spellcasting demons.',
@@ -6196,7 +6196,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '2',
+    id: '132',
     name: 'Hezrou',
     description: 'Hezrous are large, foul smelling demons.',
     flavorText: 'Hezrous are large, foul smelling demons.',
@@ -6270,7 +6270,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '133',
     name: 'Marilith',
     description: 'Mariliths are serpentine, muilti-armed demons.',
     flavorText: 'Mariliths are serpentine, muilti-armed demons.',
@@ -6342,7 +6342,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '134',
     name: 'Nalfeshnee',
     description:
       'Nalfeshnees are large demons that appear like a standing mix of an ape and a boar.',
@@ -6436,7 +6436,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '5',
+    id: '135',
     name: 'Quasit',
     description: 'Quasits are tiny demons that can turn invisible.',
     flavorText: 'Quasits are tiny demons that can turn invisible.',
@@ -6497,7 +6497,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '136',
     name: 'Vrock',
     description: 'Vrocks are large, demonic, vulture-like creatures.',
     flavorText: 'Vrocks are large, demonic, vulture-like creatures.',
@@ -6590,7 +6590,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '137',
     name: 'Barbed Devil',
     description:
       'Barbed devils are fiends that serve as enforcers in the Nine Hells.',
@@ -6679,7 +6679,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '8',
+    id: '138',
     name: 'Bearded Devil',
     description: 'Bearded devils are fiends that serve as shock troops.',
     flavorText: 'Bearded devils are fiends that serve as shock troops.',
@@ -6732,7 +6732,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '139',
     name: 'Bone Devil',
     description: 'Bone devils are fiends that serve as jailers and torturers.',
     flavorText: 'Bone devils are fiends that serve as jailers and torturers.',
@@ -6806,7 +6806,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '0',
+    id: '140',
     name: 'Chain Devil',
     description: 'Chain devils are fiends that serve as jailers and torturers.',
     flavorText: 'Chain devils are fierce and brutal jailers.',
@@ -6872,7 +6872,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '141',
     name: 'Erinyes',
     description: 'Erinyes are beautiful humanoids with feathered wings.',
     flavorText: 'Erinyes are beautiful humanoids with feathered wings.',
@@ -6903,7 +6903,7 @@ const CreatureSeed: CreatureSeedType[] = [
     armorEquippedId: itemIds.scaleMail,
   },
   {
-    id: '2',
+    id: '142',
     name: 'Horned Devil',
     description: 'Lazy and cruel, horned devils serve as flying infantry.',
     flavorText: 'Lazy and cruel, horned devils serve as flying infantry.',
@@ -6989,7 +6989,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '143',
     name: 'Ice Devil',
     description: 'Ice devils are giant bipedal insects.',
     flavorText: 'Ice devils are giant bipedal insects.',
@@ -7075,7 +7075,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '144',
     name: 'Imp',
     description: 'Imps are minor devils that serve as spies and informants.',
     flavorText: 'Imps are minor devils that serve as spies and informants.',
@@ -7138,7 +7138,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '5',
+    id: '145',
     name: 'Lemure',
     description: 'Lemures are the shapeless blobs, lowest form of devil.',
     flavorText: 'Lemures are the shapeless blobs, lowest form of devil.',
@@ -7184,7 +7184,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '146',
     name: 'Pit Fiend',
     description: "Pit Fiend's are the generals of the Nine Hells.",
     flavorText: "Pit Fiend's are the generals of the Nine Hells.",
@@ -7261,7 +7261,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '147',
     name: 'Plesiosaurus',
     description: 'Plesiosauruses are aquatic dinosaurs.',
     flavorText: 'Plesiosauruses are aquatic dinosaurs.',
@@ -7301,7 +7301,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '8',
+    id: '148',
     name: 'Triceratops',
     description: 'Triceratops are large herbivorous dinosaurs.',
     flavorText: 'Triceratops are large herbivorous dinosaurs.',
@@ -7355,7 +7355,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '149',
     name: 'Tyrannosaurus Rex',
     description: 'Tyrannosaurus Rex are large carnivorous dinosaurs.',
     flavorText: 'Tyrannosaurus Rex are large carnivorous dinosaurs.',
@@ -7417,7 +7417,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '0',
+    id: '150',
     name: 'Doppelganger',
     description: 'Doppelgangers are shapeshifting humanoids.',
     flavorText: 'Doppelgangers are shapeshifting humanoids.',
@@ -7468,7 +7468,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '151',
     name: 'Ancient Black Dragon',
     description: 'Massive Chaotic Evil swamp-dwelling dragons.',
     flavorText: 'Massive Chaotic Evil swamp-dwelling dragons.',
@@ -7597,7 +7597,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '2',
+    id: '152',
     name: 'Adult Black Dragon',
     description: 'Adult Black Dragons are huge swamp-dwelling dragons.',
     flavorText: 'Adult Black Dragons are huge swamp-dwelling dragons.',
@@ -7730,7 +7730,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '153',
     name: 'Young Black Dragon',
     description: 'Young Black Dragons are large swamp-dwelling dragons.',
     flavorText: 'Young Black Dragons are large swamp-dwelling dragons.',
@@ -7808,7 +7808,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '154',
     name: 'Black Dragon Wyrmling',
     description: 'Black Dragon Wyrmlings are small swamp-dwelling dragons.',
     flavorText: 'Black Dragon Wyrmlings are small swamp-dwelling dragons.',
@@ -7872,7 +7872,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '5',
+    id: '155',
     name: 'Ancient Blue Dragon',
     description: 'Massive Lawful Evil desert-dwelling dragons.',
     flavorText: 'Massive Lawful Evil desert-dwelling dragons.',
@@ -7999,7 +7999,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '156',
     name: 'Adult Blue Dragon',
     description: 'Adult Blue Dragons are huge desert-dwelling dragons.',
     flavorText: 'Adult Blue Dragons are huge desert-dwelling dragons.',
@@ -8133,7 +8133,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '157',
     name: 'Young Blue Dragon',
     description: 'Young Blue Dragons are large desert-dwelling dragons.',
     flavorText: 'Young Blue Dragons are large desert-dwelling dragons.',
@@ -8219,7 +8219,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '8',
+    id: '158',
     name: 'Blue Dragon Wyrmling',
     description: 'Blue Dragon Wyrmlings are small desert-dwelling dragons.',
     flavorText: 'Blue Dragon Wyrmlings are small desert-dwelling dragons.',
@@ -8263,7 +8263,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '159',
     name: 'Ancient Green Dragon',
     description: 'Ancient Green Dragons are massive forest-dwelling dragons.',
     flavorText: 'Ancient Green Dragons are massive forest-dwelling dragons.',
@@ -8396,7 +8396,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '0',
+    id: '160',
     name: 'Adult Green Dragon',
     description: 'Adult Green Dragons are huge forest-dwelling dragons.',
     flavorText: 'Adult Green Dragons are huge forest-dwelling dragons.',
@@ -8529,7 +8529,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '161',
     name: 'Young Green Dragon',
     description: 'Young Green Dragons are large forest-dwelling dragons.',
     flavorText: 'Young Green Dragons are large forest-dwelling dragons.',
@@ -8616,7 +8616,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '2',
+    id: '162',
     name: 'Green Dragon Wyrmling',
     description: 'Green Dragon Wyrmlings are small forest-dwelling dragons.',
     flavorText: 'Green Dragon Wyrmlings are small forest-dwelling dragons.',
@@ -8682,7 +8682,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '163',
     name: 'Ancient Red Dragon',
     description:
       'Ancient Red Dragons are massive dragons that dwell in incredibly hot environments.',
@@ -8818,7 +8818,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '4',
+    id: '164',
     name: 'Adult Red Dragon',
     description:
       'Adult Red Dragons are huge dragons that dwell in hot environments.',
@@ -8947,7 +8947,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '5',
+    id: '165',
     name: 'Young Red Dragon',
     description:
       'Young Red Dragons are large dragons that dwell in hot environments.',
@@ -9036,7 +9036,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '6',
+    id: '166',
     name: 'Red Dragon Wyrmling',
     description:
       'Red Dragon Wyrmlings are small dragons that dwell in hot environments.',
@@ -9102,7 +9102,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '7',
+    id: '167',
     name: 'Ancient White Dragon',
     description:
       'Ancient White Dragons are massive dragons that dwell in cold environments.',
@@ -9232,7 +9232,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '8',
+    id: '168',
     name: 'Adult White Dragon',
     description:
       'Adult White Dragons are huge dragons that dwell in cold environments.',
@@ -9362,7 +9362,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '9',
+    id: '169',
     name: 'Young White Dragon',
     description:
       'Young White Dragons are large dragons that dwell in cold environments.',
@@ -9451,7 +9451,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '0',
+    id: '170',
     name: 'White Dragon Wyrmling',
     description:
       'White Dragon Wyrmlings are small dragons that dwell in cold environments.',
@@ -9518,7 +9518,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '1',
+    id: '171',
     name: 'Ancient Brass Dragon',
     description:
       "Ancient Brass Dragons are massive dragons that dwell in ruin's canyons, or cave networks.",
@@ -9656,7 +9656,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '2',
+    id: '172',
     name: 'Adult Brass Dragon',
     description:
       "Adult Brass Dragons are huge dragons that dwell in ruin's canyons, or cave networks.",
@@ -9788,7 +9788,7 @@ const CreatureSeed: CreatureSeedType[] = [
     ],
   },
   {
-    id: '3',
+    id: '173',
     name: 'Young Brass Dragon',
     description:
       "Young Brass Dragons are large dragons that dwell in ruin's canyons, or cave networks.",

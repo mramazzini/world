@@ -9,7 +9,7 @@ export const equipWeapon = async (
   numHands: 1 | 2 //number of hands that the weapon uses
 ): Promise<PrismaJson.CharacterState> => {
   //check to see if in inventory
-  const weapon = state.inventory.find((i) => i.item === weaponItemId);
+  const weapon = state.inventory.find((i) => i.item == weaponItemId);
   if (!weapon) return state;
   // get item data
   const itemData = (await memoizeGetItem({

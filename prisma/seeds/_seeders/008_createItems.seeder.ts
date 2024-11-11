@@ -26,7 +26,7 @@ export const createItems = async (db: PrismaClient) => {
     } catch (error) {
       cerr('Error creating item:', Item.name, error);
       console.error(error);
-      return;
+      throw new Error('Error creating item');
     }
   }
   cinfo('Items created');
@@ -60,7 +60,7 @@ export const createItems = async (db: PrismaClient) => {
     } catch (error) {
       cerr('Error linking item to weapon:', error);
       console.error(error);
-      return;
+      throw new Error('Error linking item to weapon');
     }
   }
 
@@ -84,7 +84,7 @@ export const createItems = async (db: PrismaClient) => {
         cinfo('Ammunition linked to weapon');
       } catch (error) {
         cerr('Error linking ammunition to weapon:', Weapon.name, error);
-        return;
+        throw new Error('Error linking ammunition to weapon');
       }
     }
   }

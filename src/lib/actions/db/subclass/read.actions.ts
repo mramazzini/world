@@ -325,13 +325,13 @@ export async function getSubclass({
         },
       },
     });
-    await db.$disconnect();
     return res;
   } catch (error) {
     console.error(error);
+    return null;
+  } finally {
+    await db.$disconnect();
   }
-  await db.$disconnect();
-  return null;
 }
 
 export const getSubclassesByClass = async ({
@@ -369,9 +369,6 @@ export const getSubclassesByClass = async ({
       },
     },
   });
-  await db.$disconnect();
-  return res;
-
   await db.$disconnect();
   return res;
 };

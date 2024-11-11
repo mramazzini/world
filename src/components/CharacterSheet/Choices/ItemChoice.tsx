@@ -102,12 +102,13 @@ const ItemChoice = ({ choice, updateSelections, modalID }: Props) => {
             {choice.options.map((itemList, index) => (
               <option key={index} value={index}>
                 {itemList
-                  .map(
-                    (itemData) =>
-                      `${itemData.quantity} ${
-                        options.find((i) => i.id === itemData.item)?.name
-                      }`
-                  )
+                  .map((itemData) => {
+                    return `${itemData.quantity} ${
+                      options.find(
+                        (i) => i.id.toString() === itemData.item.toString()
+                      )?.name
+                    }`;
+                  })
                   .join(', ')}
               </option>
             ))}

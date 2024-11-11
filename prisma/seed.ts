@@ -20,6 +20,7 @@ import { createCreatures } from './seeds/_seeders/017_createCreatures.seeder';
 import { linkCreatureToSpells } from './seeds/_seeders/018_CreatureToSpell.linker';
 import { linkCreatureToItems } from './seeds/_seeders/019_creatureToItem.linker';
 import { createTool } from './seeds/_seeders/006_createTools.seeder';
+import createUsers from './seeds/_seeders/022_createMaxyUser.seeder';
 const db = new PrismaClient();
 
 const seedarr: {
@@ -32,108 +33,89 @@ const seedarr: {
     index: '001',
     callback: createSpells,
     description: 'Creating spells from the spell seed.',
-    //enabled: true,
+    enabled: true,
   },
   {
     index: '002',
     callback: createSpellList,
     description: 'Creating spell lists from the spell list seed.',
-    //enabled: true,
+    enabled: true,
   },
   {
     index: '003',
     callback: linkSpellListToSpell,
     description: 'Linking spell lists to spells.',
-    //enabled: true,
+    enabled: true,
   },
   {
     index: '004',
     callback: createArmor,
     description: 'Creating armor from the armor seed.',
-    // enabled: true,
+    enabled: true,
   },
   {
     index: '005',
     callback: createEquipmentPacks,
     description: 'Creating equipment packs from the equipment pack seed.',
-    // enabled: true,
+    enabled: true,
   },
   {
     index: '006',
     callback: createTool,
     description: 'Creating tools from the tools seed.',
-    // enabled: true,
+    enabled: true,
   },
   {
     index: '007',
     callback: createWeapons,
     description: 'Creating weapons from the weapons seed.',
-    // enabled: true,
+    enabled: true,
   },
   {
     index: '008',
     callback: createItems,
     description: 'Creating items from the item seed.',
-    // enabled: true,
+    enabled: true,
   },
   {
     index: '010',
     callback: createBackgrounds,
     description: 'Creating backgrounds from the background seed.',
-    // enabled: true,
+    enabled: true,
   },
   {
     index: '011',
     callback: createClasses,
     description: 'Creating classes from the class seed.',
-    // enabled: true,
+    enabled: true,
   },
   {
     index: '013',
     callback: createSubclass,
     description: 'Creating subclasses from the subclass seed.',
-    // enabled: true,
+    enabled: true,
   },
   {
     index: '014',
     callback: createSpecies,
     description: 'Creating species from the species seed.',
-    // enabled: true,
+    enabled: true,
   },
   {
     index: '015',
     callback: createSubspecies,
     description: 'Creating subspecies from subspecies seed.',
-    // enabled: true,
+    enabled: true,
   },
   {
     index: '016',
     callback: createFeats,
     description: 'Creating feats from the species seed.',
-    // enabled: true,
+    enabled: true,
   },
   {
     index: '017',
     callback: createCreatures,
-    description: 'Creating creatures from the creature seed.',
-    // enabled: true,
-  },
-  {
-    index: '018',
-    callback: linkCreatureToSpells,
-    description: 'Linking creatures to spells.',
-    // enabled: true,
-  },
-  {
-    index: '019',
-    callback: linkCreatureToItems,
-    description: 'Linking creatures to items.',
-    // enabled: true,
-  },
-
-  {
-    index: '020',
-    callback: createCharacter,
     description: 'Creating characters from the character seed.',
     //  enabled:true,
   },
@@ -145,7 +127,7 @@ const seedarr: {
   },
   {
     index: '022',
-    callback: createMaxyUser,
+    callback: createUsers,
     description: 'Creating maxy user from the maxy user seed.',
     enabled: true,
   },
@@ -156,7 +138,12 @@ const seed = async (db: PrismaClient) => {
   for (const seed of seedarr) {
     if (seed.enabled) {
       cinfo(seed.description);
-      await seed.callback(db);
+      try {
+        await seed.callback(db);
+      } catch (error) {
+        console.error('Error seeding:', seed.index, error);
+        return;
+      }
     }
   }
   csuccess('✅ Successfully seeded database ✅');

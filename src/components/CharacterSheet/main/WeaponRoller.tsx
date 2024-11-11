@@ -159,7 +159,6 @@ const WeaponRoller = ({ logPush }: Props) => {
   const customWeaponAttacks = useMemo(() => {
     return weaponAttacks || [];
   }, [weaponAttacks]);
-
   return (
     <div className="flex flex-col h-full w-full">
       <div className="h-full flex justify-center items-center w-full flex-col  bg-base-300 rounded-xl p-2">

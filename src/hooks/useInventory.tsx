@@ -45,8 +45,9 @@ const useInventory = () => {
 
   const equippedItems = useMemo(() => {
     return (
-      items.filter((item) => state?.equipped.hands.items?.includes(item.id)) ||
-      []
+      items.filter((item) =>
+        state?.equipped.hands.items?.includes(item.id.toString())
+      ) || []
     );
   }, [items, state]);
 
