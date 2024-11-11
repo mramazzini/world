@@ -9,7 +9,10 @@ type Props = {
   params: { subSpeciesName: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getSubSpecie(params.subSpeciesName.replaceAll('-', ' '));
+  const data = await getSubSpecie({
+    query: params.subSpeciesName.replaceAll('-', ' '),
+    type: 'name',
+  });
 
   if (!data) {
     return {
@@ -58,9 +61,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Page = async ({ params }: Props) => {
-  const species = await getSubSpecie(
-    params.subSpeciesName.replaceAll('-', ' ')
-  );
+  const species = await getSubSpecie({
+    query: params.subSpeciesName.replaceAll('-', ' '),
+    type: 'name',
+  });
 
   return <SubSpeciesPage subSpecies={species} />;
 };

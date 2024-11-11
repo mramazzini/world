@@ -1,14 +1,14 @@
 const ids = {
-  arcaneArcher: 1,
-  banneret: 2,
-  battleMaster: 3,
-  cavalier: 4,
-  champion: 5,
-  echoKnight: 6,
-  eldritchKnight: 7,
-  psiWarrior: 8,
-  runeKnight: 9,
-  samurai: 10,
+  arcaneArcher: '1',
+  banneret: '2',
+  battleMaster: '3',
+  cavalier: '4',
+  champion: '5',
+  echoKnight: '6',
+  eldritchKnight: '7',
+  psiWarrior: '8',
+  runeKnight: '9',
+  samurai: '10',
 };
 
 const FighterSubclassFeatures = [

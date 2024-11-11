@@ -1,4 +1,5 @@
 'use server';
+import { SingleDataQuery } from '@/lib/types/metadata';
 import { ToolInfo } from '@/lib/types/modelInfo';
 import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
@@ -16,33 +17,22 @@ export const getTools = async (): Promise<ToolInfo[]> => {
   return res;
 };
 
-export const getTool = async (
-  query: string | number
-): Promise<ToolInfo | null> => {
+export const getTool = async ({
+  query,
+  type,
+}: SingleDataQuery): Promise<ToolInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === 'string') {
-    const res = await db.tool.findFirst({
-      where: {
-        name: query,
-      },
-      include: {
-        Features: true,
-      },
-    });
-    await db.$disconnect();
-    return res;
-  } else {
-    const res = await db.tool.findFirst({
-      where: {
-        id: query,
-      },
-      include: {
-        Features: true,
-      },
-    });
-    await db.$disconnect();
-    return res;
-  }
+
+  const res = await db.tool.findFirst({
+    where: {
+      [type]: query,
+    },
+    include: {
+      Features: true,
+    },
+  });
+  await db.$disconnect();
+  return res;
 };
 
 export const getToolChunk = async (

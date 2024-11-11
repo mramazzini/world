@@ -1,14 +1,14 @@
 const ids = {
-  astral: 62,
-  dragon: 63,
-  drunken: 64,
-  fourElements: 65,
-  kensei: 66,
-  longDeath: 67,
-  mercy: 68,
-  openHand: 69,
-  shadow: 70,
-  sunSoul: 71,
+  astral: '62',
+  dragon: '63',
+  drunken: '64',
+  fourElements: '65',
+  kensei: '66',
+  longDeath: '67',
+  mercy: '68',
+  openHand: '69',
+  shadow: '70',
+  sunSoul: '71',
 };
 
 const MonkSubclassFeatures = [

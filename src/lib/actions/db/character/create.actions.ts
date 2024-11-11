@@ -7,6 +7,7 @@ import {
   SubSpeciesID,
 } from '@/lib/types/types';
 import { Alignment, PrismaClient } from '@prisma/client';
+import { v4 } from 'uuid';
 
 export interface CreateCharacterParams {
   name: string;
@@ -14,15 +15,16 @@ export interface CreateCharacterParams {
   classId: ClassID;
   alignment: Alignment;
   backgroundId: BackgroundID;
-  userId: number;
+  userId: string;
   variantId?: SubSpeciesID;
 }
 export const createCharacter = async (
   params: CreateCharacterParams
-): Promise<number> => {
+): Promise<string> => {
   const db = new PrismaClient();
   const res = await db.character.create({
     data: {
+      id: v4(),
       name: params.name,
       alignment: params.alignment,
       Classes: {

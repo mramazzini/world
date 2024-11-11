@@ -1,8 +1,9 @@
 'use server';
+import { ClassID } from '@/lib/types/types';
 import { Prisma, PrismaClient } from '@prisma/client';
 
 export const createSubClass = async (
-  classID: number,
+  classID: ClassID,
   subClass: Prisma.SubClassCreateManyInput
 ) => {
   const db = new PrismaClient();

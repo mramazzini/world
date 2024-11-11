@@ -9,7 +9,10 @@ type Props = {
   params: { backgroundName: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getBackground(params.backgroundName.replaceAll('-', ' '));
+  const data = await getBackground({
+    query: params.backgroundName.replaceAll('-', ' '),
+    type: 'name',
+  });
 
   if (!data) {
     return {
@@ -58,9 +61,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Page = async ({ params }: Props) => {
-  const background = await getBackground(
-    params.backgroundName.replaceAll('-', ' ')
-  );
+  const background = await getBackground({
+    query: params.backgroundName.replaceAll('-', ' '),
+    type: 'name',
+  });
   return <BackgroundPage background={background} />;
 };
 

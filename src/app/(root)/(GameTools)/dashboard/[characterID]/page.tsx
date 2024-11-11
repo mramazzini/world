@@ -14,8 +14,8 @@ interface Props {
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const characterID = parseInt(params.characterID);
-  if (isNaN(characterID)) {
+  const characterID = params.characterID;
+  if (characterID) {
     console.error('Invalid characterID:', params.characterID);
     return {
       title: "Character Not Found - Max's DND",
@@ -35,7 +35,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     };
   }
-  const data = await getCharacter(parseInt(params.characterID));
+  const data = await getCharacter({
+    query: params.characterID,
+    type: 'id',
+  });
 
   if (!data) {
     return {
@@ -79,7 +82,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   try {
-    const character = await getCharacter(parseInt(params.characterID));
+    const character = await getCharacter({
+      query: params.characterID,
+      type: 'id',
+    });
+
     if (!character) {
       return (
         <div className="p-8">You do not have a character with that ID.</div>

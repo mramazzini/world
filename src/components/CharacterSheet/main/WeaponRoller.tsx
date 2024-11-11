@@ -10,6 +10,7 @@ import useInventory from '@/hooks/useInventory';
 import { useAppSelector } from '@/store/hooks';
 import useModifier from '@/hooks/useModifier';
 import useProficiency from '@/hooks/useProficiency';
+import { v4 } from 'uuid';
 
 const SingleWeapon = ({
   weaponData,
@@ -181,7 +182,7 @@ const WeaponRoller = ({ logPush }: Props) => {
                   WeaponPropertyInstance: [],
                   ammunition: null,
                   ammunitionId: null,
-                  id: Math.floor(Math.random() * 100000),
+                  id: v4(),
                   isRanged: false,
                   isSimple: true,
                 }}

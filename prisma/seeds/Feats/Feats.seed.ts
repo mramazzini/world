@@ -6,7 +6,7 @@ import { classIds } from '../Classes/ClassIds';
 import { subSpeciesIds } from '../Subspecies/Subspecies.seed';
 const FeatSeed: Prisma.FeatCreateManyInput[] = [
   {
-    id: 1,
+    id: '1',
     name: 'Aberrant Dragonmark',
     flavorText: 'You have manifested an aberrant dragonmark.',
     prereqDescription: 'No other dragonmark',
@@ -70,35 +70,35 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 2,
+    id: '2',
     name: 'Actor',
     flavorText: 'You are skilled at mimicry and dramatics.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 3,
+    id: '3',
     name: 'Alert',
     flavorText: 'You are always on the lookout for danger.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 4,
+    id: '4',
     name: 'Artificer Initiate',
     flavorText: "You have learned some of an artificer's inventiveness.",
     source: src.tasha,
     prereqDescription: 'None',
   },
   {
-    id: 5,
+    id: '5',
     name: 'Athlete',
     flavorText: 'You have undergone extensive physical training.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 6,
+    id: '6',
     name: 'Cartomancer',
     flavorText:
       'You have learned to channel your magic through a deck of cards.',
@@ -117,14 +117,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 7,
+    id: '7',
     name: 'Charger',
     flavorText: 'You are trained in mounted combat.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 8,
+    id: '8',
     name: 'Chef',
     flavorText:
       'Time and effort spent mastering the culinary arts has paid off.',
@@ -132,21 +132,21 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     prereqDescription: 'None',
   },
   {
-    id: 9,
+    id: '9',
     name: 'Crossbow Expert',
     flavorText: 'You have extensive practice with the crossbow.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 10,
+    id: '10',
     name: 'Crusher',
     flavorText: 'You are practiced in the art of crushing your enemies.',
     source: src.tasha,
     prereqDescription: 'None',
   },
   {
-    id: 11,
+    id: '11',
     name: 'Defensive Duelist',
     flavorText: 'You excel at defending yourself while dueling.',
     source: src.phb,
@@ -161,14 +161,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 12,
+    id: '12',
     name: 'Dual Wielder',
     flavorText: 'You master fighting with two weapons.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 13,
+    id: '13',
     name: 'Dungeon Delver',
     flavorText:
       'You are alert to the hidden traps and secret doors found in many dungeons.',
@@ -176,14 +176,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     prereqDescription: 'None',
   },
   {
-    id: 14,
+    id: '14',
     name: 'Durable',
     flavorText: 'You are hardy and resiliant.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 15,
+    id: '15',
     name: 'Eldritch Adept',
     flavorText: 'Studying occult lore, you learn one eldritch invocation.',
     source: src.tasha,
@@ -198,7 +198,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 16,
+    id: '16',
     name: 'Elemental Adept',
     flavorText: 'You have mastered the elements.',
     source: src.phb,
@@ -213,14 +213,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 17,
+    id: '17',
     name: 'Fey Touched',
     flavorText: 'Your exposure to the Feywild has changed you.',
     source: src.tasha,
     prereqDescription: 'None',
   },
   {
-    id: 18,
+    id: '18',
     name: 'Fighting Initiate',
     flavorText:
       'Your martial training has helped you develop a particular style of fighting.',
@@ -236,28 +236,28 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 19,
+    id: '19',
     name: 'Gift of the Chromatic Dragon',
     flavorText: 'You have inherited the power of a chromatic dragon.',
     source: src.fizban,
     prereqDescription: 'None',
   },
   {
-    id: 20,
+    id: '20',
     name: 'Gift of the Gem Dragon',
     flavorText: 'You have inherited the power of a gem dragon.',
     source: src.fizban,
     prereqDescription: 'None',
   },
   {
-    id: 21,
+    id: '21',
     name: 'Gift of the Metallic Dragon',
     flavorText: 'You’ve manifested some of the power of metallic dragons.',
     source: src.fizban,
     prereqDescription: 'None',
   },
   {
-    id: 22,
+    id: '22',
     name: 'Grappler',
     flavorText:
       "You've developed the skills necessary to hold your own in close-quarters grappling.",
@@ -273,7 +273,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 23,
+    id: '23',
     name: 'Great Weapon Master',
     flavorText:
       "You've learned to put the weight of a weapon to your advantage.",
@@ -281,14 +281,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     prereqDescription: 'None',
   },
   {
-    id: 24,
+    id: '24',
     name: 'Gunner',
     flavorText: 'You have a quick hand and keen eye when employing firearms.',
     source: src.tasha,
     prereqDescription: 'None',
   },
   {
-    id: 25,
+    id: '25',
     name: 'Healer',
     flavorText:
       'You are an able physician, allowing you to mend wounds quickly.',
@@ -296,7 +296,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     prereqDescription: 'None',
   },
   {
-    id: 26,
+    id: '26',
     name: 'Heavily Armored',
     flavorText: 'You have trained to master the use of heavy armor.',
     source: src.phb,
@@ -311,7 +311,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 27,
+    id: '27',
     name: 'Heavy Armor Master',
     flavorText:
       'You can use your armor to deflect strikes that would kill others.',
@@ -327,7 +327,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 28,
+    id: '28',
     name: 'Inspiring Leader',
     flavorText: 'You can spend time to inspire your companions.',
     source: src.phb,
@@ -342,28 +342,28 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 29,
+    id: '29',
     name: 'Keen Mind',
     flavorText: 'You have a mind that can track time, direction, and detail.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 30,
+    id: '30',
     name: 'Lightly Armored',
     flavorText: 'You have trained to master the use of light armor.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 31,
+    id: '31',
     name: 'Linguist',
     flavorText: 'You have studied languages and codes.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 32,
+    id: '32',
     name: 'Lucky',
     flavorText:
       'You have inexplicable luck that seems to kick in at just the right moment.',
@@ -371,7 +371,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     prereqDescription: 'None',
   },
   {
-    id: 33,
+    id: '33',
     name: 'Mage Slayer',
     flavorText:
       'You have practiced techniques useful in melee combat against spellcasters.',
@@ -379,14 +379,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     prereqDescription: 'None',
   },
   {
-    id: 34,
+    id: '34',
     name: 'Magic Initiate',
     flavorText: 'You learn a few spells of your choice from a specific class.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 35,
+    id: '35',
     name: 'Martial Adept',
     flavorText:
       'You have martial training that allows you to perform special combat maneuvers.',
@@ -394,7 +394,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     prereqDescription: 'None',
   },
   {
-    id: 36,
+    id: '36',
     name: 'Medium Armor Master',
     flavorText: 'You have learned to master the use of medium armor.',
     source: src.phb,
@@ -409,7 +409,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 37,
+    id: '37',
     name: 'Metamagic Adept',
     flavorText:
       "You've learned how to exert your will on your spells to alter how they function.",
@@ -425,14 +425,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 38,
+    id: '38',
     name: 'Mobile',
     flavorText: 'You are exceptionally speedy and agile.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 39,
+    id: '39',
     name: 'Moderately Armored',
     flavorText:
       'You have trained to master the use of medium armor and shileds.',
@@ -448,49 +448,49 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 40,
+    id: '40',
     name: 'Mounted Combatant',
     flavorText: 'You are a dangerous foe to face while mounted.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 41,
+    id: '41',
     name: 'Observant',
     flavorText: 'You are quick to notice details of your environment.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 42,
+    id: '42',
     name: 'Piercer',
     flavorText: 'You have achieved a penetrating precision in combat.',
     source: src.tasha,
     prereqDescription: 'None',
   },
   {
-    id: 43,
+    id: '43',
     name: 'Poisoner',
     flavorText: 'You can prepare and deliver deadly poisons.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 44,
+    id: '44',
     name: 'Polearm Master',
     flavorText: 'You can keep your enemies at bay with reach weapons.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 45,
+    id: '45',
     name: 'Resilient',
     flavorText: 'You gain some bonuses in a chosen ability score.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 46,
+    id: '46',
     name: 'Ritual Caster',
     flavorText: 'You can cast a small number of spells as rituals.',
     source: src.phb,
@@ -505,7 +505,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 47,
+    id: '47',
     name: 'Rune Shaper',
     flavorText: 'You’ve studied the magic of Giant runes.',
     source: src.Bigby,
@@ -523,14 +523,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 48,
+    id: '48',
     name: 'Savage Attacker',
     flavorText: 'You are a ferocious combatant.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 49,
+    id: '49',
     name: 'Sentinel',
     flavorText:
       "You have mastered techniques to take advantage of every drop in any enemy's guard.",
@@ -538,14 +538,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     prereqDescription: 'None',
   },
   {
-    id: 50,
+    id: '50',
     name: 'Shadow Touched',
     flavorText: "Your exposure to the Shadowfell's magic has changed you.",
     source: src.tasha,
     prereqDescription: 'None',
   },
   {
-    id: 51,
+    id: '51',
     name: 'Sharpshooter',
     flavorText:
       'You have mastered ranged weapons and can make shots that others find impossible.',
@@ -553,28 +553,28 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     prereqDescription: 'None',
   },
   {
-    id: 52,
+    id: '52',
     name: 'Shield Master',
     flavorText: 'You use shields not just for protection but also for offense.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 53,
+    id: '53',
     name: 'Skill Expert',
     flavorText: 'You have honed your proficiency with particular skills.',
     source: src.tasha,
     prereqDescription: 'None',
   },
   {
-    id: 54,
+    id: '54',
     name: 'Skilled',
     flavorText: 'You are skilled.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 55,
+    id: '55',
     name: 'Skulker',
     flavorText: 'You are expert at slinking through shadows.',
     source: src.phb,
@@ -589,14 +589,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 56,
+    id: '56',
     name: 'Slasher',
     flavorText: "You've learned where to cut to have the greatest results.",
     source: src.tasha,
     prereqDescription: 'None',
   },
   {
-    id: 57,
+    id: '57',
     name: 'Spell Sniper',
     flavorText:
       'You have learned techniques to enhance your attacks with certain kinds of spells, gaining the following benefits:',
@@ -612,7 +612,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 58,
+    id: '58',
     name: 'Strike of the Giants',
     flavorText:
       'You have absorbed primeval magic that gives you an echo of the might of giants.',
@@ -632,7 +632,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 59,
+    id: '59',
     name: 'Ember of the Fire Giant',
     flavorText: 'You’ve manifested the fiery combat emblematic of fire giants.',
     source: src.Bigby,
@@ -641,7 +641,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
       protocol: 'AND',
       data: [
         {
-          Feat: 58,
+          Feat: '58',
         },
         {
           minLevel: 4,
@@ -650,7 +650,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 60,
+    id: '60',
     name: 'Fury of the Frost Giant',
     flavorText: 'You’ve manifested the icy might emblematic of frost giants',
     source: src.Bigby,
@@ -659,7 +659,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
       protocol: 'AND',
       data: [
         {
-          Feat: 58,
+          Feat: '58',
         },
         {
           minLevel: 4,
@@ -668,7 +668,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 61,
+    id: '61',
     name: 'Guile of the Cloud Giant',
     flavorText:
       'You’ve manifested the confounding magic emblematic of cloud giants.',
@@ -678,7 +678,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
       protocol: 'AND',
       data: [
         {
-          Feat: 58,
+          Feat: '58',
         },
         {
           minLevel: 4,
@@ -687,7 +687,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 62,
+    id: '62',
     name: 'Keenness of the Stone Giant',
     flavorText:
       'You’ve manifested the physical talents emblematic of stone giants.',
@@ -697,7 +697,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
       protocol: 'AND',
       data: [
         {
-          Feat: 58,
+          Feat: '58',
         },
         {
           minLevel: 4,
@@ -706,7 +706,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 63,
+    id: '63',
     name: 'Soul of the Storm Giant',
     flavorText:
       'You’ve manifested the tempest magic emblematic of storm giants.',
@@ -716,7 +716,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
       protocol: 'AND',
       data: [
         {
-          Feat: 58,
+          Feat: '58',
         },
         {
           minLevel: 4,
@@ -725,7 +725,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 64,
+    id: '64',
     name: 'Tavern Brawler',
     flavorText:
       'You are accustomed to the rough-and-tumble fighting using whatever weapons happen to be at hand.',
@@ -733,28 +733,28 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     prereqDescription: 'None',
   },
   {
-    id: 65,
+    id: '65',
     name: 'Telekinetic',
     flavorText: 'You learn to move things with your mind.',
     source: src.tasha,
     prereqDescription: 'None',
   },
   {
-    id: 66,
+    id: '66',
     name: 'Telepathic',
     flavorText: 'You awaken the ability to mentally connect with others.',
     source: src.tasha,
     prereqDescription: 'None',
   },
   {
-    id: 67,
+    id: '67',
     name: 'Tough',
     flavorText: 'You are Tough.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 68,
+    id: '68',
     name: 'Vigor of the Hill Giant',
     flavorText: 'You’ve manifested the resilience emblematic of hill giants.',
     source: src.Bigby,
@@ -763,7 +763,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
       protocol: 'AND',
       data: [
         {
-          Feat: 58,
+          Feat: '58',
         },
         {
           minLevel: 4,
@@ -772,7 +772,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 69,
+    id: '69',
     name: 'War Caster',
     flavorText: 'You have practiced casting spells in the midst of combat.',
     source: src.phb,
@@ -787,14 +787,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 70,
+    id: '70',
     name: 'Weapon Master',
     flavorText: 'You have practiced extensively with a variety of weapons.',
     source: src.phb,
     prereqDescription: 'None',
   },
   {
-    id: 71,
+    id: '71',
     name: 'Scion of the Outer Planes',
     flavorText:
       'Your connection to an Outer Plane infuses you with the energy there.',
@@ -802,7 +802,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     prereqDescription: 'Planescape Campaign',
   },
   {
-    id: 72,
+    id: '72',
     name: 'Agent of Order',
     flavorText: 'You can channel cosmic forces of order.',
     source: src.planescape,
@@ -815,13 +815,13 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
           minLevel: 4,
         },
         {
-          Feat: 71,
+          Feat: '71',
         },
       ],
     },
   },
   {
-    id: 73,
+    id: '73',
     name: 'Baleful Scion',
     flavorText: 'You can channel cosmic forces of evil.',
     source: src.planescape,
@@ -834,13 +834,13 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
           minLevel: 4,
         },
         {
-          Feat: 71,
+          Feat: '71',
         },
       ],
     },
   },
   {
-    id: 74,
+    id: '74',
     name: 'Cohort of Chaos',
     flavorText: 'You can channel cosmic forces of chaos.',
     source: src.planescape,
@@ -853,13 +853,13 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
           minLevel: 4,
         },
         {
-          Feat: 71,
+          Feat: '71',
         },
       ],
     },
   },
   {
-    id: 75,
+    id: '75',
     name: 'Outlands Envoy',
     flavorText:
       'You have spent significant time in Sigil or the Outlands, the crossroads of the multiverse. Being steeped in converging planar energies grants you some benefits.',
@@ -872,13 +872,13 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
           minLevel: 4,
         },
         {
-          Feat: 71,
+          Feat: '71',
         },
       ],
     },
   },
   {
-    id: 76,
+    id: '76',
     name: 'Planar Wanderer',
     flavorText:
       'You can draw upon the forces of the multiverse to survive cosmic extremes and to traverse its infinite realms.',
@@ -892,13 +892,13 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
           minLevel: 4,
         },
         {
-          Feat: 71,
+          Feat: '71',
         },
       ],
     },
   },
   {
-    id: 77,
+    id: '77',
     name: 'Righteous Heritor',
     flavorText: 'You can channel cosmic forces of good.',
     source: src.planescape,
@@ -911,13 +911,13 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
           minLevel: 4,
         },
         {
-          Feat: 71,
+          Feat: '71',
         },
       ],
     },
   },
   {
-    id: 78,
+    id: '78',
     name: 'Strixhaven Initiate',
     flavorText:
       'You have studied some magical theory and have learned a few spells associated with Strixhaven University.',
@@ -925,7 +925,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     prereqDescription: 'None',
   },
   {
-    id: 79,
+    id: '79',
     name: 'Strixhaven Mascot',
     flavorText:
       'You have learned how to summon a Strixhaven mascot to assist you.',
@@ -935,7 +935,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
       protocol: 'AND',
       data: [
         {
-          Feat: 78,
+          Feat: '78',
         },
         {
           minLevel: 4,
@@ -944,7 +944,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 80,
+    id: '80',
     name: 'Bountiful Luck',
     flavorText: 'Your people have extraordinary luck.',
     source: src.tasha,
@@ -959,7 +959,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 81,
+    id: '81',
     name: 'Dragon Fear',
     flavorText: 'When angered, you radiate menace.',
     source: src.tasha,
@@ -974,7 +974,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 82,
+    id: '82',
     name: 'Dragon Hide',
     flavorText:
       'You manifest scales and claws reminiscent of your draconic ancestors. ',
@@ -990,7 +990,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 83,
+    id: '83',
     name: 'Dwarven Fortitude',
     flavorText:
       'You have the blood of dwarf heroes flowing through your veins.',
@@ -1006,7 +1006,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 84,
+    id: '84',
     name: 'Drow High Magic',
     flavorText: 'You learn more of the magic typical of dark elves.',
     source: src.tasha,
@@ -1021,7 +1021,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 85,
+    id: '85',
     name: 'Elven Accuracy',
     flavorText:
       'You have uncanny aim with attacks that rely on precision rather than brute force.',
@@ -1040,7 +1040,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 86,
+    id: '86',
     name: 'Fade Away',
     flavorText:
       'You have learned a magical trick for fading away when you suffer harm. ',
@@ -1056,7 +1056,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 87,
+    id: '87',
     name: 'Fey Teleportation',
     flavorText:
       'You can momentarily stride through the Feywild to shorten your path from one place to another. ',
@@ -1072,7 +1072,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 88,
+    id: '88',
     name: 'Flames of Phlegethos',
     flavorText: 'You learn to call on hellfire to serve your commands.',
     source: src.tasha,
@@ -1087,7 +1087,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 89,
+    id: '89',
     name: 'Infernal Constitution',
     flavorText: 'Fiendish blood runs strong in you.',
     source: src.tasha,
@@ -1102,7 +1102,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 90,
+    id: '90',
     name: 'Orcish Fury',
     flavorText: 'Your fury burns tirelessly.',
     source: src.tasha,
@@ -1117,7 +1117,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 91,
+    id: '91',
     name: 'Prodigy',
     flavorText: 'You have a knack for learning new things.',
     source: src.tasha,
@@ -1138,7 +1138,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 92,
+    id: '92',
     name: 'Revenant Blade',
     flavorText:
       'You are descended from a master of the double-bladed scimitar.',
@@ -1154,7 +1154,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 93,
+    id: '93',
     name: 'Second Chance',
     flavorText: 'Fortune favors you when someone tries to strike you.',
     source: src.tasha,
@@ -1169,7 +1169,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 94,
+    id: '94',
     name: 'Squat Nimbleness',
     flavorText: 'You are uncommonly nimble for your race.',
     source: src.tasha,
@@ -1190,7 +1190,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 95,
+    id: '95',
     name: 'Svirfneblin Magic',
     flavorText:
       'You have inherited the innate spellcasting ability of your ancestors.',
@@ -1206,7 +1206,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 96,
+    id: '96',
     name: 'Wood Elf Magic',
     flavorText: 'You learn the magic of the primeval woods.',
     source: src.tasha,
@@ -1221,7 +1221,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 97,
+    id: '97',
     name: 'Servo Crafting',
     flavorText:
       'You are skilled in the creation of servos—tiny constructs that function as personal assistants.',
@@ -1237,7 +1237,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 98,
+    id: '98',
     name: 'Quicksmithing',
     flavorText:
       'You can use your talents to create immediate, short-term magical effects similar to spells.',
@@ -1253,7 +1253,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 99,
+    id: '99',
     name: 'Initiate of High Sorcery',
     flavorText:
       "You've received training from magic-users affiliated with the Mages of High Sorcery.",
@@ -1276,7 +1276,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 100,
+    id: '100',
     name: 'Adept of the Black Robes',
     flavorText:
       'You chose the moon Nuitari to influence your magic, and your ambition and loyalty to the Order of the Black Robes has been recognized.',
@@ -1286,7 +1286,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
       protocol: 'AND',
       data: [
         {
-          Feat: 99,
+          Feat: '99',
         },
         {
           minLevel: 4,
@@ -1295,7 +1295,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 101,
+    id: '101',
     name: 'Adept of the Red Robes',
     flavorText:
       'You chose the moon Lunitari to influence your magic, and your dedication to maintaining the balance between all things has been recognized by the Order of the Red Robes.',
@@ -1305,7 +1305,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
       protocol: 'AND',
       data: [
         {
-          Feat: 99,
+          Feat: '99',
         },
         {
           minLevel: 4,
@@ -1314,7 +1314,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 102,
+    id: '102',
     name: 'Adept of the White Robes',
     flavorText:
       'You chose the moon Solinari to influence your magic, and your oath to use magic to make the world a better place has been recognized by the Order of the White Robes.',
@@ -1324,7 +1324,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
       protocol: 'AND',
       data: [
         {
-          Feat: 99,
+          Feat: '99',
         },
         {
           minLevel: 4,
@@ -1333,7 +1333,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 103,
+    id: '103',
     name: 'Divinely Favored',
     flavorText: 'A god chose you to carry a spark of their power.',
     source: src.dragonQueen,
@@ -1348,7 +1348,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 104,
+    id: '104',
     name: 'Squire of Solamnia',
     flavorText: 'You have trained in the ways of the Knights of Solamnia.',
     source: src.dragonQueen,
@@ -1370,7 +1370,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 105,
+    id: '105',
     name: 'Knight of the Crown',
     flavorText:
       'You are a Knight of Solamnia aligned with the Order of the Crown, a group that extols the virtues of cooperation, loyalty, and obedience. You excel in group combat.',
@@ -1380,7 +1380,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
       protocol: 'AND',
       data: [
         {
-          Feat: 104,
+          Feat: '104',
         },
         {
           minLevel: 4,
@@ -1389,7 +1389,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 106,
+    id: '106',
     name: 'Knight of the Rose',
     flavorText:
       'You are a Knight of Solamnia aligned with the Order of the Rose, a group known for leadership, justice, and wisdom.',
@@ -1399,7 +1399,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
       protocol: 'AND',
       data: [
         {
-          Feat: 104,
+          Feat: '104',
         },
         {
           minLevel: 4,
@@ -1408,7 +1408,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     },
   },
   {
-    id: 107,
+    id: '107',
     name: 'Knight of the Sword',
     flavorText:
       'You are a Knight of Solamnia aligned with the Order of the Sword, a group devoted to heroism and courage. Bravery steels your spirit.',
@@ -1416,7 +1416,7 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     prereqDescription: 'Squire of Solamnia Feat, 4th Level',
   },
   {
-    id: 108,
+    id: '108',
     name: 'Vampiric Exultation',
     flavorText:
       'You can transform the lower half of your body into an inky black vapor',
@@ -1433,114 +1433,114 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
   },
 ];
 export const FeatIds = {
-  aberrantDragonmark: 1,
-  actor: 2,
-  alert: 3,
-  artificerInitiate: 4,
-  athlete: 5,
-  cartomancer: 6,
-  charger: 7,
-  chef: 8,
-  crossbowExpert: 9,
-  crusher: 10,
-  defensiveDuelist: 11,
-  dualWielder: 12,
-  dungeonDelver: 13,
-  durable: 14,
-  eldritchAdept: 15,
-  elementalAdept: 16,
-  feyTouched: 17,
-  fightingInitiate: 18,
-  giftOfTheChromaticDragon: 19,
-  giftOfTheGemDragon: 20,
-  giftOfTheMetallicDragon: 21,
-  grappler: 22,
-  greatWeaponMaster: 23,
-  gunner: 24,
-  healer: 25,
-  heavilyArmored: 26,
-  heavyArmorMaster: 27,
-  inspiringLeader: 28,
-  keenMind: 29,
-  lightlyArmored: 30,
-  linguist: 31,
-  lucky: 32,
-  mageSlayer: 33,
-  magicInitiate: 34,
-  martialAdept: 35,
-  mediumArmorMaster: 36,
-  metaMagicAdept: 37,
-  mobile: 38,
-  moderatelyArmored: 39,
-  mountedCombatant: 40,
-  observant: 41,
-  piercer: 42,
-  poisoner: 43,
-  polearmMaster: 44,
-  resilient: 45,
-  ritualCaster: 46,
-  runeShaper: 47,
-  savageAttacker: 48,
-  sentinel: 49,
-  shadowTouched: 50,
-  sharpshooter: 51,
-  shieldMaster: 52,
-  skillExpert: 53,
-  skilled: 54,
-  skulker: 55,
-  slasher: 56,
-  spellSniper: 57,
-  strikeOfTheGiants: 58,
-  emberOfTheFireGiant: 59,
-  furyOfTheFrostGiant: 60,
-  guileOfTheCloudGiant: 61,
-  keennessOfTheStoneGiant: 62,
-  soulOfTheStormGiant: 63,
-  tavernBrawler: 64,
-  telekinetic: 65,
-  telepathic: 66,
-  tough: 67,
-  vigorOfTheHillGiant: 68,
-  warCaster: 69,
-  weaponMaster: 70,
-  scionOfTheOuterPlanes: 71,
-  agentOfOrder: 72,
-  balefulScion: 73,
-  cohortOfChaos: 74,
-  outlandsEnvoy: 75,
-  planarWanderer: 76,
-  righteousHeritor: 77,
-  strixhavenInitiate: 78,
-  strixhavenMascot: 79,
-  bountifulLuck: 80,
-  dragonFear: 81,
-  dragonHide: 82,
-  dwarvenFortitude: 83,
-  drowHighMagic: 84,
-  elvenAccuracy: 85,
-  fadeAway: 86,
-  feyTeleportation: 87,
-  flamesOfPhlegethos: 88,
-  infernalConstitution: 89,
-  orcishFury: 90,
-  prodigy: 91,
-  revenantBlade: 92,
-  secondChance: 93,
-  squatNimbleness: 94,
-  svirfneblinMagic: 95,
-  woodElfMagic: 96,
-  servoCrafting: 97,
-  quicksmithing: 98,
-  initiateOfHighSorcery: 99,
-  adeptOfTheBlackRobes: 100,
-  adeptOfTheRedRobes: 101,
-  adeptOfTheWhiteRobes: 102,
-  divinelyFavored: 103,
-  squireOfSolamnia: 104,
-  knightOfTheCrown: 105,
-  knightOfTheRose: 106,
-  knightOfTheSword: 107,
-  vampiricExultation: 108,
+  aberrantDragonmark: '1',
+  actor: '2',
+  alert: '3',
+  artificerInitiate: '4',
+  athlete: '5',
+  cartomancer: '6',
+  charger: '7',
+  chef: '8',
+  crossbowExpert: '9',
+  crusher: '10',
+  defensiveDuelist: '11',
+  dualWielder: '12',
+  dungeonDelver: '13',
+  durable: '14',
+  eldritchAdept: '15',
+  elementalAdept: '16',
+  feyTouched: '17',
+  fightingInitiate: '18',
+  giftOfTheChromaticDragon: '19',
+  giftOfTheGemDragon: '20',
+  giftOfTheMetallicDragon: '21',
+  grappler: '22',
+  greatWeaponMaster: '23',
+  gunner: '24',
+  healer: '25',
+  heavilyArmored: '26',
+  heavyArmorMaster: '27',
+  inspiringLeader: '28',
+  keenMind: '29',
+  lightlyArmored: '30',
+  linguist: '31',
+  lucky: '32',
+  mageSlayer: '33',
+  magicInitiate: '34',
+  martialAdept: '35',
+  mediumArmorMaster: '36',
+  metaMagicAdept: '37',
+  mobile: '38',
+  moderatelyArmored: '39',
+  mountedCombatant: '40',
+  observant: '41',
+  piercer: '42',
+  poisoner: '43',
+  polearmMaster: '44',
+  resilient: '45',
+  ritualCaster: '46',
+  runeShaper: '47',
+  savageAttacker: '48',
+  sentinel: '49',
+  shadowTouched: '50',
+  sharpshooter: '51',
+  shieldMaster: '52',
+  skillExpert: '53',
+  skilled: '54',
+  skulker: '55',
+  slasher: '56',
+  spellSniper: '57',
+  strikeOfTheGiants: '58',
+  emberOfTheFireGiant: '59',
+  furyOfTheFrostGiant: '60',
+  guileOfTheCloudGiant: '61',
+  keennessOfTheStoneGiant: '62',
+  soulOfTheStormGiant: '63',
+  tavernBrawler: '64',
+  telekinetic: '65',
+  telepathic: '66',
+  tough: '67',
+  vigorOfTheHillGiant: '68',
+  warCaster: '69',
+  weaponMaster: '70',
+  scionOfTheOuterPlanes: '71',
+  agentOfOrder: '72',
+  balefulScion: '73',
+  cohortOfChaos: '74',
+  outlandsEnvoy: '75',
+  planarWanderer: '76',
+  righteousHeritor: '77',
+  strixhavenInitiate: '78',
+  strixhavenMascot: '79',
+  bountifulLuck: '80',
+  dragonFear: '81',
+  dragonHide: '82',
+  dwarvenFortitude: '83',
+  drowHighMagic: '84',
+  elvenAccuracy: '85',
+  fadeAway: '86',
+  feyTeleportation: '87',
+  flamesOfPhlegethos: '88',
+  infernalConstitution: '89',
+  orcishFury: '90',
+  prodigy: '91',
+  revenantBlade: '92',
+  secondChance: '93',
+  squatNimbleness: '94',
+  svirfneblinMagic: '95',
+  woodElfMagic: '96',
+  servoCrafting: '97',
+  quicksmithing: '98',
+  initiateOfHighSorcery: '99',
+  adeptOfTheBlackRobes: '100',
+  adeptOfTheRedRobes: '101',
+  adeptOfTheWhiteRobes: '102',
+  divinelyFavored: '103',
+  squireOfSolamnia: '104',
+  knightOfTheCrown: '105',
+  knightOfTheRose: '106',
+  knightOfTheSword: '107',
+  vampiricExultation: '108',
 };
 
 export default FeatSeed;

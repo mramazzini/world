@@ -4,7 +4,7 @@ import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
-import { DBMetadata } from '@/lib/types/metadata';
+import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { ClassInfo } from '@/lib/types/modelInfo';
 
 export async function getClassMetadata(): Promise<DBMetadata[]> {
@@ -79,68 +79,40 @@ export async function getClasses(homebrew: boolean): Promise<ClassInfo[]> {
   return res;
 }
 
-export async function getClass(
-  query: string | number
-): Promise<ClassInfo | null> {
+export async function getClass({
+  query,
+  type,
+}: SingleDataQuery): Promise<ClassInfo | null> {
   const db = new PrismaClient();
 
-  if (typeof query === 'string') {
-    const res = await db.class.findFirst({
-      where: {
-        name: query,
-      },
+  const res = await db.class.findFirst({
+    where: {
+      [type]: query,
+    },
 
-      include: {
-        SubClasses: true,
-        Features: {
-          include: {
-            columnedFeatures: true,
-          },
-        },
-        SpellcastingFeatures: {
-          include: {
-            columnedFeatures: true,
-          },
-        },
-        SpellList: true,
-        User: {
-          select: {
-            username: true,
-          },
+    include: {
+      SubClasses: true,
+      Features: {
+        include: {
+          columnedFeatures: true,
         },
       },
-    });
-    await db.$disconnect();
+      SpellcastingFeatures: {
+        include: {
+          columnedFeatures: true,
+        },
+      },
+      SpellList: true,
+      User: {
+        select: {
+          username: true,
+        },
+      },
+    },
+  });
+  await db.$disconnect();
 
-    return res;
-  } else {
-    const res = await db.class.findFirst({
-      where: {
-        id: query,
-      },
-      include: {
-        SubClasses: true,
-        Features: {
-          include: {
-            columnedFeatures: true,
-          },
-        },
-        SpellcastingFeatures: {
-          include: {
-            columnedFeatures: true,
-          },
-        },
-        SpellList: true,
-        User: {
-          select: {
-            username: true,
-          },
-        },
-      },
-    });
-    await db.$disconnect();
-    return res;
-  }
+  return res;
 }
 
 export async function getClassChunk(

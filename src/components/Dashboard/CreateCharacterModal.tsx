@@ -64,6 +64,10 @@ const CreateCharacterModal = () => {
   }, [sideBarModel, newChar.species]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const userId = await getUserId();
+
+    if (userId === null) return;
+
     e.preventDefault();
     if (
       !newChar.class ||
@@ -78,7 +82,7 @@ const CreateCharacterModal = () => {
       classId: newChar.class?.id,
       speciesId: newChar.species?.id,
       backgroundId: newChar.background?.id,
-      userId: await getUserId(),
+      userId: userId,
       variantId: newChar.variant?.id,
     });
 

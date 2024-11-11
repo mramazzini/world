@@ -4,7 +4,7 @@ import P from '@/Utility/FormatAndSanitize';
 import JsonTable from '@/Utility/JsonTable';
 import { Fragment, useState } from 'react';
 import { useEffect } from 'react';
-import { memoizeGetItem } from '@/Utility/globalCache';
+import { memoizeGetItem } from '@/Utility/Indexed/globalCache';
 import { ItemInfo } from '@/lib/types/modelInfo';
 import { Feature } from '@prisma/client';
 import { useAppSelector } from '@/store/hooks';
@@ -70,7 +70,12 @@ const ItemFeatures = () => {
   const [items, setItems] = useState<ItemInfo[]>([]);
   useEffect(() => {
     try {
-      const promises = inventory?.map((item) => memoizeGetItem(item.item));
+      const promises = inventory?.map((item) =>
+        memoizeGetItem({
+          query: item.item,
+          type: 'id',
+        })
+      );
       if (!promises) return;
       Promise.all(promises).then((items) => {
         setItems(items as ItemInfo[]);

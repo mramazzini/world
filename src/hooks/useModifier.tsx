@@ -3,6 +3,7 @@ import { useAppSelector } from '@/store/hooks';
 import { Ability, Skill } from '@prisma/client';
 import { useCallback } from 'react';
 import useProficiency from './useProficiency';
+import { ToolID } from '@/lib/types/types';
 
 const useModifier = () => {
   const state = useAppSelector((state) => state.character.state);
@@ -47,7 +48,7 @@ const useModifier = () => {
   );
 
   const getToolModifier = useCallback(
-    (toolId: number, ability?: Ability) => {
+    (toolId: ToolID, ability?: Ability) => {
       if (!state) return 0;
       const isProficient = state.proficiencies.tools.includes(toolId);
 

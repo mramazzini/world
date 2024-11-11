@@ -9,6 +9,7 @@ import {
 } from '@/lib/utils/auth';
 import { createUser } from '../db/general/create.actions';
 import { sendNewUserMessage } from '@/lib/webhook/DiscordWebhook';
+import { v4 } from 'uuid';
 
 const db = new PrismaClient();
 
@@ -86,6 +87,7 @@ export const signup = async (data: {
   const oneWeekFromNow = new Date();
   oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
   const newUser = await createUser({
+    id: v4(),
     email,
     password: hashedPassword,
     username: data.username,

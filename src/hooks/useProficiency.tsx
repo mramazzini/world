@@ -2,13 +2,14 @@ import { useAppSelector } from '@/store/hooks';
 import { Ability, ArmorType, Skill } from '@prisma/client';
 import { useCallback, useMemo } from 'react';
 import useLevel from './useLevel';
+import { ToolID, WeaponID } from '@/lib/types/types';
 
 const useProficiency = () => {
   const state = useAppSelector((state) => state.character.state);
   const level = useLevel();
 
   const getToolProficiency = useCallback(
-    (toolID: number) => {
+    (toolID: ToolID) => {
       if (!state) return false;
       return state.proficiencies.tools.includes(toolID);
     },
@@ -50,7 +51,7 @@ const useProficiency = () => {
   );
 
   const getWeaponProficiency = useCallback(
-    (weaponId: number) => {
+    (weaponId: WeaponID) => {
       if (!state) return false;
       return state.proficiencies.weapons.includes(weaponId);
     },

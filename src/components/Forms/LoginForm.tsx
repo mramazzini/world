@@ -69,6 +69,7 @@ const Login = () => {
         >
           <Form>
             <FormField
+              as="input"
               name="emailOrUsername"
               label="Email or Username"
               formProps={{
@@ -77,6 +78,7 @@ const Login = () => {
               }}
             />
             <FormField
+              as="input"
               name="password"
               label="Password"
               formProps={{

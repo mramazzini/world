@@ -7,8 +7,8 @@ import generateId from '../_helpers/generateId';
 let count = 1;
 
 const homebrewSubclassesId = {
-  oathOfTheGravekeeper: 1001,
-  arcaneSalvager: 1002,
+  oathOfTheGravekeeper: '1001',
+  arcaneSalvager: '1002',
 };
 
 const subclasses: Prisma.SubClassCreateManyInput[] = [

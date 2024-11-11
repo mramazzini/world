@@ -4,7 +4,7 @@ import { AssociatedModel, PrismaClient } from '@prisma/client';
 
 export const getCommentsByModel = async (
   model: AssociatedModel,
-  id: number
+  id: string
 ): Promise<CommentInfo[]> => {
   const db = new PrismaClient();
   try {

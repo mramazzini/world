@@ -1,7 +1,12 @@
 export type DBMetadata = {
-  id: number;
+  id: string;
   name: string;
   description: string;
   flavorText: string;
   updatedAt: Date;
+};
+
+export type SingleDataQuery = {
+  query: string;
+  type: 'id' | 'name';
 };

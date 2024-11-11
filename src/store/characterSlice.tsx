@@ -3,14 +3,14 @@ import { Alignment } from '@prisma/client';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: CharacterInfo = {
-  id: 9999,
+  id: '',
   name: '',
   alignment: Alignment.TRUE_NEUTRAL,
-  backgroundId: 1,
-  speciesId: 1,
-  subSpeciesId: 1,
+  backgroundId: '',
+  speciesId: '',
+  subSpeciesId: '',
   User: {
-    id: 1,
+    id: '',
     username: '',
   },
   Classes: [],
@@ -19,7 +19,7 @@ const initialState: CharacterInfo = {
   Species: null,
   SubSpecies: null,
   Background: null,
-  userId: 1,
+  userId: '',
   imageURL: '',
   state: null,
   campaignId: null,

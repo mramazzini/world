@@ -141,14 +141,12 @@ input[type='number'] {
   }
 
   h2 {
-    @apply md:divider;
     margin: 2rem 0;
 
     font-size: 1.5rem;
   }
 
   h3 {
-    @apply md:divider;
     margin: 2rem 0;
 
     font-size: 1.25rem;

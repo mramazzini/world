@@ -5,13 +5,14 @@ interface ValidatedInputProps {
   name: string;
   label?: string;
   children?: React.ReactNode;
+  join?: boolean;
 }
 
 const ValidatedInput = ({ name, label, children }: ValidatedInputProps) => {
   const { errors } = useFormikContext();
   const error = get(errors, name);
   return (
-    <div className="form-control my-2">
+    <div className="form-control my-2 w-full">
       {label && (
         <label className="label" htmlFor={name}>
           <span className="label-text">{label}</span>

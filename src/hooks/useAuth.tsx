@@ -20,7 +20,7 @@ interface UseAuthReturn {
   login: (loginInput: LoginInput) => Promise<string | null>;
   register: (signupInput: SignupInput) => Promise<string | null>;
   isLoading: boolean;
-  userID: number | null;
+  userID: string | null;
   loggedIn: boolean;
 }
 
@@ -42,6 +42,9 @@ export const useAuth = (): UseAuthReturn => {
 
       const userId = await getUserId();
 
+      if (userId === null)
+        return 'Something went wrong. Please try again later.';
+
       dispatch(authSlice.login(userId));
       return null;
     } catch (err) {
@@ -61,6 +64,10 @@ export const useAuth = (): UseAuthReturn => {
       }
 
       const userId = await getUserId();
+
+      if (userId === null)
+        return 'Something went wrong. Please try again later.';
+
       dispatch(authSlice.login(userId));
       return null;
     } catch (err) {

@@ -8,7 +8,7 @@ const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
 // we generate a token when they login or signup
 // its stored in cookies and sent with every request
-export const generateToken = async (id: number) => {
+export const generateToken = async (id: string) => {
   const jwt = await new SignJWT();
   const token = await jwt
     .setProtectedHeader({ alg: 'HS256' })
@@ -56,17 +56,17 @@ export const getUserId = async () => {
   try {
     const token = cookies().get('token');
 
-    if (!token) return -1;
+    if (!token) return null;
 
     const { payload } = await jwtVerify(token.value, secret);
-    if (!payload) return -1;
+    if (!payload) return null;
     if (payload.sub) {
-      return parseInt(payload.sub);
+      return payload.sub;
     }
-    return -1;
+    return null;
   } catch (error) {
     console.error(error);
-    return -1;
+    return null;
   }
 };
 
@@ -90,5 +90,5 @@ export const validateEmail = (email: string): boolean => {
 
 export const isAdministrator = async () => {
   const userId = await getUserId();
-  return process.env.ADMIN_ID === userId.toString();
+  return process.env.ADMIN_ID === userId;
 };

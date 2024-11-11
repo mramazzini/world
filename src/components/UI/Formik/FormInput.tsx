@@ -2,7 +2,7 @@ interface Props {
   name: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   type?: string;
   placeholder?: string;
   disabled?: boolean;
@@ -20,7 +20,13 @@ const FormInput = ({
   return (
     <input
       className={`input input-bordered ${
-        size === 'sm' ? 'input-sm' : size === 'lg' ? 'input-lg' : ''
+        size === 'sm'
+          ? 'input-sm'
+          : size === 'md'
+            ? 'input-md'
+            : size === 'lg'
+              ? 'input-lg'
+              : 'input-xl'
       }`}
       name={name}
       value={value}

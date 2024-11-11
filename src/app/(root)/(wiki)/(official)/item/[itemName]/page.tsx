@@ -8,7 +8,10 @@ type Props = {
   params: { itemName: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getItem(params.itemName.replaceAll('-', ' '));
+  const data = await getItem({
+    query: params.itemName.replaceAll('-', ' '),
+    type: 'name',
+  });
 
   if (!data) {
     return {
@@ -56,7 +59,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Page = async ({ params }: Props) => {
-  const item = await getItem(params.itemName.replaceAll('-', ' '));
+  const item = await getItem({
+    query: params.itemName.replaceAll('-', ' '),
+    type: 'name',
+  });
+
   return <ItemPage item={item} />;
 };
 

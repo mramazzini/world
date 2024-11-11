@@ -1,6 +1,6 @@
 'use client';
 import P from '@/Utility/FormatAndSanitize';
-import { memoizeGetItem } from '@/Utility/globalCache';
+import { memoizeGetItem } from '@/Utility/Indexed/globalCache';
 import { ItemInfo } from '@/lib/types/modelInfo';
 import numberArray from '@/lib/utils/numberArray';
 import { useEffect, useMemo, useState } from 'react';
@@ -32,7 +32,10 @@ const ItemChoice = ({ choice, updateSelections, modalID }: Props) => {
       try {
         const items = await Promise.all(
           choice.options.flat().map(async (itemData) => {
-            return memoizeGetItem(itemData.item);
+            return memoizeGetItem({
+              query: itemData.item,
+              type: 'id',
+            });
           })
         );
         setOptions(items as ItemInfo[]);

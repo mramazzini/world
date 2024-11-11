@@ -8,7 +8,10 @@ type Props = {
   params: { featName: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getFeat(params.featName.replaceAll('-', ' '));
+  const data = await getFeat({
+    query: params.featName.replaceAll('-', ' '),
+    type: 'name',
+  });
 
   if (!data) {
     return {
@@ -56,7 +59,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Page = async ({ params }: Props) => {
-  const feat = await getFeat(params.featName.replaceAll('-', ' '));
+  const feat = await getFeat({
+    query: params.featName.replaceAll('-', ' '),
+    type: 'name',
+  });
 
   return <FeatPage feat={feat} />;
 };

@@ -30,6 +30,7 @@ const ContactModal = () => {
 
   useEffect(() => {
     getUserId().then((res) => {
+      if (res === null) return;
       getUser(res).then((res) => {
         setUser(res);
       });
@@ -56,7 +57,7 @@ const ContactModal = () => {
         Contact us -&gt;
       </ModalButton>
       <Modal id={id}>
-        <ModalBox className=" h-auto">
+        <ModalBox className=" h-auto text-base-content">
           {/* modal content */}
           <h2 className="text-2xl font-bold ">Contact Us</h2>
           <div className="divider divider-primary"></div>

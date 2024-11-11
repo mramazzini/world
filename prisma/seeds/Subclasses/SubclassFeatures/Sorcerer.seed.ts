@@ -1,12 +1,12 @@
 const ids = {
-  aberrant: 98,
-  clockwork: 99,
-  draconic: 100,
-  divine: 101,
-  lunar: 102,
-  shadow: 103,
-  storm: 104,
-  wild: 105,
+  aberrant: '98',
+  clockwork: '99',
+  draconic: '100',
+  divine: '101',
+  lunar: '102',
+  shadow: '103',
+  storm: '104',
+  wild: '105',
 };
 
 const sorcererSubclassFeatures = [

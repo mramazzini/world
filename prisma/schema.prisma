@@ -198,46 +198,47 @@ enum Alignment {
 }
 
 model User {
-  id             Int          @id @default(autoincrement())
-  username       String       @unique
-  email          String       @unique
+  id             String         @id
+  username       String         @unique
+  email          String         @unique
   password       String
   Classes        Class[]
   SubClasses     SubClass[]
   Species        Species[]
   Background     Background[]
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-  likedComments  Comment[]    @relation("LikedComments")
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  likedComments  Comment[]      @relation("LikedComments")
   Spell          Spell[]
   Messages       Message[]
   SubSpecies     SubSpecies[]
-  Campaigns      Campaign[]   @relation("PlayerCampaigns")
-  GMForCampaigns Campaign[]   @relation("GMCampaigns")
+  Campaigns      Campaign[]     @relation("PlayerCampaigns")
+  GMForCampaigns Campaign[]     @relation("GMCampaigns")
   Tool           Tool[]
   Item           Item[]
   Character      Character[]
   Feat           Feat[]
   Comment        Comment[]
   Creature       Creature[]
+  WorkshopItem   WorkshopItem[]
 }
 
 model Character {
-  id           Int        @id @default(autoincrement())
+  id           String     @id
   name         String
   imageURL     String?
   alignment    Alignment
   Background   Background @relation(fields: [backgroundId], references: [id])
-  backgroundId Int
+  backgroundId String
 
   Classes Class[] @relation("Character classes")
 
   SubClasses SubClass[] @relation("Character subClasses")
 
   Species      Species     @relation(fields: [speciesId], references: [id])
-  speciesId    Int
+  speciesId    String
   SubSpecies   SubSpecies? @relation(fields: [subSpeciesId], references: [id])
-  subSpeciesId Int?
+  subSpeciesId String?
 
   Feats Feat[]
 
@@ -248,25 +249,25 @@ model Character {
   updatedAt DateTime @updatedAt
 
   User       User?     @relation(fields: [userId], references: [id])
-  userId     Int?
+  userId     String?
   Campaign   Campaign? @relation(fields: [campaignId], references: [id])
-  campaignId Int?
+  campaignId String?
 }
 
 model Campaign {
-  id           Int         @id @default(autoincrement())
+  id           String      @id
   name         String
   description  String
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
   GameMaster   User        @relation("GMCampaigns", fields: [gameMasterId], references: [id])
-  gameMasterId Int
+  gameMasterId String
   Players      User[]      @relation("PlayerCampaigns")
   Characters   Character[]
 }
 
 model Class {
-  id  Int     @id @default(autoincrement())
+  id  String  @id
   srd Boolean @default(false)
 
   name                     String
@@ -317,7 +318,7 @@ model Class {
   spellCastingInfo Json? //only exists if isSpellCaster is true
 
   SpellList            SpellList? @relation(fields: [spellListId], references: [id]) // If the class has a spell list, link it here
-  spellListId          Int?
+  spellListId          String?
   spellListDescription String?
 
   //date fields
@@ -325,13 +326,13 @@ model Class {
   updatedAt DateTime @updatedAt
 
   User            User?             @relation(fields: [userId], references: [id])
-  userId          Int?
+  userId          String?
   Characters      Character[]       @relation("Character classes")
   ColumnedFeature ColumnedFeature[]
 }
 
 model Spell {
-  id            Int          @id @default(autoincrement())
+  id            String       @id
   srd           Boolean      @default(false)
   name          String
   description   String
@@ -362,7 +363,7 @@ model Spell {
   updatedAt     DateTime     @updatedAt
 
   User                 User?                  @relation(fields: [userId], references: [id])
-  userId               Int?
+  userId               String?
   SpellLists           SpellList[]
   Item                 Item[]                 @relation("SpellScroll")
   PreparedByCreature   Creature[]             @relation("CreaturePrepares")
@@ -371,7 +372,7 @@ model Spell {
 }
 
 model SpellList {
-  id          Int    @id @default(autoincrement())
+  id          String @id
   name        String
   flavorText  String @db.VarChar(200)
   description String
@@ -384,7 +385,9 @@ model SpellList {
 }
 
 model Feature {
-  id            String   @id
+  id            String        @id
+  workshopId    String?       @unique
+  WorkshopItem  WorkshopItem? @relation(fields: [workshopId], references: [id])
   name          String
   description   String
   options       String[]
@@ -398,40 +401,40 @@ model Feature {
   createdAt               DateTime                  @default(now())
   updatedAt               DateTime                  @updatedAt
   SubClass                SubClass?                 @relation("SubClassFeatures", fields: [subClassId], references: [id])
-  subClassId              Int?
+  subClassId              String?
   SpellCastingSubclass    SubClass?                 @relation("SpellCastingFeatures", fields: [spellCastingSubclassId], references: [id])
-  spellCastingSubclassId  Int?
+  spellCastingSubclassId  String?
   Species                 Species?                  @relation(fields: [speciesId], references: [id])
-  speciesId               Int?
+  speciesId               String?
   Class                   Class?                    @relation("ClassFeatures", fields: [classId], references: [id])
-  classId                 Int?
+  classId                 String?
   SpellCastingClass       Class?                    @relation("SpellCastingFeatures", fields: [spellCastingClassId], references: [id])
-  spellCastingClassId     Int?
+  spellCastingClassId     String?
   Feat                    Feat?                     @relation(fields: [featId], references: [id])
-  featId                  Int?
+  featId                  String?
   Tool                    Tool?                     @relation(fields: [toolId], references: [id])
-  toolId                  Int?
+  toolId                  String?
   Item                    Item?                     @relation(fields: [itemId], references: [id])
-  itemId                  Int?
+  itemId                  String?
   Armor                   Armor?                    @relation(fields: [armorId], references: [id])
-  armorId                 Int?
+  armorId                 String?
   FeatureCollection       FeatureCollection?        @relation(fields: [featureCollectionId], references: [id])
-  featureCollectionId     Int?
+  featureCollectionId     String?
   Creature                Creature?                 @relation(fields: [creatureId], references: [id])
-  creatureId              Int?
+  creatureId              String?
   SubSpecies              SubSpecies?               @relation(fields: [subSpeciesId], references: [id])
-  subSpeciesId            Int?
+  subSpeciesId            String?
   Background              Background?               @relation(fields: [backgroundId], references: [id])
-  backgroundId            Int?
+  backgroundId            String?
   Weapon                  Weapon?                   @relation(fields: [weaponId], references: [id])
-  weaponId                Int?
+  weaponId                String?
   columnedFeatures        ColumnedFeature[]
   SubClassColumnedFeature SubClassColumnedFeature[]
 }
 
 model ColumnedFeature {
-  id        Int      @id @default(autoincrement())
-  classId   Int
+  id        String   @id
+  classId   String
   Class     Class    @relation(fields: [classId], references: [id])
   featureId String
   Feature   Feature  @relation(fields: [featureId], references: [id])
@@ -440,8 +443,8 @@ model ColumnedFeature {
 }
 
 model SubClassColumnedFeature {
-  id         Int      @id @default(autoincrement())
-  subClassId Int
+  id         String   @id
+  subClassId String
   SubClass   SubClass @relation(fields: [subClassId], references: [id])
   featureId  String
   Feature    Feature  @relation(fields: [featureId], references: [id])
@@ -450,7 +453,7 @@ model SubClassColumnedFeature {
 }
 
 model SubClass {
-  id  Int     @id @default(autoincrement())
+  id  String  @id
   srd Boolean @default(false)
 
   name        String
@@ -461,15 +464,15 @@ model SubClass {
   /// [SpellCastingInfo]
   spellCastingInfo Json? //only exists if isSpellCaster is true
   spellList        SpellList? @relation(fields: [spellListId], references: [id]) // If the class has a spell list, link it here
-  spellListId      Int?
+  spellListId      String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Class   Class? @relation(fields: [classId], references: [id])
-  classId Int?
-  User    User?  @relation(fields: [userId], references: [id])
-  userId  Int?
+  Class   Class?  @relation(fields: [classId], references: [id])
+  classId String?
+  User    User?   @relation(fields: [userId], references: [id])
+  userId  String?
 
   Character               Character[]               @relation("Character subClasses")
   Features                Feature[]                 @relation("SubClassFeatures")
@@ -478,7 +481,7 @@ model SubClass {
 }
 
 model Species {
-  id          Int     @id @default(autoincrement())
+  id          String  @id
   srd         Boolean @default(false)
   name        String
   description String
@@ -535,12 +538,12 @@ model Species {
   Variants SubSpecies[]
 
   User      User?       @relation(fields: [userId], references: [id])
-  userId    Int?
+  userId    String?
   Character Character[]
 }
 
 model SubSpecies {
-  id                      Int     @id @default(autoincrement())
+  id                      String  @id
   srd                     Boolean @default(false)
   name                    String
   description             String
@@ -595,16 +598,17 @@ model SubSpecies {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
 
   species   Species     @relation(fields: [speciesId], references: [id])
-  speciesId Int
+  speciesId String
   Character Character[]
 }
 
 model Background {
-  id                             Int      @id @default(autoincrement())
+  id String @id
+
   srd                            Boolean  @default(false)
   name                           String
   description                    String
@@ -629,16 +633,19 @@ model Background {
   ideals                   String[]
   bonds                    String[]
   flaws                    String[]
-  createdAt                DateTime    @default(now())
-  updatedAt                DateTime    @updatedAt
-  User                     User?       @relation(fields: [userId], references: [id])
-  userId                   Int?
+  createdAt                DateTime       @default(now())
+  updatedAt                DateTime       @updatedAt
+  User                     User?          @relation(fields: [userId], references: [id])
+  userId                   String?
   Character                Character[]
+  WorkshopItem             WorkshopItem[]
 }
 
 model Feat {
-  id   Int    @id @default(autoincrement())
-  name String
+  id           String        @id
+  workshopId   String?       @unique
+  WorkshopItem WorkshopItem? @relation(fields: [workshopId], references: [id])
+  name         String
 
   Features          Feature[]
   flavorText        String    @db.VarChar(200)
@@ -650,14 +657,14 @@ model Feat {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   User       User?       @relation(fields: [userId], references: [id])
-  userId     Int?
+  userId     String?
   Characters Character[]
 }
 
 model Message {
-  id        Int      @id @default(autoincrement())
+  id        String   @id
   User      User?    @relation(fields: [userId], references: [id])
-  userId    Int?
+  userId    String?
   email     String?
   message   String
   createdAt DateTime @default(now())
@@ -665,7 +672,7 @@ model Message {
 }
 
 model Tool {
-  id   Int    @id @default(autoincrement())
+  id   String @id
   name String
 
   /// [ToolSkill]
@@ -678,8 +685,8 @@ model Tool {
 
   Items Item[]
 
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -721,7 +728,7 @@ enum Unit {
 }
 
 model EquipmentPack {
-  id   Int    @id @default(autoincrement())
+  id   String @id
   name String
 
   /// [QuantityItem]
@@ -735,7 +742,7 @@ model EquipmentPack {
 }
 
 model Item {
-  id                 Int     @id @default(autoincrement())
+  id                 String  @id
   name               String
   description        String
   flavorText         String  @db.VarChar(200)
@@ -763,24 +770,24 @@ model Item {
   EquipmentPackList EquipmentPack[] @relation("EquipmentPackParent")
   //the item can be an equipment pack
   EquipmentPack     EquipmentPack?  @relation("EquipmentPackChild", fields: [equipmentPackId], references: [id])
-  equipmentPackId   Int?
+  equipmentPackId   String?
 
   // if the item is a tool we can link it to the tool model
-  Tool   Tool? @relation(fields: [toolId], references: [id])
-  toolId Int?
+  Tool   Tool?   @relation(fields: [toolId], references: [id])
+  toolId String?
 
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
 
-  Spell   Spell? @relation("SpellScroll", fields: [spellId], references: [id])
-  spellId Int?
+  Spell   Spell?  @relation("SpellScroll", fields: [spellId], references: [id])
+  spellId String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   AmmunitionFor Weapon[] @relation("WeaponAmmunition")
   Armor         Armor?   @relation("ItemArmor", fields: [armorId], references: [id])
-  armorId       Int?
+  armorId       String?
 
   CreatureWielding Creature[]      @relation("CreatureWields")
   CreatureArmor    Creature[]      @relation("CreatureArmor")
@@ -789,9 +796,9 @@ model Item {
 }
 
 model ItemWeaponData {
-  itemId   Int     @unique
+  itemId   String  @unique
   Item     Item    @relation(fields: [itemId], references: [id])
-  weaponId Int
+  weaponId String
   Weapon   Weapon  @relation(fields: [weaponId], references: [id])
   silvered Boolean @default(false)
   magical  Boolean @default(false)
@@ -810,7 +817,7 @@ enum Rarity {
 
 //es Finessed, Light, Thrown etc
 model WeaponProperty {
-  id                     Int                      @id @default(autoincrement())
+  id                     String                   @id
   name                   String
   description            String
   createdAt              DateTime                 @default(now())
@@ -820,8 +827,8 @@ model WeaponProperty {
 
 model WeaponPropertyInstance {
   // composite key
-  weaponId   Int
-  propertyId Int
+  weaponId   String
+  propertyId String
   Weapon     Weapon         @relation(fields: [weaponId], references: [id])
   Property   WeaponProperty @relation(fields: [propertyId], references: [id])
   range      String?
@@ -836,7 +843,7 @@ model WeaponPropertyInstance {
 }
 
 model Weapon {
-  id   Int    @id @default(autoincrement())
+  id   String @id
   name String
 
   // if the weapon is simple or martial
@@ -846,8 +853,8 @@ model Weapon {
   /// [Damage]
   damage Json[] // AND array (ex 1d6 piercing and 2d6 fire)
 
-  ammunition   Item? @relation("WeaponAmmunition", fields: [ammunitionId], references: [id])
-  ammunitionId Int?
+  ammunition   Item?   @relation("WeaponAmmunition", fields: [ammunitionId], references: [id])
+  ammunitionId String?
 
   SpecialProperties      Feature[]
   WeaponPropertyInstance WeaponPropertyInstance[]
@@ -855,7 +862,7 @@ model Weapon {
 }
 
 model Armor {
-  id   Int    @id @default(autoincrement())
+  id   String @id
   name String
 
   armorClass Int
@@ -870,7 +877,7 @@ model Armor {
 //This represents a list of features that will typically be chosen from
 // Ex. Eldritch Invocations, Fighting Styles, etc.
 model FeatureCollection {
-  id          Int    @id @default(autoincrement())
+  id          String @id
   name        String
   description String
   flavorText  String @db.VarChar(200)
@@ -881,7 +888,7 @@ model FeatureCollection {
 }
 
 model BlogPost {
-  id              Int      @id @default(autoincrement())
+  id              String   @id
   title           String
   route           String   @unique
   meta            String   @db.VarChar(200)
@@ -915,13 +922,13 @@ enum AssociatedModel {
 }
 
 model Comment {
-  id      Int    @id @default(autoincrement())
+  id      String @id
   User    User   @relation(fields: [userId], references: [id])
-  userId  Int
+  userId  String
   comment String
 
   parentComment   Comment?  @relation("ParentComment", fields: [parentCommentId], references: [id])
-  parentCommentId Int?
+  parentCommentId String?
   replies         Comment[] @relation("ParentComment")
   likedBy         User[]    @relation("LikedComments")
 
@@ -931,7 +938,7 @@ model Comment {
   CommentType CommentType
   model       AssociatedModel
 
-  modelId Int
+  modelId String
 }
 
 enum ArmorClassProtocol {
@@ -940,7 +947,7 @@ enum ArmorClassProtocol {
 }
 
 model Creature {
-  id          Int    @id @default(autoincrement())
+  id          String @id
   name        String
   description String
   flavorText  String @db.VarChar(200)
@@ -975,11 +982,11 @@ model Creature {
 
   wieldingItems Item[] @relation("CreatureWields")
 
-  armorEquipped   Item? @relation("CreatureArmor", fields: [armorEquippedId], references: [id])
-  armorEquippedId Int?
+  armorEquipped   Item?   @relation("CreatureArmor", fields: [armorEquippedId], references: [id])
+  armorEquippedId String?
 
-  shieldEquipped   Item? @relation("CreatureShield", fields: [shieldEquippedId], references: [id])
-  shieldEquippedId Int?
+  shieldEquipped   Item?   @relation("CreatureShield", fields: [shieldEquippedId], references: [id])
+  shieldEquippedId String?
 
   spellsPrepared Spell[] @relation("CreaturePrepares")
   freeSpells     Spell[] @relation("CreatureFreelyCasts")
@@ -1029,7 +1036,7 @@ model Creature {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   User      User?    @relation(fields: [userId], references: [id])
-  userId    Int?
+  userId    String?
 }
 
 enum Time {
@@ -1046,8 +1053,8 @@ enum Time {
 }
 
 model CreatureLimitedSpell {
-  creatureId Int
-  spellId    Int
+  creatureId String
+  spellId    String
   amount     Int
   time       Time
   Creature   Creature @relation(fields: [creatureId], references: [id], onUpdate: Cascade, onDelete: Cascade)
@@ -1056,9 +1063,38 @@ model CreatureLimitedSpell {
   @@id([creatureId, spellId])
 }
 
+enum WorkshopProtocol {
+  SPELL
+  ITEM
+  CREATURE
+  CLASS
+  SUBCLASS
+  SPECIES
+  SUBSPECIES
+  BACKGROUND
+  FEAT
+  FEATURE
+}
+
+model WorkshopItem {
+  id   String @id
+  /// [WorkshopItemData]
+  data Json
+
+  User   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  createdAt    DateTime    @default(now())
+  Feature      Feature?
+  Feat         Feat?
+  Background   Background? @relation(fields: [backgroundId], references: [id])
+  backgroundId String?
+}
+
 //Prisma wont create enum types if they are not in a model, so this is a dummy model
 model Enums {
   id                 Int                @id @default(autoincrement())
+  protocol           WorkshopProtocol
   skill              Skill
   ability            Ability
   armorType          ArmorType

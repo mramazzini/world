@@ -2,6 +2,7 @@ import { cerr, cinfo, cwarn } from '@/lib/utils/chalkLog';
 import SpellListToSpellArr from '../Spells/SpellLists/SpellListToSpell.seed';
 import { SpellSeed } from '../Spells/spells.seed';
 import { PrismaClient } from '@prisma/client';
+import { SpellID } from '@/lib/types/types';
 
 export const linkSpellListToSpell = async (db: PrismaClient) => {
   const ids = SpellSeed.map((s) => s.id).filter((id) => id !== undefined);
@@ -41,8 +42,8 @@ export const linkSpellListToSpell = async (db: PrismaClient) => {
 };
 
 const verifySpellList = (
-  spellIds: number[],
-  spellListsToSpell: { spellId: number; spellListId: number }[]
+  spellIds: SpellID[],
+  spellListsToSpell: { spellId: SpellID; spellListId: string }[]
 ) => {
   //verify that all spellIds are in spellListsToSpell
   for (const id of spellIds) {

@@ -18,7 +18,7 @@ const createMaxyUser = async (prisma: PrismaClient) => {
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   await prisma.user.upsert({
     where: {
-      id: parseInt(process.env.ADMIN_ID),
+      id: process.env.ADMIN_ID,
     },
     update: {
       email: process.env.ADMIN_EMAIL,
@@ -26,7 +26,7 @@ const createMaxyUser = async (prisma: PrismaClient) => {
       password: hashedPassword,
     },
     create: {
-      id: parseInt(process.env.ADMIN_ID),
+      id: process.env.ADMIN_ID,
       email: process.env.ADMIN_EMAIL,
       username: process.env.ADMIN_USERNAME,
       password: hashedPassword,

@@ -1,7 +1,7 @@
 'use client';
 
 export const saveCharacterToDB = async (
-  id: number,
+  id: string,
   state: PrismaJson.CharacterState
 ) => {
   return await fetch('/api/saveCharacter', {
@@ -12,7 +12,7 @@ export const saveCharacterToDB = async (
 };
 
 export const saveImageToCharacter = async (
-  id: number,
+  id: string,
   image: string
 ): Promise<Response> => {
   return await fetch('/api/saveCharacterImage', {

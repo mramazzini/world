@@ -3,7 +3,7 @@ import { itemIds } from '../ItemIds';
 
 const EquipmentPackSeed: Prisma.EquipmentPackCreateManyInput[] = [
   {
-    id: 1,
+    id: '1',
     name: "Burglar's Pack",
     itemsQuantity: [
       {
@@ -65,7 +65,7 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateManyInput[] = [
     ],
   },
   {
-    id: 2,
+    id: '2',
     name: "Diplomat's Pack",
     itemsQuantity: [
       {
@@ -115,7 +115,7 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateManyInput[] = [
     ],
   },
   {
-    id: 3,
+    id: '3',
     name: "Dungeoneer's Pack",
     itemsQuantity: [
       {
@@ -157,7 +157,7 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateManyInput[] = [
     ],
   },
   {
-    id: 4,
+    id: '4',
     name: "Entertainer's Pack",
     itemsQuantity: [
       {
@@ -191,7 +191,7 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateManyInput[] = [
     ],
   },
   {
-    id: 5,
+    id: '5',
     name: "Explorer's Pack",
     itemsQuantity: [
       {
@@ -229,7 +229,7 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateManyInput[] = [
     ],
   },
   {
-    id: 6,
+    id: '6',
     name: "Priest's Pack",
     itemsQuantity: [
       {
@@ -271,7 +271,7 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateManyInput[] = [
     ],
   },
   {
-    id: 7,
+    id: '7',
     name: "Scholar's Pack",
     itemsQuantity: [
       {
@@ -305,7 +305,7 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateManyInput[] = [
     ],
   },
   {
-    id: 8,
+    id: '8',
     name: "Monster Hunter's Pack",
     itemsQuantity: [
       {
@@ -357,14 +357,14 @@ const EquipmentPackSeed: Prisma.EquipmentPackCreateManyInput[] = [
 ];
 
 const equipmentPackIds = {
-  burglar: 1,
-  diplomat: 2,
-  dungeoneer: 3,
-  entertainer: 4,
-  explorer: 5,
-  priest: 6,
-  scholar: 7,
-  monster: 8,
+  burglar: '1',
+  diplomat: '2',
+  dungeoneer: '3',
+  entertainer: '4',
+  explorer: '5',
+  priest: '6',
+  scholar: '7',
+  monster: '8',
 };
 
 export { EquipmentPackSeed, equipmentPackIds };

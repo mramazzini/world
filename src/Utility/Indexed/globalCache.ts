@@ -6,18 +6,19 @@ import { getWeapon } from '@/lib/actions/db/weapons/read.actions';
 import { getSubclass } from '@/lib/actions/db/subclass/read.actions';
 import { getSpell } from '@/lib/actions/db/spell/read.actions';
 import { getFeat } from '@/lib/actions/db/feat/read.actions';
+import { SingleDataQuery } from '@/lib/types/metadata';
 
 const pendingQueries = new Map<string, unknown>();
 
 export function cacheFunction<
-  T extends (query: number | string) => ReturnType<T>,
+  T extends (query: SingleDataQuery) => ReturnType<T>,
 >(
-  keyGenerator: (query: number | string) => string,
+  keyGenerator: (query: string) => string,
   fetchFunction: T
-): (query: number | string) => ReturnType<T> {
+): (query: SingleDataQuery) => ReturnType<T> {
   // @ts-expect-error pendingQueries is not used in the returned function
-  return async function (query: number | string) {
-    const key = keyGenerator(query);
+  return async function (query: SingleDataQuery) {
+    const key = keyGenerator(query.query);
 
     // Check if there is an ongoing promise for this key
     if (pendingQueries.has(key)) {
@@ -56,7 +57,7 @@ export function cacheFunction<
 }
 
 export const memoizeGetItem = cacheFunction(
-  (itemId: string | number) => `item-${itemId}`,
+  (itemId) => `item-${itemId}`,
   getItem
 );
 
@@ -81,7 +82,7 @@ export const memoizeGetTool = cacheFunction(
 );
 
 export const memoizeGetSubclass = cacheFunction(
-  (subclassId: string | number) => `subclass-${subclassId}`,
+  (subclassId: string) => `subclass-${subclassId}`,
   getSubclass
 );
 

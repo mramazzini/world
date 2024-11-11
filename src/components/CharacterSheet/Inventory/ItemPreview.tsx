@@ -1,5 +1,5 @@
 'use client';
-import { memoizeGetItem } from '@/Utility/globalCache';
+import { memoizeGetItem } from '@/Utility/Indexed/globalCache';
 import { Fragment, useEffect, useState } from 'react';
 import ItemPage from '@/pages-lib/wiki/official/Item.page';
 import Image from 'next/image';
@@ -28,7 +28,10 @@ const ItemPreview = ({ setSelectedItem, selectedItem }: Props) => {
 
   useEffect(() => {
     if (!selectedItem) return;
-    memoizeGetItem(selectedItem.item).then((item) => {
+    memoizeGetItem({
+      query: selectedItem.item,
+      type: 'id',
+    }).then((item) => {
       setItem(item);
     });
   }, [selectedItem]);
@@ -56,9 +59,13 @@ const ItemPreview = ({ setSelectedItem, selectedItem }: Props) => {
                   <button
                     key={index}
                     className="btn btn-secondary join-item"
-                    disabled={state?.equipped?.hands.items?.includes(
-                      selectedItem?.item || -1
-                    )}
+                    disabled={
+                      selectedItem
+                        ? state?.equipped?.hands.items?.includes(
+                            selectedItem?.item
+                          )
+                        : false
+                    }
                     onClick={async (e) => {
                       e.preventDefault();
                       if (!state) return;
@@ -72,9 +79,8 @@ const ItemPreview = ({ setSelectedItem, selectedItem }: Props) => {
                       dispatch(setCharacterState(acState));
                     }}
                   >
-                    {state?.equipped?.hands.items?.includes(
-                      selectedItem?.item || -1
-                    )
+                    {selectedItem &&
+                    state?.equipped?.hands.items?.includes(selectedItem?.item)
                       ? 'Equipped'
                       : 'Equip Shield'}
                   </button>

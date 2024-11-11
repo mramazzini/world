@@ -4,9 +4,9 @@ import generateId from '../_helpers/generateId';
 const SubclassColumnedFeaturesSeed: Prisma.SubClassColumnedFeatureCreateManyInput[] =
   [
     {
-      id: 1,
+      id: '1',
       featureId: generateId('subclass', 'Cantrips', 'Eldritch Knight', 1),
-      subClassId: 7, //eldritch knight
+      subClassId: '7', //eldritch knight
       name: 'Cantrips Known',
       rows: [
         '-',
@@ -32,9 +32,9 @@ const SubclassColumnedFeaturesSeed: Prisma.SubClassColumnedFeatureCreateManyInpu
       ],
     },
     {
-      id: 2,
+      id: '2',
       featureId: generateId('subclass', 'Spells Known', 'Eldritch Knight', 2),
-      subClassId: 7, //eldritch knight
+      subClassId: '7', //eldritch knight
       name: 'Spells Known',
       rows: [
         '-',
@@ -60,9 +60,9 @@ const SubclassColumnedFeaturesSeed: Prisma.SubClassColumnedFeatureCreateManyInpu
       ],
     },
     {
-      id: 3,
+      id: '3',
       featureId: generateId('subclass', 'Cantrips', 'Arcane Trickster', 1),
-      subClassId: 89, //arcane trickster
+      subClassId: '89', //arcane trickster
       name: 'Cantrips Known',
       rows: [
         '-',
@@ -88,9 +88,9 @@ const SubclassColumnedFeaturesSeed: Prisma.SubClassColumnedFeatureCreateManyInpu
       ],
     },
     {
-      id: 4,
+      id: '4',
       featureId: generateId('subclass', 'Spells Known', 'Arcane Trickster', 2),
-      subClassId: 89, //arcane trickster
+      subClassId: '89', //arcane trickster
       name: 'Spells Known',
       rows: [
         '-',

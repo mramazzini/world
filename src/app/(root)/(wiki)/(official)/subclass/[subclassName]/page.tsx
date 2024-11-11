@@ -8,7 +8,10 @@ type Props = {
   params: { subclassName: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getSubclass(params.subclassName.replaceAll('-', ' '));
+  const data = await getSubclass({
+    query: params.subclassName.replaceAll('-', ' '),
+    type: 'name',
+  });
 
   if (!data) {
     return {
@@ -55,7 +58,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 const Page = async ({ params }: Props) => {
-  const subclass = await getSubclass(params.subclassName.replaceAll('-', ' '));
+  const subclass = await getSubclass({
+    query: params.subclassName.replaceAll('-', ' '),
+    type: 'name',
+  });
+
   return <SubClassPage subclass={subclass} />;
 };
 

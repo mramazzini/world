@@ -1,12 +1,12 @@
 const ids = {
-  creation: 20,
-  eloquence: 21,
-  glamour: 22,
-  lore: 23,
-  spirits: 24,
-  swords: 25,
-  valor: 26,
-  whispers: 27,
+  creation: '20',
+  eloquence: '21',
+  glamour: '22',
+  lore: '23',
+  spirits: '24',
+  swords: '25',
+  valor: '26',
+  whispers: '27',
 };
 
 const BardSubclassFeatures = [

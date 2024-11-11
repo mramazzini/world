@@ -9,7 +9,10 @@ type Props = {
   params: { spellName: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getSpell(params.spellName.replaceAll('-', ' '));
+  const data = await getSpell({
+    query: params.spellName.replaceAll('-', ' '),
+    type: 'name',
+  });
 
   if (!data) {
     return {
@@ -57,7 +60,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Page = async ({ params }: Props) => {
-  const spell = await getSpell(params.spellName.replaceAll('-', ' '));
+  const spell = await getSpell({
+    query: params.spellName.replaceAll('-', ' '),
+    type: 'name',
+  });
   return <SpellPage spell={spell} />;
 };
 

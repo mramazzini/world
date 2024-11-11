@@ -9,7 +9,10 @@ type Props = {
   params: { creatureName: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getCreature(params.creatureName.replaceAll('-', ' '));
+  const data = await getCreature({
+    query: params.creatureName.replaceAll('-', ' '),
+    type: 'name',
+  });
 
   if (!data) {
     return {
@@ -58,7 +61,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Page = async ({ params }: Props) => {
-  const creature = await getCreature(params.creatureName.replaceAll('-', ' '));
+  const creature = await getCreature({
+    query: params.creatureName.replaceAll('-', ' '),
+    type: 'name',
+  });
   if (!creature)
     return (
       <main className="p-4">

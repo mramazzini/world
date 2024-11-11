@@ -1,6 +1,6 @@
 'use client';
 import { ItemID } from '@/lib/types/types';
-import { memoizeGetItem } from '../../globalCache';
+import { memoizeGetItem } from '../../Indexed/globalCache';
 import { ItemInfo } from '@/lib/types/modelInfo';
 
 export const unpackEquipment = async (
@@ -8,7 +8,10 @@ export const unpackEquipment = async (
   equipmentPackItemId: ItemID
 ): Promise<PrismaJson.CharacterState> => {
   const newState = { ...state };
-  const equipmentPack = (await memoizeGetItem(equipmentPackItemId)) as ItemInfo;
+  const equipmentPack = (await memoizeGetItem({
+    query: equipmentPackItemId,
+    type: 'id',
+  })) as ItemInfo;
   const equipmentPackData = equipmentPack.EquipmentPack;
   if (!equipmentPackData) return state;
   const equipment = equipmentPackData.itemsQuantity;

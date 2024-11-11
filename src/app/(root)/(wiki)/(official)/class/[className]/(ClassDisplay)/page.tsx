@@ -8,7 +8,10 @@ type Props = {
   params: { className: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getClass(params.className);
+  const data = await getClass({
+    query: params.className.replaceAll('-', ' '),
+    type: 'name',
+  });
   if (!data) {
     return {
       title: "Class Not Found - Max's DND",
@@ -53,7 +56,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 const Page = async ({ params }: Props) => {
-  const classObj = await getClass(params.className);
+  const classObj = await getClass({
+    query: params.className.replaceAll('-', ' '),
+    type: 'name',
+  });
   return <ClassPage classObj={classObj} />;
 };
 

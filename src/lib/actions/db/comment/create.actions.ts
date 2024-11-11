@@ -3,22 +3,24 @@ import { getUserId } from '@/lib/utils/auth';
 import { AssociatedModel, CommentType, PrismaClient } from '@prisma/client';
 import { getUser } from '../user/read.actions';
 import { sendComment } from '@/lib/webhook/DiscordWebhook';
+import { v4 } from 'uuid';
 
 export const createComment = async (
   model: AssociatedModel,
-  id: number,
+  id: string,
   text: string,
   location: string
 ) => {
   const db = new PrismaClient();
   const userId = await getUserId();
-  if (userId === -1) {
+  if (userId === null) {
     console.error('Error getting user id');
     return;
   }
   try {
     await db.comment.create({
       data: {
+        id: v4(),
         model,
         modelId: id,
         comment: text,
@@ -41,19 +43,20 @@ export const createComment = async (
 
 export const createReply = async (
   model: AssociatedModel,
-  id: number,
+  id: string,
   text: string,
-  parentId: number
+  parentId: string
 ) => {
   const db = new PrismaClient();
   const userId = await getUserId();
-  if (userId === -1) {
+  if (userId === null) {
     console.error('Error getting user id');
     return;
   }
   try {
     await db.comment.create({
       data: {
+        id: v4(),
         model,
         modelId: id,
         comment: text,

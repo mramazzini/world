@@ -1,9 +1,11 @@
+import { ItemID } from '@/lib/types/types';
+
 export const itemInInventory = ({
   state,
   itemID,
 }: {
   state: PrismaJson.CharacterState;
-  itemID: number;
+  itemID: ItemID;
 }) => {
   return state.inventory.find((item) => item.item === itemID);
 };
@@ -14,7 +16,7 @@ export const addToInventory = ({
   quantity,
 }: {
   state: PrismaJson.CharacterState;
-  itemID: number;
+  itemID: ItemID;
   quantity: number;
 }) => {
   if (itemInInventory({ state, itemID })) {

@@ -8,7 +8,10 @@ type Props = {
   params: { speciesName: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getSpecie(params.speciesName.replaceAll('-', ' '));
+  const data = await getSpecie({
+    query: params.speciesName.replaceAll('-', ' '),
+    type: 'name',
+  });
 
   if (!data) {
     return {
@@ -56,7 +59,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Page = async ({ params }: Props) => {
-  const species = await getSpecie(params.speciesName.replaceAll('-', ' '));
+  const species = await getSpecie({
+    query: params.speciesName.replaceAll('-', ' '),
+    type: 'name',
+  });
 
   return <SpeciesPage species={species} />;
 };

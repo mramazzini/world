@@ -1,0 +1,88 @@
+'use client';
+import useModal from '@/hooks/useModal';
+import { NAVBAR_HEIGHT_REM } from '@/lib/globalVars';
+import { toggleSideNav } from '@/store/workshopSlice';
+import { useDispatch } from 'react-redux';
+import CreateHomebrewModal from '../CreateHomebrewModal/CreateHomebrewModal';
+import { useCallback, useMemo } from 'react';
+import useWorkshopTab from '@/hooks/useWorkshopTab';
+import { syncWorkshopItem } from '@/lib/actions/db/workshop/create.actions';
+import useWorkshopFeatures from '@/hooks/useWorkshopFeatures';
+import { useAppSelector } from '@/store/hooks';
+import PublishModal from '../PublishModal/PublishModal';
+const WorkshopTopNav = () => {
+  const dispatch = useDispatch();
+  const itemsToDelete = useAppSelector((state) => state.workshop.itemsToDelete);
+  const tab = useWorkshopTab();
+  const features = useWorkshopFeatures();
+  const { id } = useModal();
+
+  const title = useMemo(() => (tab ? tab?.name : "Max's Workshop"), [tab]);
+
+  const subTitle = useMemo(
+    () =>
+      tab
+        ? tab?.protocol.toCapitalCase()
+        : 'Create, edit, and publish your homebrew content',
+    [tab]
+  );
+
+  const handleSave = useCallback(async () => {
+    if (!tab) return;
+    console.log(tab, features, itemsToDelete);
+    const res = await syncWorkshopItem(tab, features ? features : []);
+    console.log(res);
+  }, [tab, features, itemsToDelete]);
+
+  return (
+    <div
+      className="bg-base-300 w-full flex justify-between items-center "
+      style={{ height: NAVBAR_HEIGHT_REM + 'rem' }}
+    >
+      <div className="flex gap-4 p-4 items-center">
+        <button
+          className="btn btn-ghost h-auto w-auto p-2 "
+          onClick={() => {
+            dispatch(toggleSideNav());
+          }}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+          >
+            <path
+              d="M4 6H20M4 12H20M4 18H20"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>{' '}
+        <CreateHomebrewModal modalId={id} />
+        <button className="btn btn-ghost">Settings</button>
+        <button className="btn btn-ghost">Help</button>
+      </div>
+      <div className="flex flex-col items-center justify-center">
+        <span className="font-bold">{title}</span>{' '}
+        <span className="text-xs">{subTitle}</span>
+      </div>
+      <div className="flex gap-4 p-4 items-center">
+        <button
+          className="btn btn-ghost"
+          onClick={async (e) => {
+            e.preventDefault();
+            handleSave();
+          }}
+        >
+          Save
+        </button>
+        <PublishModal />
+      </div>
+    </div>
+  );
+};
+
+export default WorkshopTopNav;

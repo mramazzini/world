@@ -15,11 +15,11 @@ import {
 } from '../Items/Items.seed';
 import { backgroundIds } from './BackgroundIds';
 
-const i = (id: number, str: string) => `^${id}{${str}}^`;
+const i = (id: string | number, str: string) => `^${id}{${str}}^`;
 
 const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   {
-    id: 1,
+    id: '1',
     name: 'Acolyte',
     flavorText:
       'You have spent your life in the service of a temple to a specific god or pantheon of gods.',
@@ -115,7 +115,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 2,
+    id: '2',
     name: 'Anthropologist',
     flavorText: 'You have always been fascinated by other cultures.',
     description:
@@ -194,7 +194,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 3,
+    id: '3',
     name: 'Archeologist',
     flavorText: 'You love to dig in the dirt and uncover relics of the past.',
     description:
@@ -265,7 +265,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 4,
+    id: '4',
     name: 'Athlete',
     flavorText:
       'You strive to perfect yourself physically and in execution of everything you do.',
@@ -358,7 +358,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 5,
+    id: '5',
     name: 'Charlatan',
     flavorText:
       "You have always had a way with people. You know what makes them tick, you can tease out their hearts' desires after a few minutes of conversation.",
@@ -450,7 +450,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 6,
+    id: '6',
     name: 'City Watch',
     flavorText: 'You have served the community where you grew up.',
     description:
@@ -530,7 +530,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 7,
+    id: '7',
     name: 'Clan Crafter',
     flavorText: 'You are a member of a dwarven clan of crafters.',
     description:
@@ -610,7 +610,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 8,
+    id: '8',
     name: 'Cloistered Scholar',
     flavorText: 'You have worked in a library or scriptorium.',
     description:
@@ -707,7 +707,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 9,
+    id: '9',
     name: 'Courtier',
     flavorText: 'You are a personage of some significance in a noble court.',
     description:
@@ -780,7 +780,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 10,
+    id: '0',
     name: 'Criminal',
     flavorText: 'You have a history of breaking the law.',
     description:
@@ -850,7 +850,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 11,
+    id: '1',
     name: 'Entertainer',
     flavorText:
       'You thrive in front of an audience. You know how to entrance them, entertain them, and even inspire them.',
@@ -942,7 +942,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 12,
+    id: '2',
     name: 'Faceless',
     flavorText: 'You are a hero behind a mask.',
     description:
@@ -1011,7 +1011,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 13,
+    id: '3',
     name: 'Faction Agent',
     flavorText: 'You are a member of a faction.',
     description:
@@ -1109,7 +1109,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 14,
+    id: '4',
     name: 'Far Traveler',
     flavorText: 'You are from a distant place.',
     description:
@@ -1208,7 +1208,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 15,
+    id: '5',
     name: 'Feylost',
     flavorText:
       'You grew up in the Feywild after disappearing from your home plane as a child.',
@@ -1326,7 +1326,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 16,
+    id: '6',
     name: 'Fisher',
     description:
       'You have spent your life aboard fishing vessels or combing the shallows for the bounty of the ocean. Perhaps you were born into a family of fisher folk, working with your kin to feed your village. Maybe the job was a means to an end - a way out of an undesirable circumstance that forced you to take up life aboard a ship. Regardless of how you began, you soon fell in love with the sea, the art of fishing, and the promise of the eternal horizon.',
@@ -1417,7 +1417,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 17,
+    id: '7',
     name: 'Folk Hero',
     description:
       'You come from a humble social rank, but you are destined for so much more. Already the people of your home village regard you as their champion, and your destiny calls you to stand against the tyrants and monsters that threaten the common folk everywhere.',
@@ -1505,7 +1505,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 18,
+    id: '8',
     name: 'Giant Foundling',
     description:
       'Though you aren’t a Giant, you grew up among giants. Maybe you were an orphan taken in by a sympathetic family of stone giants who raised you as one of their own. Or perhaps you lived in a lost prehistoric pocket of the world, surrounded by giants and fearsome behemoths or hulking dinosaurs.\n\nSomething about your environment—perhaps the food or water that sustained you, elemental magic inherent in the site of your home, or some verdant blessing of growth placed on you—caused you to grow to a remarkable size for your kind. With the aid of this magic, you have learned how to embody the might of giants. You are used to moving through a world much bigger than you, and that is reflected in your skills, attitude, and perspective on life.',
@@ -1571,7 +1571,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 19,
+    id: '9',
     name: 'Gladiator',
     description:
       'A gladiator is as much an entertainer as any minstrel or circus performer trained to make the arts of combat into a spectacle the crowd can enjoy. ',
@@ -1586,7 +1586,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     toolProficiencyDescription:
       'You are proficient with Dsiguise kits and a musical instrument.',
     toolProficiencies: {
-      default: [itemIds.disguiseKit],
+      default: [toolIds.disguiseKit],
       choices: [
         {
           numberOfChoices: 1,
@@ -1629,7 +1629,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
       "Successful entertainers have to be able to capture and hold an audience's attention, so they tend to have flamboyant or forceful personalities. ",
   },
   {
-    id: 20,
+    id: '0',
     name: 'Guild Artisan',
     description:
       "You are a member of an artisan's guild, skilled in a particular field and closely associated with other artisans. You are a well-established part of the mercantile world, freed by talent and wealth from the constraints of a feudal social order. You learned your skills as an apprentice to a master artisan, under the sponsorship of your guild, until you became a master in your own right.",
@@ -1707,7 +1707,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 21,
+    id: '1',
     name: 'Guild Merchant',
     description:
       "Instead of an artisans' guild, you might belong to a guild of traders, caravan masters, or shopkeepers. You don't craft items yourself but earn a living by buying and selling the works of others (or the raw materials artisans need to practice their craft). Your guild might be a large merchant consortium (or family) with interests across the region. Perhaps you transported goods from one place to another, by ship, wagon, or caravan, or bought them from traveling traders and sold them in your own little shop. In some ways, the traveling merchant's life lends itself to adventure far more than the life of an artisan.",
@@ -1780,7 +1780,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 22,
+    id: '2',
     name: 'Haunted One',
     description:
       'You are haunted by something so terrible that you dare not speak of it. You’ve tried to bury it and run away from it, to no avail. Whatever this thing is that haunts you can’t be slain with a sword or banished with a spell. It might come to you as a shadow on the wall, a bloodcurdling nightmare, a memory that refuses to die, or a demonic whisper in the dark. The burden has taken its toll, isolating you from most people and making you question your sanity. You must find a way to overcome it before it destroys you.',
@@ -1872,7 +1872,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 23,
+    id: '3',
     name: 'Hermit',
     description:
       'You lived in seclusion – either in a sheltered community such as a monastery, or entirely alone – for a formative part of your life. In your time apart from the clamor of society, you found quiet, solitude, and perhaps some of the answers you were looking for.',
@@ -1885,7 +1885,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     },
     toolProficiencyDescription: 'You are proficient with an herbalism kit.',
     toolProficiencies: {
-      default: [itemIds.herbalismKit],
+      default: [toolIds.herbalismKit],
     },
     languageProficiencyDescription:
       'You are proficient in one language of your choice.',
@@ -1954,7 +1954,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   }, //skip because too many tool proficiencies
   // {
-  //   id: 24,
+  //   id: '4',
   //   name: "House Agent",
   //   description:
   //     "You have sworn fealty to a dragonmarked house. If you have a dragonmark, you're likely a member of one of the house's influential families; otherwise you're an outsider who hopes to make your fortune through the house. Your main task is to serve as the eyes of your house, but you could be called on at any time to act as its hand. Such missions can be perilous but lucrative.",
@@ -1966,7 +1966,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
 
   // },
   {
-    id: 25,
+    id: '5',
     name: 'Inheritor',
     description:
       'You are the heir to something of great value – not mere coin or wealth, but an object that has been entrusted to you and you alone. Your inheritance might have come directly to you from a member of your family, by right of birth, or it could have been left to you by a friend, a mentor, a teacher, or someone else important in your life. The revelation of your inheritance changed your life, and might have set you on the path to adventure, but it could also come with many dangers, including those who covet your gift and want to take it from you – by force, if need be.',
@@ -2065,7 +2065,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 26,
+    id: '6',
     name: 'Investigator',
     description:
       "Rarer than watch or patrol members are a community's investigators, who are responsible for solving crimes after the fact. Though such folk are seldom found in rural areas, nearly every settlement of decent size has at least one or two watch members who have the skill to investigate crime scenes and track down criminals.",
@@ -2136,7 +2136,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 27,
+    id: '7',
     name: 'Investigator (VRGR)',
     description:
       "You relentlessly seek the truth. Perhaps you're motivated by belief in the law and a sense of universal justice, or maybe that very law has failed you and you seek to make things right. You could have witnessed something remarkable or terrible, and now you must know more about this hidden truth. Or maybe you're a detective for hire, uncovering secrets for well-paying clients. Whether the mysteries you're embroiled in are local crimes or realm-spanning conspiracies, you're driven by a personal need to hunt down even the most elusive clues and reveal what others would keep hidden in the shadows.",
@@ -2155,7 +2155,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     toolProficiencyDescription:
       "You are proficient with Disguise kits and thieves' tools.",
     toolProficiencies: {
-      default: [itemIds.disguiseKit, itemIds.thievesTools],
+      default: [toolIds.disguiseKit, toolIds.thievesTools],
     },
     equipmentDescription: [
       `A ${i(itemIds.disguiseKit, 'magnifying glass')}`,
@@ -2173,7 +2173,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     },
   },
   {
-    id: 28,
+    id: '8',
     name: 'Knight',
     description:
       'A knighthood is among the lowest noble titles in most societies, but it can be a path to higher status. ',
@@ -2254,7 +2254,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 29,
+    id: '9',
     name: 'Knight of the Order',
     description: `You belong to an order of knights who have sworn oaths to achieve a certain goal. The nature of this goal depends on the order you serve, but in your eyes it is without question a vital and honorable endeavor. Faerûn has a wide variety of knightly orders, all of which have a similar outlook concerning their actions and responsibilities.\n\nThough the term "knight" conjures ideas of mounted, heavily armored warriors of noble blood, most knightly orders in Faerûn don't restrict their membership to such individuals. The goals and philosophies of the order are more important than the gear and fighting style of its members, and so most of these orders aren't limited to fighting types, but are open to all sorts of folk who are willing to battle and die for the order's cause.\n\nThe "Knightly Orders of Faerûn" section below details several of the orders that are active at present and is designed to help inform your decision about which group you owe allegiance to.`,
     flavorText:
@@ -2348,7 +2348,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 30,
+    id: '0',
     name: 'Marine',
     description:
       'You were trained for battle on sandy beaches and rocky shores. You have launched midnight raids from swift ships whose names evoke terror in the hearts of your adversaries. The water is your second home, the rain your shelter, and the crashing waves your battle cry.',
@@ -2415,7 +2415,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 31,
+    id: '1',
     name: 'Mercenary Veteran',
     description: `As a sell-sword who fought battles for coin, you're well acquainted with risking life and limb for a chance at a share of treasure. Now, you look forward to fighting foes and reaping even greater rewards as an adventurer. Your experience makes you familiar with the ins and outs of mercenary life, and you likely have harrowing stories of events on the battlefield. You might have served with a large outfit such as the Zhentarim or the soldiers of Mintarn, or a smaller band of sell-swords, maybe even more than one. See the "Mercenaries of the North" section below for a collection of possibilities.\n\nNow you're looking for something else, perhaps greater reward for the risks you take, or the freedom to choose your own activities. For whatever reason, you're leaving behind the life of a soldier for hire, but your skills are undeniably suited for battle, so now you fight on in a different way.`,
     flavorText:
@@ -2505,7 +2505,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 32,
+    id: '2',
     name: 'Noble',
     description:
       "You understand wealth, power, and privilege. You carry a noble title, and your family owns land, collects taxes, and wields significant political influence. You might be a pampered aristocrat unfamiliar with work or discomfort, a former merchant just elevated to the nobility, or a disinherited scoundrel with a disproportionate sense of entitlement. Or you could be an honest, hard-working landowner who cares deeply about the people who live and work on your land, keenly aware of your responsibility to them.\n\nWork with your DM to come up with an appropriate title and determine how much authority that title carries. A noble title doesn't stand on its own-it's connected to an entire family, and whatever title you hold, you will pass it down to your own children. Not only do you need to determine your noble title, but you should also work with the DM to describe your family and their influence on you.\n\nIs your family old and established, or was your title only recently bestowed? How much influence do they wield, and over what area? What kind of reputation does your family have among the other aristocrats of the region? How do the common people regard them?\n\nWhat's your position in the family? Are you the heir to the head of the family? Have you already inherited the title? How do you feel about that responsibility? Or are you so far down the line of inheritance that no one cares what you do, as long as you don't embarrass the family? How does the head of your family feel about your adventuring career? Are you in your family's good graces, or shunned by the rest of your family?\n\nDoes your family have a coat of arms? An insignia you might wear on a signet ring? Particular colors you wear all the time? An animal you regard as a symbol of your line or even a spiritual member of the family?",
@@ -2587,7 +2587,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 33,
+    id: '3',
     name: 'Outlander',
     description:
       "You grew up in the wilds, far from civilization and the comforts of town and technology. You've witnessed the migration of herds larger than forests, survived weather more extreme than any city-dweller could comprehend, and enjoyed the solitude of being the only thinking creature for miles in any direction. The wilds are in your blood, whether you were a nomad, an explorer, a recluse, a hunter-gatherer, or even a marauder. Even in places where you don't know the specific features of the terrain, you know the ways of the wild.",
@@ -2670,7 +2670,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 34,
+    id: '4',
     name: 'Pirate',
     description:
       "You spent your youth under the sway of a dread pirate, a ruthless cutthroat who taught you how to survive in a world of sharks and savages. You've indulged in larceny on the high seas and sent more than one deserving soul to a briny grave. Fear and bloodshed are no strangers to you, and you've garnered a somewhat unsavory reputation in many a port town.",
@@ -2738,7 +2738,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 35,
+    id: '5',
     name: 'Rewarded',
     description:
       'You were living a difficult life before your destiny suddenly changed through a miraculous turn of good fortune. Perhaps a benevolent deity gave you precisely what you most desired. You might have stumbled across a Deck of Many Things and drawn a card with a potent, positive effect. Or maybe you inherited a modest fortune from a distant relative you didn’t know you had.\n\nRegardless, you left the daily miseries of your old life behind in favor of a life of adventure and excitement. Your old debts have been paid, responsibilities you thought inescapable are behind you, or you suddenly possess rare and unusual skills unknown to ordinary folk.',
@@ -2794,7 +2794,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 36,
+    id: '6',
     name: 'Ruined',
     description:
       'Everything was going so well! You had a life of luxury, love, and comfort when you suddenly lost it all. Perhaps you were framed for crimes you didn’t commit and lost your reputation, fortune, and career. Maybe a rampaging dragon or another monster wiped out everything you had in a single calamitous afternoon. Or you might have sought out a Deck of Many Things, hoping to make your successful life even more glorious—only to draw a destructive card that changed your destiny forever.\n\nYour desperation has driven you to the career of adventurer. You don’t seek out dark dungeons and their monstrous inhabitants for excitement and glory; you do it because every other path is closed to you. But you have risen high on fortune’s wheel once before, and with luck and fortitude, you could do so again.',
@@ -2869,7 +2869,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 37,
+    id: '7',
     name: 'Rune Carver',
     description:
       'You’ve dedicated your life to studying runecraft. Whether you were taught by a master rune carver or learned by poring over ancient engravings, you can tap into the supernatural power held within runes.\n\nThe art of runecraft was initially created by giants, but over time, the practice has been adopted by many peoples. As such, though Giant runes are the most commonly used, many rune carvers incorporate symbols from their native languages into the craft.',
@@ -2935,7 +2935,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 38,
+    id: '8',
     name: 'Sage',
     description:
       'You spent years learning the lore of the multiverse. You scoured manuscripts, studied scrolls, and listened to the greatest experts on the subjects that interest you. Your efforts have made you a master in your fields of study.',
@@ -3007,7 +3007,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 39,
+    id: '9',
     name: 'Sailor',
     description:
       'You sailed on a seagoing vessel for years. In that time, you faced down mighty storms, monsters of the deep, and those who wanted to sink your craft to the bottomless depths. Your first love is the distant line of the horizon, but the time has come to try your hand at something new.\n\nDiscuss the nature of the ship you previously sailed with your DM. Was it a merchant ship, a naval vessel, a ship of discovery, or a pirate ship? How famous (or infamous) is it? Is it widely traveled? Is it still sailing, or is it missing and presumed lost with all hands?\n\nWhat were your duties on board – boatswain, captain, navigator, cook, or some other position? Who were the captain and first mate? Did you leave your ship on good terms with your fellows, or on the run?',
@@ -3082,7 +3082,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 40,
+    id: '0',
     name: 'Shipwright',
     description:
       'You have sailed into war on the decks of great ships, patching their hulls with soup bowls and prayers. You once helped build a fishing vessel that single-handedly saved a town from starvation. You have seen a majestic prow in your dreams that you have not been able to replicate in wood. Since childhood, you have loved the water and have been captivated by the many vessels that travel on it.',
@@ -3149,7 +3149,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 41,
+    id: '1',
     name: 'Smuggler',
     description:
       "On a rickety barge, you carried a hundred longswords in fish barrels right past the dock master's oblivious lackeys. You have paddled a riverboat filled with stolen elven wine under the gaze of the moon and sold it for twice its value in the morning. In your more charitable times, you have transported innocents out of war zones or helped guide herd animals to safety on the banks of a burning river.",
@@ -3231,7 +3231,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 42,
+    id: '2',
     name: 'Soldier',
     description:
       "War has been your life for as long as you care to remember. You trained as a youth, studied the use of weapons and armor, learned basic survival techniques, including how to stay alive on the battlefield. You might have been part of a standing national army or a mercenary company, or perhaps a member of a local militia who rose to prominence during a recent war.\n\nWhen you choose this background, work with your DM to determine which military organization you were a part of, how far through its ranks you progressed, and what kind of experiences you had during your military career. Was it a standing army, a town guard, or a village militia? Or it might have been a noble's or merchant's private army, or a mercenary company.",
@@ -3322,7 +3322,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 43,
+    id: '3',
     name: 'Spy',
     description:
       'Although your capabilities are not much different from those of a burglar or smuggler, you learned and practiced them in a very different context: as an espionage agent. You might have been an officially sanctioned agent of the crown, or perhaps you sold the secrets you uncovered to the highest bidder.',
@@ -3397,7 +3397,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 44,
+    id: '4',
     name: 'Urban Bounty Hunter',
     description: `Before you became an adventurer, your life was already full of conflict and excitement, because you made a living tracking down people for pay. Unlike some people who collect bounties, though, you aren't a savage who follows quarry into or through the wilderness. You're involved in a lucrative trade, in the place where you live, that routinely tests your skills and survival instincts. What's more, you aren't alone, as a bounty hunter in the wild would be: you routinely interact with both the criminal subculture and other bounty hunters, maintaining contacts in both areas to help you succeed.\n\nYou might be a cunning thief-catcher, prowling the rooftops to catch one of the myriad burglars of the city. Perhaps you are someone who has your ear to the street, aware of the doings of thieves' guilds and street gangs. You might be a "velvet mask" bounty hunter, one who blends in with high society and noble circles in order to catch the criminals that prey on the rich, whether pickpockets or con artists. The community where you plied your trade might have been one of Faenûn's great metropolises, such as Waterdeep or Baldur's Gate, or a less populous location, perhaps Luskan or Yartar – any place that's large enough to have a steady supply of potential quarries.\n\nAs a member of an adventuring party, you might find it more difficult to pursue a personal agenda that doesn't fit with the group's objectives – but on the other hand, you can take down much more formidable targets with the help of your companions.`,
     flavorText: 'You made a living tracking down people for pay.',
@@ -3491,7 +3491,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 45,
+    id: '5',
     name: 'Urchin',
     description:
       "You grew up on the streets alone, orphaned, and poor, You had no one to watch over you or to provide for you, so you learned to provide for yourself. You fought fiercely over food and kept a constant watch out for other desperate souls who might steal from you. You slept on rooftops and in alleyways, exposed to the elements, and endured sickness without the advantage of medicine or a place to recuperate. You've survived despite all odds, and did so through cunning, strength, speed, or some combination of each.\n\nYou begin your adventuring career with enough money to live modestly but securely for at least ten days. How did you come by that money? What allowed you to break free of your desperate circumstances and embark on a better life?",
@@ -3557,7 +3557,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 46,
+    id: '6',
     name: 'Uthgardt Tribe Member',
     description:
       'Though you might have only recently arrived in civilized lands, you are no stranger to the values of cooperation and group effort when striving for supremacy. You learned these principles, and much more, as a member of an Uthgardt tribe.\n\nYour people have always tried to hold to the old ways. Tradition and taboo have kept the Uthgardt strong while the kingdoms of others have collapsed into chaos and ruin. But for the last few generations, some bands among the tribes were tempted to settle, make peace, trade, and even to build towns. Perhaps this is why Uthgar chose to raise up the totems among the people as living embodiments of his power. Perhaps they needed a reminder of who they were and from whence they came. The Chosen of Uthgar led bands back to the old ways, and most of your people abandoned the soft ways of civilization.\n\nYou might have grown up in one of the tribes that had decided to settle down, and now that they have abandoned that path, you find yourself adrift. Or you might come from a segment of the Uthgardt that adheres to tradition, but you seek to bring glory to your tribe by achieving great things as a formidable adventurer.',
@@ -3647,7 +3647,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 47,
+    id: '7',
     name: 'Waterdhavian Noble',
     description:
       "You are a scion of one of the great noble families of Waterdeep. Human families who jealously guard their privilege and place in the City of Splendors, Waterdhavian nobles have a reputation across Faerûn for being eccentric, spoiled, venal, and, above all else, rich.\n\nWhether you are a shining example of the reason for this reputation or one who proves the rule by being an exception, people expect things of you when they know your surname and what it means. Your reasons for taking up adventuring likely involve your family in some way: Are you the family rebel, who prefers delving in filthy dungeons to sipping zzar at a ball? Or have you taken up sword or spell on your family's behalf, ensuring that they have someone of renown to see to their legacy?\n\nWork with your DM to come up with the family you are part of – there are around seventy-five lineages in Waterdeep, each with its own financial interests, specialties, and schemes. You might be part of the main line of your family, possibly in line to become its leader one day. Or you might be one of any number of cousins, with less prestige but also less responsibility.",
@@ -3740,7 +3740,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 48,
+    id: '8',
     name: 'Witchlight Hand',
     description:
       "You crept into the Witchlight Carnival as a child or youth and never looked back, earning a place among those who work behind the scenes to keep the carnival in business. As a hand, you work hard and party hard. The carnival has borne you to many fantastic worlds, circling back around to your home world once every eight years, but you know almost nothing about these worlds because you spend all your time in the carnival. You know the other hands well, but the carnival's owners-Mister Witch and Mister Light-remain mysterious to you even after all these years.\n\nMaybe you joined the carnival to escape a dismal life at home, or maybe you were enchanted by the idea of visiting new places or the dream of becoming one of the carnival's star attractions. Now that you're older, carnival life has lost some of its appeal. The daily routine has grown tedious, the cyclical nature of the carnival's journey monotonous. The carnival no longer fills your heart with a sense of wonder. Perhaps greater adventures await you beyond the carnival's gates.",
@@ -3860,7 +3860,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 49,
+    id: '9',
     name: "Celebrity Adventurer's Scion",
     description:
       "Your family name strikes fear and admiration in the hearts of the common folk - but that's got nothing to do with you. Songs and stories celebrating the adventuring exploits of your famous parent are widely known. Kids across the land grew up wishing they were you. But being the child of a famous adventurer wasn't all hugs and kisses.\n\nYou seldom saw your celebrity-adventurer parent, and when they were around, it was all about them and tales of slaying this demon or vanquishing that dragon. All too often, you'd be woken out of a sound sleep by someone standing outside your home screaming about the latest threat to the town, the region, or the world.\n\nIn the end, all you have to show for your lineage is your name. Most of the family's money went for consumables, from potions of healing and spell scrolls to copious amounts of dwarven ale. And everyone expects you to swing a sword or sling spells like your famous forebear, making it doubly hard for you to prove yourself.",
@@ -3931,7 +3931,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 50,
+    id: '0',
     name: 'Failed Merchant',
     source: src.aquisitions,
     description:
@@ -4025,7 +4025,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 51,
+    id: '1',
     name: 'Gambler',
     description:
       "All you need to make a lot of gold is a little gold. Except at those times when all you need to have no gold at all is a little gold. Whether you're a good gambler or a bad one rarely matters, because no one can divine the whims of Lady Luck. Sometimes you're up, sometimes you're down. But the thing about gambling is that someone is always willing to take a bet.",
@@ -4116,7 +4116,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 52,
+    id: '2',
     name: 'Plaintiff',
     description:
       "Sure, accidents happen. But they seem to happen an awful lot when Acquisitions Incorporated operatives are on the scene. Naturally, nothing ever happens when there are no witnesses left behind. But sometimes one casualty is left a little less than dead, just waiting to discover what a lucky break that accident actually was.\n\nYou were a victim of a legal incident that was ostensibly the fault of Acquisitions Incorporated. At least that's what the local magistrate said. But before a final ruling could be handed down. Acquisitions Incorporated offered you a job! Don't know how to swing a sword? They promised to teach you! Think you have what it takes to sling spells? They've got masters who'll have you throwing fire in no time!\n\nWith the promise of untold treasures and realms of magic and mystery just a dungeon away, you left your old life behind. Now a world of adventure is yours. Just initial here and sign here and here. Absolve Acq Inc of all former claims, and acknowledge you understand past outcomes don't guarantee future results.",
@@ -4209,7 +4209,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
     ],
   },
   {
-    id: 53,
+    id: '3',
     name: 'Rival Intern',
     description:
       "You were an intern at a rival of Acquisitions Incorporated, and you gained a healthy respect for not just the job and the franchising opportunities. but for the ruthless and efficient way Acquisitions Incorporated goes about its business. Why deal with the rest, when you can work for the best?\n\nPerhaps the rival did not treat you as well as you were hoping, or you washed out of that organization. Maybe you hope to leverage the knowledge you gained there for an advantage at Acquisitions Incorporated. Either way, you're now bringing your talents to the company, ready to put your skills to use.",

@@ -20,12 +20,13 @@ const Dashboard = () => {
   const [loadingCharacters, setCharactersLoading] = useState(true);
   const level = useLevel();
   const { id } = useModal();
-  const [removeCharacterId, setRemoveCharacterId] = useState<number | null>(
+  const [removeCharacterId, setRemoveCharacterId] = useState<string | null>(
     null
   );
 
   useEffect(() => {
     getUserId().then((user) => {
+      if (!user) return;
       getCharactersByUser(user).then((data) => {
         setCharacters(data);
         setCharactersLoading(false);

@@ -1,6 +1,6 @@
 'use client';
 import { ItemID } from '@/lib/types/types';
-import { memoizeGetItem } from '../../globalCache';
+import { memoizeGetItem } from '../../Indexed/globalCache';
 import { AbilityToModifier } from '../calc/AbilityToModifier';
 import { ArmorType } from '@prisma/client';
 import { ItemInfo } from '@/lib/types/modelInfo';
@@ -15,9 +15,12 @@ const baseArmorCalc = async (
   //if medium add dex to 2
   //if heavy add nothing
 
-  const armorItem = (await memoizeGetItem(
-    state.equipped.armor as number
-  )) as ItemInfo;
+  const armorItem = state.equipped.armor
+    ? ((await memoizeGetItem({
+        query: state.equipped.armor,
+        type: 'id',
+      })) as ItemInfo)
+    : null;
   if (!armorItem)
     return {
       newAC: 10 + AbilityToModifier(state.abilityScores.DEX),
@@ -131,7 +134,12 @@ export const refreshAC = async (state: PrismaJson.CharacterState) => {
   const base = await baseArmorCalc(state);
 
   if (equippedItems) {
-    const equippedData = equippedItems.map((i) => memoizeGetItem(i));
+    const equippedData = equippedItems.map((i) =>
+      memoizeGetItem({
+        query: i,
+        type: 'id',
+      })
+    );
     const equippedRes = (await Promise.all(equippedData)) as ItemInfo[];
     if (!equippedRes) return state;
     const shield = equippedRes.find(

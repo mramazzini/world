@@ -1,13 +1,13 @@
 const ids = {
-  arcane: 89,
-  assassin: 90,
-  inquisitive: 91,
-  mastermind: 92,
-  phantom: 93,
-  scout: 94,
-  soulknife: 95,
-  swashbuckler: 96,
-  thief: 97,
+  arcane: '89',
+  assassin: '90',
+  inquisitive: '91',
+  mastermind: '92',
+  phantom: '93',
+  scout: '94',
+  soulknife: '95',
+  swashbuckler: '96',
+  thief: '97',
 };
 
 const RogueSubclassFeatures = [

@@ -10,7 +10,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 interface Props {
-  id: number;
+  id: string;
   model: AssociatedModel;
 }
 
@@ -30,7 +30,7 @@ const CommentSection = ({ id, model }: Props) => {
 
   const checkLoggedIn = useCallback(async () => {
     const userID = await getUserId();
-    if (userID !== -1) {
+    if (userID !== null) {
       setLoggedIn(true);
     }
   }, []);

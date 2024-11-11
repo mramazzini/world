@@ -16,7 +16,7 @@ import { fullCaster, halfCaster, warlockSpellSlots } from './SpellSlotsUtil';
 
 const Classes: Prisma.ClassCreateManyInput[] = [
   {
-    id: 1,
+    id: '1',
     srd: true,
     name: 'fighter',
     hitDie: 10,
@@ -131,7 +131,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   },
 
   {
-    id: 2,
+    id: '2',
     name: 'wizard',
     srd: true,
     description:
@@ -240,7 +240,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     spellListId: spellListIds.wizard,
   },
   {
-    id: 3,
+    id: '3',
     name: 'cleric',
     srd: true,
     hitDie: 8,
@@ -363,7 +363,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
   },
   {
-    id: 4,
+    id: '4',
     name: 'rogue',
     hitDie: 8,
     srd: true,
@@ -468,7 +468,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       'Rogues are cunning and elusive adversaries. Using their wits and agility, they excel in stealth and deception.',
   },
   {
-    id: 5,
+    id: '5',
     name: 'barbarian',
     srd: true,
     description:
@@ -549,7 +549,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       'Barbarians are fierce warriors who draw their power from a primal connection to the spirits of nature and the world around them to fuel an unquenchable rage.',
   },
   {
-    id: 6,
+    id: '6',
     name: 'bard',
     srd: true,
     hitDie: 8,
@@ -609,7 +609,9 @@ const Classes: Prisma.ClassCreateManyInput[] = [
           options: [
             [{ item: itemIds.rapier, quantity: 1 }],
             [{ item: itemIds.longsword, quantity: 1 }],
-            ...simpleIds.map((id) => [{ item: id, quantity: 1 }]),
+            ...simpleMeleeItemIds
+              .concat(simpleRangedItemIds)
+              .map((id) => [{ item: id, quantity: 1 }]),
           ],
         },
         {
@@ -657,7 +659,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
   },
   {
-    id: 7,
+    id: '7',
     name: 'druid',
     srd: true,
     hitDie: 8,
@@ -779,7 +781,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
   },
   {
-    id: 8,
+    id: '8',
     name: 'monk',
     srd: true,
     hitDie: 8,
@@ -862,7 +864,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       'Monks are martial artists who use ki to perform amazing feats. They are masters of unarmed combat, and they are known for their ability to catch arrows, dodge blows, and move with extraordinary speed.',
   },
   {
-    id: 9,
+    id: '9',
     name: 'paladin',
     srd: true,
     hitDie: 10,
@@ -979,7 +981,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
   },
   {
-    id: 10,
+    id: '10',
     name: 'ranger',
     srd: true,
     hitDie: 10,
@@ -1101,7 +1103,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
   },
   {
-    id: 11,
+    id: '11',
     name: 'sorcerer',
     srd: true,
     description:
@@ -1214,7 +1216,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
   },
   {
-    id: 12,
+    id: '12',
     name: 'warlock',
     srd: true,
     hitDie: 8,
@@ -1336,7 +1338,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   },
   //artificer
   {
-    id: 13,
+    id: '13',
     name: 'artificer',
     source: 'Wayfinder’s Guide to Eberron',
     flavorText:
