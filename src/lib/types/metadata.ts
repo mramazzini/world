@@ -4,9 +4,10 @@ export type DBMetadata = {
   description: string;
   flavorText: string;
   updatedAt: Date;
+  slug: string;
 };
 
 export type SingleDataQuery = {
   query: string;
-  type: 'id' | 'name';
+  type: 'id' | 'name' | 'slug';
 };

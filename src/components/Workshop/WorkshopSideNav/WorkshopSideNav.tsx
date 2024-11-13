@@ -15,13 +15,22 @@ const WorkshopSideNav = () => {
     },
     []
   );
+
+  const disabled: WorkshopProtocol[] = [
+    'FEATURE',
+    'CLASS',
+    'SPELL',
+    'CREATURE',
+    'SPECIES',
+    'SUBSPECIES',
+  ];
   return (
     <div
       className={`h-full bg-base-200 ${sideNavOpen ? 'w-[20rem]' : 'w-0'} transition-all duration-300 overflow-auto flex flex-col items-start justify-start `}
     >
       <ul className="menu menu-xs bg-base-200 rounded-lg w-full">
         {Object.values(WorkshopProtocol).map((protocol) => {
-          if (protocol === WorkshopProtocol.FEATURE) return null;
+          if (disabled.includes(protocol)) return null;
           const childNodes = filterFn(protocol, Object.values(workshopItems));
           return (
             <WorkshopSideNavSection

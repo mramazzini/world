@@ -53,7 +53,7 @@ const ModelLink = ({
                     modalid={modalID}
                     element={res && res[1] ? res[1] : modelObj.name}
                     title={modelObj.name}
-                    link={`/${linkBase}/${modelObj.name.replaceAll(' ', '-')}`}
+                    link={`/${linkBase}/${modelObj.slug}`}
                     badges={[
                       { text: modelObj.id.toString(), color: 'badge-primary' },
                     ]}

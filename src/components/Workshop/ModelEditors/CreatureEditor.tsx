@@ -1,5 +1,5 @@
 const CreatureEditor = () => {
-  return <div>Spell</div>;
+  return <div>Creature Editor Coming Soon...</div>;
 };
 
 export default CreatureEditor;

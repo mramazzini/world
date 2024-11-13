@@ -5,6 +5,7 @@ import ItemFeatureSeed from '../Items/ItemFeatures.seed';
 import createFeature from '../_helpers/createFeature';
 import ItemToWeaponSeed from '../Items/Weapons/ItemToWeapon.seed';
 import { Weapons } from '../Items/Weapons/Weapons.seed';
+import { createSlug } from '../_helpers/createSlug';
 
 export const createItems = async (db: PrismaClient) => {
   //Create Items
@@ -17,9 +18,13 @@ export const createItems = async (db: PrismaClient) => {
         where: {
           id: Item.id,
         },
-        update: Item,
+        update: {
+          ...Item,
+          slug: createSlug(Item.name),
+        },
         create: {
           ...Item,
+          slug: createSlug(Item.name),
         },
       });
       cinfo('Item created');

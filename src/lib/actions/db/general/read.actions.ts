@@ -43,6 +43,7 @@ export const searchEverything = async (
       type: 'Spells',
       other: spell.school,
       lastUpdated: spell.updatedAt,
+      slug: spell.slug,
     })),
     ...classes.map((class_) => ({
       name: class_.name,
@@ -51,6 +52,7 @@ export const searchEverything = async (
       type: 'Class',
       other: class_.subClassDescription,
       lastUpdated: class_.updatedAt,
+      slug: class_.slug,
     })),
     ...subclasses.map((subclass) => ({
       name: subclass.name,
@@ -63,6 +65,7 @@ export const searchEverything = async (
       type: 'Subclass',
       other: subclass.Class?.name || '',
       lastUpdated: subclass.updatedAt,
+      slug: subclass.slug,
     })),
     ...items.map((item) => ({
       name: item.name,
@@ -71,6 +74,7 @@ export const searchEverything = async (
       type: 'Item',
       other: item.types.join(', '),
       lastUpdated: item.updatedAt,
+      slug: item.slug,
     })),
     ...species.map((r) => ({
       name: r.name,
@@ -79,6 +83,7 @@ export const searchEverything = async (
       type: 'Species',
       other: r.size,
       lastUpdated: r.updatedAt,
+      slug: r.slug,
     })),
     ...subspecies.map((r) => ({
       name: r.name,
@@ -87,6 +92,7 @@ export const searchEverything = async (
       type: 'Subspecies',
       other: r.species.name,
       lastUpdated: r.updatedAt,
+      slug: r.slug,
     })),
 
     ...backgrounds.map((background) => ({
@@ -96,6 +102,7 @@ export const searchEverything = async (
       type: 'Background',
       other: '',
       lastUpdated: background.updatedAt,
+      slug: background.slug,
     })),
     ...spellLists.map((spellList) => ({
       name: spellList.name,
@@ -104,6 +111,7 @@ export const searchEverything = async (
       type: 'Spell-List',
       other: '',
       lastUpdated: spellList.updatedAt,
+      slug: spellList.slug,
     })),
     ...feats.map((feat) => ({
       name: feat.name,
@@ -112,6 +120,7 @@ export const searchEverything = async (
       type: 'Feats',
       other: feat.prereqDescription,
       lastUpdated: feat.updatedAt,
+      slug: feat.slug,
     })),
     ...creatures.map((creature) => ({
       name: creature.name,
@@ -120,6 +129,7 @@ export const searchEverything = async (
       type: 'Creature',
       other: creature.creatureType,
       lastUpdated: creature.updatedAt,
+      slug: creature.slug,
     })),
   ];
   const fuse = new Fuse(combined, {

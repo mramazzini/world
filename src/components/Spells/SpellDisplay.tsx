@@ -55,7 +55,7 @@ const SpellDisplay = ({ spell }: Props) => {
             return (
               <Link
                 className="text-accent "
-                href={`/spell-list/${spellList.name?.replaceAll(' ', '-')}`}
+                href={`/spell-list/${spellList.slug}`}
                 key={index}
               >
                 {spellList.name && (
@@ -70,7 +70,7 @@ const SpellDisplay = ({ spell }: Props) => {
             <Fragment key={index}>
               <Link
                 className="text-accent "
-                href={`/spell-list/${spellList.name?.replaceAll(' ', '-')}`}
+                href={`/spell-list/${spellList.slug}`}
                 key={index}
                 target="_blank"
               >

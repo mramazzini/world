@@ -1,3 +1,6 @@
+import { ItemTypes, Rarity } from '@prisma/client';
+import { ArmorID, ClassID, ToolID, WeaponID } from './types';
+
 export type WorkshopItemEditorData =
   | ClassEditorData
   | SubclassEditorData
@@ -10,7 +13,15 @@ export type WorkshopItemEditorData =
   | SubSpeciesEditorData
   | FeatEditorData;
 export interface ClassEditorData {}
-export interface SubclassEditorData {}
+export interface SubclassEditorData {
+  flavorText: string;
+  description: string;
+  classData: {
+    id: ClassID;
+    name: string;
+    subClassLevels: number[];
+  } | null;
+}
 export interface FeatureEditorData {
   description: string;
   options?: string[];
@@ -20,7 +31,31 @@ export interface FeatureEditorData {
   rolls: PrismaJson.RollRequest[];
 }
 export interface SpellEditorData {}
-export interface ItemEditorData {}
+export interface ItemEditorData {
+  flavorText: string;
+  description: string;
+  requiresAttunement: boolean;
+  rarity: Rarity;
+  cost: PrismaJson.CurrencyAmount;
+  types: ItemTypes[];
+
+  weaponData: {
+    silvered: boolean;
+    magical: boolean;
+    weaponId?: WeaponID;
+    weaponName?: string;
+  };
+
+  toolData: {
+    toolId?: ToolID;
+    toolName?: string;
+  };
+
+  armorData: {
+    armorId?: ArmorID;
+    armorName?: string;
+  };
+}
 export interface CreatureEditorData {}
 export interface BackgroundEditorData {}
 export interface SpeciesEditorData {}

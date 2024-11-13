@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import FeatSeed from '../Feats/Feats.seed';
 import FeatFeaturesSeed from '../Feats/FeatFeatures.seed';
 import createFeature from '../_helpers/createFeature';
+import { createSlug } from '../_helpers/createSlug';
 export const createFeats = async (db: PrismaClient) => {
   cinfo('Creating Feats');
   for (const feat of FeatSeed) {
@@ -17,8 +18,14 @@ export const createFeats = async (db: PrismaClient) => {
       //upsert feat
       await db.feat.upsert({
         where: { id: feat.id },
-        update: feat,
-        create: feat,
+        update: {
+          ...feat,
+          slug: createSlug(feat.name),
+        },
+        create: {
+          ...feat,
+          slug: createSlug(feat.name),
+        },
       });
 
       cinfo('Feat created');

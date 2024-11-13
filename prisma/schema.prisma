@@ -329,6 +329,8 @@ model Class {
   userId          String?
   Characters      Character[]       @relation("Character classes")
   ColumnedFeature ColumnedFeature[]
+
+  slug String @unique @db.VarChar(200)
 }
 
 model Spell {
@@ -369,6 +371,8 @@ model Spell {
   PreparedByCreature   Creature[]             @relation("CreaturePrepares")
   FreelyCastByCreature Creature[]             @relation("CreatureFreelyCasts")
   CreatureLimitedSpell CreatureLimitedSpell[]
+
+  slug String @unique @db.VarChar(200)
 }
 
 model SpellList {
@@ -382,6 +386,8 @@ model SpellList {
   Spells    Spell[]
   Classes   Class[]
   SubClass  SubClass[]
+
+  slug String @unique @db.VarChar(200)
 }
 
 model Feature {
@@ -469,8 +475,8 @@ model SubClass {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Class   Class?  @relation(fields: [classId], references: [id])
-  classId String?
+  Class   Class   @relation(fields: [classId], references: [id])
+  classId String
   User    User?   @relation(fields: [userId], references: [id])
   userId  String?
 
@@ -478,6 +484,11 @@ model SubClass {
   Features                Feature[]                 @relation("SubClassFeatures")
   SpellCastingFeatures    Feature[]                 @relation("SpellCastingFeatures")
   SubClassColumnedFeature SubClassColumnedFeature[]
+
+  WorkshopItem WorkshopItem? @relation(fields: [workshopId], references: [id])
+  workshopId   String?       @unique
+
+  slug String @unique @db.VarChar(200)
 }
 
 model Species {
@@ -540,6 +551,8 @@ model Species {
   User      User?       @relation(fields: [userId], references: [id])
   userId    String?
   Character Character[]
+
+  slug String @unique @db.VarChar(200)
 }
 
 model SubSpecies {
@@ -604,6 +617,8 @@ model SubSpecies {
   species   Species     @relation(fields: [speciesId], references: [id])
   speciesId String
   Character Character[]
+
+  slug String @unique @db.VarChar(200)
 }
 
 model Background {
@@ -633,12 +648,14 @@ model Background {
   ideals                   String[]
   bonds                    String[]
   flaws                    String[]
-  createdAt                DateTime       @default(now())
-  updatedAt                DateTime       @updatedAt
-  User                     User?          @relation(fields: [userId], references: [id])
+  createdAt                DateTime      @default(now())
+  updatedAt                DateTime      @updatedAt
+  User                     User?         @relation(fields: [userId], references: [id])
   userId                   String?
   Character                Character[]
-  WorkshopItem             WorkshopItem[]
+  WorkshopItem             WorkshopItem? @relation(fields: [workshopItemId], references: [id])
+  workshopItemId           String?       @unique
+  slug                     String        @unique @db.VarChar(200)
 }
 
 model Feat {
@@ -659,6 +676,8 @@ model Feat {
   User       User?       @relation(fields: [userId], references: [id])
   userId     String?
   Characters Character[]
+
+  slug String @unique @db.VarChar(200)
 }
 
 model Message {
@@ -745,6 +764,7 @@ model Item {
   id                 String  @id
   name               String
   description        String
+  slug               String  @unique @db.VarChar(200)
   flavorText         String  @db.VarChar(200)
   requiresAttunement Boolean @default(false)
   rarity             Rarity
@@ -793,6 +813,9 @@ model Item {
   CreatureArmor    Creature[]      @relation("CreatureArmor")
   CreatureShield   Creature[]      @relation("CreatureShield")
   ItemWeaponData   ItemWeaponData?
+
+  workshopId   String?       @unique
+  WorkshopItem WorkshopItem? @relation(fields: [workshopId], references: [id])
 }
 
 model ItemWeaponData {
@@ -1037,6 +1060,8 @@ model Creature {
   updatedAt DateTime @updatedAt
   User      User?    @relation(fields: [userId], references: [id])
   userId    String?
+
+  slug String @unique @db.VarChar(200)
 }
 
 enum Time {
@@ -1084,11 +1109,13 @@ model WorkshopItem {
   User   User   @relation(fields: [userId], references: [id])
   userId String
 
-  createdAt    DateTime    @default(now())
-  Feature      Feature?
-  Feat         Feat?
-  Background   Background? @relation(fields: [backgroundId], references: [id])
-  backgroundId String?
+  createdAt DateTime @default(now())
+  Feature   Feature?
+  Feat      Feat?
+
+  Item       Item?
+  SubClass   SubClass?
+  Background Background?
 }
 
 //Prisma wont create enum types if they are not in a model, so this is a dummy model

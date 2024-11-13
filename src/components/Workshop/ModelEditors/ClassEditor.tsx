@@ -2,7 +2,7 @@
 
 const ClassEditor = () => {
   // const data = useWorkshopTab();
-  return <div>Class</div>;
+  return <div>Class Editor Coming Soon</div>;
 };
 
 export default ClassEditor;

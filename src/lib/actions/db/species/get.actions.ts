@@ -15,6 +15,7 @@ export const getSpeciesMetadata = async (): Promise<DBMetadata[]> => {
       name: true,
       description: true,
       flavorText: true,
+      slug: true,
       updatedAt: true,
     },
   });

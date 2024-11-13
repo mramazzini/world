@@ -16,6 +16,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '1',
     name: 'Dragonborn',
+    slug: '',
     description:
       'Born of dragons, as their name proclaims, the dragonborn walk proudly through a world that greets them with fearful incomprehension. Shaped by draconic gods or the dragons themselves, dragonborn originally hatched from dragon eggs as a unique species, combining the best attributes of dragons and humanoids. Some dragonborn are faithful servants to true dragons, others form the ranks of soldiers in great wars, and still others find themselves adrift, with no clear calling in life.',
     abilityScoreDescription:
@@ -52,6 +53,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '2',
     name: 'Dwarf',
+    slug: '',
     description:
       'Kingdoms rich in ancient grandeur, halls carved into the roots of mountains, the echoing of picks and hammers in deep mines and blazing forges, a commitment to clan and tradition, and a burning hatred of goblins and orcs – these common threads unite all dwarves.',
     abilityScoreDescription: 'Your Constitution score increases by 2.',
@@ -111,6 +113,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '3',
     name: 'Elf',
+    slug: '',
     description:
       'Elves are a magical people of otherworldly gspecies, living in places of ethereal beauty, in the midst of ancient forests or in silvery spires glittering with faerie light, where soft music drifts through the air and gentle fragrances waft on the breeze. Elves love nature and magic, art and artistry, music and poetry.',
     abilityScores: {
@@ -148,6 +151,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '4',
     name: 'Gnome',
+    slug: '',
     description:
       'A constant hum of busy activity pervades the warrens and neighborhoods where gnomes form their close-knit communities. Louder sounds punctuate the hum: a crunch of grinding gears here, a minor explosion there, a yelp of surprise or triumph, and especially bursts of laughter. Gnomes take delight in life, enjoying every moment of invention, exploration, investigation, creation, and play.',
     abilityScores: {
@@ -182,6 +186,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '5',
     name: 'Half Elf',
+    slug: '',
     description:
       'Walking in two worlds but truly belonging to neither, half-elves combine what some say are the best qualities of their elf and human parents: human curiosity, inventiveness, and ambition tempered by the refined senses, love of nature, and artistic tastes of the elves.',
     abilityScores: {
@@ -231,6 +236,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '6',
     name: 'Half Orc',
+    slug: '',
     description:
       'When alliances between humans and orcs are sealed by marriages, half-orcs are born. Some half-orcs rise to become proud chiefs of orc tribes, their human blood giving them an edge over their full-blooded orc rivals. Some venture into the world to prove their worth among humans and other more civilized races. Many of these become adventurers, achieving greatness for their mighty deeds and notoriety for their barbaric customs and savage fury.',
     abilityScores: {
@@ -271,6 +277,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '7',
     name: 'Halfling',
+    slug: '',
     description:
       "The comforts of home are the goals of most halflings' lives: a place to settle in peace and quiet, far from marauding monsters and clashing armies. Others form nomadic bands that travel constantly, lured by the open road and the wide horizon to discover the wonders of new lands and peoples. Halflings work readily with others, and they are loyal to their friends, whether halfling or otherwise. They can display remarkable ferocity when their friends, families, or communities are threatened.",
     abilityScores: {
@@ -302,6 +309,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '8',
     name: 'Human',
+    slug: '',
     description:
       "In the reckonings of most worlds, humans are the youngest of the common races, late to arrive on the world scene and short-lived in comparison to dwarves, elves, and dragons. Perhaps it is because of their shorter lives that they strive to achieve as much as they can in the years they are given. Or maybe they feel they have something to prove to the elder races, and that's why they build their mighty empires on the foundation of conquest and trade. Whatever drives them, humans are the innovators, the achievers, and the pioneers of the worlds.",
     abilityScores: {
@@ -360,6 +368,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '9',
     name: 'Tiefling',
+    slug: '',
     description:
       "To be greeted with stares and whispers, to suffer violence and insult on the street, to see mistrust and fear in every eye: this is the lot of the tiefling. And to twist the knife, tieflings know that this is because a pact struck generations ago infused the essence of Asmodeus, overlord of the Nine Hells (and many of the other powerful devils serving under him) into their bloodline. Their appearance and their nature are not their fault but the result of an ancient sin, for which they and their children and their children's children will always be held accountable.",
     abilityScores: {
@@ -397,6 +406,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '10',
     name: 'Aarakocra (MMOM)',
+    slug: '',
     flavorText:
       'A winged people who originated on the Elemental Plane of Air, aarakocra soar through the sky wherever they wander.',
     age: 'N/A',
@@ -442,6 +452,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '11',
     name: 'Aasimar (MMOM)',
+    slug: '',
     description:
       'Whether descended from a celestial being or infused with heavenly power, aasimar are mortals who carry a spark of the Upper Planes within their souls. They can fan that spark to bring light, ease wounds, and unleash the fury of the heavens.\n\nAasimar can arise among any population of mortals. They resemble their parents, but they live for up to 160 years and often have features that hint at their celestial heritage. These often begin subtle and become more obvious when the aasimar gains the ability to reveal their full celestial nature. The Aasimar Celestial Features table has examples you can choose or use as inspiration to create your own.',
     flavorText:
@@ -490,6 +501,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '12',
     name: 'Aasimar (VGM)',
+    slug: '',
     description:
       'Aasimar bear within their souls the light of the heavens. They are descended from humans with a touch of the power of Mount Celestia, the divine realm of many lawful good deities. Aasimar are born to serve as champions of the gods, their births hailed as blessed events. They are a people of otherworldly visages, with luminous features that reveal their celestial heritage.\n\nAn aasimar, except for one who has turned to evil, has a link to an angelic being. That being – usually a deva – provides guidance to the aasimar, though this connection functions only in dreams. As such, the guidance is not a direct command or a simple spoken word. Instead, the aasimar receives visions, prophecies, and feelings.',
     flavorText: 'Aasimar bear within their souls the light of the heavens.',
@@ -524,6 +536,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '13',
     name: 'Changeling (MMOM)',
+    slug: '',
     description:
       'With ever-changing appearances, changelings reside in many societies undetected. Each changeling can supernaturally adopt any face they like. For some changelings, a new face is only a disguise. For other changelings, a new face may reveal an aspect of their soul.\n\nThe first changelings in the multiverse appeared in the Feywild, and the wondrous, mutable essence of that plane lingers in changelings today — even in those changelings who have never set foot in the fey realm. Each changeling decides how to use their shape-shifting ability, channeling either the peril or the joy of the Feywild. Sometimes they adopt new forms for the sake of mischief or malice, and other times they don a new identity to right wrongs or delight the downtrodden.\n\nIn their true form, changelings appear faded, their features almost devoid of detail. It is rare to see a changeling in that form, for a typical changeling changes their shape the way others might change clothes. A casual shape — one created on the spur of the moment, with no depth or history — is called a mask. A mask can be used to express a mood or to serve a specific purpose and then might never be used again. However, many changelings develop identities that have more depth, crafting whole personas complete with histories and beliefs. A changeling adventurer might have personas for many situations, including negotiation, investigation, and combat.\n\nPersonas can be shared by multiple changelings; a community might be home to three healer changelings, with whoever is on duty adopting the persona of Andrea, the gentle physician. Personas can even be passed down through a family, allowing a younger changeling to take advantage of contacts established by the persona’s previous users.',
     flavorText:
@@ -574,6 +587,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '14',
     name: 'Changeling (Eberron)',
+    slug: '',
     description:
       'A changeling can shift its face and form with a thought. Many changelings use this gift as a form of artistic and emotional expression, but it’s an invaluable tool for grifters, spies, and others who wish to deceive. This leads many people to treat known changelings with fear and suspicion.',
     flavorText: 'A changeling can shift its face and form with a thought.',
@@ -614,6 +628,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '15',
     name: 'Deep Gnome (MMOM)',
+    slug: '',
     description:
       'Deep gnomes, or svirfneblin, are natives of the Underdark and are suffused with that subterranean realm’s magic. They can supernaturally camouflage themselves, and their svirfneblin magic renders them difficult to locate. These abilities have enabled them to survive for generations among the perils of the Underdark.',
     flavorText: 'Deep gnomes, or svirfneblin, are natives of the Underdark.',
@@ -660,6 +675,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '16',
     name: 'Deep Gnome (EEPC)',
+    slug: '',
     description:
       'Forest gnomes and rock gnomes are the gnomes most commonly encountered in the lands of the surface world. There is another subspecies of gnomes rarely seen by any surface-dweller: deep gnomes, also known as svirfneblin. Guarded, and suspicious of outsiders, svirfneblin are cunning and taciturn, but can be just as kind-hearted, loyal, and compassionate as their surface cousins.',
     flavorText: 'Deep gnomes, or svirfneblin, are natives of the Underdark.',
@@ -696,6 +712,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '17',
     name: 'Duergar (MMOM)',
+    slug: '',
     description:
       'Duergar are dwarves whose ancestors were transformed by centuries living in the deepest places of the Underdark. That chthonic realm is saturated with strange magical energy, and over generations, early duergar absorbed traces of it. They were further altered when mind flayers and other Aberrations invaded and performed horrific experiments on them. Fueled by Underdark magic, those experiments left early duergar with psionic powers, which have been passed down to their descendants. In time, they liberated themselves from their aberrant tyrants and forged a new life for themselves in the Underdark and beyond.',
     flavorText:
@@ -742,6 +759,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '18',
     name: 'Duergar (SCAG)',
+    slug: '',
     description:
       'The gray dwarves, or duergar, live deep in the Underdark. After delving deeper than any other dwarves, they were enslaved by mind flayers for eons. Although they eventually won their freedom, these grim, ashen-skinned dwarves now take slaves of their own and are as tyrannical as their former masters.\n\nPhysically similar to other dwarves in some ways, duergar are wiry and lean, with black eyes and bald heads, with the males growing long, unkempt, gray beards.\n\nDuergar value toil above all else. Showing emotions other than grim determination or wrath is frowned on in their culture, but they can sometimes seem joyful when at work. They have the typical dwarven appreciation for order, tradition, and impeccable craftsmanship, but their goods are purely utilitarian, disdaining aesthetic or artistic value.',
     flavorText: 'The gray dwarves, or duergar, live deep in the Underdark.',
@@ -793,6 +811,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '19',
     name: 'Eladrin (MMOM)',
+    slug: '',
     description:
       'Eladrin are elves of the Feywild, a realm of perilous beauty and boundless magic. Using that magic, eladrin can step from one place to another in the blink of an eye, and each eladrin resonates with emotions captured in the Feywild in the form of seasons — affinities that affect the eladrin’s mood and appearance. An eladrin’s season can change, though some remain in one season forever. ',
     flavorText:
@@ -841,6 +860,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '20',
     name: 'Eladrin (MToF)',
+    slug: '',
     description:
       "Eladrin are elves native to the Feywild, a realm of beauty, unpredictable emotion, and boundless magic. An eladrin is associated with one of the four seasons and has coloration reminiscent of that season, which can also affect the eladrin's mood:\n\n- Autumn is the season of peace and goodwill, when summer's harvest is shared with all.\n- Winter is the season of contemplation and dolor, when the vibrant energy of the world slumbers.\n - Spring is the season of cheerfulness and celebration, marked by merriment as winter's sorrow passes.\n- Summer is the season of boldness and aggression, a time of unfettered energy.\n\nSome eladrin remain associated with a particular season for their entire lives, whereas other eladrin transform, adopting characteristics of a new season.\n\nWhen finishing a long rest, any eladrin can change their season. An eladrin might choose the season that is present in the world or perhaps the season that most closely matches the eladrin's current emotional state. For example, an eladrin might shift to autumn if filled with contentment, another eladrin could change to winter if plunged into sorrow, still another might be bursting with joy and become an eladrin of spring, and fury might cause an eladrin to change to summer.",
     flavorText:
@@ -882,6 +902,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '21',
     name: 'Fairy (MMOM)',
+    slug: '',
     description:
       'The Feywild is home to many fantastic peoples, including fairies. Fairies are a wee folk, but not nearly as much so as their pixie and sprite friends. The first fairies spoke Elvish, Goblin, or Sylvan, and encounters with human visitors prompted many of them to learn Common as well.',
     flavorText:
@@ -928,6 +949,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '22',
     name: 'Fairy (TWBtW)',
+    slug: '',
     description:
       'The Feywild is home to many fantastic peoples, including fairies. Fairies are a wee folk, but not nearly as much so as their pixie and sprite friends. The first fairies spoke Elvish, Goblin, or Sylvan, and encounters with human visitors prompted many of them to learn Common as well.',
     flavorText:
@@ -974,6 +996,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '23',
     name: 'Firbolg (MMOM)',
+    slug: '',
     description:
       'Distant cousins of giants, the first firbolgs wandered the primeval forests of the multiverse, and the magic of those forests entwined itself with the firbolgs’ souls. Centuries later, that magic still thrums inside a firbolg, even one who has never lived under the boughs of a great forest.\n\nA firbolg’s magic is an obscuring sort, which allowed their ancestors to pass through a forest without disturbing it. So deep is the connection between a firbolg and the wild places of the world that they can communicate with flora and fauna.',
     age: 'Firbolgs can live up to 500 years.',
@@ -1017,6 +1040,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '24',
     name: 'Firbolg (VGtM)',
+    slug: '',
     description:
       'Firbolgs are fey-oriented half-giants. Their tribes cloister in remote forest strongholds, preferring to spend their days in quiet harmony with the woods. When provoked, firbolgs demonstrate formidable skills with weapons and druidic magic.',
     flavorText: 'Firbolgs are fey-oriented half-giants.',
@@ -1053,6 +1077,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '25',
     name: 'Air Genasi (MMOM)',
+    slug: '',
     description:
       'Tracing their ancestry to the genies of the Elemental Planes, each genasi can tap into the power of one of the elements. Air, earth, fire, and water — these are the four pillars of the Material Plane and the four types of genasi. Some genasi are direct descendants of a genie, while others were born to non-genasi parents who lived near a place suffused by a genie’s magic.\n\nAir genasi are descended from djinn, the genies of the Elemental Plane of Air. Embodying many of the airy traits of their otherworldly ancestors, air genasi can draw upon their connection to the winds.\n\nAir genasi’s skin tones include many shades of blue, along with the full range of human skin tones, with bluish or ashen casts. Sometimes their skin is marked by lines that seem like cracks with bluish-white energy spilling out. An air genasi’s hair might blow in a phantom wind or be made entirely of clouds or vapor.',
     flavorText:
@@ -1099,6 +1124,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '26',
     name: 'Air Genasi (EEPC)',
+    slug: '',
     description:
       'Those who think of other planes at all consider them remote, distant realms, but planar influence can be felt throughout the world. It sometimes manifests in beings who, through an accident of birth, carry the power of the planes in their blood. The genasi are one such people, the offspring of genies and mortals.\n\nAs an air genasi, you are descended from the djinn. As changeable as the weather, your moods shift from calm to wild and violent with little warning, but these storms rarely last long.\n\nAir genasi typically have light blue skin, hair, and eyes. A faint but constant breeze accompanies them, tousling the hair and stirring the clothing. Some air genasi speak with breathy voices, marked by a faint echo. A few display odd patterns in their flesh or grow crystals from their scalps.',
     flavorText: 'As an air genasi, you are descended from the djinn.',
@@ -1136,6 +1162,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '27',
     name: 'Earth Genasi (MMOM)',
+    slug: '',
     description:
       'Tracing their ancestry to the genies of the Elemental Planes, each genasi can tap into the power of one of the elements. Air, earth, fire, and water — these are the four pillars of the Material Plane and the four types of genasi. Some genasi are direct descendants of a genie, while others were born to non-genasi parents who lived near a place suffused by a genie’s magic.\n\nTracing their ancestry to dao, the genies of the Elemental Plane of Earth, earth genasi inherit dao’s steadfast strength and control over earth.\n\nAn earth genasi’s skin can be the colors of stone and earth or a human skin tone with glittering sparkles like gem dust. Some earth genasi have lines marking their skin like cracks, either showing glimmering gemlike veins or a dim, yellowish glow. Earth genasi hair can appear carved of stone or crystal or resemble strands of spun metal.',
     flavorText:
@@ -1181,6 +1208,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '28',
     name: 'Earth Genasi (EEPC)',
+    slug: '',
     description:
       'Those who think of other planes at all consider them remote, distant realms, but planar influence can be felt throughout the world. It sometimes manifests in beings who, through an accident of birth, carry the power of the planes in their blood. The genasi are one such people, the offspring of genies and mortals.\n\nAs an earth genasi, you are descended from the cruel and greedy dao, though you aren’t necessarily evil. You have inherited some measure of control over earth, reveling in superior strength and solid power. You tend to avoid rash decisions, pausing long enough to consider your options before taking action.\n\nElemental earth manifests differently from one individual to the next. Some earth genasi always have bits of dust falling from their bodies and mud clinging to their clothes, never getting clean no matter how often they bathe. Others are as shiny and polished as gemstones, with skin tones of deep brown or black, eyes sparkling like agates. Earth genasi can also have smooth metallic flesh, dull iron skin spotted with rust, a pebbled and rough hide, or even a coating of tiny embedded crystals. The most arresting have fissures in their flesh, from which faint light shines.',
     age: 'Genasi mature at about the same rate as humans and reach adulthood in their late teens. They live somewhat longer than humans do, up to 120 years.',
@@ -1218,6 +1246,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '29',
     name: 'Fire Genasi (MMOM)',
+    slug: '',
     description:
       'Tracing their ancestry to the genies of the Elemental Planes, each genasi can tap into the power of one of the elements. Air, earth, fire, and water — these are the four pillars of the Material Plane and the four types of genasi. Some genasi are direct descendants of a genie, while others were born to non-genasi parents who lived near a place suffused by a genie’s magic.\n\nDescended from efreet, the genies of the Elemental Plane of Fire, fire genasi channel the flamboyant and often destructive nature of flame. They show their heritage in their skin tones, which can range from deep charcoal to shades of red and orange. Some bear skin tones common to humanity but with fiery marks, such as slowly swirling lights under their skin that resemble embers or glowing red lines tracing over their bodies like cracks. Fire genasi hair can resemble threads of fire or sooty smoke.',
     abilityScoreDescription:
@@ -1264,6 +1293,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '30',
     name: 'Fire Genasi (EEPC)',
+    slug: '',
     description:
       'Those who think of other planes at all consider them remote, distant realms, but planar influence can be felt throughout the world. It sometimes manifests in beings who, through an accident of birth, carry the power of the planes in their blood. The genasi are one such people, the offspring of genies and mortals.\n\nAs a fire genasi, you have inherited the volatile mood and keen mind of the efreet. You tend toward impatience and making snap judgments. Rather than hide your distinctive appearance, you exult in it.\n\nNearly all fire genasi are feverishly hot as if burning inside, an impression reinforced by flaming red, coal- black, or ash-gray skin tones. The more human-looking have fiery red hair that writhes under extreme emotion, while more exotic specimens sport actual flames dancing on their heads. Fire genasi voices might sound like crackling flames, and their eyes flare when angered. Some are accompanied by the faint scent of brimstone.',
     flavorText:
@@ -1305,6 +1335,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '31',
     name: 'Water Genasi (MMOM)',
+    slug: '',
     description:
       'Tracing their ancestry to the genies of the Elemental Planes, each genasi can tap into the power of one of the elements. Air, earth, fire, and water — these are the four pillars of the Material Plane and the four types of genasi. Some genasi are direct descendants of a genie, while others were born to non-genasi parents who lived near a place suffused by a genie’s magic.\n\nWater genasi descend from marids, aquatic genies from the Elemental Plane of Water. Water genasi are perfectly suited to life underwater and carry the power of the waves inside themselves.\n\nTheir skin is often shades of blue or green, sometimes a blend of the two. If they have a human skin tone, there is a glistening texture that catches the light, like water droplets or nearly invisible fish scales. Their hair can resemble seaweed, waving as if in a current, or it can even be like water itself.',
     flavorText: 'Water genasi descend from marids, aquatic genies.',
@@ -1354,6 +1385,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '32',
     name: 'Water Genasi (EEPC)',
+    slug: '',
     description:
       'Those who think of other planes at all consider them remote, distant realms, but planar influence can be felt throughout the world. It sometimes manifests in beings who, through an accident of birth, carry the power of the planes in their blood. The genasi are one such people, the offspring of genies and mortals.\n\nThe lapping of waves, the spray of sea foam on the wind, the ocean depths — all of these things call to your heart. You wander freely and take pride in your independence, though others might consider you selfish.\n\nMost water genasi look as if they just finished bathing, with beads of moisture collecting on their skin and hair. They smell of fresh rain and clean water. Blue or green skin is common, and most have somewhat overlarge eyes, blue-black in color. A water genasi’s hair might float freely, swaying and waving as if underwater. Some have voices with undertones reminiscent of whale song or trickling streams.',
     flavorText: 'The lapping of waves, the spray of sea foam on the wind.',
@@ -1388,6 +1420,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '33',
     name: 'Githyanki (MMOM)',
+    slug: '',
     description:
       'Once members of a people who escaped servitude to mind flayers, githyanki split from their cousins, githzerai, and fled to the Astral Plane. In that timeless, silvery realm, githyanki honed their psionic powers and built a great city called Tu’narath. They have since spread throughout the multiverse, starting in outposts outside the Astral Plane, called creches, where time passes and their children can reach adulthood.\n\nA lanky people with skin tones of yellows, greens, and browns, githyanki complement their physical prowess with psionic might, instilled in them by mind flayers and cultivated over eons in the Astral Plane. Now all githyanki can use their psychic bond with that plane to access splinters of knowledge left behind by beings who travel, live, and die among the silver astral clouds.',
     age: 'Githyanki who reside in the Astral Plane can live indefinitely.',
@@ -1432,6 +1465,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '34',
     name: 'Githyanki (MToF)',
+    slug: '',
     description:
       "The warlike githyanki and the contemplative githzerai are a sundered people – two cultures that utterly despise one another. The brutal githyanki are trained from birth as warriors, while the githzerai hone their minds to a razor’s edge in their fortresses within Limbo. But before there were githyanki or githzerai, these creatures were a single species enslaved by the illithids.\n\nAlthough they attempted to overthrow their masters many times, their rebellions were repeatedly crushed until a great leader named Gith arose. After much bloodshed, Gith and her followers threw off the yoke of their illithid masters, but another leader named Zerthimon emerged in the aftermath of battle. Zerthimon challenged Gith's motives, claiming that her strict martial leadership and desire for vengeance amounted to little more than another form of slavery for her people. A rift erupted between followers of each leader, and they eventually became the two races whose enmity endures to this day: the Githyanki in the way of Gith, and the Githzerai in the way of Zerthimon.\n\nThe githyanki plunder countless worlds from the decks of their astral vessels and the backs of red dragons. Feathers, beads, gems, and precious metals decorate their armor and weapons – the legendary silver swords with which they cut through their foes. Since winning their freedom from the illithids, the githyanki have become ruthless conquerors under the rulership of their dread lich-queen, Vlaakith.",
     flavorText:
@@ -1474,6 +1508,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '35',
     name: 'Githzerai (MMoM)',
+    slug: '',
     description:
       'Githzerai migrated to the Everchanging Chaos of Limbo after the ancient schism that split their ancestors from their cousins, githyanki. Limbo is a roiling maelstrom of matter and energy, collapsing and reforming without purpose or direction, until a creature exerts deliberate will to stabilize it. Through their potent psionic power, githzerai carved a home for themselves amid the chaos. As the ages passed, githzerai explorers ranged out to other planes and worlds of the multiverse.\n\nGithzerai are generally slender, with speckled skin in shades of yellow, green, or brown. Eons of cultivating their mental powers within the endless chaos of Limbo have imbued githzerai with the ability to shape psionic energy to protect themselves and probe minds.',
     flavorText: 'Githzerai migrated to the Everchanging Chaos of Limbo.',
@@ -1517,6 +1552,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '36',
     name: 'Githzerai (MToF)',
+    slug: '',
     description:
       "The warlike githyanki and the contemplative githzerai are a sundered people – two cultures that utterly despise one another. The brutal githyanki are trained from birth as warriors, while the githzerai hone their minds to a razor’s edge in their fortresses within Limbo. But before there were githyanki or githzerai, these creatures were a single species enslaved by the illithids.\n\nAlthough they attempted to overthrow their masters many times, their rebellions were repeatedly crushed until a great leader named Gith arose. After much bloodshed, Gith and her followers threw off the yoke of their illithid masters, but another leader named Zerthimon emerged in the aftermath of battle. Zerthimon challenged Gith's motives, claiming that her strict martial leadership and desire for vengeance amounted to little more than another form of slavery for her people. A rift erupted between followers of each leader, and they eventually became the two races whose enmity endures to this day: the Githyanki in the way of Gith, and the Githzerai in the way of Zerthimon.\n\nWhether these tall, gaunt creatures were peaceful or savage, cultured or primitive before the illithids enslaved and changed them, none can say. Not even the original name of their species remains from that distant time.\n\nFocused philosophers and austere ascetics, the githzerai pursue lives of rigid order. Lean and muscular, they wear unadorned clothing free of ornamentation, keeping their own counsel and trusting few creatures outside of their own kind. Having turned their backs on their warlike githyanki kin, the githzerai maintain a strict monastic lifestyle, dwelling on islands of order in the vast sea of chaos that is the plane of Limbo.",
     flavorText: 'Focused philosophers and austere ascetics.',
@@ -1558,6 +1594,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '37',
     name: 'Goliath (MMOM)',
+    slug: '',
     description:
       'The first goliaths lived on the highest mountain peaks — far above the tree line, where the air is thin and frigid winds howl. Distantly related to giants and infused with the supernatural essence of their ancestors’ mountainous home, goliaths stand between 7 and 8 feet tall and have a wide array of skin tones resembling different types of stone.',
     flavorText:
@@ -1605,6 +1642,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '38',
     name: 'Goliath (EEPC)',
+    slug: '',
     description:
       'At the highest mountain peaks dwell the reclusive goliaths, wandering a bleak realm of rock, wind, and cold. Their bodies look as if they are carved from mountain stone and give them great physical power. Their hearts are infused with the cold regard of their frigid realm, leaving each goliath with the responsibility to earn a place in the tribe or die trying.',
     flavorText: 'At the highest mountain peaks dwell the reclusive goliaths.',
@@ -1645,6 +1683,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '39',
     name: 'Harengon (MMOM)',
+    slug: '',
     description:
       'Harengons originated in the Feywild, where they spoke Sylvan and embodied the spirit of freedom and travel. In time, these rabbitfolk hopped into other worlds, bringing the fey realm’s exuberance with them and learning new languages as they went.\n\nHarengons are bipedal, with the characteristic long feet of the rabbits they resemble and fur in a variety of colors. They share the keen senses and powerful legs of leporine creatures and are full of energy, like a wound-up spring. Harengons are blessed with a little fey luck, and they often find themselves a few fortunate feet away from dangers during adventures.',
     flavorText: 'Harengons originated in the Feywild, where they spoke Sylvan.',
@@ -1692,6 +1731,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '40',
     name: 'Harengon (TWBtW)',
+    slug: '',
     description:
       "Harengons originated in the Feywild, where they spoke Sylvan and embodied the spirit of freedom and travel. In time, these rabbitfolk hopped into other worlds, bringing the fey realm's exuberance with them and learning new languages as they went.\n\nHarengons are bipedal, with the characteristic long feet of the rabbits they resemble and fur in a variety of colors. They share the keen senses and powerful legs of leporine creatures and are full of energy, like a wound-up spring. Harengons are blessed with a little fey luck, and they often find themselves a few fortunate feet away from dangers during adventures.",
     flavorText: 'Harengons originated in the Feywild, where they spoke Sylvan.',
@@ -1740,6 +1780,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '41',
     name: 'Kenku (MMOM)',
+    slug: '',
     description:
       'Feathered folk who resemble ravens, kenku are blessed with keen observation and supernaturally accurate memories. None of them can remember the origin of the first kenku, however, and they often joke that there are as many kenku origin stories as there are kenku. Some of them paint their genesis as a curse, being a flightless bird people doomed to mimic other people’s creations. Other kenku recite cryptic but beautiful poems about their advent being a blessed event in which they were sent into the multiverse to observe and catalog its many wonders.\n\nWhatever their true origin, kenku are most often found in the Shadowfell and the Material Plane, and they tend to have the coloration typical of ravens.',
     flavorText: 'Feathered folk who resemble ravens.',
@@ -1792,6 +1833,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '42',
     name: 'Kenku (VGM)',
+    slug: '',
     description:
       'Haunted by an ancient crime that robbed them of their wings, the flightless kenku wander the world as vagabonds and burglars who live at the edge of human society. Kenku suffer from a sinister reputation that is not wholly unearned, but they can prove to be valuable allies.',
     flavorText: 'Haunted by an ancient crime that robbed them of their wings.',
@@ -1843,6 +1885,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '43',
     name: 'Locathah',
+    slug: '',
     description:
       'These resilient and proud fish-folk have endured war, slavery, and mistreatment at the hands of other aquatic creatures. They dwell in submerged tribal communities along seacoasts, and hunt both above and below the water.',
     flavorText:
@@ -1884,6 +1927,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '44',
     name: 'Owlin',
+    slug: '',
     description:
       'Distant kin of giant owls from the Feywild, owlin come in many shapes and sizes, from petite and fluffy to wide-winged and majestic. Owlin have arms and legs like other Humanoids, as well as wings that extend from their back and shoulders. Like owls, owlin are gspeciesd with feathers that make no sound when they move or fly, making it easy for them to sneak up on you in the library.\n\nYour owlin character might be nocturnal. Or perhaps your character is simply prone to rise later, embodying the common nickname of night owl.',
     flavorText: 'Distant kin of giant owls from the Feywild.',
@@ -1933,6 +1977,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '45',
     name: 'Satyr',
+    slug: '',
     description:
       'Originating in the Feywild — a realm of pure emotion-satyrs thrive on the energy of merriment. They resemble elves but have goatlike legs, cloven hooves, and ram or goat horns. The magic of the fey realm has given them an innate ability to perform, to delight, and to resist magical intrusion. While they’re usually found in the Feywild, satyrs do wander to other planes of existence, most often to the Material Plane. There they seek to bring a bit of their home plane’s splendor to other worlds.',
     flavorText:
@@ -1989,6 +2034,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '46',
     name: 'Satyr (MOoT)',
+    slug: '',
     description:
       'Satyrs have a well-earned reputation for their good spirits, gregarious personalities, and love of revels. Most satyrs are driven by simple desires, to see the world and to sample its every pleasure. While their spontaneity and whimsy sometimes put them at odds with more stoic peoples, satyrs rarely let the moodiness of others hinder their own happiness. Life is a blessing from the gods, after all, and the proper response to such a gift, as far as most satyrs are concerned, is to accept it with relish.',
     flavorText: 'Satyrs have a well-earned reputation for their good spirits.',
@@ -2038,6 +2084,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '47',
     name: 'Sea Elf (MMOM)',
+    slug: '',
     description:
       'Sea elves fell in love with the wild beauty of the ocean in the earliest days of the multiverse. While other elves traveled from realm to realm, sea elves navigated the currents and explored the waters of many worlds. Today these elves can be found wherever oceans exist, as well as in the Elemental Plane of Water.',
     flavorText: 'Sea elves fell in love with the wild beauty of the ocean.',
@@ -2090,6 +2137,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '48',
     name: 'Sea Elf (MToF)',
+    slug: '',
     description:
       'Sea elves fell in love with the wild beauty of the ocean in the earliest days of the multiverse. While other elves traveled from realm to realm, the sea elves navigated the deepest currents and explored the waters across a hundred worlds. Today, they live in small, hidden communities in the ocean shallows and on the Elemental Plane of Water.',
     flavorText: 'Sea elves fell in love with the wild beauty of the ocean.',
@@ -2142,6 +2190,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '49',
     name: 'Shadar Kai (MMOM)',
+    slug: '',
     description:
       'Shadar-kai are the elves of the Shadowfell, originally drawn to that dread realm by the Raven Queen. Over the centuries, some of them have continued to serve her, while others have ventured into the Material Plane to forge their own destinies.\n\nOnce shadar-kai were Fey like the rest of their elven kin; now they exist in a state between life and death, thanks to being transformed by the Shadowfell’s grim energy.\n\nShadar-kai have ashen skin tones, and while they’re in the Shadowfell, they also become wizened, reflecting the somber nature of that gloomy plane.',
     age: 'Like other elves, shadar-kai can live to be over 750 years old.',
@@ -2192,6 +2241,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '50',
     name: 'Shadar Kai (MToF)',
+    slug: '',
     description:
       "Sworn to the Raven Queen's service, the mysterious shadar-kai venture into the Material Plane from the Shadowfell to advance her will. Once they were fey like the rest of their elven kin, and now they exist in a strange state between life and death. Eladrin and shadar-kai are like reflections of each other: one bursting with emotion, the other nearly devoid of it.",
     flavorText:
@@ -2235,6 +2285,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '51',
     name: 'Tabaxi (MMOM)',
+    slug: '',
     description:
       'Created by the Cat Lord—a divine being of the Upper Planes—to blend the qualities of humanoids and cats, tabaxi are a varied people in both attitude and appearance. In some lands, tabaxi live like the cats they resemble, naturally curious and at home in playful environments. In other places, tabaxi live as other folk do, not exhibiting the feline behavior the Cat Lord intended.\n\nTabaxi’s appearance is as varied as their attitudes. Some tabaxi have features or patterning in their fur like tigers, jaguars, or other big cats, while others have appearances more like a house cat. Still others have unique patterns or might style their fur to their preferences — or might even be hairless!',
     flavorText: 'Created by the Cat Lord, tabaxi are a varied people.',
@@ -2288,6 +2339,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '52',
     name: 'Tabaxi (VGM)',
+    slug: '',
     description:
       "Hailing from a strange and distant land, wandering tabaxi are catlike humanoids driven by curiosity to collect interesting artifacts, gather tales and stories, and lay eyes on all the world's wonders. Ultimate travelers, the inquisitive tabaxi rarely stay in one place for long. Their innate nature pushes them to leave no secrets uncovered, no treasures or legends lost.",
     flavorText: 'Hailing from a strange and distant land, wandering tabaxi.',
@@ -2333,6 +2385,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '53',
     name: 'Tortle (MMOM)',
+    slug: '',
     description:
       'Tortles have a saying: “We wear our homes on our backs.” These turtle folk live on many worlds, most often journeying up and down coasts, along waterways, and across the sea. Tortles don’t have a unified story of how they were created, but they all have a sense of being mystically connected to the natural world. Carrying their shelter on their backs gives tortles a special feeling of security wherever they go, for even if they visit a far, unknown country, they have a place to lay their heads\n\nTortles exhibit the same range of coloration and patterns found among turtles, and many tortles enjoy adorning their shells in distinctive ways.',
     flavorText: 'Tortles have a saying: “We wear our homes on our backs.',
@@ -2393,6 +2446,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '54',
     name: 'Tortle (TP)',
+    slug: '',
     description:
       "What many tortles consider a simple life, others might call a life of adventure. Tortles are born near sandy coastlines, but as soon as they're able to walk on two legs, they become nomad survivalists eager to explore the wilderness, experience its many wonders, put their skills to the test, and make new acquaintances.",
     flavorText: 'Tortles are born near sandy coastlines.',
@@ -2432,6 +2486,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '55',
     name: 'Triton (MMOM)',
+    slug: '',
     description:
       'Originally from the Elemental Plane of Water, many tritons entered the Material Plane centuries ago in response to the growing threat of evil elementals. Those tritons spread across the worlds’ oceans, protecting the surface from terrors in the deep. Over time, triton have extended their stewardship over the sea floor to the ocean’s surface.\n\nTritons have webbed hands and feet, small fins on their calves, and coloration that favors blues and greens.',
     flavorText: 'Originally from the Elemental Plane of Water, many tritons.',
@@ -2480,6 +2535,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '56',
     name: 'Triton (VGM)',
+    slug: '',
     description:
       'Tritons guard the ocean depths, building small settlements beside deep trenches, portals to the elemental planes, and other dangerous spots far from the eyes of land-bound folk. Long-established guardians of the deep ocean floor, the noble tritons have gradually become increasingly active in the world above.',
     source: src.volo,
@@ -2525,6 +2581,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '57',
     name: 'Verdan',
+    slug: '',
     description:
       'Verdan owe their existence to chaos. Descendants of goblins and hobgoblins, transformed by the shadow of That-Which-Endures. They are THE newest species of Faerûn.',
     flavorText: 'Verdan owe their existence to chaos.',
@@ -2574,6 +2631,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '58',
     name: 'Kender',
+    slug: '',
     description:
       'During the mythical origins of Krynn, Reorx, god of craft, indulged in an age of unfettered creation. Many peoples sprang from his divine forge, but not all among them remained as the god created them. Altered by unbridled magic, a group of gnomes were transformed and given almost supernatural curiosity and fearlessness. These were the first kender.\n\nOriginating on the world of Krynn, kender are diminutive Humanoids who look like humans with pointed ears and diverse appearances. Kender have a supernatural curiosity that drives them to adventure. Due to this inquisitiveness, many kender find themselves falling through portals to other planes and worlds.\n\nKender sometimes amass impressive collections of curiosities. Some might collect mundane knickknacks or relics from magical sites, while others might become professional thieves.',
     flavorText:
@@ -2619,6 +2677,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '59',
     name: 'Kalashtar',
+    slug: '',
     description:
       'The kalashtar are a compound species created from the union of humanity and renegade spirits from the plane of dreams – spirits called quori. Kalashtar are often seen as wise, spiritual people with great compassion for others. But there is an unmistakable alien quality to the kalashtar, as they are haunted by the conflicts of their otherworldly spirits.',
     flavorText:
@@ -2664,6 +2723,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '60',
     name: 'Warforged',
+    slug: '',
     description:
       'The warforged were built to fight in the Last War. The first warforged were mindless automatons, but House Cannith devoted vast resources to improving these steel soldiers. An unexpected breakthrough produced fully sentient soldiers, blending organic and inorganic materials. Warforged are made from wood and metal, but they can feel pain and emotion. Built as weapons, they must now find a purpose beyond the war. A warforged can be a steadfast ally, a cold-hearted killing machine, or a visionary in search of purpose and meaning.',
     flavorText: 'The warforged were built to fight in the Last War.',
@@ -2708,6 +2768,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '61',
     name: 'Bugbear (MMOM)',
+    slug: '',
     description:
       'Neither bugs nor bears, bugbears are the hulking cousins of goblins and hobgoblins. With roots in the Feywild, early bugbears resided in hidden places, in hard-to-reach and shadowed spaces. Long ago and from out of the corner of your eye, they came to the Material Plane, urged to spread throughout the multiverse by the conquering god Maglubiyet. Centuries later, they still bear a fey gift for lurking just out of sight, and many of them have sneaked away from that god’s influence.\n\nThey are long of limb and covered in coarse hair, with wedge-shaped ears and pointed teeth. Despite their formidable build, bugbears are quiet skulkers, thanks to a fey magic that allows them to hide in spaces seemingly too small for them.',
     flavorText:
@@ -2754,6 +2815,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '62',
     name: 'Bugbear (VGM)',
+    slug: '',
     description:
       "Bugbears rely on stealth and strength to attack, preferring to operate at night. When they're not in battle, bugbears spend much of their time resting or dozing, and bully weaker creatures into doing their bidding. From the viewpoint of the rest of the world, their aggression and savagery are thankfully offset by their rarity and lethargy.",
     abilityScoreDescription:
@@ -2793,6 +2855,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '63',
     name: 'Centaur (MMOM)',
+    slug: '',
     description:
       'Centaurs gallop throughout the multiverse and trace their origins to many different realms. The centaurs presented here hail from the Feywild and mystically resonate with the natural world. From the waist up, they resemble elves, displaying all the elf varieties of skin tone. From the waist down, they have the bodies of horses.',
     flavorText: 'Centaurs gallop throughout the multiverse.',
@@ -2835,6 +2898,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '64',
     name: 'Centaur (GGR)',
+    slug: '',
     description: `In the sprawling city of Ravnica, where "open road" seems like a contradiction and "open plain" is sheer nonsense, centaurs nevertheless retain a love of wide spaces and the freedom to travel. As much as they can, centaurs run-in wide plazas, spacious parks, and expanses of rubble and ruin. They race the wind, hooves thundering and tails streaming behind them, until the next wall looms in their path and brings them to a stop.\n\nCentaurs have the upper bodies, down to the waist, of muscular humans, displaying all the human variety of skin tones and features. Their ears are slightly pointed, but their faces are wider and squarer than those of elves. Below the waist, they have the bodies of small horses, with a similar range of coloration - from various s hades of chestnut or bay to dappled or even zebra like striped patterns. Most centaurs style their hair and their tails in a similar way. Selesnya centaurs favor long, flowing hair. Gruul centaurs cut their hair in rough. spiky styles.The upper bodies of centaurs are comparable to human torsos in size, and their lower equine bodies average about 4 feet tall al the withers. Though they are smaller than a human rider mounted on a horse, they fill similar roles as cavalry warriors. messengers, outriders, and scouts.`,
     flavorText:
       "In the sprawling city of Ravnica, where 'open road' seems like a contradiction and 'open plain' is sheer nonsense, centaurs nevertheless retain a love of wide spaces and the freedom to travel.",
@@ -2871,6 +2935,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '65',
     name: 'Centaur (MOoT)',
+    slug: '',
     description:
       "Powerful and curious, quick to act and knowledgeable of the wider world, centaurs seek to experience life's boundless bounty. The centaurs of Theros are divided into two groups: members of the far-traveling Lagonna band and the proud raiders of the Pheres band. These bands occupy territories situated between the three major human poleis, making them common sights to those who travel human lands. Not ones to settle in permanent homes, though, centaurs might be found wherever there are wonders to be witnessed and adventures to be had.\n\nThough centaurs share the same basic physiology, the centaur bands are commonly associated with their own distinct traits.\n\nLagonna band centaurs tend to be sleek and muscular, with powerful legs built for endurance rather than speed. They usually have coats of a single color, often with a shine that can look metallic in bright light.\n\nPheres band centaurs typically have long, nimble legs and lean bodies, and are often marked with natural color patterns on their hide. Pheres centaurs sometimes paint or tattoo their upper bodies to match the patterns on their lower half. Occasionally, a Pheres centaur is born with vertical stripes on their hooves, foretelling an exciting and adventurous life.",
     flavorText:
@@ -2908,6 +2973,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '66',
     name: 'Goblin (MMOM)',
+    slug: '',
     description:
       'A subterranean folk, goblins can be found in every corner of the multiverse, often beside their bugbear and hobgoblin kin. Long before the god Maglubiyet conquered them, early goblins served in the court of the Queen of Air and Darkness, one of the Feywild’s archfey. Goblins thrived in her dangerous domain thanks to a special boon from her—a supernatural knack for finding the weak spots in foes larger than themselves and for getting out of trouble. Goblins brought this fey boon with them to worlds across the Material Plane, even if they don’t remember the fey realm they inhabited before Maglubiyet’s rise. Now many goblins pursue their own destinies, escaping the plots of both archfey and gods.',
     flavorText:
@@ -2954,6 +3020,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '67',
     name: 'Goblin (VGM)',
+    slug: '',
     description:
       'Goblins occupy an uneasy place in a dangerous world, and they react by lashing out at any creatures they believe they can bully. Cunning in battle and cruel in victory, goblins are fawning and servile in defeat.',
     abilityScoreDescription:
@@ -2992,6 +3059,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '68',
     name: 'Goblin (AwMD)',
+    slug: '',
     description:
       'Dankwood goblins are much like any other run-of-the-mill goblin but they are much more gentle and artistic than the savage and uncouth goblins of the world.\n\nThey are inquisitive and have a magical bond with the small forest creatures with which they are often friends. They are fast and numble and love to explore. Because of this they make great adventurers and guides.',
     flavorText:
@@ -3031,6 +3099,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '69',
     name: 'Goblin (PSI)',
+    slug: '',
     description:
       "Goblins are native to Ixalan, and their eager curiosity drew them to the ships of the Brazen Coalition where the pirates first made landfall on the Sun Empire's shores. Though they still thrive in remote jungle colonies, goblins are most commonly seen swinging on the ropes of sleek pirate ships.\n\nGoblins stand about three feet tall, though they rarely stand upright. They prefer a crouched posture that lets them scramble quickly on all fours, aided by their long prehensile tails. Their hearing and eyesight make them excellent lookouts, and their agility serves them well as crew members on pirate ships. They climb, swing, and jump easily among a ship's ropes, and can get into tight spaces that humans can't. For better or worse, many goblins are also incorrigible pranksters, and they often have a hard time determining when a prank is inappropriate, is poorly timed, or has gone too far.",
     abilityScoreDescription: 'Your Dexteriy score increases by 2.',
@@ -3065,6 +3134,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '70',
     name: 'Goblin (PSZ)',
+    slug: '',
     description:
       "Goblins are an inquisitive and adaptable race hampered by their small size, their natural cowardice, and a severe shortage of common sense. They eagerly explore areas that others hesitate to enter, and obsessively fiddle with magic that more sensible folk would take careful precautions with. They prize ancient artifacts not for their inherent value, but primarily as a mark of status—for a precious trophy proves that its owner survived a delve into a deep and dangerous ruin.\n\nA typical goblin stands between three-and-a-half and five feet tall, with a slender, elongated build. Goblins' arms are unusually long and spindly, making them adept at climbing cliffs and trees. Their skin has a stony texture, ranging in color from red-brown to moss green or gray. Their ears are large and swept back, their eyes are intensely red, and many sport heavy bone protrusions on their spines or elbows. Males have similar growths jutting from their chins, while females have heavier growths on their foreheads.",
     flavorText:
@@ -3099,6 +3169,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '71',
     name: 'Grung',
+    slug: '',
     description:
       'Grungs are aggressive froglike humanoids found in rain forests and tropical jungles. They are fiercely territorial and see themselves as superior to most other creatures.\n\nGrung society is a caste system. Each caste lays eggs in a separate hatching pool, and juvenile grungs join their caste upon emergence from the hatchery. All grungs are a dull greenish gray when they are born, but each individual takes on the color of its caste as it grows to adulthood. From lowest to highest caste, grungs can be green, blue, purple, red, orange, or gold.\n\nAll grungs secrete a substance that is harmless to them but poisonous to other creatures. A grung also uses venom to poison its weapons. Grungs are always on the lookout for creatures they can capture and enslave. Grungs use slaves for all manner of menial tasks, but mostly they just like bossing them around. Slaves are fed mildly poisoned food to keep them lethargic and compliant. A creature afflicted in this way over a long period of time becomes a shell of its former self and can be restored to normalcy only by magic. Being amphibious, grungs require water to live; any grung that fails to immerse itself in water for at least 1 hour during a day becomes quite exhausted.',
     flavorText:
@@ -3136,6 +3207,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '72',
     name: 'Hobgoblin (MMOM)',
+    slug: '',
     description:
       'Hobgoblins trace their origins to the ancient courts of the Feywild, where they first appeared with their goblin and bugbear kin. Many of them were driven from the Feywild by the conquering god Maglubiyet, who marshaled them as soldiers, but the fey realm left its mark; wherever they are in the multiverse, they continue to channel an aspect of the Feywild’s rule of reciprocity, which creates a mystical bond between the giver and the receiver of a gift.Hobgoblins are generally taller than their goblin cousins but not quite as big as bugbears. They have curved, pointed ears and noses that turn bright red or blue during displays of emotion.',
     flavorText:
@@ -3184,6 +3256,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '73',
     name: 'Hobgoblin (VGM)',
+    slug: '',
     description:
       "War is the lifeblood of hobgoblins. Its glories are the dreams that inspire them. Its horrors don't feature in their nightmares. Cowardice is more terrible to hobgoblins than dying, for they carry their living acts into the afterlife. A hero in death becomes a hero eternal.",
     flavorText: 'War is the lifeblood of hobgoblins.',
@@ -3222,6 +3295,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '74',
     name: 'Kobold (MMOM)',
+    slug: '',
     description:
       'Some of the smallest draconic creatures in the multiverse, kobolds display their draconic ancestry in the glint of their scales and in their roars. Legends tell of the first kobolds emerging from the Underdark near the lairs of the earliest dragons. In some lands, kobolds serve chromatic or metallic dragons — even worshiping them as divine beings. In other places, kobolds know too well how dangerous those dragons can be and help others defend against draconic destruction.\n\nWhatever their relationship to dragons, kobold scales tend to be rust colored, although the occasional kobold sports a scale color more akin to that of a chromatic or a metallic dragon. A kobold’s cry can express a range of emotion: anger, resolve, elation, fear, and more. Regardless of the emotion expressed, their cry resonates with draconic power.',
     flavorText: 'Some of the smallest draconic creatures in the multiverse.',
@@ -3267,6 +3341,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '75',
     name: 'Kobold (VGM)',
+    slug: '',
     description:
       'Kobolds are often dismissed as cowardly, foolish, and weak, but these little reptilian creatures actually have a strong social structure that stresses devotion to the tribe, are clever with their hands, and viciously work together in order to overcome their physical limitations.',
     abilityScoreDescription: 'Your Dexterity score increases by 2.',
@@ -3300,6 +3375,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '76',
     name: 'Lizardfolk (MMOM)',
+    slug: '',
     description:
       'The saurian lizardfolk are thought by some sages to be distant cousins of dragonborn and kobolds. Despite their resemblance to those other scaled folk, however, lizardfolk are their own people and have lived on the worlds of the Material Plane since the worlds’ creation. Gifted by the gods with remarkable physical defenses and a mystical connection to the natural world, lizardfolk can survive with just their wits in situations that would be deadly for other folk. Because of that fact, many lizardfolk myths state that their people were placed by the gods in the Material Plane to guard its natural wonders.\n\nLizardfolk have colorful scales and exhibit a wide array of scale patterns. Their individual facial features are as varied as those of lizards.',
     flavorText:
@@ -3346,6 +3422,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '77',
     name: 'Lizardfolk (VGM)',
+    slug: '',
     description:
       'Lizardfolk possess an alien and inscrutable mindset, their desires and thoughts driven by a different set of basic principles than those of warm-blooded creatures. Their dismal swamp homes might lie hundreds of miles from the nearest human settlement, but the gap between their way of thinking and that of the smooth-skins is far greater.',
     flavorText: 'Lizardfolk possess an alien and inscrutable mindset.',
@@ -3384,6 +3461,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '78',
     name: 'Minotaur (MMOM)',
+    slug: '',
     description:
       'Minotaurs are barrel-chested humanoids with heads resembling those of bulls. Blessed with a supernaturally strong sense of direction, minotaurs make great navigators. Some sages believe minotaurs were first created by the Lady of Pain to patrol the magical mazes that she uses to trap her foes.\n\nMinotaur horns range in size from about 1 foot long to easily three times that length. Minotaurs often carve their horns to sharpen their edges, etch symbols of power into them, or sheathe them in bronze to prevent them from shattering during battle.\n\nThick hair extends down minotaurs’ necks and powerful backs, and some have long patches of hair on their chins and cheeks. Their legs end in heavy, cloven hooves, and they have long, tufted tails.',
     flavorText:
@@ -3427,6 +3505,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '79',
     name: 'Minotaur (GGtR)',
+    slug: '',
     description:
       "The minotaurs of Ravnica are strong in body. dedication, and courage. They are at home on the battlefield, willing to fight for their various causes. They combine a burning fury in battle with keen tactics that make them excellent commanders as well as valuable shock troops.\n\nMinotaurs are barrel-chested humanoids with heads resembling those of bulls. Their horns range in size from about 1 foot long to great, curling weapons easily three times that length. They often ornament their horns with metal rings or sheathe them in metal to protect them from damage.\n\nManes of shaggy fur extend down minotaurs' necks and powerful backs, and males have long tufts of hair on their chins and cheeks. Their legs end in heavy, cloven hooves. Minotaurs are born with long, tufted tails, but minotaurs of the Ordruun clan (and some others) have their tails docked as part of a coming-of-age ceremony; they find the heavy armor of the Boros legion much more comfortable without a long tail in the way.",
     flavorText:
@@ -3463,6 +3542,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '80',
     name: 'Minotaur (MOoT)',
+    slug: '',
     description:
       "The minotaurs who dwell in the badlands of Phoberos and the remote polis of Skophos are caught between two worlds. Some follow the dark god Mogis, who has tyrannized them for ages untold and shown them a trail of slaughter that is all many minotaurs have ever known. Others, though, have emerged from this bloody path and found a world that welcomes those who pursue their own destinies and heroic callings.\n\nMinotaurs are barrel-chested humanoids with heads resembling those of bulls. Their horns range in size from about 1 foot long to great, curling weapons easily three times that length. Theros minotaurs often carve their horns to sharpen their edges, etch symbols of power into them, or sheathe them in bronze to prevent them from shattering during battle.\n\nThick hair extends down minotaurs' necks and powerful backs, and some have long patches of hair on their chins and cheeks. Their legs end in heavy, cloven hooves, and they have long, tufted tails. Minotaur priests often adorn themselves with sacred items, be they trophies from fallen foes, keepsakes from their homeland, or naturally occurring marks of their god's favor.",
     flavorText:
@@ -3499,6 +3579,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '81',
     name: 'Minotaur (PSA)',
+    slug: '',
     description:
       'Minotaurs are powerfully built, barrel-chested humanoids with heads resembling rams. Their horns curl tightly against the sides of their heads to encircle their ears, and manes of shaggy fur — shorter in females — fall over their broad shoulders. As their appearance suggests, they combine physical strength with stubbornness, bravado, and reckless bravery. They revel in combat, especially when the odds against them seem overwhelming.\n\nMinotaurs are rowdy, boisterous, and direct to the point of rudeness. They have no qualms about declaring what they want and defying others to keep it from them. In combat, they bellow loud challenges in defiance of their foes, and roar with laughter as they triumph.\n\nMinotaurs believe they hold a unique place among the races of Amonkhet. The khenra can look to Hazoret, the naga to Rhonas, and the aven to Kefnet to see themselves represented among the gods. Humans have no single god to look to, which explains why they demonstrate such variety. But only one god bears a pair of curving horns: the God-Pharaoh himself, who holds a special place for many of the minotaurs of Amonkhet.',
     flavorText:
@@ -3535,6 +3616,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '82',
     name: 'Orc (MMOM)',
+    slug: '',
     description:
       'Orcs trace their creation to the one-eyed god Gruumsh, an unstoppable warrior and powerful leader. The divine qualities of Gruumsh resonate within orcs, granting them a reflection of his toughness and tenacity that can’t be matched, and the god equipped his children to be able to live above or below ground.\n\nOn some worlds, such as Eberron, orcs were among the first defenders of the natural order from the encroachments of Fiends and other extraplanar threats. Gruumsh’s blessings have made orcs tireless guardians and mighty allies wherever they are found, even when they turn their devotion to other gods.',
     flavorText: 'Orcs trace their creation to the one-eyed god Gruumsh.',
@@ -3580,6 +3662,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '83',
     name: 'Orc (VGM)',
+    slug: '',
     description:
       'Savage and fearless, orc tribes are ever in search of elves, dwarves, and humans to destroy. Motivated by their hatred of the civilized races of the world and their need to satisfy the demands of their deities, the orcs know that if they fight well and bring glory to their tribe, Gruumsh will call them home.',
     flavorText:
@@ -3619,6 +3702,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '84',
     name: 'Orc (ERLW)',
+    slug: '',
     description:
       "Thousands of years before humans came to Khorvaire, the land was dominated by wild orcs and goblinoids of the Dhakaani Empire. The goblin empire scattered the orc tribes and forced them into harsh and unwanted lands: the swamps of the Shadow Marches, the Demon Wastes, and the depths of the Ironroot Mountains. But in the Shadow Marches, the orcs learned the secrets of druidic magic from the dragon Vvaraak, becoming the first of the Gatekeepers. With the invasion of the alien daelkyr from Xoriat, the Gatekeepers put the dragon's teaching to the test, creating magical seals that bound the daelkyr in the depths of Khyber and protected Eberron against further incursion from the plane of madness.",
     flavorText:
@@ -3658,6 +3742,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '85',
     name: 'Orc (EGtW)',
+    slug: '',
     description:
       "Orcs are one of Exandria's youngest races, and are said to have been born from elves seared by the blood of Gruumsh, the Ruiner, when Corellon pierced the orc god's eye on the field of battle. For long years, orcs were feared as mindless abominations, drawn to slaughter like moths to flame.\n\nStories tell of how the blood of the Ruiner flows in the veins of all orcs, driving them to commit acts of terrible violence and anger. Orcs call this fury hgar'Gruum, or the curse of ruin, and use it to refer to everything from battle rage to a bad temper. Half-orcs are said to have inherited the blood of the Ruiner, and to carry the same bloodlust and fury that orcs do.\n\nOrcs and half-orcs do feel a certain pull toward violence and anger. But the simple truth is that there is no curse of ruin. No supernatural power drives orcs to kill. Rather, they are simply victims of the same selfish, violent impulses that corrupt all mortal beings.",
     flavorText:
@@ -3697,6 +3782,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '86',
     name: 'Orc (PSI)',
+    slug: '',
     description:
       'Orcs originally came from the same mountainous region where the kingdom of Torrezon was born, and they have been enemies of the Legion of Dusk since it was originally formed. The entire race has been declared anathema by the Church of Torrezon, and after centuries of fighting the Legion, the orcs have dwindled to only a few hundred in number. Some still live on remote islands near Torrezon, but many have joined the Brazen Coalition to serve on pirate ships — taking on any role that calls for an abundance of sheer muscle.\n\nOrcs are tall, standing head and shoulders above most humans, and are generally twice as broad. They often accentuate their bulging muscles by wearing tight-fitting bands and accessories around the thickest parts of their arms and necks. Their skin color ranges from light brown through gray to almost jet-black.',
     flavorText:
@@ -3736,6 +3822,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '87',
     name: 'Shifter MMOM',
+    slug: '',
     description:
       'Shifters are sometimes called weretouched, as they are descendants of people who contracted full or partial lycanthropy. Humanoids with a bestial aspect, shifters can’t fully change shape, but they can temporarily enhance their animalistic features by entering a state they call shifting.\n\nShifters are similar to humans in height and build but are typically more lithe and flexible. Their facial features have a bestial cast, often with large eyes and pointed ears; most shifters also have prominent canine teeth. They grow fur-like hair on nearly every part of their bodies. While a shifter’s appearance might remind an onlooker of an animal, they remain clearly identifiable as shifters even when at their most feral.',
     flavorText:
@@ -3780,6 +3867,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '88',
     name: 'Shifter (ERLW)',
+    slug: '',
     description:
       'Shifters are sometimes called the weretouched, as many believe that they are the descendants of humans and lycanthropes. They are humanoids with a bestial aspect; while they cannot fully change shape they can temporarily enhance their animalistic features – a state they call shifting. Whatever their origins, shifters have evolved into a unique race. A shifter walks on the knife’s edge between the wilds and the world around them. Do they embrace their primal instincts or the path of civilization?',
     flavorText: 'Shifters are sometimes called the weretouched.',
@@ -3810,6 +3898,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '89',
     name: 'Yuan Ti (MMOM)',
+    slug: '',
     description:
       'Yuan-ti were originally humans who transformed themselves into serpent folk through ancient rituals. Most yuan-ti were corrupted into monsters by those rites, but some yuan-ti instead became a new people who mix characteristics of humans and snakes.\n\nBlessed with resistance to magical and poisonous effects by the rituals that created them, each of these yuan-ti manifests their serpentine heritage in a variety of ways: a forked tongue, snake eyes, a snakelike nose, or some other ophidian characteristic. However a yuan-ti looks, they have the power to pursue great good or evil in the multiverse.',
     flavorText:
@@ -3854,6 +3943,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '90',
     name: 'Yuan Ti (VGM)',
+    slug: '',
     description:
       'The serpent creatures known as yuan-ti are all that remains of an ancient, decadent human empire. Ages ago their dark gods taught them profane, cannibalistic rituals to mix their flesh with that of snakes, producing a caste-based society of hybrids in which the most snakelike are the leaders and the most humanlike are spies and agents in foreign lands.',
     flavorText:
@@ -3894,6 +3984,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '91',
     name: 'Aetherborn',
+    slug: '',
     description:
       'Aetherborn come into being spontaneously as part of the aether refinement process. Their bodies and minds are apparently formed out of some interaction between the volatile elements of aether that are removed during refinement and the psychic impressions created by the people involved in the process. But each aetherborn is a unique individual, not a mere copy of some other person’s mind and shape. This race is little understood, and few aetherborn are willing to waste any of their short lives allowing vedalken scholars to study their biological and psychological characteristics.\n\nAetherborn are a strange living by-product of the process of aether refinement, cast in humanoid form but lacking any of the biological qualities of other races. They don’t eat or sleep, and they don’t reproduce—nor do they have any physical sexual characteristics. Language that categorizes people into male or female categories thus breaks down when it comes to aetherborn. Most aetherborn prefer that others use the pronoun “they” to refer to them, since it doesn’t attribute a gender that they don’t possess. Only a relative few prefer “he” or “she,” having chosen to adopt a gender.',
     flavorText:
@@ -3940,6 +4031,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '92',
     name: 'Aven',
+    slug: '',
     description:
       'Aven have humanlike bodies, arms, and legs, along with birdlike wings and heads. Two distinct varieties of aven are found in Naktamun. One has the head of a hawk or similar bird of prey, with short wings allowing fast flight. The other variety has the head of an ibis atop a long neck, with wide, angular wings better suited to soaring. All aven have lean bodies with feathers extending from their heads down to their shoulders.\n\nAven delight in flying above their foes, using their superior mobility to confound and outpace their opponents. They love soaring through the sky as well, though the Hekma limits their altitude. Like all people of Naktamun, they are grateful for the Hekma’s protective magic, of course. But they keenly anticipate the hour when the God-Pharaoh will return and dissolve the veil, letting them fly without limit in the afterlife.',
     flavorText:
@@ -3972,6 +4064,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '93',
     name: 'Khenra',
+    slug: '',
     description:
       'The khenra of Amonkhet are tall and lean, with graceful bodies and heads that strongly resemble jackals. Their snouts are long and sharp, and their angular ears rise straight above their heads. Their bodies are covered in dark, sleek hair that ranges from the brown of the desert sands to ebony black. Despite their sharp teeth, they consider biting to be an uncouth and unworthy combat tactic.\n\nNearly every khenra is born a fraternal or identical twin, and a pair of khenra twins forms an extremely close emotional bond unknown to most other residents of Amonkhet. The death of one twin in training or the trials causes a tremendous shock to the survivor, who typically grows more aggressive and foolhardy in battle. The rare khenra who are born without twins are believed to have killed their siblings in the womb, and are thus viewed as natural-born initiates, sure to achieve a glorified death in the Trial of Zeal.',
     flavorText:
@@ -4008,6 +4101,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '94',
     name: 'Kor',
+    slug: '',
     description:
       'Deeply reverent of the land and its sacred sites, the nomadic kor live a spare existence defined by their constant travels. Masters of ropes and hooks, they scale sheer cliffs and cross yawning chasms with such skill and agility that they sometimes seem almost to take flight.\n\nKor are tall, slender humanoids with light hair and gray, blue-gray, or ivory skin. All kor have slightly pointed ears, and males have short, fleshy barbels on their chins. They paint softly glowing geometric patterns on their faces and bodies, suggestive of the shapes and design of the hedrons that appear across Zendikar. Their clothing tends to leave their arms and shoulders free to facilitate climbing, and they keep most of their gear in pouches and slings at their waists.\n\nThe kor have a nonverbal language of hand signs and gestures that allows communication despite significant distance (particularly when augmented with whirling ropes) or howling winds. They also use this sign language among themselves when they wish to avoid being overheard, giving rise to misguided rumors that they are incapable of speech. When they do speak, they typically use as few words as possible to convey their meaning.',
     flavorText:
@@ -4048,6 +4142,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '95',
     name: 'Merfolk (PSI)',
+    slug: '',
     description:
       'The River Heralds are merfolk—a race of amphibious humanoids at home throughout the oceans, rivers, and rain forests of Ixalan. They stand between seven and eight feet tall, with skin that ranges from deep burgundy through many shades of violet and blue, to green, bright orange, and yellow. They are humanlike in shape, but have long fins extending from their shoulders, forearms, middle backs, and calves. Frills of fins also protrude from the backs of their heads. All merfolk can breathe air or filter oxygen from the water, and they can walk on land or swim with equal ease.',
     abilityScoreDescription: 'Your Charisma score increases by 1.',
@@ -4089,6 +4184,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '96',
     name: 'Merfolk (PSZ)',
+    slug: '',
     description:
       'Curious, thoughtful, and analytical, the merfolk of Zendikar are natural scholars and explorers. In the past, merfolk society was organized around their belief in three deities. But in the wake of the reappearance of the Eldrazi, the merfolk have realized that their faith was a web of lies, built on a corrupted memory of the Eldrazi titans handed down from generation to generation. In peaceful times, the merfolk might have fought over the ultimate meaning of this revelation. But faced with the danger presented by the Eldrazi broods, the merfolk have largely set aside their differences and joined together in a united force. Old grudges still linger, but the well-being of the merfolk race—and the world—far outweigh any ancient conflicts between creeds.\n\nMerfolk are associated with knowledge, logic, and strategy, though the traditional merfolk creeds express this connection in different ways.',
     flavorText:
@@ -4131,6 +4227,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '116',
     name: 'Naga',
+    slug: '',
     description:
       'Naga resemble enormous snakes with shoulders, arms, and a torso that resembles a humanoid form. They typically hold their heads and torsos off the ground while moving, but they can increase their speed by lowering their bodies and using their hands for extra propulsion. They adorn their torsos with armor, jewelry, and a vague nod toward the clothing worn by other races. Male naga have broad hoods, wider than their shoulders, while females have narrower hoods and longer faces.',
     flavorText:
@@ -4166,6 +4263,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '117',
     name: 'Siren',
+    slug: '',
     description:
       'Sirens are at home along the waters of the Stormwreck Sea. They settle on rocky coasts and remote islands, and even on floating piles of kelp. Sirens are mercurial creatures who can turn in an instant from lonely to repulsed, from desirous to hateful, from welcoming to irritated, from loving to murderous—and then back again. They are fascinated with ships, and enjoy toying with them. One siren might call out to a passing crew for company, only to capriciously draw the ship into an entangling mass of kelp. Another might lure a vessel onto jagged rocks so as to study the wreckage and learn more about the strange contraption. But as the number of Brazen Coalition ships passing through siren-controlled waters has increased over the years, a growing number of sirens have decided to satisfy their curiosity by taking positions on ship crews—including, in at least one case, the position of captain.\n\nSirens are humanoid creatures with birdlike features. Their long, slender arms extend into powerful wings that easily carry their light frames into the air. Their fingers bear sharp claws but are nimble enough to wield weapons and perform fine manipulation. Crests of feathery plumage start between their eyes and cover the backs of their heads.',
     flavorText: 'Sirens are at home along the waters of the Stormwreck Sea.',
@@ -4199,6 +4297,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '118',
     name: 'Vampire (PSI)',
+    slug: '',
     description:
       'Vampires are associated with necromancy. Their existence is predicated on draining the life from others to fuel their own existence, and on putting their own lives ahead of all other concerns. Philosophically, they do not constrain themselves with artificial rules of morality, but believe that the strong can and should take what they need from the weak.',
     flavorText: 'Vampires are associated with necromancy.',
@@ -4237,6 +4336,7 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   {
     id: '119',
     name: 'Vampire (PSZ)',
+    slug: '',
     description:
       'Vampires are associated with necromancy. Their existence is predicated on draining the life from others to fuel their own existence, and on putting their own lives ahead of all other concerns. Philosophically, they do not constrain themselves with artificial rules of morality, but believe that the strong can and should take what they need from the weak.',
     flavorText: 'Vampires are associated with necromancy.',

@@ -15,6 +15,7 @@ export const getBackgroundsMetadata = async (): Promise<DBMetadata[]> => {
       description: true,
       updatedAt: true,
       flavorText: true,
+      slug: true,
     },
   });
   await db.$disconnect();

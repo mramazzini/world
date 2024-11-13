@@ -12,13 +12,9 @@ import { createClasses } from './seeds/_seeders/011_createClasses.seeder';
 import { createSubclass } from './seeds/_seeders/013_createSubclass.seeder';
 import { createSpecies } from './seeds/_seeders/014_createSpecies.seeder';
 import { createSubspecies } from './seeds/_seeders/015_createSubSpecies.seeder';
-import { createCharacter } from './seeds/_seeders/020_createCharacter.seeder';
-import createMaxyUser from './seeds/_seeders/022_createMaxyUser.seeder';
 import { createFeats } from './seeds/_seeders/016_createFeats.seeder';
 import { createBlogPosts } from './seeds/_seeders/021_createBlogPosts.seeder';
 import { createCreatures } from './seeds/_seeders/017_createCreatures.seeder';
-import { linkCreatureToSpells } from './seeds/_seeders/018_CreatureToSpell.linker';
-import { linkCreatureToItems } from './seeds/_seeders/019_creatureToItem.linker';
 import { createTool } from './seeds/_seeders/006_createTools.seeder';
 import createUsers from './seeds/_seeders/022_createMaxyUser.seeder';
 const db = new PrismaClient();
@@ -117,7 +113,7 @@ const seedarr: {
     index: '017',
     callback: createCreatures,
     description: 'Creating characters from the character seed.',
-    //  enabled:true,
+    enabled: true,
   },
   {
     index: '021',

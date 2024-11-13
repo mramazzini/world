@@ -13,7 +13,7 @@ import FeatureList from '@/components/UI/FeatureList';
 import CommentSection from '@/components/CommentSection/CommentSection';
 import { ClassInfo, FeatureWithClassColumn } from '@/lib/types/modelInfo';
 
-const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
+const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
   if (!classObj) return <span className="p-4">Class does not exist</span>;
   const spellCastingFeatures = classObj.SpellcastingFeatures.sort((a, b) => {
     if (a.levels === undefined) return -1; // Put a first if its levels are undefined
@@ -51,7 +51,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
           '': {
             headers: ['Subclass', 'Description'],
             links: classObj.SubClasses.map((subClass) => {
-              return `/subclass/${subClass.name.replaceAll(' ', '-')}`;
+              return `/subclass/${subClass.slug}`;
             }),
             data: classObj.SubClasses.map((subClass) => {
               return {
@@ -81,7 +81,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
         <>
           <div className="flex flex-col md:flex-row justify-between">
             <div className="flex flex-col md:w-4/5">
-              <h1>{classObj.name.toCapitalCase() || 'Class Name'}</h1>
+              <h1>{classObj.name}</h1>
               <p className="italic pr-4">
                 <NewLineParse>{classObj.description}</NewLineParse>
               </p>
@@ -304,10 +304,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo | null }) => {
                           `The ${classObj.name} class can cast spells from the ${classObj.SpellList.name} Spell-list.`}
                       </P>
                       <Link
-                        href={`/spell-list/${classObj.SpellList?.name.replaceAll(
-                          ' ',
-                          '-'
-                        )}`}
+                        href={`/spell-list/${classObj.SpellList?.slug}`}
                         className="btn btn-primary btn-sm mx-4"
                       >
                         View Spell List -&gt;

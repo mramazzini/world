@@ -56,7 +56,7 @@ const CharacterIntro = () => {
             </a>
           ) : (
             <a
-              href={`/species/${character.Species?.name.replaceAll(' ', '-')}`}
+              href={`/species/${character.Species?.slug}`}
               className="hover:link"
             >
               {character.Species?.name}
@@ -65,10 +65,7 @@ const CharacterIntro = () => {
           ,{' '}
           {character.Classes?.map((c) => (
             <Fragment key={c.name}>
-              <a
-                href={`/class/${c.name.replaceAll(' ', '-')}`}
-                className="hover:link"
-              >
+              <a href={`/class/${c.slug}`} className="hover:link">
                 {c.name.toCapitalCase()}
               </a>
             </Fragment>

@@ -8,6 +8,7 @@ import { syncWorkshopItem } from '@/lib/actions/db/workshop/create.actions';
 import useWorkshopFeatures from '@/hooks/useWorkshopFeatures';
 import { useAppSelector } from '@/store/hooks';
 import PublishModal from '../PublishModal/PublishModal';
+import { SubclassEditorData } from '@/lib/types/workshop';
 const WorkshopTopNav = () => {
   const dispatch = useDispatch();
   const itemsToDelete = useAppSelector((state) => state.workshop.itemsToDelete);
@@ -16,13 +17,17 @@ const WorkshopTopNav = () => {
 
   const title = useMemo(() => (tab ? tab?.name : "Max's Workshop"), [tab]);
 
-  const subTitle = useMemo(
-    () =>
-      tab
-        ? tab?.protocol.toCapitalCase()
-        : 'Create, edit, and publish your homebrew content',
-    [tab]
-  );
+  const subTitle = useMemo(() => {
+    const suffix =
+      tab?.protocol === 'SUBCLASS' &&
+      tab.data &&
+      (tab.data as SubclassEditorData).classData
+        ? (tab.data as SubclassEditorData).classData?.name.toCapitalCase()
+        : '';
+    return tab
+      ? `${suffix} ${tab?.protocol.toCapitalCase()}`
+      : 'Create, edit, and publish your homebrew content';
+  }, [tab]);
 
   const handleSave = useCallback(async () => {
     if (!tab) return;

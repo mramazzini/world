@@ -14,6 +14,7 @@ const homebrewSubclassesId = {
 const subclasses: Prisma.SubClassCreateManyInput[] = [
   {
     id: homebrewSubclassesId.oathOfTheGravekeeper,
+    slug: 'maxy:oath-of-the-gravekeeper',
     name: 'Oath of the Gravekeeper',
     description:
       'You swear this oath to become a vigilant guardian of the boundary between the living and the dead. Your sacred duty is to protect the realms of the living from the encroachment of the undead and to wield the power of the spirits themselves.',
@@ -23,6 +24,7 @@ const subclasses: Prisma.SubClassCreateManyInput[] = [
   },
   {
     id: homebrewSubclassesId.arcaneSalvager,
+    slug: 'maxy:arcane-salvager',
     name: 'Arcane Salvager',
     classId: classIds.artificer,
     description:

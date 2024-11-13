@@ -1,5 +1,5 @@
 const SubSpeciesEditor = () => {
-  return <div>Spell</div>;
+  return <div>Sub Species Editor Coming Soon</div>;
 };
 
 export default SubSpeciesEditor;

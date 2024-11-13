@@ -2,6 +2,7 @@ import { cerr, cinfo, cwarn } from '@/lib/utils/chalkLog';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { SpellSeed } from '../Spells/spells.seed';
 import verifyTableIntegrity from '@/lib/utils/verifyTableIntegrity';
+import { createSlug } from '../_helpers/createSlug';
 
 export const createSpells = async (db: PrismaClient) => {
   cinfo('Creating spells');
@@ -16,8 +17,14 @@ export const createSpells = async (db: PrismaClient) => {
         where: {
           id: Spell.id,
         },
-        update: Spell,
-        create: Spell,
+        update: {
+          ...Spell,
+          slug: createSlug(Spell.name),
+        },
+        create: {
+          ...Spell,
+          slug: createSlug(Spell.name),
+        },
       });
       cinfo('Spell created');
     } catch (error) {

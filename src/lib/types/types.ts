@@ -282,9 +282,17 @@ export interface CombinedData {
   type: string;
   other: string | null;
   lastUpdated: Date;
+  slug: string;
 }
 
 export interface QuantityDistance {
   quantity: number;
   unit: Distance;
 }
+
+export type SidebarDisplayData = Array<{
+  name: string;
+  description?: string;
+  id: string;
+  slug?: string;
+}>;

@@ -7,6 +7,7 @@ import { getSubclass } from '@/lib/actions/db/subclass/read.actions';
 import { getSpell } from '@/lib/actions/db/spell/read.actions';
 import { getFeat } from '@/lib/actions/db/feat/read.actions';
 import { SingleDataQuery } from '@/lib/types/metadata';
+import { getClass } from '@/lib/actions/db/class/read.actions';
 
 const pendingQueries = new Map<string, unknown>();
 
@@ -97,4 +98,9 @@ export const memoizeGetSubclass = cacheFunction(
 export const memoizeGetFeat = cacheFunction(
   (featId: string) => `feat-${featId}`,
   getFeat
+);
+
+export const memoizeGetClass = cacheFunction(
+  (classId: string) => `class-${classId}`,
+  getClass
 );

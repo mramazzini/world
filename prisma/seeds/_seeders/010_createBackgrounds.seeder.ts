@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import Backgrounds from '../Backgrounds/Backgrounds.seed';
 import BackgroundFeatures from '../Backgrounds/BackgroundFeatures.seed';
 import createFeature from '../_helpers/createFeature';
+import { createSlug } from '../_helpers/createSlug';
 
 export const createBackgrounds = async (db: PrismaClient) => {
   // Create Backgrounds
@@ -14,8 +15,14 @@ export const createBackgrounds = async (db: PrismaClient) => {
         where: {
           id: Background.id,
         },
-        update: Background,
-        create: Background,
+        update: {
+          ...Background,
+          slug: createSlug(Background.name),
+        },
+        create: {
+          ...Background,
+          slug: createSlug(Background.name),
+        },
       });
       cinfo('Background created');
     } catch (error) {

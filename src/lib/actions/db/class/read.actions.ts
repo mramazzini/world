@@ -15,6 +15,7 @@ export async function getClassMetadata(): Promise<DBMetadata[]> {
       name: true,
       description: true,
       flavorText: true,
+      slug: true,
       updatedAt: true,
     },
   });

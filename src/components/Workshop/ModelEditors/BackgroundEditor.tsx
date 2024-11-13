@@ -1,5 +1,5 @@
 const BackgroundEditor = () => {
-  return <div>Background</div>;
+  return <div>Background Editor Coming Soon</div>;
 };
 
 export default BackgroundEditor;

@@ -14,6 +14,7 @@ export const getFeatsMetadata = async (): Promise<DBMetadata[]> => {
       id: true,
       name: true,
       updatedAt: true,
+      slug: true,
       flavorText: true,
     },
   });

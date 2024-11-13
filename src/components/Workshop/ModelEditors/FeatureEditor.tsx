@@ -2,13 +2,16 @@ import FormField from '@/components/UI/Formik/FormField';
 import FormFieldArray from '@/components/UI/Formik/FormFieldArray';
 import Loading from '@/components/UI/Loading';
 import useWorkshopEditor from '@/hooks/useWorkshopEditor';
-import { FeatureEditorData } from '@/lib/types/workshop';
+import useWorkshopTab from '@/hooks/useWorkshopTab';
+import { FeatureEditorData, SubclassEditorData } from '@/lib/types/workshop';
 import numberArray from '@/lib/utils/numberArray';
 import P from '@/Utility/FormatAndSanitize';
 import { Form, Formik } from 'formik';
+import { useMemo } from 'react';
 import * as Yup from 'yup';
 
 const FeatureEditor = () => {
+  const parentTab = useWorkshopTab(true);
   const { data, updateData } = useWorkshopEditor<FeatureEditorData>({
     description: '# New Feature',
     extendedTable: [],
@@ -21,6 +24,14 @@ const FeatureEditor = () => {
     description: Yup.string().required('Required'),
     levels: Yup.array().of(Yup.number().required('Required')),
   });
+
+  const validLevels = useMemo(() => {
+    if (parentTab?.protocol === 'SUBCLASS') {
+      const subclass = parentTab.data as SubclassEditorData;
+      return subclass.classData?.subClassLevels || [];
+    }
+    return numberArray(1, 20);
+  }, [parentTab]);
 
   if (!data) return <Loading />;
 
@@ -49,7 +60,7 @@ const FeatureEditor = () => {
             <option value="" disabled>
               Select Level
             </option>
-            {numberArray(1, 20).map((level) => (
+            {validLevels.map((level) => (
               <option key={level} value={level}>
                 {level}
               </option>

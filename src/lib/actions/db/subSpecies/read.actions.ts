@@ -15,6 +15,7 @@ export const getVariantMetadata = async (): Promise<DBMetadata[]> => {
       name: true,
       description: true,
       updatedAt: true,
+      slug: true,
       flavorText: true,
     },
   });
@@ -35,6 +36,7 @@ export const getVariantMetadataBySpecies = async (
       name: true,
       description: true,
       updatedAt: true,
+      slug: true,
       flavorText: true,
     },
   });

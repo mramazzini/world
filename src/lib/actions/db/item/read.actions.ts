@@ -14,6 +14,7 @@ export const getItemsMetadata = async (): Promise<DBMetadata[]> => {
       name: true,
       description: true,
       flavorText: true,
+      slug: true,
       updatedAt: true,
     },
   });
@@ -75,6 +76,7 @@ export const getItem = async ({
   type,
 }: SingleDataQuery): Promise<ItemInfo | null> => {
   const db = new PrismaClient();
+
   try {
     const res = await db.item.findFirst({
       where: {
@@ -122,6 +124,7 @@ export const getItem = async ({
         },
       },
     });
+
     return res;
   } catch (error) {
     console.error('Error getting item', error);

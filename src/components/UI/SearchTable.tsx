@@ -14,8 +14,8 @@ const SearchTable = () => {
   const router = useRouter();
   const [data, setData] = useState<null | CombinedData[]>(null);
 
-  const tableRoute = (routeName: string, name: string) =>
-    `/${routeName}/${name.replaceAll(' ', '-')}`;
+  const tableRoute = (routeName: string, slug: string) =>
+    `/${routeName}/${slug}`;
   useEffect(() => {
     const req: QueryParams = {
       query,
@@ -64,21 +64,11 @@ const SearchTable = () => {
                     e.stopPropagation();
                     //make mouse pointer turn to a loading icon
                     handleLoad();
-                    router.push(
-                      tableRoute(
-                        item.type.toLowerCase(),
-                        item.name.replaceAll(' ', '-')
-                      )
-                    );
+                    router.push(tableRoute(item.type.toLowerCase(), item.slug));
                   }}
                 >
                   <td>
-                    <Link
-                      href={tableRoute(
-                        item.type.toLowerCase(),
-                        item.name.replaceAll(' ', '-')
-                      )}
-                    >
+                    <Link href={tableRoute(item.type.toLowerCase(), item.slug)}>
                       <div className="btn btn-primary btn-xs h-auto p-1 ">
                         {item.type === 'Class'
                           ? item.name.toCapitalCase()
@@ -87,48 +77,28 @@ const SearchTable = () => {
                     </Link>
                   </td>
                   <td className="hidden lg:table-cell">
-                    <Link
-                      href={tableRoute(
-                        item.type.toLowerCase(),
-                        item.name.replaceAll(' ', '-')
-                      )}
-                    >
+                    <Link href={tableRoute(item.type.toLowerCase(), item.slug)}>
                       {item.flavorText.length < 200
                         ? item.flavorText
                         : item.flavorText.slice(0, 200) + '...'}
                     </Link>
                   </td>
                   <td className="lg:hidden  ">
-                    <Link
-                      href={tableRoute(
-                        item.type.toLowerCase(),
-                        item.name.replaceAll(' ', '-')
-                      )}
-                    >
+                    <Link href={tableRoute(item.type.toLowerCase(), item.slug)}>
                       {item.flavorText.length < 100
                         ? item.flavorText
                         : item.flavorText.slice(0, 100) + '...'}
                     </Link>
                   </td>
                   <td className="md:table-cell hidden">
-                    <Link
-                      href={tableRoute(
-                        item.type.toLowerCase(),
-                        item.name.replaceAll(' ', '-')
-                      )}
-                    >
+                    <Link href={tableRoute(item.type.toLowerCase(), item.slug)}>
                       <div className="btn btn-accent btn-xs h-auto p-1 ">
                         {item.type}
                       </div>
                     </Link>
                   </td>
                   <td className="md:table-cell hidden">
-                    <Link
-                      href={tableRoute(
-                        item.type.toLowerCase(),
-                        item.name.replaceAll(' ', '-')
-                      )}
-                    >
+                    <Link href={tableRoute(item.type.toLowerCase(), item.slug)}>
                       {item.lastUpdated &&
                         item.lastUpdated.toLocaleDateString()}
                     </Link>

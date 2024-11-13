@@ -93,20 +93,14 @@ const Dashboard = () => {
                       Level {level},{' '}
                       {character.SubSpecies ? (
                         <a
-                          href={`/subspecies/${character.SubSpecies?.name.replaceAll(
-                            ' ',
-                            '-'
-                          )}`}
+                          href={`/subspecies/${character.SubSpecies?.slug}`}
                           className="hover:link"
                         >
                           {character.SubSpecies?.name}
                         </a>
                       ) : (
                         <a
-                          href={`/species/${character.Species?.name.replaceAll(
-                            ' ',
-                            '-'
-                          )}`}
+                          href={`/species/${character.Species?.slug}`}
                           className="hover:link"
                         >
                           {character.Species?.name}
@@ -115,20 +109,14 @@ const Dashboard = () => {
                       ,{' '}
                       {character.Classes?.map((c) => (
                         <Fragment key={c.id}>
-                          <a
-                            href={`/class/${c.name.replaceAll(' ', '-')}`}
-                            className="hover:link"
-                          >
+                          <a href={`/class/${c.slug}`} className="hover:link">
                             {c.name.toCapitalCase()}
                           </a>
                         </Fragment>
                       ))}
                       ,{' '}
                       <a
-                        href={`/background/${character.Background?.name.replaceAll(
-                          ' ',
-                          '-'
-                        )}`}
+                        href={`/background/${character.Background?.slug}`}
                         className="hover:link"
                       >
                         {character.Background?.name}

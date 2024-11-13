@@ -7,6 +7,7 @@ import HomebrewSubclassesSeed, {
 } from '../Subclasses/HomebrewSubclasses.seed';
 import createFeature from '../_helpers/createFeature';
 import SubclassColumnedFeaturesSeed from '../Subclasses/SubclassColumnedFeatures.seed';
+import { createSlug } from '../_helpers/createSlug';
 
 export const createSubclass = async (db: PrismaClient) => {
   // Create sub classes
@@ -23,8 +24,14 @@ export const createSubclass = async (db: PrismaClient) => {
         where: {
           id: SubClass.id,
         },
-        update: SubClass,
-        create: SubClass,
+        update: {
+          ...SubClass,
+          slug: createSlug(SubClass.name),
+        },
+        create: {
+          ...SubClass,
+          slug: createSlug(SubClass.name),
+        },
       });
       cinfo('Sub class created');
     } catch (error) {

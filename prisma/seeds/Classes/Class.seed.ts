@@ -18,7 +18,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   {
     id: '1',
     srd: true,
-    name: 'fighter',
+    slug: 'fighter',
+    name: 'Fighter',
     hitDie: 10,
     flavorText:
       'Fighters are the warriors of the realm. They are the masters of weapons and armor, and they are well acquainted with death, both meting it out and staring it defiantly in the face.',
@@ -132,7 +133,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
 
   {
     id: '2',
-    name: 'wizard',
+    name: 'Wizard',
+    slug: 'wizard',
     srd: true,
     description:
       'Wizards are supreme magic-users, defined and united as a class by the spells they cast. Drawing on the subtle weave of magic that permeates the cosmos, wizards cast spells of explosive fire, arcing lightning, subtle deception, and brute force mind control. Their magic conjures monsters from other planes of existence, glimpses the future, or turns slain foes into zombies. Their mightiest spells change one substance into another, call meteors down from the sky, or open portals to other worlds.',
@@ -241,7 +243,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   },
   {
     id: '3',
-    name: 'cleric',
+    name: 'Cleric',
+    slug: 'cleric',
     srd: true,
     hitDie: 8,
     description:
@@ -364,7 +367,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   },
   {
     id: '4',
-    name: 'rogue',
+    name: 'Rogue',
+    slug: 'rogue',
     hitDie: 8,
     srd: true,
     description:
@@ -469,7 +473,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   },
   {
     id: '5',
-    name: 'barbarian',
+    name: 'Barbarian',
+    slug: 'barbarian',
     srd: true,
     description:
       'For some, their rage springs from a communion with fierce animal spirits. Others draw from a roiling reservoir of anger at a world full of pain. For every barbarian, rage is a power that fuels not just a battle frenzy but also uncanny reflexes, resilience, and feats of strength.',
@@ -550,7 +555,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   },
   {
     id: '6',
-    name: 'bard',
+    name: 'Bard',
+    slug: 'bard',
     srd: true,
     hitDie: 8,
     description:
@@ -660,7 +666,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   },
   {
     id: '7',
-    name: 'druid',
+    name: 'Druid',
+    slug: 'druid',
     srd: true,
     hitDie: 8,
     description:
@@ -782,7 +789,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   },
   {
     id: '8',
-    name: 'monk',
+    name: 'Monk',
+    slug: 'monk',
     srd: true,
     hitDie: 8,
     description:
@@ -865,7 +873,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   },
   {
     id: '9',
-    name: 'paladin',
+    name: 'Paladin',
+    slug: 'paladin',
     srd: true,
     hitDie: 10,
     description:
@@ -982,7 +991,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   },
   {
     id: '10',
-    name: 'ranger',
+    name: 'Ranger',
+    slug: 'ranger',
     srd: true,
     hitDie: 10,
     description:
@@ -1104,7 +1114,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   },
   {
     id: '11',
-    name: 'sorcerer',
+    name: 'Sorcerer',
+    slug: 'sorcerer',
     srd: true,
     description:
       'Sorcerers carry a magical birthright conferred upon them by an exotic bloodline, some otherworldly influence, or exposure to unknown cosmic forces. No one chooses sorcery; the power chooses the sorcerer.',
@@ -1217,7 +1228,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   },
   {
     id: '12',
-    name: 'warlock',
+    name: 'Warlock',
+    slug: 'warlock',
     srd: true,
     hitDie: 8,
     description:
@@ -1339,7 +1351,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   //artificer
   {
     id: '13',
-    name: 'artificer',
+    name: 'Artificer',
+    slug: 'artificer',
     source: 'Wayfinder’s Guide to Eberron',
     flavorText:
       'Masters of invention, artificers use ingenuity and magic to unlock extraordinary capabilities in objects.',

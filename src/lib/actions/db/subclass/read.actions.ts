@@ -14,6 +14,7 @@ export const getSubclassMetadata = async (): Promise<DBMetadata[]> => {
       id: true,
       name: true,
       description: true,
+      slug: true,
       updatedAt: true,
       flavorText: true,
     },
@@ -48,6 +49,7 @@ export async function getSubclasses({
         },
         Class: {
           select: {
+            slug: true,
             name: true,
           },
         },
@@ -80,6 +82,7 @@ export async function getSubclasses({
       },
       Class: {
         select: {
+          slug: true,
           name: true,
         },
       },
@@ -129,6 +132,7 @@ export async function getSubclassChunkByClass(
         },
         Class: {
           select: {
+            slug: true,
             name: true,
           },
         },
@@ -168,6 +172,7 @@ export async function getSubclassChunkByClass(
       },
       Class: {
         select: {
+          slug: true,
           name: true,
         },
       },
@@ -228,6 +233,7 @@ export async function getHomebrewSubclassChunk(
         },
         Class: {
           select: {
+            slug: true,
             name: true,
           },
         },
@@ -264,6 +270,7 @@ export async function getHomebrewSubclassChunk(
       },
       Class: {
         select: {
+          slug: true,
           name: true,
         },
       },
@@ -315,6 +322,7 @@ export async function getSubclass({
         },
         Class: {
           select: {
+            slug: true,
             name: true,
           },
         },
@@ -364,6 +372,7 @@ export const getSubclassesByClass = async ({
       },
       Class: {
         select: {
+          slug: true,
           name: true,
         },
       },
@@ -405,6 +414,7 @@ export async function getSubclassChunk(
         },
         Class: {
           select: {
+            slug: true,
             name: true,
           },
         },
@@ -437,6 +447,7 @@ export async function getSubclassChunk(
       },
       Class: {
         select: {
+          slug: true,
           name: true,
         },
       },

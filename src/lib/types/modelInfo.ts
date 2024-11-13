@@ -174,7 +174,8 @@ export interface BackgroundInfo extends Background {
 
 export interface SubClassInfo extends SubClass {
   Class: {
-    name: string | null;
+    name: string;
+    slug: string;
   } | null;
   Features: FeatureWithSubClassColumn[];
   SpellCastingFeatures: FeatureWithSubClassColumn[];

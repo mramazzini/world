@@ -9,7 +9,7 @@ export const linkSpellListToSpell = async (db: PrismaClient) => {
 
   if (!verifySpellList(ids, SpellListToSpellArr)) {
     cerr('Error verifying spell list');
-    return;
+    throw new Error('Error verifying spell list');
   }
 
   //link spells to spell lists

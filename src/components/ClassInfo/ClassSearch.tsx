@@ -1,8 +1,6 @@
 'use client';
 
 import { ClassInfo } from '@/lib/types/modelInfo';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import Loading from '../UI/Loading';
 import '@/lib/string.extensions';
 import Link from 'next/link';
@@ -11,21 +9,10 @@ interface Props {
 }
 
 const ClassSearch = ({ classes }: Props) => {
-  const router = useRouter();
-
   const loading = false;
 
-  const [linkLoading, setLinkLoading] = useState(false);
-
-  const handleLinkClick = () => {
-    setLinkLoading(true);
-    setTimeout(() => {
-      setLinkLoading(false);
-    }, 5000);
-  };
-
   return (
-    <main className={` ${linkLoading && 'cursor-wait'}`}>
+    <main>
       <div className="flex flex-col md:flex-row justify-between ">
         <div className="flex flex-col md:w-4/5 ">
           <h1>Official Classes</h1>
@@ -79,44 +66,31 @@ const ClassSearch = ({ classes }: Props) => {
             return (
               <tr
                 key={index}
-                className={`hover transition ease-in-out duration-50 ${
-                  linkLoading ? 'cursor-wait' : 'cursor-pointer'
-                }`}
+                className={`hover transition ease-in-out duration-50`}
               >
                 <td>
-                  <Link href={`/class/${item.name}`}>
+                  <Link href={`/class/${item.slug}`}>
                     <p className="btn btn-xs btn-primary h-auto font-bold">
-                      {item.name.toCapitalCase()}
+                      {item.name}
                     </p>
                   </Link>
                 </td>
                 <td className="hidden md:table-cell ">
-                  <Link href={`/class/${item.name}`}>
+                  <Link href={`/class/${item.slug}`}>
                     <p className="italic line-clamp-2 "> {item.flavorText}</p>
                   </Link>
                 </td>
-                <td
-                  className={` hidden md:table-cell ${
-                    linkLoading ? 'cursor-wait' : 'cursor-pointer'
-                  }`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleLinkClick();
-                    router.push(`/class/${item.name}/subclass`);
-                  }}
-                >
-                  <Link href={`/class/${item.name}/subclass`}>
-                    <p className=" btn  btn-accent btn-xs h-auto  font-bold ">
-                      {item.subClassName}
-                    </p>
-                  </Link>
+                <td className={` hidden md:table-cell `}>
+                  <p className=" badge badge-accent  h-auto  font-bold ">
+                    {item.subClassName}
+                  </p>
                 </td>
 
                 <td>
-                  <Link href={`/class/${item.name}`}>{item.source}</Link>
+                  <Link href={`/class/${item.slug}`}>{item.source}</Link>
                 </td>
                 <td className="hidden sm:table-cell">
-                  <Link href={`/class/${item.name}`}>
+                  <Link href={`/class/${item.slug}`}>
                     {item.updatedAt.getMonth()}/{item.updatedAt.getDate()}/
                     {item.updatedAt.getFullYear()}
                   </Link>

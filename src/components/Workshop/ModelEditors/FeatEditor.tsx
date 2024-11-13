@@ -5,6 +5,7 @@ import Loading from '@/components/UI/Loading';
 import useWorkshopEditor from '@/hooks/useWorkshopEditor';
 import { FeatEditorData } from '@/lib/types/workshop';
 import { Form, Formik } from 'formik';
+import { ChangeEvent } from 'react';
 import * as Yup from 'yup';
 
 const FeatEditor = () => {
@@ -35,7 +36,7 @@ const FeatEditor = () => {
             as="textarea"
             name="flavorText"
             label="Flavor Text - Briefly describe the feat - Max 150 characters"
-            onChange={(e) =>
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
               updateData({
                 ...data,
                 flavorText: e.target.value,
@@ -52,7 +53,7 @@ const FeatEditor = () => {
             as="textarea"
             name="description"
             label="Description - Describe any preliminary information about the feat before the mechanics are explained in the features section."
-            onChange={(e) =>
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
               updateData({
                 ...data,
                 description: e.target.value,
@@ -68,7 +69,7 @@ const FeatEditor = () => {
             as="textarea"
             name="prereqDescription"
             label="Prerequisite Description - Describe any prerequisites for the feat."
-            onChange={(e) =>
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
               updateData({
                 ...data,
                 prereqDescription: e.target.value,

@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import Species from '../Species/Species.seed';
 import SpeciesFeaturesSeed from '../Species/SpeciesFeatures.seed';
 import createFeature from '../_helpers/createFeature';
+import { createSlug } from '../_helpers/createSlug';
 
 export const createSpecies = async (db: PrismaClient) => {
   //create species and traits
@@ -14,8 +15,14 @@ export const createSpecies = async (db: PrismaClient) => {
         where: {
           id: r.id,
         },
-        update: r,
-        create: r,
+        update: {
+          ...r,
+          slug: createSlug(r.name),
+        },
+        create: {
+          ...r,
+          slug: createSlug(r.name),
+        },
       });
       cinfo('Species created');
     } catch (error) {

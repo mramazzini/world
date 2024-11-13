@@ -3,11 +3,13 @@ import ValidatedInput from './ValidatedInput';
 import FormInput from './FormInput';
 import FormSelect from './FormSelect';
 import FormTextArea from './FormTextArea';
+import { ChangeEvent } from 'react';
+import FormCheckbox from './FormCheckbox';
 interface Props {
   children?: React.ReactNode;
   name: string;
   label?: string;
-  as: 'input' | 'textarea' | 'select';
+  as: 'input' | 'textarea' | 'select' | 'checkbox';
   formProps: {
     className?: string;
     readOnly?: boolean;
@@ -15,8 +17,11 @@ interface Props {
     placeholder?: string;
     value?: string;
     type?: string;
+    checked?: boolean;
   };
-  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onChange?: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+  >;
 }
 
 const FormField = ({
@@ -38,11 +43,17 @@ const FormField = ({
             ? FormInput
             : as === 'textarea'
               ? FormTextArea
-              : FormSelect
+              : as === 'select'
+                ? FormSelect
+                : FormCheckbox
         }
         {...formProps}
-        onChange={onChange ?? handleChange}
-        // isInvalid={!!error}
+        onChange={(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+          handleChange(e);
+          if (onChange) {
+            onChange(e);
+          }
+        }}
       >
         {children}
       </Field>
