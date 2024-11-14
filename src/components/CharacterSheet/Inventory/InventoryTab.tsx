@@ -40,7 +40,7 @@ const InventoryTab = () => {
 
         {/* inventory */}
 
-        <div className="col-span-4 h-full overflow-auto bg-base-200 rounded-xl border border-primary h-[34rem]">
+        <div className="col-span-4 overflow-auto bg-base-200 rounded-xl border border-primary h-[34rem]">
           <ItemPreview
             setSelectedItem={(selected) => {
               if (!selected) {
