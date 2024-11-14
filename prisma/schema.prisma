@@ -736,6 +736,7 @@ enum ItemTypes {
   BOOTS
   BRACERS
   CLOAK
+  WORKSHOP
 }
 
 enum Unit {

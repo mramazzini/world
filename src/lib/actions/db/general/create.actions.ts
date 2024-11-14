@@ -8,7 +8,13 @@ import {
   SubclassEditorData,
 } from '@/lib/types/workshop';
 import { getUserId } from '@/lib/utils/auth';
-import { PrismaClient, Prisma, User, WorkshopProtocol } from '@prisma/client';
+import {
+  PrismaClient,
+  Prisma,
+  User,
+  WorkshopProtocol,
+  ItemTypes,
+} from '@prisma/client';
 
 export const createUser = async (
   data: Prisma.UserCreateInput
@@ -242,7 +248,7 @@ const createWorkshopItem = async (
     requiresAttunement: item.data?.requiresAttunement || false,
     rarity: item.data?.rarity || 'COMMON',
     cost: item.data?.cost || { quantity: 0, unit: 'gp' },
-    types: item.data?.types || [],
+    types: [...(item.data?.types || []), ItemTypes.WORKSHOP],
     slug,
     ItemWeaponData: {
       create: {
