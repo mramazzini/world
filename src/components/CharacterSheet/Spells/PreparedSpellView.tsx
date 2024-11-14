@@ -101,7 +101,11 @@ const PreparedSpellView = ({
   const [spell, setSpell] = useState<PrismaJson.SheetSpell>(spellInput);
   const [rollSpellLevel, setRollSpellLevel] = useState<number>(0);
   if (!spell.spellRoll) {
-    spell.spellRoll = [];
+    setSpell({
+      ...spell,
+      spellRoll: [],
+    });
+    return null;
   }
   if (!spell.upcastBonus) {
     spell.upcastBonus = {
