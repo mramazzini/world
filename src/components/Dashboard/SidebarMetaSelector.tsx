@@ -39,6 +39,15 @@ const SidebarMetaSelector = ({
     setSearchResults(metadata);
   }, [metadata]);
 
+  //close on escape
+  useEffect(() => {
+    const close = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelected(null);
+    };
+    window.addEventListener('keydown', close);
+    return () => window.removeEventListener('keydown', close);
+  }, [setSelected]);
+
   return (
     <>
       {show && (
