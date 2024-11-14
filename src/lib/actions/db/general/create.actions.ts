@@ -163,6 +163,10 @@ const createWorkshopFeat = async (
       break;
     }
 
+    if (existing.id === feat.id) {
+      break;
+    }
+
     slug = `${slug}-${index}`;
     index++;
   }
@@ -228,6 +232,10 @@ const createWorkshopItem = async (
     });
 
     if (existing === null) {
+      break;
+    }
+
+    if (existing.id === item.id) {
       break;
     }
 
@@ -317,6 +325,10 @@ const createWorkshopSubclass = async (
     });
 
     if (existing === null) {
+      break;
+    }
+
+    if (existing.id === subclass.id) {
       break;
     }
 
