@@ -243,7 +243,7 @@ const createWorkshopItem = async (
     index++;
   }
 
-  const input: Prisma.ItemCreateInput = {
+  let input: Prisma.ItemCreateInput = {
     id: item.id,
     WorkshopItem: {
       connect: {
@@ -258,28 +258,6 @@ const createWorkshopItem = async (
     cost: item.data?.cost || { quantity: 0, unit: 'gp' },
     types: [...(item.data?.types || []), ItemTypes.WORKSHOP],
     slug,
-    ItemWeaponData: {
-      create: {
-        silvered: item.data?.weaponData?.silvered || false,
-        magical: item.data?.weaponData?.magical || false,
-        Weapon: {
-          connect: {
-            id: item.data?.weaponData?.weaponId || '',
-          },
-        },
-      },
-    },
-    Tool: {
-      connect: {
-        id: item.data?.toolData?.toolId || '',
-      },
-    },
-
-    Armor: {
-      connect: {
-        id: item.data?.armorData?.armorId || '',
-      },
-    },
 
     User: {
       connect: {
@@ -287,6 +265,47 @@ const createWorkshopItem = async (
       },
     },
   };
+
+  if (item.data?.weaponData.weaponId) {
+    input = {
+      ...input,
+      ItemWeaponData: {
+        create: {
+          silvered: item.data?.weaponData?.silvered || false,
+          magical: item.data?.weaponData?.magical || false,
+          Weapon: {
+            connect: {
+              id: item.data?.weaponData?.weaponId,
+            },
+          },
+        },
+      },
+    };
+  }
+
+  if (item.data?.armorData.armorId) {
+    input = {
+      ...input,
+
+      Armor: {
+        connect: {
+          id: item.data?.armorData?.armorId,
+        },
+      },
+    };
+  }
+
+  if (item.data?.toolData.toolId) {
+    input = {
+      ...input,
+      Tool: {
+        connect: {
+          id: item.data?.toolData?.toolId,
+        },
+      },
+    };
+  }
+
   await db.item.upsert({
     where: {
       workshopId: item.id,
