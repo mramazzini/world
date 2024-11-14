@@ -65,7 +65,6 @@ export default async function Page({ params }: Props) {
       query: params.characterID,
       type: 'id',
     });
-    console.log('character', character);
     if (!character) {
       return (
         <div className="p-8">You do not have a character with that ID.</div>

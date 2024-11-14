@@ -14,7 +14,6 @@ interface Props {
 const SubClassTable: React.FC<Props> = ({ subClass }) => {
   const spellCasting = subClass.spellCastingInfo;
   const spellCastingFeatures = subClass.SpellCastingFeatures;
-  console.log(subClass);
   const [expand, setExpand] = useState(false);
   if (!spellCasting) return null;
   return (

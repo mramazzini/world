@@ -37,7 +37,6 @@ const CreateHomebrewModal = ({ modalId }: { modalId: string }) => {
                   lastEditISOString: new Date().toISOString(),
                 })
               );
-              console.log(values);
             }}
             validationSchema={formSchema}
           >
