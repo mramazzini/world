@@ -9,6 +9,7 @@ import useWorkshopFeatures from '@/hooks/useWorkshopFeatures';
 import { useAppSelector } from '@/store/hooks';
 import PublishModal from '../PublishModal/PublishModal';
 import { SubclassEditorData } from '@/lib/types/workshop';
+import Link from 'next/link';
 const WorkshopTopNav = () => {
   const dispatch = useDispatch();
   const itemsToDelete = useAppSelector((state) => state.workshop.itemsToDelete);
@@ -63,8 +64,12 @@ const WorkshopTopNav = () => {
             />
           </svg>
         </button>{' '}
-        <button className="btn btn-ghost">Settings</button>
-        <button className="btn btn-ghost">Help</button>
+        <Link href="/" className="btn btn-ghost">
+          Home
+        </Link>
+        <Link href={'/dashboard'} className="btn btn-ghost">
+          Dashboard
+        </Link>
       </div>
       <div className="flex flex-col items-center justify-center">
         <span className="font-bold">{title}</span>{' '}

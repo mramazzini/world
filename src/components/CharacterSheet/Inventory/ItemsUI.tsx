@@ -2,10 +2,11 @@
 import ModelDisplay from '@/Utility/ModelDisplay';
 import numberArray from '@/lib/utils/numberArray';
 import { useAppSelector } from '@/store/hooks';
+import { SelectedItemInfo } from './InventoryTab';
 
 interface Props {
   setSelectedItem: (item: PrismaJson.QuantityItem | null) => void;
-  selectedItem: PrismaJson.QuantityItem | null;
+  selectedItemInfo: SelectedItemInfo | null;
 }
 
 const GridItem = ({
@@ -42,17 +43,17 @@ const GridItem = ({
   );
 };
 
-const ItemsUI = ({ setSelectedItem, selectedItem }: Props) => {
+const ItemsUI = ({ setSelectedItem, selectedItemInfo }: Props) => {
   const state = useAppSelector((state) => state.character.state);
   if (!state) return null;
   return (
-    <div className="flex flex-wrap gap-2 justify-center">
+    <div className="flex flex-wrap gap-2 justify-center bg-base-200 p-4 h-full rounded-xl">
       {state.inventory.map((item, index) => (
         <GridItem
           key={index}
           data={item}
           setSelectedItem={setSelectedItem}
-          selectedItem={selectedItem}
+          selectedItem={selectedItemInfo?.itemQuantity}
         />
       ))}
       {numberArray(1, 56 - state.inventory.length).map((index) => (

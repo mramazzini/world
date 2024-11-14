@@ -93,28 +93,19 @@ const HomePage = () => {
           </section>
           <section className="col-span-12 md:col-span-12  lg:col-span-12  xl:col-span-8 row-span-1 bg-base-300 p-4 rounded-xl">
             <div className="bg-base-300 p-4 rounded-xl w-full flex flex-col">
-              <h3 className="text-center">Latest Update: Feature Cleanup</h3>
+              <h3 className="text-center">Latest Update: The Workshop</h3>
               <div className="text-center divider mt-0 italic">
-                October 14th, 2024
+                November 13th, 2024
               </div>
               <time className="text-center w-full italic mb-2"></time>
               <ul className="list-disc list-inside">
                 <li>
-                  Refactored features to be there their own database model. This
-                  should remove a lot of the jankiness that was present in the
-                  character sheet.
+                  Created the Workshop, a place to create and edit and publish
+                  your own homebrew content. Check it out in the navbar!
                 </li>
-                <li>Removed Halloween theme</li>
+                <li>Reworked URL routes for all pages to be more readable</li>
               </ul>
-              <time className="text-center w-full italic  divider">
-                October 27th, 2024
-              </time>
-              <ul className="list-disc list-inside">
-                <li>Updated Navbars</li>
-                <li>Fixed certain mobile layouts</li>
-                <li>Changed Max&apos;s DND Wiki to Max&apos;s DND</li>
-                <li>Added delete button for characters</li>
-              </ul>
+
               <div className="divider">
                 <Link
                   href="/changelog"

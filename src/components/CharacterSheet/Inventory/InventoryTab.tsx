@@ -4,27 +4,67 @@ import ItemsUI from './ItemsUI';
 import { useState } from 'react';
 import ItemPreview from './ItemPreview';
 import ItemFeatures from './ItemFeatures';
+import ItemShop from './ItemShop';
+
+export interface SelectedItemInfo {
+  itemQuantity: PrismaJson.QuantityItem;
+  purchasing: boolean;
+}
 
 const InventoryTab = () => {
-  const [selectedItem, setSelectedItem] =
-    useState<PrismaJson.QuantityItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<SelectedItemInfo | null>(
+    null
+  );
 
   return (
     <div className="flex flex-col w-full">
-      <div className="grid grid-cols-2 w-full">
+      <div className="grid grid-cols-12 w-full gap-4">
         {/* loadout */}
-        <LoadoutUI />
+        <div className="col-span-4">
+          <LoadoutUI />
+        </div>
+
+        {/* item shop */}
+        <div className="col-span-4">
+          <ItemShop
+            setSelectedItem={(selected) => {
+              if (!selected) {
+                setSelectedItem(null);
+                return;
+              }
+              setSelectedItem({ itemQuantity: selected, purchasing: true });
+            }}
+            selectedItemInfo={selectedItem}
+          />
+        </div>
+
         {/* inventory */}
-        <ItemsUI
-          setSelectedItem={setSelectedItem}
-          selectedItem={selectedItem}
-        />
-        <ItemPreview
-          setSelectedItem={setSelectedItem}
-          selectedItem={selectedItem}
-        />
+
+        <div className="col-span-4 h-full overflow-auto bg-base-200 rounded-xl border border-primary h-[34rem]">
+          <ItemPreview
+            setSelectedItem={(selected) => {
+              if (!selected) {
+                setSelectedItem(null);
+                return;
+              }
+              setSelectedItem({ itemQuantity: selected, purchasing: false });
+            }}
+            selectedItemInfo={selectedItem}
+          />
+        </div>
+        <div className="col-span-12">
+          <ItemsUI
+            setSelectedItem={(selected) => {
+              if (!selected) {
+                return;
+              }
+              setSelectedItem({ itemQuantity: selected, purchasing: false });
+            }}
+            selectedItemInfo={selectedItem}
+          />
+        </div>
+        <ItemFeatures />
       </div>
-      <ItemFeatures />
     </div>
   );
 };

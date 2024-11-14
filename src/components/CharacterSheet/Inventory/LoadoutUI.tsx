@@ -25,7 +25,7 @@ const LoadoutUI = () => {
   return (
     character &&
     character.state && (
-      <div className="grid grid-cols-6 w-full  gap-4 rounded-xl mb-4">
+      <div className="grid grid-cols-6 w-full  gap-4 rounded-xl ">
         <section
           className="indicator col-span-2  bg-base-200  p-4 w-full flex justify-center flex-col items-start col-span-6 "
           style={{

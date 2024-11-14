@@ -20,41 +20,58 @@ export interface CreateCharacterParams {
 }
 export const createCharacter = async (
   params: CreateCharacterParams
-): Promise<string> => {
+): Promise<{
+  id: string;
+  result: 'success' | 'error';
+}> => {
   const db = new PrismaClient();
-  const res = await db.character.create({
-    data: {
-      id: v4(),
-      name: params.name,
-      alignment: params.alignment,
-      Classes: {
-        connect: { id: params.classId },
-      },
-      Background: {
-        connect: { id: params.backgroundId },
-      },
-      User: {
-        connect: { id: params.userId },
-      },
-      Species: {
-        connect: { id: params.speciesId },
-      },
-    },
-  });
 
-  // If a variant was selected, connect it to the character
-
-  if (params.variantId) {
-    await db.character.update({
-      where: { id: res.id },
+  try {
+    const res = await db.character.create({
       data: {
-        SubSpecies: {
-          connect: { id: params.variantId },
+        id: v4(),
+        name: params.name,
+        alignment: params.alignment,
+        Classes: {
+          connect: { id: params.classId },
+        },
+        Background: {
+          connect: { id: params.backgroundId },
+        },
+        User: {
+          connect: { id: params.userId },
+        },
+        Species: {
+          connect: { id: params.speciesId },
         },
       },
     });
-  }
 
-  await db.$disconnect();
-  return res.id;
+    // If a variant was selected, connect it to the character
+
+    if (params.variantId) {
+      await db.character.update({
+        where: { id: res.id },
+        data: {
+          SubSpecies: {
+            connect: { id: params.variantId },
+          },
+        },
+      });
+    }
+
+    console.log(res);
+    return {
+      id: res.id,
+      result: 'success',
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      id: '',
+      result: 'error',
+    };
+  } finally {
+    await db.$disconnect();
+  }
 };

@@ -23,6 +23,7 @@ const WorkshopSideNav = () => {
     'CREATURE',
     'SPECIES',
     'SUBSPECIES',
+    'BACKGROUND',
   ];
   return (
     <div

@@ -79,7 +79,7 @@ const SidebarSelector: React.FC<SidebarSelectorProps> = ({
                     <td className="w-[25%]">
                       <Link
                         className="btn btn-accent  btn-xs "
-                        href={`/${baseLink}/${meta.name.replaceAll(' ', '-')}`}
+                        href={`/${baseLink}/${meta.slug}`}
                         target="_blank"
                         onClick={(e) => e.stopPropagation()}
                       >

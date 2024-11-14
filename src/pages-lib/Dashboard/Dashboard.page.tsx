@@ -58,7 +58,7 @@ const Dashboard = () => {
       />
       <div className="flex flex-col p-4 md:p-8">
         <div className="flex flex-col lg:flex-row items-center justify-center w-full gap-4">
-          <section className="flex flex-col items-center justify-start bg-base-300 rounded-xl p-4 lg:w-1/2 gap-4 h-[80vh] w-full  ">
+          <section className="flex flex-col items-center justify-start bg-base-300 rounded-xl p-4  gap-4 h-[80vh] w-full  ">
             <div className="flex grow bg-base-200 w-full p-4 flex flex-col xl:flex-row items-center h-auto justify-between">
               <h2 className="text-2xl">
                 Your Characters
@@ -70,7 +70,15 @@ const Dashboard = () => {
             <div className="divider m-0 divider-primary"></div>
             <div className="flex flex-col items-center justify-start h-[80%] overflow-auto w-full gap-4">
               {loadingCharacters && <DashboardSkeleton />}
-
+              {characters.length === 0 && !loadingCharacters && (
+                <div className="flex flex-col items-center justify-center gap-4">
+                  <h2 className="text-2xl">No Characters Found</h2>
+                  <p>
+                    You have not created any characters yet. Click the button
+                    above to create your first character.
+                  </p>
+                </div>
+              )}
               {characters.map((character) => (
                 <div
                   key={character.id}
@@ -149,7 +157,7 @@ const Dashboard = () => {
             </div>
           </section>
 
-          <section className="flex flex-col items-center justify-start bg-base-300 rounded-xl p-4 lg:w-1/2 gap-4 h-[80vh]  w-full">
+          {/* <section className="flex flex-col items-center justify-start bg-base-300 rounded-xl p-4 lg:w-1/2 gap-4 h-[80vh]  w-full">
             <div className="flex grow bg-base-200 w-full p-4 flex flex-col xl:flex-row items-center h-auto justify-between">
               <h2 className="text-2xl">
                 Your Homebrew
@@ -161,7 +169,7 @@ const Dashboard = () => {
             </div>
             <div className="divider m-0 divider-primary"></div>
             <div className="flex flex-col items-center justify-start h-[80%] overflow-auto w-full gap-4"></div>
-          </section>
+          </section> */}
         </div>
       </div>
     </>

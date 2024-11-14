@@ -15,7 +15,7 @@ interface Props {
     readOnly?: boolean;
     size?: 'sm' | 'md' | 'lg' | 'xl';
     placeholder?: string;
-    value?: string;
+    value?: string | number;
     type?: string;
     checked?: boolean;
   };

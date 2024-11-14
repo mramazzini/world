@@ -64,11 +64,15 @@ const CreateCharacterModal = () => {
   }, [sideBarModel, newChar.species]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const userId = await getUserId();
 
-    if (userId === null) return;
+    if (userId === null) {
+      console.error('User not logged in');
+      return;
+    }
 
-    e.preventDefault();
     if (
       !newChar.class ||
       !newChar.species ||
@@ -86,7 +90,9 @@ const CreateCharacterModal = () => {
       variantId: newChar.variant?.id,
     });
 
-    router.push(`/dashboard/${res}`);
+    if (res.result === 'error') return;
+
+    router.push(`/dashboard/${res.id}`);
   };
 
   return (

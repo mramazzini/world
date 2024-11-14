@@ -119,7 +119,7 @@ const seedarr: {
     index: '021',
     callback: createBlogPosts,
     description: 'Creating blogpost from the blogpost seed.',
-    //enabled: true,
+    enabled: true,
   },
   {
     index: '022',
