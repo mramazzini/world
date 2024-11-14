@@ -9,10 +9,10 @@ export const calcWeight = async (state: PrismaJson.CharacterState) => {
     const i = await memoizeGetItem({ query: item.item, type: 'id' });
     if (i?.weight) {
       if (i.weight.unit === Unit.oz) {
-        weight.quantity += i.weight.quantity / 16;
+        weight.quantity += (i.weight.quantity / 16) * item.quantity;
       }
       if (i.weight.unit === Unit.lb) {
-        weight.quantity += i.weight.quantity;
+        weight.quantity += i.weight.quantity * item.quantity;
       }
       //for now we are ignoring other units
     }
