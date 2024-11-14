@@ -11,7 +11,7 @@ type Props = {
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getSpecie({
-    query: params.slug,
+    query: decodeURIComponent(params.slug),
     type: 'slug',
   });
 
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const Page = async ({ params }: Props) => {
   const species = await getSpecie({
-    query: params.slug,
+    query: decodeURIComponent(params.slug),
     type: 'slug',
   });
 

@@ -10,7 +10,7 @@ type Props = {
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getSubclass({
-    query: params.slug,
+    query: decodeURIComponent(params.slug),
     type: 'slug',
   });
 
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 const Page = async ({ params }: Props) => {
   const subclass = await getSubclass({
-    query: params.slug,
+    query: decodeURIComponent(params.slug),
     type: 'slug',
   });
 

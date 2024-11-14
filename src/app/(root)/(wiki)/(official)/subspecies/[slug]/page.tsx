@@ -11,7 +11,7 @@ type Props = {
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getSubSpecie({
-    query: params.slug,
+    query: decodeURIComponent(params.slug),
     type: 'slug',
   });
 
@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const Page = async ({ params }: Props) => {
   const subspecies = await getSubSpecie({
-    query: params.slug,
+    query: decodeURIComponent(params.slug),
     type: 'slug',
   });
   if (!subspecies) notFound();

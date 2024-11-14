@@ -12,7 +12,7 @@ type Props = {
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getBackground({
-    query: params.slug,
+    query: decodeURIComponent(params.slug),
     type: 'slug',
   });
 
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const Page = async ({ params }: Props) => {
   const background = await getBackground({
-    query: params.slug,
+    query: decodeURIComponent(params.slug),
     type: 'slug',
   });
   if (!background) {

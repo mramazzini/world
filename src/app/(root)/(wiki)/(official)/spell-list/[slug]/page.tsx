@@ -12,7 +12,7 @@ type Props = {
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getSpellList({
-    query: params.slug,
+    query: decodeURIComponent(params.slug),
     type: 'slug',
   });
 
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const Page = async ({ params }: Props) => {
   const spellList = await getSpellList({
-    query: params.slug,
+    query: decodeURIComponent(params.slug),
     type: 'slug',
   });
 
