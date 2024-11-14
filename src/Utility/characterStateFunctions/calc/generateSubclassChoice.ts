@@ -4,7 +4,10 @@ import { ClassID } from '@/lib/types/types';
 export const generateSubclassChoice = async (
   classId: ClassID
 ): Promise<PrismaJson.SubclassChoice> => {
-  const subclasses = await getSubclassesByClass(classId);
+  const subclasses = await getSubclassesByClass({
+    query: classId,
+    type: 'id',
+  });
   const subclassChoices: PrismaJson.SubclassChoice = {
     choices: [
       {

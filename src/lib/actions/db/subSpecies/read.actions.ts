@@ -4,7 +4,7 @@ import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 
 import Fuse from 'fuse.js';
-import { DBMetadata } from '@/lib/types/metadata';
+import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { SubSpeciesInfo } from '@/lib/types/modelInfo';
 
 export const getVariantMetadata = async (): Promise<DBMetadata[]> => {
@@ -15,6 +15,7 @@ export const getVariantMetadata = async (): Promise<DBMetadata[]> => {
       name: true,
       description: true,
       updatedAt: true,
+      slug: true,
       flavorText: true,
     },
   });
@@ -23,7 +24,7 @@ export const getVariantMetadata = async (): Promise<DBMetadata[]> => {
 };
 
 export const getVariantMetadataBySpecies = async (
-  speciesId: number
+  speciesId: string
 ): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
   const res = await db.subSpecies.findMany({
@@ -35,6 +36,7 @@ export const getVariantMetadataBySpecies = async (
       name: true,
       description: true,
       updatedAt: true,
+      slug: true,
       flavorText: true,
     },
   });
@@ -63,53 +65,32 @@ export const getSubSpecies = async (): Promise<SubSpeciesInfo[]> => {
   return res;
 };
 
-export const getSubSpecie = async (
-  query: string | number
-): Promise<SubSpeciesInfo | null> => {
+export const getSubSpecie = async ({
+  query,
+  type,
+}: SingleDataQuery): Promise<SubSpeciesInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === 'string') {
-    const res = await db.subSpecies.findFirst({
-      where: {
-        name: query,
-      },
-      include: {
-        species: {
-          include: {
-            Features: true,
-          },
-        },
-        Features: true,
-        User: {
-          select: {
-            username: true,
-          },
+
+  const res = await db.subSpecies.findFirst({
+    where: {
+      [type]: query,
+    },
+    include: {
+      species: {
+        include: {
+          Features: true,
         },
       },
-    });
-    await db.$disconnect();
-    return res;
-  } else {
-    const res = await db.subSpecies.findFirst({
-      where: {
-        id: query,
-      },
-      include: {
-        species: {
-          include: {
-            Features: true,
-          },
-        },
-        Features: true,
-        User: {
-          select: {
-            username: true,
-          },
+      Features: true,
+      User: {
+        select: {
+          username: true,
         },
       },
-    });
-    await db.$disconnect();
-    return res;
-  }
+    },
+  });
+  await db.$disconnect();
+  return res;
 };
 
 export const getSubSpeciesChunk = async (

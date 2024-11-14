@@ -1,4 +1,5 @@
 'use server';
+import { SingleDataQuery } from '@/lib/types/metadata';
 import { ArmorInfo } from '@/lib/types/modelInfo';
 import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
@@ -16,33 +17,21 @@ export const getArmors = async (): Promise<ArmorInfo[]> => {
   return res;
 };
 
-export const getArmor = async (
-  query: string | number
-): Promise<ArmorInfo | null> => {
+export const getArmor = async ({
+  query,
+  type,
+}: SingleDataQuery): Promise<ArmorInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === 'string') {
-    const res = await db.armor.findFirst({
-      where: {
-        name: query,
-      },
-      include: {
-        Features: true,
-      },
-    });
-    await db.$disconnect();
-    return res;
-  } else {
-    const res = await db.armor.findFirst({
-      where: {
-        id: query,
-      },
-      include: {
-        Features: true,
-      },
-    });
-    await db.$disconnect();
-    return res;
-  }
+  const res = await db.armor.findFirst({
+    where: {
+      [type]: query,
+    },
+    include: {
+      Features: true,
+    },
+  });
+  await db.$disconnect();
+  return res;
 };
 
 export const getArmorChunk = async (

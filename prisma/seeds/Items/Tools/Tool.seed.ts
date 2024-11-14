@@ -2,7 +2,7 @@ import { Prisma, Skill } from '@prisma/client';
 
 const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
-    id: 1,
+    id: '1',
     name: "Alchemist's Supplies",
 
     components: [
@@ -28,7 +28,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 2,
+    id: '2',
     name: "Brewer's Supplies",
 
     components: [
@@ -58,7 +58,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 3,
+    id: '3',
     name: "Calligrapher's Supplies",
 
     components: [
@@ -83,7 +83,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 4,
+    id: '4',
     name: "Carpenter's Tools",
 
     components: [
@@ -122,7 +122,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 5,
+    id: '5',
     name: "Cartographer's Tools",
 
     components: [
@@ -165,7 +165,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 6,
+    id: '6',
     name: "Cobbler's Tools",
 
     components: [
@@ -198,7 +198,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 7,
+    id: '7',
     name: "Cook's Utensils",
 
     componentsDescription:
@@ -229,7 +229,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 8,
+    id: '8',
     name: 'Disguise Kit',
 
     componentsDescription:
@@ -264,7 +264,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 9,
+    id: '9',
     name: 'Forgery Kit',
 
     componentsDescription:
@@ -294,7 +294,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 10,
+    id: '10',
     name: 'Gaming Kit',
 
     componentsDescription:
@@ -321,7 +321,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 11,
+    id: '11',
     name: "Glassblower's Tools",
 
     componentsDescription:
@@ -353,7 +353,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 12,
+    id: '12',
     name: 'Herbalism Kit',
 
     componentsDescription:
@@ -394,7 +394,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 13,
+    id: '13',
     name: "Jeweler's Tools",
 
     componentsDescription:
@@ -414,7 +414,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 14,
+    id: '14',
     name: 'Land Vehicles',
 
     skills: [
@@ -441,7 +441,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 15,
+    id: '15',
     name: "Leatherworker's Tools",
 
     componentsDescription:
@@ -469,7 +469,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 16,
+    id: '16',
     name: "Mason's Tools",
 
     componentsDescription:
@@ -495,7 +495,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 17,
+    id: '17',
     name: 'Musical Instrument',
 
     skills: [
@@ -512,7 +512,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 18,
+    id: '18',
     name: "Navigator's Tools",
 
     componentsDescription:
@@ -535,7 +535,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 19,
+    id: '19',
     name: "Painter's Supplies",
 
     componentsDescription:
@@ -570,7 +570,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 20,
+    id: '20',
     name: "Poisoner's Kit",
 
     componentsDescription:
@@ -615,7 +615,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 21,
+    id: '21',
     name: "Potter's Tools",
 
     componentsDescription:
@@ -640,7 +640,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 22,
+    id: '22',
     name: "Smith's Tools",
 
     componentsDescription:
@@ -665,7 +665,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 23,
+    id: '23',
     name: "Thieves' Tools",
 
     componentsDescription:
@@ -696,7 +696,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 24,
+    id: '24',
     name: "Tinker's Tools",
 
     componentsDescription:
@@ -724,7 +724,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 25,
+    id: '25',
     name: "Weaver's Tools",
 
     componentsDescription:
@@ -749,7 +749,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 26,
+    id: '26',
     name: "Woodcarver's Tools",
 
     componentsDescription:
@@ -775,7 +775,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   },
   //gaming sets
   {
-    id: 27,
+    id: '27',
     name: 'Dice Set',
 
     componentsDescription: 'A collection of dice',
@@ -800,7 +800,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 28,
+    id: '28',
     name: 'Dragonchess Set',
 
     componentsDescription: 'A dragonchess set includes a board and pieces.',
@@ -825,7 +825,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 29,
+    id: '29',
     name: 'Playing Card Set',
 
     componentsDescription: 'A collection of cards',
@@ -851,7 +851,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 30,
+    id: '30',
     name: 'Three-Dragon Ante Set',
 
     componentsDescription: 'A Three-Dragon Ante set includes a deck of cards.',
@@ -877,7 +877,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   },
   //instruments
   {
-    id: 31,
+    id: '31',
     name: 'Bagpipes',
 
     components: ['Bagpipes'],
@@ -895,7 +895,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 32,
+    id: '32',
     name: 'Drum',
 
     components: ['Drum'],
@@ -913,7 +913,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 33,
+    id: '33',
     name: 'Dulcimer',
     components: ['Dulcimer'],
     skills: [
@@ -930,7 +930,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 34,
+    id: '34',
     name: 'Flute',
 
     components: ['Flute'],
@@ -948,7 +948,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 35,
+    id: '35',
     name: 'Lute',
 
     components: ['Lute'],
@@ -966,7 +966,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 36,
+    id: '36',
     name: 'Lyre',
 
     components: ['Lyre'],
@@ -984,7 +984,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 37,
+    id: '37',
     name: 'Horn',
 
     components: ['Horn'],
@@ -1002,7 +1002,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 38,
+    id: '38',
     name: 'Pan Flute',
 
     components: ['Pan Flute'],
@@ -1020,7 +1020,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 39,
+    id: '39',
     name: 'Shawm',
 
     components: ['Shawm'],
@@ -1038,7 +1038,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 40,
+    id: '40',
     name: 'Viol',
 
     components: ['Viol'],
@@ -1056,7 +1056,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     ],
   },
   {
-    id: 41,
+    id: '41',
     name: 'Water Vehicles',
 
     skills: [
@@ -1085,53 +1085,80 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
 ];
 
 const toolIds = {
-  alchemistSupplies: 1,
-  brewerSupplies: 2,
-  calligrapherSupplies: 3,
-  carpenterTools: 4,
-  cartographerTools: 5,
-  cobblerTools: 6,
-  cookUtensils: 7,
-  disguiseKit: 8,
-  forgeryKit: 9,
-  gamingKit: 10,
-  glassblowerTools: 11,
-  herbalismKit: 12,
-  jewelerTools: 13,
-  landVehicles: 14,
-  leatherworkerTools: 15,
-  masonTools: 16,
-  musicalInstrument: 17,
-  navigatorsTools: 18,
-  paintersSupplies: 19,
-  poisonersKit: 20,
-  pottersTools: 21,
-  smithTools: 22,
-  thievesTools: 23,
-  tinkersTools: 24,
-  weaversTools: 25,
-  woodcarversTools: 26,
-  diceSet: 27,
-  dragonchessSet: 28,
-  playingCardSet: 29,
-  threeDragonAnteSet: 30,
-  bagpipes: 31,
-  drum: 32,
-  dulcimer: 33,
-  flute: 34,
-  lute: 35,
-  lyre: 36,
-  horn: 37,
-  panFlute: 38,
-  shawm: 39,
-  viol: 40,
-  waterVehicle: 41,
+  alchemistSupplies: '1',
+  brewerSupplies: '2',
+  calligrapherSupplies: '3',
+  carpenterTools: '4',
+  cartographerTools: '5',
+  cobblerTools: '6',
+  cookUtensils: '7',
+  disguiseKit: '8',
+  forgeryKit: '9',
+  gamingKit: '10',
+  glassblowerTools: '11',
+  herbalismKit: '12',
+  jewelerTools: '13',
+  landVehicles: '14',
+  leatherworkerTools: '15',
+  masonTools: '16',
+  musicalInstrument: '17',
+  navigatorsTools: '18',
+  paintersSupplies: '19',
+  poisonersKit: '20',
+  pottersTools: '21',
+  smithTools: '22',
+  thievesTools: '23',
+  tinkersTools: '24',
+  weaversTools: '25',
+  woodcarversTools: '26',
+  diceSet: '27',
+  dragonchessSet: '28',
+  playingCardSet: '29',
+  threeDragonAnteSet: '30',
+  bagpipes: '31',
+  drum: '32',
+  dulcimer: '33',
+  flute: '34',
+  lute: '35',
+  lyre: '36',
+  horn: '37',
+  panFlute: '38',
+  shawm: '39',
+  viol: '40',
+  waterVehicle: '41',
 };
 
-const instrumentIds = [31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
-const artisanIds = [
-  1, 2, 3, 4, 5, 6, 7, 11, 13, 15, 16, 19, 21, 22, 24, 25, 26,
+const instrumentIds = [
+  '31',
+  '32',
+  '33',
+  '34',
+  '35',
+  '36',
+  '37',
+  '38',
+  '39',
+  '40',
 ];
-const gamingKitIds = [27, 28, 29, 30];
+const artisanIds = [
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '11',
+  '13',
+  '15',
+  '16',
+  '19',
+  '21',
+  '22',
+  '24',
+  '25',
+  '26',
+];
+const gamingKitIds = ['27', '28', '29', '30'];
 
 export { ToolSeed, toolIds, instrumentIds, artisanIds, gamingKitIds };

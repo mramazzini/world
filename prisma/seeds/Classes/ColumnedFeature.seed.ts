@@ -4,7 +4,7 @@ import { classIds } from './ClassIds';
 
 const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
   {
-    id: 1,
+    id: '1',
     featureId: generateId('class', 'Cantrips', 'bard', 1),
     classId: classIds.bard,
     name: 'Cantrips Known',
@@ -32,7 +32,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 2,
+    id: '2',
     featureId: generateId('class', 'Spells Known', 'bard', 2),
     classId: classIds.bard,
     name: 'Spells Known',
@@ -60,7 +60,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 2,
+    id: '2',
     featureId: generateId('class', 'Sneak Attack', 'rogue', 2),
     classId: classIds.rogue,
     name: 'Sneak Attack',
@@ -88,7 +88,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 3,
+    id: '3',
     featureId: generateId('class', 'Rage', 'barbarian', 1),
     classId: classIds.barbarian,
     name: 'Rages',
@@ -116,7 +116,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 4,
+    id: '4',
     featureId: generateId('class', 'Rage', 'barbarian', 1),
     classId: classIds.barbarian,
     name: 'Rage Damage',
@@ -144,7 +144,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 5,
+    id: '5',
     featureId: generateId('class', 'Cantrips', 'druid', 1),
     classId: classIds.druid,
     name: 'Cantrips Known',
@@ -172,7 +172,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 6,
+    id: '6',
     featureId: generateId('class', 'Martial Arts', 'monk', 2),
     classId: classIds.monk,
     name: 'Martial Arts',
@@ -200,7 +200,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 7,
+    id: '7',
     featureId: generateId('class', 'Ki', 'monk', 3),
     classId: classIds.monk,
     name: 'Ki Points',
@@ -228,7 +228,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 8,
+    id: '8',
     featureId: generateId('class', 'Unarmored Movement', 'monk', 4),
     classId: classIds.monk,
     name: 'Unarmored Movement',
@@ -256,7 +256,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 9,
+    id: '9',
     featureId: generateId('class', 'Cantrips', 'sorcerer', 1),
     classId: classIds.sorcerer,
     name: 'Cantrips Known',
@@ -284,7 +284,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 10,
+    id: '10',
     featureId: generateId('class', 'Spells Known', 'sorcerer', 2),
     classId: classIds.sorcerer,
     name: 'Spells Known',
@@ -312,7 +312,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 11,
+    id: '11',
     featureId: generateId('class', 'Font of Magic', 'sorcerer', 1),
     classId: classIds.sorcerer,
     name: 'Sorcery Points',
@@ -340,7 +340,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 12,
+    id: '12',
     featureId: generateId('class', 'Cantrips', 'warlock', 1),
     classId: classIds.warlock,
     name: 'Cantrips Known',
@@ -368,7 +368,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 13,
+    id: '13',
     featureId: generateId('class', 'Spells Known', 'warlock', 2),
     classId: classIds.warlock,
     name: 'Spells Known',
@@ -396,7 +396,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 14,
+    id: '14',
     featureId: generateId('class', 'Spells Known', 'warlock', 2),
     classId: classIds.warlock,
     name: 'Slot Level',
@@ -424,7 +424,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 15,
+    id: '15',
     featureId: generateId('class', 'Eldritch Invocations', 'warlock', 1),
     classId: classIds.warlock,
     name: 'Invocations Known',
@@ -452,7 +452,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 16,
+    id: '16',
     featureId: generateId('class', 'Spells Known', 'ranger', 1),
     classId: classIds.ranger,
     name: 'Spells Known',
@@ -480,7 +480,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 17,
+    id: '17',
     featureId: generateId('class', 'Infuse Item', 'artificer', 2),
     classId: classIds.artificer,
     name: 'Infusions Known',
@@ -508,7 +508,7 @@ const ColumnedFeatureSeed: Prisma.ColumnedFeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 18,
+    id: '18',
     featureId: generateId('class', 'Infuse Item', 'artificer', 2),
     classId: classIds.artificer,
     name: 'Infused Items',

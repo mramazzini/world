@@ -2,8 +2,8 @@ import { itemIds } from '../Items/ItemIds';
 import { creatureIds } from './Creature.seed';
 
 const CreatureToItemsSeed: {
-  creatureID: number;
-  itemID: number;
+  creatureID: string;
+  itemID: string;
 }[] = [
   {
     creatureID: creatureIds.acolyte,

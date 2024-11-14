@@ -5,7 +5,6 @@ import Link from 'next/link';
 import SubClassTable from './SubClassTable';
 import Info from '../UI/Info';
 
-import Loading from '../UI/Loading';
 import NewLineParse from '../../Utility/NewLineParse';
 import FeatureList from '../UI/FeatureList';
 interface Props {
@@ -13,14 +12,14 @@ interface Props {
 }
 
 const SubClassDisplay = ({ subClass }: Props) => {
-  const className = subClass.Class?.name;
-  if (!className) return <Loading />;
+  if (!subClass.Class) return null;
+  const classObj = subClass.Class;
   return (
     <>
       <div className="flex flex-col md:flex-row justify-between">
         <div className="flex flex-col md:w-4/5">
           <h1 className="px-4">
-            {className.toCapitalCase()} - {subClass.name}
+            {classObj.name} - {subClass.name}
           </h1>
           <p className="px-4 italic">
             <NewLineParse>{subClass.description}</NewLineParse>
@@ -34,9 +33,9 @@ const SubClassDisplay = ({ subClass }: Props) => {
           {/* go back */}
           <Link
             className={'btn btn-ghost border border-gray-500 w-full'}
-            href={`/class/${className.replaceAll(' ', '-')}`}
+            href={`/class/${classObj.slug}`}
           >
-            View {className.toCapitalCase()} Class -&gt;
+            View {classObj.name} Class -&gt;
           </Link>
         </div>
       </div>

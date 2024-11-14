@@ -3,7 +3,7 @@ import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
-import { DBMetadata } from '@/lib/types/metadata';
+import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { CreatureInfo } from '@/lib/types/modelInfo';
 
 export const getCreaturesMetadata = async (): Promise<DBMetadata[]> => {
@@ -14,6 +14,7 @@ export const getCreaturesMetadata = async (): Promise<DBMetadata[]> => {
       name: true,
       description: true,
       flavorText: true,
+      slug: true,
       updatedAt: true,
     },
   });
@@ -174,317 +175,164 @@ export const getCreatures = async (): Promise<CreatureInfo[]> => {
   return res;
 };
 
-export const getCreature = async (
-  query: string | number
-): Promise<CreatureInfo | null> => {
+export const getCreature = async ({
+  query,
+  type,
+}: SingleDataQuery): Promise<CreatureInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === 'string') {
-    const res = await db.creature.findFirst({
-      where: {
-        name: query,
+
+  const res = await db.creature.findFirst({
+    where: {
+      [type]: query,
+    },
+    include: {
+      User: {
+        select: {
+          username: true,
+        },
       },
-      include: {
-        User: {
-          select: {
-            username: true,
-          },
-        },
-        wieldingItems: {
-          include: {
-            Features: true,
+      wieldingItems: {
+        include: {
+          Features: true,
 
-            ItemWeaponData: {
-              include: {
-                Weapon: {
-                  include: {
-                    SpecialProperties: true,
-                    ammunition: true,
-                    WeaponPropertyInstance: {
-                      include: {
-                        Property: true,
-                      },
+          ItemWeaponData: {
+            include: {
+              Weapon: {
+                include: {
+                  SpecialProperties: true,
+                  ammunition: true,
+                  WeaponPropertyInstance: {
+                    include: {
+                      Property: true,
                     },
                   },
                 },
               },
             },
-            Spell: true,
-            Armor: {
-              include: {
-                Features: true,
-              },
-            },
-            Tool: {
-              include: {
-                Features: true,
-              },
-            },
-            AmmunitionFor: true,
-
-            EquipmentPack: {
-              include: {
-                items: true,
-              },
-            },
-            User: {
-              select: {
-                username: true,
-              },
+          },
+          Spell: true,
+          Armor: {
+            include: {
+              Features: true,
             },
           },
-        },
-        armorEquipped: {
-          include: {
-            ItemWeaponData: {
-              include: {
-                Weapon: {
-                  include: {
-                    SpecialProperties: true,
-                    ammunition: true,
-                    WeaponPropertyInstance: {
-                      include: {
-                        Property: true,
-                      },
-                    },
-                  },
-                },
-              },
+          Tool: {
+            include: {
+              Features: true,
             },
-            Spell: true,
-            Armor: {
-              include: {
-                Features: true,
-              },
-            },
-            Tool: {
-              include: {
-                Features: true,
-              },
-            },
-            AmmunitionFor: true,
-
-            EquipmentPack: {
-              include: {
-                items: true,
-              },
-            },
-            User: {
-              select: {
-                username: true,
-              },
-            },
-            Features: true,
           },
-        },
-        spellsPrepared: true,
-        freeSpells: true,
-        CreatureLimitedSpells: {
-          include: {
-            Spell: true,
-          },
-        },
-        Features: true,
-        shieldEquipped: {
-          include: {
-            Features: true,
-            ItemWeaponData: {
-              include: {
-                Weapon: {
-                  include: {
-                    SpecialProperties: true,
-                    ammunition: true,
-                    WeaponPropertyInstance: {
-                      include: {
-                        Property: true,
-                      },
-                    },
-                  },
-                },
-              },
-            },
-            Spell: true,
-            Armor: {
-              include: {
-                Features: true,
-              },
-            },
-            Tool: {
-              include: {
-                Features: true,
-              },
-            },
-            AmmunitionFor: true,
+          AmmunitionFor: true,
 
-            EquipmentPack: {
-              include: {
-                items: true,
-              },
+          EquipmentPack: {
+            include: {
+              items: true,
             },
-            User: {
-              select: {
-                username: true,
-              },
+          },
+          User: {
+            select: {
+              username: true,
             },
           },
         },
       },
-    });
-    await db.$disconnect();
-    return res;
-  } else {
-    const res = await db.creature.findFirst({
-      where: {
-        id: query,
+      armorEquipped: {
+        include: {
+          ItemWeaponData: {
+            include: {
+              Weapon: {
+                include: {
+                  SpecialProperties: true,
+                  ammunition: true,
+                  WeaponPropertyInstance: {
+                    include: {
+                      Property: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+          Spell: true,
+          Armor: {
+            include: {
+              Features: true,
+            },
+          },
+          Tool: {
+            include: {
+              Features: true,
+            },
+          },
+          AmmunitionFor: true,
+
+          EquipmentPack: {
+            include: {
+              items: true,
+            },
+          },
+          User: {
+            select: {
+              username: true,
+            },
+          },
+          Features: true,
+        },
       },
-      include: {
-        User: {
-          select: {
-            username: true,
-          },
+      spellsPrepared: true,
+      freeSpells: true,
+      CreatureLimitedSpells: {
+        include: {
+          Spell: true,
         },
-        wieldingItems: {
-          include: {
-            Features: true,
-
-            ItemWeaponData: {
-              include: {
-                Weapon: {
-                  include: {
-                    SpecialProperties: true,
-                    ammunition: true,
-                    WeaponPropertyInstance: {
-                      include: {
-                        Property: true,
-                      },
+      },
+      Features: true,
+      shieldEquipped: {
+        include: {
+          Features: true,
+          ItemWeaponData: {
+            include: {
+              Weapon: {
+                include: {
+                  SpecialProperties: true,
+                  ammunition: true,
+                  WeaponPropertyInstance: {
+                    include: {
+                      Property: true,
                     },
                   },
                 },
               },
             },
-            Spell: true,
-            Armor: {
-              include: {
-                Features: true,
-              },
-            },
-            Tool: {
-              include: {
-                Features: true,
-              },
-            },
-            AmmunitionFor: true,
-
-            EquipmentPack: {
-              include: {
-                items: true,
-              },
-            },
-            User: {
-              select: {
-                username: true,
-              },
+          },
+          Spell: true,
+          Armor: {
+            include: {
+              Features: true,
             },
           },
-        },
-        armorEquipped: {
-          include: {
-            ItemWeaponData: {
-              include: {
-                Weapon: {
-                  include: {
-                    SpecialProperties: true,
-                    ammunition: true,
-                    WeaponPropertyInstance: {
-                      include: {
-                        Property: true,
-                      },
-                    },
-                  },
-                },
-              },
+          Tool: {
+            include: {
+              Features: true,
             },
-            Spell: true,
-            Armor: {
-              include: {
-                Features: true,
-              },
-            },
-            Tool: {
-              include: {
-                Features: true,
-              },
-            },
-            AmmunitionFor: true,
-
-            EquipmentPack: {
-              include: {
-                items: true,
-              },
-            },
-            User: {
-              select: {
-                username: true,
-              },
-            },
-            Features: true,
           },
-        },
-        spellsPrepared: true,
-        freeSpells: true,
-        CreatureLimitedSpells: {
-          include: {
-            Spell: true,
-          },
-        },
-        Features: true,
-        shieldEquipped: {
-          include: {
-            Features: true,
-            ItemWeaponData: {
-              include: {
-                Weapon: {
-                  include: {
-                    SpecialProperties: true,
-                    ammunition: true,
-                    WeaponPropertyInstance: {
-                      include: {
-                        Property: true,
-                      },
-                    },
-                  },
-                },
-              },
-            },
-            Spell: true,
-            Armor: {
-              include: {
-                Features: true,
-              },
-            },
-            Tool: {
-              include: {
-                Features: true,
-              },
-            },
-            AmmunitionFor: true,
+          AmmunitionFor: true,
 
-            EquipmentPack: {
-              include: {
-                items: true,
-              },
+          EquipmentPack: {
+            include: {
+              items: true,
             },
-            User: {
-              select: {
-                username: true,
-              },
+          },
+          User: {
+            select: {
+              username: true,
             },
           },
         },
       },
-    });
-    await db.$disconnect();
-    return res;
-  }
+    },
+  });
+  await db.$disconnect();
+  return res;
 };
 
 export const getCreatureChunk = async (

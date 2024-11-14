@@ -3,7 +3,7 @@ import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
-import { DBMetadata } from '@/lib/types/metadata';
+import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { ItemInfo } from '@/lib/types/modelInfo';
 
 export const getItemsMetadata = async (): Promise<DBMetadata[]> => {
@@ -14,6 +14,7 @@ export const getItemsMetadata = async (): Promise<DBMetadata[]> => {
       name: true,
       description: true,
       flavorText: true,
+      slug: true,
       updatedAt: true,
     },
   });
@@ -70,14 +71,16 @@ export const getItems = async (): Promise<ItemInfo[]> => {
   return res;
 };
 
-export const getItem = async (
-  query: string | number
-): Promise<ItemInfo | null> => {
+export const getItem = async ({
+  query,
+  type,
+}: SingleDataQuery): Promise<ItemInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === 'string') {
+
+  try {
     const res = await db.item.findFirst({
       where: {
-        name: query,
+        [type]: query,
       },
       include: {
         ItemWeaponData: {
@@ -121,57 +124,13 @@ export const getItem = async (
         },
       },
     });
-    await db.$disconnect();
-    return res;
-  } else {
-    const res = await db.item.findFirst({
-      where: {
-        id: query,
-      },
-      include: {
-        ItemWeaponData: {
-          include: {
-            Weapon: {
-              include: {
-                ammunition: true,
-                SpecialProperties: true,
-                WeaponPropertyInstance: {
-                  include: {
-                    Property: true,
-                  },
-                },
-              },
-            },
-          },
-        },
-        Spell: true,
-        Features: true,
-        Armor: {
-          include: {
-            Features: true,
-          },
-        },
-        Tool: {
-          include: {
-            Features: true,
-          },
-        },
-        AmmunitionFor: true,
 
-        EquipmentPack: {
-          include: {
-            items: true,
-          },
-        },
-        User: {
-          select: {
-            username: true,
-          },
-        },
-      },
-    });
-    await db.$disconnect();
     return res;
+  } catch (error) {
+    console.error('Error getting item', error);
+    return null;
+  } finally {
+    await db.$disconnect();
   }
 };
 

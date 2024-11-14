@@ -127,8 +127,7 @@ const SearchPageComponent = <T extends DataType>({
   count += table.length;
   count += relationalFields?.length || 0;
 
-  const tableRoute = (name: string) =>
-    `/${routeName}/${name.replaceAll(' ', '-')}`;
+  const tableRoute = (slug: string) => `/${routeName}/${slug}`;
 
   const generateSearchOptions = (): SearchFieldOptions[] => {
     const searchOptions: SearchFieldOptions[] = [];
@@ -343,7 +342,7 @@ const SearchPageComponent = <T extends DataType>({
                             e.stopPropagation();
                             //make mouse pointer turn to a loading icon
                             handleLoad();
-                            router.push(tableRoute(item.name));
+                            router.push(tableRoute(item.slug));
                           }}
                         >
                           {numberArray(0, count).map((num) => {
@@ -377,7 +376,7 @@ const SearchPageComponent = <T extends DataType>({
                                               : 'hidden xl:table-cell'
                                     }`}
                                   >
-                                    <Link href={tableRoute(item.name)}>
+                                    <Link href={tableRoute(item.slug)}>
                                       {data}
                                     </Link>
                                   </td>

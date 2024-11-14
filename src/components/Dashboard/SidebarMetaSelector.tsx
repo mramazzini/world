@@ -38,6 +38,7 @@ const SidebarMetaSelector = ({
   useEffect(() => {
     setSearchResults(metadata);
   }, [metadata]);
+
   return (
     <>
       {show && (
@@ -48,9 +49,7 @@ const SidebarMetaSelector = ({
           show ? 'fixed ' : 'hidden'
         }`}
       >
-        <h2 className="text-2xl p-4 text-center">
-          Select a {model} for your character.
-        </h2>
+        <h2 className="text-2xl p-4 text-center">Select a {model}.</h2>
         <div className="divider">
           <button
             className="btn btn-primary btn-sm"
@@ -85,7 +84,7 @@ const SidebarMetaSelector = ({
                     <td className="w-[25%]">
                       <Link
                         className="btn btn-accent  btn-xs "
-                        href={`/${model}/${meta.name.replaceAll(' ', '-')}`}
+                        href={`/${model}/${meta.slug}`}
                         target="_blank"
                         onClick={(e) => e.stopPropagation()}
                       >

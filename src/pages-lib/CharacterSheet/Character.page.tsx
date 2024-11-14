@@ -64,6 +64,10 @@ const CharacterSheet = ({ characterData }: Props) => {
     });
   }, [characterData, dispatch, character.state, isInitialized]);
 
+  useEffect(() => {
+    console.log(character);
+  }, [character]);
+
   return (
     <main className="p-4 md:p-8">
       <div role="alert" className="alert alert-info mb-4">

@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { itemIds } from '../Items/ItemIds';
-import { generateSpellLink, spellIds } from '../Spells/spells.seed';
+import { spellIds } from '../Spells/spells.seed';
 import { classIds as ids } from './ClassIds';
 import generateId from '../_helpers/generateId';
 import Classes from './Class.seed';
@@ -1283,13 +1283,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       {
         'Primal Awareness Spells': {
           headers: ['Ranger Level', 'Spell'],
-          links: [
-            spellIds.speakWithAnimals,
-            spellIds.beastSense,
-            spellIds.speakWithPlants,
-            spellIds.locateCreature,
-            spellIds.communeWithNature,
-          ].map((id) => generateSpellLink(id)),
+
           data: [
             {
               'Ranger Level': '3rd',

@@ -1,6 +1,6 @@
 'use client';
 
-import { memoizeGetSubclass } from '@/Utility/globalCache';
+import { memoizeGetSubclass } from '@/Utility/Indexed/globalCache';
 import ModelDisplay from '@/Utility/ModelDisplay';
 import ModelLink from '@/Utility/ModelLink';
 import { SubClassID } from '@/lib/types/types';
@@ -25,7 +25,12 @@ const SubclassChoice = ({ choice, updateSelections, modalID }: Props) => {
     const fetchSubclasses = async () => {
       try {
         const fetchedSubclasses = await Promise.all(
-          choice.options.map((subClass) => memoizeGetSubclass(subClass))
+          choice.options.map((subClass) =>
+            memoizeGetSubclass({
+              query: subClass,
+              type: 'id',
+            })
+          )
         );
         setSubclasses(fetchedSubclasses as SubClassInfo[]);
       } catch (error) {

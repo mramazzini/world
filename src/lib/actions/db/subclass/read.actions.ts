@@ -4,7 +4,7 @@ import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { Prisma, PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
-import { DBMetadata } from '@/lib/types/metadata';
+import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { SubClassInfo } from '@/lib/types/modelInfo';
 
 export const getSubclassMetadata = async (): Promise<DBMetadata[]> => {
@@ -14,6 +14,7 @@ export const getSubclassMetadata = async (): Promise<DBMetadata[]> => {
       id: true,
       name: true,
       description: true,
+      slug: true,
       updatedAt: true,
       flavorText: true,
     },
@@ -48,6 +49,7 @@ export async function getSubclasses({
         },
         Class: {
           select: {
+            slug: true,
             name: true,
           },
         },
@@ -80,6 +82,7 @@ export async function getSubclasses({
       },
       Class: {
         select: {
+          slug: true,
           name: true,
         },
       },
@@ -129,6 +132,7 @@ export async function getSubclassChunkByClass(
         },
         Class: {
           select: {
+            slug: true,
             name: true,
           },
         },
@@ -168,6 +172,7 @@ export async function getSubclassChunkByClass(
       },
       Class: {
         select: {
+          slug: true,
           name: true,
         },
       },
@@ -228,6 +233,7 @@ export async function getHomebrewSubclassChunk(
         },
         Class: {
           select: {
+            slug: true,
             name: true,
           },
         },
@@ -264,6 +270,7 @@ export async function getHomebrewSubclassChunk(
       },
       Class: {
         select: {
+          slug: true,
           name: true,
         },
       },
@@ -292,90 +299,15 @@ export async function getHomebrewSubclassChunk(
   );
 }
 
-export async function getSubclass(
-  query: string | number
-): Promise<SubClassInfo | null> {
+export async function getSubclass({
+  query,
+  type,
+}: SingleDataQuery): Promise<SubClassInfo | null> {
   const db = new PrismaClient();
   try {
-    if (typeof query === 'string') {
-      const res = await db.subClass.findFirst({
-        where: {
-          name: query,
-        },
-        include: {
-          SpellCastingFeatures: {
-            include: {
-              SubClassColumnedFeature: true,
-            },
-          },
-          Features: {
-            include: {
-              SubClassColumnedFeature: true,
-            },
-          },
-          Class: {
-            select: {
-              name: true,
-            },
-          },
-          User: {
-            select: {
-              username: true,
-            },
-          },
-        },
-      });
-      await db.$disconnect();
-      return res;
-    } else {
-      const res = await db.subClass.findFirst({
-        where: {
-          id: query,
-        },
-        include: {
-          SpellCastingFeatures: {
-            include: {
-              SubClassColumnedFeature: true,
-            },
-          },
-          Features: {
-            include: {
-              SubClassColumnedFeature: true,
-            },
-          },
-          Class: {
-            select: {
-              name: true,
-            },
-          },
-          User: {
-            select: {
-              username: true,
-            },
-          },
-        },
-      });
-      await db.$disconnect();
-      return res;
-    }
-  } catch (error) {
-    console.error(error);
-  }
-  await db.$disconnect();
-  return null;
-}
-
-export const getSubclassesByClass = async (
-  className: string | number
-): Promise<SubClassInfo[]> => {
-  const db = new PrismaClient();
-
-  if (typeof className === 'number') {
-    const res = await db.subClass.findMany({
+    const res = await db.subClass.findFirst({
       where: {
-        Class: {
-          id: className,
-        },
+        [type]: query,
       },
       include: {
         SpellCastingFeatures: {
@@ -388,26 +320,38 @@ export const getSubclassesByClass = async (
             SubClassColumnedFeature: true,
           },
         },
+        Class: {
+          select: {
+            slug: true,
+            name: true,
+          },
+        },
         User: {
           select: {
             username: true,
           },
         },
-        Class: {
-          select: {
-            name: true,
-          },
-        },
       },
     });
-    await db.$disconnect();
     return res;
+  } catch (error) {
+    console.error(error);
+    return null;
+  } finally {
+    await db.$disconnect();
   }
+}
+
+export const getSubclassesByClass = async ({
+  query,
+  type,
+}: SingleDataQuery): Promise<SubClassInfo[]> => {
+  const db = new PrismaClient();
 
   const res = await db.subClass.findMany({
     where: {
       Class: {
-        name: className,
+        [type]: query,
       },
     },
     include: {
@@ -428,6 +372,7 @@ export const getSubclassesByClass = async (
       },
       Class: {
         select: {
+          slug: true,
           name: true,
         },
       },
@@ -469,6 +414,7 @@ export async function getSubclassChunk(
         },
         Class: {
           select: {
+            slug: true,
             name: true,
           },
         },
@@ -501,6 +447,7 @@ export async function getSubclassChunk(
       },
       Class: {
         select: {
+          slug: true,
           name: true,
         },
       },

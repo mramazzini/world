@@ -2171,7 +2171,10 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   const featureParent = Backgrounds.find(
     (background) => background.id === feature.backgroundId
   );
-  if (!featureParent?.name) throw new Error('Feature must have a name');
+  if (!featureParent?.name) {
+    console.log(feature);
+    throw new Error('Feature must have a name');
+  }
   const id = generateId('background', feature.name, featureParent.name, count);
   count++;
   const nextBackgroundFeature = arr[index + 1];

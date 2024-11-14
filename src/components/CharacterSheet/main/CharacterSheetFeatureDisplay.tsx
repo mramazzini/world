@@ -56,7 +56,9 @@ const CharacterSheetFeatureDisplay = () => {
 
             return minA - minB;
           })
-          .filter((f) => !f.levels?.some((l) => l > level))
+          .filter((f) =>
+            f.levels.length > 0 ? f.levels.some((l) => l <= level) : true
+          )
           .map((featureInfo, index) => (
             <div
               key={index}
@@ -136,7 +138,9 @@ const CharacterSheetFeatureDisplay = () => {
         <p className="italic px-4">Level up to unlock these features</p>
         <div className="divider m-1" />
         {features
-          .filter((f) => f.levels?.some((l) => l > level))
+          .filter((f) =>
+            f.levels.length > 0 ? !f.levels.some((l) => l <= level) : false
+          )
           .map((featureInfo) => (
             <div
               key={featureInfo.id}

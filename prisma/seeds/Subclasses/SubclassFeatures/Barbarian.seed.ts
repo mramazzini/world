@@ -1,13 +1,13 @@
 const ids = {
-  ancestralGuardian: 11,
-  battlerager: 12,
-  beast: 13,
-  berserker: 14,
-  giant: 15,
-  stormHerald: 16,
-  totamWarrior: 17,
-  wildMagic: 18,
-  zealot: 19,
+  ancestralGuardian: '11',
+  battlerager: '12',
+  beast: '13',
+  berserker: '14',
+  giant: '15',
+  stormHerald: '16',
+  totamWarrior: '17',
+  wildMagic: '18',
+  zealot: '19',
 };
 
 const BarbarianSubclassFeatures = [

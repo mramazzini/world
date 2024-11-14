@@ -59,7 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const subclasses = await getSubclasses({ homebrew: false });
   for (const s of subclasses) {
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/subclass/${s.name.replaceAll(' ', '-')}`,
+      url: `${process.env.DOMAIN_NAME}/subclass/${s.slug}`,
       lastModified: s.updatedAt,
       changeFrequency: 'yearly',
       priority: 0.8,
@@ -158,7 +158,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
   for (const r of species) {
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/species/${r.name.replaceAll(' ', '-')}`,
+      url: `${process.env.DOMAIN_NAME}/species/${r.slug}`,
       lastModified: r.updatedAt,
       changeFrequency: 'yearly',
       priority: 0.8,
@@ -211,7 +211,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
   for (const t of items) {
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/item/${t.name.replaceAll(' ', '-')}`,
+      url: `${process.env.DOMAIN_NAME}/item/${t.slug}`,
       lastModified: t.updatedAt,
       changeFrequency: 'yearly',
       priority: 0.8,
@@ -264,7 +264,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
   for (const f of feats) {
     siteMap.push({
-      url: `${process.env.DOMAIN_NAME}/feats/${f.name.replaceAll(' ', '-')}`,
+      url: `${process.env.DOMAIN_NAME}/feats/${f.slug}`,
       lastModified: f.updatedAt,
       changeFrequency: 'yearly',
       priority: 0.8,

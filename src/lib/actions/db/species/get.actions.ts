@@ -4,7 +4,7 @@ import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 
 import Fuse from 'fuse.js';
-import { DBMetadata } from '@/lib/types/metadata';
+import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { SpeciesInfo } from '@/lib/types/modelInfo';
 
 export const getSpeciesMetadata = async (): Promise<DBMetadata[]> => {
@@ -15,6 +15,7 @@ export const getSpeciesMetadata = async (): Promise<DBMetadata[]> => {
       name: true,
       description: true,
       flavorText: true,
+      slug: true,
       updatedAt: true,
     },
   });
@@ -39,45 +40,28 @@ export const getSpecies = async (): Promise<SpeciesInfo[]> => {
   return res;
 };
 
-export const getSpecie = async (
-  query: string | number
-): Promise<SpeciesInfo | null> => {
+export const getSpecie = async ({
+  query,
+  type,
+}: SingleDataQuery): Promise<SpeciesInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === 'string') {
-    const res = await db.species.findFirst({
-      where: {
-        name: query,
-      },
-      include: {
-        Variants: true,
-        Features: true,
-        User: {
-          select: {
-            username: true,
-          },
+
+  const res = await db.species.findFirst({
+    where: {
+      [type]: query,
+    },
+    include: {
+      Variants: true,
+      Features: true,
+      User: {
+        select: {
+          username: true,
         },
       },
-    });
-    await db.$disconnect();
-    return res;
-  } else {
-    const res = await db.species.findFirst({
-      where: {
-        id: query,
-      },
-      include: {
-        Variants: true,
-        Features: true,
-        User: {
-          select: {
-            username: true,
-          },
-        },
-      },
-    });
-    await db.$disconnect();
-    return res;
-  }
+    },
+  });
+  await db.$disconnect();
+  return res;
 };
 
 export const getSpeciesChunk = async (

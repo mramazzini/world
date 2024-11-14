@@ -1,13 +1,13 @@
 const ids = {
-  ancients: 72,
-  conquest: 73,
-  crown: 74,
-  devotion: 75,
-  glory: 76,
-  redemption: 77,
-  vengeance: 78,
-  watchers: 79,
-  oathbreaker: 80,
+  ancients: '72',
+  conquest: '73',
+  crown: '74',
+  devotion: '75',
+  glory: '76',
+  redemption: '77',
+  vengeance: '78',
+  watchers: '79',
+  oathbreaker: '80',
 };
 
 const PaladinSubclassFeatures = [

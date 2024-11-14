@@ -13,7 +13,7 @@ export const createCharacter = async (db: PrismaClient) => {
       cinfo('Character created');
     } catch (error) {
       cerr('Error creating character:', Character.name, error);
-      return;
+      throw new Error('Error creating character');
     }
   }
 };

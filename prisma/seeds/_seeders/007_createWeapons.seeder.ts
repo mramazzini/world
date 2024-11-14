@@ -24,7 +24,7 @@ export const createWeapons = async (db: PrismaClient) => {
       cinfo('Weapon created');
     } catch (error) {
       cerr('Error creating weapon:', Weapon.name, error);
-      return;
+      throw new Error('Error creating weapon');
     }
   }
   cinfo('Weapons created');
@@ -45,7 +45,7 @@ export const createWeapons = async (db: PrismaClient) => {
       cinfo('Weapon property created');
     } catch (error) {
       cerr('Error creating weapon property:', WeaponProperty.name, error);
-      return;
+      throw new Error('Error creating weapon property');
     }
   }
 
@@ -76,7 +76,7 @@ export const createWeapons = async (db: PrismaClient) => {
         WeaponPropertyInstance.weaponId,
         error
       );
-      return;
+      throw new Error('Error creating weapon to property relationship');
     }
   }
   cinfo('Weapon to property relationships created');
@@ -101,7 +101,7 @@ export const createWeapons = async (db: PrismaClient) => {
         WeaponSpecialFeature.name,
         error
       );
-      return;
+      throw new Error('Error creating weapon special feature');
     }
   }
 };

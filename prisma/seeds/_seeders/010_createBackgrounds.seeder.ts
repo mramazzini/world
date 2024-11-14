@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import Backgrounds from '../Backgrounds/Backgrounds.seed';
 import BackgroundFeatures from '../Backgrounds/BackgroundFeatures.seed';
 import createFeature from '../_helpers/createFeature';
+import { createSlug } from '../_helpers/createSlug';
 
 export const createBackgrounds = async (db: PrismaClient) => {
   // Create Backgrounds
@@ -14,13 +15,19 @@ export const createBackgrounds = async (db: PrismaClient) => {
         where: {
           id: Background.id,
         },
-        update: Background,
-        create: Background,
+        update: {
+          ...Background,
+          slug: createSlug(Background.name),
+        },
+        create: {
+          ...Background,
+          slug: createSlug(Background.name),
+        },
       });
       cinfo('Background created');
     } catch (error) {
       cerr('Error creating background:', Background.name, error);
-      return;
+      throw new Error('Error creating background');
     }
   }
   cinfo('Backgrounds created');
@@ -33,14 +40,14 @@ export const createBackgrounds = async (db: PrismaClient) => {
       //make sure feature has a classId and levels
       if (!Feature.backgroundId) {
         cerr('Feature missing backgroundId field:', Feature.name);
-        return;
+        throw new Error('Feature missing backgroundId field');
       }
       await createFeature(db, Feature);
 
       cinfo('Feature created');
     } catch (error) {
       cerr('Error creating background feature:', Feature.name, error);
-      return;
+      throw new Error('Error creating background feature');
     }
   }
   cinfo('Background features created');

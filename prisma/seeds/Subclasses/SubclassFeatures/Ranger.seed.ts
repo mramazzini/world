@@ -1,12 +1,12 @@
 const ids = {
-  BeastMaster: 81,
-  feyWanderer: 82,
-  gloomStalker: 83,
-  horizonWalker: 84,
-  hunter: 85,
-  monsterSlayer: 86,
-  swarmkeeper: 87,
-  drakewarden: 88,
+  BeastMaster: '81',
+  feyWanderer: '82',
+  gloomStalker: '83',
+  horizonWalker: '84',
+  hunter: '85',
+  monsterSlayer: '86',
+  swarmkeeper: '87',
+  drakewarden: '88',
 };
 
 const RangerSubclassFeatures = [

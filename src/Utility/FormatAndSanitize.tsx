@@ -3,7 +3,7 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import termDictionary from './TermDictionary';
 import Tooltip from './Tooltip';
 import ModelLink from './ModelLink';
-import { memoizeGetItem, memoizeGetSpell } from './globalCache';
+import { memoizeGetItem, memoizeGetSpell } from './Indexed/globalCache';
 import { ItemInfo, SpellInfo } from '@/lib/types/modelInfo';
 
 const P = ({
@@ -144,7 +144,10 @@ const P = ({
           console.error('Item id not found in string: ', string);
           return null;
         }
-        const item = (await memoizeGetItem(parseInt(id))) as ItemInfo;
+        const item = (await memoizeGetItem({
+          query: id,
+          type: 'id',
+        })) as ItemInfo;
 
         if (match[0].length && item) {
           items.push(item);
@@ -179,7 +182,10 @@ const P = ({
           console.error('Spell id not found in string: ', string);
           return null;
         }
-        const spell = await memoizeGetSpell(parseInt(id));
+        const spell = await memoizeGetSpell({
+          query: id,
+          type: 'id',
+        });
         if (match[0].length && spell) {
           spells.push(spell);
         }

@@ -1,11 +1,10 @@
 'use client';
-import { memoizeGetSubclass } from '../../globalCache';
-import { getFeat } from '@/lib/actions/db/feat/read.actions';
 import {
   linkCharacterToFeat,
   linkCharacterToSubClass,
 } from '@/lib/actions/db/character/update.actions';
-import { CharacterInfo, SubClassInfo } from '@/lib/types/modelInfo';
+import { CharacterInfo } from '@/lib/types/modelInfo';
+
 export const applyPendingModels = async (
   character: CharacterInfo
 ): Promise<CharacterInfo> => {
@@ -32,72 +31,49 @@ export const applyPendingModels = async (
   if (pendingSubclasses) {
     for (const subclass of pendingSubclasses) {
       try {
-        await linkCharacterToSubClass(character.id, subclass);
+        const res = await linkCharacterToSubClass(character.id, subclass);
+        if (!res) return character;
+        if (!newCharacter.state) return character;
+        newCharacter = {
+          ...res,
+          state: {
+            ...newCharacter.state,
+            pendingLinks: {
+              ...newCharacter.state.pendingLinks,
+              subClass: newCharacter.state.pendingLinks.subClass.filter(
+                (s) => s !== subclass
+              ),
+            },
+          },
+        };
       } catch (error) {
         console.error('Error linking character to subclass', error);
         return character;
       }
-      const subclassData = (await memoizeGetSubclass(subclass)) as SubClassInfo;
-
-      if (!subclassData) {
-        continue;
-      }
-      newCharacter = {
-        ...newCharacter,
-        SubClasses: [...(newCharacter.SubClasses || []), subclassData],
-      };
-      if (!newCharacter.state) {
-        console.error('No state found on character');
-        return character;
-      }
-
-      newCharacter = {
-        ...newCharacter,
-        state: {
-          ...newCharacter.state,
-          pendingLinks: {
-            ...newCharacter.state.pendingLinks,
-            subClass: newCharacter.state.pendingLinks.subClass.filter(
-              (s) => s !== subclass
-            ),
-          },
-        },
-      };
     }
   }
   if (pendingFeats) {
     for (const feat of pendingFeats) {
       try {
-        await linkCharacterToFeat(character.id, feat);
+        const res = await linkCharacterToFeat(character.id, feat);
+        if (!res) return character;
+        if (!newCharacter.state) return character;
+        newCharacter = {
+          ...res,
+          state: {
+            ...newCharacter.state,
+            pendingLinks: {
+              ...newCharacter.state.pendingLinks,
+              feats: newCharacter.state.pendingLinks.feats.filter(
+                (f) => f !== feat
+              ),
+            },
+          },
+        };
       } catch (error) {
         console.error('Error linking character to feat', error);
         return character;
       }
-      const featData = await getFeat(feat);
-      if (!featData) {
-        continue;
-      }
-      newCharacter = {
-        ...newCharacter,
-        Feats: [...(newCharacter.Feats || []), featData],
-      };
-      if (!newCharacter.state) {
-        console.error('No state found on character');
-        return character;
-      }
-
-      newCharacter = {
-        ...newCharacter,
-        state: {
-          ...newCharacter.state,
-          pendingLinks: {
-            ...newCharacter.state.pendingLinks,
-            feats: newCharacter.state.pendingLinks.feats.filter(
-              (f) => f !== feat
-            ),
-          },
-        },
-      };
     }
   }
 

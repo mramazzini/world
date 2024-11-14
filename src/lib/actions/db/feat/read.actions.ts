@@ -1,5 +1,5 @@
 'use server';
-import { DBMetadata } from '@/lib/types/metadata';
+import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { FeatInfo } from '@/lib/types/modelInfo';
 import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
@@ -14,6 +14,7 @@ export const getFeatsMetadata = async (): Promise<DBMetadata[]> => {
       id: true,
       name: true,
       updatedAt: true,
+      slug: true,
       flavorText: true,
     },
   });
@@ -40,43 +41,27 @@ export const getFeats = async (): Promise<FeatInfo[]> => {
   return res;
 };
 
-export const getFeat = async (
-  query: string | number
-): Promise<FeatInfo | null> => {
+export const getFeat = async ({
+  query,
+  type,
+}: SingleDataQuery): Promise<FeatInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === 'string') {
-    const res = await db.feat.findFirst({
-      where: {
-        name: query,
-      },
-      include: {
-        Features: true,
-        User: {
-          select: {
-            username: true,
-          },
+
+  const res = await db.feat.findFirst({
+    where: {
+      [type]: query,
+    },
+    include: {
+      Features: true,
+      User: {
+        select: {
+          username: true,
         },
       },
-    });
-    await db.$disconnect();
-    return res;
-  } else {
-    const res = await db.feat.findFirst({
-      where: {
-        id: query,
-      },
-      include: {
-        Features: true,
-        User: {
-          select: {
-            username: true,
-          },
-        },
-      },
-    });
-    await db.$disconnect();
-    return res;
-  }
+    },
+  });
+  await db.$disconnect();
+  return res;
 };
 
 export const getFeatChunk = async (

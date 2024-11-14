@@ -1,11 +1,11 @@
 const ids = {
-  dreams: 55,
-  land: 56,
-  moon: 57,
-  shepherd: 58,
-  spores: 59,
-  stars: 60,
-  wildfire: 61,
+  dreams: '55',
+  land: '56',
+  moon: '57',
+  shepherd: '58',
+  spores: '59',
+  stars: '60',
+  wildfire: '61',
 };
 
 const druidSubclassFeatures = [

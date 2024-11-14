@@ -74,6 +74,7 @@ export const linkCreatureToSpells = async (db: PrismaClient) => {
       });
     } catch (error) {
       cerr('Error linking creature to spell', error);
+      throw new Error('Error linking creature to spell');
     }
   }
 };

@@ -3,15 +3,17 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 
 import HomeSearchBar from '../UI/HomeSearchBar';
 import { destroySession, verifyToken } from '@/lib/utils/auth';
 import { NAVBAR_HEIGHT_TAILWIND, wikiLinks } from '@/lib/globalVars';
+import { useAppSelector } from '@/store/hooks';
 // import { wikiLinks } from '@/lib/globalVars';
 
 const Navbar = () => {
   //Block navbar on certain pages
+  const showNavbar = useAppSelector((state) => state.layout.showNav);
   const pathname = usePathname();
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -24,10 +26,6 @@ const Navbar = () => {
   }, [pathname, router]);
 
   if (!pathname) return null;
-
-  //add pages to this array to hide the navbar
-  const noNavbar: string[] = [];
-  const showNavbar = !noNavbar.includes(pathname);
 
   const checkToken = async () => {
     const isAuthenticated = await verifyToken();
@@ -89,7 +87,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="navbar-center flex items-center justify-center">
-          {!homepage && <HomeSearchBar small />}
+          <Suspense> {!homepage && <HomeSearchBar small />}</Suspense>
         </div>
         <div className="navbar-end">
           {isAuthenticated ? (

@@ -1,4 +1,5 @@
 'use server';
+import { SingleDataQuery } from '@/lib/types/metadata';
 import { WeaponInfo } from '@/lib/types/modelInfo';
 import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
@@ -22,14 +23,15 @@ export const getWeapons = async (): Promise<WeaponInfo[]> => {
   return res;
 };
 
-export const getWeapon = async (
-  query: string | number
-): Promise<WeaponInfo | null> => {
+export const getWeapon = async ({
+  query,
+  type,
+}: SingleDataQuery): Promise<WeaponInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === 'string') {
+  try {
     const res = await db.weapon.findFirst({
       where: {
-        name: query,
+        [type]: query,
       },
       include: {
         SpecialProperties: true,
@@ -41,25 +43,12 @@ export const getWeapon = async (
         },
       },
     });
-    await db.$disconnect();
     return res;
-  } else {
-    const res = await db.weapon.findFirst({
-      where: {
-        id: query,
-      },
-      include: {
-        SpecialProperties: true,
-        ammunition: true,
-        WeaponPropertyInstance: {
-          include: {
-            Property: true,
-          },
-        },
-      },
-    });
+  } catch (error) {
+    console.error('Error getting weapon', error);
+    return null;
+  } finally {
     await db.$disconnect();
-    return res;
   }
 };
 

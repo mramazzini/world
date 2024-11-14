@@ -16,7 +16,7 @@ const generateBlogPostSeed = async (): Promise<
 
   return [
     {
-      id: 1,
+      id: '1',
       title: 'Class Selection Guide',
       flavorText:
         'This article aims to help new players choose a class that fits their playstyle. It covers the basics of each class and provides a brief overview of their strengths and weaknesses, as well as a measure of their complexity.',
@@ -77,7 +77,7 @@ const generateBlogPostSeed = async (): Promise<
       ],
     },
     {
-      id: 2,
+      id: '2',
       title: "Beginner's Guide to playing the Game Master",
       flavorText:
         'A guide for new players who want to try their hand at being a Game Master. This article covers the basics of running a game, creating a campaign plot, a world to play in, and managing players.',

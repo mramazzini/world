@@ -10,6 +10,7 @@ import useInventory from '@/hooks/useInventory';
 import { useAppSelector } from '@/store/hooks';
 import useModifier from '@/hooks/useModifier';
 import useProficiency from '@/hooks/useProficiency';
+import { v4 } from 'uuid';
 
 const SingleWeapon = ({
   weaponData,
@@ -158,7 +159,6 @@ const WeaponRoller = ({ logPush }: Props) => {
   const customWeaponAttacks = useMemo(() => {
     return weaponAttacks || [];
   }, [weaponAttacks]);
-
   return (
     <div className="flex flex-col h-full w-full">
       <div className="h-full flex justify-center items-center w-full flex-col  bg-base-300 rounded-xl p-2">
@@ -181,7 +181,7 @@ const WeaponRoller = ({ logPush }: Props) => {
                   WeaponPropertyInstance: [],
                   ammunition: null,
                   ammunitionId: null,
-                  id: Math.floor(Math.random() * 100000),
+                  id: v4(),
                   isRanged: false,
                   isSimple: true,
                 }}

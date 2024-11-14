@@ -1,6 +1,6 @@
 'use client';
 import { ItemID } from '@/lib/types/types';
-import { memoizeGetItem } from '../../globalCache';
+import { memoizeGetItem } from '../../Indexed/globalCache';
 import { ItemInfo } from '@/lib/types/modelInfo';
 
 export const equipWeapon = async (
@@ -9,10 +9,13 @@ export const equipWeapon = async (
   numHands: 1 | 2 //number of hands that the weapon uses
 ): Promise<PrismaJson.CharacterState> => {
   //check to see if in inventory
-  const weapon = state.inventory.find((i) => i.item === weaponItemId);
+  const weapon = state.inventory.find((i) => i.item == weaponItemId);
   if (!weapon) return state;
   // get item data
-  const itemData = (await memoizeGetItem(weapon.item)) as ItemInfo;
+  const itemData = (await memoizeGetItem({
+    query: weapon.item,
+    type: 'id',
+  })) as ItemInfo;
   if (!itemData) return state;
 
   if (!state.equipped.hands.items) {
@@ -43,7 +46,12 @@ export const equipWeapon = async (
     };
   }
 
-  const equippedData = state.equipped.hands.items.map((i) => memoizeGetItem(i));
+  const equippedData = state.equipped.hands.items.map((i) =>
+    memoizeGetItem({
+      query: weapon.item,
+      type: 'id',
+    })
+  );
   const equippedRes = (await Promise.all(equippedData)) as ItemInfo[];
   if (!equippedRes) return state;
   const equippedTwoHandedWeapon = equippedRes.find((i) =>

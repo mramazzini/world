@@ -14,11 +14,11 @@ import {
   memoizeGetSubclass,
   memoizeGetTool,
   memoizeGetWeapon,
-} from './globalCache';
+} from './Indexed/globalCache';
 import { useEffect, useState } from 'react';
 interface Props {
   model: 'Weapon' | 'Armor' | 'Tool' | 'Subclass' | 'Item' | 'Feat';
-  id: number;
+  id: string;
 }
 
 const ModelDisplay = ({ model, id }: Props) => {
@@ -35,22 +35,40 @@ const ModelDisplay = ({ model, id }: Props) => {
   useEffect(() => {
     switch (model) {
       case 'Weapon':
-        memoizeGetWeapon(id).then((res) => setData(res));
+        memoizeGetWeapon({
+          query: id,
+          type: 'id',
+        }).then((res) => setData(res));
         break;
       case 'Armor':
-        memoizeGetArmor(id).then((res) => setData(res));
+        memoizeGetArmor({
+          query: id,
+          type: 'id',
+        }).then((res) => setData(res));
         break;
       case 'Tool':
-        memoizeGetTool(id).then((res) => setData(res));
+        memoizeGetTool({
+          query: id,
+          type: 'id',
+        }).then((res) => setData(res));
         break;
       case 'Subclass':
-        memoizeGetSubclass(id).then((res) => setData(res));
+        memoizeGetSubclass({
+          query: id,
+          type: 'id',
+        }).then((res) => setData(res));
         break;
       case 'Item':
-        memoizeGetItem(id).then((res) => setData(res));
+        memoizeGetItem({
+          query: id,
+          type: 'id',
+        }).then((res) => setData(res));
         break;
       case 'Feat':
-        memoizeGetFeat(id).then((res) => setData(res));
+        memoizeGetFeat({
+          query: id,
+          type: 'id',
+        }).then((res) => setData(res));
     }
   }, [model, id]);
 

@@ -1,4 +1,5 @@
 'use server';
+import { SingleDataQuery } from '@/lib/types/metadata';
 import { CharacterInfo } from '@/lib/types/modelInfo';
 import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
@@ -65,9 +66,10 @@ export const getCharacters = async (): Promise<CharacterInfo[]> => {
   return res as CharacterInfo[];
 };
 
-export const getCharacter = async (
-  query: string | number
-): Promise<CharacterInfo | null> => {
+export const getCharacter = async ({
+  query,
+  type,
+}: SingleDataQuery): Promise<CharacterInfo | null> => {
   const db = new PrismaClient({
     omit: {
       character: {
@@ -75,6 +77,10 @@ export const getCharacter = async (
         updatedAt: true,
       },
       species: {
+        createdAt: true,
+        updatedAt: true,
+      },
+      subSpecies: {
         createdAt: true,
         updatedAt: true,
       },
@@ -108,10 +114,10 @@ export const getCharacter = async (
       },
     },
   });
-  if (typeof query === 'string') {
+  try {
     const res = await db.character.findFirst({
       where: {
-        name: query,
+        [type]: query,
       },
       include: {
         Species: {
@@ -158,66 +164,17 @@ export const getCharacter = async (
         },
       },
     });
+    return res;
+  } catch (error) {
+    console.error('Error getting character', error);
+    return null;
+  } finally {
     await db.$disconnect();
-    return res as CharacterInfo;
-  } else {
-    const res = await db.character.findFirst({
-      where: {
-        id: query,
-      },
-
-      include: {
-        Species: {
-          include: {
-            Features: true,
-          },
-        },
-        Background: {
-          include: {
-            Features: true,
-          },
-        },
-        SubClasses: {
-          include: {
-            Features: true,
-          },
-        },
-        Classes: {
-          include: {
-            Features: true,
-            SpellcastingFeatures: true,
-            SpellList: {
-              include: {
-                Spells: true,
-              },
-            },
-          },
-        },
-        Feats: {
-          include: {
-            Features: true,
-          },
-        },
-        SubSpecies: {
-          include: {
-            Features: true,
-          },
-        },
-        User: {
-          select: {
-            id: true,
-            username: true,
-          },
-        },
-      },
-    });
-    await db.$disconnect();
-    return res as CharacterInfo;
   }
 };
 
 export const getCharactersByUser = async (
-  userID: number
+  userID: string
 ): Promise<CharacterInfo[]> => {
   const db = new PrismaClient({
     omit: {

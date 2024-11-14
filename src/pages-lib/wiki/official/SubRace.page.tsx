@@ -146,7 +146,7 @@ const SubSpeciesPage = ({ subSpecies }: Props) => {
               </Link>
               <Link
                 className={'btn btn-ghost border border-gray-500 w-full '}
-                href={`/species/${species.name.replaceAll(' ', '-')}`}
+                href={`/species/${species.slug}`}
               >
                 See {species.name} Species -&gt;
               </Link>

@@ -1,4 +1,5 @@
 'use server';
+import { SingleDataQuery } from '@/lib/types/metadata';
 import { SpellListInfo } from '@/lib/types/modelInfo';
 import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
@@ -16,33 +17,21 @@ export const getSpellLists = async (): Promise<SpellListInfo[]> => {
   return res;
 };
 
-export const getSpellList = async (
-  query: string | number
-): Promise<SpellListInfo | null> => {
+export const getSpellList = async ({
+  query,
+  type,
+}: SingleDataQuery): Promise<SpellListInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === 'string') {
-    const res = await db.spellList.findFirst({
-      where: {
-        name: query,
-      },
-      include: {
-        Spells: true,
-      },
-    });
-    await db.$disconnect();
-    return res;
-  } else {
-    const res = await db.spellList.findFirst({
-      where: {
-        id: query,
-      },
-      include: {
-        Spells: true,
-      },
-    });
-    await db.$disconnect();
-    return res;
-  }
+  const res = await db.spellList.findFirst({
+    where: {
+      [type]: query,
+    },
+    include: {
+      Spells: true,
+    },
+  });
+  await db.$disconnect();
+  return res;
 };
 
 export const getSpellListChunk = async (

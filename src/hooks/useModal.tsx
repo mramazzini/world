@@ -2,14 +2,18 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { v4 } from 'uuid';
 
-const useModal = () => {
+const useModal = (modalId?: string) => {
   const [isOpen, setIsOpen] = useState(false);
   const [id, setId] = useState<string>('');
   const modalRef = useRef<HTMLDialogElement | null>(null);
 
   useEffect(() => {
-    setId(v4());
-  }, []);
+    if (modalId) {
+      setId(modalId);
+    } else {
+      setId(v4());
+    }
+  }, [modalId]);
 
   useEffect(() => {
     const observer = new MutationObserver(() => {

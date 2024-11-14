@@ -1,6 +1,6 @@
 import { ItemInfo, ItemWeaponDataInfo, ToolInfo } from '@/lib/types/modelInfo';
 import { useAppSelector } from '@/store/hooks';
-import { memoizeGetItem } from '@/Utility/globalCache';
+import { memoizeGetItem } from '@/Utility/Indexed/globalCache';
 import { useEffect, useMemo, useState } from 'react';
 
 const useInventory = () => {
@@ -10,7 +10,11 @@ const useInventory = () => {
   const itemsPromises = useMemo(async () => {
     if (!state?.inventory) return [];
     const promises = state.inventory.map(
-      (item) => memoizeGetItem(item.item) as Promise<ItemInfo>
+      (item) =>
+        memoizeGetItem({
+          query: item.item,
+          type: 'id',
+        }) as Promise<ItemInfo>
     );
     return await Promise.all(promises);
   }, [state]);
@@ -41,8 +45,9 @@ const useInventory = () => {
 
   const equippedItems = useMemo(() => {
     return (
-      items.filter((item) => state?.equipped.hands.items?.includes(item.id)) ||
-      []
+      items.filter((item) =>
+        state?.equipped.hands.items?.includes(item.id.toString())
+      ) || []
     );
   }, [items, state]);
 

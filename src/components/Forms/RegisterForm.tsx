@@ -81,6 +81,7 @@ const Register = () => {
         >
           <Form>
             <FormField
+              as="input"
               label="Email"
               name="email"
               formProps={{
@@ -89,6 +90,7 @@ const Register = () => {
               }}
             />
             <FormField
+              as="input"
               label="Username"
               name="username"
               formProps={{
@@ -97,6 +99,7 @@ const Register = () => {
               }}
             />
             <FormField
+              as="input"
               label="Password"
               name="password"
               formProps={{
@@ -105,6 +108,7 @@ const Register = () => {
               }}
             />
             <FormField
+              as="input"
               label="Confirm Password"
               name="confirmPassword"
               formProps={{

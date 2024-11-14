@@ -2,6 +2,7 @@
 import ConfirmModal from '@/components/Modals/ConfirmModal';
 import ModalButton from '@/components/UI/Modal/ModalButton';
 import useModal from '@/hooks/useModal';
+import { resetCharacter } from '@/lib/actions/db/character/update.actions';
 import { CharacterInfo } from '@/lib/types/modelInfo';
 import { setCharacterState } from '@/store/characterSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -37,9 +38,10 @@ const Save = () => {
 
   const regenerateCharacter = useCallback(
     async (character: CharacterInfo) => {
-      generateCharacter(character).then((c) => {
-        dispatch(setCharacterState(c));
-      });
+      //await resetCharacter
+      await resetCharacter(character.id);
+      const c = await generateCharacter(character);
+      dispatch(setCharacterState(c));
     },
     [dispatch]
   );

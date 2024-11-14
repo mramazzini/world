@@ -42,7 +42,7 @@ const ModelLink = ({
         if (!id) return <span key={index}>{child}</span>;
 
         const res = match.match(/\{([^}]+)\}/);
-        const modelObj = potential.find((item) => item.id === parseInt(id[0]));
+        const modelObj = potential.find((item) => item.id === id[0]);
         if (!modelObj) return <span key={index}>{child}</span>;
         return (
           <span key={index}>
@@ -53,7 +53,7 @@ const ModelLink = ({
                     modalid={modalID}
                     element={res && res[1] ? res[1] : modelObj.name}
                     title={modelObj.name}
-                    link={`/${linkBase}/${modelObj.name.replaceAll(' ', '-')}`}
+                    link={`/${linkBase}/${modelObj.slug}`}
                     badges={[
                       { text: modelObj.id.toString(), color: 'badge-primary' },
                     ]}

@@ -3,7 +3,7 @@ import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
-import { DBMetadata } from '@/lib/types/metadata';
+import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { BackgroundInfo } from '@/lib/types/modelInfo';
 
 export const getBackgroundsMetadata = async (): Promise<DBMetadata[]> => {
@@ -15,6 +15,7 @@ export const getBackgroundsMetadata = async (): Promise<DBMetadata[]> => {
       description: true,
       updatedAt: true,
       flavorText: true,
+      slug: true,
     },
   });
   await db.$disconnect();
@@ -37,43 +38,26 @@ export const getBackgrounds = async (): Promise<BackgroundInfo[]> => {
   return res;
 };
 
-export const getBackground = async (
-  query: string | number
-): Promise<BackgroundInfo | null> => {
+export const getBackground = async ({
+  query,
+  type,
+}: SingleDataQuery): Promise<BackgroundInfo | null> => {
   const db = new PrismaClient();
-  if (typeof query === 'string') {
-    const res = await db.background.findFirst({
-      where: {
-        name: query,
-      },
-      include: {
-        Features: true,
-        User: {
-          select: {
-            username: true,
-          },
+  const res = await db.background.findFirst({
+    where: {
+      [type]: query,
+    },
+    include: {
+      Features: true,
+      User: {
+        select: {
+          username: true,
         },
       },
-    });
-    await db.$disconnect();
-    return res;
-  } else {
-    const res = await db.background.findFirst({
-      where: {
-        id: query,
-      },
-      include: {
-        Features: true,
-        User: {
-          select: {
-            username: true,
-          },
-        },
-      },
-    });
-    await db.$disconnect();
-    return res;
-  }
+    },
+  });
+  await db.$disconnect();
+  return res;
 };
 
 export const getBackgroundChunk = async (

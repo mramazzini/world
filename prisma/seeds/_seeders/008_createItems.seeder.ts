@@ -5,6 +5,7 @@ import ItemFeatureSeed from '../Items/ItemFeatures.seed';
 import createFeature from '../_helpers/createFeature';
 import ItemToWeaponSeed from '../Items/Weapons/ItemToWeapon.seed';
 import { Weapons } from '../Items/Weapons/Weapons.seed';
+import { createSlug } from '../_helpers/createSlug';
 
 export const createItems = async (db: PrismaClient) => {
   //Create Items
@@ -17,16 +18,20 @@ export const createItems = async (db: PrismaClient) => {
         where: {
           id: Item.id,
         },
-        update: Item,
+        update: {
+          ...Item,
+          slug: createSlug(Item.name),
+        },
         create: {
           ...Item,
+          slug: createSlug(Item.name),
         },
       });
       cinfo('Item created');
     } catch (error) {
       cerr('Error creating item:', Item.name, error);
       console.error(error);
-      return;
+      throw new Error('Error creating item');
     }
   }
   cinfo('Items created');
@@ -60,7 +65,7 @@ export const createItems = async (db: PrismaClient) => {
     } catch (error) {
       cerr('Error linking item to weapon:', error);
       console.error(error);
-      return;
+      throw new Error('Error linking item to weapon');
     }
   }
 
@@ -84,7 +89,7 @@ export const createItems = async (db: PrismaClient) => {
         cinfo('Ammunition linked to weapon');
       } catch (error) {
         cerr('Error linking ammunition to weapon:', Weapon.name, error);
-        return;
+        throw new Error('Error linking ammunition to weapon');
       }
     }
   }

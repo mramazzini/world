@@ -1,13 +1,13 @@
 const ids = {
-  archfey: 110,
-  celestial: 111,
-  fathomless: 112,
-  fiend: 113,
-  genie: 114,
-  greatOldOne: 115,
-  hexblade: 116,
-  undead: 117,
-  undying: 118,
+  archfey: '110',
+  celestial: '111',
+  fathomless: '112',
+  fiend: '113',
+  genie: '114',
+  greatOldOne: '115',
+  hexblade: '116',
+  undead: '117',
+  undying: '118',
 };
 
 const warlockSubclassFeatures = [

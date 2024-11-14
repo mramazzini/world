@@ -1,22 +1,14 @@
 import SubClassDisplay from '@/components/ClassInfo/SubClassDisplay';
 
-import Loading from '@/components/UI/Loading';
 import CommentSection from '@/components/CommentSection/CommentSection';
 import { AssociatedModel } from '@prisma/client';
 import { SubClassInfo } from '@/lib/types/modelInfo';
 
-const SubClassPage = ({ subclass }: { subclass: SubClassInfo | null }) => {
-  if (!subclass) return <span className="p-4">Subclass does not exist</span>;
+const SubClassPage = ({ subclass }: { subclass: SubClassInfo }) => {
   return (
     <div className="p-4 md:p-8">
-      {!subclass && <Loading />}
-
-      {subclass && (
-        <>
-          <SubClassDisplay subClass={subclass} />{' '}
-          <CommentSection id={subclass.id} model={AssociatedModel.SUBCLASS} />
-        </>
-      )}
+      <SubClassDisplay subClass={subclass} />{' '}
+      <CommentSection id={subclass.id} model={AssociatedModel.SUBCLASS} />
     </div>
   );
 };

@@ -1,8 +1,8 @@
 const ids = {
-  alchemist: 106,
-  armorer: 107,
-  artillerist: 108,
-  battleSmith: 109,
+  alchemist: '106',
+  armorer: '107',
+  artillerist: '108',
+  battleSmith: '109',
 };
 
 const ArtificerSubclassFeatures = [

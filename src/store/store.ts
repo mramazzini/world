@@ -2,13 +2,20 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
 import characterReducer from './characterSlice';
+import layoutReducer from './layoutSlice';
+import workshopReducer from './workshopSlice';
+import workshopMiddleware from './middleware/WorkshopMiddleware';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       auth: authReducer,
       character: characterReducer,
+      layout: layoutReducer,
+      workshop: workshopReducer,
     },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(workshopMiddleware),
   });
 };
 

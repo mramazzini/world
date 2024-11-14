@@ -3,6 +3,7 @@ import { ArmorClassProtocol, PrismaClient } from '@prisma/client';
 import CreatureSeed from '../Creatures/Creature.seed';
 import CreatureFeaturesSeed from '../Creatures/CreatureFeatures.seed';
 import createFeature from '../_helpers/createFeature';
+import { createSlug } from '../_helpers/createSlug';
 export const createCreatures = async (db: PrismaClient) => {
   //create creatures
   cinfo('Creating creatures');
@@ -43,12 +44,18 @@ export const createCreatures = async (db: PrismaClient) => {
         where: {
           id: Creature.id,
         },
-        update: Creature,
-        create: Creature,
+        update: {
+          ...Creature,
+          slug: createSlug(Creature.name),
+        },
+        create: {
+          ...Creature,
+          slug: createSlug(Creature.name),
+        },
       });
     } catch (error) {
       cerr('Error creating creature', error);
-      return;
+      throw new Error('Error creating creature');
     }
   }
 
@@ -60,13 +67,13 @@ export const createCreatures = async (db: PrismaClient) => {
       cinfo('Creating creature features:', CreatureFeature.name);
       if (!CreatureFeature.creatureId) {
         cerr('Creature missing creatureId field:', CreatureFeature.name);
-        return;
+        throw new Error('Creature missing creatureId field');
       }
       await createFeature(db, CreatureFeature);
       cinfo('Creature Feature created');
     } catch (error) {
       cerr('Error creating creature feature:', CreatureFeature.name, error);
-      return;
+      throw new Error('Error creating creature feature');
     }
   }
 };

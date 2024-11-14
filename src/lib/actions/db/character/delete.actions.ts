@@ -2,7 +2,7 @@
 
 import { PrismaClient } from '@prisma/client';
 
-export const deleteCharacter = async (id: number) => {
+export const deleteCharacter = async (id: string) => {
   const prisma = new PrismaClient();
   try {
     await prisma.character.delete({

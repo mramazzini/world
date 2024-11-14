@@ -60,10 +60,7 @@ const CharacterStatsTab = () => {
                     </td>
                     <td>
                       <Link
-                        href={`/subclass/${character.SubClasses[0].name.replaceAll(
-                          ' ',
-                          '-'
-                        )}`}
+                        href={`/subclass/${character.SubClasses[0].slug}`}
                         target="_blank"
                         className="btn btn-xs btn-accent"
                       >
@@ -77,10 +74,7 @@ const CharacterStatsTab = () => {
                   <td>{character.Background?.name.replaceAll('_', ' ')}</td>
                   <td>
                     <Link
-                      href={`/background/${character.Background?.name.replaceAll(
-                        ' ',
-                        '-'
-                      )}`}
+                      href={`/background/${character.Background?.slug}`}
                       target="_blank"
                       className="btn btn-xs btn-accent"
                     >
@@ -93,10 +87,7 @@ const CharacterStatsTab = () => {
                   <td>{character.Species?.name.replaceAll('_', ' ')}</td>
                   <td>
                     <Link
-                      href={`/species/${character.Species?.name.replaceAll(
-                        ' ',
-                        '-'
-                      )}`}
+                      href={`/species/${character.Species?.slug}`}
                       target="_blank"
                       className="btn btn-xs btn-accent"
                     >
@@ -110,10 +101,7 @@ const CharacterStatsTab = () => {
                     <td>{character.SubSpecies?.name}</td>
                     <td>
                       <Link
-                        href={`/subspecies/${character.SubSpecies?.name.replaceAll(
-                          ' ',
-                          '-'
-                        )}`}
+                        href={`/subspecies/${character.SubSpecies?.slug}`}
                         target="_blank"
                         className="btn btn-xs btn-accent"
                       >
