@@ -42,7 +42,7 @@ const SubclassEditor = () => {
           <FormField
             as="textarea"
             name="flavorText"
-            label="Flavor Text - Briefly describe the feat - Max 150 characters"
+            label="Flavor Text - Briefly describe the subclass - Max 150 characters"
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
               updateData({
                 ...data,
