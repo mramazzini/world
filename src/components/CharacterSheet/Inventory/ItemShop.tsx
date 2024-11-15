@@ -17,7 +17,7 @@ interface Props {
 
 const ItemShop = ({ setSelectedItem, selectedItemInfo }: Props) => {
   const dispatch = useAppDispatch();
-  const { itemMetaData, loading } = useQueryItemMetaData();
+  const { itemMetaData, loading, refetch } = useQueryItemMetaData();
   const [show, setShow] = useState(false);
   const state = useAppSelector((state) => state.character.state);
 
@@ -34,6 +34,7 @@ const ItemShop = ({ setSelectedItem, selectedItemInfo }: Props) => {
         metadata={itemMetaData}
         loading={loading}
         show={show}
+        refresh={refetch}
         setSelected={(selected) => {
           setShow(false);
           if (!selected) {

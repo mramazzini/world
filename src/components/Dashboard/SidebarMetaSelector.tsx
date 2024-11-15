@@ -2,8 +2,10 @@ import Loading from '@/components/UI/Loading';
 import { DBMetadata } from '@/lib/types/metadata';
 import Fuse from 'fuse.js';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
+import LoadingButton from '../UI/Formik/LoadingButton';
+import { debounce } from 'lodash';
 
 interface Props {
   model: string;
@@ -11,6 +13,7 @@ interface Props {
   metadata: DBMetadata[];
   show: boolean;
   setSelected: (selected: DBMetadata | null) => void;
+  refresh?: () => void;
 }
 
 const SidebarMetaSelector = ({
@@ -19,22 +22,42 @@ const SidebarMetaSelector = ({
   show,
   loading,
   setSelected,
+  refresh,
 }: Props) => {
+  const [filtering, setFiltering] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState<DBMetadata[]>(metadata);
-  const search = async (query: string) => {
-    const fuse = new Fuse(metadata, {
-      keys: [
-        { name: 'name', weight: 1 },
-        { name: 'description', weight: 0.33 },
-        { name: 'flavorText', weight: 0.5 },
-      ],
-    });
-    const results = fuse.search(query);
-    const resultsParsed = results.map((item) => item.item);
-    if (query === '') return setSearchResults(metadata);
-    setSearchResults(resultsParsed);
-  };
 
+  const fuse = useMemo(
+    () =>
+      new Fuse(metadata, {
+        keys: [
+          { name: 'name', weight: 1 },
+          { name: 'description', weight: 0.33 },
+          { name: 'flavorText', weight: 0.5 },
+        ],
+      }),
+    [metadata]
+  );
+
+  const search = useCallback(
+    (query: string) => {
+      const results = fuse.search(query);
+      const resultsParsed = results.map((item) => item.item);
+      if (query === '') {
+        setSearchResults(metadata);
+        setFiltering(false);
+        return;
+      }
+      setSearchResults(resultsParsed);
+      setFiltering(false);
+    },
+    [fuse, metadata]
+  );
+  const debounceSearch = useMemo(
+    () => debounce((query: string) => search(query), 500),
+    [search]
+  );
   useEffect(() => {
     setSearchResults(metadata);
   }, [metadata]);
@@ -51,22 +74,42 @@ const SidebarMetaSelector = ({
   return (
     <>
       {show && (
-        <div className="bg-black/50 fixed top-0 left-0 w-full h-full"></div>
+        <div className="bg-black/50 fixed top-0 left-0 w-full h-full z-[99]"></div>
       )}
       <div
-        className={`bg-base-200 h-screen w-[30rem] top-0 right-0 flex flex-col   ${
+        className={`bg-base-200 h-screen w-[30rem] top-0 right-0 flex flex-col  z-[100]  ${
           show ? 'fixed ' : 'hidden'
         }`}
       >
-        <h2 className="text-2xl p-4 text-center">Select a {model}.</h2>
-        <div className="divider">
+        <div className="flex justify-center p-4">
+          <h2 className="text-2xl text-center">Select a(n) {model}. </h2>
+
           <button
-            className="btn btn-primary btn-sm"
             onClick={() => setSelected(null)}
+            className="btn btn-error btn-sm absolute top-4 right-4"
           >
             Close
           </button>
         </div>
+        <div className="divider mt-0">
+          <LoadingButton
+            isLoading={loading}
+            className="btn btn-primary btn-sm"
+            onClick={refresh}
+          >
+            Refresh
+          </LoadingButton>
+        </div>
+        <p className="text-xs text-center">
+          {metadata.length} {model}s found.
+        </p>
+        <p className="text-xs text-center mb-4">
+          Can&apos;t find what you&apos;re looking for?{' '}
+          <span className="text-primary font-extrabold text-sm">
+            {' '}
+            Try refreshing the list.
+          </span>
+        </p>
         <div className="bg-base-100 max-h-full grow  overflow-y-auto  overflow-x-visible border-b">
           <table className="table table-zebra table-xs  p-4  table-pin-rows">
             <thead>
@@ -78,6 +121,7 @@ const SidebarMetaSelector = ({
             </thead>
             <tbody>
               {!loading &&
+                !filtering &&
                 searchResults.map((meta) => (
                   <tr
                     key={v4()}
@@ -105,15 +149,21 @@ const SidebarMetaSelector = ({
             </tbody>
           </table>
 
-          {loading && <Loading />}
+          {(loading || filtering) && <Loading />}
         </div>
 
         <div className="flex justify-center my-4 flex-col items-center gap-4">
           <input
             type="text"
+            value={searchValue}
             className="input input-primary input-bordered w-full max-w-xs min-h-12 "
             placeholder="Search"
-            onChange={(e) => search(e.target.value)}
+            onChange={(e) => {
+              e.preventDefault();
+              setFiltering(true);
+              setSearchValue(e.target.value);
+              debounceSearch(e.target.value);
+            }}
           />
         </div>
       </div>
