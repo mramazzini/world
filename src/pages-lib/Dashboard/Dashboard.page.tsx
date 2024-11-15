@@ -13,16 +13,22 @@ import ConfirmModal from '@/components/Modals/ConfirmModal';
 import useModal from '@/hooks/useModal';
 import ModalButton from '@/components/UI/Modal/ModalButton';
 import { deleteCharacter } from '@/lib/actions/db/character/delete.actions';
-import useLevel from '@/hooks/useLevel';
 
 const Dashboard = () => {
   const [characters, setCharacters] = useState<CharacterInfo[]>([]);
   const [loadingCharacters, setCharactersLoading] = useState(true);
-  const level = useLevel();
   const { id } = useModal();
   const [removeCharacterId, setRemoveCharacterId] = useState<string | null>(
     null
   );
+
+  const calcLevel = useCallback((c: CharacterInfo) => {
+    let level = 0;
+    level += c.state
+      ? c.state.classLevels.reduce((acc, cl) => acc + cl.level, 0)
+      : 1;
+    return level;
+  }, []);
 
   useEffect(() => {
     getUserId().then((user) => {
@@ -98,7 +104,7 @@ const Dashboard = () => {
                     </h2>
 
                     <p className="italic">
-                      Level {level},{' '}
+                      Level {calcLevel(character)},{' '}
                       {character.SubSpecies ? (
                         <a
                           href={`/subspecies/${character.SubSpecies?.slug}`}
