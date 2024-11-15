@@ -13,7 +13,7 @@ interface Props {
 }
 
 const SkillRoller = ({ handleRoll, skills }: Props) => {
-  const { getSkillModifier } = useModifier();
+  const { getSkillModifier, getAbilityModifier } = useModifier();
   const { proficiencyBonus } = useProficiency();
   const state = useAppSelector((state) => state.character.state);
   return (
@@ -44,9 +44,9 @@ const SkillRoller = ({ handleRoll, skills }: Props) => {
                           <tr>
                             <td>{AbilityToText(skillAtritbuteMap[skill])}</td>
                             <td>
-                              {getSkillModifier(skill) >= 0
-                                ? `+ ${getSkillModifier(skill)}`
-                                : `- ${getSkillModifier(skill)}`}
+                              {getAbilityModifier(skillAtritbuteMap[skill]) >= 0
+                                ? `+ ${getAbilityModifier(skillAtritbuteMap[skill])}`
+                                : `- ${getAbilityModifier(skillAtritbuteMap[skill])}`}
                             </td>
                           </tr>
                           {state?.proficiencies.skills.includes(skill) && (

@@ -3,6 +3,7 @@ import { Ability, ArmorType, Skill } from '@prisma/client';
 import { useCallback, useMemo } from 'react';
 import useLevel from './useLevel';
 import { ToolID, WeaponID } from '@/lib/types/types';
+import { calcProficiency } from '@/Utility/characterStateFunctions/calc/calcProficiency';
 
 const useProficiency = () => {
   const state = useAppSelector((state) => state.character.state);
@@ -59,7 +60,7 @@ const useProficiency = () => {
   );
 
   const proficiencyBonus = useMemo(() => {
-    return Math.ceil((level + 7) / 4);
+    return calcProficiency(level);
   }, [level]);
 
   return {
