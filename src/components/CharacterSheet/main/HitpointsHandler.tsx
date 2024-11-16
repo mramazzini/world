@@ -120,12 +120,24 @@ const HitPointsHandler = () => {
                     if (newChar.state.hp.current - hpDeltaValue < 0) {
                       return;
                     }
-                    newChar.state.hp.damageLog.push({
+                    const newLog = {
                       reason: 'Damage',
                       effect: `- ${Math.abs(hpDeltaValue)}`,
-                    });
-                    newChar.state.hp.current -= hpDeltaValue;
-                    dispatch(setCharacter(newChar));
+                    };
+
+                    dispatch(
+                      setCharacter({
+                        ...newChar,
+                        state: {
+                          ...newChar.state,
+                          hp: {
+                            ...newChar.state.hp,
+                            current: newChar.state.hp.current - hpDeltaValue,
+                            damageLog: [...newChar.state.hp.damageLog, newLog],
+                          },
+                        },
+                      })
+                    );
                   }}
                 >
                   -{' '}
@@ -148,12 +160,23 @@ const HitPointsHandler = () => {
                     ) {
                       return;
                     }
-                    newChar.state.hp.damageLog.push({
+                    const newLog = {
                       reason: 'Healing',
                       effect: `+ ${hpDeltaValue}`,
-                    });
-                    newChar.state.hp.current += hpDeltaValue;
-                    dispatch(setCharacter(newChar));
+                    };
+                    dispatch(
+                      setCharacter({
+                        ...newChar,
+                        state: {
+                          ...newChar.state,
+                          hp: {
+                            ...newChar.state.hp,
+                            current: newChar.state.hp.current + hpDeltaValue,
+                            damageLog: [...newChar.state.hp.damageLog, newLog],
+                          },
+                        },
+                      })
+                    );
                   }}
                 >
                   +

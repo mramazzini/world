@@ -46,10 +46,7 @@ const CharacterIntro = () => {
           Level {level},{' '}
           {character.SubSpecies ? (
             <a
-              href={`/subspecies/${character.SubSpecies?.name.replaceAll(
-                ' ',
-                '-'
-              )}`}
+              href={`/subspecies/${character.SubSpecies?.slug}`}
               className="hover:link"
             >
               {character.SubSpecies?.name}
@@ -72,10 +69,7 @@ const CharacterIntro = () => {
           ))}
           ,{' '}
           <a
-            href={`/background/${character.Background?.name.replaceAll(
-              ' ',
-              '-'
-            )}`}
+            href={`/background/${character.Background?.slug}`}
             className="hover:link"
           >
             {character.Background?.name}
