@@ -19,15 +19,15 @@ const FeatureDisplay = ({ feature }: Props) => {
               All Levels
             </span>
           ) : (
-            feature.levels?.map((level, index) => {
+            feature.levels?.map((level) => {
               return (
                 <div
+                  key={level}
                   className={`bg-neutral rounded-full w-8 h-8 flex justify-center items-center text-neutral-content font-bold ${numberColor(
                     level
                   )} border border-4 mx-1 before:absolute  before:rounded-full before:border-4 z-[1] before:w-8 before:h-8 ${
                     numberColorBefore[level].bg
                   } ${numberColorBefore[level].opacity}`}
-                  key={index}
                 >
                   {level}
                 </div>

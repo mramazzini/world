@@ -14,7 +14,6 @@ import CommentSection from '@/components/CommentSection/CommentSection';
 import { ClassInfo, FeatureWithClassColumn } from '@/lib/types/modelInfo';
 
 const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
-  if (!classObj) return <span className="p-4">Class does not exist</span>;
   const spellCastingFeatures = classObj.SpellcastingFeatures.sort((a, b) => {
     if (a.levels === undefined) return -1; // Put a first if its levels are undefined
     if (b.levels === undefined) return 1; // Put b first if its levels are undefined

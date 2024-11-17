@@ -380,7 +380,7 @@ model Class {
 
   abilityScoreLevels Int[]
 
-  choices Choice[]
+  Choices Choice[]
 
   isSpellCaster    Boolean @default(false)
   /// [SpellCastingInfo]

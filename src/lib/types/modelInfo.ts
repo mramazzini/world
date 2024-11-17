@@ -3,6 +3,7 @@ import {
   Background,
   Character,
   CharacterToClass,
+  Choice,
   Class,
   ColumnedFeature,
   Comment,
@@ -89,6 +90,7 @@ export interface ClassInfo extends Class {
   SubClasses: SubClass[];
   SpellcastingFeatures: FeatureWithClassColumn[];
   SpellList: SpellList | null;
+  Choices: Choice[];
   Features: FeatureWithClassColumn[];
   User: {
     username: string | null;

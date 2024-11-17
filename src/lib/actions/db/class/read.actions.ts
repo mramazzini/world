@@ -7,6 +7,29 @@ import Fuse from 'fuse.js';
 import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { ClassInfo } from '@/lib/types/modelInfo';
 
+const ClassInfoTemplate = {
+  include: {
+    SubClasses: true,
+    SpellList: true,
+    Features: {
+      include: {
+        columnedFeatures: true,
+      },
+    },
+    Choices: true,
+    SpellcastingFeatures: {
+      include: {
+        columnedFeatures: true,
+      },
+    },
+    User: {
+      select: {
+        username: true,
+      },
+    },
+  },
+};
+
 export async function getClassMetadata(): Promise<DBMetadata[]> {
   const db = new PrismaClient();
   const res = await db.class.findMany({
@@ -23,59 +46,10 @@ export async function getClassMetadata(): Promise<DBMetadata[]> {
   return res;
 }
 
-export async function getClasses(homebrew: boolean): Promise<ClassInfo[]> {
+export async function getClasses(): Promise<ClassInfo[]> {
   const db = new PrismaClient();
-  if (homebrew) {
-    const res = await db.class.findMany({
-      where: {
-        userId: {
-          not: null,
-        },
-      },
-      include: {
-        SubClasses: true,
-        SpellList: true,
-        Features: {
-          include: {
-            columnedFeatures: true,
-          },
-        },
-        SpellcastingFeatures: {
-          include: {
-            columnedFeatures: true,
-          },
-        },
-        User: {
-          select: {
-            username: true,
-          },
-        },
-      },
-    });
-    await db.$disconnect();
-    return res;
-  }
-  const res = await db.class.findMany({
-    include: {
-      SubClasses: true,
-      Features: {
-        include: {
-          columnedFeatures: true,
-        },
-      },
-      SpellcastingFeatures: {
-        include: {
-          columnedFeatures: true,
-        },
-      },
-      SpellList: true,
-      User: {
-        select: {
-          username: true,
-        },
-      },
-    },
-  });
+
+  const res = await db.class.findMany(ClassInfoTemplate);
   await db.$disconnect();
   return res;
 }
@@ -86,31 +60,7 @@ export async function getClass({
 }: SingleDataQuery): Promise<ClassInfo | null> {
   const db = new PrismaClient();
 
-  const res = await db.class.findFirst({
-    where: {
-      [type]: query,
-    },
-
-    include: {
-      SubClasses: true,
-      Features: {
-        include: {
-          columnedFeatures: true,
-        },
-      },
-      SpellcastingFeatures: {
-        include: {
-          columnedFeatures: true,
-        },
-      },
-      SpellList: true,
-      User: {
-        select: {
-          username: true,
-        },
-      },
-    },
-  });
+  const res = await db.class.findFirst(ClassInfoTemplate);
   await db.$disconnect();
 
   return res;
@@ -125,50 +75,12 @@ export async function getClassChunk(
     const res = await db.class.findMany({
       take: QUERY_LIMIT,
       skip: page * QUERY_LIMIT,
-      include: {
-        Features: {
-          include: {
-            columnedFeatures: true,
-          },
-        },
-        SpellcastingFeatures: {
-          include: {
-            columnedFeatures: true,
-          },
-        },
-        SubClasses: true,
-        SpellList: true,
-        User: {
-          select: {
-            username: true,
-          },
-        },
-      },
+      ...ClassInfoTemplate,
     });
     await db.$disconnect();
     return res;
   }
-  const res: ClassInfo[] = await db.class.findMany({
-    include: {
-      SubClasses: true,
-      Features: {
-        include: {
-          columnedFeatures: true,
-        },
-      },
-      SpellcastingFeatures: {
-        include: {
-          columnedFeatures: true,
-        },
-      },
-      SpellList: true,
-      User: {
-        select: {
-          username: true,
-        },
-      },
-    },
-  });
+  const res: ClassInfo[] = await db.class.findMany(ClassInfoTemplate);
   const fuse = new Fuse(res, {
     keys: [
       { name: 'name', weight: 1 },
@@ -206,55 +118,12 @@ export const getHomebrewClassChunk = async (
           },
         },
       }),
-      include: {
-        SubClasses: true,
-        Features: {
-          include: {
-            columnedFeatures: true,
-          },
-        },
-        SpellcastingFeatures: {
-          include: {
-            columnedFeatures: true,
-          },
-        },
-        SpellList: true,
-        User: {
-          select: {
-            username: true,
-          },
-        },
-      },
+      ...ClassInfoTemplate,
     });
     await db.$disconnect();
     return res;
   }
-  const res: ClassInfo[] = await db.class.findMany({
-    where: {
-      userId: {
-        not: null,
-      },
-    },
-    include: {
-      SubClasses: true,
-      Features: {
-        include: {
-          columnedFeatures: true,
-        },
-      },
-      SpellcastingFeatures: {
-        include: {
-          columnedFeatures: true,
-        },
-      },
-      SpellList: true,
-      User: {
-        select: {
-          username: true,
-        },
-      },
-    },
-  });
+  const res: ClassInfo[] = await db.class.findMany(ClassInfoTemplate);
   const fuse = new Fuse(res, {
     keys: [
       { name: 'name', weight: 1 },

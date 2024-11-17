@@ -6,7 +6,7 @@ import useProficiency from './useProficiency';
 import { ToolID } from '@/lib/types/types';
 
 const useModifier = () => {
-  const state = useAppSelector((state) => state.character.state);
+  const state = useAppSelector((state) => state.sheet.rawCharacter);
   const { proficiencyBonus } = useProficiency();
 
   const getModifier = useCallback((score: number) => {

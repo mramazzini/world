@@ -7,13 +7,12 @@ import useModifier from '@/hooks/useModifier';
 
 const AbilityScoreRoller = () => {
   const character = useAppSelector((state) => state.sheet.rawCharacter);
-  const modifiers = useModifier();
 
   return (
     character.state && (
       <>
         <div className="flex flex-wrap gap-4 justify-center items-center w-full">
-          {Object.values(Ability).map(([key, value]) => (
+          {Object.values(Ability).map((ability) => (
             <div className="indicator " key={key}>
               <Tooltip
                 element={
