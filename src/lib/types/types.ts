@@ -1,12 +1,4 @@
-import {
-  Ability,
-  ArmorType,
-  Language,
-  Skill,
-  Spell,
-  SubClass,
-  CreatureLimitedSpell,
-} from '@prisma/client';
+import { Spell, SubClass, CreatureLimitedSpell } from '@prisma/client';
 
 export enum Pages {
   Class = 'Class',
@@ -37,20 +29,6 @@ export enum ASIorFeat {
   ASI = 'ASI',
   Feat = 'Feat',
 }
-
-export type CallbackOptions =
-  | Skill[]
-  | Ability[]
-  | Language[]
-  | ArmorType[]
-  | WeaponID[]
-  | ToolID[]
-  | ItemID[]
-  | ArmorID[]
-  | AbilityScoreValue[]
-  | PrismaJson.QuantityItem[][]
-  | SubClassID[]
-  | ASIorFeat[];
 
 export type ClassID = string;
 export type SubClassID = string;
@@ -176,10 +154,6 @@ export interface Log {
   info?: string;
   from?: string;
   spellLevel?: number;
-}
-export interface AbilityScoreValue {
-  ability: Ability;
-  value: number;
 }
 
 export interface AbilityScores {

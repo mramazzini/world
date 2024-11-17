@@ -414,6 +414,7 @@ enum ChoiceProtocol {
   ADD_TO_INVENTORY_GROUPED
   SET_LANGUAGE_PROFICIENCY
   SET_ABILITY_SCORE
+  IMPROVE_ABILITY_SCORE
 }
 
 model Choice {
@@ -427,8 +428,12 @@ model Choice {
   /// [ChoiceFetchParams]
   fetchParams Json //The parameters that will be used to fetch the choice
 
-  Class   Class?  @relation(fields: [classId], references: [id])
-  classId String?
+  Class        Class?      @relation(fields: [classId], references: [id])
+  classId      String?
+  Species      Species?    @relation(fields: [speciesId], references: [id])
+  speciesId    String?
+  SubSpecies   SubSpecies? @relation(fields: [subSpeciesId], references: [id])
+  subSpeciesId String?
 }
 
 model CharacterChoiceStatus {
@@ -614,9 +619,11 @@ model Species {
 
   Features Feature[]
 
-  /// [AbilityScoreChoice]
-  abilityScores           Json
-  abilityScoreDescription String
+  Choices Choice[]
+
+  /// [AbilityScoreValue]
+  freeAbilityScoreImprovements Json[]
+  abilityScoreDescription      String
 
   creatureType    CreatureType
   size            Size
@@ -625,35 +632,31 @@ model Species {
   age       String
   alignment String
 
-  /// [SkillChoice]
-  skillProficiencies          Json?
-  skillProficiencyDescription String?
-
-  /// [ToolChoice]
-  toolProficiencies            Json?
-  /// [WeaponChoice]
-  weaponProficiencies          Json? // Weapon IDs
-  weaponProficiencyDescription String?
-
   speed       Int
   flightSpeed Int?
   swimSpeed   Int?
   climbSpeed  Int?
+  burrowSpeed Int?
 
-  speedDescription  String
-  flightDescription String?
-  swimDescription   String?
-  climbDescription  String?
+  speedDescription       String
+  flightDescription      String?
+  swimDescription        String?
+  climbDescription       String?
+  burrowSpeedDescription String?
 
   darkvision            Int?
   darkvisionDescription String?
 
-  resistanceTo DamageTypes[]
-  immuneTo     DamageTypes[]
-  vulnerableTo DamageTypes[]
+  blindSight            Int?
+  blindSightDescription String?
 
-  /// [LanguageChoice]
-  originLanguages     Json
+  trueSight            Int?
+  trueSightDescription String?
+
+  tremorSense            Int?
+  tremorSenseDescription String?
+
+  freeLanguages       Language[]
   languageDescription String?
 
   createdAt DateTime @default(now())
@@ -669,18 +672,20 @@ model Species {
 }
 
 model SubSpecies {
-  id                      String  @id
-  srd                     Boolean @default(false)
-  name                    String
-  description             String
-  flavorText              String  @db.VarChar(200)
-  source                  String
-  /// [AbilityScoreChoice]
-  abilityScores           Json?
-  abilityScoreDescription String?
+  id          String  @id
+  srd         Boolean @default(false)
+  name        String
+  description String
+  flavorText  String  @db.VarChar(200)
+  source      String
 
-  Features      Feature[]
-  removedTraits String[] // A list of traits that are removed from the base race. Case sensitive
+  Features Feature[]
+
+  Choices Choice[]
+
+  /// [AbilityScoreValue]
+  freeAbilityScoreImprovements Json[]
+  abilityScoreDescription      String?
 
   creatureType    CreatureType?
   size            Size?
@@ -689,36 +694,31 @@ model SubSpecies {
   age       String?
   alignment String?
 
-  /// [SkillChoice]
-  skillProficiencies          Json?
-  skillProficiencyDescription String?
-
-  /// [ToolChoice]
-  toolProficiencies            Json?
-  toolProficiencyDescription   String?
-  /// [WeaponChoice]
-  weaponProficiencies          Json?
-  weaponProficiencyDescription String?
-
   speed       Int?
   flightSpeed Int?
   swimSpeed   Int?
   climbSpeed  Int?
+  burrowSpeed Int?
 
-  speedDescription  String?
-  flightDescription String?
-  swimDescription   String?
-  climbDescription  String?
+  speedDescription       String?
+  flightDescription      String?
+  swimDescription        String?
+  climbDescription       String?
+  burrowSpeedDescription String?
 
   darkvision            Int?
   darkvisionDescription String?
 
-  resistanceTo DamageTypes[]
-  immuneTo     DamageTypes[]
-  vulnerableTo DamageTypes[]
+  blindSight            Int?
+  blindSightDescription String?
 
-  /// [LanguageChoice]
-  originLanguages     Json?
+  trueSight            Int?
+  trueSightDescription String?
+
+  tremorSense            Int?
+  tremorSenseDescription String?
+
+  freeLanguages       Language[]
   languageDescription String?
 
   createdAt DateTime @default(now())

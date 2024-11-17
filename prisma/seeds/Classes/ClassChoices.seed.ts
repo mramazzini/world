@@ -19,6 +19,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateSkillProficiencyChoice(
     'fighter-skill-1',
     ids.fighter,
+    'classId',
     'Choose your skill proficiencies.',
     [
       Skill.ACROBATICS,
@@ -35,6 +36,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'fighter-item-1',
     ids.fighter,
+    'classId',
     `Choose between Chain Mail or Leather Armor, a Longbow and 20 Arrows.`,
     [
       [{ item: itemIds.chainMail, quantity: 1 }],
@@ -48,6 +50,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'fighter-item-2',
     ids.fighter,
+    'classId',
     `Choose your 2 main weapon(s). You may also forgo one of these weapons for a shield.`,
     [
       {
@@ -74,6 +77,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'fighter-item-3',
     ids.fighter,
+    'classId',
     `Choose a ranged weapon.`,
     [
       [
@@ -87,6 +91,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'fighter-item-4',
     ids.fighter,
+    'classId',
     `Choose an equipment pack to start with.`,
     [
       [{ item: itemIds.dungeoneersPack, quantity: 1 }],
@@ -97,6 +102,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateSkillProficiencyChoice(
     'wizard-skill-1',
     ids.wizard,
+    'classId',
     'Choose two skills.',
     [
       Skill.ARCANA,
@@ -108,13 +114,20 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
     ],
     2
   ),
-  generateAddToInventoryChoice('wizard-item-1', ids.wizard, `Choose a weapon`, [
-    [{ item: itemIds.quarterstaff, quantity: 1 }],
-    [{ item: itemIds.dagger, quantity: 1 }],
-  ]),
+  generateAddToInventoryChoice(
+    'wizard-item-1',
+    ids.wizard,
+    'classId',
+    `Choose a weapon`,
+    [
+      [{ item: itemIds.quarterstaff, quantity: 1 }],
+      [{ item: itemIds.dagger, quantity: 1 }],
+    ]
+  ),
   generateAddToInventoryGroupedChoice(
     'wizard-item-2',
     ids.wizard,
+    'classId',
     `Choose your spellcasting focus.`,
     [
       {
@@ -128,6 +141,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'wizard-item-3',
     ids.wizard,
+    'classId',
     `Choose an equipment pack to begin with.`,
     [
       [{ item: itemIds.explorersPack, quantity: 1 }],
@@ -138,6 +152,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateSkillProficiencyChoice(
     'cleric-skill-1',
     ids.cleric,
+    'classId',
     'Choose two skills.',
     [
       Skill.HISTORY,
@@ -151,6 +166,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'cleric-item-1',
     ids.cleric,
+    'classId',
     `Choose your Holy Symbol.`,
     [
       {
@@ -161,6 +177,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'cleric-item-2',
     ids.cleric,
+    'classId',
     `Choose your starting armor.`,
     [
       [{ item: itemIds.scaleMail, quantity: 1 }],
@@ -171,6 +188,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'cleric-item-3',
     ids.cleric,
+    'classId',
     `Choose a weapon.`,
     [
       [{ item: itemIds.mace, quantity: 1 }],
@@ -180,6 +198,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'cleric-item-4',
     ids.cleric,
+    'classId',
     `Choose a weapon`,
     [
       {
@@ -197,6 +216,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'cleric-item-5',
     ids.cleric,
+    'classId',
     `Choose an equipment pack to begin with.`,
     [
       [{ item: itemIds.priestsPack, quantity: 1 }],
@@ -207,6 +227,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateSkillProficiencyChoice(
     'rogue-skill-1',
     ids.rogue,
+    'classId',
     'Choose your skill proficiencies.',
     [
       Skill.ACROBATICS,
@@ -223,13 +244,20 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
     ],
     4
   ),
-  generateAddToInventoryChoice('rogue-item-1', ids.rogue, `Choose a weapon.`, [
-    [{ item: itemIds.rapier, quantity: 1 }],
-    [{ item: itemIds.shortsword, quantity: 1 }],
-  ]),
+  generateAddToInventoryChoice(
+    'rogue-item-1',
+    ids.rogue,
+    'classId',
+    `Choose a weapon.`,
+    [
+      [{ item: itemIds.rapier, quantity: 1 }],
+      [{ item: itemIds.shortsword, quantity: 1 }],
+    ]
+  ),
   generateAddToInventoryChoice(
     'rogue-item-2',
     ids.rogue,
+    'classId',
     `Choose an equipment pack.`,
     [
       [{ item: itemIds.burglarsPack, quantity: 1 }],
@@ -237,17 +265,24 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
       [{ item: itemIds.explorersPack, quantity: 1 }],
     ]
   ),
-  generateAddToInventoryChoice('rogue-item-3', ids.rogue, `Choose a weapon.`, [
+  generateAddToInventoryChoice(
+    'rogue-item-3',
+    ids.rogue,
+    'classId',
+    `Choose a weapon.`,
     [
-      { item: itemIds.shortbow, quantity: 1 },
-      { item: itemIds.arrow, quantity: 20 },
-    ],
-    [{ item: itemIds.shortsword, quantity: 1 }],
-  ]),
+      [
+        { item: itemIds.shortbow, quantity: 1 },
+        { item: itemIds.arrow, quantity: 20 },
+      ],
+      [{ item: itemIds.shortsword, quantity: 1 }],
+    ]
+  ),
   //barbarian
   generateSkillProficiencyChoice(
     'barbarian-skill-1',
     ids.barbarian,
+    'classId',
     'Choose your skill proficiencies.',
     [
       Skill.ANIMAL_HANDLING,
@@ -262,6 +297,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'barbarian-item-1',
     ids.barbarian,
+    'classId',
     `Choose a weapon.`,
     [
       {
@@ -275,6 +311,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'barbarian-item-2',
     ids.barbarian,
+    'classId',
     `Choose a weapon.`,
     [
       {
@@ -292,6 +329,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateSkillProficiencyChoice(
     'bard-skill-1',
     ids.bard,
+    'classId',
     'Choose your skill proficiencies.',
     Object.values(Skill),
     3
@@ -299,6 +337,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateToolProficiencyGroupedChoice(
     'bard-tool-1',
     ids.bard,
+    'classId',
     'Choose a musical instrument.',
     [{ type: 'group', group: ToolGroup.INSTRUMENTS }],
     3
@@ -306,6 +345,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'bard-item-1',
     ids.bard,
+    'classId',
     `Choose a weapon.`,
     [
       {
@@ -325,6 +365,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'bard-item-2',
     ids.bard,
+    'classId',
     `Choose an equipment pack.`,
     [
       [{ item: itemIds.diplomatsPack, quantity: 1 }],
@@ -334,6 +375,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'bard-item-3',
     ids.bard,
+    'classId',
     `Choose a musical instrument.`,
     [
       {
@@ -349,6 +391,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateSkillProficiencyChoice(
     'druid-skill-1',
     ids.druid,
+    'classId',
     'Choose your skill proficiencies.',
     [
       Skill.ARCANA,
@@ -365,6 +408,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'druid-item-1',
     ids.druid,
+    'classId',
     `Choose a weapon.`,
     [
       {
@@ -381,6 +425,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'druid-item-2',
     ids.druid,
+    'classId',
     `Choose your druidic focus.`,
     [
       {
@@ -391,6 +436,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'druid-item-3',
     ids.druid,
+    'classId',
     `Choose between a shield or another weapon.`,
     [
       {
@@ -408,6 +454,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateSkillProficiencyChoice(
     'monk-skill-1',
     ids.monk,
+    'classId',
     'Choose your skill proficiencies.',
     [
       Skill.ACROBATICS,
@@ -422,6 +469,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateToolProficiencyGroupedChoice(
     'monk-tool-1',
     ids.monk,
+    'classId',
     'Choose an artisan tool or musical instrument.',
     [
       { type: 'group', group: ToolGroup.ARTISANS_TOOLS },
@@ -432,6 +480,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'monk-item-1',
     ids.monk,
+    'classId',
     `Choose a weapon.`,
     [
       {
@@ -448,6 +497,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'monk-item-2',
     ids.monk,
+    'classId',
     `Choose an equipment pack.`,
     [
       [{ item: itemIds.dungeoneersPack, quantity: 1 }],
@@ -458,6 +508,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateSkillProficiencyChoice(
     'paladin-skill-1',
     ids.paladin,
+    'classId',
     'Choose a skill proficiency.',
     [
       Skill.ATHLETICS,
@@ -472,6 +523,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'paladin-item-1',
     ids.paladin,
+    'classId',
     `Choose your starting equipment.`,
     [
       {
@@ -492,6 +544,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'paladin-item-2',
     ids.paladin,
+    'classId',
     `Choose a weapon.`,
     [
       {
@@ -508,6 +561,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'paladin-item-3',
     ids.paladin,
+    'classId',
     `Choose an equipment pack.`,
     [
       [{ item: itemIds.explorersPack, quantity: 1 }],
@@ -517,6 +571,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'paladin-item-4',
     ids.paladin,
+    'classId',
     `Choose a holy symbol.`,
     [
       {
@@ -528,6 +583,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateSkillProficiencyChoice(
     'ranger-skill-1',
     ids.ranger,
+    'classId',
     'Choose your skill proficiencies.',
     [
       Skill.ANIMAL_HANDLING,
@@ -544,6 +600,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'ranger-item-1',
     ids.ranger,
+    'classId',
     `Choose your armor.`,
     [
       [{ item: itemIds.scaleMail, quantity: 1 }],
@@ -553,6 +610,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'ranger-item-2',
     ids.ranger,
+    'classId',
     `Choose a weapon.`,
     [
       {
@@ -569,6 +627,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'ranger-item-3',
     ids.ranger,
+    'classId',
     `Choose an equipment pack.`,
     [
       [{ item: itemIds.dungeoneersPack, quantity: 1 }],
@@ -579,6 +638,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateSkillProficiencyChoice(
     'sorcerer-skill-1',
     ids.sorcerer,
+    'classId',
     'Choose your skill proficiencies.',
     [
       Skill.ARCANA,
@@ -593,6 +653,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'sorcerer-item-1',
     ids.sorcerer,
+    'classId',
     `Choose a weapon.`,
     [
       {
@@ -612,6 +673,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'sorcerer-item-2',
     ids.sorcerer,
+    'classId',
     `Choose an equipment pack.`,
     [
       [{ item: itemIds.dungeoneersPack, quantity: 1 }],
@@ -621,6 +683,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'sorcerer-item-3',
     ids.sorcerer,
+    'classId',
     `Choose an arcane focus.`,
     [
       {
@@ -632,6 +695,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateSkillProficiencyChoice(
     'warlock-skill-1',
     ids.warlock,
+    'classId',
     'Choose your skill proficiencies.',
     [
       Skill.ARCANA,
@@ -647,6 +711,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'warlock-item-1',
     ids.warlock,
+    'classId',
     `Choose a weapon.`,
     [
       {
@@ -666,6 +731,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'warlock-item-2',
     ids.warlock,
+    'classId',
     `Choose an arcane focus.`,
     [
       {
@@ -676,6 +742,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'warlock-item-3',
     ids.warlock,
+    'classId',
     `Choose an equipment pack.`,
     [
       [{ item: itemIds.dungeoneersPack, quantity: 1 }],
@@ -685,6 +752,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'warlock-item-4',
     ids.warlock,
+    'classId',
     `Choose a weapon.`,
     [
       {
@@ -699,6 +767,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateSkillProficiencyChoice(
     'artificer-skill-1',
     ids.artificer,
+    'classId',
     'Choose your skill proficiencies.',
     [
       Skill.ARCANA,
@@ -715,6 +784,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateToolProficiencyGroupedChoice(
     'artificer-tool-1',
     ids.artificer,
+    'classId',
     'Choose your artisan tool proficiency.',
     [{ type: 'group', group: ToolGroup.ARTISANS_TOOLS }],
     1
@@ -722,6 +792,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryChoice(
     'artificer-item-1',
     ids.artificer,
+    'classId',
     `Choose your armor.`,
     [
       [{ item: itemIds.scaleMail, quantity: 1 }],
@@ -731,6 +802,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateAddToInventoryGroupedChoice(
     'artificer-item-2',
     ids.artificer,
+    'classId',
     `Choose a weapon.`,
     [
       {

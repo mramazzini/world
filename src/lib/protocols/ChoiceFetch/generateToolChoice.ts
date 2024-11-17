@@ -1,4 +1,5 @@
 import {
+  ChoiceModelId,
   SetToolProficiencyGroupedParams,
   SetToolProficiencyParams,
 } from '@/lib/types/protocols';
@@ -6,14 +7,15 @@ import { ChoiceProtocol, Prisma } from '@prisma/client';
 
 export const generateToolProficiencyChoice = (
   id: string,
-  classId: string,
+  modelId: string,
+  model: ChoiceModelId,
   description: string,
   tools: SetToolProficiencyParams,
   amount?: number
 ): Prisma.ChoiceCreateManyInput => {
   return {
     id,
-    classId,
+    [model]: modelId,
     description,
     fetchParams: tools,
     amountOfOptionToChoose: amount || 1,
@@ -23,14 +25,15 @@ export const generateToolProficiencyChoice = (
 
 export const generateToolProficiencyGroupedChoice = (
   id: string,
-  classId: string,
+  modelId: string,
+  model: ChoiceModelId,
   description: string,
   tools: SetToolProficiencyGroupedParams,
   amount?: number
 ): Prisma.ChoiceCreateManyInput => {
   return {
     id,
-    classId,
+    [model]: modelId,
     description,
     fetchParams: tools,
     amountOfOptionToChoose: amount || 1,

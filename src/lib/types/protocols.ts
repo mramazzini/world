@@ -65,6 +65,15 @@ export type SetAbilityScoreOutput = {
   score: number;
 }[];
 
+export type ImproveAbilityScoreParams = {
+  increaseValues: number[];
+  abilitiesToIncrease: Ability[];
+}[];
+
+export type ChoiceModelId = 'speciesId' | 'subSpeciesId' | 'classId';
+
+export type ImproveAbilityScoreOutput = PrismaJson.AbilityScoreValue[];
+
 export type ChoiceParams =
   | SetToolProficiencyParams
   | SetToolProficiencyGroupedParams
@@ -76,4 +85,5 @@ export type ChoiceParams =
   | AddToInventoryParams
   | AddToInventoryGroupedParams
   | SetLanguageProficiencyParams
-  | SetAbilityScoreParams;
+  | SetAbilityScoreParams
+  | ImproveAbilityScoreParams;

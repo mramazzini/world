@@ -1,4 +1,5 @@
 import {
+  ChoiceModelId,
   SetSkillExpertiseParams,
   SetSkillProficiencyParams,
 } from '@/lib/types/protocols';
@@ -6,14 +7,15 @@ import { ChoiceProtocol, Prisma } from '@prisma/client';
 
 export const generateSkillProficiencyChoice = (
   id: string,
-  classId: string,
+  modelId: string,
+  model: ChoiceModelId,
   description: string,
   skills: SetSkillProficiencyParams,
   amount?: number
 ): Prisma.ChoiceCreateManyInput => {
   return {
     id,
-    classId,
+    [model]: modelId,
     description,
     fetchParams: skills,
     amountOfOptionToChoose: amount || 1,
@@ -23,14 +25,15 @@ export const generateSkillProficiencyChoice = (
 
 export const generateSkillExpertiseChoice = (
   id: string,
-  classId: string,
+  modelId: string,
+  model: ChoiceModelId,
   description: string,
   skills: SetSkillExpertiseParams,
   amount?: number
 ): Prisma.ChoiceCreateManyInput => {
   return {
     id,
-    classId,
+    [model]: modelId,
     description,
     fetchParams: skills,
     amountOfOptionToChoose: amount || 1,

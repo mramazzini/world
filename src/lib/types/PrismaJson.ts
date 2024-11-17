@@ -8,7 +8,6 @@ import {
   WorkshopProtocol,
 } from '@prisma/client';
 import {
-  AbilityScoreValue,
   ArmorID,
   BackgroundID,
   ClassID,
@@ -71,30 +70,6 @@ declare global {
       data: { [key: string | number]: string }[];
     }
 
-    interface AbilityScoreChoice {
-      default?: { ability: Ability; value: number }[]; // Fixed increases like Strength +2, Charisma +1
-      choices?: {
-        abilities: Ability[]; // Array of abilities that can be chosen
-        options: number[]; // Array of numbers that can be chosen
-      }[];
-    }
-
-    interface FeatChoice {
-      default?: FeatID[];
-      choices?: {
-        options: FeatID[];
-        numberOfChoices: number;
-      }[];
-    }
-
-    interface LanguageChoice {
-      default?: Language[];
-      choices?: {
-        options: Language[];
-        numberOfChoices: number;
-      }[];
-    }
-
     type TableColumn = {
       [K in Level]: string | number;
     };
@@ -126,7 +101,10 @@ declare global {
       addSpellcastingModifier?: boolean;
       components?: string;
     }
-
+    interface AbilityScoreValue {
+      ability: Ability;
+      value: number;
+    }
     interface Prerequisite {
       protocol: 'AND' | 'OR';
       data:
