@@ -3,18 +3,17 @@ import Tooltip from '@/Utility/Tooltip';
 import AbilityToText from '@/lib/utils/AbilityToText';
 import { Ability } from '@prisma/client';
 import { useAppSelector } from '@/store/hooks';
+import useModifier from '@/hooks/useModifier';
 
-interface Props {
-  handleRoll: (modifier: number, reason: string) => void;
-}
+const AbilityScoreRoller = () => {
+  const character = useAppSelector((state) => state.sheet.rawCharacter);
+  const modifiers = useModifier();
 
-const AbilityScoreRoller = ({ handleRoll }: Props) => {
-  const character = useAppSelector((state) => state.character);
   return (
     character.state && (
       <>
         <div className="flex flex-wrap gap-4 justify-center items-center w-full">
-          {Object.entries(character.state.abilityScores).map(([key, value]) => (
+          {Object.values(Ability).map(([key, value]) => (
             <div className="indicator " key={key}>
               <Tooltip
                 element={

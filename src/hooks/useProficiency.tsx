@@ -6,13 +6,13 @@ import { ToolID, WeaponID } from '@/lib/types/types';
 import { calcProficiency } from '@/Utility/characterStateFunctions/calc/calcProficiency';
 
 const useProficiency = () => {
-  const state = useAppSelector((state) => state.character.state);
+  const state = useAppSelector((state) => state.sheet.rawCharacter);
   const level = useLevel();
 
   const getToolProficiency = useCallback(
     (toolID: ToolID) => {
       if (!state) return false;
-      return state.proficiencies.tools.includes(toolID);
+      return state.tools.includes(toolID);
     },
     [state]
   );

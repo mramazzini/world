@@ -1,7 +1,7 @@
 'use client';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import PreparedSpellView from './PreparedSpellView';
-import { setCharacterState } from '@/store/characterSlice';
+import { setCharacterState } from '@/store/sheetSlice';
 
 const PrepareSpellSection = () => {
   const character = useAppSelector((state) => state.character);

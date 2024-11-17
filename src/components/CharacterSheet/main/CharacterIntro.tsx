@@ -5,11 +5,15 @@ import ImageUploadModal from './ImageUploadModal';
 import useModal from '@/hooks/useModal';
 import { useAppSelector } from '@/store/hooks';
 import useLevel from '@/hooks/useLevel';
+import Skeleton from '@/components/UI/Skeleton';
 
 const CharacterIntro = () => {
   const { id, openModal, closeModal } = useModal();
-  const character = useAppSelector((state) => state.character);
+  const character = useAppSelector((state) => state.sheet.rawCharacter);
   const level = useLevel();
+
+  if (!character) return <Skeleton height={128} />;
+
   return (
     <>
       <ImageUploadModal modalid={id} />
@@ -46,10 +50,7 @@ const CharacterIntro = () => {
           Level {level},{' '}
           {character.SubSpecies ? (
             <a
-              href={`/subspecies/${character.SubSpecies?.name.replaceAll(
-                ' ',
-                '-'
-              )}`}
+              href={`/subspecies/${character.SubSpecies?.slug}`}
               className="hover:link"
             >
               {character.SubSpecies?.name}
@@ -63,19 +64,16 @@ const CharacterIntro = () => {
             </a>
           )}
           ,{' '}
-          {character.Classes?.map((c) => (
-            <Fragment key={c.name}>
-              <a href={`/class/${c.slug}`} className="hover:link">
-                {c.name.toCapitalCase()}
+          {character.CharacterToClass?.map((c) => (
+            <Fragment key={c.Class.name}>
+              <a href={`/class/${c.Class.slug}`} className="hover:link">
+                {c.Class.name}
               </a>
             </Fragment>
           ))}
           ,{' '}
           <a
-            href={`/background/${character.Background?.name.replaceAll(
-              ' ',
-              '-'
-            )}`}
+            href={`/background/${character.Background?.slug}`}
             className="hover:link"
           >
             {character.Background?.name}

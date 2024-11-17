@@ -231,8 +231,6 @@ model Character {
   Background   Background @relation(fields: [backgroundId], references: [id])
   backgroundId String
 
-  Classes Class[] @relation("Character classes")
-
   SubClasses SubClass[] @relation("Character subClasses")
 
   Species      Species     @relation(fields: [speciesId], references: [id])
@@ -242,16 +240,67 @@ model Character {
 
   Feats Feat[]
 
-  /// [CharacterState]
-  state Json?
+  notes             String[]
+  ideals            String[]
+  bonds             String[]
+  flaws             String[]
+  personalityTraits String[]
+  biography         String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  inspirationRolls Int
 
-  User       User?     @relation(fields: [userId], references: [id])
-  userId     String?
-  Campaign   Campaign? @relation(fields: [campaignId], references: [id])
-  campaignId String?
+  /// [DiceAmount]
+  hitDieUsedSinceLastRest Json[]
+
+  /// [QuantityItem]
+  inventory Json[]
+
+  baseSTR Int
+  baseDEX Int
+  baseCON Int
+  baseINT Int
+  baseWIS Int
+  baseCHA Int
+
+  armorEquippedId String?
+
+  weaponEquippedIds String[]
+
+  deathSavesSuccess Int
+  deathSavesFail    Int
+
+  exhaustion Int
+
+  conditions Condition[]
+
+  preparedSpells Spell[]
+
+  maxHp     Int
+  currentHp Int
+  tempHp    Int
+
+  /// [Choice]
+  pendingChoices Json[]
+
+  createdAt          DateTime @default(now())
+  updatedAtIsoString String?
+
+  User                  User?                   @relation(fields: [userId], references: [id])
+  userId                String?
+  Campaign              Campaign?               @relation(fields: [campaignId], references: [id])
+  campaignId            String?
+  CharacterToClass      CharacterToClass[]
+  CharacterChoiceStatus CharacterChoiceStatus[]
+}
+
+model CharacterToClass {
+  characterId   String
+  classId       String
+  levelsInClass Int
+  Character     Character @relation(fields: [characterId], references: [id])
+  Class         Class     @relation(fields: [classId], references: [id])
+
+  @@id([characterId, classId])
 }
 
 model Campaign {
@@ -264,6 +313,25 @@ model Campaign {
   gameMasterId String
   Players      User[]      @relation("PlayerCampaigns")
   Characters   Character[]
+}
+
+enum WeaponGroup {
+  ALL_SIMPLE
+  ALL_MARTIAL
+  ALL_RANGED
+  ALL_MELEE
+  SIMPLE_MELEE
+  SIMPLE_RANGED
+  MARTIAL_MELEE
+  MARTIAL_RANGED
+  ALL_WEAPONS
+}
+
+enum ToolGroup {
+  ARTISANS_TOOLS
+  GAMING_SETS
+  INSTRUMENTS
+  VEHICLES
 }
 
 model Class {
@@ -280,13 +348,6 @@ model Class {
 
   hitDie Int
 
-  /// [AbilityChoice]
-  savingThrows Json
-
-  /// [SkillChoice]
-  skills                 Json
-  skillChoiceDescription String
-
   SubClasses            SubClass[]
   subClassName          String
   subClassDescription   String
@@ -295,23 +356,31 @@ model Class {
   Features             Feature[] @relation("ClassFeatures")
   SpellcastingFeatures Feature[] @relation("SpellCastingFeatures")
 
-  /// [ToolChoice]
-  tools            Json
-  toolsDescription String
+  savingThrowDescription       String
+  freeSavingThrowProficiencies Ability[]
 
-  /// [ArmorChoice]
-  armor            Json
-  armorDescription String
+  skillDescription String
+  freeSkills       Skill[]
 
-  /// [WeaponChoice]
-  weapons           Json
-  weaponDescription String
+  toolProficiencyDescription String
+  freeToolProficiencyGroups  ToolGroup[]
+  freeToolProficiencyIds     String[]
+
+  armorProficiencyDescription String
+  freeArmorProficiencies      ArmorType[]
+
+  weaponProficiencyDescription String
+  freeWeaponProficiencyIds     String[]
+  freeWeaponProficiencyGroups  WeaponGroup[]
+
+  itemDescription String[]
+
+  /// [QuantityItem]
+  freeItemIds Json[]
 
   abilityScoreLevels Int[]
 
-  /// [ItemChoice]
-  equipment            Json //this is the starting items for the class
-  equipmentDescription String[]
+  choices Choice[]
 
   isSpellCaster    Boolean @default(false)
   /// [SpellCastingInfo]
@@ -327,10 +396,52 @@ model Class {
 
   User            User?             @relation(fields: [userId], references: [id])
   userId          String?
-  Characters      Character[]       @relation("Character classes")
   ColumnedFeature ColumnedFeature[]
 
-  slug String @unique @db.VarChar(200)
+  slug             String             @unique @db.VarChar(200)
+  CharacterToClass CharacterToClass[]
+}
+
+enum ChoiceProtocol {
+  SET_SKILL_PROFICIENCY
+  SET_SKILL_EXPERTISE
+  SET_TOOL_PROFICIENCY
+  SET_TOOL_PROFICIENCY_GROUPED
+  SET_SAVING_THROW_PROFICIENCY
+  SET_ARMOR_PROFICIENCY
+  SET_WEAPON_PROFICIENCY
+  ADD_TO_INVENTORY
+  ADD_TO_INVENTORY_GROUPED
+  SET_LANGUAGE_PROFICIENCY
+  SET_ABILITY_SCORE
+}
+
+model Choice {
+  id          String @id
+  description String //The Choice in human readable form
+
+  amountOfOptionToChoose Int
+  CharacterChoiceStatus  CharacterChoiceStatus[]
+
+  protocol    ChoiceProtocol // Describes How to handle the choice parameters, and what callback to invoke
+  /// [ChoiceFetchParams]
+  fetchParams Json //The parameters that will be used to fetch the choice
+
+  Class   Class?  @relation(fields: [classId], references: [id])
+  classId String?
+}
+
+model CharacterChoiceStatus {
+  characterId String
+  choiceId    String
+
+  fufilled Boolean
+  values   Json[]
+
+  Character Character @relation(fields: [characterId], references: [id])
+  Choice    Choice    @relation(fields: [choiceId], references: [id])
+
+  @@id([characterId, choiceId])
 }
 
 model Spell {
@@ -372,7 +483,9 @@ model Spell {
   FreelyCastByCreature Creature[]             @relation("CreatureFreelyCasts")
   CreatureLimitedSpell CreatureLimitedSpell[]
 
-  slug String @unique @db.VarChar(200)
+  slug        String      @unique @db.VarChar(200)
+  Character   Character[]
+  characterId String?
 }
 
 model SpellList {

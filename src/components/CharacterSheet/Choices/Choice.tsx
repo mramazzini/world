@@ -12,7 +12,7 @@ import ASIorFeatHandler from './ASIorFeatHandler';
 import FeatHandler from './FeatHandler';
 import { useAppSelector } from '@/store/hooks';
 import { useDispatch } from 'react-redux';
-import { setCharacterState } from '@/store/characterSlice';
+import { setCharacterState } from '@/store/sheetSlice';
 
 interface Props {
   id: string;

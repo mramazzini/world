@@ -4,6 +4,7 @@ import Classes from '../Classes/Class.seed';
 import createFeature from '../_helpers/createFeature';
 import ClassFeaturesSeed from '../Classes/Features.seed';
 import ColumnedFeatureSeed from '../Classes/ColumnedFeature.seed';
+import ClassChoicesSeed from '../Classes/ClassChoices.seed';
 
 export const createClasses = async (db: PrismaClient) => {
   // Create classes
@@ -59,6 +60,26 @@ export const createClasses = async (db: PrismaClient) => {
     } catch (error) {
       cerr('Error creating columned feature:', columnedFeature.name, error);
       throw new Error('Error creating columned feature');
+    }
+  }
+  cinfo('Columned features created');
+
+  //create class Choices
+  cinfo('Creating class choices');
+  for (const choice of ClassChoicesSeed) {
+    try {
+      cinfo('Creating class choice:', choice.description);
+      await db.choice.upsert({
+        where: {
+          id: choice.id,
+        },
+        update: choice,
+        create: choice,
+      });
+      cinfo('Class choice created');
+    } catch (error) {
+      cerr('Error creating class choice:', choice.description, error);
+      throw new Error('Error creating class choice');
     }
   }
 };

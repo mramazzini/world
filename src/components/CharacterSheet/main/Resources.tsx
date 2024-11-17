@@ -4,7 +4,7 @@ import ModalBox from '@/components/UI/Modal/ModalBox';
 import ModalButton from '@/components/UI/Modal/ModalButton';
 import useModal from '@/hooks/useModal';
 import { Time } from '@/lib/types/types';
-import { setCharacterState } from '@/store/characterSlice';
+import { setCharacterState } from '@/store/sheetSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import Image from 'next/image';
 

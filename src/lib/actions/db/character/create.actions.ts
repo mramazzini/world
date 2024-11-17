@@ -32,8 +32,13 @@ export const createCharacter = async (
         id: v4(),
         name: params.name,
         alignment: params.alignment,
-        Classes: {
-          connect: { id: params.classId },
+        CharacterToClass: {
+          create: {
+            Class: {
+              connect: { id: params.classId },
+            },
+            levelsInClass: 1,
+          },
         },
         Background: {
           connect: { id: params.backgroundId },
@@ -44,6 +49,21 @@ export const createCharacter = async (
         Species: {
           connect: { id: params.speciesId },
         },
+        biography: '',
+        inspirationRolls: 0,
+        baseSTR: 10,
+        baseDEX: 10,
+        baseCON: 10,
+        baseINT: 10,
+        baseWIS: 10,
+        baseCHA: 10,
+        deathSavesFail: 0,
+        deathSavesSuccess: 0,
+        exhaustion: 0,
+
+        maxHp: 0,
+        currentHp: 0,
+        tempHp: 0,
       },
     });
 

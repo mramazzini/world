@@ -6,7 +6,7 @@ import { Form, Formik } from 'formik';
 import FormField from '@/components/UI/Formik/FormField';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setCharacterState } from '@/store/characterSlice';
+import { setCharacterState } from '@/store/sheetSlice';
 import { addToInventory } from '@/Utility/ChoiceFunctions/Inventory';
 import ModelDisplay from '@/Utility/ModelDisplay';
 

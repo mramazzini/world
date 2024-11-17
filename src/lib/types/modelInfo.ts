@@ -2,6 +2,7 @@ import {
   Armor,
   Background,
   Character,
+  CharacterToClass,
   Class,
   ColumnedFeature,
   Comment,
@@ -103,16 +104,14 @@ export interface FeatInfo extends Feat {
     username: string | null;
   } | null;
 }
-export interface CharacterInfo
-  extends Omit<Character, 'createdAt' | 'updatedAt'> {
+
+export interface CharacterInfo extends Omit<Character, 'createdAt'> {
   User: {
     id: string;
     username: string | null;
   } | null;
   Background: Omit<BackgroundWithFeatures, 'createdAt' | 'updatedAt'> | null;
-  Classes:
-    | Omit<ClassWithSpellListAndFeatures, 'createdAt' | 'updatedAt'>[]
-    | null;
+  CharacterToClass: CharacterToClassInfo[];
   SubClasses: Omit<SubClassWithFeatures, 'createdAt' | 'updatedAt'>[] | null;
   Feats: Omit<FeatWithFeatures, 'createdAt' | 'updatedAt'>[] | null;
   Species: Omit<SpeciesWithFeatures, 'createdAt' | 'updatedAt'> | null;
@@ -144,6 +143,10 @@ interface ClassWithSpellListAndFeatures extends Class {
   SpellList: SpellListInfo | null;
   Features: FeatureNoDate[];
   SpellcastingFeatures: FeatureNoDate[];
+}
+
+interface CharacterToClassInfo extends CharacterToClass {
+  Class: Omit<ClassWithSpellListAndFeatures, 'createdAt' | 'updatedAt'>;
 }
 
 export interface CreatureInfo extends Creature {

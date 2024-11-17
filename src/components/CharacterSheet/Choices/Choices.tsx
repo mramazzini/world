@@ -7,7 +7,7 @@ import { removeChoice } from '@/Utility/characterStateFunctions/update/removeCho
 import Loading from '@/components/UI/Loading';
 import { useAppSelector } from '@/store/hooks';
 import { useDispatch } from 'react-redux';
-import { setCharacterState } from '@/store/characterSlice';
+import { setCharacterState } from '@/store/sheetSlice';
 
 const ChooseChoices = () => {
   const [loading, setLoading] = useState(false);

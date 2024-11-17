@@ -1,15 +1,9 @@
-import { ArmorType, Prisma, Skill, Ability } from '@prisma/client';
+import { ArmorType, Prisma, Ability, WeaponGroup } from '@prisma/client';
 import { SpellFocus } from '@/lib/types/types';
-import { simpleIds, weaponIds } from '../Items/Weapons/Weapons.seed';
+import { weaponIds } from '../Items/Weapons/Weapons.seed';
 import { itemIds } from '../Items/ItemIds';
-import {
-  instrumentItemIds,
-  martialMeleeItemIds,
-  martialRangedItemIds,
-  simpleMeleeItemIds,
-  simpleRangedItemIds,
-} from '../Items/Items.seed';
-import { artisanIds, instrumentIds, toolIds } from '../Items/Tools/Tool.seed';
+
+import { toolIds } from '../Items/Tools/Tool.seed';
 import { spellIds } from '../Spells/spells.seed';
 import { spellListIds } from '../Spells/SpellLists/SpellLists.seed';
 import { fullCaster, halfCaster, warlockSpellSlots } from './SpellSlotsUtil';
@@ -31,94 +25,27 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
     multiclassingDescription:
       'You must have a Dexterity or Strength score of 13 or higher in order to multiclass in or out of this class.',
-    savingThrows: {
-      default: [Ability.STR, Ability.CON],
-    },
-
-    skills: {
-      choices: [
-        {
-          options: [
-            Skill.ACROBATICS,
-            Skill.ANIMAL_HANDLING,
-            Skill.ATHLETICS,
-            Skill.HISTORY,
-            Skill.INSIGHT,
-            Skill.INTIMIDATION,
-            Skill.PERCEPTION,
-            Skill.SURVIVAL,
-          ],
-          numberOfChoices: 2,
-        },
-      ],
-    },
-    skillChoiceDescription:
-      'Choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival.',
-    weapons: {
-      default: Object.values(weaponIds),
-    },
-    weaponDescription:
+    freeSavingThrowProficiencies: [Ability.STR, Ability.CON],
+    savingThrowDescription:
+      'Fighters are proficient in Strength and Constitution saving throws',
+    freeWeaponProficiencyGroups: [WeaponGroup.ALL_WEAPONS],
+    weaponProficiencyDescription:
       'Fighters are proficient in all simple and martial weapons',
-    armor: {
-      default: [
-        ArmorType.LIGHT,
-        ArmorType.MEDIUM,
-        ArmorType.HEAVY,
-        ArmorType.SHIELDS,
-      ],
-    },
-    armorDescription: 'Fighters are proficient with all armor and shields',
-    tools: {},
-    toolsDescription: 'Fighters are not proficient with any tools',
 
-    equipment: {
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.chainMail, quantity: 1 }],
-            [
-              { item: itemIds.leatherArmor, quantity: 1 },
-              { item: itemIds.longbow, quantity: 1 },
-              { item: itemIds.arrow, quantity: 20 },
-            ],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            ...martialMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-            ...martialRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
-            [{ item: itemIds.shield, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            ...martialMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-            ...martialRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [
-              { item: itemIds.crossbowLight, quantity: 1 },
-              { item: itemIds.crossbowBolt, quantity: 20 },
-            ],
-            [{ item: itemIds.handaxe, quantity: 2 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.dungeoneersPack, quantity: 1 }],
-            [{ item: itemIds.explorersPack, quantity: 1 }],
-          ],
-        },
-      ],
-    },
-    equipmentDescription: [
+    freeArmorProficiencies: [
+      ArmorType.LIGHT,
+      ArmorType.MEDIUM,
+      ArmorType.HEAVY,
+      ArmorType.SHIELDS,
+    ],
+    skillDescription:
+      'Choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival.',
+
+    armorProficiencyDescription:
+      'Fighters are proficient with all armor and shields',
+    toolProficiencyDescription: 'Fighters are not proficient with any tools',
+
+    itemDescription: [
       `(a) ^${itemIds.chainMail}{chain mail}^ or (b) ^${itemIds.leatherArmor}{leather}^, ^${itemIds.longbow}{longbow}^, and 20 ^${itemIds.arrow}{arrows}^`,
       `(a) a martial weapon and a ^${itemIds.shield}{shield}^ or (b) two martial weapons`,
       `(a) a ^${itemIds.crossbowLight}{light crossbow}^ and 20 ^${itemIds.crossbowBolt}{bolts}^ or (b) two ^${itemIds.handaxe}{handaxes}^`,
@@ -147,75 +74,29 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     multiclassingDescription:
       'You must have an Intelligence score of 13 or higher in order to multiclass in or out of this class.',
     hitDie: 6,
-    savingThrows: {
-      default: [Ability.INT, Ability.WIS],
-    },
-    skills: {
-      choices: [
-        {
-          options: [
-            Skill.ARCANA,
-            Skill.HISTORY,
-            Skill.INSIGHT,
-            Skill.INVESTIGATION,
-            Skill.MEDICINE,
-            Skill.RELIGION,
-          ],
-          numberOfChoices: 2,
-        },
-      ],
-    },
-    skillChoiceDescription:
+    savingThrowDescription:
+      'Wizards are proficient in Intelligence and Wisdom saving throws',
+    freeSavingThrowProficiencies: [Ability.INT, Ability.WIS],
+    skillDescription:
       'Choose two skills from Arcana, History, Insight, Investigation, Medicine, and Religion.',
-    armor: {},
-    armorDescription: 'Wizards are not proficient with any armor.',
-    weapons: {
-      default: [
-        weaponIds.dagger,
-        weaponIds.quarterstaff,
-        weaponIds.crossbowLight,
-        weaponIds.dart,
-        weaponIds.sling,
-      ],
-    },
+    armorProficiencyDescription: 'Wizards are not proficient with any armor.',
 
-    weaponDescription:
+    weaponProficiencyDescription:
       'Wizards are proficient with daggers, darts, slings, quarterstaffs, and light crossbows.',
 
-    tools: {},
-    toolsDescription: 'Wizards are not proficient with any tools.',
-    equipment: {
-      default: [{ item: itemIds.spellBook, quantity: 1 }],
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.quarterstaff, quantity: 1 }],
-            [{ item: itemIds.dagger, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.componentPouch, quantity: 1 }],
-            [{ item: itemIds.crystal, quantity: 1 }],
-            [{ item: itemIds.orb, quantity: 1 }],
-            [{ item: itemIds.rod, quantity: 1 }],
-            [{ item: itemIds.staff, quantity: 1 }],
-            [{ item: itemIds.wand, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.scholarsPack, quantity: 1 }],
-            [{ item: itemIds.explorersPack, quantity: 1 }],
-          ],
-        },
-      ],
-    },
-    equipmentDescription: [
-      `(a) ^${itemIds.quarterstaff}{quarterstaff}^ or (b) a ^${itemIds.dagger}{dagger}^`,
+    toolProficiencyDescription: 'Wizards are not proficient with any tools.',
+    freeWeaponProficiencyIds: [
+      weaponIds.dagger,
+      weaponIds.quarterstaff,
+      weaponIds.crossbowLight,
+      weaponIds.dart,
+      weaponIds.sling,
+    ],
+
+    freeItemIds: [{ item: itemIds.spellBook, quantity: 1 }],
+
+    itemDescription: [
+      `(a) a ^${itemIds.quarterstaff}{quarterstaff}^ or (b) a ^${itemIds.dagger}{dagger}^`,
       `(a) a ^${itemIds.componentPouch}{component pouch}^ or (b) an arcane focus`,
       `(a) a ^${itemIds.scholarsPack}{scholar's pack}^ or (b) an ^${itemIds.explorersPack}{explorer's pack}^`,
       `A ^${itemIds.spellBook}{spellbook}^`,
@@ -255,85 +136,27 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       abilities: [Ability.WIS],
       greaterThan: 12,
     },
-    savingThrows: {
-      default: [Ability.WIS, Ability.CHA],
-    },
-    skills: {
-      choices: [
-        {
-          options: [
-            Skill.HISTORY,
-            Skill.INSIGHT,
-            Skill.MEDICINE,
-            Skill.PERSUASION,
-            Skill.RELIGION,
-          ],
-          numberOfChoices: 2,
-        },
-      ],
-    },
-    skillChoiceDescription:
+    savingThrowDescription:
+      'Clerics are proficient in Wisdom and Charisma saving throws',
+    freeSavingThrowProficiencies: [Ability.WIS, Ability.CHA],
+
+    skillDescription:
       'Choose two skills from History, Insight, Medicine, Persuasion, and Religion.',
+    freeWeaponProficiencyGroups: [WeaponGroup.ALL_SIMPLE],
+    weaponProficiencyDescription:
+      'Clerics are proficient with all simple weapons.',
 
-    weapons: {
-      default: simpleIds,
-    },
-    weaponDescription: 'Clerics are proficient with all simple weapons.',
-    armor: {
-      default: [ArmorType.LIGHT, ArmorType.MEDIUM, ArmorType.SHIELDS],
-    },
-    armorDescription:
+    freeArmorProficiencies: [
+      ArmorType.LIGHT,
+      ArmorType.MEDIUM,
+      ArmorType.SHIELDS,
+    ],
+    armorProficiencyDescription:
       'Clerics are proficient with Light Armor, Medium Armor, and shields.',
-    tools: {},
-    toolsDescription: 'Clerics are not proficient with any tools.',
-    equipment: {
-      default: [{ item: itemIds.shield, quantity: 1 }],
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.amulet, quantity: 1 }],
-            [{ item: itemIds.reliquary, quantity: 1 }],
-            [{ item: itemIds.emblem, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.warhammer, quantity: 1 }],
-            [{ item: itemIds.mace, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.scaleMail, quantity: 1 }],
-            [{ item: itemIds.leatherArmor, quantity: 1 }],
-            [{ item: itemIds.chainMail, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [
-              { item: itemIds.crossbowLight, quantity: 1 },
-              { item: itemIds.crossbowBolt, quantity: 20 },
-            ],
-            ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-            ...simpleRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
+    toolProficiencyDescription: 'Clerics are not proficient with any tools.',
+    freeItemIds: [{ item: itemIds.shield, quantity: 1 }],
 
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.priestsPack, quantity: 1 }],
-            [{ item: itemIds.explorersPack, quantity: 1 }],
-          ],
-        },
-      ],
-    },
-    equipmentDescription: [
+    itemDescription: [
       `(a) a ^${itemIds.scaleMail}{scale mail}^, (b) a ^${itemIds.leatherArmor}{leather armor}^, or (c) a ^${itemIds.chainMail}{chain mail}^`,
       `(a) a ^${itemIds.warhammer}{warhammer}^ or (b) a ^${itemIds.mace}{mace}^`,
       `(a) a ^${itemIds.crossbowLight}{light crossbow}^ and 20 ^${itemIds.crossbowBolt}{bolts}^ or (b) any simple weapon`,
@@ -379,84 +202,32 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
     multiclassingDescription:
       'You must have a Dexterity score of 13 or higher in order to multiclass in or out of this class.',
-    savingThrows: {
-      default: [Ability.DEX, Ability.INT],
-    },
-    skills: {
-      choices: [
-        {
-          options: [
-            Skill.ACROBATICS,
-            Skill.ATHLETICS,
-            Skill.DECEPTION,
-            Skill.INSIGHT,
-            Skill.INTIMIDATION,
-            Skill.INVESTIGATION,
-            Skill.PERCEPTION,
-            Skill.PERFORMANCE,
-            Skill.PERSUASION,
-            Skill.SLEIGHT_OF_HAND,
-            Skill.STEALTH,
-          ],
-          numberOfChoices: 4,
-        },
-      ],
-    },
-    skillChoiceDescription:
+    freeSavingThrowProficiencies: [Ability.DEX, Ability.INT],
+    savingThrowDescription:
+      'Rogues are proficient in Dexterity and Intelligence saving throws',
+
+    skillDescription:
       'Choose four skills from Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, Sleight of Hand, and Stealth.',
 
-    weapons: {
-      default: simpleIds.concat([
-        weaponIds.rapier,
-        weaponIds.shortsword,
-        weaponIds.longsword,
-        weaponIds.crossbowHand,
-      ]),
-    },
-    weaponDescription: `Rogues are proficient with all simple weapons, ^${itemIds.rapier}{rapiers}^, ^${itemIds.shortsword}{shortswords}^, ^${itemIds.longsword}{longswords}^, and ^${itemIds.crossbowHand}{hand crossbows}^`,
-    armor: {
-      default: [ArmorType.LIGHT],
-    },
-    armorDescription: 'Rogues are proficient with light armor.',
-    tools: {
-      default: [toolIds.thievesTools],
-    },
-    toolsDescription: `Rogues are proficient with ^${itemIds.thievesTools}{thieves' tools}^.`,
-    equipment: {
-      default: [
-        { item: itemIds.dagger, quantity: 2 },
-        { item: itemIds.thievesTools, quantity: 1 },
-        { item: itemIds.leatherArmor, quantity: 1 },
-      ],
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.rapier, quantity: 1 }],
-            [{ item: itemIds.shortsword, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.burglarsPack, quantity: 1 }],
-            [{ item: itemIds.dungeoneersPack, quantity: 1 }],
-            [{ item: itemIds.explorersPack, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [
-              { item: itemIds.shortbow, quantity: 1 },
-              { item: itemIds.arrow, quantity: 20 },
-            ],
-            [{ item: itemIds.shortsword, quantity: 1 }],
-          ],
-        },
-      ],
-    },
-    equipmentDescription: [
+    freeWeaponProficiencyIds: [
+      weaponIds.rapier,
+      weaponIds.shortsword,
+      weaponIds.longsword,
+      weaponIds.crossbowHand,
+    ],
+    freeWeaponProficiencyGroups: [WeaponGroup.ALL_SIMPLE],
+    weaponProficiencyDescription: `Rogues are proficient with all simple weapons, ^${itemIds.rapier}{rapiers}^, ^${itemIds.shortsword}{shortswords}^, ^${itemIds.longsword}{longswords}^, and ^${itemIds.crossbowHand}{hand crossbows}^`,
+    freeArmorProficiencies: [ArmorType.LIGHT],
+    armorProficiencyDescription: 'Rogues are proficient with light armor.',
+    freeToolProficiencyIds: [toolIds.thievesTools],
+    toolProficiencyDescription: `Rogues are proficient with ^${itemIds.thievesTools}{thieves' tools}^.`,
+    freeItemIds: [
+      { item: itemIds.dagger, quantity: 2 },
+      { item: itemIds.thievesTools, quantity: 1 },
+      { item: itemIds.leatherArmor, quantity: 1 },
+    ],
+
+    itemDescription: [
       `(a) a ^${itemIds.rapier}{rapier}^ or (b) a ^${itemIds.shortsword}{shortsword}^`,
       `(a) a ^${itemIds.burglarsPack}{burglar's pack}^, (b) a ^${itemIds.dungeoneersPack}{dungeoneer's pack}^, or (c) an ^${itemIds.explorersPack}{explorer's pack}^`,
       `(a) a ^${itemIds.shortbow}{shortbow}^ and a ^${itemIds.quiver}{quiver}^ of 20 ^${itemIds.arrow}{arrows}^ or (b) a ^${itemIds.shortsword}{shortsword}^`,
@@ -485,61 +256,27 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     multiclassingDescription:
       'You must have a Strength score of 13 or higher in order to multiclass in or out of this class.',
     hitDie: 12,
-    savingThrows: {
-      default: [Ability.STR, Ability.CON],
-    },
-    skills: {
-      choices: [
-        {
-          options: [
-            Skill.ANIMAL_HANDLING,
-            Skill.ATHLETICS,
-            Skill.INTIMIDATION,
-            Skill.NATURE,
-            Skill.PERCEPTION,
-            Skill.SURVIVAL,
-          ],
-          numberOfChoices: 2,
-        },
-      ],
-    },
-    skillChoiceDescription: `Choose two skills from Animal Handling, Athletics, Intimidation, Nature, Perception, and Survival.`,
-    weapons: {
-      default: Object.values(weaponIds),
-    },
-    weaponDescription:
+    freeSavingThrowProficiencies: [Ability.STR, Ability.CON],
+    savingThrowDescription:
+      'Barbarians are proficient in Strength and Constitution saving throws',
+
+    skillDescription: `Choose two skills from Animal Handling, Athletics, Intimidation, Nature, Perception, and Survival.`,
+    freeWeaponProficiencyGroups: [WeaponGroup.ALL_WEAPONS],
+    weaponProficiencyDescription:
       'Barbarians are proficient with all simple and martial weapons.',
-    armor: {
-      default: [ArmorType.LIGHT, ArmorType.MEDIUM, ArmorType.SHIELDS],
-    },
-    armorDescription:
+    freeArmorProficiencies: [
+      ArmorType.LIGHT,
+      ArmorType.MEDIUM,
+      ArmorType.SHIELDS,
+    ],
+    armorProficiencyDescription:
       'Barbarians are proficient with Light Armor, Medium Armor, Shields',
-    tools: {},
-    toolsDescription: 'Barbarians are not proficient with any tools.',
-    equipment: {
-      default: [
-        { item: itemIds.explorersPack, quantity: 1 },
-        { item: itemIds.javelin, quantity: 4 },
-      ],
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.greataxe, quantity: 1 }],
-            ...martialMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.handaxe, quantity: 2 }],
-            ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-            ...simpleRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-      ],
-    },
-    equipmentDescription: [
+    toolProficiencyDescription: 'Barbarians are not proficient with any tools.',
+    freeItemIds: [
+      { item: itemIds.explorersPack, quantity: 1 },
+      { item: itemIds.javelin, quantity: 4 },
+    ],
+    itemDescription: [
       `(a) a ^${itemIds.greataxe}{greataxe}^ or (b) any martial melee weapon`,
       `(a) two ^${itemIds.handaxe}{handaxes}^ or (b) any simple weapon`,
       `^${itemIds.explorersPack}{Explorer's pack}^ and four ^${itemIds.javelin}{javelins}^`,
@@ -567,75 +304,29 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
     multiclassingDescription:
       'You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.',
-    savingThrows: {
-      default: [Ability.DEX, Ability.CHA],
-    },
-    skills: {
-      choices: [
-        {
-          options: Object.values(Skill),
-          numberOfChoices: 3,
-        },
-      ],
-    },
-    skillChoiceDescription:
+    freeSavingThrowProficiencies: [Ability.DEX, Ability.CHA],
+    savingThrowDescription:
+      'Bards are proficient in Dexterity and Charisma saving throws',
+    skillDescription:
       'Rogues are proficient in any three skills of their choice.',
-    weapons: {
-      default: simpleIds.concat([
-        weaponIds.longsword,
-        weaponIds.rapier,
-        weaponIds.shortsword,
-        weaponIds.crossbowHand,
-      ]),
-    },
-    weaponDescription: `Bards are proficient with all simple weapons, plus the ^${itemIds.longsword}{longsword}^, ^${itemIds.rapier}{rapier}^, ^${itemIds.shortsword}{shortsword}^, and ^${itemIds.crossbowHand}{hand crossbow}^`,
-    armor: {
-      default: [ArmorType.LIGHT],
-    },
-    armorDescription: 'Bards are proficient with light armor.',
+    freeWeaponProficiencyIds: [
+      weaponIds.longsword,
+      weaponIds.rapier,
+      weaponIds.shortsword,
+      weaponIds.crossbowHand,
+    ],
+    freeWeaponProficiencyGroups: [WeaponGroup.ALL_SIMPLE],
+    weaponProficiencyDescription: `Bards are proficient with all simple weapons, plus the ^${itemIds.longsword}{longsword}^, ^${itemIds.rapier}{rapier}^, ^${itemIds.shortsword}{shortsword}^, and ^${itemIds.crossbowHand}{hand crossbow}^`,
+    freeArmorProficiencies: [ArmorType.LIGHT],
+    armorProficiencyDescription: 'Bards are proficient with light armor.',
 
-    tools: {
-      choices: [
-        {
-          numberOfChoices: 3,
-          options: instrumentIds,
-        },
-      ],
-    },
-    toolsDescription:
+    toolProficiencyDescription:
       'Bards are proficient with three musical instruments of their choice.',
-    equipment: {
-      default: [
-        { item: itemIds.leatherArmor, quantity: 1 },
-        { item: itemIds.dagger, quantity: 1 },
-      ],
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.rapier, quantity: 1 }],
-            [{ item: itemIds.longsword, quantity: 1 }],
-            ...simpleMeleeItemIds
-              .concat(simpleRangedItemIds)
-              .map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.diplomatsPack, quantity: 1 }],
-            [{ item: itemIds.entertainersPack, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            ...instrumentItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-      ],
-    },
-    equipmentDescription: [
+    freeItemIds: [
+      { item: itemIds.leatherArmor, quantity: 1 },
+      { item: itemIds.dagger, quantity: 1 },
+    ],
+    itemDescription: [
       `(a) a ^${itemIds.rapier}{rapier}^ or (b) a ^${itemIds.longsword}{longsword}^ or (c) any simple weapon`,
       `(a) a ^${itemIds.diplomatsPack}{diplomat's pack}^ or (b) an ^${itemIds.entertainersPack}{entertainer's pack}^`,
       `^${itemIds.leatherArmor}{Leather armor}^ a ^${itemIds.dagger}{dagger}^, and a musical instrument`,
@@ -678,84 +369,36 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
     multiclassingDescription:
       'You must have a Wisdom score of 13 or higher in order to multiclass in or out of this class.',
-    savingThrows: {
-      default: [Ability.INT, Ability.WIS],
-    },
-    skills: {
-      choices: [
-        {
-          options: [
-            Skill.ARCANA,
-            Skill.ANIMAL_HANDLING,
-            Skill.INSIGHT,
-            Skill.MEDICINE,
-            Skill.NATURE,
-            Skill.PERCEPTION,
-            Skill.RELIGION,
-            Skill.SURVIVAL,
-          ],
-          numberOfChoices: 2,
-        },
-      ],
-    },
-    skillChoiceDescription: `Choose two skills from Arcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival.`,
-    weapons: {
-      default: [
-        weaponIds.club,
-        weaponIds.dagger,
-        weaponIds.dart,
-        weaponIds.javelin,
-        weaponIds.mace,
-        weaponIds.quarterstaff,
-        weaponIds.scimitar,
-        weaponIds.sickle,
-        weaponIds.sling,
-        weaponIds.spear,
-      ],
-    },
-    weaponDescription: `Druids are proficient with  ^${itemIds.club}{club}^ , ^${itemIds.dagger}{dagger}^, ^${itemIds.dart}{dart}^, ^${itemIds.javelin}{javelin}^, ^${itemIds.mace}{mace}^, ^${itemIds.quarterstaff}{quarterstaff}^, ^${itemIds.scimitar}{scimitar}^, ^${itemIds.sickle}{sickle}^, ^${itemIds.sling}{sling}^, and ^${itemIds.spear}{spear}^`,
-    armor: {
-      default: [ArmorType.LIGHT, ArmorType.MEDIUM, ArmorType.SHIELDS],
-    },
-    armorDescription:
+    savingThrowDescription:
+      'Druids are proficient in Intelligence and Wisdom saving throws',
+    skillDescription: `Choose two skills from Arcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival.`,
+    freeWeaponProficiencyIds: [
+      weaponIds.club,
+      weaponIds.dagger,
+      weaponIds.dart,
+      weaponIds.javelin,
+      weaponIds.mace,
+      weaponIds.quarterstaff,
+      weaponIds.scimitar,
+      weaponIds.sickle,
+      weaponIds.sling,
+      weaponIds.spear,
+    ],
+    weaponProficiencyDescription: `Druids are proficient with  ^${itemIds.club}{club}^ , ^${itemIds.dagger}{dagger}^, ^${itemIds.dart}{dart}^, ^${itemIds.javelin}{javelin}^, ^${itemIds.mace}{mace}^, ^${itemIds.quarterstaff}{quarterstaff}^, ^${itemIds.scimitar}{scimitar}^, ^${itemIds.sickle}{sickle}^, ^${itemIds.sling}{sling}^, and ^${itemIds.spear}{spear}^`,
+    freeArmorProficiencies: [
+      ArmorType.LIGHT,
+      ArmorType.MEDIUM,
+      ArmorType.SHIELDS,
+    ],
+    armorProficiencyDescription:
       'Druids are proficient with Light Armor, Medium Armor, and Shields. However, a druid will not wear armor or use shields made of metal.',
-    tools: {
-      default: [toolIds.herbalismKit],
-    },
-    toolsDescription: `Druids are proficient with ^${itemIds.herbalismKit}{herbalism kits}^.`,
-    equipment: {
-      default: [
-        { item: itemIds.leatherArmor, quantity: 1 },
-        { item: itemIds.explorersPack, quantity: 1 },
-      ],
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.scimitar, quantity: 1 }],
-            ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.sprigOfMistletoe, quantity: 1 }],
-            [{ item: itemIds.totem, quantity: 1 }],
-            [{ item: itemIds.woodenStaff, quantity: 1 }],
-            [{ item: itemIds.yewWand, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.shield, quantity: 1 }],
-            ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-            ...simpleRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-      ],
-    },
-    equipmentDescription: [
+    freeToolProficiencyIds: [toolIds.herbalismKit],
+    toolProficiencyDescription: `Druids are proficient with ^${itemIds.herbalismKit}{herbalism kits}^.`,
+    freeItemIds: [
+      { item: itemIds.leatherArmor, quantity: 1 },
+      { item: itemIds.explorersPack, quantity: 1 },
+    ],
+    itemDescription: [
       `(a) a ^${itemIds.scimitar}{scimitar}^ or (b) any simple melee weapon`,
       `(a) a ^${itemIds.shield}{shield}^ or (b) any simple melee weapon`,
       `^${itemIds.leatherArmor}{Leather armor}^, an ^${itemIds.explorersPack}{explorer's pack}^, and a druidic focus`,
@@ -801,62 +444,19 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
     multiclassingDescription:
       'You must have a Dexterity score and a Wisdom score of 13 or higher in order to multiclass in or out of this class.',
-    savingThrows: {
-      default: [Ability.STR, Ability.DEX],
-    },
-    skills: {
-      choices: [
-        {
-          options: [
-            Skill.ACROBATICS,
-            Skill.ATHLETICS,
-            Skill.HISTORY,
-            Skill.INSIGHT,
-            Skill.RELIGION,
-            Skill.STEALTH,
-          ],
-          numberOfChoices: 2,
-        },
-      ],
-    },
-    skillChoiceDescription: `Choose two skills from Acrobatics, Athletics, History, Insight, Religion, and Stealth.`,
-    weapons: {
-      default: simpleIds.concat([weaponIds.shortsword]),
-    },
-    weaponDescription: `Monks are proficient with all simple melee weapons and ^${itemIds.shortsword}{shortswords}^`,
-    armor: {},
-    armorDescription: 'Monks are not proficient with armor or shields.',
-    tools: {
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: [...instrumentIds, ...artisanIds],
-        },
-      ],
-    },
-    toolsDescription:
+    freeSavingThrowProficiencies: [Ability.STR, Ability.DEX],
+    savingThrowDescription:
+      'Monks are proficient in Strength and Dexterity saving throws',
+    skillDescription: `Choose two skills from Acrobatics, Athletics, History, Insight, Religion, and Stealth.`,
+    freeWeaponProficiencyGroups: [WeaponGroup.ALL_SIMPLE],
+    freeWeaponProficiencyIds: [weaponIds.shortsword],
+    weaponProficiencyDescription: `Monks are proficient with all simple melee weapons and ^${itemIds.shortsword}{shortswords}^`,
+    armorProficiencyDescription:
+      'Monks are not proficient with armor or shields.',
+    toolProficiencyDescription:
       "Choose one type of artisan's tools or one musical instrument.",
-    equipment: {
-      default: [{ item: itemIds.dart, quantity: 10 }],
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.shortsword, quantity: 1 }],
-            ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-            ...simpleRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.dungeoneersPack, quantity: 1 }],
-            [{ item: itemIds.explorersPack, quantity: 1 }],
-          ],
-        },
-      ],
-    },
-    equipmentDescription: [
+    freeItemIds: [{ item: itemIds.dart, quantity: 10 }],
+    itemDescription: [
       `(a) a ^${itemIds.shortsword}{shortsword}^ or (b) any simple weapon`,
       `(a) a ^${itemIds.dungeoneersPack}{dungeoneer's pack}^ or (b) an ^${itemIds.explorersPack}{explorer's pack}^`,
       `^${itemIds.dart}{10 darts}^`,
@@ -885,80 +485,22 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
     multiclassingDescription:
       'You must have a Strength and Charisma score of 13 or higher in order to multiclass in or out of this class',
-    savingThrows: {
-      default: [Ability.WIS, Ability.CHA],
-    },
-    skills: {
-      choices: [
-        {
-          options: [
-            Skill.ATHLETICS,
-            Skill.INSIGHT,
-            Skill.INTIMIDATION,
-            Skill.MEDICINE,
-            Skill.PERSUASION,
-            Skill.RELIGION,
-          ],
-          numberOfChoices: 2,
-        },
-      ],
-    },
-    skillChoiceDescription:
+    savingThrowDescription:
+      'Paladins are proficient in Wisdom and Charisma saving throws',
+    skillDescription:
       'Choose two skills from Athletics, Insight, Intimidation, Medicine, Persuasion, and Religion.',
-    weapons: {
-      default: Object.values(weaponIds),
-    },
-    weaponDescription:
+    freeWeaponProficiencyGroups: [WeaponGroup.ALL_WEAPONS],
+    weaponProficiencyDescription:
       'Paladins are proficient with all simple and martial weapons.',
-    armor: {
-      default: [ArmorType.LIGHT, ArmorType.MEDIUM, ArmorType.HEAVY],
-    },
-    armorDescription: `Paladins are proficient with all armor and ^${itemIds.shield}{shields}^.`,
-    tools: {},
-    toolsDescription: 'Paladins are not proficient with any tools.',
-    equipment: {
-      default: [{ item: itemIds.chainMail, quantity: 1 }],
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: [
-            ...martialMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-            ...martialRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            ...martialMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-            ...martialRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
-            [{ item: itemIds.shield, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.javelin, quantity: 5 }],
-            ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.priestsPack, quantity: 1 }],
-            [{ item: itemIds.explorersPack, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.amulet, quantity: 1 }],
-            [{ item: itemIds.reliquary, quantity: 1 }],
-            [{ item: itemIds.emblem, quantity: 1 }],
-          ],
-        },
-      ],
-    },
-    equipmentDescription: [
+    freeArmorProficiencies: [
+      ArmorType.LIGHT,
+      ArmorType.MEDIUM,
+      ArmorType.HEAVY,
+    ],
+    armorProficiencyDescription: `Paladins are proficient with all armor and ^${itemIds.shield}{shields}^.`,
+    toolProficiencyDescription: 'Paladins are not proficient with any tools.',
+    freeItemIds: [{ item: itemIds.chainMail, quantity: 1 }],
+    itemDescription: [
       `^${itemIds.chainMail}{Chain mail}^ and a holy symbol.`,
       `(a) a martial weapon and a ^${itemIds.shield}{shield}^ or (b) two martial weapons`,
       `(a) five ^${itemIds.javelin}{javelins}^ or (b) any simple melee weapon`,
@@ -1003,84 +545,34 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       abilities: [Ability.DEX, Ability.WIS],
       greaterThan: 12,
     },
-    savingThrows: {
-      default: [Ability.STR, Ability.DEX],
-    },
-    skills: {
-      choices: [
-        {
-          options: [
-            Skill.ANIMAL_HANDLING,
-            Skill.ATHLETICS,
-            Skill.INSIGHT,
-            Skill.INVESTIGATION,
-            Skill.NATURE,
-            Skill.PERCEPTION,
-            Skill.STEALTH,
-            Skill.SURVIVAL,
-          ],
-          numberOfChoices: 3,
-        },
-      ],
-    },
-    skillChoiceDescription: `Choose three from Animal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, and Survival`,
-    weapons: {
-      default: Object.values(weaponIds),
-    },
-    weaponDescription:
+    savingThrowDescription:
+      'Rangers are proficient in Strength and Dexterity saving throws',
+    freeSavingThrowProficiencies: [Ability.STR, Ability.DEX],
+    skillDescription: `Choose three from Animal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, and Survival`,
+    freeWeaponProficiencyGroups: [WeaponGroup.ALL_WEAPONS],
+    weaponProficiencyDescription:
       'Rangers are proficient with all simple and martial weapons.',
-    armor: {
-      default: [ArmorType.LIGHT, ArmorType.MEDIUM, ArmorType.SHIELDS],
-    },
-    armorDescription:
+    freeArmorProficiencies: [
+      ArmorType.LIGHT,
+      ArmorType.MEDIUM,
+      ArmorType.SHIELDS,
+    ],
+    armorProficiencyDescription:
       'Rangers are proficient with Light Armor and Medium Armor.',
-    tools: {},
-    toolsDescription: 'Rangers are not proficient with any tools.',
+    toolProficiencyDescription: 'Rangers are not proficient with any tools.',
+    freeItemIds: [
+      { item: itemIds.arrow, quantity: 20 },
+      {
+        item: itemIds.quiver,
+        quantity: 1,
+      },
+      {
+        item: itemIds.longbow,
+        quantity: 1,
+      },
+    ],
 
-    equipment: {
-      default: [
-        { item: itemIds.arrow, quantity: 20 },
-        {
-          item: itemIds.quiver,
-          quantity: 1,
-        },
-        {
-          item: itemIds.longbow,
-          quantity: 1,
-        },
-      ],
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.scaleMail, quantity: 1 }],
-            [{ item: itemIds.leatherArmor, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.shortsword, quantity: 1 }],
-            ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.shortsword, quantity: 1 }],
-            ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.dungeoneersPack, quantity: 1 }],
-            [{ item: itemIds.explorersPack, quantity: 1 }],
-          ],
-        },
-      ],
-    },
-    equipmentDescription: [
+    itemDescription: [
       `(a) ^${itemIds.scaleMail}{scale mail}^ or (b) ^${itemIds.leatherArmor}{leather armor}^`,
       `(a) Two ^${itemIds.shortsword}{shortswords}^ or (b) any two simple melee weapon`,
       `(a) a ^${itemIds.dungeoneersPack}{dungeoneer's pack}^ or (b) an ^${itemIds.explorersPack}{explorer's pack}^`,
@@ -1126,76 +618,23 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     multiclassingDescription:
       'You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.',
     hitDie: 6,
-    savingThrows: {
-      default: [Ability.CON, Ability.CHA],
-    },
-    skillChoiceDescription:
+    freeSavingThrowProficiencies: [Ability.CON, Ability.CHA],
+    skillDescription:
       'Choose two from Arcana, Deception, Insight, Intimidation, Persuasion, and Religion',
-    skills: {
-      choices: [
-        {
-          options: [
-            Skill.ARCANA,
-            Skill.DECEPTION,
-            Skill.INSIGHT,
-            Skill.INTIMIDATION,
-            Skill.PERSUASION,
-            Skill.RELIGION,
-          ],
-          numberOfChoices: 2,
-        },
-      ],
-    },
-
-    weapons: {
-      default: [
-        weaponIds.dagger,
-        weaponIds.dart,
-        weaponIds.sling,
-        weaponIds.quarterstaff,
-        weaponIds.crossbowLight,
-      ],
-    },
-    weaponDescription: `Sorcerers are proficient with ^${itemIds.dagger}{daggers}^, ^${itemIds.dart}{darts}^, ^${itemIds.sling}{slings}^, ^${itemIds.quarterstaff}{quarterstaffs}^, and ^${itemIds.crossbowLight}{light crossbows}^`,
-    armor: {},
-    armorDescription: 'Sorcerers are not proficient with armor.',
-    tools: {},
-    toolsDescription: 'Sorcerers are not proficient with any tools.',
-    equipment: {
-      default: [{ item: itemIds.dagger, quantity: 2 }],
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: [
-            [
-              { item: itemIds.crossbowLight, quantity: 1 },
-              { item: itemIds.crossbowBolt, quantity: 20 },
-            ],
-            ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-            ...simpleRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.dungeoneersPack, quantity: 1 }],
-            [{ item: itemIds.explorersPack, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.componentPouch, quantity: 1 }],
-            [{ item: itemIds.staff, quantity: 1 }],
-            [{ item: itemIds.wand, quantity: 1 }],
-            [{ item: itemIds.crystal, quantity: 1 }],
-            [{ item: itemIds.rod, quantity: 1 }],
-            [{ item: itemIds.orb, quantity: 1 }],
-          ],
-        },
-      ],
-    },
-    equipmentDescription: [
+    savingThrowDescription:
+      'Sorcerers are proficient in Constitution and Charisma saving throws',
+    freeWeaponProficiencyIds: [
+      weaponIds.dagger,
+      weaponIds.dart,
+      weaponIds.sling,
+      weaponIds.quarterstaff,
+      weaponIds.crossbowLight,
+    ],
+    weaponProficiencyDescription: `Sorcerers are proficient with ^${itemIds.dagger}{daggers}^, ^${itemIds.dart}{darts}^, ^${itemIds.sling}{slings}^, ^${itemIds.quarterstaff}{quarterstaffs}^, and ^${itemIds.crossbowLight}{light crossbows}^`,
+    armorProficiencyDescription: 'Sorcerers are not proficient with armor.',
+    toolProficiencyDescription: 'Sorcerers are not proficient with any tools.',
+    freeItemIds: [{ item: itemIds.dagger, quantity: 2 }],
+    itemDescription: [
       `(a) a ^${itemIds.crossbowLight}{light crossbow}^ and 20 ^${itemIds.crossbowBolt}{bolts}^ or (b) any simple weapon`,
       `(a) a ^${itemIds.componentPouch}{component pouch}^ or (b) an arcane focus`,
       `(a) a ^${itemIds.dungeoneersPack}{dungeoneer's pack}^ or (b) an ^${itemIds.explorersPack}{explorer's pack}^`,
@@ -1240,83 +679,23 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     },
     multiclassingDescription:
       'You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.',
-    savingThrows: {
-      default: [Ability.WIS, Ability.CHA],
-    },
-    skills: {
-      choices: [
-        {
-          options: [
-            Skill.ARCANA,
-            Skill.DECEPTION,
-            Skill.HISTORY,
-            Skill.INTIMIDATION,
-            Skill.INVESTIGATION,
-            Skill.NATURE,
-            Skill.RELIGION,
-          ],
-          numberOfChoices: 2,
-        },
-      ],
-    },
-    skillChoiceDescription:
-      'Choose two from Arcana, Deception, History, Intimidation, Investigation, Nature, and Religion',
-    weapons: {
-      default: simpleIds,
-    },
-    weaponDescription: 'Warlocks are proficient with all simple weapons.',
-    armor: {
-      default: [ArmorType.LIGHT],
-    },
-    armorDescription: 'Warlocks are proficient with Light Armor.',
-    tools: {},
-    toolsDescription: 'Warlocks are not proficient with any tools.',
+    savingThrowDescription:
+      'Warlocks are proficient in Wisdom and Charisma saving throws',
+    freeSavingThrowProficiencies: [Ability.WIS, Ability.CHA],
 
-    equipment: {
-      default: [
-        { item: itemIds.dagger, quantity: 2 },
-        { item: itemIds.leatherArmor, quantity: 1 },
-      ],
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: [
-            [
-              { item: itemIds.crossbowLight, quantity: 1 },
-              { item: itemIds.crossbowBolt, quantity: 20 },
-            ],
-            ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-            ...simpleRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.componentPouch, quantity: 1 }],
-            [{ item: itemIds.staff, quantity: 1 }],
-            [{ item: itemIds.wand, quantity: 1 }],
-            [{ item: itemIds.crystal, quantity: 1 }],
-            [{ item: itemIds.rod, quantity: 1 }],
-            [{ item: itemIds.orb, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.dungeoneersPack, quantity: 1 }],
-            [{ item: itemIds.scholarsPack, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 1,
-          options: [
-            ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-            ...simpleRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-      ],
-    },
-    equipmentDescription: [
+    skillDescription:
+      'Choose two from Arcana, Deception, History, Intimidation, Investigation, Nature, and Religion',
+    freeWeaponProficiencyGroups: [WeaponGroup.ALL_SIMPLE],
+    weaponProficiencyDescription:
+      'Warlocks are proficient with all simple weapons.',
+    freeArmorProficiencies: [ArmorType.LIGHT],
+    armorProficiencyDescription: 'Warlocks are proficient with Light Armor.',
+    toolProficiencyDescription: 'Warlocks are not proficient with any tools.',
+    freeItemIds: [
+      { item: itemIds.dagger, quantity: 2 },
+      { item: itemIds.leatherArmor, quantity: 1 },
+    ],
+    itemDescription: [
       `(a) a ^${itemIds.crossbowLight}{light crossbow}^ and 20 ^${itemIds.crossbowBolt}{bolts}^ or (b) any simple weapon`,
       `(a) a ^${itemIds.componentPouch}{component pouch}^ or (b) an arcane focus`,
       `(a) a ^${itemIds.dungeoneersPack}{dungeoneer's pack}^ or (b) a ^${itemIds.scholarsPack}{scholar's pack}^`,
@@ -1365,75 +744,33 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     multiclassingDescription:
       'You must have an Intelligence score of 13 or higher in order to multiclass in or out of this class.',
     hitDie: 8,
-    armor: {
-      default: [ArmorType.LIGHT, ArmorType.MEDIUM, ArmorType.SHIELDS],
-    },
-    armorDescription:
+    freeArmorProficiencies: [
+      ArmorType.LIGHT,
+      ArmorType.MEDIUM,
+      ArmorType.SHIELDS,
+    ],
+    armorProficiencyDescription:
       'Artificers are proficient with Light Armor, Medium Armor, and Shields.',
-    savingThrows: {
-      default: [Ability.CON, Ability.INT],
-    },
-    toolsDescription: `Artificers are proficient with a variety of tools. All artificers are proficient with ^${itemIds.thievesTools}{Thieves' Tools}^ and ^${itemIds.thievesTools}{Tinker's Tools}^. Additionally, you can choose one additional artisan's tool of your choice.`,
-    tools: {
-      default: [toolIds.thievesTools, toolIds.tinkersTools],
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: artisanIds,
-        },
-      ],
-    },
-    skills: {
-      choices: [
-        {
-          options: [
-            Skill.ARCANA,
-            Skill.HISTORY,
-            Skill.INVESTIGATION,
-            Skill.MEDICINE,
-            Skill.NATURE,
-            Skill.PERCEPTION,
-            Skill.SLEIGHT_OF_HAND,
-            Skill.INSIGHT,
-          ],
-          numberOfChoices: 2,
-        },
-      ],
-    },
-    skillChoiceDescription:
+    savingThrowDescription:
+      'Artificers are proficient in Constitution and Intelligence saving throws',
+    freeSavingThrowProficiencies: [Ability.CON, Ability.INT],
+    toolProficiencyDescription: `Artificers are proficient with a variety of tools. All artificers are proficient with ^${itemIds.thievesTools}{Thieves' Tools}^ and ^${itemIds.thievesTools}{Tinker's Tools}^. Additionally, you can choose one additional artisan's tool of your choice.`,
+    freeToolProficiencyIds: [toolIds.thievesTools, toolIds.tinkersTools],
+    skillDescription:
       'Choose two from Arcana, History, Investigation, Medicine, Nature, Perception, Sleight of Hand, and Insight.',
-    weaponDescription: 'Artificers are proficient with simple weapons.',
-    weapons: {
-      default: simpleIds,
-    },
+    weaponProficiencyDescription:
+      'Artificers are proficient with simple weapons.',
+    freeWeaponProficiencyGroups: [WeaponGroup.ALL_SIMPLE],
+    freeItemIds: [
+      { item: itemIds.dagger, quantity: 1 },
+      { item: itemIds.crossbowLight, quantity: 1 },
+      { item: itemIds.crossbowBolt, quantity: 20 },
+      { item: itemIds.leatherArmor, quantity: 1 },
+      { item: itemIds.thievesTools, quantity: 1 },
+      { item: itemIds.dungeoneersPack, quantity: 1 },
+    ],
 
-    equipment: {
-      default: [
-        { item: itemIds.dagger, quantity: 1 },
-        { item: itemIds.crossbowLight, quantity: 1 },
-        { item: itemIds.crossbowBolt, quantity: 20 },
-        { item: itemIds.leatherArmor, quantity: 1 },
-        { item: itemIds.thievesTools, quantity: 1 },
-        { item: itemIds.dungeoneersPack, quantity: 1 },
-      ],
-      choices: [
-        {
-          numberOfChoices: 1,
-          options: [
-            [{ item: itemIds.scaleMail, quantity: 1 }],
-            [{ item: itemIds.studdedLeatherArmor, quantity: 1 }],
-          ],
-        },
-        {
-          numberOfChoices: 2,
-          options: [
-            ...simpleMeleeItemIds.map((id) => [{ item: id, quantity: 1 }]),
-            ...simpleRangedItemIds.map((id) => [{ item: id, quantity: 1 }]),
-          ],
-        },
-      ],
-    },
-    equipmentDescription: [
+    itemDescription: [
       `(a) ^${itemIds.scaleMail}{Scale mail}^ or (b) ^${itemIds.studdedLeatherArmor}{studded leather armor}^`,
       `Any two simple weapons`,
       `^${itemIds.thievesTools}{thieves' tools}^, and a ^${itemIds.dungeoneersPack}{dungeoneer's pack}^`,

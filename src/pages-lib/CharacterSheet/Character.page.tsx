@@ -1,21 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { generateCharacter } from '../../Utility/characterStateFunctions/update/generateCharacter';
+import { useState } from 'react';
 import '@/lib/string.extensions';
 import MainSheet from '@/components/CharacterSheet/main/MainSheet';
-import InventoryTab from '@/components/CharacterSheet/Inventory/InventoryTab';
-import ChooseChoices from '@/components/CharacterSheet/Choices/Choices';
-import SpellSheet from '@/components/CharacterSheet/Spells/SpellSheet';
+// import InventoryTab from '@/components/CharacterSheet/Inventory/InventoryTab';
+// import ChooseChoices from '@/components/CharacterSheet/Choices/Choices';
+// import SpellSheet from '@/components/CharacterSheet/Spells/SpellSheet';
 // import Notes from '@/components/CharacterSheet/Notes/Notes';
-import Traits from '@/components/CharacterSheet/Traits/Traits';
-import { applyPendingModels } from '../../Utility/characterStateFunctions/update/applyPendingModels';
-import CharacterStatsTab from '@/components/CharacterSheet/Stats/CharacterStatsTab';
-import { CharacterInfo } from '@/lib/types/modelInfo';
-import { useAppSelector } from '@/store/hooks';
-import { useDispatch } from 'react-redux';
-import { setCharacter } from '@/store/characterSlice';
+// import Traits from '@/components/CharacterSheet/Traits/Traits';
+// import CharacterStatsTab from '@/components/CharacterSheet/Stats/CharacterStatsTab';
 import Loading from '@/components/UI/Loading';
+import useCharacter from '@/hooks/useCharacter/useCharacter';
 
 type Tab =
   | 'sheet'
@@ -27,46 +22,12 @@ type Tab =
   | 'stats';
 
 interface Props {
-  characterData: CharacterInfo;
+  characterID: string;
 }
 
-const CharacterSheet = ({ characterData }: Props) => {
+const CharacterSheet = ({ characterID }: Props) => {
   const [activeTab, setActiveTab] = useState<Tab>('sheet');
-  const character = useAppSelector((state) => state.character);
-  const [isInitialized, setIsInitialized] = useState(false);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    // check to see if class/subclass needs to be linked
-    if (!character.state) return;
-    if (!character.state.pendingLinks) return;
-    applyPendingModels(character).then((c) => {
-      dispatch(setCharacter(c));
-    });
-  }, [character, dispatch]);
-
-  useEffect(() => {
-    if (isInitialized && character.state) return;
-    setIsInitialized(true);
-
-    if (characterData.state) {
-      dispatch(setCharacter(characterData));
-      return;
-    }
-
-    generateCharacter(characterData).then((c) => {
-      dispatch(
-        setCharacter({
-          ...characterData,
-          state: c,
-        })
-      );
-    });
-  }, [characterData, dispatch, character.state, isInitialized]);
-
-  useEffect(() => {
-    console.log(character);
-  }, [character]);
+  const { loading } = useCharacter(characterID);
 
   return (
     <main className="p-4 md:p-8">
@@ -88,7 +49,9 @@ const CharacterSheet = ({ characterData }: Props) => {
           Character sheets are currently in beta, and bugs are to be expected.
         </span>
       </div>
-      {character.state ? (
+      {loading ? (
+        <Loading />
+      ) : (
         <>
           <div role="tablist" className="tabs tabs-lifted">
             <input
@@ -107,8 +70,7 @@ const CharacterSheet = ({ characterData }: Props) => {
             >
               <MainSheet />
             </div>
-            {/* dummy tabs for now */}
-            <input
+            {/* <input
               type="radio"
               name="charcter_tabs"
               role="tab"
@@ -203,11 +165,9 @@ const CharacterSheet = ({ characterData }: Props) => {
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
               <ChooseChoices />
-            </div>
+            </div> */}
           </div>
         </>
-      ) : (
-        <Loading />
       )}
     </main>
   );

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Tooltip from '@/Utility/Tooltip';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setCharacter } from '@/store/characterSlice';
+import { setCharacter } from '@/store/sheetSlice';
 
 const HitPointsHandler = () => {
   const character = useAppSelector((state) => state.character);

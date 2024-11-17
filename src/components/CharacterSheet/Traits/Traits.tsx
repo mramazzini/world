@@ -2,7 +2,7 @@
 import JsonTable from '@/Utility/JsonTable';
 import Tooltip from '@/Utility/Tooltip';
 import { MarkdownItem } from '@/lib/types/types';
-import { setCharacterState } from '@/store/characterSlice';
+import { setCharacterState } from '@/store/sheetSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import DOMPurify from 'dompurify';
 import markdownIt from 'markdown-it';

@@ -158,39 +158,35 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
                 <span className="font-bold">
                   <P>Armor: </P>
                 </span>
-                <P>{classObj.armorDescription}</P>
+                <P>{classObj.armorProficiencyDescription}</P>
               </p>
               <div className="divider m-0"></div>
               <p>
                 <span className="font-bold">
                   <P>Weapons: </P>
                 </span>
-                <P>{classObj.weaponDescription}</P>
+                <P>{classObj.weaponProficiencyDescription}</P>
               </p>
               <div className="divider m-0"></div>
               <p>
                 <span className="font-bold">
                   <P>Tools: </P>
                 </span>
-                <P>{classObj.toolsDescription}</P>
+                <P>{classObj.toolProficiencyDescription}</P>
               </p>
               <div className="divider m-0"></div>
               <p>
                 <span className="font-bold">
                   <P>Skills: </P>
                 </span>
-                <P>{classObj.skillChoiceDescription}</P>
+                <P>{classObj.skillDescription}</P>
               </p>
               <div className="divider m-0"></div>
               <p>
                 <span className="font-bold">
                   <P>Saving Throws: </P>
                 </span>
-                <P>
-                  {classObj.savingThrows?.default
-                    ?.map((s) => AbilityToText(Ability[s]))
-                    .join(', ') || 'None'}
-                </P>
+                <P>{classObj.savingThrowDescription}</P>
               </p>
               <div className="divider m-0"></div>
             </div>
@@ -201,7 +197,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
               </h2>
               <div className="divider m-0"></div>
               <ul>
-                {classObj.equipmentDescription.map((item, index) => (
+                {classObj.itemDescription.map((item, index) => (
                   <Fragment key={index}>
                     <li>
                       <P>{item}</P>

@@ -3,9 +3,10 @@ import Loading from '@/components/UI/Loading';
 import Modal from '@/components/UI/Modal/Modal';
 import ModalBox from '@/components/UI/Modal/ModalBox';
 import ModalButton from '@/components/UI/Modal/ModalButton';
-import { setImageUrl } from '@/store/characterSlice';
+import Skeleton from '@/components/UI/Skeleton';
+import { CharacterInfo } from '@/lib/types/modelInfo';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { saveImageToCharacter } from '@/Utility/saveCharacterToDB';
+import { setRawCharacter } from '@/store/sheetSlice';
 import Image from 'next/image';
 import { Suspense, useState } from 'react';
 interface Props {
@@ -13,8 +14,7 @@ interface Props {
 }
 const ImageUploadModal = ({ modalid }: Props) => {
   const dispatch = useAppDispatch();
-  const character = useAppSelector((state) => state.character);
-  const image = useAppSelector((state) => state.character.imageURL);
+  const character = useAppSelector((state) => state.sheet.rawCharacter);
   const [valid, setValid] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -25,9 +25,12 @@ const ImageUploadModal = ({ modalid }: Props) => {
   };
 
   const saveImage = async (image: string) => {
-    await dispatch(setImageUrl(image));
-    await saveImageToCharacter(character.id, image);
+    await dispatch(
+      setRawCharacter({ ...character, imageURL: image } as CharacterInfo)
+    );
   };
+
+  if (!character) return <Skeleton height={128} />;
 
   return (
     <>
@@ -45,19 +48,20 @@ const ImageUploadModal = ({ modalid }: Props) => {
               type="text"
               placeholder="Image URL"
               className="input input-bordered grow  join-item"
-              value={image || ''}
+              value={character.imageURL || ''}
               onChange={(e) => {
                 setValid(false);
-                dispatch(setImageUrl(e.target.value));
+                saveImage(e.target.value);
               }}
             />
             <button
               className="btn join-item "
               onClick={(e) => {
                 e.preventDefault();
-                if (!validUrl(image || '')) return setMessage('Invalid URL');
+                if (!validUrl(character.imageURL || ''))
+                  return setMessage('Invalid URL');
                 setValid(true);
-                dispatch(setImageUrl(image || ''));
+                saveImage(character.imageURL || '');
                 setMessage('');
               }}
             >
@@ -65,11 +69,11 @@ const ImageUploadModal = ({ modalid }: Props) => {
             </button>
           </div>
           {message && <p className="text-red-500 my-4">{message}</p>}
-          {valid && image && (
+          {valid && character.imageURL && (
             <div className="flex items-center justify-center m-4">
               <Suspense fallback={<Loading />}>
                 <Image
-                  src={image}
+                  src={character.imageURL}
                   width={200}
                   height={200}
                   className="rounded-lg w-[200px] h-[200px] object-cover object-center mr-4 text-center font-bold"
@@ -81,12 +85,14 @@ const ImageUploadModal = ({ modalid }: Props) => {
           <div className="modal-action">
             <form method="dialog gap-4">
               {/* if there is a button in form, it will close the modal */}
-              {valid && image && (
+              {valid && character.imageURL && (
                 <button
                   className="btn mr-2"
                   onClick={async (e) => {
                     e.preventDefault();
-                    await saveImage(image);
+                    if (!character.imageURL) return;
+
+                    await saveImage(character.imageURL);
                     const modal = document.getElementById(
                       modalid
                     ) as HTMLDialogElement;

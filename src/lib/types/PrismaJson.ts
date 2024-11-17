@@ -1,6 +1,5 @@
 import {
   Ability,
-  ArmorType,
   Currency,
   DamageTypes,
   Language,
@@ -9,17 +8,13 @@ import {
   WorkshopProtocol,
 } from '@prisma/client';
 import {
-  AbilityScores,
   AbilityScoreValue,
   ArmorID,
-  ASIorFeat,
   BackgroundID,
-  CallbackOptions,
   ClassID,
   FeatID,
   ItemID,
   Level,
-  MarkdownItem,
   SpeciesID,
   SpellFocus,
   SpellID,
@@ -31,8 +26,8 @@ import {
   WeaponPropertyNames,
   Time,
 } from './types';
-import { CharacterInfo } from './modelInfo';
 import { WorkshopItemEditorData } from './workshop';
+import { ChoiceParams } from './protocols';
 
 declare global {
   namespace PrismaJson {
@@ -131,11 +126,6 @@ declare global {
       addSpellcastingModifier?: boolean;
       components?: string;
     }
-    type StateCallback = (
-      character: CharacterInfo,
-      selections: CallbackOptions,
-      from: string
-    ) => Promise<PrismaJson.CharacterState> | PrismaJson.CharacterState;
 
     interface Prerequisite {
       protocol: 'AND' | 'OR';
@@ -175,33 +165,6 @@ declare global {
       }[];
     }
 
-    interface EquipmentSetup {
-      armorTypes?: ArmorType[];
-      armor?: ArmorID[]; // armor id
-      weapons?: {
-        martialOnly?: boolean;
-        simpleOnly?: boolean;
-        rangedOnly?: boolean;
-        meleeOnly?: boolean;
-        weaponIds?: WeaponID[]; // weapon id
-        properties?: WeaponPropertyNames[];
-      };
-
-      shield?: boolean;
-      items?: ItemID[]; // If a specific item needs to be equipped.
-      emptyHands?: { amount: 1 | 2 }; // If the player needs to have empty hands to use the feature. If shield is true, the player can have a shield equipped.
-      armorless?: boolean; // If the player needs to be unarmored to use the feature.
-      weaponless?: boolean; // If the player needs to be unarmed to use the feature.
-      shieldless?: boolean; // If the player needs to be unshielded to use the feature.
-    }
-
-    interface CustomizedSpell {
-      spells: SpellChoice;
-      noSpellSlot?: boolean;
-      customLevel?: number;
-      alwaysPrepared?: boolean;
-      //add more as needed
-    }
     interface CustomResource {
       name: string;
       description: string;
@@ -209,13 +172,7 @@ declare global {
       current: number; //current amount of resource
       resetType: QuantityTime;
     }
-    interface Cost {
-      items?: ItemChoice;
-      spellSlots?: SpellSlots;
-      combatTime?: CombatTime;
-      time?: QuantityTime;
-      customResources?: QuantityCustomResource;
-    }
+
     interface QuantityCustomResource {
       quantity: number;
       resource: string; //resource name
@@ -233,61 +190,10 @@ declare global {
       [K in SpellLevel]?: number;
     };
 
-    interface SpellChoice {
-      //Spell Ids
-      default?: SpellID[];
-      choices?: {
-        options: SpellID[];
-        numberOfChoices: number;
-      }[];
-    }
-
     interface AbilityScoreTrigger {
       abilities: Ability[];
       lessThan?: number;
       greaterThan?: number;
-    }
-
-    interface ArmorChoice {
-      default?: ArmorType[];
-      choices?: {
-        options: ArmorType[];
-        numberOfChoices: number;
-      }[];
-    }
-
-    interface WeaponChoice {
-      default?: WeaponID[]; // weapon id
-      choices?: {
-        options: WeaponID[]; // weapon id
-        numberOfChoices: number;
-      }[];
-    }
-
-    interface ToolChoice {
-      default?: ToolID[]; // tool id
-      choices?: {
-        options: ToolID[]; // tool id
-        numberOfChoices: number;
-      }[];
-    }
-
-    interface SkillChoice {
-      default?: Skill[];
-      choices?: {
-        options: Skill[];
-        numberOfChoices: number;
-      }[];
-    }
-    interface ItemChoice {
-      default?: {
-        item: ItemID; // item id
-        quantity: number;
-      }[];
-      choices?: {
-        options: QuantityItem[][]; // 2d arr to allow variations in quantity
-        numberOfChoices: number;
-      }[];
     }
 
     interface QuantityTime {
@@ -298,114 +204,10 @@ declare global {
       rangedOnly?: boolean;
       meleeOnly?: boolean;
     }
-    type ChoiceModel =
-      | 'Item'
-      | 'Language'
-      | 'Skill'
-      | 'Ability'
-      | 'AbilityScore'
-      | 'CharacterAbilityScoreSelection'
-      | 'Weapon'
-      | 'Armor'
-      | 'Tool'
-      | 'Subclass'
-      | 'Feat'
-      | 'ASI or Feat';
-    type ChoiceType =
-      | ItemChoice
-      | LanguageChoice
-      | SkillChoice
-      | AbilityChoice
-      | AbilityScoreChoice
-      | WeaponChoice
-      | ArmorChoice
-      | ToolChoice
-      | SubclassChoice
-      | FeatChoice
-      | ASIorFeatChoice;
-    interface SubclassChoice {
-      default?: SubClassID[];
-      choices?: {
-        options: SubClassID[];
-        numberOfChoices: number;
-      }[];
-    }
-    interface ASIorFeatChoice {
-      default?: ASIorFeat[];
-      choices?: {
-        options: ASIorFeat[];
-        numberOfChoices: number;
-      }[];
-    }
-
-    interface Choice {
-      id: string;
-      model: ChoiceModel;
-      choice: ChoiceType;
-
-      from: string;
-      description?: string;
-      callbackProtocol: CallbackProtocol;
-    }
-    type CallbackProtocol =
-      | 'addLanguageProficiencies'
-      | 'addSkillProficiencies'
-      | 'addToolProficiencies'
-      | 'addArmorProficiencies'
-      | 'addWeaponProficiencies'
-      | 'addSavingThrowProficiencies'
-      | 'ItemToInventory'
-      | 'SetAbilityScore'
-      | 'AbilityScoreIncrease'
-      | 'SpeciesAbilityScoreIncrease'
-      | 'SubclassSelection'
-      | 'ASIOrFeatSelection'
-      | 'FeatSelection';
-    interface AbilityChoice {
-      default?: Ability[];
-      choices?: {
-        options: Ability[];
-        numberOfChoices: number;
-      }[];
-    }
 
     interface RollBonus {
       bonus: number;
       situation: string;
-    }
-
-    interface Advantage {
-      always?: boolean;
-      situation: string;
-      disadvantage?: boolean;
-    }
-
-    interface AttackRollAdvantage extends Advantage {
-      rangedOnly?: boolean;
-      meleeOnly?: boolean;
-    }
-
-    interface DamageRollBonus {
-      bonus: Damage[] | number; // number will be damage type of weapon.
-      situation: string;
-      rangedOnly?: boolean;
-      meleeOnly?: boolean;
-    }
-
-    interface SkillRollAdvantage extends Advantage {
-      skill: SkillChoice;
-    }
-
-    interface SkillRollBonus extends RollBonus {
-      skill: SkillChoice;
-    }
-
-    interface AbilityRollBonus extends RollBonus {
-      ability: AbilityChoice;
-    }
-
-    interface AbilityRollAdvantage extends Advantage {
-      ability: AbilityChoice;
     }
 
     interface Equipment {
@@ -467,116 +269,34 @@ declare global {
       title: string;
       link: string;
     }
-    interface CharacterState {
-      //will be used to link a model to a character
-      pendingLinks: {
-        subClass: SubClassID[];
-        Class: ClassID[];
-        feats: FeatID[];
-      };
-      notes: MarkdownItem[];
-      ideals: MarkdownItem[];
-      bonds: MarkdownItem[];
-      flaws: MarkdownItem[];
-      biography: MarkdownItem;
-      personalityTraits: MarkdownItem[];
-      classLevels: { classId: ClassID; level: number }[];
-      inspirationRolls: number;
 
-      armorClass: number;
-      armorClassReasons: Reason[];
+    interface ModelLink {
+      model:
+        | 'SubClass'
+        | 'Class'
+        | 'Feat'
+        | 'Species'
+        | 'Background'
+        | 'Spell'
+        | 'Item'
+        | 'Weapon'
+        | 'Armor'
+        | 'Tool';
 
-      experience: number;
-      experienceLog: { date: Date; amount: number; event: string }[];
-      hp: {
-        max: number;
-        maxReasons: Reason[];
-        current: number;
-        damageLog: Reason[];
-        temporary: number;
-        temporaryReason?: Reason; //Can only have one source of temphp
-        hitDieAvailable: {
-          4?: number;
-          6?: number;
-          8?: number;
-          10?: number;
-          12?: number;
-          20?: number;
-        };
-      };
-      inventory: QuantityItem[];
-      speed: {
-        base: number;
-        bonuses: Reason[];
-        running: number;
-        swimming: number;
-        climbing: number;
-        flying: number;
-        runningReasons: Reason[];
-        swimmingReasons: Reason[];
-        climbingReasons: Reason[];
-        flyingReasons: Reason[];
-      };
-      initiative: number;
-      initiativeReasons: Reason[];
-      darkvision?: QuantityUnit;
-      darkvisionReasons?: Reason[];
-      blindsight?: QuantityUnit;
-      blindsightReasons?: Reason[];
-      abilityScores: AbilityScores;
-      abilityScoreReasons: {
-        [K in Ability]?: Reason[];
-      };
-      passivePerception: number;
-      passivePerceptionReasons?: Reason[];
-      equipped: {
-        armor?: ItemID;
-        hands: {
-          numberOfHands: number;
-          numberOfHandsReasons: Reason[];
-          items?: ItemID[];
-        };
-      };
-      customAttacks?: CustomWeapon[];
-      customResources?: CustomResource[];
-      deathSaves: {
-        successes: number;
-        failures: number;
-      };
-      exhaustion: number;
-      exhaustionReasons: string[];
-      conditions: string[];
-      conditionsReasons: string[];
-
-      carryingCapacity: number;
-      carryingCapacityReasons: Reason[];
-
-      preparedSpells: SpellID[];
-      alwaysPreparedSpells: SpellID[];
-      preparedCantrips: SpellID[];
-      //for now, we only allow user submitted spells to be added to the character sheet
-      userSubmittedSpells: SheetSpell[];
-
-      spellSlots?: {
-        [K in SpellLevel]?: number;
-      };
-      proficiencies: {
-        languages: Language[];
-        languageReasons: Reason[];
-        skills: Skill[];
-        skillReasons: Reason[];
-        skillExpertise: Skill[];
-        skillExpertiseReasons: Reason[];
-        tools: ToolID[];
-        toolReasons: Reason[];
-        weapons: WeaponID[];
-        weaponReasons: Reason[];
-        armor: ArmorType[];
-        armorReasons: Reason[];
-        savingThrows: Ability[];
-        savingThrowsReasons: Reason[];
-      };
-      pendingChoices: Choice[];
+      id: string;
     }
+
+    interface DiceAmount {
+      quantity: number;
+      dice: number;
+    }
+
+    interface SpellSlot {
+      level: SpellLevel;
+      max: number;
+      current: number;
+    }
+
+    type ChoiceFetchParams = ChoiceParams;
   }
 }

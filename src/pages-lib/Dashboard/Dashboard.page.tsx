@@ -24,8 +24,8 @@ const Dashboard = () => {
 
   const calcLevel = useCallback((c: CharacterInfo) => {
     let level = 0;
-    level += c.state
-      ? c.state.classLevels.reduce((acc, cl) => acc + cl.level, 0)
+    level += c
+      ? c.CharacterToClass.reduce((acc, c) => acc + c.levelsInClass, 0)
       : 1;
     return level;
   }, []);
@@ -121,10 +121,13 @@ const Dashboard = () => {
                         </a>
                       )}
                       ,{' '}
-                      {character.Classes?.map((c) => (
-                        <Fragment key={c.id}>
-                          <a href={`/class/${c.slug}`} className="hover:link">
-                            {c.name.toCapitalCase()}
+                      {character.CharacterToClass?.map((c) => (
+                        <Fragment key={c.classId}>
+                          <a
+                            href={`/class/${c.Class.slug}`}
+                            className="hover:link"
+                          >
+                            {c.Class.name}
                           </a>
                         </Fragment>
                       ))}

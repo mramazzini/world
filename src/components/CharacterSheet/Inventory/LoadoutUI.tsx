@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import CustomWeaponsModal from './CustomWeaponsModal';
 import { useAppSelector } from '@/store/hooks';
 import { useDispatch } from 'react-redux';
-import { setCharacterState } from '@/store/characterSlice';
+import { setCharacterState } from '@/store/sheetSlice';
 import { refreshAC } from '@/Utility/characterStateFunctions/update/updateAC';
 
 const LoadoutUI = () => {

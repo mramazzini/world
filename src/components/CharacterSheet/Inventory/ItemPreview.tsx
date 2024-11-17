@@ -13,7 +13,7 @@ import { equipWeapon } from '@/Utility/characterStateFunctions/update/equipWeapo
 import { ItemInfo } from '@/lib/types/modelInfo';
 import { useAppSelector } from '@/store/hooks';
 import { useDispatch } from 'react-redux';
-import { setCharacterState } from '@/store/characterSlice';
+import { setCharacterState } from '@/store/sheetSlice';
 import { SelectedItemInfo } from './InventoryTab';
 interface Props {
   setSelectedItem: (item: PrismaJson.QuantityItem | null) => void;
