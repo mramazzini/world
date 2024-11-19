@@ -23,12 +23,12 @@ const Tool = ({
 }) => {
   const [selectedAbility, setSelectedAbility] = useState<Ability>(Ability.STR);
   const { getSkillModifier, getToolModifier } = useModifier();
-  const { getToolProficiency } = useProficiency();
+  const { isProficientInTool } = useProficiency();
   return (
     <div className="flex flex-col items-center border-primary border p-2 rounded-xl ">
       <p>{tool.name}</p>
       <p className="text-xs">
-        {getToolProficiency(tool.id) ? (
+        {isProficientInTool(tool.id) ? (
           <span className="badge-success badge badge-xs">Proficient</span>
         ) : (
           <span className="badge-error badge badge-xs">Not Proficient</span>
@@ -85,7 +85,7 @@ const Tool = ({
           )}
         </button>
       </div>
-      {getToolProficiency(tool.id) &&
+      {isProficientInTool(tool.id) &&
         tool.skills.map((skill, index) => (
           <div className="join mx-2 mt-1" key={index}>
             <Tooltip

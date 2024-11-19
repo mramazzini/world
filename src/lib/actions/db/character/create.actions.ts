@@ -26,6 +26,18 @@ export const createCharacter = async (
 }> => {
   const db = new PrismaClient();
 
+  const _class = await db.class.findUnique({
+    where: { id: params.classId },
+  });
+
+  if (!_class) {
+    console.error('Class not found');
+    return {
+      id: '',
+      result: 'error',
+    };
+  }
+
   try {
     const res = await db.character.create({
       data: {
@@ -61,8 +73,7 @@ export const createCharacter = async (
         deathSavesSuccess: 0,
         exhaustion: 0,
 
-        maxHp: 0,
-        currentHp: 0,
+        currentHp: _class.hitDie,
         tempHp: 0,
       },
     });

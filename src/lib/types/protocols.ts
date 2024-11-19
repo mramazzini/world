@@ -70,7 +70,11 @@ export type ImproveAbilityScoreParams = {
   abilitiesToIncrease: Ability[];
 }[];
 
-export type ChoiceModelId = 'speciesId' | 'subSpeciesId' | 'classId';
+export type ChoiceModelId =
+  | 'speciesId'
+  | 'subSpeciesId'
+  | 'classId'
+  | 'backgroundId';
 
 export type ImproveAbilityScoreOutput = PrismaJson.AbilityScoreValue[];
 
@@ -87,3 +91,16 @@ export type ChoiceParams =
   | SetLanguageProficiencyParams
   | SetAbilityScoreParams
   | ImproveAbilityScoreParams;
+
+export type ChoiceOutput =
+  | SetToolProficiencyOutput
+  | SetSkillProficiencyOutput
+  | SetSkillExpertiseOutput
+  | SetSavingThrowProficiencyOutput
+  | SetArmorProficiencyOutput
+  | SetWeaponProficiencyOutput
+  | AddToInventoryOutput
+  | AddToInventoryGroupedOutput
+  | SetLanguageProficiencyOutput
+  | SetAbilityScoreOutput
+  | ImproveAbilityScoreOutput;

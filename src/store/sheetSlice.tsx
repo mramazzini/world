@@ -34,11 +34,6 @@ const sheetSlice = createSlice({
     setRawCharacter(state, action: PayloadAction<CharacterInfo>) {
       state.rawCharacter = action.payload;
     },
-    applyPendingModel(state, action: PayloadAction<PrismaJson.ModelLink>) {
-      if (state.rawCharacter) {
-        state.rawCharacter.pendingLinks.push(action.payload);
-      }
-    },
   },
 });
 

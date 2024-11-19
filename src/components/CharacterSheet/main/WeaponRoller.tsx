@@ -21,10 +21,10 @@ const SingleWeapon = ({
 }) => {
   const [selectedAbility, setSelectedAbility] = useState<Ability>(Ability.STR);
   const { isVersatile } = useInventory();
-  const { getWeaponProficiency, proficiencyBonus } = useProficiency();
+  const { isProficientInWeapon, proficiencyBonus } = useProficiency();
   const { getAbilityModifier } = useModifier();
 
-  const isProficient = getWeaponProficiency(weaponData.id);
+  const isProficient = isProficientInWeapon(weaponData.id);
 
   const weapon = weaponData;
   let damage = weapon.damage;

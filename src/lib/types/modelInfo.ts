@@ -43,11 +43,12 @@ export interface SpeciesInfo extends Species {
   Variants: SubSpecies[];
 }
 
-interface SpeciesWithFeatures extends Species {
+interface SpeciesWithFeaturesAndChoices extends Species {
+  Choices: Choice[];
   Features: FeatureNoDate[];
 }
 export interface SubSpeciesInfo extends SubSpecies {
-  species: SpeciesWithFeatures;
+  species: SpeciesWithFeaturesAndChoices;
   Features: FeatureNoDate[];
   User: {
     username: string | null;
@@ -86,6 +87,7 @@ export interface CommentInfo extends Comment {
   } | null;
   replies: Comment[];
 }
+
 export interface ClassInfo extends Class {
   SubClasses: SubClass[];
   SpellcastingFeatures: FeatureWithClassColumn[];
@@ -112,17 +114,27 @@ export interface CharacterInfo extends Omit<Character, 'createdAt'> {
     id: string;
     username: string | null;
   } | null;
-  Background: Omit<BackgroundWithFeatures, 'createdAt' | 'updatedAt'> | null;
+  Background: Omit<
+    BackgroundWithFeaturesAndChoices,
+    'createdAt' | 'updatedAt'
+  > | null;
   CharacterToClass: CharacterToClassInfo[];
   SubClasses: Omit<SubClassWithFeatures, 'createdAt' | 'updatedAt'>[] | null;
   Feats: Omit<FeatWithFeatures, 'createdAt' | 'updatedAt'>[] | null;
-  Species: Omit<SpeciesWithFeatures, 'createdAt' | 'updatedAt'> | null;
-  SubSpecies: Omit<SubSpeciesWithFeatures, 'createdAt' | 'updatedAt'> | null;
+  Species: Omit<
+    SpeciesWithFeaturesAndChoices,
+    'createdAt' | 'updatedAt'
+  > | null;
+  SubSpecies: Omit<
+    SubSpeciesWithFeaturesAndChoices,
+    'createdAt' | 'updatedAt'
+  > | null;
 
   // Inventory: any;
 }
-export interface BackgroundWithFeatures extends Background {
+export interface BackgroundWithFeaturesAndChoices extends Background {
   Features: FeatureNoDate[];
+  Choices: Choice[];
 }
 export interface ClassWithFeatures extends Class {
   Features: FeatureNoDate[];
@@ -137,18 +149,23 @@ export interface FeatWithFeatures extends Feat {
 export interface ItemWithFeatures extends Item {
   Features: FeatureNoDate[];
 }
-export interface SubSpeciesWithFeatures extends SubSpecies {
+export interface SubSpeciesWithFeaturesAndChoices extends SubSpecies {
   Features: FeatureNoDate[];
+  Choices: Choice[];
 }
 
-interface ClassWithSpellListAndFeatures extends Class {
+interface ClassWithSpellListAndFeaturesAndChoices extends Class {
   SpellList: SpellListInfo | null;
   Features: FeatureNoDate[];
+  Choices: Choice[];
   SpellcastingFeatures: FeatureNoDate[];
 }
 
 interface CharacterToClassInfo extends CharacterToClass {
-  Class: Omit<ClassWithSpellListAndFeatures, 'createdAt' | 'updatedAt'>;
+  Class: Omit<
+    ClassWithSpellListAndFeaturesAndChoices,
+    'createdAt' | 'updatedAt'
+  >;
 }
 
 export interface CreatureInfo extends Creature {

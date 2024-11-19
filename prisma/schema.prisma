@@ -262,6 +262,8 @@ model Character {
   baseWIS Int
   baseCHA Int
 
+  itemsInitialized Boolean @default(false)
+
   armorEquippedId String?
 
   weaponEquippedIds String[]
@@ -275,12 +277,11 @@ model Character {
 
   preparedSpells Spell[]
 
-  maxHp     Int
+  /// [ModelLink]
+  pendingLinks Json[]
+
   currentHp Int
   tempHp    Int
-
-  /// [Choice]
-  pendingChoices Json[]
 
   createdAt          DateTime @default(now())
   updatedAtIsoString String?
@@ -434,6 +435,8 @@ model Choice {
   speciesId    String?
   SubSpecies   SubSpecies? @relation(fields: [subSpeciesId], references: [id])
   subSpeciesId String?
+  Background   Background? @relation(fields: [backgroundId], references: [id])
+  backgroundId String?
 }
 
 model CharacterChoiceStatus {
@@ -441,6 +444,7 @@ model CharacterChoiceStatus {
   choiceId    String
 
   fufilled Boolean
+  /// [ChoiceFetchOutput]
   values   Json[]
 
   Character Character @relation(fields: [characterId], references: [id])
@@ -737,25 +741,30 @@ model SubSpecies {
 model Background {
   id String @id
 
-  srd                            Boolean  @default(false)
-  name                           String
-  description                    String
-  source                         String   @default("Player's Handbook")
-  flavorText                     String   @db.VarChar(200)
-  /// [SkillChoice]
-  skillProficiencies             Json?
-  skillProficiencyDescription    String?
-  /// [ToolChoice]
-  toolProficiencies              Json?
-  toolProficiencyDescription     String?
-  /// [LanguageChoice]
-  languageProficiencies          Json?
-  languageProficiencyDescription String?
-  /// [ItemChoice]
-  equipment                      Json?
-  equipmentDescription           String[]
+  srd         Boolean @default(false)
+  name        String
+  description String
+  source      String  @default("Player's Handbook")
+  flavorText  String  @db.VarChar(200)
 
-  Features                 Feature[]
+  Choices Choice[]
+
+  freeSkillProficiencies      Skill[]
+  skillProficiencyDescription String?
+
+  freeToolProficiencyGroups  ToolGroup[]
+  freeToolProficiencyIds     String[]
+  toolProficiencyDescription String?
+
+  freeLanguageProficiencies      Language[]
+  languageProficiencyDescription String?
+
+  /// [QuantityItem]
+  freeEquipment        Json[]
+  equipmentDescription String[]
+
+  Features Feature[]
+
   suggestedCharacteristics String?
   traits                   String[]
   ideals                   String[]
@@ -815,7 +824,8 @@ model Tool {
 
   Features Feature[]
 
-  Items Item[]
+  Items     Item[]
+  ToolGroup ToolGroup?
 
   User   User?   @relation(fields: [userId], references: [id])
   userId String?

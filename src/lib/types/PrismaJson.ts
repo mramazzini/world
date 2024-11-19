@@ -2,7 +2,6 @@ import {
   Ability,
   Currency,
   DamageTypes,
-  Language,
   Skill,
   Unit,
   WorkshopProtocol,
@@ -26,7 +25,7 @@ import {
   Time,
 } from './types';
 import { WorkshopItemEditorData } from './workshop';
-import { ChoiceParams } from './protocols';
+import { ChoiceOutput, ChoiceParams } from './protocols';
 
 declare global {
   namespace PrismaJson {
@@ -276,5 +275,7 @@ declare global {
     }
 
     type ChoiceFetchParams = ChoiceParams;
+
+    type ChoiceFetchOutput = ChoiceOutput;
   }
 }

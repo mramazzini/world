@@ -11,6 +11,7 @@ const useCharacter = (characterID: string) => {
 
   const calculateCharacter = useCallback(async (character: CharacterInfo) => {
     console.log('Recalc triggered');
+    console.log(character);
     if (!character) return;
     // Do some
   }, []);

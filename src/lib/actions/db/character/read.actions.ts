@@ -11,11 +11,13 @@ const CharacterInfoTemplate = {
     Species: {
       include: {
         Features: true,
+        Choices: true,
       },
     },
     Background: {
       include: {
         Features: true,
+        Choices: true,
       },
     },
     SubClasses: {
@@ -34,6 +36,7 @@ const CharacterInfoTemplate = {
                 Spells: true,
               },
             },
+            Choices: true,
           },
         },
       },
@@ -46,6 +49,7 @@ const CharacterInfoTemplate = {
     SubSpecies: {
       include: {
         Features: true,
+        Choices: true,
       },
     },
 

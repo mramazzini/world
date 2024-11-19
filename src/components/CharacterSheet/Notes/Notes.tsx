@@ -4,6 +4,7 @@ import MarkdownIt from 'markdown-it';
 import DOMPurify from 'dompurify';
 import { useState } from 'react';
 import Image from 'next/image';
+import { useAppSelector } from '@/store/hooks';
 interface Props {
   notes: MarkdownItem[];
   updateNotes: (notes: MarkdownItem[]) => void;
@@ -61,7 +62,15 @@ const Note = ({
   );
 };
 
-const Notes = ({ updateNotes, notes }: Props) => {
+const Notes = () => {
+  const notes = useAppSelector((state) => state.sheet.rawCharacter?.notes);
+
+  const updateNotes = (notes: MarkdownItem[]) => {
+    console.log(notes);
+  };
+
+  if (!notes) return null;
+
   const handleAddNote = () => {
     updateNotes([...notes, '# New Note']);
   };

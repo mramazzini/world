@@ -1,62 +1,205 @@
 import { useAppSelector } from '@/store/hooks';
-import { Ability, ArmorType, Skill } from '@prisma/client';
+import {
+  Ability,
+  ArmorType,
+  Language,
+  Skill,
+  ToolGroup,
+  WeaponGroup,
+} from '@prisma/client';
 import { useCallback, useMemo } from 'react';
 import useLevel from './useLevel';
 import { ToolID, WeaponID } from '@/lib/types/types';
 import { calcProficiency } from '@/Utility/characterStateFunctions/calc/calcProficiency';
+import {
+  memoizeGetTool,
+  memoizeGetWeapon,
+} from '@/Utility/Indexed/globalCache';
 
 const useProficiency = () => {
-  const state = useAppSelector((state) => state.sheet.rawCharacter);
+  const character = useAppSelector((state) => state.sheet.rawCharacter);
   const level = useLevel();
 
-  const getToolProficiency = useCallback(
-    (toolID: ToolID) => {
-      if (!state) return false;
-      return state.tools.includes(toolID);
+  const toolIds = useMemo(() => {
+    if (!character) return [];
+    const toolIds: ToolID[] = [
+      ...character.CharacterToClass.reduce<string[]>((acc, cur) => {
+        return [...acc, ...cur.Class.freeToolProficiencyIds];
+      }, []),
+      ...(character.Background?.freeToolProficiencyIds || []),
+    ];
+    return toolIds;
+  }, [character]);
+
+  const toolGroups = useMemo(() => {
+    if (!character) return [];
+    const toolGroups: ToolGroup[] = [
+      ...character.CharacterToClass.reduce<ToolGroup[]>((acc, cur) => {
+        return [...acc, ...cur.Class.freeToolProficiencyGroups];
+      }, []),
+      ...(character.Background?.freeToolProficiencyGroups || []),
+    ];
+    return toolGroups;
+  }, [character]);
+
+  const languages = useMemo(() => {
+    if (!character) return [];
+    const languages: Language[] = [
+      ...(character.Background?.freeLanguageProficiencies || []),
+    ];
+    return languages;
+  }, [character]);
+
+  const skillProficiencies = useMemo(() => {
+    if (!character) return [];
+    const skills: Skill[] = [
+      ...character.CharacterToClass.reduce<Skill[]>((acc, cur) => {
+        return [...acc, ...cur.Class.freeSkills];
+      }, []),
+      ...(character.Background?.freeSkillProficiencies || []),
+    ];
+    return skills;
+  }, [character]);
+
+  const skillExpertises = useMemo(() => {
+    return [] as Skill[];
+  }, []);
+
+  const savingThrows = useMemo(() => {
+    if (!character) return [];
+    const savingThrows: Ability[] = [
+      ...character.CharacterToClass.reduce<Ability[]>((acc, cur) => {
+        return [...acc, ...cur.Class.freeSavingThrowProficiencies];
+      }, []),
+    ];
+    return savingThrows;
+  }, [character]);
+
+  const armorTypes = useMemo(() => {
+    if (!character) return [];
+    const armorTypes: ArmorType[] = [
+      ...character.CharacterToClass.reduce<ArmorType[]>((acc, cur) => {
+        return [...acc, ...cur.Class.freeArmorProficiencies];
+      }, []),
+    ];
+    return armorTypes;
+  }, [character]);
+
+  const weaponIds = useMemo(() => {
+    if (!character) return [];
+    const weaponIds: WeaponID[] = [
+      ...character.CharacterToClass.reduce<WeaponID[]>((acc, cur) => {
+        return [...acc, ...cur.Class.freeWeaponProficiencyIds];
+      }, []),
+    ];
+    return weaponIds;
+  }, [character]);
+
+  const weaponGroups = useMemo(() => {
+    if (!character) return [];
+    const weaponGroups: WeaponGroup[] = [
+      ...character.CharacterToClass.reduce<WeaponGroup[]>((acc, cur) => {
+        return [...acc, ...cur.Class.freeWeaponProficiencyGroups];
+      }, []),
+    ];
+    return weaponGroups;
+  }, [character]);
+
+  const isProficientInTool = useCallback(
+    async (toolID: ToolID) => {
+      if (toolIds.includes(toolID)) return true;
+
+      // Try to find the toolgroup
+      const tool = await memoizeGetTool({
+        query: toolID,
+        type: 'id',
+      });
+
+      if (!tool || !tool.ToolGroup) return false;
+
+      if (toolGroups.includes(tool.ToolGroup)) return true;
     },
-    [state]
+    [toolGroups, toolIds]
   );
 
-  const getSkillProficiency = useCallback(
+  const isProficientInSkill = useCallback(
     (skill: Skill) => {
-      if (!state) return false;
-      return state.proficiencies.skills.includes(skill);
+      return skillProficiencies.includes(skill);
     },
-    [state]
+    [skillProficiencies]
   );
 
-  const getSavingThrowProficiency = useCallback(
+  const isProficientInSavingThrow = useCallback(
     (ability: Ability) => {
-      if (!state) return false;
-      return state.proficiencies.savingThrows.includes(ability);
+      return savingThrows.includes(ability);
     },
-    [state]
+    [savingThrows]
   );
 
-  const getSkillProficiencyExpertise = useCallback(
+  const isExpertInSkill = useCallback(
     (skill: Skill) => {
-      if (!state) return null;
-      if (state.proficiencies.skillExpertise.includes(skill))
-        return 'expertise';
-      if (state.proficiencies.skills.includes(skill)) return 'proficient';
+      return skillExpertises.includes(skill);
     },
-    [state]
+    [skillExpertises]
   );
 
-  const getArmorProficiency = useCallback(
+  const isProficientInArmorType = useCallback(
     (armorType: ArmorType) => {
-      if (!state) return false;
-      return state.proficiencies.armor.includes(armorType);
+      return armorTypes.includes(armorType);
     },
-    [state]
+    [armorTypes]
   );
 
-  const getWeaponProficiency = useCallback(
-    (weaponId: WeaponID) => {
-      if (!state) return false;
-      return state.proficiencies.weapons.includes(weaponId);
+  const isProficientInLanguage = useCallback(
+    (language: Language) => {
+      return languages.includes(language);
     },
-    [state]
+    [languages]
+  );
+
+  const isProficientInWeapon = useCallback(
+    async (weaponId: WeaponID) => {
+      if (weaponIds.includes(weaponId)) return true;
+
+      // Try to find the weaponGroup
+      const weapon = await memoizeGetWeapon({
+        query: weaponId,
+        type: 'id',
+      });
+
+      if (!weapon) return false;
+
+      if (weaponGroups.includes(WeaponGroup.ALL_WEAPONS)) return true;
+
+      //THIS is bad and I dont like it but it is unlikely that there will be more weapon groups in the future.
+
+      //identify weapon group
+      const isSimple = weapon.isSimple;
+      const isRanged = weapon.isRanged || false;
+      const isMelee = !weapon.isRanged;
+
+      if (
+        (isSimple && weaponGroups.includes(WeaponGroup.ALL_SIMPLE)) ||
+        (isRanged && weaponGroups.includes(WeaponGroup.ALL_RANGED)) ||
+        (isMelee && weaponGroups.includes(WeaponGroup.ALL_MELEE)) ||
+        (!isSimple && weaponGroups.includes(WeaponGroup.ALL_MARTIAL)) ||
+        (isRanged &&
+          !isSimple &&
+          weaponGroups.includes(WeaponGroup.MARTIAL_RANGED)) ||
+        (isMelee &&
+          !isSimple &&
+          weaponGroups.includes(WeaponGroup.MARTIAL_MELEE)) ||
+        (isSimple &&
+          isRanged &&
+          weaponGroups.includes(WeaponGroup.SIMPLE_RANGED)) ||
+        (isSimple && isMelee && weaponGroups.includes(WeaponGroup.SIMPLE_MELEE))
+      ) {
+        return true;
+      }
+
+      return false;
+    },
+    [weaponGroups, weaponIds]
   );
 
   const proficiencyBonus = useMemo(() => {
@@ -65,12 +208,22 @@ const useProficiency = () => {
 
   return {
     proficiencyBonus,
-    getToolProficiency,
-    getSkillProficiency,
-    getSavingThrowProficiency,
-    getSkillProficiencyExpertise,
-    getArmorProficiency,
-    getWeaponProficiency,
+    toolIds,
+    toolGroups,
+    skillProficiencies,
+    skillExpertises,
+    savingThrows,
+    armorTypes,
+    weaponGroups,
+    weaponIds,
+    languages,
+    isProficientInTool,
+    isProficientInSkill,
+    isProficientInLanguage,
+    isProficientInSavingThrow,
+    isExpertInSkill,
+    isProficientInArmorType,
+    isProficientInWeapon,
   };
 };
 
