@@ -20,7 +20,7 @@ import FeatureList from '@/components/UI/FeatureList';
 import CommentSection from '@/components/CommentSection/CommentSection';
 import WeaponDescription from '@/Utility/WeaponDescription';
 import numPlace from '@/lib/utils/numPlace';
-import AbilityToText from '@/lib/utils/AbilityToText';
+import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import numberArray from '@/lib/utils/numberArray';
 import RollRequest from '@/components/UI/RollRequest';
 import { fullCaster } from '../../../../prisma/seeds/Classes/SpellSlotsUtil';

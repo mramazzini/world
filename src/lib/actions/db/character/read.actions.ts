@@ -25,6 +25,7 @@ const CharacterInfoTemplate = {
         Features: true,
       },
     },
+    CharacterChoiceStatus: true,
     CharacterToClass: {
       include: {
         Class: {

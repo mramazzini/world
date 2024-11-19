@@ -1,13 +1,13 @@
 import { ItemTypes, Language, Prisma, Skill, ToolGroup } from '@prisma/client';
 import { backgroundIds } from './BackgroundIds';
-import { generateLanguageProficiencyChoice } from '@/lib/protocols/ChoiceFetch/generateLanguageProficiencyChoice';
+import { generateLanguageProficiencyChoice } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateLanguageProficiencyChoice';
 import {
   generateAddToInventoryChoice,
   generateAddToInventoryGroupedChoice,
-} from '@/lib/protocols/ChoiceFetch/generateItemChoice';
+} from '@/lib/ChoiceHelpers/ChoiceGenerators/generateItemChoice';
 import { itemIds } from '../Items/ItemIds';
-import { generateSkillProficiencyChoice } from '@/lib/protocols/ChoiceFetch/generateSkillChoice';
-import { generateToolProficiencyGroupedChoice } from '@/lib/protocols/ChoiceFetch/generateToolChoice';
+import { generateSkillProficiencyChoice } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateSkillChoice';
+import { generateToolProficiencyGroupedChoice } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateToolChoice';
 
 const BackgroundChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   generateLanguageProficiencyChoice(

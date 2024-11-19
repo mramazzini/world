@@ -1,5 +1,5 @@
 import Tooltip from '@/Utility/Tooltip';
-import AbilityToText from '@/lib/utils/AbilityToText';
+import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import Image from 'next/image';
 import { useAppSelector } from '@/store/hooks';
 import useSpellcaster from '@/hooks/useSpellcaster';

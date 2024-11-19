@@ -104,3 +104,9 @@ export type ChoiceOutput =
   | SetLanguageProficiencyOutput
   | SetAbilityScoreOutput
   | ImproveAbilityScoreOutput;
+
+export type ResolverFunction = (result: {
+  selections: ChoiceOutput;
+  characterId: string;
+  choiceId: string;
+}) => Promise<'success' | 'failure'>;

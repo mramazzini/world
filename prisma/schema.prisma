@@ -445,7 +445,7 @@ model CharacterChoiceStatus {
 
   fufilled Boolean
   /// [ChoiceFetchOutput]
-  values   Json[]
+  values   Json
 
   Character Character @relation(fields: [characterId], references: [id])
   Choice    Choice    @relation(fields: [choiceId], references: [id])

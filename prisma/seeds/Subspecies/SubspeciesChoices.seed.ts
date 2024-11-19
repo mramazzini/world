@@ -1,7 +1,7 @@
-import { generateLanguageProficiencyChoice } from '@/lib/protocols/ChoiceFetch/generateLanguageProficiencyChoice';
+import { generateLanguageProficiencyChoice } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateLanguageProficiencyChoice';
 import { Ability, Language, Prisma } from '@prisma/client';
 import { subSpeciesIds as ids } from './Subspecies.seed';
-import { generateAbilityScoreImprovementChoice } from '@/lib/protocols/ChoiceFetch/generateAbilityScoreChoice';
+import { generateAbilityScoreImprovementChoice } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateAbilityScoreChoice';
 const SubSpeciesChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   //high elf
   generateLanguageProficiencyChoice(

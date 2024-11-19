@@ -7,7 +7,7 @@ import ClassTable from '@/components/ClassInfo/ClassTable';
 import P from '@/Utility/FormatAndSanitize';
 import '@/lib/string.extensions';
 import Info from '@/components/UI/Info';
-import AbilityToText from '@/lib/utils/AbilityToText';
+import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import numPlace from '@/lib/utils/numPlace';
 import FeatureList from '@/components/UI/FeatureList';
 import CommentSection from '@/components/CommentSection/CommentSection';

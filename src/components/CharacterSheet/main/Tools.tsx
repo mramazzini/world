@@ -3,7 +3,7 @@ import { Log } from '@/lib/types/types';
 import { useState } from 'react';
 import Tooltip from '@/Utility/Tooltip';
 import { Ability } from '@prisma/client';
-import AbilityToText from '@/lib/utils/AbilityToText';
+import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import { roll } from '@/Utility/roll';
 import Image from 'next/image';
 import { ToolInfo } from '@/lib/types/modelInfo';

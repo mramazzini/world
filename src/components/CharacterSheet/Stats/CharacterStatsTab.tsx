@@ -7,7 +7,7 @@ import useLevel from '@/hooks/useLevel';
 import useModifier from '@/hooks/useModifier';
 import useProficiency from '@/hooks/useProficiency';
 import useSpeed from '@/hooks/useSpeed';
-import AbilityToText from '@/lib/utils/AbilityToText';
+import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import { useAppSelector } from '@/store/hooks';
 import P from '@/Utility/FormatAndSanitize';
 import ModelDisplay from '@/Utility/ModelDisplay';

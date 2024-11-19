@@ -1,6 +1,6 @@
 import Tooltip from '@/Utility/Tooltip';
 import { skillAtritbuteMap } from '@/lib/globalVars';
-import AbilityToText from '@/lib/utils/AbilityToText';
+import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import { Skill } from '@prisma/client';
 import { Fragment } from 'react';
 import useModifier from '@/hooks/useModifier';

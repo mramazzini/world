@@ -1,7 +1,7 @@
 'use client';
 
 import { AbilityScoreValue } from '@/lib/types/types';
-import AbilityToText from '@/lib/utils/AbilityToText';
+import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import numberArray from '@/lib/utils/numberArray';
 import { Ability } from '@prisma/client';
 import { useEffect, useState } from 'react';

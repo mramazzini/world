@@ -49,6 +49,7 @@ const useCombinedSpecies = () => {
       'tremorSenseDescription',
       'trueSight',
       'trueSightDescription',
+      'Choices',
     ];
 
     // Assuming subSpecies and species are typed correctly:

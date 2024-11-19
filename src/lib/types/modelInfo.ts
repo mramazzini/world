@@ -2,6 +2,7 @@ import {
   Armor,
   Background,
   Character,
+  CharacterChoiceStatus,
   CharacterToClass,
   Choice,
   Class,
@@ -121,6 +122,7 @@ export interface CharacterInfo extends Omit<Character, 'createdAt'> {
   CharacterToClass: CharacterToClassInfo[];
   SubClasses: Omit<SubClassWithFeatures, 'createdAt' | 'updatedAt'>[] | null;
   Feats: Omit<FeatWithFeatures, 'createdAt' | 'updatedAt'>[] | null;
+  CharacterChoiceStatus: CharacterChoiceStatus[];
   Species: Omit<
     SpeciesWithFeaturesAndChoices,
     'createdAt' | 'updatedAt'

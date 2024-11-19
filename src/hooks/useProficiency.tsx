@@ -2,6 +2,7 @@ import { useAppSelector } from '@/store/hooks';
 import {
   Ability,
   ArmorType,
+  ChoiceProtocol,
   Language,
   Skill,
   ToolGroup,
@@ -15,10 +16,12 @@ import {
   memoizeGetTool,
   memoizeGetWeapon,
 } from '@/Utility/Indexed/globalCache';
+import useCharacterChoices from './useCharacterChoices';
 
 const useProficiency = () => {
   const character = useAppSelector((state) => state.sheet.rawCharacter);
   const level = useLevel();
+  const { completedChoices } = useCharacterChoices();
 
   const toolIds = useMemo(() => {
     if (!character) return [];
@@ -57,9 +60,16 @@ const useProficiency = () => {
         return [...acc, ...cur.Class.freeSkills];
       }, []),
       ...(character.Background?.freeSkillProficiencies || []),
+      //@ts-expect-error I don't know why this gives an error, completedChoices is an array.
+      ...completedChoices.reduce<Skill[]>((acc, cur) => {
+        if (cur.protocol === ChoiceProtocol.SET_SKILL_PROFICIENCY) {
+          return [...acc, ...cur.selections];
+        }
+        return acc;
+      }, []),
     ];
     return skills;
-  }, [character]);
+  }, [character, completedChoices]);
 
   const skillExpertises = useMemo(() => {
     return [] as Skill[];

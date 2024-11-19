@@ -1,7 +1,7 @@
 import { Ability, Language, Prisma } from '@prisma/client';
 import { speciesIds as ids } from './Species.seed';
-import { generateAbilityScoreImprovementChoice } from '@/lib/protocols/ChoiceFetch/generateAbilityScoreChoice';
-import { generateLanguageProficiencyChoice } from '@/lib/protocols/ChoiceFetch/generateLanguageProficiencyChoice';
+import { generateAbilityScoreImprovementChoice } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateAbilityScoreChoice';
+import { generateLanguageProficiencyChoice } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateLanguageProficiencyChoice';
 const SpeciesChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   //half elf
   generateAbilityScoreImprovementChoice(

@@ -7,12 +7,12 @@ import {
 } from '@prisma/client';
 import { classIds as ids } from './ClassIds';
 import { itemIds } from '../Items/ItemIds';
-import { generateSkillProficiencyChoice } from '@/lib/protocols/ChoiceFetch/generateSkillChoice';
+import { generateSkillProficiencyChoice } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateSkillChoice';
 import {
   generateAddToInventoryChoice,
   generateAddToInventoryGroupedChoice,
-} from '@/lib/protocols/ChoiceFetch/generateItemChoice';
-import { generateToolProficiencyGroupedChoice } from '@/lib/protocols/ChoiceFetch/generateToolChoice';
+} from '@/lib/ChoiceHelpers/ChoiceGenerators/generateItemChoice';
+import { generateToolProficiencyGroupedChoice } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateToolChoice';
 
 const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
   //fighter

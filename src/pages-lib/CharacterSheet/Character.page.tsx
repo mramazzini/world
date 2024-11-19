@@ -12,8 +12,8 @@ import MainSheet from '@/components/CharacterSheet/main/MainSheet';
 import Loading from '@/components/UI/Loading';
 import useCharacter from '@/hooks/useCharacter/useCharacter';
 import CharacterStatsTab from '@/components/CharacterSheet/Stats/CharacterStatsTab';
-import ChooseChoices from '@/components/CharacterSheet/Choices/Choices';
 import Notes from '@/components/CharacterSheet/Notes/Notes';
+import ChoicesTab from '@/components/CharacterSheet/ChoicesTab/ChoicesTab';
 
 type Tab =
   | 'sheet'
@@ -154,7 +154,7 @@ const CharacterSheet = ({ characterID }: Props) => {
             >
               <Notes />
             </div>
-            {/* <input
+            <input
               type="radio"
               name="charcter_tabs"
               role="tab"
@@ -169,8 +169,8 @@ const CharacterSheet = ({ characterID }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <ChooseChoices />
-            </div> */}
+              <ChoicesTab />
+            </div>
           </div>
         </>
       )}
