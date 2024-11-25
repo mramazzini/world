@@ -7,12 +7,19 @@ interface Props {
   tooltip: string;
   alert?: boolean;
   format?: boolean;
+  modalid?: string;
 }
 
-const Info: React.FC<Props> = ({ tooltip, alert = false, format = true }) => {
+const Info: React.FC<Props> = ({
+  tooltip,
+  alert = false,
+  format = true,
+  modalid,
+}) => {
   return (
     <div className="info-icon inline group">
       <Tooltip
+        modalid={modalid}
         format={format}
         element={
           !alert ? (

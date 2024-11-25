@@ -18,6 +18,7 @@ interface Props {
     value?: string | number;
     type?: string;
     checked?: boolean;
+    step?: string;
   };
   onChange?: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement

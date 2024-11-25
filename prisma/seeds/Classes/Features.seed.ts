@@ -2,193 +2,356 @@ import { Prisma } from '@prisma/client';
 import { itemIds } from '../Items/ItemIds';
 import { spellIds } from '../Spells/spells.seed';
 import { classIds as ids } from './ClassIds';
-import generateId from '../_helpers/generateId';
-import Classes from './Class.seed';
 
-let count = 1;
-
+export const ClassFeatureIds = {
+  actionSurge: 'Fighter-Action Surge',
+  fighterExtraAttack: 'Fighter-Extra Attack',
+  fighterFightingStyle: 'Fighter-Fighting Style',
+  secondWind: 'Fighter-Second Wind',
+  martialVersatility: 'Fighter-Martial Versatility',
+  indomitable: 'Fighter-Indomitable',
+  wizardCantrips: 'Wizard-Cantrips',
+  signatureSpells: 'Wizard-Signature Spells',
+  spellMastery: 'Wizard-Spell Mastery',
+  cantripFormulas: 'Wizard-Cantrip Formulas',
+  arcaneRecovery: 'Wizard-Arcane Recovery',
+  spellBook: 'Wizard-Spellbook',
+  copyingASpell: 'Wizard-Copying a Spell into the Spellbook',
+  replacingTheSpellbook: 'Wizard-Replacing the Spellbook',
+  wizardRitualCasting: 'Wizard-Ritual Casting',
+  learningSpells: 'Wizard-Learning Spells of 1st Level and Higher',
+  bardCantrips: 'Bard-Cantrips',
+  bardSpellsKnown: 'Bard-Spells Known',
+  ritualCastingBard: 'Bard-Ritual Casting',
+  bardicInspiration: 'Bard-Bardic Inspiration',
+  jackOfAllTrades: 'Bard-Jack of All Trades',
+  songOfRest: 'Bard-Song of Rest',
+  magicalInspiration: 'Bard-Magical Inspiration',
+  bardExpertise: 'Bard-Expertise',
+  bardicVersatility: 'Bard-Bardic Versatility',
+  fontOfInspiration: 'Bard-Font of Inspiration',
+  countercharm: 'Bard-Countercharm',
+  magicalSecrets: 'Bard-Magical Secrets',
+  superiorInspiration: 'Bard-Superior Inspiration',
+  channelDivinity: 'Cleric-Channel Divinity',
+  turnUndead: 'Cleric-Turn Undead',
+  clericHarnessDivinePower: 'Cleric-Harness Divine Power',
+  clericCantripVersatility: 'Cleric-Cantrip Versatility',
+  destroyUndead: 'Cleric-Destroy Undead',
+  blessedStrikes: 'Cleric-Blessed Strikes',
+  divineIntervention: 'Cleric-Divine Intervention',
+  clericCantrips: 'Cleric-Cantrips',
+  ritualCastingCleric: 'Cleric-Ritual Casting',
+  rogueExpertise: 'Rogue-Expertise',
+  sneakAttack: 'Rogue-Sneak Attack',
+  thievesCant: 'Rogue-Thieves Cant',
+  cunningAction: 'Rogue-Cunning Action',
+  steadyAim: 'Rogue-Steady Aim',
+  uncannyDodge: 'Rogue-Uncanny Dodge',
+  evasion: 'Rogue-Evasion',
+  reliableTalent: 'Rogue-Reliable Talent',
+  blindsense: 'Rogue-Blindsense',
+  slipperyMind: 'Rogue-Slippery Mind',
+  elusive: 'Rogue-Elusive',
+  strokeOfLuck: 'Rogue-Stroke of Luck',
+  rage: 'Barbarian-Rage',
+  unarmoredDefense: 'Barbarian-Unarmored Defense',
+  recklessAttack: 'Barbarian-Reckless Attack',
+  dangerSense: 'Barbarian-Danger Sense',
+  primalKnowledge: 'Barbarian-Primal Knowledge',
+  extraAttackBarbarian: 'Barbarian-Extra Attack',
+  fastMovement: 'Barbarian-Fast Movement',
+  feralInstinct: 'Barbarian-Feral Instinct',
+  instinctivePounce: 'Barbarian-Instinctive Pounce',
+  brutalCritical: 'Barbarian-Brutal Critical',
+  relentlessRage: 'Barbarian-Relentless Rage',
+  persistentRage: 'Barbarian-Persistent Rage',
+  indomitableMight: 'Barbarian-Indomitable Might',
+  primalChampion: 'Barbarian-Primal Champion',
+  druidCantrips: 'Druid-Cantrips',
+  druidic: 'Druid-Druidic',
+  druidRitualCasting: 'Druid-Ritual Casting',
+  wildShape: 'Druid-Wild Shape',
+  wildCompanion: 'Druid-Wild Companion',
+  cantripVersatilityDruid: 'Druid-Cantrip Versatility',
+  timelessBody: 'Druid-Timeless Body',
+  beastSpells: 'Druid-Beast Spells',
+  archdruid: 'Druid-Archdruid',
+  monkUnarmoredDefense: 'Monk-Unarmored Defense',
+  martialArts: 'Monk-Martial Arts',
+  ki: 'Monk-Ki',
+  unarmoredMovement: 'Monk-Unarmored Movement',
+  deflectMissiles: 'Monk-Deflect Missiles',
+  dedicatedWeapon: 'Monk-Dedicated Weapon',
+  kiFueledAttack: 'Monk-Ki-Fueled Attack',
+  slowFall: 'Monk-Slow Fall',
+  quickenedHealing: 'Monk-Quickened Healing',
+  monkExtraAttack: 'Monk-Extra Attack',
+  stunningStrike: 'Monk-Stunning Strike',
+  focusedAim: 'Monk-Focused Aim',
+  kiEmpoweredStrikes: 'Monk-Ki-Empowered Strikes',
+  evasionMonk: 'Monk-Evasion',
+  stillnessOfMind: 'Monk-Stillness of Mind',
+  purityOfBody: 'Monk-Purity of Body',
+  tongueOfTheSunAndMoon: 'Monk-Tongue of the Sun and Moon',
+  diamondSouled: 'Monk-Diamond Souled',
+  timelessBodyMonk: 'Monk-Timeless Body',
+  emptyBody: 'Monk-Empty Body',
+  perfectSelf: 'Monk-Perfect Self',
+  divineSense: 'Paladin-Divine Sense',
+  layOnHands: 'Paladin-Lay on Hands',
+  fightingStylePaladin: 'Paladin-Fighting Style',
+  divineSmite: 'Paladin-Divine Smite',
+  divineHealth: 'Paladin-Divine Health',
+  harnessDivinePowerPaladin: 'Paladin-Harness Divine Power',
+  extraAttackPaladin: 'Paladin-Extra Attack',
+  auraOfProtection: 'Paladin-Aura of Protection',
+  auraOfCourage: 'Paladin-Aura of Courage',
+  improvedDivineSmite: 'Paladin-Improved Divine Smite',
+  cleansingTouch: 'Paladin-Cleansing Touch',
+  sorcererCantrips: 'Sorcerer-Cantrips',
+  sorcererSpellsKnown: 'Sorcerer-Spells Known',
+  fontOfMagic: 'Sorcerer-Font of Magic',
+  metamagic: 'Sorcerer-Metamagic',
+  sorcerousVersatility: 'Sorcerer-Sorcerous Versatility',
+  magicalGuidance: 'Sorcerer-Magical Guidance',
+  sorcerousRestoration: 'Sorcerer-Sorcerous Restoration',
+  warlockCantrips: 'Warlock-Cantrips',
+  warlockSpellsKnown: 'Warlock-Spells Known',
+  eldritchInvocations: 'Warlock-Eldritch Invocations',
+  pactBoon: 'Warlock-Pact Boon',
+  eldritchVersatility: 'Warlock-Eldritch Versatility',
+  mysticArcanum: 'Warlock-Mystic Arcanum',
+  eldritchMaster: 'Warlock-Eldritch Master',
+  rangerSpellsKnown: 'Ranger-Spells Known',
+  favoredEnemy: 'Ranger-Favored Enemy',
+  favoredFoe: 'Ranger-Favored Foe',
+  naturalExplorer: 'Ranger-Natural Explorer',
+  deftExplorer: 'Ranger-Deft Explorer',
+  rangerFightingStyle: 'Ranger-Fighting Style',
+  primevalAwareness: 'Ranger-Primeval Awareness',
+  primalAwareness: 'Ranger-Primal Awareness',
+  rangerMartialVersatility: 'Ranger-Martial Versatility',
+  rangerExtraAttack: 'Ranger-Extra Attack',
+  landStride: 'Ranger-Land Stride',
+  hideInPlainSight: 'Ranger-Hide in Plain Sight',
+  naturesVeil: 'Ranger-Nature’s Veil',
+  vanish: 'Ranger-Vanish',
+  feralSenses: 'Ranger-Feral Senses',
+  foeSlayer: 'Ranger-Foe Slayer',
+  artificerCantrips: 'Artificer-Cantrips',
+  artificerRitualCasting: 'Artificer-Ritual Casting',
+  magicalTinkering: 'Artificer-Magical Tinkering',
+  artificerInfuseItem: 'Artificer-Infuse Item',
+  artificerRightToolForTheJob: 'Artificer-Right Tool for the Job',
+  artificerToolExpertise: 'Artificer-Tool Expertise',
+  artificerFlashOfGenius: 'Artificer-Flash of Genius',
+  artificerMagicItemAdept: 'Artificer-Magic Item Adept',
+  artificerSpellStoringItem: 'Artificer-Spell-Storing Item',
+  artificerMagicItemSavant: 'Artificer-Magic Item Savant',
+  artificerMagicItemMaster: 'Artificer-Magic Item Master',
+  artificerSoulOfArtifice: 'Artificer-Soul of Artifice',
+};
+const fids = ClassFeatureIds;
 const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   // Fighter
-  {
-    name: 'Action Surge',
-    description:
-      'Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action.\n\nOnce you use this feature, you must finish a short or long rest before you can use it again. Starting at 17th level, you can use it twice before a rest, but only once on the same turn.',
-    levels: [2, 17],
-    classId: ids.fighter,
-  },
-  {
-    name: 'Extra Attack',
-    description:
-      'Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn.\n\n The number of attacks increases to three when you reach 11th level in this class and to four when you reach 20th level in this class.',
-    levels: [5, 11, 20],
-    classId: ids.fighter,
-  },
-  {
-    classId: ids.fighter,
-    name: 'Fighting Style',
-    levels: [1],
-    description: `You adopt a particular style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again.`,
+  // {
+  //   id: fids.actionSurge,
+  //   name: 'Action Surge',
+  //   description:
+  //     'Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action.\n\nOnce you use this feature, you must finish a short or long rest before you can use it again. Starting at 17th level, you can use it twice before a rest, but only once on the same turn.',
+  //   levels: [2, 17],
+  //   classId: ids.fighter,
+  // },
+  // {
+  //   id: fids.extraAttack,
+  //   name: 'Extra Attack',
+  //   description:
+  //     'Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn.\n\n The number of attacks increases to three when you reach 11th level in this class and to four when you reach 20th level in this class.',
+  //   levels: [5, 11, 20],
+  //   classId: ids.fighter,
+  // },
+  // {
+  //   id: fids.fightingStyle,
+  //   classId: ids.fighter,
+  //   name: 'Fighting Style',
+  //   levels: [1],
+  //   description: `You adopt a particular style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again.`,
 
-    extendedTable: [
-      {
-        '': {
-          headers: ['Style', 'Description'],
-          data: [
-            {
-              Style: 'Archery',
-              Description:
-                'You gain a +2 bonus to attack rolls you make with ranged weapons.',
-            },
-            {
-              Style: 'Blind Fighting',
-              Description:
-                "You have blindsight with a range of 10 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.",
-            },
-            {
-              Style: 'Defense',
-              Description:
-                'While you are wearing armor, you gain a +1 bonus to AC.',
-            },
-            {
-              Style: 'Dueling',
-              Description:
-                'When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.',
-            },
-            {
-              Style: 'Great Weapon Fighting',
-              Description:
-                'When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.',
-            },
-            {
-              Style: 'Protection',
-              Description: `When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a ^${itemIds.shield}{shield}^.`,
-            },
-            {
-              Style: 'Interception',
-              Description: `When a creature you can see hits a target, other than you, within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your proficiency bonus (to a minimum of 0 damage). You must be wielding a ^${itemIds.shield}{shield}^ or a simple or martial weapon to use this reaction.`,
-            },
-            {
-              Style: 'Superior Technique',
-              Description:
-                "You learn one maneuver of your choice from among those available to the Battle Master archetype. If a maneuver you use requires your target to make a saving throw to resist the maneuver's effects, the saving throw DC equals 8 + your proficiency bonus + your Strength or Dexterity modifier (your choice).\n\n You gain one superiority die, which is a d6 (this die is added to any superiority dice you have from another source). This die is used to fuel your maneuvers. A superiority die is expended when you use it. You regain your expended superiority dice when you finish a short or long rest.",
-            },
-            {
-              Style: 'Thrown-Weapon Fighting',
-              Description:
-                'You can draw a weapon that has the thrown property as part of the attack you make with the weapon. In addition, when you hit with a ranged attack using a thrown weapon, you gain a +2 bonus to the damage roll.',
-            },
-            {
-              Style: 'Two-Weapon Fighting',
-              Description:
-                'When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.',
-            },
-            {
-              Style: 'Unarmed Fighting',
-              Description:
-                'Your unarmed strikes can deal bludgeoning damage equal to 1d6 + your Strength modifier. If you strike with two free hands, the d6 becomes a d8.',
-            },
-          ],
-        },
-      },
-    ],
-  },
-  {
-    name: 'Second Wind',
-    levels: [1],
-    description:
-      'You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.\n\n Once you use this feature, you must finish a short or long rest before you can use it again.',
-    classId: ids.fighter,
-  },
-  {
-    name: 'Martial Versatility',
-    description: `Whenever you reach a level in this class that grants the Ability Score Improvement feature, you can do one of the following, as you shift the focus of your martial practice:`,
-    options: [
-      'Replace a fighting style you know with another fighting style available to fighters.',
-      'If you know a maneuver from the Battle Master archetype, you can replace it with another maneuver from that archetype.',
-    ],
+  //   extendedTable: [
+  //     {
+  //       '': {
+  //         headers: ['Style', 'Description'],
+  //         data: [
+  //           {
+  //             Style: 'Archery',
+  //             Description:
+  //               'You gain a +2 bonus to attack rolls you make with ranged weapons.',
+  //           },
+  //           {
+  //             Style: 'Blind Fighting',
+  //             Description:
+  //               "You have blindsight with a range of 10 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.",
+  //           },
+  //           {
+  //             Style: 'Defense',
+  //             Description:
+  //               'While you are wearing armor, you gain a +1 bonus to AC.',
+  //           },
+  //           {
+  //             Style: 'Dueling',
+  //             Description:
+  //               'When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.',
+  //           },
+  //           {
+  //             Style: 'Great Weapon Fighting',
+  //             Description:
+  //               'When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.',
+  //           },
+  //           {
+  //             Style: 'Protection',
+  //             Description: `When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a ^${itemIds.shield}{shield}^.`,
+  //           },
+  //           {
+  //             Style: 'Interception',
+  //             Description: `When a creature you can see hits a target, other than you, within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your proficiency bonus (to a minimum of 0 damage). You must be wielding a ^${itemIds.shield}{shield}^ or a simple or martial weapon to use this reaction.`,
+  //           },
+  //           {
+  //             Style: 'Superior Technique',
+  //             Description:
+  //               "You learn one maneuver of your choice from among those available to the Battle Master archetype. If a maneuver you use requires your target to make a saving throw to resist the maneuver's effects, the saving throw DC equals 8 + your proficiency bonus + your Strength or Dexterity modifier (your choice).\n\n You gain one superiority die, which is a d6 (this die is added to any superiority dice you have from another source). This die is used to fuel your maneuvers. A superiority die is expended when you use it. You regain your expended superiority dice when you finish a short or long rest.",
+  //           },
+  //           {
+  //             Style: 'Thrown-Weapon Fighting',
+  //             Description:
+  //               'You can draw a weapon that has the thrown property as part of the attack you make with the weapon. In addition, when you hit with a ranged attack using a thrown weapon, you gain a +2 bonus to the damage roll.',
+  //           },
+  //           {
+  //             Style: 'Two-Weapon Fighting',
+  //             Description:
+  //               'When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.',
+  //           },
+  //           {
+  //             Style: 'Unarmed Fighting',
+  //             Description:
+  //               'Your unarmed strikes can deal bludgeoning damage equal to 1d6 + your Strength modifier. If you strike with two free hands, the d6 becomes a d8.',
+  //           },
+  //         ],
+  //       },
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: fids.secondWind,
+  //   name: 'Second Wind',
+  //   levels: [1],
+  //   description:
+  //     'You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.\n\n Once you use this feature, you must finish a short or long rest before you can use it again.',
+  //   classId: ids.fighter,
+  // },
+  // {
+  //   id: fids.martialVersatility,
+  //   name: 'Martial Versatility',
+  //   description: `Whenever you reach a level in this class that grants the Ability Score Improvement feature, you can do one of the following, as you shift the focus of your martial practice:`,
+  //   options: [
+  //     'Replace a fighting style you know with another fighting style available to fighters.',
+  //     'If you know a maneuver from the Battle Master archetype, you can replace it with another maneuver from that archetype.',
+  //   ],
 
-    levels: [4, 6, 8, 12, 14, 16, 19],
-    classId: ids.fighter,
-  },
-  {
-    name: 'Indomitable',
-    description:
-      "Beginning at 9th level, you can reroll a saving throw that you fail. If you do so, you must use the new roll, and you can't use this feature again until you finish a long rest. \n\nYou can use this feature twice between long rests starting at 13th level and three times between long rests starting at 17th level.",
-    levels: [9, 13, 17],
-    classId: ids.fighter,
-  },
-  // Wizard
-  {
-    spellCastingClassId: ids.wizard,
-    name: 'Cantrips',
-    levels: [1, 4, 10],
-    description:
-      'At 1st level, you know three cantrips of your choice from the wizard spell list. You learn additional wizard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Wizard table.',
-  },
+  //   levels: [4, 6, 8, 12, 14, 16, 19],
+  //   classId: ids.fighter,
+  // },
+  // {
+  //   id: fids.indomitable,
+  //   name: 'Indomitable',
+  //   description:
+  //     "Beginning at 9th level, you can reroll a saving throw that you fail. If you do so, you must use the new roll, and you can't use this feature again until you finish a long rest. \n\nYou can use this feature twice between long rests starting at 13th level and three times between long rests starting at 17th level.",
+  //   levels: [9, 13, 17],
+  //   classId: ids.fighter,
+  // },
+  // // Wizard
+  // {
+  //   id: fids.wizardCantrips,
+  //   spellCastingClassId: ids.wizard,
+  //   name: 'Cantrips',
+  //   levels: [1, 4, 10],
+  //   description:
+  //     'At 1st level, you know three cantrips of your choice from the wizard spell list. You learn additional wizard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Wizard table.',
+  // },
 
-  {
-    classId: ids.wizard,
-    levels: [20],
-    name: 'Signature Spells',
-    description: `When you reach 20th level, you gain mastery over two powerful spells and can cast them with little effort. Choose two 3rd-level wizard spells in your ^${itemIds.spellBook}{spellbook}^ as your signature spells. You always have these spells prepared, they don't count against the number of spells you have prepared, and you can cast each of them once at 3rd level without expending a spell slot. When you do so, you can't do so again until you finish a short or long rest.\n\nIf you want to cast either spell at a higher level, you must expend a spell slot as normal.`,
-  },
-  {
-    name: 'Spell Mastery',
-    description: `At 18th level, you have achieved such mastery over certain spells that you can cast them at will. Choose a 1st-level wizard spell and a 2nd-level wizard spell that are in your ^${itemIds.spellBook}{spellbook}^. You can cast those spells at their lowest level without expending a spell slot when you have them prepared. If you want to cast either spell at a higher level, you must expend a spell slot as normal.\n\nBy spending 8 hours in study, you can exchange one or both of the spells you chose for different spells of the same levels.`,
-    levels: [18],
-    classId: ids.wizard,
-  },
-  {
-    levels: [3],
-    classId: ids.wizard,
-    name: 'Cantrip Formulas',
-    description: `At 3rd level, you have scribed a set of arcane formulas in your ^${itemIds.spellBook}{spellbook}^ that you can use to formulate a cantrip in your mind. Whenever you finish a long rest and consult those formulas in your ^${itemIds.spellBook}{spellbook}^, you can replace one wizard cantrip you know with another cantrip from the wizard spell list.`,
-  },
-  {
-    classId: ids.wizard,
-    levels: [1],
-    name: 'Arcane Recovery',
-    description: `You have learned to regain some of your magical energy by studying your ^${itemIds.spellBook}{spellbook}^. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.\n\nFor example, if you're a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots.`,
-  },
-  {
-    spellCastingClassId: ids.wizard,
+  // {
+  //   id: fids.signatureSpells,
+  //   classId: ids.wizard,
+  //   levels: [20],
+  //   name: 'Signature Spells',
+  //   description: `When you reach 20th level, you gain mastery over two powerful spells and can cast them with little effort. Choose two 3rd-level wizard spells in your ^${itemIds.spellBook}{spellbook}^ as your signature spells. You always have these spells prepared, they don't count against the number of spells you have prepared, and you can cast each of them once at 3rd level without expending a spell slot. When you do so, you can't do so again until you finish a short or long rest.\n\nIf you want to cast either spell at a higher level, you must expend a spell slot as normal.`,
+  // },
+  // {
+  //   id: fids.spellMastery,
+  //   name: 'Spell Mastery',
+  //   description: `At 18th level, you have achieved such mastery over certain spells that you can cast them at will. Choose a 1st-level wizard spell and a 2nd-level wizard spell that are in your ^${itemIds.spellBook}{spellbook}^. You can cast those spells at their lowest level without expending a spell slot when you have them prepared. If you want to cast either spell at a higher level, you must expend a spell slot as normal.\n\nBy spending 8 hours in study, you can exchange one or both of the spells you chose for different spells of the same levels.`,
+  //   levels: [18],
+  //   classId: ids.wizard,
+  // },
+  // {
+  //   id: fids.cantripFormulas,
+  //   levels: [3],
+  //   classId: ids.wizard,
+  //   name: 'Cantrip Formulas',
+  //   description: `At 3rd level, you have scribed a set of arcane formulas in your ^${itemIds.spellBook}{spellbook}^ that you can use to formulate a cantrip in your mind. Whenever you finish a long rest and consult those formulas in your ^${itemIds.spellBook}{spellbook}^, you can replace one wizard cantrip you know with another cantrip from the wizard spell list.`,
+  // },
+  // {
+  //   id: fids.arcaneRecovery,
+  //   classId: ids.wizard,
+  //   levels: [1],
+  //   name: 'Arcane Recovery',
+  //   description: `You have learned to regain some of your magical energy by studying your ^${itemIds.spellBook}{spellbook}^. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.\n\nFor example, if you're a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots.`,
+  // },
+  // {
+  //   id: fids.spellBook,
+  //   spellCastingClassId: ids.wizard,
 
-    name: 'Spellbook',
-    description: `As a wizard, you have a ^${itemIds.spellBook}{spellbook}^ containing six 1st-level wizard spells of your choice. Your ^${itemIds.spellBook}{spellbook}^ is the repository of the wizard spells you know, except your cantrips, which are fixed in your mind.\n\nThe spells that you add to your ^${itemIds.spellBook}{spellbook}^ as you gain levels reflect the arcane research you conduct on your own, as well as intellectual breakthroughs you have had about the nature of the multiverse. You might find other spells during your adventures. You could discover a spell recorded on a scroll in an evil wizard's chest, for example, or in a dusty tome in an ancient library.\n\nYour ^${itemIds.spellBook}{spellbook}^ is a unique compilation of spells, with its own decorative flourishes and margin notes. It might be a plain, functional leather volume that you received as a gift from your master, a finely bound gilt-edged tome you found in an ancient library or even a loose collection of notes scrounged together after you lost your previous ^${itemIds.spellBook}{spellbook}^ in a mishap.`,
-  },
-  {
-    spellCastingClassId: ids.wizard,
+  //   name: 'Spellbook',
+  //   description: `As a wizard, you have a ^${itemIds.spellBook}{spellbook}^ containing six 1st-level wizard spells of your choice. Your ^${itemIds.spellBook}{spellbook}^ is the repository of the wizard spells you know, except your cantrips, which are fixed in your mind.\n\nThe spells that you add to your ^${itemIds.spellBook}{spellbook}^ as you gain levels reflect the arcane research you conduct on your own, as well as intellectual breakthroughs you have had about the nature of the multiverse. You might find other spells during your adventures. You could discover a spell recorded on a scroll in an evil wizard's chest, for example, or in a dusty tome in an ancient library.\n\nYour ^${itemIds.spellBook}{spellbook}^ is a unique compilation of spells, with its own decorative flourishes and margin notes. It might be a plain, functional leather volume that you received as a gift from your master, a finely bound gilt-edged tome you found in an ancient library or even a loose collection of notes scrounged together after you lost your previous ^${itemIds.spellBook}{spellbook}^ in a mishap.`,
+  // },
+  // {
+  //   id: fids.copyingASpell,
+  //   spellCastingClassId: ids.wizard,
 
-    name: 'Copying a Spell into the Spellbook',
-    description: `When you find a wizard spell of 1st level or higher, you can add it to your ^${itemIds.spellBook}{spellbook}^ if it is of a spell level you can prepare and if you can spare the time to decipher and copy it.\n\nCopying a spell into your ^${itemIds.spellBook}{spellbook}^ involves reproducing the basic form of the spell, then deciphering the unique system of notation used by the wizard who wrote it. You must practice the spell until you understand the sounds or gestures required, then transcribe it into your ^${itemIds.spellBook}{spellbook}^ using your own notation.\n\nFor each level of the spell, the process takes 2 hours and costs 50 ^${itemIds.goldPiece}{gp}^. The cost represents material components you expend as you experiment with the spell to master it, as well as the fine ^${itemIds.ink}{inks}^ you need to record it. Once you have spent this time and money, you can prepare the spell just like your other spells.`,
-  },
+  //   name: 'Copying a Spell into the Spellbook',
+  //   description: `When you find a wizard spell of 1st level or higher, you can add it to your ^${itemIds.spellBook}{spellbook}^ if it is of a spell level you can prepare and if you can spare the time to decipher and copy it.\n\nCopying a spell into your ^${itemIds.spellBook}{spellbook}^ involves reproducing the basic form of the spell, then deciphering the unique system of notation used by the wizard who wrote it. You must practice the spell until you understand the sounds or gestures required, then transcribe it into your ^${itemIds.spellBook}{spellbook}^ using your own notation.\n\nFor each level of the spell, the process takes 2 hours and costs 50 ^${itemIds.goldPiece}{gp}^. The cost represents material components you expend as you experiment with the spell to master it, as well as the fine ^${itemIds.ink}{inks}^ you need to record it. Once you have spent this time and money, you can prepare the spell just like your other spells.`,
+  // },
 
-  {
-    spellCastingClassId: ids.wizard,
-    name: 'Replacing the Spellbook',
-    description: `You can copy a spell from your own ^${itemIds.spellBook}{spellbook}^ into another book-for example, if you want to make a backup copy of your ^${itemIds.spellBook}{spellbook}^. This is just like copying a new spell into your ^${itemIds.spellBook}{spellbook}^, but faster and easier, since you understand your own notation and already know how to cast the spell. You need spend only 1 hour and 10 ^${itemIds.goldPiece}{gp}^ for each level of the copied spell.\n\nIf you lose your ^${itemIds.spellBook}{spellbook}^, you can use the same procedure to transcribe the spells that you have prepared into a new ^${itemIds.spellBook}{spellbook}^. Filling out the remainder of your ^${itemIds.spellBook}{spellbook}^ requires you to find new spells to do so, as normal. For this reason, many wizards keep backup ^${itemIds.spellBook}{spellbooks}^ in a safe place.`,
-  },
-  {
-    spellCastingClassId: ids.wizard,
+  // {
+  //   id: fids.replacingTheSpellbook,
+  //   spellCastingClassId: ids.wizard,
+  //   name: 'Replacing the Spellbook',
+  //   description: `You can copy a spell from your own ^${itemIds.spellBook}{spellbook}^ into another book-for example, if you want to make a backup copy of your ^${itemIds.spellBook}{spellbook}^. This is just like copying a new spell into your ^${itemIds.spellBook}{spellbook}^, but faster and easier, since you understand your own notation and already know how to cast the spell. You need spend only 1 hour and 10 ^${itemIds.goldPiece}{gp}^ for each level of the copied spell.\n\nIf you lose your ^${itemIds.spellBook}{spellbook}^, you can use the same procedure to transcribe the spells that you have prepared into a new ^${itemIds.spellBook}{spellbook}^. Filling out the remainder of your ^${itemIds.spellBook}{spellbook}^ requires you to find new spells to do so, as normal. For this reason, many wizards keep backup ^${itemIds.spellBook}{spellbooks}^ in a safe place.`,
+  // },
+  // {
 
-    name: 'Ritual Casting',
-    description: `You can cast a wizard spell as a ritual if that spell has the ritual tag and you have the spell in your ^${itemIds.spellBook}{spellbook}^. You don't need to have the spell prepared.`,
-  },
-  {
-    spellCastingClassId: ids.wizard,
+  //   spellCastingClassId: ids.wizard,
 
-    name: 'Learning Spells of 1st Level and Higher',
-    description: `Each time you gain a wizard level, you can add two wizard spells of your choice to your ^${itemIds.spellBook}{spellbook}^ for free. Each of these spells must be of a level for which you have spell slots, as shown on the Wizard table. On your adventures, you might find other spells that you can add to your ^${itemIds.spellBook}{spellbook}^.`,
-  },
+  //   name: 'Ritual Casting',
+  //   description: `You can cast a wizard spell as a ritual if that spell has the ritual tag and you have the spell in your ^${itemIds.spellBook}{spellbook}^. You don't need to have the spell prepared.`,
+  // },
+  // {
+  //   spellCastingClassId: ids.wizard,
+
+  //   name: 'Learning Spells of 1st Level and Higher',
+  //   description: `Each time you gain a wizard level, you can add two wizard spells of your choice to your ^${itemIds.spellBook}{spellbook}^ for free. Each of these spells must be of a level for which you have spell slots, as shown on the Wizard table. On your adventures, you might find other spells that you can add to your ^${itemIds.spellBook}{spellbook}^.`,
+  // },
 
   // Bard
   {
+    id: fids.bardCantrips,
     name: 'Cantrips',
     description:
       'You know two cantrips of your choice from the bard spell list. You learn additional bard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Bard table.',
     spellCastingClassId: ids.bard,
   },
   {
+    id: fids.bardSpellsKnown,
     name: 'Spells Known',
     description:
       'You know four 1st-level spells of your choice from the bard spell list.\n\nThe Spells Known column of the Bard table shows when you learn more bard spells of your choice. Each of these spells must be of a level for which you have spell slots, as shown on the table. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the bard spells you know and replace it with another spell from the bard spell list, which also must be of a level for which you have spell slots.',
@@ -196,18 +359,21 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     spellCastingClassId: ids.bard,
   },
   {
+    id: fids.ritualCastingBard,
     name: 'Ritual Casting',
     description: `You can cast any bard spell you know as a ritual if that spell has the ritual tag.`,
 
     spellCastingClassId: ids.bard,
   },
   {
+    id: fids.bardicInspiration,
     name: 'Bardic Inspiration',
     description: `You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6.\n\nOnce within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the DM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time. \n\nYou can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain any expended uses when you finish a long rest.\n\nYour Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.`,
     levels: [1, 5, 10, 15],
     classId: ids.bard,
   },
   {
+    id: fids.jackOfAllTrades,
     name: 'Jack of All Trades',
     description:
       "Starting at 2nd level, you can add half your proficiency bonus, rounded down, to any ability check you make that doesn't already include your proficiency bonus.",
@@ -215,12 +381,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.bard,
   },
   {
+    id: fids.songOfRest,
     name: 'Song of Rest',
     description: `Beginning at 2nd level, you can use soothing music or oration to help revitalize your wounded allies during a short rest. If you or any friendly creatures who can hear your performance regain hit points at the end of the short rest by spending one or more Hit Dice, each of those creatures regains an extra 1d6 hit points.\n\nThe extra hit points increase when you reach certain levels in this class: to 1d8 at 9th level, to 1d10 at 13th level, and to 1d12 at 17th level.`,
     levels: [2, 9, 13, 17],
     classId: ids.bard,
   },
   {
+    id: fids.magicalInspiration,
     name: 'Magical Inspiration',
     description:
       'At 2nd level, if a creature has a Bardic Inspiration die from you and casts a spell that restores hit points or deals damage, the creature can roll that die and choose a target affected by the spell. Add the number rolled as a bonus to the hit points regained or the damage dealt. The Bardic Inspiration die is then lost.',
@@ -228,12 +396,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.bard,
   },
   {
+    id: fids.bardExpertise,
     name: 'Expertise',
     description: `At 3rd level, choose two of your skill proficiencies. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.\n\nAt 10th level, you can choose another two skill proficiencies to gain this benefit.`,
     levels: [3, 10],
     classId: ids.bard,
   },
   {
+    id: fids.bardicVersatility,
     name: 'Bardic Versatility',
     description:
       'Whenever you reach a level in this class that grants the Ability Score Improvement feature, you can do one of the following, representing a change in focus as you use your skills and magic:',
@@ -246,6 +416,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.bard,
   },
   {
+    id: fids.fontOfInspiration,
     name: 'Font of Inspiration',
     description:
       'Beginning when you reach 5th level, you regain all of your expended uses of Bardic Inspiration when you finish a short or long rest.',
@@ -253,6 +424,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.bard,
   },
   {
+    id: fids.countercharm,
     name: 'Countercharm',
     description:
       'At 6th level, you gain the ability to use musical notes or words of power to disrupt mind-influencing effects. As an action, you can start a performance that lasts until the end of your next turn. During that time, you and any friendly creatures within 30 feet of you have advantage on saving throws against being frightened or charmed. A creature must be able to hear you to gain this benefit. The performance ends early if you are incapacitated or silenced or if you voluntarily end it (no action required).',
@@ -260,6 +432,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.bard,
   },
   {
+    id: fids.magicalSecrets,
     name: 'Magical Secrets',
     description:
       'By 10th level, you have plundered magical knowledge from a wide spectrum of disciplines. Choose two spells from any classes, including this one. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip.\n\n The chosen spells count as bard spells for you and are included in the number in the Spells Known column of the Bard table.\n\n You learn two additional spells from any classes at 14th level and again at 18th level. ',
@@ -267,6 +440,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.bard,
   },
   {
+    id: fids.superiorInspiration,
     name: 'Superior Inspiration',
     description:
       'At 20th level, when you roll initiative and have no uses of Bardic Inspiration left, you regain one use.',
@@ -275,18 +449,21 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   },
   // Cleric
   {
+    id: fids.channelDivinity,
     name: 'Channel Divinity',
     description: `At 2nd level, you gain the ability to channel divine energy directly from your deity, using that energy to fuel magical effects. You start with two such effects: Turn Undead and an effect determined by your domain. Some domains grant you additional effects as you advance in levels, as noted in the domain description.\n\nWhen you use your Channel Divinity, you choose which effect to create. You must then finish a short or long rest to use your Channel Divinity again.\n\nSome Channel Divinity effects require saving throws. When you use such an effect from this class, the DC equals your cleric spell save DC.\n\nBeginning at 6th level, you can use your Channel Divinity twice between rests, and beginning at 18th level, you can use it three times between rests. When you finish a short or long rest, you regain your expended uses.`,
     levels: [2, 6, 18],
     classId: ids.cleric,
   },
   {
+    id: fids.turnUndead,
     name: 'Turn Undead',
     description: `As an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage.\n\nA turned creature must spend its turns trying to move as far away from you as it can, and it can't willingly move to a space within 30 feet of you. It also can't take reactions. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there's nowhere to move, the creature can use the Dodge action.`,
     levels: [2],
     classId: ids.cleric,
   },
   {
+    id: fids.destroyUndead,
     name: 'Harness Divine Power ',
     description:
       "At 2nd level, you can expend a use of your Channel Divinity to fuel your spells. As a bonus action, you touch your holy symbol, utter a prayer, and regain one expended spell slot, the level of which can be no higher than half your proficiency bonus (rounded up). The number of times you can use this feature is based on the level you've reached in this class: 2nd level, once; 6th level, twice; and 18th level, thrice. You regain all expended uses when you finish a long rest.",
@@ -294,6 +471,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.cleric,
   },
   {
+    id: fids.clericCantripVersatility,
     name: 'Cantrip Versatility',
     description:
       "Whenever you reach a level in this class that grants the Ability Score Improvement feature, you can replace one cantrip you learned from this class's Spellcasting feature with another cantrip from the cleric spell list.",
@@ -301,6 +479,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.cleric,
   },
   {
+    id: fids.destroyUndead,
     name: 'Destroy Undead',
     description:
       'Starting at 5th level, when an undead fails its saving throw against your Turn Undead feature, the creature is instantly destroyed if its challenge rating is at or below (CR 1/2). This increases to CR 1 at 8th level, CR 2 at 11th level, CR 3 at 14th level, and CR 4 at 17th level.',
@@ -308,18 +487,21 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.cleric,
   },
   {
+    id: fids.blessedStrikes,
     name: 'Blessed Strikes ',
     description: `*Replaces the Divine Strike or Potent Spellcasting feature that you may recieve from your Divine Domain.*\n\nWhen you reach 8th level, you are blessed with divine might in battle. When a creature takes damage from one of your cantrips or weapon attacks, you can also deal 1d8 radiant damage to that creature. Once you deal this damage, you can't use this feature again until the start of your next turn.`,
     levels: [8],
     classId: ids.cleric,
   },
   {
+    id: fids.divineIntervention,
     name: 'Divine Intervention',
     description: `Beginning at 10th level, you can call on your deity to intervene on your behalf when your need is great.\n\nImploring your deity's aid requires you to use your action. Describe the assistance you seek, and roll percentile dice. If you roll a number equal to or lower than your cleric level, your deity intervenes. The DM chooses the nature of the intervention; the effect of any cleric spell or cleric domain spell would be appropriate. If your deity intervenes, you can't use this feature again for 7 days. Otherwise, you can use it again after you finish a long rest. \n\nAt 20th level, your call for intervention succeeds automatically, no roll required.`,
     levels: [10, 20],
     classId: ids.cleric,
   },
   {
+    id: fids.clericCantrips,
     name: 'Cantrips',
     description:
       'At 1st level, you know three cantrips of your choice from the cleric spell list. You learn additional cleric cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Cleric table.',
@@ -327,95 +509,97 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     spellCastingClassId: ids.cleric,
   },
   {
+    id: fids.ritualCastingCleric,
     name: 'Ritual Casting',
     description: `You can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared.`,
     spellCastingClassId: ids.cleric,
   },
   // Rogue
-  {
-    name: 'Expertise',
-    description: `At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with ^${itemIds.thievesTools}{thieves' tools}^. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.\n\n At 6th level, you can choose two more of your proficiencies (in skills or with ^${itemIds.thievesTools}{thieves' tools}^) to gain this benefit.`,
-    levels: [1, 6],
-    classId: ids.rogue,
-  },
-  {
-    name: 'Sneak Attack',
-    description:
-      "Beginning at 1st level, you know how to strike subtly and exploit a foe's distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.\n\n You don't need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn't incapacitated, and you don't have disadvantage on the attack roll. \n\nThe amount of the extra damage increases as you gain levels in this class, as shown in the Sneak Attack column of the Rogue table.",
-    classId: ids.rogue,
-    levels: [1],
-  },
-  {
-    name: "Thieves' Cant",
-    description:
-      "During your rogue training you learned thieves' cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves' cant understands such messages. It takes four times longer to convey such a message than it does to speak the same idea plainly.\n\n In addition, you understand a set of secret signs and symbols used to convey short, simple messages, such as whether an area is dangerous or the territory of a thieves' guild, whether loot is nearby, or whether the people in an area are easy marks or will provide a safe house for thieves on the run.",
-    levels: [1],
-    classId: ids.rogue,
-  },
-  {
-    name: 'Cunning Action',
-    description:
-      'Starting at 2nd level, your quick thinking and agility allow you to move and act quickly. You can take a bonus action on each of your turns in combat. This action can be used only to take the Dash, Disengage, or Hide action.',
-    levels: [2],
-    classId: ids.rogue,
-  },
-  {
-    name: 'Steady Aim ',
-    description:
-      'Starting at 3rd level, you can use your bonus action to carefully aim your ranged weapon. Your next attack with a ranged weapon before the end of your turn ignores half cover and three-quarters cover.',
-    levels: [3],
-    classId: ids.rogue,
-  },
-  {
-    name: 'Uncanny Dodge',
-    description:
-      "Starting at 5th level, when an attacker that you can see hits you with an attack, you can use your reaction to halve the attack's damage against you.",
-    levels: [5],
-    classId: ids.rogue,
-  },
-  {
-    name: 'Evasion',
-    description: `Beginning at 7th level, you can nimbly dodge out of the way of certain area effects, such as a red dragon's fiery breath or an %${spellIds.iceStorm}{ice storm}% spell. When you are subjected to an effect that allows you to make a Dexterity saving throw to take only half damage, you instead take no damage if you succeed on the saving throw, and only half damage if you fail.`,
-    levels: [7],
-    classId: ids.rogue,
-  },
-  {
-    name: 'Reliable Talent',
-    description:
-      'By 11th level, you have refined your chosen skills until they approach perfection. Whenever you make an ability check that lets you add your proficiency bonus, you can treat a d20 roll of 9 or lower as a 10.',
-    levels: [11],
-    classId: ids.rogue,
-  },
-  {
-    name: 'Blindsense',
-    description:
-      'Starting at 14th level, if you are able to hear, you are aware of the location of any hidden or invisible creature within 10 feet of you.',
-    levels: [14],
-    classId: ids.rogue,
-  },
-  {
-    name: 'Slippery Mind',
-    description:
-      'By 15th level, you have acquired greater mental strength. You gain proficiency in Wisdom saving throws.',
-    levels: [15],
-    classId: ids.rogue,
-  },
-  {
-    name: 'Elusive',
-    description:
-      "Beginning at 18th level, you are so evasive that attackers rarely gain the upper hand against you. No attack roll has advantage against you while you aren't incapacitated.",
-    levels: [18],
-    classId: ids.rogue,
-  },
-  {
-    name: 'Stroke of Luck',
-    description:
-      'At 20th level, you have an uncanny knack for succeeding when you need to. If your attack misses a target within range, you can turn the miss into a hit. Alternatively, if you fail an ability check, you can treat the d20 roll as a 20.',
-    levels: [20],
-    classId: ids.rogue,
-  },
+  // {
+  //   name: 'Expertise',
+  //   description: `At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with ^${itemIds.thievesTools}{thieves' tools}^. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.\n\n At 6th level, you can choose two more of your proficiencies (in skills or with ^${itemIds.thievesTools}{thieves' tools}^) to gain this benefit.`,
+  //   levels: [1, 6],
+  //   classId: ids.rogue,
+  // },
+  // {
+  //   name: 'Sneak Attack',
+  //   description:
+  //     "Beginning at 1st level, you know how to strike subtly and exploit a foe's distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.\n\n You don't need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn't incapacitated, and you don't have disadvantage on the attack roll. \n\nThe amount of the extra damage increases as you gain levels in this class, as shown in the Sneak Attack column of the Rogue table.",
+  //   classId: ids.rogue,
+  //   levels: [1],
+  // },
+  // {
+  //   name: "Thieves' Cant",
+  //   description:
+  //     "During your rogue training you learned thieves' cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves' cant understands such messages. It takes four times longer to convey such a message than it does to speak the same idea plainly.\n\n In addition, you understand a set of secret signs and symbols used to convey short, simple messages, such as whether an area is dangerous or the territory of a thieves' guild, whether loot is nearby, or whether the people in an area are easy marks or will provide a safe house for thieves on the run.",
+  //   levels: [1],
+  //   classId: ids.rogue,
+  // },
+  // {
+  //   name: 'Cunning Action',
+  //   description:
+  //     'Starting at 2nd level, your quick thinking and agility allow you to move and act quickly. You can take a bonus action on each of your turns in combat. This action can be used only to take the Dash, Disengage, or Hide action.',
+  //   levels: [2],
+  //   classId: ids.rogue,
+  // },
+  // {
+  //   name: 'Steady Aim ',
+  //   description:
+  //     'Starting at 3rd level, you can use your bonus action to carefully aim your ranged weapon. Your next attack with a ranged weapon before the end of your turn ignores half cover and three-quarters cover.',
+  //   levels: [3],
+  //   classId: ids.rogue,
+  // },
+  // {
+  //   name: 'Uncanny Dodge',
+  //   description:
+  //     "Starting at 5th level, when an attacker that you can see hits you with an attack, you can use your reaction to halve the attack's damage against you.",
+  //   levels: [5],
+  //   classId: ids.rogue,
+  // },
+  // {
+  //   name: 'Evasion',
+  //   description: `Beginning at 7th level, you can nimbly dodge out of the way of certain area effects, such as a red dragon's fiery breath or an %${spellIds.iceStorm}{ice storm}% spell. When you are subjected to an effect that allows you to make a Dexterity saving throw to take only half damage, you instead take no damage if you succeed on the saving throw, and only half damage if you fail.`,
+  //   levels: [7],
+  //   classId: ids.rogue,
+  // },
+  // {
+  //   name: 'Reliable Talent',
+  //   description:
+  //     'By 11th level, you have refined your chosen skills until they approach perfection. Whenever you make an ability check that lets you add your proficiency bonus, you can treat a d20 roll of 9 or lower as a 10.',
+  //   levels: [11],
+  //   classId: ids.rogue,
+  // },
+  // {
+  //   name: 'Blindsense',
+  //   description:
+  //     'Starting at 14th level, if you are able to hear, you are aware of the location of any hidden or invisible creature within 10 feet of you.',
+  //   levels: [14],
+  //   classId: ids.rogue,
+  // },
+  // {
+  //   name: 'Slippery Mind',
+  //   description:
+  //     'By 15th level, you have acquired greater mental strength. You gain proficiency in Wisdom saving throws.',
+  //   levels: [15],
+  //   classId: ids.rogue,
+  // },
+  // {
+  //   name: 'Elusive',
+  //   description:
+  //     "Beginning at 18th level, you are so evasive that attackers rarely gain the upper hand against you. No attack roll has advantage against you while you aren't incapacitated.",
+  //   levels: [18],
+  //   classId: ids.rogue,
+  // },
+  // {
+  //   name: 'Stroke of Luck',
+  //   description:
+  //     'At 20th level, you have an uncanny knack for succeeding when you need to. If your attack misses a target within range, you can turn the miss into a hit. Alternatively, if you fail an ability check, you can treat the d20 roll as a 20.',
+  //   levels: [20],
+  //   classId: ids.rogue,
+  // },
   // Barbarian
   {
+    id: fids.rage,
     name: 'Rage',
     description:
       "In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. \n\nIf you are able to cast spells, you can't cast them or concentrate on them while raging.\n\n Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven't attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.\n\nOnce you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again.\n\n While raging, you have the following benefits if you aren't wearing heavy armor: ",
@@ -428,12 +612,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     ],
   },
   {
+    id: fids.unarmoredDefense,
     name: 'Unarmored Defense',
     description: `While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a ^${itemIds.shield}{shield}^ and still gain this benefit.`,
     levels: [1],
     classId: ids.barbarian,
   },
   {
+    id: fids.recklessAttack,
     name: 'Reckless Attack',
     description:
       'Starting at 2nd level, you can throw aside all concern for defense to attack with fierce desperation. When you make your first attack on your turn, you can decide to attack recklessly. Doing so gives you advantage on melee weapon attack rolls using Strength during this turn, but attack rolls against you have advantage until your next turn.',
@@ -441,6 +627,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.barbarian,
   },
   {
+    id: fids.dangerSense,
     name: 'Danger Sense',
     description:
       "At 2nd level, you gain an uncanny sense of when things nearby aren't as they should be, giving you an edge when you dodge away from danger. You have advantage on Dexterity saving throws against effects that you can see, such as traps and spells. To gain this benefit, you can't be blinded, deafened, or incapacitated.",
@@ -448,6 +635,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.barbarian,
   },
   {
+    id: fids.primalKnowledge,
     name: 'Primal Knowledge',
     description:
       'When you reach 3rd level and again at 10th level, you gain proficiency in one skill of your choice from the list of skills available to barbarians at 1st level.',
@@ -455,6 +643,15 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.barbarian,
   },
   {
+    id: fids.extraAttackBarbarian,
+    name: 'Extra Attack',
+    description:
+      'Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn.',
+    levels: [5],
+    classId: ids.barbarian,
+  },
+  {
+    id: fids.fastMovement,
     name: 'Fast Movement',
     description:
       "Starting at 5th level, your speed increases by 10 feet while you aren't wearing heavy armor.",
@@ -462,6 +659,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.barbarian,
   },
   {
+    id: fids.feralInstinct,
     name: 'Feral Instinct',
     description:
       "By 7th level, your instincts are so honed that you have advantage on initiative rolls.\n\nAdditionally, if you are surprised at the beginning of combat and aren't incapacitated, you can act normally on your first turn, but only if you enter your rage before doing anything else on that turn.",
@@ -469,6 +667,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.barbarian,
   },
   {
+    id: fids.instinctivePounce,
     name: 'Instinctive Pounce',
     description:
       'At 7th level, as part of the bonus action you take to enter your rage, you can move up to half your speed.',
@@ -476,6 +675,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.barbarian,
   },
   {
+    id: fids.brutalCritical,
     name: 'Brutal Critical',
     description:
       'Beginning at 9th level, you can roll one additional weapon damage die when determining the extra damage for a critical hit with a melee attack.\n\n This increases to two additional dice at 13th level and three additional dice at 17th level. ',
@@ -483,6 +683,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.barbarian,
   },
   {
+    id: fids.relentlessRage,
     name: 'Relentless Rage',
     description:
       "Starting at 11th level, your rage can keep you fighting despite grievous wounds. If you drop to 0 hit points while you're raging and don't die outright, you can make a DC 10 Constitution saving throw. If you succeed, you drop to 1 hit point instead.\n\n Each time you use this feature after the first, the DC increases by 5. When you finish a short or long rest, the DC resets to 10.",
@@ -490,6 +691,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.barbarian,
   },
   {
+    id: fids.persistentRage,
     name: 'Persistent Rage',
     description:
       'Beginning at 15th level, your rage is so fierce that it ends early only if you fall unconscious or if you choose to end it.',
@@ -497,6 +699,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.barbarian,
   },
   {
+    id: fids.indomitableMight,
     name: 'Indomitable Might',
     description:
       'Beginning at 18th level, if your total for a Strength check is less than your Strength score, you can use that score in place of the total.',
@@ -504,6 +707,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.barbarian,
   },
   {
+    id: fids.primalChampion,
     name: 'Primal Champion',
     description:
       'At 20th level, you embody the power of the wilds. Your Strength and Constitution scores increase by 4. Your maximum for those scores is now 24.',
@@ -512,6 +716,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   },
   // Druid
   {
+    id: fids.druidCantrips,
     name: 'Cantrips',
     description:
       'At 1st level, you know two cantrips of your choice from the druid spell list. You learn additional druid cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Druid table.',
@@ -519,6 +724,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     spellCastingClassId: ids.druid,
   },
   {
+    id: fids.druidic,
     name: 'Druidic',
     description:
       "You know Druidic, the secret language of druids. You can speak the language and use it to leave hidden messages. You and others who know this language automatically spot such a message. Others spot the message's presence with a successful DC 15 Wisdom (Perception) check but can't decipher it without magic.",
@@ -526,12 +732,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.druid,
   },
   {
+    id: fids.druidRitualCasting,
     name: 'Ritual Casting',
     description: `You can cast a druid spell as a ritual if that spell has the ritual tag and you have the spell prepared.`,
 
     spellCastingClassId: ids.druid,
   },
   {
+    id: fids.wildShape,
     name: 'Wild Shape',
     description:
       'Starting at 2nd level, you can use your action to magically assume the shape of a beast that you have seen before. You can use this feature twice. You regain expended uses when you finish a short or long rest.\n\nYour druid level determines the beasts you can transform into according to the Beast Shapes Table.\n\n You can stay in a beast shape for a number of hours equal to half your druid level (rounded down). You then revert to your normal form unless you expend another use of this feature. You can revert to your normal form earlier by using a bonus action on your turn. You automatically revert if you fall unconscious, drop to 0 hit points, or die. \n\nWhile you are transformed, the following rules apply:',
@@ -573,6 +781,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     ],
   },
   {
+    id: fids.wildCompanion,
     name: 'Wild Companion',
     description:
       'At 2nd level, you gain the ability to summon a spirit that assumes an animal form: as an action, you can expend a use of your Wild Shape feature to cast the Find Familiar spell, without material components.\n\n When you cast the spell in this way, the familiar is a fey instead of a beast, and the familiar disappears after a number of hours equal to half your druid level.',
@@ -580,6 +789,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.druid,
   },
   {
+    id: fids.cantripVersatilityDruid,
     name: 'Cantrip Versatility',
     description:
       "Whenever you reach a level in this class that grants the Ability Score Improvement feature, you can replace one cantrip you learned from this class's Spellcasting feature with another cantrip from the druid spell list.",
@@ -588,6 +798,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   },
 
   {
+    id: fids.timelessBody,
     name: 'Timeless Body',
     description:
       'Starting at 18th level, the primal magic that you wield causes you to age more slowly. For every 10 years that pass, your body ages only 1 year.',
@@ -595,6 +806,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.druid,
   },
   {
+    id: fids.beastSpells,
     name: 'Beast Spells',
     description:
       "Beginning at 18th level, you can cast many of your druid spells in any shape you assume using Wild Shape. You can perform the somatic and verbal components of a druid spell while in a beast shape, but you aren't able to provide material components.",
@@ -602,6 +814,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.druid,
   },
   {
+    id: fids.archdruid,
     name: 'Archdruid',
     description:
       "At 20th level, you can use your Wild Shape an unlimited number of times.\n\n Additionally, you can ignore the verbal and somatic components of your druid spells, as well as any material components that lack a cost and aren't consumed by a spell. You gain this benefit in both your normal shape and your beast shape from Wild Shape.",
@@ -610,12 +823,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   },
   // Monk
   {
+    id: fids.unarmoredDefense,
     name: 'Unarmored Defense',
     description: `Beginning at 1st level, while you are wearing no armor and not wielding a ^${itemIds.shield}{shield}^, your AC equals 10 + your Dexterity modifier + your Wisdom modifier.`,
     levels: [1],
     classId: ids.monk,
   },
   {
+    id: fids.martialArts,
     name: 'Martial Arts',
     description: `At 1st level, your practice of martial arts gives you mastery of combat styles that use unarmed strikes and monk weapons, which are ^${itemIds.shortsword}{shortswords}^ and any simple melee weapons that don't have the two-handed or heavy property.\n\nCertain monasteries use specialized forms of the monk weapons. For example, you might use a ^${itemIds.club}{club}^ that is two lengths of wood connected by a short chain (called a nunchaku) or a ^${itemIds.sickle}{sickle}^ with a shorter, straighter blade (called a kama). Whatever name you use for a monk weapon, you can use the game statistics provided for the weapon on the Weapons page.\n\nYou gain the following benefits while you are unarmed or wielding only monk weapons and you aren't wearing armor or wielding a ^${itemIds.shield}{shield}^:`,
     options: [
@@ -627,6 +842,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.ki,
     name: 'Ki',
     description:
       "Starting at 2nd level, your training allows you to harness the mystic energy of ki. Your access to this energy is represented by a number of ki points. Your monk level determines the number of points you have, as shown in the Ki Points column of the Monk table.\n\nYou can spend these points to fuel various ki features. You start knowing three such features: Flurry of Blows, Patient Defense, and Step of the Wind. You learn more ki features as you gain levels in this class.\n\nWhen you spend a ki point, it is unavailable until you finish a short or long rest, at the end of which you draw all of your expended ki back into yourself. You must spend at least 30 minutes of the rest meditating to regain your ki points.\n\nSome of your ki features require your target to make a saving throw to resist the feature's effects. The saving throw DC is calculated as follows:\n\n**Ki save DC** = 8 + your proficiency bonus + your Wisdom modifier.",
@@ -639,12 +855,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.unarmoredMovement,
     name: 'Unarmored Movement',
     description: `Starting at 2nd level, your speed increases by 10 feet while you are not wearing armor or wielding a ^${itemIds.shield}{shield}^. This bonus increases when you reach certain monk levels, as shown in the Monk table.\n\n At 9th level, you gain the ability to move along vertical surfaces and across liquids on your turn without falling during the move.`,
     levels: [2, 9],
     classId: ids.monk,
   },
   {
+    id: fids.dedicatedWeapon,
     name: 'Dedicated Weapon',
     description:
       'Also at 2nd level, you train yourself to use a variety of weapons as monk weapons, not just simple melee weapons and shortswords. Whenever you finish a short or long rest, you can touch one weapon, focus your ki on it, and then count that weapon as a monk weapon until you use this feature again.\n\n The chosen must meet these three criteria: ',
@@ -657,6 +875,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.deflectMissiles,
     name: 'Deflect Missiles',
     description:
       'Starting at 3rd level, you can use your reaction to deflect or catch the missile when you are hit by a ranged weapon attack. When you do so, the damage you take from the attack is reduced by 1d10 + your Dexterity modifier + your monk level.\n\n If you reduce the damage to 0, you can catch the missile if it is small enough for you to hold in one hand and you have at least one hand free. If you catch a missile in this way, you can spend 1 ki point to make a ranged attack with a range of 20/60 using the weapon or piece of ammunition you just caught, as part of the same reaction. You make this attack with proficiency, regardless of your weapon proficiencies, and the missile counts as a monk weapon for the attack.',
@@ -664,6 +883,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.kiFueledAttack,
     name: 'Ki-Fueled Attack',
     description:
       'Also at 3rd level, if you spend 1 ki point or more as part of your action on your turn, you can make one attack with an unarmed strike or a monk weapon as a bonus action before the end of the turn.',
@@ -671,6 +891,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.slowFall,
     name: 'Slow Fall',
     description:
       'Beginning at 4th level, you can use your reaction when you fall to reduce any falling damage you take by an amount equal to five times your monk level.',
@@ -678,6 +899,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.quickenedHealing,
     name: 'Quickened Healing',
     description:
       'At 4th level, you can use your action to spend 2 ki points to touch a creature and restore a number of hit points equal to a roll of your Martial Arts die + your Wisdom modifier.',
@@ -685,6 +907,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.monkExtraAttack,
     name: 'Extra Attack',
     description:
       'Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn.',
@@ -692,6 +915,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.stunningStrike,
     name: 'Stunning Strike',
     description:
       "Starting at 5th level, you can interfere with the flow of ki in an opponent's body. When you hit another creature with a melee weapon attack, you can spend 1 ki point to attempt a stunning strike. The target must succeed on a Constitution saving throw or be stunned until the end of your next turn.",
@@ -699,6 +923,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.focusedAim,
     name: 'Focused Aim',
     description:
       'Also at 5th level, when you miss with an attack roll, you can spend 1 to 3 ki points to increase your attack roll by 2 for each of these ki points you spend, potentially turning the miss into a hit.',
@@ -706,6 +931,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.kiEmpoweredStrikes,
     name: 'Ki-Empowered Strikes',
     description:
       'Starting at 6th level, your unarmed strikes count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage.',
@@ -713,12 +939,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.evasion,
     name: 'Evasion',
     description: `At 7th level, your instinctive agility lets you dodge out of the way of certain area effects, such as a blue dragon's lightning breath or a %${spellIds.fireball}{fireball}% spell. When you are subjected to an effect that allows you to make a Dexterity saving throw to take only half damage, you instead take no damage if you succeed on the saving throw, and only half damage if you fail.`,
     levels: [7],
     classId: ids.monk,
   },
   {
+    id: fids.stillnessOfMind,
     name: 'Stillness of Mind',
     description:
       'Starting at 7th level, you can use your action to end one effect on yourself that is causing you to be charmed or frightened.',
@@ -726,6 +954,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.purityOfBody,
     name: 'Purity of Body',
     description:
       'At 10th level, your mastery of the ki flowing through you makes you immune to disease and poison.',
@@ -733,6 +962,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.tongueOfTheSunAndMoon,
     name: 'Tongue of the Sun and Moon',
     description:
       'Starting at 13th level, you learn to touch the ki of other minds so that you understand all spoken languages. Moreover, any creature that can understand a language can understand what you say.',
@@ -740,6 +970,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.diamondSouled,
     name: 'Diamond Soul',
     description:
       'Beginning at 14th level, your mastery of ki grants you proficiency in all saving throws.\n\n Additionally, whenever you make a saving throw and fail, you can spend 1 ki point to reroll it and take the second result.',
@@ -747,6 +978,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.timelessBody,
     name: 'Timeless Body',
     description:
       "At 15th level, your ki sustains you so that you suffer none of the frailty of old age, and you can't be aged magically. You can still die of old age, however. In addition, you no longer need food or water.",
@@ -754,6 +986,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.emptyBody,
     name: 'Empty Body',
     description:
       "Beginning at 18th level, you can use your action to spend 4 ki points to become invisible for 1 minute. During that time, you also have resistance to all damage but force damage.\n\n Additionally, you can spend 8 ki points to cast the astral projection spell, without needing material components. When you do so, you can't take any other creatures with you.",
@@ -761,6 +994,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.monk,
   },
   {
+    id: fids.perfectSelf,
     name: 'Perfect Self',
     description:
       'At 20th level, when you roll for initiative and have no ki points remaining, you regain 4 ki points.',
@@ -769,6 +1003,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   },
   // Paladin
   {
+    id: fids.divineSense,
     name: 'Divine Sense',
     description:
       'The presence of strong evil registers on your senses like a noxious odor, and powerful good rings like heavenly music in your ears. As an action, you can open your awareness to detect such forces. Until the end of your next turn, within a 60ft radius, you get the benefits listed below. You can use this feature a number of times equal to 1 + your Charisma modifier. When you finish a long rest, you regain all expended uses.',
@@ -781,6 +1016,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.paladin,
   },
   {
+    id: fids.layOnHands,
     name: 'Lay on Hands',
     description:
       'Your blessed touch can heal wounds. You have a pool of healing power that replenishes when you take a long rest. With that pool, you can restore a total number of hit points equal to your paladin level x 5.\n\nAs an action, you can touch a creature and draw power from the pool to restore a number of hit points to that creature, up to the maximum amount remaining in your pool.\n\nAlternatively, you can expend 5 hit points from your pool of healing to cure the target of one disease or neutralize one poison affecting it. You can cure multiple diseases and neutralize multiple poisons with a single use of Lay on Hands, expending hit points separately for each one.\n\nThis feature has no effect on undead and constructs.',
@@ -788,6 +1024,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.paladin,
   },
   {
+    id: fids.fightingStylePaladin,
     name: 'Fighting Style',
     description:
       "At 2nd level, you adopt a style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again.",
@@ -864,6 +1101,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.paladin,
   },
   {
+    id: fids.divineSmite,
     name: 'Divine Smite',
     description:
       "Starting at 2nd level, when you hit a creature with a melee weapon attack, you can expend one spell slot to deal radiant damage to the target, in addition to the weapon's damage. The extra damage is 2d8 for a 1st-level spell slot, plus 1d8 for each spell level higher than 1st, to a maximum of 5d8. The damage increases by 1d8 if the target is an undead or a fiend.",
@@ -871,6 +1109,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.paladin,
   },
   {
+    id: fids.divineHealth,
     name: 'Divine Health',
     description:
       'By 3rd level, the divine magic flowing through you makes you immune to disease.',
@@ -878,6 +1117,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.paladin,
   },
   {
+    id: fids.harnessDivinePowerPaladin,
     name: 'Harness Divine Power',
     description:
       "Also at 3rd level, you can expend a use of your Channel Divinity to fuel your spells. As a bonus action, you touch your holy symbol, utter a prayer, and regain one expended spell slot, the level of which can be no higher than half your proficiency bonus (rounded up). The number of times you can use this feature is based on the level you've reached in this class: 3rd level, once; 7th level, twice; and 15th level, thrice. You regain all expended uses when you finish a long rest.",
@@ -885,6 +1125,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.paladin,
   },
   {
+    id: fids.extraAttackPaladin,
     name: 'Extra Attack',
     description:
       'Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn.',
@@ -892,6 +1133,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.paladin,
   },
   {
+    id: fids.auraOfProtection,
     name: 'Aura of Protection',
     description:
       'Starting at 6th level, whenever you or a friendly creature within 10 feet of you must make a saving throw, the creature gains a bonus to the saving throw equal to your Charisma modifier (with a minimum bonus of +1). You must be conscious to grant this bonus. At 18th level, the range of this aura increases to 30 feet.',
@@ -899,6 +1141,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.paladin,
   },
   {
+    id: fids.auraOfCourage,
     name: 'Aura of Courage',
     description:
       "Starting at 10th level, you and friendly creatures within 10 feet of you can't be frightened while you are conscious. At 18th level, the range of this aura increases to 30 feet.",
@@ -906,6 +1149,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.paladin,
   },
   {
+    id: fids.improvedDivineSmite,
     name: 'Improved Divine Smite',
     description:
       'By 11th level, you are so suffused with righteous might that all your melee weapon strikes carry divine power with them. Whenever you hit a creature with a melee weapon, the creature takes an extra 1d8 radiant damage.',
@@ -913,6 +1157,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.paladin,
   },
   {
+    id: fids.cleansingTouch,
     name: 'Cleansing Touch',
     description:
       'Beginning at 14th level, you can use your action to end one spell on yourself or on one willing creature that you touch. You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain expended uses when you finish a long rest.',
@@ -920,216 +1165,222 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.paladin,
   },
   // Sorcerer
-  {
-    name: 'Cantrips',
-    description:
-      'At 1st level, you know four cantrips of your choice from the sorcerer spell list. You learn additional sorcerer cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Sorcerer table.',
+  // {
+  //   id: fids.sorcererCantrips,
+  //   name: 'Cantrips',
+  //   description:
+  //     'At 1st level, you know four cantrips of your choice from the sorcerer spell list. You learn additional sorcerer cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Sorcerer table.',
 
-    spellCastingClassId: ids.sorcerer,
-  },
-  {
-    name: 'Spells Known',
-    description:
-      'You know two 1st-level spells of your choice from the sorcerer spell list.\n\nThe Spells Known column of the Sorcerer table shows when you learn more sorcerer spells of your choice. Each of these spells must be of a level for which you have spell slots. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the sorcerer spells you know and replace it with another spell from the sorcerer spell list, which also must be of a level for which you have spell slots.',
+  //   spellCastingClassId: ids.sorcerer,
+  // },
+  // {
+  //   id: fids.sorcererSpellsKnown,
+  //   name: 'Spells Known',
+  //   description:
+  //     'You know two 1st-level spells of your choice from the sorcerer spell list.\n\nThe Spells Known column of the Sorcerer table shows when you learn more sorcerer spells of your choice. Each of these spells must be of a level for which you have spell slots. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the sorcerer spells you know and replace it with another spell from the sorcerer spell list, which also must be of a level for which you have spell slots.',
 
-    spellCastingClassId: ids.sorcerer,
-  },
-  {
-    name: 'Font of Magic',
-    description:
-      'At 2nd level, you tap into a deep wellspring of magic within yourself. This wellspring is represented by sorcery points, which allow you to create a variety of magical effects.',
-    options: [
-      '**Sorcery Points.** You have 2 sorcery points, and you gain more as you reach higher levels, as shown in the Sorcery Points column of the Sorcerer table. You can never have more sorcery points than shown on the table for your level. You regain all spent sorcery points when you finish a long rest.',
-      '**Create Spell Slots.** You can transform unexpended sorcery points into one spell slot as a bonus action on your turn. The Creating Spell Slots table shows the cost of creating a spell slot of a given level. You can create spell slots no higher in level than 5th. Any spell slot you create with this feature vanishes when you finish a long rest.',
-      "**Converting Spell Slots to Sorcery points.** As a bonus action on your turn, you can expend one spell slot and gain a number of sorcery points equal to the slot's level.",
-    ],
-    levels: [2],
-    classId: ids.sorcerer,
-    extendedTable: [
-      {
-        'Creating Spell Slots': {
-          headersLength: [50, 50],
-          headers: ['Spell Slot Level', 'Sorcery Point Cost'],
-          data: [
-            {
-              'Spell Slot Level': '1st',
-              'Sorcery Point Cost': '2',
-            },
-            {
-              'Spell Slot Level': '2nd',
-              'Sorcery Point Cost': '3',
-            },
-            {
-              'Spell Slot Level': '3rd',
-              'Sorcery Point Cost': '5',
-            },
-            {
-              'Spell Slot Level': '4th',
-              'Sorcery Point Cost': '6',
-            },
-            {
-              'Spell Slot Level': '5th',
-              'Sorcery Point Cost': '7',
-            },
-          ],
-        },
-      },
-    ],
-  },
-  {
-    name: 'Metamagic',
-    description:
-      'At 3rd level, you gain the ability to twist your spells to suit your needs. You gain two of the following Metamagic options of your choice. You gain another one at 10th and 17th level.',
-    extendedTable: [
-      {
-        '': {
-          headers: ['Metamagic', 'Description'],
-          data: [
-            {
-              Metamagic: 'Careful Spell',
-              Description:
-                "When you cast a spell that forces other creatures to make a saving throw, you can protect some of those creatures from the spell's full force. To do so, you spend 1 sorcery point and choose a number of those creatures up to your Charisma modifier (minimum of one creature). A chosen creature automatically succeeds on its saving throw against the spell.",
-            },
-            {
-              Metamagic: 'Distant Spell',
-              Description:
-                'When you cast a spell that has a range of 5 feet or greater, you can spend 1 sorcery point to double the range of the spell. When you cast a spell that has a range of touch, you can spend 1 sorcery point to make the range of the spell 30 feet.',
-            },
-            {
-              Metamagic: 'Empowered Spell',
-              Description:
-                'When you roll damage for a spell, you can spend 1 sorcery point to reroll a number of the damage dice up to your Charisma modifier (minimum of one). You must use the new rolls. You can use Empowered Spell even if you have already used a different Metamagic option during the casting of the spell.',
-            },
-            {
-              Metamagic: 'Extended Spell',
-              Description:
-                'When you cast a spell that has a duration of 1 minute or longer, you can spend 1 sorcery point to double its duration, to a maximum duration of 24 hours.',
-            },
-            {
-              Metamagic: 'Heightened Spell',
-              Description:
-                'When you cast a spell that forces a creature to make a saving throw to resist its effects, you can spend 3 sorcery points to give one target of the spell disadvantage on its first saving throw made against the spell.',
-            },
-            {
-              Metamagic: 'Quickened Spell',
-              Description:
-                'When you cast a spell that has a casting time of 1 action, you can spend 2 sorcery points to change the casting time to 1 bonus action for this casting.',
-            },
-            {
-              Metamagic: 'Seeking Spell',
-              Description:
-                'If you make an attack roll for a spell and miss, you can spend 2 sorcerer points to reroll the d20, and you must use the new roll. You can use Seeking Spell even if you have already used a different Metamagic option during the casting of the spell.',
-            },
-            {
-              Metamagic: 'Seeking Spell (UA)',
-              Description:
-                'When you cast a spell that requires you to make a spell attack roll or that forces a target to make a Dexterity saving throw, you can spend 1 sorcery point to ignore the effects of half- and three-quarters cover against targets of the spell.',
-            },
-            {
-              Metamagic: 'Subtle Spell',
-              Description:
-                'When you cast a spell, you can spend 1 sorcery point to cast it without any somatic or verbal components.',
-            },
-            {
-              Metamagic: 'Transmuted Spell',
-              Description:
-                'When you cast a spell that deals a type of damage from the following list, you can spend 1 sorcery point to change that damage type to one of the other listed types: acid, cold, fire, lightning, poison, thunder.',
-            },
-            {
-              Metamagic: 'Twinned Spell',
-              Description:
-                "When you cast a spell that targets only one creature and doesn't have a range of self, you can spend a number of sorcery points equal to the spell's level to target a second creature in range with the same spell (1 sorcery point if the spell is a cantrip). To be eligible, a spell must be incapable of targeting more than one creature at the spell's current level. ",
-            },
-          ],
-        },
-      },
-    ],
-    levels: [3, 10, 17],
-    classId: ids.sorcerer,
-  },
-  {
-    name: 'Sorcerous Versatility (Optional)',
-    description:
-      'When you reach a level in this class that grants the Ability Score Improvement feature, you can do one of the following, representing the magic within you flowing in new ways:',
-    options: [
-      'Replace one of the options you chose for the Metamagic feature with a different Metamagic option available to you.',
-      "Replace one cantrip you learned from this class' spellcasting feature with another cantrip from the sorcerer spell list.",
-    ],
-    levels: [4, 8, 12, 16, 19],
-    classId: ids.sorcerer,
-  },
-  {
-    name: 'Magical Guidance (Optional)',
-    description:
-      'When you reach 5th level, you can tap into your inner wellspring of magic to try and conjure success from failure. When you make an ability check that fails, you can spend 1 sorcery point to reroll the d20, and you must use the new roll, potentially turning the failure into a success.',
-    levels: [5],
-    classId: ids.sorcerer,
-  },
-  {
-    name: 'Sorcerous Restoration',
-    description:
-      'At 20th level, you regain 4 expended sorcery points whenever you finish a short rest.',
-    levels: [20],
-    classId: ids.sorcerer,
-  },
+  //   spellCastingClassId: ids.sorcerer,
+  // },
+  // {
+  //   id: fids.fontOfMagic,
+  //   name: 'Font of Magic',
+  //   description:
+  //     'At 2nd level, you tap into a deep wellspring of magic within yourself. This wellspring is represented by sorcery points, which allow you to create a variety of magical effects.',
+  //   options: [
+  //     '**Sorcery Points.** You have 2 sorcery points, and you gain more as you reach higher levels, as shown in the Sorcery Points column of the Sorcerer table. You can never have more sorcery points than shown on the table for your level. You regain all spent sorcery points when you finish a long rest.',
+  //     '**Create Spell Slots.** You can transform unexpended sorcery points into one spell slot as a bonus action on your turn. The Creating Spell Slots table shows the cost of creating a spell slot of a given level. You can create spell slots no higher in level than 5th. Any spell slot you create with this feature vanishes when you finish a long rest.',
+  //     "**Converting Spell Slots to Sorcery points.** As a bonus action on your turn, you can expend one spell slot and gain a number of sorcery points equal to the slot's level.",
+  //   ],
+  //   levels: [2],
+  //   classId: ids.sorcerer,
+  //   extendedTable: [
+  //     {
+  //       'Creating Spell Slots': {
+  //         headersLength: [50, 50],
+  //         headers: ['Spell Slot Level', 'Sorcery Point Cost'],
+  //         data: [
+  //           {
+  //             'Spell Slot Level': '1st',
+  //             'Sorcery Point Cost': '2',
+  //           },
+  //           {
+  //             'Spell Slot Level': '2nd',
+  //             'Sorcery Point Cost': '3',
+  //           },
+  //           {
+  //             'Spell Slot Level': '3rd',
+  //             'Sorcery Point Cost': '5',
+  //           },
+  //           {
+  //             'Spell Slot Level': '4th',
+  //             'Sorcery Point Cost': '6',
+  //           },
+  //           {
+  //             'Spell Slot Level': '5th',
+  //             'Sorcery Point Cost': '7',
+  //           },
+  //         ],
+  //       },
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: fids.metamagic,
+  //   name: 'Metamagic',
+  //   description:
+  //     'At 3rd level, you gain the ability to twist your spells to suit your needs. You gain two of the following Metamagic options of your choice. You gain another one at 10th and 17th level.',
+  //   extendedTable: [
+  //     {
+  //       '': {
+  //         headers: ['Metamagic', 'Description'],
+  //         data: [
+  //           {
+  //             Metamagic: 'Careful Spell',
+  //             Description:
+  //               "When you cast a spell that forces other creatures to make a saving throw, you can protect some of those creatures from the spell's full force. To do so, you spend 1 sorcery point and choose a number of those creatures up to your Charisma modifier (minimum of one creature). A chosen creature automatically succeeds on its saving throw against the spell.",
+  //           },
+  //           {
+  //             Metamagic: 'Distant Spell',
+  //             Description:
+  //               'When you cast a spell that has a range of 5 feet or greater, you can spend 1 sorcery point to double the range of the spell. When you cast a spell that has a range of touch, you can spend 1 sorcery point to make the range of the spell 30 feet.',
+  //           },
+  //           {
+  //             Metamagic: 'Empowered Spell',
+  //             Description:
+  //               'When you roll damage for a spell, you can spend 1 sorcery point to reroll a number of the damage dice up to your Charisma modifier (minimum of one). You must use the new rolls. You can use Empowered Spell even if you have already used a different Metamagic option during the casting of the spell.',
+  //           },
+  //           {
+  //             Metamagic: 'Extended Spell',
+  //             Description:
+  //               'When you cast a spell that has a duration of 1 minute or longer, you can spend 1 sorcery point to double its duration, to a maximum duration of 24 hours.',
+  //           },
+  //           {
+  //             Metamagic: 'Heightened Spell',
+  //             Description:
+  //               'When you cast a spell that forces a creature to make a saving throw to resist its effects, you can spend 3 sorcery points to give one target of the spell disadvantage on its first saving throw made against the spell.',
+  //           },
+  //           {
+  //             Metamagic: 'Quickened Spell',
+  //             Description:
+  //               'When you cast a spell that has a casting time of 1 action, you can spend 2 sorcery points to change the casting time to 1 bonus action for this casting.',
+  //           },
+  //           {
+  //             Metamagic: 'Seeking Spell',
+  //             Description:
+  //               'If you make an attack roll for a spell and miss, you can spend 2 sorcerer points to reroll the d20, and you must use the new roll. You can use Seeking Spell even if you have already used a different Metamagic option during the casting of the spell.',
+  //           },
+  //           {
+  //             Metamagic: 'Seeking Spell (UA)',
+  //             Description:
+  //               'When you cast a spell that requires you to make a spell attack roll or that forces a target to make a Dexterity saving throw, you can spend 1 sorcery point to ignore the effects of half- and three-quarters cover against targets of the spell.',
+  //           },
+  //           {
+  //             Metamagic: 'Subtle Spell',
+  //             Description:
+  //               'When you cast a spell, you can spend 1 sorcery point to cast it without any somatic or verbal components.',
+  //           },
+  //           {
+  //             Metamagic: 'Transmuted Spell',
+  //             Description:
+  //               'When you cast a spell that deals a type of damage from the following list, you can spend 1 sorcery point to change that damage type to one of the other listed types: acid, cold, fire, lightning, poison, thunder.',
+  //           },
+  //           {
+  //             Metamagic: 'Twinned Spell',
+  //             Description:
+  //               "When you cast a spell that targets only one creature and doesn't have a range of self, you can spend a number of sorcery points equal to the spell's level to target a second creature in range with the same spell (1 sorcery point if the spell is a cantrip). To be eligible, a spell must be incapable of targeting more than one creature at the spell's current level. ",
+  //           },
+  //         ],
+  //       },
+  //     },
+  //   ],
+  //   levels: [3, 10, 17],
+  //   classId: ids.sorcerer,
+  // },
+  // {
+  //   name: 'Sorcerous Versatility (Optional)',
+  //   description:
+  //     'When you reach a level in this class that grants the Ability Score Improvement feature, you can do one of the following, representing the magic within you flowing in new ways:',
+  //   options: [
+  //     'Replace one of the options you chose for the Metamagic feature with a different Metamagic option available to you.',
+  //     "Replace one cantrip you learned from this class' spellcasting feature with another cantrip from the sorcerer spell list.",
+  //   ],
+  //   levels: [4, 8, 12, 16, 19],
+  //   classId: ids.sorcerer,
+  // },
+  // {
+  //   name: 'Magical Guidance (Optional)',
+  //   description:
+  //     'When you reach 5th level, you can tap into your inner wellspring of magic to try and conjure success from failure. When you make an ability check that fails, you can spend 1 sorcery point to reroll the d20, and you must use the new roll, potentially turning the failure into a success.',
+  //   levels: [5],
+  //   classId: ids.sorcerer,
+  // },
+  // {
+  //   name: 'Sorcerous Restoration',
+  //   description:
+  //     'At 20th level, you regain 4 expended sorcery points whenever you finish a short rest.',
+  //   levels: [20],
+  //   classId: ids.sorcerer,
+  // },
   // Warlock
-  {
-    name: 'Cantrips',
-    description:
-      'You know two cantrips of your choice from the warlock spell list. You learn additional warlock cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Warlock table.',
+  // {
+  //   name: 'Cantrips',
+  //   description:
+  //     'You know two cantrips of your choice from the warlock spell list. You learn additional warlock cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Warlock table.',
 
-    spellCastingClassId: ids.warlock,
-  },
-  {
-    name: 'Spells Known',
-    description:
-      "At 1st level, you know two 1st-level spells of your choice from the warlock spell list.\n\nThe Spells Known column of the Warlock table shows when you learn more warlock spells of your choice of 1st level or higher. A spell you choose must be of a level no higher than what's shown in the table's Slot Level column for your level. When you reach 6th level, for example, you learn a new warlock spell, which can be 1st, 2nd, or 3rd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the warlock spells you know and replace it with another spell from the warlock spell list, which also must be of a level for which you have spell slots.",
+  //   spellCastingClassId: ids.warlock,
+  // },
+  // {
+  //   name: 'Spells Known',
+  //   description:
+  //     "At 1st level, you know two 1st-level spells of your choice from the warlock spell list.\n\nThe Spells Known column of the Warlock table shows when you learn more warlock spells of your choice of 1st level or higher. A spell you choose must be of a level no higher than what's shown in the table's Slot Level column for your level. When you reach 6th level, for example, you learn a new warlock spell, which can be 1st, 2nd, or 3rd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the warlock spells you know and replace it with another spell from the warlock spell list, which also must be of a level for which you have spell slots.",
 
-    spellCastingClassId: ids.warlock,
-  },
-  {
-    name: 'Eldritch Invocations',
-    description:
-      'In your study of occult lore, you have unearthed eldritch invocations, fragments of forbidden knowledge that imbue you with an abiding magical ability. At 2nd level, you gain two eldritch invocations of your choice. When you gain certain warlock levels, you gain additional invocations of your choice, as shown in the Invocations Known column of the Warlock table. A level prerequisite refers to your level in this class. Additionally, when you gain a level in this class, you can choose one of the invocations you know and replace it with another invocation that you could learn at that level.',
-    levels: [2],
-    classId: ids.warlock,
-  },
-  {
-    name: 'Pact Boon',
-    description:
-      'At 3rd level, your otherworldly patron bestows a gift upon you for your loyal service. You gain one of the following features of your choice.',
-    levels: [3],
-    classId: ids.warlock,
-  },
-  {
-    name: 'Eldritch Versatility',
-    description:
-      "When you reach a level in this class that grants the Ability Score Improvement feature, you can do one of the following, representing the magic within you flowing in new ways: Replace one cantrip you learned from this class's Pact Magic feature with another cantrip from the warlock spell list OR Replace the option you chose for the Pact Boon feature with one of that feature's other options OR If you're 12th level or higher, replace one spell from your Mystic Arcanum feature with another warlock spell of the same level. If this change makes you ineligible for any of your Eldritch Invocations, you must also replace them now, choosing invocations for which you qualify.",
-    levels: [4, 8, 12, 16, 19],
-    classId: ids.warlock,
-  },
-  {
-    name: 'Mystic Arcanum',
-    description:
-      'At 11th level, your patron bestows upon you a magical secret called an arcanum. Choose one 6th-level spell from the warlock spell list as this arcanum. You can cast your arcanum spell once without expending a spell slot. You must finish a long rest before you can do so again. At higher levels, you gain more warlock spells of your choice that can be cast in this way: one 7th-level spell at 13th level, one 8th-level spell at 15th level, and one 9th-level spell at 17th level. You regain all uses of your Mystic Arcanum when you finish a long rest.',
-    levels: [11, 13, 15, 17],
-    classId: ids.warlock,
-  },
-  {
-    name: 'Eldritch Master',
-    description:
-      'At 20th level, you can draw on your inner reserve of mystical power while entreating your patron to regain expended spell slots. You can spend 1 minute entreating your patron for aid to regain all your expended spell slots from your Pact Magic feature. Once you regain spell slots with this feature, you must finish a long rest before you can do so again.',
-    levels: [20],
-    classId: ids.warlock,
-  },
+  //   spellCastingClassId: ids.warlock,
+  // },
+  // {
+  //   name: 'Eldritch Invocations',
+  //   description:
+  //     'In your study of occult lore, you have unearthed eldritch invocations, fragments of forbidden knowledge that imbue you with an abiding magical ability. At 2nd level, you gain two eldritch invocations of your choice. When you gain certain warlock levels, you gain additional invocations of your choice, as shown in the Invocations Known column of the Warlock table. A level prerequisite refers to your level in this class. Additionally, when you gain a level in this class, you can choose one of the invocations you know and replace it with another invocation that you could learn at that level.',
+  //   levels: [2],
+  //   classId: ids.warlock,
+  // },
+  // {
+  //   name: 'Pact Boon',
+  //   description:
+  //     'At 3rd level, your otherworldly patron bestows a gift upon you for your loyal service. You gain one of the following features of your choice.',
+  //   levels: [3],
+  //   classId: ids.warlock,
+  // },
+  // {
+  //   name: 'Eldritch Versatility',
+  //   description:
+  //     "When you reach a level in this class that grants the Ability Score Improvement feature, you can do one of the following, representing the magic within you flowing in new ways: Replace one cantrip you learned from this class's Pact Magic feature with another cantrip from the warlock spell list OR Replace the option you chose for the Pact Boon feature with one of that feature's other options OR If you're 12th level or higher, replace one spell from your Mystic Arcanum feature with another warlock spell of the same level. If this change makes you ineligible for any of your Eldritch Invocations, you must also replace them now, choosing invocations for which you qualify.",
+  //   levels: [4, 8, 12, 16, 19],
+  //   classId: ids.warlock,
+  // },
+  // {
+  //   name: 'Mystic Arcanum',
+  //   description:
+  //     'At 11th level, your patron bestows upon you a magical secret called an arcanum. Choose one 6th-level spell from the warlock spell list as this arcanum. You can cast your arcanum spell once without expending a spell slot. You must finish a long rest before you can do so again. At higher levels, you gain more warlock spells of your choice that can be cast in this way: one 7th-level spell at 13th level, one 8th-level spell at 15th level, and one 9th-level spell at 17th level. You regain all uses of your Mystic Arcanum when you finish a long rest.',
+  //   levels: [11, 13, 15, 17],
+  //   classId: ids.warlock,
+  // },
+  // {
+  //   name: 'Eldritch Master',
+  //   description:
+  //     'At 20th level, you can draw on your inner reserve of mystical power while entreating your patron to regain expended spell slots. You can spend 1 minute entreating your patron for aid to regain all your expended spell slots from your Pact Magic feature. Once you regain spell slots with this feature, you must finish a long rest before you can do so again.',
+  //   levels: [20],
+  //   classId: ids.warlock,
+  // },
   //Ranger
   {
+    id: fids.rangerSpellsKnown,
     name: 'Spells Known',
     description:
       'You know two 1st-level spells of your choice from the ranger spell list.\n\nThe Spells Known column of the Ranger table shows when you learn more ranger spells of your choice. Each of these spells must be of a level for which you have spell slots. For instance, when you reach 5th level in this class, you can learn one new spell of 1st or 2nd level.\n\nAdditionally, when you gain a level in this class, you can choose one of the ranger spells you know and replace it with another spell from the ranger spell list, which also must be of a level for which you have spell slots.',
     spellCastingClassId: ids.ranger,
   },
   {
+    id: fids.favoredEnemy,
     name: 'Favored Enemy',
     description:
       'Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain type of enemy.\n\nChoose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead. Alternatively, you can select two races of humanoid (such as gnolls and orcs) as favored enemies.\n\nYou have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to recall information about them.\n\nWhen you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if they speak one at all.\n\nYou choose one additional favored enemy, as well as an associated language, at 6th and 14th level. As you gain levels, your choices should reflect the types of monsters you have encountered on your adventures.',
@@ -1137,6 +1388,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.ranger,
   },
   {
+    id: fids.favoredFoe,
     name: 'Favored Foe',
     description:
       "This 1st-level feature replaces the Favored Enemy feature and works with the Foe Slayer feature. You gain no benefit from the replaced feature and don't qualify for anything in the game that requires it.\n\n When you hit a creature with an attack roll, you can call on your mystical bond with nature to mark the target as your favored enemy for 1 minute or until you lose your concentration (as if you were concentrating on a spell). \n\nThe first time on each of your turns that you hit the favored enemy and deal damage to it, including when you mark it, you increase that damage by 1d4.\n\n You can use this feature to mark a favored enemy a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.\n\n This feature's extra damage increases when you reach certain levels in this class: to 1d6 at 6th level and to 1d8 at 14th level.",
@@ -1144,6 +1396,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.ranger,
   },
   {
+    id: fids.naturalExplorer,
     name: 'Natural Explorer',
     description:
       "You are particularly familiar with one type of natural environment and are adept at traveling and surviving in such regions. Choose one type of favored terrain: arctic, coast, desert, forest, grassland, mountain, swamp, or the Underdark. When you make an Intelligence or Wisdom check related to your favored terrain, your proficiency bonus is doubled if you are using a skill that you're proficient in.\n\n While traveling for an hour or more in your favored terrain, you gain the benefits listed below.\n\nYou choose additional favored terrain types at 6th and 10th level.",
@@ -1160,6 +1413,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.ranger,
   },
   {
+    id: fids.deftExplorer,
     name: 'Deft Explorer (Optional)',
     description:
       "This 1st-level feature replaces the Natural Explorer feature. You gain no benefit from the replaced feature and don't qualify for anything in the game that requires it.\n\nIf you take the Deft Explorer Feature, you gain the following benefits at the specified levels:",
@@ -1195,6 +1449,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.ranger,
   },
   {
+    id: fids.rangerFightingStyle,
     name: 'Fighting Style',
     description:
       "At 2nd level, you adopt a style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again.",
@@ -1269,6 +1524,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     ],
   },
   {
+    id: fids.primevalAwareness,
     name: 'Primeval Awareness',
     description:
       'Beginning at 3rd level, you can use your action and expend one ranger spell slot to focus your awareness on the region around you. For 1 minute per level of the spell slot you expend, you can sense whether the following types of creatures are present within 1 mile of you (or within up to 6 miles if you are in your favored terrain): aberrations, celestials, dragons, elementals, fey, fiends, and undead. This feature doesn’t reveal the creatures’ location or number.',
@@ -1276,6 +1532,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.ranger,
   },
   {
+    id: fids.primalAwareness,
     name: 'Primal Awareness',
     description:
       "This 3rd-level feature replaces the Primeval Awareness feature. You gain no benefit from the replaced feature and don't qualify for anything in the game that requires it.\n\n You can focus your awareness through the interconnections of nature: you learn additional spells when you reach certain levels in this class if you don't already know them, as shown in the Primal Awareness Spells table. These spells don't count against the number of ranger spells you know. \n\nYou can cast each of these spells once without expending a spell slot. Once you cast a spell in this way, you can't do so again until you finish a long rest.",
@@ -1313,6 +1570,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.ranger,
   },
   {
+    id: fids.martialVersatility,
     name: 'Martial Versatility',
     description:
       'Whenever you reach a level in this class that grants the Ability Score Improvement feature, you can replace a fighting style you know with another fighting style available to rangers. This replacement represents a shift of focus in your martial practice.',
@@ -1320,6 +1578,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.ranger,
   },
   {
+    id: fids.rangerExtraAttack,
     name: 'Extra Attack',
     description:
       'Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn.',
@@ -1327,12 +1586,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.ranger,
   },
   {
+    id: fids.landStride,
     name: "Land's Stride",
     description: `Starting at 8th level, moving through nonmagical difficult terrain costs you no extra movement. You can also pass through nonmagical plants without being slowed by them and without taking damage from them if they have thorns, spines, or a similar hazard.\n\n In addition, you have advantage on saving throws against plants that are magically created or manipulated to impede movement, such as those created by the %${spellIds.entangle}{Entangle}% spell.`,
     levels: [8],
     classId: ids.ranger,
   },
   {
+    id: fids.hideInPlainSight,
     name: 'Hide in Plain Sight',
     description:
       'Starting at 10th level, you can spend 1 minute creating camouflage for yourself. You must have access to fresh mud, dirt, plants, soot, and other naturally occurring materials with which to create your camouflage.\n\n Once you are camouflaged in this way, you can try to hide by pressing yourself up against a solid surface, such as a tree or wall, that is at least as tall and wide as you are. You gain a +10 bonus to Dexterity (Stealth) checks as long as you remain there without moving or taking actions. Once you move or take an action or a reaction, you must camouflage yourself again to gain this benefit.',
@@ -1340,6 +1601,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.ranger,
   },
   {
+    id: fids.naturesVeil,
     name: "Nature's Veil",
     description:
       "This 10th-level feature replaces the Hide in Plain Sight feature. You gain no benefit from the replaced feature and don't qualify for anything in the game that requires it. \n\nYou draw on the powers of nature to hide yourself from view briefly. As a bonus action, you can magically become invisible, along with any equipment you are wearing or carrying, until the start of your next turn.\n\n You can use this feature a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
@@ -1347,6 +1609,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.ranger,
   },
   {
+    id: fids.vanish,
     name: 'Vanish',
     description:
       "Starting at 14th level, you can use the Hide action as a bonus action on your turn. Also, you can't be tracked by nonmagical means, unless you choose to leave a trail.",
@@ -1354,6 +1617,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.ranger,
   },
   {
+    id: fids.feralSenses,
     name: 'Feral Senses',
     description:
       "At 18th level, you gain preternatural senses that help you fight creatures you can't see. When you attack a creature you can't see, your inability to see it doesn't impose disadvantage on your attack rolls against it. \n\nYou are also aware of the location of any invisible creature within 30 feet of you, provided that the creature isn't hidden from you and you aren't blinded or deafened.",
@@ -1361,6 +1625,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.ranger,
   },
   {
+    id: fids.foeSlayer,
     name: 'Foe Slayer',
     description:
       'At 20th level, you become an unparalleled hunter of your enemies. Once on each of your turns, you can add your Wisdom modifier to the attack roll or the damage roll of an attack you make against one of your favored enemies. You can choose to use this feature before or after the roll, but before any effects of the roll are applied.',
@@ -1369,12 +1634,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   },
   //Artificer
   {
+    id: fids.artificerCantrips,
     spellCastingClassId: ids.artificer,
     name: 'Cantrips',
     description:
       'At 1st level, you know two cantrips of your choice from the artificer spell list. At higher levels, you learn additional artificer cantrips of your choice, as shown in the Cantrips Known column of the Artificer table.\n\nWhen you gain a level in this class, you can replace one of the artificer cantrips you know with another cantrip from the artificer spell list.',
   },
   {
+    id: fids.artificerRitualCasting,
     spellCastingClassId: ids.artificer,
     name: 'Ritual Casting',
     description:
@@ -1382,6 +1649,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     levels: [1],
   },
   {
+    id: fids.magicalTinkering,
     classId: ids.artificer,
     name: 'Magical Tinkering',
     levels: [1],
@@ -1409,6 +1677,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     ],
   },
   {
+    id: fids.artificerInfuseItem,
     classId: ids.artificer,
     levels: [2],
     name: 'Infuse Item',
@@ -1540,12 +1809,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     ],
   },
   {
+    id: fids.artificerRightToolForTheJob,
     name: 'The Right Tool for the Job',
     description: `At 3rd level, you've learned how to produce exactly the tool you need: with ^${itemIds.thievesTools}{thieves' tools}^ or artisan's tools in hand, you can magically create one set of artisan's tools in an unoccupied space within 5 feet of you. This creation requires 1 hour of uninterrupted work, which can coincide with a short or long rest. Though the product of magic, the tools are nonmagical, and they vanish when you use this feature again.`,
     levels: [3],
     classId: ids.artificer,
   },
   {
+    id: fids.artificerToolExpertise,
     name: 'Tool Expertise',
     description:
       'At 6th level, your proficiency bonus is now doubled for any ability check you make that uses your proficiency with a tool.',
@@ -1553,6 +1824,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.artificer,
   },
   {
+    id: fids.artificerFlashOfGenius,
     name: 'Flash of Genius',
     description:
       "At 7th level, you've gained the ability to come up with solutions under pressure. When you or another creature you can see within 30 feet of you makes an ability check or a saving throw, you can use your reaction to add your Intelligence modifier to the roll.\n\nYou can use this feature a number of times equal to your Intelligence modifier (minimum of once). You regain all expended uses when you finish a long rest.",
@@ -1560,6 +1832,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.artificer,
   },
   {
+    id: fids.artificerMagicItemAdept,
     classId: ids.artificer,
     name: 'Magic Item Adept',
     description:
@@ -1571,6 +1844,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     levels: [10],
   },
   {
+    id: fids.artificerSpellStoringItem,
     name: 'Spell-Storing Item',
     description:
       "At 11th level, you can now store a spell in an object. Whenever you finish a long rest, you can touch one simple or martial weapon or one item that you can use as a spellcasting focus, and you store a spell in it, choosing a 1st- or 2nd-level spell from the artificer spell list that requires 1 action to cast (you needn't have it prepared).",
@@ -1578,6 +1852,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.artificer,
   },
   {
+    id: fids.artificerMagicItemSavant,
     name: 'Magic Item Savant',
     description: 'At 14th level, your skill with magic items deepens more:',
     options: [
@@ -1588,6 +1863,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.artificer,
   },
   {
+    id: fids.artificerMagicItemMaster,
     name: 'Magic Item Master',
     description:
       'Starting at 18th level, you can attune up to six magic items at once.',
@@ -1595,6 +1871,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.artificer,
   },
   {
+    id: fids.artificerSoulOfArtifice,
     classId: ids.artificer,
     name: 'Soul of Artifice',
     levels: [20],
@@ -1605,375 +1882,360 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       "If you're reduced to 0 hit points but not killed out-right, you can use your reaction to end one of your artificer infusions, causing you to drop to 1 hit point instead of 0.",
     ],
   },
-  {
-    classId: ids.artificer,
-    levels: [],
-    name: 'Additional Infusions',
-    description:
-      'Below is some extra information on some of the infusions listed above.',
-  },
-  {
-    name: 'Homunculus Servant Infusion',
-    description:
-      'Below is the stat block for the Homunculus Servant that you can create with the Homunculus Servant infusion.',
-    levels: [],
-    classId: ids.artificer,
-    // extendedTable: [
-    //   {
-    //     'Homunculus Servant': {
-    //       headers: ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'],
-    //       data: [
-    //         {
-    //           STR: '4 (-3)',
-    //           DEX: '15 (+2)',
-    //           CON: '12 (+1)',
-    //           INT: '10 (+0)',
-    //           WIS: '10 (+0)',
-    //           CHA: '7 (-2)',
-    //         },
-    //       ],
-    //     },
-    //   },
-    //   {
-    //     '': {
-    //       headers: ['Stat', 'Value'],
-    //       data: [
-    //         {
-    //           Stat: 'Creature Type',
-    //           Value: 'Tiny Construct',
-    //         },
-    //         {
-    //           Stat: 'Armor Class',
-    //           Value: '13 (natural armor)',
-    //         },
-    //         {
-    //           Stat: 'Hit Points',
-    //           Value:
-    //             '1 + your Intelligence modifier + your artificer level (the homunculus has a number of Hit Dice [d4s] equal to your artificer level)',
-    //         },
-    //         {
-    //           Stat: 'Speed',
-    //           Value: '20 ft., fly 30 ft.',
-    //         },
-    //         {
-    //           Stat: 'Saving Throws',
-    //           Value: 'Dex +2 plus PB',
-    //         },
-    //         {
-    //           Stat: 'Skills',
-    //           Value: 'Perception +0 plus PB x 2, Stealth +2 plus PB',
-    //         },
-    //         {
-    //           Stat: 'Damage Immunities',
-    //           Value: 'Poison',
-    //         },
-    //         {
-    //           Stat: 'Condition Immunities',
-    //           Value: 'Exhaustion, Poisoned',
-    //         },
-    //         {
-    //           Stat: 'Senses',
-    //           Value: 'darkvision 60 ft., passive Perception 10 + (PB x 2)',
-    //         },
-    //         {
-    //           Stat: 'Languages',
-    //           Value: 'understands the languages you speak',
-    //         },
-    //         {
-    //           Stat: 'Proficiency Bonus (PB)',
-    //           Value: 'equals your bonus',
-    //         },
-    //         {
-    //           Stat: 'Evasion',
-    //           Value:
-    //             "If the homunculus is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, it instead takes no damage if it succeeds on the saving throw, and only half damage if it fails. It can't use this trait if it's incapacitated.",
-    //         },
-    //       ],
-    //     },
-    //   },
-    //   {
-    //     '': {
-    //       headers: ['Action', 'Description'],
-    //       data: [
-    //         {
-    //           Action: 'Force Strike',
-    //           Description:
-    //             'Ranged Weapon Attack: your spell attack modifier to hit, range 30 ft., one target you can see. Hit: 1d4 + PB force damage.',
-    //         },
-    //       ],
-    //     },
-    //   },
-    //   {
-    //     '': {
-    //       headers: ['Reaction', 'Description'],
-    //       data: [
-    //         {
-    //           Reaction: 'Channel Magic',
-    //           Description:
-    //             'The homunculus delivers a spell you cast that has a range of touch. The homunculus must be within 120 feet of you.',
-    //         },
-    //       ],
-    //     },
-    //   },
-    // ],
-  },
-  {
-    name: 'Replicable Items Infusion',
-    description:
-      'Below is a list of items that you can replicate with the Replicate Magic Item infusion.',
-    levels: [],
-    classId: ids.artificer,
-    // extendedTable: [
-    //   {
-    //     'Replicable Magic Items (2nd-Level Artificer)': {
-    //       headers: ['Magic Item', 'Attunement'],
-    //       data: [
-    //         {
-    //           'Magic Item': 'Alchemy Jug',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Bag of Holding',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Cap of Water Breathing',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Goggles of Night',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Rope of Climbing',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Sending Stones',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Wand of Magic Detection',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Wand of Secrets',
-    //           Attunement: 'No',
-    //         },
-    //       ],
-    //     },
-    //   },
-    //   {
-    //     'Replicable Magic Items (6th-Level Artificer)': {
-    //       headers: ['Magic Item', 'Attunement'],
-    //       data: [
-    //         {
-    //           'Magic Item': 'Boots of Elvenkind',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Cloak of Elvenkind',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Cloak of the Manta Ray',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Eyes of Charming',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Gloves of Thievery',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Lantern of Revealing',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Pipes of Haunting',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Ring of Water Walking',
-    //           Attunement: 'No',
-    //         },
-    //       ],
-    //     },
-    //   },
-    //   {
-    //     'Replicable Magic Items (10th-level artificer)': {
-    //       headers: ['Magic Item', 'Attunement'],
-    //       data: [
-    //         {
-    //           'Magic Item': 'Boots of Striding and Springing',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Boots of the Winterlands',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Bspeciesrs of Archery',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Brooch of Shielding',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Cloak of Protection',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Eyes of the Eagle',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Gauntlets of Ogre Power',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Gloves of Missile Snaring',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Gloves of Swimming and Climbing',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Hat of Disguise',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Headband of Intellect',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Helm of Telepathy',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Medallion of Thoughts',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Necklace of Adaptation',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Periapt of Wound Closure',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Pipes of the Sewers',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Quiver of Ehlonna',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Ring of Jumping',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Ring of Mind Shielding',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Slippers of Spider Climbing',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Ventilating Lungs',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Winged Boots',
-    //           Attunement: 'Yes',
-    //         },
-    //       ],
-    //     },
-    //   },
-    //   {
-    //     'Replicable Magic Items (14th-level artificer)': {
-    //       headers: ['Magic Item', 'Attunement'],
-    //       data: [
-    //         {
-    //           'Magic Item': 'Amulet of Health',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Arcane Propulsion Arm',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Belt of Hill Giant Strength',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Boots of Levitation',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Boots of Speed',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Bspeciesrs of Defense',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Cloak of the Bat',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Dimensional Shackles',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Gem of Seeing',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Horn of Blasting',
-    //           Attunement: 'No',
-    //         },
-    //         {
-    //           'Magic Item': 'Ring of Free Action',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Ring of Protection',
-    //           Attunement: 'Yes',
-    //         },
-    //         {
-    //           'Magic Item': 'Ring of the Ram',
-    //           Attunement: 'Yes',
-    //         },
-    //       ],
-    //     },
-    //   },
-    // ],
-  },
-].map((feature, index, arr) => {
-  const featureParent = Classes.find(
-    (c) => c.id === feature.classId || c.id === feature.spellCastingClassId
-  );
-  if (!featureParent) throw new Error(`Error creating feature ${feature.name}`);
-  const id = generateId('class', feature.name, featureParent.name, count);
-  count++;
-  const nextClassFeature = arr[index + 1];
-  if (!nextClassFeature) return { ...feature, id };
-  if (
-    nextClassFeature.classId !== feature.classId ||
-    nextClassFeature.spellCastingClassId !== feature.spellCastingClassId
-  ) {
-    count = 1;
-  }
-  return { ...feature, id };
-});
+  // {
+
+  //   classId: ids.artificer,
+  //   levels: [],
+  //   name: 'Additional Infusions',
+  //   description:
+  //     'Below is some extra information on some of the infusions listed above.',
+  // },
+  // {
+  //   name: 'Homunculus Servant Infusion',
+  //   description:
+  //     'Below is the stat block for the Homunculus Servant that you can create with the Homunculus Servant infusion.',
+  //   levels: [],
+  //   classId: ids.artificer,
+  // extendedTable: [
+  //   {
+  //     'Homunculus Servant': {
+  //       headers: ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'],
+  //       data: [
+  //         {
+  //           STR: '4 (-3)',
+  //           DEX: '15 (+2)',
+  //           CON: '12 (+1)',
+  //           INT: '10 (+0)',
+  //           WIS: '10 (+0)',
+  //           CHA: '7 (-2)',
+  //         },
+  //       ],
+  //     },
+  //   },
+  //   {
+  //     '': {
+  //       headers: ['Stat', 'Value'],
+  //       data: [
+  //         {
+  //           Stat: 'Creature Type',
+  //           Value: 'Tiny Construct',
+  //         },
+  //         {
+  //           Stat: 'Armor Class',
+  //           Value: '13 (natural armor)',
+  //         },
+  //         {
+  //           Stat: 'Hit Points',
+  //           Value:
+  //             '1 + your Intelligence modifier + your artificer level (the homunculus has a number of Hit Dice [d4s] equal to your artificer level)',
+  //         },
+  //         {
+  //           Stat: 'Speed',
+  //           Value: '20 ft., fly 30 ft.',
+  //         },
+  //         {
+  //           Stat: 'Saving Throws',
+  //           Value: 'Dex +2 plus PB',
+  //         },
+  //         {
+  //           Stat: 'Skills',
+  //           Value: 'Perception +0 plus PB x 2, Stealth +2 plus PB',
+  //         },
+  //         {
+  //           Stat: 'Damage Immunities',
+  //           Value: 'Poison',
+  //         },
+  //         {
+  //           Stat: 'Condition Immunities',
+  //           Value: 'Exhaustion, Poisoned',
+  //         },
+  //         {
+  //           Stat: 'Senses',
+  //           Value: 'darkvision 60 ft., passive Perception 10 + (PB x 2)',
+  //         },
+  //         {
+  //           Stat: 'Languages',
+  //           Value: 'understands the languages you speak',
+  //         },
+  //         {
+  //           Stat: 'Proficiency Bonus (PB)',
+  //           Value: 'equals your bonus',
+  //         },
+  //         {
+  //           Stat: 'Evasion',
+  //           Value:
+  //             "If the homunculus is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, it instead takes no damage if it succeeds on the saving throw, and only half damage if it fails. It can't use this trait if it's incapacitated.",
+  //         },
+  //       ],
+  //     },
+  //   },
+  //   {
+  //     '': {
+  //       headers: ['Action', 'Description'],
+  //       data: [
+  //         {
+  //           Action: 'Force Strike',
+  //           Description:
+  //             'Ranged Weapon Attack: your spell attack modifier to hit, range 30 ft., one target you can see. Hit: 1d4 + PB force damage.',
+  //         },
+  //       ],
+  //     },
+  //   },
+  //   {
+  //     '': {
+  //       headers: ['Reaction', 'Description'],
+  //       data: [
+  //         {
+  //           Reaction: 'Channel Magic',
+  //           Description:
+  //             'The homunculus delivers a spell you cast that has a range of touch. The homunculus must be within 120 feet of you.',
+  //         },
+  //       ],
+  //     },
+  //   },
+  // ],
+  // },
+  // {
+  //   name: 'Replicable Items Infusion',
+  //   description:
+  //     'Below is a list of items that you can replicate with the Replicate Magic Item infusion.',
+  //   levels: [],
+  //   classId: ids.artificer,
+  // extendedTable: [
+  //   {
+  //     'Replicable Magic Items (2nd-Level Artificer)': {
+  //       headers: ['Magic Item', 'Attunement'],
+  //       data: [
+  //         {
+  //           'Magic Item': 'Alchemy Jug',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Bag of Holding',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Cap of Water Breathing',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Goggles of Night',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Rope of Climbing',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Sending Stones',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Wand of Magic Detection',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Wand of Secrets',
+  //           Attunement: 'No',
+  //         },
+  //       ],
+  //     },
+  //   },
+  //   {
+  //     'Replicable Magic Items (6th-Level Artificer)': {
+  //       headers: ['Magic Item', 'Attunement'],
+  //       data: [
+  //         {
+  //           'Magic Item': 'Boots of Elvenkind',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Cloak of Elvenkind',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Cloak of the Manta Ray',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Eyes of Charming',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Gloves of Thievery',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Lantern of Revealing',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Pipes of Haunting',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Ring of Water Walking',
+  //           Attunement: 'No',
+  //         },
+  //       ],
+  //     },
+  //   },
+  //   {
+  //     'Replicable Magic Items (10th-level artificer)': {
+  //       headers: ['Magic Item', 'Attunement'],
+  //       data: [
+  //         {
+  //           'Magic Item': 'Boots of Striding and Springing',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Boots of the Winterlands',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Bspeciesrs of Archery',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Brooch of Shielding',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Cloak of Protection',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Eyes of the Eagle',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Gauntlets of Ogre Power',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Gloves of Missile Snaring',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Gloves of Swimming and Climbing',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Hat of Disguise',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Headband of Intellect',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Helm of Telepathy',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Medallion of Thoughts',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Necklace of Adaptation',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Periapt of Wound Closure',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Pipes of the Sewers',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Quiver of Ehlonna',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Ring of Jumping',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Ring of Mind Shielding',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Slippers of Spider Climbing',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Ventilating Lungs',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Winged Boots',
+  //           Attunement: 'Yes',
+  //         },
+  //       ],
+  //     },
+  //   },
+  //   {
+  //     'Replicable Magic Items (14th-level artificer)': {
+  //       headers: ['Magic Item', 'Attunement'],
+  //       data: [
+  //         {
+  //           'Magic Item': 'Amulet of Health',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Arcane Propulsion Arm',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Belt of Hill Giant Strength',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Boots of Levitation',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Boots of Speed',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Bspeciesrs of Defense',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Cloak of the Bat',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Dimensional Shackles',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Gem of Seeing',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Horn of Blasting',
+  //           Attunement: 'No',
+  //         },
+  //         {
+  //           'Magic Item': 'Ring of Free Action',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Ring of Protection',
+  //           Attunement: 'Yes',
+  //         },
+  //         {
+  //           'Magic Item': 'Ring of the Ram',
+  //           Attunement: 'Yes',
+  //         },
+  //       ],
+  //     },
+  //   },
+  // ],
+  // },
+];
 
 export default ClassFeaturesSeed;

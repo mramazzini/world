@@ -1,32 +1,42 @@
 import { Choice, ChoiceProtocol } from '@prisma/client';
-import SetSkillProficiencyResolver from './ChoiceResolvers/SetSkillProficiencyResolver';
+import AddToInventoryResolver from './ChoiceResolvers/ItemResolvers/AddToInventoryResolver';
+import ImproveAbilityScoreResolver from './ChoiceResolvers/AbilityScoreResolvers/ImproveAbilityScoreResolver';
+import SetAbilityScoreResolver from './ChoiceResolvers/AbilityScoreResolvers/SetAbilityScoreResolver';
+import SetArmorProficiencyResolver from './ChoiceResolvers/ArmorResolvers/SetArmorProfieciencyResolver';
+import SetSavingThrowProficiency from './ChoiceResolvers/SavingThrowResolvers/SetSavingThrowProficiencyResolver';
+import SetToolProficiencyGroupedResolver from './ChoiceResolvers/ToolResolvers/SetToolProficiencyGroupedResolver';
+import SetToolProficiencyResolver from './ChoiceResolvers/ToolResolvers/SetToolProficiencyResolver';
+import SetLanguageProficiencyResolver from './ChoiceResolvers/LanguageResolvers/SetLanguageProficiencyResolver';
+import SetSkillProficiencyResolver from './ChoiceResolvers/SkillResolvers/SetSkillProficiencyResolver';
+import SetSkillExpertiseResolver from './ChoiceResolvers/SkillResolvers/SetSkillExpertiseResolver';
+import AddToInventoryGroupedResolver from './ChoiceResolvers/ItemResolvers/AddToInventoryGroupedResolver/AddToInventoryGroupedResolver';
 
 const ChoiceResolverController = ({ choice }: { choice: Choice }) => {
   switch (choice.protocol) {
     case ChoiceProtocol.ADD_TO_INVENTORY:
-      return <li>Add to Inventory</li>;
+      return <AddToInventoryResolver choice={choice} />;
     case ChoiceProtocol.ADD_TO_INVENTORY_GROUPED:
-      return <li>Add to Inventory Grouped</li>;
+      return <AddToInventoryGroupedResolver choice={choice} />;
     case ChoiceProtocol.IMPROVE_ABILITY_SCORE:
-      return <li>Improve Ability Score</li>;
+      return <ImproveAbilityScoreResolver choice={choice} />;
     case ChoiceProtocol.SET_ABILITY_SCORE:
-      return <li>Set Ability Score</li>;
+      return <SetAbilityScoreResolver choice={choice} />;
     case ChoiceProtocol.SET_ARMOR_PROFICIENCY:
-      return <li>Set Armor Proficiency</li>;
+      return <SetArmorProficiencyResolver choice={choice} />;
     case ChoiceProtocol.SET_LANGUAGE_PROFICIENCY:
-      return <li>Set Language Proficiency</li>;
+      return <SetLanguageProficiencyResolver choice={choice} />;
     case ChoiceProtocol.SET_SKILL_PROFICIENCY:
       return <SetSkillProficiencyResolver choice={choice} />;
     case ChoiceProtocol.SET_SKILL_EXPERTISE:
-      return <li>Set Skill Expertise</li>;
+      return <SetSkillExpertiseResolver choice={choice} />;
     case ChoiceProtocol.SET_TOOL_PROFICIENCY:
-      return <li>Set Tool Proficiency</li>;
+      return <SetToolProficiencyResolver choice={choice} />;
     case ChoiceProtocol.SET_TOOL_PROFICIENCY_GROUPED:
-      return <li>Set Tool Proficiency Grouped</li>;
+      return <SetToolProficiencyGroupedResolver choice={choice} />;
     case ChoiceProtocol.SET_WEAPON_PROFICIENCY:
       return <li>Set Weapon Proficiency</li>;
     case ChoiceProtocol.SET_SAVING_THROW_PROFICIENCY:
-      return <li>Set Saving Throw Proficiency</li>;
+      return <SetSavingThrowProficiency choice={choice} />;
   }
 };
 

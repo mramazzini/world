@@ -14,7 +14,6 @@ import {
   ItemID,
   Level,
   SpeciesID,
-  SpellFocus,
   SpellID,
   SpellLevel,
   SubClassID,
@@ -77,9 +76,10 @@ declare global {
       col: TableColumn;
     }
     type SpellLevels = {
-      [K in Level]?: {
-        [K in SpellLevel]?: number;
-      };
+      [K in Level]?: SpellSlots;
+    };
+    type SpellSlots = {
+      [K in SpellLevel]?: number;
     };
 
     interface SheetSpell {
@@ -123,7 +123,6 @@ declare global {
             weaponProficiency?: WeaponID;
             martialWeaponProficiency?: boolean;
             simpleWeaponProficiency?: boolean;
-
             armorProficiency?: ArmorID;
             lightArmorProficiency?: boolean;
             mediumArmorProficiency?: boolean;
@@ -162,10 +161,6 @@ declare global {
       | 'Free Action'
       | 'Movement'
       | 'Other';
-
-    type SpellSlots = {
-      [K in SpellLevel]?: number;
-    };
 
     interface AbilityScoreTrigger {
       abilities: Ability[];
@@ -210,18 +205,6 @@ declare global {
       description: string;
     }
 
-    interface SpellCastingInfo {
-      levelAquired: number;
-      description: string;
-      preparingSpellsDescription?: string;
-      castingSpellsDescription?: string;
-      spellCastingAbilityDescription: string;
-      ability: Ability;
-      spellFocus: SpellFocus;
-      spellFocusDescription?: string;
-      displaySpellLevels: boolean; // If true, display the spell levels in the class description
-      spellLevels: SpellLevels;
-    }
     interface CustomWeapon {
       name: string;
       damage: PrismaJson.Damage[];
@@ -277,5 +260,28 @@ declare global {
     type ChoiceFetchParams = ChoiceParams;
 
     type ChoiceFetchOutput = ChoiceOutput;
+
+    interface RollDetail {
+      diceType: number;
+      rolled: number[];
+    }
+
+    interface LogEntry {
+      id: string;
+      log: string;
+      type: 'info' | 'error' | 'success' | 'dice';
+      timestamp: string;
+      from: string;
+      diceRollResult?: {
+        formula: string;
+        rolls: RollDetail[];
+      };
+    }
+
+    interface Note {
+      id: string;
+      content: string;
+      title: string;
+    }
   }
 }

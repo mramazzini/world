@@ -1,29 +1,38 @@
 import Info from '@/components/UI/Info';
 import useAbility from '@/hooks/useAbilityScore';
 import { useArmorClass } from '@/hooks/useArmorClass';
+import useCharacterState from '@/hooks/useCharacter/useCharacterState';
 import useHitpoints from '@/hooks/useHitpoints';
 import useInitiative from '@/hooks/useInitiative';
 import useLevel from '@/hooks/useLevel';
 import useModifier from '@/hooks/useModifier';
 import useProficiency from '@/hooks/useProficiency';
 import useSpeed from '@/hooks/useSpeed';
+import { skillAtritbuteMap } from '@/lib/globalVars';
 import AbilityToText from '@/lib/utils/toText/AbilityToText';
-import { useAppSelector } from '@/store/hooks';
+import ArmorTypeToText from '@/lib/utils/toText/ArmorTypeToText';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { setCharacterState } from '@/store/sheetSlice';
 import P from '@/Utility/FormatAndSanitize';
 import ModelDisplay from '@/Utility/ModelDisplay';
-import { Ability } from '@prisma/client';
+import { Ability, Skill } from '@prisma/client';
 import Link from 'next/link';
 import { Fragment } from 'react';
 
 const CharacterStatsTab = () => {
   const character = useAppSelector((state) => state.sheet.rawCharacter);
+  const state = useCharacterState();
   const armorClass = useArmorClass();
   const level = useLevel();
   const { maxhp, currenthp, temphp } = useHitpoints();
+  const { isExpertInSkill, isProficientInSkill, isProficientInSavingThrow } =
+    useProficiency();
+  const { getSkillModifier, getSavingThrowModifier } = useModifier();
   const initiative = useInitiative();
   const { getSpeed, SpeedType } = useSpeed();
   const { getAbilityModifier } = useModifier();
   const abilityScores = useAbility();
+  const dispatch = useAppDispatch();
   const {
     proficiencyBonus,
     toolGroups,
@@ -39,20 +48,13 @@ const CharacterStatsTab = () => {
   return (
     character && (
       <div>
-        <h2>Character Stats</h2>
-        <p>View your character&apos;s stats</p>
-        <div className="grid grid-cols-1 gap-4 my-4">
-          <section className="bg-base-200 rounded-xl p-4 flex flex-col gap-4">
-            <h3>Character Info</h3>
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+          <section className="bg-base-200 rounded-xl p-4 flex flex-col gap-4 col-span-2">
+            <h3 className="divider bg-base-300 p-4 rounded-xl m-0 mb-4">
+              Character Info
+            </h3>
 
-            <table className="table table-zebra table-xs bg-base-300 ">
-              <thead>
-                <tr className="bg-black/20">
-                  <th>Attribute</th>
-                  <th>Value</th>
-                  <th>Wiki Link</th>
-                </tr>
-              </thead>
+            <table className="table table-zebra table-md bg-base-300 ">
               <tbody>
                 <tr>
                   <td>Class(es)</td>
@@ -153,7 +155,9 @@ const CharacterStatsTab = () => {
                 )}
               </tbody>
             </table>
-            <table className="table table-zebra table-xs bg-base-300">
+            <div className="divider m-0"></div>
+
+            <table className="table table-zebra table-md bg-base-300">
               <thead>
                 <tr className="bg-black/20">
                   <th>Attribute</th>
@@ -164,7 +168,7 @@ const CharacterStatsTab = () => {
               <tbody>
                 <tr>
                   <td>Name</td>
-                  <td>{character.name}</td>
+                  <td>{state?.name}</td>
                   <td>Your character&apos;s name</td>
                 </tr>
                 <tr>
@@ -186,7 +190,7 @@ const CharacterStatsTab = () => {
                 <tr>
                   <td>Alignment</td>
                   <td>
-                    {character.alignment.replaceAll('_', ' ').toCapitalCase()}
+                    {state?.alignment.replaceAll('_', ' ').toCapitalCase()}
                   </td>
                   <td>Your character&apos;s moral compass.</td>
                 </tr>
@@ -272,10 +276,25 @@ const CharacterStatsTab = () => {
                 </tr>
               </tbody>
             </table>
+            <div className="divider m-0"></div>
           </section>
-          <section className="bg-base-200 rounded-xl p-4">
-            <h3>Ability Scores</h3>
-            <table className="table table-zebra table-xs bg-base-300">
+          <section className="bg-base-200 rounded-xl p-4 col-span-1">
+            <h3 className="divider bg-base-300 p-4 rounded-xl m-0 mb-4">
+              Ability Scores
+            </h3>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                if (state)
+                  dispatch(
+                    setCharacterState({ ...state, abilitiesInitialized: false })
+                  );
+              }}
+              className="btn btn-primary btn-sm mb-4 w-full"
+            >
+              Edit Ability Scores
+            </button>
+            <table className="table table-zebra table-md bg-base-300">
               <thead>
                 <tr className="bg-black/20">
                   <th>Ability</th>
@@ -286,7 +305,9 @@ const CharacterStatsTab = () => {
               <tbody>
                 {Object.values(Ability).map((ability) => (
                   <tr key={ability}>
-                    <td>{AbilityToText(ability)}</td>
+                    <td>
+                      <P>{AbilityToText(ability)}</P>
+                    </td>
                     <td>{abilityScores[ability]}</td>
                     <td>
                       {getAbilityModifier(ability) >= 0
@@ -297,9 +318,79 @@ const CharacterStatsTab = () => {
                 ))}
               </tbody>
             </table>
+            <div className="divider m-0"></div>
           </section>
-          <section className="bg-base-200 rounded-xl p-4">
-            <h3>Feats</h3>
+
+          <section className="bg-base-200 rounded-xl p-4 col-span-2 xl:col-span-1 xl:row-span-2">
+            <h3 className="divider bg-base-300 p-4 rounded-xl m-0 mb-4">
+              Skill Modifiers
+            </h3>
+            <table className="table table-zebra table-md bg-base-300">
+              <thead>
+                <tr className="bg-black/20">
+                  <th>Skill</th>
+                  <th>Modifier</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.values(Skill).map((skill) => (
+                  <tr key={skill}>
+                    <td>
+                      <P>{skill.toCapitalCase().replaceAll('_', ' ')}</P> (
+                      {skillAtritbuteMap[skill]})
+                    </td>
+
+                    <td>
+                      {getSkillModifier(skill) >= 0
+                        ? `+ ${getSkillModifier(skill)}`
+                        : `- ${Math.abs(getSkillModifier(skill))}`}
+                      {isExpertInSkill(skill)
+                        ? ' (Expertise)'
+                        : isProficientInSkill(skill)
+                          ? ' (Proficient)'
+                          : ''}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="divider m-0"></div>
+          </section>
+          <section className="bg-base-200 rounded-xl p-4 col-span-2 xl:col-span-1 ">
+            <h3 className="divider bg-base-300 p-4 rounded-xl m-0 mb-4">
+              Saving Throws
+            </h3>
+            <table className="table table-zebra table-md bg-base-300">
+              <thead>
+                <tr className="bg-black/20">
+                  <th>Ability</th>
+                  <th>Modifier</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.values(Ability).map((ability) => (
+                  <tr key={ability}>
+                    <td>
+                      <P>{AbilityToText(ability)}</P>
+                    </td>
+                    <td>
+                      {getSavingThrowModifier(ability) >= 0
+                        ? `+ ${getSavingThrowModifier(ability)}`
+                        : `- ${Math.abs(getSavingThrowModifier(ability))}`}
+                      {isProficientInSavingThrow(ability)
+                        ? ' (Proficient)'
+                        : ''}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="divider m-0"></div>
+          </section>
+          <section className="bg-base-200 rounded-xl p-4 col-span-2 ">
+            <h3 className="divider bg-base-300 p-4 rounded-xl m-0 mb-4">
+              Feats
+            </h3>
             <ul className="list-disc pl-4">
               {character.Feats?.map((feat) => (
                 <li key={feat.id}>
@@ -314,7 +405,7 @@ const CharacterStatsTab = () => {
               )}
             </ul>
           </section>
-          <section className="bg-base-200 rounded-xl p-4">
+          <section className="bg-base-200 rounded-xl p-4 col-span-2">
             <div className="bg-base-300 p-4 rounded-xl">
               <h3 className="divider ">Proficiencies</h3>
               <p className="w-full text-center">
@@ -420,7 +511,7 @@ const CharacterStatsTab = () => {
             </h4>
             <ul className="list-disc pl-4">
               {armorTypes.map((prof) => (
-                <li key={prof}>{prof.toCapitalCase().replaceAll('_', ' ')}</li>
+                <li key={prof}>{ArmorTypeToText(prof)}</li>
               ))}
               {armorTypes.length === 0 && (
                 <li>

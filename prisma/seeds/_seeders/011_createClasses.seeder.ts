@@ -5,6 +5,9 @@ import createFeature from '../_helpers/createFeature';
 import ClassFeaturesSeed from '../Classes/Features.seed';
 import ColumnedFeatureSeed from '../Classes/ColumnedFeature.seed';
 import ClassChoicesSeed from '../Classes/ClassChoices.seed';
+import MulticlassingSeed from '../Classes/MultiClassing.seed';
+import MulticlassingChoicesSeed from '../Classes/MultiClassingChoices.seed';
+import SpellCasterSeed from '../Classes/SpellCaster.seed';
 
 export const createClasses = async (db: PrismaClient) => {
   // Create classes
@@ -45,13 +48,16 @@ export const createClasses = async (db: PrismaClient) => {
   }
   cinfo('Class features created');
   //Create Columned Features
-  // cinfo('Creating columned features');
+  cinfo('Creating columned features');
   for (const columnedFeature of ColumnedFeatureSeed) {
     try {
       cinfo('Creating columned feature:', columnedFeature.name);
       await db.columnedFeature.upsert({
         where: {
-          id: columnedFeature.id,
+          classId_featureId: {
+            classId: columnedFeature.classId,
+            featureId: columnedFeature.featureId,
+          },
         },
         update: columnedFeature,
         create: columnedFeature,
@@ -80,6 +86,73 @@ export const createClasses = async (db: PrismaClient) => {
     } catch (error) {
       cerr('Error creating class choice:', choice.description, error);
       throw new Error('Error creating class choice');
+    }
+  }
+
+  cinfo('Class choices created');
+
+  //Create Class MulticlassInfo
+  cinfo('Creating class multiclass info');
+  for (const _class of MulticlassingSeed) {
+    try {
+      cinfo('Creating class multiclass info:', _class.classId);
+      await db.multiClassingInfo.upsert({
+        where: {
+          classId: _class.classId,
+        },
+        update: _class,
+        create: _class,
+      });
+      cinfo('Class multiclass info created');
+    } catch (error) {
+      cerr('Error creating class multiclass info:', _class.classId, error);
+      throw new Error('Error creating class multiclass info');
+    }
+  }
+
+  cinfo('Class multiclass info created');
+
+  cinfo('Creating Class Multiclass Choices');
+  for (const choice of MulticlassingChoicesSeed) {
+    try {
+      cinfo('Creating class multiclass choice:', choice.description);
+      await db.choice.upsert({
+        where: {
+          id: choice.id,
+        },
+        update: choice,
+        create: choice,
+      });
+      cinfo('Class multiclass choice created');
+    } catch (error) {
+      cerr(
+        'Error creating class multiclass choice:',
+        choice.description,
+        error
+      );
+      throw new Error('Error creating class multiclass choice');
+    }
+  }
+
+  cinfo('Class multiclass choices created');
+
+  cinfo('Creating Class spellcasting info');
+
+  for (const _class of SpellCasterSeed) {
+    try {
+      if (!_class.classId) continue;
+      cinfo('Creating class spellcasting info:', _class.classId);
+      await db.spellCasting.upsert({
+        where: {
+          classId: _class.classId,
+        },
+        update: _class,
+        create: _class,
+      });
+      cinfo('Class spellcasting info created');
+    } catch (error) {
+      cerr('Error creating class spellcasting info:', _class.classId, error);
+      throw new Error('Error creating class spellcasting info');
     }
   }
 };

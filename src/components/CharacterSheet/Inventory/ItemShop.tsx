@@ -5,10 +5,8 @@ import { SelectedItemInfo } from './InventoryTab';
 import { Form, Formik } from 'formik';
 import FormField from '@/components/UI/Formik/FormField';
 import * as Yup from 'yup';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setCharacterState } from '@/store/sheetSlice';
-import { addToInventory } from '@/Utility/ChoiceFunctions/Inventory';
 import ModelDisplay from '@/Utility/ModelDisplay';
+import useInventoryMutator from '@/hooks/useInventoryMutator';
 
 interface Props {
   setSelectedItem: (item: PrismaJson.QuantityItem | null) => void;
@@ -16,10 +14,10 @@ interface Props {
 }
 
 const ItemShop = ({ setSelectedItem, selectedItemInfo }: Props) => {
-  const dispatch = useAppDispatch();
   const { itemMetaData, loading, refetch } = useQueryItemMetaData();
   const [show, setShow] = useState(false);
-  const state = useAppSelector((state) => state.character.state);
+
+  const { addToInventory } = useInventoryMutator();
 
   const validationSchema = Yup.object().shape({
     quantity: Yup.number().min(1),
@@ -56,13 +54,10 @@ const ItemShop = ({ setSelectedItem, selectedItemInfo }: Props) => {
         initialValues={{ quantity: 1 }}
         onSubmit={(values) => {
           if (!selectedItemInfo) return;
-          if (!state) return;
-          const newState = addToInventory({
-            state,
-            itemID: selectedItemInfo.itemQuantity.item,
+          addToInventory({
+            item: selectedItemInfo.itemQuantity.item,
             quantity: values.quantity,
           });
-          dispatch(setCharacterState(newState));
         }}
       >
         <Form className="bg-base-300 p-4 rounded-xl">

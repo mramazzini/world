@@ -1,15 +1,20 @@
-import { useAppSelector } from '@/store/hooks';
-import { useMemo } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useCallback, useMemo } from 'react';
 import useModifier from './useModifier';
 import { Ability } from '@prisma/client';
+import useCharacterState from './useCharacter/useCharacterState';
+import { setCharacterState } from '@/store/sheetSlice';
 
 const useHitpoints = () => {
+  const dispatch = useAppDispatch();
   const character = useAppSelector((state) => state.sheet.rawCharacter);
+  const state = useCharacterState();
   const { getAbilityModifier } = useModifier();
+
   const temphp = useMemo(() => {
-    if (!character) return 0;
-    return character.tempHp;
-  }, [character]);
+    if (!state) return 0;
+    return state?.tempHp;
+  }, [state]);
 
   const maxhp = useMemo(() => {
     if (!character) return 0;
@@ -40,10 +45,61 @@ const useHitpoints = () => {
   }, [character, getAbilityModifier]);
 
   const currenthp = useMemo(() => {
-    if (!character) return 0;
-    return character.currentHp;
-  }, [character]);
-  return { temphp, maxhp, currenthp };
+    if (!state) return 0;
+    return state?.currentHp;
+  }, [state]);
+
+  const applyDamage = useCallback(
+    (damage: number) => {
+      if (!state) return;
+      let tempHpToLose = 0;
+      if (temphp > 0) {
+        if (temphp >= damage) {
+          tempHpToLose = damage;
+        } else {
+          tempHpToLose = temphp;
+        }
+      }
+      const damageToApply = damage - tempHpToLose;
+
+      dispatch(
+        setCharacterState({
+          ...state,
+          currentHp: state.currentHp - damageToApply,
+          tempHp: state.tempHp - tempHpToLose,
+        })
+      );
+    },
+    [state, dispatch, temphp]
+  );
+
+  const applyHealing = useCallback(
+    (healing: number) => {
+      if (!state) return;
+      dispatch(
+        setCharacterState({
+          ...state,
+          currentHp: state.currentHp + healing,
+        })
+      );
+    },
+    [state, dispatch]
+  );
+
+  const applyTempHp = useCallback(
+    (tempHp: number) => {
+      if (!state) return;
+      dispatch(
+        setCharacterState({
+          ...state,
+          tempHp: state.tempHp + tempHp,
+        })
+      );
+    },
+    [state, dispatch]
+  );
+
+  return { temphp, maxhp, currenthp, applyDamage, applyHealing, applyTempHp };
 };
 
 export default useHitpoints;

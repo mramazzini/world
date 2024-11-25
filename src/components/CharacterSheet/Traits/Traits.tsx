@@ -1,169 +1,21 @@
 'use client';
 import JsonTable from '@/Utility/JsonTable';
 import Tooltip from '@/Utility/Tooltip';
-import { MarkdownItem } from '@/lib/types/types';
 import { setCharacterState } from '@/store/sheetSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import DOMPurify from 'dompurify';
-import markdownIt from 'markdown-it';
-import { useState } from 'react';
-
-const md = markdownIt();
-
-const Trait = ({
-  note,
-  updateNote,
-  buttonText,
-}: {
-  note: MarkdownItem;
-  index: number;
-  updateNote: (note: MarkdownItem) => void;
-  buttonText: string;
-}) => {
-  const [editing, setEditing] = useState(false);
-  const [noteText, setNoteText] = useState(note);
-  const getParsedHtml = (markdownText: string) => {
-    const rawHtml = md.render(markdownText);
-    return DOMPurify.sanitize(rawHtml);
-  };
-  return (
-    <div className="bg-base-300 p-4 rounded-xl flex flex-col min-h-96 w-full">
-      {editing ? (
-        <textarea
-          className="w-full min-h-96 textarea"
-          defaultValue={noteText}
-          onChange={(e) => {
-            setNoteText(e.target.value);
-          }}
-        ></textarea>
-      ) : (
-        <div
-          className="markdown-content "
-          dangerouslySetInnerHTML={{
-            __html: getParsedHtml(`${note}`),
-          }}
-        />
-      )}{' '}
-      <div className="divider m-0"></div>
-      <div className="flex justify-between mt-2 w-full ">
-        <div></div>
-        <button
-          onClick={() => {
-            if (editing) {
-              updateNote(noteText);
-            }
-            setEditing(!editing);
-          }}
-          className="btn btn-ghost border-gray-500 btn-sm  w-full"
-        >
-          {editing ? 'Save ' + buttonText : 'Edit ' + buttonText}
-        </button>
-      </div>
-    </div>
-  );
-};
-
-const ListEditor = ({
-  data,
-  setData,
-  buttonText,
-  title,
-  tooltip,
-}: {
-  data: string[];
-  setData: (data: string[]) => void;
-  buttonText: string;
-  title: string;
-  tooltip?: JSX.Element;
-}) => {
-  const [editing, setEditing] = useState(false);
-  const [listText, setListText] = useState(data.join('\n'));
-  const handleDelete = (index: number) => {
-    const newList = data.filter((_, i) => i !== index);
-    setData(newList);
-  };
-  const handleCreate = () => {
-    const newList = [...data, ''];
-    setData(newList);
-  };
-  return (
-    <div className="bg-base-300 p-4 rounded-xl flex flex-col min-h-96 w-full">
-      <h2 className="font-bold flex items-center">
-        {title} <span className="ml-2 ">{tooltip}</span>
-      </h2>
-      <div className="divider m-0"></div>
-      {editing ? (
-        data.map((item, index) => (
-          <div className="join" key={index}>
-            <input
-              className="input input-bordered w-full mb-2 join-item"
-              key={index}
-              defaultValue={item}
-              onChange={(e) => {
-                const newListText = listText.split('\n');
-                newListText[index] = e.target.value;
-                setListText(newListText.join('\n'));
-              }}
-            ></input>
-            <button
-              className="btn btn-error  join-item"
-              onClick={() => handleDelete(index)}
-            >
-              Delete
-            </button>
-          </div>
-        ))
-      ) : (
-        <ul className="list-disc ml-4">
-          {data.length > 0 ? (
-            data.map((item, index) => (
-              <li key={index}>
-                {item.length > 0
-                  ? item
-                  : `Empty ${buttonText} - Edit this to display your ${buttonText}`}
-              </li>
-            ))
-          ) : (
-            <li>
-              No {buttonText} - Edit this to display your {buttonText}
-            </li>
-          )}
-        </ul>
-      )}
-      {editing && (
-        <button
-          onClick={() => handleCreate()}
-          className="btn btn-success btn-sm mt-2"
-        >
-          + Add +
-        </button>
-      )}
-      <div className="divider m-0"></div>
-
-      <div className="flex justify-between mt-2 w-full mt-auto">
-        <div></div>
-        <button
-          onClick={() => {
-            if (editing) {
-              setData(listText.split('\n'));
-            }
-            setEditing(!editing);
-          }}
-          className="btn btn-ghost border-gray-500 btn-sm  w-full "
-        >
-          {editing ? 'Save ' + buttonText : 'Edit ' + buttonText}
-        </button>
-      </div>
-    </div>
-  );
-};
+import useCharacterState from '@/hooks/useCharacter/useCharacterState';
+import TraitEditor from './TraitEditor';
+import { CharacterState } from '@prisma/client';
+import BiographyEditor from './BiographyEditor';
 
 const Traits = () => {
-  const state = useAppSelector((state) => state.character.state);
-  const background = useAppSelector((state) => state.character.Background);
+  const state = useCharacterState();
+  const background = useAppSelector(
+    (state) => state.sheet.rawCharacter?.Background
+  );
   const dispatch = useAppDispatch();
 
-  const setState = (newState: PrismaJson.CharacterState) => {
+  const setState = (newState: CharacterState) => {
     dispatch(setCharacterState(newState));
   };
 
@@ -196,7 +48,7 @@ const Traits = () => {
       <div className="divider m-0"></div>
       <h2 className="font-bold w-full text-center">About </h2>
       <div className="divider m-0"></div>
-      <Trait
+      <BiographyEditor
         buttonText="Biography"
         note={state.biography}
         index={0}
@@ -206,7 +58,7 @@ const Traits = () => {
       />
       <div className="divider m-0"></div>
       <div className="grid grid-cols-2 gap-4 mt-4">
-        <ListEditor
+        <TraitEditor
           title="Personality Traits"
           buttonText="Personality Traits"
           data={state.personalityTraits}
@@ -253,7 +105,7 @@ const Traits = () => {
             </Tooltip>
           }
         />
-        <ListEditor
+        <TraitEditor
           title="Ideals"
           buttonText="Ideals"
           data={state.ideals}
@@ -296,7 +148,7 @@ const Traits = () => {
             </Tooltip>
           }
         />
-        <ListEditor
+        <TraitEditor
           title="Bonds"
           buttonText="Bonds"
           data={state.bonds}
@@ -339,7 +191,7 @@ const Traits = () => {
             </Tooltip>
           }
         />
-        <ListEditor
+        <TraitEditor
           title="Flaws"
           buttonText="Flaws"
           data={state.flaws}

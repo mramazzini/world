@@ -3,17 +3,15 @@
 import { useState } from 'react';
 import '@/lib/string.extensions';
 import MainSheet from '@/components/CharacterSheet/main/MainSheet';
-// import InventoryTab from '@/components/CharacterSheet/Inventory/InventoryTab';
-// import ChooseChoices from '@/components/CharacterSheet/Choices/Choices';
-// import SpellSheet from '@/components/CharacterSheet/Spells/SpellSheet';
-// import Notes from '@/components/CharacterSheet/Notes/Notes';
-// import Traits from '@/components/CharacterSheet/Traits/Traits';
-// import CharacterStatsTab from '@/components/CharacterSheet/Stats/CharacterStatsTab';
 import Loading from '@/components/UI/Loading';
 import useCharacter from '@/hooks/useCharacter/useCharacter';
 import CharacterStatsTab from '@/components/CharacterSheet/Stats/CharacterStatsTab';
-import Notes from '@/components/CharacterSheet/Notes/Notes';
+import Notes from '@/components/CharacterSheet/Notes/NotesTab';
 import ChoicesTab from '@/components/CharacterSheet/ChoicesTab/ChoicesTab';
+import InventoryTab from '@/components/CharacterSheet/Inventory/InventoryTab';
+import Traits from '@/components/CharacterSheet/Traits/Traits';
+import SpellSheet from '@/components/CharacterSheet/Spells/SpellSheet';
+import AbilityScoreModal from '@/components/CharacterSheet/AbilityScoreModal/AbilityScoreModal';
 
 type Tab =
   | 'sheet'
@@ -71,9 +69,9 @@ const CharacterSheet = ({ characterID }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <MainSheet />
+              {activeTab === 'sheet' && <MainSheet />}
             </div>
-            {/* <input
+            <input
               type="radio"
               name="charcter_tabs"
               role="tab"
@@ -87,7 +85,7 @@ const CharacterSheet = ({ characterID }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <InventoryTab />
+              {activeTab === 'inventory' && <InventoryTab />}
             </div>
             <input
               type="radio"
@@ -103,7 +101,7 @@ const CharacterSheet = ({ characterID }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <SpellSheet />
+              {activeTab === 'spells' && <SpellSheet />}
             </div>
             <input
               type="radio"
@@ -119,8 +117,8 @@ const CharacterSheet = ({ characterID }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <Traits />
-            </div> */}
+              {activeTab === 'traits' && <Traits />}
+            </div>
             <input
               type="radio"
               name="charcter_tabs"
@@ -135,7 +133,7 @@ const CharacterSheet = ({ characterID }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <CharacterStatsTab />
+              {activeTab === 'stats' && <CharacterStatsTab />}
             </div>
 
             <input
@@ -152,7 +150,7 @@ const CharacterSheet = ({ characterID }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <Notes />
+              {activeTab === 'notes' && <Notes />}
             </div>
             <input
               type="radio"
@@ -169,11 +167,12 @@ const CharacterSheet = ({ characterID }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <ChoicesTab />
+              {activeTab === 'choices' && <ChoicesTab />}
             </div>
           </div>
         </>
       )}
+      <AbilityScoreModal />
     </main>
   );
 };

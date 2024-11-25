@@ -122,14 +122,6 @@ export enum WeaponPropertyNames {
   TwoHanded = 'Two-Handed',
   Versatile = 'Versatile',
 }
-export enum SpellFocus {
-  ARCANE_FOCUS = 'arcane focus',
-  HOLY_SYMBOL = 'holy symbol',
-  DRUIDIC_FOCUS = 'druidic focus',
-  MUSICAL_INSTRUMENT = 'musical instrument',
-  ARTISAN_TOOLS = 'artisan tools',
-  NONE = 'none',
-}
 
 export type ArmorID = string;
 export type WeaponID = string;

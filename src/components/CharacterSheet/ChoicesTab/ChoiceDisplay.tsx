@@ -1,8 +1,6 @@
 import useCharacterChoices from '@/hooks/useCharacterChoices';
-import { ChoiceProtocolToText } from '@/lib/utils/toText/ChoiceProtocolToText';
 import { useAppSelector } from '@/store/hooks';
 import P from '@/Utility/FormatAndSanitize';
-import { ChoiceProtocol } from '@prisma/client';
 import { useMemo } from 'react';
 import ChoiceResolverController from './ChoiceResolverController';
 import Link from 'next/link';
@@ -52,7 +50,7 @@ const ChoiceDisplay = () => {
       };
     }
     return null;
-  }, [selectedChoice]);
+  }, [selectedChoice, classes, species, subSpecies, background]);
 
   if (!selectedChoice) return null;
 

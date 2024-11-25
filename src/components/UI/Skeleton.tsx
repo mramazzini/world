@@ -1,10 +1,10 @@
 const Skeleton = ({ width, height }: { width?: number; height?: number }) => {
   return (
     <div
-      className={`skeleton flex grow`}
+      className={`skeleton flex grow h-full w-full`}
       style={{
-        width: width ? `${width}px` : '100%',
-        height: height ? `${height}px` : '100%',
+        minWidth: width ? `${width}px` : '100%',
+        minHeight: height ? `${height}px` : '100%',
       }}
     ></div>
   );

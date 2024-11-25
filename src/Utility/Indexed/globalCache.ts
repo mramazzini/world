@@ -1,3 +1,4 @@
+'use client';
 import { getFromDb, putInDb } from './indexedDB';
 import { getItem } from '@/lib/actions/db/item/read.actions';
 import { getArmor } from '@/lib/actions/db/armor/read.actions';

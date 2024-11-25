@@ -32,9 +32,14 @@ const CharacterInfoTemplate = {
           include: {
             Features: true,
             SpellcastingFeatures: true,
-            SpellList: {
+            MultiClassing: {
               include: {
-                Spells: true,
+                Choices: true,
+              },
+            },
+            SpellCasting: {
+              include: {
+                SpellList: true,
               },
             },
             Choices: true,
@@ -121,6 +126,10 @@ export const getCharacter = async ({
         createdAt: true,
         updatedAt: true,
       },
+      spellCasting: {
+        createdAt: true,
+        updatedAt: true,
+      },
     },
   });
   try {
@@ -156,11 +165,7 @@ export const getCharactersByUser = async (
     ...CharacterInfoTemplate,
   });
   await db.$disconnect();
-  return res.sort((a, b) => {
-    const dateA = new Date(a.updatedAtIsoString || 0).getTime().toString();
-    const dateB = new Date(b.updatedAtIsoString || 0).getTime().toString();
-    return dateB.localeCompare(dateA);
-  });
+  return res;
 };
 
 export const getCharacterChunk = async (

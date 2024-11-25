@@ -1,0 +1,2 @@
+-- AlterEnum
+ALTER TYPE "SpellFocus" ADD VALUE 'ARTISANS_TOOLS';

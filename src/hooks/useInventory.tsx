@@ -1,10 +1,15 @@
-import { ItemInfo, ItemWeaponDataInfo, ToolInfo } from '@/lib/types/modelInfo';
-import { useAppSelector } from '@/store/hooks';
+import {
+  ArmorInfo,
+  ItemInfo,
+  ItemWeaponDataInfo,
+  ToolInfo,
+} from '@/lib/types/modelInfo';
 import { memoizeGetItem } from '@/Utility/Indexed/globalCache';
 import { useEffect, useMemo, useState } from 'react';
+import useCharacterState from './useCharacter/useCharacterState';
 
 const useInventory = () => {
-  const state = useAppSelector((state) => state.character.state);
+  const state = useCharacterState();
   const [items, setItems] = useState<ItemInfo[]>([]);
 
   const itemsPromises = useMemo(async () => {
@@ -33,6 +38,16 @@ const useInventory = () => {
     return tools;
   }, [items]);
 
+  const armor = useMemo(() => {
+    const armor: ArmorInfo[] = [];
+    items.forEach((item) => {
+      if (item.Armor) {
+        armor.push(item.Armor);
+      }
+    });
+    return armor;
+  }, [items]);
+
   const weapons = useMemo(() => {
     const weapons: ItemWeaponDataInfo[] = [];
     items.forEach((item) => {
@@ -45,8 +60,10 @@ const useInventory = () => {
 
   const equippedItems = useMemo(() => {
     return (
-      items.filter((item) =>
-        state?.equipped.hands.items?.includes(item.id.toString())
+      items.filter(
+        (item) =>
+          state?.weaponEquippedIds?.includes(item.id) ||
+          state?.armorEquippedId === item.id
       ) || []
     );
   }, [items, state]);
@@ -60,8 +77,12 @@ const useInventory = () => {
       .filter((item) => item !== null);
   }, [equippedItems]);
 
+  const equippedShield = useMemo(() => {
+    return items.find((item) => state?.shieldEquippedId === item.id);
+  }, [items, state]);
+
   const equippedArmor = useMemo(() => {
-    return items.filter((item) => state?.equipped.armor === item.id);
+    return items.find((item) => state?.armorEquippedId === item.id);
   }, [items, state]);
 
   const isVersatile = useMemo(
@@ -75,7 +96,48 @@ const useInventory = () => {
     [equippedWeapons, equippedItems]
   );
 
-  return { tools, weapons, items, equippedWeapons, equippedArmor, isVersatile };
+  const weight = useMemo(() => {
+    return items.reduce((acc, item) => {
+      const inventoryItem = state?.inventory?.find((i) => i.item === item.id);
+      const weight = item.weight;
+      if (!weight) return acc;
+
+      const amount = weight.quantity;
+      const unit = weight.unit;
+      if (!inventoryItem) return acc;
+
+      if (unit === 'lb') {
+        return acc + amount * inventoryItem.quantity;
+      } else if (unit === 'oz') {
+        return acc + (amount / 16) * inventoryItem.quantity;
+      } else {
+        return acc;
+      }
+    }, 0);
+  }, [items, state]);
+
+  const itemAmounts = useMemo(() => {
+    const itemQuantities: { [key: string]: number } = {};
+    items.forEach((item) => {
+      const inventoryItem = state?.inventory?.find((i) => i.item === item.id);
+      if (!inventoryItem) return;
+      itemQuantities[item.id] = inventoryItem.quantity;
+    });
+    return itemQuantities;
+  }, [items, state]);
+
+  return {
+    tools,
+    weapons,
+    items,
+    equippedWeapons,
+    equippedArmor,
+    equippedShield,
+    isVersatile,
+    weight,
+    armor,
+    itemAmounts,
+  };
 };
 
 export default useInventory;

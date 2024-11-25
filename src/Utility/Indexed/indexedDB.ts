@@ -1,3 +1,4 @@
+'use client';
 import { VERSION } from '@/lib/globalVars';
 
 const DB_NAME = 'dataCache';

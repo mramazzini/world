@@ -1,25 +1,25 @@
-import { useAppSelector } from '@/store/hooks';
 import { Ability } from '@prisma/client';
 import { useMemo } from 'react';
+import useCharacterState from './useCharacter/useCharacterState';
 
 const useAbility = () => {
-  const character = useAppSelector((state) => state.sheet.rawCharacter);
+  const state = useCharacterState();
   const abilityScores = useMemo(() => {
     return {
-      [Ability.STR]: character?.baseSTR || 10,
-      [Ability.DEX]: character?.baseDEX || 10,
-      [Ability.CON]: character?.baseCON || 10,
-      [Ability.INT]: character?.baseINT || 10,
-      [Ability.WIS]: character?.baseWIS || 10,
-      [Ability.CHA]: character?.baseCHA || 10,
+      [Ability.STR]: state?.baseSTR || 10,
+      [Ability.DEX]: state?.baseDEX || 10,
+      [Ability.CON]: state?.baseCON || 10,
+      [Ability.INT]: state?.baseINT || 10,
+      [Ability.WIS]: state?.baseWIS || 10,
+      [Ability.CHA]: state?.baseCHA || 10,
     };
   }, [
-    character?.baseCHA,
-    character?.baseCON,
-    character?.baseDEX,
-    character?.baseINT,
-    character?.baseSTR,
-    character?.baseWIS,
+    state?.baseCHA,
+    state?.baseCON,
+    state?.baseDEX,
+    state?.baseINT,
+    state?.baseSTR,
+    state?.baseWIS,
   ]);
 
   return abilityScores;

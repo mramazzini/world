@@ -1,9 +1,5 @@
-import { Prisma, Ability } from '@prisma/client';
-import { SpellFocus } from '@/lib/types/types';
+import { Prisma } from '@prisma/client';
 import { src } from '@/lib/types/types';
-import { spellListIds } from '../Spells/SpellLists/SpellLists.seed';
-import { spellIds } from '../Spells/spells.seed';
-import { thirdCaster } from '../Classes/SpellSlotsUtil';
 import { classIds as ids } from '../Classes/ClassIds';
 
 const SubClasses: Prisma.SubClassCreateManyInput[] = [
@@ -74,31 +70,31 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
     flavorText:
       'The Echo Knight has mastered the art of using dunamis to summon the fading shades of unrealized timelines to aid them in battle.',
   },
-  {
-    id: '7',
-    name: 'Eldritch Knight',
-    slug: '',
-    description:
-      "The archetypal Eldritch Knight combines the martial mastery common to all fighters with a careful study of magic. Eldritch Knights use magical techniques similar to those practiced by wizards. They focus their study on two of the eight schools of magic: abjuration and evocation. Abjuration spells grant an Eldritch Knight additional protection in battle, and evocation spells deal damage to many foes at once, extending the fighter's reach in combat. These knights learn a comparatively small number of spells, committing them to memory instead of keeping them in a spellbook.",
-    classId: ids.fighter,
-    source: src.phb,
-    flavorText:
-      'The Eldritch Knight combines the martial mastery common to all fighters with a careful study of magic.',
-    spellCastingInfo: {
-      levelAquired: 3,
-      displaySpellLevels: true,
-      ability: Ability.INT,
-      description:
-        'When you reach 3rd level, you augment your martial prowess with the ability to cast spells.',
-      spellFocus: SpellFocus.NONE,
-      spellFocusDescription:
-        'Eldritch Knights do not use a spell focus. If they acquire a component pouch, they can use it to cast spells.',
-      spellCastingAbilityDescription:
-        'Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.',
-      castingSpellsDescription: `The Eldritch Knight Spellcasting table shows how many spell slots you have to cast your wizard spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.\n\nFor example, if you know the 1st-level spell %${spellIds.shield}{Shield}% and have a 1st-level and a 2nd-level spell slot available, you can cast %${spellIds.shield}{Shield}% using either slot.`,
-      spellLevels: thirdCaster,
-    },
-  },
+  // {
+  //   id: '7',
+  //   name: 'Eldritch Knight',
+  //   slug: '',
+  //   description:
+  //     "The archetypal Eldritch Knight combines the martial mastery common to all fighters with a careful study of magic. Eldritch Knights use magical techniques similar to those practiced by wizards. They focus their study on two of the eight schools of magic: abjuration and evocation. Abjuration spells grant an Eldritch Knight additional protection in battle, and evocation spells deal damage to many foes at once, extending the fighter's reach in combat. These knights learn a comparatively small number of spells, committing them to memory instead of keeping them in a spellbook.",
+  //   classId: ids.fighter,
+  //   source: src.phb,
+  //   flavorText:
+  //     'The Eldritch Knight combines the martial mastery common to all fighters with a careful study of magic.',
+  //   spellCastingInfo: {
+  //     levelAquired: 3,
+  //     displaySpellLevels: true,
+  //     ability: Ability.INT,
+  //     description:
+  //       'When you reach 3rd level, you augment your martial prowess with the ability to cast spells.',
+  //     spellFocus: SpellFocus.NONE,
+  //     spellFocusDescription:
+  //       'Eldritch Knights do not use a spell focus. If they acquire a component pouch, they can use it to cast spells.',
+  //     spellCastingAbilityDescription:
+  //       'Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.',
+  //     castingSpellsDescription: `The Eldritch Knight Spellcasting table shows how many spell slots you have to cast your wizard spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.\n\nFor example, if you know the 1st-level spell %${spellIds.shield}{Shield}% and have a 1st-level and a 2nd-level spell slot available, you can cast %${spellIds.shield}{Shield}% using either slot.`,
+  //     spellLevels: thirdCaster,
+  //   },
+  // },
   {
     id: '8',
     name: 'Psi Warrior',
@@ -1009,33 +1005,33 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
       'Drakewardens bond with a draconic spirit, which can manifest in physical form as a drake.',
   },
   //rogue
-  {
-    name: 'Arcane Trickster',
-    slug: '',
-    description:
-      'Some rogues enhance their fine-honed skills of stealth and agility with magic, learning tricks of enchantment and illusion. These rogues include pickpockets and burglars, but also pranksters, mischief-makers, and a significant number of adventurers.',
-    id: '89',
-    classId: ids.rogue,
-    source: src.phb,
-    flavorText:
-      'Arcane Tricksters enhance their fine-honed skills of stealth and agility with magic, learning tricks of enchantment and illusion.',
-    spellListId: spellListIds.wizard,
-    spellCastingInfo: {
-      ability: Ability.INT,
-      levelAquired: 3,
-      description:
-        'When you reach 3rd level, you augment your martial prowess with the ability to cast spells.',
-      displaySpellLevels: true,
-      spellLevels: thirdCaster,
-      spellCastingAbilityDescription:
-        'Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through dedicated study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.',
-      spellFocus: SpellFocus.NONE,
-      spellFocusDescription:
-        'Arcane tricksters do not use a spell focus. If they acquire a component pouch, they can use it to cast spells.',
-      castingSpellsDescription:
-        "The Arcane Trickster Spellcasting table shows how many spell slots you have to cast your wizard spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.\n\nFor example, if you know the 1st-level spell Charm Person and have a 1st-level and a 2nd-level spell slot available, you can cast Charm Person using either slot.",
-    },
-  },
+  // {
+  //   name: 'Arcane Trickster',
+  //   slug: '',
+  //   description:
+  //     'Some rogues enhance their fine-honed skills of stealth and agility with magic, learning tricks of enchantment and illusion. These rogues include pickpockets and burglars, but also pranksters, mischief-makers, and a significant number of adventurers.',
+  //   id: '89',
+  //   classId: ids.rogue,
+  //   source: src.phb,
+  //   flavorText:
+  //     'Arcane Tricksters enhance their fine-honed skills of stealth and agility with magic, learning tricks of enchantment and illusion.',
+  //   spellListId: spellListIds.wizard,
+  //   spellCastingInfo: {
+  //     ability: Ability.INT,
+  //     levelAquired: 3,
+  //     description:
+  //       'When you reach 3rd level, you augment your martial prowess with the ability to cast spells.',
+  //     displaySpellLevels: true,
+  //     spellLevels: thirdCaster,
+  //     spellCastingAbilityDescription:
+  //       'Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through dedicated study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.',
+  //     spellFocus: SpellFocus.NONE,
+  //     spellFocusDescription:
+  //       'Arcane tricksters do not use a spell focus. If they acquire a component pouch, they can use it to cast spells.',
+  //     castingSpellsDescription:
+  //       "The Arcane Trickster Spellcasting table shows how many spell slots you have to cast your wizard spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.\n\nFor example, if you know the 1st-level spell Charm Person and have a 1st-level and a 2nd-level spell slot available, you can cast Charm Person using either slot.",
+  //   },
+  // },
   {
     name: 'Assassin',
     slug: '',

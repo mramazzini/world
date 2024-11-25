@@ -1,5 +1,6 @@
-import { getCharacter } from '@/lib/actions/db/character/read.actions';
-import { CharacterInfo } from '@/lib/types/modelInfo';
+'use client';
+import { getCharacterState } from '@/lib/actions/db/characterState/read.actions';
+import { CharacterState } from '@prisma/client';
 
 const SHEET_DB_NAME = 'sheetCache';
 const SHEET_DB_VERSION = 1;
@@ -30,7 +31,7 @@ function openSheetDb(): Promise<IDBDatabase> {
 }
 export async function getLocalCharacterData(
   key: string
-): Promise<CharacterInfo | null> {
+): Promise<CharacterState | null> {
   if (!sheetDb) await openSheetDb();
   return new Promise((resolve, reject) => {
     const transaction = sheetDb!.transaction(SHEET_STORE_NAME, 'readonly');
@@ -46,17 +47,14 @@ export async function getLocalCharacterData(
 
 export async function getLatestCharacter(
   characterId: string
-): Promise<CharacterInfo | null> {
+): Promise<CharacterState | null> {
   try {
     // Get data from IndexedDB and cloud database
     const localItem = await getLocalCharacterData(characterId);
-    const cloudItem = await getCharacter({
-      query: characterId,
-      type: 'id',
-    });
+    const cloudItem = await getCharacterState(characterId);
 
-    const localDate = new Date(localItem?.updatedAtIsoString || 0);
-    const cloudDate = new Date(cloudItem?.updatedAtIsoString || 0);
+    const localDate = new Date(localItem?.lastSavedIsoString || 0);
+    const cloudDate = new Date(cloudItem?.lastSavedIsoString || 0);
 
     if (cloudDate > localDate) {
       if (cloudItem) await putCharacterData(cloudItem.id, cloudItem);
@@ -70,7 +68,7 @@ export async function getLatestCharacter(
 }
 export async function putCharacterData(
   key: string,
-  value: CharacterInfo
+  value: CharacterState
 ): Promise<void> {
   if (!sheetDb) await openSheetDb();
   return new Promise((resolve, reject) => {

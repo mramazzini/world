@@ -3,6 +3,7 @@ import { Choice } from '@prisma/client';
 import { useCallback, useMemo } from 'react';
 import useCombinedSpecies from './useCombinedSpecies';
 import { ChoiceOutput } from '@/lib/types/protocols';
+import usePrimaryClass from './usePrimaryClass';
 
 interface CompletedChoice extends Choice {
   selections: ChoiceOutput;
@@ -13,7 +14,16 @@ const useCharacterChoices = () => {
   const selectedChoiceID = useAppSelector(
     (state) => state.sheet.activeChoiceId
   );
+  const primaryClass = usePrimaryClass();
   const combinedSpecies = useCombinedSpecies();
+
+  const multiclasses = useMemo(() => {
+    if (!character) return [];
+    const classes = character.CharacterToClass.filter(
+      (c) => !c.primaryClass
+    ).map((c) => c.Class.MultiClassing);
+    return classes;
+  }, [character]);
 
   const isFufilled = useCallback(
     (choice: Choice) => {
@@ -21,7 +31,8 @@ const useCharacterChoices = () => {
       const choiceStatus = character.CharacterChoiceStatus.find(
         (status) => status.choiceId === choice.id
       );
-      return choiceStatus?.fufilled || false;
+      if (!choiceStatus) return false;
+      return true;
     },
     [character]
   );
@@ -29,16 +40,22 @@ const useCharacterChoices = () => {
   const choices = useMemo(() => {
     if (!character) return [];
     const choices = [
-      ...character.CharacterToClass.reduce<Choice[]>((acc, cur) => {
-        return [...acc, ...cur.Class.Choices];
+      ...(primaryClass?.Class.Choices || []),
+      ...multiclasses.reduce<Choice[]>((acc, cur) => {
+        return [...acc, ...(cur?.Choices || [])];
       }, []),
       ...(character.Background?.Choices || []),
       ...(combinedSpecies?.Choices || []),
     ];
     return choices;
-  }, [character, combinedSpecies?.Choices]);
+  }, [
+    character,
+    combinedSpecies?.Choices,
+    primaryClass?.Class.Choices,
+    multiclasses,
+  ]);
 
-  const completedChoices = useMemo(() => {
+  const fufilledChoices = useMemo(() => {
     if (!character) return [];
     const completedChoices = choices.reduce<CompletedChoice[]>((acc, cur) => {
       if (isFufilled(cur)) {
@@ -76,9 +93,9 @@ const useCharacterChoices = () => {
 
   return {
     choices,
-    completedChoices,
     pendingChoices,
     selectedChoice,
+    fufilledChoices,
   };
 };
 

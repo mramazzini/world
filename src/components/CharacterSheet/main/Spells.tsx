@@ -1,125 +1,18 @@
 'use client';
 import { Log, SpellLevel } from '@/lib/types/types';
 import Image from 'next/image';
-import PreparedSpellView from '../Spells/PreparedSpellView';
 import numberArray from '@/lib/utils/numberArray';
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '@/store/hooks';
+import useCharacterState from '@/hooks/useCharacter/useCharacterState';
 
-interface Props {
-  logPush: (newLog: Log) => void;
-}
-
-const Spells = ({ logPush }: Props) => {
-  const state = useAppSelector((state) => state.character.state);
-  const prepared = state?.userSubmittedSpells;
-  const [spellSlotsState, setSpellSlotsState] = useState<PrismaJson.SpellSlots>(
-    state?.spellSlots || {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-      6: 0,
-      7: 0,
-      8: 0,
-      9: 0,
-    }
-  );
-
-  useEffect(() => {
-    if (!state) return;
-    if (!state.spellSlots) return;
-    setSpellSlotsState(state.spellSlots);
-  }, [state]);
-
-  const handleRest = () => {
-    if (!state) return;
-    if (!state.spellSlots) return;
-
-    setSpellSlotsState(state.spellSlots);
-  };
+const Spells = () => {
+  const state = useCharacterState();
 
   return (
     <div className="h-full flex flex-col">
-      {/* <p>Tools</p>
-      <div className="divider m-0"></div> */}
-
       <div className="flex flex-row bg-base-300 rounded-xl p-4 h-full items-center justify-center">
-        {prepared && prepared.length > 0 ? (
-          <>
-            <div className="grid gap-4 w-full">
-              <div className="join flex flex-row items-center justify-center">
-                <div className="flex flex-wrap w-full items-center justify-center bg-neutral text-neutral-content rounded-xl p-4 gap-4 join-item">
-                  {numberArray(1, 9).map((level) => {
-                    if (!state) return null;
-                    const maxSlots = state.spellSlots;
-                    if (!maxSlots) return null;
-                    const levelMaxSlots = maxSlots[level as SpellLevel];
-                    if (!levelMaxSlots) return null;
-                    return (
-                      <div
-                        key={level}
-                        className="flex flex-col items-center justify-center "
-                      >
-                        <h4>Level {level} Spells</h4>
-                        <div className="join flex flex-row items-center justify-center join rounded-xl">
-                          <input
-                            type="number"
-                            className="input input-neutral text-neutral-content h-8 join-item w-12 "
-                            value={spellSlotsState[level as SpellLevel]}
-                            onChange={(e) => {
-                              const newSlots = { ...spellSlotsState };
-                              newSlots[level as SpellLevel] = parseInt(
-                                e.target.value
-                              );
-                              setSpellSlotsState(newSlots);
-                            }}
-                          />
-
-                          <div className="h-8 join-item flex items-center p-2 badge bg-base-300 text-base-content ">
-                            Max: {levelMaxSlots}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}{' '}
-                </div>{' '}
-                <button
-                  onClick={handleRest}
-                  className="btn btn-secondary join-item h-full"
-                >
-                  <Image
-                    src="/images/refresh.svg"
-                    alt="Rest"
-                    width={24}
-                    height={24}
-                  />
-                </button>
-              </div>
-              {prepared.map((spell, index) => {
-                return (
-                  <PreparedSpellView
-                    handleRemoveSpell={(index) => {
-                      if (!state) return;
-                      const newSpells = [...state.userSubmittedSpells];
-                      newSpells.splice(index, 1);
-                    }}
-                    key={index}
-                    index={index}
-                    showEditor={false}
-                    spellInput={spell}
-                    updateSpell={(newSpell) => {
-                      if (!state) return;
-                      const newSpells = [...state.userSubmittedSpells];
-                      newSpells[index] = newSpell;
-                    }}
-                    logPush={logPush}
-                  />
-                );
-              })}
-            </div>
-          </>
+        {false ? (
+          <></>
         ) : (
           <div className="flex items-center justify-center flex-col">
             <p className="font-bold m-2">No Spells Found..</p>

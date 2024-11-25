@@ -11,109 +11,145 @@ import {
 import { useCallback, useMemo } from 'react';
 import useLevel from './useLevel';
 import { ToolID, WeaponID } from '@/lib/types/types';
-import { calcProficiency } from '@/Utility/characterStateFunctions/calc/calcProficiency';
 import {
   memoizeGetTool,
   memoizeGetWeapon,
 } from '@/Utility/Indexed/globalCache';
 import useCharacterChoices from './useCharacterChoices';
+import { makeArrayUnique } from '@/Utility/makeArrayUnique';
+import usePrimaryClass from './usePrimaryClass';
+import useMulticlass from './useMulticlass';
 
 const useProficiency = () => {
-  const character = useAppSelector((state) => state.sheet.rawCharacter);
   const level = useLevel();
-  const { completedChoices } = useCharacterChoices();
+  const primaryClass = usePrimaryClass();
+  const multiclasses = useMulticlass();
+  const character = useAppSelector((state) => state.sheet.rawCharacter);
+  const { fufilledChoices } = useCharacterChoices();
 
   const toolIds = useMemo(() => {
-    if (!character) return [];
     const toolIds: ToolID[] = [
-      ...character.CharacterToClass.reduce<string[]>((acc, cur) => {
-        return [...acc, ...cur.Class.freeToolProficiencyIds];
+      ...multiclasses.reduce<string[]>((acc, cur) => {
+        return [
+          ...acc,
+          ...(cur.Class.MultiClassing?.freeToolIdProficiencies || []),
+        ];
       }, []),
-      ...(character.Background?.freeToolProficiencyIds || []),
+      ...(primaryClass?.Class.freeToolProficiencyIds || []),
+      ...(character?.Background?.freeToolProficiencyIds || []),
     ];
-    return toolIds;
-  }, [character]);
+    return makeArrayUnique(toolIds);
+  }, [character, multiclasses, primaryClass]);
 
   const toolGroups = useMemo(() => {
-    if (!character) return [];
     const toolGroups: ToolGroup[] = [
-      ...character.CharacterToClass.reduce<ToolGroup[]>((acc, cur) => {
-        return [...acc, ...cur.Class.freeToolProficiencyGroups];
-      }, []),
-      ...(character.Background?.freeToolProficiencyGroups || []),
+      ...(multiclasses.reduce<ToolGroup[]>((acc, cur) => {
+        return [
+          ...acc,
+          ...(cur.Class.MultiClassing?.freeToolGroupProficiencies || []),
+        ];
+      }, []) || []),
+      ...(primaryClass?.Class.freeToolProficiencyGroups || []),
+      ...(character?.Background?.freeToolProficiencyGroups || []),
     ];
-    return toolGroups;
-  }, [character]);
+    //use set to make unique
+    return makeArrayUnique(toolGroups);
+  }, [character, multiclasses, primaryClass]);
 
   const languages = useMemo(() => {
     if (!character) return [];
     const languages: Language[] = [
       ...(character.Background?.freeLanguageProficiencies || []),
+      ...fufilledChoices
+        .map((choice) => {
+          if (choice.protocol === ChoiceProtocol.SET_LANGUAGE_PROFICIENCY) {
+            return choice.selections as Language[];
+          }
+        })
+        .filter((x) => x !== undefined)
+        .flat(),
     ];
-    return languages;
-  }, [character]);
+    return makeArrayUnique(languages);
+  }, [character, fufilledChoices]);
 
   const skillProficiencies = useMemo(() => {
-    if (!character) return [];
     const skills: Skill[] = [
-      ...character.CharacterToClass.reduce<Skill[]>((acc, cur) => {
-        return [...acc, ...cur.Class.freeSkills];
+      ...multiclasses.reduce<Skill[]>((acc, cur) => {
+        return [
+          ...acc,
+          ...(cur.Class.MultiClassing?.freeSkillProficiencies || []),
+        ];
       }, []),
-      ...(character.Background?.freeSkillProficiencies || []),
-      //@ts-expect-error I don't know why this gives an error, completedChoices is an array.
-      ...completedChoices.reduce<Skill[]>((acc, cur) => {
-        if (cur.protocol === ChoiceProtocol.SET_SKILL_PROFICIENCY) {
-          return [...acc, ...cur.selections];
-        }
-        return acc;
-      }, []),
+      ...(primaryClass?.Class.freeSkills || []),
+      ...(character?.Background?.freeSkillProficiencies || []),
+      ...fufilledChoices
+        .map((choice) => {
+          if (choice.protocol === ChoiceProtocol.SET_SKILL_PROFICIENCY) {
+            return choice.selections as Skill[];
+          }
+        })
+        .filter((x) => x !== undefined)
+        .flat(),
     ];
-    return skills;
-  }, [character, completedChoices]);
+    return makeArrayUnique(skills);
+  }, [character, fufilledChoices, multiclasses, primaryClass]);
 
   const skillExpertises = useMemo(() => {
     return [] as Skill[];
   }, []);
 
   const savingThrows = useMemo(() => {
-    if (!character) return [];
     const savingThrows: Ability[] = [
-      ...character.CharacterToClass.reduce<Ability[]>((acc, cur) => {
-        return [...acc, ...cur.Class.freeSavingThrowProficiencies];
+      ...(primaryClass?.Class.freeSavingThrowProficiencies || []),
+      ...multiclasses.reduce<Ability[]>((acc, cur) => {
+        return [
+          ...acc,
+          ...(cur.Class.MultiClassing?.freeSavingThrowProficiencies || []),
+        ];
       }, []),
     ];
-    return savingThrows;
-  }, [character]);
+    return makeArrayUnique(savingThrows);
+  }, [primaryClass, multiclasses]);
 
   const armorTypes = useMemo(() => {
-    if (!character) return [];
+    if (!primaryClass) return [];
     const armorTypes: ArmorType[] = [
-      ...character.CharacterToClass.reduce<ArmorType[]>((acc, cur) => {
-        return [...acc, ...cur.Class.freeArmorProficiencies];
+      ...(primaryClass?.Class.freeArmorProficiencies || []),
+      ...multiclasses.reduce<ArmorType[]>((acc, cur) => {
+        return [
+          ...acc,
+          ...(cur.Class.MultiClassing?.freeArmorProficiencies || []),
+        ];
       }, []),
     ];
-    return armorTypes;
-  }, [character]);
+    return makeArrayUnique(armorTypes);
+  }, [multiclasses, primaryClass]);
 
   const weaponIds = useMemo(() => {
-    if (!character) return [];
     const weaponIds: WeaponID[] = [
-      ...character.CharacterToClass.reduce<WeaponID[]>((acc, cur) => {
-        return [...acc, ...cur.Class.freeWeaponProficiencyIds];
+      ...(primaryClass?.Class.freeWeaponProficiencyIds || []),
+      ...multiclasses.reduce<string[]>((acc, cur) => {
+        return [
+          ...acc,
+          ...(cur.Class.MultiClassing?.freeWeaponIdProficiencies || []),
+        ];
       }, []),
     ];
-    return weaponIds;
-  }, [character]);
+    return makeArrayUnique(weaponIds);
+  }, [multiclasses, primaryClass]);
 
   const weaponGroups = useMemo(() => {
-    if (!character) return [];
     const weaponGroups: WeaponGroup[] = [
-      ...character.CharacterToClass.reduce<WeaponGroup[]>((acc, cur) => {
-        return [...acc, ...cur.Class.freeWeaponProficiencyGroups];
+      ...(primaryClass?.Class.freeWeaponProficiencyGroups || []),
+      ...multiclasses.reduce<WeaponGroup[]>((acc, cur) => {
+        return [
+          ...acc,
+          ...(cur.Class.MultiClassing?.freeWeaponGroupProficiencies || []),
+        ];
       }, []),
     ];
-    return weaponGroups;
-  }, [character]);
+    return makeArrayUnique(weaponGroups);
+  }, [multiclasses, primaryClass]);
 
   const isProficientInTool = useCallback(
     async (toolID: ToolID) => {
@@ -128,6 +164,8 @@ const useProficiency = () => {
       if (!tool || !tool.ToolGroup) return false;
 
       if (toolGroups.includes(tool.ToolGroup)) return true;
+
+      return false;
     },
     [toolGroups, toolIds]
   );
@@ -213,7 +251,7 @@ const useProficiency = () => {
   );
 
   const proficiencyBonus = useMemo(() => {
-    return calcProficiency(level);
+    return Math.ceil(level / 4) + 1;
   }, [level]);
 
   return {

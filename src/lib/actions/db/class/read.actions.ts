@@ -10,7 +10,11 @@ import { ClassInfo } from '@/lib/types/modelInfo';
 const ClassInfoTemplate = {
   include: {
     SubClasses: true,
-    SpellList: true,
+    SpellCasting: {
+      include: {
+        SpellList: true,
+      },
+    },
     Features: {
       include: {
         columnedFeatures: true,
@@ -20,6 +24,11 @@ const ClassInfoTemplate = {
     SpellcastingFeatures: {
       include: {
         columnedFeatures: true,
+      },
+    },
+    MultiClassing: {
+      include: {
+        Choices: true,
       },
     },
     User: {
@@ -60,7 +69,12 @@ export async function getClass({
 }: SingleDataQuery): Promise<ClassInfo | null> {
   const db = new PrismaClient();
 
-  const res = await db.class.findFirst(ClassInfoTemplate);
+  const res = await db.class.findFirst({
+    where: {
+      [type]: query,
+    },
+    ...ClassInfoTemplate,
+  });
   await db.$disconnect();
 
   return res;

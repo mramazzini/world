@@ -62,7 +62,6 @@ const Page = async ({ params }: Props) => {
     query: decodeURIComponent(params.slug),
     type: 'slug',
   });
-
   if (!classObj) {
     //redirect to 404
     notFound();

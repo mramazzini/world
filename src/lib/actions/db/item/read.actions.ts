@@ -1,7 +1,7 @@
 'use server';
 import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
-import { PrismaClient } from '@prisma/client';
+import { ItemTypes, PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
 import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { ItemInfo } from '@/lib/types/modelInfo';
@@ -20,6 +20,66 @@ export const getItemsMetadata = async (): Promise<DBMetadata[]> => {
   });
   await db.$disconnect();
   return res;
+};
+
+export const getItemsByType = async (type: ItemTypes): Promise<ItemInfo[]> => {
+  const db = new PrismaClient();
+  try {
+    const res = await db.item.findMany({
+      where: {
+        types: {
+          has: type,
+        },
+      },
+      include: {
+        ItemWeaponData: {
+          include: {
+            Weapon: {
+              include: {
+                ammunition: true,
+                SpecialProperties: true,
+                WeaponPropertyInstance: {
+                  include: {
+                    Property: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+        Spell: true,
+        Features: true,
+        Armor: {
+          include: {
+            Features: true,
+          },
+        },
+        Tool: {
+          include: {
+            Features: true,
+          },
+        },
+        AmmunitionFor: true,
+
+        EquipmentPack: {
+          include: {
+            items: true,
+          },
+        },
+        User: {
+          select: {
+            username: true,
+          },
+        },
+      },
+    });
+    return res;
+  } catch (error) {
+    console.error('Error getting items by type', error);
+    return [];
+  } finally {
+    await db.$disconnect();
+  }
 };
 
 export const getItems = async (): Promise<ItemInfo[]> => {

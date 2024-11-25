@@ -4,18 +4,18 @@ import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import { Skill } from '@prisma/client';
 import { Fragment } from 'react';
 import useModifier from '@/hooks/useModifier';
-import { useAppSelector } from '@/store/hooks';
 import useProficiency from '@/hooks/useProficiency';
+import useLog from '@/hooks/useLog';
 
 interface Props {
-  handleRoll: (modifier: number, reason: string, diceSize: number) => void;
   skills: Skill[];
 }
 
-const SkillRoller = ({ handleRoll, skills }: Props) => {
+const SkillRoller = ({ skills }: Props) => {
   const { getSkillModifier, getAbilityModifier } = useModifier();
-  const { proficiencyBonus } = useProficiency();
-  const state = useAppSelector((state) => state.character.state);
+  const { proficiencyBonus, skillProficiencies } = useProficiency();
+  const { diceLogPush } = useLog();
+
   return (
     <>
       <div className="bg-base-300 p-2 rounded-xl border-primary border">
@@ -49,7 +49,7 @@ const SkillRoller = ({ handleRoll, skills }: Props) => {
                                 : `- ${getAbilityModifier(skillAtritbuteMap[skill])}`}
                             </td>
                           </tr>
-                          {state?.proficiencies.skills.includes(skill) && (
+                          {skillProficiencies.includes(skill) && (
                             <tr>
                               <td>Proficient</td>
                               <td>{`+ ${proficiencyBonus}`}</td>
@@ -69,13 +69,13 @@ const SkillRoller = ({ handleRoll, skills }: Props) => {
                 </p>
                 <button
                   className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold w-10"
-                  onClick={() =>
-                    handleRoll(
-                      getSkillModifier(skill),
-                      skill.toCapitalCase().replaceAll('_', ' '),
-                      20
-                    )
-                  }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    diceLogPush(
+                      `1d20 + ${getSkillModifier(skill)}`,
+                      `${skill.toCapitalCase().replaceAll('_', ' ')} Check`
+                    );
+                  }}
                 >
                   {getSkillModifier(skill) >= 0
                     ? `+ ${getSkillModifier(skill)}`

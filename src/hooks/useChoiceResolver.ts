@@ -8,11 +8,16 @@ const useChoiceResolver = (choiceId: string) => {
   const characterId = useAppSelector((state) => state.sheet.rawCharacter?.id);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
+
   const resolve = useCallback(
     async (selections: ChoiceOutput) => {
       if (!characterId) return;
       setLoading(true);
-      await resolveChoice({ characterId, choiceId, selections });
+      const res = await resolveChoice({ characterId, choiceId, selections });
+      if (res === 'failure') {
+        setLoading(false);
+        return;
+      }
       dispatch(setRefreshSheet(true));
       setLoading(false);
     },

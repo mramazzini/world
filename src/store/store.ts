@@ -5,6 +5,7 @@ import sheetReducer from './sheetSlice';
 import layoutReducer from './layoutSlice';
 import workshopReducer from './workshopSlice';
 import workshopMiddleware from './middleware/WorkshopMiddleware';
+import sheetMiddleware from './middleware/SheetMiddleware';
 
 export const makeStore = () => {
   return configureStore({
@@ -15,7 +16,7 @@ export const makeStore = () => {
       workshop: workshopReducer,
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(workshopMiddleware),
+      getDefaultMiddleware().concat(workshopMiddleware).concat(sheetMiddleware),
   });
 };
 

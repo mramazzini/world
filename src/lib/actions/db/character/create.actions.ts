@@ -30,8 +30,20 @@ export const createCharacter = async (
     where: { id: params.classId },
   });
 
+  const background = await db.background.findUnique({
+    where: { id: params.backgroundId },
+  });
+
   if (!_class) {
     console.error('Class not found');
+    return {
+      id: '',
+      result: 'error',
+    };
+  }
+
+  if (!background) {
+    console.error('Background not found');
     return {
       id: '',
       result: 'error',
@@ -42,13 +54,12 @@ export const createCharacter = async (
     const res = await db.character.create({
       data: {
         id: v4(),
-        name: params.name,
-        alignment: params.alignment,
         CharacterToClass: {
           create: {
             Class: {
               connect: { id: params.classId },
             },
+            primaryClass: true,
             levelsInClass: 1,
           },
         },
@@ -61,23 +72,8 @@ export const createCharacter = async (
         Species: {
           connect: { id: params.speciesId },
         },
-        biography: '',
-        inspirationRolls: 0,
-        baseSTR: 10,
-        baseDEX: 10,
-        baseCON: 10,
-        baseINT: 10,
-        baseWIS: 10,
-        baseCHA: 10,
-        deathSavesFail: 0,
-        deathSavesSuccess: 0,
-        exhaustion: 0,
-
-        currentHp: _class.hitDie,
-        tempHp: 0,
       },
     });
-
     // If a variant was selected, connect it to the character
 
     if (params.variantId) {
@@ -90,8 +86,37 @@ export const createCharacter = async (
         },
       });
     }
+    //initialize the character's state
+    await db.characterState.create({
+      data: {
+        id: res.id,
+        alignment: params.alignment,
+        name: params.name,
+        currentHp: _class.hitDie,
+        tempHp: 0,
+        inspirationRolls: 0,
+        deathSavesFail: 0,
+        deathSavesSuccess: 0,
+        hitDieUsedSinceLastRest: [],
+        inventory: [..._class.freeItemIds, ...background.freeEquipment],
+        spellSlotsUsedSinceLastRefresh: {},
+        pendingLinks: [],
+        preparedSpellsIds: [],
+        exhaustion: 0,
+        weaponEquippedIds: [],
+        lastSavedIsoString: new Date().toISOString(),
+        notes: [],
 
-    console.log(res);
+        biography: '',
+        baseCHA: 10,
+        baseCON: 10,
+        baseDEX: 10,
+        baseINT: 10,
+        baseSTR: 10,
+        baseWIS: 10,
+        conditions: [],
+      },
+    });
     return {
       id: res.id,
       result: 'success',

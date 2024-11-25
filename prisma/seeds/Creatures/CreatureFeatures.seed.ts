@@ -686,12 +686,12 @@ const CreatureFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Sneak Attack',
     description:
       "Once per turn, the assassin deals an extra 14 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of the assassin that isn't incapacitated and the assassin doesn't have disadvantage on the attack roll.",
-    rolls: [
-      {
-        name: 'Sneak Attack Damage',
-        formula: '4d6',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Sneak Attack Damage',
+    //     formula: '4d6',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.assassin,
@@ -752,12 +752,12 @@ const CreatureFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Sneak Attack (1/Turn)',
     description:
       'Once per turn, the spy can deal an extra 7 (2d6) damage to one creature it hits with an attack if it has advantage on the attack roll. The spy doesn’t need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn’t incapacitated, and the spy doesn’t have disadvantage on the attack roll.',
-    rolls: [
-      {
-        name: 'Damage',
-        formula: '2d6',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Damage',
+    //     formula: '2d6',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.thug,
@@ -793,12 +793,12 @@ const CreatureFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Angelic Weapons',
     description:
       'The deva’s weapon attacks are magical. When the deva hits with any weapon, the weapon deals an extra 4d8 radiant damage.',
-    rolls: [
-      {
-        name: 'Angelic Weapon Damage',
-        formula: '4d8',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Angelic Weapon Damage',
+    //     formula: '4d8',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.deva,
@@ -811,12 +811,12 @@ const CreatureFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Angelic Weapons',
     description:
       'The planetar’s weapon attacks are magical. When the planetar hits with any weapon, the weapon deals an extra 5d8 radiant damage.',
-    rolls: [
-      {
-        name: 'Angelic Weapon Damage',
-        formula: '5d8',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Angelic Weapon Damage',
+    //     formula: '5d8',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.planetar,
@@ -834,12 +834,12 @@ const CreatureFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Angelic Weapons',
     description:
       'The solar’s weapon attacks are magical. When the solar hits with any weapon, the weapon deals an extra 6d8 radiant damage (included in the attack).',
-    rolls: [
-      {
-        name: 'Angelic Weapon Damage',
-        formula: '6d8',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Angelic Weapon Damage',
+    //     formula: '6d8',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.solar,
@@ -910,24 +910,24 @@ const CreatureFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Heated Body',
     description:
       'A creature that touches the azer or hits it with a melee attack while within 5 feet of it takes 5 (1d10) fire damage.',
-    rolls: [
-      {
-        name: 'Damage',
-        formula: '1d10',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Damage',
+    //     formula: '1d10',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.azer,
     name: 'Heated Weapons',
     description:
       'When the azer hits with a metal melee weapon, it deals an extra 3 (1d6) fire damage (included in the attack).',
-    rolls: [
-      {
-        name: 'Fire Damage',
-        formula: '1d6',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Fire Damage',
+    //     formula: '1d6',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.azer,
@@ -952,12 +952,12 @@ const CreatureFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Surprise Attack',
     description:
       'If the bugbear surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack.',
-    rolls: [
-      {
-        name: 'Damage',
-        formula: '2d6',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Damage',
+    //     formula: '2d6',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.bulette,
@@ -1021,24 +1021,24 @@ const CreatureFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Death Throes',
     description:
       'When the balor dies, it explodes, and each creature within 30 feet of it must make a DC 20 Dexterity saving throw, taking 70 (20d6) fire damage on a failed save, or half as much damage on a successful one. The explosion ignites flammable objects in that area that aren’t being worn or carried, and it destroys the balor’s weapons.',
-    rolls: [
-      {
-        name: 'Damage',
-        formula: '20d6',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Damage',
+    //     formula: '20d6',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.balor,
     name: 'Fire Aura',
     description:
       'At the start of each of the balor’s turns, each creature within 5 feet of it takes 10 (3d6) fire damage, and flammable objects in the aura that aren’t being worn or carried ignite. A creature that touches the balor or hits it with a melee attack while within 5 feet of it takes 10 (3d6) fire damage.',
-    rolls: [
-      {
-        name: 'Damage',
-        formula: '3d6',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Damage',
+    //     formula: '3d6',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.balor,
@@ -1056,12 +1056,12 @@ const CreatureFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Improved Longsword Attack',
     description:
       'The balor’s longsword deals an extra 13 (3d8) lightning damage. If the balor scores a critical hit, it rolls damage dice three times, instead of twice.',
-    rolls: [
-      {
-        name: 'Lightning Damage',
-        formula: '3d8',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Lightning Damage',
+    //     formula: '3d8',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.glabrezu,
@@ -1138,12 +1138,12 @@ const CreatureFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Barbed Hide',
     description:
       'At the start of each of its turns, the barbed devil deals 5 (1d10) piercing damage to any creature grappling it.',
-    rolls: [
-      {
-        name: 'Damage',
-        formula: '1d10',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Damage',
+    //     formula: '1d10',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.beardedDevil,
@@ -1168,16 +1168,16 @@ const CreatureFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Glaive Weapon Attack',
     description:
       'Whenever the bearded devil hits a creature with its glaive, if the target is a creature other than an undead or a construct, it must succeed on a DC 12 Constitution saving throw or lose 5 (1d10) hit points at the start of each of its turns due to an infernal wound. Each time the devil hits the wounded target with this attack, the damage dealt by the wound increases by 5 (1d10). Any creature can take an action to stanch the wound with a successful DC 12 Wisdom (Medicine) check. The wound also closes if the target receives magical healing.',
-    rolls: [
-      {
-        name: 'Attack',
-        formula: '1d20 + 5',
-      },
-      {
-        name: 'Damage',
-        formula: '1d10 + 3',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Attack',
+    //     formula: '1d20 + 5',
+    //   },
+    //   {
+    //     name: 'Damage',
+    //     formula: '1d10 + 3',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.boneDevil,
@@ -1207,12 +1207,12 @@ const CreatureFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Hellish Weapons',
     description:
       'The erinyes’s weapon attacks are magical and deal an extra 13 (3d8) poison damage on a hit.',
-    rolls: [
-      {
-        name: 'Damage',
-        formula: '3d8',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Damage',
+    //     formula: '3d8',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.erinyes,
@@ -1328,12 +1328,12 @@ const CreatureFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Surprise Attack',
     description:
       'If the doppelganger surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack',
-    rolls: [
-      {
-        name: 'Damage',
-        formula: '3d6',
-      },
-    ],
+    // rolls: [
+    //   {
+    //     name: 'Damage',
+    //     formula: '3d6',
+    //   },
+    // ],
   },
   {
     creatureId: creatureIds.ancientBlackDragon,

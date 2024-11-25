@@ -3,9 +3,9 @@ import { createSpells } from './seeds/_seeders/001_createSpells.seeder';
 import { PrismaClient } from '@prisma/client';
 import { createSpellList } from './seeds/_seeders/002_createSpellList.seeder';
 import { linkSpellListToSpell } from './seeds/_seeders/003_SpellListToSpell.linker';
-import { createArmor } from './seeds/_seeders/004_createArmor.seeder';
-import { createEquipmentPacks } from './seeds/_seeders/005_createEquipmentPacks.seeder';
-import { createWeapons } from './seeds/_seeders/007_createWeapons.seeder';
+import { createArmor } from './seeds/_seeders/005_createArmor.seeder';
+import { createEquipmentPacks } from './seeds/_seeders/006_createEquipmentPacks.seeder';
+import { createWeapons } from './seeds/_seeders/009_createWeapons.seeder';
 import { createItems } from './seeds/_seeders/008_createItems.seeder';
 import { createBackgrounds } from './seeds/_seeders/010_createBackgrounds.seeder';
 import { createClasses } from './seeds/_seeders/011_createClasses.seeder';
@@ -15,8 +15,9 @@ import { createSubspecies } from './seeds/_seeders/015_createSubSpecies.seeder';
 import { createFeats } from './seeds/_seeders/016_createFeats.seeder';
 import { createBlogPosts } from './seeds/_seeders/021_createBlogPosts.seeder';
 import { createCreatures } from './seeds/_seeders/017_createCreatures.seeder';
-import { createTool } from './seeds/_seeders/006_createTools.seeder';
+import { createTool } from './seeds/_seeders/007_createTools.seeder';
 import createUsers from './seeds/_seeders/022_createMaxyUser.seeder';
+import { createFeatureGroup } from './seeds/_seeders/004_createFeatureGroup.seeder';
 const db = new PrismaClient();
 
 const seedarr: {
@@ -47,6 +48,12 @@ const seedarr: {
     index: '004',
     callback: createArmor,
     description: 'Creating armor from the armor seed.',
+    enabled: true,
+  },
+  {
+    index: 'Im lazy',
+    callback: createFeatureGroup,
+    description: 'Creating feature groups from the feature group seed.',
     enabled: true,
   },
   {

@@ -1,16 +1,13 @@
 import { ArmorType, Prisma, Ability, WeaponGroup } from '@prisma/client';
-import { SpellFocus } from '@/lib/types/types';
 import { weaponIds } from '../Items/Weapons/Weapons.seed';
 import { itemIds } from '../Items/ItemIds';
 
 import { toolIds } from '../Items/Tools/Tool.seed';
-import { spellIds } from '../Spells/spells.seed';
-import { spellListIds } from '../Spells/SpellLists/SpellLists.seed';
-import { fullCaster, halfCaster, warlockSpellSlots } from './SpellSlotsUtil';
+import { classIds } from './ClassIds';
 
 const Classes: Prisma.ClassCreateManyInput[] = [
   {
-    id: '1',
+    id: classIds.fighter,
     srd: true,
     slug: 'fighter',
     name: 'Fighter',
@@ -19,12 +16,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       'Fighters are the warriors of the realm. They are the masters of weapons and armor, and they are well acquainted with death, both meting it out and staring it defiantly in the face.',
     description:
       'Fighters share an unparalleled mastery with weapons and armor, and a thorough knowledge of the skills of combat. They are well acquainted with death, both meting it out and staring it defiantly in the face.',
-    multiclassing: {
-      abilities: [Ability.STR, Ability.DEX],
-      greaterThan: 12,
-    },
-    multiclassingDescription:
-      'You must have a Dexterity or Strength score of 13 or higher in order to multiclass in or out of this class.',
+
     freeSavingThrowProficiencies: [Ability.STR, Ability.CON],
     savingThrowDescription:
       'Fighters are proficient in Strength and Constitution saving throws',
@@ -59,7 +51,8 @@ const Classes: Prisma.ClassCreateManyInput[] = [
   },
 
   {
-    id: '2',
+    id: classIds.wizard,
+
     name: 'Wizard',
     slug: 'wizard',
     srd: true,
@@ -67,12 +60,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       'Wizards are supreme magic-users, defined and united as a class by the spells they cast. Drawing on the subtle weave of magic that permeates the cosmos, wizards cast spells of explosive fire, arcing lightning, subtle deception, and brute force mind control. Their magic conjures monsters from other planes of existence, glimpses the future, or turns slain foes into zombies. Their mightiest spells change one substance into another, call meteors down from the sky, or open portals to other worlds.',
     flavorText:
       'Drawing on the subtle weave of magic that permeates the cosmos, wizards cast spells of explosive fire, arcing lightning, subtle deception, and brute-force mind control.',
-    multiclassing: {
-      abilities: [Ability.INT],
-      greaterThan: 12,
-    },
-    multiclassingDescription:
-      'You must have an Intelligence score of 13 or higher in order to multiclass in or out of this class.',
+
     hitDie: 6,
     savingThrowDescription:
       'Wizards are proficient in Intelligence and Wisdom saving throws',
@@ -106,36 +94,15 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subClassDescription:
       'When you reach 2nd level, you choose an arcane tradition, shaping your practice of magic through one of the following schools. Your choice grants you features at 2nd level and again at 6th, 10th, and 14th level.',
     subClassFeatureLevels: [2, 6, 10, 14],
-    isSpellCaster: true,
-    spellCastingInfo: {
-      levelAquired: 1,
-      displaySpellLevels: true,
-      description: `As a student of arcane magic, you have a ^${itemIds.spellBook}{spellbook}^ containing spells that show the first glimmerings of your true power.`,
-      preparingSpellsDescription: `You prepare the list of wizard spells that are available for you to cast. To do so, choose a number of wizard spells from your ^${itemIds.spellBook}{spellbook}^ equal to your Intelligence modifier + your wizard level (minimum of one spell). The spells must be of a level for which you have spell slots.\n\nFor example, if you're a 3rd-level wizard, you have four 1st-level and two 2nd-level spell slots. With an Intelligence of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination, chosen from your ^${itemIds.spellBook}{spellbook}^. If you prepare the 1st-level spell %${spellIds.magicMissile}{magic missile}%, you can cast it using a 1st-level or a 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.\n\nYou can change your list of prepared spells when you finish a long rest. Preparing a new list of wizard spells requires time spent studying your ^${itemIds.spellBook}{spellbook}^ and memorizing the incantations and gestures you must make to cast the spell: at least 1 minute per spell level for each spell on your list.`,
-      spellCastingAbilityDescription:
-        'Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through dedicated study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.',
-      castingSpellsDescription:
-        "The Wizard table shows how many spell slots you have to cast your wizard spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
-      ability: Ability.INT,
-      spellFocus: SpellFocus.ARCANE_FOCUS,
-      spellLevels: fullCaster,
-    },
-    spellListId: spellListIds.wizard,
   },
   {
-    id: '3',
+    id: classIds.cleric,
     name: 'Cleric',
     slug: 'cleric',
     srd: true,
     hitDie: 8,
     description:
       'Clerics are intermediaries between the mortal world and the distant planes of the gods. As varied as the gods they serve, clerics strive to embody the handiwork of their deities. No ordinary priest, a cleric is imbued with divine magic.',
-    multiclassingDescription:
-      'You must have a Wisdom score of 13 or higher in order to multiclass in or out of this class.',
-    multiclassing: {
-      abilities: [Ability.WIS],
-      greaterThan: 12,
-    },
     savingThrowDescription:
       'Clerics are proficient in Wisdom and Charisma saving throws',
     freeSavingThrowProficiencies: [Ability.WIS, Ability.CHA],
@@ -172,36 +139,15 @@ const Classes: Prisma.ClassCreateManyInput[] = [
 
     flavorText:
       'Clerics are intermediaries between the mortal world and the distant planes of the gods, using their divine magic to heal the wounded, bless the righteous, and smite the wicked.',
-
-    spellListId: spellListIds.cleric,
-    isSpellCaster: true,
-    spellCastingInfo: {
-      levelAquired: 1,
-      displaySpellLevels: true,
-      description: `As a conduit for divine power, you can cast cleric spells.`,
-      preparingSpellsDescription: `You prepare the list of cleric spells that are available for you to cast, choosing from the cleric spell list. When you do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots.\n\nFor example, if you are a 3rd-level cleric, you have four 1st-level and two 2nd-level spell slots. With a Wisdom of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell %${spellIds.cureWounds}{Cure Wounds}%, you can cast it using a 1st-level or 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.\n\nYou can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.`,
-      castingSpellsDescription: `The Cleric table shows how many spell slots you have to cast your cleric spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.`,
-      spellCastingAbilityDescription:
-        'Wisdom is your spellcasting ability for your cleric spells. The power of your spells comes from your devotion to your deity. You use your Wisdom whenever a cleric spell refers to your spellcasting ability. In addition, you use your Wisdom modifier when setting the saving throw DC for a cleric spell you cast and when making an attack roll with one.',
-      ability: Ability.WIS,
-      spellFocus: SpellFocus.HOLY_SYMBOL,
-      spellLevels: fullCaster,
-    },
   },
   {
-    id: '4',
+    id: classIds.rogue,
     name: 'Rogue',
     slug: 'rogue',
     hitDie: 8,
     srd: true,
     description:
       "Rogues rely on skill, stealth, and their foes' vulnerabilities to get the upper hand in any situation. They have a knack for finding the solution to just about any problem, demonstrating a resourcefulness and versatility that is the cornerstone of any successful adventuring party.",
-    multiclassing: {
-      abilities: [Ability.DEX],
-      greaterThan: 12,
-    },
-    multiclassingDescription:
-      'You must have a Dexterity score of 13 or higher in order to multiclass in or out of this class.',
     freeSavingThrowProficiencies: [Ability.DEX, Ability.INT],
     savingThrowDescription:
       'Rogues are proficient in Dexterity and Intelligence saving throws',
@@ -243,18 +189,13 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       'Rogues are cunning and elusive adversaries. Using their wits and agility, they excel in stealth and deception.',
   },
   {
-    id: '5',
+    id: classIds.barbarian,
     name: 'Barbarian',
     slug: 'barbarian',
     srd: true,
     description:
       'For some, their rage springs from a communion with fierce animal spirits. Others draw from a roiling reservoir of anger at a world full of pain. For every barbarian, rage is a power that fuels not just a battle frenzy but also uncanny reflexes, resilience, and feats of strength.',
-    multiclassing: {
-      abilities: [Ability.STR],
-      greaterThan: 12,
-    },
-    multiclassingDescription:
-      'You must have a Strength score of 13 or higher in order to multiclass in or out of this class.',
+
     hitDie: 12,
     freeSavingThrowProficiencies: [Ability.STR, Ability.CON],
     savingThrowDescription:
@@ -291,19 +232,13 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       'Barbarians are fierce warriors who draw their power from a primal connection to the spirits of nature and the world around them to fuel an unquenchable rage.',
   },
   {
-    id: '6',
+    id: classIds.bard,
     name: 'Bard',
     slug: 'bard',
     srd: true,
     hitDie: 8,
     description:
       'Whether scholar, skald, or scoundrel, a bard weaves magic through words and music to inspire allies, demoralize foes, manipulate minds, create illusions, and even heal wounds. The bard is a master of song, speech, and the magic they contain.',
-    multiclassing: {
-      abilities: [Ability.CHA],
-      greaterThan: 12,
-    },
-    multiclassingDescription:
-      'You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.',
     freeSavingThrowProficiencies: [Ability.DEX, Ability.CHA],
     savingThrowDescription:
       'Bards are proficient in Dexterity and Charisma saving throws',
@@ -339,36 +274,15 @@ const Classes: Prisma.ClassCreateManyInput[] = [
 
     flavorText:
       'Bards are the masters of song, speech, and the magic they contain. They use their talents to inspire allies, demoralize foes, manipulate minds, create illusions, and even heal wounds.',
-
-    spellListId: spellListIds.bard,
-    spellCastingInfo: {
-      ability: Ability.CHA,
-      spellCastingAbilityDescription:
-        'Charisma is your spellcasting ability for your bard spells. Your magic comes from the heart and soul you pour into the performance of your music or oration. You use your Charisma whenever a spell refers to your spellcasting ability. In addition, you use your Charisma modifier when setting the saving throw DC for a bard spell you cast and when making an attack roll with one.',
-      castingSpellsDescription: `The Bard table shows how many spell slots you have to cast your bard spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest. For example, if you know the 1st-level spell %${spellIds.cureWounds}{Cure Wounds}% and have a 1st-level and a 2nd-level spell slot available, you can cast %${spellIds.cureWounds}{Cure Wounds}% using either slot.`,
-      description:
-        'You have learned to untangle and reshape the fabric of reality in harmony with your wishes and music. Your spells are part of your vast repertoire, magic that you can tune to different situations.',
-      levelAquired: 1,
-      displaySpellLevels: true,
-      spellLevels: fullCaster,
-
-      spellFocus: SpellFocus.MUSICAL_INSTRUMENT,
-    },
   },
   {
-    id: '7',
+    id: classIds.druid,
     name: 'Druid',
     slug: 'druid',
     srd: true,
     hitDie: 8,
     description:
       "Whether calling on the elemental forces of nature or emulating the creatures of the animal world, druids are an embodiment of nature's resilience, cunning, and fury. They claim no mastery over nature, but see themselves as extensions of nature's indomitable will.",
-    multiclassing: {
-      abilities: [Ability.WIS],
-      greaterThan: 12,
-    },
-    multiclassingDescription:
-      'You must have a Wisdom score of 13 or higher in order to multiclass in or out of this class.',
     savingThrowDescription:
       'Druids are proficient in Intelligence and Wisdom saving throws',
     skillDescription: `Choose two skills from Arcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival.`,
@@ -412,38 +326,15 @@ const Classes: Prisma.ClassCreateManyInput[] = [
 
     flavorText:
       "Druids are the embodiment of nature's resilience, cunning, and fury. They claim no mastery over nature, but see themselves as extensions of nature's indomitable will.",
-
-    spellListId: spellListIds.druid,
-    isSpellCaster: true,
-    spellCastingInfo: {
-      ability: Ability.WIS,
-      spellCastingAbilityDescription:
-        'Wisdom is your spellcasting ability for your druid spells, since your magic draws upon your devotion and attunement to nature. You use your Wisdom whenever a spell refers to your spellcasting ability. In addition, you use your Wisdom modifier when setting the saving throw DC for a druid spell you cast and when making an attack roll with one.',
-      castingSpellsDescription: `The Druid table shows how many spell slots you have to cast your druid spells of 1st level and higher. To cast one of these druid spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.`,
-      preparingSpellsDescription: `You prepare the list of druid spells that are available for you to cast, choosing from the druid spell list. When you do so, choose a number of druid spells equal to your Wisdom modifier + your Druid level (minimum of one spell). The spells must be of a level for which you have spell slots.\n\nFor example, if you are a 3rd-level druid, you have four 1st-level and two 2nd-level spell slots. With a Wisdom of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell Cure Wounds, you can cast it using a 1st-level or 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.\n\nYou can also change your list of prepared spells when you finish a long rest. Preparing a new list of druid spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.`,
-      description:
-        'Drawing on the divine essence of nature itself, you can cast spells to shape that essence to your will.',
-      levelAquired: 1,
-      displaySpellLevels: true,
-      spellLevels: fullCaster,
-
-      spellFocus: SpellFocus.DRUIDIC_FOCUS,
-    },
   },
   {
-    id: '8',
+    id: classIds.monk,
     name: 'Monk',
     slug: 'monk',
     srd: true,
     hitDie: 8,
     description:
       'Monks are united in their ability to magically harness the energy that flows in their bodies. Whether channeled as a striking display of combat prowess or a subtler focus of defensive ability and speed, this energy infuses all that a monk does.',
-    multiclassing: {
-      abilities: [Ability.DEX, Ability.WIS],
-      greaterThan: 12,
-    },
-    multiclassingDescription:
-      'You must have a Dexterity score and a Wisdom score of 13 or higher in order to multiclass in or out of this class.',
     freeSavingThrowProficiencies: [Ability.STR, Ability.DEX],
     savingThrowDescription:
       'Monks are proficient in Strength and Dexterity saving throws',
@@ -472,19 +363,13 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       'Monks are martial artists who use ki to perform amazing feats. They are masters of unarmed combat, and they are known for their ability to catch arrows, dodge blows, and move with extraordinary speed.',
   },
   {
-    id: '9',
+    id: classIds.paladin,
     name: 'Paladin',
     slug: 'paladin',
     srd: true,
     hitDie: 10,
     description:
       "Whether sworn before a god's altar and the witness of a priest, in a sacred glade before nature spirits and fey beings, or in a moment of desperation and grief with the dead as the only witness, a paladin's oath is a powerful bond.",
-    multiclassing: {
-      abilities: [Ability.STR, Ability.CHA],
-      greaterThan: 12,
-    },
-    multiclassingDescription:
-      'You must have a Strength and Charisma score of 13 or higher in order to multiclass in or out of this class',
     savingThrowDescription:
       'Paladins are proficient in Wisdom and Charisma saving throws',
     skillDescription:
@@ -514,37 +399,15 @@ const Classes: Prisma.ClassCreateManyInput[] = [
 
     flavorText:
       'Paladins are holy warriors bound to a sacred oath, using their divine magic to heal the wounded, bless the righteous, and smite the wicked.',
-
-    spellListId: spellListIds.paladin,
-    spellCastingInfo: {
-      ability: Ability.CHA,
-      description:
-        'By 2nd level, you have learned to draw on divine magic through meditation and prayer to cast spells as a cleric does.',
-      spellCastingAbilityDescription:
-        'Charisma is your spellcasting ability for your paladin spells, since their power derives from the strength of your convictions. You use your Charisma whenever a spell refers to your spellcasting ability. In addition, you use your Charisma modifier when setting the saving throw DC for a paladin spell you cast and when making an attack roll with one.',
-      spellFocus: SpellFocus.HOLY_SYMBOL,
-      castingSpellsDescription:
-        "The Paladin table shows how many spell slots you have to cast your paladin spells. To cast one of your paladin spells of 1st level or higher, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
-      preparingSpellsDescription: `You prepare the list of paladin spells that are available for you to cast, choosing from the paladin spell list. When you do so, choose a number of paladin spells equal to your Charisma modifier + half your paladin level, rounded down (minimum of one spell). The spells must be of a level for which you have spell slots.\n\nFor example, if you are a 5th-level paladin, you have four 1st-level and two 2nd-level spell slots. With a Charisma of 14, your list of prepared spells can include four spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell %${spellIds.cureWounds}{Cure Wounds}%, you can cast it using a 1st-level or a 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.\n\nYou can change your list of prepared spells when you finish a long rest. Preparing a new list of paladin spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.`,
-      levelAquired: 2,
-      spellLevels: halfCaster,
-      displaySpellLevels: true,
-    },
   },
   {
-    id: '10',
+    id: classIds.ranger,
     name: 'Ranger',
     slug: 'ranger',
     srd: true,
     hitDie: 10,
     description:
       'Far from the bustle of cities and towns, past the hedges that shelter the most distant farms from the terrors of the wild, amid the dense-packed trees of trackless forests and across wide and empty plains, rangers keep their unending watch.',
-    multiclassingDescription:
-      'You must have a Dexterity and Wisdom score of 13 or higher in order to multiclass in or out of this class.',
-    multiclassing: {
-      abilities: [Ability.DEX, Ability.WIS],
-      greaterThan: 12,
-    },
     savingThrowDescription:
       'Rangers are proficient in Strength and Dexterity saving throws',
     freeSavingThrowProficiencies: [Ability.STR, Ability.DEX],
@@ -587,36 +450,14 @@ const Classes: Prisma.ClassCreateManyInput[] = [
 
     flavorText:
       'Rangers are hunters and wilderness warriors who use their knowledge of the land and their fighting skills to protect the wild places of the world.',
-
-    spellListId: spellListIds.ranger,
-    spellCastingInfo: {
-      ability: Ability.WIS,
-      spellCastingAbilityDescription:
-        'Wisdom is your spellcasting ability for your ranger spells, since your magic draws on your attunement to nature. You use your Wisdom whenever a spell refers to your spellcasting ability. In addition, you use your Wisdom modifier when setting the saving throw DC for a ranger spell you cast and when making an attack roll with one.',
-      castingSpellsDescription:
-        "The Ranger table shows how many spell slots you have to cast your ranger spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
-      levelAquired: 2,
-      displaySpellLevels: true,
-      spellLevels: halfCaster,
-
-      spellFocus: SpellFocus.DRUIDIC_FOCUS,
-      description:
-        'By the time you reach 2nd level, you have learned to use the magical essence of nature to cast spells, much as a druid does.',
-    },
   },
   {
-    id: '11',
+    id: classIds.sorcerer,
     name: 'Sorcerer',
     slug: 'sorcerer',
     srd: true,
     description:
       'Sorcerers carry a magical birthright conferred upon them by an exotic bloodline, some otherworldly influence, or exposure to unknown cosmic forces. No one chooses sorcery; the power chooses the sorcerer.',
-    multiclassing: {
-      abilities: [Ability.CHA],
-      greaterThan: 12,
-    },
-    multiclassingDescription:
-      'You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.',
     hitDie: 6,
     freeSavingThrowProficiencies: [Ability.CON, Ability.CHA],
     skillDescription:
@@ -648,37 +489,15 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subClassFeatureLevels: [1, 6, 14, 18],
     flavorText:
       'Sorcerers are spellcasters who draw on innate magic. They are the masters of the arcane, using their knowledge and power to cast spells that can change the world around them.',
-
-    spellListId: spellListIds.sorcerer,
-    spellCastingInfo: {
-      ability: Ability.CHA,
-      description:
-        'An event in your past, or in the life of a parent or ancestor, left an indelible mark on you, infusing you with arcane magic. This font of magic, whatever its origin, fuels your spells.',
-      spellCastingAbilityDescription:
-        'Charisma is your spellcasting ability for your sorcerer spells, since the power of your magic relies on your ability to project your will into the world. You use your Charisma whenever a spell refers to your spellcasting ability. In addition, you use your Charisma modifier when setting the saving throw DC for a sorcerer spell you cast and when making an attack roll with one.',
-      castingSpellsDescription:
-        "The Sorcerer table shows how many spell slots you have to cast your sorcerer spells of 1st level and higher. To cast one of these sorcerer spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
-      levelAquired: 1,
-      displaySpellLevels: true,
-      spellLevels: fullCaster,
-
-      spellFocus: SpellFocus.ARCANE_FOCUS,
-    },
   },
   {
-    id: '12',
+    id: classIds.warlock,
     name: 'Warlock',
     slug: 'warlock',
     srd: true,
     hitDie: 8,
     description:
       'Warlocks are seekers of the knowledge that lies hidden in the fabric of the multiverse. Through pacts made with mysterious beings of supernatural power, warlocks unlock magical effects both subtle and spectacular.',
-    multiclassing: {
-      abilities: [Ability.CHA],
-      greaterThan: 12,
-    },
-    multiclassingDescription:
-      'You must have a Charisma score of 13 or higher in order to multiclass in or out of this class.',
     savingThrowDescription:
       'Warlocks are proficient in Wisdom and Charisma saving throws',
     freeSavingThrowProficiencies: [Ability.WIS, Ability.CHA],
@@ -710,26 +529,10 @@ const Classes: Prisma.ClassCreateManyInput[] = [
 
     flavorText:
       "Warlocks are wielders of magic who have forged a pact with an otherworldly being. Whether it's a demon, a devil, a fey, or some other powerful entity, warlocks draw their power from their patron.",
-
-    spellListId: spellListIds.warlock,
-    spellCastingInfo: {
-      ability: Ability.CHA,
-      description:
-        'Your arcane research and the magic bestowed on you by your patron have given you facility with spells.',
-      spellCastingAbilityDescription:
-        'Charisma is your spellcasting ability for your warlock spells, so you use your Charisma whenever a spell refers to your spellcasting ability. In addition, you use your Charisma modifier when setting the saving throw DC for a warlock spell you cast and when making an attack roll with one.',
-      castingSpellsDescription:
-        'The Warlock table shows how many spell slots you have to cast your warlock spells of 1st through 5th level. The table also shows what the level of those slots is; all of your spell slots are the same level. To cast one of your warlock spells of 1st level or higher, you must expend a spell slot. You regain all expended spell slots when you finish a short or long rest.',
-      levelAquired: 1,
-      displaySpellLevels: false,
-      spellLevels: warlockSpellSlots,
-
-      spellFocus: SpellFocus.ARCANE_FOCUS,
-    },
   },
   //artificer
   {
-    id: '13',
+    id: classIds.artificer,
     name: 'Artificer',
     slug: 'artificer',
     source: 'Wayfinder’s Guide to Eberron',
@@ -737,12 +540,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       'Masters of invention, artificers use ingenuity and magic to unlock extraordinary capabilities in objects.',
     description:
       "Masters of invention, artificers use ingenuity and magic to unlock extraordinary capabilities in objects. They see magic as a complex system waiting to be decoded and then harnessed in their spells and inventions. You can find everything you need to play one of these inventors in the next few sections.\n\nArtificers use a variety of tools to channel their arcane power. To cast a spell, an artificer might use alchemist's supplies to create a potent elixir, calligrapher's supplies to inscribe a sigil of power, or tinker's tools to craft a temporary charm. The magic of artificers is tied to their tools and their talents, and few other characters can produce the right tool for a job as well as an artificer.",
-    multiclassing: {
-      abilities: [Ability.INT],
-      greaterThan: 12,
-    },
-    multiclassingDescription:
-      'You must have an Intelligence score of 13 or higher in order to multiclass in or out of this class.',
+
     hitDie: 8,
     freeArmorProficiencies: [
       ArmorType.LIGHT,
@@ -782,28 +580,6 @@ const Classes: Prisma.ClassCreateManyInput[] = [
     subClassDescription:
       'At 3rd level, you choose the type of specialist you are. Your choice grants you features at 5th level and again at 9th and 15th level.',
     subClassFeatureLevels: [3, 5, 9, 15],
-
-    spellListId: spellListIds.artificer,
-    spellCastingInfo: {
-      displaySpellLevels: true,
-      ability: Ability.INT,
-      levelAquired: 1,
-      spellLevels: {
-        1: {
-          1: 2,
-        },
-        ...halfCaster,
-      },
-      spellCastingAbilityDescription:
-        'Intelligence is your spellcasting ability for your artificer spells; your understanding of the theory behind magic allows you to wield these spells with superior skill. You use your Intelligence whenever an artificer spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for an artificer spell you cast and when making an attack roll with one.',
-      description:
-        "You've studied the workings of magic and how to cast spells, channeling the magic through objects. To observers, you don't appear to be casting spells in a conventional way; you appear to produce wonders from mundane items and outlandish inventions.",
-      spellFocus: SpellFocus.ARTISAN_TOOLS,
-      spellFocusDescription: `You produce your artificer spell effects through your tools. You must have a spellcasting focus - specifically ^${itemIds.thievesTools}{thieves' tools}^ or some kind of artisan's tool - in hand when you cast any spell with this Spellcasting feature (meaning the spell has an "M" component when you cast it). You must be proficient with the tool to use it in this way. See chapter 5, "Equipment," in the Player's Handbook for descriptions of these tools.\n\nAfter you gain the Infuse Item feature at 2nd level, you can also use any item bearing one of your infusions as a spellcasting focus.`,
-      castingSpellsDescription:
-        "The Artificer table shows how many spell slots you have to cast your artificer spells. To cast one of your artificer spells of 1st level or higher, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.",
-      preparingSpellsDescription: `You prepare the list of artificer spells that are available for you to cast, choosing from the artificer spell list. When you do so, choose a number of artificer spells equal to your Intelligence modifier + half your artificer level, rounded down (minimum of one spell). The spells must be of a level for which you have spell slots.\n\nFor example, if you are a 5th-level artificer, you have four 1st-level and two 2nd-level spell slots. With an Intelligence of 14, your list of prepared spells can include four spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell %${spellIds.cureWounds}{Cure Wounds}%, you can cast it using a lst-level or a 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.\n\nYou can change your list of prepared spells when you finish a long rest. Preparing a new list of artificer spells requires time spent tinkering with your spellcasting focuses: at least 1 minute per spell level for each spell on your list.`,
-    },
   },
 ];
 

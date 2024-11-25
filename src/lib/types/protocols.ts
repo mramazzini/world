@@ -36,7 +36,7 @@ export type SetWeaponProficiencyOutput = WeaponID[];
 export type AddToInventoryParams = PrismaJson.QuantityItem[][];
 export type AddToInventoryOutput = PrismaJson.QuantityItem[];
 
-export type AddToInventoryGroupedParams = {
+export type ItemGroupQuantity = {
   items?: PrismaJson.QuantityItem[];
   weaponGroup?: {
     group: WeaponGroup;
@@ -50,7 +50,9 @@ export type AddToInventoryGroupedParams = {
     group: ToolGroup;
     quantity: number;
   };
-}[];
+};
+
+export type AddToInventoryGroupedParams = ItemGroupQuantity[];
 export type AddToInventoryGroupedOutput = PrismaJson.QuantityItem[];
 
 export type SetLanguageProficiencyParams = Language[];
@@ -74,7 +76,8 @@ export type ChoiceModelId =
   | 'speciesId'
   | 'subSpeciesId'
   | 'classId'
-  | 'backgroundId';
+  | 'backgroundId'
+  | 'multiClassId';
 
 export type ImproveAbilityScoreOutput = PrismaJson.AbilityScoreValue[];
 

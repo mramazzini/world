@@ -39,12 +39,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${data.name} - Max's DND`,
+    title: `Character Sheet - Max's DND`,
     description: 'View and edit your character sheet.',
 
     openGraph: {
       type: 'website',
-      title: `${data.name} - Max's DND`,
+      title: `Character Sheet - Max's DND`,
       description: 'View and edit your character sheet.',
       images: [
         {

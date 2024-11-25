@@ -14,7 +14,6 @@ export const resolveChoice: ResolverFunction = async ({
       data: {
         characterId,
         choiceId,
-        fufilled: true,
         values: selections,
       },
     });

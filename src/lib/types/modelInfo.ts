@@ -12,11 +12,14 @@ import {
   EquipmentPack,
   Feat,
   Feature,
+  FeatureGroup,
   Item,
   ItemWeaponData,
   Message,
+  MultiClassingInfo,
   Species,
   Spell,
+  SpellCasting,
   SpellList,
   SubClass,
   SubClassColumnedFeature,
@@ -89,16 +92,6 @@ export interface CommentInfo extends Comment {
   replies: Comment[];
 }
 
-export interface ClassInfo extends Class {
-  SubClasses: SubClass[];
-  SpellcastingFeatures: FeatureWithClassColumn[];
-  SpellList: SpellList | null;
-  Choices: Choice[];
-  Features: FeatureWithClassColumn[];
-  User: {
-    username: string | null;
-  } | null;
-}
 export interface FeatureWithClassColumn extends Feature {
   columnedFeatures: ColumnedFeature[];
 }
@@ -108,6 +101,10 @@ export interface FeatInfo extends Feat {
   User: {
     username: string | null;
   } | null;
+}
+
+export interface SpellCastingInfo extends SpellCasting {
+  SpellList: SpellList | null;
 }
 
 export interface CharacterInfo extends Omit<Character, 'createdAt'> {
@@ -131,8 +128,6 @@ export interface CharacterInfo extends Omit<Character, 'createdAt'> {
     SubSpeciesWithFeaturesAndChoices,
     'createdAt' | 'updatedAt'
   > | null;
-
-  // Inventory: any;
 }
 export interface BackgroundWithFeaturesAndChoices extends Background {
   Features: FeatureNoDate[];
@@ -156,18 +151,30 @@ export interface SubSpeciesWithFeaturesAndChoices extends SubSpecies {
   Choices: Choice[];
 }
 
-interface ClassWithSpellListAndFeaturesAndChoices extends Class {
-  SpellList: SpellListInfo | null;
+interface CharacterSheetClassInfo extends Class {
+  SpellCasting: SpellCastingInfo | null;
   Features: FeatureNoDate[];
   Choices: Choice[];
   SpellcastingFeatures: FeatureNoDate[];
+  MultiClassing: ExtendedMulticlassInfo | null;
+}
+export interface ExtendedMulticlassInfo extends MultiClassingInfo {
+  Choices: Choice[];
 }
 
+export interface ClassInfo extends Class {
+  SubClasses: SubClass[];
+  MultiClassing: ExtendedMulticlassInfo | null;
+  SpellcastingFeatures: FeatureWithClassColumn[];
+  SpellCasting: SpellCastingInfo | null;
+  Choices: Choice[];
+  Features: FeatureWithClassColumn[];
+  User: {
+    username: string | null;
+  } | null;
+}
 interface CharacterToClassInfo extends CharacterToClass {
-  Class: Omit<
-    ClassWithSpellListAndFeaturesAndChoices,
-    'createdAt' | 'updatedAt'
-  >;
+  Class: Omit<CharacterSheetClassInfo, 'createdAt' | 'updatedAt'>;
 }
 
 export interface CreatureInfo extends Creature {
@@ -221,3 +228,7 @@ export interface SpellListInfo extends SpellList {
 }
 
 export type FeatureNoDate = Omit<Feature, 'createdAt | updatedAt'>;
+
+export interface FeatureGroupInfo extends FeatureGroup {
+  FeaturesInGroup: FeatureNoDate[];
+}

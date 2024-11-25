@@ -3,23 +3,25 @@ import Image from 'next/image';
 import { Fragment } from 'react';
 import ImageUploadModal from './ImageUploadModal';
 import useModal from '@/hooks/useModal';
-import { useAppSelector } from '@/store/hooks';
 import useLevel from '@/hooks/useLevel';
+import { useAppSelector } from '@/store/hooks';
 import Skeleton from '@/components/UI/Skeleton';
+import useCharacterState from '@/hooks/useCharacter/useCharacterState';
 
 const CharacterIntro = () => {
   const { id, openModal, closeModal } = useModal();
   const character = useAppSelector((state) => state.sheet.rawCharacter);
+  const state = useCharacterState();
   const level = useLevel();
 
-  if (!character) return <Skeleton height={128} />;
+  if (!character || !state) return <Skeleton height={200} />;
 
   return (
     <>
       <ImageUploadModal modalid={id} />
-      {character.imageURL ? (
+      {state.imageURL ? (
         <Image
-          src={character.imageURL}
+          src={state.imageURL}
           width={200}
           height={200}
           className="rounded-lg w-[100px] h-[100px] object-cover object-center mr-4 btn btn-ghost p-0"
@@ -42,7 +44,7 @@ const CharacterIntro = () => {
       )}
       <div className="flex flex-col justify-">
         <h2>
-          {character.name}
+          {state.name}
           <div className="divider m-0 divider-primary"></div>
         </h2>
 
@@ -64,13 +66,24 @@ const CharacterIntro = () => {
             </a>
           )}
           ,{' '}
-          {character.CharacterToClass?.map((c) => (
-            <Fragment key={c.Class.name}>
-              <a href={`/class/${c.Class.slug}`} className="hover:link">
-                {c.Class.name}
-              </a>
-            </Fragment>
-          ))}
+          {character.CharacterToClass?.map((c, index) => {
+            if (index === character.CharacterToClass.length - 1) {
+              return (
+                <Fragment key={c.Class.name}>
+                  <a href={`/class/${c.Class.slug}`} className="hover:link">
+                    {c.Class.name} ({c.levelsInClass})
+                  </a>
+                </Fragment>
+              );
+            }
+            return (
+              <Fragment key={c.Class.name}>
+                <a href={`/class/${c.Class.slug}`} className="hover:link">
+                  {c.Class.name} ({c.levelsInClass}),{' '}
+                </a>
+              </Fragment>
+            );
+          })}
           ,{' '}
           <a
             href={`/background/${character.Background?.slug}`}
@@ -79,9 +92,7 @@ const CharacterIntro = () => {
             {character.Background?.name}
           </a>{' '}
         </p>
-        <p className="italic font-bold">
-          {alignmentToText(character.alignment)}
-        </p>
+        <p className="italic font-bold">{alignmentToText(state.alignment)}</p>
       </div>
     </>
   );
