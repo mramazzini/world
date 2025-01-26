@@ -24,7 +24,7 @@ const useQuerySpellsFromGroup = ({
     };
 
     fetchSpells();
-  }, [spellListIds]);
+  }, [spellListIds, spellLevels]);
 
   const refetch = async () => {
     setLoading(true);

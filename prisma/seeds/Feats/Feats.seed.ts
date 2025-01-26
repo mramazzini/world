@@ -2,7 +2,7 @@ import { src } from '@/lib/types/types';
 import { Ability, Prisma } from '@prisma/client';
 import { backgroundIds } from '../Backgrounds/BackgroundIds';
 import { speciesIds } from '../Species/Species.seed';
-import { classIds } from '../Classes/ClassIds';
+// import { classIds } from '../Classes/ClassIds';
 import { subSpeciesIds } from '../Subspecies/Subspecies.seed';
 const FeatSeed: Prisma.FeatCreateManyInput[] = [
   {
@@ -12,63 +12,63 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     flavorText: 'You have manifested an aberrant dragonmark.',
     prereqDescription: 'No other dragonmark',
     source: src.eberron,
-    prerequisites: {
-      protocol: 'AND',
-      data: [
-        {
-          blackList: true,
-          SubSpecies: subSpeciesIds.markOfDetection, // mark of detection half elf
-        },
-        {
-          blackList: true,
-          SubSpecies: subSpeciesIds.markOfFindingOrk, // mark of finding half orc
-        },
-        {
-          blackList: true,
-          SubSpecies: subSpeciesIds.markOfFindingHuman, // mark of finding human
-        },
-        {
-          blackList: true,
-          SubSpecies: subSpeciesIds.markOfHandling, // mark of handling human
-        },
-        {
-          blackList: true,
-          SubSpecies: subSpeciesIds.markOfHealing, // mark of healing halfling
-        },
-        {
-          blackList: true,
-          SubSpecies: subSpeciesIds.markOfHospitality, // mark of hospitality halfling
-        },
-        {
-          blackList: true,
-          SubSpecies: subSpeciesIds.markOfMaking, // mark of making human
-        },
-        {
-          blackList: true,
-          SubSpecies: subSpeciesIds.markOfPassage, // mark of passage human
-        },
-        {
-          blackList: true,
-          SubSpecies: subSpeciesIds.markOfScribing, // mark of scribing gnome
-        },
-        {
-          blackList: true,
-          SubSpecies: subSpeciesIds.markOfSentinel, // mark of sentinel human
-        },
-        {
-          blackList: true,
-          SubSpecies: subSpeciesIds.markOfShadow, // mark of shadow elf
-        },
-        {
-          blackList: true,
-          SubSpecies: subSpeciesIds.markOfStorm, // mark of storm half-elf
-        },
-        {
-          blackList: true,
-          SubSpecies: subSpeciesIds.markOfWarding, // mark of warding dwarf
-        },
-      ],
-    },
+    // prerequisites: {
+    //   protocol: 'AND',
+    //   data: [
+    //     {
+    //       blackList: true,
+    //       SubSpecies: subSpeciesIds.markOfDetection, // mark of detection half elf
+    //     },
+    //     {
+    //       blackList: true,
+    //       SubSpecies: subSpeciesIds.markOfFindingOrk, // mark of finding half orc
+    //     },
+    //     {
+    //       blackList: true,
+    //       SubSpecies: subSpeciesIds.markOfFindingHuman, // mark of finding human
+    //     },
+    //     {
+    //       blackList: true,
+    //       SubSpecies: subSpeciesIds.markOfHandling, // mark of handling human
+    //     },
+    //     {
+    //       blackList: true,
+    //       SubSpecies: subSpeciesIds.markOfHealing, // mark of healing halfling
+    //     },
+    //     {
+    //       blackList: true,
+    //       SubSpecies: subSpeciesIds.markOfHospitality, // mark of hospitality halfling
+    //     },
+    //     {
+    //       blackList: true,
+    //       SubSpecies: subSpeciesIds.markOfMaking, // mark of making human
+    //     },
+    //     {
+    //       blackList: true,
+    //       SubSpecies: subSpeciesIds.markOfPassage, // mark of passage human
+    //     },
+    //     {
+    //       blackList: true,
+    //       SubSpecies: subSpeciesIds.markOfScribing, // mark of scribing gnome
+    //     },
+    //     {
+    //       blackList: true,
+    //       SubSpecies: subSpeciesIds.markOfSentinel, // mark of sentinel human
+    //     },
+    //     {
+    //       blackList: true,
+    //       SubSpecies: subSpeciesIds.markOfShadow, // mark of shadow elf
+    //     },
+    //     {
+    //       blackList: true,
+    //       SubSpecies: subSpeciesIds.markOfStorm, // mark of storm half-elf
+    //     },
+    //     {
+    //       blackList: true,
+    //       SubSpecies: subSpeciesIds.markOfWarding, // mark of warding dwarf
+    //     },
+    //   ],
+    // },
   },
   {
     id: '2',
@@ -677,17 +677,17 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     source: src.Bigby,
     prereqDescription:
       'Martial Weapon Proficiency or Giant Foundling Background',
-    prerequisites: {
-      protocol: 'OR',
-      data: [
-        {
-          martialWeaponProficiency: true,
-        },
-        {
-          Background: backgroundIds.giantFoundling,
-        },
-      ],
-    },
+    // prerequisites: {
+    //   protocol: 'OR',
+    //   data: [
+    //     {
+    //       martialWeaponProficiency: true,
+    //     },
+    //     {
+    //       Background: backgroundIds.giantFoundling,
+    //     },
+    //   ],
+    // },
   },
   {
     id: '59',
@@ -1095,14 +1095,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     flavorText: 'You learn more of the magic typical of dark elves.',
     source: src.tasha,
     prereqDescription: 'Drow',
-    prerequisites: {
-      protocol: 'AND',
-      data: [
-        {
-          SubSpecies: subSpeciesIds.darkElf,
-        },
-      ],
-    },
+    // prerequisites: {
+    //   protocol: 'AND',
+    //   data: [
+    //     {
+    //       SubSpecies: subSpeciesIds.darkElf,
+    //     },
+    //   ],
+    // },
   },
   {
     id: '85',
@@ -1291,14 +1291,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
       'You have inherited the innate spellcasting ability of your ancestors.',
     source: src.tasha,
     prereqDescription: 'Deep Gnome',
-    prerequisites: {
-      protocol: 'AND',
-      data: [
-        {
-          Species: speciesIds.deepGnomeMMOM,
-        },
-      ],
-    },
+    // prerequisites: {
+    //   protocol: 'AND',
+    //   data: [
+    //     {
+    //       Species: speciesIds.deepGnomeMMOM,
+    //     },
+    //   ],
+    // },
   },
   {
     id: '96',
@@ -1307,14 +1307,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     flavorText: 'You learn the magic of the primeval woods.',
     source: src.tasha,
     prereqDescription: 'Wood Elf',
-    prerequisites: {
-      protocol: 'AND',
-      data: [
-        {
-          SubSpecies: subSpeciesIds.woodElf,
-        },
-      ],
-    },
+    // prerequisites: {
+    //   protocol: 'AND',
+    //   data: [
+    //     {
+    //       SubSpecies: subSpeciesIds.woodElf,
+    //     },
+    //   ],
+    // },
   },
   {
     id: '97',
@@ -1359,20 +1359,20 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     source: src.dragonQueen,
     prereqDescription:
       'Dragonlance Campaign, Sorcerer or Wizard Class or Mage of High Sorcery Background',
-    prerequisites: {
-      protocol: 'OR',
-      data: [
-        {
-          Class: classIds.sorcerer,
-        },
-        {
-          Class: classIds.wizard,
-        },
-        {
-          Background: backgroundIds.mageOfHighSorcery,
-        },
-      ],
-    },
+    // prerequisites: {
+    //   protocol: 'OR',
+    //   data: [
+    //     {
+    //       Class: classIds.sorcerer,
+    //     },
+    //     {
+    //       Class: classIds.wizard,
+    //     },
+    //     {
+    //       Background: backgroundIds.mageOfHighSorcery,
+    //     },
+    //   ],
+    // },
   },
   {
     id: '100',
@@ -1458,20 +1458,20 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
     source: src.dragonQueen,
     prereqDescription:
       'Dragonlance Campaign, Fighter or Paladin Class or Knight of Solamnia Background',
-    prerequisites: {
-      protocol: 'OR',
-      data: [
-        {
-          Class: classIds.fighter,
-        },
-        {
-          Class: classIds.paladin,
-        },
-        {
-          Background: backgroundIds.knightOfSolamnia,
-        },
-      ],
-    },
+    // prerequisites: {
+    //   protocol: 'OR',
+    //   data: [
+    //     {
+    //       Class: classIds.fighter,
+    //     },
+    //     {
+    //       Class: classIds.paladin,
+    //     },
+    //     {
+    //       Background: backgroundIds.knightOfSolamnia,
+    //     },
+    //   ],
+    // },
   },
   {
     id: '105',
@@ -1530,14 +1530,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
       'You can transform the lower half of your body into an inky black vapor',
     prereqDescription: 'Vampire',
     source: src.ixalan,
-    prerequisites: {
-      protocol: 'AND',
-      data: [
-        {
-          Species: speciesIds.vampireIxalan,
-        },
-      ],
-    },
+    // prerequisites: {
+    //   protocol: 'AND',
+    //   data: [
+    //     {
+    //       Species: speciesIds.vampireIxalan,
+    //     },
+    //   ],
+    // },
   },
 ];
 export const FeatIds = {

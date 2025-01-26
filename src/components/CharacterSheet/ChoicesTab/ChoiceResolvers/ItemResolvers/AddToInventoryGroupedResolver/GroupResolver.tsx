@@ -56,7 +56,7 @@ const AddToInventoryWeaponGroup = ({
   setSelectedItems: (items: PrismaJson.QuantityItem[]) => void;
   amount: number;
 }) => {
-  const { loading, items, refetch } = useQueryItemWeaponGroup(weaponGroup);
+  const { loading, items } = useQueryItemWeaponGroup(weaponGroup);
   const itemChoices = useMemo(() => {
     const itemChoices = {} as Record<string, PrismaJson.QuantityItem>;
     items.forEach((p) => {
@@ -117,7 +117,7 @@ const AddToInventoryItemType = ({
   selectedItems: PrismaJson.QuantityItem[];
   setSelectedItems: (items: PrismaJson.QuantityItem[]) => void;
 }) => {
-  const { loading, items, refetch } = useItemTypeQuery(type);
+  const { loading, items } = useItemTypeQuery(type);
 
   return (
     <>
@@ -242,7 +242,7 @@ const GroupResolver = ({
   isActive: boolean;
   activeRemaining: number;
 }) => {
-  const allowChoice = useMemo(() => activeRemaining > 0, [activeRemaining]);
+  // const allowChoice = useMemo(() => activeRemaining > 0, [activeRemaining]);
   const canActivate = useMemo(() => activeRemaining > 0, [activeRemaining]);
   const canDeactivate = useMemo(() => isActive, [isActive]);
   const canToggle = useMemo(
@@ -254,8 +254,8 @@ const GroupResolver = ({
       className={`bg-base-300 border border-gray-500 rounded-xl transition-all transition-duration-300 p-4 `}
     >
       <div className="flex flex-col gap-2">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label>Use this option</label>
-
         <input
           className="toggle"
           type="checkbox"

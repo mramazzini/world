@@ -1,5 +1,5 @@
 'use client';
-import { numberColor, numberColorBefore } from '@/Utility/colorBefore';
+// import { numberColor, numberColorBefore } from '@/Utility/colorBefore';
 import P from '@/Utility/FormatAndSanitize';
 import JsonTable from '@/Utility/JsonTable';
 import { Fragment, useState } from 'react';
@@ -27,7 +27,7 @@ const RenderItemFeature = ({
           </span>
         </div>
         <div className="flex flex-wrap items-center">
-          {feature.levels && feature.levels.length == 20 ? (
+          {/* {feature.levels && feature.levels.length == 20 ? (
             <span className="badge badge-accent font-bold rounded-full">
               All Levels
             </span>
@@ -46,7 +46,7 @@ const RenderItemFeature = ({
                 </div>
               );
             })
-          )}
+          )} */}
         </div>
       </div>
       <div className="collapse-content">

@@ -1,4 +1,3 @@
-import useProficiency from '@/hooks/CharacterControllers/useProficiency';
 import { SetSkillProficiencyParams } from '@/lib/types/protocols';
 import { SkillToText } from '@/lib/utils/toText/SkillToText';
 import P from '@/Utility/FormatAndSanitize';

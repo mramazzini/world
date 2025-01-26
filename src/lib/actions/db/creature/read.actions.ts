@@ -1,10 +1,12 @@
 'use server';
 import { QueryParams } from '@/lib/types/types';
-import { generateQueryFields } from '@/lib/utils/generateQueryFields';
+// import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
 import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { CreatureInfo } from '@/lib/types/modelInfo';
+import { FeatureInfoIncludeTemplate } from '../dbIncludeTemplates';
+import { ItemInfoTemplate } from '../dbIncludeTemplates';
 
 export const getCreaturesMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
@@ -15,7 +17,6 @@ export const getCreaturesMetadata = async (): Promise<DBMetadata[]> => {
       description: true,
       flavorText: true,
       slug: true,
-      updatedAt: true,
     },
   });
   await db.$disconnect();
@@ -31,93 +32,8 @@ export const getCreatures = async (): Promise<CreatureInfo[]> => {
           username: true,
         },
       },
-      wieldingItems: {
-        include: {
-          Features: true,
-
-          ItemWeaponData: {
-            include: {
-              Weapon: {
-                include: {
-                  SpecialProperties: true,
-                  ammunition: true,
-                  WeaponPropertyInstance: {
-                    include: {
-                      Property: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-          Spell: true,
-          Armor: {
-            include: {
-              Features: true,
-            },
-          },
-          Tool: {
-            include: {
-              Features: true,
-            },
-          },
-          AmmunitionFor: true,
-
-          EquipmentPack: {
-            include: {
-              items: true,
-            },
-          },
-          User: {
-            select: {
-              username: true,
-            },
-          },
-        },
-      },
-      armorEquipped: {
-        include: {
-          ItemWeaponData: {
-            include: {
-              Weapon: {
-                include: {
-                  SpecialProperties: true,
-                  ammunition: true,
-                  WeaponPropertyInstance: {
-                    include: {
-                      Property: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-          Spell: true,
-          Armor: {
-            include: {
-              Features: true,
-            },
-          },
-          Tool: {
-            include: {
-              Features: true,
-            },
-          },
-          AmmunitionFor: true,
-
-          EquipmentPack: {
-            include: {
-              items: true,
-            },
-          },
-          User: {
-            select: {
-              username: true,
-            },
-          },
-          Features: true,
-        },
-      },
+      wieldingItems: ItemInfoTemplate,
+      armorEquipped: ItemInfoTemplate,
       spellsPrepared: true,
       freeSpells: true,
       CreatureLimitedSpells: {
@@ -125,50 +41,10 @@ export const getCreatures = async (): Promise<CreatureInfo[]> => {
           Spell: true,
         },
       },
-      Features: true,
-      shieldEquipped: {
-        include: {
-          Features: true,
-          ItemWeaponData: {
-            include: {
-              Weapon: {
-                include: {
-                  SpecialProperties: true,
-                  ammunition: true,
-                  WeaponPropertyInstance: {
-                    include: {
-                      Property: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-          Spell: true,
-          Armor: {
-            include: {
-              Features: true,
-            },
-          },
-          Tool: {
-            include: {
-              Features: true,
-            },
-          },
-          AmmunitionFor: true,
-
-          EquipmentPack: {
-            include: {
-              items: true,
-            },
-          },
-          User: {
-            select: {
-              username: true,
-            },
-          },
-        },
+      Features: {
+        include: FeatureInfoIncludeTemplate,
       },
+      shieldEquipped: ItemInfoTemplate,
     },
   });
   await db.$disconnect();
@@ -182,102 +58,14 @@ export const getCreature = async ({
   const db = new PrismaClient();
 
   const res = await db.creature.findFirst({
-    where: {
-      [type]: query,
-    },
     include: {
       User: {
         select: {
           username: true,
         },
       },
-      wieldingItems: {
-        include: {
-          Features: true,
-
-          ItemWeaponData: {
-            include: {
-              Weapon: {
-                include: {
-                  SpecialProperties: true,
-                  ammunition: true,
-                  WeaponPropertyInstance: {
-                    include: {
-                      Property: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-          Spell: true,
-          Armor: {
-            include: {
-              Features: true,
-            },
-          },
-          Tool: {
-            include: {
-              Features: true,
-            },
-          },
-          AmmunitionFor: true,
-
-          EquipmentPack: {
-            include: {
-              items: true,
-            },
-          },
-          User: {
-            select: {
-              username: true,
-            },
-          },
-        },
-      },
-      armorEquipped: {
-        include: {
-          ItemWeaponData: {
-            include: {
-              Weapon: {
-                include: {
-                  SpecialProperties: true,
-                  ammunition: true,
-                  WeaponPropertyInstance: {
-                    include: {
-                      Property: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-          Spell: true,
-          Armor: {
-            include: {
-              Features: true,
-            },
-          },
-          Tool: {
-            include: {
-              Features: true,
-            },
-          },
-          AmmunitionFor: true,
-
-          EquipmentPack: {
-            include: {
-              items: true,
-            },
-          },
-          User: {
-            select: {
-              username: true,
-            },
-          },
-          Features: true,
-        },
-      },
+      wieldingItems: ItemInfoTemplate,
+      armorEquipped: ItemInfoTemplate,
       spellsPrepared: true,
       freeSpells: true,
       CreatureLimitedSpells: {
@@ -285,50 +73,10 @@ export const getCreature = async ({
           Spell: true,
         },
       },
-      Features: true,
-      shieldEquipped: {
-        include: {
-          Features: true,
-          ItemWeaponData: {
-            include: {
-              Weapon: {
-                include: {
-                  SpecialProperties: true,
-                  ammunition: true,
-                  WeaponPropertyInstance: {
-                    include: {
-                      Property: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-          Spell: true,
-          Armor: {
-            include: {
-              Features: true,
-            },
-          },
-          Tool: {
-            include: {
-              Features: true,
-            },
-          },
-          AmmunitionFor: true,
-
-          EquipmentPack: {
-            include: {
-              items: true,
-            },
-          },
-          User: {
-            select: {
-              username: true,
-            },
-          },
-        },
+      Features: {
+        include: FeatureInfoIncludeTemplate,
       },
+      shieldEquipped: ItemInfoTemplate,
     },
   });
   await db.$disconnect();
@@ -342,103 +90,14 @@ export const getCreatureChunk = async (
   const { query } = queryInfo;
   if (query === '') {
     const res = await db.creature.findMany({
-      where: generateQueryFields({
-        fields: queryInfo.searchFields,
-        relationalFields: queryInfo.relationalFields,
-      }),
       include: {
         User: {
           select: {
             username: true,
           },
         },
-        wieldingItems: {
-          include: {
-            Features: true,
-
-            ItemWeaponData: {
-              include: {
-                Weapon: {
-                  include: {
-                    SpecialProperties: true,
-                    ammunition: true,
-                    WeaponPropertyInstance: {
-                      include: {
-                        Property: true,
-                      },
-                    },
-                  },
-                },
-              },
-            },
-            Spell: true,
-            Armor: {
-              include: {
-                Features: true,
-              },
-            },
-            Tool: {
-              include: {
-                Features: true,
-              },
-            },
-            AmmunitionFor: true,
-
-            EquipmentPack: {
-              include: {
-                items: true,
-              },
-            },
-            User: {
-              select: {
-                username: true,
-              },
-            },
-          },
-        },
-        armorEquipped: {
-          include: {
-            ItemWeaponData: {
-              include: {
-                Weapon: {
-                  include: {
-                    SpecialProperties: true,
-                    ammunition: true,
-                    WeaponPropertyInstance: {
-                      include: {
-                        Property: true,
-                      },
-                    },
-                  },
-                },
-              },
-            },
-            Spell: true,
-            Armor: {
-              include: {
-                Features: true,
-              },
-            },
-            Tool: {
-              include: {
-                Features: true,
-              },
-            },
-            AmmunitionFor: true,
-
-            EquipmentPack: {
-              include: {
-                items: true,
-              },
-            },
-            User: {
-              select: {
-                username: true,
-              },
-            },
-            Features: true,
-          },
-        },
+        wieldingItems: ItemInfoTemplate,
+        armorEquipped: ItemInfoTemplate,
         spellsPrepared: true,
         freeSpells: true,
         CreatureLimitedSpells: {
@@ -446,50 +105,10 @@ export const getCreatureChunk = async (
             Spell: true,
           },
         },
-        Features: true,
-        shieldEquipped: {
-          include: {
-            Features: true,
-            ItemWeaponData: {
-              include: {
-                Weapon: {
-                  include: {
-                    SpecialProperties: true,
-                    ammunition: true,
-                    WeaponPropertyInstance: {
-                      include: {
-                        Property: true,
-                      },
-                    },
-                  },
-                },
-              },
-            },
-            Spell: true,
-            Armor: {
-              include: {
-                Features: true,
-              },
-            },
-            Tool: {
-              include: {
-                Features: true,
-              },
-            },
-            AmmunitionFor: true,
-
-            EquipmentPack: {
-              include: {
-                items: true,
-              },
-            },
-            User: {
-              select: {
-                username: true,
-              },
-            },
-          },
+        Features: {
+          include: FeatureInfoIncludeTemplate,
         },
+        shieldEquipped: ItemInfoTemplate,
       },
     });
     await db.$disconnect();
@@ -497,104 +116,14 @@ export const getCreatureChunk = async (
   }
 
   const res: CreatureInfo[] = await db.creature.findMany({
-    where: generateQueryFields({
-      fields: queryInfo.searchFields,
-      relationalFields: queryInfo.relationalFields,
-    }),
-
     include: {
       User: {
         select: {
           username: true,
         },
       },
-      wieldingItems: {
-        include: {
-          Features: true,
-
-          ItemWeaponData: {
-            include: {
-              Weapon: {
-                include: {
-                  SpecialProperties: true,
-                  ammunition: true,
-                  WeaponPropertyInstance: {
-                    include: {
-                      Property: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-          Spell: true,
-          Armor: {
-            include: {
-              Features: true,
-            },
-          },
-          Tool: {
-            include: {
-              Features: true,
-            },
-          },
-          AmmunitionFor: true,
-
-          EquipmentPack: {
-            include: {
-              items: true,
-            },
-          },
-          User: {
-            select: {
-              username: true,
-            },
-          },
-        },
-      },
-      armorEquipped: {
-        include: {
-          ItemWeaponData: {
-            include: {
-              Weapon: {
-                include: {
-                  SpecialProperties: true,
-                  ammunition: true,
-                  WeaponPropertyInstance: {
-                    include: {
-                      Property: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-          Spell: true,
-          Armor: {
-            include: {
-              Features: true,
-            },
-          },
-          Tool: {
-            include: {
-              Features: true,
-            },
-          },
-          AmmunitionFor: true,
-
-          EquipmentPack: {
-            include: {
-              items: true,
-            },
-          },
-          User: {
-            select: {
-              username: true,
-            },
-          },
-          Features: true,
-        },
-      },
+      wieldingItems: ItemInfoTemplate,
+      armorEquipped: ItemInfoTemplate,
       spellsPrepared: true,
       freeSpells: true,
       CreatureLimitedSpells: {
@@ -602,50 +131,10 @@ export const getCreatureChunk = async (
           Spell: true,
         },
       },
-      Features: true,
-      shieldEquipped: {
-        include: {
-          Features: true,
-          ItemWeaponData: {
-            include: {
-              Weapon: {
-                include: {
-                  SpecialProperties: true,
-                  ammunition: true,
-                  WeaponPropertyInstance: {
-                    include: {
-                      Property: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-          Spell: true,
-          Armor: {
-            include: {
-              Features: true,
-            },
-          },
-          Tool: {
-            include: {
-              Features: true,
-            },
-          },
-          AmmunitionFor: true,
-
-          EquipmentPack: {
-            include: {
-              items: true,
-            },
-          },
-          User: {
-            select: {
-              username: true,
-            },
-          },
-        },
+      Features: {
+        include: FeatureInfoIncludeTemplate,
       },
+      shieldEquipped: ItemInfoTemplate,
     },
   });
 

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 };
 export const dynamic = 'force-dynamic';
 const Page = async () => {
-  const classes = await getClasses(false);
+  const classes = await getClasses();
   if (!classes) {
     return (
       <div className="p-8">

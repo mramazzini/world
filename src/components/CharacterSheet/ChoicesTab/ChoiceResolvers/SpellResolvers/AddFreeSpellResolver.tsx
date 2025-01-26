@@ -2,7 +2,7 @@ import Loading from '@/components/UI/Loading';
 import useQuerySpellsFromGroup from '@/hooks/apiHooks/useQueryFilteredSpells';
 import { AddFreeSpellParams } from '@/lib/types/protocols';
 import { Choice } from '@prisma/client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ChoiceResolverButton from '../../ChoiceResolverButton';
 import P from '@/Utility/FormatAndSanitize';
 
@@ -10,7 +10,7 @@ const AddFreeSpellResolver = ({ choice }: { choice: Choice }) => {
   const params = choice.fetchParams as AddFreeSpellParams;
   const [selected, setSelected] = useState<string[]>([]);
 
-  const { spells, loading, refetch } = useQuerySpellsFromGroup({
+  const { spells, loading } = useQuerySpellsFromGroup({
     spellLevels: params.fromGroup?.levels ?? [],
     spellListIds: params.fromGroup?.spellListIds ?? [],
   });

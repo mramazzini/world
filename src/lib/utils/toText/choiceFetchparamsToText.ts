@@ -1,3 +1,3 @@
-import { ChoiceParams } from "../types/protocols";
+// import { ChoiceParams } from "../types/protocols";
 
-export const choiceFetchParamsToText = (params: ChoiceParams)=> {
+// export const choiceFetchParamsToText = (params: ChoiceParams)=> {

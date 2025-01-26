@@ -1,34 +1,27 @@
 'use client';
-import { Log, SpellLevel } from '@/lib/types/types';
 import Image from 'next/image';
-import numberArray from '@/lib/utils/numberArray';
-import { useEffect, useState } from 'react';
-import useCharacterState from '@/hooks/useCharacter/useCharacterState';
+// import useCharacterState from '@/hooks/useCharacter/useCharacterState';
 
 const Spells = () => {
-  const state = useCharacterState();
+  // const state = useCharacterState();
 
   return (
     <div className="h-full flex flex-col">
       <div className="flex flex-row bg-base-300 rounded-xl p-4 h-full items-center justify-center">
-        {false ? (
-          <></>
-        ) : (
-          <div className="flex items-center justify-center flex-col">
-            <p className="font-bold m-2">No Spells Found..</p>
-            <Image
-              src="/images/fireball.svg"
-              alt="Empty"
-              width={80}
-              height={80}
-              className="opacity-40 m-2"
-            />
-            <p className="m-2">
-              Prepare spells to use them in combat. Prepared spells will be
-              shown here.
-            </p>
-          </div>
-        )}
+        <div className="flex items-center justify-center flex-col">
+          <p className="font-bold m-2">No Spells Found..</p>
+          <Image
+            src="/images/fireball.svg"
+            alt="Empty"
+            width={80}
+            height={80}
+            className="opacity-40 m-2"
+          />
+          <p className="m-2">
+            Prepare spells to use them in combat. Prepared spells will be shown
+            here.
+          </p>
+        </div>
       </div>
     </div>
   );

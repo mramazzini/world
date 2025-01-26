@@ -1,4 +1,3 @@
-import useProficiency from '@/hooks/CharacterControllers/useProficiency';
 import { SetLanguageProficiencyParams } from '@/lib/types/protocols';
 import P from '@/Utility/FormatAndSanitize';
 import { Choice, Language } from '@prisma/client';

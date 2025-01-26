@@ -5,12 +5,15 @@ import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
+import { FeatureInfoIncludeTemplate } from '../dbIncludeTemplates';
 
 export const getArmors = async (): Promise<ArmorInfo[]> => {
   const db = new PrismaClient();
   const res = await db.armor.findMany({
     include: {
-      Features: true,
+      Features: {
+        include: FeatureInfoIncludeTemplate,
+      },
     },
   });
   await db.$disconnect();
@@ -27,7 +30,9 @@ export const getArmor = async ({
       [type]: query,
     },
     include: {
-      Features: true,
+      Features: {
+        include: FeatureInfoIncludeTemplate,
+      },
     },
   });
   await db.$disconnect();
@@ -46,7 +51,9 @@ export const getArmorChunk = async (
         relationalFields: queryInfo.relationalFields,
       }),
       include: {
-        Features: true,
+        Features: {
+          include: FeatureInfoIncludeTemplate,
+        },
       },
     });
     await db.$disconnect();
@@ -59,7 +66,9 @@ export const getArmorChunk = async (
       relationalFields: queryInfo.relationalFields,
     }),
     include: {
-      Features: true,
+      Features: {
+        include: FeatureInfoIncludeTemplate,
+      },
     },
   });
 

@@ -10,7 +10,7 @@ const AddKnownSpellResolver = ({ choice }: { choice: Choice }) => {
   const params = choice.fetchParams as AddPreparedSpellParams;
   const [selected, setSelected] = useState<string[]>([]);
 
-  const { spells, loading, refetch } = useQuerySpellsFromGroup({
+  const { spells, loading } = useQuerySpellsFromGroup({
     spellLevels: params.fromGroup?.levels ?? [],
     spellListIds: params.fromGroup?.spellListIds ?? [],
   });

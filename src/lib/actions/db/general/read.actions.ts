@@ -42,7 +42,7 @@ export const searchEverything = async (
       flavorText: spell.description,
       type: 'Spells',
       other: spell.school,
-      lastUpdated: spell.updatedAt,
+      // lastUpdated: spell.updatedAt,
       slug: spell.slug,
     })),
     ...classes.map((class_) => ({
@@ -51,7 +51,7 @@ export const searchEverything = async (
       flavorText: class_.description,
       type: 'Class',
       other: class_.subClassDescription,
-      lastUpdated: class_.updatedAt,
+      // lastUpdated: class_.updatedAt,
       slug: class_.slug,
     })),
     ...subclasses.map((subclass) => ({
@@ -64,7 +64,7 @@ export const searchEverything = async (
         : 'No description available.',
       type: 'Subclass',
       other: subclass.Class?.name || '',
-      lastUpdated: subclass.updatedAt,
+      // lastUpdated: subclass.updatedAt,
       slug: subclass.slug,
     })),
     ...items.map((item) => ({
@@ -73,7 +73,7 @@ export const searchEverything = async (
       flavorText: item.flavorText,
       type: 'Item',
       other: item.types.join(', '),
-      lastUpdated: item.updatedAt,
+      // lastUpdated: item.updatedAt,
       slug: item.slug,
     })),
     ...species.map((r) => ({
@@ -82,7 +82,7 @@ export const searchEverything = async (
       flavorText: r.description ? r.description : 'No description available',
       type: 'Species',
       other: r.size,
-      lastUpdated: r.updatedAt,
+      // lastUpdated: r.updatedAt,
       slug: r.slug,
     })),
     ...subspecies.map((r) => ({
@@ -91,7 +91,7 @@ export const searchEverything = async (
       flavorText: r.description ? r.description : 'No description available',
       type: 'Subspecies',
       other: r.species.name,
-      lastUpdated: r.updatedAt,
+      // lastUpdated: r.updatedAt,
       slug: r.slug,
     })),
 
@@ -101,7 +101,7 @@ export const searchEverything = async (
       flavorText: background.description,
       type: 'Background',
       other: '',
-      lastUpdated: background.updatedAt,
+      // lastUpdated: background.updatedAt,
       slug: background.slug,
     })),
     ...spellLists.map((spellList) => ({
@@ -110,7 +110,7 @@ export const searchEverything = async (
       flavorText: spellList.description,
       type: 'Spell-List',
       other: '',
-      lastUpdated: spellList.updatedAt,
+      // lastUpdated: spellList.updatedAt,
       slug: spellList.slug,
     })),
     ...feats.map((feat) => ({
@@ -119,7 +119,7 @@ export const searchEverything = async (
       flavorText: feat.flavorText,
       type: 'Feats',
       other: feat.prereqDescription,
-      lastUpdated: feat.updatedAt,
+      // lastUpdated: feat.updatedAt,
       slug: feat.slug,
     })),
     ...creatures.map((creature) => ({
@@ -128,7 +128,7 @@ export const searchEverything = async (
       flavorText: creature.description,
       type: 'Creature',
       other: creature.creatureType,
-      lastUpdated: creature.updatedAt,
+      // lastUpdated: creature.updatedAt,
       slug: creature.slug,
     })),
   ];

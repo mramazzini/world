@@ -34,7 +34,8 @@ const useFeatureGroup = () => {
     const active = featureGroups.reduce<FeatureInfo[]>((acc, group) => {
       for (const feature of group.FeatureGroup.FeaturesInGroup) {
         if (ids.includes(feature.id)) {
-          acc.push(feature);
+          //This as will probaly break things so FIXME TODO ETC
+          acc.push(feature as FeatureInfo);
         }
       }
       return acc;

@@ -15,7 +15,7 @@ export const getSubclassMetadata = async (): Promise<DBMetadata[]> => {
       name: true,
       description: true,
       slug: true,
-      updatedAt: true,
+
       flavorText: true,
     },
   });

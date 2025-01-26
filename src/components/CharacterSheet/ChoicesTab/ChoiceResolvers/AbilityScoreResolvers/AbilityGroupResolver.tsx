@@ -56,7 +56,7 @@ const AbilityGroupResolver = ({
             {selected.map((s) => {
               if (s.ability !== ability) return null;
               return (
-                <p>
+                <p key={s.ability}>
                   You have selected to increase {AbilityToText(ability)} by{' '}
                   {selected.map((s) => {
                     return (

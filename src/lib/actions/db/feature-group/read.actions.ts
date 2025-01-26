@@ -1,10 +1,13 @@
 import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { FeatureGroupInfo } from '@/lib/types/modelInfo';
 import { PrismaClient } from '@prisma/client';
+import { FeatureInfoIncludeTemplate } from '../dbIncludeTemplates';
 
 const FeatureGroupInfoTemplate = {
   include: {
-    FeaturesInGroup: true,
+    FeaturesInGroup: {
+      include: FeatureInfoIncludeTemplate,
+    },
   },
 };
 
@@ -17,7 +20,7 @@ export async function getFeatureGroupMetadata(): Promise<DBMetadata[]> {
       description: true,
       flavorText: true,
       slug: true,
-      updatedAt: true,
+      // updatedAt: true,
     },
   });
   await db.$disconnect();

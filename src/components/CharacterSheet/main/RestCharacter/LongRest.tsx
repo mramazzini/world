@@ -2,7 +2,6 @@ import Modal from '@/components/UI/Modal/Modal';
 import ModalBox from '@/components/UI/Modal/ModalBox';
 import ModalButton from '@/components/UI/Modal/ModalButton';
 import useModal from '@/hooks/useModal';
-import useSpellcaster from '@/hooks/CharacterControllers/useSpellcaster';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import useResourceMutator from '@/hooks/useResourceMutator';

@@ -1,34 +1,36 @@
 'use client';
-import Loading from '@/components/UI/Loading';
+// import Loading from '@/components/UI/Loading';
 import Modal from '@/components/UI/Modal/Modal';
 import ModalBox from '@/components/UI/Modal/ModalBox';
 import ModalButton from '@/components/UI/Modal/ModalButton';
 import Skeleton from '@/components/UI/Skeleton';
-import { CharacterInfo } from '@/lib/types/modelInfo';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setRawCharacter } from '@/store/sheetSlice';
-import Image from 'next/image';
-import { Suspense, useState } from 'react';
+import { useAppSelector } from '@/store/hooks';
+import { useState } from 'react';
+// import { CharacterInfo } from '@/lib/types/modelInfo';
+// import { useAppDispatch, us/eAppSelector } from '@/store/hooks';
+// import { setRawCharacter } from '@/store/sheetSlice';
+// import Image from 'next/image';
+// import { Suspense, useState } from 'react';
 interface Props {
   modalid: string;
 }
 const ImageUploadModal = ({ modalid }: Props) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const character = useAppSelector((state) => state.sheet.rawCharacter);
-  const [valid, setValid] = useState(false);
-  const [message, setMessage] = useState('');
+  // const [valid, setValid] = useState(false);
+  const [message] = useState('');
 
-  const validUrl = (str: string) => {
-    const regex =
-      /^(https?:\/\/)?([a-zA-Z0-9.-]+(\.[a-zA-Z]{2,})+)(:[0-9]{1,5})?(\/[^\s]*)?$/;
-    return regex.test(str);
-  };
+  // const validUrl = (str: string) => {
+  //   const regex =
+  //     /^(https?:\/\/)?([a-zA-Z0-9.-]+(\.[a-zA-Z]{2,})+)(:[0-9]{1,5})?(\/[^\s]*)?$/;
+  //   return regex.test(str);
+  // };
 
-  const saveImage = async (image: string) => {
-    await dispatch(
-      setRawCharacter({ ...character, imageURL: image } as CharacterInfo)
-    );
-  };
+  // const saveImage = async (image: string) => {
+  //   await dispatch(
+  //     setRawCharacter({ ...character, imageURL: image } as CharacterInfo)
+  //   );
+  // };
 
   if (!character) return <Skeleton height={128} />;
 
@@ -44,7 +46,7 @@ const ImageUploadModal = ({ modalid }: Props) => {
             displayed as a 200x200 image.
           </p>
           <div className="join w-full flex">
-            <input
+            {/* <input
               type="text"
               placeholder="Image URL"
               className="input input-bordered grow  join-item"
@@ -66,10 +68,10 @@ const ImageUploadModal = ({ modalid }: Props) => {
               }}
             >
               Search
-            </button>
+            </button> */}
           </div>
           {message && <p className="text-red-500 my-4">{message}</p>}
-          {valid && character.imageURL && (
+          {/* {valid && character.imageURL && (
             <div className="flex items-center justify-center m-4">
               <Suspense fallback={<Loading />}>
                 <Image
@@ -81,11 +83,11 @@ const ImageUploadModal = ({ modalid }: Props) => {
                 />
               </Suspense>
             </div>
-          )}
+          )} */}
           <div className="modal-action">
             <form method="dialog gap-4">
               {/* if there is a button in form, it will close the modal */}
-              {valid && character.imageURL && (
+              {/* {valid && character.imageURL && (
                 <button
                   className="btn mr-2"
                   onClick={async (e) => {
@@ -101,7 +103,7 @@ const ImageUploadModal = ({ modalid }: Props) => {
                 >
                   Set Image
                 </button>
-              )}
+              )} */}
               <ModalButton modaltype="close" className="btn" modalid={modalid}>
                 Close
               </ModalButton>
