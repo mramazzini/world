@@ -254,7 +254,7 @@ export interface CombinedData {
   flavorText: string;
   type: string;
   other: string | null;
-  lastUpdated: Date;
+  // lastUpdated: Date;
   slug: string;
 }
 

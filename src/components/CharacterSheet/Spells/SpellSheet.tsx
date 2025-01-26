@@ -1,4 +1,3 @@
-import useSpellcaster from '@/hooks/CharacterControllers/useSpellcaster';
 import { SpellLevel } from '@/lib/types/types';
 import numberArray from '@/lib/utils/numberArray';
 import numPlace from '@/lib/utils/numPlace';

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ids = {
   arcane: '89',
   assassin: '90',
@@ -10,7 +11,7 @@ const ids = {
   thief: '97',
 };
 
-const RogueSubclassFeatures = [
+const RogueSubclassFeatures: never[] = [
   // Arcane Trickster
   // {
   //   name: 'Mage Hand Legerdemain',

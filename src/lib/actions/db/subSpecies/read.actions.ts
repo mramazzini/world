@@ -6,6 +6,7 @@ import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
 import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { SubSpeciesInfo } from '@/lib/types/modelInfo';
+import { FeatureInfoIncludeTemplate } from '../dbIncludeTemplates';
 
 export const getVariantMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
@@ -14,7 +15,7 @@ export const getVariantMetadata = async (): Promise<DBMetadata[]> => {
       id: true,
       name: true,
       description: true,
-      updatedAt: true,
+
       slug: true,
       flavorText: true,
     },
@@ -35,7 +36,7 @@ export const getVariantMetadataBySpecies = async (
       id: true,
       name: true,
       description: true,
-      updatedAt: true,
+
       slug: true,
       flavorText: true,
     },
@@ -50,10 +51,15 @@ export const getSubSpecies = async (): Promise<SubSpeciesInfo[]> => {
     include: {
       species: {
         include: {
-          Features: true,
+          Features: {
+            include: FeatureInfoIncludeTemplate,
+          },
+          Choices: true,
         },
       },
-      Features: true,
+      Features: {
+        include: FeatureInfoIncludeTemplate,
+      },
       User: {
         select: {
           username: true,
@@ -78,10 +84,15 @@ export const getSubSpecie = async ({
     include: {
       species: {
         include: {
-          Features: true,
+          Features: {
+            include: FeatureInfoIncludeTemplate,
+          },
+          Choices: true,
         },
       },
-      Features: true,
+      Features: {
+        include: FeatureInfoIncludeTemplate,
+      },
       User: {
         select: {
           username: true,
@@ -107,10 +118,15 @@ export const getSubSpeciesChunk = async (
       include: {
         species: {
           include: {
-            Features: true,
+            Features: {
+              include: FeatureInfoIncludeTemplate,
+            },
+            Choices: true,
           },
         },
-        Features: true,
+        Features: {
+          include: FeatureInfoIncludeTemplate,
+        },
         User: {
           select: {
             username: true,
@@ -131,10 +147,15 @@ export const getSubSpeciesChunk = async (
     include: {
       species: {
         include: {
-          Features: true,
+          Features: {
+            include: FeatureInfoIncludeTemplate,
+          },
+          Choices: true,
         },
       },
-      Features: true,
+      Features: {
+        include: FeatureInfoIncludeTemplate,
+      },
       User: {
         select: {
           username: true,

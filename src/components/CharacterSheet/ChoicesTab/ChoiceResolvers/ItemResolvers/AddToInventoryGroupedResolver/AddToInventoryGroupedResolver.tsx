@@ -4,8 +4,8 @@ import {
   ItemGroupQuantity,
 } from '@/lib/types/protocols';
 import P from '@/Utility/FormatAndSanitize';
-import { Choice, ToolGroup, WeaponGroup } from '@prisma/client';
-import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
+import { Choice } from '@prisma/client';
+import { useCallback, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 import GroupResolver from './GroupResolver';
 import ChoiceResolverButton from '../../../ChoiceResolverButton';
@@ -44,7 +44,7 @@ const AddToInventoryGroupedResolver = ({ choice }: { choice: Choice }) => {
       .map((s) => [...s.items, ...(groupChoices[s.id]?.items || [])])
       .filter((s) => s.length > 0)
       .flat();
-  }, [selectedOptions]);
+  }, [selectedOptions, groupChoices]);
 
   const beforeSubmit = useCallback(() => {
     //add to inventory

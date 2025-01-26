@@ -1,4 +1,3 @@
-import useProficiency from '@/hooks/CharacterControllers/useProficiency';
 import { getToolsByGroup } from '@/lib/actions/db/tool/read.actions';
 import { SetToolProficiencyGroupedParams } from '@/lib/types/protocols';
 import { ToolID } from '@/lib/types/types';

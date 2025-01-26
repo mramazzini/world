@@ -5,13 +5,16 @@ import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
+import { FeatureInfoIncludeTemplate } from '../dbIncludeTemplates';
 
 export const getWeapons = async (): Promise<WeaponInfo[]> => {
   const db = new PrismaClient();
   const res = await db.weapon.findMany({
     include: {
       ammunition: true,
-      SpecialProperties: true,
+      SpecialProperties: {
+        include: FeatureInfoIncludeTemplate,
+      },
       WeaponPropertyInstance: {
         include: {
           Property: true,
@@ -34,7 +37,9 @@ export const getWeapon = async ({
         [type]: query,
       },
       include: {
-        SpecialProperties: true,
+        SpecialProperties: {
+          include: FeatureInfoIncludeTemplate,
+        },
         ammunition: true,
         WeaponPropertyInstance: {
           include: {
@@ -64,7 +69,9 @@ export const getWeaponChunk = async (
         relationalFields: queryInfo.relationalFields,
       }),
       include: {
-        SpecialProperties: true,
+        SpecialProperties: {
+          include: FeatureInfoIncludeTemplate,
+        },
         ammunition: true,
         WeaponPropertyInstance: {
           include: {
@@ -83,7 +90,9 @@ export const getWeaponChunk = async (
       relationalFields: queryInfo.relationalFields,
     }),
     include: {
-      SpecialProperties: true,
+      SpecialProperties: {
+        include: FeatureInfoIncludeTemplate,
+      },
       ammunition: true,
       WeaponPropertyInstance: {
         include: {

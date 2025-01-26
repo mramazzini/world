@@ -5,6 +5,7 @@ import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient, ToolGroup } from '@prisma/client';
 import Fuse from 'fuse.js';
+import { FeatureInfoIncludeTemplate } from '../dbIncludeTemplates';
 
 export const getTools = async (): Promise<ToolInfo[]> => {
   const db = new PrismaClient();
@@ -177,23 +178,7 @@ export const getToolChunk = async (
       }),
       include: {
         Features: {
-          include: {
-            Effects: {
-              include: {
-                Choices: true,
-                EffectToSpell: {
-                  include: {
-                    Spell: true,
-                  },
-                },
-                EffectToResource: {
-                  include: {
-                    Resource: true,
-                  },
-                },
-              },
-            },
-          },
+          include: FeatureInfoIncludeTemplate,
         },
       },
     });
@@ -208,23 +193,7 @@ export const getToolChunk = async (
     }),
     include: {
       Features: {
-        include: {
-          Effects: {
-            include: {
-              Choices: true,
-              EffectToSpell: {
-                include: {
-                  Spell: true,
-                },
-              },
-              EffectToResource: {
-                include: {
-                  Resource: true,
-                },
-              },
-            },
-          },
-        },
+        include: FeatureInfoIncludeTemplate,
       },
     },
   });

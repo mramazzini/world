@@ -34,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.1,
   });
 
-  const classes = await getClasses(false);
+  const classes = await getClasses();
   siteMap.push({
     url: process.env.DOMAIN_NAME,
     lastModified: new Date(),
@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const c of classes) {
     siteMap.push({
       url: `${process.env.DOMAIN_NAME}/class/${c.name}`,
-      lastModified: c.updatedAt,
+      // lastModified: c.updatedAt,
 
       changeFrequency: 'yearly',
       priority: 0.8,
@@ -60,7 +60,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const s of subclasses) {
     siteMap.push({
       url: `${process.env.DOMAIN_NAME}/subclass/${s.slug}`,
-      lastModified: s.updatedAt,
+      // lastModified: s.updatedAt,
       changeFrequency: 'yearly',
       priority: 0.8,
     });
@@ -94,7 +94,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ' ',
         '-'
       )}`,
-      lastModified: spells[i].updatedAt,
+      // lastModified: spells[i].updatedAt,
       changeFrequency: 'yearly',
       priority: 0.8,
     });
@@ -128,7 +128,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ' ',
         '-'
       )}`,
-      lastModified: b.updatedAt,
+      // lastModified: b.updatedAt,
       changeFrequency: 'yearly',
       priority: 0.7,
     });
@@ -159,7 +159,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const r of species) {
     siteMap.push({
       url: `${process.env.DOMAIN_NAME}/species/${r.slug}`,
-      lastModified: r.updatedAt,
+      // lastModified: r.updatedAt,
       changeFrequency: 'yearly',
       priority: 0.8,
     });
@@ -187,7 +187,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ' ',
         '-'
       )}`,
-      lastModified: v.updatedAt,
+      // lastModified: v.updatedAt,
       changeFrequency: 'yearly',
       priority: 0.8,
     });
@@ -212,7 +212,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const t of items) {
     siteMap.push({
       url: `${process.env.DOMAIN_NAME}/item/${t.slug}`,
-      lastModified: t.updatedAt,
+      // lastModified: t.updatedAt,
       changeFrequency: 'yearly',
       priority: 0.8,
     });
@@ -240,7 +240,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ' ',
         '-'
       )}`,
-      lastModified: s.updatedAt,
+      // lastModified: s.updatedAt,
       changeFrequency: 'yearly',
       priority: 0.8,
     });
@@ -265,7 +265,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const f of feats) {
     siteMap.push({
       url: `${process.env.DOMAIN_NAME}/feats/${f.slug}`,
-      lastModified: f.updatedAt,
+      // lastModified: f.updatedAt,
       changeFrequency: 'yearly',
       priority: 0.8,
     });
@@ -292,7 +292,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const b of blogPosts) {
     siteMap.push({
       url: `${process.env.DOMAIN_NAME}/blog/${b.route}`,
-      lastModified: b.updatedAt,
+      // lastModified: b.updatedAt,
       changeFrequency: 'never',
       priority: 0.8,
     });

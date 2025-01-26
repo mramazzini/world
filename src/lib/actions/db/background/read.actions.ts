@@ -5,6 +5,7 @@ import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
 import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { BackgroundInfo } from '@/lib/types/modelInfo';
+import { FeatureInfoIncludeTemplate } from '../dbIncludeTemplates';
 
 export const getBackgroundsMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
@@ -13,7 +14,6 @@ export const getBackgroundsMetadata = async (): Promise<DBMetadata[]> => {
       id: true,
       name: true,
       description: true,
-      updatedAt: true,
       flavorText: true,
       slug: true,
     },
@@ -31,7 +31,9 @@ export const getBackgrounds = async (): Promise<BackgroundInfo[]> => {
           username: true,
         },
       },
-      Features: true,
+      Features: {
+        include: FeatureInfoIncludeTemplate,
+      },
     },
   });
   await db.$disconnect();
@@ -48,7 +50,9 @@ export const getBackground = async ({
       [type]: query,
     },
     include: {
-      Features: true,
+      Features: {
+        include: FeatureInfoIncludeTemplate,
+      },
       User: {
         select: {
           username: true,
@@ -72,7 +76,9 @@ export const getBackgroundChunk = async (
         relationalFields: queryInfo.relationalFields,
       }),
       include: {
-        Features: true,
+        Features: {
+          include: FeatureInfoIncludeTemplate,
+        },
         User: {
           select: {
             username: true,
@@ -91,7 +97,9 @@ export const getBackgroundChunk = async (
     }),
 
     include: {
-      Features: true,
+      Features: {
+        include: FeatureInfoIncludeTemplate,
+      },
       User: {
         select: {
           username: true,
