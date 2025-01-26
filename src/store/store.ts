@@ -1,21 +1,22 @@
 'use client';
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
-import characterReducer from './characterSlice';
+import sheetReducer from './sheetSlice';
 import layoutReducer from './layoutSlice';
 import workshopReducer from './workshopSlice';
 import workshopMiddleware from './middleware/WorkshopMiddleware';
+import sheetMiddleware from './middleware/SheetMiddleware';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       auth: authReducer,
-      character: characterReducer,
+      sheet: sheetReducer,
       layout: layoutReducer,
       workshop: workshopReducer,
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(workshopMiddleware),
+      getDefaultMiddleware().concat(workshopMiddleware).concat(sheetMiddleware),
   });
 };
 

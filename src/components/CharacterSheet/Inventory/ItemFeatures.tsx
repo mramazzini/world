@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { memoizeGetItem } from '@/Utility/Indexed/globalCache';
 import { ItemInfo } from '@/lib/types/modelInfo';
 import { Feature } from '@prisma/client';
-import { useAppSelector } from '@/store/hooks';
+import useCharacterState from '@/hooks/useCharacter/useCharacterState';
 
 const RenderItemFeature = ({
   feature,
@@ -66,8 +66,10 @@ const RenderItemFeature = ({
 };
 
 const ItemFeatures = () => {
-  const inventory = useAppSelector((state) => state.character.state?.inventory);
+  const state = useCharacterState();
   const [items, setItems] = useState<ItemInfo[]>([]);
+
+  const inventory = state?.inventory;
   useEffect(() => {
     try {
       const promises = inventory?.map((item) =>

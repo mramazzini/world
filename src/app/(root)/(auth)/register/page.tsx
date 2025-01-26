@@ -1,5 +1,6 @@
 import RegisterForm from '@/components/Forms/RegisterForm';
 import { Metadata } from 'next';
+
 export const metadata: Metadata = {
   title: "Create an Account - Max's DND",
   description:
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
     ],
   },
 };
+
 const Page = () => {
   return (
     <main className="p-4 flex w-full justify-center">

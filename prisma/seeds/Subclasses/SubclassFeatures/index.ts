@@ -16,18 +16,18 @@ import SubClasses from '../Subclasses.seed';
 import { Prisma } from '@prisma/client';
 let count = 1;
 const SubclassFeatures: Prisma.FeatureCreateManyInput[] = [
-  ...FighterSubclassFeatures,
+  // ...FighterSubclassFeatures,
   ...ClericSubclassFeatures,
   ...BarbarianSubclassFeatures,
   ...BardSubclassFeatures,
-  ...WizardSubclassFeatures,
+  // ...WizardSubclassFeatures,
   ...DruidSubclassFeatures,
   ...MonkSubclassFeatures,
   ...PaladinSubclassFeatures,
   ...RangerSubclassFeatures,
-  ...RogueSubclassFeatures,
-  ...SorcererSubclassFeatures,
-  ...WarlockSubclassFeatures,
+  // ...RogueSubclassFeatures,
+  // ...SorcererSubclassFeatures,
+  // ...WarlockSubclassFeatures,
   ...ArtificerSubclassFeatures,
 ].map((feature, index, arr) => {
   const featureParent = SubClasses.find(

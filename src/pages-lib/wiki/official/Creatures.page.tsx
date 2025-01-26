@@ -16,14 +16,14 @@ import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import '@/lib/string.extensions';
 import { sizeToHitDie } from '@/Utility/sizeToHitdie';
-import FeatureList from '@/components/UI/FeatureList';
+import FeatureList from '@/components/UI/Features/FeatureList';
 import CommentSection from '@/components/CommentSection/CommentSection';
 import WeaponDescription from '@/Utility/WeaponDescription';
 import numPlace from '@/lib/utils/numPlace';
-import AbilityToText from '@/lib/utils/AbilityToText';
+import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import numberArray from '@/lib/utils/numberArray';
 import RollRequest from '@/components/UI/RollRequest';
-import { fullCaster } from '../../../../prisma/seeds/Classes/SpellSlotsUtil';
+import { fullCaster } from '../../../lib/utils/SpellSlotsUtil';
 import { CreatureInfo, ItemInfo } from '@/lib/types/modelInfo';
 interface Props {
   creature: CreatureInfo;

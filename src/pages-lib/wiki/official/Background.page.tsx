@@ -1,6 +1,6 @@
 import CommentSection from '@/components/CommentSection/CommentSection';
 import DieTable from '@/components/UI/DieTable';
-import FeatureList from '@/components/UI/FeatureList';
+import FeatureList from '@/components/UI/Features/FeatureList';
 import Info from '@/components/UI/Info';
 import { BackgroundInfo } from '@/lib/types/modelInfo';
 import P from '@/Utility/FormatAndSanitize';

@@ -1,6 +1,6 @@
 import { WeaponPropertyIds } from './WeaponProperty.seed';
 import { weaponIds } from '../Weapons.seed';
-import { DamageTypes, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 const WeaponToPropertySeed: Prisma.WeaponPropertyInstanceCreateManyInput[] = [
   {
@@ -51,7 +51,7 @@ const WeaponToPropertySeed: Prisma.WeaponPropertyInstanceCreateManyInput[] = [
   {
     weaponId: weaponIds.quarterstaff,
     propertyId: WeaponPropertyIds.Versatile,
-    versatileDamage: { type: DamageTypes.BLUDGEONING, formula: '1d8' },
+    versatileDamage: '1d8',
   },
   {
     weaponId: weaponIds.sickle,
@@ -69,7 +69,7 @@ const WeaponToPropertySeed: Prisma.WeaponPropertyInstanceCreateManyInput[] = [
   {
     weaponId: weaponIds.spear,
     propertyId: WeaponPropertyIds.Versatile,
-    versatileDamage: { type: DamageTypes.PIERCING, formula: '1d8' },
+    versatileDamage: '1d8',
   },
   {
     weaponId: weaponIds.crossbowLight,
@@ -106,7 +106,7 @@ const WeaponToPropertySeed: Prisma.WeaponPropertyInstanceCreateManyInput[] = [
   {
     weaponId: weaponIds.battleaxe,
     propertyId: WeaponPropertyIds.Versatile,
-    versatileDamage: { type: DamageTypes.SLASHING, formula: '1d10' },
+    versatileDamage: '1d10',
   },
   {
     weaponId: weaponIds.glaive,
@@ -155,7 +155,7 @@ const WeaponToPropertySeed: Prisma.WeaponPropertyInstanceCreateManyInput[] = [
   {
     weaponId: weaponIds.longsword,
     propertyId: WeaponPropertyIds.Versatile,
-    versatileDamage: { type: DamageTypes.SLASHING, formula: '1d10' },
+    versatileDamage: '1d10',
   },
   {
     weaponId: weaponIds.maul,
@@ -205,17 +205,17 @@ const WeaponToPropertySeed: Prisma.WeaponPropertyInstanceCreateManyInput[] = [
   {
     weaponId: weaponIds.trident,
     propertyId: WeaponPropertyIds.Versatile,
-    versatileDamage: { type: DamageTypes.PIERCING, formula: '1d8' },
+    versatileDamage: '1d8',
   },
   {
     weaponId: weaponIds.warPick,
     propertyId: WeaponPropertyIds.Versatile,
-    versatileDamage: { type: DamageTypes.PIERCING, formula: '1d8' },
+    versatileDamage: '1d8',
   },
   {
     weaponId: weaponIds.warhammer,
     propertyId: WeaponPropertyIds.Versatile,
-    versatileDamage: { type: DamageTypes.BLUDGEONING, formula: '1d10' },
+    versatileDamage: '1d10',
   },
   {
     weaponId: weaponIds.whip,

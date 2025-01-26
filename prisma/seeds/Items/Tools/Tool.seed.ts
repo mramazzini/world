@@ -1,10 +1,10 @@
-import { Prisma, Skill } from '@prisma/client';
+import { Prisma, Skill, ToolGroup } from '@prisma/client';
 
 const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '1',
     name: "Alchemist's Supplies",
-
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
     components: [
       'Two glass beakers',
       'A metal frame to hold a beaker in place over an open flame',
@@ -31,6 +31,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '2',
     name: "Brewer's Supplies",
 
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
     components: [
       'A large glass jug',
       'A quantity of hops',
@@ -61,6 +62,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '3',
     name: "Calligrapher's Supplies",
 
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
     components: [
       'A set of inks',
       'A dozen sheets of parchment',
@@ -86,6 +88,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '4',
     name: "Carpenter's Tools",
 
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
     components: [
       'A Saw',
       'A Hammer',
@@ -124,6 +127,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '5',
     name: "Cartographer's Tools",
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
 
     components: [
       'A Quill',
@@ -168,6 +172,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '6',
     name: "Cobbler's Tools",
 
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
     components: [
       'A Hammer',
       'An Awl',
@@ -201,6 +206,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '7',
     name: "Cook's Utensils",
 
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
     componentsDescription:
       "Cook's utensils include a metal pot, knives, forks, a stirring spoon, and a ladle.",
     components: [
@@ -296,7 +302,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '10',
     name: 'Gaming Kit',
-
+    ToolGroup: ToolGroup.GAMING_SETS,
     componentsDescription:
       'A gaming set has all the pieces needed to play a specific game or type of game, such as a complete deck of cards or a board and tokens.',
 
@@ -324,6 +330,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '11',
     name: "Glassblower's Tools",
 
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
     componentsDescription:
       'The tools include a blowpipe, a small marver, blocks, and tweezers. You need a source of heat to work glass.',
     components: [
@@ -397,6 +404,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '13',
     name: "Jeweler's Tools",
 
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
     componentsDescription:
       "Jeweler's tools consist of a small saw and hammer, files, pliers, and tweezers.",
     components: ['Small Saw', 'Hammer', 'Files', 'Pliers', 'Tweezers'],
@@ -416,7 +424,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '14',
     name: 'Land Vehicles',
-
+    ToolGroup: ToolGroup.VEHICLES,
     skills: [
       {
         skill: Skill.ARCANA,
@@ -444,6 +452,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '15',
     name: "Leatherworker's Tools",
 
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
     componentsDescription:
       "Leatherworker's tools include a knife, a small mallet, an edger, a hole punch, thread, and leather scraps.",
     components: [
@@ -471,6 +480,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '16',
     name: "Mason's Tools",
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
 
     componentsDescription:
       "Mason's tools consist of a trowel, a hammer, a chisel, brushes, and a square.",
@@ -497,6 +507,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '17',
     name: 'Musical Instrument',
+    ToolGroup: ToolGroup.INSTRUMENTS,
 
     skills: [
       {
@@ -538,6 +549,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '19',
     name: "Painter's Supplies",
 
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
     componentsDescription:
       "Painter's supplies include an easel, canvas, paints, brushes, charcoal sticks, and a palette.",
     components: ['Easel', 'Canvas', 'Paints', 'Brushes', 'Charcoal Sticks'],
@@ -617,6 +629,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '21',
     name: "Potter's Tools",
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
 
     componentsDescription:
       " Potter's tools include potter's needles, ribs, scrapers, a knife, and calipers.",
@@ -642,6 +655,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '22',
     name: "Smith's Tools",
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
 
     componentsDescription:
       "Smith's tools include hammers, tongs, charcoal, rags, and a whetstone.",
@@ -698,6 +712,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '24',
     name: "Tinker's Tools",
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
 
     componentsDescription:
       "Tinker's tools include a variety of hand tools, thread, needles, a whetstone, scraps of cloth and leather, and a small pot of glue.",
@@ -727,6 +742,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '25',
     name: "Weaver's Tools",
 
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
     componentsDescription:
       "Weaver's tools include thread, needles, and scraps of cloth. You know how to work a loom, but such equipment is too large to transport.",
     components: ['Thread', 'Needles', 'Scraps of Cloth'],
@@ -752,6 +768,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '26',
     name: "Woodcarver's Tools",
 
+    ToolGroup: ToolGroup.ARTISANS_TOOLS,
     componentsDescription:
       "Woodcarver's tools consist of a knife, a gouge, and a small saw.",
     components: ['Knife', 'Gouge', 'Small Saw'],
@@ -777,7 +794,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '27',
     name: 'Dice Set',
-
+    ToolGroup: ToolGroup.GAMING_SETS,
     componentsDescription: 'A collection of dice',
 
     components: ['Dice'],
@@ -802,6 +819,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '28',
     name: 'Dragonchess Set',
+    ToolGroup: ToolGroup.GAMING_SETS,
 
     componentsDescription: 'A dragonchess set includes a board and pieces.',
 
@@ -827,6 +845,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '29',
     name: 'Playing Card Set',
+    ToolGroup: ToolGroup.GAMING_SETS,
 
     componentsDescription: 'A collection of cards',
 
@@ -853,6 +872,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '30',
     name: 'Three-Dragon Ante Set',
+    ToolGroup: ToolGroup.GAMING_SETS,
 
     componentsDescription: 'A Three-Dragon Ante set includes a deck of cards.',
 
@@ -879,7 +899,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '31',
     name: 'Bagpipes',
-
+    ToolGroup: ToolGroup.INSTRUMENTS,
     components: ['Bagpipes'],
     skills: [
       {
@@ -897,6 +917,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '32',
     name: 'Drum',
+    ToolGroup: ToolGroup.INSTRUMENTS,
 
     components: ['Drum'],
     skills: [
@@ -915,6 +936,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '33',
     name: 'Dulcimer',
+    ToolGroup: ToolGroup.INSTRUMENTS,
     components: ['Dulcimer'],
     skills: [
       {
@@ -933,6 +955,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '34',
     name: 'Flute',
 
+    ToolGroup: ToolGroup.INSTRUMENTS,
     components: ['Flute'],
     skills: [
       {
@@ -951,6 +974,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '35',
     name: 'Lute',
 
+    ToolGroup: ToolGroup.INSTRUMENTS,
     components: ['Lute'],
     skills: [
       {
@@ -968,6 +992,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '36',
     name: 'Lyre',
+    ToolGroup: ToolGroup.INSTRUMENTS,
 
     components: ['Lyre'],
     skills: [
@@ -986,6 +1011,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '37',
     name: 'Horn',
+    ToolGroup: ToolGroup.INSTRUMENTS,
 
     components: ['Horn'],
     skills: [
@@ -1003,6 +1029,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   },
   {
     id: '38',
+    ToolGroup: ToolGroup.INSTRUMENTS,
     name: 'Pan Flute',
 
     components: ['Pan Flute'],
@@ -1023,6 +1050,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '39',
     name: 'Shawm',
 
+    ToolGroup: ToolGroup.INSTRUMENTS,
     components: ['Shawm'],
     skills: [
       {
@@ -1041,6 +1069,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
     id: '40',
     name: 'Viol',
 
+    ToolGroup: ToolGroup.INSTRUMENTS,
     components: ['Viol'],
     skills: [
       {
@@ -1058,7 +1087,7 @@ const ToolSeed: Prisma.ToolCreateManyInput[] = [
   {
     id: '41',
     name: 'Water Vehicles',
-
+    ToolGroup: ToolGroup.VEHICLES,
     skills: [
       {
         skill: Skill.ARCANA,

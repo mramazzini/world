@@ -1,51 +1,99 @@
-import useLevel from '@/hooks/useLevel';
-import { useAppSelector } from '@/store/hooks';
-import { AbilityToModifier } from '@/Utility/characterStateFunctions/calc/AbilityToModifier';
+import Info from '@/components/UI/Info';
+import useCharacterState from '@/hooks/useCharacter/useCharacterState';
+import useModifier from '@/hooks/useModifier';
+import { skillAtritbuteMap } from '@/lib/globalVars';
+import AbilityToText from '@/lib/utils/toText/AbilityToText';
+import ArmorTypeToText from '@/lib/utils/toText/ArmorTypeToText';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { setCharacterState } from '@/store/sheetSlice';
 import P from '@/Utility/FormatAndSanitize';
 import ModelDisplay from '@/Utility/ModelDisplay';
+import { Ability, Skill } from '@prisma/client';
 import Link from 'next/link';
+import { Fragment } from 'react';
+import useProficiencySelector from '@/hooks/useProficiencySelector';
+import useSpeed from '@/hooks/useSpeed';
 
 const CharacterStatsTab = () => {
-  const character = useAppSelector((state) => state.character);
-  const level = useLevel();
-  return (
-    character.state && (
-      <div>
-        <h2>Character Stats</h2>
-        <p>View your character&apos;s stats</p>
-        <div className="grid grid-cols-1 gap-4 my-4">
-          <section className="bg-base-200 rounded-xl p-4 flex flex-col gap-4">
-            <h3>Character Info</h3>
+  const {
+    rawCharacter: character,
+    proficiencyBonus,
+    proficientToolGroups: toolGroups,
+    proficientToolIds: toolIds,
+    skillExpertises,
+    skillProficiencies,
+    savingThrowProficiencies: savingThrows,
+    proficientWeaponGroups: weaponGroups,
+    proficientWeaponIds: weaponIds,
+    proficientArmorTypes: armorTypes,
+    proficientLanguages: languages,
+    armorClass,
+    abilityScores,
+    initiative,
+    level,
+    maxHP,
+    passivePerception,
+    darkvision,
+    blindsight,
+    tremorsense,
+    truesight,
+  } = useAppSelector((state) => state.sheet);
+  const state = useCharacterState();
+  const {
+    isExpertInSkill,
+    isProficientInSkill,
+    isProficientInSavingThrow,
+    isHalfProficientInSkill,
+  } = useProficiencySelector();
+  const { getSkillModifier, getSavingThrowModifier } = useModifier();
+  const { getSpeed, SpeedType } = useSpeed();
+  const { getAbilityModifier } = useModifier();
+  const dispatch = useAppDispatch();
 
-            <table className="table table-zebra table-xs bg-base-300 ">
-              <thead>
-                <tr className="bg-black/20">
-                  <th>Attribute</th>
-                  <th>Value</th>
-                  <th>Wiki Link</th>
-                </tr>
-              </thead>
+  return (
+    character && (
+      <div>
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+          <section className="bg-base-200 rounded-xl p-4 flex flex-col gap-4 col-span-2">
+            <h3 className="divider bg-base-300 p-4 rounded-xl m-0 mb-4">
+              Character Info
+            </h3>
+
+            <table className="table table-zebra table-md bg-base-300 ">
               <tbody>
                 <tr>
                   <td>Class(es)</td>
                   <td>
-                    {character.Classes?.map((classData) => (
-                      <span key={classData.id} className="capitalize">
-                        {classData.name}{' '}
-                      </span>
-                    ))}
+                    {character.CharacterToClass?.map(
+                      (characterClassData, index) => {
+                        const last =
+                          index === character.CharacterToClass.length - 1;
+                        return (
+                          <Fragment key={characterClassData.classId}>
+                            <span className="capitalize">
+                              {characterClassData.Class.name}
+                            </span>
+                            {!last && ', '}
+                          </Fragment>
+                        );
+                      }
+                    )}
                   </td>
                   <td>
-                    {character.Classes?.map((classData) => (
-                      <Link
-                        href={`/class/${classData.name}`}
-                        key={classData.id}
-                        target="_blank"
-                        className="btn btn-xs btn-accent"
-                      >
-                        Read More -&gt;
-                      </Link>
-                    ))}
+                    {character.CharacterToClass?.map(
+                      (characterClassData, index) => {
+                        return (
+                          <Link
+                            href={`/class/${characterClassData.Class.slug}`}
+                            key={characterClassData.classId}
+                            target="_blank"
+                            className="btn btn-xs btn-accent mr-2"
+                          >
+                            Read More -&gt;
+                          </Link>
+                        );
+                      }
+                    )}
                   </td>
                 </tr>
                 {character.SubClasses && character.SubClasses[0] && (
@@ -112,7 +160,9 @@ const CharacterStatsTab = () => {
                 )}
               </tbody>
             </table>
-            <table className="table table-zebra table-xs bg-base-300">
+            <div className="divider m-0"></div>
+
+            <table className="table table-zebra table-md bg-base-300">
               <thead>
                 <tr className="bg-black/20">
                   <th>Attribute</th>
@@ -123,7 +173,7 @@ const CharacterStatsTab = () => {
               <tbody>
                 <tr>
                   <td>Name</td>
-                  <td>{character.name}</td>
+                  <td>{state?.name}</td>
                   <td>Your character&apos;s name</td>
                 </tr>
                 <tr>
@@ -136,7 +186,7 @@ const CharacterStatsTab = () => {
                 </tr>
                 <tr>
                   <td>Armor Class</td>
-                  <td>{character.state.armorClass}</td>
+                  <td>{armorClass}</td>
                   <td>
                     How difficult it is for enemies to hit you. The higher the
                     better.
@@ -145,7 +195,7 @@ const CharacterStatsTab = () => {
                 <tr>
                   <td>Alignment</td>
                   <td>
-                    {character.alignment.replaceAll('_', ' ').toCapitalCase()}
+                    {state?.alignment.replaceAll('_', ' ').toCapitalCase()}
                   </td>
                   <td>Your character&apos;s moral compass.</td>
                 </tr>
@@ -168,29 +218,42 @@ const CharacterStatsTab = () => {
 
                 <tr>
                   <td>Max Hit Points</td>
-                  <td>{character.state.hp.max}</td>
+                  <td>{maxHP}</td>
                   <td>
                     How much damage your character can take before they begin to
                     roll for death saves.
                   </td>
                 </tr>
                 <tr>
+                  <td>Current Hit Points</td>
+                  <td>{state?.currentHp}</td>
+                  <td>How much health your character currently has.</td>
+                </tr>
+                <tr>
+                  <td>Temporary Hit Points</td>
+                  <td>{state?.tempHp}</td>
+                  <td>
+                    Temporary hit points are a buffer that can absorb damage
+                    before your character takes real damage.
+                  </td>
+                </tr>
+                <tr>
                   <td>Initiative</td>
                   <td>
-                    {character.state.initiative >= 0
-                      ? `+ ${character.state.initiative}`
-                      : `- ${Math.abs(character.state.initiative)} `}
+                    {initiative >= 0
+                      ? `+ ${initiative}`
+                      : `- ${Math.abs(initiative)} `}
                   </td>
                   <td>How quickly your character can react in combat.</td>
                 </tr>
                 <tr>
                   <td>Walking Speed</td>
-                  <td>{character.state.speed.base} ft</td>
+                  <td>{getSpeed(SpeedType.WALK)} ft</td>
                   <td>How far your character can move in one action.</td>
                 </tr>
                 <tr>
                   <td>Running Speed</td>
-                  <td>{character.state.speed.running} ft</td>
+                  <td>{getSpeed(SpeedType.RUN)} ft</td>
                   <td>
                     How far your character can move when you take the dash
                     action.
@@ -198,25 +261,83 @@ const CharacterStatsTab = () => {
                 </tr>
                 <tr>
                   <td>Flying Speed</td>
-                  <td>{character.state.speed.flying} ft</td>
+                  <td>{getSpeed(SpeedType.FLY)} ft</td>
                   <td>How far your character can move when flying.</td>
                 </tr>
                 <tr>
                   <td>Swimming Speed</td>
-                  <td>{character.state.speed.swimming} ft</td>
+                  <td>{getSpeed(SpeedType.SWIM)} ft</td>
                   <td>How far your character can move when swimming.</td>
                 </tr>
                 <tr>
                   <td>Climbing Speed</td>
-                  <td>{character.state.speed.climbing} ft</td>
+                  <td>{getSpeed(SpeedType.CLIMB)} ft</td>
                   <td>How far your character can move when climbing.</td>
+                </tr>
+                <tr>
+                  <td>Burrowing Speed</td>
+                  <td>{getSpeed(SpeedType.BURROW)} ft</td>
+                  <td>How far your character can move when burrowing.</td>
+                </tr>
+                <tr>
+                  <td>Darkvision</td>
+                  <td>{darkvision} ft</td>
+                  <td>
+                    How far your character can see in darkness. Usually in black
+                    and white.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Blindsight</td>
+                  <td>{blindsight} ft</td>
+                  <td>
+                    How far your character can see without using their eyes.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Tremorsense</td>
+                  <td>{tremorsense} ft</td>
+                  <td>
+                    How far your character can sense vibrations in the ground.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Truesight</td>
+                  <td>{truesight} ft</td>
+                  <td>
+                    How far your character can see through illusions and
+                    invisibility.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Passive Perception</td>
+                  <td>{passivePerception}</td>
+                  <td>
+                    How well your character can notice things without actively
+                    looking.
+                  </td>
                 </tr>
               </tbody>
             </table>
+            <div className="divider m-0"></div>
           </section>
-          <section className="bg-base-200 rounded-xl p-4">
-            <h3>Ability Scores</h3>
-            <table className="table table-zebra table-xs bg-base-300">
+          <section className="bg-base-200 rounded-xl p-4 col-span-1">
+            <h3 className="divider bg-base-300 p-4 rounded-xl m-0 mb-4">
+              Ability Scores
+            </h3>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                if (state)
+                  dispatch(
+                    setCharacterState({ ...state, abilitiesInitialized: false })
+                  );
+              }}
+              className="btn btn-primary btn-sm mb-4 w-full"
+            >
+              Edit Ability Scores
+            </button>
+            <table className="table table-zebra table-md bg-base-300">
               <thead>
                 <tr className="bg-black/20">
                   <th>Ability</th>
@@ -225,75 +346,240 @@ const CharacterStatsTab = () => {
                 </tr>
               </thead>
               <tbody>
-                {Object.entries(character.state.abilityScores).map(
-                  ([key, value]) => (
-                    <tr key={key}>
-                      <td>{key.toCapitalCase()}</td>
-                      <td>{value}</td>
-                      <td>
-                        {AbilityToModifier(value) >= 0
-                          ? `+ ${AbilityToModifier(value)}`
-                          : `- ${Math.abs(AbilityToModifier(value))}`}
-                      </td>
-                    </tr>
-                  )
-                )}
+                {Object.values(Ability).map((ability) => (
+                  <tr key={ability}>
+                    <td>
+                      <P>{AbilityToText(ability)}</P>
+                    </td>
+                    <td>{abilityScores[ability]}</td>
+                    <td>
+                      {getAbilityModifier(ability) >= 0
+                        ? `+ ${getAbilityModifier(ability)}`
+                        : `- ${Math.abs(getAbilityModifier(ability))}`}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
+            <div className="divider m-0"></div>
           </section>
-          <section className="bg-base-200 rounded-xl p-4">
-            <h3>Feats</h3>
+
+          <section className="bg-base-200 rounded-xl p-4 col-span-2 xl:col-span-1 xl:row-span-2">
+            <h3 className="divider bg-base-300 p-4 rounded-xl m-0 mb-4">
+              Skill Modifiers
+            </h3>
+            <table className="table table-zebra table-md bg-base-300">
+              <thead>
+                <tr className="bg-black/20">
+                  <th>Skill</th>
+                  <th>Modifier</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.values(Skill).map((skill) => (
+                  <tr key={skill}>
+                    <td>
+                      <P>{skill.toCapitalCase().replaceAll('_', ' ')}</P> (
+                      {skillAtritbuteMap[skill]})
+                    </td>
+
+                    <td>
+                      {getSkillModifier(skill) >= 0
+                        ? `+ ${getSkillModifier(skill)}`
+                        : `- ${Math.abs(getSkillModifier(skill))}`}
+                      {isExpertInSkill(skill)
+                        ? ' (Expertise)'
+                        : isProficientInSkill(skill)
+                          ? ' (Proficient)'
+                          : isHalfProficientInSkill(skill)
+                            ? ' (Half Proficient)'
+                            : ''}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="divider m-0"></div>
+          </section>
+          <section className="bg-base-200 rounded-xl p-4 col-span-2 xl:col-span-1 ">
+            <h3 className="divider bg-base-300 p-4 rounded-xl m-0 mb-4">
+              Saving Throws
+            </h3>
+            <table className="table table-zebra table-md bg-base-300">
+              <thead>
+                <tr className="bg-black/20">
+                  <th>Ability</th>
+                  <th>Modifier</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.values(Ability).map((ability) => (
+                  <tr key={ability}>
+                    <td>
+                      <P>{AbilityToText(ability)}</P>
+                    </td>
+                    <td>
+                      {getSavingThrowModifier(ability) >= 0
+                        ? `+ ${getSavingThrowModifier(ability)}`
+                        : `- ${Math.abs(getSavingThrowModifier(ability))}`}
+                      {isProficientInSavingThrow(ability)
+                        ? ' (Proficient)'
+                        : ''}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="divider m-0"></div>
+          </section>
+          <section className="bg-base-200 rounded-xl p-4 col-span-2 ">
+            <h3 className="divider bg-base-300 p-4 rounded-xl m-0 mb-4">
+              Feats
+            </h3>
             <ul className="list-disc pl-4">
               {character.Feats?.map((feat) => (
                 <li key={feat.id}>
                   <ModelDisplay model="Feat" id={feat.id} />
                 </li>
               ))}
+              {character.Feats?.length === 0 && (
+                <li>
+                  You have not selected any feats. Certain sites sell it at a
+                  premium.
+                </li>
+              )}
             </ul>
           </section>
-          <section className="bg-base-200 rounded-xl p-4">
-            <h3 className="divider">Proficiencies</h3>
-            <h4 className="divider">Skills</h4>
+          <section className="bg-base-200 rounded-xl p-4 col-span-2">
+            <div className="bg-base-300 p-4 rounded-xl">
+              <h3 className="divider ">Proficiencies</h3>
+              <p className="w-full text-center">
+                Proficiency Bonus:{' '}
+                <span className="text-accent font-bold text-xl">
+                  + {proficiencyBonus}
+                </span>
+              </p>
+            </div>{' '}
+            <div className="divider"></div>
+            <h4>
+              Skills{' '}
+              <Info tooltip="Skill Proficiencies allow you to add your proficiency bonus to skill checks." />{' '}
+            </h4>
             <ul className="list-disc pl-4">
-              {character.state.proficiencies.skills.map((prof) => (
+              {skillProficiencies.map((prof) => (
                 <li key={prof}>
                   <P>{prof.toCapitalCase().replaceAll('_', ' ')}</P>
                 </li>
               ))}
-            </ul>
-            <h4 className="divider">Tools</h4>
+            </ul>{' '}
+            <div className="divider"></div>
+            <h4>
+              Skill Expertise
+              <Info tooltip="Skill Expertise allow you to add twice your proficiency bonus to skill checks." />
+            </h4>
             <ul className="list-disc pl-4">
-              {character.state.proficiencies.tools.map((prof) => (
+              {skillExpertises.map((prof) => (
+                <li key={prof}>
+                  <P>{prof.toCapitalCase().replaceAll('_', ' ')}</P>
+                </li>
+              ))}
+              {skillExpertises.length === 0 && (
+                <li>
+                  You have no skill expertises. Being good at things is
+                  overrated.
+                </li>
+              )}
+            </ul>{' '}
+            <div className="divider"></div>
+            <h4>
+              Tools{' '}
+              <Info tooltip="Tool Proficiencies allow you to add your proficiency bonus to tool checks. You also gain situational advantage on certain checks, depending on the tool." />
+            </h4>
+            <ul className="list-disc pl-4">
+              {toolIds.map((prof) => (
                 <li key={prof}>
                   <ModelDisplay model="Tool" id={prof} />
                 </li>
               ))}
-            </ul>
-            <h4 className="divider">Languages</h4>
+              {toolGroups.map((prof) => (
+                <li key={prof}>
+                  <P>{prof.toCapitalCase().replaceAll('_', ' ')}</P>
+                </li>
+              ))}
+              {toolIds.length === 0 && toolGroups.length === 0 && (
+                <li>
+                  You have not selected any tool proficiencies. You&apos;re
+                  going to have to get creative.
+                </li>
+              )}
+            </ul>{' '}
+            <div className="divider"></div>
+            <h4>
+              Languages{' '}
+              <Info tooltip="Language Proficiencies allows you to speak, read, write, and otherwise understand a given language." />
+            </h4>
             <ul className="list-disc pl-4">
-              {character.state.proficiencies.languages.map((prof) => (
+              {languages.map((prof) => (
                 <li key={prof}>{prof.toCapitalCase().replaceAll('_', ' ')}</li>
               ))}
-            </ul>
-            <h4 className="divider">Weapons</h4>
+              {languages.length === 0 && (
+                <li>
+                  You have not selected any languages. Should have paid
+                  attention in high school.
+                </li>
+              )}
+            </ul>{' '}
+            <div className="divider"></div>
+            <h4>
+              Weapons{' '}
+              <Info tooltip="Weapon Proficiencies allows you to add your proficiency bonus to weapon attack rolls." />
+            </h4>
             <ul className="list-disc pl-4">
-              {character.state.proficiencies.weapons.map((prof) => (
+              {weaponIds.map((prof) => (
                 <li key={prof}>
                   <ModelDisplay model="Weapon" id={prof}></ModelDisplay>
                 </li>
-              ))}
-            </ul>
-            <h4 className="divider">Armor</h4>
-            <ul className="list-disc pl-4">
-              {character.state.proficiencies.armor.map((prof) => (
+              ))}{' '}
+              {weaponGroups.map((prof) => (
                 <li key={prof}>{prof.toCapitalCase().replaceAll('_', ' ')}</li>
               ))}
-            </ul>
-            <h4 className="divider">Saving Throws</h4>
+              {weaponIds.length === 0 && weaponGroups.length === 0 && (
+                <li>
+                  You have not selected any weapon proficiencies. Fists it is.
+                </li>
+              )}
+            </ul>{' '}
+            <div className="divider"></div>
+            <h4>
+              Armor{' '}
+              <Info tooltip="Armor Proficiency allows you to equip specific 'Armortypes'. Rather than giving you a buff, it prevents certain debuffs that get applied if you equip armor you are not proficient in." />
+            </h4>
             <ul className="list-disc pl-4">
-              {character.state.proficiencies.savingThrows.map((prof) => (
-                <li key={prof}>{prof.toCapitalCase().replaceAll('_', ' ')}</li>
+              {armorTypes.map((prof) => (
+                <li key={prof}>{ArmorTypeToText(prof)}</li>
               ))}
+              {armorTypes.length === 0 && (
+                <li>
+                  You have not selected any armor proficiencies. Try hiding
+                  behind the barbarian.
+                </li>
+              )}
+            </ul>{' '}
+            <div className="divider"></div>
+            <h4>
+              Saving Throws
+              <Info tooltip="Saving Throw Proficiencies allow you to add your proficiency bonus to saving throws of the selected ability." />
+            </h4>
+            <ul className="list-disc pl-4">
+              {savingThrows.map((prof) => (
+                <li key={prof}>{AbilityToText(prof)}</li>
+              ))}
+              {savingThrows.length === 0 && (
+                <li>
+                  You have not selected any saving throw proficiencies. Grim
+                  Reaper says hi.
+                </li>
+              )}
             </ul>
           </section>
         </div>

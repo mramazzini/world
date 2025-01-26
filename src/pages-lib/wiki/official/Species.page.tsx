@@ -3,7 +3,7 @@ import NewLineParse from '@/Utility/NewLineParse';
 import GenerateTable from '@/components/UI/GenerateTable';
 import Info from '@/components/UI/Info';
 import JsonTable from '@/Utility/JsonTable';
-import FeatureList from '@/components/UI/FeatureList';
+import FeatureList from '@/components/UI/Features/FeatureList';
 import { AssociatedModel } from '@prisma/client';
 import CommentSection from '@/components/CommentSection/CommentSection';
 import { SpeciesInfo } from '@/lib/types/modelInfo';
@@ -90,25 +90,6 @@ const SpeciesPage = ({ species }: Props) => {
             <div className="divider m-0"></div>
             <p>{species.languageDescription}</p>
           </div>
-          {species.weaponProficiencyDescription !== null && (
-            <div className="bg-base-200 rounded-xl p-4  max-w-1/3 ">
-              <h2 className="pb-0 flex justify-between flex-row items-center">
-                <div>
-                  Weapons{' '}
-                  <Info
-                    tooltip={`A character who is a ${species.name} has proficiency with the following weapons.`}
-                  />
-                </div>
-                {species.weaponProficiencyDescription !== null ? (
-                  <div className="badge badge-accent">{species.name}</div>
-                ) : (
-                  <div className="badge badge-neutral">{species.name}</div>
-                )}
-              </h2>
-              <div className="divider m-0"></div>
-              <p>{species.weaponProficiencyDescription || 'None'}</p>
-            </div>
-          )}
         </div>
         <div className="divider mb-0"></div>
       </div>

@@ -15,10 +15,12 @@ import useModal from '@/hooks/useModal';
 import Modal from '../UI/Modal/Modal';
 import ModalBox from '../UI/Modal/ModalBox';
 import ModalButton from '../UI/Modal/ModalButton';
+import LoadingButton from '../UI/Formik/LoadingButton';
 
 const CreateCharacterModal = () => {
   const router = useRouter();
   const [sideBarMetadata, setSideBarMetadata] = useState<DBMetadata[]>([]);
+  const [loading, setLoading] = useState(false);
   const [sideBarModel, setSideBarModel] = useState<
     'class' | 'species' | 'variant' | 'background' | null
   >(null);
@@ -65,11 +67,13 @@ const CreateCharacterModal = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
     const userId = await getUserId();
 
     if (userId === null) {
       console.error('User not logged in');
+      setLoading(false);
       return;
     }
 
@@ -78,8 +82,10 @@ const CreateCharacterModal = () => {
       !newChar.species ||
       !newChar.background ||
       newChar.name.length == 0
-    )
+    ) {
+      setLoading(false);
       return;
+    }
     const res = await createCharacter({
       name: newChar.name,
       alignment: newChar.alignment,
@@ -90,7 +96,10 @@ const CreateCharacterModal = () => {
       variantId: newChar.variant?.id,
     });
 
-    if (res.result === 'error') return;
+    if (res.result === 'error') {
+      setLoading(false);
+      return;
+    }
 
     router.push(`/dashboard/${res.id}`);
   };
@@ -209,9 +218,13 @@ const CreateCharacterModal = () => {
                 >
                   Cancel
                 </ModalButton>
-                <button className="btn btn-primary" type="submit">
+                <LoadingButton
+                  isLoading={loading}
+                  className="btn btn-primary"
+                  type="submit"
+                >
                   Submit
-                </button>
+                </LoadingButton>
               </div>
             </div>
           </form>

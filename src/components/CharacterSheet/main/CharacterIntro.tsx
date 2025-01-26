@@ -1,21 +1,28 @@
+'use client';
 import { alignmentToText } from '@/Utility/alignmentToText';
 import Image from 'next/image';
 import { Fragment } from 'react';
 import ImageUploadModal from './ImageUploadModal';
 import useModal from '@/hooks/useModal';
 import { useAppSelector } from '@/store/hooks';
-import useLevel from '@/hooks/useLevel';
+import Skeleton from '@/components/UI/Skeleton';
+import useCharacterState from '@/hooks/useCharacter/useCharacterState';
 
 const CharacterIntro = () => {
   const { id, openModal, closeModal } = useModal();
-  const character = useAppSelector((state) => state.character);
-  const level = useLevel();
+  const { rawCharacter: character, level } = useAppSelector(
+    (state) => state.sheet
+  );
+  const state = useCharacterState();
+
+  if (!character || !state) return <Skeleton height={200} />;
+
   return (
     <>
       <ImageUploadModal modalid={id} />
-      {character.imageURL ? (
+      {state.imageURL ? (
         <Image
-          src={character.imageURL}
+          src={state.imageURL}
           width={200}
           height={200}
           className="rounded-lg w-[100px] h-[100px] object-cover object-center mr-4 btn btn-ghost p-0"
@@ -38,7 +45,7 @@ const CharacterIntro = () => {
       )}
       <div className="flex flex-col justify-">
         <h2>
-          {character.name}
+          {state.name}
           <div className="divider m-0 divider-primary"></div>
         </h2>
 
@@ -46,10 +53,7 @@ const CharacterIntro = () => {
           Level {level},{' '}
           {character.SubSpecies ? (
             <a
-              href={`/subspecies/${character.SubSpecies?.name.replaceAll(
-                ' ',
-                '-'
-              )}`}
+              href={`/subspecies/${character.SubSpecies?.slug}`}
               className="hover:link"
             >
               {character.SubSpecies?.name}
@@ -63,27 +67,33 @@ const CharacterIntro = () => {
             </a>
           )}
           ,{' '}
-          {character.Classes?.map((c) => (
-            <Fragment key={c.name}>
-              <a href={`/class/${c.slug}`} className="hover:link">
-                {c.name.toCapitalCase()}
-              </a>
-            </Fragment>
-          ))}
+          {character.CharacterToClass?.map((c, index) => {
+            if (index === character.CharacterToClass.length - 1) {
+              return (
+                <Fragment key={c.Class.name}>
+                  <a href={`/class/${c.Class.slug}`} className="hover:link">
+                    {c.Class.name} ({c.levelsInClass})
+                  </a>
+                </Fragment>
+              );
+            }
+            return (
+              <Fragment key={c.Class.name}>
+                <a href={`/class/${c.Class.slug}`} className="hover:link">
+                  {c.Class.name} ({c.levelsInClass}),{' '}
+                </a>
+              </Fragment>
+            );
+          })}
           ,{' '}
           <a
-            href={`/background/${character.Background?.name.replaceAll(
-              ' ',
-              '-'
-            )}`}
+            href={`/background/${character.Background?.slug}`}
             className="hover:link"
           >
             {character.Background?.name}
           </a>{' '}
         </p>
-        <p className="italic font-bold">
-          {alignmentToText(character.alignment)}
-        </p>
+        <p className="italic font-bold">{alignmentToText(state.alignment)}</p>
       </div>
     </>
   );

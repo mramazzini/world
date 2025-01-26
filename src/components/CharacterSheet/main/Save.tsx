@@ -4,7 +4,7 @@ import ModalButton from '@/components/UI/Modal/ModalButton';
 import useModal from '@/hooks/useModal';
 import { resetCharacter } from '@/lib/actions/db/character/update.actions';
 import { CharacterInfo } from '@/lib/types/modelInfo';
-import { setCharacterState } from '@/store/characterSlice';
+import { setCharacterState } from '@/store/sheetSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { generateCharacter } from '@/Utility/characterStateFunctions/update/generateCharacter';
 import { useCallback, useState } from 'react';

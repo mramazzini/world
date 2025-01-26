@@ -1,10 +1,8 @@
 'use client';
-import { alignmentToText } from '@/Utility/alignmentToText';
 import '@/lib/string.extensions';
 import { getCharactersByUser } from '@/lib/actions/db/character/read.actions';
 import { CharacterInfo } from '@/lib/types/modelInfo';
 import { getUserId } from '@/lib/utils/auth';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import DashboardSkeleton from '@/components/Dashboard/DashboardSkeleton';
@@ -24,8 +22,8 @@ const Dashboard = () => {
 
   const calcLevel = useCallback((c: CharacterInfo) => {
     let level = 0;
-    level += c.state
-      ? c.state.classLevels.reduce((acc, cl) => acc + cl.level, 0)
+    level += c
+      ? c.CharacterToClass.reduce((acc, c) => acc + c.levelsInClass, 0)
       : 1;
     return level;
   }, []);
@@ -90,18 +88,20 @@ const Dashboard = () => {
                   key={character.id}
                   className="bg-base-200 w-full p-4 flex flex-col xl:flex-row items-center h-auto justify-start gap-4 "
                 >
-                  <Image
-                    src={character.imageURL || '/images/hero.jpg'}
+                  {/* <Image
+                    src={
+                      character.CharacterState.imageURL || '/images/hero.jpg'
+                    }
                     width={200}
                     height={200}
                     className="rounded-lg w-[100px] h-[100px] object-cover object-center "
                     alt="Fighter"
-                  />
+                  /> */}
                   <div className="flex flex-col ">
-                    <h2>
-                      {character.name}
+                    {/* <h2>
+                      {character.CharacterState.name}
                       <div className="divider m-0 divider-primary"></div>
-                    </h2>
+                    </h2> */}
 
                     <p className="italic">
                       Level {calcLevel(character)},{' '}
@@ -121,10 +121,13 @@ const Dashboard = () => {
                         </a>
                       )}
                       ,{' '}
-                      {character.Classes?.map((c) => (
-                        <Fragment key={c.id}>
-                          <a href={`/class/${c.slug}`} className="hover:link">
-                            {c.name.toCapitalCase()}
+                      {character.CharacterToClass?.map((c) => (
+                        <Fragment key={c.classId}>
+                          <a
+                            href={`/class/${c.Class.slug}`}
+                            className="hover:link"
+                          >
+                            {c.Class.name}
                           </a>
                         </Fragment>
                       ))}
@@ -136,9 +139,9 @@ const Dashboard = () => {
                         {character.Background?.name}
                       </a>{' '}
                     </p>
-                    <p className="italic font-bold">
-                      {alignmentToText(character.alignment)}
-                    </p>
+                    {/* <p className="italic font-bold">
+                      {alignmentToText(character.CharacterState.alignment)}
+                    </p> */}
                   </div>
                   <div className="flex flex-row xl:flex-col items-end gap-4 grow mt-4 xl:mt-0">
                     <Link

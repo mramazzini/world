@@ -2,18 +2,29 @@ import {
   Armor,
   Background,
   Character,
+  CharacterChoiceStatus,
+  CharacterToClass,
+  Choice,
   Class,
   ColumnedFeature,
   Comment,
   Creature,
+  CustomResource,
+  Effect,
+  EffectGrantsGroup,
+  EffectToResource,
+  EffectToSpell,
   EquipmentPack,
   Feat,
   Feature,
+  FeatureGroup,
   Item,
   ItemWeaponData,
   Message,
+  MultiClassingInfo,
   Species,
   Spell,
+  SpellCasting,
   SpellList,
   SubClass,
   SubClassColumnedFeature,
@@ -37,16 +48,17 @@ export interface SpeciesInfo extends Species {
   User: {
     username: string | null;
   } | null;
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
   Variants: SubSpecies[];
 }
 
-interface SpeciesWithFeatures extends Species {
-  Features: FeatureNoDate[];
+interface SpeciesWithFeaturesAndChoices extends Species {
+  Choices: Choice[];
+  Features: FeatureInfo[];
 }
 export interface SubSpeciesInfo extends SubSpecies {
-  species: SpeciesWithFeatures;
-  Features: FeatureNoDate[];
+  species: SpeciesWithFeaturesAndChoices;
+  Features: FeatureInfo[];
   User: {
     username: string | null;
   } | null;
@@ -62,7 +74,7 @@ export interface ItemInfo extends Item {
   } | null;
   ItemWeaponData: ItemWeaponDataInfo | null;
   Armor: ArmorInfo | null;
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
   Tool: ToolInfo | null;
   AmmunitionFor: Weapon[] | null;
   EquipmentPack: EquipmentPack | null;
@@ -73,7 +85,7 @@ export interface WeaponPropertyInstanceInfo extends WeaponPropertyInstance {
   Property: WeaponProperty;
 }
 export interface WeaponInfo extends Weapon {
-  SpecialProperties: FeatureNoDate[];
+  SpecialProperties: FeatureInfo[];
   ammunition: Item | null;
   WeaponPropertyInstance: WeaponPropertyInstanceInfo[];
 }
@@ -84,73 +96,89 @@ export interface CommentInfo extends Comment {
   } | null;
   replies: Comment[];
 }
+
+export interface FeatureWithClassColumn extends Feature {
+  columnedFeatures: ColumnedFeature[];
+  Effects: EffectInfo[];
+}
+
+export interface FeatInfo extends Feat {
+  Features: FeatureInfo[];
+  User: {
+    username: string | null;
+  } | null;
+}
+
+export interface SpellCastingInfo extends SpellCasting {
+  SpellList: SpellList | null;
+}
+
+export interface CharacterInfo extends Omit<Character, 'createdAt'> {
+  User: {
+    id: string;
+    username: string | null;
+  } | null;
+  Background: BackgroundWithFeaturesAndChoices | null;
+  CharacterToClass: CharacterToClassInfo[];
+  SubClasses: SubClassWithFeatures[] | null;
+  Feats: FeatWithFeatures[] | null;
+  CharacterChoiceStatus: CharacterChoiceStatus[];
+  Species: SpeciesWithFeaturesAndChoices | null;
+  SubSpecies: SubSpeciesWithFeaturesAndChoices | null;
+}
+export interface BackgroundWithFeaturesAndChoices extends Background {
+  Features: FeatureInfo[];
+  Choices: Choice[];
+}
+export interface ClassWithFeatures extends Class {
+  Features: FeatureInfo[];
+  SpellcastingFeatures: FeatureInfo[];
+}
+export interface SubClassWithFeatures extends SubClass {
+  Features: FeatureInfo[];
+}
+export interface FeatWithFeatures extends Feat {
+  Features: FeatureInfo[];
+}
+export interface ItemWithFeatures extends Item {
+  Features: FeatureInfo[];
+}
+export interface SubSpeciesWithFeaturesAndChoices extends SubSpecies {
+  Features: FeatureInfo[];
+  Choices: Choice[];
+}
+
+interface CharacterSheetClassInfo extends Class {
+  SpellCasting: SpellCastingInfo | null;
+  Features: FeatureInfo[];
+  Choices: Choice[];
+  SpellcastingFeatures: FeatureInfo[];
+  MultiClassing: ExtendedMulticlassInfo | null;
+}
+export interface ExtendedMulticlassInfo extends MultiClassingInfo {
+  Choices: Choice[];
+}
+
 export interface ClassInfo extends Class {
   SubClasses: SubClass[];
+  MultiClassing: ExtendedMulticlassInfo | null;
   SpellcastingFeatures: FeatureWithClassColumn[];
-  SpellList: SpellList | null;
+  SpellCasting: SpellCastingInfo | null;
+  Choices: Choice[];
   Features: FeatureWithClassColumn[];
   User: {
     username: string | null;
   } | null;
 }
-export interface FeatureWithClassColumn extends Feature {
-  columnedFeatures: ColumnedFeature[];
-}
-
-export interface FeatInfo extends Feat {
-  Features: FeatureNoDate[];
-  User: {
-    username: string | null;
-  } | null;
-}
-export interface CharacterInfo
-  extends Omit<Character, 'createdAt' | 'updatedAt'> {
-  User: {
-    id: string;
-    username: string | null;
-  } | null;
-  Background: Omit<BackgroundWithFeatures, 'createdAt' | 'updatedAt'> | null;
-  Classes:
-    | Omit<ClassWithSpellListAndFeatures, 'createdAt' | 'updatedAt'>[]
-    | null;
-  SubClasses: Omit<SubClassWithFeatures, 'createdAt' | 'updatedAt'>[] | null;
-  Feats: Omit<FeatWithFeatures, 'createdAt' | 'updatedAt'>[] | null;
-  Species: Omit<SpeciesWithFeatures, 'createdAt' | 'updatedAt'> | null;
-  SubSpecies: Omit<SubSpeciesWithFeatures, 'createdAt' | 'updatedAt'> | null;
-
-  // Inventory: any;
-}
-export interface BackgroundWithFeatures extends Background {
-  Features: FeatureNoDate[];
-}
-export interface ClassWithFeatures extends Class {
-  Features: FeatureNoDate[];
-  SpellcastingFeatures: FeatureNoDate[];
-}
-export interface SubClassWithFeatures extends SubClass {
-  Features: FeatureNoDate[];
-}
-export interface FeatWithFeatures extends Feat {
-  Features: FeatureNoDate[];
-}
-export interface ItemWithFeatures extends Item {
-  Features: FeatureNoDate[];
-}
-export interface SubSpeciesWithFeatures extends SubSpecies {
-  Features: FeatureNoDate[];
-}
-
-interface ClassWithSpellListAndFeatures extends Class {
-  SpellList: SpellListInfo | null;
-  Features: FeatureNoDate[];
-  SpellcastingFeatures: FeatureNoDate[];
+export interface CharacterToClassInfo extends CharacterToClass {
+  Class: CharacterSheetClassInfo;
 }
 
 export interface CreatureInfo extends Creature {
   User: {
     username: string | null;
   } | null;
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
   wieldingItems: ItemInfo[];
   armorEquipped: ItemInfo | null;
   shieldEquipped: ItemInfo | null;
@@ -159,17 +187,17 @@ export interface CreatureInfo extends Creature {
   CreatureLimitedSpells: CreatureLimitedSpellWithSpell[];
 }
 export interface ArmorInfo extends Armor {
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
 }
 export interface ToolInfo extends Tool {
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
 }
 export interface BackgroundInfo extends Background {
   User: {
     username: string | null;
   } | null;
 
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
 }
 
 export interface SubClassInfo extends SubClass {
@@ -196,4 +224,39 @@ export interface SpellListInfo extends SpellList {
   Spells: Spell[];
 }
 
-export type FeatureNoDate = Omit<Feature, 'createdAt | updatedAt'>;
+export interface FeatureInfo extends Feature {
+  Effects: EffectInfo[];
+}
+export interface EffectInfoNoGroup extends Effect {
+  Choices: Choice[];
+  EffectToResource: EffectToResourceInfo[];
+  EffectToSpell: EffectToSpellInfo[];
+}
+
+export interface EffectInfo extends EffectInfoNoGroup {
+  EffectGrantsGroup: EffectGrantsGroupInfo[];
+}
+
+export interface FeatureInfo extends Feature {
+  Effects: EffectInfo[];
+}
+
+export interface EffectToSpellInfo extends EffectToSpell {
+  Spell: Spell;
+}
+
+export interface EffectToResourceInfo extends EffectToResource {
+  Resource: CustomResource;
+}
+export interface EffectGrantsGroupInfo extends EffectGrantsGroup {
+  FeatureGroup: FeatureGroupInfo;
+  FeaturesToChooseFrom: FeatureInGroupInfo[];
+}
+
+export interface FeatureInGroupInfo extends Feature {
+  Effects: EffectInfoNoGroup[];
+}
+
+export interface FeatureGroupInfo extends FeatureGroup {
+  FeaturesInGroup: FeatureInGroupInfo[];
+}

@@ -438,57 +438,57 @@ const FighterSubclassFeatures = [
     levels: [18],
   },
   //Eldritch Knight
-  {
-    name: 'Weapon Bond',
-    description:
-      "At 3rd level, you learn a ritual that creates a magical bond between yourself and one weapon. You perform the ritual over the course of 1 hour, which can be done during a short rest. The weapon must be within your reach throughout the ritual, at the conclusion of which you touch the weapon and forge the bond.\n\nOnce you have bonded a weapon to yourself, you can't be disarmed of that weapon unless you are incapacitated. If it is on the same plane of existence, you can summon that weapon as a bonus action on your turn, causing it to teleport instantly to your hand.\n\nYou can have up to two bonded weapons, but can summon only one at a time with your bonus action. If you attempt to bond with a third weapon, you must break the bond with one of the other two.",
-    subClassId: ids.eldritchKnight,
-    levels: [3],
-  },
-  {
-    name: 'War Magic',
-    description:
-      'Beginning at 7th level, when you use your action to cast a cantrip, you can make one weapon attack as a bonus action.',
-    subClassId: ids.eldritchKnight,
-    levels: [7],
-  },
-  {
-    name: 'Eldritch Strike',
-    description:
-      "At 10th level, you learn how to make your weapon strikes undercut a creature's resistance to your spells. When you hit a creature with a weapon attack, that creature has disadvantage on the next saving throw it makes against a spell you cast before the end of your next turn.",
-    subClassId: ids.eldritchKnight,
-    levels: [10],
-  },
-  {
-    name: 'Arcane Charge',
-    description:
-      'At 15th level, you gain the ability to teleport up to 30 feet to an unoccupied space you can see when you use your Action Surge. You can teleport before or after the additional action.',
-    subClassId: ids.eldritchKnight,
-    levels: [15],
-  },
-  {
-    name: 'Improved War Magic',
-    description:
-      'Starting at 18th level, when you use your action to cast a spell, you can make one weapon attack as a bonus action.',
-    subClassId: ids.eldritchKnight,
-    levels: [18],
-  },
-  {
-    spellCastingSubclassId: ids.eldritchKnight,
-    name: 'Cantrips',
-    description:
-      'You learn two cantrips of your choice from the wizard spell list. You learn an additional wizard cantrip of your choice at 10th level.',
+  // {
+  //   name: 'Weapon Bond',
+  //   description:
+  //     "At 3rd level, you learn a ritual that creates a magical bond between yourself and one weapon. You perform the ritual over the course of 1 hour, which can be done during a short rest. The weapon must be within your reach throughout the ritual, at the conclusion of which you touch the weapon and forge the bond.\n\nOnce you have bonded a weapon to yourself, you can't be disarmed of that weapon unless you are incapacitated. If it is on the same plane of existence, you can summon that weapon as a bonus action on your turn, causing it to teleport instantly to your hand.\n\nYou can have up to two bonded weapons, but can summon only one at a time with your bonus action. If you attempt to bond with a third weapon, you must break the bond with one of the other two.",
+  //   subClassId: ids.eldritchKnight,
+  //   levels: [3],
+  // },
+  // {
+  //   name: 'War Magic',
+  //   description:
+  //     'Beginning at 7th level, when you use your action to cast a cantrip, you can make one weapon attack as a bonus action.',
+  //   subClassId: ids.eldritchKnight,
+  //   levels: [7],
+  // },
+  // {
+  //   name: 'Eldritch Strike',
+  //   description:
+  //     "At 10th level, you learn how to make your weapon strikes undercut a creature's resistance to your spells. When you hit a creature with a weapon attack, that creature has disadvantage on the next saving throw it makes against a spell you cast before the end of your next turn.",
+  //   subClassId: ids.eldritchKnight,
+  //   levels: [10],
+  // },
+  // {
+  //   name: 'Arcane Charge',
+  //   description:
+  //     'At 15th level, you gain the ability to teleport up to 30 feet to an unoccupied space you can see when you use your Action Surge. You can teleport before or after the additional action.',
+  //   subClassId: ids.eldritchKnight,
+  //   levels: [15],
+  // },
+  // {
+  //   name: 'Improved War Magic',
+  //   description:
+  //     'Starting at 18th level, when you use your action to cast a spell, you can make one weapon attack as a bonus action.',
+  //   subClassId: ids.eldritchKnight,
+  //   levels: [18],
+  // },
+  // {
+  //   spellCastingSubclassId: ids.eldritchKnight,
+  //   name: 'Cantrips',
+  //   description:
+  //     'You learn two cantrips of your choice from the wizard spell list. You learn an additional wizard cantrip of your choice at 10th level.',
 
-    levels: [3, 10],
-  },
-  {
-    spellCastingSubclassId: ids.eldritchKnight,
-    name: 'Spells Known',
-    description:
-      "You know three 1st-level wizard spells of your choice, two of which you must choose from the abjuration and evocation spells on the wizard spell list.\n\nThe Spells Known column of the Eldritch Knight Spellcasting table shows when you learn more wizard spells of 1st level or higher. Each of these spells must be an abjuration or evocation spell of your choice, and must be of a level for which you have spell slots. For instance, when you reach 7th level in this class, you can learn one new spell of 1st or 2nd level.\n\nThe spells you learn at 8th, 14th, and 20th level can come from any school of magic.\n\nWhenever you gain a level in this class, you can replace one of the wizard spells you know with another spell of your choice from the wizard spell list. The new spell must be of a level for which you have spell slots, and it must be an abjuration or evocation spell, unless you're replacing the spell you gained at 3rd, 8th, 14th, or 20th level from any school of magic.",
+  //   levels: [3, 10],
+  // },
+  // {
+  //   spellCastingSubclassId: ids.eldritchKnight,
+  //   name: 'Spells Known',
+  //   description:
+  //     "You know three 1st-level wizard spells of your choice, two of which you must choose from the abjuration and evocation spells on the wizard spell list.\n\nThe Spells Known column of the Eldritch Knight Spellcasting table shows when you learn more wizard spells of 1st level or higher. Each of these spells must be an abjuration or evocation spell of your choice, and must be of a level for which you have spell slots. For instance, when you reach 7th level in this class, you can learn one new spell of 1st or 2nd level.\n\nThe spells you learn at 8th, 14th, and 20th level can come from any school of magic.\n\nWhenever you gain a level in this class, you can replace one of the wizard spells you know with another spell of your choice from the wizard spell list. The new spell must be of a level for which you have spell slots, and it must be an abjuration or evocation spell, unless you're replacing the spell you gained at 3rd, 8th, 14th, or 20th level from any school of magic.",
 
-    levels: [3],
-  },
+  //   levels: [3],
+  // },
   //psi warrior
   {
     name: 'Psionic Power',

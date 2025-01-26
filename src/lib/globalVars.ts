@@ -5,7 +5,7 @@ export const QUERY_LIMIT = 30;
 export const NAVBAR_HEIGHT_TAILWIND = 'h-16';
 export const NAVBAR_HEIGHT_REM = 4;
 export const EXPANDED_NAVBAR_HEIGHT_REM = 16;
-export const VERSION = '0.12.4';
+export const VERSION = '0.13.17';
 export const officialSources: string[] = Object.values(src).filter(
   (s) => s !== src.homebrew
 );

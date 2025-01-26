@@ -1,6 +1,5 @@
 'use client';
 
-import LocalSyncer from '@/components/Workshop/LocalSyncer/LocalSyncer';
 import WorkshopContainer from '@/components/Workshop/WorkshopContainer/WorkshopContainer';
 import WorkshopContextMenu from '@/components/Workshop/WorkshopContextMenu/SidenavContextMenu';
 import WorkshopSideNav from '@/components/Workshop/WorkshopSideNav/WorkshopSideNav';
@@ -49,7 +48,6 @@ const WorkshopPage = () => {
         <WorkshopSideNav />
         <WorkshopContainer />
       </div>
-      <LocalSyncer />
       <button className="btn" onClick={() => clearWorkshopData()}>
         Clear DB
       </button>

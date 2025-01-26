@@ -3,7 +3,7 @@ import P from '@/Utility/FormatAndSanitize';
 import NewLineParse from '@/Utility/NewLineParse';
 import Link from 'next/link';
 import Tooltip from '@/Utility/Tooltip';
-import FeatureList from '@/components/UI/FeatureList';
+import FeatureList from '@/components/UI/Features/FeatureList';
 import { ArmorType, AssociatedModel, ItemTypes, Rarity } from '@prisma/client';
 import { itemIds } from '../../../../prisma/seeds/Items/ItemIds';
 import JsonTable from '@/Utility/JsonTable';
@@ -17,9 +17,7 @@ const ItemPage = ({ item }: Props) => {
     const tooltip = (
       <Tooltip
         element={`${prop.Property.name}${prop.range ? ` (${prop.range})` : ''}${
-          prop.versatileDamage
-            ? ` (${prop.versatileDamage.formula} ${prop.versatileDamage.type.toCapitalCase().replaceAll('_', ' ')})`
-            : ''
+          prop.versatileDamage ? ` (${prop.versatileDamage})` : ''
         }`}
       >
         {prop.Property.description}
@@ -479,26 +477,7 @@ const ItemPage = ({ item }: Props) => {
                 <ul className="list-disc ">
                   <li className="ml-4">
                     <span className="font-bold">Damage:</span>{' '}
-                    {item.ItemWeaponData.Weapon.damage.length > 0
-                      ? item.ItemWeaponData.Weapon.damage.map((d, index) => {
-                          if (!item.ItemWeaponData) return null;
-                          if (
-                            index ==
-                            item.ItemWeaponData.Weapon.damage.length - 1
-                          ) {
-                            return (
-                              <span key={index}>
-                                {d.formula} {d.type.toCapitalCase()}
-                              </span>
-                            );
-                          }
-                          return (
-                            <span key={index}>
-                              {d.formula} {d.type.toCapitalCase()},{' '}
-                            </span>
-                          );
-                        })
-                      : 'N/A'}
+                    <span>{item.ItemWeaponData.Weapon.damage}</span>
                   </li>
                   <li className="ml-4">
                     <span className="font-bold">Properties:</span>{' '}

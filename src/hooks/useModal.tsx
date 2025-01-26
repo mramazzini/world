@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 
 const useModal = (modalId?: string) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [id, setId] = useState<string>('');
+  const [id, setId] = useState<string>('id');
   const modalRef = useRef<HTMLDialogElement | null>(null);
 
   useEffect(() => {

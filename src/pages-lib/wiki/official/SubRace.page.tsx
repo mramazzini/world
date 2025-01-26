@@ -12,7 +12,6 @@ import '@/lib/string.extensions';
 import JsonTable from '@/Utility/JsonTable';
 import { AssociatedModel } from '@prisma/client';
 import CommentSection from '@/components/CommentSection/CommentSection';
-import { objEqual } from '@/lib/utils/deepEqual';
 import { SubSpeciesInfo } from '@/lib/types/modelInfo';
 const SubSpeciesPage = ({ subSpecies }: Props) => {
   if (!subSpecies) return null;
@@ -26,8 +25,6 @@ const SubSpeciesPage = ({ subSpecies }: Props) => {
     darkvision: TraitStatus;
     abilityScore: TraitStatus;
     languages: TraitStatus;
-    weaponProficiencies: TraitStatus;
-    toolProficiencies: TraitStatus;
   }
   enum TraitStatus {
     NEW = 'NEW',
@@ -89,25 +86,6 @@ const SubSpeciesPage = ({ subSpecies }: Props) => {
           ? TraitStatus.NEW
           : base.languageDescription !== sub.languageDescription &&
               sub.languageDescription !== null
-            ? TraitStatus.REPLACED
-            : TraitStatus.NONE,
-
-      weaponProficiencies:
-        base.weaponProficiencyDescription === null &&
-        sub.weaponProficiencyDescription !== null
-          ? TraitStatus.NEW
-          : base.weaponProficiencyDescription !==
-                sub.weaponProficiencyDescription &&
-              sub.weaponProficiencyDescription !== null
-            ? TraitStatus.REPLACED
-            : TraitStatus.NONE,
-
-      toolProficiencies:
-        base.toolProficiencies === null && sub.toolProficiencies !== null
-          ? TraitStatus.NEW
-          : // @ts-expect-error is chill
-            objEqual(base.toolProficiencies, sub.toolProficiencies) &&
-              sub.toolProficiencies !== null
             ? TraitStatus.REPLACED
             : TraitStatus.NONE,
     };
@@ -205,12 +183,6 @@ const SubSpeciesPage = ({ subSpecies }: Props) => {
                 </h2>
                 <div className="divider m-0"></div>
 
-                <ul className="list-disc pl-4">
-                  {subSpecies.removedTraits.map((trait, index) => (
-                    <li key={index}>{trait}</li>
-                  ))}
-                  {subSpecies.removedTraits.length == 0 && <li>None</li>}
-                </ul>
                 <ul className="list-disc pl-4"></ul>
               </div>
             </div>
@@ -295,27 +267,6 @@ const SubSpeciesPage = ({ subSpecies }: Props) => {
                     species.languageDescription}
                 </p>
               </div>
-              {subSpecies.weaponProficiencyDescription !== null && (
-                <div className="bg-base-200 rounded-xl p-4  max-w-1/3 ">
-                  <h2 className="pb-0 flex justify-between flex-row items-center">
-                    <div>
-                      Weapons{' '}
-                      <Info
-                        tooltip={`A character who is a ${subSpecies.name} has proficiency with the following weapons.`}
-                      />
-                    </div>
-                    {subSpecies.weaponProficiencyDescription !== null ? (
-                      <div className="badge badge-accent">
-                        {subSpecies.name}
-                      </div>
-                    ) : (
-                      <div className="badge badge-neutral">{species.name}</div>
-                    )}
-                  </h2>
-                  <div className="divider m-0"></div>
-                  <p>{subSpecies.weaponProficiencyDescription || 'None'}</p>
-                </div>
-              )}
             </div>
 
             <div className="divider mb-0"></div>
@@ -351,26 +302,23 @@ const SubSpeciesPage = ({ subSpecies }: Props) => {
                 ))}
               </>
             )}
-            {species.Features.map(
-              (trait, index) =>
-                !subSpecies.removedTraits.includes(trait.name) && (
-                  <div key={index} className="bg-base-200 rounded-xl p-4 my-2">
-                    <h3>
-                      {trait.name}{' '}
-                      <div className="badge badge-neutral">{species.name}</div>
-                    </h3>
-                    <div className="divider m-0"></div>
-                    <p>
-                      <P>{trait.description}</P>
-                    </p>
-                    {trait.extendedTable && trait.extendedTable.length > 0 && (
-                      <div className="bg-base-300 mt-4">
-                        <JsonTable json={trait.extendedTable} />
-                      </div>
-                    )}
+            {species.Features.map((trait, index) => (
+              <div key={index} className="bg-base-200 rounded-xl p-4 my-2">
+                <h3>
+                  {trait.name}{' '}
+                  <div className="badge badge-neutral">{species.name}</div>
+                </h3>
+                <div className="divider m-0"></div>
+                <p>
+                  <P>{trait.description}</P>
+                </p>
+                {trait.extendedTable && trait.extendedTable.length > 0 && (
+                  <div className="bg-base-300 mt-4">
+                    <JsonTable json={trait.extendedTable} />
                   </div>
-                )
-            )}
+                )}
+              </div>
+            ))}
           </div>
           <CommentSection
             id={subSpecies.id}

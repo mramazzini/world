@@ -1,86 +1,81 @@
+import useSpellcaster from '@/hooks/CharacterControllers/useSpellcaster';
 import { SpellLevel } from '@/lib/types/types';
-import SpellSection from './SpellSection';
-import { calcProficiency } from '@/Utility/characterStateFunctions/calc/calcProficiency';
 import numberArray from '@/lib/utils/numberArray';
-import PrepareSpellSection from './PrepareSpellSection';
+import numPlace from '@/lib/utils/numPlace';
 import { useAppSelector } from '@/store/hooks';
+import P from '@/Utility/FormatAndSanitize';
 
-//user needs to be able to select spells to prepare, view the rules for spellcasting for their class, and view the spells they have prepared. Any spells automatically granted to them should be readily available as well.
+//Show free spells
+//Show prepared spells
+//Change prepared spell if castertype is prepared
+//show spell slots max + current
+
 const SpellSheet = () => {
-  const character = useAppSelector((state) => state.character);
-  if (!character || !character.state || !character.Classes) return <div></div>;
-  const classObj = character.Classes[0];
-  if (!classObj) return <div></div>;
-  const spellList = classObj.SpellList;
-  if (!spellList) return <div></div>;
-  const spellCastingInfo = classObj.spellCastingInfo;
-  if (!spellCastingInfo) return <div></div>;
-  const spellSlots = character.state.spellSlots;
-  const calcLevel = () => {
-    return character?.state?.classLevels.reduce(
-      (acc, cur) => acc + cur.level,
-      0
-    );
-  };
-  const levelAquired = spellCastingInfo.levelAquired;
-  return character && character.state && levelAquired <= (calcLevel() || 1) ? (
-    <div className="flex flex-col w-full bg-base-200 p-4">
-      <div className="bg-base-300 p-4 rounded-xl">
-        <h2 className="font-bold">
-          {character.Classes[0].name.toCapitalCase()} Spellcasting
-        </h2>
-        <p>You have access to the {spellList.name}. </p>
-        <div className="divider"></div>
-        <h3>Spell Slots</h3>
-        <div className="flex flex-row w-full items-center justify-center bg-neutral text-neutral-content rounded-xl p-4">
-          {numberArray(1, 9).map((level) => {
-            if (!spellSlots) return null;
-            const slots = spellSlots[level as SpellLevel];
-            if (!slots) return null;
-            return (
-              <div
-                key={level}
-                className="flex flex-col items-center justify-center"
-              >
-                <h4>Level {level}</h4>
-                <div className="badge ">{slots} slots</div>
-              </div>
-            );
-          })}{' '}
-        </div>
+  const { spellSlots, currentSpellSlots, freeSpells, preparedSpells } =
+    useAppSelector((state) => state.sheet);
+  return (
+    <div className="grid grid-cols-2 gap-4 bg-base-200 p-4 rounded-xl">
+      <h2 className="divider bg-base-300 p-4 m-0 col-span-2">Spell Slots</h2>
+      <div
+        className={`flex flex-wrap gap-4  items-center justify-center w-full col-span-2`}
+      >
+        {Object.entries(spellSlots).map(([level, slots]) => (
+          <div
+            key={level}
+            className="flex flex-col gap-2 items-center justify-center bg-base-300 p-4 rounded-xl min-w-48"
+          >
+            <p className="badge badge-xl p-4 badge-accent">
+              {numPlace(Number(level))} level
+            </p>
+            <div className="flex gap-2 items-center justify-center">
+              {numberArray(1, slots).map((num) => (
+                <div
+                  key={num}
+                  className={`w-6 h-6 rounded-full  ${
+                    num <= (currentSpellSlots[Number(level) as SpellLevel] || 0)
+                      ? 'bg-primary'
+                      : 'bg-base-300 border border-white'
+                  }`}
+                ></div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
-      <PrepareSpellSection />
-
-      <div className="grid grid-cols-2 gap-4 mt-4"></div>
-
-      <div className="divider"></div>
-
-      {spellList.Spells.map((spell) => {
-        return (
-          <SpellSection
-            key={spell.id}
-            preparedSpell={character.state?.preparedSpells?.includes(spell.id)}
-            spell={spell}
-            alwaysPrepared={character.state?.alwaysPreparedSpells.includes(
-              spell.id
-            )}
-            spellCastingAbility={spellCastingInfo.ability}
-            proficiencyBonus={calcProficiency(calcLevel() || 1)}
-            spellCastingModifier={
-              character.state?.abilityScores[spellCastingInfo.ability] || 0
-            }
-          />
-        );
-      })}
-    </div>
-  ) : (
-    <div className="flex flex-col w-full bg-base-200 p-4">
       <div className="bg-base-300 p-4 rounded-xl">
-        <h2 className="font-bold">
-          {character.Classes[0].name.toCapitalCase()} Spellcasting
-        </h2>
-        <div className="divider m-0"></div>
-        <p>You can cast spells at level {levelAquired} </p>
+        <h2 className="divider  mt-0">Free Spells</h2>
+        <p>Spells you can cast without expending a spell slot.</p>
+        {freeSpells.map((spellId) => (
+          <div
+            key={spellId}
+            className="flex flex-col gap-2 items-center justify-center bg-base-300 p-4 rounded-xl"
+          >
+            <p className=" p-4">
+              {' '}
+              <P>
+                %{spellId}
+                {`{}`}%
+              </P>
+            </p>
+          </div>
+        ))}
+      </div>
+      <div className="bg-base-300 p-4 rounded-xl">
+        <h2 className="divider mt-0">Prepared Spells</h2>
+        <p>Spells you have prepared and can cast by expending a spell slot.</p>
+        {preparedSpells.map((spellId) => (
+          <div
+            key={spellId}
+            className="flex flex-col gap-2 items-center justify-center bg-base-300 p-4 rounded-xl"
+          >
+            <p className="p-4 ">
+              <P>
+                %{spellId}
+                {`{}`}%
+              </P>
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
