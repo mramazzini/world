@@ -7,7 +7,7 @@ import {
   ToolGroup,
   WeaponGroup,
 } from '@prisma/client';
-import { ToolID, WeaponID } from './types';
+import { SpellID, SpellLevel, ToolID, WeaponID } from './types';
 
 export type SetToolProficiencyParams = ToolID[];
 export type SetToolProficiencyOutput = ToolID[];
@@ -23,6 +23,9 @@ export type SetSkillProficiencyOutput = Skill[];
 
 export type SetSkillExpertiseParams = Skill[];
 export type SetSkillExpertiseOutput = Skill[];
+
+export type UpgradeSkillProficiencyToExpertiseParams = null;
+export type UpgradeSkillProficiencyToExpertiseOutput = Skill[];
 
 export type SetSavingThrowProficiencyParams = Ability[];
 export type SetSavingThrowProficiencyOutput = Ability[];
@@ -71,13 +74,34 @@ export type ImproveAbilityScoreParams = {
   increaseValues: number[];
   abilitiesToIncrease: Ability[];
 }[];
+export type SpellLevelsWithCantrip = SpellLevel | 0;
+
+export type AddFreeSpellParams = {
+  fromGroup?: {
+    spellListIds?: string[];
+    levels?: SpellLevelsWithCantrip[];
+  };
+  spellIds?: SpellID[];
+};
+
+export type AddFreeSpellOutput = SpellID[];
+export type AddPreparedSpellParams = {
+  fromGroup?: {
+    spellListIds?: string[];
+    levels?: SpellLevelsWithCantrip[];
+  };
+  fromIds?: SpellID[];
+};
+
+export type AddPreparedSpellOutput = SpellID[];
 
 export type ChoiceModelId =
   | 'speciesId'
   | 'subSpeciesId'
   | 'classId'
   | 'backgroundId'
-  | 'multiClassId';
+  | 'multiClassId'
+  | 'effectId';
 
 export type ImproveAbilityScoreOutput = PrismaJson.AbilityScoreValue[];
 
@@ -93,7 +117,10 @@ export type ChoiceParams =
   | AddToInventoryGroupedParams
   | SetLanguageProficiencyParams
   | SetAbilityScoreParams
-  | ImproveAbilityScoreParams;
+  | ImproveAbilityScoreParams
+  | AddFreeSpellParams
+  | AddPreparedSpellParams
+  | UpgradeSkillProficiencyToExpertiseParams;
 
 export type ChoiceOutput =
   | SetToolProficiencyOutput
@@ -106,7 +133,10 @@ export type ChoiceOutput =
   | AddToInventoryGroupedOutput
   | SetLanguageProficiencyOutput
   | SetAbilityScoreOutput
-  | ImproveAbilityScoreOutput;
+  | ImproveAbilityScoreOutput
+  | AddFreeSpellOutput
+  | AddPreparedSpellOutput
+  | UpgradeSkillProficiencyToExpertiseOutput;
 
 export type ResolverFunction = (result: {
   selections: ChoiceOutput;

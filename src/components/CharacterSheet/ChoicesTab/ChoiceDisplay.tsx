@@ -1,12 +1,12 @@
-import useCharacterChoices from '@/hooks/useCharacterChoices';
 import { useAppSelector } from '@/store/hooks';
 import P from '@/Utility/FormatAndSanitize';
 import { useMemo } from 'react';
 import ChoiceResolverController from './ChoiceResolverController';
 import Link from 'next/link';
+import useChoicesSelector from '@/hooks/useChoicesSelector';
 
 const ChoiceDisplay = () => {
-  const { selectedChoice } = useCharacterChoices();
+  const { selectedChoice } = useChoicesSelector();
   const classes = useAppSelector(
     (state) => state.sheet.rawCharacter?.CharacterToClass
   )?.map((c) => {

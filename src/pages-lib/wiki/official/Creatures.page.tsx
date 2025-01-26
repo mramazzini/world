@@ -16,7 +16,7 @@ import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import '@/lib/string.extensions';
 import { sizeToHitDie } from '@/Utility/sizeToHitdie';
-import FeatureList from '@/components/UI/FeatureList';
+import FeatureList from '@/components/UI/Features/FeatureList';
 import CommentSection from '@/components/CommentSection/CommentSection';
 import WeaponDescription from '@/Utility/WeaponDescription';
 import numPlace from '@/lib/utils/numPlace';

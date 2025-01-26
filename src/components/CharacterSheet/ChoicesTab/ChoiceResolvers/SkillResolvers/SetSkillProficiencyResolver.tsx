@@ -1,13 +1,14 @@
-import useProficiency from '@/hooks/useProficiency';
+import useProficiency from '@/hooks/CharacterControllers/useProficiency';
 import { SetSkillProficiencyParams } from '@/lib/types/protocols';
 import { SkillToText } from '@/lib/utils/toText/SkillToText';
 import P from '@/Utility/FormatAndSanitize';
 import { Choice, Skill } from '@prisma/client';
 import { useMemo, useState } from 'react';
 import ChoiceResolverButton from '../../ChoiceResolverButton';
+import { useAppSelector } from '@/store/hooks';
 
 const SetSkillProficiencyResolver = ({ choice }: { choice: Choice }) => {
-  const { skillProficiencies } = useProficiency();
+  const { skillProficiencies } = useAppSelector((state) => state.sheet);
   const params = choice.fetchParams as SetSkillProficiencyParams;
   const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
 

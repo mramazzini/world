@@ -3,7 +3,6 @@ export type DBMetadata = {
   name: string;
   description: string;
   flavorText: string;
-  updatedAt: Date;
   slug: string;
 };
 

@@ -2,23 +2,24 @@ import { skillAtritbuteMap } from '@/lib/globalVars';
 import { useAppSelector } from '@/store/hooks';
 import { Ability, Skill } from '@prisma/client';
 import { useCallback } from 'react';
-import useProficiency from './useProficiency';
 import { ToolID, WeaponID } from '@/lib/types/types';
-import useAbility from './useAbilityScore';
+import useProficiencySelector from './useProficiencySelector';
 
 const useModifier = () => {
-  const character = useAppSelector((state) => state.sheet.rawCharacter);
-
-  const abilityScores = useAbility();
+  const {
+    rawCharacter: character,
+    abilityScores,
+    proficiencyBonus,
+  } = useAppSelector((state) => state.sheet);
 
   const {
-    proficiencyBonus,
+    isHalfProficientInSkill,
     isProficientInSkill,
     isExpertInSkill,
     isProficientInTool,
     isProficientInWeapon,
     isProficientInSavingThrow,
-  } = useProficiency();
+  } = useProficiencySelector();
 
   const getModifier = useCallback((score: number) => {
     return Math.floor((score - 10) / 2);
@@ -50,12 +51,18 @@ const useModifier = () => {
       const ability = skillAtritbuteMap[skill];
       const abilityScore = abilityScores[ability];
       const modifier = getModifier(abilityScore);
+      const isHalfProficient = isHalfProficientInSkill(skill);
       const isProficient = isProficientInSkill(skill);
       const isExpertise = isExpertInSkill(skill);
       return (
         modifier +
-        (isProficient ? proficiencyBonus : 0) +
-        (isExpertise ? proficiencyBonus * 2 : 0)
+        (isExpertise
+          ? proficiencyBonus * 2
+          : isProficient
+            ? proficiencyBonus
+            : isHalfProficient
+              ? Math.floor(proficiencyBonus / 2)
+              : 0)
       );
     },
     [
@@ -65,6 +72,7 @@ const useModifier = () => {
       getModifier,
       isProficientInSkill,
       isExpertInSkill,
+      isHalfProficientInSkill,
     ]
   );
 

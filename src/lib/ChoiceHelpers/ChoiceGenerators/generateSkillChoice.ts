@@ -40,3 +40,20 @@ export const generateSkillExpertiseChoice = (
     protocol: ChoiceProtocol.SET_SKILL_EXPERTISE,
   };
 };
+
+export const generateUpgradeSkillProficiencyToExpertiseChoice = (
+  id: string,
+  modelId: string,
+  model: ChoiceModelId,
+  description: string,
+  amount?: number
+): Prisma.ChoiceCreateManyInput => {
+  return {
+    id,
+    [model]: modelId,
+    description,
+    fetchParams: null,
+    amountOfOptionToChoose: amount || 1,
+    protocol: ChoiceProtocol.UPGRADE_SKILL_PROFICIENCY_TO_EXPERTISE,
+  };
+};

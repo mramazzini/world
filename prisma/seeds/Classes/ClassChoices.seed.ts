@@ -338,7 +338,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
     'bard-tool-1',
     ids.bard,
     'classId',
-    'Choose a musical instrument.',
+    'Choose 3 musical instruments to be proficient in.',
     [{ type: 'group', group: ToolGroup.INSTRUMENTS }],
     3
   ),

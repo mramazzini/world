@@ -1,4 +1,11 @@
-import { Spell, SubClass, CreatureLimitedSpell } from '@prisma/client';
+import {
+  Spell,
+  SubClass,
+  CreatureLimitedSpell,
+  CustomResource,
+  RefreshEvent,
+} from '@prisma/client';
+import { FeatureInfo } from './modelInfo';
 
 export enum Pages {
   Class = 'Class',
@@ -262,3 +269,39 @@ export type SidebarDisplayData = Array<{
   id: string;
   slug?: string;
 }>;
+
+export interface CharacterFeatures {
+  classes: {
+    id: string;
+    features: FeatureInfo[];
+    name: string;
+  }[];
+  species: {
+    id: string;
+    features: FeatureInfo[];
+    name: string;
+  };
+  background: {
+    id: string;
+    features: FeatureInfo[];
+    name: string;
+  };
+  subclasses: {
+    id: string;
+    features: FeatureInfo[];
+    name: string;
+    classId: string;
+  }[];
+  subSpecies: {
+    id: string;
+    features: FeatureInfo[];
+    name: string;
+  };
+}
+
+export interface ResourceData {
+  resource: CustomResource;
+  max: number;
+  current: number;
+  refreshOn: RefreshEvent;
+}

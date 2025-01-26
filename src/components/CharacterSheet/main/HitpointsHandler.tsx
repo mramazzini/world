@@ -2,16 +2,17 @@
 import { useState } from 'react';
 import { useAppSelector } from '@/store/hooks';
 import useCharacterState from '@/hooks/useCharacter/useCharacterState';
-import useHitpoints from '@/hooks/useHitpoints';
 import Skeleton from '@/components/UI/Skeleton';
+import useHitpointsMutator from '@/hooks/useHitpointsMutator';
 
 const HitPointsHandler = () => {
-  const character = useAppSelector((state) => state.sheet.rawCharacter);
+  const { rawCharacter: character, maxHP } = useAppSelector(
+    (state) => state.sheet
+  );
   const state = useCharacterState();
   const [hpDeltaValue, setHpDeltaValue] = useState<number>(1);
 
-  const { maxhp, currenthp, temphp, applyDamage, applyHealing } =
-    useHitpoints();
+  const { applyDamage, applyHealing } = useHitpointsMutator();
 
   if (!character) return <Skeleton height={100} />;
 
@@ -109,8 +110,10 @@ const HitPointsHandler = () => {
         </div>
         <div className="divider px-2 m-0 border-x border-primary"></div>
         <div className="px-2 text-center border-x text-xl font-bold border-primary flex items-center justify-center">
-          {currenthp} / {maxhp}{' '}
-          {temphp > 0 && <span className="ml-1 text-success">+ {temphp}</span>}
+          {state.currentHp} / {maxHP}{' '}
+          {state.tempHp > 0 && (
+            <span className="ml-1 text-success">+ {state.tempHp}</span>
+          )}
         </div>
         <div className="divider px-2 m-0 border-x border-primary"></div>
         <div className="rounded-b-xl px-2 pb-2 text-center border-primary text-xs border-b border-x font-bold ">

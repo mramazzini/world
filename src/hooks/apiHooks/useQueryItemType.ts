@@ -15,14 +15,14 @@ const useItemTypeQuery = (type: ItemTypes) => {
     const data = await getItemsByType(type);
     setItems(data);
     setLoading(false);
-    await putInDb(item_grouped_DATA_KEY, data);
+    await putInDb(item_grouped_DATA_KEY + '-' + type, data);
     return items;
   }, [items, type]);
 
   useEffect(() => {
     const fetchItemData = async () => {
       try {
-        const cachedData = await getFromDb(item_grouped_DATA_KEY);
+        const cachedData = await getFromDb(item_grouped_DATA_KEY + '-' + type);
 
         if (cachedData) {
           setItems(cachedData as ItemInfo[]);

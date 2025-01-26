@@ -9,18 +9,13 @@ import { getBlogposts } from '@/lib/actions/db/blogpost/read.actions';
 import { BlogPost } from '@prisma/client';
 import HomeSearchBar from '@/components/UI/HomeSearchBar';
 import BlogPostPreview from '@/components/HomePage/BlogPostPreview';
-import Stats from '@/components/HomePage/Stats';
+// import Stats from '@/components/HomePage/Stats';
 import Trivia from '@/components/HomePage/Trivia';
 
 const HomePage = () => {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   useEffect(() => {
     getBlogposts().then((res) => {
-      res.sort((a, b) => {
-        return (
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        );
-      });
       setBlogPosts(res);
     });
   }, []);
@@ -78,20 +73,24 @@ const HomePage = () => {
           </div>
           <div className="divider m-0"></div>
         </div>
+
         <h2 className="text-center my-8 divider divider-primary">Whats New</h2>
         <div className="grid grid-cols-12 w-full gap-4">
-          <section className="col-span-12 md:col-span-7 xl:col-span-4 lg:col-span-5 row-span-1 md:row-span-2 xl:row-span-3 bg-base-300 p-4 rounded-xl">
+          {/* <section className="col-span-12 md:col-span-7 xl:col-span-4 lg:col-span-5 row-span-1 md:row-span-2 xl:row-span-3 bg-base-300 p-4 rounded-xl">
             <Stats />
-          </section>
-          <section className="col-span-12 md:col-span-5 xl:col-span-8 lg:col-span-7 row-span-1  bg-base-300 p-4 rounded-xl">
+          </section> */}
+          <section className="col-span-12  row-span-1  bg-base-300 p-4 rounded-xl">
+            {/* md:col-span-5 xl:col-span-8 lg:col-span-7 */}
             {/* blogpost 1 */}
             {blogPosts[0] && <BlogPostPreview blogPost={blogPosts[0]} />}
           </section>
-          <section className="col-span-12 md:col-span-5 xl:col-span-8 lg:col-span-7 row-span-1 bg-base-300 p-4 rounded-xl ">
+          <section className="col-span-12  row-span-1 bg-base-300 p-4 rounded-xl ">
+            {/* md:col-span-5 xl:col-span-8 lg:col-span-7 */}
             {/* blogpost 2 */}
             {blogPosts[1] && <BlogPostPreview blogPost={blogPosts[1]} />}
           </section>
-          <section className="col-span-12 md:col-span-12  lg:col-span-12  xl:col-span-8 row-span-1 bg-base-300 p-4 rounded-xl">
+          <section className="col-span-12 row-span-1 bg-base-300 p-4 rounded-xl">
+            {/* md:col-span-12  lg:col-span-12  xl:col-span-8  */}
             <div className="bg-base-300 p-4 rounded-xl w-full flex flex-col">
               <h3 className="text-center">Latest Update: The Workshop</h3>
               <time className="text-center divider mt-0 italic">

@@ -8,6 +8,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   //acolyte
   {
     backgroundId: ids.acolyte,
+    unimplemented: true,
     name: 'Shelter of the Faithful',
     description:
       'As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.\n\nYou might also have ties to a specific temple dedicated to your chosen deity or pantheon, and you have a residence there. This could be the temple where you used to serve, if you remain on good terms with it, or a temple where you have found a new home. While near your temple, you can call upon the priests for assistance, provided the assistance you ask for is not hazardous and you remain in good standing with your temple.',
@@ -15,6 +16,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   //anthropologist
   {
     backgroundId: ids.anthropologist,
+    unimplemented: true,
     name: 'Cultural Chameleon',
     description:
       "Before becoming an adventurer, you spent much of your adult life away from your homeland, living among people different from your kin. You came to understand these foreign cultures and the ways of their people, who eventually treated you as one of their own. One culture had more of an influence on you than any other, shaping your beliefs and customs. Choose a species whose culture you've adopted.",
@@ -22,6 +24,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   {
     backgroundId: ids.anthropologist,
     name: 'Adept Linguist',
+    unimplemented: true,
     description:
       "You can communicate with humanoids who don't speak any language you know. You must observe the humanoids interacting with one another for at least 1 day, after which you learn a handful of important words, expressions, and gestures – enough to communicate on a rudimentary level.",
   },
@@ -188,6 +191,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   //cityWatch
   {
     name: "Watcher's Eye",
+    unimplemented: true,
     description:
       "Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former locations rather than the latter.",
     backgroundId: ids.cityWatch,
@@ -966,6 +970,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
     name: 'Harrowing Event',
     description:
       'Prior to becoming an adventurer, your path in life was defined by one dark moment, one fateful decision, or one tragedy. Now you feel a darkness threatening to consume you, and you fear there may be no hope of escape. Choose a harrowing event that haunts you, or roll one on the Harrowing Events table.',
+    unimplemented: true,
     extendedTable: [
       {
         '': {
@@ -1028,6 +1033,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   },
   {
     backgroundId: ids.hauntedOne,
+    unimplemented: true,
     name: 'Heart of Darkness',
     description:
       'Those who look into your eyes can see that you have faced unimaginable horror and that you are no stranger to darkness. Though they might fear you, commoners will extend you every courtesy and do their utmost to help you. Unless you have shown yourself to be a danger to them, they will even take up arms to fight alongside you, should you find yourself facing an enemy alone.',
@@ -1035,6 +1041,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   {
     backgroundId: ids.hermit,
     name: 'Life of Seclusion',
+    unimplemented: true,
     description:
       'What was the reason for your isolation, and what changed to allow you to end your solitude? You can work with your DM to determine the exact nature of your seclusion, or you can choose to roll on the table below to determine the reason behind your seclusion.',
     extendedTable: [
@@ -1085,6 +1092,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   {
     backgroundId: ids.hermit,
     name: 'Discovery',
+    unimplemented: true,
     description:
       'The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery. The exact nature of this revelation depends on the nature of your seclusion. It might be a great truth about the cosmos, the deities, the powerful beings of the outer planes, or the forces of nature. It could be a site that no one else has ever seen. You might have uncovered a fact that has long been forgotten, or unearthed some relic of the past that could rewrite history. It might be information that would be damaging to the people who or consigned you to exile, and hence the reason for your return to society.\n\nWork with your DM to determine the details of your discovery and its impact on the campaign.',
   },
@@ -1116,6 +1124,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   // },
   {
     backgroundId: ids.investigatorSCAG,
+    unimplemented: true,
     name: "Watcher's Eye",
     description:
       "Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former locations rather than the latter.",
@@ -1194,6 +1203,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   //     'Thanks to your noble birth, people are inclined to think the best of you. You are welcome in high society, and people assume you have the right to be wherever you are. The common folk make every effort to accommodate you and avoid your displeasure, and other people of high birth treat you as a member of the same social sphere. You can secure an audience with a local noble if you need to.\n\nalternativly, you can choose to have retainers instead of the position of privilege as described below.\n\nYou have the service of three retainers loyal to your family. These retainers can be attendants or messengers, and one might be a majordomo. Your retainers are commoners who can perform mundane tasks for you, but they do not fight for you, will not follow you into obviously dangerous areas (such as dungeons), and will leave if they are frequently endangered or abused.',
   // },
   {
+    unimplemented: true,
     backgroundId: ids.knightOfTheOrder,
     name: 'Knightly Orders of Faerûn',
     description: `Many who rightfully call themselves "knight" earn that title as part of an order in service to a deity, such as Kelemvor's Eternal Order or Mystra's Knights of the Mystic Fire. Other knightly orders serve a government, royal family, or are the elite military of a feudal state, such as the brutal Warlock Knights of Vaasa. Other knighthoods are secular and non-governmental organizations of warriors who follow a particular philosophy, or consider themselves a kind of extended family, similar to an order of monks. Although there are organizations, such as the Knights of the Shield, that use the trappings of knighthood without necessarily being warriors, most folk of Faerûn who hear the word "knight" think of a mounted warrior in armor beholden to a code. Below are a few knightly organizations.`,
@@ -1223,6 +1233,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
     ],
   },
   {
+    unimplemented: true,
     backgroundId: ids.knightOfTheOrder,
     name: 'Knightly Regard',
     description:
@@ -1280,6 +1291,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   // },
   {
     backgroundId: ids.mercenaryVeteran,
+    unimplemented: true,
     name: 'Mercernaries of the North',
     description:
       'Countless mercenary companies operate up and down the Sword Coast and throughout the North. Most are small-scale operations that employ a dozen to a hundred folk who offer security services, hunt monsters and brigands, or go to war in exchange for gold. Some organizations, such as the Zhentarim, Flaming Fist, and the nation of Mintarn have hundreds or thousands of members and can provide private armies to those with enough funds. A few organizations operating in the North are described below.',
@@ -1310,6 +1322,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   },
   {
     backgroundId: ids.mercenaryVeteran,
+    unimplemented: true,
     name: 'Mercenary Life',
     description:
       'You know the mercenary life as only someone who has experienced it can. You are able to identify mercenary companies by their emblems, and you know a little about any such company, including the names and reputations of its commanders and leaders, and who has hired them recently. You can find the taverns and festhalls where mercenaries abide in any area, as long as you speak the language. You can find mercenary work between adventures sufficient to maintain a comfortable lifestyle.',
@@ -1440,6 +1453,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   {
     backgroundId: ids.runeCarver,
     name: 'Rune Styles',
+    unimplemented: true,
     description:
       'Each rune carver has a unique style and preferred medium. To determine how you make your runes, you can roll on the Rune Style table.',
     extendedTable: [
@@ -1483,6 +1497,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   },
   {
     backgroundId: ids.runeCarver,
+    unimplemented: true,
     name: 'Rune Shaper',
     description: 'You gain the Rune Shaper feat.',
   },
@@ -1517,11 +1532,13 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   // },
   {
     name: "Ship's Passage",
+    unimplemented: true,
     description:
       "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate). Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need. Your DM will determine how long it takes to get where you need to go. In return for your free passage, you and your companions are expected to assist the crew during the voyage.",
     backgroundId: ids.sailor,
   },
   {
+    unimplemented: true,
     name: "I'll patch it!",
     description:
       "Provided you have carpenter's tools and wood, you can perform repairs on a water vehicle. When you use this ability, you restore a number of hit points to the hull of a water vehicle equal to 5 × your proficiency modifier. A vehicle cannot be patched by you in this way again until after it has been pulled ashore and fully repaired.",
@@ -1529,6 +1546,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   },
   {
     backgroundId: ids.sailor,
+    unimplemented: true,
     name: 'Life at Sea',
     description:
       'Your life at sea and in port has shaped you; you can roll on the following table to determine its impact or choose an element that best fits your character.',
@@ -1626,6 +1644,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   {
     backgroundId: ids.soldier,
     name: 'Specialty',
+    unimplemented: true,
     description:
       'During your time as a soldier, you had a specific role to play in your unit or army. Roll a d8 or choose from the options in the table below to determine your role:',
     extendedTable: [
@@ -1650,6 +1669,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
     ],
   },
   {
+    unimplemented: true,
     backgroundId: ids.soldier,
     name: 'Military Rank',
     description:
@@ -1828,12 +1848,13 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   //   description:
   //     'From your time as a merchant, you retain connections with wholesalers, suppliers, and other merchants and entrepreneurs. You can call upon these connections when looking for items or information.',
   // },
-  // {
-  //   backgroundId: ids.gambler,
-  //   name: 'Never Tell Me the Odds',
-  //   description:
-  //     "Odds and probability are your bread and butter. During downtime activities that involve games of chance or figuring odds on the best plan, you can get a solid sense of which choice is likely the best one and which opportunities seem too good to be true, at the DM's determination.",
-  // },
+  {
+    backgroundId: ids.gambler,
+    unimplemented: true,
+    name: 'Never Tell Me the Odds',
+    description:
+      "Odds and probability are your bread and butter. During downtime activities that involve games of chance or figuring odds on the best plan, you can get a solid sense of which choice is likely the best one and which opportunities seem too good to be true, at the DM's determination.",
+  },
   // {
   //   backgroundId: ids.plaintiff,
   //   name: 'Legalese',
@@ -1842,6 +1863,7 @@ const BackgroundFeatures: Prisma.FeatureCreateManyInput[] = [
   // },
   {
     backgroundId: ids.rivalIntern,
+    unimplemented: true,
     name: 'Inside Informant',
     description:
       "You have connections to your previous employer or other groups you dealt with during your previous employment. You can communicate with your contacts, gaining information at the DM's discretion.",

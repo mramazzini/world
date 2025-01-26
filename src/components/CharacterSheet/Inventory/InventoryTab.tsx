@@ -15,7 +15,6 @@ const InventoryTab = () => {
   const [selectedItem, setSelectedItem] = useState<SelectedItemInfo | null>(
     null
   );
-
   return (
     <div className="flex flex-col w-full">
       <div className="grid grid-cols-12 w-full gap-4">

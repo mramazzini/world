@@ -25,4 +25,10 @@ const SpellCastingToSpellSlots = (
   }
 };
 
+export const SpellCastingLevelToSpellSlots = (
+  level: Level
+): PrismaJson.SpellSlots => {
+  return fullCaster[level] || {};
+};
+
 export default SpellCastingToSpellSlots;

@@ -1,11 +1,11 @@
-import useInitiative from '@/hooks/useInitiative';
 import useLog from '@/hooks/useLog';
 import useModifier from '@/hooks/useModifier';
 import Tooltip from '@/Utility/Tooltip';
 import { Ability } from '@prisma/client';
+import { useAppSelector } from '@/store/hooks';
 
 const IntiativeRoller = () => {
-  const initiative = useInitiative();
+  const initiative = useAppSelector((state) => state.sheet.initiative);
   const { getAbilityModifier } = useModifier();
   const { diceLogPush } = useLog();
   return (

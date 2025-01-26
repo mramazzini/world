@@ -1,2 +1,0 @@
--- AlterEnum
-ALTER TYPE "ChoiceProtocol" ADD VALUE 'SET_TOOL_PROFICIENCY_GROUPED';

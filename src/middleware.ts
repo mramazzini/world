@@ -8,6 +8,7 @@ const protectedRoutes = [
   '/dashboard',
   '/workshop',
 ];
+
 const adminRoutes = ['/admin', '/admin/messages'];
 
 export async function middleware(req: NextRequest) {

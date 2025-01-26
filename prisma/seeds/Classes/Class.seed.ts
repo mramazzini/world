@@ -382,6 +382,7 @@ const Classes: Prisma.ClassCreateManyInput[] = [
       ArmorType.MEDIUM,
       ArmorType.HEAVY,
     ],
+    freeSavingThrowProficiencies: [Ability.WIS, Ability.CHA],
     armorProficiencyDescription: `Paladins are proficient with all armor and ^${itemIds.shield}{shields}^.`,
     toolProficiencyDescription: 'Paladins are not proficient with any tools.',
     freeItemIds: [{ item: itemIds.chainMail, quantity: 1 }],

@@ -4,6 +4,7 @@ import {
   DamageTypes,
   Skill,
   Unit,
+  WeaponGroup,
   WorkshopProtocol,
 } from '@prisma/client';
 import {
@@ -25,9 +26,14 @@ import {
 } from './types';
 import { WorkshopItemEditorData } from './workshop';
 import { ChoiceOutput, ChoiceParams } from './protocols';
+import { EquippedState } from '@/hooks/useLoadout';
 
 declare global {
   namespace PrismaJson {
+    interface ResourcesUsed {
+      //[CustomResourceId]: Amount used since last refresh
+      [key: string]: number;
+    }
     interface WorkshopItemData<
       T extends WorkshopItemEditorData = WorkshopItemEditorData,
     > {
@@ -104,33 +110,37 @@ declare global {
       ability: Ability;
       value: number;
     }
+    interface PrerequisiteData {
+      blackList?: boolean; //if true, the player must not have the listed items
+      minLevel?: number;
+      Class?: ClassID;
+      SubClass?: SubClassID;
+      Species?: SpeciesID;
+      SubSpecies?: SubSpeciesID;
+      Background?: BackgroundID;
+      Feat?: FeatID;
+      minAbilityScore?: AbilityScoreValue;
+      Spellcaster?: boolean;
+      hasASpell?: boolean;
+      Spell?: SpellID;
+      weaponProficiency?: WeaponID;
+      martialWeaponProficiency?: boolean;
+      simpleWeaponProficiency?: boolean;
+      armorProficiency?: ArmorID;
+      lightArmorProficiency?: boolean;
+      mediumArmorProficiency?: boolean;
+      heavyArmorProficiency?: boolean;
+      toolProficiency?: ToolID;
+      skillProficiency?: Skill;
+      isWearingArmor?: boolean;
+      isHoldingShield?: boolean;
+      isWieldingWeaponGroup?: WeaponGroup;
+      equippedState?: EquippedState;
+    }
+
     interface Prerequisite {
       protocol: 'AND' | 'OR';
-      data:
-        | {
-            blackList?: boolean; //if true, the player must not have the listed items
-            minLevel?: number;
-            Class?: ClassID;
-            SubClass?: SubClassID;
-            Species?: SpeciesID;
-            SubSpecies?: SubSpeciesID;
-            Background?: BackgroundID;
-            Feat?: FeatID;
-            minAbilityScore?: AbilityScoreValue;
-            Spellcaster?: boolean;
-            hasASpell?: boolean;
-            Spell?: SpellID;
-            weaponProficiency?: WeaponID;
-            martialWeaponProficiency?: boolean;
-            simpleWeaponProficiency?: boolean;
-            armorProficiency?: ArmorID;
-            lightArmorProficiency?: boolean;
-            mediumArmorProficiency?: boolean;
-            heavyArmorProficiency?: boolean;
-            toolProficiency?: ToolID;
-            skillProficiency?: Skill;
-          }[]
-        | Prerequisite[];
+      data: PrerequisiteData[] | Prerequisite[];
     }
 
     interface WeaponPropertyChoice {
@@ -139,19 +149,6 @@ declare global {
         options: WeaponPropertyNames[];
         numberOfChoices: number;
       }[];
-    }
-
-    interface CustomResource {
-      name: string;
-      description: string;
-      max: number; //amount of resource
-      current: number; //current amount of resource
-      resetType: QuantityTime;
-    }
-
-    interface QuantityCustomResource {
-      quantity: number;
-      resource: string; //resource name
     }
 
     type CombatTime =
@@ -247,8 +244,7 @@ declare global {
     }
 
     interface DiceAmount {
-      quantity: number;
-      dice: number;
+      [key: string]: number;
     }
 
     interface SpellSlot {

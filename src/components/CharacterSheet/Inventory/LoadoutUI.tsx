@@ -4,25 +4,23 @@ import numberArray from '@/lib/utils/numberArray';
 import Image from 'next/image';
 import useInventoryMutator from '@/hooks/useInventoryMutator';
 import useCharacterState from '@/hooks/useCharacter/useCharacterState';
-import useInventory from '@/hooks/useInventory';
-import useAbility from '@/hooks/useAbilityScore';
 import useLoadout from '@/hooks/useLoadout';
-import { useArmorClass } from '@/hooks/useArmorClass';
+import { useAppSelector } from '@/store/hooks';
 
 const LoadoutUI = () => {
-  const scores = useAbility();
   const state = useCharacterState();
+  const { weightCarried, abilityScores, armorClass } = useAppSelector(
+    (state) => state.sheet
+  );
   const { unequipItem, unequipArmor } = useInventoryMutator();
-  const armorClass = useArmorClass();
   const { equippedState, handsUsed } = useLoadout();
-  const { weight } = useInventory();
 
   if (!state) return null;
 
   return (
     <div className="grid grid-cols-6 w-full  gap-4 rounded-xl h-full">
       <section
-        className="indicator col-span-2  bg-base-200  p-4 w-full flex justify-center flex-col items-start col-span-6 rounded-xl"
+        className="indicator col-span-2 bg-base-200  p-4 w-full flex justify-center flex-col items-start col-span-6 rounded-xl"
         style={{
           borderTopRightRadius: '0.75rem',
           borderTopLeftRadius: '0.75rem',
@@ -248,10 +246,10 @@ const LoadoutUI = () => {
             Carrying Capacity
           </p>
           <div className="divider m-0" />{' '}
-          <p className="text-center">{Math.round(weight)} lbs carried</p>
+          <p className="text-center">{Math.round(weightCarried)} lbs carried</p>
           <div className="divider m-0" />{' '}
           <p className="text-center items-center flex justify-center pb-3">
-            Max: {scores.STR * 15} lbs
+            Max: {abilityScores.STR * 15} lbs
           </p>
         </div>
       </section>

@@ -1,10 +1,10 @@
-import useCharacterChoices from '@/hooks/useCharacterChoices';
+import useChoicesSelector from '@/hooks/useChoicesSelector';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setActiveChoiceId } from '@/store/sheetSlice';
 import { useEffect } from 'react';
 
 const ChoiceSelector = () => {
-  const { pendingChoices } = useCharacterChoices();
+  const { pendingChoices } = useChoicesSelector();
   const activeChoiceId = useAppSelector((state) => state.sheet.activeChoiceId);
   const dispatch = useAppDispatch();
 

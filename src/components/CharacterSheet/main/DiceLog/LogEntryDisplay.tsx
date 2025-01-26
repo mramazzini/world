@@ -1,5 +1,6 @@
 import { Fragment, useMemo } from 'react';
 import RollDetailsDisplay from './RollDetailDisplay';
+import ToolTipFormula from './TooltipFormula';
 
 interface LogEntryDisplayProps {
   entry: PrismaJson.LogEntry;
@@ -24,7 +25,11 @@ const LogEntryDisplay = ({ entry }: LogEntryDisplayProps) => {
     <Fragment>
       <div className="flex flex-row items-center justify-between ">
         <span className={`ml-2 ${cssValue}`}>
-          {entry.log}{' '}
+          {entry.type == 'dice' ? (
+            <ToolTipFormula formula={entry.log} />
+          ) : (
+            entry.log
+          )}{' '}
           {entry.type === 'dice' && entry.diceRollResult && (
             <RollDetailsDisplay rollDetails={entry.diceRollResult.rolls} />
           )}

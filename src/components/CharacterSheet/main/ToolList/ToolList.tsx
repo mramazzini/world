@@ -1,10 +1,10 @@
 'use client';
 import Image from 'next/image';
-import useInventory from '@/hooks/useInventory';
 import ToolDisplay from './ToolDisplay';
+import { useAppSelector } from '@/store/hooks';
 
 const ToolList = () => {
-  const { tools } = useInventory();
+  const tools = useAppSelector((state) => state.sheet.toolsInInventory);
 
   return (
     <div className="h-full flex flex-col w-full">

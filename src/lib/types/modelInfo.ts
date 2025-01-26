@@ -9,6 +9,11 @@ import {
   ColumnedFeature,
   Comment,
   Creature,
+  CustomResource,
+  Effect,
+  EffectGrantsGroup,
+  EffectToResource,
+  EffectToSpell,
   EquipmentPack,
   Feat,
   Feature,
@@ -43,17 +48,17 @@ export interface SpeciesInfo extends Species {
   User: {
     username: string | null;
   } | null;
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
   Variants: SubSpecies[];
 }
 
 interface SpeciesWithFeaturesAndChoices extends Species {
   Choices: Choice[];
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
 }
 export interface SubSpeciesInfo extends SubSpecies {
   species: SpeciesWithFeaturesAndChoices;
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
   User: {
     username: string | null;
   } | null;
@@ -69,7 +74,7 @@ export interface ItemInfo extends Item {
   } | null;
   ItemWeaponData: ItemWeaponDataInfo | null;
   Armor: ArmorInfo | null;
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
   Tool: ToolInfo | null;
   AmmunitionFor: Weapon[] | null;
   EquipmentPack: EquipmentPack | null;
@@ -80,7 +85,7 @@ export interface WeaponPropertyInstanceInfo extends WeaponPropertyInstance {
   Property: WeaponProperty;
 }
 export interface WeaponInfo extends Weapon {
-  SpecialProperties: FeatureNoDate[];
+  SpecialProperties: FeatureInfo[];
   ammunition: Item | null;
   WeaponPropertyInstance: WeaponPropertyInstanceInfo[];
 }
@@ -94,10 +99,11 @@ export interface CommentInfo extends Comment {
 
 export interface FeatureWithClassColumn extends Feature {
   columnedFeatures: ColumnedFeature[];
+  Effects: EffectInfo[];
 }
 
 export interface FeatInfo extends Feat {
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
   User: {
     username: string | null;
   } | null;
@@ -112,50 +118,41 @@ export interface CharacterInfo extends Omit<Character, 'createdAt'> {
     id: string;
     username: string | null;
   } | null;
-  Background: Omit<
-    BackgroundWithFeaturesAndChoices,
-    'createdAt' | 'updatedAt'
-  > | null;
+  Background: BackgroundWithFeaturesAndChoices | null;
   CharacterToClass: CharacterToClassInfo[];
-  SubClasses: Omit<SubClassWithFeatures, 'createdAt' | 'updatedAt'>[] | null;
-  Feats: Omit<FeatWithFeatures, 'createdAt' | 'updatedAt'>[] | null;
+  SubClasses: SubClassWithFeatures[] | null;
+  Feats: FeatWithFeatures[] | null;
   CharacterChoiceStatus: CharacterChoiceStatus[];
-  Species: Omit<
-    SpeciesWithFeaturesAndChoices,
-    'createdAt' | 'updatedAt'
-  > | null;
-  SubSpecies: Omit<
-    SubSpeciesWithFeaturesAndChoices,
-    'createdAt' | 'updatedAt'
-  > | null;
+  Species: SpeciesWithFeaturesAndChoices | null;
+  SubSpecies: SubSpeciesWithFeaturesAndChoices | null;
 }
 export interface BackgroundWithFeaturesAndChoices extends Background {
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
   Choices: Choice[];
 }
 export interface ClassWithFeatures extends Class {
-  Features: FeatureNoDate[];
-  SpellcastingFeatures: FeatureNoDate[];
+  Features: FeatureInfo[];
+  SpellcastingFeatures: FeatureInfo[];
 }
 export interface SubClassWithFeatures extends SubClass {
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
 }
 export interface FeatWithFeatures extends Feat {
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
 }
 export interface ItemWithFeatures extends Item {
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
 }
 export interface SubSpeciesWithFeaturesAndChoices extends SubSpecies {
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
   Choices: Choice[];
 }
 
 interface CharacterSheetClassInfo extends Class {
   SpellCasting: SpellCastingInfo | null;
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
   Choices: Choice[];
-  SpellcastingFeatures: FeatureNoDate[];
+  SpellcastingFeatures: FeatureInfo[];
   MultiClassing: ExtendedMulticlassInfo | null;
 }
 export interface ExtendedMulticlassInfo extends MultiClassingInfo {
@@ -173,15 +170,15 @@ export interface ClassInfo extends Class {
     username: string | null;
   } | null;
 }
-interface CharacterToClassInfo extends CharacterToClass {
-  Class: Omit<CharacterSheetClassInfo, 'createdAt' | 'updatedAt'>;
+export interface CharacterToClassInfo extends CharacterToClass {
+  Class: CharacterSheetClassInfo;
 }
 
 export interface CreatureInfo extends Creature {
   User: {
     username: string | null;
   } | null;
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
   wieldingItems: ItemInfo[];
   armorEquipped: ItemInfo | null;
   shieldEquipped: ItemInfo | null;
@@ -190,17 +187,17 @@ export interface CreatureInfo extends Creature {
   CreatureLimitedSpells: CreatureLimitedSpellWithSpell[];
 }
 export interface ArmorInfo extends Armor {
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
 }
 export interface ToolInfo extends Tool {
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
 }
 export interface BackgroundInfo extends Background {
   User: {
     username: string | null;
   } | null;
 
-  Features: FeatureNoDate[];
+  Features: FeatureInfo[];
 }
 
 export interface SubClassInfo extends SubClass {
@@ -227,8 +224,39 @@ export interface SpellListInfo extends SpellList {
   Spells: Spell[];
 }
 
-export type FeatureNoDate = Omit<Feature, 'createdAt | updatedAt'>;
+export interface FeatureInfo extends Feature {
+  Effects: EffectInfo[];
+}
+export interface EffectInfoNoGroup extends Effect {
+  Choices: Choice[];
+  EffectToResource: EffectToResourceInfo[];
+  EffectToSpell: EffectToSpellInfo[];
+}
+
+export interface EffectInfo extends EffectInfoNoGroup {
+  EffectGrantsGroup: EffectGrantsGroupInfo[];
+}
+
+export interface FeatureInfo extends Feature {
+  Effects: EffectInfo[];
+}
+
+export interface EffectToSpellInfo extends EffectToSpell {
+  Spell: Spell;
+}
+
+export interface EffectToResourceInfo extends EffectToResource {
+  Resource: CustomResource;
+}
+export interface EffectGrantsGroupInfo extends EffectGrantsGroup {
+  FeatureGroup: FeatureGroupInfo;
+  FeaturesToChooseFrom: FeatureInGroupInfo[];
+}
+
+export interface FeatureInGroupInfo extends Feature {
+  Effects: EffectInfoNoGroup[];
+}
 
 export interface FeatureGroupInfo extends FeatureGroup {
-  FeaturesInGroup: FeatureNoDate[];
+  FeaturesInGroup: FeatureInGroupInfo[];
 }

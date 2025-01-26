@@ -24,6 +24,40 @@ export const getSpells = async (): Promise<SpellInfo[]> => {
   return spells;
 };
 
+export const getSpellsFromGroup = async ({
+  spellListIds,
+  spellLevels,
+}: {
+  spellListIds: string[];
+  spellLevels: number[];
+}): Promise<SpellInfo[]> => {
+  const db = new PrismaClient();
+  const spells = await db.spell.findMany({
+    where: {
+      SpellLists: {
+        some: {
+          id: {
+            in: spellListIds,
+          },
+        },
+      },
+      level: {
+        in: spellLevels,
+      },
+    },
+    include: {
+      SpellLists: true,
+      User: {
+        select: {
+          username: true,
+        },
+      },
+    },
+  });
+  db.$disconnect();
+  return spells;
+};
+
 export const getSpell = async ({
   query,
   type,

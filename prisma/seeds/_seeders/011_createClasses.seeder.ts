@@ -8,6 +8,8 @@ import ClassChoicesSeed from '../Classes/ClassChoices.seed';
 import MulticlassingSeed from '../Classes/MultiClassing.seed';
 import MulticlassingChoicesSeed from '../Classes/MultiClassingChoices.seed';
 import SpellCasterSeed from '../Classes/SpellCaster.seed';
+import ClassFeatureEffectSeed from '../Classes/FeatureEffects.seed';
+import ClassEffectChoices from '../Classes/ClassEffectChoices.seed';
 
 export const createClasses = async (db: PrismaClient) => {
   // Create classes
@@ -153,6 +155,43 @@ export const createClasses = async (db: PrismaClient) => {
     } catch (error) {
       cerr('Error creating class spellcasting info:', _class.classId, error);
       throw new Error('Error creating class spellcasting info');
+    }
+  }
+  //create feature effects
+  cinfo('Creating feature effects');
+  for (const effect of ClassFeatureEffectSeed) {
+    try {
+      cinfo('Creating feature effect:', effect.id);
+      await db.effect.upsert({
+        where: {
+          id: effect.id,
+        },
+        update: effect,
+        create: effect,
+      });
+      cinfo('Feature effect created');
+    } catch (error) {
+      cerr('Error creating feature effect:', effect.id, error);
+      throw new Error('Error creating feature effect');
+    }
+  }
+  cinfo('Feature effects created');
+  //create effect choice
+  cinfo('Creating effect choices');
+  for (const choice of ClassEffectChoices) {
+    try {
+      cinfo('Creating effect choice:', choice.description);
+      await db.choice.upsert({
+        where: {
+          id: choice.id,
+        },
+        update: choice,
+        create: choice,
+      });
+      cinfo('Effect choice created');
+    } catch (error) {
+      cerr('Error creating effect choice:', choice.description, error);
+      throw new Error('Error creating effect choice');
     }
   }
 };

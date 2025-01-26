@@ -1,9 +1,9 @@
 import { ItemID, WeaponID, WeaponPropertyNames } from '@/lib/types/types';
 import { useCallback, useMemo } from 'react';
 import useCharacterState from './useCharacter/useCharacterState';
-import useInventory from './useInventory';
+import { useAppSelector } from '@/store/hooks';
 
-enum EquippedState {
+export enum EquippedState {
   TwoHanded = 'Two Handed',
   OneHanded = 'One Handed',
   DualWield = 'Dual Wielding',
@@ -14,7 +14,11 @@ enum EquippedState {
 
 const useLoadout = () => {
   const state = useCharacterState();
-  const { items, itemAmounts, weapons } = useInventory();
+  const {
+    itemsInInventory: items,
+    itemAmounts,
+    weaponsInInventory: weapons,
+  } = useAppSelector((state) => state.sheet);
 
   const findItem = useCallback(
     (itemID: string) => {
@@ -153,7 +157,7 @@ const useLoadout = () => {
           return false;
       }
     },
-    [state, hasProperty, equippedState, findItem]
+    [state, hasProperty, equippedState, findItem, itemAmounts]
   );
 
   return { hasProperty, canEquip, equippedState, handsUsed };

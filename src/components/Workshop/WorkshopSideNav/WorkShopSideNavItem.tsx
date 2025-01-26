@@ -115,7 +115,6 @@ const WorkshopSideNavItem = ({
               if (childNode.id !== selectedTab) {
                 dispatch(selectTab(childNode.id));
               } else {
-                console.log('renaming', renaming);
                 setIsRenaming(true);
               }
             }}

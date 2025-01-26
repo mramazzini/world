@@ -9,7 +9,7 @@ import { SelectedItemInfo } from './InventoryTab';
 import Loading from '@/components/UI/Loading';
 import useInventoryMutator from '@/hooks/useInventoryMutator';
 import ItemAction from './ItemAction';
-import useInventory from '@/hooks/useInventory';
+import { useAppSelector } from '@/store/hooks';
 interface Props {
   setSelectedItem: (item: PrismaJson.QuantityItem | null) => void;
   selectedItemInfo: SelectedItemInfo | null;
@@ -19,7 +19,7 @@ const ItemPreview = ({ setSelectedItem, selectedItemInfo }: Props) => {
   const [item, setItem] = useState<ItemInfo | null>(null);
   const [loading, setLoading] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const { items } = useInventory();
+  const items = useAppSelector((state) => state.sheet.itemsInInventory);
   const [deleteAmount, setDeleteAmount] = useState(1);
   const { deleteItem } = useInventoryMutator();
 
@@ -43,9 +43,8 @@ const ItemPreview = ({ setSelectedItem, selectedItemInfo }: Props) => {
   }, [selectedItem]);
 
   const inInventory = useMemo(() => {
-    return items.find((i) => i.id === selectedItem?.item);
+    return items.find((i) => i.id === selectedItem?.item) ? true : false;
   }, [selectedItem, items]);
-
   return (
     <div className="flex flex-col w-full h-full ">
       {loading && <Loading />}
@@ -86,6 +85,7 @@ const ItemPreview = ({ setSelectedItem, selectedItemInfo }: Props) => {
                     if (confirmDelete) {
                       deleteItem(selectedItem.item, deleteAmount);
                       setConfirmDelete(false);
+                      setSelectedItem(null);
                     } else {
                       setConfirmDelete(true);
                       setTimeout(() => {

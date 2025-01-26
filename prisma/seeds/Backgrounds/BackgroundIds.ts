@@ -50,7 +50,7 @@ export const backgroundIds = {
   // //aquisitionsInc
   // celebrityAdventurer: '49',
   // failedMerchant: '50',
-  // gambler: '51',
+  gambler: '51',
   // plaintiff: '52',
   rivalIntern: '53',
   //curse of strahd

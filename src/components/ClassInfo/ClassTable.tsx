@@ -17,10 +17,7 @@ const ClassTable = ({ classObj }: Props) => {
   const { spellSlots, loading } = useClassSpellSlots(classObj.id);
   const [expand, setExpand] = useState(false);
 
-  console.log(spellSlots);
-
   if (loading || !spellSlots) return <Loading />;
-
   return (
     <>
       <div className={`overflow-auto ${expand ? 'h-90vh' : 'max-h-[300px]'}`}>
@@ -103,7 +100,7 @@ const ClassTable = ({ classObj }: Props) => {
                         <li>Spellcasting </li>
                       )} */}
                     {features.map((feature, index) => {
-                      const lvls = feature.levels;
+                      const lvls = feature.Effects.map((e) => e.level);
 
                       return (
                         lvls &&

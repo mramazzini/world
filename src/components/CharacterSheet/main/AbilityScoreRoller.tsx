@@ -1,11 +1,11 @@
 import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import { Ability } from '@prisma/client';
 import useModifier from '@/hooks/useModifier';
-import useAbility from '@/hooks/useAbilityScore';
 import useLog from '@/hooks/useLog';
+import { useAppSelector } from '@/store/hooks';
 
 const AbilityScoreRoller = () => {
-  const scores = useAbility();
+  const abilityScores = useAppSelector((state) => state.sheet.abilityScores);
   const { getAbilityModifier } = useModifier();
 
   const { diceLogPush } = useLog();
@@ -58,7 +58,7 @@ const AbilityScoreRoller = () => {
                   className="btn btn-xs btn-accent"
                   onClick={() =>
                     diceLogPush(
-                      `1d20 + ${modifier}`,
+                      `1d20 + ${ability}`,
                       `${AbilityToText(ability)} Check`
                     )
                   }
@@ -68,7 +68,7 @@ const AbilityScoreRoller = () => {
               </div>
               <div className="divider px-2 m-0 border-x border-primary"></div>
               <div className="rounded-b-xl px-2 pb-2 text-center border-primary text-xs border-b border-x font-bold">
-                {scores[ability]}
+                {abilityScores[ability]}
               </div>
             </div>
           </div>

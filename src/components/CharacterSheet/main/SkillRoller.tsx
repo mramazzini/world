@@ -4,8 +4,8 @@ import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import { Skill } from '@prisma/client';
 import { Fragment } from 'react';
 import useModifier from '@/hooks/useModifier';
-import useProficiency from '@/hooks/useProficiency';
 import useLog from '@/hooks/useLog';
+import { useAppSelector } from '@/store/hooks';
 
 interface Props {
   skills: Skill[];
@@ -13,7 +13,13 @@ interface Props {
 
 const SkillRoller = ({ skills }: Props) => {
   const { getSkillModifier, getAbilityModifier } = useModifier();
-  const { proficiencyBonus, skillProficiencies } = useProficiency();
+  const {
+    skillProficiencies,
+    skillExpertises,
+    skillHalfProficiencies,
+    proficiencyBonus,
+  } = useAppSelector((state) => state.sheet);
+
   const { diceLogPush } = useLog();
 
   return (
@@ -49,12 +55,22 @@ const SkillRoller = ({ skills }: Props) => {
                                 : `- ${getAbilityModifier(skillAtritbuteMap[skill])}`}
                             </td>
                           </tr>
-                          {skillProficiencies.includes(skill) && (
+                          {skillExpertises.includes(skill) ? (
                             <tr>
-                              <td>Proficient</td>
+                              <td>Expertise</td>
+                              <td>{`+ ${proficiencyBonus} * 2`}</td>
+                            </tr>
+                          ) : skillProficiencies.includes(skill) ? (
+                            <tr>
+                              <td>Proficiency</td>
                               <td>{`+ ${proficiencyBonus}`}</td>
                             </tr>
-                          )}
+                          ) : skillHalfProficiencies.includes(skill) ? (
+                            <tr>
+                              <td>Half Proficiency</td>
+                              <td>{`+ (${proficiencyBonus} / 2)`}</td>
+                            </tr>
+                          ) : null}
                         </tbody>
                       </table>
                     </div>
@@ -72,7 +88,7 @@ const SkillRoller = ({ skills }: Props) => {
                   onClick={(e) => {
                     e.preventDefault();
                     diceLogPush(
-                      `1d20 + ${getSkillModifier(skill)}`,
+                      `1d20 + ${skill}`,
                       `${skill.toCapitalCase().replaceAll('_', ' ')} Check`
                     );
                   }}

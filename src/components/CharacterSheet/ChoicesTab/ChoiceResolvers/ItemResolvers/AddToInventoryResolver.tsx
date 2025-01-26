@@ -5,12 +5,10 @@ import { Fragment, useCallback, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 import ChoiceResolverButton from '../../ChoiceResolverButton';
 import useInventoryMutator from '@/hooks/useInventoryMutator';
-import useCharacterState from '@/hooks/useCharacter/useCharacterState';
 
 const AddToInventoryResolver = ({ choice }: { choice: Choice }) => {
   const params = choice.fetchParams as AddToInventoryParams;
   const [selected, setSelected] = useState<string[]>([]);
-  const state = useCharacterState();
 
   const { bulkAddToInventory } = useInventoryMutator();
 
@@ -29,11 +27,9 @@ const AddToInventoryResolver = ({ choice }: { choice: Choice }) => {
 
   const beforeSubmit = useCallback(() => {
     //add to inventory
-    console.log(output);
     bulkAddToInventory(output);
-    console.log(state);
     return true;
-  }, [bulkAddToInventory, output, state]);
+  }, [bulkAddToInventory, output]);
 
   return (
     <div>

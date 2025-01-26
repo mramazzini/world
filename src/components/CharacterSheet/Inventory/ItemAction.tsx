@@ -21,7 +21,6 @@ const ItemAction = ({ item }: ItemActionProps) => {
   }, [item, canEquip]);
 
   if (!state) return null;
-
   return item.types.map((type, index) =>
     item.Armor?.armorType == ArmorType.SHIELDS ? (
       <ItemActionButton

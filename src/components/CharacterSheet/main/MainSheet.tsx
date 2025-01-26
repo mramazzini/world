@@ -16,6 +16,8 @@ import DiceLog from './DiceLog/DiceLog';
 import ToolList from './ToolList/ToolList';
 import WeaponList from './WeaponList/WeaponList';
 import Spells from './Spells';
+import Resources from './Resources';
+import RestCharacter from './RestCharacter/RestCharacter';
 
 const MainSheet = () => {
   return (
@@ -52,8 +54,8 @@ const MainSheet = () => {
         <CharacterStats />
       </section>
       {/* Resources (ki, rages, hitdie) */}
-      <section className="bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2 row-span-2">
-        {/* <Resources /> */}
+      <section className="bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2 row-span-1">
+        <Resources />
       </section>
 
       {/* Spellcasting */}
@@ -64,6 +66,10 @@ const MainSheet = () => {
       {/* saving throw */}
       <section className="bg-base-200 rounded-xl p-4 col-span-4 2xl:col-span-2 row-span-2 2xl:row-span-1 ">
         <SavingThrowsRoller />
+      </section>
+      {/* Rest */}
+      <section className="bg-base-200 rounded-xl p-4 col-span-3 2xl:col-span-2 row-span-1">
+        <RestCharacter />
       </section>
 
       {/* Initiative */}

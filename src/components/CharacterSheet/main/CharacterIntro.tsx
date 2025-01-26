@@ -1,18 +1,19 @@
+'use client';
 import { alignmentToText } from '@/Utility/alignmentToText';
 import Image from 'next/image';
 import { Fragment } from 'react';
 import ImageUploadModal from './ImageUploadModal';
 import useModal from '@/hooks/useModal';
-import useLevel from '@/hooks/useLevel';
 import { useAppSelector } from '@/store/hooks';
 import Skeleton from '@/components/UI/Skeleton';
 import useCharacterState from '@/hooks/useCharacter/useCharacterState';
 
 const CharacterIntro = () => {
   const { id, openModal, closeModal } = useModal();
-  const character = useAppSelector((state) => state.sheet.rawCharacter);
+  const { rawCharacter: character, level } = useAppSelector(
+    (state) => state.sheet
+  );
   const state = useCharacterState();
-  const level = useLevel();
 
   if (!character || !state) return <Skeleton height={200} />;
 

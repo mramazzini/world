@@ -6,6 +6,7 @@ import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
 import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { ClassInfo } from '@/lib/types/modelInfo';
+import { FeatureInfoIncludeTemplate } from '../dbIncludeTemplates';
 
 const ClassInfoTemplate = {
   include: {
@@ -16,15 +17,11 @@ const ClassInfoTemplate = {
       },
     },
     Features: {
-      include: {
-        columnedFeatures: true,
-      },
+      include: FeatureInfoIncludeTemplate,
     },
     Choices: true,
     SpellcastingFeatures: {
-      include: {
-        columnedFeatures: true,
-      },
+      include: FeatureInfoIncludeTemplate,
     },
     MultiClassing: {
       include: {
@@ -48,7 +45,6 @@ export async function getClassMetadata(): Promise<DBMetadata[]> {
       description: true,
       flavorText: true,
       slug: true,
-      updatedAt: true,
     },
   });
   await db.$disconnect();

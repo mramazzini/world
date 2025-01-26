@@ -1,2 +1,0 @@
--- AlterEnum
-ALTER TYPE "ChoiceProtocol" ADD VALUE 'IMPROVE_ABILITY_SCORE';

@@ -1,17 +1,17 @@
 import Loading from '@/components/UI/Loading';
 import useLog from '@/hooks/useLog';
 import useModifier from '@/hooks/useModifier';
-import useProficiency from '@/hooks/useProficiency';
 import { ToolInfo } from '@/lib/types/modelInfo';
 import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import Tooltip from '@/Utility/Tooltip';
 import { Ability } from '@prisma/client';
 import { useEffect, useMemo, useState } from 'react';
+import useProficiencySelector from '@/hooks/useProficiencySelector';
 
 const ToolDisplay = ({ tool }: { tool: ToolInfo }) => {
   const [selectedAbility, setSelectedAbility] = useState<Ability>(Ability.STR);
   const { getSkillModifier, getToolModifier } = useModifier();
-  const { isProficientInTool } = useProficiency();
+  const { isProficientInTool } = useProficiencySelector();
   const [toolModifier, setToolModifier] = useState<number>(0);
   const [isProficient, setIsProficient] = useState(false);
   const [loading, setLoading] = useState(true);

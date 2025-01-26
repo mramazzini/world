@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '@/lib/string.extensions';
 import MainSheet from '@/components/CharacterSheet/main/MainSheet';
 import Loading from '@/components/UI/Loading';
-import useCharacter from '@/hooks/useCharacter/useCharacter';
+import useCharacter from '@/hooks/CharacterControllers/useCharacter';
 import CharacterStatsTab from '@/components/CharacterSheet/Stats/CharacterStatsTab';
 import Notes from '@/components/CharacterSheet/Notes/NotesTab';
 import ChoicesTab from '@/components/CharacterSheet/ChoicesTab/ChoicesTab';
@@ -12,6 +12,9 @@ import InventoryTab from '@/components/CharacterSheet/Inventory/InventoryTab';
 import Traits from '@/components/CharacterSheet/Traits/Traits';
 import SpellSheet from '@/components/CharacterSheet/Spells/SpellSheet';
 import AbilityScoreModal from '@/components/CharacterSheet/AbilityScoreModal/AbilityScoreModal';
+import useCharacterLogic from '@/hooks/CharacterControllers/useCharacterLogic';
+import { clearSheetState } from '@/store/sheetSlice';
+import { useAppDispatch } from '@/store/hooks';
 
 type Tab =
   | 'sheet'
@@ -29,6 +32,18 @@ interface Props {
 const CharacterSheet = ({ characterID }: Props) => {
   const [activeTab, setActiveTab] = useState<Tab>('sheet');
   const { loading } = useCharacter(characterID);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    return () => {
+      console.log('clearing sheet state');
+      dispatch(clearSheetState());
+    };
+  }, [dispatch]);
+
+  // A wrapper for all the character logic
+  useCharacterLogic();
 
   return (
     <main className="p-4 md:p-8">
@@ -54,7 +69,7 @@ const CharacterSheet = ({ characterID }: Props) => {
         <Loading />
       ) : (
         <>
-          <div role="tablist" className="tabs tabs-lifted">
+          <div role="tablist" className="tabs tabs-lifted ">
             <input
               type="radio"
               name="charcter_tabs"

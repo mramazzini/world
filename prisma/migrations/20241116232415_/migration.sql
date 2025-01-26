@@ -1,2 +1,0 @@
--- AlterEnum
-ALTER TYPE "ChoiceProtocol" ADD VALUE 'ADD_TO_INVENTORY_GROUPED';

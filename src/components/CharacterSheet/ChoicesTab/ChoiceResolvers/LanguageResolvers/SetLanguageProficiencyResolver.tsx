@@ -1,13 +1,16 @@
-import useProficiency from '@/hooks/useProficiency';
+import useProficiency from '@/hooks/CharacterControllers/useProficiency';
 import { SetLanguageProficiencyParams } from '@/lib/types/protocols';
 import P from '@/Utility/FormatAndSanitize';
 import { Choice, Language } from '@prisma/client';
 import { useMemo, useState } from 'react';
 import ChoiceResolverButton from '../../ChoiceResolverButton';
 import { LanguageToText } from '@/lib/utils/toText/LanguageToText';
+import { useAppSelector } from '@/store/hooks';
 
 const SetLanguageProficiencyResolver = ({ choice }: { choice: Choice }) => {
-  const { languages } = useProficiency();
+  const { proficientLanguages: languages } = useAppSelector(
+    (state) => state.sheet
+  );
   const params = choice.fetchParams as SetLanguageProficiencyParams;
   const [selectedLanguages, setSelectedLanguages] = useState<Language[]>([]);
 

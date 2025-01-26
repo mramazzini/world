@@ -3,7 +3,7 @@ import NewLineParse from '@/Utility/NewLineParse';
 import GenerateTable from '@/components/UI/GenerateTable';
 import Info from '@/components/UI/Info';
 import JsonTable from '@/Utility/JsonTable';
-import FeatureList from '@/components/UI/FeatureList';
+import FeatureList from '@/components/UI/Features/FeatureList';
 import { AssociatedModel } from '@prisma/client';
 import CommentSection from '@/components/CommentSection/CommentSection';
 import { SpeciesInfo } from '@/lib/types/modelInfo';

@@ -28,7 +28,6 @@ const AbilityGroupResolver = ({
     newIncreaseAmountsRemaining.splice(index, 1);
     setIncreaseAmountsRemaining(newIncreaseAmountsRemaining);
   };
-  console.log(selected);
 
   return (
     <div className="bg-base-300 border border-gray-500 p-4 rounded-xl">

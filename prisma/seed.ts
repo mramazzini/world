@@ -18,6 +18,8 @@ import { createCreatures } from './seeds/_seeders/017_createCreatures.seeder';
 import { createTool } from './seeds/_seeders/007_createTools.seeder';
 import createUsers from './seeds/_seeders/022_createMaxyUser.seeder';
 import { createFeatureGroup } from './seeds/_seeders/004_createFeatureGroup.seeder';
+import { createCustomResources } from './seeds/_seeders/000_customResource.seed';
+import { createCharacter } from './seeds/_seeders/020_createCharacter.seeder';
 const db = new PrismaClient();
 
 const seedarr: {
@@ -26,6 +28,12 @@ const seedarr: {
   description: string;
   enabled?: boolean;
 }[] = [
+  {
+    index: '000',
+    callback: createCustomResources,
+    description: 'Creating custom resources from the custom resource seed.',
+    enabled: true,
+  },
   {
     index: '001',
     callback: createSpells,
@@ -104,36 +112,42 @@ const seedarr: {
     description: 'Creating species from the species seed.',
     enabled: true,
   },
+  // {
+  //   index: '015',
+  //   callback: createSubspecies,
+  //   description: 'Creating subspecies from subspecies seed.',
+  //   enabled: true,
+  // },
+  // {
+  //   index: '016',
+  //   callback: createFeats,
+  //   description: 'Creating feats from the species seed.',
+  //   enabled: true,
+  // },
+  // {
+  //   index: '017',
+  //   callback: createCreatures,
+  //   description: 'Creating characters from the character seed.',
+  //   enabled: true,
+  // },
   {
-    index: '015',
-    callback: createSubspecies,
-    description: 'Creating subspecies from subspecies seed.',
-    enabled: true,
-  },
-  {
-    index: '016',
-    callback: createFeats,
-    description: 'Creating feats from the species seed.',
-    enabled: true,
-  },
-  {
-    index: '017',
-    callback: createCreatures,
+    index: '020',
+    callback: createCharacter,
     description: 'Creating characters from the character seed.',
     enabled: true,
   },
-  {
-    index: '021',
-    callback: createBlogPosts,
-    description: 'Creating blogpost from the blogpost seed.',
-    enabled: true,
-  },
-  {
-    index: '022',
-    callback: createUsers,
-    description: 'Creating maxy user from the maxy user seed.',
-    enabled: true,
-  },
+  // {
+  //   index: '021',
+  //   callback: createBlogPosts,
+  //   description: 'Creating blogpost from the blogpost seed.',
+  //   enabled: true,
+  // },
+  // {
+  //   index: '022',
+  //   callback: createUsers,
+  //   description: 'Creating maxy user from the maxy user seed.',
+  //   enabled: true,
+  // },
 ];
 
 const seed = async (db: PrismaClient) => {

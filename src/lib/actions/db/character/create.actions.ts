@@ -99,6 +99,7 @@ export const createCharacter = async (
         deathSavesSuccess: 0,
         hitDieUsedSinceLastRest: [],
         inventory: [..._class.freeItemIds, ...background.freeEquipment],
+        resourcesUsed: {},
         spellSlotsUsedSinceLastRefresh: {},
         pendingLinks: [],
         preparedSpellsIds: [],

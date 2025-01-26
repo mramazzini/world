@@ -16,10 +16,16 @@ const useLog = () => {
         return;
       }
 
+      const newLog = [...state.characterLog, log];
+
+      if (newLog.length > 20) {
+        newLog.shift();
+      }
+
       dispatch(
         setCharacterState({
           ...state,
-          characterLog: [...state.characterLog, log],
+          characterLog: [...newLog],
         })
       );
     },
@@ -40,8 +46,8 @@ const useLog = () => {
   );
 
   const diceLogPush = useCallback(
-    (formula: string, from: string) => {
-      const { total, rolls, status } = rollFormula(formula);
+    async (formula: string, from: string) => {
+      const { total, rolls, status } = await rollFormula(formula);
 
       if (status === 'error') {
         logPush('Invalid formula.', 'error', from);
@@ -60,7 +66,7 @@ const useLog = () => {
         },
       });
     },
-    [dispatchLog, rollFormula]
+    [dispatchLog, rollFormula, logPush]
   );
 
   return { logPush, diceLogPush };

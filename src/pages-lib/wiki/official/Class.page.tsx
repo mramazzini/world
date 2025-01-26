@@ -9,7 +9,7 @@ import '@/lib/string.extensions';
 import Info from '@/components/UI/Info';
 import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import numPlace from '@/lib/utils/numPlace';
-import FeatureList from '@/components/UI/FeatureList';
+import FeatureList from '@/components/UI/Features/FeatureList';
 import CommentSection from '@/components/CommentSection/CommentSection';
 import { ClassInfo, FeatureWithClassColumn } from '@/lib/types/modelInfo';
 import ClassProficiencies from '@/components/ClassInfo/ClassProficiencies';
@@ -17,19 +17,21 @@ import { SpellFocusToText } from '@/lib/utils/toText/SpellFocusToText';
 
 const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
   const spellCastingFeatures = classObj.SpellcastingFeatures.sort((a, b) => {
-    if (a.levels === undefined) return -1; // Put a first if its levels are undefined
-    if (b.levels === undefined) return 1; // Put b first if its levels are undefined
-
-    const minA = Math.min(...a.levels);
-    const minB = Math.min(...b.levels);
+    const minA = Math.min(...a.Effects.map((e) => e.level));
+    const minB = Math.min(...b.Effects.map((e) => e.level));
 
     return minA - minB;
   });
   const lvls = classObj.abilityScoreLevels.sort((a, b) => a - b);
   const regularFeatures = classObj.Features.concat([
     {
-      levels: classObj.abilityScoreLevels,
       name: 'Ability Score Improvement',
+      Effects: lvls.map((lvl) => {
+        return {
+          level: lvl,
+          EffectGrantsGroup: [],
+        };
+      }, []) as unknown as FeatureWithClassColumn['Effects'],
       description: `When you reach ${numPlace(
         lvls[0]
       )} level, and again at ${lvls
@@ -44,9 +46,14 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
         )} you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.`,
     } as unknown as FeatureWithClassColumn,
     {
-      levels: classObj.subClassFeatureLevels,
       name: `Subclass: ${classObj.subClassName}`,
       description: classObj.subClassDescription,
+      Effects: classObj.subClassFeatureLevels.map((lvl) => {
+        return {
+          level: lvl,
+          EffectGrantsGroup: [],
+        };
+      }, []) as unknown as FeatureWithClassColumn['Effects'],
       extendedTable: [
         {
           '': {
@@ -65,15 +72,15 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
       ],
     } as unknown as FeatureWithClassColumn,
   ]).sort((a, b) => {
-    if (a.levels === undefined) return -1; // Put a first if its levels are undefined
-    if (b.levels === undefined) return 1; // Put b first if its levels are undefined
-
-    const minA = Math.min(...a.levels);
-    const minB = Math.min(...b.levels);
+    const minA = Math.min(
+      ...(a.Effects ? a.Effects.map((e) => e.level) : [-1])
+    );
+    const minB = Math.min(
+      ...(b.Effects ? b.Effects.map((e) => e.level) : [-1])
+    );
 
     return minA - minB;
   });
-
   return (
     <main className="p-4 md:p-8">
       {!classObj && <Loading />}

@@ -24,6 +24,7 @@ const useClassSpellSlots = (classId: ClassID) => {
   const spellSlotsByLevel = useCallback(
     (level: Level) => {
       if (!classInfo?.SpellCasting) return {};
+
       return SpellCastingToSpellSlots(classInfo.SpellCasting, level);
     },
     [classInfo]

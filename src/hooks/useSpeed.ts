@@ -1,5 +1,6 @@
-import { useCallback } from 'react';
-import useCombinedSpecies from './useCombinedSpecies';
+import { useAppSelector } from '@/store/hooks';
+import { useCallback, useEffect, useState } from 'react';
+import useDiceRoller from './useDiceRoller';
 
 enum SpeedType {
   WALK = 'WALK',
@@ -11,15 +12,34 @@ enum SpeedType {
 }
 
 const useSpeed = () => {
-  const combinedSpecies = useCombinedSpecies();
+  const combinedSpecies = useAppSelector(
+    (state) => state.sheet.combinedSpecies
+  );
+  const activeEffects = useAppSelector((state) => state.sheet.activeEffects);
+  const { rollFormula } = useDiceRoller();
+  const [speedBonus, setSpeedBonus] = useState(0);
+  useEffect(() => {
+    const getBonus = async () => {
+      let totalBonus = 0;
+      for (const effect of activeEffects) {
+        if (effect.speedBonusFormula) {
+          totalBonus += (await rollFormula(effect.speedBonusFormula)).total;
+        }
+      }
+      return totalBonus;
+    };
+    getBonus().then((bonus) => setSpeedBonus(bonus));
+  }, [activeEffects, rollFormula]);
 
   const getSpeed = useCallback(
     (type: SpeedType): number => {
       if (!combinedSpecies) return 0;
 
+      //TODO add speed bonus from effects
+
       switch (type) {
         case SpeedType.WALK:
-          return combinedSpecies.speed || 0;
+          return (combinedSpecies.speed || 0) + speedBonus;
         case SpeedType.FLY:
           return combinedSpecies.flightSpeed || 0;
         case SpeedType.SWIM:
@@ -33,10 +53,10 @@ const useSpeed = () => {
         case SpeedType.BURROW:
           return combinedSpecies.burrowSpeed || 0;
         case SpeedType.RUN:
-          return combinedSpecies.speed ? combinedSpecies.speed * 2 : 0;
+          return Math.round(getSpeed(SpeedType.WALK) * 2);
       }
     },
-    [combinedSpecies]
+    [combinedSpecies, speedBonus]
   );
 
   return { getSpeed, SpeedType };

@@ -6,7 +6,7 @@ import SubClassTable from './SubClassTable';
 import Info from '../UI/Info';
 
 import NewLineParse from '../../Utility/NewLineParse';
-import FeatureList from '../UI/FeatureList';
+import FeatureList from '../UI/Features/FeatureList';
 interface Props {
   subClass: SubClassInfo;
 }

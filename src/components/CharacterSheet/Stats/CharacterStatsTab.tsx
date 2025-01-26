@@ -1,13 +1,6 @@
 import Info from '@/components/UI/Info';
-import useAbility from '@/hooks/useAbilityScore';
-import { useArmorClass } from '@/hooks/useArmorClass';
 import useCharacterState from '@/hooks/useCharacter/useCharacterState';
-import useHitpoints from '@/hooks/useHitpoints';
-import useInitiative from '@/hooks/useInitiative';
-import useLevel from '@/hooks/useLevel';
 import useModifier from '@/hooks/useModifier';
-import useProficiency from '@/hooks/useProficiency';
-import useSpeed from '@/hooks/useSpeed';
 import { skillAtritbuteMap } from '@/lib/globalVars';
 import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import ArmorTypeToText from '@/lib/utils/toText/ArmorTypeToText';
@@ -18,33 +11,45 @@ import ModelDisplay from '@/Utility/ModelDisplay';
 import { Ability, Skill } from '@prisma/client';
 import Link from 'next/link';
 import { Fragment } from 'react';
+import useProficiencySelector from '@/hooks/useProficiencySelector';
+import useSpeed from '@/hooks/useSpeed';
 
 const CharacterStatsTab = () => {
-  const character = useAppSelector((state) => state.sheet.rawCharacter);
-  const state = useCharacterState();
-  const armorClass = useArmorClass();
-  const level = useLevel();
-  const { maxhp, currenthp, temphp } = useHitpoints();
-  const { isExpertInSkill, isProficientInSkill, isProficientInSavingThrow } =
-    useProficiency();
-  const { getSkillModifier, getSavingThrowModifier } = useModifier();
-  const initiative = useInitiative();
-  const { getSpeed, SpeedType } = useSpeed();
-  const { getAbilityModifier } = useModifier();
-  const abilityScores = useAbility();
-  const dispatch = useAppDispatch();
   const {
+    rawCharacter: character,
     proficiencyBonus,
-    toolGroups,
-    toolIds,
+    proficientToolGroups: toolGroups,
+    proficientToolIds: toolIds,
     skillExpertises,
     skillProficiencies,
-    savingThrows,
-    weaponGroups,
-    weaponIds,
-    armorTypes,
-    languages,
-  } = useProficiency();
+    savingThrowProficiencies: savingThrows,
+    proficientWeaponGroups: weaponGroups,
+    proficientWeaponIds: weaponIds,
+    proficientArmorTypes: armorTypes,
+    proficientLanguages: languages,
+    armorClass,
+    abilityScores,
+    initiative,
+    level,
+    maxHP,
+    passivePerception,
+    darkvision,
+    blindsight,
+    tremorsense,
+    truesight,
+  } = useAppSelector((state) => state.sheet);
+  const state = useCharacterState();
+  const {
+    isExpertInSkill,
+    isProficientInSkill,
+    isProficientInSavingThrow,
+    isHalfProficientInSkill,
+  } = useProficiencySelector();
+  const { getSkillModifier, getSavingThrowModifier } = useModifier();
+  const { getSpeed, SpeedType } = useSpeed();
+  const { getAbilityModifier } = useModifier();
+  const dispatch = useAppDispatch();
+
   return (
     character && (
       <div>
@@ -213,7 +218,7 @@ const CharacterStatsTab = () => {
 
                 <tr>
                   <td>Max Hit Points</td>
-                  <td>{maxhp}</td>
+                  <td>{maxHP}</td>
                   <td>
                     How much damage your character can take before they begin to
                     roll for death saves.
@@ -221,12 +226,12 @@ const CharacterStatsTab = () => {
                 </tr>
                 <tr>
                   <td>Current Hit Points</td>
-                  <td>{currenthp}</td>
+                  <td>{state?.currentHp}</td>
                   <td>How much health your character currently has.</td>
                 </tr>
                 <tr>
                   <td>Temporary Hit Points</td>
-                  <td>{temphp}</td>
+                  <td>{state?.tempHp}</td>
                   <td>
                     Temporary hit points are a buffer that can absorb damage
                     before your character takes real damage.
@@ -273,6 +278,44 @@ const CharacterStatsTab = () => {
                   <td>Burrowing Speed</td>
                   <td>{getSpeed(SpeedType.BURROW)} ft</td>
                   <td>How far your character can move when burrowing.</td>
+                </tr>
+                <tr>
+                  <td>Darkvision</td>
+                  <td>{darkvision} ft</td>
+                  <td>
+                    How far your character can see in darkness. Usually in black
+                    and white.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Blindsight</td>
+                  <td>{blindsight} ft</td>
+                  <td>
+                    How far your character can see without using their eyes.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Tremorsense</td>
+                  <td>{tremorsense} ft</td>
+                  <td>
+                    How far your character can sense vibrations in the ground.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Truesight</td>
+                  <td>{truesight} ft</td>
+                  <td>
+                    How far your character can see through illusions and
+                    invisibility.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Passive Perception</td>
+                  <td>{passivePerception}</td>
+                  <td>
+                    How well your character can notice things without actively
+                    looking.
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -348,7 +391,9 @@ const CharacterStatsTab = () => {
                         ? ' (Expertise)'
                         : isProficientInSkill(skill)
                           ? ' (Proficient)'
-                          : ''}
+                          : isHalfProficientInSkill(skill)
+                            ? ' (Half Proficient)'
+                            : ''}
                     </td>
                   </tr>
                 ))}

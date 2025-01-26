@@ -12,38 +12,6 @@ export const linkCharacterToSubClass = async (
       character: {
         createdAt: true,
       },
-      species: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      feature: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      background: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      class: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      subClass: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      spell: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      feat: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      spellList: {
-        createdAt: true,
-        updatedAt: true,
-      },
     },
   });
 
@@ -58,38 +26,6 @@ export const linkCharacterToFeat = async (
     omit: {
       character: {
         createdAt: true,
-      },
-      species: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      feature: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      background: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      class: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      subClass: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      spell: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      feat: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      spellList: {
-        createdAt: true,
-        updatedAt: true,
       },
     },
   });

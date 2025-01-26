@@ -2,12 +2,16 @@ import Tooltip from '@/Utility/Tooltip';
 import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import { Ability } from '@prisma/client';
 import useModifier from '@/hooks/useModifier';
-import useProficiency from '@/hooks/useProficiency';
 import useLog from '@/hooks/useLog';
+import useProficiencySelector from '@/hooks/useProficiencySelector';
+import { useAppSelector } from '@/store/hooks';
 
 const SavingThrowsRoller = () => {
   const { getAbilityModifier, getSavingThrowModifier } = useModifier();
-  const { proficiencyBonus, isProficientInSavingThrow } = useProficiency();
+  const proficiencyBonus = useAppSelector(
+    (state) => state.sheet.proficiencyBonus
+  );
+  const { isProficientInSavingThrow } = useProficiencySelector();
   const { diceLogPush } = useLog();
   return (
     <div className="border border-primary rounded-xl bg-base-300 flex flex-col items-center p-2 h-full">
@@ -72,7 +76,9 @@ const SavingThrowsRoller = () => {
               onClick={(e) => {
                 e.preventDefault();
                 diceLogPush(
-                  `1d20 + ${getSavingThrowModifier(ability)}`,
+                  `1d20 + ${ability} ${
+                    isProficientInSavingThrow(ability) ? `+ PROF` : ''
+                  }`,
                   `${AbilityToText(ability)} Saving Throw`
                 );
               }}

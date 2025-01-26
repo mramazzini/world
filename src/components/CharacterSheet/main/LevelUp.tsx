@@ -8,21 +8,22 @@ import { useEffect, useState } from 'react';
 import { getClassMetadata } from '@/lib/actions/db/class/read.actions';
 import { DBMetadata } from '@/lib/types/metadata';
 import SidebarMetaSelector from '@/components/Dashboard/SidebarMetaSelector';
-import useCharacterChoices from '@/hooks/useCharacterChoices';
 import { levelUpCharacter } from '@/lib/actions/db/character/update.actions';
-import useLevelByClass from '@/hooks/useLevelByClass';
-import useLevel from '@/hooks/useLevel';
+import useChoicesSelector from '@/hooks/useChoicesSelector';
 
 const LevelUp = () => {
+  const { pendingChoices } = useChoicesSelector();
   const { id } = useModal();
   const dispatch = useAppDispatch();
-  const character = useAppSelector((state) => state.sheet.rawCharacter);
-  const { pendingChoices } = useCharacterChoices();
+  const {
+    rawCharacter: character,
+    level,
+    levelsByClass,
+  } = useAppSelector((state) => state.sheet);
   const [classData, setClassData] = useState<DBMetadata[] | null>(null);
   const [show, setShow] = useState(false);
   const [selectedClass, setSelectedClass] = useState<DBMetadata | null>(null);
-  const levelsByClass = useLevelByClass();
-  const level = useLevel();
+
   const handleLevelUp = async () => {
     if (!selectedClass) return;
     if (!character) return;

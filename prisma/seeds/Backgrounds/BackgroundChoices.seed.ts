@@ -262,6 +262,42 @@ const BackgroundChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
     Object.values(Language) as Language[],
     2
   ),
+  //gambler
+  generateToolProficiencyGroupedChoice(
+    'background-gambler-gaming-set',
+    backgroundIds.gambler,
+    'backgroundId',
+    'Choose a gaming set.',
+    [
+      {
+        type: 'group',
+        group: ToolGroup.GAMING_SETS,
+      },
+    ],
+    1
+  ),
+  generateLanguageProficiencyChoice(
+    'background-gambler-languages',
+    backgroundIds.gambler,
+    'backgroundId',
+    'Choose one language',
+    Object.values(Language) as Language[],
+    1
+  ),
+  generateAddToInventoryGroupedChoice(
+    'background-gambler-dice',
+    backgroundIds.gambler,
+    'backgroundId',
+    'Choose a gaming set to start with.',
+    [
+      {
+        toolGroup: {
+          group: ToolGroup.GAMING_SETS,
+          quantity: 1,
+        },
+      },
+    ]
+  ),
 ];
 
 export default BackgroundChoicesSeed;

@@ -3863,98 +3863,74 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   //     "Nothing gets between me and danger except my fellow adventurers. So I'll be sure to put them there.",
   //   ],
   // },
-  // {
-  //   id: '51',
-  //   name: 'Gambler',
-  //   slug: '',
-  //   description:
-  //     "All you need to make a lot of gold is a little gold. Except at those times when all you need to have no gold at all is a little gold. Whether you're a good gambler or a bad one rarely matters, because no one can divine the whims of Lady Luck. Sometimes you're up, sometimes you're down. But the thing about gambling is that someone is always willing to take a bet.",
-  //   source: src.aquisitions,
-  //   flavorText: 'All you need to make a lot of gold is a little gold.',
-  //   skillProficiencyDescription: 'You are proficient in Deception and Insight.',
-  //   skillProficiencies: {
-  //     default: [Skill.DECEPTION, Skill.INSIGHT],
-  //   },
-  //   toolProficiencyDescription:
-  //     'You are proficient with one type of gaming set.',
-  //   toolProficiencies: {
-  //     choices: [
-  //       {
-  //         numberOfChoices: 1,
-  //         options: [...gamingKitIds],
-  //       },
-  //     ],
-  //   },
-  //   languageProficiencyDescription:
-  //     'You are proficient in one language of your choice.',
-  //   languageProficiencies: {
-  //     choices: [
-  //       {
-  //         numberOfChoices: 1,
-  //         options: Object.values(Language),
-  //       },
-  //     ],
-  //   },
-  //   equipmentDescription: [
-  //     `A set of ${i(itemIds.fineClothes, 'fine clothes')}`,
-  //     `A ${i(itemIds.gamingKit, 'gaming set')}`,
-  //     `A ${i(itemIds.pouch, 'belt pouch')} containing 15 ${i(
-  //       itemIds.goldPiece,
-  //       'gp'
-  //     )}`,
-  //   ],
-  //   equipment: {
-  //     default: [
-  //       { item: itemIds.fineClothes, quantity: 1 },
-  //       { item: itemIds.pouch, quantity: 1 },
-  //       { item: itemIds.goldPiece, quantity: 15 },
-  //     ],
-  //     choices: [
-  //       {
-  //         numberOfChoices: 1,
-  //         options: [
-  //           ...gamingKitItemIds.map((id) => [{ item: id, quantity: 1 }]),
-  //         ],
-  //       },
-  //     ],
-  //   },
-  //   suggestedCharacteristics:
-  //     'Some gamble out of necessity. Others do so out of boredom. Still others become addicted to the thrill of winning or losing everything on a turn of fortune. For some, gambling is less a matter of chance and more a matter of seeking every advantage to ensure the outcome. The best gamblers can lose everything, and the worst gamblers sometimes win. Regardless, you can always tell gamblers by the look in their eyes. Lady Luck haunts them.',
-  //   traits: [
-  //     'I plan for every contingency. Leave nothing to chance!',
-  //     'Every copper wants to be a silver. Each bet is an opportunity.',
-  //     "I'm one of Lady Luck's favored. Anything I try is destined to succeed.",
-  //     "I've lost so much to gambling that I refuse to spend money on anything anymore.",
-  //     "Nothing is certain. Planning is a coward's act.",
-  //     "I can't be sure who I've swindled, cheated, or defeated, so I keep a low profile in public.",
-  //     'The perfect bet is out there somewhere. I just have to keep my eyes open.',
-  //     "I have beaten my addiction, but all it takes is one weak moment and I'll be back at the card table.",
-  //   ],
-  //   ideals: [
-  //     '**Knowledge.** Knowledge is power, and knowing which horse to back is the key to success. (Any)',
-  //     '**Fate.** Whatever happens is fated, regardless of any planning or striving. (Lawful)',
-  //     '**Bravery.** If you want to succeed, you have to take risks. (Chaotic)',
-  //     "**Survival.** You can't win if you're dead. Live to fight another day - when the odds might be more in your favor. (Any)",
-  //     '**Reliability.** When I was in need, I was able to rely on others. Now I want to be the one others rely on. (Good)',
-  //     '**Victory.** Winning is the real measure of a person. In the end, the only thing that matters is the scoreboard. (Evil)',
-  //   ],
-  //   bonds: [
-  //     'One person in particular owes me a lot of money, and I need to keep them alive if I want to be repaid.',
-  //     "I'm loyal to the friend or family member who taught me how to gamble.",
-  //     "The person who saved me from my gambling addiction is the only reason I'm alive today.",
-  //     'A patron once fronted me money in exchange for a percentage of my winnings. I owe them a debt of gratitude. And a lot of cash.',
-  //     "A criminal syndicate I once played for isn't happy I left the game, and its enforcers are looking for me.",
-  //     "Urchins once helped me find marks for my games. Now I'm driven to help them escape the streets.",
-  //   ],
-  //   flaws: [
-  //     "I don't know when to quit. Especially when everyone else is telling me to.",
-  //     'I save my sympathy for my friends, and I have no friends.',
-  //     "You think we're in trouble now? Let me tell you how bad things are likely to get!",
-  //     "You can loan me a little, right? I've got a sure thing. I'll double your money, guaranteed.",
-  //     'I was once a terribly flawed person, like you. Let me tell you how you can save yourself.',
-  //     "I'm a great gambler. I'm just bad at math and logic.",
-  //   ],
-  // },
+  {
+    id: '51',
+    name: 'Gambler',
+    slug: '',
+    description:
+      "All you need to make a lot of gold is a little gold. Except at those times when all you need to have no gold at all is a little gold. Whether you're a good gambler or a bad one rarely matters, because no one can divine the whims of Lady Luck. Sometimes you're up, sometimes you're down. But the thing about gambling is that someone is always willing to take a bet.",
+    source: src.aquisitions,
+    flavorText: 'All you need to make a lot of gold is a little gold.',
+    skillProficiencyDescription: 'You are proficient in Deception and Insight.',
+    freeSkillProficiencies: [Skill.DECEPTION, Skill.INSIGHT],
+
+    toolProficiencyDescription:
+      'You are proficient with one type of gaming set.',
+
+    languageProficiencyDescription:
+      'You are proficient in one language of your choice.',
+
+    equipmentDescription: [
+      `A set of ${i(itemIds.fineClothes, 'fine clothes')}`,
+      `A ${i(itemIds.gamingKit, 'gaming set')}`,
+      `A ${i(itemIds.pouch, 'belt pouch')} containing 15 ${i(
+        itemIds.goldPiece,
+        'gp'
+      )}`,
+    ],
+    freeEquipment: [
+      { item: itemIds.fineClothes, quantity: 1 },
+      { item: itemIds.pouch, quantity: 1 },
+      { item: itemIds.goldPiece, quantity: 15 },
+    ],
+
+    suggestedCharacteristics:
+      'Some gamble out of necessity. Others do so out of boredom. Still others become addicted to the thrill of winning or losing everything on a turn of fortune. For some, gambling is less a matter of chance and more a matter of seeking every advantage to ensure the outcome. The best gamblers can lose everything, and the worst gamblers sometimes win. Regardless, you can always tell gamblers by the look in their eyes. Lady Luck haunts them.',
+    traits: [
+      'I plan for every contingency. Leave nothing to chance!',
+      'Every copper wants to be a silver. Each bet is an opportunity.',
+      "I'm one of Lady Luck's favored. Anything I try is destined to succeed.",
+      "I've lost so much to gambling that I refuse to spend money on anything anymore.",
+      "Nothing is certain. Planning is a coward's act.",
+      "I can't be sure who I've swindled, cheated, or defeated, so I keep a low profile in public.",
+      'The perfect bet is out there somewhere. I just have to keep my eyes open.',
+      "I have beaten my addiction, but all it takes is one weak moment and I'll be back at the card table.",
+    ],
+    ideals: [
+      '**Knowledge.** Knowledge is power, and knowing which horse to back is the key to success. (Any)',
+      '**Fate.** Whatever happens is fated, regardless of any planning or striving. (Lawful)',
+      '**Bravery.** If you want to succeed, you have to take risks. (Chaotic)',
+      "**Survival.** You can't win if you're dead. Live to fight another day - when the odds might be more in your favor. (Any)",
+      '**Reliability.** When I was in need, I was able to rely on others. Now I want to be the one others rely on. (Good)',
+      '**Victory.** Winning is the real measure of a person. In the end, the only thing that matters is the scoreboard. (Evil)',
+    ],
+    bonds: [
+      'One person in particular owes me a lot of money, and I need to keep them alive if I want to be repaid.',
+      "I'm loyal to the friend or family member who taught me how to gamble.",
+      "The person who saved me from my gambling addiction is the only reason I'm alive today.",
+      'A patron once fronted me money in exchange for a percentage of my winnings. I owe them a debt of gratitude. And a lot of cash.',
+      "A criminal syndicate I once played for isn't happy I left the game, and its enforcers are looking for me.",
+      "Urchins once helped me find marks for my games. Now I'm driven to help them escape the streets.",
+    ],
+    flaws: [
+      "I don't know when to quit. Especially when everyone else is telling me to.",
+      'I save my sympathy for my friends, and I have no friends.',
+      "You think we're in trouble now? Let me tell you how bad things are likely to get!",
+      "You can loan me a little, right? I've got a sure thing. I'll double your money, guaranteed.",
+      'I was once a terribly flawed person, like you. Let me tell you how you can save yourself.',
+      "I'm a great gambler. I'm just bad at math and logic.",
+    ],
+  },
   // {
   //   id: '52',
   //   name: 'Plaintiff',

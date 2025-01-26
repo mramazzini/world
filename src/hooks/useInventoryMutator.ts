@@ -4,6 +4,7 @@ import { setCharacterState } from '@/store/sheetSlice';
 import { useCallback } from 'react';
 import { ItemID } from '@/lib/types/types';
 import useLoadout from './useLoadout';
+import { memoizeGetItem } from '@/Utility/Indexed/globalCache';
 
 const useInventoryMutator = () => {
   const state = useCharacterState();
@@ -118,9 +119,38 @@ const useInventoryMutator = () => {
     [dispatch, state]
   );
 
-  const unpackEquipment = useCallback((itemId: ItemID) => {}, []);
+  const deleteItem = useCallback(
+    (itemId: ItemID, amount: number) => {
+      if (!state) return;
+      const itemIndex = state.inventory.findIndex((i) => i.item === itemId);
+      if (itemIndex === -1) return;
+      const newInventory = [...state.inventory];
+      if (newInventory[itemIndex].quantity > amount) {
+        newInventory[itemIndex].quantity -= amount;
+      } else {
+        newInventory.splice(itemIndex, 1);
+      }
 
-  const deleteItem = useCallback((itemId: ItemID, amount: number) => {}, []);
+      dispatch(
+        setCharacterState({
+          ...state,
+          inventory: newInventory,
+        })
+      );
+    },
+    [state, dispatch]
+  );
+
+  const unpackEquipment = useCallback(
+    async (itemId: ItemID) => {
+      const item = await memoizeGetItem({ type: 'id', query: itemId });
+      if (!item || !item.EquipmentPack) return;
+
+      bulkAddToInventory(item.EquipmentPack.itemsQuantity);
+      deleteItem(itemId, 1);
+    },
+    [bulkAddToInventory, deleteItem]
+  );
 
   const unequipItem = useCallback(
     (itemId: ItemID) => {

@@ -5,24 +5,32 @@ import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
+import { FeatureInfoIncludeTemplate } from '../dbIncludeTemplates';
 
 const CharacterInfoTemplate = {
   include: {
     Species: {
       include: {
-        Features: true,
+        Features: {
+          include: FeatureInfoIncludeTemplate,
+        },
+
         Choices: true,
       },
     },
     Background: {
       include: {
-        Features: true,
+        Features: {
+          include: FeatureInfoIncludeTemplate,
+        },
         Choices: true,
       },
     },
     SubClasses: {
       include: {
-        Features: true,
+        Features: {
+          include: FeatureInfoIncludeTemplate,
+        },
       },
     },
     CharacterChoiceStatus: true,
@@ -30,8 +38,12 @@ const CharacterInfoTemplate = {
       include: {
         Class: {
           include: {
-            Features: true,
-            SpellcastingFeatures: true,
+            Features: {
+              include: FeatureInfoIncludeTemplate,
+            },
+            SpellcastingFeatures: {
+              include: FeatureInfoIncludeTemplate,
+            },
             MultiClassing: {
               include: {
                 Choices: true,
@@ -49,12 +61,17 @@ const CharacterInfoTemplate = {
     },
     Feats: {
       include: {
-        Features: true,
+        Features: {
+          include: FeatureInfoIncludeTemplate,
+        },
       },
     },
     SubSpecies: {
       include: {
-        Features: true,
+        Features: {
+          include: FeatureInfoIncludeTemplate,
+        },
+
         Choices: true,
       },
     },
@@ -89,46 +106,6 @@ export const getCharacter = async ({
     omit: {
       character: {
         createdAt: true,
-      },
-      species: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      subSpecies: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      feature: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      background: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      class: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      subClass: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      spell: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      feat: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      spellList: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      spellCasting: {
-        createdAt: true,
-        updatedAt: true,
       },
     },
   });

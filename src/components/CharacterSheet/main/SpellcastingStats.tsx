@@ -1,12 +1,10 @@
 import Tooltip from '@/Utility/Tooltip';
 import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import Image from 'next/image';
-import useSpellcaster from '@/hooks/useSpellcaster';
-import useProficiency from '@/hooks/useProficiency';
 import useCharacterState from '@/hooks/useCharacter/useCharacterState';
 import Skeleton from '@/components/UI/Skeleton';
 import useLog from '@/hooks/useLog';
-import { useAppDispatch } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setActiveSpellCastingClassId } from '@/store/sheetSlice';
 
 const SpellcastingStats = () => {
@@ -14,15 +12,15 @@ const SpellcastingStats = () => {
 
   const state = useCharacterState();
   const {
-    ability,
-    modifier,
+    proficiencyBonus,
+    spellCastingAbility: ability,
+    spellCastingAbilityModifier: modifier,
     isSpellcaster,
     spellSaveDC,
     spellAttackBonus,
     spellcastingClasses,
-  } = useSpellcaster();
+  } = useAppSelector((state) => state.sheet);
   const { diceLogPush } = useLog();
-  const { proficiencyBonus } = useProficiency();
 
   const handleClassChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const classId = e.target.value;
@@ -129,10 +127,7 @@ const SpellcastingStats = () => {
                 className="btn btn-accent btn-xs font-bold join-item"
                 onClick={(e) => {
                   e.preventDefault();
-                  diceLogPush(
-                    `1d20 + ${spellAttackBonus}`,
-                    `Spell Attack Roll`
-                  );
+                  diceLogPush(`1d20 + SPA`, `Spell Attack Roll`);
                 }}
               >
                 + {spellAttackBonus}
