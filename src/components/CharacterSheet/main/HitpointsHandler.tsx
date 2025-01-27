@@ -130,9 +130,25 @@ const HitPointsHandler = () => {
             </button>
             <input
               type="number"
-              className="input input-xs w-12 join-item  border-y-neutral border-2 text-center"
+              className="input input-xs w-12 join-item border-y-neutral border-2 text-center"
               value={hpDeltaValue}
-              onChange={(e) => setHpDeltaValue(parseInt(e.target.value))}
+              onChange={(e) => {
+                const value = e.target.value;
+
+                // Allow empty string to let user clear input
+                if (value === '') {
+                  setHpDeltaValue(0);
+                  return;
+                }
+
+                // Convert value to integer safely
+                const parsedValue = parseInt(value, 10);
+
+                // Check if parsed value is a valid number
+                if (!isNaN(parsedValue)) {
+                  setHpDeltaValue(parsedValue);
+                }
+              }}
             />
 
             <button
