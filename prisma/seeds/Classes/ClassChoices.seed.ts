@@ -13,9 +13,23 @@ import {
   generateAddToInventoryGroupedChoice,
 } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateItemChoice';
 import { generateToolProficiencyGroupedChoice } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateToolChoice';
+import { generateSubclassChoice } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateSubclassChoice';
 
 const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
+  //subclasses
+
+  ...Object.values(ids).map((id) =>
+    generateSubclassChoice(
+      `${id}-subclass-1`,
+      id,
+      'classId',
+      'Choose your subclass.',
+      id
+    )
+  ),
+
   //fighter
+
   generateSkillProficiencyChoice(
     'fighter-skill-1',
     ids.fighter,

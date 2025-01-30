@@ -13,6 +13,7 @@ import AddKnownSpellResolver from './ChoiceResolvers/SpellResolvers/AddKnownSpel
 import SetToolProficiencyGroupedResolver from './ChoiceResolvers/ToolResolvers/Grouped/SetToolProficiencyGroupedResolver';
 import AddFreeSpellResolver from './ChoiceResolvers/SpellResolvers/AddFreeSpellResolver';
 import UpgradeSkillProficiencyToExpertiseResolver from './ChoiceResolvers/SkillResolvers/UpgradeSkillProficiencyToExpertise';
+import ChooseSubclassResolver from './ChoiceResolvers/SubclassResolver/ChooseSubclassResolver';
 
 const ChoiceResolverController = ({ choice }: { choice: Choice }) => {
   switch (choice.protocol) {
@@ -44,6 +45,8 @@ const ChoiceResolverController = ({ choice }: { choice: Choice }) => {
       return <AddKnownSpellResolver choice={choice} />;
     case ChoiceProtocol.UPGRADE_SKILL_PROFICIENCY_TO_EXPERTISE:
       return <UpgradeSkillProficiencyToExpertiseResolver choice={choice} />;
+    case ChoiceProtocol.CHOOSE_SUBCLASS:
+      return <ChooseSubclassResolver choice={choice} />;
     // case ChoiceProtocol.SET_WEAPON_PROFICIENCY:
 
     default:

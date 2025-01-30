@@ -15,7 +15,22 @@ export const linkCharacterToSubClass = async (
     },
   });
 
-  await db.$disconnect();
+  try {
+    await db.character.update({
+      where: { id },
+      data: {
+        SubClasses: {
+          connect: {
+            id: subClassId,
+          },
+        },
+      },
+    });
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await db.$disconnect();
+  }
 };
 
 export const linkCharacterToFeat = async (

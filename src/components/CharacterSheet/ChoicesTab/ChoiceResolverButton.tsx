@@ -15,13 +15,13 @@ const ChoiceResolverButton = ({
   choiceId: string;
 
   // Submission fails if beforeSubmit returns false
-  beforeSubmit?: () => boolean;
+  beforeSubmit?: () => boolean | Promise<boolean>;
 }) => {
   const { resolve, loading } = useChoiceResolver(choiceId);
 
   const handleSubmit = useCallback(async () => {
     if (disabled) return;
-    if (beforeSubmit && !beforeSubmit()) return;
+    if (beforeSubmit && !(await beforeSubmit())) return;
     await resolve(selected);
   }, [disabled, beforeSubmit, resolve, selected]);
 
