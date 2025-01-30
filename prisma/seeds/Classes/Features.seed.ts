@@ -667,6 +667,8 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       'When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.',
       'You have resistance to bludgeoning, piercing, and slashing damage.',
     ],
+    effectChainType: ChainType.REPLACE,
+    unimplemented: false,
   },
   {
     id: fids.unarmoredDefense,
@@ -674,7 +676,8 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     description: `While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a ^${itemIds.shield}{shield}^ and still gain this benefit.`,
     // levels: [1],
     classId: ids.barbarian,
-    unimplemented: true,
+    effectChainType: ChainType.NONE,
+    unimplemented: false,
   },
   {
     id: fids.recklessAttack,
@@ -683,7 +686,8 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       'Starting at 2nd level, you can throw aside all concern for defense to attack with fierce desperation. When you make your first attack on your turn, you can decide to attack recklessly. Doing so gives you advantage on melee weapon attack rolls using Strength during this turn, but attack rolls against you have advantage until your next turn.',
     // levels: [2],
     classId: ids.barbarian,
-    unimplemented: true,
+    effectChainType: ChainType.NONE,
+    unimplemented: false,
   },
   {
     id: fids.dangerSense,
@@ -692,7 +696,8 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       "At 2nd level, you gain an uncanny sense of when things nearby aren't as they should be, giving you an edge when you dodge away from danger. You have advantage on Dexterity saving throws against effects that you can see, such as traps and spells. To gain this benefit, you can't be blinded, deafened, or incapacitated.",
     // levels: [2],
     classId: ids.barbarian,
-    unimplemented: true,
+    effectChainType: ChainType.NONE,
+    unimplemented: false,
   },
   {
     id: fids.primalKnowledge,
@@ -701,7 +706,8 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       'When you reach 3rd level and again at 10th level, you gain proficiency in one skill of your choice from the list of skills available to barbarians at 1st level.',
     // levels: [3, 10],
     classId: ids.barbarian,
-    unimplemented: true,
+    effectChainType: ChainType.ADD,
+    unimplemented: false,
   },
   {
     id: fids.extraAttackBarbarian,
@@ -710,7 +716,8 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       'Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn.',
     // levels: [5],
     classId: ids.barbarian,
-    unimplemented: true,
+    effectChainType: ChainType.NONE,
+    unimplemented: false,
   },
   {
     id: fids.fastMovement,
@@ -719,7 +726,8 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       "Starting at 5th level, your speed increases by 10 feet while you aren't wearing heavy armor.",
     // levels: [5],
     classId: ids.barbarian,
-    unimplemented: true,
+    effectChainType: ChainType.NONE,
+    unimplemented: false,
   },
   {
     id: fids.feralInstinct,
@@ -728,7 +736,8 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       "By 7th level, your instincts are so honed that you have advantage on initiative rolls.\n\nAdditionally, if you are surprised at the beginning of combat and aren't incapacitated, you can act normally on your first turn, but only if you enter your rage before doing anything else on that turn.",
     // levels: [7],
     classId: ids.barbarian,
-    unimplemented: true,
+    effectChainType: ChainType.NONE,
+    unimplemented: false,
   },
   {
     id: fids.instinctivePounce,
@@ -737,7 +746,8 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       'At 7th level, as part of the bonus action you take to enter your rage, you can move up to half your speed.',
     // levels: [7],
     classId: ids.barbarian,
-    unimplemented: true,
+    effectChainType: ChainType.NONE,
+    unimplemented: false,
   },
   {
     id: fids.brutalCritical,
@@ -746,6 +756,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       'Beginning at 9th level, you can roll one additional weapon damage die when determining the extra damage for a critical hit with a melee attack.\n\n This increases to two additional dice at 13th level and three additional dice at 17th level. ',
     // levels: [9, 13, 17],
     classId: ids.barbarian,
+    effectChainType: ChainType.REPLACE,
     unimplemented: true,
   },
   {
@@ -755,7 +766,8 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       "Starting at 11th level, your rage can keep you fighting despite grievous wounds. If you drop to 0 hit points while you're raging and don't die outright, you can make a DC 10 Constitution saving throw. If you succeed, you drop to 1 hit point instead.\n\n Each time you use this feature after the first, the DC increases by 5. When you finish a short or long rest, the DC resets to 10.",
     // levels: [11],
     classId: ids.barbarian,
-    unimplemented: true,
+    effectChainType: ChainType.NONE,
+    unimplemented: false,
   },
   {
     id: fids.persistentRage,
@@ -764,7 +776,8 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       'Beginning at 15th level, your rage is so fierce that it ends early only if you fall unconscious or if you choose to end it.',
     // levels: [15],
     classId: ids.barbarian,
-    unimplemented: true,
+    effectChainType: ChainType.NONE,
+    unimplemented: false,
   },
   {
     id: fids.indomitableMight,
@@ -773,6 +786,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       'Beginning at 18th level, if your total for a Strength check is less than your Strength score, you can use that score in place of the total.',
     // levels: [18],
     classId: ids.barbarian,
+    effectChainType: ChainType.NONE,
     unimplemented: true,
   },
   {
@@ -782,7 +796,8 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       'At 20th level, you embody the power of the wilds. Your Strength and Constitution scores increase by 4. Your maximum for those scores is now 24.',
     // levels: [20],
     classId: ids.barbarian,
-    unimplemented: true,
+    effectChainType: ChainType.NONE,
+    unimplemented: false,
   },
   // // Druid
   {

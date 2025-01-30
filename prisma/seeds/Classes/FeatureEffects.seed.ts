@@ -2555,6 +2555,189 @@ const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
       },
     },
   },
+  {
+    id: ClassFeatureEffectIds.barbarianUnarmoredDefense1,
+    acBonusFormula: 'CON',
+    level: 1,
+    Feature: {
+      connect: {
+        id: fids.unarmoredDefense,
+      },
+    },
+    preRequisite: {
+      protocol: 'AND',
+      data: [
+        {
+          blackList: true,
+          isWearingArmor: true,
+        },
+      ],
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianRecklessAttack2,
+    level: 2,
+    Feature: {
+      connect: {
+        id: fids.recklessAttack,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianDangerSense2,
+    level: 2,
+    Feature: {
+      connect: {
+        id: fids.dangerSense,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianPrimalKnowledge3,
+    level: 3,
+    Feature: {
+      connect: {
+        id: fids.primalKnowledge,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianPrimalKnowledge10,
+    level: 10,
+    Feature: {
+      connect: {
+        id: fids.primalKnowledge,
+      },
+    },
+    parentEffect: {
+      connect: {
+        id: ClassFeatureEffectIds.barbarianPrimalKnowledge3,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianExtraAttack5,
+    level: 5,
+    Feature: {
+      connect: {
+        id: fids.extraAttackBarbarian,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianFastMovement5,
+    level: 5,
+    Feature: {
+      connect: {
+        id: fids.fastMovement,
+      },
+    },
+    speedBonusFormula: '10',
+    preRequisite: {
+      protocol: 'AND',
+      data: [
+        {
+          blackList: true,
+          isWearingArmor: true,
+        },
+      ],
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianFeralInstinct7,
+    level: 7,
+    Feature: {
+      connect: {
+        id: fids.feralInstinct,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianInstinctivePounce7,
+    level: 7,
+    Feature: {
+      connect: {
+        id: fids.instinctivePounce,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianBrutalCritical9,
+    level: 9,
+    Feature: {
+      connect: {
+        id: fids.brutalCritical,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianBrutalCritical13,
+    level: 13,
+    Feature: {
+      connect: {
+        id: fids.brutalCritical,
+      },
+    },
+    parentEffect: {
+      connect: {
+        id: ClassFeatureEffectIds.barbarianBrutalCritical9,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianBrutalCritical17,
+    level: 17,
+    Feature: {
+      connect: {
+        id: fids.brutalCritical,
+      },
+    },
+    parentEffect: {
+      connect: {
+        id: ClassFeatureEffectIds.barbarianBrutalCritical13,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianRelentlessRage11,
+    level: 11,
+    Feature: {
+      connect: {
+        id: fids.relentlessRage,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianPersistentRage15,
+    level: 15,
+    Feature: {
+      connect: {
+        id: fids.persistentRage,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianIndomitableMight18,
+    level: 18,
+    Feature: {
+      connect: {
+        id: fids.indomitableMight,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.barbarianPrimalChampion20,
+    level: 20,
+    Feature: {
+      connect: {
+        id: fids.primalChampion,
+      },
+    },
+    abilityScoreImprovements: [
+      { ability: 'STR', value: 4 },
+      { ability: 'CON', value: 4 },
+    ],
+  },
 ];
 
 export default ClassFeatureEffectSeed;

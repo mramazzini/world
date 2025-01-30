@@ -142,6 +142,7 @@ const useCharacterEffects = () => {
           // Check skill proficiency
         }
         if (condition.isWearingArmor && !equippedArmor) {
+          console.log('isWearingArmor');
           // Check if character is wearing armor
           if (!isBlacklist) return false;
         }

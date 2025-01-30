@@ -2,13 +2,16 @@ import {
   generateFreeSpellChoice,
   generateKnownSpellChoice,
 } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateSpellChoice';
-import { Prisma } from '@prisma/client';
+import { Prisma, Skill } from '@prisma/client';
 import { spellListIds } from '../Spells/SpellLists/SpellLists.seed';
 import { ClassFeatureEffectIds } from './FeatureEffects.seed';
 import { fullCaster } from '@/lib/utils/SpellSlotsUtil';
 import { Level } from '@/lib/types/types';
 import { SpellLevelsWithCantrip } from '@/lib/types/protocols';
-import { generateUpgradeSkillProficiencyToExpertiseChoice } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateSkillChoice';
+import {
+  generateSkillProficiencyChoice,
+  generateUpgradeSkillProficiencyToExpertiseChoice,
+} from '@/lib/ChoiceHelpers/ChoiceGenerators/generateSkillChoice';
 
 const ClassEffectChoices: Prisma.ChoiceCreateInput[] = [
   generateFreeSpellChoice(
@@ -190,6 +193,21 @@ const ClassEffectChoices: Prisma.ChoiceCreateInput[] = [
       },
       1
     )
+  ),
+  // barbarian
+  generateSkillProficiencyChoice(
+    ClassFeatureEffectIds.barbarianPrimalKnowledge3,
+    ClassFeatureEffectIds.barbarianPrimalKnowledge3,
+    'effectId',
+    'Choose 1 skill proficiency from the barbarian skill list',
+    [Skill.ANIMAL_HANDLING, Skill.ATHLETICS, Skill.INTIMIDATION, Skill.NATURE]
+  ),
+  generateSkillProficiencyChoice(
+    ClassFeatureEffectIds.barbarianPrimalKnowledge10,
+    ClassFeatureEffectIds.barbarianPrimalKnowledge10,
+    'effectId',
+    'Choose 1 skill proficiency from the barbarian skill list',
+    [Skill.ANIMAL_HANDLING, Skill.ATHLETICS, Skill.INTIMIDATION, Skill.NATURE]
   ),
 ];
 
