@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 const ChoiceSelector = () => {
   const { pendingChoices } = useChoicesSelector();
   const activeChoiceId = useAppSelector((state) => state.sheet.activeChoiceId);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {

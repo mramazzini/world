@@ -7,7 +7,14 @@ import {
   ToolGroup,
   WeaponGroup,
 } from '@prisma/client';
-import { SpellID, SpellLevel, ToolID, WeaponID } from './types';
+import {
+  ClassID,
+  SpellID,
+  SpellLevel,
+  SubClassID,
+  ToolID,
+  WeaponID,
+} from './types';
 
 export type SetToolProficiencyParams = ToolID[];
 export type SetToolProficiencyOutput = ToolID[];
@@ -83,8 +90,8 @@ export type AddFreeSpellParams = {
   };
   spellIds?: SpellID[];
 };
-
 export type AddFreeSpellOutput = SpellID[];
+
 export type AddPreparedSpellParams = {
   fromGroup?: {
     spellListIds?: string[];
@@ -92,8 +99,10 @@ export type AddPreparedSpellParams = {
   };
   fromIds?: SpellID[];
 };
-
 export type AddPreparedSpellOutput = SpellID[];
+
+export type ChooseSubclassParams = ClassID;
+export type ChooseSubclassOutput = SubClassID;
 
 export type ChoiceModelId =
   | 'speciesId'
@@ -120,7 +129,8 @@ export type ChoiceParams =
   | ImproveAbilityScoreParams
   | AddFreeSpellParams
   | AddPreparedSpellParams
-  | UpgradeSkillProficiencyToExpertiseParams;
+  | UpgradeSkillProficiencyToExpertiseParams
+  | ChooseSubclassParams;
 
 export type ChoiceOutput =
   | SetToolProficiencyOutput
@@ -136,7 +146,8 @@ export type ChoiceOutput =
   | ImproveAbilityScoreOutput
   | AddFreeSpellOutput
   | AddPreparedSpellOutput
-  | UpgradeSkillProficiencyToExpertiseOutput;
+  | UpgradeSkillProficiencyToExpertiseOutput
+  | ChooseSubclassOutput;
 
 export type ResolverFunction = (result: {
   selections: ChoiceOutput;

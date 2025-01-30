@@ -10,10 +10,12 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
     description:
       'You can use your action to exhale destructive energy. It deals acid damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 acid damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.',
     subSpeciesId: subSpeciesIds.blackDragonborn,
+    unimplemented: true,
   },
   {
     name: 'Damage Resistance',
     description: 'You have resistance to acid damage.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.blackDragonborn,
   },
   //blue
@@ -26,6 +28,7 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
   {
     name: 'Damage Resistance',
     description: 'You have resistance to lightning damage.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.blueDragonborn,
   },
   //brass
@@ -33,23 +36,27 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Fire Breath',
     description:
       'You can use your action to exhale destructive energy. It deals fire damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 fire damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.brassDragonborn,
   },
   {
     name: 'Damage Resistance',
     description: 'You have resistance to fire damage.',
     subSpeciesId: subSpeciesIds.brassDragonborn,
+    unimplemented: true,
   },
   //bronze
   {
     name: 'Lightning Breath',
     description:
       'You can use your action to exhale destructive energy. It deals lightning damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 lightning damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.bronzeDragonborn,
   },
   {
     name: 'Damage Resistance',
     description: 'You have resistance to lightning damage.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.bronzeDragonborn,
   },
   //copper
@@ -57,11 +64,13 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Acid Breath',
     description:
       'You can use your action to exhale destructive energy. It deals acid damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 acid damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.copperDragonborn,
   },
   {
     name: 'Damage Resistance',
     description: 'You have resistance to acid damage.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.copperDragonborn,
   },
   //gold
@@ -69,11 +78,13 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Fire Breath',
     description:
       'You can use your action to exhale destructive energy. It deals fire damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 fire damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.goldDragonborn,
   },
   {
     name: 'Damage Resistance',
     description: 'You have resistance to fire damage.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.goldDragonborn,
   },
   //green
@@ -81,11 +92,13 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Poison Breath',
     description:
       'You can use your action to exhale destructive energy. It deals poison damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 poison damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.greenDragonborn,
   },
   {
     name: 'Damage Resistance',
     description: 'You have resistance to poison damage.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.greenDragonborn,
   },
   //red
@@ -93,11 +106,13 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Fire Breath',
     description:
       'You can use your action to exhale destructive energy. It deals fire damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 fire damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.redDragonborn,
   },
   {
     name: 'Damage Resistance',
     description: 'You have resistance to fire damage.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.redDragonborn,
   },
   //silver
@@ -105,11 +120,13 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Cold Breath',
     description:
       'You can use your action to exhale destructive energy. It deals cold damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 cold damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.silverDragonborn,
   },
   {
     name: 'Damage Resistance',
     description: 'You have resistance to cold damage.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.silverDragonborn,
   },
   //white
@@ -117,11 +134,13 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Cold Breath',
     description:
       'You can use your action to exhale destructive energy. It deals cold damage in an area. When you use your breath weapon, all creatures in the area must make a Dexterity saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus.\n\n A creature takes 2d6 cold damage on a failed save, and half as much damage on a successful one. \n\nThe damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. \n\nAfter using your breath weapon, you cannot use it again until you complete a short or long rest.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.whiteDragonborn,
   },
   {
     name: 'Damage Resistance',
     description: 'You have resistance to cold damage.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.whiteDragonborn,
   },
   //dwarves
@@ -130,6 +149,7 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Dwarven Toughness',
     description:
       'Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.hillDwarf,
   },
   //mountain
@@ -137,6 +157,7 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Dwarven Armor Training',
     description: 'You have proficiency with light and medium armor.',
     subSpeciesId: subSpeciesIds.mountainDwarf,
+    unimplemented: true,
   },
   //mark of warading
   // {
@@ -215,18 +236,21 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Elf Weapon Training',
     description:
       'You have proficiency with the longsword, shortsword, shortbow, and longbow.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.highElf,
   },
   {
     name: 'Cantrip',
     description:
       'You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.highElf,
   },
   {
     name: 'Extra Language',
     description:
       'You can speak, read, and write one extra language of your choice.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.highElf,
   },
   //wood elf
@@ -264,18 +288,21 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Cunning Intuition',
     description:
       'Whenever you roll a Dexterity (Stealth) check or a Charisma (Performance) check, roll a d4 and add the number rolled to the total ability check.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.markOfShadow,
   },
   {
     name: 'Shape Shadows',
     description:
       "You know the Minor Illusion cantrip. Starting at 3rd level, you can also cast the Invisibility spell with this trait. Once you cast either spell with this trait, you can't cast that spell again until you finish a long rest. Charisma is your Spellcasting Ability for these spells.",
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.markOfShadow,
   },
   {
     name: 'Spells of the Mark',
     description:
       'if you have the Spellcasting or Pact Magic class features, the spells on the Mark of Shadow Spells table are added to the spell list of your spellcasting class.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.markOfShadow,
     extendedTable: [
       {
@@ -381,12 +408,14 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
     name: "Artificer's Lore",
     description:
       'Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply.',
+    unimplemented: true,
     subSpeciesId: subSpeciesIds.rockGnome,
   },
   {
     name: 'Tinker',
     description:
       "You have proficiency with artisan tools (tinker's tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24 hours (unless you spend 1 hour repairing it to keep the device functioning), or when you use your action to dismantle it; at that time, you can reclaim the materials used to create it. You can have up to three such devices active at a time. When you create a device, choose one of the following options: ",
+    unimplemented: true,
     extendedTable: [
       {
         '': {
@@ -416,18 +445,21 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
   //mark of scribing
   {
     name: 'Gifted Scribe',
+    unimplemented: true,
     description:
       "Whenever you make an Intelligence (History) or an Ability Check involving Calligrapher's Supplies, you can roll a d4 and add the number rolled to the total ability check.",
     subSpeciesId: subSpeciesIds.markOfScribing,
   },
   {
     name: "Scribe's Insight",
+    unimplemented: true,
     description:
       "You know the Message cantrip. You can also cast the Comprehend Languages spell with this trait. Starting at 3rd level, you can also cast the Magic Mouth spell with it. Once you cast either spell with this trait, you can't cast that spell again until you finish a Long Rest. Intelligence is your Spellcasting Ability for these spells.",
     subSpeciesId: subSpeciesIds.markOfScribing,
   },
   {
     name: 'Spells of the Mark',
+    unimplemented: true,
     description:
       'If you have the Spellcasting or Pact Magic class feature, the spells on the Mark of Scribing Spells table are added to the spell list of your Spellcasting class.',
     subSpeciesId: subSpeciesIds.markOfScribing,
@@ -663,6 +695,7 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
   //lightfoot
   {
     name: 'Naturally Stealthy',
+    unimplemented: true,
     description:
       'You can attempt to hide even when you are only obscured by a creature that is at least one size larger than you.',
     subSpeciesId: subSpeciesIds.lightfootHalfling,
@@ -1131,6 +1164,7 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
     subSpeciesId: subSpeciesIds.variantHuman,
     name: 'Feat',
     description: 'You gain one feat of your choice.',
+    unimplemented: true,
   },
   // {
   //   subSpeciesId: subSpeciesIds.aarakocra,
@@ -1140,18 +1174,21 @@ const SubSpeciesFeatureSeed: Prisma.FeatureCreateManyInput[] = [
   // },
   {
     subSpeciesId: subSpeciesIds.protectorAasimar,
+    unimplemented: true,
     name: 'Radiant Soul',
     description:
       "Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing your eyes to glimmer and two luminous, incorporeal wings to sprout from your back. \n\nYour transformation lasts for 1 minute or until you end it as a bonus action. During it, you have a flying speed of 30 feet, and once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level.\n\nOnce you use this trait, you can't use it again until you finish a long rest.",
   },
   {
     subSpeciesId: subSpeciesIds.scourgeAasimar,
+    unimplemented: true,
     name: 'Radiant Consumption',
     description:
       "Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing a searing light to radiate from you, pour out of your eyes and mouth, and threaten to char you. \n\nYour transformation lasts for 1 minute or until you end it as a bonus action. During it, you shed bright light in a 10-foot radius and dim light for an additional 10 feet, and at the end of each of your turns, you and each creature within 10 feet of you take radiant damage equal to half your level (rounded up). In addition, once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level.\n\nOnce you use this trait, you can't use it again until you finish a long rest.",
   },
   {
     subSpeciesId: subSpeciesIds.fallenAasimar,
+    unimplemented: true,
     name: 'Necrotic Shroud',
     description:
       "Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing your eyes to turn into pools of darkness and two skeletal, ghostly, flightless wings to sprout from your back. The instant you transform, other creatures within 10 feet of you that can see you must each succeed on a Charisma saving throw (DC 8 + your proficiency bonus + your Charisma modifier) or become frightened of you until the end of your next turn.\n\nYour transformation lasts for 1 minute or until you end it as a bonus action. During it, once on each of your turns, you can deal extra necrotic damage to one target when you deal damage to it with an attack or a spell. The extra necrotic damage equals your level.\n\nOnce you use this trait, you can't use it again until you finish a long rest.",

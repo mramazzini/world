@@ -23,6 +23,28 @@ export const getSubclassMetadata = async (): Promise<DBMetadata[]> => {
   return res;
 };
 
+export const getSubclassMetadataByClass = async (
+  classID: string
+): Promise<DBMetadata[]> => {
+  const db = new PrismaClient();
+  const res = await db.subClass.findMany({
+    where: {
+      Class: {
+        id: classID,
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      slug: true,
+      flavorText: true,
+    },
+  });
+  await db.$disconnect();
+  return res;
+};
+
 export async function getSubclasses({
   homebrew,
 }: {

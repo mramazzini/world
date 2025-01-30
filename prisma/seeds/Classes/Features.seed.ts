@@ -150,6 +150,18 @@ export const ClassFeatureIds = {
   artificerMagicItemSavant: 'Artificer-Magic Item Savant',
   artificerMagicItemMaster: 'Artificer-Magic Item Master',
   artificerSoulOfArtifice: 'Artificer-Soul of Artifice',
+  bardSubclass: 'Bard-Subclass',
+  clericSubclass: 'Cleric-Subclass',
+  druidSubclass: 'Druid-Subclass',
+  fighterSubclass: 'Fighter-Subclass',
+  monkSubclass: 'Monk-Subclass',
+  paladinSubclass: 'Paladin-Subclass',
+  rangerSubclass: 'Ranger-Subclass',
+  rogueSubclass: 'Rogue-Subclass',
+  sorcererSubclass: 'Sorcerer-Subclass',
+  warlockSubclass: 'Warlock-Subclass',
+  wizardSubclass: 'Wizard-Subclass',
+  artificerSubclass: 'Artificer-Subclass',
 };
 const fids = ClassFeatureIds;
 const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
@@ -357,7 +369,6 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     description: `Each time you gain a wizard level, you can add two wizard spells of your choice to your ^${itemIds.spellBook}{spellbook}^ for free. Each of these spells must be of a level for which you have spell slots, as shown on the Wizard table. On your adventures, you might find other spells that you can add to your ^${itemIds.spellBook}{spellbook}^.`,
   },
 
-  // Bard
   {
     id: fids.bardCantrips,
     name: 'Cantrips',

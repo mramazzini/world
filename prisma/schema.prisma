@@ -505,6 +505,7 @@ enum ChoiceProtocol {
   IMPROVE_ABILITY_SCORE
   ADD_FREE_SPELL
   ADD_KNOWN_SPELL
+  CHOOSE_SUBCLASS
 }
 
 model Choice {

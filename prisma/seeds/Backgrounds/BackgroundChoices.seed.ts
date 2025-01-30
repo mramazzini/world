@@ -10,6 +10,7 @@ import { generateSkillProficiencyChoice } from '@/lib/ChoiceHelpers/ChoiceGenera
 import { generateToolProficiencyGroupedChoice } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateToolChoice';
 
 const BackgroundChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
+  //acolyte
   generateLanguageProficiencyChoice(
     'background-acolyte-languages',
     backgroundIds.acolyte,
