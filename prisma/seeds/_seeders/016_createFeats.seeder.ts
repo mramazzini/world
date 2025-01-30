@@ -45,7 +45,6 @@ export const createFeats = async (db: PrismaClient) => {
         cerr('Feat missing featId field:', featFeature.name);
         throw new Error('Error creating feat feature');
       }
-      //@ts-expect-error Extendedtable is valid
       await createFeature(db, featFeature);
       cinfo('Feat Feature created');
     } catch (error) {
