@@ -24,7 +24,6 @@ export const useArmorClass = () => {
           ac += (await rollFormula(effect.acBonusFormula)).total;
         }
       }
-      console.log(activeEffects);
       dispatch(setArmorClass(ac));
     };
     calcAC();

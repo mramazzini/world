@@ -104,6 +104,16 @@ export type AddPreparedSpellOutput = SpellID[];
 export type ChooseSubclassParams = ClassID;
 export type ChooseSubclassOutput = SubClassID;
 
+export type FeatOrASIParams = null;
+export type FeatOrASIOutput = {
+  featOrASI: 'feat' | 'asi';
+  featId?: string;
+  abilityScoreIncreaseAbilityOne?: Ability;
+  abilityScoreIncreaseAbilityTwo?: Ability;
+  abilityScoreIncreaseValueOne?: number;
+  abilityScoreIncreaseValueTwo?: number;
+};
+
 export type ChoiceModelId =
   | 'speciesId'
   | 'subSpeciesId'

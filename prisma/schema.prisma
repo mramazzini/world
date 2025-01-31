@@ -506,6 +506,7 @@ enum ChoiceProtocol {
   ADD_FREE_SPELL
   ADD_KNOWN_SPELL
   CHOOSE_SUBCLASS
+  SET_FEAT_OR_ASI
 }
 
 model Choice {
@@ -721,6 +722,9 @@ model Effect {
   twoHandedDamage   String?
   unarmedDamageType DamageTypes?
   unarmedModifier   String? //Flat mod to add to all unarmed attacks.
+
+  /// [AbilityScoreValue]
+  abilityScoreImprovements Json[]
 
   speedBonusFormula String?
 
