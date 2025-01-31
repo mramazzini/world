@@ -27,6 +27,7 @@
     "seed": "npx tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@maxmind/geoip2-node": "^5.0.0",
     "@prisma/client": "^5.16.1",
     "@react-pdf/renderer": "^3.4.4",
     "@reduxjs/toolkit": "^2.3.0",
