@@ -1901,12 +1901,10 @@ const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
       protocol: 'AND',
       data: [
         {
-          blackList: true,
-          isWearingArmor: true,
+          isWearingArmor: false,
         },
         {
-          blackList: true,
-          isHoldingShield: true,
+          isHoldingShield: false,
         },
       ],
     },
@@ -2044,6 +2042,17 @@ const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
       },
     },
     speedBonusFormula: '10',
+    preRequisite: {
+      protocol: 'AND',
+      data: [
+        {
+          isWearingArmor: false,
+        },
+        {
+          isHoldingShield: false,
+        },
+      ],
+    },
   },
   {
     id: ClassFeatureEffectIds.monkUnarmoredMovement6,
@@ -2568,8 +2577,7 @@ const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
       protocol: 'AND',
       data: [
         {
-          blackList: true,
-          isWearingArmor: true,
+          isWearingArmor: false,
         },
       ],
     },
@@ -2637,8 +2645,7 @@ const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
       protocol: 'AND',
       data: [
         {
-          blackList: true,
-          isWearingArmor: true,
+          isWearingArmor: false,
         },
       ],
     },

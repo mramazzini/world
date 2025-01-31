@@ -84,22 +84,22 @@ const useCharacterEffects = () => {
         if (condition.minLevel !== undefined) {
           // Check character's level
         }
-        if (condition.Class) {
+        if (condition.Class !== undefined) {
           // Check character's class
         }
-        if (condition.SubClass) {
+        if (condition.SubClass !== undefined) {
           // Check character's subclass
         }
-        if (condition.Species) {
+        if (condition.Species !== undefined) {
           // Check character's species
         }
-        if (condition.SubSpecies) {
+        if (condition.SubSpecies !== undefined) {
           // Check character's subspecies
         }
-        if (condition.Background) {
+        if (condition.Background !== undefined) {
           // Check character's background
         }
-        if (condition.Feat) {
+        if (condition.Feat !== undefined) {
           // Check character's feats
         }
         if (condition.minAbilityScore !== undefined) {
@@ -111,10 +111,10 @@ const useCharacterEffects = () => {
         if (condition.hasASpell !== undefined) {
           // Check if character has any spells
         }
-        if (condition.Spell) {
+        if (condition.Spell !== undefined) {
           // Check specific spell
         }
-        if (condition.weaponProficiency) {
+        if (condition.weaponProficiency !== undefined) {
           // Check weapon proficiency
         }
         if (condition.martialWeaponProficiency !== undefined) {
@@ -123,7 +123,7 @@ const useCharacterEffects = () => {
         if (condition.simpleWeaponProficiency !== undefined) {
           // Check simple weapon proficiency
         }
-        if (condition.armorProficiency) {
+        if (condition.armorProficiency !== undefined) {
           // Check armor proficiency
         }
         if (condition.lightArmorProficiency !== undefined) {
@@ -135,16 +135,23 @@ const useCharacterEffects = () => {
         if (condition.heavyArmorProficiency !== undefined) {
           // Check heavy armor proficiency
         }
-        if (condition.toolProficiency) {
+        if (condition.toolProficiency !== undefined) {
           // Check tool proficiency
         }
-        if (condition.skillProficiency) {
+        if (condition.skillProficiency !== undefined) {
           // Check skill proficiency
         }
-        if (condition.isWearingArmor && !equippedArmor) {
-          console.log('isWearingArmor');
-          // Check if character is wearing armor
-          if (!isBlacklist) return false;
+        if (condition.isWearingArmor !== undefined) {
+          if (condition.isWearingArmor && !equippedArmor) {
+            // Check if character is wearing armor
+            if (!isBlacklist) return false;
+          }
+          if (!condition.isWearingArmor && equippedArmor) {
+            // Check if character is not wearing armor
+            console.log(isBlacklist, condition);
+
+            if (!isBlacklist) return false;
+          }
         }
         if (
           condition.equippedState &&
@@ -239,13 +246,19 @@ const useCharacterEffects = () => {
       }
       return true;
     });
-    //instead of checking length,check for an id that is not in the storedActiveEffects
 
-    for (const effect of activeAndValid) {
-      if (!storedActiveEffects.some((active) => active.id === effect.id)) {
-        dispatch(setActiveEffects(activeAndValid));
-        break;
-      }
+    const arraysAreDifferent =
+      activeAndValid.length !== storedActiveEffects.length ||
+      activeAndValid.some(
+        (effect) =>
+          !storedActiveEffects.some((active) => active.id === effect.id)
+      ) ||
+      storedActiveEffects.some(
+        (active) => !activeAndValid.some((effect) => effect.id === active.id)
+      );
+
+    if (arraysAreDifferent) {
+      dispatch(setActiveEffects([...activeAndValid]));
     }
   }, [
     unlockedFeatures,
