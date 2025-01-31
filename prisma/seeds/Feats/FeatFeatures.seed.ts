@@ -1,9 +1,14 @@
-import FeatSeed, { FeatIds } from './Feats.seed';
-import generateId from '../_helpers/generateId';
+import { Prisma } from '@prisma/client';
+import { FeatIds } from './Feats.seed';
 
-let count = 1;
+export const FeatFeatureIds = {
+  mobile: 'mobile',
+  resilient: 'resilient',
+  skillExpert: 'skillExpert',
+  speedingRage: 'speedingRage',
+};
 
-const FeatFeaturesSeed = [
+const FeatFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   // {
   //   featId: FeatIds.aberrantDragonmark,
   //   name: 'Aberrant Dragonmark',
@@ -466,6 +471,7 @@ const FeatFeaturesSeed = [
   //   ],
   // },
   {
+    id: FeatFeatureIds.mobile,
     featId: FeatIds.mobile,
     name: 'Mobile',
     description:
@@ -475,7 +481,7 @@ const FeatFeaturesSeed = [
       "When you use the Dash action, difficult terrain doesn't cost you extra movement on that turn.",
       "When you make a melee attack against a creature, you don't provoke opportunity attacks from that creature for the rest of the turn, whether you hit or not.",
     ],
-    unimplemented: true,
+    unimplemented: false,
   },
   // {
   //   featId: FeatIds.moderatelyArmored,
@@ -541,6 +547,7 @@ const FeatFeaturesSeed = [
   //   ],
   // },
   {
+    id: FeatFeatureIds.resilient,
     featId: FeatIds.resilient,
     name: 'Resilient',
     description: 'Choose one ability score. You gain the following benefits:',
@@ -679,6 +686,7 @@ const FeatFeaturesSeed = [
   //   ],
   // },
   {
+    id: FeatFeatureIds.skillExpert,
     featId: FeatIds.skillExpert,
     name: 'Skill Expert',
     description:
@@ -1539,20 +1547,13 @@ const FeatFeaturesSeed = [
   //   description:
   //     'Once per turn, when you hit a creature with a weapon attack roll, you can attempt to frighten that target. The target must make a Wisdom saving throw (DC equals 8 + your proficiency bonus + the ability modifier of the score increased by this feat). On a failed save, the target is frightened of you until the end of your next turn. On a successful save, the target has disadvantage on the next attack roll it makes before the end of its next turn. You can use this benefit a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.',
   // },
-].map((feature, index, arr) => {
-  const featureParent = FeatSeed.find((feat) => feat.id === feature.featId);
-  if (!featureParent)
-    throw new Error(
-      'No parent with id ' + feature.featId + ' for feature ' + feature.name
-    );
-  const id = generateId('feat', feature.name, featureParent.name, count);
-  count++;
-  const nextFeatFeature = arr[index + 1];
-  if (!nextFeatFeature) return { ...feature, id };
-  if (nextFeatFeature.featId !== feature.featId) {
-    count = 1;
-  }
-  return { ...feature, id };
-});
+  {
+    featId: FeatIds.speedingRage,
+    id: FeatFeatureIds.speedingRage,
+    name: 'Speeding Rage',
+    description:
+      'You can move with incredible speed while raging. When you enter a rage, you gain bonus movement equal to 5 * your proficiency bonus. This bonus movement lasts until your rage ends.',
+  },
+];
 
 export default FeatFeaturesSeed;
