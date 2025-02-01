@@ -25,7 +25,7 @@ const useHitpoints = () => {
 
     const totalHp =
       Object.keys(tempDie).reduce((acc, key) => {
-        return acc + (tempDie[Number(key)] / 2) * (Number(key) + con);
+        return acc + Math.ceil(tempDie[Number(key)] / 2) * (Number(key) + con);
       }, 0) +
       largestHitDie +
       con;

@@ -124,6 +124,7 @@ const initialState: SheetState = {
   combinedSpecies: null,
   levelsByClass: {},
   features: {
+    feats: [],
     classes: [],
     subclasses: [],
     species: {

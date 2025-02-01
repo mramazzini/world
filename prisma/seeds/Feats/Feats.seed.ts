@@ -1,5 +1,6 @@
 import { src } from '@/lib/types/types';
 import { Prisma } from '@prisma/client';
+import { classIds } from '../Classes/ClassIds';
 
 const FeatSeed: Prisma.FeatCreateManyInput[] = [
   // {
@@ -136,14 +137,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
   //   source: src.tasha,
   //   prereqDescription: 'None',
   // },
-  // {
-  //   id: '9',
-  //   name: 'Crossbow Expert',
-  //   slug: '',
-  //   flavorText: 'You have extensive practice with the crossbow.',
-  //   source: src.phb,
-  //   prereqDescription: 'None',
-  // },
+  {
+    id: '9',
+    name: 'Crossbow Expert',
+    slug: '',
+    flavorText: 'You have extensive practice with the crossbow.',
+    source: src.phb,
+    prereqDescription: 'None',
+  },
   // {
   //   id: '10',
   //   name: 'Crusher',
@@ -1536,6 +1537,25 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
   //   //   ],
   //   // },
   // },
+  {
+    id: '109',
+    name: 'Speeding Rage',
+    slug: 'speeding-rage',
+    flavorText: 'You can move with incredible speed while raging.',
+    source: src.homebrew,
+    prereqDescription: 'Barbarian, 5th Level',
+    prerequisites: {
+      protocol: 'AND',
+      data: [
+        {
+          Class: classIds.barbarian,
+        },
+        {
+          minLevel: 5,
+        },
+      ],
+    },
+  },
 ];
 export const FeatIds = {
   aberrantDragonmark: '1',
@@ -1646,6 +1666,7 @@ export const FeatIds = {
   knightOfTheRose: '106',
   knightOfTheSword: '107',
   vampiricExultation: '108',
+  speedingRage: '109',
 };
 
 export default FeatSeed;

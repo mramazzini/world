@@ -26,6 +26,7 @@ const useFeatureSelector = () => {
   );
 
   const unlockedFeatures = useMemo(() => {
+    console.log(features);
     const unlocked = {
       classes: features.classes.map((c) => {
         return {
@@ -77,6 +78,17 @@ const useFeatureSelector = () => {
           })
           .sort(sortFn),
       },
+      feats: features.feats.map((f) => {
+        return {
+          id: f.id,
+          name: f.name,
+          features: f.features
+            .filter((f) => {
+              return level >= (getMinlevel(f) || 0);
+            })
+            .sort(sortFn),
+        };
+      }),
     };
 
     return unlocked;
@@ -133,6 +145,18 @@ const useFeatureSelector = () => {
           })
           .sort(sortFn),
       },
+      feats: features.feats.map((f) => {
+        return {
+          name: f.name,
+          features: f.features
+            .filter((f) => {
+              return !unlockedFeatures.feats
+                .find((uf) => uf.name === f.name)
+                ?.features.includes(f);
+            })
+            .sort(sortFn),
+        };
+      }),
     };
   }, [features, unlockedFeatures, sortFn]);
 
@@ -146,6 +170,7 @@ const useFeatureSelector = () => {
             ...features.background.features,
             ...features.subclasses.flatMap((s) => s.features),
             ...features.subSpecies.features,
+            ...features.feats.flatMap((f) => f.features),
           ];
         case 'unlocked':
           return [
@@ -154,6 +179,7 @@ const useFeatureSelector = () => {
             ...unlockedFeatures.background.features,
             ...unlockedFeatures.subclasses.flatMap((s) => s.features),
             ...unlockedFeatures.subSpecies.features,
+            ...unlockedFeatures.feats.flatMap((f) => f.features),
           ];
         case 'locked':
           return [
@@ -162,6 +188,7 @@ const useFeatureSelector = () => {
             ...lockedFeatures.background.features,
             ...lockedFeatures.subclasses.flatMap((s) => s.features),
             ...lockedFeatures.subSpecies.features,
+            ...lockedFeatures.feats.flatMap((f) => f.features),
           ];
         default:
           return [
@@ -170,6 +197,7 @@ const useFeatureSelector = () => {
             ...features.background.features,
             ...features.subclasses.flatMap((s) => s.features),
             ...features.subSpecies.features,
+            ...features.feats.flatMap((f) => f.features),
           ];
       }
     },
@@ -186,6 +214,7 @@ const useFeatureSelector = () => {
             features.background,
             ...features.subclasses,
             features.subSpecies,
+            ...features.feats,
           ].filter((f) => f.name !== '');
         case 'locked':
           return [
@@ -194,6 +223,7 @@ const useFeatureSelector = () => {
             lockedFeatures.background,
             ...lockedFeatures.subclasses,
             lockedFeatures.subSpecies,
+            ...features.feats,
           ].filter((f) => f.name !== '');
         case 'unlocked':
           return [
@@ -202,6 +232,7 @@ const useFeatureSelector = () => {
             unlockedFeatures.background,
             ...unlockedFeatures.subclasses,
             unlockedFeatures.subSpecies,
+            ...features.feats,
           ].filter((f) => f.name !== '');
         default:
           return [
@@ -210,6 +241,7 @@ const useFeatureSelector = () => {
             features.background,
             ...features.subclasses,
             features.subSpecies,
+            ...features.feats,
           ].filter((f) => f.name !== '');
       }
     },
