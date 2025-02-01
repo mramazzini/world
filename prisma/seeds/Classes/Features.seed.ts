@@ -162,10 +162,32 @@ export const ClassFeatureIds = {
   warlockSubclass: 'Warlock-Subclass',
   wizardSubclass: 'Wizard-Subclass',
   artificerSubclass: 'Artificer-Subclass',
+  barbarianSubclass: 'Barbarian-Subclass',
+  fighterASI: 'Fighter-ASI',
+  wizardASI: 'Wizard-ASI',
+  bardASI: 'Bard-ASI',
+  clericASI: 'Cleric-ASI',
+  rogueASI: 'Rogue-ASI',
+  barbarianASI: 'Barbarian-ASI',
+  druidASI: 'Druid-ASI',
+  monkASI: 'Monk-ASI',
+  paladinASI: 'Paladin-ASI',
+  rangerASI: 'Ranger-ASI',
+  sorcererASI: 'Sorcerer-ASI',
+  warlockASI: 'Warlock-ASI',
+  artificerASI: 'Artificer-ASI',
 };
 const fids = ClassFeatureIds;
 const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   // Fighter
+  {
+    id: fids.fighterASI,
+    name: 'Ability Score Improvements',
+    description:
+      "When you reach 4th level, and again at 6th, 8th, 12th, 14th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.\n\nAlternatively, you can choose to take a feat instead.",
+    classId: ids.fighter,
+    effectChainType: ChainType.ADD,
+  },
   {
     id: fids.actionSurge,
     name: 'Action Surge',
@@ -287,6 +309,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   },
   // Wizard
   {
+    id: fids.wizardASI,
+    name: 'Ability Score Improvements',
+    description:
+      "When you reach 4th level, and again at 8th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.\n\nAlternatively, you can choose to take a feat instead.",
+    classId: ids.wizard,
+    effectChainType: ChainType.ADD,
+  },
+  {
     id: fids.wizardCantrips,
     spellCastingClassId: ids.wizard,
     name: 'Cantrips',
@@ -369,6 +399,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     description: `Each time you gain a wizard level, you can add two wizard spells of your choice to your ^${itemIds.spellBook}{spellbook}^ for free. Each of these spells must be of a level for which you have spell slots, as shown on the Wizard table. On your adventures, you might find other spells that you can add to your ^${itemIds.spellBook}{spellbook}^.`,
   },
 
+  {
+    id: fids.bardASI,
+    name: 'Ability Score Improvements',
+    description:
+      "When you reach 4th level, and again at 8th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.\n\nAlternatively, you can choose to take a feat instead.",
+    classId: ids.bard,
+    effectChainType: ChainType.ADD,
+  },
   {
     id: fids.bardCantrips,
     name: 'Cantrips',
@@ -480,6 +518,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   },
   // Cleric
   {
+    id: fids.clericASI,
+    name: 'Ability Score Improvements',
+    description:
+      "When you reach 4th level, and again at 8th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.\n\nAlternatively, you can choose to take a feat instead.",
+    classId: ids.cleric,
+    effectChainType: ChainType.ADD,
+  },
+  {
     id: fids.channelDivinity,
     name: 'Channel Divinity',
     description: `At 2nd level, you gain the ability to channel divine energy directly from your deity, using that energy to fuel magical effects. You start with two such effects: Turn Undead and an effect determined by your domain. Some domains grant you additional effects as you advance in levels, as noted in the domain description.\n\nWhen you use your Channel Divinity, you choose which effect to create. You must then finish a short or long rest to use your Channel Divinity again.\n\nSome Channel Divinity effects require saving throws. When you use such an effect from this class, the DC equals your cleric spell save DC.\n\nBeginning at 6th level, you can use your Channel Divinity twice between rests, and beginning at 18th level, you can use it three times between rests. When you finish a short or long rest, you regain your expended uses.`,
@@ -548,6 +594,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     effectChainType: ChainType.NONE,
   },
   // Rogue
+  {
+    id: fids.rogueASI,
+    name: 'Ability Score Improvements',
+    description:
+      "When you reach 4th level, and again at 8th, 10th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.\n\nAlternatively, you can choose to take a feat instead.",
+    classId: ids.rogue,
+    effectChainType: ChainType.ADD,
+  },
   {
     id: fids.rogueExpertise,
     name: 'Expertise',
@@ -655,6 +709,15 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.rogue,
   },
   // Barbarian
+  {
+    id: fids.barbarianASI,
+    name: 'Ability Score Improvements',
+    description:
+      "When you reach 4th level, and again at 8th, 12th, 14th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.\n\nAlternatively, you can choose to take a feat instead.",
+    classId: ids.barbarian,
+    effectChainType: ChainType.ADD,
+  },
+
   {
     id: fids.rage,
     name: 'Rage',
@@ -801,6 +864,13 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   },
   // // Druid
   {
+    id: fids.druidASI,
+    name: 'Ability Score Improvements',
+    description: `When you reach 4th level, and again at 8th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.\n\nAlternatively, you can choose to take a feat instead.`,
+    classId: ids.druid,
+    effectChainType: ChainType.ADD,
+  },
+  {
     id: fids.druidCantrips,
     name: 'Cantrips',
     description:
@@ -916,6 +986,13 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     unimplemented: true,
   },
   // // Monk
+  {
+    id: fids.monkASI,
+    name: 'Ability Score Improvements',
+    description: `When you reach 4th level, and again at 6th, 8th, 10th, 12th, 14th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.\n\nAlternatively, you can choose to take a feat instead.`,
+    classId: ids.monk,
+    effectChainType: ChainType.ADD,
+  },
   {
     id: fids.monkUnarmoredDefense,
     name: 'Unarmored Defense',
@@ -1121,6 +1198,13 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   },
   // // Paladin
   {
+    id: fids.paladinASI,
+    name: 'Ability Score Improvements',
+    description: `When you reach 4th level, and again at 8th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.\n\nAlternatively, you can choose to take a feat instead.`,
+    classId: ids.paladin,
+    effectChainType: ChainType.ADD,
+  },
+  {
     id: fids.divineSense,
     name: 'Divine Sense',
     description:
@@ -1224,6 +1308,13 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     effectChainType: ChainType.NONE,
   },
   // Sorcerer
+  {
+    id: fids.sorcererASI,
+    name: 'Ability Score Improvements',
+    description: `When you reach 4th level, and again at 8th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.\n\nAlternatively, you can choose to take a feat instead.`,
+    classId: ids.sorcerer,
+    effectChainType: ChainType.ADD,
+  },
   {
     id: fids.sorcererCantrips,
     name: 'Cantrips',
@@ -1393,6 +1484,13 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   },
   // Warlock
   {
+    id: fids.warlockASI,
+    name: 'Ability Score Improvements',
+    description: `When you reach 4th level, and again at 8th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.\n\nAlternatively, you can choose to take a feat instead.`,
+    classId: ids.warlock,
+    effectChainType: ChainType.ADD,
+  },
+  {
     id: fids.warlockCantrips,
     name: 'Cantrips',
     description:
@@ -1456,6 +1554,13 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.warlock,
   },
   //Ranger
+  {
+    id: fids.rangerASI,
+    name: 'Ability Score Improvements',
+    description: `When you reach 4th level, and again at 8th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.\n\nAlternatively, you can choose to take a feat instead.`,
+    classId: ids.ranger,
+    effectChainType: ChainType.ADD,
+  },
   {
     id: fids.rangerSpellsKnown,
     name: 'Spells Known',
@@ -1698,6 +1803,13 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     classId: ids.ranger,
   },
   // //Artificer
+  {
+    id: fids.artificerASI,
+    name: 'Ability Score Improvements',
+    description: `When you reach 4th level, and again at 8th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.\n\nAlternatively, you can choose to take a feat instead.`,
+    classId: ids.artificer,
+    effectChainType: ChainType.ADD,
+  },
   {
     id: fids.artificerCantrips,
     spellCastingClassId: ids.artificer,

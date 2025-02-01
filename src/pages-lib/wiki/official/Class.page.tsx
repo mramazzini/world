@@ -8,7 +8,6 @@ import P from '@/Utility/FormatAndSanitize';
 import '@/lib/string.extensions';
 import Info from '@/components/UI/Info';
 import AbilityToText from '@/lib/utils/toText/AbilityToText';
-import numPlace from '@/lib/utils/numPlace';
 import FeatureList from '@/components/UI/Features/FeatureList';
 import CommentSection from '@/components/CommentSection/CommentSection';
 import { ClassInfo, FeatureWithClassColumn } from '@/lib/types/modelInfo';
@@ -22,29 +21,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
 
     return minA - minB;
   });
-  const lvls = classObj.abilityScoreLevels.sort((a, b) => a - b);
   const regularFeatures = classObj.Features.concat([
-    {
-      name: 'Ability Score Improvement',
-      Effects: lvls.map((lvl) => {
-        return {
-          level: lvl,
-          EffectGrantsGroup: [],
-        };
-      }, []) as unknown as FeatureWithClassColumn['Effects'],
-      description: `When you reach ${numPlace(
-        lvls[0]
-      )} level, and again at ${lvls
-        .map((l, i) => {
-          if (i === 0) return;
-          if (i === lvls.length - 1) return `and ${numPlace(l)} level,`;
-          return numPlace(l);
-        })
-        .filter((l) => l !== undefined)
-        .join(
-          ', '
-        )} you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.`,
-    } as unknown as FeatureWithClassColumn,
     {
       name: `Subclass: ${classObj.subClassName}`,
       description: classObj.subClassDescription,

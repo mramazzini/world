@@ -81,7 +81,7 @@ const FeatureBody = ({ feature, locked = true }: Props) => {
       {feature.options && feature.options.length > 0 && (
         <>
           <ul className="list-disc ">
-            {feature.options.map((option, index) => (
+            {feature.options.map((option) => (
               <Fragment key={v4()}>
                 <li className="ml-4">
                   <P>{option}</P>

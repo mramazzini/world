@@ -128,9 +128,6 @@ const ClassTable = ({ classObj }: Props) => {
                         ) > 0 && 'Feature'}
                       </li>
                     ) : null}
-                    {classObj.abilityScoreLevels.includes(num) ? (
-                      <li>Ability Score Improvement</li>
-                    ) : null}
                   </ul>
                 </td>
 
