@@ -41,6 +41,14 @@ const useFeatures = () => {
       name: character?.SubSpecies?.name || '',
       features: character?.SubSpecies?.Features || [],
     };
+    const feats =
+      character?.Feats?.map((f) => {
+        return {
+          id: f.id,
+          name: f.name,
+          features: f.Features,
+        };
+      }, []) || [];
 
     const features: CharacterFeatures = {
       classes: _class,
@@ -48,6 +56,7 @@ const useFeatures = () => {
       background,
       subclasses: subclass,
       subSpecies,
+      feats,
     };
 
     dispatch(setFeatures(features));

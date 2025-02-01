@@ -6,6 +6,7 @@ export const FeatFeatureIds = {
   resilient: 'resilient',
   skillExpert: 'skillExpert',
   speedingRage: 'speedingRage',
+  crossbowExpert: 'crossbowExpert',
 };
 
 const FeatFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
@@ -159,17 +160,18 @@ const FeatFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   //     'With one hour of work or when you finish a long rest, you can cook a number of treats equal to your proficiency bonus. These special treats last 8 hours after being made. A creature can use a bonus action to eat one of those treats to gain temporary hit points equal to your proficiency bonus.',
   //   ],
   // },
-  // {
-  //   featId: FeatIds.crossbowExpert,
-  //   name: 'Crossbow Expert',
-  //   description:
-  //     'Thanks to extensive practice with the crossbow, you gain the following benefits:',
-  //   options: [
-  //     'You ignore the loading property of crossbows with which you are proficient.',
-  //     "Being within 5 feet of a hostile creature doesn't impose disadvantage on your ranged attack rolls.",
-  //     'When you use the Attack action and attack with a one-handed weapon, you can use a bonus action to attack with a hand crossbow you are holding.',
-  //   ],
-  // },
+  {
+    id: FeatFeatureIds.crossbowExpert,
+    featId: FeatIds.crossbowExpert,
+    name: 'Crossbow Expert',
+    description:
+      'Thanks to extensive practice with the crossbow, you gain the following benefits:',
+    options: [
+      'You ignore the loading property of crossbows with which you are proficient.',
+      "Being within 5 feet of a hostile creature doesn't impose disadvantage on your ranged attack rolls.",
+      'When you use the Attack action and attack with a one-handed weapon, you can use a bonus action to attack with a hand crossbow you are holding.',
+    ],
+  },
   // {
   //   featId: FeatIds.crusher,
   //   name: 'Crusher',

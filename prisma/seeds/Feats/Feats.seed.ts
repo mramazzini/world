@@ -137,14 +137,14 @@ const FeatSeed: Prisma.FeatCreateManyInput[] = [
   //   source: src.tasha,
   //   prereqDescription: 'None',
   // },
-  // {
-  //   id: '9',
-  //   name: 'Crossbow Expert',
-  //   slug: '',
-  //   flavorText: 'You have extensive practice with the crossbow.',
-  //   source: src.phb,
-  //   prereqDescription: 'None',
-  // },
+  {
+    id: '9',
+    name: 'Crossbow Expert',
+    slug: '',
+    flavorText: 'You have extensive practice with the crossbow.',
+    source: src.phb,
+    prereqDescription: 'None',
+  },
   // {
   //   id: '10',
   //   name: 'Crusher',

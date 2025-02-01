@@ -271,6 +271,11 @@ export type SidebarDisplayData = Array<{
 }>;
 
 export interface CharacterFeatures {
+  feats: {
+    id: string;
+    features: FeatureInfo[];
+    name: string;
+  }[];
   classes: {
     id: string;
     features: FeatureInfo[];
