@@ -28,12 +28,12 @@ const seedarr: {
   description: string;
   enabled?: boolean;
 }[] = [
-  // {
-  //   index: '000',
-  //   callback: createCustomResources,
-  //   description: 'Creating custom resources from the custom resource seed.',
-  //   enabled: true,
-  // },
+  {
+    index: '000',
+    callback: createCustomResources,
+    description: 'Creating custom resources from the custom resource seed.',
+    enabled: true,
+  },
   // {
   //   index: '001',
   //   callback: createSpells,

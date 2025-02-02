@@ -10,6 +10,8 @@ const RefreshEventToText = (r: RefreshEvent) => {
       return 'Round';
     case RefreshEvent.TURN:
       return 'Turn';
+    case RefreshEvent.OTHER:
+      return 'Other';
   }
 };
 

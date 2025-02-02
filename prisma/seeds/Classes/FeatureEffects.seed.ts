@@ -337,6 +337,24 @@ export const ClassFeatureEffectIds = {
   artificerASI12: 'artificerASI-12',
   artificerASI16: 'artificerASI-16',
   artificerASI19: 'artificerASI-19',
+  artificerCantrips1: 'artificerCantrips-1',
+  artificerCantrips10: 'artificerCantrips-10',
+  artificerCantrips14: 'artificerCantrips-14',
+  artificerRitualCasting1: 'artificerRitualCasting-1',
+  artificerMagicalTinkering1: 'artificerMagicalTinkering-1',
+  artificerInfuseItem2: 'artificerInfuseItem-2',
+  artificerInfuseItem6: 'artificerInfuseItem-6',
+  artificerInfuseItem10: 'artificerInfuseItem-10',
+  artificerInfuseItem14: 'artificerInfuseItem-14',
+  artificerInfuseItem18: 'artificerInfuseItem-18',
+  artificerRightToolForTheJob3: 'artificerRightToolForTheJob-3',
+  artificerToolExpertise6: 'artificerToolExpertise-6',
+  artificerFlashOfGenius7: 'artificerFlashOfGenius-7',
+  artificerMagicItemAdept10: 'artificerMagicItemAdept-10',
+  artificerSpellStoringItem18: 'artificerSpellStoringItem-18',
+  artificerMagicItemSavant14: 'artificerMagicItemSavant-14',
+  artificerMagicItemMaster18: 'artificerMagicItemMaster-18',
+  artificerSoulOfArtifice20: 'artificerSoulOfArtifice-20',
 };
 
 const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
@@ -427,7 +445,7 @@ const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
       },
     };
   }),
-  // artificer (skip for now)
+  // artificer
   ...[4, 8, 12, 16, 19].map((level, i, arr) => {
     if (i === 0)
       return {
@@ -456,6 +474,255 @@ const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
       },
     };
   }),
+  {
+    id: ClassFeatureEffectIds.artificerCantrips1,
+    level: 1,
+    Feature: {
+      connect: {
+        id: fids.artificerCantrips,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerCantrips10,
+    level: 10,
+    Feature: {
+      connect: {
+        id: fids.artificerCantrips,
+      },
+    },
+    parentEffect: {
+      connect: {
+        id: ClassFeatureEffectIds.artificerCantrips1,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerCantrips14,
+    level: 14,
+    Feature: {
+      connect: {
+        id: fids.artificerCantrips,
+      },
+    },
+    parentEffect: {
+      connect: {
+        id: ClassFeatureEffectIds.artificerCantrips10,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerRitualCasting1,
+    level: 1,
+    Feature: {
+      connect: {
+        id: fids.artificerRitualCasting,
+      },
+    },
+    ritualCasterType: RitualCasterType.PREPARED,
+  },
+  {
+    id: ClassFeatureEffectIds.artificerMagicalTinkering1,
+    level: 1,
+    Feature: {
+      connect: {
+        id: fids.magicalTinkering,
+      },
+    },
+    EffectToResource: {
+      connectOrCreate: {
+        where: {
+          effectId_resourceId: {
+            effectId: ClassFeatureEffectIds.artificerMagicalTinkering1,
+            resourceId: CustomResourceIds.magicalTinkering,
+          },
+        },
+        create: {
+          resourceId: CustomResourceIds.magicalTinkering,
+          scalingFormula: 'max(1, INT)',
+          refreshOn: RefreshEvent.OTHER,
+        },
+      },
+    },
+  },
+  ...[2, 6, 10, 14, 18].map((level, i, arr) => {
+    if (i == 0)
+      return {
+        id: ClassFeatureEffectIds.artificerInfuseItem2,
+        level: 2,
+        Feature: {
+          connect: {
+            id: fids.artificerInfuseItem,
+          },
+        },
+        EffectToResource: {
+          connectOrCreate: [
+            {
+              where: {
+                effectId_resourceId: {
+                  effectId: ClassFeatureEffectIds.artificerInfuseItem2,
+                  resourceId: CustomResourceIds.infusedItems,
+                },
+              },
+              create: {
+                resourceId: CustomResourceIds.infusedItems,
+                scalingFormula: 'max(1, INT)',
+                refreshOn: RefreshEvent.OTHER,
+              },
+            },
+            {
+              where: {
+                effectId_resourceId: {
+                  effectId: ClassFeatureEffectIds.artificerInfuseItem2,
+                  resourceId: CustomResourceIds.infusionsKnown,
+                },
+              },
+              create: {
+                resourceId: CustomResourceIds.infusionsKnown,
+                scalingFormula: '4',
+                refreshOn: RefreshEvent.LONG_REST,
+              },
+            },
+          ],
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`artificerInfuseItem${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.artificerInfuseItem,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`artificerInfuseItem${arr[i - 1]}`],
+        },
+      },
+      EffectToResource: {
+        connectOrCreate: [
+          {
+            where: {
+              effectId_resourceId: {
+                //@ts-expect-error level can index
+                effectId: ClassFeatureEffectIds[`artificerInfuseItem${level}`],
+                resourceId: CustomResourceIds.infusedItems,
+              },
+            },
+            create: {
+              resourceId: CustomResourceIds.infusedItems,
+              scalingFormula: 'max(1, INT)',
+              refreshOn: RefreshEvent.OTHER,
+            },
+          },
+          {
+            where: {
+              effectId_resourceId: {
+                // @ts-expect-error level can index
+                effectId: ClassFeatureEffectIds[`artificerInfuseItem${level}`],
+                resourceId: CustomResourceIds.infusionsKnown,
+              },
+            },
+            create: {
+              resourceId: CustomResourceIds.infusionsKnown,
+              scalingFormula: `${Math.floor((level - 2) / 4) * 2 + 4}`,
+              refreshOn: RefreshEvent.LONG_REST,
+            },
+          },
+        ],
+      },
+    };
+  }),
+  {
+    id: ClassFeatureEffectIds.artificerRightToolForTheJob3,
+    level: 3,
+    Feature: {
+      connect: {
+        id: fids.artificerRightToolForTheJob,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerToolExpertise6,
+    level: 6,
+    Feature: {
+      connect: {
+        id: fids.artificerToolExpertise,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerFlashOfGenius7,
+    level: 7,
+    Feature: {
+      connect: {
+        id: fids.artificerFlashOfGenius,
+      },
+    },
+    EffectToResource: {
+      connectOrCreate: {
+        where: {
+          effectId_resourceId: {
+            effectId: ClassFeatureEffectIds.artificerFlashOfGenius7,
+            resourceId: CustomResourceIds.flashOfGenius,
+          },
+        },
+        create: {
+          resourceId: CustomResourceIds.flashOfGenius,
+          scalingFormula: 'max(1, INT)',
+          refreshOn: RefreshEvent.LONG_REST,
+        },
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerMagicItemAdept10,
+    level: 10,
+    Feature: {
+      connect: {
+        id: fids.artificerMagicItemAdept,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerSpellStoringItem18,
+    level: 18,
+    Feature: {
+      connect: {
+        id: fids.artificerSpellStoringItem,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerMagicItemSavant14,
+    level: 14,
+    Feature: {
+      connect: {
+        id: fids.artificerMagicItemSavant,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerMagicItemMaster18,
+    level: 18,
+    Feature: {
+      connect: {
+        id: fids.artificerMagicItemMaster,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerSoulOfArtifice20,
+    level: 20,
+    Feature: {
+      connect: {
+        id: fids.artificerSoulOfArtifice,
+      },
+    },
+  },
+
   //rogue (skip for now)
   ...[4, 8, 10, 12, 16, 19].map((level, i, arr) => {
     if (i === 0)

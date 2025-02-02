@@ -1816,7 +1816,8 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Cantrips',
     description:
       'At 1st level, you know two cantrips of your choice from the artificer spell list. At higher levels, you learn additional artificer cantrips of your choice, as shown in the Cantrips Known column of the Artificer table.\n\nWhen you gain a level in this class, you can replace one of the artificer cantrips you know with another cantrip from the artificer spell list.',
-    unimplemented: true,
+    unimplemented: false,
+    effectChainType: ChainType.ADD,
   },
   {
     id: fids.artificerRitualCasting,
@@ -1826,12 +1827,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       'You can cast an artificer spell as a ritual if that spell has the ritual tag and you have the spell prepared.',
     unimplemented: true,
     // levels: [1],
+    effectChainType: ChainType.NONE,
   },
   {
     id: fids.magicalTinkering,
     classId: ids.artificer,
     name: 'Magical Tinkering',
-    unimplemented: true,
+    unimplemented: false,
+    effectChainType: ChainType.NONE,
     // levels: [1],
     description: `At 1st level, you've learned how to invest a spark of magic into mundane objects. To use this ability, you must have ^${itemIds.thievesTools}{thieves' tools}^ or artisan's tools in hand. You then touch a Tiny nonmagical object as an action and give it a property from the *Tinkering Options Table* below.\n\nThe chosen property lasts indefinitely. As an action, you can touch the object and end the property early.\n\nYou can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies.`,
     extendedTable: [
@@ -1859,7 +1862,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   {
     id: fids.artificerInfuseItem,
     classId: ids.artificer,
-    unimplemented: true,
+    unimplemented: false,
     // levels: [2],
     name: 'Infuse Item',
     description:
@@ -1988,6 +1991,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
         },
       },
     ],
+    effectChainType: ChainType.REPLACE,
   },
   {
     id: fids.artificerRightToolForTheJob,
@@ -1996,6 +2000,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     unimplemented: true,
     // levels: [3],
     classId: ids.artificer,
+    effectChainType: ChainType.NONE,
   },
   {
     id: fids.artificerToolExpertise,
@@ -2005,13 +2010,14 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     unimplemented: true,
     // levels: [6],
     classId: ids.artificer,
+    effectChainType: ChainType.NONE,
   },
   {
     id: fids.artificerFlashOfGenius,
     name: 'Flash of Genius',
     description:
       "At 7th level, you've gained the ability to come up with solutions under pressure. When you or another creature you can see within 30 feet of you makes an ability check or a saving throw, you can use your reaction to add your Intelligence modifier to the roll.\n\nYou can use this feature a number of times equal to your Intelligence modifier (minimum of once). You regain all expended uses when you finish a long rest.",
-    unimplemented: true,
+    unimplemented: false,
     // levels: [7],
     classId: ids.artificer,
   },
