@@ -3,6 +3,7 @@ import {
   Background,
   Character,
   CharacterChoiceStatus,
+  CharacterState,
   CharacterToClass,
   Choice,
   Class,
@@ -125,6 +126,7 @@ export interface CharacterInfo extends Omit<Character, 'createdAt'> {
   CharacterChoiceStatus: CharacterChoiceStatus[];
   Species: SpeciesWithFeaturesAndChoices | null;
   SubSpecies: SubSpeciesWithFeaturesAndChoices | null;
+  CharacterState: CharacterState | null;
 }
 export interface BackgroundWithFeaturesAndChoices extends Background {
   Features: FeatureInfo[];

@@ -9,6 +9,7 @@ import { FeatureInfoIncludeTemplate } from '../dbIncludeTemplates';
 
 const CharacterInfoTemplate = {
   include: {
+    CharacterState: true,
     Species: {
       include: {
         Features: {
