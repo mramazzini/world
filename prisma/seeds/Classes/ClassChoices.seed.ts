@@ -113,6 +113,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
     ]
   ),
   //wizard
+
   generateSkillProficiencyChoice(
     'wizard-skill-1',
     ids.wizard,
@@ -163,6 +164,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
     ]
   ),
   //cleric
+
   generateSkillProficiencyChoice(
     'cleric-skill-1',
     ids.cleric,
@@ -238,6 +240,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
     ]
   ),
   //Rogue
+
   generateSkillProficiencyChoice(
     'rogue-skill-1',
     ids.rogue,
@@ -292,7 +295,9 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
       [{ item: itemIds.shortsword, quantity: 1 }],
     ]
   ),
+
   //barbarian
+
   generateSkillProficiencyChoice(
     'barbarian-skill-1',
     ids.barbarian,
@@ -340,6 +345,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
     ]
   ),
   //bard
+
   generateSkillProficiencyChoice(
     'bard-skill-1',
     ids.bard,
@@ -402,6 +408,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
     1
   ),
   //druid
+
   generateSkillProficiencyChoice(
     'druid-skill-1',
     ids.druid,
@@ -465,6 +472,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
     ]
   ),
   //monk
+
   generateSkillProficiencyChoice(
     'monk-skill-1',
     ids.monk,
@@ -519,6 +527,7 @@ const ClassChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
     ]
   ),
   //paladin
+
   generateSkillProficiencyChoice(
     'paladin-skill-1',
     ids.paladin,

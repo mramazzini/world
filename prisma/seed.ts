@@ -28,12 +28,12 @@ const seedarr: {
   description: string;
   enabled?: boolean;
 }[] = [
-  // {
-  //   index: '000',
-  //   callback: createCustomResources,
-  //   description: 'Creating custom resources from the custom resource seed.',
-  //   enabled: true,
-  // },
+  {
+    index: '000',
+    callback: createCustomResources,
+    description: 'Creating custom resources from the custom resource seed.',
+    enabled: true,
+  },
   // {
   //   index: '001',
   //   callback: createSpells,
@@ -94,12 +94,12 @@ const seedarr: {
   //   description: 'Creating backgrounds from the background seed.',
   //   enabled: true,
   // },
-  // {
-  //   index: '011',
-  //   callback: createClasses,
-  //   description: 'Creating classes from the class seed.',
-  //   enabled: true,
-  // },
+  {
+    index: '011',
+    callback: createClasses,
+    description: 'Creating classes from the class seed.',
+    enabled: true,
+  },
   // {
   //   index: '013',
   //   callback: createSubclass,
@@ -118,12 +118,12 @@ const seedarr: {
   //   description: 'Creating subspecies from subspecies seed.',
   //   enabled: true,
   // },
-  {
-    index: '016',
-    callback: createFeats,
-    description: 'Creating feats from the species seed.',
-    enabled: true,
-  },
+  // {
+  //   index: '016',
+  //   callback: createFeats,
+  //   description: 'Creating feats from the species seed.',
+  //   enabled: true,
+  // },
   // {
   //   index: '017',
   //   callback: createCreatures,

@@ -10,6 +10,10 @@ export const CustomResourceIds = {
   cleansingTouch: 'cleansingTouch',
   kiPoints: 'kiPoints',
   rage: 'rage',
+  magicalTinkering: 'magicalTinkering',
+  infusedItems: 'infusedItems',
+  infusionsKnown: 'infusionsKnown',
+  flashOfGenius: 'flashOfGenius',
 };
 
 const CustomResourceSeed: Prisma.CustomResourceCreateManyInput[] = [
@@ -75,6 +79,34 @@ const CustomResourceSeed: Prisma.CustomResourceCreateManyInput[] = [
     description:
       'A pool of points that dictate how many uses of rage a Barbarian has.',
     slug: 'rage',
+  },
+  {
+    id: CustomResourceIds.magicalTinkering,
+    name: 'Magical Tinkering',
+    description:
+      'A pool of charges that dictate how many uses of magical tinkering an Artificer has.',
+    slug: 'magical-tinkering',
+  },
+  {
+    id: CustomResourceIds.infusedItems,
+    name: 'Infused Items',
+    description:
+      'A pool of charges that dictate how many infused items an Artificer can have at once.',
+    slug: 'infused-items',
+  },
+  {
+    id: CustomResourceIds.infusionsKnown,
+    name: 'Infusions Known',
+    description:
+      'A pool of infusions that dictate how many infusions an Artificer can know.',
+    slug: 'infusions-known',
+  },
+  {
+    id: CustomResourceIds.flashOfGenius,
+    name: 'Flash of Genius',
+    description:
+      'A pool of charges that dictate how many uses of flash of genius an Artificer has.',
+    slug: 'flash-of-genius',
   },
 ];
 

@@ -12,8 +12,152 @@ import {
   generateSkillProficiencyChoice,
   generateUpgradeSkillProficiencyToExpertiseChoice,
 } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateSkillChoice';
+import { generateFeatOrASIChoice } from '@/lib/ChoiceHelpers/ChoiceGenerators/generateFeatOrASIChoice';
 
 const ClassEffectChoices: Prisma.ChoiceCreateInput[] = [
+  //fighter ASI
+  ...[4, 6, 8, 12, 14, 16, 19].map((level) =>
+    generateFeatOrASIChoice(
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`fighterASI${level}`],
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`fighterASI${level}`],
+      'effectId',
+      `Choose a feat or increase your ability scores.`
+    )
+  ),
+  //wizard ASI
+  ...[4, 8, 12, 16, 19].map((level) =>
+    generateFeatOrASIChoice(
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`wizardASI${level}`],
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`wizardASI${level}`],
+      'effectId',
+      `Choose a feat or increase your ability scores`
+    )
+  ),
+  //cleric
+  ...[4, 8, 12, 16, 19].map((level) => {
+    return generateFeatOrASIChoice(
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`clericASI${level}`],
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`clericASI${level}`],
+      'effectId',
+      `Choose a feat or increase your ability scores.`
+    );
+  }),
+  //rogue ASI
+  ...[4, 8, 10, 12, 16, 19].map((level) => {
+    return generateFeatOrASIChoice(
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`rogueASI${level}`],
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`rogueASI${level}`],
+      'effectId',
+      `Choose a feat or increase your ability scores.`
+    );
+  }),
+  //barbarian asi
+  ...[4, 6, 8, 12, 14, 16, 19].map((level) =>
+    generateFeatOrASIChoice(
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`barbarianASI${level}`],
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`barbarianASI${level}`],
+      'effectId',
+      `Choose a feat or increase your ability scores.`
+    )
+  ),
+  //bard asi
+  ...[4, 8, 12, 16, 19].map((level) =>
+    generateFeatOrASIChoice(
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`bardASI${level}`],
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`bardASI${level}`],
+      'effectId',
+      `Choose a feat or increase your ability scores.`
+    )
+  ),
+  //druid asi
+  ...[4, 8, 12, 16, 19].map((level) => {
+    return generateFeatOrASIChoice(
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`druidASI${level}`],
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`druidASI${level}`],
+      'effectId',
+      `Choose a feat or increase your ability scores.`
+    );
+  }),
+  //monk asi
+  ...[4, 8, 12, 16, 19].map((level) => {
+    return generateFeatOrASIChoice(
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`monkASI${level}`],
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`monkASI${level}`],
+      'effectId',
+      `Choose a feat or increase your ability scores.`
+    );
+  }),
+  //paladin asi
+  ...[4, 8, 12, 16, 19].map((level) =>
+    generateFeatOrASIChoice(
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`paladinASI${level}`],
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`paladinASI${level}`],
+      'effectId',
+      `Choose a feat or increase your ability scores.`
+    )
+  ),
+  //ranger asi
+  ...[4, 8, 12, 16, 19].map((level) =>
+    generateFeatOrASIChoice(
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`rangerASI${level}`],
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`rangerASI${level}`],
+      'effectId',
+      `Choose a feat or increase your ability scores.`
+    )
+  ),
+  //sorcerer asi
+  ...[4, 8, 12, 16, 19].map((level) =>
+    generateFeatOrASIChoice(
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`sorcererASI${level}`],
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`sorcererASI${level}`],
+      'effectId',
+      `Choose a feat or increase your ability scores.`
+    )
+  ),
+  //warlock asi
+  ...[4, 8, 12, 16, 19].map((level) =>
+    generateFeatOrASIChoice(
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`warlockASI${level}`],
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`warlockASI${level}`],
+      'effectId',
+      `Choose a feat or increase your ability scores.`
+    )
+  ),
+  //artificer asi
+  ...[4, 8, 12, 16, 19].map((level) =>
+    generateFeatOrASIChoice(
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`artificerASI${level}`],
+      // @ts-expect-error level can index
+      ClassFeatureEffectIds[`artificerASI${level}`],
+      'effectId',
+      `Choose a feat or increase your ability scores.`
+    )
+  ),
   generateFreeSpellChoice(
     ClassFeatureEffectIds.bardCantrips1,
     ClassFeatureEffectIds.bardCantrips1,

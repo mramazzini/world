@@ -265,12 +265,580 @@ export const ClassFeatureEffectIds = {
   barbarianPersistentRage15: 'persistentRage-15',
   barbarianIndomitableMight18: 'indomitableMight-18',
   barbarianPrimalChampion20: 'primalChampion-20',
+  fighterASI4: 'fighterASI-4',
+  fighterASI6: 'fighterASI-6',
+  fighterASI8: 'fighterASI-8',
+  fighterASI12: 'fighterASI-12',
+  fighterASI14: 'fighterASI-14',
+  fighterASI16: 'fighterASI-16',
+  fighterASI19: 'fighterASI-19',
+  wizardASI4: 'wizardASI-4',
+  wizardASI8: 'wizardASI-8',
+  wizardASI12: 'wizardASI-12',
+  wizardASI16: 'wizardASI-16',
+  wizardASI19: 'wizardASI-19',
+  clericASI4: 'clericASI-4',
+  clericASI8: 'clericASI-8',
+  clericASI12: 'clericASI-12',
+  clericASI16: 'clericASI-16',
+  clericASI19: 'clericASI-19',
+  rogueASI4: 'rogueASI-4',
+  rogueASI8: 'rogueASI-8',
+  rogueASI10: 'rogueASI-10',
+  rogueASI12: 'rogueASI-12',
+  rogueASI16: 'rogueASI-16',
+  rogueASI19: 'rogueASI-19',
+  barbarianASI4: 'barbarianASI-4',
+  barbarianASI6: 'barbarianASI-6',
+  barbarianASI8: 'barbarianASI-8',
+  barbarianASI12: 'barbarianASI-12',
+  barbarianASI14: 'barbarianASI-14',
+  barbarianASI16: 'barbarianASI-16',
+  barbarianASI19: 'barbarianASI-19',
+  bardASI4: 'bardASI-4',
+  bardASI8: 'bardASI-8',
+  bardASI12: 'bardASI-12',
+  bardASI16: 'bardASI-16',
+  bardASI19: 'bardASI-19',
+  druidASI4: 'druidASI-4',
+  druidASI8: 'druidASI-8',
+  druidASI12: 'druidASI-12',
+  druidASI16: 'druidASI-16',
+  druidASI19: 'druidASI-19',
+  monkASI4: 'monkASI-4',
+  monkASI6: 'monkASI-6',
+  monkASI8: 'monkASI-8',
+  monkASI10: 'monkASI-10',
+  monkASI12: 'monkASI-12',
+  monkASI16: 'monkASI-16',
+  monkASI19: 'monkASI-19',
+  paladinASI4: 'paladinASI-4',
+  paladinASI8: 'paladinASI-8',
+  paladinASI12: 'paladinASI-12',
+  paladinASI16: 'paladinASI-16',
+  paladinASI19: 'paladinASI-19',
+  rangerASI4: 'rangerASI-4',
+  rangerASI8: 'rangerASI-8',
+  rangerASI12: 'rangerASI-12',
+  rangerASI16: 'rangerASI-16',
+  rangerASI19: 'rangerASI-19',
+  sorcererASI4: 'sorcererASI-4',
+  sorcererASI8: 'sorcererASI-8',
+  sorcererASI12: 'sorcererASI-12',
+  sorcererASI16: 'sorcererASI-16',
+  sorcererASI19: 'sorcererASI-19',
+  warlockASI4: 'warlockASI-4',
+  warlockASI8: 'warlockASI-8',
+  warlockASI12: 'warlockASI-12',
+  warlockASI16: 'warlockASI-16',
+  warlockASI19: 'warlockASI-19',
+  artificerASI4: 'artificerASI-4',
+  artificerASI8: 'artificerASI-8',
+  artificerASI12: 'artificerASI-12',
+  artificerASI16: 'artificerASI-16',
+  artificerASI19: 'artificerASI-19',
+  artificerCantrips1: 'artificerCantrips-1',
+  artificerCantrips10: 'artificerCantrips-10',
+  artificerCantrips14: 'artificerCantrips-14',
+  artificerRitualCasting1: 'artificerRitualCasting-1',
+  artificerMagicalTinkering1: 'artificerMagicalTinkering-1',
+  artificerInfuseItem2: 'artificerInfuseItem-2',
+  artificerInfuseItem6: 'artificerInfuseItem-6',
+  artificerInfuseItem10: 'artificerInfuseItem-10',
+  artificerInfuseItem14: 'artificerInfuseItem-14',
+  artificerInfuseItem18: 'artificerInfuseItem-18',
+  artificerRightToolForTheJob3: 'artificerRightToolForTheJob-3',
+  artificerToolExpertise6: 'artificerToolExpertise-6',
+  artificerFlashOfGenius7: 'artificerFlashOfGenius-7',
+  artificerMagicItemAdept10: 'artificerMagicItemAdept-10',
+  artificerSpellStoringItem18: 'artificerSpellStoringItem-18',
+  artificerMagicItemSavant14: 'artificerMagicItemSavant-14',
+  artificerMagicItemMaster18: 'artificerMagicItemMaster-18',
+  artificerSoulOfArtifice20: 'artificerSoulOfArtifice-20',
 };
 
 const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
+  //druid (skip for now)
+  ...[4, 8, 12, 16, 19].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.druidASI4,
+        level: 4,
+        Feature: {
+          connect: {
+            id: fids.druidASI,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`druidASI${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.druidASI,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`druidASI${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
+  // warlock (skip for now)
+  ...[4, 8, 12, 16, 19].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.warlockASI4,
+        level: 4,
+        Feature: {
+          connect: {
+            id: fids.warlockASI,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`warlockASI${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.warlockASI,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`warlockASI${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
+  //sorcerer (skip for now)
+  ...[4, 8, 12, 16, 19].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.sorcererASI4,
+        level: 4,
+        Feature: {
+          connect: {
+            id: fids.sorcererASI,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`sorcererASI${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.sorcererASI,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`sorcererASI${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
+  // artificer
+  ...[4, 8, 12, 16, 19].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.artificerASI4,
+        level: 4,
+        Feature: {
+          connect: {
+            id: fids.artificerASI,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`artificerASI${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.artificerASI,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`artificerASI${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
+  {
+    id: ClassFeatureEffectIds.artificerCantrips1,
+    level: 1,
+    Feature: {
+      connect: {
+        id: fids.artificerCantrips,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerCantrips10,
+    level: 10,
+    Feature: {
+      connect: {
+        id: fids.artificerCantrips,
+      },
+    },
+    parentEffect: {
+      connect: {
+        id: ClassFeatureEffectIds.artificerCantrips1,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerCantrips14,
+    level: 14,
+    Feature: {
+      connect: {
+        id: fids.artificerCantrips,
+      },
+    },
+    parentEffect: {
+      connect: {
+        id: ClassFeatureEffectIds.artificerCantrips10,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerRitualCasting1,
+    level: 1,
+    Feature: {
+      connect: {
+        id: fids.artificerRitualCasting,
+      },
+    },
+    ritualCasterType: RitualCasterType.PREPARED,
+  },
+  {
+    id: ClassFeatureEffectIds.artificerMagicalTinkering1,
+    level: 1,
+    Feature: {
+      connect: {
+        id: fids.magicalTinkering,
+      },
+    },
+    EffectToResource: {
+      connectOrCreate: {
+        where: {
+          effectId_resourceId: {
+            effectId: ClassFeatureEffectIds.artificerMagicalTinkering1,
+            resourceId: CustomResourceIds.magicalTinkering,
+          },
+        },
+        create: {
+          resourceId: CustomResourceIds.magicalTinkering,
+          scalingFormula: 'max(1, INT)',
+          refreshOn: RefreshEvent.OTHER,
+        },
+      },
+    },
+  },
+  ...[2, 6, 10, 14, 18].map((level, i, arr) => {
+    if (i == 0)
+      return {
+        id: ClassFeatureEffectIds.artificerInfuseItem2,
+        level: 2,
+        Feature: {
+          connect: {
+            id: fids.artificerInfuseItem,
+          },
+        },
+        EffectToResource: {
+          connectOrCreate: [
+            {
+              where: {
+                effectId_resourceId: {
+                  effectId: ClassFeatureEffectIds.artificerInfuseItem2,
+                  resourceId: CustomResourceIds.infusedItems,
+                },
+              },
+              create: {
+                resourceId: CustomResourceIds.infusedItems,
+                scalingFormula: 'max(1, INT)',
+                refreshOn: RefreshEvent.OTHER,
+              },
+            },
+            {
+              where: {
+                effectId_resourceId: {
+                  effectId: ClassFeatureEffectIds.artificerInfuseItem2,
+                  resourceId: CustomResourceIds.infusionsKnown,
+                },
+              },
+              create: {
+                resourceId: CustomResourceIds.infusionsKnown,
+                scalingFormula: '4',
+                refreshOn: RefreshEvent.LONG_REST,
+              },
+            },
+          ],
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`artificerInfuseItem${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.artificerInfuseItem,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`artificerInfuseItem${arr[i - 1]}`],
+        },
+      },
+      EffectToResource: {
+        connectOrCreate: [
+          {
+            where: {
+              effectId_resourceId: {
+                //@ts-expect-error level can index
+                effectId: ClassFeatureEffectIds[`artificerInfuseItem${level}`],
+                resourceId: CustomResourceIds.infusedItems,
+              },
+            },
+            create: {
+              resourceId: CustomResourceIds.infusedItems,
+              scalingFormula: 'max(1, INT)',
+              refreshOn: RefreshEvent.OTHER,
+            },
+          },
+          {
+            where: {
+              effectId_resourceId: {
+                // @ts-expect-error level can index
+                effectId: ClassFeatureEffectIds[`artificerInfuseItem${level}`],
+                resourceId: CustomResourceIds.infusionsKnown,
+              },
+            },
+            create: {
+              resourceId: CustomResourceIds.infusionsKnown,
+              scalingFormula: `${Math.floor((level - 2) / 4) * 2 + 4}`,
+              refreshOn: RefreshEvent.LONG_REST,
+            },
+          },
+        ],
+      },
+    };
+  }),
+  {
+    id: ClassFeatureEffectIds.artificerRightToolForTheJob3,
+    level: 3,
+    Feature: {
+      connect: {
+        id: fids.artificerRightToolForTheJob,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerToolExpertise6,
+    level: 6,
+    Feature: {
+      connect: {
+        id: fids.artificerToolExpertise,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerFlashOfGenius7,
+    level: 7,
+    Feature: {
+      connect: {
+        id: fids.artificerFlashOfGenius,
+      },
+    },
+    EffectToResource: {
+      connectOrCreate: {
+        where: {
+          effectId_resourceId: {
+            effectId: ClassFeatureEffectIds.artificerFlashOfGenius7,
+            resourceId: CustomResourceIds.flashOfGenius,
+          },
+        },
+        create: {
+          resourceId: CustomResourceIds.flashOfGenius,
+          scalingFormula: 'max(1, INT)',
+          refreshOn: RefreshEvent.LONG_REST,
+        },
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerMagicItemAdept10,
+    level: 10,
+    Feature: {
+      connect: {
+        id: fids.artificerMagicItemAdept,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerSpellStoringItem18,
+    level: 18,
+    Feature: {
+      connect: {
+        id: fids.artificerSpellStoringItem,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerMagicItemSavant14,
+    level: 14,
+    Feature: {
+      connect: {
+        id: fids.artificerMagicItemSavant,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerMagicItemMaster18,
+    level: 18,
+    Feature: {
+      connect: {
+        id: fids.artificerMagicItemMaster,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.artificerSoulOfArtifice20,
+    level: 20,
+    Feature: {
+      connect: {
+        id: fids.artificerSoulOfArtifice,
+      },
+    },
+  },
+
+  //rogue (skip for now)
+  ...[4, 8, 10, 12, 16, 19].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.rogueASI4,
+        level: 4,
+        Feature: {
+          connect: {
+            id: fids.rogueASI,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`rogueASI${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.rogueASI,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`rogueASI${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
   //Fighter (Skip for now)
+  ...[4, 6, 8, 12, 14, 16, 19].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.fighterASI4,
+        level: 4,
+        Feature: {
+          connect: {
+            id: fids.fighterASI,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`fighterASI${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.fighterASI,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`fighterASI${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
   //Wizard Skip for now
+  ...[4, 8, 12, 16, 19].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.wizardASI4,
+        level: 4,
+        Feature: {
+          connect: {
+            id: fids.wizardASI,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`wizardASI${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.wizardASI,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`wizardASI${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
   //Bard
+  ...[4, 8, 12, 16, 19].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.bardASI4,
+        level: 4,
+        Feature: {
+          connect: {
+            id: fids.bardASI,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`bardASI${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.bardASI,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`bardASI${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
   //Cantrips
   {
     id: ClassFeatureEffectIds.bardCantrips1,
@@ -749,6 +1317,34 @@ const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
     },
   },
   //cleric
+  ...[4, 8, 12, 16, 19].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.clericASI4,
+        level: 4,
+        Feature: {
+          connect: {
+            id: fids.clericASI,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`clericASI${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.clericASI,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`clericASI${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
   {
     id: ClassFeatureEffectIds.clericChannelDivinity2,
     level: 2,
@@ -1260,6 +1856,34 @@ const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
     ritualCasterType: RitualCasterType.PREPARED,
   },
   //paladin
+  ...[4, 8, 12, 16, 19].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.paladinASI4,
+        level: 4,
+        Feature: {
+          connect: {
+            id: fids.paladinASI,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`paladinASI${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.paladinASI,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`paladinASI${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
   {
     id: ClassFeatureEffectIds.paladinDivineSense1,
     level: 1,
@@ -1608,6 +2232,36 @@ const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
       },
     },
   },
+  //ranger asi
+  ...[4, 8, 12, 16, 19].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.rangerASI4,
+        level: 4,
+        Feature: {
+          connect: {
+            id: fids.rangerASI,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`rangerASI${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.rangerASI,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`rangerASI${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
+
   {
     id: ClassFeatureEffectIds.rangerSpellsKnown2,
     level: 2,
@@ -1888,6 +2542,34 @@ const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
     },
   },
   //monk
+  ...[4, 8, 12, 16, 19].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.monkASI4,
+        level: 4,
+        Feature: {
+          connect: {
+            id: fids.monkASI,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`monkASI${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.monkASI,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`monkASI${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
   {
     id: ClassFeatureEffectIds.monkUnarmoredDefense1,
     level: 1,
@@ -2344,6 +3026,34 @@ const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
     },
   },
   //barbarian
+  ...[4, 6, 8, 12, 14, 16, 19].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.barbarianASI4,
+        level: 4,
+        Feature: {
+          connect: {
+            id: fids.barbarianASI,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`barbarianASI${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.barbarianASI,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`barbarianASI${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
   {
     id: ClassFeatureEffectIds.barbarianRage1,
     level: 1,
