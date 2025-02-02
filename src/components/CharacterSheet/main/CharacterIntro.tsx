@@ -9,7 +9,7 @@ import Skeleton from '@/components/UI/Skeleton';
 import useCharacterState from '@/hooks/useCharacter/useCharacterState';
 
 const CharacterIntro = () => {
-  const { id, openModal, closeModal } = useModal();
+  const { id, openModal } = useModal();
   const { rawCharacter: character, level } = useAppSelector(
     (state) => state.sheet
   );
@@ -28,7 +28,7 @@ const CharacterIntro = () => {
           className="rounded-lg w-[100px] h-[100px] object-cover object-center mr-4 btn btn-ghost p-0"
           alt="Character Image Not Found"
           onClick={() => {
-            closeModal();
+            openModal();
           }}
         />
       ) : (

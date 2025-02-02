@@ -14,6 +14,7 @@ export const CustomResourceIds = {
   infusedItems: 'infusedItems',
   infusionsKnown: 'infusionsKnown',
   flashOfGenius: 'flashOfGenius',
+  wildshapeDruid: 'wildshapeDruid',
 };
 
 const CustomResourceSeed: Prisma.CustomResourceCreateManyInput[] = [
@@ -107,6 +108,13 @@ const CustomResourceSeed: Prisma.CustomResourceCreateManyInput[] = [
     description:
       'A pool of charges that dictate how many uses of flash of genius an Artificer has.',
     slug: 'flash-of-genius',
+  },
+  {
+    id: CustomResourceIds.wildshapeDruid,
+    name: 'Wild Shape',
+    description:
+      'A pool of charges that dictate how many uses of wild shape a Druid has.',
+    slug: 'wild-shape-druid',
   },
 ];
 

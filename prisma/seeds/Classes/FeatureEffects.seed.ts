@@ -1,5 +1,6 @@
 import {
   DamageTypes,
+  Language,
   Prisma,
   RefreshEvent,
   RitualCasterType,
@@ -355,6 +356,23 @@ export const ClassFeatureEffectIds = {
   artificerMagicItemSavant14: 'artificerMagicItemSavant-14',
   artificerMagicItemMaster18: 'artificerMagicItemMaster-18',
   artificerSoulOfArtifice20: 'artificerSoulOfArtifice-20',
+  druidCantrips1: 'druidCantrips-1',
+  druidCantrips4: 'druidCantrips-4',
+  druidCantrips10: 'druidCantrips-10',
+  druiddruidic1: 'druiddruidic-1',
+  druidRitualCaster: 'druidRitualCaster',
+  druidWildShape2: 'druidWildShape-2',
+  druidWildShape4: 'druidWildShape-4',
+  druidWildShape8: 'druidWildShape-8',
+  druidWildCompanion2: 'druidWildCompanion-2',
+  druidCantripVersatility4: 'druidCantripVersatility-4',
+  druidCantripVersatility8: 'druidCantripVersatility-8',
+  druidCantripVersatility12: 'druidCantripVersatility-12',
+  druidCantripVersatility16: 'druidCantripVersatility-16',
+  druidCantripVersatility19: 'druidCantripVersatility-19',
+  druidTimelessBody18: 'druidTimelessBody-18',
+  druidBeastSpells18: 'druidBeastSpells-18',
+  druidArchdruid20: 'druidArchdruid-20',
 };
 
 const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
@@ -387,6 +405,212 @@ const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
       },
     };
   }),
+  //druid cantrips
+  ...[1, 4, 10].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.druidCantrips1,
+        level: 1,
+        Feature: {
+          connect: {
+            id: fids.druidCantrips,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`druidCantrips${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.druidCantrips,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`druidCantrips${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
+  {
+    id: ClassFeatureEffectIds.druiddruidic1,
+    level: 1,
+    Feature: {
+      connect: {
+        id: fids.druidic,
+      },
+    },
+    languageProficiencies: [Language.DRUIDIC],
+  },
+  {
+    id: ClassFeatureEffectIds.druidRitualCaster,
+    level: 1,
+    Feature: {
+      connect: {
+        id: fids.druidRitualCasting,
+      },
+    },
+    ritualCasterType: RitualCasterType.PREPARED,
+  },
+  {
+    id: ClassFeatureEffectIds.druidWildShape2,
+    level: 2,
+    Feature: {
+      connect: {
+        id: fids.wildShape,
+      },
+    },
+    EffectToResource: {
+      connectOrCreate: {
+        where: {
+          effectId_resourceId: {
+            effectId: ClassFeatureEffectIds.druidWildShape2,
+            resourceId: CustomResourceIds.wildshapeDruid,
+          },
+        },
+        create: {
+          resourceId: CustomResourceIds.wildshapeDruid,
+          scalingFormula: '2',
+          refreshOn: RefreshEvent.SHORT_REST,
+        },
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.druidWildShape4,
+    level: 4,
+    Feature: {
+      connect: {
+        id: fids.wildShape,
+      },
+    },
+    EffectToResource: {
+      connectOrCreate: {
+        where: {
+          effectId_resourceId: {
+            effectId: ClassFeatureEffectIds.druidWildShape4,
+            resourceId: CustomResourceIds.wildshapeDruid,
+          },
+        },
+        create: {
+          resourceId: CustomResourceIds.wildshapeDruid,
+          scalingFormula: '2',
+          refreshOn: RefreshEvent.SHORT_REST,
+        },
+      },
+    },
+    parentEffect: {
+      connect: {
+        id: ClassFeatureEffectIds.druidWildShape2,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.druidWildShape8,
+    level: 8,
+    Feature: {
+      connect: {
+        id: fids.wildShape,
+      },
+    },
+    EffectToResource: {
+      connectOrCreate: {
+        where: {
+          effectId_resourceId: {
+            effectId: ClassFeatureEffectIds.druidWildShape8,
+            resourceId: CustomResourceIds.wildshapeDruid,
+          },
+        },
+        create: {
+          resourceId: CustomResourceIds.wildshapeDruid,
+          scalingFormula: '2',
+          refreshOn: RefreshEvent.SHORT_REST,
+        },
+      },
+    },
+    parentEffect: {
+      connect: {
+        id: ClassFeatureEffectIds.druidWildShape4,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.druidWildCompanion2,
+    level: 2,
+    Feature: {
+      connect: {
+        id: fids.wildCompanion,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.druidCantripVersatility4,
+    level: 4,
+    Feature: {
+      connect: {
+        id: fids.cantripVersatilityDruid,
+      },
+    },
+  },
+  ...[8, 12, 16, 19].map((level, i, arr) => {
+    if (i === 0)
+      return {
+        id: ClassFeatureEffectIds.druidCantripVersatility8,
+        level: 8,
+        Feature: {
+          connect: {
+            id: fids.cantripVersatilityDruid,
+          },
+        },
+      };
+    return {
+      //@ts-expect-error level can index
+      id: ClassFeatureEffectIds[`druidCantripVersatility${level}`],
+      level: level,
+      Feature: {
+        connect: {
+          id: fids.cantripVersatilityDruid,
+        },
+      },
+      parentEffect: {
+        connect: {
+          //@ts-expect-error level can index
+          id: ClassFeatureEffectIds[`druidCantripVersatility${arr[i - 1]}`],
+        },
+      },
+    };
+  }),
+
+  {
+    id: ClassFeatureEffectIds.druidTimelessBody18,
+    level: 18,
+    Feature: {
+      connect: {
+        id: fids.timelessBody,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.druidBeastSpells18,
+    level: 18,
+    Feature: {
+      connect: {
+        id: fids.beastSpells,
+      },
+    },
+  },
+  {
+    id: ClassFeatureEffectIds.druidArchdruid20,
+    level: 20,
+    Feature: {
+      connect: {
+        id: fids.archdruid,
+      },
+    },
+  },
+
   // warlock (skip for now)
   ...[4, 8, 12, 16, 19].map((level, i, arr) => {
     if (i === 0)
