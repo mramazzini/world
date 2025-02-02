@@ -8,9 +8,16 @@ const protectedRoutes = [
   '/dashboard',
   '/workshop',
 ];
+
 const adminRoutes = ['/admin', '/admin/messages'];
 
 export async function middleware(req: NextRequest) {
+  //russian bot filter
+  const country = req.geo?.country || '';
+  if (country === 'RU') {
+    return new NextResponse('Access Denied', { status: 403 });
+  }
+
   const isAuthenticated = await verifyToken();
 
   // administator routes can only be accessed by me

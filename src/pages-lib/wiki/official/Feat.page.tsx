@@ -1,5 +1,5 @@
 import CommentSection from '@/components/CommentSection/CommentSection';
-import FeatureList from '@/components/UI/FeatureList';
+import FeatureList from '@/components/UI/Features/FeatureList';
 import Info from '@/components/UI/Info';
 import { FeatInfo } from '@/lib/types/modelInfo';
 import NewLineParse from '@/Utility/NewLineParse';

@@ -1,21 +1,20 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { generateCharacter } from '../../Utility/characterStateFunctions/update/generateCharacter';
 import '@/lib/string.extensions';
 import MainSheet from '@/components/CharacterSheet/main/MainSheet';
-import InventoryTab from '@/components/CharacterSheet/Inventory/InventoryTab';
-import ChooseChoices from '@/components/CharacterSheet/Choices/Choices';
-import SpellSheet from '@/components/CharacterSheet/Spells/SpellSheet';
-// import Notes from '@/components/CharacterSheet/Notes/Notes';
-import Traits from '@/components/CharacterSheet/Traits/Traits';
-import { applyPendingModels } from '../../Utility/characterStateFunctions/update/applyPendingModels';
-import CharacterStatsTab from '@/components/CharacterSheet/Stats/CharacterStatsTab';
-import { CharacterInfo } from '@/lib/types/modelInfo';
-import { useAppSelector } from '@/store/hooks';
-import { useDispatch } from 'react-redux';
-import { setCharacter } from '@/store/characterSlice';
 import Loading from '@/components/UI/Loading';
+import useCharacter from '@/hooks/CharacterControllers/useCharacter';
+import CharacterStatsTab from '@/components/CharacterSheet/Stats/CharacterStatsTab';
+import Notes from '@/components/CharacterSheet/Notes/NotesTab';
+import ChoicesTab from '@/components/CharacterSheet/ChoicesTab/ChoicesTab';
+import InventoryTab from '@/components/CharacterSheet/Inventory/InventoryTab';
+import Traits from '@/components/CharacterSheet/Traits/Traits';
+import SpellSheet from '@/components/CharacterSheet/Spells/SpellSheet';
+import AbilityScoreModal from '@/components/CharacterSheet/AbilityScoreModal/AbilityScoreModal';
+import useCharacterLogic from '@/hooks/CharacterControllers/useCharacterLogic';
+import { clearSheetState } from '@/store/sheetSlice';
+import { useAppDispatch } from '@/store/hooks';
 
 type Tab =
   | 'sheet'
@@ -27,46 +26,24 @@ type Tab =
   | 'stats';
 
 interface Props {
-  characterData: CharacterInfo;
+  characterID: string;
 }
 
-const CharacterSheet = ({ characterData }: Props) => {
+const CharacterSheet = ({ characterID }: Props) => {
   const [activeTab, setActiveTab] = useState<Tab>('sheet');
-  const character = useAppSelector((state) => state.character);
-  const [isInitialized, setIsInitialized] = useState(false);
-  const dispatch = useDispatch();
+  const { loading } = useCharacter(characterID);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // check to see if class/subclass needs to be linked
-    if (!character.state) return;
-    if (!character.state.pendingLinks) return;
-    applyPendingModels(character).then((c) => {
-      dispatch(setCharacter(c));
-    });
-  }, [character, dispatch]);
+    return () => {
+      console.log('clearing sheet state');
+      dispatch(clearSheetState());
+    };
+  }, [dispatch]);
 
-  useEffect(() => {
-    if (isInitialized && character.state) return;
-    setIsInitialized(true);
-
-    if (characterData.state) {
-      dispatch(setCharacter(characterData));
-      return;
-    }
-
-    generateCharacter(characterData).then((c) => {
-      dispatch(
-        setCharacter({
-          ...characterData,
-          state: c,
-        })
-      );
-    });
-  }, [characterData, dispatch, character.state, isInitialized]);
-
-  useEffect(() => {
-    console.log(character);
-  }, [character]);
+  // A wrapper for all the character logic
+  useCharacterLogic();
 
   return (
     <main className="p-4 md:p-8">
@@ -88,9 +65,11 @@ const CharacterSheet = ({ characterData }: Props) => {
           Character sheets are currently in beta, and bugs are to be expected.
         </span>
       </div>
-      {character.state ? (
+      {loading ? (
+        <Loading />
+      ) : (
         <>
-          <div role="tablist" className="tabs tabs-lifted">
+          <div role="tablist" className="tabs tabs-lifted ">
             <input
               type="radio"
               name="charcter_tabs"
@@ -105,9 +84,8 @@ const CharacterSheet = ({ characterData }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <MainSheet />
+              {activeTab === 'sheet' && <MainSheet />}
             </div>
-            {/* dummy tabs for now */}
             <input
               type="radio"
               name="charcter_tabs"
@@ -122,7 +100,7 @@ const CharacterSheet = ({ characterData }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <InventoryTab />
+              {activeTab === 'inventory' && <InventoryTab />}
             </div>
             <input
               type="radio"
@@ -138,7 +116,7 @@ const CharacterSheet = ({ characterData }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <SpellSheet />
+              {activeTab === 'spells' && <SpellSheet />}
             </div>
             <input
               type="radio"
@@ -154,7 +132,7 @@ const CharacterSheet = ({ characterData }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <Traits />
+              {activeTab === 'traits' && <Traits />}
             </div>
             <input
               type="radio"
@@ -170,7 +148,7 @@ const CharacterSheet = ({ characterData }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <CharacterStatsTab />
+              {activeTab === 'stats' && <CharacterStatsTab />}
             </div>
 
             <input
@@ -186,7 +164,9 @@ const CharacterSheet = ({ characterData }: Props) => {
             <div
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
-            ></div>
+            >
+              {activeTab === 'notes' && <Notes />}
+            </div>
             <input
               type="radio"
               name="charcter_tabs"
@@ -202,13 +182,12 @@ const CharacterSheet = ({ characterData }: Props) => {
               role="tabpanel"
               className="bg-base-300 p-4 rounded-xl tab-content "
             >
-              <ChooseChoices />
+              {activeTab === 'choices' && <ChoicesTab />}
             </div>
           </div>
         </>
-      ) : (
-        <Loading />
       )}
+      <AbilityScoreModal />
     </main>
   );
 };

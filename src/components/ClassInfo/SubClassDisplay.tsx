@@ -1,12 +1,12 @@
-import { SubClassInfo } from '@/lib/types/modelInfo';
+import { FeatureInfo, SubClassInfo } from '@/lib/types/modelInfo';
 import '@/lib/string.extensions';
 
 import Link from 'next/link';
-import SubClassTable from './SubClassTable';
+// import SubClassTable from './SubClassTable';
 import Info from '../UI/Info';
 
 import NewLineParse from '../../Utility/NewLineParse';
-import FeatureList from '../UI/FeatureList';
+import FeatureList from '../UI/Features/FeatureList';
 interface Props {
   subClass: SubClassInfo;
 }
@@ -42,7 +42,7 @@ const SubClassDisplay = ({ subClass }: Props) => {
       <div className="divider"></div>
       <div className="px-4">
         {/* Subclass table only required if they are a spellcaster */}
-        {subClass.spellCastingInfo && (
+        {/* {subClass.spellCastingInfo && (
           <>
             <div className="bg-base-300 p-4 rounded-xl ">
               <h2>{subClass.name} Spellcasting </h2>
@@ -52,14 +52,14 @@ const SubClassDisplay = ({ subClass }: Props) => {
 
             <div className="divider"></div>
           </>
-        )}
+        )} */}
 
         <h2 className="px-4">
           Subclass Features{' '}
           <Info tooltip="Subclasses provide additional features that make your character more powerful as they level up." />
         </h2>
         <div className="divider"></div>
-        <FeatureList features={subClass.Features} />
+        <FeatureList features={subClass.Features as unknown as FeatureInfo[]} />
       </div>
     </>
   );

@@ -21,6 +21,7 @@ const SpellSeed: Prisma.SpellCreateManyInput[] = [
     postTableData: '',
     extendedTable: [],
     options: [],
+    rolls: ['1d6 {ACID} + 1d6 {ACID} * {LEVEL}'],
     upcastInfo:
       'This spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).',
   },
@@ -66,6 +67,7 @@ const SpellSeed: Prisma.SpellCreateManyInput[] = [
     options: [],
     upcastInfo:
       'At 5th level, the melee attack deals an extra 1d8 thunder damage to the target on a hit, and the damage the target takes for moving increases to 2d8. Both damage rolls increase by 1d8 at 11th level (2d8 and 3d8) and again at 17th level (3d8 and 4d8).',
+    rolls: ['1d8 {THUNDER} + 1d8 {THUNDER} * {LEVEL}'],
   },
   {
     id: '3',

@@ -124,7 +124,7 @@ const createWorkshopFeature = async (
 
     name: feature.name,
     description: feature.data?.description || 'No description provided',
-    levels: feature.data?.levels || [],
+    // levels: feature.data?.levels || [],
   };
   await db.feature.upsert({
     where: {

@@ -1,10 +1,8 @@
 'use client';
-import { alignmentToText } from '@/Utility/alignmentToText';
 import '@/lib/string.extensions';
 import { getCharactersByUser } from '@/lib/actions/db/character/read.actions';
 import { CharacterInfo } from '@/lib/types/modelInfo';
 import { getUserId } from '@/lib/utils/auth';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import DashboardSkeleton from '@/components/Dashboard/DashboardSkeleton';
@@ -13,6 +11,9 @@ import ConfirmModal from '@/components/Modals/ConfirmModal';
 import useModal from '@/hooks/useModal';
 import ModalButton from '@/components/UI/Modal/ModalButton';
 import { deleteCharacter } from '@/lib/actions/db/character/delete.actions';
+import Image from 'next/image';
+import { alignmentToText } from '@/Utility/alignmentToText';
+import { Alignment } from '@prisma/client';
 
 const Dashboard = () => {
   const [characters, setCharacters] = useState<CharacterInfo[]>([]);
@@ -24,8 +25,8 @@ const Dashboard = () => {
 
   const calcLevel = useCallback((c: CharacterInfo) => {
     let level = 0;
-    level += c.state
-      ? c.state.classLevels.reduce((acc, cl) => acc + cl.level, 0)
+    level += c
+      ? c.CharacterToClass.reduce((acc, c) => acc + c.levelsInClass, 0)
       : 1;
     return level;
   }, []);
@@ -91,7 +92,10 @@ const Dashboard = () => {
                   className="bg-base-200 w-full p-4 flex flex-col xl:flex-row items-center h-auto justify-start gap-4 "
                 >
                   <Image
-                    src={character.imageURL || '/images/hero.jpg'}
+                    src={
+                      character.CharacterState?.imageURL ||
+                      '/images/blank_person.svg'
+                    }
                     width={200}
                     height={200}
                     className="rounded-lg w-[100px] h-[100px] object-cover object-center "
@@ -99,7 +103,7 @@ const Dashboard = () => {
                   />
                   <div className="flex flex-col ">
                     <h2>
-                      {character.name}
+                      {character.CharacterState?.name}
                       <div className="divider m-0 divider-primary"></div>
                     </h2>
 
@@ -121,13 +125,30 @@ const Dashboard = () => {
                         </a>
                       )}
                       ,{' '}
-                      {character.Classes?.map((c) => (
-                        <Fragment key={c.id}>
-                          <a href={`/class/${c.slug}`} className="hover:link">
-                            {c.name.toCapitalCase()}
-                          </a>
-                        </Fragment>
-                      ))}
+                      {character.CharacterToClass?.map((c, i) => {
+                        if (i === character.CharacterToClass.length - 1) {
+                          return (
+                            <Fragment key={c.Class.name}>
+                              <a
+                                href={`/class/${c.Class.slug}`}
+                                className="hover:link"
+                              >
+                                {c.Class.name} ({c.levelsInClass})
+                              </a>
+                            </Fragment>
+                          );
+                        }
+                        return (
+                          <Fragment key={c.Class.name}>
+                            <a
+                              href={`/class/${c.Class.slug}`}
+                              className="hover:link"
+                            >
+                              {c.Class.name} ({c.levelsInClass}),{' '}
+                            </a>
+                          </Fragment>
+                        );
+                      })}
                       ,{' '}
                       <a
                         href={`/background/${character.Background?.slug}`}
@@ -137,7 +158,10 @@ const Dashboard = () => {
                       </a>{' '}
                     </p>
                     <p className="italic font-bold">
-                      {alignmentToText(character.alignment)}
+                      {alignmentToText(
+                        character.CharacterState?.alignment ||
+                          Alignment.TRUE_NEUTRAL
+                      )}
                     </p>
                   </div>
                   <div className="flex flex-row xl:flex-col items-end gap-4 grow mt-4 xl:mt-0">

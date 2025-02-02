@@ -97,12 +97,12 @@ const SearchTable = () => {
                       </div>
                     </Link>
                   </td>
-                  <td className="md:table-cell hidden">
+                  {/* <td className="md:table-cell hidden">
                     <Link href={tableRoute(item.type.toLowerCase(), item.slug)}>
                       {item.lastUpdated &&
                         item.lastUpdated.toLocaleDateString()}
                     </Link>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
           </tbody>

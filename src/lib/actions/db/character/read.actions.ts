@@ -5,63 +5,96 @@ import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
+import { FeatureInfoIncludeTemplate } from '../dbIncludeTemplates';
+
+const CharacterInfoTemplate = {
+  include: {
+    CharacterState: true,
+    Species: {
+      include: {
+        Features: {
+          include: FeatureInfoIncludeTemplate,
+        },
+
+        Choices: true,
+      },
+    },
+    Background: {
+      include: {
+        Features: {
+          include: FeatureInfoIncludeTemplate,
+        },
+        Choices: true,
+      },
+    },
+    SubClasses: {
+      include: {
+        Features: {
+          include: FeatureInfoIncludeTemplate,
+        },
+      },
+    },
+    CharacterChoiceStatus: true,
+    CharacterToClass: {
+      include: {
+        Class: {
+          include: {
+            Features: {
+              include: FeatureInfoIncludeTemplate,
+            },
+            SpellcastingFeatures: {
+              include: FeatureInfoIncludeTemplate,
+            },
+            MultiClassing: {
+              include: {
+                Choices: true,
+              },
+            },
+            SpellCasting: {
+              include: {
+                SpellList: true,
+              },
+            },
+            Choices: true,
+          },
+        },
+      },
+    },
+    Feats: {
+      include: {
+        Features: {
+          include: FeatureInfoIncludeTemplate,
+        },
+      },
+    },
+    SubSpecies: {
+      include: {
+        Features: {
+          include: FeatureInfoIncludeTemplate,
+        },
+
+        Choices: true,
+      },
+    },
+
+    User: {
+      select: {
+        id: true,
+        username: true,
+      },
+    },
+  },
+};
 
 export const getCharacters = async (): Promise<CharacterInfo[]> => {
   const db = new PrismaClient({
     omit: {
       character: {
         createdAt: true,
-        updatedAt: true,
       },
     },
   });
-  const res = await db.character.findMany({
-    include: {
-      Species: {
-        include: {
-          Features: true,
-        },
-      },
-      Background: {
-        include: {
-          Features: true,
-        },
-      },
-      SubClasses: {
-        include: {
-          Features: true,
-        },
-      },
-      Classes: {
-        include: {
-          Features: true,
-          SpellcastingFeatures: true,
-          SpellList: {
-            include: {
-              Spells: true,
-            },
-          },
-        },
-      },
-      Feats: {
-        include: {
-          Features: true,
-        },
-      },
-      SubSpecies: {
-        include: {
-          Features: true,
-        },
-      },
-
-      User: {
-        select: {
-          id: true,
-          username: true,
-        },
-      },
-    },
-  });
+  const res = await db.character.findMany(CharacterInfoTemplate);
   await db.$disconnect();
   return res as CharacterInfo[];
 };
@@ -74,43 +107,6 @@ export const getCharacter = async ({
     omit: {
       character: {
         createdAt: true,
-        updatedAt: true,
-      },
-      species: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      subSpecies: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      feature: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      background: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      class: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      subClass: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      spell: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      feat: {
-        createdAt: true,
-        updatedAt: true,
-      },
-      spellList: {
-        createdAt: true,
-        updatedAt: true,
       },
     },
   });
@@ -119,50 +115,7 @@ export const getCharacter = async ({
       where: {
         [type]: query,
       },
-      include: {
-        Species: {
-          include: {
-            Features: true,
-          },
-        },
-        Background: {
-          include: {
-            Features: true,
-          },
-        },
-        SubClasses: {
-          include: {
-            Features: true,
-          },
-        },
-        Classes: {
-          include: {
-            Features: true,
-            SpellcastingFeatures: true,
-            SpellList: {
-              include: {
-                Spells: true,
-              },
-            },
-          },
-        },
-        Feats: {
-          include: {
-            Features: true,
-          },
-        },
-        SubSpecies: {
-          include: {
-            Features: true,
-          },
-        },
-        User: {
-          select: {
-            id: true,
-            username: true,
-          },
-        },
-      },
+      ...CharacterInfoTemplate,
     });
     return res;
   } catch (error) {
@@ -180,61 +133,14 @@ export const getCharactersByUser = async (
     omit: {
       character: {
         createdAt: true,
-        updatedAt: true,
       },
     },
   });
   const res = await db.character.findMany({
-    orderBy: {
-      updatedAt: 'desc',
-    },
     where: {
       userId: userID,
     },
-    include: {
-      Species: {
-        include: {
-          Features: true,
-        },
-      },
-      Background: {
-        include: {
-          Features: true,
-        },
-      },
-      SubClasses: {
-        include: {
-          Features: true,
-        },
-      },
-      Classes: {
-        include: {
-          Features: true,
-          SpellcastingFeatures: true,
-          SpellList: {
-            include: {
-              Spells: true,
-            },
-          },
-        },
-      },
-      Feats: {
-        include: {
-          Features: true,
-        },
-      },
-      SubSpecies: {
-        include: {
-          Features: true,
-        },
-      },
-      User: {
-        select: {
-          id: true,
-          username: true,
-        },
-      },
-    },
+    ...CharacterInfoTemplate,
   });
   await db.$disconnect();
   return res;
@@ -247,7 +153,6 @@ export const getCharacterChunk = async (
     omit: {
       character: {
         createdAt: true,
-        updatedAt: true,
       },
     },
   });
@@ -258,50 +163,7 @@ export const getCharacterChunk = async (
         fields: queryInfo.searchFields,
         relationalFields: queryInfo.relationalFields,
       }),
-      include: {
-        Species: {
-          include: {
-            Features: true,
-          },
-        },
-        Background: {
-          include: {
-            Features: true,
-          },
-        },
-        SubClasses: {
-          include: {
-            Features: true,
-          },
-        },
-        Classes: {
-          include: {
-            Features: true,
-            SpellcastingFeatures: true,
-            SpellList: {
-              include: {
-                Spells: true,
-              },
-            },
-          },
-        },
-        Feats: {
-          include: {
-            Features: true,
-          },
-        },
-        SubSpecies: {
-          include: {
-            Features: true,
-          },
-        },
-        User: {
-          select: {
-            id: true,
-            username: true,
-          },
-        },
-      },
+      ...CharacterInfoTemplate,
     });
     await db.$disconnect();
     return res;
@@ -312,51 +174,7 @@ export const getCharacterChunk = async (
       fields: queryInfo.searchFields,
       relationalFields: queryInfo.relationalFields,
     }),
-
-    include: {
-      Species: {
-        include: {
-          Features: true,
-        },
-      },
-      Background: {
-        include: {
-          Features: true,
-        },
-      },
-      SubClasses: {
-        include: {
-          Features: true,
-        },
-      },
-      Classes: {
-        include: {
-          Features: true,
-          SpellcastingFeatures: true,
-          SpellList: {
-            include: {
-              Spells: true,
-            },
-          },
-        },
-      },
-      Feats: {
-        include: {
-          Features: true,
-        },
-      },
-      SubSpecies: {
-        include: {
-          Features: true,
-        },
-      },
-      User: {
-        select: {
-          id: true,
-          username: true,
-        },
-      },
-    },
+    ...CharacterInfoTemplate,
   });
 
   const fuse = new Fuse(res, {

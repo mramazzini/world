@@ -18,6 +18,11 @@ export default function RootLayout({
       <head>
         {/* charset */}
         <meta charSet="UTF-8" />
+        <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="khVQzcVORG8ZCq/DmIw/Xg"
+          async
+        ></script>
       </head>
       <body
         className={`${inter.className} w-screen flex flex-col items-center  `}

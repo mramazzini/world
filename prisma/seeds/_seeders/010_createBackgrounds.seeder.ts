@@ -4,6 +4,7 @@ import Backgrounds from '../Backgrounds/Backgrounds.seed';
 import BackgroundFeatures from '../Backgrounds/BackgroundFeatures.seed';
 import createFeature from '../_helpers/createFeature';
 import { createSlug } from '../_helpers/createSlug';
+import BackgroundChoicesSeed from '../Backgrounds/BackgroundChoices.seed';
 
 export const createBackgrounds = async (db: PrismaClient) => {
   // Create Backgrounds
@@ -51,4 +52,27 @@ export const createBackgrounds = async (db: PrismaClient) => {
     }
   }
   cinfo('Background features created');
+
+  // Create Background Choices
+  cinfo('Creating background choices');
+  for (const Choice of BackgroundChoicesSeed) {
+    try {
+      cinfo('Creating choice:', Choice.id);
+      await db.choice.upsert({
+        where: {
+          id: Choice.id,
+        },
+        update: {
+          ...Choice,
+        },
+        create: {
+          ...Choice,
+        },
+      });
+      cinfo('Choice created');
+    } catch (error) {
+      cerr('Error creating background choice:', Choice.id, error);
+      throw new Error('Error creating background choice');
+    }
+  }
 };

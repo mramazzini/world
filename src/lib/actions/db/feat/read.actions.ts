@@ -6,6 +6,7 @@ import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 
 import Fuse from 'fuse.js';
+import { FeatureInfoIncludeTemplate } from '../dbIncludeTemplates';
 
 export const getFeatsMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
@@ -13,7 +14,7 @@ export const getFeatsMetadata = async (): Promise<DBMetadata[]> => {
     select: {
       id: true,
       name: true,
-      updatedAt: true,
+      // updatedAt: true,
       slug: true,
       flavorText: true,
     },
@@ -29,7 +30,9 @@ export const getFeats = async (): Promise<FeatInfo[]> => {
   const db = new PrismaClient();
   const res = await db.feat.findMany({
     include: {
-      Features: true,
+      Features: {
+        include: FeatureInfoIncludeTemplate,
+      },
       User: {
         select: {
           username: true,
@@ -52,7 +55,9 @@ export const getFeat = async ({
       [type]: query,
     },
     include: {
-      Features: true,
+      Features: {
+        include: FeatureInfoIncludeTemplate,
+      },
       User: {
         select: {
           username: true,
@@ -76,7 +81,9 @@ export const getFeatChunk = async (
         relationalFields: queryInfo.relationalFields,
       }),
       include: {
-        Features: true,
+        Features: {
+          include: FeatureInfoIncludeTemplate,
+        },
         User: {
           select: {
             username: true,
@@ -95,7 +102,9 @@ export const getFeatChunk = async (
     }),
 
     include: {
-      Features: true,
+      Features: {
+        include: FeatureInfoIncludeTemplate,
+      },
       User: {
         select: {
           username: true,

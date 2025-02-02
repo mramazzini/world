@@ -1,33 +1,34 @@
-import FighterSubclassFeatures from './Fighter.seed';
+// import FighterSubclassFeatures from './Fighter.seed';
 import ClericSubclassFeatures from './Cleric.seed';
 import BarbarianSubclassFeatures from './Barbarian.seed';
 import BardSubclassFeatures from './Bard.seed';
-import WizardSubclassFeatures from './Wizard.seed';
+// import WizardSubclassFeatures from './Wizard.seed';
 import DruidSubclassFeatures from './Druid.seed';
 import MonkSubclassFeatures from './Monk.seed';
 import PaladinSubclassFeatures from './Paladin.seed';
 import RangerSubclassFeatures from './Ranger.seed';
-import RogueSubclassFeatures from './Rogue.seed';
-import SorcererSubclassFeatures from './Sorcerer.seed';
-import WarlockSubclassFeatures from './Warlock.seed';
+// import RogueSubclassFeatures from './Rogue.seed';
+// import SorcererSubclassFeatures from './Sorcerer.seed';
+// import WarlockSubclassFeatures from './Warlock.seed';
 import ArtificerSubclassFeatures from './Artificer.seed';
 import generateId from '../../_helpers/generateId';
 import SubClasses from '../Subclasses.seed';
 import { Prisma } from '@prisma/client';
 let count = 1;
+//@ts-expect-error asdasd
 const SubclassFeatures: Prisma.FeatureCreateManyInput[] = [
-  ...FighterSubclassFeatures,
+  // ...FighterSubclassFeatures,
   ...ClericSubclassFeatures,
   ...BarbarianSubclassFeatures,
   ...BardSubclassFeatures,
-  ...WizardSubclassFeatures,
+  // ...WizardSubclassFeatures,
   ...DruidSubclassFeatures,
   ...MonkSubclassFeatures,
   ...PaladinSubclassFeatures,
   ...RangerSubclassFeatures,
-  ...RogueSubclassFeatures,
-  ...SorcererSubclassFeatures,
-  ...WarlockSubclassFeatures,
+  // ...RogueSubclassFeatures,
+  // ...SorcererSubclassFeatures,
+  // ...WarlockSubclassFeatures,
   ...ArtificerSubclassFeatures,
 ].map((feature, index, arr) => {
   const featureParent = SubClasses.find(

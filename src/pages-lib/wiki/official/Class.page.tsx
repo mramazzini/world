@@ -7,45 +7,30 @@ import ClassTable from '@/components/ClassInfo/ClassTable';
 import P from '@/Utility/FormatAndSanitize';
 import '@/lib/string.extensions';
 import Info from '@/components/UI/Info';
-import AbilityToText from '@/lib/utils/AbilityToText';
-import numPlace from '@/lib/utils/numPlace';
-import FeatureList from '@/components/UI/FeatureList';
+import AbilityToText from '@/lib/utils/toText/AbilityToText';
+import FeatureList from '@/components/UI/Features/FeatureList';
 import CommentSection from '@/components/CommentSection/CommentSection';
 import { ClassInfo, FeatureWithClassColumn } from '@/lib/types/modelInfo';
+import ClassProficiencies from '@/components/ClassInfo/ClassProficiencies';
+import { SpellFocusToText } from '@/lib/utils/toText/SpellFocusToText';
 
 const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
-  if (!classObj) return <span className="p-4">Class does not exist</span>;
   const spellCastingFeatures = classObj.SpellcastingFeatures.sort((a, b) => {
-    if (a.levels === undefined) return -1; // Put a first if its levels are undefined
-    if (b.levels === undefined) return 1; // Put b first if its levels are undefined
-
-    const minA = Math.min(...a.levels);
-    const minB = Math.min(...b.levels);
+    const minA = Math.min(...a.Effects.map((e) => e.level));
+    const minB = Math.min(...b.Effects.map((e) => e.level));
 
     return minA - minB;
   });
-  const lvls = classObj.abilityScoreLevels.sort((a, b) => a - b);
   const regularFeatures = classObj.Features.concat([
     {
-      levels: classObj.abilityScoreLevels,
-      name: 'Ability Score Improvement',
-      description: `When you reach ${numPlace(
-        lvls[0]
-      )} level, and again at ${lvls
-        .map((l, i) => {
-          if (i === 0) return;
-          if (i === lvls.length - 1) return `and ${numPlace(l)} level,`;
-          return numPlace(l);
-        })
-        .filter((l) => l !== undefined)
-        .join(
-          ', '
-        )} you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.`,
-    } as unknown as FeatureWithClassColumn,
-    {
-      levels: classObj.subClassFeatureLevels,
       name: `Subclass: ${classObj.subClassName}`,
       description: classObj.subClassDescription,
+      Effects: classObj.subClassFeatureLevels.map((lvl) => {
+        return {
+          level: lvl,
+          EffectGrantsGroup: [],
+        };
+      }, []) as unknown as FeatureWithClassColumn['Effects'],
       extendedTable: [
         {
           '': {
@@ -64,15 +49,15 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
       ],
     } as unknown as FeatureWithClassColumn,
   ]).sort((a, b) => {
-    if (a.levels === undefined) return -1; // Put a first if its levels are undefined
-    if (b.levels === undefined) return 1; // Put b first if its levels are undefined
-
-    const minA = Math.min(...a.levels);
-    const minB = Math.min(...b.levels);
+    const minA = Math.min(
+      ...(a.Effects ? a.Effects.map((e) => e.level) : [-1])
+    );
+    const minB = Math.min(
+      ...(b.Effects ? b.Effects.map((e) => e.level) : [-1])
+    );
 
     return minA - minB;
   });
-
   return (
     <main className="p-4 md:p-8">
       {!classObj && <Loading />}
@@ -100,10 +85,14 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
               </Link>
             </div>
           </div>
-          <div className="divider"></div>
-          <p>
-            <P>{classObj.multiclassingDescription}</P>
-          </p>
+          {classObj.MultiClassing && (
+            <>
+              <div className="divider"></div>
+              <p>
+                <P>{classObj.MultiClassing.multiclassingDescription}</P>
+              </p>
+            </>
+          )}
           <div className="divider"></div>
           <div className="bg-base-300 p-4 rounded-xl ">
             <h2>
@@ -150,49 +139,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
               <div className="divider m-0"></div>
             </div>
             <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
-              <h2 className="pb-0">
-                Proficiencies <Info tooltip="Proficient" />
-              </h2>
-              <div className="divider m-0"></div>
-              <p>
-                <span className="font-bold">
-                  <P>Armor: </P>
-                </span>
-                <P>{classObj.armorDescription}</P>
-              </p>
-              <div className="divider m-0"></div>
-              <p>
-                <span className="font-bold">
-                  <P>Weapons: </P>
-                </span>
-                <P>{classObj.weaponDescription}</P>
-              </p>
-              <div className="divider m-0"></div>
-              <p>
-                <span className="font-bold">
-                  <P>Tools: </P>
-                </span>
-                <P>{classObj.toolsDescription}</P>
-              </p>
-              <div className="divider m-0"></div>
-              <p>
-                <span className="font-bold">
-                  <P>Skills: </P>
-                </span>
-                <P>{classObj.skillChoiceDescription}</P>
-              </p>
-              <div className="divider m-0"></div>
-              <p>
-                <span className="font-bold">
-                  <P>Saving Throws: </P>
-                </span>
-                <P>
-                  {classObj.savingThrows?.default
-                    ?.map((s) => AbilityToText(Ability[s]))
-                    .join(', ') || 'None'}
-                </P>
-              </p>
-              <div className="divider m-0"></div>
+              <ClassProficiencies classObj={classObj} />
             </div>
             <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
               <h2 className="pb-0">
@@ -201,7 +148,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
               </h2>
               <div className="divider m-0"></div>
               <ul>
-                {classObj.equipmentDescription.map((item, index) => (
+                {classObj.itemDescription.map((item, index) => (
                   <Fragment key={index}>
                     <li>
                       <P>{item}</P>
@@ -212,7 +159,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
               </ul>
             </div>
           </div>
-          {classObj.spellCastingInfo && (
+          {classObj.SpellCasting && (
             <>
               <div className="divider"></div>
               <h2>
@@ -220,7 +167,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
                 <Info tooltip="This Class has the ability to cast spells, as described below." />
               </h2>{' '}
               <p className="text-base font-normal italic">
-                <P>{classObj.spellCastingInfo.description}</P>
+                <P>{classObj.SpellCasting.description}</P>
               </p>
               <div className="divider"></div>
               <div className="grid grid-cols-1 gap-4">
@@ -232,7 +179,8 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
                   <div className="divider m-0"></div>
                   <p>
                     <P>
-                      {classObj.spellCastingInfo.spellCastingAbilityDescription}
+                      {classObj.SpellCasting.spellCastingAbilityDescription ||
+                        ''}
                     </P>
                   </p>
                   <div className="divider m-0"></div>
@@ -241,9 +189,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
                       <P>Spellcasting Ability: </P>
                     </span>
                     <P>
-                      {AbilityToText(
-                        Ability[classObj.spellCastingInfo.ability]
-                      )}
+                      {AbilityToText(Ability[classObj.SpellCasting.ability])}
                     </P>
                   </p>
                   <div className="divider m-0"></div>
@@ -254,9 +200,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
                     </span>
                     <P>
                       8 + your proficiency bonus + your{' '}
-                      {AbilityToText(
-                        Ability[classObj.spellCastingInfo.ability]
-                      )}{' '}
+                      {AbilityToText(Ability[classObj.SpellCasting.ability])}{' '}
                       modifier
                     </P>
                   </p>
@@ -267,31 +211,32 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
                     </span>
                     <P>
                       your proficiency bonus + your{' '}
-                      {AbilityToText(
-                        Ability[classObj.spellCastingInfo.ability]
-                      )}{' '}
+                      {AbilityToText(Ability[classObj.SpellCasting.ability])}{' '}
                       modifier
                     </P>
                   </p>
                   <div className="divider m-0"></div>
                 </div>
-                <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
-                  <h2 className="pb-0">
-                    Spellcasting Focus{' '}
-                    <Info tooltip="Spellcasting Focuses allow the spellcaster to cast spells more freely. It removes the need for material components that specify a cost." />
-                  </h2>
-                  <div className="divider m-0"></div>
-                  <p>
-                    <P>
-                      You can use a {classObj.spellCastingInfo.spellFocus} as a
-                      spellcasting focus for your {classObj.name} spells.
-                    </P>
-                  </p>
+                {classObj.SpellCasting.spellFocus && (
+                  <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
+                    <h2 className="pb-0">
+                      Spellcasting Focus{' '}
+                      <Info tooltip="Spellcasting Focuses allow the spellcaster to cast spells more freely. It removes the need for material components that do not specify a cost." />
+                    </h2>
+                    <div className="divider m-0"></div>
+                    <p>
+                      <P>
+                        You can use a{' '}
+                        {SpellFocusToText(classObj.SpellCasting.spellFocus)} as
+                        a spellcasting focus for your {classObj.name} spells.
+                      </P>
+                    </p>
 
-                  <div className="divider m-0"></div>
-                  <div role="tablist" className="tabs tabs-bordered"></div>
-                </div>
-                {classObj.SpellList && (
+                    <div className="divider m-0"></div>
+                    <div role="tablist" className="tabs tabs-bordered"></div>
+                  </div>
+                )}
+                {classObj.SpellCasting.SpellList && (
                   <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
                     <h2 className="pb-0">
                       Spell List{' '}
@@ -300,11 +245,11 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
                     <div className="divider m-0"></div>
                     <p>
                       <P>
-                        {classObj.spellListDescription ||
-                          `The ${classObj.name} class can cast spells from the ${classObj.SpellList.name} Spell-list.`}
+                        {classObj.SpellCasting.spellListDescription ||
+                          `The ${classObj.name} class can cast spells from the ${classObj.SpellCasting.SpellList.name} Spell-list.`}
                       </P>
                       <Link
-                        href={`/spell-list/${classObj.SpellList?.slug}`}
+                        href={`/spell-list/${classObj.SpellCasting.SpellList?.slug}`}
                         className="btn btn-primary btn-sm mx-4"
                       >
                         View Spell List -&gt;
@@ -316,7 +261,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
                   </div>
                 )}
 
-                {classObj.spellCastingInfo.castingSpellsDescription && (
+                {classObj.SpellCasting.castingSpellsDescription && (
                   <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
                     <h2 className="pb-0">
                       Casting Spells{' '}
@@ -324,14 +269,12 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
                     </h2>
                     <div className="divider m-0"></div>
                     <p>
-                      <P>
-                        {classObj.spellCastingInfo.castingSpellsDescription}
-                      </P>
+                      <P>{classObj.SpellCasting.castingSpellsDescription}</P>
                     </p>
                     <div className="divider m-0"></div>
                   </div>
                 )}
-                {classObj.spellCastingInfo.preparingSpellsDescription && (
+                {classObj.SpellCasting.preparingSpellsDescription && (
                   <div className="bg-base-200 rounded-xl p-4 max-w-1/3">
                     <h2 className="pb-0">
                       Preparing Spells{' '}
@@ -339,9 +282,7 @@ const ClassPage = ({ classObj }: { classObj: ClassInfo }) => {
                     </h2>
                     <div className="divider m-0"></div>
                     <p>
-                      <P>
-                        {classObj.spellCastingInfo.preparingSpellsDescription}
-                      </P>
+                      <P>{classObj.SpellCasting.preparingSpellsDescription}</P>
                     </p>
                     <div className="divider m-0"></div>
                   </div>

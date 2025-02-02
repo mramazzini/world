@@ -1,21 +1,27 @@
 import Tooltip from '@/Utility/Tooltip';
 import { skillAtritbuteMap } from '@/lib/globalVars';
-import AbilityToText from '@/lib/utils/AbilityToText';
+import AbilityToText from '@/lib/utils/toText/AbilityToText';
 import { Skill } from '@prisma/client';
 import { Fragment } from 'react';
 import useModifier from '@/hooks/useModifier';
+import useLog from '@/hooks/useLog';
 import { useAppSelector } from '@/store/hooks';
-import useProficiency from '@/hooks/useProficiency';
 
 interface Props {
-  handleRoll: (modifier: number, reason: string, diceSize: number) => void;
   skills: Skill[];
 }
 
-const SkillRoller = ({ handleRoll, skills }: Props) => {
+const SkillRoller = ({ skills }: Props) => {
   const { getSkillModifier, getAbilityModifier } = useModifier();
-  const { proficiencyBonus } = useProficiency();
-  const state = useAppSelector((state) => state.character.state);
+  const {
+    skillProficiencies,
+    skillExpertises,
+    skillHalfProficiencies,
+    proficiencyBonus,
+  } = useAppSelector((state) => state.sheet);
+
+  const { diceLogPush } = useLog();
+
   return (
     <>
       <div className="bg-base-300 p-2 rounded-xl border-primary border">
@@ -49,12 +55,22 @@ const SkillRoller = ({ handleRoll, skills }: Props) => {
                                 : `- ${getAbilityModifier(skillAtritbuteMap[skill])}`}
                             </td>
                           </tr>
-                          {state?.proficiencies.skills.includes(skill) && (
+                          {skillExpertises.includes(skill) ? (
                             <tr>
-                              <td>Proficient</td>
+                              <td>Expertise</td>
+                              <td>{`+ ${proficiencyBonus} * 2`}</td>
+                            </tr>
+                          ) : skillProficiencies.includes(skill) ? (
+                            <tr>
+                              <td>Proficiency</td>
                               <td>{`+ ${proficiencyBonus}`}</td>
                             </tr>
-                          )}
+                          ) : skillHalfProficiencies.includes(skill) ? (
+                            <tr>
+                              <td>Half Proficiency</td>
+                              <td>{`+ (${proficiencyBonus} / 2)`}</td>
+                            </tr>
+                          ) : null}
                         </tbody>
                       </table>
                     </div>
@@ -69,13 +85,13 @@ const SkillRoller = ({ handleRoll, skills }: Props) => {
                 </p>
                 <button
                   className="flex items-center justify-center join-item btn btn-accent btn-xs font-bold w-10"
-                  onClick={() =>
-                    handleRoll(
-                      getSkillModifier(skill),
-                      skill.toCapitalCase().replaceAll('_', ' '),
-                      20
-                    )
-                  }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    diceLogPush(
+                      `1d20 + ${skill}`,
+                      `${skill.toCapitalCase().replaceAll('_', ' ')} Check`
+                    );
+                  }}
                 >
                   {getSkillModifier(skill) >= 0
                     ? `+ ${getSkillModifier(skill)}`

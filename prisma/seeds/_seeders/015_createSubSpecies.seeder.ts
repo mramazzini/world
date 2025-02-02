@@ -4,6 +4,7 @@ import { SubSpeciesSeed } from '../Subspecies/Subspecies.seed';
 import SubSpeciesFeatureSeed from '../Subspecies/SubspeciesFeatures.seed';
 import createFeature from '../_helpers/createFeature';
 import { createSlug } from '../_helpers/createSlug';
+import SubSpeciesChoicesSeed from '../Subspecies/SubspeciesChoices.seed';
 
 export const createSubspecies = async (db: PrismaClient) => {
   //create subSpecies and traits
@@ -53,4 +54,27 @@ export const createSubspecies = async (db: PrismaClient) => {
     }
   }
   cinfo('Species Features created');
+
+  cinfo('Create SubSpecies Choices');
+
+  for (const choice of SubSpeciesChoicesSeed) {
+    try {
+      cinfo('Creating subspecies choice:', choice.id);
+      await db.choice.upsert({
+        where: {
+          id: choice.id,
+        },
+        update: {
+          ...choice,
+        },
+        create: {
+          ...choice,
+        },
+      });
+      cinfo('SubSpecies Choice created');
+    } catch (error) {
+      cerr('Error creating subspecies choice:', choice.id, error);
+      throw new Error('Error creating subspecies choice');
+    }
+  }
 };

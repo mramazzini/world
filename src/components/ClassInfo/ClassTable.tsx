@@ -5,6 +5,8 @@ import numPlace from '@/lib/utils/numPlace';
 import { useState } from 'react';
 import { Level, SpellLevel } from '@/lib/types/types';
 import { ClassInfo } from '@/lib/types/modelInfo';
+import useClassSpellSlots from '@/hooks/useClassSpellSlots';
+import Loading from '../UI/Loading';
 interface Props {
   classObj: ClassInfo;
 }
@@ -12,8 +14,10 @@ interface Props {
 const ClassTable = ({ classObj }: Props) => {
   const features = classObj.Features;
   const spellCastingFeatures = classObj.SpellcastingFeatures;
-  const spellCasting = classObj.spellCastingInfo;
+  const { spellSlots, loading } = useClassSpellSlots(classObj.id);
   const [expand, setExpand] = useState(false);
+
+  if (loading || !spellSlots) return <Loading />;
   return (
     <>
       <div className={`overflow-auto ${expand ? 'h-90vh' : 'max-h-[300px]'}`}>
@@ -52,28 +56,26 @@ const ClassTable = ({ classObj }: Props) => {
                   });
                 })}
               {/* spell slots */}
-              {spellCasting &&
-                spellCasting.displaySpellLevels &&
-                numberArray(1, 9).map((num) => {
-                  let displaySpellSlot = false;
-                  for (let i = 1; i < 20; i++) {
-                    const level = spellCasting.spellLevels[i as Level];
-                    if (level) {
-                      const slots = level[num as SpellLevel];
-                      if (slots) {
-                        displaySpellSlot = true;
-                        break;
-                      }
+              {numberArray(1, 9).map((num) => {
+                let displaySpellSlot = false;
+                for (let i = 1; i < 20; i++) {
+                  const level = spellSlots[i as Level];
+                  if (level) {
+                    const slots = level[num as SpellLevel];
+                    if (slots) {
+                      displaySpellSlot = true;
+                      break;
                     }
                   }
-                  return (
-                    displaySpellSlot && (
-                      <th key={num} className="text-left bg-black/20 w-[10px]">
-                        {numPlace(num)}
-                      </th>
-                    )
-                  );
-                })}
+                }
+                return (
+                  displaySpellSlot && (
+                    <th key={num} className="text-left bg-black/20 w-[10px]">
+                      {numPlace(num)}
+                    </th>
+                  )
+                );
+              })}
             </tr>
           </thead>
           <tbody>
@@ -93,12 +95,12 @@ const ClassTable = ({ classObj }: Props) => {
                 {/* features */}
                 <td>
                   <ul>
-                    {classObj.spellCastingInfo &&
+                    {/* {classObj.spellCastingInfo &&
                       classObj.spellCastingInfo.levelAquired === num && (
                         <li>Spellcasting </li>
-                      )}
+                      )} */}
                     {features.map((feature, index) => {
-                      const lvls = feature.levels;
+                      const lvls = feature.Effects.map((e) => e.level);
 
                       return (
                         lvls &&
@@ -126,9 +128,6 @@ const ClassTable = ({ classObj }: Props) => {
                         ) > 0 && 'Feature'}
                       </li>
                     ) : null}
-                    {classObj.abilityScoreLevels.includes(num) ? (
-                      <li>Ability Score Improvement</li>
-                    ) : null}
                   </ul>
                 </td>
 
@@ -143,27 +142,25 @@ const ClassTable = ({ classObj }: Props) => {
                     });
                   })}
                 {/* spell slots */}
-                {spellCasting &&
-                  spellCasting.displaySpellLevels &&
-                  numberArray(1, 9).map((spellLevel) => {
-                    let displaySpellSlot = false;
-                    for (let i = 1; i < 20; i++) {
-                      const level = spellCasting.spellLevels[i as Level];
-                      if (level) {
-                        const slots = level[spellLevel as SpellLevel];
-                        if (slots) {
-                          displaySpellSlot = true;
-                          break;
-                        }
+                {numberArray(1, 9).map((spellLevel) => {
+                  let displaySpellSlot = false;
+                  for (let i = 1; i < 20; i++) {
+                    const level = spellSlots[i as Level];
+                    if (level) {
+                      const slots = level[spellLevel as SpellLevel];
+                      if (slots) {
+                        displaySpellSlot = true;
+                        break;
                       }
                     }
+                  }
 
-                    if (!displaySpellSlot) return null;
-                    const thisLevel = spellCasting.spellLevels[num as Level];
-                    if (!thisLevel) return <td key={spellLevel}>{'-'}</td>;
-                    const slots = thisLevel[spellLevel as SpellLevel];
-                    return <td key={spellLevel}>{slots || '-'}</td>;
-                  })}
+                  if (!displaySpellSlot) return null;
+                  const thisLevel = spellSlots[num as Level];
+                  if (!thisLevel) return <td key={spellLevel}>{'-'}</td>;
+                  const slots = thisLevel[spellLevel as SpellLevel];
+                  return <td key={spellLevel}>{slots || '-'}</td>;
+                })}
               </tr>
             ))}
           </tbody>

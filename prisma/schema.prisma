@@ -122,6 +122,7 @@ enum Language {
   NAGA
   MERFOLK
   SIREN
+  DRUIDIC
 }
 
 enum Condition {
@@ -223,15 +224,78 @@ model User {
   WorkshopItem   WorkshopItem[]
 }
 
+// This is what gets saved locally client side, as its to volatile to be saved in the database
+// Auto saves will be done periodically to sync the data with the server
+model CharacterState {
+  id        String    @id
+  name      String
+  alignment Alignment
+  Character Character @relation(fields: [id], references: [id])
+
+  /// [ResourcesUsed]
+  resourcesUsed Json
+
+  /// [LogEntry]
+  characterLog Json[]
+
+  /// [DiceAmount]
+  hitDieUsedSinceLastRest Json[]
+
+  /// [QuantityItem]
+  inventory        Json[]
+  inspirationRolls Int
+  armorEquippedId  String?
+
+  weaponEquippedIds String[]
+  shieldEquippedId  String?
+
+  deathSavesSuccess Int
+  deathSavesFail    Int
+
+  exhaustion Int
+
+  abilitiesInitialized Boolean @default(false)
+
+  conditions Condition[]
+
+  /// [SpellSlots]
+  spellSlotsUsedSinceLastRefresh Json
+
+  //SpellID
+  preparedSpellsIds String[]
+
+  /// [ModelLink]
+  pendingLinks Json[]
+
+  currentHp Int
+  tempHp    Int
+
+  lastSavedIsoString String
+
+  activeFeatureFromGroupsIds String[]
+
+  /// [Note]
+  notes             Json[]
+  ideals            String[]
+  bonds             String[]
+  flaws             String[]
+  personalityTraits String[]
+  biography         String
+
+  imageURL String?
+
+  baseSTR Int
+  baseDEX Int
+  baseCON Int
+  baseINT Int
+  baseWIS Int
+  baseCHA Int
+}
+
 model Character {
   id           String     @id
-  name         String
-  imageURL     String?
-  alignment    Alignment
   Background   Background @relation(fields: [backgroundId], references: [id])
   backgroundId String
-
-  Classes Class[] @relation("Character classes")
 
   SubClasses SubClass[] @relation("Character subClasses")
 
@@ -242,16 +306,28 @@ model Character {
 
   Feats Feat[]
 
-  /// [CharacterState]
-  state Json?
-
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
-  User       User?     @relation(fields: [userId], references: [id])
-  userId     String?
-  Campaign   Campaign? @relation(fields: [campaignId], references: [id])
-  campaignId String?
+  User                  User?                   @relation(fields: [userId], references: [id])
+  userId                String?
+  Campaign              Campaign?               @relation(fields: [campaignId], references: [id])
+  campaignId            String?
+  CharacterToClass      CharacterToClass[]
+  CharacterChoiceStatus CharacterChoiceStatus[]
+  Spell                 Spell?                  @relation(fields: [spellId], references: [id])
+  spellId               String?
+  CharacterState        CharacterState?
+}
+
+model CharacterToClass {
+  characterId   String
+  classId       String
+  levelsInClass Int
+  primaryClass  Boolean   @default(false)
+  Character     Character @relation(fields: [characterId], references: [id])
+  Class         Class     @relation(fields: [classId], references: [id])
+
+  @@id([characterId, classId])
 }
 
 model Campaign {
@@ -266,26 +342,35 @@ model Campaign {
   Characters   Character[]
 }
 
+enum WeaponGroup {
+  ALL_SIMPLE
+  ALL_MARTIAL
+  ALL_RANGED
+  ALL_MELEE
+  SIMPLE_MELEE
+  SIMPLE_RANGED
+  MARTIAL_MELEE
+  MARTIAL_RANGED
+  ALL_WEAPONS
+}
+
+enum ToolGroup {
+  ARTISANS_TOOLS
+  GAMING_SETS
+  INSTRUMENTS
+  VEHICLES
+}
+
 model Class {
   id  String  @id
   srd Boolean @default(false)
 
-  name                     String
-  description              String
-  flavorText               String @db.VarChar(200)
-  /// [AbilityScoreTrigger]
-  multiclassing            Json
-  multiclassingDescription String
-  source                   String @default("Player's Handbook") //source of the class
+  name        String
+  description String
+  flavorText  String @db.VarChar(200)
+  source      String @default("Player's Handbook") //source of the class
 
   hitDie Int
-
-  /// [AbilityChoice]
-  savingThrows Json
-
-  /// [SkillChoice]
-  skills                 Json
-  skillChoiceDescription String
 
   SubClasses            SubClass[]
   subClassName          String
@@ -295,42 +380,172 @@ model Class {
   Features             Feature[] @relation("ClassFeatures")
   SpellcastingFeatures Feature[] @relation("SpellCastingFeatures")
 
-  /// [ToolChoice]
-  tools            Json
-  toolsDescription String
+  savingThrowDescription       String
+  freeSavingThrowProficiencies Ability[]
 
-  /// [ArmorChoice]
-  armor            Json
-  armorDescription String
+  skillDescription String
+  freeSkills       Skill[]
 
-  /// [WeaponChoice]
-  weapons           Json
-  weaponDescription String
+  toolProficiencyDescription String
+  freeToolProficiencyGroups  ToolGroup[]
+  freeToolProficiencyIds     String[]
+
+  armorProficiencyDescription String
+  freeArmorProficiencies      ArmorType[]
+
+  weaponProficiencyDescription String
+  freeWeaponProficiencyIds     String[]
+  freeWeaponProficiencyGroups  WeaponGroup[]
+
+  itemDescription String[]
+
+  /// [QuantityItem]
+  freeItemIds Json[]
 
   abilityScoreLevels Int[]
 
-  /// [ItemChoice]
-  equipment            Json //this is the starting items for the class
-  equipmentDescription String[]
+  Choices Choice[]
 
-  isSpellCaster    Boolean @default(false)
-  /// [SpellCastingInfo]
-  spellCastingInfo Json? //only exists if isSpellCaster is true
+  User            User?             @relation(fields: [userId], references: [id])
+  userId          String?
+  ColumnedFeature ColumnedFeature[]
+
+  slug             String             @unique @db.VarChar(200)
+  CharacterToClass CharacterToClass[]
+  MultiClassing    MultiClassingInfo?
+  SpellCasting     SpellCasting?
+}
+
+enum SpellFocus {
+  ARCANE_FOCUS
+  DRUIDIC_FOCUS
+  HOLY_SYMBOL
+  COMPONENT_POUCH
+  MUSICAL_INSTRUMENT
+  ARTISANS_TOOLS
+}
+
+enum CasterPower {
+  FULL
+  HALF_ROUNDED_UP
+  HALF_ROUNDED_DOWN
+  THIRD_ROUNDED_UP
+  THIRD_ROUNDED_DOWN
+  CUSTOM
+}
+
+enum CasterType {
+  PREPARED
+  KNOWN
+}
+
+model SpellCasting {
+  id         String    @id
+  classId    String?   @unique
+  Class      Class?    @relation(fields: [classId], references: [id])
+  subclassId String?   @unique
+  SubClass   SubClass? @relation(fields: [subclassId], references: [id])
 
   SpellList            SpellList? @relation(fields: [spellListId], references: [id]) // If the class has a spell list, link it here
   spellListId          String?
   spellListDescription String?
 
-  //date fields
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  description                    String
+  preparingSpellsDescription     String?
+  castingSpellsDescription       String?
+  spellCastingAbilityDescription String?
+  ability                        Ability
+  spellFocus                     SpellFocus?
+  spellFocusDescription          String?
 
-  User            User?             @relation(fields: [userId], references: [id])
-  userId          String?
-  Characters      Character[]       @relation("Character classes")
-  ColumnedFeature ColumnedFeature[]
+  casterPower CasterPower
+  casterType  CasterType
 
-  slug String @unique @db.VarChar(200)
+  /// [SpellLevels]
+  customCasterSpellLevels Json?
+}
+
+model MultiClassingInfo {
+  classId                  String @id
+  Class                    Class  @relation(fields: [classId], references: [id])
+  multiclassingDescription String
+
+  /// [Prerequisite]
+  prerequisite Json
+
+  freeSkillProficiencies       Skill[]
+  freeToolIdProficiencies      String[]
+  freeToolGroupProficiencies   ToolGroup[]
+  freeLanguages                Language[]
+  freeArmorProficiencies       ArmorType[]
+  freeWeaponGroupProficiencies WeaponGroup[]
+  freeWeaponIdProficiencies    String[]
+  freeSavingThrowProficiencies Ability[]
+
+  Choices Choice[]
+}
+
+enum ChoiceProtocol {
+  SET_COMPREHENSIVE_HALF_PROFICIENCY
+  SET_COMPREHENSIVE_PROFICIENCY
+  SET_COMPREHENSIVE_EXPERTISE
+  SET_SKILL_HALF_PROFICIENCY
+  SET_SKILL_PROFICIENCY
+  SET_SKILL_EXPERTISE
+  UPGRADE_SKILL_PROFICIENCY_TO_EXPERTISE
+  SET_TOOL_PROFICIENCY
+  SET_TOOL_PROFICIENCY_GROUPED
+  SET_SAVING_THROW_PROFICIENCY
+  SET_ARMOR_PROFICIENCY
+  SET_WEAPON_PROFICIENCY
+  SET_WEAPON_PROFICIENCY_GROUPED
+  ADD_TO_INVENTORY
+  ADD_TO_INVENTORY_GROUPED
+  SET_LANGUAGE_PROFICIENCY
+  SET_ABILITY_SCORE
+  IMPROVE_ABILITY_SCORE
+  ADD_FREE_SPELL
+  ADD_KNOWN_SPELL
+  CHOOSE_SUBCLASS
+  SET_FEAT_OR_ASI
+}
+
+model Choice {
+  id          String @id
+  description String //The Choice in human readable form
+
+  amountOfOptionToChoose Int
+  CharacterChoiceStatus  CharacterChoiceStatus[]
+
+  protocol    ChoiceProtocol // Describes How to handle the choice parameters, and what callback to invoke
+  /// [ChoiceFetchParams]
+  fetchParams Json //The parameters that will be used to fetch the choice
+
+  Class         Class?             @relation(fields: [classId], references: [id])
+  classId       String?
+  Species       Species?           @relation(fields: [speciesId], references: [id])
+  speciesId     String?
+  SubSpecies    SubSpecies?        @relation(fields: [subSpeciesId], references: [id])
+  subSpeciesId  String?
+  Background    Background?        @relation(fields: [backgroundId], references: [id])
+  backgroundId  String?
+  MultiClassing MultiClassingInfo? @relation(fields: [multiClassId], references: [classId])
+  multiClassId  String?
+  Effect        Effect?            @relation(fields: [effectId], references: [id])
+  effectId      String?
+}
+
+model CharacterChoiceStatus {
+  characterId String
+  choiceId    String
+
+  /// [ChoiceFetchOutput]
+  values Json
+
+  Character Character @relation(fields: [characterId], references: [id])
+  Choice    Choice    @relation(fields: [choiceId], references: [id])
+
+  @@id([characterId, choiceId])
 }
 
 model Spell {
@@ -347,6 +562,7 @@ model Spell {
   materialCost  String?
   concentration Boolean      @default(false)
   ritual        Boolean      @default(false)
+  rolls         String[]
   upcastInfo    String?
   //search fields
   tags          String[]
@@ -361,8 +577,6 @@ model Spell {
   school        SpellSchool
   level         Int //0 is cantrip, 1-9 are spell levels
   source        String
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
 
   User                 User?                  @relation(fields: [userId], references: [id])
   userId               String?
@@ -372,7 +586,10 @@ model Spell {
   FreelyCastByCreature Creature[]             @relation("CreatureFreelyCasts")
   CreatureLimitedSpell CreatureLimitedSpell[]
 
-  slug String @unique @db.VarChar(200)
+  slug          String          @unique @db.VarChar(200)
+  Character     Character[]
+  characterId   String?
+  EffectToSpell EffectToSpell[]
 }
 
 model SpellList {
@@ -381,71 +598,214 @@ model SpellList {
   flavorText  String @db.VarChar(200)
   description String
 
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  Spells    Spell[]
-  Classes   Class[]
-  SubClass  SubClass[]
+  Spells Spell[]
 
-  slug String @unique @db.VarChar(200)
+  slug         String         @unique @db.VarChar(200)
+  SpellCasting SpellCasting[]
 }
 
 model Feature {
-  id            String        @id
-  workshopId    String?       @unique
-  WorkshopItem  WorkshopItem? @relation(fields: [workshopId], references: [id])
-  name          String
-  description   String
-  options       String[]
+  id                        String                    @id
+  workshopId                String?                   @unique
+  WorkshopItem              WorkshopItem?             @relation(fields: [workshopId], references: [id])
+  name                      String
+  description               String
+  options                   String[]
   /// [Table]
-  extendedTable Json[]
-  postTableData String?
-  levels        Int[]
-  /// [RollRequest]
-  rolls         Json[]
+  extendedTable             Json[]
+  postTableData             String?
+  unimplemented             Boolean                   @default(false)
+  SubClass                  SubClass?                 @relation("SubClassFeatures", fields: [subClassId], references: [id])
+  subClassId                String?
+  SpellCastingSubclass      SubClass?                 @relation("SpellCastingFeatures", fields: [spellCastingSubclassId], references: [id])
+  spellCastingSubclassId    String?
+  Species                   Species?                  @relation(fields: [speciesId], references: [id])
+  speciesId                 String?
+  Class                     Class?                    @relation("ClassFeatures", fields: [classId], references: [id])
+  classId                   String?
+  SpellCastingClass         Class?                    @relation("SpellCastingFeatures", fields: [spellCastingClassId], references: [id])
+  spellCastingClassId       String?
+  Feat                      Feat?                     @relation(fields: [featId], references: [id])
+  featId                    String?
+  Tool                      Tool?                     @relation(fields: [toolId], references: [id])
+  toolId                    String?
+  Item                      Item?                     @relation(fields: [itemId], references: [id])
+  itemId                    String?
+  Armor                     Armor?                    @relation(fields: [armorId], references: [id])
+  armorId                   String?
+  Creature                  Creature?                 @relation(fields: [creatureId], references: [id])
+  creatureId                String?
+  SubSpecies                SubSpecies?               @relation(fields: [subSpeciesId], references: [id])
+  subSpeciesId              String?
+  Background                Background?               @relation(fields: [backgroundId], references: [id])
+  backgroundId              String?
+  Weapon                    Weapon?                   @relation(fields: [weaponId], references: [id])
+  weaponId                  String?
+  columnedFeatures          ColumnedFeature[]
+  SubClassColumnedFeature   SubClassColumnedFeature[]
+  FeatureGroup              FeatureGroup?             @relation(fields: [FeatureGroupId], references: [id])
+  FeatureGroupId            String?
+  Effects                   Effect[]
+  effectChainType           ChainType                 @default(NONE)
+  EffectGrantsGroup         EffectGrantsGroup?        @relation(fields: [effectGrantsGroupEffectId, effectGrantsGroupGroupId], references: [effectId, groupId])
+  effectGrantsGroupEffectId String?
+  effectGrantsGroupGroupId  String?
+}
 
-  createdAt               DateTime                  @default(now())
-  updatedAt               DateTime                  @updatedAt
-  SubClass                SubClass?                 @relation("SubClassFeatures", fields: [subClassId], references: [id])
-  subClassId              String?
-  SpellCastingSubclass    SubClass?                 @relation("SpellCastingFeatures", fields: [spellCastingSubclassId], references: [id])
-  spellCastingSubclassId  String?
-  Species                 Species?                  @relation(fields: [speciesId], references: [id])
-  speciesId               String?
-  Class                   Class?                    @relation("ClassFeatures", fields: [classId], references: [id])
-  classId                 String?
-  SpellCastingClass       Class?                    @relation("SpellCastingFeatures", fields: [spellCastingClassId], references: [id])
-  spellCastingClassId     String?
-  Feat                    Feat?                     @relation(fields: [featId], references: [id])
-  featId                  String?
-  Tool                    Tool?                     @relation(fields: [toolId], references: [id])
-  toolId                  String?
-  Item                    Item?                     @relation(fields: [itemId], references: [id])
-  itemId                  String?
-  Armor                   Armor?                    @relation(fields: [armorId], references: [id])
-  armorId                 String?
-  FeatureCollection       FeatureCollection?        @relation(fields: [featureCollectionId], references: [id])
-  featureCollectionId     String?
-  Creature                Creature?                 @relation(fields: [creatureId], references: [id])
-  creatureId              String?
-  SubSpecies              SubSpecies?               @relation(fields: [subSpeciesId], references: [id])
-  subSpeciesId            String?
-  Background              Background?               @relation(fields: [backgroundId], references: [id])
-  backgroundId            String?
-  Weapon                  Weapon?                   @relation(fields: [weaponId], references: [id])
-  weaponId                String?
-  columnedFeatures        ColumnedFeature[]
-  SubClassColumnedFeature SubClassColumnedFeature[]
+// Toggleable features. You can only have one feature from this group active at a time
+model FeatureGroup {
+  id                String              @id
+  name              String
+  description       String
+  flavorText        String              @db.VarChar(200)
+  slug              String              @unique @db.VarChar(200)
+  FeaturesInGroup   Feature[]
+  EffectGrantsGroup EffectGrantsGroup[]
+}
+
+enum ChainType {
+  REPLACE //Voids the previous effect
+  ADD //Adds to the previous effect
+  NONE // Only one effect. No chain
+}
+
+//Represents a feature effect that grants x choices to the user from a feature group
+//ex pick 2 fighting styles.
+model EffectGrantsGroup {
+  effectId String
+  groupId  String
+
+  amount Int
+
+  // If length is 0, the user can pick any feature from the group
+  FeaturesToChooseFrom Feature[]
+
+  Effect       Effect       @relation(fields: [effectId], references: [id])
+  FeatureGroup FeatureGroup @relation(fields: [groupId], references: [id])
+
+  @@id([effectId, groupId])
+}
+
+enum RitualCasterType {
+  ALL
+  PREPARED
+  KNOWN
+}
+
+// Effects define how the feature interacts with character data
+model Effect {
+  id    String @id
+  level Int
+
+  rollFormulas String[]
+
+  /// [Prerequisite]
+  preRequisite Json?
+
+  // Chained Effects are effects that override
+  chainedEffect   Effect? @relation("ChainedEffect", fields: [chainedEffectId], references: [id])
+  chainedEffectId String? @unique
+
+  multiAttackAmount Int?
+
+  ritualCasterType            RitualCasterType?
+  halfSkillProficiencies      Skill[]
+  fullSkillProficiencies      Skill[]
+  expertiseSkillProficiencies Skill[]
+
+  languageProficiencies Language[]
+
+  weaponGroupRef     WeaponGroup?
+  attackModifier     String?
+  damageModifier     String?
+  damageModifierType DamageTypes?
+
+  unarmedAttack     String? //if there is both unarmed attack, damage and damagetype, it will be added to the character sheet
+  unarmedDamage     String?
+  twoHandedDamage   String?
+  unarmedDamageType DamageTypes?
+  unarmedModifier   String? //Flat mod to add to all unarmed attacks.
+
+  /// [AbilityScoreValue]
+  abilityScoreImprovements Json[]
+
+  speedBonusFormula String?
+
+  blindsight  Int?
+  darkvision  Int?
+  tremorsense Int?
+  truesight   Int?
+
+  acBonusFormula String?
+
+  Choices Choice[]
+
+  EffectToResource  EffectToResource[]
+  Feature           Feature             @relation(fields: [featureId], references: [id])
+  parentEffect      Effect?             @relation("ChainedEffect")
+  EffectGrantsGroup EffectGrantsGroup[]
+  EffectToSpell     EffectToSpell[]
+  featureId         String
+}
+
+model EffectToSpell {
+  effectId String
+  spellId  String
+
+  requireMaterial  Boolean @default(true)
+  requireSpellSlot Boolean @default(true)
+
+  amountBeforeRest Int? //Blank for infinite
+  restType         RefreshEvent?
+
+  Effect Effect @relation(fields: [effectId], references: [id])
+  Spell  Spell  @relation(fields: [spellId], references: [id])
+
+  @@id([effectId, spellId])
+}
+
+enum RefreshEvent {
+  SHORT_REST
+  LONG_REST
+  TURN
+  ROUND
+  OTHER
+}
+
+//If an effect is attached to a resource, the amount will be added to the resource tracker on the sheet. 
+model EffectToResource {
+  effectId   String
+  resourceId String
+
+  //ex 2 + {prof} * 2 / (8 * {STR}) + {level}
+  scalingFormula String
+
+  refreshOn RefreshEvent
+  Effect    Effect         @relation(fields: [effectId], references: [id])
+  Resource  CustomResource @relation(fields: [resourceId], references: [id])
+
+  @@id([effectId, resourceId])
+}
+
+// Custom Resources are resources that are tracked on the character sheet. Such as Ki points, Sorcery points, etc
+model CustomResource {
+  id          String @id
+  name        String
+  description String
+  slug        String @unique @db.VarChar(200)
+
+  EffectToResource EffectToResource[]
 }
 
 model ColumnedFeature {
-  id        String   @id
   classId   String
   Class     Class    @relation(fields: [classId], references: [id])
   featureId String
   Feature   Feature  @relation(fields: [featureId], references: [id])
   name      String
   rows      String[]
+
+  @@id([classId, featureId])
 }
 
 model SubClassColumnedFeature {
@@ -467,14 +827,6 @@ model SubClass {
   flavorText  String @db.VarChar(200)
   source      String @default("Player's Handbook")
 
-  /// [SpellCastingInfo]
-  spellCastingInfo Json? //only exists if isSpellCaster is true
-  spellList        SpellList? @relation(fields: [spellListId], references: [id]) // If the class has a spell list, link it here
-  spellListId      String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
   Class   Class   @relation(fields: [classId], references: [id])
   classId String
   User    User?   @relation(fields: [userId], references: [id])
@@ -488,7 +840,8 @@ model SubClass {
   WorkshopItem WorkshopItem? @relation(fields: [workshopId], references: [id])
   workshopId   String?       @unique
 
-  slug String @unique @db.VarChar(200)
+  slug         String        @unique @db.VarChar(200)
+  SpellCasting SpellCasting?
 }
 
 model Species {
@@ -501,9 +854,11 @@ model Species {
 
   Features Feature[]
 
-  /// [AbilityScoreChoice]
-  abilityScores           Json
-  abilityScoreDescription String
+  Choices Choice[]
+
+  /// [AbilityScoreValue]
+  freeAbilityScoreImprovements Json[]
+  abilityScoreDescription      String
 
   creatureType    CreatureType
   size            Size
@@ -512,39 +867,32 @@ model Species {
   age       String
   alignment String
 
-  /// [SkillChoice]
-  skillProficiencies          Json?
-  skillProficiencyDescription String?
-
-  /// [ToolChoice]
-  toolProficiencies            Json?
-  /// [WeaponChoice]
-  weaponProficiencies          Json? // Weapon IDs
-  weaponProficiencyDescription String?
-
   speed       Int
   flightSpeed Int?
   swimSpeed   Int?
   climbSpeed  Int?
+  burrowSpeed Int?
 
-  speedDescription  String
-  flightDescription String?
-  swimDescription   String?
-  climbDescription  String?
+  speedDescription       String
+  flightDescription      String?
+  swimDescription        String?
+  climbDescription       String?
+  burrowSpeedDescription String?
 
   darkvision            Int?
   darkvisionDescription String?
 
-  resistanceTo DamageTypes[]
-  immuneTo     DamageTypes[]
-  vulnerableTo DamageTypes[]
+  blindSight            Int?
+  blindSightDescription String?
 
-  /// [LanguageChoice]
-  originLanguages     Json
+  trueSight            Int?
+  trueSightDescription String?
+
+  tremorSense            Int?
+  tremorSenseDescription String?
+
+  freeLanguages       Language[]
   languageDescription String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
   Variants SubSpecies[]
 
@@ -556,18 +904,20 @@ model Species {
 }
 
 model SubSpecies {
-  id                      String  @id
-  srd                     Boolean @default(false)
-  name                    String
-  description             String
-  flavorText              String  @db.VarChar(200)
-  source                  String
-  /// [AbilityScoreChoice]
-  abilityScores           Json?
-  abilityScoreDescription String?
+  id          String  @id
+  srd         Boolean @default(false)
+  name        String
+  description String
+  flavorText  String  @db.VarChar(200)
+  source      String
 
-  Features      Feature[]
-  removedTraits String[] // A list of traits that are removed from the base race. Case sensitive
+  Features Feature[]
+
+  Choices Choice[]
+
+  /// [AbilityScoreValue]
+  freeAbilityScoreImprovements Json[]
+  abilityScoreDescription      String?
 
   creatureType    CreatureType?
   size            Size?
@@ -576,40 +926,32 @@ model SubSpecies {
   age       String?
   alignment String?
 
-  /// [SkillChoice]
-  skillProficiencies          Json?
-  skillProficiencyDescription String?
-
-  /// [ToolChoice]
-  toolProficiencies            Json?
-  toolProficiencyDescription   String?
-  /// [WeaponChoice]
-  weaponProficiencies          Json?
-  weaponProficiencyDescription String?
-
   speed       Int?
   flightSpeed Int?
   swimSpeed   Int?
   climbSpeed  Int?
+  burrowSpeed Int?
 
-  speedDescription  String?
-  flightDescription String?
-  swimDescription   String?
-  climbDescription  String?
+  speedDescription       String?
+  flightDescription      String?
+  swimDescription        String?
+  climbDescription       String?
+  burrowSpeedDescription String?
 
   darkvision            Int?
   darkvisionDescription String?
 
-  resistanceTo DamageTypes[]
-  immuneTo     DamageTypes[]
-  vulnerableTo DamageTypes[]
+  blindSight            Int?
+  blindSightDescription String?
 
-  /// [LanguageChoice]
-  originLanguages     Json?
+  trueSight            Int?
+  trueSightDescription String?
+
+  tremorSense            Int?
+  tremorSenseDescription String?
+
+  freeLanguages       Language[]
   languageDescription String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
   User   User?   @relation(fields: [userId], references: [id])
   userId String?
@@ -624,32 +966,35 @@ model SubSpecies {
 model Background {
   id String @id
 
-  srd                            Boolean  @default(false)
-  name                           String
-  description                    String
-  source                         String   @default("Player's Handbook")
-  flavorText                     String   @db.VarChar(200)
-  /// [SkillChoice]
-  skillProficiencies             Json?
-  skillProficiencyDescription    String?
-  /// [ToolChoice]
-  toolProficiencies              Json?
-  toolProficiencyDescription     String?
-  /// [LanguageChoice]
-  languageProficiencies          Json?
-  languageProficiencyDescription String?
-  /// [ItemChoice]
-  equipment                      Json?
-  equipmentDescription           String[]
+  srd         Boolean @default(false)
+  name        String
+  description String
+  source      String  @default("Player's Handbook")
+  flavorText  String  @db.VarChar(200)
 
-  Features                 Feature[]
+  Choices Choice[]
+
+  freeSkillProficiencies      Skill[]
+  skillProficiencyDescription String?
+
+  freeToolProficiencyGroups  ToolGroup[]
+  freeToolProficiencyIds     String[]
+  toolProficiencyDescription String?
+
+  freeLanguageProficiencies      Language[]
+  languageProficiencyDescription String?
+
+  /// [QuantityItem]
+  freeEquipment        Json[]
+  equipmentDescription String[]
+
+  Features Feature[]
+
   suggestedCharacteristics String?
   traits                   String[]
   ideals                   String[]
   bonds                    String[]
   flaws                    String[]
-  createdAt                DateTime      @default(now())
-  updatedAt                DateTime      @updatedAt
   User                     User?         @relation(fields: [userId], references: [id])
   userId                   String?
   Character                Character[]
@@ -671,8 +1016,6 @@ model Feat {
   prerequisites     Json?
   prereqDescription String
 
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
   User       User?       @relation(fields: [userId], references: [id])
   userId     String?
   Characters Character[]
@@ -702,13 +1045,11 @@ model Tool {
 
   Features Feature[]
 
-  Items Item[]
+  Items     Item[]
+  ToolGroup ToolGroup?
 
   User   User?   @relation(fields: [userId], references: [id])
   userId String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 enum ItemTypes {
@@ -756,9 +1097,6 @@ model EquipmentPack {
   itemList      Item[] @relation("EquipmentPackParent")
 
   items Item[] @relation("EquipmentPackChild")
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Item {
@@ -803,9 +1141,6 @@ model Item {
   Spell   Spell?  @relation("SpellScroll", fields: [spellId], references: [id])
   spellId String?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
   AmmunitionFor Weapon[] @relation("WeaponAmmunition")
   Armor         Armor?   @relation("ItemArmor", fields: [armorId], references: [id])
   armorId       String?
@@ -844,8 +1179,6 @@ model WeaponProperty {
   id                     String                   @id
   name                   String
   description            String
-  createdAt              DateTime                 @default(now())
-  updatedAt              DateTime                 @updatedAt
   WeaponPropertyInstance WeaponPropertyInstance[]
 }
 
@@ -857,11 +1190,7 @@ model WeaponPropertyInstance {
   Property   WeaponProperty @relation(fields: [propertyId], references: [id])
   range      String?
 
-  /// [Damage]
-  versatileDamage Json?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  versatileDamage String?
 
   @@id([weaponId, propertyId])
 }
@@ -874,8 +1203,8 @@ model Weapon {
   isSimple Boolean
   isRanged Boolean?
 
-  /// [Damage]
-  damage Json[] // AND array (ex 1d6 piercing and 2d6 fire)
+  damage     String
+  damageType DamageTypes
 
   ammunition   Item?   @relation("WeaponAmmunition", fields: [ammunitionId], references: [id])
   ammunitionId String?
@@ -892,36 +1221,19 @@ model Armor {
   armorClass Int
   armorType  ArmorType
 
-  // AND array (ex disadvantage on stealth checks)
-
   Features Feature[]
   Item     Item[]    @relation("ItemArmor")
 }
 
-//This represents a list of features that will typically be chosen from
-// Ex. Eldritch Invocations, Fighting Styles, etc.
-model FeatureCollection {
-  id          String @id
-  name        String
-  description String
-  flavorText  String @db.VarChar(200)
-
-  Features  Feature[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-}
-
 model BlogPost {
-  id              String   @id
+  id              String @id
   title           String
-  route           String   @unique
-  meta            String   @db.VarChar(200)
-  flavorText      String   @db.VarChar(400)
+  route           String @unique
+  meta            String @db.VarChar(200)
+  flavorText      String @db.VarChar(400)
   content         String //markdown
   /// [TableOfContentItem]
   tableOfContents Json[] // array of objects with title and link
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
 
   ImageURL String
   ImageAlt String
@@ -1057,10 +1369,8 @@ model Creature {
 
   CreatureLimitedSpells CreatureLimitedSpell[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    String?
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
 
   slug String @unique @db.VarChar(200)
 }

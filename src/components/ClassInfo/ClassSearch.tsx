@@ -89,12 +89,6 @@ const ClassSearch = ({ classes }: Props) => {
                 <td>
                   <Link href={`/class/${item.slug}`}>{item.source}</Link>
                 </td>
-                <td className="hidden sm:table-cell">
-                  <Link href={`/class/${item.slug}`}>
-                    {item.updatedAt.getMonth()}/{item.updatedAt.getDate()}/
-                    {item.updatedAt.getFullYear()}
-                  </Link>
-                </td>
               </tr>
             );
           })}

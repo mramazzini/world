@@ -1,5 +1,5 @@
 'use client';
-import { numberColor, numberColorBefore } from '@/Utility/colorBefore';
+// import { numberColor, numberColorBefore } from '@/Utility/colorBefore';
 import P from '@/Utility/FormatAndSanitize';
 import JsonTable from '@/Utility/JsonTable';
 import { Fragment, useState } from 'react';
@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { memoizeGetItem } from '@/Utility/Indexed/globalCache';
 import { ItemInfo } from '@/lib/types/modelInfo';
 import { Feature } from '@prisma/client';
-import { useAppSelector } from '@/store/hooks';
+import useCharacterState from '@/hooks/useCharacter/useCharacterState';
 
 const RenderItemFeature = ({
   feature,
@@ -27,7 +27,7 @@ const RenderItemFeature = ({
           </span>
         </div>
         <div className="flex flex-wrap items-center">
-          {feature.levels && feature.levels.length == 20 ? (
+          {/* {feature.levels && feature.levels.length == 20 ? (
             <span className="badge badge-accent font-bold rounded-full">
               All Levels
             </span>
@@ -46,7 +46,7 @@ const RenderItemFeature = ({
                 </div>
               );
             })
-          )}
+          )} */}
         </div>
       </div>
       <div className="collapse-content">
@@ -66,8 +66,10 @@ const RenderItemFeature = ({
 };
 
 const ItemFeatures = () => {
-  const inventory = useAppSelector((state) => state.character.state?.inventory);
+  const state = useCharacterState();
   const [items, setItems] = useState<ItemInfo[]>([]);
+
+  const inventory = state?.inventory;
   useEffect(() => {
     try {
       const promises = inventory?.map((item) =>

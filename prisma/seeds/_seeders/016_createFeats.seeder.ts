@@ -4,6 +4,7 @@ import FeatSeed from '../Feats/Feats.seed';
 import FeatFeaturesSeed from '../Feats/FeatFeatures.seed';
 import createFeature from '../_helpers/createFeature';
 import { createSlug } from '../_helpers/createSlug';
+import FeatFeatureEffectSeed from '../Feats/FeatFeatureEffects.seed';
 export const createFeats = async (db: PrismaClient) => {
   cinfo('Creating Feats');
   for (const feat of FeatSeed) {
@@ -45,12 +46,38 @@ export const createFeats = async (db: PrismaClient) => {
         cerr('Feat missing featId field:', featFeature.name);
         throw new Error('Error creating feat feature');
       }
-      //@ts-expect-error Extendedtable is valid
       await createFeature(db, featFeature);
       cinfo('Feat Feature created');
     } catch (error) {
       cerr('Error creating feat feature:', featFeature.name, error);
       throw new Error('Error creating feat feature');
+    }
+  }
+
+  //create feat feature effects
+  cinfo('Feat features created');
+  cinfo('Creating Feat feature effects');
+  for (const featFeatureEffect of FeatFeatureEffectSeed) {
+    try {
+      cinfo('Creating feat feature effect:', featFeatureEffect.id);
+      //make sure featFeatureEffect has a featId
+      if (!featFeatureEffect.id) {
+        cerr('Feat feature effect missing id field:', featFeatureEffect.id);
+        throw new Error('Error creating feat feature effect');
+      }
+      await db.effect.upsert({
+        where: { id: featFeatureEffect.id },
+        update: {
+          ...featFeatureEffect,
+        },
+        create: {
+          ...featFeatureEffect,
+        },
+      });
+      cinfo('Feat feature effect created');
+    } catch (error) {
+      cerr('Error creating feat feature effect:', featFeatureEffect.id, error);
+      throw new Error('Error creating feat feature effect');
     }
   }
 };

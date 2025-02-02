@@ -34,7 +34,7 @@ export function useWorkshop(id: string) {
         setError(err as Error);
       }
     },
-    []
+    [id]
   );
 
   // Update state locally and store it in IndexedDB

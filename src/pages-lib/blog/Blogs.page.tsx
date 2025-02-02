@@ -23,11 +23,11 @@ const BlogsPage = ({ post }: Props) => {
     <main className="p-4 md:p-8 flex flex-col bg-base-100 items-center relative min-h-screen  ">
       {content.length > 0 ? (
         <>
-          <div className="w-full bg-base-300 p-8 max-w-[1200px] rounded-xl flex flex-col items-center w-full">
+          <div className="w-full bg-base-300 p-8 max-w-[1200px] rounded-xl flex flex-col items-center ">
             <h1 className="text-4xl">{post.title}</h1>
-            <time className="divider">
+            {/* <time className="divider">
               {new Date(post.createdAt).toLocaleDateString()}
-            </time>
+            </time> */}
             <div className="flex flex-col md:flex-row items-center justify-center  w-full join h-full p-4 rounded-xl  bg-base-100 gap-8">
               <Image
                 src={post.ImageURL}

@@ -27,8 +27,7 @@ const PublishModal = () => {
         lastSyncedISOString: new Date().toISOString(),
       })
     );
-    const res = await publishWorkshopItem(tab, features ? features : []);
-    console.log(res);
+    await publishWorkshopItem(tab, features ? features : []);
   }, [tab, features, dispatch]);
 
   if (!tab)

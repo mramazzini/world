@@ -1,3 +1,4 @@
+'use client';
 import { VERSION } from '@/lib/globalVars';
 
 const DB_NAME = 'dataCache';
@@ -12,7 +13,10 @@ function openDb(): Promise<IDBDatabase> {
 
     request.onupgradeneeded = (event) => {
       const db = request.result;
-      if (event.oldVersion < DB_VERSION) {
+      if (
+        event.oldVersion < DB_VERSION ||
+        process.env.NODE_ENV === 'development'
+      ) {
         // Delete the old object store if it exists
         if (db.objectStoreNames.contains(STORE_NAME)) {
           db.deleteObjectStore(STORE_NAME);

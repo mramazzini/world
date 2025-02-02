@@ -1,12 +1,11 @@
 import {
-  Ability,
-  ArmorType,
-  Language,
-  Skill,
   Spell,
   SubClass,
   CreatureLimitedSpell,
+  CustomResource,
+  RefreshEvent,
 } from '@prisma/client';
+import { FeatureInfo } from './modelInfo';
 
 export enum Pages {
   Class = 'Class',
@@ -37,20 +36,6 @@ export enum ASIorFeat {
   ASI = 'ASI',
   Feat = 'Feat',
 }
-
-export type CallbackOptions =
-  | Skill[]
-  | Ability[]
-  | Language[]
-  | ArmorType[]
-  | WeaponID[]
-  | ToolID[]
-  | ItemID[]
-  | ArmorID[]
-  | AbilityScoreValue[]
-  | PrismaJson.QuantityItem[][]
-  | SubClassID[]
-  | ASIorFeat[];
 
 export type ClassID = string;
 export type SubClassID = string;
@@ -144,14 +129,6 @@ export enum WeaponPropertyNames {
   TwoHanded = 'Two-Handed',
   Versatile = 'Versatile',
 }
-export enum SpellFocus {
-  ARCANE_FOCUS = 'arcane focus',
-  HOLY_SYMBOL = 'holy symbol',
-  DRUIDIC_FOCUS = 'druidic focus',
-  MUSICAL_INSTRUMENT = 'musical instrument',
-  ARTISAN_TOOLS = 'artisan tools',
-  NONE = 'none',
-}
 
 export type ArmorID = string;
 export type WeaponID = string;
@@ -176,10 +153,6 @@ export interface Log {
   info?: string;
   from?: string;
   spellLevel?: number;
-}
-export interface AbilityScoreValue {
-  ability: Ability;
-  value: number;
 }
 
 export interface AbilityScores {
@@ -281,7 +254,7 @@ export interface CombinedData {
   flavorText: string;
   type: string;
   other: string | null;
-  lastUpdated: Date;
+  // lastUpdated: Date;
   slug: string;
 }
 
@@ -296,3 +269,44 @@ export type SidebarDisplayData = Array<{
   id: string;
   slug?: string;
 }>;
+
+export interface CharacterFeatures {
+  feats: {
+    id: string;
+    features: FeatureInfo[];
+    name: string;
+  }[];
+  classes: {
+    id: string;
+    features: FeatureInfo[];
+    name: string;
+  }[];
+  species: {
+    id: string;
+    features: FeatureInfo[];
+    name: string;
+  };
+  background: {
+    id: string;
+    features: FeatureInfo[];
+    name: string;
+  };
+  subclasses: {
+    id: string;
+    features: FeatureInfo[];
+    name: string;
+    classId: string;
+  }[];
+  subSpecies: {
+    id: string;
+    features: FeatureInfo[];
+    name: string;
+  };
+}
+
+export interface ResourceData {
+  resource: CustomResource;
+  max: number;
+  current: number;
+  refreshOn: RefreshEvent;
+}

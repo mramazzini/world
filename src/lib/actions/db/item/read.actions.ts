@@ -1,10 +1,16 @@
 'use server';
 import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
-import { PrismaClient } from '@prisma/client';
+import {
+  ItemTypes,
+  PrismaClient,
+  ToolGroup,
+  WeaponGroup,
+} from '@prisma/client';
 import Fuse from 'fuse.js';
 import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { ItemInfo } from '@/lib/types/modelInfo';
+import { ItemInfoTemplate } from '../dbIncludeTemplates';
 
 export const getItemsMetadata = async (): Promise<DBMetadata[]> => {
   const db = new PrismaClient();
@@ -15,58 +21,120 @@ export const getItemsMetadata = async (): Promise<DBMetadata[]> => {
       description: true,
       flavorText: true,
       slug: true,
-      updatedAt: true,
     },
   });
   await db.$disconnect();
   return res;
 };
 
-export const getItems = async (): Promise<ItemInfo[]> => {
+export const getItemsByToolGroup = async (
+  group: ToolGroup
+): Promise<ItemInfo[]> => {
   const db = new PrismaClient();
-  const res = await db.item.findMany({
-    include: {
-      ItemWeaponData: {
-        include: {
+  try {
+    const res = await db.item.findMany({
+      where: {
+        Tool: {
+          ToolGroup: group,
+        },
+      },
+      ...ItemInfoTemplate,
+    });
+    return res;
+  } catch (error) {
+    console.error('Error getting items by tool group', error);
+    return [];
+  } finally {
+    await db.$disconnect();
+  }
+};
+
+export const getItemsByWeaponGroup = async (
+  group: WeaponGroup
+): Promise<ItemInfo[]> => {
+  const db = new PrismaClient();
+  const obj: {
+    isSimple?: boolean | undefined;
+    isRanged?: boolean | undefined;
+  } = {};
+
+  switch (group) {
+    case WeaponGroup.ALL_MARTIAL:
+      obj.isSimple = false;
+      break;
+    case WeaponGroup.ALL_SIMPLE:
+      obj.isSimple = true;
+      break;
+    case WeaponGroup.ALL_RANGED:
+      obj.isRanged = true;
+      break;
+    case WeaponGroup.ALL_MELEE:
+      obj.isRanged = false;
+      break;
+    case WeaponGroup.MARTIAL_MELEE:
+      obj.isSimple = false;
+      obj.isRanged = false;
+      break;
+    case WeaponGroup.MARTIAL_RANGED:
+      obj.isSimple = false;
+      obj.isRanged = true;
+      break;
+    case WeaponGroup.SIMPLE_MELEE:
+      obj.isSimple = true;
+      obj.isRanged = false;
+      break;
+    case WeaponGroup.SIMPLE_RANGED:
+      obj.isSimple = true;
+      obj.isRanged = true;
+      break;
+    default:
+      break;
+  }
+
+  try {
+    const res = await db.item.findMany({
+      ...ItemInfoTemplate,
+      where: {
+        ItemWeaponData: {
           Weapon: {
-            include: {
-              ammunition: true,
-              SpecialProperties: true,
-              WeaponPropertyInstance: {
-                include: {
-                  Property: true,
-                },
-              },
-            },
+            ...obj,
           },
         },
       },
-      Spell: true,
-      Features: true,
-      Armor: {
-        include: {
-          Features: true,
-        },
-      },
-      Tool: {
-        include: {
-          Features: true,
-        },
-      },
-      AmmunitionFor: true,
+    });
 
-      EquipmentPack: {
-        include: {
-          items: true,
+    return res;
+  } catch (error) {
+    console.error('Error getting items by weapon group', error);
+    return [];
+  } finally {
+    await db.$disconnect();
+  }
+};
+
+export const getItemsByType = async (type: ItemTypes): Promise<ItemInfo[]> => {
+  const db = new PrismaClient();
+  try {
+    const res = await db.item.findMany({
+      where: {
+        types: {
+          has: type,
         },
       },
-      User: {
-        select: {
-          username: true,
-        },
-      },
-    },
-  });
+      ...ItemInfoTemplate,
+    });
+    return res;
+  } catch (error) {
+    console.error('Error getting items by type', error);
+    return [];
+  } finally {
+    await db.$disconnect();
+  }
+};
+
+export const getItems = async (): Promise<ItemInfo[]> => {
+  const db = new PrismaClient();
+  const res = await db.item.findMany(ItemInfoTemplate);
   await db.$disconnect();
   return res;
 };
@@ -82,47 +150,7 @@ export const getItem = async ({
       where: {
         [type]: query,
       },
-      include: {
-        ItemWeaponData: {
-          include: {
-            Weapon: {
-              include: {
-                ammunition: true,
-                SpecialProperties: true,
-                WeaponPropertyInstance: {
-                  include: {
-                    Property: true,
-                  },
-                },
-              },
-            },
-          },
-        },
-        Spell: true,
-        Features: true,
-        Armor: {
-          include: {
-            Features: true,
-          },
-        },
-        Tool: {
-          include: {
-            Features: true,
-          },
-        },
-        AmmunitionFor: true,
-
-        EquipmentPack: {
-          include: {
-            items: true,
-          },
-        },
-        User: {
-          select: {
-            username: true,
-          },
-        },
-      },
+      ...ItemInfoTemplate,
     });
 
     return res;
@@ -145,47 +173,7 @@ export const getItemChunk = async (
         fields: queryInfo.searchFields,
         relationalFields: queryInfo.relationalFields,
       }),
-      include: {
-        ItemWeaponData: {
-          include: {
-            Weapon: {
-              include: {
-                ammunition: true,
-                SpecialProperties: true,
-                WeaponPropertyInstance: {
-                  include: {
-                    Property: true,
-                  },
-                },
-              },
-            },
-          },
-        },
-        Spell: true,
-        Features: true,
-        Armor: {
-          include: {
-            Features: true,
-          },
-        },
-        Tool: {
-          include: {
-            Features: true,
-          },
-        },
-        AmmunitionFor: true,
-
-        EquipmentPack: {
-          include: {
-            items: true,
-          },
-        },
-        User: {
-          select: {
-            username: true,
-          },
-        },
-      },
+      ...ItemInfoTemplate,
     });
     await db.$disconnect();
     return res;
@@ -197,47 +185,7 @@ export const getItemChunk = async (
       relationalFields: queryInfo.relationalFields,
     }),
 
-    include: {
-      ItemWeaponData: {
-        include: {
-          Weapon: {
-            include: {
-              ammunition: true,
-              SpecialProperties: true,
-              WeaponPropertyInstance: {
-                include: {
-                  Property: true,
-                },
-              },
-            },
-          },
-        },
-      },
-      Spell: true,
-      Features: true,
-      Armor: {
-        include: {
-          Features: true,
-        },
-      },
-      Tool: {
-        include: {
-          Features: true,
-        },
-      },
-      AmmunitionFor: true,
-
-      EquipmentPack: {
-        include: {
-          items: true,
-        },
-      },
-      User: {
-        select: {
-          username: true,
-        },
-      },
-    },
+    ...ItemInfoTemplate,
   });
 
   const fuse = new Fuse(res, {
