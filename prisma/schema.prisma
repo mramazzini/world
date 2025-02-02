@@ -122,6 +122,7 @@ enum Language {
   NAGA
   MERFOLK
   SIREN
+  DRUIDIC
 }
 
 enum Condition {
@@ -711,6 +712,8 @@ model Effect {
   halfSkillProficiencies      Skill[]
   fullSkillProficiencies      Skill[]
   expertiseSkillProficiencies Skill[]
+
+  languageProficiencies Language[]
 
   weaponGroupRef     WeaponGroup?
   attackModifier     String?

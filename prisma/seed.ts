@@ -136,12 +136,12 @@ const seedarr: {
   //   description: 'Creating characters from the character seed.',
   //   enabled: true,
   // },
-  // {
-  //   index: '021',
-  //   callback: createBlogPosts,
-  //   description: 'Creating blogpost from the blogpost seed.',
-  //   enabled: true,
-  // },
+  {
+    index: '021',
+    callback: createBlogPosts,
+    description: 'Creating blogpost from the blogpost seed.',
+    enabled: true,
+  },
   // {
   //   index: '022',
   //   callback: createUsers,

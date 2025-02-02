@@ -353,6 +353,46 @@ const ClassEffectChoices: Prisma.ChoiceCreateInput[] = [
     'Choose 1 skill proficiency from the barbarian skill list',
     [Skill.ANIMAL_HANDLING, Skill.ATHLETICS, Skill.INTIMIDATION, Skill.NATURE]
   ),
+  //druid
+  generateFreeSpellChoice(
+    ClassFeatureEffectIds.druidCantrips1,
+    ClassFeatureEffectIds.druidCantrips1,
+    'effectId',
+    'Choose 2 cantrips from the Druid spell list',
+    {
+      fromGroup: {
+        spellListIds: [spellListIds.druid],
+        levels: [0],
+      },
+    },
+    2
+  ),
+  generateFreeSpellChoice(
+    ClassFeatureEffectIds.druidCantrips4,
+    ClassFeatureEffectIds.druidCantrips4,
+    'effectId',
+    'Choose 1 cantrip from the Druid spell list',
+    {
+      fromGroup: {
+        spellListIds: [spellListIds.druid],
+        levels: [0],
+      },
+    },
+    1
+  ),
+  generateFreeSpellChoice(
+    ClassFeatureEffectIds.druidCantrips10,
+    ClassFeatureEffectIds.druidCantrips10,
+    'effectId',
+    'Choose 1 cantrip from the Druid spell list',
+    {
+      fromGroup: {
+        spellListIds: [spellListIds.druid],
+        levels: [0],
+      },
+    },
+    1
+  ),
 ];
 
 export default ClassEffectChoices;
