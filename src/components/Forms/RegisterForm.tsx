@@ -13,6 +13,7 @@ import useMessageModal from '@/hooks/useMessageModal';
 import ErrorModal from '../Modals/ErrorModal';
 import { useAuth } from '@/hooks/useAuth';
 import { DISCORD_AUTH_REDIRECT_URI } from '@/lib/globalVars';
+import Image from 'next/image';
 
 interface SignupUserInput {
   email: string;
@@ -129,8 +130,15 @@ const Register = () => {
             </p>
           </Form>
         </Formik>
-        <Link href={DISCORD_AUTH_REDIRECT_URI} className="text-info hover:link">
+        <Link href={DISCORD_AUTH_REDIRECT_URI} className="btn w-full btn-lg">
           Signup with Discord
+          <Image
+            src="/images/discord.svg"
+            alt="Discord Logo"
+            className="w-10 h-10"
+            width={128}
+            height={128}
+          />
         </Link>
       </div>
     </>
