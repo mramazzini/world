@@ -87,13 +87,13 @@ export const createUserFromDiscord = async (
   try {
     const tokenData = await getDiscordTokenData(code);
     if (!tokenData?.access_token) {
-      console.error('token missing access_token');
+      console.error('token missing access_token', tokenData);
       return AuthResult.InvalidCredentials;
     }
     const userData = await getDiscordUserData(tokenData?.access_token);
 
     if (!userData?.id) {
-      console.error('Failed to get user data');
+      console.error('Failed to get user data', userData);
       return AuthResult.InvalidCredentials;
     }
 
