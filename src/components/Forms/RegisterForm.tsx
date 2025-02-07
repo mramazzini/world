@@ -12,8 +12,8 @@ import * as Yup from 'yup';
 import useMessageModal from '@/hooks/useMessageModal';
 import ErrorModal from '../Modals/ErrorModal';
 import { useAuth } from '@/hooks/useAuth';
-import { DISCORD_AUTH_REDIRECT_URI } from '@/lib/globalVars';
 import Image from 'next/image';
+import { buildDiscordURI } from '@/Utility/buildDiscordURI';
 
 interface SignupUserInput {
   email: string;
@@ -130,7 +130,8 @@ const Register = () => {
             </p>
           </Form>
         </Formik>
-        <Link href={DISCORD_AUTH_REDIRECT_URI} className="btn w-full btn-lg">
+        <div className="divider divider-accent"></div>
+        <Link href={buildDiscordURI()} className="btn w-full btn-lg">
           Signup with Discord
           <Image
             src="/images/discord.svg"

@@ -1,8 +1,8 @@
 'use client';
 import Loading from '@/components/UI/Loading';
 import { loginWithDiscord } from '@/lib/actions/auth/oauth/discord.actions';
-import { DISCORD_AUTH_REDIRECT_URI } from '@/lib/globalVars';
 import { AuthResult } from '@/lib/types/types';
+import { buildDiscordURI } from '@/Utility/buildDiscordURI';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -17,7 +17,7 @@ const DiscordOauthLoginPage = () => {
           case AuthResult.InvalidCredentials:
             setLoading(false);
             console.log(res);
-            router.push(DISCORD_AUTH_REDIRECT_URI);
+            router.push(buildDiscordURI());
             return;
           case AuthResult.Success:
             return router.push('/dashboard');
