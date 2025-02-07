@@ -12,6 +12,7 @@ import * as Yup from 'yup';
 import useMessageModal from '@/hooks/useMessageModal';
 import ErrorModal from '../Modals/ErrorModal';
 import { useAuth } from '@/hooks/useAuth';
+import { DISCORD_AUTH_REDIRECT_URI } from '@/lib/globalVars';
 
 interface SignupUserInput {
   email: string;
@@ -128,6 +129,9 @@ const Register = () => {
             </p>
           </Form>
         </Formik>
+        <Link href={DISCORD_AUTH_REDIRECT_URI} className="text-info hover:link">
+          Signup with Discord
+        </Link>
       </div>
     </>
   );

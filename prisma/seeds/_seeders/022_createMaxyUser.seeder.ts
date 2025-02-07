@@ -1,8 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import {
-  DefaultArgs,
-  PrismaClientOptions,
-} from '@prisma/client/runtime/library';
 
 import bcrypt from 'bcrypt';
 

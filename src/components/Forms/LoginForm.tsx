@@ -98,6 +98,9 @@ const Login = () => {
             </p>
           </Form>
         </Formik>
+        <Link href="/oauth/discord/login" className="text-info hover:link">
+          Login with Discord
+        </Link>
       </div>
     </>
   );

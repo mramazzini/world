@@ -1,6 +1,6 @@
 'use server';
 import bcrypt from 'bcrypt';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, UserType } from '@prisma/client';
 import { AuthResult } from '@/lib/types/types';
 import {
   generateToken,
@@ -21,18 +21,29 @@ export const login = async (data: {
 
   const user = await db.user.findFirst({
     where: {
-      OR: [
+      AND: [
         {
-          email: emailOrUsername,
+          OR: [
+            {
+              email: emailOrUsername,
+            },
+            {
+              username: emailOrUsername,
+            },
+          ],
         },
         {
-          username: emailOrUsername,
+          type: UserType.NORMAL,
         },
       ],
     },
   });
 
   if (!user) {
+    return AuthResult.UserNotFound;
+  }
+
+  if (!user.password) {
     return AuthResult.UserNotFound;
   }
 
@@ -104,7 +115,7 @@ export const signup = async (data: {
   generateToken(newUser.id);
 
   try {
-    sendNewUserMessage(newUser.username);
+    sendNewUserMessage(newUser?.username || '');
   } catch (error) {
     console.error('Failed to send verification email', error);
   }
