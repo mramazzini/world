@@ -299,6 +299,28 @@ const BackgroundChoicesSeed: Prisma.ChoiceCreateManyInput[] = [
       },
     ]
   ),
+  //outlander
+  generateToolProficiencyGroupedChoice(
+    'background-outlander-musical-instrument',
+    backgroundIds.outlander,
+    'backgroundId',
+    'Choose a musical instrument.',
+    [
+      {
+        type: 'group',
+        group: ToolGroup.INSTRUMENTS,
+      },
+    ],
+    1
+  ),
+  generateLanguageProficiencyChoice(
+    'background-outlander-languages',
+    backgroundIds.outlander,
+    'backgroundId',
+    'Choose one language',
+    Object.values(Language) as Language[],
+    1
+  ),
 ];
 
 export default BackgroundChoicesSeed;

@@ -15,6 +15,7 @@ export const CustomResourceIds = {
   infusionsKnown: 'infusionsKnown',
   flashOfGenius: 'flashOfGenius',
   wildshapeDruid: 'wildshapeDruid',
+  rabbitHopHarengon: 'rabbitHopHarengon',
 };
 
 const CustomResourceSeed: Prisma.CustomResourceCreateManyInput[] = [
@@ -115,6 +116,13 @@ const CustomResourceSeed: Prisma.CustomResourceCreateManyInput[] = [
     description:
       'A pool of charges that dictate how many uses of wild shape a Druid has.',
     slug: 'wild-shape-druid',
+  },
+  {
+    id: CustomResourceIds.rabbitHopHarengon,
+    name: 'Rabbit Hop',
+    description:
+      'A pool of charges that dictate how many uses of rabbit hop a Harengon has.',
+    slug: 'rabbit-hop-harengon',
   },
 ];
 

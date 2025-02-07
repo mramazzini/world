@@ -9,7 +9,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   {
     id: '1',
     name: 'Acolyte',
-    slug: '',
+    slug: 'acolyte',
     flavorText:
       'You have spent your life in the service of a temple to a specific god or pantheon of gods.',
     description:
@@ -80,7 +80,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   {
     id: '2',
     name: 'Anthropologist',
-    slug: '',
+    slug: 'anthropologist',
     flavorText: 'You have always been fascinated by other cultures.',
     description:
       "You have always been fascinated by other cultures, from the most ancient and primeval lost lands to the most modern civilizations. By studying other cultures' customs, philosophies, laws, rituals, religious beliefs, languages, and art, you have learned how tribes, empires, and all forms of society in between craft their own destinies and doom. This knowledge came to you not only through books and scrolls, but also through firsthand observation – by visiting far-flung settlements and exploring local histories and customs.",
@@ -407,7 +407,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   {
     id: '6',
     name: 'City Watch',
-    slug: '',
+    slug: 'city-watch',
     flavorText: 'You have served the community where you grew up.',
     description:
       "You have served the community where you grew up, standing as its first line of defense against crime. You aren't a soldier, directing your gaze outward at possible enemies. Instead, your service to your hometown was to help police its populace, protecting the citizenry from lawbreakers and malefactors of every stripe.\n\nYou might have been part of the City Watch of Waterdeep, the baton-wielding police force of the City of Splendors, protecting the common folk from thieves and rowdy nobility alike. Or you might have been one of the valiant defenders of Silverymoon, a member of the Silverwatch or even one of the magic-wielding Spellguard.\n\nPerhaps you hail from Neverwinter and have served as one of its Wintershield watchmen, the newly founded branch of guards who vow to keep safe the City of Skilled Hands.\n\nEven if you're not city-born or city-bred, this background can describe your early years as a member of law enforcement. Most settlements of any size have their own constables and police forces, and even smaller communities have sheriffs and bailiffs who stand ready to protect their community.",
@@ -1742,7 +1742,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   {
     id: '22',
     name: 'Haunted One',
-    slug: '',
+    slug: 'haunted-one',
     description:
       'You are haunted by something so terrible that you dare not speak of it. You’ve tried to bury it and run away from it, to no avail. Whatever this thing is that haunts you can’t be slain with a sword or banished with a spell. It might come to you as a shadow on the wall, a bloodcurdling nightmare, a memory that refuses to die, or a demonic whisper in the dark. The burden has taken its toll, isolating you from most people and making you question your sanity. You must find a way to overcome it before it destroys you.',
     flavorText:
@@ -1802,7 +1802,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   {
     id: '23',
     name: 'Hermit',
-    slug: '',
+    slug: 'hermit',
     description:
       'You lived in seclusion – either in a sheltered community such as a monastery, or entirely alone – for a formative part of your life. In your time apart from the clamor of society, you found quiet, solitude, and perhaps some of the answers you were looking for.',
     flavorText:
@@ -1985,7 +1985,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   {
     id: '26',
     name: 'Investigator',
-    slug: '',
+    slug: 'investigator',
     description:
       "Rarer than watch or patrol members are a community's investigators, who are responsible for solving crimes after the fact. Though such folk are seldom found in rural areas, nearly every settlement of decent size has at least one or two watch members who have the skill to investigate crime scenes and track down criminals.",
     flavorText: 'You are responsible for solving crimes after the fact.',
@@ -2167,7 +2167,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   {
     id: '29',
     name: 'Knight of the Order',
-    slug: '',
+    slug: 'knight-of-the-order',
     description: `You belong to an order of knights who have sworn oaths to achieve a certain goal. The nature of this goal depends on the order you serve, but in your eyes it is without question a vital and honorable endeavor. Faerûn has a wide variety of knightly orders, all of which have a similar outlook concerning their actions and responsibilities.\n\nThough the term "knight" conjures ideas of mounted, heavily armored warriors of noble blood, most knightly orders in Faerûn don't restrict their membership to such individuals. The goals and philosophies of the order are more important than the gear and fighting style of its members, and so most of these orders aren't limited to fighting types, but are open to all sorts of folk who are willing to battle and die for the order's cause.\n\nThe "Knightly Orders of Faerûn" section below details several of the orders that are active at present and is designed to help inform your decision about which group you owe allegiance to.`,
     flavorText:
       'You belong to an order of knights who have sworn oaths to achieve a certain goal.',
@@ -2305,7 +2305,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   {
     id: '31',
     name: 'Mercenary Veteran',
-    slug: '',
+    slug: 'mercenary-veteran',
     description: `As a sell-sword who fought battles for coin, you're well acquainted with risking life and limb for a chance at a share of treasure. Now, you look forward to fighting foes and reaping even greater rewards as an adventurer. Your experience makes you familiar with the ins and outs of mercenary life, and you likely have harrowing stories of events on the battlefield. You might have served with a large outfit such as the Zhentarim or the soldiers of Mintarn, or a smaller band of sell-swords, maybe even more than one. See the "Mercenaries of the North" section below for a collection of possibilities.\n\nNow you're looking for something else, perhaps greater reward for the risks you take, or the freedom to choose your own activities. For whatever reason, you're leaving behind the life of a soldier for hire, but your skills are undeniably suited for battle, so now you fight on in a different way.`,
     flavorText:
       "As a sell-sword who fought battles for coin, you're well acquainted with risking life and limb for a chance at a share of treasure.",
@@ -2457,90 +2457,81 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   //     'By my words and actions, I often bring shame to my family.',
   //   ],
   // },
-  // {
-  //   id: '33',
-  //   name: 'Outlander',
-  //   slug: '',
-  //   description:
-  //     "You grew up in the wilds, far from civilization and the comforts of town and technology. You've witnessed the migration of herds larger than forests, survived weather more extreme than any city-dweller could comprehend, and enjoyed the solitude of being the only thinking creature for miles in any direction. The wilds are in your blood, whether you were a nomad, an explorer, a recluse, a hunter-gatherer, or even a marauder. Even in places where you don't know the specific features of the terrain, you know the ways of the wild.",
-  //   flavorText:
-  //     'You grew up in the wilds, far from civilization and the comforts of town and technology.',
-  //   source: src.phb,
-  //   skillProficiencyDescription:
-  //     'You are proficient in Athletics and Survival.',
-  //   skillProficiencies: {
-  //     default: [Skill.ATHLETICS, Skill.SURVIVAL],
-  //   },
-  //   toolProficiencyDescription:
-  //     'You are proficient with one type of musical instrument.',
-  //   toolProficiencies: {
-  //     choices: [
-  //       {
-  //         numberOfChoices: 1,
-  //         options: [...instrumentIds],
-  //       },
-  //     ],
-  //   },
-  //   languageProficiencyDescription:
-  //     'You can speak, read, and write one language of your choice.',
-  //   languageProficiencies: {
-  //     choices: [
-  //       {
-  //         numberOfChoices: 1,
-  //         options: Object.values(Language),
-  //       },
-  //     ],
-  //   },
-  //   equipmentDescription: [
-  //     `A ${i(itemIds.staff, 'staff')}`,
-  //     `A ${i(itemIds.huntingTrap, 'hunting trap')}`,
-  //     `A trophy from an animal you killed`,
-  //     `A set of ${i(itemIds.travelersClothes, "traveler's clothes")}`,
-  //     `A ${i(itemIds.pouch, 'purse')} containing 10 ${i(
-  //       itemIds.goldPiece,
-  //       'gp'
-  //     )}`,
-  //   ],
-  //   suggestedCharacteristics:
-  //     'Often considered rude and uncouth among civilized folk, outlanders have little respect for the niceties of life in the cities. The ties of tribe, clan, family, and the natural world of which they are a part are the most important bonds to most outlanders.',
-  //   traits: [
-  //     "I'm driven by a wanderlust that led me away from home.",
-  //     'I watch over my friends as if they were a litter of newborn pups.',
-  //     "I once ran twenty-five miles without stopping to warn my clan of an approaching orc horde. I'd do it again if I had to.",
-  //     'I have a lesson for every situation, drawn from observing nature.',
-  //     "I place no stock in wealthy or well-mannered folk. Money and manners won't save you from a hungry owlbear.",
-  //     "I'm always picking things up, absently fiddling with them, and sometimes accidentally breaking them.",
-  //     'I feel far more comfortable around animals than people.',
-  //     'I was, in fact, raised by wolves.',
-  //   ],
+  {
+    id: '33',
+    name: 'Outlander',
+    slug: 'outlander',
+    description:
+      "You grew up in the wilds, far from civilization and the comforts of town and technology. You've witnessed the migration of herds larger than forests, survived weather more extreme than any city-dweller could comprehend, and enjoyed the solitude of being the only thinking creature for miles in any direction. The wilds are in your blood, whether you were a nomad, an explorer, a recluse, a hunter-gatherer, or even a marauder. Even in places where you don't know the specific features of the terrain, you know the ways of the wild.",
+    flavorText:
+      'You grew up in the wilds, far from civilization and the comforts of town and technology.',
+    source: src.phb,
+    skillProficiencyDescription:
+      'You are proficient in Athletics and Survival.',
+    freeSkillProficiencies: [Skill.ATHLETICS, Skill.SURVIVAL],
+    toolProficiencyDescription:
+      'You are proficient with one type of musical instrument.',
 
-  //   ideals: [
-  //     '**Change.** Life is like the seasons, in constant change, and we must change with it. (Chaotic)',
-  //     "**Greater Good.** It is each person's responsibility to make the most happiness for the whole tribe. (Good)",
-  //     '**Honor.** If I dishonor myself, I dishonor my whole clan. (Lawful)',
-  //     '**Might.** The strongest are meant to rule. (Evil)',
-  //     '**Nature.** The natural world is more important than all the constructs of civilization. (Neutral)',
-  //     '**Glory.** I must earn glory in battle, for myself and my clan. (Any)',
-  //   ],
+    languageProficiencyDescription:
+      'You can speak, read, and write one language of your choice.',
 
-  //   bonds: [
-  //     'My family, clan, or tribe is the most important thing in my life, even when they are far from me.',
-  //     'An injury to the unspoiled wilderness of my home is an injury to me.',
-  //     'I will bring terrible wrath down on the evildoers who destroyed my homeland.',
-  //     'I am the last of my tribe, and it is up to me to ensure their names enter legend.',
-  //     'I suffer awful visions of a coming disaster and will do anything to prevent it.',
-  //     'It is my duty to provide children to sustain my tribe.',
-  //   ],
+    equipmentDescription: [
+      `A ${i(itemIds.staff, 'staff')}`,
+      `A ${i(itemIds.huntingTrap, 'hunting trap')}`,
+      `A trophy from an animal you killed`,
+      `A set of ${i(itemIds.travelersClothes, "traveler's clothes")}`,
+      `A ${i(itemIds.pouch, 'purse')} containing 10 ${i(
+        itemIds.goldPiece,
+        'gp'
+      )}`,
+    ],
+    freeEquipment: [
+      { item: itemIds.staff, quantity: 1 },
+      { item: itemIds.huntingTrap, quantity: 1 },
+      { item: itemIds.travelersClothes, quantity: 1 },
+      { item: itemIds.pouch, quantity: 1 },
+      { item: itemIds.goldPiece, quantity: 10 },
+    ],
+    suggestedCharacteristics:
+      'Often considered rude and uncouth among civilized folk, outlanders have little respect for the niceties of life in the cities. The ties of tribe, clan, family, and the natural world of which they are a part are the most important bonds to most outlanders.',
+    traits: [
+      "I'm driven by a wanderlust that led me away from home.",
+      'I watch over my friends as if they were a litter of newborn pups.',
+      "I once ran twenty-five miles without stopping to warn my clan of an approaching orc horde. I'd do it again if I had to.",
+      'I have a lesson for every situation, drawn from observing nature.',
+      "I place no stock in wealthy or well-mannered folk. Money and manners won't save you from a hungry owlbear.",
+      "I'm always picking things up, absently fiddling with them, and sometimes accidentally breaking them.",
+      'I feel far more comfortable around animals than people.',
+      'I was, in fact, raised by wolves.',
+    ],
 
-  //   flaws: [
-  //     'I am too enamored of ale, wine, and other intoxicants.',
-  //     "There's no room for caution in a life lived to the fullest.",
-  //     "I remember every insult I've received and nurse a silent resentment toward anyone who's ever wronged me.",
-  //     'I am slow to trust members of other races, tribes, and societies.',
-  //     'Violence is my answer to almost any challenge.',
-  //     "Don't expect me to save those who can't save themselves. It is nature's way that the strong thrive and the weak perish.",
-  //   ],
-  // },
+    ideals: [
+      '**Change.** Life is like the seasons, in constant change, and we must change with it. (Chaotic)',
+      "**Greater Good.** It is each person's responsibility to make the most happiness for the whole tribe. (Good)",
+      '**Honor.** If I dishonor myself, I dishonor my whole clan. (Lawful)',
+      '**Might.** The strongest are meant to rule. (Evil)',
+      '**Nature.** The natural world is more important than all the constructs of civilization. (Neutral)',
+      '**Glory.** I must earn glory in battle, for myself and my clan. (Any)',
+    ],
+
+    bonds: [
+      'My family, clan, or tribe is the most important thing in my life, even when they are far from me.',
+      'An injury to the unspoiled wilderness of my home is an injury to me.',
+      'I will bring terrible wrath down on the evildoers who destroyed my homeland.',
+      'I am the last of my tribe, and it is up to me to ensure their names enter legend.',
+      'I suffer awful visions of a coming disaster and will do anything to prevent it.',
+      'It is my duty to provide children to sustain my tribe.',
+    ],
+
+    flaws: [
+      'I am too enamored of ale, wine, and other intoxicants.',
+      "There's no room for caution in a life lived to the fullest.",
+      "I remember every insult I've received and nurse a silent resentment toward anyone who's ever wronged me.",
+      'I am slow to trust members of other races, tribes, and societies.',
+      'Violence is my answer to almost any challenge.',
+      "Don't expect me to save those who can't save themselves. It is nature's way that the strong thrive and the weak perish.",
+    ],
+  },
   // {
   //   id: '34',
   //   name: 'Pirate',
@@ -2746,7 +2737,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   {
     id: '37',
     name: 'Rune Carver',
-    slug: '',
+    slug: 'rune-carver',
     description:
       'You’ve dedicated your life to studying runecraft. Whether you were taught by a master rune carver or learned by poring over ancient engravings, you can tap into the supernatural power held within runes.\n\nThe art of runecraft was initially created by giants, but over time, the practice has been adopted by many peoples. As such, though Giant runes are the most commonly used, many rune carvers incorporate symbols from their native languages into the craft.',
     flavorText: 'You’ve dedicated your life to studying runecraft.',
@@ -2862,7 +2853,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   {
     id: '39',
     name: 'Sailor',
-    slug: '',
+    slug: 'sailor',
     description:
       'You sailed on a seagoing vessel for years. In that time, you faced down mighty storms, monsters of the deep, and those who wanted to sink your craft to the bottomless depths. Your first love is the distant line of the horizon, but the time has come to try your hand at something new.\n\nDiscuss the nature of the ship you previously sailed with your DM. Was it a merchant ship, a naval vessel, a ship of discovery, or a pirate ship? How famous (or infamous) is it? Is it widely traveled? Is it still sailing, or is it missing and presumed lost with all hands?\n\nWhat were your duties on board – boatswain, captain, navigator, cook, or some other position? Who were the captain and first mate? Did you leave your ship on good terms with your fellows, or on the run?',
     flavorText: 'You sailed on a seagoing vessel for years.',
@@ -3083,7 +3074,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   {
     id: '42',
     name: 'Soldier',
-    slug: '',
+    slug: 'soldier',
     description:
       "War has been your life for as long as you care to remember. You trained as a youth, studied the use of weapons and armor, learned basic survival techniques, including how to stay alive on the battlefield. You might have been part of a standing national army or a mercenary company, or perhaps a member of a local militia who rose to prominence during a recent war.\n\nWhen you choose this background, work with your DM to determine which military organization you were a part of, how far through its ranks you progressed, and what kind of experiences you had during your military career. Was it a standing army, a town guard, or a village militia? Or it might have been a noble's or merchant's private army, or a mercenary company.",
     flavorText: 'War has been your life for as long as you care to remember.',
@@ -3866,7 +3857,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   {
     id: '51',
     name: 'Gambler',
-    slug: '',
+    slug: 'gambler',
     description:
       "All you need to make a lot of gold is a little gold. Except at those times when all you need to have no gold at all is a little gold. Whether you're a good gambler or a bad one rarely matters, because no one can divine the whims of Lady Luck. Sometimes you're up, sometimes you're down. But the thing about gambling is that someone is always willing to take a bet.",
     source: src.aquisitions,
@@ -4028,7 +4019,7 @@ const Backgrounds: Prisma.BackgroundCreateManyInput[] = [
   {
     id: '53',
     name: 'Rival Intern',
-    slug: '',
+    slug: 'rival-intern',
     description:
       "You were an intern at a rival of Acquisitions Incorporated, and you gained a healthy respect for not just the job and the franchising opportunities. but for the ruthless and efficient way Acquisitions Incorporated goes about its business. Why deal with the rest, when you can work for the best?\n\nPerhaps the rival did not treat you as well as you were hoping, or you washed out of that organization. Maybe you hope to leverage the knowledge you gained there for an advantage at Acquisitions Incorporated. Either way, you're now bringing your talents to the company, ready to put your skills to use.",
     flavorText: 'You were an intern at a rival of Acquisitions Incorporated.',

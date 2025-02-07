@@ -26,7 +26,6 @@ const useFeatureSelector = () => {
   );
 
   const unlockedFeatures = useMemo(() => {
-    console.log(features);
     const unlocked = {
       classes: features.classes.map((c) => {
         return {

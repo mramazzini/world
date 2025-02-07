@@ -5,6 +5,8 @@ import SpeciesFeaturesSeed from '../Species/SpeciesFeatures.seed';
 import createFeature from '../_helpers/createFeature';
 import { createSlug } from '../_helpers/createSlug';
 import SpeciesChoicesSeed from '../Species/SpeciesChoices.seed';
+import SpeciesFeatureEffectSeed from '../Species/SpeciesFeatureEffects.seed';
+import SpeciesEffectChoicesSeed from '../Species/SpeciesEffectChoices.seed';
 
 export const createSpecies = async (db: PrismaClient) => {
   //create species and traits
@@ -71,6 +73,52 @@ export const createSpecies = async (db: PrismaClient) => {
     } catch (error) {
       cerr('Error creating species choice:', choice.id, error);
       throw new Error('Error creating species choice');
+    }
+  }
+
+  cinfo('Species Choices created');
+
+  cinfo('Create Species Effects');
+  for (const effect of SpeciesFeatureEffectSeed) {
+    try {
+      cinfo('Creating species effect:', effect.id);
+      await db.effect.upsert({
+        where: {
+          id: effect.id,
+        },
+        update: {
+          ...effect,
+        },
+        create: {
+          ...effect,
+        },
+      });
+      cinfo('Species effect created');
+    } catch (error) {
+      cerr('Error creating species effect:', effect.id, error);
+      throw new Error('Error creating species effect');
+    }
+  }
+  cinfo('Species Effects created');
+  cinfo('Create species effect choices');
+  for (const choice of SpeciesEffectChoicesSeed) {
+    try {
+      cinfo('Creating species effect choice:', choice.id);
+      await db.choice.upsert({
+        where: {
+          id: choice.id,
+        },
+        update: {
+          ...choice,
+        },
+        create: {
+          ...choice,
+        },
+      });
+      cinfo('Species effect choice created');
+    } catch (error) {
+      cerr('Error creating species effect choice:', choice.id, error);
+      throw new Error('Error creating species effect choice');
     }
   }
 };
