@@ -60,7 +60,7 @@ export const getDiscordTokenData = async (
     });
     const data = (await response.json()) as DiscordTokenData;
     if (!data?.access_token) {
-      return null;
+      throw new Error(`Failed to get token data ${JSON.stringify(data)}`);
     }
     return data;
   } catch (error) {
@@ -87,7 +87,7 @@ export const createUserFromDiscord = async (
   try {
     const tokenData = await getDiscordTokenData(code);
     if (!tokenData?.access_token) {
-      console.error('Failed to get token data');
+      console.error('token missing access_token');
       return AuthResult.InvalidCredentials;
     }
     const userData = await getDiscordUserData(tokenData?.access_token);
@@ -220,7 +220,7 @@ export const loginWithDiscord = async () => {
 
     return AuthResult.Success;
   } catch (error) {
-    console.error('Failed to get token data', error);
+    console.error('Failed to refresh_token', error);
     return AuthResult.InvalidCredentials;
   }
 };
