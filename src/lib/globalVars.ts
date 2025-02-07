@@ -10,9 +10,6 @@ export const officialSources: string[] = Object.values(src).filter(
   (s) => s !== src.homebrew
 );
 
-export const DISCORD_AUTH_REDIRECT_URI =
-  'https://discord.com/oauth2/authorize?client_id=1335433498198016105&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Foauth%2Fdiscord%2Fregister&scope=identify+email';
-
 export const DISCORD_INVITE = 'https://discord.gg/gNmJU7ZZqs';
 
 export const skills: Skill[] = Object.values(Skill);
