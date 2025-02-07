@@ -130,6 +130,7 @@ const Register = () => {
             </p>
           </Form>
         </Formik>
+        <div className="divider divider-accent"></div>
         <Link href={DISCORD_AUTH_REDIRECT_URI} className="btn w-full btn-lg">
           Signup with Discord
           <Image
