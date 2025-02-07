@@ -31,7 +31,7 @@ export const backgroundIds = {
   // marine: '30',
   mercenaryVeteran: '31',
   // noble: '32',
-  // outlander: '33',
+  outlander: '33',
   // pirate: '34',
   // rewarded: '35',
   // ruined: '36',

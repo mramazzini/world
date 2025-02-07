@@ -1484,47 +1484,38 @@ const Species: Prisma.SpeciesCreateManyInput[] = [
   //   },
   //   resistanceTo: [DamageTypes.COLD],
   // },
-  // {
-  //   id: '38',
-  //   name: 'Goliath (EEPC)',
-  //   slug: '',
-  //   description:
-  //     'At the highest mountain peaks dwell the reclusive goliaths, wandering a bleak realm of rock, wind, and cold. Their bodies look as if they are carved from mountain stone and give them great physical power. Their hearts are infused with the cold regard of their frigid realm, leaving each goliath with the responsibility to earn a place in the tribe or die trying.',
-  //   flavorText: 'At the highest mountain peaks dwell the reclusive goliaths.',
-  //   source: src.eepc,
-  //   abilityScoreDescription:
-  //     'Your Strength score increases by 2, and your Constitution score increases by 1.',
-  //   abilityScores: {
-  //     [
-  //       {
-  //         ability: Ability.STR,
-  //         value: 2,
-  //       },
-  //       {
-  //         ability: Ability.CON,
-  //         value: 1,
-  //       },
-  //     ],
-  //   },
-  //   age: 'Goliaths have lifespans comparable to humans. They enter adulthood in their late teens and usually live less than a century.',
-  //   alignment:
-  //     'Goliath society, with its clear roles and tasks, has a strong lawful bent. The goliath sense of fairness, balanced with an emphasis on self-sufficiency and personal accountability, pushes them toward neutrality.',
-  //   sizeDescription:
-  //     'Goliaths are between 7 and 8 feet tall and weigh between 280 and 340 pounds. Your size is Medium.',
-  //   size: Size.MEDIUM,
-  //   speed: 30,
-  //   speedDescription: 'Your base walking speed is 30 feet.',
-  //   skillProficiencyDescription: 'You have proficiency in the Athletics skill.',
-  //   skillProficiencies: {
-  //     [Skill.ATHLETICS],
-  //   },
-  //   resistanceTo: [DamageTypes.COLD],
-  //   creatureType: CreatureType.HUMANOID,
-  //   languageDescription: 'You can speak, read, and write Common and Giant.',
+  {
+    id: '38',
+    name: 'Goliath (EEPC)',
+    slug: '',
+    description:
+      'At the highest mountain peaks dwell the reclusive goliaths, wandering a bleak realm of rock, wind, and cold. Their bodies look as if they are carved from mountain stone and give them great physical power. Their hearts are infused with the cold regard of their frigid realm, leaving each goliath with the responsibility to earn a place in the tribe or die trying.',
+    flavorText: 'At the highest mountain peaks dwell the reclusive goliaths.',
+    source: src.eepc,
+    abilityScoreDescription:
+      'Your Strength score increases by 2, and your Constitution score increases by 1.',
 
-  //     [Language.COMMON, Language.GIANT],
-  //   },
-  // },
+    age: 'Goliaths have lifespans comparable to humans. They enter adulthood in their late teens and usually live less than a century.',
+    alignment:
+      'Goliath society, with its clear roles and tasks, has a strong lawful bent. The goliath sense of fairness, balanced with an emphasis on self-sufficiency and personal accountability, pushes them toward neutrality.',
+    sizeDescription:
+      'Goliaths are between 7 and 8 feet tall and weigh between 280 and 340 pounds. Your size is Medium.',
+    size: Size.MEDIUM,
+    speed: 30,
+    speedDescription: 'Your base walking speed is 30 feet.',
+    // skillProficiencyDescription: 'You have proficiency in the Athletics skill.',
+    // skillProficiencies: {
+    // [Skill.ATHLETICS],
+    // },
+    freeAbilityScoreImprovements: [
+      { ability: Ability.STR, value: 2 },
+      { ability: Ability.CON, value: 1 },
+    ],
+    // resistanceTo: [DamageTypes.COLD],
+    creatureType: CreatureType.HUMANOID,
+    languageDescription: 'You can speak, read, and write Common and Giant.',
+    freeLanguages: [Language.COMMON, Language.GIANT],
+  },
   {
     id: '39',
     name: 'Harengon (MMOM)',
@@ -4220,7 +4211,7 @@ export const speciesIds = {
   // githzeraiMMOM: '35',
   // githzeraiMTOF: '36',
   // goliathMMOM: '37',
-  // goliathEEPC: '38',
+  goliathEEPC: '38',
   harengonMMOM: '39',
   // harengonTWBTW: '40',
   // kenkuMMOM: '41',

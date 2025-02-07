@@ -744,7 +744,8 @@ model Effect {
   /// [AbilityScoreValue]
   abilityScoreImprovements Json[]
 
-  speedBonusFormula String?
+  speedBonusFormula      String?
+  initiativeBonusFormula String?
 
   blindsight  Int?
   darkvision  Int?
@@ -760,7 +761,18 @@ model Effect {
   parentEffect      Effect?             @relation("ChainedEffect")
   EffectGrantsGroup EffectGrantsGroup[]
   EffectToSpell     EffectToSpell[]
+  EffectGrantsFeat  EffectGrantsFeat[]
   featureId         String
+}
+
+model EffectGrantsFeat {
+  effectId String
+  featId   String
+
+  Effect Effect @relation(fields: [effectId], references: [id])
+  Feat   Feat   @relation(fields: [featId], references: [id])
+
+  @@id([effectId, featId])
 }
 
 model EffectToSpell {
@@ -1035,7 +1047,8 @@ model Feat {
   userId     String?
   Characters Character[]
 
-  slug String @unique @db.VarChar(200)
+  slug             String             @unique @db.VarChar(200)
+  EffectGrantsFeat EffectGrantsFeat[]
 }
 
 model Message {

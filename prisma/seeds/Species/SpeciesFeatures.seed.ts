@@ -1,7 +1,53 @@
-import { Prisma } from '@prisma/client';
-import Species, { speciesIds } from './Species.seed';
-import generateId from '../_helpers/generateId';
-let count = 1;
+import { ChainType, Prisma } from '@prisma/client';
+import { speciesIds } from './Species.seed';
+
+export const speciesFeaturesIds = {
+  aasimarMMOMCelestialResistance: 'aasimarMMOMCelestialResistance',
+  aasimarMMOMHealingHands: 'aasimarMMOMHealingHands',
+  aasimarMMOMLightBearer: 'aasimarMMOMLightBearer',
+  aasimarMMOMCelestialRevelation: 'aasimarMMOMCelestialRevelation',
+  aasimarVGMCelestialResistance: 'aasimarVGMCelestialResistance',
+  aasimarVGMHealingHands: 'aasimarVGMHealingHands',
+  aasimarVGMLightBearer: 'aasimarVGMLightBearer',
+  airGenasiMMOMUnendingBreath: 'airGenasiMMOMUnendingBreath',
+  airGenasiMMOMLightningResistance: 'airGenasiMMOMLightningResistance',
+  airGenasiMMOMMingleWithTheWind: 'airGenasiMMOMMingleWithTheWind',
+  airGenasiEEPCUnendingBreath: 'airGenasiEEPCUnendingBreath',
+  airGenasiEEPCMingleWithTheWind: 'airGenasiEEPCMingleWithTheWind',
+  airGenasiEEPCLightningResistance: 'airGenasiEEPCLightningResistance',
+  waterGenasiMMOMAmphibious: 'waterGenasiMMOMAmphibious',
+  waterGenasiMMOMAcidResistance: 'waterGenasiMMOMAcidResistance',
+  waterGenasiMMOMCallToTheWave: 'waterGenasiMMOMCallToTheWave',
+  stonesEnduranceGolaithEEPC: 'stonesEnduranceGolaithEEPC',
+  powerfulBuildGolaithEEPC: 'powerfulBuildGolaithEEPC',
+  mountainBornGolaithEEPC: 'mountainBornGolaithEEPC',
+  luckyFootworkHarengonMMOM: 'luckyFootworkHarengonMMOM',
+  rabbitHopHarengonMMOM: 'rabbitHopHarengonMMOM',
+  hareTriggerHarengonMMOM: 'hareTriggerHarengonMMOM',
+  leoprineSensesHarengonMMOM: 'leoprineSensesHarengonMMOM',
+  constructedResilienceWarforgedMMOM: 'constructedResilienceWarforgedMMOM',
+  sentrysRestWarforgedMMOM: 'sentrysRestWarforgedMMOM',
+  integratedProtectionWarforgedMMOM: 'IntegratedProtectionWarforgedMMOM',
+  specializedDesignWarforgedMMOM: 'specializedDesignWarforgedMMOM',
+  draconicAncestryDragonborn: 'draconicAncestryDragonborn',
+  dwarvenResilienceDwarf: 'dwarvenResilienceDwarf',
+  dwarvenCombatTrainingDwarf: 'dwarvenCombatTrainingDwarf',
+  dwarfToolProficiencyDwarf: 'dwarfToolProficiencyDwarf',
+  dwarfStonecunningDwarf: 'dwarfStonecunningDwarf',
+  feyAncestryElf: 'feyAncestryElf',
+  tranceElf: 'tranceElf',
+  keenSensesElf: 'keenSensesElf',
+  gnomeCunning: 'gnomeCunning',
+  halfElfFeyAncestry: 'halfElfFeyAncestry',
+  halfOrcRelentlessEndurance: 'halfOrcRelentlessEndurance',
+  halfOrcSavageAttacks: 'halfOrcSavageAttacks',
+  halfOrcMenacing: 'halfOrcMenacing',
+  halflingLucky: 'halflingLucky',
+  halflingBrave: 'halflingBrave',
+  halflingNimbleness: 'halflingNimbleness',
+  hellishResistanceTiefling: 'hellishResistanceTiefling',
+};
+
 const SpeciesFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   // {
   //   name: 'Talons',
@@ -16,24 +62,32 @@ const SpeciesFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   //   speciesId: speciesIds.aarakocraMMOM,
   // },
   {
+    id: speciesFeaturesIds.aasimarMMOMCelestialResistance,
     name: 'Celestial Resistance',
     description: 'You have resistance to necrotic and radiant damage.',
     speciesId: speciesIds.aasimarMMOM,
+    unimplemented: true,
   },
   {
+    id: speciesFeaturesIds.aasimarMMOMHealingHands,
     name: 'Healing Hands',
     speciesId: speciesIds.aasimarMMOM,
+    effectChainType: ChainType.ADD,
     description:
       'As an action, you can touch a creature and roll a number of d4s equal to your proficiency bonus. The creature regains a number of hit points equal to the total rolled. Once you use this trait, you can’t use it again until you finish a long rest.',
   },
   {
+    id: speciesFeaturesIds.aasimarMMOMLightBearer,
     name: 'Light Bearer',
+    effectChainType: ChainType.ADD,
     speciesId: speciesIds.aasimarMMOM,
     description:
       'You know the Light cantrip. Charisma is your spellcasting ability for it.',
   },
   {
+    id: speciesFeaturesIds.aasimarMMOMCelestialRevelation,
     name: 'Celestial Revelation',
+    unimplemented: true,
     speciesId: speciesIds.aasimarMMOM,
     description:
       'When you reach 3rd level, choose one of the revelation options below. Thereafter, you can use a bonus action to unleash the celestial energy within yourself, gaining the benefits of that revelation. Your transformation lasts for 1 minute or until you end it as a bonus action. Once you transform using your revelation below, you can’t use it again until you finish a long rest: ',
@@ -63,17 +117,23 @@ const SpeciesFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     ],
   },
   {
+    id: speciesFeaturesIds.aasimarVGMCelestialResistance,
     name: 'Celestial Resistance',
     description: 'You have resistance to necrotic and radiant damage.',
     speciesId: speciesIds.aasimarVGM,
+    unimplemented: true,
   },
   {
+    id: speciesFeaturesIds.aasimarVGMHealingHands,
     name: 'Healing Hands',
     speciesId: speciesIds.aasimarVGM,
+    effectChainType: ChainType.ADD,
     description:
       "As an action, you can touch a creature and cause it to regain a number of hit points equal to your level. Once you use this trait, you can't use it again until you finish a long rest.",
   },
   {
+    id: speciesFeaturesIds.aasimarVGMLightBearer,
+    effectChainType: ChainType.ADD,
     name: 'Light Bearer',
     speciesId: speciesIds.aasimarVGM,
     description:
@@ -487,38 +547,47 @@ const SpeciesFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   //     'You have the ability to communicate in a limited manner with beasts and plants. They can understand the meaning of your words, though you have no special ability to understand them in return. You have advantage on all Charisma checks you make to influence them.',
   // },
   {
+    id: speciesFeaturesIds.airGenasiMMOMUnendingBreath,
     speciesId: speciesIds.airGenasiMMOM,
     name: 'Unending Breath',
     description:
       'You can hold your breath indefinitely while you’re not incapacitated.',
   },
   {
+    id: speciesFeaturesIds.airGenasiMMOMLightningResistance,
     speciesId: speciesIds.airGenasiMMOM,
     name: 'Lightning Resistance',
     description: 'You have resistance to lightning damage.',
+    unimplemented: true,
   },
   {
+    id: speciesFeaturesIds.airGenasiMMOMMingleWithTheWind,
     speciesId: speciesIds.airGenasiMMOM,
     name: 'Mingle with the Wind',
     description:
       'You know the Shocking Grasp cantrip. Starting at 3rd level, you can cast the Feather Fall spell with this trait, without requiring a material component. Starting at 5th level, you can also cast the Levitate spell with this trait, without requiring a material component. Once you cast Feather Fall or Levitate with this trait, you can’t cast that spell with it again until you finish a long rest. You can also cast either of those spells using any spell slots you have of the appropriate level. \n\nIntelligence, Wisdom, or Charisma is your spellcasting ability for these spells when you cast them with this trait (choose when you select this species).',
+    effectChainType: ChainType.ADD,
   },
   {
+    id: speciesFeaturesIds.airGenasiEEPCUnendingBreath,
     speciesId: speciesIds.airGenasiEEPC,
     name: 'Unending Breath',
     description:
       'You can hold your breath indefinitely while you’re not incapacitated.',
   },
   {
+    id: speciesFeaturesIds.airGenasiEEPCMingleWithTheWind,
     speciesId: speciesIds.airGenasiEEPC,
     name: 'Mingle with the Wind',
     description:
       'You can cast the Levitate spell once with this trait, requiring no material components, and you regain the ability to cast it this way when you finish a long rest. Constitution is your spellcasting ability for this spell.',
   },
   {
+    id: speciesFeaturesIds.airGenasiEEPCLightningResistance,
     speciesId: speciesIds.airGenasiEEPC,
     name: 'Lightning Resistance',
     description: 'You have resistance to lightning damage.',
+    unimplemented: true,
   },
   // {
   //   speciesId: speciesIds.earthGenasiMMOM,
@@ -572,20 +641,25 @@ const SpeciesFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   //     'You can speak, read, and write Common and Primordial. Primordial is a guttural language, filled with harsh syllables and hard consonants.',
   // },
   {
+    id: speciesFeaturesIds.waterGenasiMMOMAmphibious,
     speciesId: speciesIds.waterGenasiMMOM,
     name: 'Amphibious',
     description: 'You can breathe air and water.',
   },
   {
+    id: speciesFeaturesIds.waterGenasiMMOMAcidResistance,
     speciesId: speciesIds.waterGenasiMMOM,
     name: 'Acid Resistance',
     description: 'You have resistance to acid damage.',
+    unimplemented: true,
   },
   {
+    id: speciesFeaturesIds.waterGenasiMMOMCallToTheWave,
     speciesId: speciesIds.waterGenasiMMOM,
     name: 'Call to the Wave',
     description:
       'You know the Acid Splash cantrip. Starting at 3rd level, you can cast the Create or Destroy Water spell with this trait. Starting at 5th level, you can also cast the Water Walk spell with this trait, without requiring a material component. Once you cast Create or Destroy Water or Water Walk with this trait, you can’t cast that spell with it again until you finish a long rest. You can also cast either of those spells using any spell slots you have of the appropriate level. \n\nIntelligence, Wisdom, or Charisma is your spellcasting ability for these spells when you cast them with this trait (choose when you select this species).',
+    unimplemented: true,
   },
   // {
   //   speciesId: speciesIds.waterGenasiEEPC,
@@ -690,43 +764,57 @@ const SpeciesFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   //   name: 'Natural Athlete',
   //   description: 'You have proficiency in the Athletics skill.',
   // },
-  // {
-  //   speciesId: speciesIds.goliathEEPC,
-  //   name: "Stone's Endurance",
-  //   description:
-  //     'You can focus yourself to occasionally shrug off injury. When you take damage, you can use your reaction to roll a d12. Add your Constitution modifier to the number rolled, and reduce the damage by that total. After you use this trait, you can’t use it again until you finish a short or long rest.',
-  // },
-  // {
-  //   speciesId: speciesIds.goliathEEPC,
-  //   name: 'Powerful Build',
-  //   description:
-  //     'You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.',
-  // },
-  // {
-  //   speciesId: speciesIds.goliathEEPC,
-  //   name: 'Mountain Born',
-  //   description:
-  //     'You have resistance to cold damage. You’re also acclimated to high altitude, including elevations above 20,000 feet.',
-  // },
   {
+    id: speciesFeaturesIds.stonesEnduranceGolaithEEPC,
+    speciesId: speciesIds.goliathEEPC,
+    name: "Stone's Endurance",
+    description:
+      'You can focus yourself to occasionally shrug off injury. When you take damage, you can use your reaction to roll a d12. Add your Constitution modifier to the number rolled, and reduce the damage by that total. After you use this trait, you can’t use it again until you finish a short or long rest.',
+    unimplemented: true,
+  },
+  {
+    id: speciesFeaturesIds.powerfulBuildGolaithEEPC,
+    speciesId: speciesIds.goliathEEPC,
+    name: 'Powerful Build',
+    description:
+      'You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.',
+    unimplemented: true,
+  },
+  {
+    id: speciesFeaturesIds.mountainBornGolaithEEPC,
+    speciesId: speciesIds.goliathEEPC,
+    name: 'Mountain Born',
+    description:
+      'You have resistance to cold damage. You’re also acclimated to high altitude, including elevations above 20,000 feet.',
+    unimplemented: true,
+  },
+  {
+    id: speciesFeaturesIds.luckyFootworkHarengonMMOM,
     speciesId: speciesIds.harengonMMOM,
+    effectChainType: ChainType.ADD,
     name: 'Lucky Footwork',
     description:
       "When you fail a Dexterity saving throw, you can use your reaction to roll a d4 and add it to the save, potentially turning the failure into a success. You can't use this reaction if you're prone or your speed is 0.",
   },
   {
+    id: speciesFeaturesIds.rabbitHopHarengonMMOM,
     speciesId: speciesIds.harengonMMOM,
+    effectChainType: ChainType.ADD,
     name: 'Rabbit Hop',
     description:
       'As a bonus action, you can jump a number of feet equal to five times your proficiency bonus, without provoking opportunity attacks. You can use this trait only if your speed is greater than 0. You can use it a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.',
   },
   {
+    id: speciesFeaturesIds.hareTriggerHarengonMMOM,
+    effectChainType: ChainType.ADD,
     speciesId: speciesIds.harengonMMOM,
     name: 'Hare Trigger',
     description: 'You can add your proficiency bonus to your initiative rolls.',
   },
   {
+    id: speciesFeaturesIds.leoprineSensesHarengonMMOM,
     speciesId: speciesIds.harengonMMOM,
+    effectChainType: ChainType.ADD,
     name: 'Leoprine Senses',
     description: 'You have proficiency in the Perception skill.',
   },
@@ -1174,6 +1262,8 @@ const SpeciesFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   //     'Kalashtar sleep, but they don’t connect to the plane of dreams as other creatures do. Instead, their minds draw from the memories of their otherworldly spirit while they sleep. As such, you are immune to magical spells and effects that require you to dream, like the Dream spell, but not to spells and effects that put you to sleep, like the Sleep spell.',
   // },
   {
+    id: speciesFeaturesIds.constructedResilienceWarforgedMMOM,
+    effectChainType: ChainType.ADD,
     speciesId: speciesIds.warforged,
     name: 'Constructed Resilience',
     description:
@@ -1184,15 +1274,20 @@ const SpeciesFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
       'You don’t need to eat, drink, or breathe.',
       "You don't need to sleep, and magic can't put you to sleep.",
     ],
+    unimplemented: true,
   },
   {
+    id: speciesFeaturesIds.sentrysRestWarforgedMMOM,
     speciesId: speciesIds.warforged,
+    effectChainType: ChainType.ADD,
     name: "Sentry's Rest",
     description:
       'When you take a long rest, you must spend at least six hours in an inactive, motionless state, rather than sleeping. In this state, you appear inert, but it doesn’t render you unconscious, and you can see and hear as normal.',
   },
   {
+    id: speciesFeaturesIds.integratedProtectionWarforgedMMOM,
     speciesId: speciesIds.warforged,
+    effectChainType: ChainType.ADD,
     name: 'Integrated Protection',
     description:
       'Your body has built-in defensive layers, which can be enhanced with armor.',
@@ -1203,7 +1298,9 @@ const SpeciesFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     ],
   },
   {
+    id: speciesFeaturesIds.specializedDesignWarforgedMMOM,
     speciesId: speciesIds.warforged,
+    effectChainType: ChainType.ADD,
     name: 'Specialized Design',
     description:
       'You gain one skill proficiency and one tool proficiency of your choice.',
@@ -2019,7 +2116,9 @@ const SpeciesFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   //   description: 'You have resistance to necrotic damage.',
   // }, //Dragonborn
   {
+    id: speciesFeaturesIds.draconicAncestryDragonborn,
     name: 'Draconic Ancestry',
+    effectChainType: ChainType.ADD,
     description:
       'You are distantly related to a particular kind of dragon. Your subspecies determines the damage type and shape of the breath weapon you have.',
     speciesId: speciesIds.dragonborn,
@@ -2027,55 +2126,74 @@ const SpeciesFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   //dwarf
 
   {
+    id: speciesFeaturesIds.dwarvenResilienceDwarf,
     name: 'Dwarven Resilience',
     description:
       'You have advantage on saving throws against poison, and you have resistance against poison damage.',
     speciesId: speciesIds.dwarf,
+    unimplemented: true,
   },
   {
+    id: speciesFeaturesIds.dwarvenCombatTrainingDwarf,
     name: 'Dwarven Combat Training',
     description:
       'You have proficiency with the battleaxe, handaxe, light hammer, and warhammer.',
     speciesId: speciesIds.dwarf,
+    unimplemented: true,
   },
   {
+    id: speciesFeaturesIds.dwarfToolProficiencyDwarf,
     name: 'Tool Proficiency',
     description:
       "You gain proficiency with the artisan's tools of your choice: smith's tools, brewer's supplies, or mason's tools.",
     speciesId: speciesIds.dwarf,
+    unimplemented: true,
   },
   {
+    id: speciesFeaturesIds.dwarfStonecunningDwarf,
     name: 'Stonecunning',
     description:
       'Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.',
     speciesId: speciesIds.dwarf,
+    unimplemented: true,
   },
   //elf
   {
+    id: speciesFeaturesIds.feyAncestryElf,
     name: 'Fey Ancestry',
     description:
       "You have advantage on saving throws against being charmed, and magic can't put you to sleep.",
     speciesId: speciesIds.elf,
+    unimplemented: true,
   },
   {
+    id: speciesFeaturesIds.tranceElf,
+    effectChainType: ChainType.ADD,
     name: 'Trance',
     description: `Elves do not sleep. Instead they meditate deeply, remaining semi-conscious, for 4 hours a day. The Common word for this meditation is "trance." While meditating, you dream after a fashion; such dreams are actually mental exercises that have become reflexive after years of practice. After resting in this way, you gain the same benefit a human would from 8 hours of sleep.`,
     speciesId: speciesIds.elf,
   },
   {
+    id: speciesFeaturesIds.keenSensesElf,
+    effectChainType: ChainType.ADD,
     name: 'Keen Senses',
     description: 'You have proficiency in the Perception skill.',
     speciesId: speciesIds.elf,
   },
   //gnome
   {
+    id: speciesFeaturesIds.gnomeCunning,
     name: 'Gnome Cunning',
+    effectChainType: ChainType.ADD,
     description:
       'You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.',
     speciesId: speciesIds.gnome,
+    unimplemented: true,
   },
   //halfElf
   {
+    id: speciesFeaturesIds.halfElfFeyAncestry,
+    effectChainType: ChainType.ADD,
     name: 'Fey Ancestry',
     description:
       "You have advantage on saving throws against being charmed, and magic can't put you to sleep.",
@@ -2083,36 +2201,48 @@ const SpeciesFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   },
   //halfOrc
   {
+    effectChainType: ChainType.ADD,
+    id: speciesFeaturesIds.halfOrcMenacing,
     name: 'Menacing',
     description: 'You gain proficiency in the Intimidation skill.',
     speciesId: speciesIds.halfOrc,
   },
   {
+    id: speciesFeaturesIds.halfOrcRelentlessEndurance,
     name: 'Relentless Endurance',
     description:
       "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can't use this feature again until you finish a long rest.",
     speciesId: speciesIds.halfOrc,
+    unimplemented: true,
   },
   {
+    id: speciesFeaturesIds.halfOrcSavageAttacks,
     name: 'Savage Attacks',
     description:
       "When you score a critical hit with a melee weapon attack, you can roll one of the weapon's damage dice one additional time and add it to the extra damage of the critical hit.",
     speciesId: speciesIds.halfOrc,
+    unimplemented: true,
   },
   //halfling
   {
+    id: speciesFeaturesIds.halflingLucky,
     name: 'Lucky',
+    effectChainType: ChainType.ADD,
     description:
       'When you roll a 1 on an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.',
     speciesId: speciesIds.halfling,
   },
   {
+    id: speciesFeaturesIds.halflingBrave,
     name: 'Brave',
+    effectChainType: ChainType.ADD,
     description:
       'You have advantage on saving throws against being frightened.',
     speciesId: speciesIds.halfling,
   },
   {
+    id: speciesFeaturesIds.halflingNimbleness,
+    effectChainType: ChainType.ADD,
     name: 'Halfling Nimbleness',
     description:
       'You can move through the space of any creature that is of a size larger than yours.',
@@ -2121,23 +2251,11 @@ const SpeciesFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   //human
   //tiefling
   {
+    id: speciesFeaturesIds.hellishResistanceTiefling,
     name: 'Hellish Resistance',
     description: 'You have resistance to fire damage.',
     speciesId: speciesIds.tiefling,
+    unimplemented: true,
   },
-].map((feature, index, arr) => {
-  const featureParent = Species.find(
-    (species) => species.id === feature.speciesId
-  );
-  if (!featureParent) throw new Error(`Parent of ${feature.name} not found`);
-  const id = generateId('species', feature.name, featureParent.name, count);
-  count++;
-  const nextSpeciesFeature = arr[index + 1];
-  if (!nextSpeciesFeature) return { ...feature, id };
-  if (nextSpeciesFeature.speciesId !== feature.speciesId) {
-    count = 1;
-  }
-  return { ...feature, id };
-});
-
+];
 export default SpeciesFeaturesSeed;

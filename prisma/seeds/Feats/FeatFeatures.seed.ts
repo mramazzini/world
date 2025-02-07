@@ -1,5 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { FeatIds } from './Feats.seed';
+import { spellIds } from '../Spells/spells.seed';
 
 export const FeatFeatureIds = {
   mobile: 'mobile',
@@ -7,6 +8,8 @@ export const FeatFeatureIds = {
   skillExpert: 'skillExpert',
   speedingRage: 'speedingRage',
   crossbowExpert: 'crossbowExpert',
+  runeShaperComprehendLanguages: 'runeShaperComprehendLanguages',
+  runeShaperRuneMagic: 'runeShaperRuneMagic',
 };
 
 const FeatFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
@@ -565,79 +568,83 @@ const FeatFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   //   description:
   //     "You have learned a number of spells that you can cast as rituals. These spells are written in a ritual book, which you must have in hand while casting one of them.\n\nWhen you choose this feat, you acquire a ritual book holding two 1st-level spells of your choice. Choose one of the following classes: bard, cleric, druid, sorcerer, warlock, or wizard. You must choose your spells from that class's spell list, and the spells you choose must have the ritual tag. The class you choose also must have the ritual tag. The class you choose also determines your spellcasting ability for these spells: Charisma for bard, sorcerer, or warlock; Wisdom for cleric or druid; or Intelligence for wizard.\n\nIf you come across a spell in written form, such as a magical spell scroll or a wizard's spellbook, you might be able to add it to your ritual book. The spell must be on the spell list for the class you chose, the spell's level can be no higher than half your level (rounded up), and it must have the ritual tag. The process of copying the spell into your ritual book takes 2 hours per level of the spell, and costs 50 gp per level. The cost represents the material components you expend as you experiment with the spell to master it, as well as the fine inks you need to record it.",
   // },
-  // {
-  //   featId: FeatIds.runeShaper,
-  //   name: 'Comprehend Languages',
-  //   description:
-  //     'You learn the comprehend languages spell. You can cast this spell without expending a spell slot, and you must finish a long rest before you can cast it in this way again. You can also cast this spell using any spell slots you have.',
-  // },
-  // {
-  //   featId: FeatIds.runeShaper,
-  //   name: 'Rune Magic',
-  //   description:
-  //     'You know a number of runes equal to half your proficiency bonus (rounded down), chosen from the Rune Spells table. Whenever you finish a long rest, you can inscribe each rune you know onto one nonmagical weapon, armor, piece of clothing, or other object you touch. You temporarily learn the 1st-level spells that correspond to the runes you inscribed, as specified on the Rune Spells table, and you know those spells until you finish a long rest, when the runes fade. While you are wearing or carrying any rune-marked object, you can cast the spells associated with those runes using any spell slots you have.\n\nYou can also invoke a rune inscribed on an object you are wearing or carrying and cast its associated spell without expending a spell slot or using material components. Once you cast the spell in this way, you can’t do so again until you finish a long rest. Your spellcasting ability for this feat is Intelligence, Wisdom, or Charisma (choose when you select this feat).\n\nEach time you gain a level, you can replace one of the runes you know with another one from the Rune Spells table.',
-  //   extendedTable: [
-  //     {
-  //       'Rune Spells': {
-  //         headers: ['Rune', 'Spell'],
-  //         data: [
-  //           {
-  //             Rune: 'Cloud',
-  //             Spell: `%${spellIds.fogCloud}{Fog Cloud}%`,
-  //           },
-  //           {
-  //             Rune: 'Death',
-  //             Spell: `%${spellIds.inflictWounds}{Inflict Wounds}%`,
-  //           },
-  //           {
-  //             Rune: 'Dragon',
-  //             Spell: `%${spellIds.chromaticOrb}{Chromatic Orb}%`,
-  //           },
-  //           {
-  //             Rune: 'Enemy',
-  //             Spell: `%${spellIds.disguiseSelf}{Disguise Self}%`,
-  //           },
-  //           {
-  //             Rune: 'Fire',
-  //             Spell: `%${spellIds.burningHands}{Burning Hands}%`,
-  //           },
-  //           {
-  //             Rune: 'Friend',
-  //             Spell: `%${spellIds.speakWithAnimals}{Speak with animals}%`,
-  //           },
-  //           {
-  //             Rune: 'Frost',
-  //             Spell: `%${spellIds.armorOfAgathys}{Armor of Agathys}%`,
-  //           },
-  //           {
-  //             Rune: 'Hill',
-  //             Spell: `%${spellIds.goodberry}{Goodberry}%`,
-  //           },
-  //           {
-  //             Rune: 'Journey',
-  //             Spell: `%${spellIds.longstrider}{Longstrider}%`,
-  //           },
-  //           {
-  //             Rune: 'King',
-  //             Spell: `%${spellIds.command}{Command}%`,
-  //           },
-  //           {
-  //             Rune: 'Mountain',
-  //             Spell: `%${spellIds.entangle}{Entangle}%`,
-  //           },
-  //           {
-  //             Rune: 'Stone',
-  //             Spell: `%${spellIds.sanctuary}{Sanctuary}%`,
-  //           },
-  //           {
-  //             Rune: 'Storm',
-  //             Spell: `%${spellIds.thunderwave}{Thunderwave}%`,
-  //           },
-  //         ],
-  //       },
-  //     },
-  //   ],
-  // },
+  {
+    id: FeatFeatureIds.runeShaperComprehendLanguages,
+    featId: FeatIds.runeShaper,
+    name: 'Comprehend Languages',
+    description:
+      'You learn the comprehend languages spell. You can cast this spell without expending a spell slot, and you must finish a long rest before you can cast it in this way again. You can also cast this spell using any spell slots you have.',
+    unimplemented: false,
+  },
+  {
+    id: FeatFeatureIds.runeShaperRuneMagic,
+    unimplemented: true,
+    featId: FeatIds.runeShaper,
+    name: 'Rune Magic',
+    description:
+      'You know a number of runes equal to half your proficiency bonus (rounded down), chosen from the Rune Spells table. Whenever you finish a long rest, you can inscribe each rune you know onto one nonmagical weapon, armor, piece of clothing, or other object you touch. You temporarily learn the 1st-level spells that correspond to the runes you inscribed, as specified on the Rune Spells table, and you know those spells until you finish a long rest, when the runes fade. While you are wearing or carrying any rune-marked object, you can cast the spells associated with those runes using any spell slots you have.\n\nYou can also invoke a rune inscribed on an object you are wearing or carrying and cast its associated spell without expending a spell slot or using material components. Once you cast the spell in this way, you can’t do so again until you finish a long rest. Your spellcasting ability for this feat is Intelligence, Wisdom, or Charisma (choose when you select this feat).\n\nEach time you gain a level, you can replace one of the runes you know with another one from the Rune Spells table.',
+    extendedTable: [
+      {
+        'Rune Spells': {
+          headers: ['Rune', 'Spell'],
+          data: [
+            {
+              Rune: 'Cloud',
+              Spell: `%${spellIds.fogCloud}{Fog Cloud}%`,
+            },
+            {
+              Rune: 'Death',
+              Spell: `%${spellIds.inflictWounds}{Inflict Wounds}%`,
+            },
+            {
+              Rune: 'Dragon',
+              Spell: `%${spellIds.chromaticOrb}{Chromatic Orb}%`,
+            },
+            {
+              Rune: 'Enemy',
+              Spell: `%${spellIds.disguiseSelf}{Disguise Self}%`,
+            },
+            {
+              Rune: 'Fire',
+              Spell: `%${spellIds.burningHands}{Burning Hands}%`,
+            },
+            {
+              Rune: 'Friend',
+              Spell: `%${spellIds.speakWithAnimals}{Speak with animals}%`,
+            },
+            {
+              Rune: 'Frost',
+              Spell: `%${spellIds.armorOfAgathys}{Armor of Agathys}%`,
+            },
+            {
+              Rune: 'Hill',
+              Spell: `%${spellIds.goodberry}{Goodberry}%`,
+            },
+            {
+              Rune: 'Journey',
+              Spell: `%${spellIds.longstrider}{Longstrider}%`,
+            },
+            {
+              Rune: 'King',
+              Spell: `%${spellIds.command}{Command}%`,
+            },
+            {
+              Rune: 'Mountain',
+              Spell: `%${spellIds.entangle}{Entangle}%`,
+            },
+            {
+              Rune: 'Stone',
+              Spell: `%${spellIds.sanctuary}{Sanctuary}%`,
+            },
+            {
+              Rune: 'Storm',
+              Spell: `%${spellIds.thunderwave}{Thunderwave}%`,
+            },
+          ],
+        },
+      },
+    ],
+  },
   // {
   //   featId: FeatIds.savageAttacker,
   //   name: 'Savage Attacker',
