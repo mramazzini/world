@@ -5,7 +5,7 @@ export const buildDiscordURI = () => {
     base = window.location.origin;
   } else {
     // Server-side (fallback for when you need to provide a default)
-    base = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    base = process.env.DOMAIN_NAME || 'http://localhost:3000';
   }
 
   const urlEncoded = encodeURIComponent(base + '/oauth/discord/register');

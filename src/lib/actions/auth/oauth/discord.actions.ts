@@ -51,7 +51,7 @@ export const getDiscordTokenData = async (
         client_secret: clientSecret,
         code,
         grant_type: 'authorization_code',
-        redirect_uri: `http://localhost:3000/oauth/discord/register`,
+        redirect_uri: `${process.env.DOMAIN_NAME || 'http://localhost:3000'}/oauth/discord/register`,
         scope: 'identify',
       }).toString(),
       headers: {
@@ -199,7 +199,7 @@ export const loginWithDiscord = async () => {
         client_secret: clientSecret,
         grant_type: 'refresh_token',
         refresh_token,
-        redirect_uri: `http://localhost:3000/dashboard`,
+        redirect_uri: `${process.env.DOMAIN_NAME || 'http://localhost:3000'}/dashboard`,
         scope: 'identify',
       }).toString(),
       headers: {
