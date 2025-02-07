@@ -414,7 +414,7 @@ const generateSlugBase = async (name: string, db: PrismaClient) => {
     return;
   }
 
-  return `${sanitize(user.username)}:${sanitize(name)}`;
+  return `${sanitize(user.username || user.discordUsername || '')}:${sanitize(name)}`;
 };
 
 const sanitize = (str: string) =>

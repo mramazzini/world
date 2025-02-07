@@ -38,7 +38,11 @@ export const createComment = async (
     console.error('Error getting user');
     return null;
   }
-  sendComment(text, location, user.username);
+  sendComment(
+    text,
+    location,
+    user.username || user.discordUsername || 'Unknown'
+  );
 };
 
 export const createReply = async (

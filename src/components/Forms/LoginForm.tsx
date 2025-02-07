@@ -11,6 +11,7 @@ import LoadingButton from '../UI/Formik/LoadingButton';
 import useMessageModal from '@/hooks/useMessageModal';
 import ErrorModal from '../Modals/ErrorModal';
 import { useAuth } from '@/hooks/useAuth';
+import Image from 'next/image';
 
 interface UserInput {
   emailOrUsername: string;
@@ -98,6 +99,17 @@ const Login = () => {
             </p>
           </Form>
         </Formik>
+        <div className="divider divider-accent"></div>
+        <Link href="/oauth/discord/login" className="btn w-full btn-lg">
+          Login with Discord
+          <Image
+            src="/images/discord.svg"
+            alt="Discord Logo"
+            className="w-10 h-10"
+            width={128}
+            height={128}
+          />
+        </Link>
       </div>
     </>
   );

@@ -198,11 +198,26 @@ enum Alignment {
   CHAOTIC_EVIL
 }
 
+enum UserType {
+  DISCORD
+  NORMAL
+}
+
 model User {
-  id             String         @id
-  username       String         @unique
-  email          String         @unique
-  password       String
+  id       String   @id
+  username String?  @unique
+  email    String?  @unique
+  password String?
+  type     UserType @default(NORMAL)
+
+  // Discord
+  discordId           String?
+  discordAvatar       String?
+  discordUsername     String?
+  discordAccessToken  String?
+  discordRefreshToken String?
+  discordEmail        String?
+
   Classes        Class[]
   SubClasses     SubClass[]
   Species        Species[]
