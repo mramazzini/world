@@ -1,3 +1,5 @@
+import { ChainType, Prisma } from '@prisma/client';
+
 const ids = {
   astral: '62',
   dragon: '63',
@@ -10,8 +12,16 @@ const ids = {
   shadow: '70',
   sunSoul: '71',
 };
+export const monkSubclassFeatureIds = {
+  discipleOfTheElements: 'discipleOfTheElements',
+  castingElementalSpells: 'castingElementalSpells',
+  openHandTechnique: 'openHandTechnique',
+  wholenessOfBody: 'wholenessOfBody',
+  tranquility: 'tranquility',
+  quiveringPalm: 'quiveringPalm',
+};
 
-const MonkSubclassFeatures = [
+const MonkSubclassFeatures: Prisma.FeatureCreateManyInput[] = [
   //astral self
   // {
   //   name: 'Arms of the Astral Self',
@@ -318,134 +328,16 @@ const MonkSubclassFeatures = [
   // },
   // //way of the four elements
   {
+    id: monkSubclassFeatureIds.discipleOfTheElements,
     name: 'Disciple of the Elements',
     description:
       'When you choose this tradition at 3rd level, you learn magical disciplines that harness the power of the four elements. A discipline requires you to spend ki points each time you use it.\n\nYou know the Elemental Attunement discipline and one other elemental discipline of your choice, chosen from the table below. You learn one additional elemental discipline of your choice at 6th, 11th, and 17th level.\n\nWhenever you learn a new elemental discipline, you can also replace one elemental discipline that you already know with a different discipline.',
-    unimplemented: true,
     // levels: [3, 6, 11, 17],
+    effectChainType: ChainType.REPLACE,
     subClassId: ids.fourElements,
-    extendedTable: [
-      {
-        'Elemental Discipline Table': {
-          headers: ['Discipline', 'Description', 'Ki Cost', 'Prerequisite'],
-          headersLength: [15, 70, 5, 10],
-          data: [
-            {
-              Discipline: 'Breath of Winter',
-              Description: 'You can spend 6 ki points to cast Cone of Cold.',
-              'Ki Cost': '6',
-              Prerequisite: '17th level',
-            },
-            {
-              Discipline: 'Clench of the North Wind',
-              Description: 'You can spend 3 ki points to cast Hold Person.',
-              'Ki Cost': '3',
-              Prerequisite: '6th level',
-            },
-            {
-              Discipline: 'Elemental Attunement',
-              Description:
-                'You can use your action to briefly control elemental forces within 30 feet of you, causing one of the following effects of your choice:\n\n- Create a harmless, instantaneous sensory effect related to air, earth, fire, or water, such as a shower of sparks, a puff of wind, a spray of light mist, or a gentle rumbling of stone.\n\n- Instantaneously light or snuff out a candle, a torch, or a small campfire.\n\n- Chill or warm up to 1 pound of nonliving material for up to 1 hour.\n\n- Cause earth, fire, water, or mist that can fit within a 1-foot cube to shape itself into a crude form you designate for 1 minute.',
-              'Ki Cost': '-',
-              Prerequisite: '-',
-            },
-            {
-              Discipline: 'Eternal Mountain Defense',
-              Description:
-                'You can spend 5 ki points to cast Stoneskin, targeting yourself.',
-              'Ki Cost': '5',
-              Prerequisite: '17th level',
-            },
-            {
-              Discipline: 'Fangs of the Fire Snake',
-              Description:
-                'When you use the Attack action on your turn, you can spend 1 ki point to cause tendrils of flame to stretch out from your fists and feet. Your reach with your unarmed strikes increases by 10 feet for that action, as well as the rest of the turn. A hit with such an attack deals fire damage instead of bludgeoning damage, and if you spend 1 ki point when the attack hits, it also deals an extra 1d10 fire damage..',
-              'Ki Cost': '1 - 2',
-              Prerequisite: '-',
-            },
-            {
-              Discipline: 'Fist of Four Thunders',
-              Description: 'You can spend 2 ki points to cast Thunderwave.',
-              'Ki Cost': '2',
-              Prerequisite: '-',
-            },
-            {
-              Discipline: 'Fist of Unbroken Air',
-              Description:
-                "You can create a blast of compressed air that strikes like a mighty fist. As an action, you can spend 2 ki points and choose a creature within 30 feet of you. That creature must make a Strength saving throw. On a failed save, the creature takes 3d10 bludgeoning damage, plus an extra 1d10 bludgeoning damage for each additional ki point you spend, and you can push the creature up to 20 feet away from you and knock it prone. On a successful save, the creature takes half as much damage, and you don't push it or knock it prone.",
-              'Ki Cost': '2',
-              Prerequisite: '-',
-            },
-            {
-              Discipline: 'Flames of the Phoenix',
-              Description: 'You can spend 4 ki points to cast Fireball.',
-              'Ki Cost': '4',
-              Prerequisite: '11th level',
-            },
-            {
-              Discipline: 'Gong of the Summit',
-              Description: 'You can spend 3 ki points to cast Shatter.',
-              'Ki Cost': '3',
-              Prerequisite: '6th level',
-            },
-            {
-              Discipline: 'Mist Stance',
-              Description:
-                'You can spend 4 ki points to cast Gaseous Form, targeting yourself.',
-              'Ki Cost': '4',
-              Prerequisite: '11th level',
-            },
-            {
-              Discipline: 'Ride the Wind',
-              Description:
-                'You can spend 4 ki points to cast Fly, targeting yourself.',
-              'Ki Cost': '4',
-              Prerequisite: '11th level',
-            },
-            {
-              Discipline: 'River of Hungry Flame',
-              Description: 'You can spend 5 ki points to cast Wall of Fire.',
-              'Ki Cost': '5',
-              Prerequisite: '17th level',
-            },
-            {
-              Discipline: 'Rush of the Gale Spirits',
-              Description: 'You can spend 2 ki points to cast Gust of Wind.',
-              'Ki Cost': '2',
-              Prerequisite: '-',
-            },
-            {
-              Discipline: 'Shape the Flowing River',
-              Description:
-                "As an action, you can spend 1 ki point to choose an area of ice or water no larger than 30 feet on a side within 120 feet of you. You can change water to ice within the area and vice versa, and you can reshape ice in the area in any manner you choose. You can raise or lower the ice's elevation, create or fill in a trench, erect or flatten a wall, or form a pillar. The extent of any such changes can't exceed half the area's largest dimension. For example, if you affect a 30-foot square, you can create a pillar up to 15 feet high, raise or lower the square's elevation by up to 15 feet, dig a trench up to 15 feet deep, and so on. You can't shape the ice to trap or injure a creature in the area.",
-              'Ki Cost': '1',
-              Prerequisite: '-',
-            },
-            {
-              Discipline: 'Sweeping Cinder Strike',
-              Description: 'You can spend 2 ki points to cast Burning Hands.',
-              'Ki Cost': '2',
-              Prerequisite: '-',
-            },
-            {
-              Discipline: 'Water Whip',
-              Description:
-                "You can spend 2 ki points as an action to create a whip of water that shoves and pulls a creature to unbalance it. A creature that you can see that is within 30 feet of you must make a Dexterity saving throw. On a failed save, the creature takes 3d10 bludgeoning damage, plus an extra 1d10 bludgeoning damage for each additional ki point you spend, and you can either knock it prone or pull it up to 25 feet closer to you. On a successful save, the creature takes half as much damage, and you don't pull it or knock it prone.",
-              'Ki Cost': '2+',
-              Prerequisite: '-',
-            },
-            {
-              Discipline: 'Wave of Rolling Earth',
-              Description: 'You can spend 6 ki points to cast Wall of Stone.',
-              'Ki Cost': '6',
-              Prerequisite: '17th level',
-            },
-          ],
-        },
-      },
-    ],
   },
   {
+    id: monkSubclassFeatureIds.castingElementalSpells,
     name: 'Casting Elemental Spells',
     description:
       "Some elemental disciplines allow you to cast spells. See chapter 10 for the general rules of spellcasting. To cast one of these spells, you use its casting time and other rules, but you don't need to provide material components for it.\n\nOnce you reach 5th level in this class, you can spend additional ki points to increase the level of an elemental discipline spell that you cast, provided that the spell has an enhanced effect at a higher level, as Burning Hands does. The spell's level increases by 1 for each additional ki point you spend. For example, if you are a 5th-level monk and use Sweeping Cinder Strike to cast Burning Hands, you can spend 3 ki points to cast it as a 2nd-level spell (the discipline's base cost of 2 ki points plus 1).\n\nThe maximum number of ki points you can spend to cast a spell in this way (including its base ki point cost and any additional ki points you spend to increase its level) is determined by your monk level, as shown in the Spells and Ki Points table.",
@@ -661,6 +553,7 @@ const MonkSubclassFeatures = [
   // },
   // way of the open hand
   {
+    id: monkSubclassFeatureIds.openHandTechnique,
     name: 'Open Hand Technique',
     description:
       "Starting when you choose this tradition at 3rd level, you can manipulate your enemy's ki when you harness your own. Whenever you hit a creature with one of the attacks granted by your Flurry of Blows, you can impose one of the following effects on that target:",
@@ -670,30 +563,33 @@ const MonkSubclassFeatures = [
       "It can't take reactions until the end of your next turn.",
     ],
     subClassId: ids.openHand,
-    unimplemented: true,
+    unimplemented: false,
     // levels: [3],
   },
   {
+    id: monkSubclassFeatureIds.wholenessOfBody,
     name: 'Wholeness of Body',
     description:
       'At 6th level, you gain the ability to heal yourself. As an action, you can regain hit points equal to three times your monk level. You must finish a long rest before you can use this feature again.',
     subClassId: ids.openHand,
-    unimplemented: true,
+    unimplemented: false,
     // levels: [6],
   },
   {
+    id: monkSubclassFeatureIds.tranquility,
     name: 'Tranquility',
     description:
       'Beginning at 11th level, you can enter a special meditation that surrounds you with an aura of peace. At the end of a long rest, you gain the effect of a Sanctuary spell that lasts until the start of your next long rest (the spell can end early as normal). The saving throw DC for the spell equals 8 + your Wisdom modifier + your proficiency bonus.',
-    unimplemented: true,
+    unimplemented: false,
     subClassId: ids.openHand,
     // levels: [11],
   },
   {
+    id: monkSubclassFeatureIds.quiveringPalm,
     name: 'Quivering Palm',
     description:
       "At 17th level, you gain the ability to set up lethal vibrations in someone's body. When you hit a creature with an unarmed strike, you can spend 3 ki points to start these imperceptible vibrations, which last for a number of days equal to your monk level. The vibrations are harmless unless you use your action to end them. To do so, you and the target must be on the same plane of existence. When you use this action, the creature must make a Constitution saving throw. If it fails, it is reduced to 0 hit points. If it succeeds, it takes 10d10 necrotic damage.\n\nYou can have only one creature under the effect of this feature at a time. You can choose to end the vibrations harmlessly without using an action.",
-    unimplemented: true,
+    unimplemented: false,
     subClassId: ids.openHand,
     // levels: [17],
   },

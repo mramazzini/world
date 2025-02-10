@@ -11298,6 +11298,8 @@ const SpellSeed: Prisma.SpellCreateManyInput[] = [
 ];
 
 const spellIds = {
+  gustOfWind: '159',
+  gaseousForm: '234',
   confusion: '282',
   bestowCurse: '211',
   animateDead: '207',

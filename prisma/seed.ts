@@ -58,12 +58,12 @@ const seedarr: {
   //   description: 'Creating armor from the armor seed.',
   //   enabled: true,
   // },
-  // {
-  //   index: 'Im lazy',
-  //   callback: createFeatureGroup,
-  //   description: 'Creating feature groups from the feature group seed.',
-  //   enabled: true,
-  // },
+  {
+    index: '',
+    callback: createFeatureGroup,
+    description: 'Creating feature groups from the feature group seed.',
+    enabled: true,
+  },
   // {
   //   index: '005',
   //   callback: createEquipmentPacks,

@@ -19,6 +19,7 @@ export const CustomResourceIds = {
   arcaneJolt: 'arcaneJolt',
   markForDeath: 'markForDeath',
   dreadLord: 'dreadLord',
+  wholenessOfBody: 'wholenessOfBody',
 };
 
 const CustomResourceSeed: Prisma.CustomResourceCreateManyInput[] = [
@@ -147,6 +148,13 @@ const CustomResourceSeed: Prisma.CustomResourceCreateManyInput[] = [
     description:
       'A pool of charges that dictate how many uses of dread lord an Oathbreaker paladin has.',
     slug: 'dread-lord',
+  },
+  {
+    id: CustomResourceIds.wholenessOfBody,
+    name: 'Wholeness of Body',
+    description:
+      'A pool of points that dictate how many times a way oh the open hand Monk can restore to themselves using the Wholeness of Body Feature.',
+    slug: 'wholeness-of-body',
   },
 ];
 

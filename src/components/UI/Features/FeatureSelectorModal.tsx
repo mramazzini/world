@@ -12,7 +12,6 @@ interface Props {
 const FeatureSelectorModal = ({ effect, locked = true }: Props) => {
   const { activeFeaturesFromGroups } = useAppSelector((state) => state.sheet);
   const { activate, deactivate } = useFeatureGroupMutator();
-
   const allFeaturesUseable = useMemo(() => {
     return effect.FeaturesToChooseFrom.length === 0;
   }, [effect]);

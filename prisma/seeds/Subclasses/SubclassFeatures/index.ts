@@ -19,7 +19,7 @@ const SubclassFeatures: Prisma.FeatureCreateManyInput[] = [
   // ...BardSubclassFeatures,
   // ...WizardSubclassFeatures,
   ...DruidSubclassFeatures,
-  // ...MonkSubclassFeatures,
+  ...MonkSubclassFeatures,
   ...PaladinSubclassFeatures,
   // ...RangerSubclassFeatures,
   // ...RogueSubclassFeatures,

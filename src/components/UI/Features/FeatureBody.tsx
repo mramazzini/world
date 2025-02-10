@@ -107,8 +107,13 @@ const FeatureBody = ({ feature, locked = true }: Props) => {
         </>
       )}
       {feature.Effects &&
-        feature.Effects.map((effect) => {
-          if ('EffectGrantsGroup' in effect) {
+        feature.Effects.length > 0 &&
+        feature.Effects.map((effect, i) => {
+          if (i !== 0) return;
+          if (
+            'EffectGrantsGroup' in effect &&
+            effect.EffectGrantsGroup.length > 0
+          ) {
             if (isInCharacterSheet) {
               return (
                 <Fragment key={effect.id}>
