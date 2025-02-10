@@ -1,10 +1,7 @@
 'use client';
 import Image from 'next/image';
-// import useCharacterState from '@/hooks/useCharacter/useCharacterState';
 
 const Spells = () => {
-  // const state = useCharacterState();
-
   return (
     <div className="h-full flex flex-col">
       <div className="flex flex-row bg-base-300 rounded-xl p-4 h-full items-center justify-center">

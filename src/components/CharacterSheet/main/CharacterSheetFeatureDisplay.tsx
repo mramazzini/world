@@ -21,7 +21,6 @@ const CharacterSheetFeatureDisplay = () => {
                 <FeatureDisplay
                   key={feature.id}
                   featureInfo={feature}
-                  from={c.name}
                   locked={false}
                 />
               );
@@ -39,12 +38,7 @@ const CharacterSheetFeatureDisplay = () => {
             {c.features.length > 0 && <h3 className="divider">{c.name}</h3>}
             {c.features.map((feature) => {
               return (
-                <FeatureDisplay
-                  key={feature.id}
-                  featureInfo={feature}
-                  from={c.name}
-                  locked
-                />
+                <FeatureDisplay key={feature.id} featureInfo={feature} locked />
               );
             })}
           </div>
@@ -56,11 +50,9 @@ const CharacterSheetFeatureDisplay = () => {
 
 const FeatureDisplay = ({
   featureInfo,
-  from,
   locked,
 }: {
   featureInfo: FeatureInfo | FeatureInGroupInfo;
-  from?: string;
   locked?: boolean;
 }) => {
   return (

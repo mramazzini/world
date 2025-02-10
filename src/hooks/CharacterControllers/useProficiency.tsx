@@ -22,6 +22,7 @@ import {
   setProficientWeaponGroups,
   setProficientWeaponIds,
   setSavingThrowProficiencies,
+  setSkillExpertises,
   setSkillHalfProficiencies,
   setSkillProficiencies,
 } from '@/store/sheetSlice';
@@ -43,6 +44,12 @@ const useProficiency = () => {
       }, []),
       ...(primaryClass?.Class.freeToolProficiencyIds || []),
       ...(rawCharacter?.Background?.freeToolProficiencyIds || []),
+      ...activeEffects.reduce<ToolID[]>((acc, cur) => {
+        if (cur.toolProficienciesIds) {
+          return [...acc, ...cur.toolProficienciesIds];
+        }
+        return acc;
+      }, []),
       ...(fufilledChoices.reduce<SetToolProficiencyOutput>((acc, cur) => {
         if (cur.protocol === ChoiceProtocol.SET_TOOL_PROFICIENCY) {
           return [...acc, ...(cur.selections as SetToolProficiencyOutput)];
@@ -54,7 +61,14 @@ const useProficiency = () => {
       }, []) || []),
     ];
     dispatch(setProficientToolIds(makeArrayUnique(toolIds)));
-  }, [rawCharacter, multiClasses, primaryClass, fufilledChoices, dispatch]);
+  }, [
+    rawCharacter,
+    multiClasses,
+    primaryClass,
+    fufilledChoices,
+    dispatch,
+    activeEffects,
+  ]);
 
   useEffect(() => {
     const toolGroups: ToolGroup[] = [
@@ -89,6 +103,12 @@ const useProficiency = () => {
 
   useEffect(() => {
     const skills: Skill[] = [
+      ...activeEffects.reduce<Skill[]>((acc, cur) => {
+        if (cur.fullSkillProficiencies) {
+          return [...acc, ...cur.fullSkillProficiencies];
+        }
+        return acc;
+      }, []),
       ...multiClasses.reduce<Skill[]>((acc, cur) => {
         return [
           ...acc,
@@ -107,12 +127,27 @@ const useProficiency = () => {
         .flat(),
     ];
     dispatch(setSkillProficiencies(makeArrayUnique(skills)));
-  }, [rawCharacter, fufilledChoices, multiClasses, primaryClass, dispatch]);
+  }, [
+    rawCharacter,
+    fufilledChoices,
+    multiClasses,
+    primaryClass,
+    dispatch,
+    activeEffects,
+  ]);
 
   useEffect(() => {
-    //TODO: Implement skill expertises
-    return;
-  }, []);
+    const skills: Skill[] = [
+      ...activeEffects.reduce<Skill[]>((acc, cur) => {
+        if (cur.expertiseSkillProficiencies) {
+          return [...acc, ...cur.expertiseSkillProficiencies];
+        }
+        return acc;
+      }, []),
+    ];
+
+    dispatch(setSkillExpertises(makeArrayUnique(skills)));
+  }, [activeEffects, dispatch]);
 
   useEffect(() => {
     const skills = [
@@ -182,9 +217,15 @@ const useProficiency = () => {
           ...(cur.Class.MultiClassing?.freeWeaponGroupProficiencies || []),
         ];
       }, []),
+      ...activeEffects.reduce<WeaponGroup[]>((acc, cur) => {
+        if (cur.weaponGroupProficiencies) {
+          return [...acc, ...cur.weaponGroupProficiencies];
+        }
+        return acc;
+      }, []),
     ];
     dispatch(setProficientWeaponGroups(makeArrayUnique(weaponGroups)));
-  }, [multiClasses, primaryClass, dispatch]);
+  }, [multiClasses, primaryClass, dispatch, activeEffects]);
 
   useEffect(() => {
     dispatch(setProficiencyBonus(Math.ceil(level / 4) + 1));

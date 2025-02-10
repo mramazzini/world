@@ -2878,7 +2878,7 @@ const SpellSeed: Prisma.SpellCreateManyInput[] = [
   {
     id: '127',
     name: 'Alter Self',
-    slug: '',
+    slug: 'alter-self',
     description:
       'You assume a different form. When you cast the spell, choose one of the following options, the effects of which last for the duration of the spell. While the spell lasts, you can end one option as an action to gain the benefits of a different one.\n\n',
     level: 2,
@@ -11298,6 +11298,21 @@ const SpellSeed: Prisma.SpellCreateManyInput[] = [
 ];
 
 const spellIds = {
+  confusion: '282',
+  bestowCurse: '211',
+  animateDead: '207',
+  crownOfMadness: '141',
+  darkness: '142',
+  hellishRebuke: '90',
+  circleOfPower: '327',
+  geas: '348',
+  guardianOfFaith: '301',
+  zoneOfTruth: '206',
+  compelledDuel: '63',
+  auraOfPurity: '277',
+  conjureBarrage: '218',
+  auraOfVitality: '209',
+  wardingBond: '201',
   magicMissile: '102',
   fireball: '230',
   cureWounds: '66',
@@ -11307,6 +11322,7 @@ const spellIds = {
   speakWithPlants: '262',
   locateCreature: '305',
   communeWithNature: '330',
+  brandingSmite: '136',
   entangle: '76',
   shield: '109',
   prestidigitation: '27',
@@ -11416,6 +11432,12 @@ const spellIds = {
   phantasmalKiller: '309',
   cloudkill: '328',
   bladeWard: '1',
+  shatter: '191',
+  windWall: '274',
+  heroism: '91',
+  alterSelf: '127',
+  contagion: '335',
+  dominatePerson: '343',
 };
 const ritualIds = {
   alarm: '47',

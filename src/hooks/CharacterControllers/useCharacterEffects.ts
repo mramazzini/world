@@ -146,6 +146,48 @@ const useCharacterEffects = () => {
           break;
       }
     }
+    //subclass
+    for (const subclass of unlockedFeatures.subclasses) {
+      for (const feature of subclass.features) {
+        switch (feature.effectChainType) {
+          case ChainType.NONE:
+            if (feature.Effects.length !== 1) {
+              console.error('Invalid effect chain on effect', feature);
+              break;
+            }
+            active.push(feature.Effects[0]);
+            break;
+          case ChainType.ADD:
+            for (const effect of feature.Effects) {
+              if (effect.level <= levelsByClass[subclass.classId]) {
+                active.push(effect);
+              }
+            }
+            break;
+          case ChainType.REPLACE: {
+            //find the highest level effect that is less than or equal to the class level
+            let highest = 0;
+            let highestEffect = null as EffectInfo | null;
+            for (const effect of feature.Effects) {
+              if (
+                effect.level <= levelsByClass[subclass.classId] &&
+                effect.level > highest
+              ) {
+                highest = effect.level;
+                highestEffect = effect;
+              }
+            }
+            if (highestEffect) {
+              active.push(highestEffect);
+            }
+            break;
+          }
+          default:
+            console.error('Invalid effect chain type');
+            break;
+        }
+      }
+    }
 
     return active;
   }, [unlockedFeatures, levelsByClass, level, combinedSpecies]);

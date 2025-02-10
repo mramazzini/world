@@ -1,3 +1,5 @@
+import { Prisma } from '@prisma/client';
+
 const ids = {
   ancients: '72',
   conquest: '73',
@@ -10,7 +12,23 @@ const ids = {
   oathbreaker: '80',
 };
 
-const PaladinSubclassFeatures = [
+export const PaladinSubclassFeatureIds = {
+  tenetsOfTheCrown: 'tenetsOfTheCrown',
+  crownOathSpells: 'crownOathSpells',
+  championChallenge: 'championChallenge',
+  turnTheTide: 'turnTheTide',
+  divineAllegiance: 'divineAllegiance',
+  unyieldingSpirit: 'unyieldingSpirit',
+  exaltedChampion: 'exaltedChampion',
+  oathBreakerSpells: 'oathBreakerSpells',
+  controlUndead: 'controlUndead',
+  dreadfulAspect: 'dreadfulAspect',
+  auraOfHate: 'auraOfHate',
+  supernaturalConstitution: 'supernaturalConstitution',
+  dreadLord: 'dreadLord',
+};
+
+const PaladinSubclassFeatures: Prisma.FeatureCreateManyInput[] = [
   //ancients
   // {
   //   name: 'Tenets of the Ancients',
@@ -232,8 +250,9 @@ const PaladinSubclassFeatures = [
   // },
   // //crown
   {
+    id: PaladinSubclassFeatureIds.tenetsOfTheCrown,
     name: 'Tenets of the Crown',
-    unimplemented: true,
+    unimplemented: false,
     description:
       'The tenets of the Oath of the Crown are often set by the sovereign to which their oath is sworn, but generally emphasize the following tenets.',
     extendedTable: [
@@ -269,9 +288,10 @@ const PaladinSubclassFeatures = [
     subClassId: ids.crown,
   },
   {
+    id: PaladinSubclassFeatureIds.crownOathSpells,
     name: 'Oath Spells',
     description: 'You gain oath spells at the paladin levels listed.',
-    unimplemented: true,
+    unimplemented: false,
     // levels: [3, 5, 9, 13, 17],
     subClassId: ids.crown,
     extendedTable: [
@@ -305,30 +325,34 @@ const PaladinSubclassFeatures = [
     ],
   },
   {
+    id: PaladinSubclassFeatureIds.championChallenge,
     name: 'Channel Divinity: Champion Challenge',
     description:
       "As a bonus action, you issue a challenge that compels other creatures to do battle with you. Each creature of your choice that you can see within 30 feet of you must make a Wisdom saving throw. On a failed save, a creature can't willingly move more than 30 feet away from you. This effect ends on the creature if you are incapacitated or die or if the creature is more than 30 feet away from you.",
-    unimplemented: true,
+    unimplemented: false,
     // levels: [3],
     subClassId: ids.crown,
   },
   {
+    id: PaladinSubclassFeatureIds.turnTheTide,
     name: 'Channel Divinity: Turn the Tide',
     description:
       'As a bonus action, you can bolster injured creatures with your Channel Divinity. Each creature of your choice that can hear you within 30 feet of you regains hit points equal to 1d6 + your Charisma modifier (minimum of 1) if it has no more than half of its hit points.',
-    unimplemented: true,
+    unimplemented: false,
     // levels: [3],
     subClassId: ids.crown,
   },
   {
+    id: PaladinSubclassFeatureIds.divineAllegiance,
     name: 'Divine Allegiance',
     description:
       "Starting at 7th level, when a creature within 5 feet of you takes damage, you can use your reaction to magically substitute your own health for that of the target creature, causing that creature not to take the damage. Instead, you take the damage. This damage to you can't be reduced or prevented in any way.",
-    unimplemented: true,
+    unimplemented: false,
     // levels: [7],
     subClassId: ids.crown,
   },
   {
+    id: PaladinSubclassFeatureIds.unyieldingSpirit,
     name: 'Unyielding Spirit',
     unimplemented: true,
     description:
@@ -337,6 +361,7 @@ const PaladinSubclassFeatures = [
     subClassId: ids.crown,
   },
   {
+    id: PaladinSubclassFeatureIds.exaltedChampion,
     name: 'Exalted Champion',
     unimplemented: true,
     description:
@@ -903,10 +928,11 @@ const PaladinSubclassFeatures = [
   // },
   // oathbreaker
   {
+    id: PaladinSubclassFeatureIds.oathBreakerSpells,
     name: 'Oathbreaker Spells',
-    description: 'You gain oath spells at the paladin // levels listed.',
+    description: 'You gain oath spells at the paladin levels listed.',
     // levels: [3, 5, 9, 13, 17],
-    unimplemented: true,
+    unimplemented: false,
     subClassId: ids.oathbreaker,
     extendedTable: [
       {
@@ -939,22 +965,25 @@ const PaladinSubclassFeatures = [
     ],
   },
   {
+    id: PaladinSubclassFeatureIds.controlUndead,
     name: 'Channel Divinity: Control Undead',
     description:
       'Starting at 3rd level, you can use your Channel Divinity to control undead creatures.  As an action, you target one undead creature you can see within 30 feet of you. The target must make a Wisdom saving throw. On a failed save, the target must obey your commands for the next 24 hours, or until you use this Channel Divinity option again. An undead whose challenge rating is equal to or greater than your paladin level is immune to this effect.',
-    unimplemented: true,
+    unimplemented: false,
     // levels: [3],
     subClassId: ids.oathbreaker,
   },
   {
+    id: PaladinSubclassFeatureIds.dreadfulAspect,
     name: 'Channel Divinity: Dreadful Aspect',
     description:
       'Starting at 3rd level, you can use your Channel Divinity to strike terror into your enemies. As an action, you channel the darkest emotions and focus them into a burst of magical menace. Each creature of your choice within 30 feet of you must make a Wisdom saving throw if it can see you. On a failed save, the target is frightened of you for 1 minute. If a creature frightened by this effect ends its turn more than 30 feet away from you, it can attempt another Wisdom saving throw to end the effect on it.',
     // levels: [3],
-    unimplemented: true,
+    unimplemented: false,
     subClassId: ids.oathbreaker,
   },
   {
+    id: PaladinSubclassFeatureIds.auraOfHate,
     name: 'Aura of Hate',
     description:
       'Starting at 7th level you, as well any fiends and undead within 10 feet of you, gain a bonus to melee weapon damage rolls equal to your Charisma modifier (minimum of +1). A creature can benefit from this feature from only one paladin at a time.\n\nAt 18th level, the range of this aura increases to 30 feet.',
@@ -963,6 +992,7 @@ const PaladinSubclassFeatures = [
     subClassId: ids.oathbreaker,
   },
   {
+    id: PaladinSubclassFeatureIds.supernaturalConstitution,
     name: 'Supernatural Resistance',
     description:
       'At 15th level, you gain resistance to bludgeoning, piercing, and slashing damage from nonmagical weapons.',
@@ -971,10 +1001,11 @@ const PaladinSubclassFeatures = [
     subClassId: ids.oathbreaker,
   },
   {
+    id: PaladinSubclassFeatureIds.dreadLord,
     name: 'Dread Lord',
     description:
       "At 20th level, you can, as an action, surround yourself with an aura of gloom that lasts for 1 minute. The aura reduces any bright light in a 30-foot radius around you to dim light. Whenever an enemy that is frightened by you starts its turn in the aura, it takes 4d10 psychic damage. Additionally, you and any creatures of your choosing in the aura are draped in deeper shadow. Creatures that rely on sight have disadvantage on attack rolls against creatures draped in this shadow.\n\nWhile the aura lasts, you can use a bonus action on your turn to cause the shadows in the aura to attack one creature. Make a melee spell attack against the target. If the attack hits, the target takes necrotic damage equal to 3d10 + your Charisma modifier.\n\nAfter activating this feature, you can't do so again until you finish a long rest.",
-    unimplemented: true,
+    unimplemented: false,
     // levels: [20],
     subClassId: ids.oathbreaker,
   },

@@ -16,6 +16,9 @@ export const CustomResourceIds = {
   flashOfGenius: 'flashOfGenius',
   wildshapeDruid: 'wildshapeDruid',
   rabbitHopHarengon: 'rabbitHopHarengon',
+  arcaneJolt: 'arcaneJolt',
+  markForDeath: 'markForDeath',
+  dreadLord: 'dreadLord',
 };
 
 const CustomResourceSeed: Prisma.CustomResourceCreateManyInput[] = [
@@ -123,6 +126,27 @@ const CustomResourceSeed: Prisma.CustomResourceCreateManyInput[] = [
     description:
       'A pool of charges that dictate how many uses of rabbit hop a Harengon has.',
     slug: 'rabbit-hop-harengon',
+  },
+  {
+    id: CustomResourceIds.arcaneJolt,
+    name: 'Arcane Jolt',
+    description:
+      'A pool of charges that dictate how many uses of arcane jolt an Artificer has.',
+    slug: 'arcane-jolt',
+  },
+  {
+    id: CustomResourceIds.markForDeath,
+    name: 'Mark for Death',
+    description:
+      'A pool of charges that dictate how many uses of mark for death an Oath of the Gravekeeper Paladin has.',
+    slug: 'mark-for-death',
+  },
+  {
+    id: CustomResourceIds.dreadLord,
+    name: 'Dread Lord',
+    description:
+      'A pool of charges that dictate how many uses of dread lord an Oathbreaker paladin has.',
+    slug: 'dread-lord',
   },
 ];
 

@@ -373,6 +373,8 @@ export const ClassFeatureEffectIds = {
   druidTimelessBody18: 'druidTimelessBody-18',
   druidBeastSpells18: 'druidBeastSpells-18',
   druidArchdruid20: 'druidArchdruid-20',
+  artificerHomunculusServant: 'artificerHomunculusServant',
+  artificerReplicableMagicItems: 'artificerReplicableMagicItems',
 };
 
 const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
@@ -3678,6 +3680,24 @@ const ClassFeatureEffectSeed: Prisma.EffectCreateInput[] = [
       { ability: 'STR', value: 4 },
       { ability: 'CON', value: 4 },
     ],
+  },
+  {
+    id: ClassFeatureEffectIds.artificerReplicableMagicItems,
+    Feature: {
+      connect: {
+        id: fids.artificerMagicalItems,
+      },
+    },
+    level: 0,
+  },
+  {
+    id: ClassFeatureEffectIds.artificerHomunculusServant,
+    Feature: {
+      connect: {
+        id: fids.artificerHomunculusServant,
+      },
+    },
+    level: 0,
   },
 ];
 

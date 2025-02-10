@@ -3,11 +3,12 @@ import { PrismaClient } from '@prisma/client';
 import SubClasses from '../Subclasses/Subclasses.seed';
 import SubclassFeatures from '../Subclasses/SubclassFeatures';
 import HomebrewSubclassesSeed, {
+  HomebrewFeatureEffectSeed,
   HomebrewSubclassFeaturesSeed,
 } from '../Subclasses/HomebrewSubclasses.seed';
 import createFeature from '../_helpers/createFeature';
-import SubclassColumnedFeaturesSeed from '../Subclasses/SubclassColumnedFeatures.seed';
 import { createSlug } from '../_helpers/createSlug';
+import SubclassFeatureEffects from '../Subclasses/SubclassFeatureEffects';
 
 export const createSubclass = async (db: PrismaClient) => {
   // Create sub classes
@@ -100,55 +101,72 @@ export const createSubclass = async (db: PrismaClient) => {
   }
   cinfo('Subclass features created');
 
-  // cinfo('Homebrew subclass features');
-  // for (const HomebrewSubclassFeature of HomebrewSubclassFeaturesSeed) {
-  //   try {
-  //     cinfo(
-  //       'Creating homebrew subclass feature:',
-  //       HomebrewSubclassFeature.name
-  //     );
-  //     //make sure subclass feature has
-  //     if (
-  //       !HomebrewSubclassFeature.subClassId &&
-  //       !HomebrewSubclassFeature.spellCastingSubclassId
-  //     ) {
-  //       cerr(
-  //         'Homebrew subclass feature missing subClassId field:',
-  //         HomebrewSubclassFeature.name
-  //       );
-  //       throw new Error('Error creating homebrew subclass feature');
-  //     }
+  cinfo('Create subclass feature effects');
+  for (const effect of SubclassFeatureEffects) {
+    try {
+      cinfo('Creating subclass feature effect:', effect.id);
+      await db.effect.upsert({
+        where: {
+          id: effect.id,
+        },
+        update: effect,
+        create: effect,
+      });
+      cinfo('Subclass feature effect created');
+    } catch (error) {
+      cerr('Error creating subclass feature effect', effect.id, error);
+      return;
+    }
+  }
 
-  //     await createFeature(db, HomebrewSubclassFeature);
+  cinfo('Homebrew subclass features');
+  for (const HomebrewSubclassFeature of HomebrewSubclassFeaturesSeed) {
+    try {
+      cinfo(
+        'Creating homebrew subclass feature:',
+        HomebrewSubclassFeature.name
+      );
+      //make sure subclass feature has
+      if (
+        !HomebrewSubclassFeature.subClassId &&
+        !HomebrewSubclassFeature.spellCastingSubclassId
+      ) {
+        cerr(
+          'Homebrew subclass feature missing subClassId field:',
+          HomebrewSubclassFeature.name
+        );
+        throw new Error('Error creating homebrew subclass feature');
+      }
 
-  //     cinfo('Homebrew subclass feature created');
-  //   } catch (error) {
-  //     cerr(
-  //       'Error creating homebrew subclass feature',
-  //       HomebrewSubclassFeature.name,
-  //       error
-  //     );
-  //     throw new Error('Error creating homebrew subclass feature');
-  //   }
-  // }
-  // cinfo('Homebrew subclass features created');
+      await createFeature(db, HomebrewSubclassFeature);
 
-  // cinfo('Create subclass table columns');
-  // // Create subclass table columns
-  // for (const SubclassColumns of SubclassColumnedFeaturesSeed) {
-  //   try {
-  //     cinfo('Creating subclass column:', SubclassColumns.name);
-  //     await db.subClassColumnedFeature.upsert({
-  //       where: {
-  //         id: SubclassColumns.id,
-  //       },
-  //       update: SubclassColumns,
-  //       create: SubclassColumns,
-  //     });
-  //     cinfo('Subclass column created');
-  //   } catch (error) {
-  //     cerr('Error creating subclass column', SubclassColumns.name, error);
-  //     return;
-  //   }
-  // }
+      cinfo('Homebrew subclass feature created');
+    } catch (error) {
+      cerr(
+        'Error creating homebrew subclass feature',
+        HomebrewSubclassFeature.name,
+        error
+      );
+      throw new Error('Error creating homebrew subclass feature');
+    }
+  }
+  cinfo('Homebrew subclass features created');
+
+  cinfo('Homebrew subclass feature effects');
+  for (const effect of HomebrewFeatureEffectSeed) {
+    try {
+      cinfo('Creating homebrew subclass feature effect:', effect.id);
+      await db.effect.upsert({
+        where: {
+          id: effect.id,
+        },
+        update: effect,
+        create: effect,
+      });
+      cinfo('Homebrew subclass feature effect created');
+    } catch (error) {
+      cerr('Error creating homebrew subclass feature effect', effect.id, error);
+      return;
+    }
+  }
 };

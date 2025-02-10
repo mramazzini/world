@@ -1,3 +1,5 @@
+import { Prisma } from '@prisma/client';
+
 const ids = {
   dreams: '55',
   land: '56',
@@ -8,7 +10,20 @@ const ids = {
   wildfire: '61',
 };
 
-const druidSubclassFeatures = [
+export const DruidSubclassFeatureIds = {
+  combatWildShape: 'combatWildShape',
+  circleForms: 'circleForms',
+  primalStrike: 'primalStrike',
+  elementalWildShape: 'elementalWildShape',
+  thousandForms: 'thousandForms',
+  speechOfTheWoods: 'speechOfTheWoods',
+  spiritTotem: 'spiritTotem',
+  mightySummoner: 'mightySummoner',
+  guardianSpirit: 'guardianSpirit',
+  faithfulSummons: 'faithfulSummons',
+};
+
+const druidSubclassFeatures: Prisma.FeatureCreateManyInput[] = [
   //dreams
   // {
   //   name: 'Balm of the Summer Court',
@@ -274,22 +289,25 @@ const druidSubclassFeatures = [
   // },
   // //moon
   {
+    id: DruidSubclassFeatureIds.combatWildShape,
     name: 'Combat Wild Shape',
     description:
       'When you choose this circle at 2nd level, you gain the ability to use Wild Shape on your turn as a bonus action, rather than as an action.\n\nAdditionally, while you are transformed by Wild Shape, you can use a bonus action to expend one spell slot to regain 1d8 hit points per level of the spell slot expended.',
     subClassId: ids.moon,
-    unimplemented: true,
+    unimplemented: false,
     // levels: [2],
   },
   {
+    id: DruidSubclassFeatureIds.circleForms,
     name: 'Circle Forms',
     description:
       'The rites of your circle grant you the ability to transform into more dangerous animal forms. Starting at 2nd level, you can use your Wild Shape to transform into a beast with a challenge rating as high as 1. You ignore the Max. CR column of the Beast Shapes table, but must abide by the other limitations there.\n\nStarting at 6th level, you can transform into a beast with a challenge rating as high as your druid level divided by 3, rounded down.',
     subClassId: ids.moon,
-    unimplemented: true,
+    unimplemented: false,
     // levels: [2, 6],
   },
   {
+    id: DruidSubclassFeatureIds.primalStrike,
     name: 'Primal Strike',
     description:
       'Starting at 6th level, your attacks in beast form count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage.',
@@ -298,31 +316,35 @@ const druidSubclassFeatures = [
     // levels: [6],
   },
   {
+    id: DruidSubclassFeatureIds.elementalWildShape,
     name: 'Elemental Wild Shape',
     description:
       'At 10th level, you can expend two uses of Wild Shape at the same time to transform into an air elemental, an earth elemental, a fire elemental, or a water elemental.',
-    unimplemented: true,
+    unimplemented: false,
     subClassId: ids.moon,
     // levels: [10],
   },
   {
+    id: DruidSubclassFeatureIds.thousandForms,
     name: 'Thousand Forms',
     description:
       'By 14th level, you have learned to use magic to alter your physical form in more subtle ways. You can cast the Alter Self spell at will.',
-    unimplemented: true,
+    unimplemented: false,
     subClassId: ids.moon,
     // levels: [14],
   },
   // //sheperd
   {
+    id: DruidSubclassFeatureIds.speechOfTheWoods,
     name: 'Speech of the Woods',
     description:
       'At 2nd level, you gain the ability to converse with beasts and many fey.\n\nYou learn to speak, read, and write Sylvan. In addition, beasts can understand your speech, and you gain the ability to decipher their noises and motions. Most beasts lack the intelligence to convey or understand sophisticated concepts, but a friendly beast could relay what it has seen or heard in the recent past. This ability doesn’t grant you any special friendship with beasts, though you can combine this ability with gifts to curry favor with them as you would with any nonplayer character.',
     subClassId: ids.shepherd,
-    unimplemented: true,
+    unimplemented: false,
     // levels: [2],
   },
   {
+    id: DruidSubclassFeatureIds.spiritTotem,
     name: 'Spirit Totem',
     description:
       'Starting at 2nd level, you gain the ability to call forth nature spirits and use them to influence the world around you.\n\nAs a bonus action, you can magically summon an incorporeal spirit to a point you can see within 60 feet of you. The spirit creates an aura in a 30-foot radius around that point. It counts as neither a creature nor an object, though it has the spectral appearance of the creature it represents. As a bonus action, you can move the spirit up to 60 feet to a point you can see.\n\nThe spirit persists for 1 minute. Once you use this feature, you can’t use it again until you finish a short or long rest.\n\nThe effect of the spirit’s aura depends on the type of spirit you summon from the options below.',
@@ -355,6 +377,7 @@ const druidSubclassFeatures = [
     ],
   },
   {
+    id: DruidSubclassFeatureIds.mightySummoner,
     name: 'Mighty Summoner',
     unimplemented: true,
     description:
@@ -367,6 +390,7 @@ const druidSubclassFeatures = [
     // levels: [6],
   },
   {
+    id: DruidSubclassFeatureIds.guardianSpirit,
     name: 'Guardian Spirit',
     unimplemented: true,
     description:
@@ -375,6 +399,7 @@ const druidSubclassFeatures = [
     // levels: [10],
   },
   {
+    id: DruidSubclassFeatureIds.faithfulSummons,
     name: 'Faithful Summons',
     unimplemented: true,
     description:

@@ -150,6 +150,8 @@ export const ClassFeatureIds = {
   artificerMagicItemSavant: 'Artificer-Magic Item Savant',
   artificerMagicItemMaster: 'Artificer-Magic Item Master',
   artificerSoulOfArtifice: 'Artificer-Soul of Artifice',
+  artificerHomunculusServant: 'Artificer-Homunculus Servant',
+  artificerMagicalItems: 'Artificer-Magical Items',
   bardSubclass: 'Bard-Subclass',
   clericSubclass: 'Cleric-Subclass',
   druidSubclass: 'Druid-Subclass',
@@ -875,7 +877,7 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     name: 'Cantrips',
     description:
       'At 1st level, you know two cantrips of your choice from the druid spell list. You learn additional druid cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Druid table.',
-
+    effectChainType: ChainType.ADD,
     unimplemented: false,
     spellCastingClassId: ids.druid,
   },
@@ -2085,11 +2087,13 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
   },
 
   {
-    id: 'Artificer-Homunculus',
+    id: fids.artificerHomunculusServant,
     name: 'Homunculus Servant Infusion',
     description:
       'Below is the stat block for the Homunculus Servant that you can create with the Homunculus Servant infusion.',
     // levels: [],
+    effectChainType: ChainType.NONE,
+    unimplemented: true,
     classId: ids.artificer,
     extendedTable: [
       {
@@ -2191,12 +2195,12 @@ const ClassFeaturesSeed: Prisma.FeatureCreateManyInput[] = [
     ],
   },
   {
-    id: 'ReplicableMagicItems',
+    id: fids.artificerMagicalItems,
     name: 'Replicable Items Infusion',
     description:
       'Below is a list of items that you can replicate with the Replicate Magic Item infusion.',
     unimplemented: true,
-    effectChainType: ChainType.NONE,
+
     // levels: [],
     classId: ids.artificer,
     extendedTable: [

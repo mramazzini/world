@@ -728,7 +728,9 @@ model Effect {
   fullSkillProficiencies      Skill[]
   expertiseSkillProficiencies Skill[]
 
-  languageProficiencies Language[]
+  languageProficiencies    Language[]
+  toolProficienciesIds     String[]
+  weaponGroupProficiencies WeaponGroup[]
 
   weaponGroupRef     WeaponGroup?
   attackModifier     String?
