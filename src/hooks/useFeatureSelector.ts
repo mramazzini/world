@@ -38,6 +38,18 @@ const useFeatureSelector = () => {
             .sort(sortFn),
         };
       }, []),
+      subclasses: features.subclasses.map((s) => {
+        return {
+          id: s.id,
+          classId: s.classId,
+          name: s.name,
+          features: s.features
+            .filter((f) => {
+              return levels[s.classId] >= (getMinlevel(f) || 0);
+            }, [])
+            .sort(sortFn),
+        };
+      }),
       species: {
         id: features.species.id,
         name: features.species.name,
@@ -56,18 +68,7 @@ const useFeatureSelector = () => {
           })
           .sort(sortFn),
       },
-      subclasses: features.subclasses.map((s) => {
-        return {
-          id: s.id,
-          classId: s.classId,
-          name: s.name,
-          features: s.features
-            .filter((f) => {
-              return levels[s.id] >= (getMinlevel(f) || 0);
-            })
-            .sort(sortFn),
-        };
-      }),
+
       subSpecies: {
         id: features.subSpecies.id,
         name: features.subSpecies.name,

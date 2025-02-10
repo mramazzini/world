@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { useCallback, useEffect } from 'react';
 import useModifier from '../useModifier';
 import { SpellCastingInfo } from '@/lib/types/modelInfo';
-import { ClassID, Level, SpellLevel } from '@/lib/types/types';
+import { ClassID, Level, SpellID, SpellLevel } from '@/lib/types/types';
 import SpellCastingToSpellSlots, {
   SpellCastingLevelToSpellSlots,
 } from '@/Utility/SpellCastingToSpellSlots';
@@ -44,6 +44,7 @@ const useSpellcaster = () => {
     activeSpellCastingClass,
     spellCastingAbility: ability,
     spellCastingAbilityModifier: modifier,
+    activeEffects,
   } = useAppSelector((state) => state.sheet);
 
   const spellSlotsFromClass = useCallback(
@@ -171,8 +172,18 @@ const useSpellcaster = () => {
     const preparedSpells = preparedSpellChoices
       .map((c) => c.selections)
       .flat() as AddPreparedSpellOutput;
-    dispatch(setPreparedSpells(preparedSpells));
-  }, [fufilledChoices, dispatch]);
+    const effectToSpell: SpellID[] = [];
+    for (const effect of activeEffects) {
+      if (effect.EffectToSpell.length > 0) {
+        for (const spell of effect.EffectToSpell) {
+          if (spell.requireSpellSlot) {
+            effectToSpell.push(spell.spellId);
+          }
+        }
+      }
+    }
+    dispatch(setPreparedSpells(effectToSpell.concat(preparedSpells)));
+  }, [fufilledChoices, dispatch, activeEffects]);
 
   useEffect(() => {
     const freeSpellChoices = fufilledChoices.filter(
@@ -181,8 +192,18 @@ const useSpellcaster = () => {
     const freeSpells = freeSpellChoices
       .map((c) => c.selections)
       .flat() as AddFreeSpellOutput;
-    dispatch(setFreeSpells(freeSpells));
-  }, [fufilledChoices, dispatch]);
+    const effectToSpell: SpellID[] = [];
+    for (const effect of activeEffects) {
+      if (effect.EffectToSpell.length > 0) {
+        for (const spell of effect.EffectToSpell) {
+          if (!spell.requireSpellSlot) {
+            effectToSpell.push(spell.spellId);
+          }
+        }
+      }
+    }
+    dispatch(setFreeSpells(effectToSpell.concat(freeSpells)));
+  }, [fufilledChoices, dispatch, activeEffects]);
 };
 
 export default useSpellcaster;

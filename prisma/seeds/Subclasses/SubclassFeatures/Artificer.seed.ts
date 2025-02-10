@@ -1,3 +1,5 @@
+import { ChainType, Prisma } from '@prisma/client';
+
 const ids = {
   alchemist: '106',
   armorer: '107',
@@ -5,7 +7,23 @@ const ids = {
   battleSmith: '109',
 };
 
-const ArtificerSubclassFeatures = [
+export const artificerFeatureSubclassIds = {
+  toolProficiencyArtillerist: 'toolProficiencyArtillerist',
+  artilleristSpells: 'artilleristSpells',
+  eldritchCannon: 'eldritchCannon',
+  arcaneFirearm: 'arcaneFirearm',
+  explosiveCannon: 'explosiveCannon',
+  fortifiedPosition: 'fortifiedPosition',
+  toolProficiencyBattleSmith: 'toolProficiencyBattleSmith',
+  battleSmithSpells: 'battleSmithSpells',
+  battleReady: 'battleReady',
+  steelDefender: 'steelDefender',
+  extraAttack: 'extraAttack',
+  arcaneJolt: 'arcaneJolt',
+  improvedDefender: 'improvedDefender',
+};
+
+const ArtificerSubclassFeatures: Prisma.FeatureCreateManyInput[] = [
   // Alchemist
   // {
   //   name: 'Tool Proficiency',
@@ -266,19 +284,23 @@ const ArtificerSubclassFeatures = [
   // },
   // // Artillerist
   {
+    id: artificerFeatureSubclassIds.toolProficiencyArtillerist,
     name: 'Tool Proficiency',
     description:
       "When you adopt this specialization at 3rd level, you gain proficiency with woodcarver's tools. If you already have this proficiency, you gain proficiency with one other type of artisan's tools of your choice.",
     // levels: [3],
-    unimplemented: true,
+    unimplemented: false,
     subClassId: ids.artillerist,
+    effectChainType: ChainType.ADD,
   },
   {
+    id: artificerFeatureSubclassIds.artilleristSpells,
     name: 'Artillerist Spells',
     description:
       'Starting at 3rd level, you always have certain spells prepared after you reach particular levels in this class, as shown in the Artillerist Spells table. These spells count as artificer spells for you, but they don’t count against the number of artificer spells you prepare.',
     // levels: [3],
-    unimplemented: true,
+    unimplemented: false,
+    effectChainType: ChainType.ADD,
     subClassId: ids.artillerist,
     extendedTable: [
       {
@@ -311,9 +333,11 @@ const ArtificerSubclassFeatures = [
     ],
   },
   {
+    id: artificerFeatureSubclassIds.eldritchCannon,
     name: 'Eldritch Cannon',
     description:
       "Also at 3rd level, you've learned how to create a magical cannon. Using woodcarver's tools or smith's tools, you can take an action to magically create a Small or Tiny eldritch cannon in an unoccupied space on a horizontal surface within 5 feet of you. A Small eldritch cannon occupies its space, and a Tiny one can be held in one hand. Once you create a cannon, you can't do so again until you finish a long rest or until you expend a spell slot to create one. You can have only one cannon at a time and can't create one while your cannon is present.\n\nThe cannon is a magical object. Regardless of size, the cannon has an AC of 18 and a number of hit points equal to five times your artificer level. It is immune to poison damage and psychic damage. If it is forced to make an ability check or a saving throw, treat all its ability scores as 10 (+0). If the mending spell is cast on it, it regains 2d6 hit points. It disappears if it is reduced to 0 hit points or after 1 hour. You can dismiss it early as an action.\n\nWhen you create the cannon, you determine its appearance and whether it has legs. You also decide which type it is, choosing from the options on the Eldritch Cannons table. On each of your turns, you can take a bonus action to cause the cannon to activate if you are within 60 feet of it. As part of the same bonus action, you can direct the cannon to walk or climb up to 15 feet to an unoccupied space, provided it has legs.",
+    unimplemented: true,
     extendedTable: [
       {
         'Eldritch Cannons': {
@@ -342,6 +366,7 @@ const ArtificerSubclassFeatures = [
     subClassId: ids.artillerist,
   },
   {
+    id: artificerFeatureSubclassIds.arcaneFirearm,
     name: 'Arcane Firearm',
     description:
       "At 5th level, You know how to turn a wand, staff, or rod into an arcane firearm, a conduit for your destructive spells. When you finish a long rest, you can use woodcarver's tools to carve special sigils into a wand, staff, or rod and thereby turn it into your arcane firearm. The sigils disappear from the object if you later carve them on a different item. The sigils otherwise last indefinitely.\n\nYou can use your arcane firearm as a spellcasting focus for your artificer spells. When you cast an artificer spell through the firearm, roll a d8, and you gain a bonus to one of the spell's damage rolls equal to the number rolled.",
@@ -350,6 +375,7 @@ const ArtificerSubclassFeatures = [
     subClassId: ids.artillerist,
   },
   {
+    id: artificerFeatureSubclassIds.explosiveCannon,
     name: 'Explosive Cannon',
     description:
       'Starting at 9th level, every eldritch cannon you create is more destructive:',
@@ -362,6 +388,7 @@ const ArtificerSubclassFeatures = [
     ],
   },
   {
+    id: artificerFeatureSubclassIds.fortifiedPosition,
     name: 'Fortified Position',
     description:
       'By 15th level, you’re a master at forming well-defended emplacements using Eldritch Cannon:',
@@ -375,19 +402,21 @@ const ArtificerSubclassFeatures = [
   },
   // // Battle Smith
   {
+    id: artificerFeatureSubclassIds.toolProficiencyBattleSmith,
     name: 'Tool Proficiency',
     description:
       "When you adopt this specialization at 3rd level, you gain proficiency with smith's tools. If you already have this proficiency, you gain proficiency with one other type of artisan's tools of your choice.",
-    unimplemented: true,
+    unimplemented: false,
     // levels: [3],
     subClassId: ids.battleSmith,
   },
   {
+    id: artificerFeatureSubclassIds.battleSmithSpells,
     name: 'Battle Smith Spells',
     description:
       'Starting at 3rd level, you always have certain spells prepared after you reach particular levels in this class, as shown in the Battle Smith Spells table. These spells count as artificer spells for you, but they don’t count against the number of artificer spells you prepare.',
     // levels: [3],
-    unimplemented: true,
+    unimplemented: false,
     subClassId: ids.battleSmith,
     extendedTable: [
       {
@@ -420,11 +449,12 @@ const ArtificerSubclassFeatures = [
     ],
   },
   {
+    id: artificerFeatureSubclassIds.battleReady,
     name: 'Battle Ready',
     description:
       'When you reach 3rd level, your combat training and your experiments with magic have paid off in two ways:',
     // levels: [3],
-    unimplemented: true,
+    unimplemented: false,
     subClassId: ids.battleSmith,
     options: [
       'You gain proficiency with martial weapons.',
@@ -432,9 +462,10 @@ const ArtificerSubclassFeatures = [
     ],
   },
   {
+    id: artificerFeatureSubclassIds.steelDefender,
     name: 'Steel Defender',
     description:
-      "y 3rd level, your tinkering has borne you a faithful companion, a steel defender. It's friendly to you and your companions, and it obeys your commands. See its game statistics in the Steel Defender stat block, which uses your proficiency bonus (PB) in several places. You determine the creature's appearance and whether it has two legs or four; your choice has no effect on its game statistics.\n\nn combat, the defender shares your initiative count, but it takes its turn immediately after yours. It can move and use its reaction on its own, but the only action it takes on its turn is the Dodge action, unless you take a bonus action on your turn to command it to take another action. That action can be one in its stat block or some other action. If you are incapacitated, the defender can take any action of its choice, not just Dodge.\n\nIf the Mending spell is cast on it, it regains 2d6 hit points. If it has died within the last hour, you can use your smith's tools as an action to revive it, provided you are within 5 feet of it and you expend a spell slot of 1st level or higher. The steel defender returns to life after 1 minute with all its hit points restored.\n\nAt the end of a long rest, you can create a new steel defender if you have smith's tools with you. If you already have a defender from this feature, the first one immediately perishes. The defender also perishes if you die.",
+      "By 3rd level, your tinkering has borne you a faithful companion, a steel defender. It's friendly to you and your companions, and it obeys your commands. See its game statistics in the Steel Defender stat block, which uses your proficiency bonus (PB) in several places. You determine the creature's appearance and whether it has two legs or four; your choice has no effect on its game statistics.\n\nn combat, the defender shares your initiative count, but it takes its turn immediately after yours. It can move and use its reaction on its own, but the only action it takes on its turn is the Dodge action, unless you take a bonus action on your turn to command it to take another action. That action can be one in its stat block or some other action. If you are incapacitated, the defender can take any action of its choice, not just Dodge.\n\nIf the Mending spell is cast on it, it regains 2d6 hit points. If it has died within the last hour, you can use your smith's tools as an action to revive it, provided you are within 5 feet of it and you expend a spell slot of 1st level or higher. The steel defender returns to life after 1 minute with all its hit points restored.\n\nAt the end of a long rest, you can create a new steel defender if you have smith's tools with you. If you already have a defender from this feature, the first one immediately perishes. The defender also perishes if you die.",
     // levels: [3],
     unimplemented: true,
     subClassId: ids.battleSmith,
@@ -542,19 +573,21 @@ const ArtificerSubclassFeatures = [
     ],
   },
   {
+    id: artificerFeatureSubclassIds.extraAttack,
     name: 'Extra Attack',
     description:
       'Starting at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn.',
     // levels: [5],
-    unimplemented: true,
+    unimplemented: false,
     subClassId: ids.battleSmith,
   },
   {
+    id: artificerFeatureSubclassIds.arcaneJolt,
     name: 'Arcane Jolt',
     description:
       "At 9th level, you've learn new ways to channel arcane energy to harm or heal. When either you hit a target with a magic weapon attack or your steel defender hits a target, you can channel magical energy through the strike to create one of the effects listed below.\n\nYou can use this energy a number of times equal to your Intelligence modifier (minimum of once), but you can do so no more than once on a turn. You regain all expended uses when you finish a long rest.",
     // levels: [9],
-    unimplemented: true,
+    unimplemented: false,
     subClassId: ids.battleSmith,
     extendedTable: [
       {
@@ -574,6 +607,7 @@ const ArtificerSubclassFeatures = [
     ],
   },
   {
+    id: artificerFeatureSubclassIds.improvedDefender,
     name: 'Improved Defender',
     description:
       'At 15th level, your Arcane Jolt and steel defender become more powerful:',
