@@ -10,6 +10,7 @@ export const FeatureGroupIds = {
   rangerExplorer: 'ranger-explorer',
   rangerAwareness: 'ranger-awareness',
   rangerDisguise: 'ranger-disguise',
+  elementalDisciplines: 'elemental-disciplines',
 };
 
 export const FeaturesFromFeatureGroupIds = {
@@ -86,6 +87,28 @@ export const FeaturesFromFeatureGroupIds = {
   primevalAwarenessRangerAwareness: 'primeval-awareness-ranger-awareness',
   hideinPlainSightRangerDisguise: 'hide-in-plain-sight-ranger-disguise',
   naturesVeilRangerDisguise: 'natures-veil-ranger-disguise',
+  breathOfWinterDiscipleElements: 'breath-of-winter-disciple-elements',
+  clenchOfNorthWindDiscipleElements: 'clench-of-north-wind-disciple-elements',
+  elementalAtunementDiscipleElements: 'elemental-atunement-disciple-elements',
+  eternalMountainDefenseDiscipleElements:
+    'eternal-mountain-defense-disciple-elements',
+  fangsOfTheFireSnakeDiscipleElements:
+    'fangs-of-the-fire-snake-disciple-elements',
+  fistOfFourThundersDiscipleElements: 'fist-of-four-thunders-disciple-elements',
+  firstOfUnbrokenAirDiscipleElements: 'first-of-unbroken-air-disciple-elements',
+  flamesOfThePheonixDiscipleElements: 'flames-of-the-pheonix-disciple-elements',
+  gongOfTheSummitDiscipleElements: 'gong-of-the-summit-disciple-elements',
+  mistStanceDiscipleElements: 'mist-stance-disciple-elements',
+  rideTheWindDiscipleElements: 'ride-the-wind-disciple-elements',
+  riverOfHungryFlameDiscipleElements: 'river-of-hungry-flame-disciple-elements',
+  rushOfTheGaleSpiritsDiscipleElements:
+    'rush-of-the-gale-spirits-disciple-elements',
+  shapeOfTheFlowingRiverDiscipleElements:
+    'shape-of-the-flowing-river-disciple-elements',
+  sweepingCinderStrikeDiscipleElements:
+    'sweeping-cinder-strike-disciple-elements',
+  waterWhipDiscipleElements: 'water-whip-disciple-elements',
+  waveOfRollingEarthDiscipleElements: 'wave-of-rolling-earth-disciple-elements',
 };
 
 const FeaturesFromFeatureGroupSeed: Prisma.FeatureCreateManyInput[] = [
@@ -630,6 +653,120 @@ const FeaturesFromFeatureGroupSeed: Prisma.FeatureCreateManyInput[] = [
       "This 10th-level feature replaces the Hide in Plain Sight feature. You gain no benefit from the replaced feature and don't qualify for anything in the game that requires it. \n\nYou draw on the powers of nature to hide yourself from view briefly. As a bonus action, you can magically become invisible, along with any equipment you are wearing or carrying, until the start of your next turn.\n\n You can use this feature a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
     FeatureGroupId: FeatureGroupIds.rangerDisguise,
   },
+  {
+    id: FeaturesFromFeatureGroupIds.breathOfWinterDiscipleElements,
+    name: 'Breath of Winter',
+    description: 'You can spend 6 ki points to cast Cone of Cold.',
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.clenchOfNorthWindDiscipleElements,
+    name: 'Clench of the North Wind',
+    description: 'You can spend 3 ki points to cast Hold Person.',
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.elementalAtunementDiscipleElements,
+    description:
+      'You can use your action to briefly control elemental forces within 30 feet of you, causing one of the following effects of your choice:\n\n- Create a harmless, instantaneous sensory effect related to air, earth, fire, or water, such as a shower of sparks, a puff of wind, a spray of light mist, or a gentle rumbling of stone.\n\n- Instantaneously light or snuff out a candle, a torch, or a small campfire.\n\n- Chill or warm up to 1 pound of nonliving material for up to 1 hour.\n\n- Cause earth, fire, water, or mist that can fit within a 1-foot cube to shape itself into a crude form you designate for 1 minute.',
+    name: 'Elemental Attunement',
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.eternalMountainDefenseDiscipleElements,
+    name: 'Eternal Mountain Defense',
+    description:
+      'You can spend 5 ki points to cast Stoneskin, targeting yourself',
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.fangsOfTheFireSnakeDiscipleElements,
+    name: 'Fangs of the Fire Snake',
+    unimplemented: true,
+    description:
+      'When you use the Attack action on your turn, you can spend 1 ki point to cause tendrils of flame to stretch out from your fists and feet. Your reach with your unarmed strikes increases by 10 feet for that action, as well as the rest of the turn. A hit with such an attack deals fire damage instead of bludgeoning damage, and if you spend 1 ki point when the attack hits, it also deals an extra 1d10 fire damage.',
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.fistOfFourThundersDiscipleElements,
+    name: 'Fist of Four Thunders',
+    description: 'You can spend 2 ki points to cast Thunderwave.',
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.firstOfUnbrokenAirDiscipleElements,
+    name: 'Fist of Unbroken Air',
+    description:
+      "You can create a blast of compressed air that strikes like a mighty fist. As an action, you can spend 2 ki points and choose a creature within 30 feet of you. That creature must make a Strength saving throw. On a failed save, the creature takes 3d10 bludgeoning damage, plus an extra 1d10 bludgeoning damage for each additional ki point you spend, and you can push the creature up to 20 feet away from you and knock it prone. On a successful save, the creature takes half as much damage, and you don't push it or knock it prone.",
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+    unimplemented: true,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.flamesOfThePheonixDiscipleElements,
+    name: 'Flames of the Phoenix',
+    description: 'You can spend 4 ki points to cast Fireball.',
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.gongOfTheSummitDiscipleElements,
+    name: 'Gong of the Summit',
+    description: 'You can spend 3 ki points to cast Shatter.',
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.mistStanceDiscipleElements,
+    name: 'Mist Stance',
+    description:
+      'You can spend 2 ki points to cast Gaseous Form, targeting yourself.',
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.rideTheWindDiscipleElements,
+    name: 'Ride the Wind',
+    description: 'You can spend 4 ki points to cast Fly, targeting yourself.',
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.riverOfHungryFlameDiscipleElements,
+    name: 'River of Hungry Flame',
+    description:
+      'You can spend 5 ki points to cast Wall of Fire, targeting yourself.',
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.rushOfTheGaleSpiritsDiscipleElements,
+    name: 'Rush of the Gale Spirits',
+    description: 'You can spend 2 ki points to cast Gust of Wind.',
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.shapeOfTheFlowingRiverDiscipleElements,
+    name: 'Shape of the Flowing River',
+    unimplemented: true,
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+    description:
+      "As an action, you can spend 1 ki point to choose an area of ice or water no larger than 30 feet on a side within 120 feet of you. You can change water to ice within the area and vice versa, and you can reshape ice in the area in any manner you choose. You can raise or lower the ice's elevation, create or fill in a trench, erect or flatten a wall, or form a pillar. The extent of any such changes can't exceed half the area's largest dimension. For example, if you affect a 30-foot square, you can create a pillar up to 15 feet high, raise or lower the square's elevation by up to 15 feet, dig a trench up to 15 feet deep, and so on. You can't shape the ice to trap or injure a creature in the area.",
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.sweepingCinderStrikeDiscipleElements,
+    name: 'Sweeping Cinder Strike',
+    description: 'You can spend 2 ki points to cast Burning Hands.',
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.waterWhipDiscipleElements,
+    description:
+      "You can spend 2 ki points as an action to create a whip of water that shoves and pulls a creature to unbalance it. A creature that you can see that is within 30 feet of you must make a Dexterity saving throw. On a failed save, the creature takes 3d10 bludgeoning damage, plus an extra 1d10 bludgeoning damage for each additional ki point you spend, and you can either knock it prone or pull it up to 25 feet closer to you. On a successful save, the creature takes half as much damage, and you don't pull it or knock it prone.",
+    name: 'Water Whip',
+    unimplemented: true,
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
+  {
+    id: FeaturesFromFeatureGroupIds.waveOfRollingEarthDiscipleElements,
+    name: 'Wave of Rolling Earth',
+    description: 'You can spend 6 ki points to cast Wall of Stone.',
+    FeatureGroupId: FeatureGroupIds.elementalDisciplines,
+  },
 ];
 
 const FeatureGroupSeed: Prisma.FeatureGroupCreateManyInput[] = [
@@ -704,6 +841,15 @@ const FeatureGroupSeed: Prisma.FeatureGroupCreateManyInput[] = [
     description:
       'Rangers must choose between Hide in Plain Sight or Nature’s Veil',
     slug: 'ranger-disguise',
+  },
+  {
+    id: FeatureGroupIds.elementalDisciplines,
+    name: 'Elemental Disciplines',
+    flavorText:
+      "Monk's with the Way of the Four Elements subclass can choose from a list of Elemental Disciplines.",
+    description:
+      "Monk's with the Way of the Four Elements subclass can choose from a list of Elemental Disciplines.",
+    slug: 'elemental-disciplines',
   },
 ];
 
