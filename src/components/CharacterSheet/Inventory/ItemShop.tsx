@@ -25,7 +25,7 @@ const ItemShop = ({ setSelectedItem, selectedItemInfo }: Props) => {
 
   return (
     <div className="p-4 bg-base-200 rounded-xl border border-primary h-full flex flex-col items-center">
-      <h2 className="divider">Item Shop</h2>
+      <h2 className="lg:divider">Item Shop</h2>
       <p>Add Items into your inventory.</p>
       <SidebarMetaSelector
         model="Item"
@@ -60,8 +60,8 @@ const ItemShop = ({ setSelectedItem, selectedItemInfo }: Props) => {
           });
         }}
       >
-        <Form className="bg-base-300 p-4 rounded-xl">
-          <p className="divider">
+        <Form className="bg-base-300 p-4 rounded-xl flex items-center flex-col w-full gap-2">
+          <p className="lg:divider">
             Selected Item:{' '}
             {selectedItemInfo ? (
               <ModelDisplay
@@ -78,9 +78,11 @@ const ItemShop = ({ setSelectedItem, selectedItemInfo }: Props) => {
             as="input"
             formProps={{
               type: 'number',
+              size: 'sm',
+              className: 'w-full',
             }}
           />
-          <div className="divider my-8">
+          <div className="lg:divider">
             <button type="submit" className="btn btn-primary">
               Add to Inventory
             </button>

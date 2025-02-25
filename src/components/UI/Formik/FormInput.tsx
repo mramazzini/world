@@ -6,6 +6,7 @@ interface Props {
   type?: string;
   placeholder?: string;
   disabled?: boolean;
+  className?: string;
 }
 
 const FormInput = ({
@@ -16,6 +17,7 @@ const FormInput = ({
   type,
   placeholder,
   disabled,
+  className,
 }: Props) => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     // If the type is 'number', filter out non-numeric characters
@@ -26,7 +28,7 @@ const FormInput = ({
   };
   return (
     <input
-      className={`input input-bordered ${
+      className={`input input-bordered ${className} ${
         size === 'sm'
           ? 'input-sm'
           : size === 'md'

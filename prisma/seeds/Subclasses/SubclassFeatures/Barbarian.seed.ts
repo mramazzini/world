@@ -1,3 +1,5 @@
+import { Prisma } from '@prisma/client';
+
 const ids = {
   ancestralGuardian: '11',
   battlerager: '12',
@@ -10,7 +12,18 @@ const ids = {
   zealot: '19',
 };
 
-const BarbarianSubclassFeatures = [
+export const BarbarianSubclassFeatureIds = {
+  formOfTheBeast: 'FormOfTheBeast',
+  bestialSoul: 'BestialSoul',
+  infectiousFury: 'InfectiousFury',
+  callTheHunt: 'CallTheHunt',
+  stormAura: 'StormAura',
+  stormSoul: 'StormSoul',
+  shieldingStorm: 'ShieldingStorm',
+  ragingStorm: 'RagingStorm',
+};
+
+const BarbarianSubclassFeatures: Prisma.FeatureCreateManyInput[] = [
   // ancestral guardian
   // {
   //   name: 'Ancestral Protectors',
@@ -71,6 +84,7 @@ const BarbarianSubclassFeatures = [
   // },
   // //Path of the Beast
   {
+    id: BarbarianSubclassFeatureIds.formOfTheBeast,
     name: 'Form of the Beast',
     unimplemented: true,
     description:
@@ -103,6 +117,7 @@ const BarbarianSubclassFeatures = [
     // levels: [3],
   },
   {
+    id: BarbarianSubclassFeatureIds.bestialSoul,
     name: 'Bestial Soul',
     unimplemented: true,
     description:
@@ -116,8 +131,9 @@ const BarbarianSubclassFeatures = [
     // // levels: [6],
   },
   {
+    id: BarbarianSubclassFeatureIds.infectiousFury,
     name: 'Infectious Fury',
-    unimplemented: true,
+    unimplemented: false,
     description:
       'At 10th level, your bestial form can unleash a rabid fury. When you hit a creature with your natural weapons while you’re raging, the spirit within you can curse your target with rabid fury.\n\nYou can use this feature a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.\n\n The target must succeed on a Wisdom saving throw (DC 8 + your proficiency bonus + your Constitution modifier) or suffer one of the following effects (your choice):',
     options: [
@@ -129,6 +145,7 @@ const BarbarianSubclassFeatures = [
     // levels: [10],
   },
   {
+    id: BarbarianSubclassFeatureIds.callTheHunt,
     name: 'Call the Hunt',
     unimplemented: true,
     description:
@@ -207,10 +224,11 @@ const BarbarianSubclassFeatures = [
   // },
   // // Path of the Storm Herald
   {
+    id: BarbarianSubclassFeatureIds.stormAura,
     name: 'Storm Aura',
     description:
       "When you select this path at 3rd level, you emanate a stormy, magical aura while you rage. The aura extends 10 feet from you in every direction, but not through total cover.\n\nYour aura has an effect that activates when you enter your rage, and you can activate the effect again on each of your turns as a bonus action. Choose desert, sea, or tundra. Your aura's effect depends on that chosen environment, as detailed below. You can change your environment choice whenever you gain a level in this class.\n\nIf your aura's effects require a saving throw, the DC equals 8 + your proficiency bonus + your Constitution modifier.",
-    unimplemented: true,
+    unimplemented: false,
     extendedTable: [
       {
         '': {
@@ -239,6 +257,7 @@ const BarbarianSubclassFeatures = [
     // levels: [3],
   },
   {
+    id: BarbarianSubclassFeatureIds.stormSoul,
     name: 'Storm Soul',
     unimplemented: true,
     description:
@@ -272,6 +291,7 @@ const BarbarianSubclassFeatures = [
     // levels: [6],
   },
   {
+    id: BarbarianSubclassFeatureIds.shieldingStorm,
     name: 'Shielding Storm',
     unimplemented: true,
     description:
@@ -280,6 +300,7 @@ const BarbarianSubclassFeatures = [
     // levels: [10],
   },
   {
+    id: BarbarianSubclassFeatureIds.ragingStorm,
     name: 'Raging Storm',
     unimplemented: true,
     description:

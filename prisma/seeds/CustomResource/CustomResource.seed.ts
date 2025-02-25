@@ -20,6 +20,10 @@ export const CustomResourceIds = {
   markForDeath: 'markForDeath',
   dreadLord: 'dreadLord',
   wholenessOfBody: 'wholenessOfBody',
+  infectiousFury: 'infectiousFury',
+  drakesBreath: 'drakesBreath',
+  reflexiveResistance: 'reflexiveResistance',
+  detectPortal: 'detectPortal',
 };
 
 const CustomResourceSeed: Prisma.CustomResourceCreateManyInput[] = [
@@ -155,6 +159,34 @@ const CustomResourceSeed: Prisma.CustomResourceCreateManyInput[] = [
     description:
       'A pool of points that dictate how many times a way oh the open hand Monk can restore to themselves using the Wholeness of Body Feature.',
     slug: 'wholeness-of-body',
+  },
+  {
+    id: CustomResourceIds.infectiousFury,
+    name: 'Infectious Fury',
+    description:
+      'A pool of points that dictate how many times a Path of the Beast Barbarian can use the Infectious Fury Feature.',
+    slug: 'infectious-fury',
+  },
+  {
+    id: CustomResourceIds.drakesBreath,
+    name: "Drake's Breath",
+    description:
+      'A pool of charges that dictate how many uses of drake breath a drakewarden Ranger has.',
+    slug: 'drakes-breath',
+  },
+  {
+    id: CustomResourceIds.reflexiveResistance,
+    name: 'Reflexive Resistance',
+    description:
+      'A pool of charges that dictate how many uses of reflective resistance a drakewarden ranger has has.',
+    slug: 'reflective-resistance',
+  },
+  {
+    id: CustomResourceIds.detectPortal,
+    name: 'Detect Portal',
+    description:
+      'A pool of charges that dictate how many uses of detect portal a horizon walker ranger has.',
+    slug: 'detect-portal',
   },
 ];
 
