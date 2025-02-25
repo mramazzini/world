@@ -3,12 +3,16 @@ import ArtificerSubclassFeatureEffectsSeed from './ArtificerSubclassFeatureEffec
 import { DruidSubclassFeatureEffects } from './DruidSubclassFeatureEffects.seed';
 import { PaladinSubclassFeatureEffects } from './PaladinSubclassFeatureEffects.seed';
 import { MonkSubclassFeatureEffects } from './MonkSubclassFeatureEffect.seed';
+import BarbarianSubclassFeatureEffectsSeed from './BarbarianSubclassFeatureEffects.seed';
+import { RangerSubclassFeatureEffects } from './RangerSubclassFeatureEffects.seed';
 
 const SubclassFeatureEffects: Prisma.EffectCreateInput[] = [
   ...ArtificerSubclassFeatureEffectsSeed,
   ...DruidSubclassFeatureEffects,
   ...PaladinSubclassFeatureEffects,
   ...MonkSubclassFeatureEffects,
+  ...BarbarianSubclassFeatureEffectsSeed,
+  ...RangerSubclassFeatureEffects,
 ];
 
 export default SubclassFeatureEffects;

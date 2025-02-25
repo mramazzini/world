@@ -11,35 +11,31 @@ const useInventoryMutator = () => {
   const { canEquip } = useLoadout();
   const dispatch = useAppDispatch();
 
-  const addToInventoryHelper = useCallback(
-    (
-      itemQuantity: PrismaJson.QuantityItem,
-      inventory: PrismaJson.QuantityItem[]
-    ) => {
-      if (!state) return [];
-      let newInventory = [...inventory];
+  const addToInventoryHelper = (
+    itemQuantity: PrismaJson.QuantityItem,
+    inventory: PrismaJson.QuantityItem[]
+  ) => {
+    let newInventory = [...inventory];
 
-      const itemIndex = newInventory.findIndex(
-        (i) => i.item === itemQuantity.item
-      );
+    const itemIndex = newInventory.findIndex(
+      (i) => i.item === itemQuantity.item
+    );
 
-      if (itemIndex === -1) {
-        newInventory = [...newInventory, itemQuantity];
-      } else {
-        newInventory = newInventory.map((i) => {
-          if (i.item === itemQuantity.item) {
-            return {
-              ...i,
-              quantity: i.quantity + itemQuantity.quantity,
-            };
-          }
-          return i;
-        });
-      }
-      return newInventory;
-    },
-    [state]
-  );
+    if (itemIndex === -1) {
+      newInventory = [...newInventory, itemQuantity];
+    } else {
+      newInventory = newInventory.map((i) => {
+        if (i.item === itemQuantity.item) {
+          return {
+            ...i,
+            quantity: i.quantity + itemQuantity.quantity,
+          };
+        }
+        return i;
+      });
+    }
+    return newInventory;
+  };
 
   const addToInventory = useCallback(
     (itemQuantity: PrismaJson.QuantityItem) => {
@@ -52,16 +48,17 @@ const useInventoryMutator = () => {
         })
       );
     },
-    [state, dispatch, addToInventoryHelper]
+    [state, dispatch]
   );
 
   const bulkAddToInventory = useCallback(
     (items: PrismaJson.QuantityItem[]) => {
       if (!state) return;
       let newInventory = [...state.inventory];
-      items.forEach((item) => {
+      for (const item of items) {
         newInventory = addToInventoryHelper(item, newInventory);
-      });
+      }
+
       dispatch(
         setCharacterState({
           ...state,
@@ -69,7 +66,7 @@ const useInventoryMutator = () => {
         })
       );
     },
-    [state, dispatch, addToInventoryHelper]
+    [state, dispatch]
   );
 
   const equipArmor = useCallback(
@@ -126,11 +123,13 @@ const useInventoryMutator = () => {
       if (itemIndex === -1) return;
       const newInventory = [...state.inventory];
       if (newInventory[itemIndex].quantity > amount) {
-        newInventory[itemIndex].quantity -= amount;
+        newInventory[itemIndex] = {
+          ...newInventory[itemIndex],
+          quantity: newInventory[itemIndex].quantity - amount,
+        };
       } else {
         newInventory.splice(itemIndex, 1);
       }
-
       dispatch(
         setCharacterState({
           ...state,
@@ -141,16 +140,37 @@ const useInventoryMutator = () => {
     [state, dispatch]
   );
 
-  const unpackEquipment = useCallback(
-    async (itemId: ItemID) => {
-      const item = await memoizeGetItem({ type: 'id', query: itemId });
-      if (!item || !item.EquipmentPack) return;
+  const unpackEquipment = async (itemId: ItemID) => {
+    const item = await memoizeGetItem({ type: 'id', query: itemId });
+    if (!item || !item.EquipmentPack) {
+      console.log('Item is not an equipment pack.');
+      return;
+    }
+    if (!state) return;
+    const items = item.EquipmentPack.itemsQuantity;
+    let newInventory = [...state.inventory];
+    for (const item of items) {
+      newInventory = addToInventoryHelper(item, newInventory);
+    }
 
-      bulkAddToInventory(item.EquipmentPack.itemsQuantity);
-      deleteItem(itemId, 1);
-    },
-    [bulkAddToInventory, deleteItem]
-  );
+    const packIndex = newInventory.findIndex((i) => i.item === itemId);
+    const amount = newInventory[packIndex].quantity;
+    newInventory = [
+      ...newInventory.slice(0, packIndex),
+      ...newInventory.slice(packIndex + 1),
+    ];
+
+    if (amount > 1) {
+      newInventory = [...newInventory, { item: itemId, quantity: amount - 1 }];
+    }
+
+    dispatch(
+      setCharacterState({
+        ...state,
+        inventory: [...newInventory],
+      })
+    );
+  };
 
   const unequipItem = useCallback(
     (itemId: ItemID) => {

@@ -949,17 +949,17 @@ const SubClasses: Prisma.SubClassCreateManyInput[] = [
   //   flavorText:
   //     'Gloom stalkers are at home in the darkest places, seeking to ambush threats before they can reach the broader world.',
   // },
-  // {
-  //   name: 'Horizon Walker Conclave',
-  //   slug: '',
-  //   description:
-  //     'Horizon walkers guard the world against threats that originate from other planes or that seek to ravage the mortal realm with otherworldly magic. They seek out planar portals and keep watch over them, venturing to the Inner Planes and the Outer Planes as needed to pursue their foes. These rangers are also friends to any forces in the multiverse – especially benevolent dragons, fey, and elementals – that work to preserve life and the order of the planes.',
-  //   id: '84',
-  //   classId: ids.ranger,
-  //   source: src.xanathar,
-  //   flavorText:
-  //     'Horizon walkers guard the world against threats that originate from other planes or that seek to ravage the mortal realm with otherworldly magic.',
-  // },
+  {
+    name: 'Horizon Walker Conclave',
+    slug: 'horizon-walker',
+    description:
+      'Horizon walkers guard the world against threats that originate from other planes or that seek to ravage the mortal realm with otherworldly magic. They seek out planar portals and keep watch over them, venturing to the Inner Planes and the Outer Planes as needed to pursue their foes. These rangers are also friends to any forces in the multiverse – especially benevolent dragons, fey, and elementals – that work to preserve life and the order of the planes.',
+    id: '84',
+    classId: ids.ranger,
+    source: src.xanathar,
+    flavorText:
+      'Horizon walkers guard the world against threats that originate from other planes or that seek to ravage the mortal realm with otherworldly magic.',
+  },
   // {
   //   name: 'Hunter Conclave',
   //   slug: '',

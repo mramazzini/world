@@ -131,6 +131,13 @@ const useSpellcaster = () => {
   }, [state, spellSlots, dispatch]);
 
   useEffect(() => {
+    if (spellcastingClasses.length === 0) return;
+    if (spellcastingClasses.length === 1) {
+      dispatch(
+        setActiveSpellCastingClass(spellcastingClasses[0].Class.SpellCasting)
+      );
+      return;
+    }
     const activeSpellCastingClass = spellcastingClasses.find(
       (c) => c.Class.id === activeSpellCastingClassId
     );

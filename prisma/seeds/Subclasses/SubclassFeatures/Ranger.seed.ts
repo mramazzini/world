@@ -1,4 +1,6 @@
-const ids = {
+import { ChainType, Prisma } from '@prisma/client';
+
+export const RangerSubclassIds = {
   BeastMaster: '81',
   feyWanderer: '82',
   gloomStalker: '83',
@@ -9,7 +11,22 @@ const ids = {
   drakewarden: '88',
 };
 
-const RangerSubclassFeatures = [
+export const RangerSubclassFeatureIds = {
+  drakewardenOrigin: 'drakewardenOrigin',
+  draconicGift: 'draconicGift',
+  drakeCompanion: 'drakeCompanion',
+  bondOfFangAndScale: 'bondOfFangAndScale',
+  drakesBreath: 'drakesBreath',
+  perfectedBond: 'perfectedBond',
+  horizonWalkerMagic: 'horizonWalkerMagic',
+  detectPortal: 'detectPortal',
+  planarWarrior: 'planarWarrior',
+  etherealStep: 'etherealStep',
+  distantStrike: 'distantStrike',
+  spectralDefense: 'spectralDefense',
+};
+
+const RangerSubclassFeatures: Prisma.FeatureCreateManyInput[] = [
   // Beast Master
   // {
   //   name: "Ranger's Companion",
@@ -425,77 +442,86 @@ const RangerSubclassFeatures = [
   //   levels: [15],
   //   subClassId: ids.gloomStalker,
   // },
-  // // Horizon Walker
-  // {
-  //   name: 'Horizon Walker Magic',
-  //   description:
-  //     'Starting at 3rd level, you learn an additional spell when you reach certain levels in this class, as shown in the Horizon Walker Spells table. The spell counts as a ranger spell for you, but it doesn’t count against the number of ranger spells you know.',
-  //   levels: [3],
-  //   subClassId: ids.horizonWalker,
-  //   extendedTable: [
-  //     {
-  //       'Horizon Walker Spells': {
-  //         headers: ['Ranger Level', 'Spell'],
-  //         data: [
-  //           {
-  //             'Ranger Level': '3rd',
-  //             Spell: 'Protection from Evil and Good',
-  //           },
-  //           {
-  //             'Ranger Level': '5th',
-  //             Spell: 'Misty Step',
-  //           },
-  //           {
-  //             'Ranger Level': '9th',
-  //             Spell: 'Haste',
-  //           },
-  //           {
-  //             'Ranger Level': '13th',
-  //             Spell: 'Banishment',
-  //           },
-  //           {
-  //             'Ranger Level': '17th',
-  //             Spell: 'Teleportation Circle',
-  //           },
-  //         ],
-  //       },
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: 'Detect Portal',
-  //   description: `At 3rd level, you gain the ability to magically sense the presence of a planar portal. As an action, you detect the distance and direction to the closest planar portal within 1 mile of you.\n\nOnce you use this feature, you can't use it again until you finish a short or long rest.\n\nSee the "Planar Travel" section in chapter 2 of the Dungeon Master's Guide for examples of planar portals.`,
-  //   levels: [3],
-  //   subClassId: ids.horizonWalker,
-  // },
-  // {
-  //   name: 'Planar Warrior',
-  //   description:
-  //     'At 3rd level, you learn to draw on the energy of the multiverse to augment your attacks.\n\nAs a bonus action, choose one creature you can see within 30 feet of you. The next time you hit that creature on this turn with a weapon attack, all damage dealt by the attack becomes force damage, and the creature takes an extra 1d8 force damage from the attack. When you reach 11th level in this class, the extra damage increases to 2d8.',
-  //   levels: [3],
-  //   subClassId: ids.horizonWalker,
-  // },
-  // {
-  //   name: 'Ethereal Step',
-  //   description:
-  //     'At 7th level, you learn to step through the Ethereal Plane. As a bonus action on your turn, you can cast the Etherealness spell with this feature, without expending a spell slot, but the spell ends at the end of the current turn.\n\nOnce you use this feature, you can’t use it again until you finish a short or long rest.',
-  //   levels: [7],
-  //   subClassId: ids.horizonWalker,
-  // },
-  // {
-  //   name: 'Distant Strike',
-  //   description:
-  //     'At 11th level, you gain the ability to pass between the planes in a blink of an eye. When you use the Attack action, you can teleport up to 10 feet before each attack to an unoccupied space you can see.\n\nIf you attack at least two different creatures with the action, you can make one additional attack with it against a third creature.',
-  //   levels: [11],
-  //   subClassId: ids.horizonWalker,
-  // },
-  // {
-  //   name: 'Spectral Defense',
-  //   description:
-  //     "At 15th level, your ability to move between planes enables you to slip through the planar boundaries to lessen the harm done to you during battle. When you take damage from an attack, you can use your reaction to give yourself resistance to all of that attack's damage on this turn.",
-  //   levels: [15],
-  //   subClassId: ids.horizonWalker,
-  // },
+  // Horizon Walker
+  {
+    id: RangerSubclassFeatureIds.horizonWalkerMagic,
+    name: 'Horizon Walker Magic',
+    description:
+      'Starting at 3rd level, you learn an additional spell when you reach certain levels in this class, as shown in the Horizon Walker Spells table. The spell counts as a ranger spell for you, but it doesn’t count against the number of ranger spells you know.',
+    // levels: [3],
+    subClassId: RangerSubclassIds.horizonWalker,
+    extendedTable: [
+      {
+        'Horizon Walker Spells': {
+          headers: ['Ranger Level', 'Spell'],
+          data: [
+            {
+              'Ranger Level': '3rd',
+              Spell: 'Protection from Evil and Good',
+            },
+            {
+              'Ranger Level': '5th',
+              Spell: 'Misty Step',
+            },
+            {
+              'Ranger Level': '9th',
+              Spell: 'Haste',
+            },
+            {
+              'Ranger Level': '13th',
+              Spell: 'Banishment',
+            },
+            {
+              'Ranger Level': '17th',
+              Spell: 'Teleportation Circle',
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    name: 'Detect Portal',
+    description: `At 3rd level, you gain the ability to magically sense the presence of a planar portal. As an action, you detect the distance and direction to the closest planar portal within 1 mile of you.\n\nOnce you use this feature, you can't use it again until you finish a short or long rest.\n\nSee the "Planar Travel" section in chapter 2 of the Dungeon Master's Guide for examples of planar portals.`,
+    // levels: [3],
+    subClassId: RangerSubclassIds.horizonWalker,
+    id: RangerSubclassFeatureIds.detectPortal,
+  },
+  {
+    name: 'Planar Warrior',
+    unimplemented: true,
+    description:
+      'At 3rd level, you learn to draw on the energy of the multiverse to augment your attacks.\n\nAs a bonus action, choose one creature you can see within 30 feet of you. The next time you hit that creature on this turn with a weapon attack, all damage dealt by the attack becomes force damage, and the creature takes an extra 1d8 force damage from the attack. When you reach 11th level in this class, the extra damage increases to 2d8.',
+    // levels: [3],
+    effectChainType: ChainType.REPLACE,
+    subClassId: RangerSubclassIds.horizonWalker,
+    id: RangerSubclassFeatureIds.planarWarrior,
+  },
+  {
+    name: 'Ethereal Step',
+    description:
+      'At 7th level, you learn to step through the Ethereal Plane. As a bonus action on your turn, you can cast the Etherealness spell with this feature, without expending a spell slot, but the spell ends at the end of the current turn.\n\nOnce you use this feature, you can’t use it again until you finish a short or long rest.',
+    unimplemented: true,
+    // levels: [7],
+    subClassId: RangerSubclassIds.horizonWalker,
+    id: RangerSubclassFeatureIds.etherealStep,
+  },
+  {
+    name: 'Distant Strike',
+    description:
+      'At 11th level, you gain the ability to pass between the planes in a blink of an eye. When you use the Attack action, you can teleport up to 10 feet before each attack to an unoccupied space you can see.\n\nIf you attack at least two different creatures with the action, you can make one additional attack with it against a third creature.',
+    // levels: [11],
+    subClassId: RangerSubclassIds.horizonWalker,
+    id: RangerSubclassFeatureIds.distantStrike,
+  },
+  {
+    name: 'Spectral Defense',
+    description:
+      "At 15th level, your ability to move between planes enables you to slip through the planar boundaries to lessen the harm done to you during battle. When you take damage from an attack, you can use your reaction to give yourself resistance to all of that attack's damage on this turn.",
+    // levels: [15],
+    subClassId: RangerSubclassIds.horizonWalker,
+    id: RangerSubclassFeatureIds.spectralDefense,
+  },
   // // hunter
   // {
   //   name: "Hunter's Prey",
@@ -764,12 +790,13 @@ const RangerSubclassFeatures = [
   // },
   // // drakewarden
   {
-    name: 'Drakwarden Origin',
+    id: RangerSubclassFeatureIds.drakewardenOrigin,
+    name: 'Drakewarden Origin',
     description:
       'When you take this subclass at 3rd level, consider the source of the draconic spirit you have bonded with. The Drakewarden Origin table offers examples.',
     // levels: [3],
-    unimplemented: true,
-    subClassId: ids.drakewarden,
+    unimplemented: false,
+    subClassId: RangerSubclassIds.drakewarden,
     extendedTable: [
       {
         'Drakwarden Origin Table': {
@@ -811,12 +838,13 @@ const RangerSubclassFeatures = [
     ],
   },
   {
+    id: RangerSubclassFeatureIds.draconicGift,
     name: 'Draconic Gift',
     description:
       'At 3rd level, the bond you share with your drake creates a connection to dragonkind, granting you understanding and empowering your presence.You gain the following benefits:',
     // levels: [3],
-    unimplemented: true,
-    subClassId: ids.drakewarden,
+    unimplemented: false,
+    subClassId: RangerSubclassIds.drakewarden,
     extendedTable: [
       {
         '': {
@@ -838,12 +866,13 @@ const RangerSubclassFeatures = [
     ],
   },
   {
+    id: RangerSubclassFeatureIds.drakeCompanion,
     name: 'Drake Companion',
     unimplemented: true,
     description:
       'At 3rd level, as an action, you can magically summon the drake that is bound to you. It appears in an unoccupied space of your choice within 30 feet of you.\n\nThe drake is friendly to you and your companions, and it obeys your commands. See its game statistics in the accompanying Drake Companion stat block, which uses your proficiency bonus (PB) in several places. Whenever you summon the drake, choose a damage type listed in its Draconic Essence trait. You can determine the cosmetic characteristics of the drake, such as its color, its scale texture, or any visible effect of its Draconic Essence; your choice has no effect on its game statistics.\n\nIn combat, the drake shares your initiative count, but it takes its turn immediately after yours. It can move and use its reaction on its own, but the only action it takes on its turn is the Dodge action, unless you take a bonus action on your turn to command it to take another action. That action can be one in its stat block or some other action. If you are incapacitated, the drake can take any action of its choice, not just Dodge.\n\nThe drake remains until it is reduced to 0 hit points, until you use this feature to summon the drake again, or until you die. Anything the drake was wearing or carrying is left behind when the drake vanishes.\n\nOnce you summon the drake, you can’t do so again until you finish a long rest, unless you expend a spell slot of 1st level or higher to summon it.',
     // levels: [3],
-    subClassId: ids.drakewarden,
+    subClassId: RangerSubclassIds.drakewarden,
     extendedTable: [
       {
         'Drake Companion': {
@@ -936,6 +965,7 @@ const RangerSubclassFeatures = [
     ],
   },
   {
+    id: RangerSubclassFeatureIds.bondOfFangAndScale,
     name: 'Bond of Fang and Scale',
     unimplemented: true,
     description:
@@ -965,18 +995,21 @@ const RangerSubclassFeatures = [
         },
       },
     ],
-    subClassId: ids.drakewarden,
+    subClassId: RangerSubclassIds.drakewarden,
   },
   {
+    id: RangerSubclassFeatureIds.drakesBreath,
     name: "Drake's Breath",
     unimplemented: true,
     description:
       'At 11th level, as an action, you can exhale a 30-foot cone of damaging breath or cause your drake to exhale it. Choose acid, cold, fire, lightning, or poison damage (your choice doesn’t have to match your drake’s Draconic Essence). Each creature in the cone must make a Dexterity saving throw against your spell save DC, taking 8d6 damage on a failed save, or half as much damage on a successful one.\n\nThis damage increases to 10d6 when you reach 15th level in this class\n\nOnce you use this feature, you can’t do so again until you finish a long rest, unless you expend a spell slot of 3rd level or higher to use it again.',
     // levels: [11, 15],
-    subClassId: ids.drakewarden,
+    subClassId: RangerSubclassIds.drakewarden,
   },
   {
+    id: RangerSubclassFeatureIds.perfectedBond,
     name: 'Perfected Bond',
+    effectChainType: ChainType.REPLACE,
     unimplemented: true,
     description:
       'At 15th level, your bond to your drake reaches the pinnacle of its power. While your drake is summoned, you and the drake gain the following benefits:',
@@ -1005,7 +1038,7 @@ const RangerSubclassFeatures = [
         },
       },
     ],
-    subClassId: ids.drakewarden,
+    subClassId: RangerSubclassIds.drakewarden,
   },
 ];
 

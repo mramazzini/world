@@ -177,6 +177,8 @@ const useDiceRoller = () => {
       // Now evaluate the modified formula (with dice totals replaced)
       formula = formula.replaceAll('min', 'Math.min');
       formula = formula.replaceAll('max', 'Math.max');
+      formula = formula.replaceAll('Max', 'Math.max');
+      formula = formula.replaceAll('Min', 'Math.min');
       try {
         total = eval(formula); // eval is used here to calculate the total, but handle with care
       } catch (error) {

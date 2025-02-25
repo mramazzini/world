@@ -6,13 +6,21 @@ import {
   setRefreshSheet,
 } from '@/store/sheetSlice';
 import { getLatestCharacter } from '@/Utility/Indexed/Sheet/SheetDB';
+import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 
 const useCharacter = (characterID: string) => {
   const [loading, setLoading] = useState(false);
   const refreshPending = useAppSelector((state) => state.sheet.refreshPending);
+  const pathname = usePathname();
 
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (pathname.includes('dashboard')) {
+      dispatch(setRefreshSheet(true));
+    }
+  }, [pathname, dispatch]);
 
   const getCharacterState = useCallback(async () => {
     getLatestCharacter(characterID).then((state) => {
