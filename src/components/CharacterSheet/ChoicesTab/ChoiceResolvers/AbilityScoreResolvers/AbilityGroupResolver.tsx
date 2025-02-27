@@ -62,7 +62,11 @@ const AbilityGroupResolver = ({
       <div className="divider"></div>
       <ul className="flex flex-col gap-2">
         {pins.map((pin, index) => (
-          <li key={pin.id} className="form-control flex flex-row w-full gap-4 ">
+          <li
+            key={pin.id}
+            className="form-control flex flex-row w-full gap-2 items-center"
+          >
+            + {pin.value} to{' '}
             <select
               className="select select-sm"
               value={pin.assignedAbility || ''}
