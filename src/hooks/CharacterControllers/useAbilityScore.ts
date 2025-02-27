@@ -14,6 +14,9 @@ const useAbilityScore = () => {
   const dispatch = useAppDispatch();
   const activeEffects = useAppSelector((state) => state.sheet.activeEffects);
   const { fufilledChoices } = useChoicesSelector();
+  const combinedSpecies = useAppSelector(
+    (state) => state.sheet.combinedSpecies
+  );
   useEffect(() => {
     const abilityScores = {
       [Ability.STR]: state?.baseSTR || 10,
@@ -31,7 +34,6 @@ const useAbilityScore = () => {
         });
       }
     });
-    console.log(fufilledChoices);
     fufilledChoices.forEach((choice) => {
       switch (choice.protocol) {
         case ChoiceProtocol.IMPROVE_ABILITY_SCORE: {
@@ -54,6 +56,11 @@ const useAbilityScore = () => {
         }
       }
     });
+
+    const asi = combinedSpecies?.freeAbilityScoreImprovements || [];
+    for (const ability of asi) {
+      abilityScores[ability.ability] += ability.value;
+    }
     dispatch(setAbilityScores(abilityScores));
   }, [
     activeEffects,
