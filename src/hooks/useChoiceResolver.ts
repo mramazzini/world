@@ -15,6 +15,7 @@ const useChoiceResolver = (choiceId: string) => {
       setLoading(true);
       const res = await resolveChoice({ characterId, choiceId, selections });
       if (res === 'failure') {
+        console.error('Failed to resolve choice');
         setLoading(false);
         return;
       }

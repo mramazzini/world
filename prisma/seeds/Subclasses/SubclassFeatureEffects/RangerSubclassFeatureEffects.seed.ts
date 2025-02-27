@@ -139,7 +139,7 @@ export const RangerSubclassFeatureEffects: Prisma.EffectCreateInput[] = [
         where: {
           effectId_resourceId: {
             effectId: RangerSubclassEffectsIds.perfectedBond,
-            resourceId: CustomResourceIds.drakesBreath,
+            resourceId: CustomResourceIds.reflexiveResistance,
           },
         },
         create: {

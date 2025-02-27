@@ -14,6 +14,7 @@ import SetToolProficiencyGroupedResolver from './ChoiceResolvers/ToolResolvers/G
 import AddFreeSpellResolver from './ChoiceResolvers/SpellResolvers/AddFreeSpellResolver';
 import UpgradeSkillProficiencyToExpertiseResolver from './ChoiceResolvers/SkillResolvers/UpgradeSkillProficiencyToExpertise';
 import ChooseSubclassResolver from './ChoiceResolvers/SubclassResolver/ChooseSubclassResolver';
+import SetFeatOrASIResolver from './ChoiceResolvers/FeatOrASIResolvers/SetFeatOrASIResolver';
 
 const ChoiceResolverController = ({ choice }: { choice: Choice }) => {
   switch (choice.protocol) {
@@ -47,6 +48,8 @@ const ChoiceResolverController = ({ choice }: { choice: Choice }) => {
       return <UpgradeSkillProficiencyToExpertiseResolver choice={choice} />;
     case ChoiceProtocol.CHOOSE_SUBCLASS:
       return <ChooseSubclassResolver choice={choice} />;
+    case ChoiceProtocol.SET_FEAT_OR_ASI:
+      return <SetFeatOrASIResolver choice={choice} />;
     // case ChoiceProtocol.SET_WEAPON_PROFICIENCY:
 
     default:

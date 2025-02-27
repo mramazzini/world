@@ -86,7 +86,6 @@ const WorkshopContextMenu = () => {
           className="btn btn-error btn-sm"
           onClick={() => {
             dispatch(closeContextMenu());
-            console.log(contextMenuTab);
             if (contextMenuTab)
               dispatch(deleteLocalWorkshopItem(contextMenuTab));
           }}

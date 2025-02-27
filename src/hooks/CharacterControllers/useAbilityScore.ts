@@ -1,14 +1,19 @@
-import { Ability } from '@prisma/client';
+import { Ability, ChoiceProtocol } from '@prisma/client';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setAbilityScores } from '@/store/sheetSlice';
 import useCharacterState from '../useCharacter/useCharacterState';
+import useChoicesSelector from '../useChoicesSelector';
+import {
+  FeatOrASIOutput,
+  ImproveAbilityScoreOutput,
+} from '@/lib/types/protocols';
 
 const useAbilityScore = () => {
   const state = useCharacterState();
   const dispatch = useAppDispatch();
   const activeEffects = useAppSelector((state) => state.sheet.activeEffects);
-
+  const { fufilledChoices } = useChoicesSelector();
   useEffect(() => {
     const abilityScores = {
       [Ability.STR]: state?.baseSTR || 10,
@@ -18,7 +23,6 @@ const useAbilityScore = () => {
       [Ability.WIS]: state?.baseWIS || 10,
       [Ability.CHA]: state?.baseCHA || 10,
     };
-    console.log(activeEffects);
     activeEffects.forEach((effect) => {
       if (effect.abilityScoreImprovements) {
         effect.abilityScoreImprovements.forEach((improvement) => {
@@ -27,7 +31,29 @@ const useAbilityScore = () => {
         });
       }
     });
-
+    console.log(fufilledChoices);
+    fufilledChoices.forEach((choice) => {
+      switch (choice.protocol) {
+        case ChoiceProtocol.IMPROVE_ABILITY_SCORE: {
+          const abilityImprovements =
+            choice.selections as ImproveAbilityScoreOutput;
+          for (const ability of abilityImprovements) {
+            abilityScores[ability.ability] += ability.value;
+          }
+          break;
+        }
+        case ChoiceProtocol.SET_FEAT_OR_ASI: {
+          const featOrASI = choice.selections as FeatOrASIOutput;
+          if (featOrASI.featOrASI === 'asi') {
+            const abilityImprovements = featOrASI.abilityScoreValues || [];
+            for (const ability of abilityImprovements) {
+              abilityScores[ability.ability] += ability.value;
+            }
+          }
+          break;
+        }
+      }
+    });
     dispatch(setAbilityScores(abilityScores));
   }, [
     activeEffects,
@@ -38,6 +64,7 @@ const useAbilityScore = () => {
     state?.baseSTR,
     state?.baseWIS,
     dispatch,
+    fufilledChoices,
   ]);
 };
 

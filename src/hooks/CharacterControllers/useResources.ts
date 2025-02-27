@@ -32,8 +32,6 @@ const useResources = () => {
       return resources;
     };
     getResources().then((resources) => {
-      console.log(activeEffects);
-
       dispatch(setResources(resources));
     });
   }, [activeEffects, state, rollFormula, dispatch]);

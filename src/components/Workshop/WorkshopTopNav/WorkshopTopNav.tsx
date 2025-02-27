@@ -4,7 +4,6 @@ import { toggleSideNav } from '@/store/workshopSlice';
 import { useDispatch } from 'react-redux';
 import { useCallback, useMemo } from 'react';
 import useWorkshopTab from '@/hooks/useWorkshopTab';
-import { syncWorkshopItem } from '@/lib/actions/db/workshop/create.actions';
 import useWorkshopFeatures from '@/hooks/useWorkshopFeatures';
 import { useAppSelector } from '@/store/hooks';
 import PublishModal from '../PublishModal/PublishModal';
@@ -32,9 +31,7 @@ const WorkshopTopNav = () => {
 
   const handleSave = useCallback(async () => {
     if (!tab) return;
-    console.log(tab, features, itemsToDelete);
-    const res = await syncWorkshopItem(tab, features ? features : []);
-    console.log(res);
+    // const res = await syncWorkshopItem(tab, features ? features : []);
   }, [tab, features, itemsToDelete]);
 
   return (

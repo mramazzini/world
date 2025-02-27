@@ -29,6 +29,7 @@ const useHitpoints = () => {
       }, 0) +
       largestHitDie +
       con;
+
     dispatch(setMaxHp(totalHp));
   }, [character, getAbilityModifier, hitDie, dispatch]);
 };
