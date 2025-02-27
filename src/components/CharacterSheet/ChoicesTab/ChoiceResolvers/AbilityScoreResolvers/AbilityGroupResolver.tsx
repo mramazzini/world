@@ -1,36 +1,48 @@
-import { Fragment, useState } from 'react';
-import ChoiceResolverButton from '../../ChoiceResolverButton';
-import { ImproveAbilityScoreOutput } from '@/lib/types/protocols';
+import { useEffect, useState } from 'react';
 import { Ability, Choice } from '@prisma/client';
 import AbilityToText from '@/lib/utils/toText/AbilityToText';
+import { v4 } from 'uuid';
+import ChoiceResolverButton from '../../ChoiceResolverButton';
+import {
+  FeatOrASIOutput,
+  ImproveAbilityScoreOutput,
+} from '@/lib/types/protocols';
+
+type AbilityResolverOutput = FeatOrASIOutput | ImproveAbilityScoreOutput;
 
 interface AbilityGroupResolverProps {
   choice: Choice;
   abilitiesToChooseFrom: string[];
   increaseAmounts: number[];
+  valueFilter: (abilityScore: AbilityPinner[]) => AbilityResolverOutput;
+}
+export interface AbilityPinner {
+  id: string;
+  value: number;
+  assignedAbility?: Ability;
 }
 
 const AbilityGroupResolver = ({
   choice,
   abilitiesToChooseFrom,
   increaseAmounts,
+  valueFilter,
 }: AbilityGroupResolverProps) => {
-  const [selected, setSelected] = useState<ImproveAbilityScoreOutput>([]);
-  const [increaseAmountsRemaining, setIncreaseAmountsRemaining] =
-    useState<number[]>(increaseAmounts);
+  const [pins, setPins] = useState<AbilityPinner[]>([]);
 
-  const handleSelect = (ability: Ability, increase: number) => {
-    const newSelected = selected.filter((s) => s.ability !== ability);
-    newSelected.push({ ability, value: increase });
-    setSelected(newSelected);
-    const index = increaseAmountsRemaining.findIndex((i) => i === increase);
-    const newIncreaseAmountsRemaining = [...increaseAmountsRemaining];
-    newIncreaseAmountsRemaining.splice(index, 1);
-    setIncreaseAmountsRemaining(newIncreaseAmountsRemaining);
-  };
+  useEffect(() => {
+    //initialize pins
+    const pins = increaseAmounts.map((i) => {
+      return {
+        id: v4(),
+        value: i,
+      };
+    });
+    setPins(pins);
+  }, [increaseAmounts]);
 
   return (
-    <div className="bg-base-300 border border-gray-500 p-4 rounded-xl">
+    <>
       <p>
         Pick{' '}
         {increaseAmounts.length === 1 ? (
@@ -47,56 +59,52 @@ const AbilityGroupResolver = ({
           </span>
         )}
       </p>
-      {Object.values(abilitiesToChooseFrom).map((ability, index) => {
-        return (
-          <Fragment key={ability}>
-            <div className="divider"></div>
+      <div className="divider"></div>
+      <ul className="flex flex-col gap-2">
+        {pins.map((pin, index) => (
+          <li key={pin.id} className="form-control flex flex-row w-full gap-4 ">
+            <select
+              className="select select-sm"
+              value={pin.assignedAbility || ''}
+              onChange={(e) => {
+                const value = e.target.value;
+                const ability = abilitiesToChooseFrom.find((a) => a === value);
+                if (!ability) return;
+                setPins((prevPins) => {
+                  const newPins = [...prevPins];
+                  newPins[index].assignedAbility = ability as Ability;
+                  return newPins;
+                });
+              }}
+            >
+              <option value={undefined}>Choose an ability</option>
+              {abilitiesToChooseFrom.map((ability) => {
+                const isDisabled = pins.some(
+                  (pin) => pin.assignedAbility === ability
+                );
 
-            <h3>{ability}</h3>
-            {selected.map((s) => {
-              if (s.ability !== ability) return null;
-              return (
-                <p key={s.ability}>
-                  You have selected to increase {AbilityToText(ability)} by{' '}
-                  {selected.map((s) => {
-                    return (
-                      <span
-                        key={s.ability}
-                        className="badge badge-primary mr-2"
-                      >
-                        + {s.value}
-                      </span>
-                    );
-                  })}
-                </p>
-              );
-            })}
-            <ul className="flex flex-col gap-2">
-              {Object.values(increaseAmountsRemaining).map(
-                (increase, index) => (
-                  <li key={`${ability}-${index}`} className="">
-                    <button
-                      className="btn btn-xs btn-primary"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleSelect(ability as Ability, increase);
-                      }}
-                    >
-                      {AbilityToText(ability)} +{increase}
-                    </button>
-                  </li>
-                )
-              )}
-            </ul>
-          </Fragment>
-        );
-      })}
+                return (
+                  <option key={ability} value={ability} disabled={isDisabled}>
+                    {AbilityToText(ability)}
+                  </option>
+                );
+              })}
+            </select>
+          </li>
+        ))}
+      </ul>
+      <div className="divider"></div>
+      <p>
+        {!pins.some((pin) => !pin.assignedAbility)
+          ? 'You have selected all the abilities.'
+          : 'You have not selected all the abilities yet.'}
+      </p>
       <ChoiceResolverButton
         choiceId={choice.id}
-        selected={selected}
-        disabled={selected.length !== choice.amountOfOptionToChoose}
+        selected={valueFilter(pins)}
+        disabled={pins.some((pin) => !pin.assignedAbility)}
       />
-    </div>
+    </>
   );
 };
 

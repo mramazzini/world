@@ -45,8 +45,24 @@ export const linkCharacterToFeat = async (
     },
   });
 
-  await db.$disconnect();
+  try {
+    await db.character.update({
+      where: { id },
+      data: {
+        Feats: {
+          connect: {
+            id: featId,
+          },
+        },
+      },
+    });
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await db.$disconnect();
+  }
 };
+
 export const resetCharacter = async (id: string) => {
   const db = new PrismaClient();
   await db.character.update({

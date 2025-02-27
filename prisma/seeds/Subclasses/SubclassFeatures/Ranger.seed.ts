@@ -1009,7 +1009,7 @@ const RangerSubclassFeatures: Prisma.FeatureCreateManyInput[] = [
   {
     id: RangerSubclassFeatureIds.perfectedBond,
     name: 'Perfected Bond',
-    effectChainType: ChainType.REPLACE,
+    effectChainType: ChainType.NONE,
     unimplemented: true,
     description:
       'At 15th level, your bond to your drake reaches the pinnacle of its power. While your drake is summoned, you and the drake gain the following benefits:',

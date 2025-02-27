@@ -108,10 +108,7 @@ export type FeatOrASIParams = null;
 export type FeatOrASIOutput = {
   featOrASI: 'feat' | 'asi';
   featId?: string;
-  abilityScoreIncreaseAbilityOne?: Ability;
-  abilityScoreIncreaseAbilityTwo?: Ability;
-  abilityScoreIncreaseValueOne?: number;
-  abilityScoreIncreaseValueTwo?: number;
+  abilityScoreValues?: PrismaJson.AbilityScoreValue[];
 };
 
 export type ChoiceModelId =
@@ -140,7 +137,8 @@ export type ChoiceParams =
   | AddFreeSpellParams
   | AddPreparedSpellParams
   | UpgradeSkillProficiencyToExpertiseParams
-  | ChooseSubclassParams;
+  | ChooseSubclassParams
+  | FeatOrASIParams;
 
 export type ChoiceOutput =
   | SetToolProficiencyOutput
@@ -157,7 +155,8 @@ export type ChoiceOutput =
   | AddFreeSpellOutput
   | AddPreparedSpellOutput
   | UpgradeSkillProficiencyToExpertiseOutput
-  | ChooseSubclassOutput;
+  | ChooseSubclassOutput
+  | FeatOrASIOutput;
 
 export type ResolverFunction = (result: {
   selections: ChoiceOutput;
