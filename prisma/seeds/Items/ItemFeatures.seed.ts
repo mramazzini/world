@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { spellIds } from '../Spells/spells.seed';
+import { spellIds } from '../Spells/SpellSeed';
 import { itemIds } from './ItemIds';
 import { ItemsSeed } from './Items.seed';
 import generateId from '../_helpers/generateId';

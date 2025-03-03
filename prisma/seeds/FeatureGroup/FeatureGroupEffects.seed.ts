@@ -1,7 +1,7 @@
 import { DamageTypes, Prisma, WeaponGroup } from '@prisma/client';
 import { FeaturesFromFeatureGroupIds as ids } from './FeatureGroup.seed';
 import { EquippedState } from '@/hooks/useLoadout';
-import { spellIds } from '../Spells/spells.seed';
+import { spellIds } from '../Spells/SpellSeed';
 const FeatureGroupEffectsSeed: Prisma.EffectCreateInput[] = [
   {
     id: ids.archeryFightingStyle,

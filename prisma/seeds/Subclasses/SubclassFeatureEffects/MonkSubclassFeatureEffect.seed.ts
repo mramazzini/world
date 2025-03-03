@@ -2,7 +2,7 @@ import { Prisma, RefreshEvent } from '@prisma/client';
 import { FeatureGroupIds } from '../../FeatureGroup/FeatureGroup.seed';
 import { monkSubclassFeatureIds as fids } from '../SubclassFeatures/Monk.seed';
 import { CustomResourceIds } from '../../CustomResource/CustomResource.seed';
-import { spellIds } from '../../Spells/spells.seed';
+import { spellIds } from '../../Spells/SpellSeed';
 const MonkFeatureEffectIds = {
   discipleOfTheElements3: 'discipleOfTheElements3',
   discipleOfTheElements6: 'discipleOfTheElements6',

@@ -164,6 +164,7 @@ export interface AbilityScores {
   CHA: number;
 }
 export enum src {
+  SRD = 'SRD5.1',
   hillsfar = 'State of Hillsfar',
   mulmaster = 'Mulmaster Bonds and Backgrounds',
   awMD = 'Adventures with Muk: Dankwood',

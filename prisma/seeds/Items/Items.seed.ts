@@ -6,7 +6,7 @@ import { itemIds } from '../Items/ItemIds';
 import { armorIds } from './Armor/Armor.seed';
 import { toolIds } from './Tools/Tool.seed';
 import { equipmentPackIds } from './EquipmentPack/EquipmentPack.seed';
-import { SpellSeed } from '../Spells/spells.seed';
+import { SpellSeed } from '../Spells/SpellSeed';
 import numberArray from '@/lib/utils/numberArray';
 const { lb, oz, pint, gal } = Unit;
 const { gp, sp, cp, pp, ep } = Currency;

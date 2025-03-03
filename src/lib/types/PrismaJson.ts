@@ -106,178 +106,182 @@ declare global {
       addSpellcastingModifier?: boolean;
       components?: string;
     }
-    interface AbilityScoreValue {
-      ability: Ability;
-      value: number;
-    }
-    interface PrerequisiteData {
-      blackList?: boolean; //if true, the player must not have the listed items
-      minLevel?: number;
-      Class?: ClassID;
-      SubClass?: SubClassID;
-      Species?: SpeciesID;
-      SubSpecies?: SubSpeciesID;
-      Background?: BackgroundID;
-      Feat?: FeatID;
-      minAbilityScore?: AbilityScoreValue;
-      Spellcaster?: boolean;
-      hasASpell?: boolean;
-      Spell?: SpellID;
-      weaponProficiency?: WeaponID;
-      martialWeaponProficiency?: boolean;
-      simpleWeaponProficiency?: boolean;
-      armorProficiency?: ArmorID;
-      lightArmorProficiency?: boolean;
-      mediumArmorProficiency?: boolean;
-      heavyArmorProficiency?: boolean;
-      toolProficiency?: ToolID;
-      skillProficiency?: Skill;
-      isWearingArmor?: boolean;
-      isHoldingShield?: boolean;
-      isWieldingWeaponGroup?: WeaponGroup;
-      equippedState?: EquippedState;
-    }
 
-    interface Prerequisite {
-      protocol: 'AND' | 'OR';
-      data: PrerequisiteData[] | Prerequisite[];
-    }
-
-    interface WeaponPropertyChoice {
-      default?: WeaponPropertyNames[];
-      choices?: {
-        options: WeaponPropertyNames[];
-        numberOfChoices: number;
+    interface SpellDiceFormula {
+      description: string;
+      formulas: {
+        level: number;
+        formula: string;
       }[];
     }
+  }
 
-    type CombatTime =
-      | 'Action'
-      | 'Bonus Action'
-      | 'Reaction'
-      | 'Free Action'
-      | 'Movement'
-      | 'Other';
+  interface AbilityScoreValue {
+    ability: Ability;
+    value: number;
+  }
+  interface PrerequisiteData {
+    blackList?: boolean; //if true, the player must not have the listed items
+    minLevel?: number;
+    Class?: ClassID;
+    SubClass?: SubClassID;
+    Species?: SpeciesID;
+    SubSpecies?: SubSpeciesID;
+    Background?: BackgroundID;
+    Feat?: FeatID;
+    minAbilityScore?: AbilityScoreValue;
+    Spellcaster?: boolean;
+    hasASpell?: boolean;
+    Spell?: SpellID;
+    weaponProficiency?: WeaponID;
+    martialWeaponProficiency?: boolean;
+    simpleWeaponProficiency?: boolean;
+    armorProficiency?: ArmorID;
+    lightArmorProficiency?: boolean;
+    mediumArmorProficiency?: boolean;
+    heavyArmorProficiency?: boolean;
+    toolProficiency?: ToolID;
+    skillProficiency?: Skill;
+    isWearingArmor?: boolean;
+    isHoldingShield?: boolean;
+    isWieldingWeaponGroup?: WeaponGroup;
+    equippedState?: EquippedState;
+  }
 
-    interface AbilityScoreTrigger {
-      abilities: Ability[];
-      lessThan?: number;
-      greaterThan?: number;
-    }
+  interface Prerequisite {
+    protocol: 'AND' | 'OR';
+    data: PrerequisiteData[] | Prerequisite[];
+  }
 
-    interface QuantityTime {
-      quantity: number;
-      unit: Time;
-    }
-    interface AttackRollBonus extends RollBonus {
-      rangedOnly?: boolean;
-      meleeOnly?: boolean;
-    }
+  interface WeaponPropertyChoice {
+    default?: WeaponPropertyNames[];
+    choices?: {
+      options: WeaponPropertyNames[];
+      numberOfChoices: number;
+    }[];
+  }
 
-    interface RollBonus {
-      bonus: number;
-      situation: string;
-    }
+  type CombatTime =
+    | 'Action'
+    | 'Bonus Action'
+    | 'Reaction'
+    | 'Free Action'
+    | 'Movement'
+    | 'Other';
 
-    interface Equipment {
-      name: string;
-      description?: string;
-      type: 'Tool' | 'Weapon' | 'Armor' | 'Misc';
-    }
-    interface CurrencyAmount {
-      quantity: number;
-      unit: Currency;
-    }
-    interface QuantityUnit {
-      quantity: number;
-      unit: Unit;
-    }
-    interface QuantityItem {
-      quantity: number;
-      item: ItemID; // item id
-    }
+  interface AbilityScoreTrigger {
+    abilities: Ability[];
+    lessThan?: number;
+    greaterThan?: number;
+  }
 
-    interface ToolSkill {
-      skill: Skill;
-      description: string;
-    }
+  interface QuantityTime {
+    quantity: number;
+    unit: Time;
+  }
+  interface AttackRollBonus extends RollBonus {
+    rangedOnly?: boolean;
+    meleeOnly?: boolean;
+  }
 
-    interface CustomWeapon {
-      name: string;
-      damage: PrismaJson.Damage[];
-      isProficient: boolean;
-    }
-    interface SpellRoll {
-      type: DamageTypes | 'healing';
-      dice: 4 | 6 | 8 | 10 | 12 | 20 | 100;
-      numberOfDice: number;
-    }
+  interface RollBonus {
+    bonus: number;
+    situation: string;
+  }
 
-    interface Damage {
-      type: DamageTypes; // type of damage ex. slashing, fire, etc.
-      formula: string; // damage formula ex. 1d6
-    }
+  interface Equipment {
+    name: string;
+    description?: string;
+    type: 'Tool' | 'Weapon' | 'Armor' | 'Misc';
+  }
+  interface CurrencyAmount {
+    quantity: number;
+    unit: Currency;
+  }
+  interface QuantityUnit {
+    quantity: number;
+    unit: Unit;
+  }
+  interface QuantityItem {
+    quantity: number;
+    item: ItemID; // item id
+  }
 
-    interface Reason {
-      reason: string;
-      effect: string | number;
-    }
-    interface TableOfContentItem {
-      title: string;
-      link: string;
-    }
+  interface ToolSkill {
+    skill: Skill;
+    description: string;
+  }
 
-    interface ModelLink {
-      model:
-        | 'SubClass'
-        | 'Class'
-        | 'Feat'
-        | 'Species'
-        | 'Background'
-        | 'Spell'
-        | 'Item'
-        | 'Weapon'
-        | 'Armor'
-        | 'Tool';
+  interface SpellRoll {
+    type: DamageTypes | 'healing';
+    dice: 4 | 6 | 8 | 10 | 12 | 20 | 100;
+    numberOfDice: number;
+  }
 
-      id: string;
-    }
+  interface Damage {
+    type: DamageTypes; // type of damage ex. slashing, fire, etc.
+    formula: string; // damage formula ex. 1d6
+  }
 
-    interface DiceAmount {
-      [key: string]: number;
-    }
+  interface Reason {
+    reason: string;
+    effect: string | number;
+  }
+  interface TableOfContentItem {
+    title: string;
+    link: string;
+  }
 
-    interface SpellSlot {
-      level: SpellLevel;
-      max: number;
-      current: number;
-    }
+  interface ModelLink {
+    model:
+      | 'SubClass'
+      | 'Class'
+      | 'Feat'
+      | 'Species'
+      | 'Background'
+      | 'Spell'
+      | 'Item'
+      | 'Weapon'
+      | 'Armor'
+      | 'Tool';
 
-    type ChoiceFetchParams = ChoiceParams;
+    id: string;
+  }
 
-    type ChoiceFetchOutput = ChoiceOutput;
+  interface DiceAmount {
+    [key: string]: number;
+  }
 
-    interface RollDetail {
-      diceType: number;
-      rolled: number[];
-    }
+  interface SpellSlot {
+    level: SpellLevel;
+    max: number;
+    current: number;
+  }
 
-    interface LogEntry {
-      id: string;
-      log: string;
-      type: 'info' | 'error' | 'success' | 'dice';
-      timestamp: string;
-      from: string;
-      diceRollResult?: {
-        formula: string;
-        rolls: RollDetail[];
-      };
-    }
+  type ChoiceFetchParams = ChoiceParams;
 
-    interface Note {
-      id: string;
-      content: string;
-      title: string;
-    }
+  type ChoiceFetchOutput = ChoiceOutput;
+
+  interface RollDetail {
+    diceType: number;
+    rolled: number[];
+  }
+
+  interface LogEntry {
+    id: string;
+    log: string;
+    type: 'info' | 'error' | 'success' | 'dice';
+    timestamp: string;
+    from: string;
+    diceRollResult?: {
+      formula: string;
+      rolls: RollDetail[];
+    };
+  }
+
+  interface Note {
+    id: string;
+    content: string;
+    title: string;
   }
 }

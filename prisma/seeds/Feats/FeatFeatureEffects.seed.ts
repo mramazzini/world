@@ -1,6 +1,6 @@
 import { Prisma, RefreshEvent } from '@prisma/client';
 import { FeatFeatureIds } from './FeatFeatures.seed';
-import { spellIds } from '../Spells/spells.seed';
+import { spellIds } from '../Spells/SpellSeed';
 
 const FeatFeatureEffectIds = {
   mobile: 'mobile',

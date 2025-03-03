@@ -1,6 +1,6 @@
 import { Prisma, RefreshEvent } from '@prisma/client';
 import { PaladinSubclassFeatureIds as fids } from '../SubclassFeatures/Paladin.seed';
-import { spellIds } from '../../Spells/spells.seed';
+import { spellIds } from '../../Spells/SpellSeed';
 import { CustomResourceIds } from '../../CustomResource/CustomResource.seed';
 
 const paladinSubclassEffectIds = {

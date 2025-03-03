@@ -1,6 +1,6 @@
 import { Language, Prisma } from '@prisma/client';
 import { DruidSubclassFeatureIds as fids } from '../SubclassFeatures/Druid.seed';
-import { spellIds } from '../../Spells/spells.seed';
+import { spellIds } from '../../Spells/SpellSeed';
 const DruidSubclassEffectIds = {
   combatWildShape: 'combatWildShape',
   circleForms2: 'circleForms2',

@@ -1,6 +1,6 @@
 import { cerr, cinfo, cwarn } from '@/lib/utils/chalkLog';
 import { Prisma, PrismaClient } from '@prisma/client';
-import { SpellSeed } from '../Spells/spells.seed';
+import { SpellSeed } from '../Spells/SpellSeed';
 import verifyTableIntegrity from '@/lib/utils/verifyTableIntegrity';
 import { createSlug } from '../_helpers/createSlug';
 
