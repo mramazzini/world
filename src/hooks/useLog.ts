@@ -11,7 +11,7 @@ const useLog = () => {
   const { rollFormula } = useDiceRoller();
 
   const dispatchLog = useCallback(
-    (log: PrismaJson.LogEntry) => {
+    (log: LogEntry) => {
       if (!state) {
         return;
       }

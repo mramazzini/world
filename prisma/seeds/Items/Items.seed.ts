@@ -6,8 +6,6 @@ import { itemIds } from '../Items/ItemIds';
 import { armorIds } from './Armor/Armor.seed';
 import { toolIds } from './Tools/Tool.seed';
 import { equipmentPackIds } from './EquipmentPack/EquipmentPack.seed';
-import { SpellSeed } from '../Spells/SpellSeed';
-import numberArray from '@/lib/utils/numberArray';
 const { lb, oz, pint, gal } = Unit;
 const { gp, sp, cp, pp, ep } = Currency;
 
@@ -3979,31 +3977,31 @@ export const ItemsSeed: Prisma.ItemCreateManyInput[] = [
       'Demon armor is a cursed magical suit of armor of demonic armor.',
   },
 
-  ...SpellSeed.map((spell) => ({
-    id: spell.id && 10000 + spell.id,
-    name: `Scroll of ${spell.name}`,
-    description: `This is a spell scroll for the spell ${spell.name}.`,
-    types: [ItemTypes.SPELL_SCROLL],
-    slug: '__PLACEHOLDER__',
-    rarity:
-      spell.level == 9
-        ? Rarity.LEGENDARY
-        : spell.level >= 6 && spell.level <= 8
-          ? Rarity.VERY_RARE
-          : spell.level >= 4 && spell.level <= 5
-            ? Rarity.RARE
-            : spell.level >= 2 && spell.level <= 3
-              ? Rarity.UNCOMMON
-              : Rarity.COMMON,
-    flavorText: `This is a spell scroll for the spell ${spell.name}.`,
-    spellId: spell.id,
-  })),
+  // ...SpellSeed.map((spell) => ({
+  //   id: spell.id && 10000 + spell.id,
+  //   name: `Scroll of ${spell.name}`,
+  //   description: `This is a spell scroll for the spell ${spell.name}.`,
+  //   types: [ItemTypes.SPELL_SCROLL],
+  //   slug: '__PLACEHOLDER__',
+  //   rarity:
+  //     spell.level == 9
+  //       ? Rarity.LEGENDARY
+  //       : spell.level >= 6 && spell.level <= 8
+  //         ? Rarity.VERY_RARE
+  //         : spell.level >= 4 && spell.level <= 5
+  //           ? Rarity.RARE
+  //           : spell.level >= 2 && spell.level <= 3
+  //             ? Rarity.UNCOMMON
+  //             : Rarity.COMMON,
+  //   flavorText: `This is a spell scroll for the spell ${spell.name}.`,
+  //   spellId: spell.id,
+  // })),
 ];
 
-export const spellScrollIds = numberArray(10000, SpellSeed.length - 1);
-export const getSpellScrollIdsOfLevel = (level: number) => {
-  return spellScrollIds.filter((id) => SpellSeed[id - 10000].level === level);
-};
+// export const spellScrollIds = numberArray(10000, SpellSeed.length - 1);
+// export const getSpellScrollIdsOfLevel = (level: number) => {
+//   return spellScrollIds.filter((id) => SpellSeed[id - 10000].level === level);
+// };
 
 export const instrumentItemIds = [
   itemIds.bagpipes,
@@ -4152,28 +4150,28 @@ export const artisanToolItemIds = [
 
 export const gamingKitItemIds = [itemIds.diceSet, itemIds.playingCardSet];
 
-export const getGemstoneIdsOfMinValue = (value: number) => {
-  return Object.values(gemstoneIds).filter((id) => {
-    const item = ItemsSeed.find((item) => item.id === id);
-    if (!item || !item.cost) return false;
-    const cost = item.cost as PrismaJson.CurrencyAmount;
-    return cost.quantity >= value;
-  });
-};
-export const getGemstoneIdsOfValue = (value: number) => {
-  return Object.values(gemstoneIds).filter((id) => {
-    const item = ItemsSeed.find((item) => item.id === id);
-    if (!item || !item.cost) return false;
-    const cost = item.cost as PrismaJson.CurrencyAmount;
-    return cost.quantity === value;
-  });
-};
+// export const getGemstoneIdsOfMinValue = (value: number) => {
+//   return Object.values(gemstoneIds).filter((id) => {
+//     const item = ItemsSeed.find((item) => item.id === id);
+//     if (!item || !item.cost) return false;
+//     const cost = item.cost as PrismaJson.CurrencyAmount;
+//     return cost.quantity >= value;
+//   });
+// };
+// export const getGemstoneIdsOfValue = (value: number) => {
+//   return Object.values(gemstoneIds).filter((id) => {
+//     const item = ItemsSeed.find((item) => item.id === id);
+//     if (!item || !item.cost) return false;
+//     const cost = item.cost as PrismaJson.CurrencyAmount;
+//     return cost.quantity === value;
+//   });
+// };
 
-export const getGemstoneIdsOfMaxValue = (value: number) => {
-  return Object.values(gemstoneIds).filter((id) => {
-    const item = ItemsSeed.find((item) => item.id === id);
-    if (!item || !item.cost) return false;
-    const cost = item.cost as PrismaJson.CurrencyAmount;
-    return cost.quantity <= value;
-  });
-};
+// export const getGemstoneIdsOfMaxValue = (value: number) => {
+//   return Object.values(gemstoneIds).filter((id) => {
+//     const item = ItemsSeed.find((item) => item.id === id);
+//     if (!item || !item.cost) return false;
+//     const cost = item.cost as PrismaJson.CurrencyAmount;
+//     return cost.quantity <= value;
+//   });
+// };

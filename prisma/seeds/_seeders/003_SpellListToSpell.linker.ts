@@ -1,16 +1,15 @@
-import { cerr, cinfo, cwarn } from '@/lib/utils/chalkLog';
+import { cerr, cinfo } from '@/lib/utils/chalkLog';
 import SpellListToSpellArr from '../Spells/SpellLists/SpellListToSpell.seed';
-import { SpellSeed } from '../Spells/SpellSeed';
 import { PrismaClient } from '@prisma/client';
-import { SpellID } from '@/lib/types/types';
+// import { SpellID } from '@/lib/types/types';
 
 export const linkSpellListToSpell = async (db: PrismaClient) => {
-  const ids = SpellSeed.map((s) => s.id).filter((id) => id !== undefined);
+  // const ids = SpellSeed.map((s) => s.id).filter((id) => id !== undefined);
 
-  if (!verifySpellList(ids, SpellListToSpellArr)) {
-    cerr('Error verifying spell list');
-    throw new Error('Error verifying spell list');
-  }
+  // if (!verifySpellList(ids, SpellListToSpellArr)) {
+  //   cerr('Error verifying spell list');
+  //   throw new Error('Error verifying spell list');
+  // }
 
   //link spells to spell lists
   cinfo('Linking spells to spell lists');
@@ -41,16 +40,16 @@ export const linkSpellListToSpell = async (db: PrismaClient) => {
   }
 };
 
-const verifySpellList = (
-  spellIds: SpellID[],
-  spellListsToSpell: { spellId: SpellID; spellListId: string }[]
-) => {
-  //verify that all spellIds are in spellListsToSpell
-  for (const id of spellIds) {
-    if (!spellListsToSpell.find((s) => s.spellId === id)) {
-      cwarn('Spell id not found in spellListsToSpell:', id);
-      return false;
-    }
-  }
-  return true;
-};
+// const verifySpellList = (
+//   spellIds: SpellID[],
+//   spellListsToSpell: { spellId: SpellID; spellListId: string }[]
+// ) => {
+//   //verify that all spellIds are in spellListsToSpell
+//   for (const id of spellIds) {
+//     if (!spellListsToSpell.find((s) => s.spellId === id)) {
+//       cwarn('Spell id not found in spellListsToSpell:', id);
+//       return false;
+//     }
+//   }
+//   return true;
+// };

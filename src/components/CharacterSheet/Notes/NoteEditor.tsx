@@ -10,7 +10,7 @@ const NoteEditor = ({
   updateNote,
   deleteNote,
 }: {
-  note: PrismaJson.Note;
+  note: Note;
   updateNote: (id: string, content: string) => void;
   deleteNote: (id: string) => void;
 }) => {

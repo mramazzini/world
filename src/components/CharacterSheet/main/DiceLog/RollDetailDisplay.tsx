@@ -1,6 +1,6 @@
 import Tooltip from '@/Utility/Tooltip';
 interface RollDetailsDisplayProps {
-  rollDetails: PrismaJson.RollDetail[];
+  rollDetails: RollDetail[];
 }
 
 const RollDetailsDisplay = ({ rollDetails }: RollDetailsDisplayProps) => {

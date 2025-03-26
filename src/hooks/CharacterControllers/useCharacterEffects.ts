@@ -193,10 +193,8 @@ const useCharacterEffects = () => {
   }, [unlockedFeatures, levelsByClass, level, combinedSpecies]);
 
   const verifyPrerequisites = useCallback(
-    (prerequisites: PrismaJson.Prerequisite): boolean => {
-      const evaluateCondition = (
-        condition: PrismaJson.PrerequisiteData
-      ): boolean => {
+    (prerequisites: Prerequisite): boolean => {
+      const evaluateCondition = (condition: PrerequisiteData): boolean => {
         // Implement individual checks for each property here
 
         const isBlacklist = condition.blackList;
@@ -301,15 +299,13 @@ const useCharacterEffects = () => {
       };
 
       const evaluatePrerequisites = (
-        prerequisites: PrismaJson.Prerequisite[]
+        prerequisites: Prerequisite[]
       ): boolean => {
         for (const prerequisite of prerequisites) {
           const { protocol, data } = prerequisite;
           if (data.some((p) => 'protocol' in p)) {
             // Recursively evaluate nested prerequisites
-            const result = evaluatePrerequisites(
-              data as PrismaJson.Prerequisite[]
-            );
+            const result = evaluatePrerequisites(data as Prerequisite[]);
             if (protocol === 'AND' && !result) {
               return false; // Short-circuit if AND protocol fails
             }
@@ -319,15 +315,15 @@ const useCharacterEffects = () => {
           } else {
             // Evaluate individual conditions
             if (protocol === 'AND') {
-              const allConditionsMet = (
-                data as PrismaJson.PrerequisiteData[]
-              ).every(evaluateCondition);
+              const allConditionsMet = (data as PrerequisiteData[]).every(
+                evaluateCondition
+              );
               return allConditionsMet; // Short-circuit if AND protocol fails
             }
             if (protocol === 'OR') {
-              const anyConditionMet = (
-                data as PrismaJson.PrerequisiteData[]
-              ).some(evaluateCondition);
+              const anyConditionMet = (data as PrerequisiteData[]).some(
+                evaluateCondition
+              );
               return anyConditionMet; // Short-circuit if OR protocol succeeds
             }
           }

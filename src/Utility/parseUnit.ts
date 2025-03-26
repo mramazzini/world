@@ -1,3 +1,3 @@
-export const parseUnit = (value: PrismaJson.QuantityUnit) => {
+export const parseUnit = (value: QuantityUnit) => {
   return value.quantity + ' ' + value.unit;
 };

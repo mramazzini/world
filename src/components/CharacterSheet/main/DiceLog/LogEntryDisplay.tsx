@@ -3,7 +3,7 @@ import RollDetailsDisplay from './RollDetailDisplay';
 import ToolTipFormula from './TooltipFormula';
 
 interface LogEntryDisplayProps {
-  entry: PrismaJson.LogEntry;
+  entry: LogEntry;
 }
 
 const LogEntryDisplay = ({ entry }: LogEntryDisplayProps) => {

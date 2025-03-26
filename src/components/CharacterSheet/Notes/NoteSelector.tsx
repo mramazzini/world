@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 interface NoteSelectorProps {
-  note: PrismaJson.Note;
+  note: Note;
   selectNote: (noteId: string) => void;
   isSelected: boolean;
   renameNote: (noteId: string, name: string) => void;
