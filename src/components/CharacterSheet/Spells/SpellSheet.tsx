@@ -10,8 +10,8 @@ import P from '@/Utility/FormatAndSanitize';
 import DiceLog from '../main/DiceLog/DiceLog';
 import SpellSearch from './SpellSearch';
 import SpellDisplay from '@/components/Spells/SpellDisplay';
-import Image from 'next/image';
 import useCharacterState from '@/hooks/useCharacter/useCharacterState';
+import SelectedSpellOptions from './SelectedSpellOptions';
 
 //Show free spells
 //Show prepared spells
@@ -27,8 +27,6 @@ const SpellSheet = () => {
 
   const [selectedSpellId, setSelectedSpellId] = useState<SpellID | null>(null);
   const [selectedSpell, setSelectedSpell] = useState<SpellInfo | null>(null);
-
-  const [show, setShow] = useState(false);
 
   useEffect(() => {
     if (!selectedSpellId) {
@@ -89,25 +87,7 @@ const SpellSheet = () => {
       <div className="bg-base-300 rounded-xl col-span-6 border border-primary overflow-scroll row-span-2 max-h-[926px] flex flex-col">
         {selectedSpell ? (
           <>
-            <div className="join pt-4 px-4">
-              <button className="btn btn-primary join-item">Prepare</button>
-              <button
-                className="btn btn-primary join-item"
-                onClick={() => setShow(!show)}
-              >
-                Penis
-              </button>
-              {show && (
-                <Image
-                  src={
-                    'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Penis_with_Labels.jpg/800px-Penis_with_Labels.jpg'
-                  }
-                  width={512}
-                  height={512}
-                  alt="pen"
-                />
-              )}
-            </div>
+            <SelectedSpellOptions spell={selectedSpell.id} />
             <div className="divider "></div>
             <SpellDisplay spell={selectedSpell} hideSpellLink />
           </>
@@ -135,6 +115,7 @@ const SpellSheet = () => {
                   key={spellId}
                   spell={spellId}
                   selectSpell={setSelectedSpellId}
+                  freeSpell
                 />
               ))}
             </div>
@@ -156,6 +137,7 @@ const SpellSheet = () => {
                 key={spellId}
                 spell={spellId}
                 selectSpell={setSelectedSpellId}
+                freeSpell={false}
               />
             ))}
           </div>

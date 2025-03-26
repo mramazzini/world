@@ -1,8 +1,10 @@
 import SidebarMetaSelector from '@/components/Dashboard/SidebarMetaSelector';
 import { getSpellMetadata } from '@/lib/actions/db/spell/read.actions';
 import { DBMetadata } from '@/lib/types/metadata';
+
 import P from '@/Utility/FormatAndSanitize';
 import ModelDisplay from '@/Utility/ModelDisplay';
+
 import { useEffect, useState } from 'react';
 
 interface SpellSearchProps {

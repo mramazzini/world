@@ -10,11 +10,16 @@ import Image from 'next/image';
 import Tooltip from '@/Utility/Tooltip';
 
 interface SpellSelectProps {
+  freeSpell: boolean;
   spell: SpellID;
   selectSpell: (spellId: SpellID) => void;
 }
 
-const SpellSelect = ({ spell, selectSpell }: SpellSelectProps) => {
+const SpellSelect = ({
+  spell,
+  selectSpell,
+  freeSpell = false,
+}: SpellSelectProps) => {
   const [hide, setHide] = useState<boolean>(true);
   const { spellSlots } = useAppSelector((state) => state.sheet);
   const [spellData, setSpellData] = useState<SpellInfo | null>(null);
@@ -35,6 +40,7 @@ const SpellSelect = ({ spell, selectSpell }: SpellSelectProps) => {
   }, [spell]);
 
   const castSpell = (level: SpellLevel) => {
+    if (freeSpell && spellLevel == spellData?.level) return;
     if (state === undefined) return;
     if (state?.spellSlotsUsedSinceLastRefresh === undefined) return;
     if (state.spellSlotsUsedSinceLastRefresh[level] === undefined) {
@@ -51,7 +57,6 @@ const SpellSelect = ({ spell, selectSpell }: SpellSelectProps) => {
     }
     if (state.spellSlotsUsedSinceLastRefresh[level] === spellSlots[level])
       return;
-    console.log('casting spell');
     dispatch(
       setCharacterState({
         ...state,
