@@ -40,6 +40,14 @@ const useMetadata = (model: Model) => {
     }
   }, [model]);
 
+  const refresh = () => {
+    setLoading(true);
+    fetchFn().then((data) => {
+      setMetadata(data);
+      setLoading(false);
+    });
+  };
+
   useEffect(() => {
     fetchFn().then((data) => {
       setMetadata(data);
@@ -47,7 +55,7 @@ const useMetadata = (model: Model) => {
     });
   }, [fetchFn]);
 
-  return { metadata, loading };
+  return { metadata, loading, refresh };
 };
 
 export default useMetadata;

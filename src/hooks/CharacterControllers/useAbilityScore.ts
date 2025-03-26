@@ -29,8 +29,9 @@ const useAbilityScore = () => {
     activeEffects.forEach((effect) => {
       if (effect.abilityScoreImprovements) {
         effect.abilityScoreImprovements.forEach((improvement) => {
-          const abilityScore = abilityScores[improvement.ability];
-          abilityScores[improvement.ability] = abilityScore + improvement.value;
+          const abilityScore = abilityScores[improvement.ability as Ability];
+          abilityScores[improvement.ability as Ability] =
+            abilityScore + improvement.value;
         });
       }
     });
@@ -40,7 +41,7 @@ const useAbilityScore = () => {
           const abilityImprovements =
             choice.selections as ImproveAbilityScoreOutput;
           for (const ability of abilityImprovements) {
-            abilityScores[ability.ability] += ability.value;
+            abilityScores[ability.ability as Ability] += ability.value;
           }
           break;
         }
@@ -49,7 +50,7 @@ const useAbilityScore = () => {
           if (featOrASI.featOrASI === 'asi') {
             const abilityImprovements = featOrASI.abilityScoreValues || [];
             for (const ability of abilityImprovements) {
-              abilityScores[ability.ability] += ability.value;
+              abilityScores[ability.ability as Ability] += ability.value;
             }
           }
           break;
@@ -59,7 +60,7 @@ const useAbilityScore = () => {
 
     const asi = combinedSpecies?.freeAbilityScoreImprovements || [];
     for (const ability of asi) {
-      abilityScores[ability.ability] += ability.value;
+      abilityScores[ability.ability as Ability] += ability.value;
     }
     dispatch(setAbilityScores(abilityScores));
   }, [
@@ -70,6 +71,7 @@ const useAbilityScore = () => {
     state?.baseINT,
     state?.baseSTR,
     state?.baseWIS,
+    combinedSpecies,
     dispatch,
     fufilledChoices,
   ]);

@@ -1,6 +1,6 @@
 'use client';
 import { DBMetadata } from '@/lib/types/metadata';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Alignment } from '@prisma/client';
 import { alignmentToText } from '@/Utility/alignmentToText';
 import SidebarMetaSelector from './SidebarMetaSelector';
@@ -37,33 +37,32 @@ const CreateCharacterModal = () => {
     name: '',
     alignment: Alignment.TRUE_NEUTRAL,
   });
-
-  useEffect(() => {
-    const fetchMetadata = async () => {
-      let res: DBMetadata[] = [];
-      setSideBarMetadata([]);
-      switch (sideBarModel) {
-        case 'class':
-          res = await getClassMetadata();
-          break;
-        case 'species':
-          setNewChar((prev) => ({ ...prev, variant: undefined }));
-          res = await getSpeciesMetadata();
-          break;
-        case 'variant':
-          if (!newChar.species) return setSideBarModel(null);
-          res = await getVariantMetadataBySpecies(newChar.species.id);
-          break;
-        case 'background':
-          res = await getBackgroundsMetadata();
-          break;
-        default:
-          break;
-      }
-      setSideBarMetadata(res);
-    };
-    if (sideBarModel) fetchMetadata();
+  const fetchMetadata = useCallback(async () => {
+    let res: DBMetadata[] = [];
+    setSideBarMetadata([]);
+    switch (sideBarModel) {
+      case 'class':
+        res = await getClassMetadata();
+        break;
+      case 'species':
+        setNewChar((prev) => ({ ...prev, variant: undefined }));
+        res = await getSpeciesMetadata();
+        break;
+      case 'variant':
+        if (!newChar.species) return setSideBarModel(null);
+        res = await getVariantMetadataBySpecies(newChar.species.id);
+        break;
+      case 'background':
+        res = await getBackgroundsMetadata();
+        break;
+      default:
+        break;
+    }
+    setSideBarMetadata(res);
   }, [sideBarModel, newChar.species]);
+  useEffect(() => {
+    if (sideBarModel) fetchMetadata();
+  }, [sideBarModel, fetchMetadata]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -231,6 +230,7 @@ const CreateCharacterModal = () => {
         </ModalBox>
 
         <SidebarMetaSelector
+          refresh={fetchMetadata}
           metadata={sideBarMetadata}
           model={sideBarModel || ''}
           show={sideBarModel !== null}

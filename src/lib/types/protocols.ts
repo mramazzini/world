@@ -108,7 +108,7 @@ export type FeatOrASIParams = null;
 export type FeatOrASIOutput = {
   featOrASI: 'feat' | 'asi';
   featId?: string;
-  abilityScoreValues?: PrismaJson.AbilityScoreValue[];
+  abilityScoreValues?: AbilityScoreValue[];
 };
 
 export type ChoiceModelId =
@@ -119,7 +119,7 @@ export type ChoiceModelId =
   | 'multiClassId'
   | 'effectId';
 
-export type ImproveAbilityScoreOutput = PrismaJson.AbilityScoreValue[];
+export type ImproveAbilityScoreOutput = AbilityScoreValue[];
 
 export type ChoiceParams =
   | SetToolProficiencyParams

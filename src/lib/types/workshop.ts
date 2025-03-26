@@ -36,7 +36,7 @@ export interface ItemEditorData {
   description: string;
   requiresAttunement: boolean;
   rarity: Rarity;
-  cost: PrismaJson.CurrencyAmount;
+  cost: CurrencyAmount;
   types: ItemTypes[];
 
   weaponData: {
@@ -63,7 +63,7 @@ export interface SubSpeciesEditorData {}
 export interface FeatEditorData {
   flavorText: string;
   description: string;
-  prerequisites?: PrismaJson.Prerequisite;
+  prerequisites?: Prerequisite;
   prereqDescription: string;
 }
 //  id   Int    @id @default(autoincrement())

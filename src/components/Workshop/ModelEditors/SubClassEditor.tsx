@@ -13,7 +13,7 @@ import { ChangeEvent, useState } from 'react';
 import * as Yup from 'yup';
 
 const SubclassEditor = () => {
-  const { metadata: classes, loading } = useMetadata('class');
+  const { metadata: classes, loading, refresh } = useMetadata('class');
   const [show, setShow] = useState(false);
 
   const { data, updateData } = useWorkshopEditor<SubclassEditorData>({
@@ -80,6 +80,7 @@ const SubclassEditor = () => {
             Choose Class
           </LoadingButton>
           <SidebarMetaSelector
+            refresh={refresh}
             model="class"
             metadata={classes}
             loading={loading}

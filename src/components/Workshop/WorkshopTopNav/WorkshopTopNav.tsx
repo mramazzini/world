@@ -4,16 +4,16 @@ import { toggleSideNav } from '@/store/workshopSlice';
 import { useDispatch } from 'react-redux';
 import { useCallback, useMemo } from 'react';
 import useWorkshopTab from '@/hooks/useWorkshopTab';
-import useWorkshopFeatures from '@/hooks/useWorkshopFeatures';
-import { useAppSelector } from '@/store/hooks';
+// import useWorkshopFeatures from '@/hooks/useWorkshopFeatures';
+// import { useAppSelector } from '@/store/hooks';
 import PublishModal from '../PublishModal/PublishModal';
 import { SubclassEditorData } from '@/lib/types/workshop';
 import Link from 'next/link';
 const WorkshopTopNav = () => {
   const dispatch = useDispatch();
-  const itemsToDelete = useAppSelector((state) => state.workshop.itemsToDelete);
+  // const itemsToDelete = useAppSelector((state) => state.workshop.itemsToDelete);
   const tab = useWorkshopTab();
-  const features = useWorkshopFeatures();
+  // const features = useWorkshopFeatures();
 
   const title = useMemo(() => (tab ? tab?.name : "Max's Workshop"), [tab]);
 
@@ -32,7 +32,7 @@ const WorkshopTopNav = () => {
   const handleSave = useCallback(async () => {
     if (!tab) return;
     // const res = await syncWorkshopItem(tab, features ? features : []);
-  }, [tab, features, itemsToDelete]);
+  }, [tab]);
 
   return (
     <div
