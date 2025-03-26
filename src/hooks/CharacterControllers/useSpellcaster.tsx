@@ -173,6 +173,7 @@ const useSpellcaster = () => {
   }, [spellcastingClasses, dispatch]);
 
   useEffect(() => {
+    const preparedSpellFromState = state?.preparedSpellsIds || [];
     const preparedSpellChoices = fufilledChoices.filter(
       (c) => c.protocol === ChoiceProtocol.ADD_KNOWN_SPELL
     );
@@ -189,8 +190,12 @@ const useSpellcaster = () => {
         }
       }
     }
-    dispatch(setPreparedSpells(effectToSpell.concat(preparedSpells)));
-  }, [fufilledChoices, dispatch, activeEffects]);
+    dispatch(
+      setPreparedSpells(
+        effectToSpell.concat(preparedSpells).concat(preparedSpellFromState)
+      )
+    );
+  }, [fufilledChoices, dispatch, activeEffects, state]);
 
   useEffect(() => {
     const freeSpellChoices = fufilledChoices.filter(
