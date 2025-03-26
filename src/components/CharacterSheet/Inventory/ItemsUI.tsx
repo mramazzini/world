@@ -5,7 +5,7 @@ import { SelectedItemInfo } from './InventoryTab';
 import useCharacterState from '@/hooks/useCharacter/useCharacterState';
 
 interface Props {
-  setSelectedItem: (item: PrismaJson.QuantityItem | null) => void;
+  setSelectedItem: (item: QuantityItem | null) => void;
   selectedItemInfo: SelectedItemInfo | null;
 }
 
@@ -14,9 +14,9 @@ const GridItem = ({
   setSelectedItem,
   selectedItem,
 }: {
-  data?: PrismaJson.QuantityItem;
-  setSelectedItem?: (item: PrismaJson.QuantityItem | null) => void;
-  selectedItem?: PrismaJson.QuantityItem | null;
+  data?: QuantityItem;
+  setSelectedItem?: (item: QuantityItem | null) => void;
+  selectedItem?: QuantityItem | null;
 }) => {
   return data ? (
     <button

@@ -13,7 +13,7 @@ interface Props {
   metadata: DBMetadata[];
   show: boolean;
   setSelected: (selected: DBMetadata | null) => void;
-  refresh?: () => void;
+  refresh: () => void;
 }
 
 const SidebarMetaSelector = ({
@@ -133,7 +133,11 @@ const SidebarMetaSelector = ({
                         ? meta.name.toCapitalCase()
                         : meta.name}
                     </td>
-                    <td className="w-[60%]">{meta.flavorText}</td>
+                    <td className="w-[60%]">
+                      {meta.flavorText.length > 150
+                        ? `${meta.flavorText.slice(0, 150)}...`
+                        : meta.flavorText}
+                    </td>
                     <td className="w-[25%]">
                       <Link
                         className="btn btn-accent  btn-xs "

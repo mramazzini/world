@@ -23,7 +23,7 @@ const SpellSlotSelect = ({
           <button
             onClick={() => setSelectedSlot(level as SpellLevel)}
             key={level}
-            className="btn btn-ghost border border-gray-500 min-w-12 h-12 px-3 m-0 min-h-0 rounded-full"
+            className={`btn  min-w-12 h-12 px-3 m-0 min-h-0 rounded-full ${selectedSlot === level ? 'btn-primary' : 'btn-ghost border border-gray-500'}`}
           >
             <span>{toSpellLevel(level)}</span>
           </button>

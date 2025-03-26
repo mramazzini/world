@@ -13,7 +13,7 @@ const AddToInventoryItems = ({
   freeItems,
   isActive,
 }: {
-  freeItems: PrismaJson.QuantityItem[];
+  freeItems: QuantityItem[];
   isActive: boolean;
 }) => {
   return (
@@ -52,13 +52,13 @@ const AddToInventoryWeaponGroup = ({
   amount,
 }: {
   weaponGroup: WeaponGroup;
-  selectedItems: PrismaJson.QuantityItem[];
-  setSelectedItems: (items: PrismaJson.QuantityItem[]) => void;
+  selectedItems: QuantityItem[];
+  setSelectedItems: (items: QuantityItem[]) => void;
   amount: number;
 }) => {
   const { loading, items } = useQueryItemWeaponGroup(weaponGroup);
   const itemChoices = useMemo(() => {
-    const itemChoices = {} as Record<string, PrismaJson.QuantityItem>;
+    const itemChoices = {} as Record<string, QuantityItem>;
     items.forEach((p) => {
       const id = v4();
       itemChoices[id] = { item: p.id, quantity: 1 };
@@ -114,8 +114,8 @@ const AddToInventoryItemType = ({
 }: {
   type: ItemTypes;
   quantity: number;
-  selectedItems: PrismaJson.QuantityItem[];
-  setSelectedItems: (items: PrismaJson.QuantityItem[]) => void;
+  selectedItems: QuantityItem[];
+  setSelectedItems: (items: QuantityItem[]) => void;
 }) => {
   const { loading, items } = useItemTypeQuery(type);
 
@@ -171,13 +171,13 @@ const AddToInventoryToolGroup = ({
   amount,
 }: {
   toolGroup: ToolGroup;
-  selectedItems: PrismaJson.QuantityItem[];
-  setSelectedItems: (items: PrismaJson.QuantityItem[]) => void;
+  selectedItems: QuantityItem[];
+  setSelectedItems: (items: QuantityItem[]) => void;
   amount: number;
 }) => {
   const { items, loading } = useQueryItemToolGroup(toolGroup);
   const itemChoices = useMemo(() => {
-    const itemChoices = {} as Record<string, PrismaJson.QuantityItem>;
+    const itemChoices = {} as Record<string, QuantityItem>;
     items.forEach((p) => {
       const id = v4();
       itemChoices[id] = { item: p.id, quantity: 1 };
@@ -235,8 +235,8 @@ const GroupResolver = ({
   activeRemaining,
 }: {
   group: ItemGroupQuantity;
-  setSelectedItems: (items: PrismaJson.QuantityItem[]) => void;
-  selectedItems: PrismaJson.QuantityItem[];
+  setSelectedItems: (items: QuantityItem[]) => void;
+  selectedItems: QuantityItem[];
   activateChoice: () => void;
   deactivateChoice: () => void;
   isActive: boolean;

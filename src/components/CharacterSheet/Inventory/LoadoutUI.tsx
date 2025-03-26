@@ -1,11 +1,11 @@
 'use client';
-import P from '@/Utility/FormatAndSanitize';
 import numberArray from '@/lib/utils/numberArray';
 import Image from 'next/image';
 import useInventoryMutator from '@/hooks/useInventoryMutator';
 import useCharacterState from '@/hooks/useCharacter/useCharacterState';
 import useLoadout from '@/hooks/useLoadout';
 import { useAppSelector } from '@/store/hooks';
+import ModelDisplay from '@/Utility/ModelDisplay';
 
 const LoadoutUI = () => {
   const state = useCharacterState();
@@ -20,7 +20,7 @@ const LoadoutUI = () => {
   return (
     <div className="grid grid-cols-6 w-full  gap-4 rounded-xl h-full">
       <section
-        className="indicator col-span-2 bg-base-200  p-4 w-full flex justify-center flex-col items-start col-span-6 rounded-xl"
+        className="indicator bg-base-200  p-4 w-full flex justify-center flex-col items-start col-span-6 rounded-xl"
         style={{
           borderTopRightRadius: '0.75rem',
           borderTopLeftRadius: '0.75rem',
@@ -85,7 +85,7 @@ const LoadoutUI = () => {
                   </button>
                   <span className="flex items-center justify-center min-w-[50px] h-[50px]">
                     <span className="text-xs text-center">
-                      <P>{`^${i}{}^`}</P>
+                      <ModelDisplay model="Item" id={i} />
                     </span>
                   </span>
                 </div>
@@ -114,7 +114,7 @@ const LoadoutUI = () => {
                   </button>
                   <span className="flex items-center justify-center min-w-[50px] h-[50px]">
                     <span className="text-xs text-center">
-                      <P>{`^${state.shieldEquippedId}{}^`}</P>
+                      <ModelDisplay model="Item" id={state.shieldEquippedId} />
                     </span>
                   </span>
                 </div>
@@ -139,7 +139,7 @@ const LoadoutUI = () => {
           </div>
         </div>
       </section>
-      <section className="indicator indicator    bg-base-200  rounded-xl p-4 w-full flex justify-center col-span-6">
+      <section className="indicator bg-base-200  rounded-xl p-4 w-full flex justify-center col-span-6">
         {/* <Tooltip
           element={<span className="indicator-item badge badge-info">i</span>}
           title="Armor"
@@ -194,7 +194,7 @@ const LoadoutUI = () => {
                   </button>
                   <span className="flex items-center justify-center min-w-[50px] h-[50px]">
                     <span className="text-xs text-center">
-                      <P>{`^${state.armorEquippedId}{}^`}</P>
+                      <ModelDisplay model="Item" id={state.armorEquippedId} />
                     </span>
                   </span>
                 </div>
@@ -211,7 +211,7 @@ const LoadoutUI = () => {
           </div>
         </div>
       </section>
-      <section className="indicator indicator  col-span-2  bg-base-200  rounded-xl p-4 w-full   flex justify-center col-span-6 ">
+      <section className="indicator bg-base-200  rounded-xl p-4 w-full   flex justify-center col-span-6 ">
         {/* <Tooltip
           element={<span className="indicator-item badge badge-info">i</span>}
           title="Carrying Capacity"

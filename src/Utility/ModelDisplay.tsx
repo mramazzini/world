@@ -3,6 +3,7 @@ import {
   ArmorInfo,
   FeatInfo,
   ItemInfo,
+  SpellInfo,
   SubClassInfo,
   ToolInfo,
   WeaponInfo,
@@ -11,13 +12,14 @@ import {
   memoizeGetArmor,
   memoizeGetFeat,
   memoizeGetItem,
+  memoizeGetSpell,
   memoizeGetSubclass,
   memoizeGetTool,
   memoizeGetWeapon,
 } from './Indexed/globalCache';
 import { useEffect, useState } from 'react';
 interface Props {
-  model: 'Weapon' | 'Armor' | 'Tool' | 'Subclass' | 'Item' | 'Feat';
+  model: 'Weapon' | 'Armor' | 'Tool' | 'Subclass' | 'Item' | 'Feat' | 'Spell';
   id: string;
 }
 
@@ -29,6 +31,7 @@ const ModelDisplay = ({ model, id }: Props) => {
     | SubClassInfo
     | ItemInfo
     | FeatInfo
+    | SpellInfo
     | null
   >(null);
 
@@ -69,6 +72,12 @@ const ModelDisplay = ({ model, id }: Props) => {
           query: id,
           type: 'id',
         }).then((res) => setData(res));
+        break;
+      case 'Spell':
+        memoizeGetSpell({
+          query: id,
+          type: 'id',
+        }).then((res) => setData(res));
     }
   }, [model, id]);
 
@@ -87,6 +96,8 @@ const ModelDisplay = ({ model, id }: Props) => {
     case 'Item':
       return <>{data.name}</>;
     case 'Feat':
+      return <>{data.name}</>;
+    case 'Spell':
       return <>{data.name}</>;
   }
 };

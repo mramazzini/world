@@ -1,11 +1,32 @@
 'use server';
 import { QUERY_LIMIT } from '@/lib/globalVars';
-import { SingleDataQuery } from '@/lib/types/metadata';
+import { DBMetadata, SingleDataQuery } from '@/lib/types/metadata';
 import { SpellInfo } from '@/lib/types/modelInfo';
 import { QueryParams } from '@/lib/types/types';
 import { generateQueryFields } from '@/lib/utils/generateQueryFields';
 import { PrismaClient } from '@prisma/client';
 import Fuse from 'fuse.js';
+
+export const getSpellMetadata = async (): Promise<DBMetadata[]> => {
+  const db = new PrismaClient();
+  const metadata = await db.spell.findMany({
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      slug: true,
+    },
+  });
+
+  await db.$disconnect();
+  return metadata.map((item) => ({
+    id: item.id,
+    name: item.name,
+    description: item.description,
+    slug: item.slug,
+    flavorText: item.description,
+  }));
+};
 
 export const getSpells = async (): Promise<SpellInfo[]> => {
   const db = await new PrismaClient();

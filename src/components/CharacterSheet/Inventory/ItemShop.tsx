@@ -9,7 +9,7 @@ import ModelDisplay from '@/Utility/ModelDisplay';
 import useInventoryMutator from '@/hooks/useInventoryMutator';
 
 interface Props {
-  setSelectedItem: (item: PrismaJson.QuantityItem | null) => void;
+  setSelectedItem: (item: QuantityItem | null) => void;
   selectedItemInfo: SelectedItemInfo | null;
 }
 

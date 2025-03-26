@@ -27,10 +27,10 @@ const AddToInventoryGroupedResolver = ({ choice }: { choice: Choice }) => {
   }, [params]);
 
   const [selectedOptions, setSelectedOptions] = useState<
-    { id: string; items: PrismaJson.QuantityItem[] }[] | []
+    { id: string; items: QuantityItem[] }[] | []
   >(Object.entries(groupChoices).map(([key]) => ({ id: key, items: [] })));
 
-  const setSelectedItems = (id: string, items: PrismaJson.QuantityItem[]) => {
+  const setSelectedItems = (id: string, items: QuantityItem[]) => {
     setSelectedOptions((prev) =>
       prev.map((p) => (p.id === id ? { id, items } : p))
     );

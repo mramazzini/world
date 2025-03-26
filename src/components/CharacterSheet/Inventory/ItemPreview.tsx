@@ -11,7 +11,7 @@ import useInventoryMutator from '@/hooks/useInventoryMutator';
 import ItemAction from './ItemAction';
 import { useAppSelector } from '@/store/hooks';
 interface Props {
-  setSelectedItem: (item: PrismaJson.QuantityItem | null) => void;
+  setSelectedItem: (item: QuantityItem | null) => void;
   selectedItemInfo: SelectedItemInfo | null;
 }
 

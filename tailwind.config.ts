@@ -26,7 +26,7 @@ const config: Config = {
     themes: [
       {
         //first element is default theme
-        halloween: {
+        dracula: {
           ...require('daisyui/src/theming/themes')['dracula'],
           '.tab-base-300': {
             '--tab-bg': '#1e1f29',

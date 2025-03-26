@@ -8,9 +8,10 @@ import Tooltip from '../../Utility/Tooltip';
 import { SpellInfo } from '@/lib/types/modelInfo';
 interface Props {
   spell: SpellInfo;
+  hideSpellLink?: boolean;
 }
 
-const SpellDisplay = ({ spell }: Props) => {
+const SpellDisplay = ({ spell, hideSpellLink = false }: Props) => {
   const generateComponentsString = () => {
     let components = '';
     if (spell.verbal) components += 'V';
@@ -28,9 +29,15 @@ const SpellDisplay = ({ spell }: Props) => {
     <div className="text-xl bg-base-300 rounded-xl p-4">
       <div className="flex flex-row justify-between items-center">
         <h1>{spell.name}</h1>
-        <Link className="btn btn-ghost border border-gray-500" href={`/spells`}>
-          View all Spells -&gt;
-        </Link>
+        {!hideSpellLink && (
+          <Link
+            className="btn btn-ghost border border-gray-500"
+            href={`/spells`}
+            target="_blank"
+          >
+            View all Spells -&gt;
+          </Link>
+        )}
       </div>
 
       <div className="divider m-0"></div>

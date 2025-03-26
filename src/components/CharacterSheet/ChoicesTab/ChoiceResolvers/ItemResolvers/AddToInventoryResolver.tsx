@@ -13,7 +13,7 @@ const AddToInventoryResolver = ({ choice }: { choice: Choice }) => {
   const { bulkAddToInventory } = useInventoryMutator();
 
   const itemChoices = useMemo(() => {
-    const itemChoices = {} as Record<string, PrismaJson.QuantityItem[]>;
+    const itemChoices = {} as Record<string, QuantityItem[]>;
     params.forEach((p) => {
       const id = v4();
       itemChoices[id] = p;
