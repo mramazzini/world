@@ -1,6 +1,6 @@
 import { Language, Prisma, RefreshEvent } from '@prisma/client';
 import { RangerSubclassFeatureIds as fids } from '../SubclassFeatures/Ranger.seed';
-import { spellIds } from '../../Spells/spells.seed';
+import { spellIds } from '../../Spells/SpellSeed';
 import { CustomResourceIds } from '../../CustomResource/CustomResource.seed';
 const RangerSubclassEffectsIds = {
   drakewardenOrigin: 'drakewardenOrigin',

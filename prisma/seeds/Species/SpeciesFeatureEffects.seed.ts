@@ -1,6 +1,6 @@
 import { Prisma, RefreshEvent, Skill } from '@prisma/client';
 import { speciesFeaturesIds as fids } from './SpeciesFeatures.seed';
-import { spellIds } from '../Spells/spells.seed';
+import { spellIds } from '../Spells/SpellSeed';
 import { CustomResourceIds } from '../CustomResource/CustomResource.seed';
 
 export const speciesEffectIds = {

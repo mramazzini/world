@@ -1,7 +1,7 @@
 import { Prisma, RefreshEvent, WeaponGroup } from '@prisma/client';
 import { artificerFeatureSubclassIds as fids } from '../SubclassFeatures/Artificer.seed';
 import { toolIds } from '../../Items/Tools/Tool.seed';
-import { spellIds } from '../../Spells/spells.seed';
+import { spellIds } from '../../Spells/SpellSeed';
 import { CustomResourceIds } from '../../CustomResource/CustomResource.seed';
 
 export const ArtificerSubclassEffectIds = {

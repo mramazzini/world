@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { FeatIds } from './Feats.seed';
-import { spellIds } from '../Spells/spells.seed';
+import { spellIds } from '../Spells/SpellSeed';
 
 export const FeatFeatureIds = {
   mobile: 'mobile',

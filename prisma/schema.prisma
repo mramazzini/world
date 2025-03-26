@@ -563,28 +563,87 @@ model CharacterChoiceStatus {
   @@id([characterId, choiceId])
 }
 
+enum SpellScaleType {
+  CHARACTER_LEVEL
+  SPELL_LEVEL
+  NONE
+}
+
+enum SpellScaleResultType {
+  DAMAGE_OR_HEALING
+  TARGETS
+  DURATION
+  NONE
+}
+
+enum SpellAttackRollType {
+  RANGED
+  MELEE
+}
+
+enum SpellTags {
+  RITUAL
+  CONCENTRATION
+  AOE
+  DAMAGE
+  HEALING
+  BUFF
+  DEBUFF
+  CONTROL
+  SUMMON
+  UTILITY
+  EXPLORATION
+  SOCIAL
+  COMBAT
+}
+
+enum SpellTargetType {
+  SELF
+  TOUCH
+  RANGE
+  AREA
+  LINE
+  CONE
+  SPHERE
+  CUBE
+  CYLINDER
+  WALL
+  OTHER
+}
+
 model Spell {
-  id            String       @id
-  srd           Boolean      @default(false)
-  name          String
-  description   String
-  duration      String
-  range         String
-  castingTime   String
-  verbal        Boolean      @default(false)
-  somatic       Boolean      @default(false)
-  material      Boolean      @default(false)
-  materialCost  String?
+  id           String  @id
+  srd          Boolean @default(false)
+  name         String
+  description  String
+  duration     String
+  range        String
+  castingTime  String
+  verbal       Boolean @default(false)
+  somatic      Boolean @default(false)
+  material     Boolean @default(false)
+  materialCost String?
+
+  spellScaleType       SpellScaleType       @default(NONE)
+  spellScaleResultType SpellScaleResultType @default(NONE)
+
+  //level scaling
+
+  /// [SpellDiceFormula]
+  levelScalingFormulas Json[]
+
+  spellTargetType         SpellTargetType      @default(SELF)
+  spellTargetMaxAmount    Int?                 @default(1)
+  spellAttackRoll         SpellAttackRollType?
+  spellTargetCreatureType CreatureType?        @default(NULL)
+  savingThrowAbility      Ability?
+  unimplemented           Boolean              @default(false)
+
   concentration Boolean      @default(false)
   ritual        Boolean      @default(false)
-  rolls         String[]
   upcastInfo    String?
   //search fields
-  tags          String[]
-  saveRequired  Boolean      @default(false)
   damageType    DamageTypes?
-  aoe           Boolean      @default(false)
-  conditions    String[]
   options       String[] // If the spell has options to choose from, list here  
   /// [Table]
   extendedTable Json[] // This table will be rendered with the spell

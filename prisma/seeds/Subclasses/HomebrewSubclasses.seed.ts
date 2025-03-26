@@ -1,7 +1,7 @@
 import { ChainType, Prisma, RefreshEvent, Skill } from '@prisma/client';
 import { classIds } from '../Classes/ClassIds';
 import { src } from '@/lib/types/types';
-import { spellIds } from '../Spells/spells.seed';
+import { spellIds } from '../Spells/SpellSeed';
 import { CustomResourceIds } from '../CustomResource/CustomResource.seed';
 
 const homebrewSubclassesId = {

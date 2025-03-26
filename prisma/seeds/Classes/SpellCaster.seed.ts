@@ -7,7 +7,7 @@ import {
 } from '@prisma/client';
 import { classIds as ids } from './ClassIds';
 import { itemIds } from '../Items/ItemIds';
-import { spellIds } from '../Spells/spells.seed';
+import { spellIds } from '../Spells/SpellSeed';
 import { spellListIds } from '../Spells/SpellLists/SpellLists.seed';
 import { warlockSpellSlots } from '../../../src/lib/utils/SpellSlotsUtil';
 

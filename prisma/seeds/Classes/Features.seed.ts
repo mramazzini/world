@@ -2,7 +2,7 @@ import { ChainType, Prisma } from '@prisma/client';
 // import { itemIds } from '../Items/ItemIds';
 // import { spellIds } from '../Spells/spells.seed';
 import { classIds as ids } from './ClassIds';
-import { spellIds } from '../Spells/spells.seed';
+import { spellIds } from '../Spells/SpellSeed';
 import { itemIds } from '../Items/ItemIds';
 
 export const ClassFeatureIds = {

@@ -12,8 +12,8 @@ const useInventoryMutator = () => {
   const dispatch = useAppDispatch();
 
   const addToInventoryHelper = (
-    itemQuantity: PrismaJson.QuantityItem,
-    inventory: PrismaJson.QuantityItem[]
+    itemQuantity: QuantityItem,
+    inventory: QuantityItem[]
   ) => {
     let newInventory = [...inventory];
 
@@ -38,7 +38,7 @@ const useInventoryMutator = () => {
   };
 
   const addToInventory = useCallback(
-    (itemQuantity: PrismaJson.QuantityItem) => {
+    (itemQuantity: QuantityItem) => {
       if (!state) return;
       const newInventory = addToInventoryHelper(itemQuantity, state.inventory);
       dispatch(
@@ -52,7 +52,7 @@ const useInventoryMutator = () => {
   );
 
   const bulkAddToInventory = useCallback(
-    (items: PrismaJson.QuantityItem[]) => {
+    (items: QuantityItem[]) => {
       if (!state) return;
       let newInventory = [...state.inventory];
       for (const item of items) {

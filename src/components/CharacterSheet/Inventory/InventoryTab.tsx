@@ -7,7 +7,7 @@ import ItemFeatures from './ItemFeatures';
 import ItemShop from './ItemShop';
 
 export interface SelectedItemInfo {
-  itemQuantity: PrismaJson.QuantityItem;
+  itemQuantity: QuantityItem;
   purchasing: boolean;
 }
 

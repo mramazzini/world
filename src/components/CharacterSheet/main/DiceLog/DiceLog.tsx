@@ -6,7 +6,11 @@ import FormulaRoller from './FormulaRoller';
 import LogEntryDisplay from './LogEntryDisplay';
 import Skeleton from '@/components/UI/Skeleton';
 
-const DiceLog = () => {
+interface DiceLogProps {
+  excludeRollButtons?: boolean;
+}
+
+const DiceLog = ({ excludeRollButtons = true }: DiceLogProps) => {
   const state = useCharacterState();
   const { diceLogPush } = useLog();
 
@@ -26,9 +30,9 @@ const DiceLog = () => {
 
   return (
     <>
-      <div className=" w-full flex flex-col join-vertical">
+      <div className=" w-full flex flex-col join-vertical justify-between h-full">
         <div
-          className="bg-base-300 p-4 rounded-xl h-64 overflow-scroll"
+          className="bg-base-300 p-4 rounded-xl h-64 overflow-scroll "
           ref={containerRef}
         >
           {log.length > 0 ? (
@@ -56,52 +60,54 @@ const DiceLog = () => {
             diceLogPush(formula, 'Roll');
           }}
         />
-        <div className="flex flex-row  m-2 ">
-          <div className=" flex flex-col ">
-            <p className="flex items-center justify-center w-full my-2 badge-neutral badge">
-              Roll
-            </p>
-            {[4, 6, 8, 10, 12, 20, 100].map((die) => {
+        {!excludeRollButtons && (
+          <div className="flex flex-row  m-2 ">
+            <div className=" flex flex-col ">
+              <p className="flex items-center justify-center w-full my-2 badge-neutral badge">
+                Roll
+              </p>
+              {[4, 6, 8, 10, 12, 20, 100].map((die) => {
+                return (
+                  <button
+                    key={die}
+                    className=" btn btn-ghost border border-gray-500 btn-sm mb-2"
+                    onClick={(e) => {
+                      diceLogPush(`1d${die}`, `d${die} Roll`);
+                    }}
+                  >
+                    d{die}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="divider divider-horizontal" />
+            {[2, 3, 4, 5].map((numberOfDice, index) => {
               return (
-                <button
-                  key={die}
-                  className=" btn btn-ghost border border-gray-500 btn-sm mb-2"
-                  onClick={(e) => {
-                    diceLogPush(`1d${die}`, `d${die} Roll`);
-                  }}
-                >
-                  d{die}
-                </button>
+                <div key={index} className=" flex flex-col mx-1 w-full">
+                  <p className="flex items-center justify-center w-full my-2 badge-neutral badge">
+                    {numberOfDice} Dice
+                  </p>
+                  {[4, 6, 8, 10, 12, 20, 100].map((die) => {
+                    return (
+                      <button
+                        key={die}
+                        className=" btn btn-ghost border border-gray-500 btn-sm mb-2"
+                        onClick={() => {
+                          diceLogPush(
+                            `${numberOfDice}d${die}`,
+                            `${numberOfDice}d${die} Roll`
+                          );
+                        }}
+                      >
+                        {numberOfDice}d{die}
+                      </button>
+                    );
+                  })}
+                </div>
               );
             })}
           </div>
-          <div className="divider divider-horizontal" />
-          {[2, 3, 4, 5].map((numberOfDice, index) => {
-            return (
-              <div key={index} className=" flex flex-col mx-1 w-full">
-                <p className="flex items-center justify-center w-full my-2 badge-neutral badge">
-                  {numberOfDice} Dice
-                </p>
-                {[4, 6, 8, 10, 12, 20, 100].map((die) => {
-                  return (
-                    <button
-                      key={die}
-                      className=" btn btn-ghost border border-gray-500 btn-sm mb-2"
-                      onClick={() => {
-                        diceLogPush(
-                          `${numberOfDice}d${die}`,
-                          `${numberOfDice}d${die} Roll`
-                        );
-                      }}
-                    >
-                      {numberOfDice}d{die}
-                    </button>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
+        )}
       </div>
     </>
   );

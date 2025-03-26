@@ -1,6 +1,6 @@
 import { cerr, cinfo, cwarn } from '@/lib/utils/chalkLog';
 import SpellListToSpellArr from '../Spells/SpellLists/SpellListToSpell.seed';
-import { SpellSeed } from '../Spells/spells.seed';
+import { SpellSeed } from '../Spells/SpellSeed';
 import { PrismaClient } from '@prisma/client';
 import { SpellID } from '@/lib/types/types';
 

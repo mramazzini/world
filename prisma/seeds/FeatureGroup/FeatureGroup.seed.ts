@@ -1,5 +1,5 @@
 import { ChainType, Prisma } from '@prisma/client';
-import { spellIds } from '../Spells/spells.seed';
+import { spellIds } from '../Spells/SpellSeed';
 
 export const FeatureGroupIds = {
   fightingStyle: 'fighting-style',
