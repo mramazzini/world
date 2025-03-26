@@ -79,6 +79,13 @@ const SpellSheet = () => {
             <div className="divider m-0"></div>
           </Fragment>
         ))}
+        {spellSlots[1] === undefined && (
+          <>
+            <p className="text-center">
+              <P>You do not have any spell slots.</P>
+            </p>
+          </>
+        )}
       </div>
       <div className="bg-base-300 p-4 rounded-xl col-span-4 border border-primary max-h-[326px] overflow-scroll">
         <DiceLog excludeRollButtons />
@@ -120,7 +127,7 @@ const SpellSheet = () => {
               ))}
             </div>
           )}
-          <div className="bg-base-200 p-4 rounded-xl flex gap-4 flex-col">
+          <div className="bg-base-200 p-4 rounded-xl flex gap-4 flex-col min-h-full">
             <h2 className="divider mt-0">Prepared Spells</h2>
             <p className="text-center">
               <P>

@@ -1,6 +1,6 @@
 import { SpellID } from '@/lib/types/types';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setPreparedSpells } from '@/store/sheetSlice';
+import { setCharacterState } from '@/store/sheetSlice';
 import { useMemo } from 'react';
 
 interface SelectedSpellOptionsProps {
@@ -8,14 +8,28 @@ interface SelectedSpellOptionsProps {
 }
 
 const SelectedSpellOptions = ({ spell }: SelectedSpellOptionsProps) => {
-  const { preparedSpells } = useAppSelector((state) => state.sheet);
+  const { preparedSpells, state } = useAppSelector((state) => state.sheet);
   const dispatch = useAppDispatch();
   const addPreparedSpell = (spellId: SpellID) => {
-    dispatch(setPreparedSpells([...preparedSpells, spellId]));
+    if (!state) return;
+    dispatch(
+      setCharacterState({
+        ...state,
+        preparedSpellsIds: [...(state?.preparedSpellsIds || []), spellId],
+      })
+    );
   };
 
   const removePreparedSpell = (spellId: SpellID) => {
-    dispatch(setPreparedSpells(preparedSpells.filter((id) => id !== spellId)));
+    if (!state) return;
+    dispatch(
+      setCharacterState({
+        ...state,
+        preparedSpellsIds: state?.preparedSpellsIds?.filter(
+          (id) => id !== spellId
+        ),
+      })
+    );
   };
 
   const isPrepared = useMemo(
